@@ -56,6 +56,9 @@ static const void *const api_symbols[] = {
     (const void *) &GetExitCodeThread,
     (const void *) &SuspendThread,
     (const void *) &ResumeThread,
+    (const void *) &Sleep,
+    (const void *) &GetThreadPriority,
+    (const void *) &SetThreadPriority,
     (const void *) &TlsAlloc,
     (const void *) &TlsFree,
     (const void *) &TlsSetValue,
@@ -74,6 +77,16 @@ typedef char assert_loadlib_flags[
     (DONT_RESOLVE_DLL_REFERENCES == 1u &&
      LOAD_LIBRARY_AS_DATAFILE == 2u &&
      LOAD_WITH_ALTERED_SEARCH_PATH == 8u) ? 1 : -1];
+
+/* CE thread-priority constants (winbase.h): legacy 8-level scale
+ * with NORMAL = 3 (old level n maps to new level 248+n, so NORMAL's
+ * new-scale value is 251 per ms885643/aa450891). */
+typedef char assert_priority_vals[
+    (THREAD_PRIORITY_TIME_CRITICAL == 0 &&
+     THREAD_PRIORITY_NORMAL == 3 &&
+     THREAD_PRIORITY_IDLE == 7 &&
+     THREAD_PRIORITY_ERROR_RETURN == (int)0x7FFFFFFF &&
+     INFINITE == 0xFFFFFFFFu) ? 1 : -1];
 
 /* Error constants exercised (values from winerror.h). */
 typedef char assert_winerror_vals[

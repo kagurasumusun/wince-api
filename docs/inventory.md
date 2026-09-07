@@ -47,6 +47,13 @@ the official page body via the Learn archive.
 | `GetExitCodeProcess` | `ms885622` | CE 2.0 and later | Winbase.h | Coredll.lib | STILL_ACTIVE while running; main/WinMain return values are documented termination statuses |
 | `SetLastError` | `ms886817` | CE 1.0 and later | Winbase.h | Coredll.lib | per-thread last error; bit 29 reserved for application codes |
 | `GetExitCodeThread` | `ms885623` | CE 1.01 and later | Winbase.h | Coredll.lib | STILL_ACTIVE while running; thread-fn return value is a documented exit status |
+| `Sleep` | `aa450900` | CE 1.0 and later | Winbase.h | Coredll.lib | Sleep(INFINITE) == SuspendThread(GetCurrentThread()) on CE (resumable), unlike desktop |
+| `GetThreadPriority` | `ms885643` | CE 1.0 and later | Winbase.h | Coredll.lib | legacy 8-level scale; THREAD_PRIORITY_ERROR_RETURN on failure; CE has no priority classes |
+| `SetThreadPriority` | `aa450891` | CE 1.0 and later | Winbase.h | Coredll.lib | starts at THREAD_PRIORITY_NORMAL; legacy scale 0..7 |
+| `PROCESS_INFORMATION` struct | `ms886775` | CE 1.0 and later | Winbase.h | — | fields hProcess/hThread/dwProcessId/dwThreadId; filled by CreateProcess |
+| ThreadProc / `LPTHREAD_START_ROUTINE` | `aa450940` | CE 1.01 and later | developer-defined | — | return value readable via GetExitCodeThread |
+| `THREAD_PRIORITY_*` constants | `aa450596` + `ms885643` + `aa450891` | — | Winbase.h | — | 0..7 legacy scale, NORMAL=3 maps to new-level 251; priority table ranges 0..255 with 0 highest |
+| `INFINITE` | `aa450900` | — | Winbase.h | — | wait/delay constant |
 | `SuspendThread` | `aa450913` | CE 1.0 and later | Winbase.h | Coredll.lib | suspend count (max MAXIMUM_SUSPEND_COUNT); fails while thread is in a kernel call — may need repeats (CE note) |
 | `ResumeThread` | `ms886801` | CE 1.0 and later | Winbase.h | Coredll.lib | returns previous suspend count: 0 not suspended / 1 restarted / >1 still suspended |
 | `TlsAlloc` | `aa450945` | CE 1.0 and later | **Winuser.h (per page)** | Coredll.lib | 0xFFFFFFFF = failure; TLS_MINIMUM_AVAILABLE ≥ 64; TLS indexes not valid across processes |
@@ -63,6 +70,8 @@ the official page body via the Learn archive.
 |---|---|---|---|
 | `GetCurrentProcess` | `ms885613` (CE 1.0+): Header **Kfuncs.h**, Link Library Coredll.lib | absent from all four audited defs | Kfuncs.h = kernel-function header; function is kernel-scope on CE (Cf. CeGCC w32api kfuncs.h static inlines — existence/parity only, not a source). Not declared in user-mode headers. |
 | `GetCurrentProcessId` | `ms885614` (CE 1.0+): Header **Kfuncs.h**, Link Library Coredll.lib | absent from all four audited defs | same as above |
+| `GetCurrentThread` | `ms885615` (CE 1.0+): Header **Kfuncs.h**, Link Library Coredll.lib | absent from all four audited defs | same family; note aa450900 (Sleep) itself cites GetCurrentThread() as the CE equivalent of Sleep(INFINITE) |
+| `GetCurrentThreadId` | `ms885616` (CE 1.0+): Header **Kfuncs.h**, Link Library Coredll.lib | absent from all four audited defs | same as above |
 | `ExitProcess` | `ms885217`: Header Windows.h | absent (recorded in windows.h note) | declared in windows.h for source compatibility, link fails on genuine import libs (see windows.h) |
 
 (Conflict model: official docs are the authority for the *documented API*; the audited

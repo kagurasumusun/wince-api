@@ -282,6 +282,62 @@ DWORD ResumeThread(HANDLE hThread);
  * of the thread's process. */
 BOOL GetExitCodeThread(HANDLE hThread, LPDWORD lpExitCode);
 
+/* aa450900 "Sleep (Windows CE 5.0)": VOID Sleep(DWORD).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Suspends the current thread for the
+ * given number of milliseconds.  dwMilliseconds zero relinquishes
+ * the rest of the time slice; INFINITE delays forever.  CE note:
+ * Sleep(INFINITE) equals SuspendThread(GetCurrentThread()) -- the
+ * thread remains resumable via ResumeThread, unlike on desktop. */
+VOID Sleep(DWORD dwMilliseconds);
+
+/* INFINITE: infinite-delay constant, cited by the CE Sleep page
+ * (aa450900); value per the Win32 ABI. */
+#define INFINITE 0xFFFFFFFFu
+
+/* Thread priority values (legacy functions).  aa450596 "Priority
+ * Levels": CE 3.0+ has 256 levels, 0 = highest, 255 = lowest;
+ * application threads use levels 248-255, which are the mapping of
+ * the original 8 levels (0-7) of CE 2.12 and earlier.  The legacy
+ * GetThreadPriority/SetThreadPriority operate on that original
+ * 8-level scale (aa450596: "the functions have access only to the
+ * original 8 priority levels"), so the THREAD_PRIORITY_* constants
+ * are the old-scale numbers 0..7 with NORMAL = 3.  That is
+ * consistent with the new-scale normal value 251 on ms885643 and
+ * aa450891 because old level n maps to new level 248+n (aa450596:
+ * the original eight levels are mapped to 255..248).  The relative
+ * table on ms885643 then fixes TIME_CRITICAL (3 above NORMAL) = 0,
+ * HIGHEST = 1, ABOVE_NORMAL = 2, BELOW_NORMAL = 4, LOWEST = 5,
+ * ABOVE_IDLE = 6, IDLE (4 below NORMAL) = 7; values cross-checked
+ * against the CeGCC tree (parity only). */
+#define THREAD_PRIORITY_TIME_CRITICAL  0
+#define THREAD_PRIORITY_HIGHEST        1
+#define THREAD_PRIORITY_ABOVE_NORMAL   2
+#define THREAD_PRIORITY_NORMAL         3
+#define THREAD_PRIORITY_BELOW_NORMAL   4
+#define THREAD_PRIORITY_LOWEST         5
+#define THREAD_PRIORITY_ABOVE_IDLE     6
+#define THREAD_PRIORITY_IDLE           7
+
+/* THREAD_PRIORITY_ERROR_RETURN: GetThreadPriority failure value
+ * (ms885643 names it; Win32 ABI value 0x7FFFFFFF = 2147483647). */
+#define THREAD_PRIORITY_ERROR_RETURN   ((int)0x7FFFFFFF)
+
+/* ms885643 "GetThreadPriority (Windows CE 5.0)":
+ * int GetThreadPriority(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Returns the thread's base priority level; THREAD_PRIORITY_ERROR_
+ * RETURN on failure.  CE has no priority classes; scheduling order
+ * is determined by thread priority alone.  For real-time priorities
+ * (0-247) use CeGetThreadPriority (aa450795) -- later batch. */
+int GetThreadPriority(HANDLE hThread);
+
+/* aa450891 "SetThreadPriority (Windows CE 5.0)":
+ * BOOL SetThreadPriority(HANDLE, int).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Sets the base priority level; nonzero on success.
+ * All threads start at THREAD_PRIORITY_NORMAL.  No priority
+ * classes on CE.  Real-time range via CeSetThreadPriority
+ * (ms885155) -- later batch. */
+BOOL SetThreadPriority(HANDLE hThread, int nPriority);
+
 /* ------------------------------------------------------------------ */
 /* Thread local storage (TLS)                                         */
 /* ------------------------------------------------------------------ */
