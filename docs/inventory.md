@@ -382,6 +382,31 @@ type + LPPROGRESS_ROUTINE processing), GetStoreInformation `ms891023`
 (CeGenRandom/CeGetCanonicalPathName/CeGetFileNotificationInfo),
 FindFirstFileEx's FILE_NOTIFY_INFORMATION-related pairs.
 
+### M18: ToolHelp Reference batch (new header `tlhelp32.h`)
+
+Official `(v=msdn.10)` CE 5.0 pages of *Core OS Reference → ToolHelp
+Reference*; every function page's Header row is Tlhelp32.h (the two
+Heap32 pages print "Tlhelp.h") and Link Library row is Toolhelp.lib
+(not Coredll.lib -- these names correctly stay out of the coredll
+def).
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `TH32CS_SNAPHEAPLIST/PROCESS/THREAD/MODULE/ALL/SNAPNOHEAPS/GETALLMODS` | names per `ms885189`; values fixed Win32 ABI | — | Tlhelp32.h | — | |
+| `PROCESSENTRY32` | `ms886774` | CE 1.0+ | Tlhelp32.h | — | CE-only trailing th32MemoryBase/th32AccessKey; szExeFile[MAX_PATH]; 564 B on 32-bit CE |
+| `THREADENTRY32` | `aa450938` | CE 1.0+ | Tlhelp32.h | — | CE-only trailing th32AccessKey/th32CurrentProcessID; 36 B |
+| `MODULEENTRY32` | `ms886756` | CE 1.0+ | Tlhelp32.h | — | modBaseAddr is BYTE*; two MAX_PATH names; 1076 B on 32-bit CE |
+| `HEAPLIST32` | `ms885660` | CE 1.0+ | Tlhelp32.h | — | 16 B |
+| `HEAPENTRY32` | `ms885658` | CE 1.0+ | Tlhelp32.h | — | hHandle member; 36 B on 32-bit CE |
+| `CreateToolhelp32Snapshot` | `ms885189` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | snapshot of processes/threads/modules/heaps |
+| `CloseToolhelp32Snapshot` | `ms885169` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
+| `Process32First`/`Process32Next` | `ms886772`/`ms886773` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | dwSize=sizeof first |
+| `Thread32First`/`Thread32Next` | `aa450934`/`aa450936` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
+| `Module32First`/`Module32Next` | `ms886754`/`ms886755` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
+| `Heap32ListFirst`/`Heap32ListNext` | `ms885651`/`ms885652` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
+| `Heap32First`/`Heap32Next` | `ms885650`/`ms885653` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
+| `Toolhelp32ReadProcessMemory` | `aa450953` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | ids castable to handles; SetProcPermissions for other processes |
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

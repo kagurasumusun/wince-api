@@ -196,3 +196,16 @@ GetFileVersionInfoSize/GetFileVersionInfo `ms890963`/`ms890951`.
 New manifest `tools/manifests/file-io-reference.manifest` (51 pages);
 rows 265 -> 316.  Def: 115 -> 147 exports (file I/O rows now included
 in the public record set, e.g. CreateFileW/ReadFile/WriteFile).
+
+**M18 batch — ToolHelp Reference (new header `tlhelp32.h`):**
+CreateToolhelp32Snapshot `ms885189`, CloseToolhelp32Snapshot
+`ms885169`, Process32First/Next `ms886772`/`ms886773`,
+Thread32First/Next `aa450934`/`aa450936`, Module32First/Next
+`ms886754`/`ms886755`, Heap32ListFirst/Next `ms885651`/`ms885652`,
+Heap32First/Next `ms885650`/`ms885653`, Toolhelp32ReadProcessMemory
+`aa450953` + PROCESSENTRY32 `ms886774` (CE th32MemoryBase/
+th32AccessKey), THREADENTRY32 `aa450938` (CE th32AccessKey/
+th32CurrentProcessID), MODULEENTRY32 `ms886756`, HEAPLIST32
+`ms885660`, HEAPENTRY32 `ms885658`, TH32CS_* flags.  Header per the
+pages (Tlhelp32.h); Link Library Toolhelp.lib (not coredll).  Layout
+asserts 32-bit model pass on the CE toolchain.

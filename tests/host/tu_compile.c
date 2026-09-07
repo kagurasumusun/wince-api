@@ -12,6 +12,7 @@
  */
 
 #include <windows.h>
+#include <tlhelp32.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -197,6 +198,20 @@ static const void *const api_symbols[] = {
     (const void *) &GetCPInfo,
     (const void *) &GetStringTypeW,
     (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
+    /* M18: Toolhelp32 (tlhelp32.h; Toolhelp.lib). */
+    (const void *) &CreateToolhelp32Snapshot,
+    (const void *) &CloseToolhelp32Snapshot,
+    (const void *) &Process32First,
+    (const void *) &Process32Next,
+    (const void *) &Thread32First,
+    (const void *) &Thread32Next,
+    (const void *) &Module32First,
+    (const void *) &Module32Next,
+    (const void *) &Heap32ListFirst,
+    (const void *) &Heap32ListNext,
+    (const void *) &Heap32First,
+    (const void *) &Heap32Next,
+    (const void *) &Toolhelp32ReadProcessMemory,
     /* M17: file I/O continuation (winbase.h). */
     (const void *) &FindFirstChangeNotification,
     (const void *) &FindNextChangeNotification,
@@ -734,6 +749,27 @@ typedef char assert_nls2_vals[
      PRIMARYLANGID(0x409) == 9 && SUBLANGID(0x409) == 1 &&
      MAKELCID(0x409, 0) == 0x409) ? 1 : -1];
 
+/* M18 Toolhelp32 layout checks (tlhelp32.h; layouts from the CE page
+ * structure dumps).  Non-pointer offsets/sizes hold on every host;
+ * pointer-bearing members are checked only for the 32-bit model
+ * (precisely verified by the CE toolchain matrix). */
+typedef char assert_th_layouts[
+    (sizeof(HEAPLIST32) == 16 && sizeof(THREADENTRY32) == 36 &&
+     offsetof(THREADENTRY32, th32CurrentProcessID) == 32 &&
+     offsetof(PROCESSENTRY32, szExeFile) == 36) ? 1 : -1];
+#if __SIZEOF_POINTER__ == 4
+typedef char assert_th_layouts32[
+    (sizeof(HEAPENTRY32) == 36 && sizeof(MODULEENTRY32) == 1076 &&
+     sizeof(PROCESSENTRY32) == 564 &&
+     offsetof(MODULEENTRY32, modBaseAddr) == 20 &&
+     offsetof(MODULEENTRY32, szModule) == 32) ? 1 : -1];
+#endif
+typedef char assert_th_vals[
+    (TH32CS_SNAPHEAPLIST == 1u && TH32CS_SNAPPROCESS == 2u &&
+     TH32CS_SNAPTHREAD == 4u && TH32CS_SNAPMODULE == 8u &&
+     TH32CS_SNAPALL == 0xFu && TH32CS_SNAPNOHEAPS == 0x40000000u &&
+     TH32CS_GETALLMODS == 0x80000000u) ? 1 : -1];
+
 /* M17 file-info structure layouts (winbase.h, from the CE pages). */
 typedef char assert_fileinfo_layouts[
     (sizeof(BY_HANDLE_FILE_INFORMATION) == 56 &&
@@ -938,6 +974,33 @@ static int m15_shaped_usage(void)
     return 0;
 }
 
+/* M18 usage shape (compile-only). */
+static int m18_shaped_usage(void)
+{
+    HANDLE snap;
+    PROCESSENTRY32 pe;
+    THREADENTRY32 te;
+    MODULEENTRY32 me;
+    DWORD cb = 0;
+
+    snap = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0);
+    if (snap == INVALID_HANDLE_VALUE)
+        return (int) GetLastError();
+    pe.dwSize = sizeof(pe);
+    if (Process32First(snap, &pe))
+        (void) Process32Next(snap, &pe);
+    te.dwSize = sizeof(te);
+    if (Thread32First(snap, &te))
+        (void) Thread32Next(snap, &te);
+    me.dwSize = sizeof(me);
+    if (Module32First(snap, &me))
+        (void) Module32Next(snap, &me);
+    (void) Toolhelp32ReadProcessMemory(pe.th32ProcessID, NULL,
+                                       (LPVOID) &cb, sizeof(cb), &cb);
+    (void) CloseToolhelp32Snapshot(snap);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -961,5 +1024,7 @@ int host_tu_entry(void)
         return 1;
     if (m16_shaped_usage() != 0)
         return 1;
-    return m17_shaped_usage() == 0 ? 0 : 1;
+    if (m17_shaped_usage() != 0)
+        return 1;
+    return m18_shaped_usage() == 0 ? 0 : 1;
 }
