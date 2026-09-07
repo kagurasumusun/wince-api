@@ -1,0 +1,64 @@
+# Inventory and verification matrix
+
+Every item shipped in `include/` is transcribed from an official
+Microsoft documentation page.  For CE APIs the source is the
+CE-era MSDN archive now served on learn.microsoft.com as
+`https://learn.microsoft.com/en-us/previous-versions/windows/embedded/<ID>(v=msdn.10)`.
+The per-page **Requirements** block (OS Versions / Header / Link
+Library) is recorded below verbatim in condensed form.  Where no CE
+page exists (or the CE page is silent), the basis is named explicitly
+and the item is marked accordingly — never inferred from a
+third-party implementation.
+
+## Type and macro basis (`windef.h`)
+
+| Item | Basis |
+|---|---|
+| Windows CE Unicode-only ⇒ `TCHAR`/`LPTSTR`/`LPCTSTR` are the wide forms | official CE function pages: "Windows CE supports only the Unicode version of this function" (e.g. GetCommandLine `ms885605`, GetCommandLine `ms928607`) |
+| `WCHAR` is 16-bit | CE wchar_t ABI of the verified toolchain target (clang `*-pc-wince`: 16-bit wchar_t); module handles equal base addresses per DllMain doc `ms885202` |
+| `WINAPI`/`APIENTRY`/`CALLBACK` empty | Microsoft documents CE functions as `__cdecl` (/ENTRY `aa449732`, "Linking to the CRT" `ms859584`); ARM `__cdecl`= `__stdcall`; x86 CE export names carry no `@n` decoration (verified import surface) |
+| Integer widths (DWORD 32, LONG 32, ...) | documented Win32 data-type semantics; `stdint.h` typedefs keep widths explicit |
+| Flag values `LMEM_FIXED` 0x0000, `LMEM_ZEROINIT` 0x0040, `LPTR` | names and meanings: LocalAlloc `ms886739`; numeric values: official Win32 memory-management reference (ABI values) |
+
+## M1 functions (`winbase.h`, `windows.h`)
+
+All pages fetched in full unless marked (snip) = full content seen in
+the official page body via the Learn archive.
+
+| Function | Official page (CE 5.0 archive) | OS Versions | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| `TerminateProcess` | `aa450927` | CE 1.0 and later | Winbase.h | Coredll.lib | also CE 3.0-era page `ms913239` (CE 1.0+, same link lib) |
+| `TerminateThread` | `aa450930` | CE 1.01 and later | Winbase.h | Coredll.lib | |
+| `ExitThread` | `ms885219` | CE 1.0 and later | Winbase.h | Coredll.lib | |
+| `ExitProcess` | `ms885217` | CE 2.0 and later | Windows.h | Coredll.lib | **documented conflict**: absent from every CE 4/5/6 coredll import library of the verified sysroot; CE toolchain headers declare it as inline `TerminateProcess(GetCurrentProcess(), code)`.  Declared for source compatibility; calls fail at link time.  See wince-crt audit |
+| `GetModuleHandleW` | `ms885630` | CE 2.10 and later | Winbase.h | Coredll.lib, Nk.lib | NULL ⇒ pseudo-handle of current process; W-only export |
+| `GetModuleFileNameW` | `ms885629` | CE 2.0 and later | Winbase.h | Coredll.lib | nSize in characters; W-only export |
+| `GetCommandLineW` | `ms885605` | CE 3.0 and later | Winbase.h | Coredll.lib | remarks: Unicode-only; W-only export |
+| `GetProcAddressW` / `GetProcAddressA` | `ms885634` | CE 1.0 and later (W); A: CE 3.0+ per Remarks | Winbase.h | Coredll.lib | lpProcName Unicode for the W form; both exports present in the CE 4/5/6 import libraries (verified) |
+| `LocalAlloc` | `ms886739` | CE 1.0 and later | Winbase.h | Coredll.lib | CE: local heap = global heap; LPTR = fixed + zeroinit; NULL = failure |
+| `LocalFree` | `ms886741` | CE 1.0 and later | Winbase.h | Coredll.lib | NULL on success; NULL argument ignored |
+| `GetLastError` (M2) | `ms885627` | — | — | — | page identified (cited by CE pages' Return Values); declaration lands in M2 with its own fetch/record |
+
+## Export-surface cross-check
+
+The declarations' spellings were matched against the verified CE 4/5/6
+coredll export surface (import libraries of the toolchain sysroot;
+device-dump-audited defs, `audit-coredll.py`):
+
+* W spellings exported on all generations: `GetModuleHandleW`,
+  `GetModuleFileNameW`, `GetCommandLineW`, `GetProcAddressW`; `A`
+  spelling: `GetProcAddressA`.
+* Undecorated single names: `TerminateProcess`, `TerminateThread`,
+  `ExitThread`, `LocalAlloc`, `LocalFree`.
+* `ExitProcess`: not exported on any generation (conflict above).
+
+## Remaining verification (roadmap)
+
+* M2/M3 declarations: fetch each function's official page, transcribe
+  its Requirements row into this matrix, then declare.
+* Pointer model: 32-bit pointer/`ULONG_PTR` assertions run under the
+  CE toolchain (host checks assert them only on 32-bit hosts).
+* x86 decoration: link checks with `llvm-dlltool -m i386
+  --no-leading-underscore` import libraries, mirroring wince-crt.
+* End-to-end: link wince-crt + Akari API consumer TUs against the
+  sysroot import libraries on `arm-pc-wince` and `i386-pc-wince`.
