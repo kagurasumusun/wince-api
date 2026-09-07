@@ -93,9 +93,12 @@ include/windows.h   umbrella (declarations whose page says Header:
 include/windef.h    base types/macros (CE: TCHAR = WCHAR, WINAPI
                     empty, WCHAR 16-bit)
 include/winnt.h     base 64-bit types (LONGLONG/LARGE_INTEGER),
-                    MEMORY_BASIC_INFORMATION, SecureZeroMemory
+                    MEMORY_BASIC_INFORMATION, MAKELANGID/MAKELCID,
+                    SecureZeroMemory
 include/winnls.h    code-page / NLS API (MultiByteToWideChar,
-                    WideCharToMultiByte, IsDBCSLeadByte*)
+                    WideCharToMultiByte, IsDBCSLeadByte*, locale/
+                    code-page getters, CompareString, GetStringType*)
+include/winreg.h    registry API (Reg* + CeFind*RegChange)
 include/winbase.h   base OS API: process/thread/module/command line,
                     dynamic-link, local memory, file management +
                     synchronous file I/O + directory management,
@@ -215,13 +218,13 @@ declarations, recorded in `docs/inventory.md`):
   IsDBCSLeadByte/Ex `ms886515`/`ms886608`, CP_*/MB_*/WC_* constants),
   `BYTE`/`LPBOOL` in windef.h.  def 90 → 94 exports.
 
-Remaining roadmap: the other *Core OS Reference* books already
-manifested (Process and Thread, Strings, Unicode, System Management,
-DLL, ToolHelp, Fiber) and the File Systems / Shell&UI / Registry /
-Communication reference books — each batch adds only
-official-page-grounded declarations; continuing def harvesting for
-those pages; end-to-end link verification with wince-crt on the
-`LLVM-WinCE` toolchain (host + cross).
+Remaining roadmap: the other reference books already manifested
+(Strings, Unicode part 2, System Management part 2, DLL, ToolHelp,
+Process and Thread part 2) and the Shell&UI / GDI / Communication /
+File-Mapping books — each batch adds only official-page-grounded
+declarations; def harvesting continues in lockstep (coredll at 147
+name-only exports); end-to-end link verification with wince-crt on
+the `LLVM-WinCE` toolchain (host + cross).
 
 ## Verification rules (same as wince-crt)
 
