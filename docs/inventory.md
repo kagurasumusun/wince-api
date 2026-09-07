@@ -283,6 +283,37 @@ functions are CE .NET 4.0 and later with Link Library Coredll.lib.
 | `SwitchToFiber` | `aa450915` | CE .NET 4.0+ | Winbase.h | Coredll.lib | schedules the fiber |
 | `PFIBER_START_ROUTINE`/`LPFIBER_START_ROUTINE` | `ms885221` (FiberProc) | CE .NET 4.0+ | Windows.h (page) | — | callback type; FiberProc is the developer's own function name (placeholder), so no export and no macro |
 
+### M15: Registry Reference batch (new header `winreg.h`)
+
+Official `(v=msdn.10)` CE 5.0 pages of *File Systems and Data Store →
+Registry Reference*; Header row Winreg.h and Link Library Coredll.lib
+on every page.  The registry is Unicode-only on CE: exports are the W
+spellings (base names provided as macros); CeFind* change-notification
+functions are plain names.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `HKEY`/`PHKEY`/`REGSAM` | registry pages (HKEY used by every signature) | — | Winreg.h | — | HKEY opaque key handle; REGSAM requested-access type (ignored on CE; pass 0) |
+| `HKEY_CLASSES_ROOT`/`HKEY_CURRENT_USER`/`HKEY_LOCAL_MACHINE`/`HKEY_USERS` | names per `ms891450`+; values fixed Win32 predefined-handle ABI | — | Winreg.h | — | CE does not support HKEY_CURRENT_CONFIG/PERFORMANCE_DATA/DYN_DATA (not defined) |
+| `REG_*` value types | `ms891462`/`ms891469` (REG_NONE/SZ/EXPAND_SZ/BINARY/DWORD/LITTLE/BIG_ENDIAN/LINK/MULTI_SZ/RESOURCE_LIST) | — | Winreg.h | — | values fixed Win32 ABI |
+| `REG_OPTION_NON_VOLATILE`/`REG_OPTION_VOLATILE`, `REG_CREATED_NEW_KEY`/`REG_OPENED_EXISTING_KEY` | `ms891450` | — | Winreg.h | — | values fixed Win32 ABI |
+| `REG_NOTIFY_CHANGE_NAME`/`REG_NOTIFY_CHANGE_LAST_SET` | `aa517116` | — | Winreg.h | — | only these two documented for CE |
+| `RegCloseKey` | `ms891448` | CE 1.0+ | Winreg.h | Coredll.lib | |
+| `RegCreateKeyEx(W)` | `ms891450` | CE 1.0+ | Winreg.h | Coredll.lib | key names ≤ 255 chars, 16 subkey levels; samDesired ignored (0); lpSecurityAttributes NULL; disposition reported |
+| `RegDeleteKey(W)` | `ms891451` | CE 1.0+ | Winreg.h | Coredll.lib | deletes a subkey recursively |
+| `RegDeleteValue(W)` | `ms891452` | CE 1.0+ | Winreg.h | Coredll.lib | |
+| `RegEnumKeyEx(W)` | `ms891453` | CE 1.0+ | Winreg.h | Coredll.lib | index from 0 to ERROR_NO_MORE_ITEMS; ERROR_MORE_DATA on short buffer |
+| `RegEnumValue(W)` | `ms891454` | CE 1.0+ | Winreg.h | Coredll.lib | index enumeration as RegEnumKeyEx |
+| `RegFlushKey(W)` | `ms891455` | CE 2.10+ | Winreg.h | Coredll.lib | CE: no lazy flush by default; flush groups of changes |
+| `RegOpenKeyEx(W)` | `ms891460` | CE 1.0+ | Winreg.h | Coredll.lib | ulOptions reserved; samDesired ignored |
+| `RegQueryInfoKey(W)` | `ms891461` | CE 1.0+ | Winreg.h | Coredll.lib | counts + longest-name sizes |
+| `RegQueryValueEx(W)` | `ms891462` | CE 1.0+ | Winreg.h | Coredll.lib | NULL lpData + size ⇒ required size; ERROR_MORE_DATA |
+| `RegSetValueEx(W)` | `ms891469` | CE 1.0+ | Winreg.h | Coredll.lib | cbData includes terminator for string types; CE data cap 4 KB; value names ≤ 255 |
+| `CeFindFirstRegChange` | `aa517116` | CE 5.0+ | Winreg.h | Coredll.lib | HANDLE; INVALID_HANDLE_VALUE failure; NAME/LAST_SET filters |
+| `CeFindNextRegChange` | `aa517123` | CE 5.0+ | Winreg.h | Coredll.lib | re-arms the notification |
+| `CeFindCloseRegChange` | `aa517103` | CE 5.0+ | Winreg.h | Coredll.lib | stops monitoring |
+| `LPBYTE` (windef.h) | registry value-data pointer (`ms891454`/`ms891462`/`ms891469`) | — | Windef.h | — | windef base type |
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

@@ -1,0 +1,46 @@
+ms904415	National Language Support (NLS) Functions
+ms904713	CompareString
+ms904716	ConvertDefaultLocale
+ms904721	EnumCalendarInfo
+ms904722	EnumCalendarInfoProc
+ms904723	EnumCodePagesProc
+ms904724	EnumDateFormats
+ms904740	EnumDateFormatsProc
+ms904848	EnumLocalesProc
+ms905062	EnumSystemCodePages
+ms905070	EnumSystemLocales
+ms905077	EnumTimeFormats
+ms905083	EnumTimeFormatsProc
+ms905209	FoldString
+ms905215	GetACP
+ms905221	GetCPInfo
+ms905229	GetCurrencyFormat
+ms905235	GetDateFormat
+ms905243	GetLocaleInfo
+ms905250	GetNumberFormat
+ms905256	GetOEMCP
+ms905272	GetStringTypeW
+ms905283	GetStringTypeEx
+ms905289	GetSystemDefaultLangID
+ms905298	GetSystemDefaultLCID
+ms905310	GetTimeFormat
+ms905315	GetUserDefaultLangID
+ms905323	GetUserDefaultLCID
+ms906218	IsValidCodePage
+ms906219	IsValidLocale
+ms906221	LCMapString
+ms906277	SetLocaleInfo
+ms906279	SetUserDefaultLCID
+ms906224	National Language support (NLS) Locale Identifiers
+ms906223	LCTYPE Constants
+ms903928	Language Identifiers and Locales
+ms903783	Code Pages
+ms904406	National Language Support (NLS) Macros
+ms906225	MAKELANGID
+ms906226	MAKELCID
+ms906230	PRIMARYLANGID
+ms906441	SUBLANGID
+ms904614	National Language Support (NLS) Structures
+ms904717	CPINFO
+ms904720	CURRENCYFMT
+ms906228	NUMBERFMT

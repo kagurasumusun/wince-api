@@ -13,7 +13,7 @@ INCLUDES = -Iinclude
 # docs/verification.md).
 CE_VERSIONS = 0x420 0x500 0x600
 
-HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h \
+HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h include/winreg.h \
        include/winerror.h include/winnt.h
 
 .PHONY: check hostcheck defcheck defdoc clean

@@ -54,6 +54,19 @@ UNICODE_ONLY = {
     "RemoveDirectory": "RemoveDirectoryW",
     "SetFileAttributes": "SetFileAttributesW",
     "GetModuleFileNameEx": "GetModuleFileNameExW",
+    # Registry (CE is Unicode-only; the exported spellings are the W
+    # forms documented by the CE registry pages' base names).
+    "RegCloseKey": "RegCloseKeyW",
+    "RegOpenKeyEx": "RegOpenKeyExW",
+    "RegCreateKeyEx": "RegCreateKeyExW",
+    "RegDeleteKey": "RegDeleteKeyW",
+    "RegDeleteValue": "RegDeleteValueW",
+    "RegEnumKeyEx": "RegEnumKeyExW",
+    "RegEnumValue": "RegEnumValueW",
+    "RegQueryInfoKey": "RegQueryInfoKeyW",
+    "RegQueryValueEx": "RegQueryValueExW",
+    "RegSetValueEx": "RegSetValueExW",
+    "RegFlushKey": "RegFlushKeyW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

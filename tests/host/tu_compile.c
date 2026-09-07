@@ -183,6 +183,20 @@ static const void *const api_symbols[] = {
     (const void *) &GetCurrentFiber,
     (const void *) &GetFiberData,
     (const void *) &SwitchToFiber,
+    /* M15: registry (winreg.h). */
+    (const void *) &RegOpenKeyExW, (const void *) &RegOpenKeyEx,
+    (const void *) &RegCreateKeyExW, (const void *) &RegCreateKeyEx,
+    (const void *) &RegDeleteKeyW, (const void *) &RegDeleteKey,
+    (const void *) &RegDeleteValueW, (const void *) &RegDeleteValue,
+    (const void *) &RegEnumKeyExW, (const void *) &RegEnumKeyEx,
+    (const void *) &RegEnumValueW, (const void *) &RegEnumValue,
+    (const void *) &RegQueryInfoKeyW, (const void *) &RegQueryInfoKey,
+    (const void *) &RegQueryValueExW, (const void *) &RegQueryValueEx,
+    (const void *) &RegSetValueExW, (const void *) &RegSetValueEx,
+    (const void *) &RegFlushKeyW, (const void *) &RegFlushKey,
+    (const void *) &CeFindFirstRegChange,
+    (const void *) &CeFindNextRegChange,
+    (const void *) &CeFindCloseRegChange,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -680,6 +694,17 @@ static int m12_shaped_usage(void)
     return 0;
 }
 
+/* M15 registry constants (winreg.h; values per fixed Win32 ABI). */
+typedef char assert_reg_vals[
+    (REG_NONE == 0 && REG_SZ == 1 && REG_EXPAND_SZ == 2 &&
+     REG_BINARY == 3 && REG_DWORD == 4 &&
+     REG_DWORD_LITTLE_ENDIAN == 4 && REG_DWORD_BIG_ENDIAN == 5 &&
+     REG_LINK == 6 && REG_MULTI_SZ == 7 && REG_RESOURCE_LIST == 8 &&
+     REG_OPTION_NON_VOLATILE == 0u && REG_OPTION_VOLATILE == 1u &&
+     REG_CREATED_NEW_KEY == 1u && REG_OPENED_EXISTING_KEY == 2u &&
+     REG_NOTIFY_CHANGE_NAME == 1u &&
+     REG_NOTIFY_CHANGE_LAST_SET == 4u) ? 1 : -1];
+
 /* M13 NLS constants (winnls.h; values per fixed Win32 ABI). */
 typedef char assert_nls_vals[
     (CP_ACP == 0 && CP_OEMCP == 1 && CP_UTF7 == 65000 &&
@@ -734,6 +759,53 @@ static int m14_shaped_usage(void)
     return 0;
 }
 
+/* M15 usage shape (compile-only): registry round trip on a
+ * volatile test key under HKEY_CURRENT_USER.  Never run/linked. */
+static int m15_shaped_usage(void)
+{
+    static const WCHAR w_key[] = { 't', 0 };
+    static const WCHAR w_val[] = { 'v', 0 };
+    static const WCHAR w_sub[] = { 's', 0 };
+    HKEY hk = NULL, hsub = NULL;
+    LONG lr;
+    DWORD disp, type = 0, cb = sizeof(DWORD), cch;
+    DWORD dw = 7;
+
+    if ((HKEY) (LONG_PTR) 0x80000001 != HKEY_CURRENT_USER)
+        return (int) ERROR_INVALID_PARAMETER;
+    if (HKEY_LOCAL_MACHINE == HKEY_CLASSES_ROOT)
+        return (int) ERROR_INVALID_PARAMETER;
+    lr = RegCreateKeyExW(HKEY_CURRENT_USER, w_key, 0, NULL,
+                         REG_OPTION_VOLATILE, 0, NULL, &hk, &disp);
+    if (lr != ERROR_SUCCESS)
+        return (int) lr;
+    lr = RegSetValueExW(hk, w_val, 0, REG_DWORD,
+                        (const BYTE *) &dw, sizeof(dw));
+    if (lr == ERROR_SUCCESS) {
+        dw = 0;
+        lr = RegQueryValueExW(hk, w_val, NULL, &type,
+                              (LPBYTE) &dw, &cb);
+    }
+    if (lr == ERROR_SUCCESS && (type != REG_DWORD || dw != 7))
+        lr = ERROR_INVALID_PARAMETER;
+    if (lr == ERROR_SUCCESS)
+        lr = RegCreateKeyExW(hk, w_sub, 0, NULL, REG_OPTION_VOLATILE,
+                             0, NULL, &hsub, NULL);
+    if (lr == ERROR_SUCCESS && hsub != NULL) {
+        cch = 0;
+        (void) RegEnumKeyExW(hk, 0, NULL, &cch, NULL, NULL, NULL,
+                             NULL);
+        (void) RegQueryInfoKeyW(hk, NULL, NULL, NULL, NULL, NULL,
+                                NULL, NULL, NULL, NULL, NULL, NULL);
+        RegDeleteKeyW(hk, w_sub);
+    }
+    if (lr == ERROR_SUCCESS)
+        RegDeleteValueW(hk, w_val);
+    RegFlushKeyW(hk);
+    RegCloseKeyW(hk);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -751,5 +823,7 @@ int host_tu_entry(void)
         return 1;
     if (m13_shaped_usage() != 0)
         return 1;
-    return m14_shaped_usage() == 0 ? 0 : 1;
+    if (m14_shaped_usage() != 0)
+        return 1;
+    return m15_shaped_usage() == 0 ? 0 : 1;
 }

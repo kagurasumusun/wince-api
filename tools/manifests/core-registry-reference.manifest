@@ -1,0 +1,16 @@
+aa516952	Registry Functions
+ms891448	RegCloseKey
+ms891450	RegCreateKeyEx
+ms891451	RegDeleteKey
+ms891452	RegDeleteValue
+ms891453	RegEnumKeyEx
+ms891454	RegEnumValue
+ms891455	RegFlushKey
+ms891460	RegOpenKeyEx
+ms891461	RegQueryInfoKey
+ms891462	RegQueryValueEx
+ms891469	RegSetValueEx
+ms891456	Registry Notification Functions
+aa517103	CeFindCloseRegChange
+aa517116	CeFindFirstRegChange
+aa517123	CeFindNextRegChange

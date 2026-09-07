@@ -160,3 +160,15 @@ ConvertThreadToFiber `ms885176`, DeleteFiber `ms885197`,
 GetCurrentFiber `ms885611`, GetFiberData `ms885624`, SwitchToFiber
 `aa450915`, LPFIBER_START_ROUTINE/PFIBER_START_ROUTINE per FiberProc
 `ms885221`.  Def: 94 -> 100 exports.
+
+**M15 batch — Registry Reference (new header `winreg.h`):**
+RegCloseKey `ms891448`, RegCreateKeyEx `ms891450`, RegDeleteKey
+`ms891451`, RegDeleteValue `ms891452`, RegEnumKeyEx `ms891453`,
+RegEnumValue `ms891454`, RegFlushKey `ms891455`, RegOpenKeyEx
+`ms891460`, RegQueryInfoKey `ms891461`, RegQueryValueEx `ms891462`,
+RegSetValueEx `ms891469`, CeFindFirstRegChange `aa517116`,
+CeFindNextRegChange `aa517123`, CeFindCloseRegChange `aa517103` +
+HKEY/PHKEY/REGSAM types, predefined-key and REG_*/REG_OPTION_*/REG_
+NOTIFY_* constants.  Def: 100 -> 114 exports.  New manifests:
+`tools/manifests/core-registry-reference.manifest` (16 pages) and
+`core-nls-reference.manifest` (46 pages); harvested rows 203 -> 265.

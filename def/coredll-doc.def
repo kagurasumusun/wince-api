@@ -12,6 +12,9 @@
 ; Ordinals are not published; entries are name-only.
 LIBRARY coredll.dll
 EXPORTS
+  CeFindCloseRegChange
+  CeFindFirstRegChange
+  CeFindNextRegChange
   CompareFileTime
   ConvertThreadToFiber
   CreateEventW
@@ -84,6 +87,17 @@ EXPORTS
   QueryPerformanceCounter
   QueryPerformanceFrequency
   Random
+  RegCloseKeyW
+  RegCreateKeyExW
+  RegDeleteKeyW
+  RegDeleteValueW
+  RegEnumKeyExW
+  RegEnumValueW
+  RegFlushKeyW
+  RegOpenKeyExW
+  RegQueryInfoKeyW
+  RegQueryValueExW
+  RegSetValueExW
   ReleaseSemaphore
   ResetEvent
   ResumeThread

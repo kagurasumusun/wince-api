@@ -60,6 +60,7 @@ typedef int             INT;
 typedef unsigned int    UINT;
 typedef int             BOOL;
 typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
+typedef BYTE           *LPBYTE; /* byte pointer (registry value data)  */
 
 typedef int32_t         LONG_PTR;
 typedef uint32_t        ULONG_PTR;
