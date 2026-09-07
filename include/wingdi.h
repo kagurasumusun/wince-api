@@ -738,6 +738,43 @@ typedef struct {
 #define R2_MERGEPENNOT  14
 #define R2_MERGEPEN     15
 #define R2_WHITE        16
+/* ------------------------------------------------------------------ */
+/* M31: character-set translation (Wingdi.h rows).                      */
+/*                                                                     */
+/* ms885597 "FONTSIGNATURE (CE 2.10+; Wingdi.h)": Unicode-subset       */
+/* bitfield fsUsb[4] (128 bits) + code-page bitfield fsCsb[2] (64      */
+/* bits), members per the page's prototype.  ms885163 "CHARSETINFO      */
+/* (CE 2.11+; Wingdi.h)": ciCharset, ciACP, fs (CE layout has no       */
+/* union, exactly as the page's prototype prints).  aa450955            */
+/* "TranslateCharsetInfo (CE 2.0+; Wingdi.h; Coredll.lib)": translates  */
+/* a charset/code-page/font-signature source into a CHARSETINFO.  The   */
+/* page's dwFlags table names TCI_SRCCHARSET, TCI_SRCCODEPAGE and       */
+/* TCI_SRCFONTSIG (values are the fixed Win32 ABI ones, recorded per    */
+/* repo policy); the character-set constants (ANSI_CHARSET ... ) and    */
+/* the FS_* font-signature bits appear in the page's remarks table by   */
+/* name only, so they are recorded (docs/inventory.md), not defined.    */
+/* ------------------------------------------------------------------ */
+typedef struct tagFONTSIGNATURE {
+    DWORD fsUsb[4];   /* 128-bit Unicode subset bitfield */
+    DWORD fsCsb[2];   /* 64-bit code-page bitfield */
+} FONTSIGNATURE;
+
+typedef struct tagCHARSETINFO {
+    UINT         ciCharset;   /* character set value */
+    UINT         ciACP;       /* ANSI code-page identifier */
+    FONTSIGNATURE fs;         /* font signature */
+} CHARSETINFO;
+typedef CHARSETINFO *LPCHARSETINFO;
+
+#define TCI_SRCCHARSET 1
+#define TCI_SRCCODEPAGE 3
+#define TCI_SRCFONTSIG  4
+
+/* aa450955 prints the parameter as "DWORD FAR* lpSrc"; FAR is empty
+ * on the flat CE/Win32 ABI. */
+UINT TranslateCharsetInfo(DWORD *lpSrc, LPCHARSETINFO lpCs,
+                          DWORD dwFlags);
+
 #ifdef __cplusplus
 }
 #endif

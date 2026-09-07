@@ -224,5 +224,9 @@ typedef EXCEPTION_RECORD *PEXCEPTION_RECORD; /* type used by
  * (usable by pointer, as PCONTEXT in EXCEPTION_POINTERS ms885215). */
 typedef struct _CONTEXT CONTEXT;
 typedef CONTEXT *PCONTEXT;
+/* LPCONTEXT: the GetThreadContext page (ms885642) types the parameter
+ * with LPCONTEXT; CONTEXT* and LPCONTEXT are the same pointer type on
+ * the Windows ABI. */
+typedef CONTEXT *LPCONTEXT;
 
 #endif /* AKARI_WINNT_H */

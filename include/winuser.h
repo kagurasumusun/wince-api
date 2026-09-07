@@ -1122,6 +1122,7 @@ BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
 #define EN_VSCROLL                   0x0602         /* aa453054 */
 #define WM_CTLCOLOREDIT                0x0133         /* aa453848 */
 #define WM_MEASUREITEM                 0x002C         /* aa453883 */
+#define WM_COPYDATA                    0x004A         /* aa453921 */
 
 /* --- Image-type constants for LoadImage / ImageList_LoadImage uType --- */
 #define IMAGE_BITMAP                   0            

@@ -600,6 +600,10 @@ static const void *const api_symbols[] = {
     (const void *) &CeGetThreadQuantum, (const void *) &CeSetThreadQuantum,
     (const void *) &VerQueryValueW, (const void *) &IsProcessorFeaturePresent,
     (const void *) &QueryInstructionSet, (const void *) &SetUserDefaultLCID,
+    /* M31: cross-process read / thread context / charset translation /
+     * version-resource helpers. */
+    (const void *) &ReadProcessMemory, (const void *) &GetThreadContext,
+    (const void *) &TranslateCharsetInfo,
     /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
     (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
     (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,
@@ -2061,6 +2065,14 @@ static int m28_shaped_usage(void)
 #endif
     return 0;
 }
+
+/* M31 32-bit ABI layout checks (wingdi.h / winbase.h). */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(FONTSIGNATURE) == 24, "FONTSIGNATURE 32-bit size");
+_Static_assert(sizeof(CHARSETINFO) == 32, "CHARSETINFO 32-bit size");
+_Static_assert(sizeof(VS_FIXEDFILEINFO) == 52, "VS_FIXEDFILEINFO 32-bit size");
+#endif
+
 
 /* M29: Image List API + message/ROP constants -- typed calls and
  * pointer-free layout checks; representative constant spot-checks. */

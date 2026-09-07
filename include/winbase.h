@@ -2406,6 +2406,47 @@ BOOL VerQueryValueW(const LPVOID pBlock, LPTSTR lpSubBlock,
                     LPVOID *lplpBuffer, UINT *puLen);
 #define VerQueryValue VerQueryValueW
 
+/* ms885642 "GetThreadContext" (CE 2.0+; Coredll.lib, Nk.lib) and
+ * ms886794 "ReadProcessMemory" (CE 2.0+; Coredll.lib, Nk.lib):
+ * thread-context / cross-process read helpers.  CONTEXT is the
+ * processor-specific register set whose layout the CE Winnt.h header
+ * pages do not publish (incomplete type recorded at M24); Nk.lib is
+ * kernel scope and stays out of the import def. */
+BOOL GetThreadContext(HANDLE hThread, LPCONTEXT lpContext);
+BOOL ReadProcessMemory(HANDLE hProcess, LPCVOID lpBaseAddress,
+                       LPVOID lpBuffer, DWORD nSize,
+                       LPDWORD lpNumberOfBytesRead);
+
+/* aa450983 "VS_FIXEDFILEINFO (Windows CE 5.0)": fixed file-version
+ * information structure returned at the root sub-block ("\") of a
+ * version resource by VerQueryValue.  CE 3.0+; Header Winbase.h (per
+ * the page); the structure does not appear in any CE SDK header, it is
+ * the version resource's on-disk layout.  dwSignature is 0xFEEF04BD as
+ * documented on the page.  The VS_FF_* flag names below come from the
+ * page's dwFileFlags table; their numeric values are the fixed Win32
+ * ABI values (recorded per the repo fixed-ABI policy). */
+typedef struct tagVS_FIXEDFILEINFO {
+    DWORD dwSignature;          /* 0xFEEF04BD */
+    DWORD dwStrucVersion;
+    DWORD dwFileVersionMS;
+    DWORD dwFileVersionLS;
+    DWORD dwProductVersionMS;
+    DWORD dwProductVersionLS;
+    DWORD dwFileFlagsMask;
+    DWORD dwFileFlags;
+    DWORD dwFileOS;
+    DWORD dwFileType;
+    DWORD dwFileSubtype;
+    DWORD dwFileDateMS;
+    DWORD dwFileDateLS;
+} VS_FIXEDFILEINFO;
+#define VS_FF_DEBUG           0x00000001L
+#define VS_FF_INFOINFERRED    0x00000010L
+#define VS_FF_PATCHED         0x00000004L
+#define VS_FF_PRELEASE        0x00000002L
+#define VS_FF_PRIVATEBUILD    0x00000008L
+#define VS_FF_SPECIALBUILD    0x00000020L
+
 /* ms886726 "IsProcessorFeaturePresent" (CE .NET 4.1+; Coredll.dll):
  * nonzero when the queried processor feature is supported.  The page
  * documents the PF_ARM_* / PF_MIPS_* flag *names* (per-CPU sets) but

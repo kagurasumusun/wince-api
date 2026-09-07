@@ -161,6 +161,13 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M31 (landed):** WM_COPYDATA (winuser.h) + cross-process
+  read/thread-context (ReadProcessMemory/GetThreadContext + LPCONTEXT),
+  VS_FIXEDFILEINFO + VS_FF_* version flags (winbase.h), and
+  FONTSIGNATURE/CHARSETINFO/TranslateCharsetInfo + TCI_* charset
+  translation (wingdi.h).  coredll 360 -> 363, 616 name-only exports
+  across 33 def files; second full-corpus rows-vs-headers audit pass
+  with all remaining gaps recorded in docs/inventory.md.
 * **M30 (landed):** corpus-preservation pipeline + remaining
   Winbase.h/Windows.h gap fill.  `tools/ce-corpus.py` + `docs/corpus.md`
   implement save-all-pages / push / delete-per-session / refetch-from-

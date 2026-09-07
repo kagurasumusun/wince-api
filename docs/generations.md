@@ -418,3 +418,27 @@ TranslateCharsetInfo (needs CHARSETINFO + TCI_*).  Export surface:
 coredll 353 -> 360, coreloc 23 -> 24, total name-only exports 605 ->
 613 (33 def files); gen-doc-def gains VerQueryValue -> VerQueryValueW.
 Host + six CE targets (arm/i386 x 4.2/5.0/6.0) pass warning-free.
+
+
+**M31 batch — WM_COPYDATA + cross-process read / thread context +
+version-resource + character-set units:** second rows.json-vs-headers
+audit pass using a word-boundary matcher over all 1175 titles; the
+201-item gap triaged to recorded non-exports (index/style/error-table
+pages, CEL_* kernel payloads, debug macros, Kfuncs/Pwinuser, NAT
+callbacks) plus these implemented units: WM_COPYDATA = 0x004A in
+winuser.h (aa453921); ReadProcessMemory (ms886794) and GetThreadContext
+(ms885642) in winbase.h (Coredll.lib + Nk.lib rows; CONTEXT stays the
+M24 incomplete type, LPCONTEXT alias added in winnt.h); VS_FIXEDFILEINFO
++ the six VS_FF_* flags in winbase.h (aa450983, dwSignature 0xFEEF04BD
+as the page documents); FONTSIGNATURE (ms885597), CHARSETINFO +
+LPCHARSETINFO (ms885163) and TranslateCharsetInfo with TCI_SRCCHARSET/
+TCI_SRCCODEPAGE/TCI_SRCFONTSIG (aa450955) in wingdi.h.  Names-only
+documented sets (*_CHARSET, FS_*, WM_SYSCOPYDATA, EXTENDED_NAME_FORMAT,
+COPY_FILE_*) and the deferred functions (CopyFileEx, GetUserNameEx,
+CeHeapCreate, Nk-only WriteProcessMemory/SetThreadContext) are recorded
+in inventory.md with reasons; crypto/NTE/TRUST/CERTSRV/RAS/Net error
+tables are not numeric on the CE pages and remain recorded-not-
+transcribed.  Export surface: coredll 360 -> 363, total name-only
+exports 613 -> 616 (33 def files).  Host + six CE targets pass
+warning-free; TU static-asserts FONTSIGNATURE=24 / CHARSETINFO=32 /
+VS_FIXEDFILEINFO=52 on the 32-bit ABI.

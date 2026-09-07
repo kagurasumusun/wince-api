@@ -1534,6 +1534,51 @@ map gains VerQueryValue -> VerQueryValueW.  Host + six CE targets pass
 warning-free.
 
 
+
+### M31: message/version/charset/cross-process units (winuser + winbase + wingdi + winnt)
+
+Multi-unit continuation of the rows.json-vs-headers audit.  The full
+201-title gap list was re-derived with a word-boundary matcher and
+triaged: 85 are index pages or style/error tables (recorded in
+sections above / below), 61 are CEL_* kernel event-payload pages
+already recorded as intentionally not transcribed (see the celog.h
+header note and M21/M25 records), the Dbgapi debug macros, Kfuncs.h
+and Pwinuser.h items and the NAT editor callbacks are recorded
+intentional non-exports, and the remainder are implemented here.
+
+| Item | Official page (CE 5.0) | OS | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| `WM_COPYDATA` = 0x004A | `aa453921` | CE 1.0+ | Winuser.h | — | fixed Win32 ABI message value (message page documents semantics; see also COPYDATASTRUCT note below) |
+| `ReadProcessMemory` | `ms886794` | CE 2.0+ | Winbase.h | Coredll.lib, Nk.lib | Coredll.lib membership feeds the def; Nk.lib kernel scope excluded |
+| `GetThreadContext` | `ms885642` | CE 2.0+ | Winbase.h | Coredll.lib, Nk.lib | parameter typed LPCONTEXT; CONTEXT is the M24-recorded incomplete type; LPCONTEXT alias added to winnt.h |
+| `VS_FIXEDFILEINFO` | `aa450983` | CE 3.0+ | Winbase.h | — | dwSignature 0xFEEF04BD documented on the page; VS_FF_* flag names from the page table, numeric values fixed Win32 ABI (recorded) |
+| `FONTSIGNATURE` | `ms885597` | CE 2.10+ | Wingdi.h | — | fsUsb[4]/fsCsb[2], members per page prototype |
+| `CHARSETINFO` (+ LPCHARSETINFO) | `ms885163` | CE 2.11+ | Wingdi.h | — | ciCharset/ciACP/fs; CE layout exactly as the page prints (no union) |
+| `TranslateCharsetInfo` | `aa450955` | CE 2.0+ | Wingdi.h | Coredll.lib | page's dwFlags table names TCI_SRCCHARSET/TCI_SRCCODEPAGE/TCI_SRCFONTSIG (fixed Win32 ABI values); page remark table names the supported *_CHARSET / FS_* values by name only -> recorded, not defined |
+
+Recorded-not-defined (names documented, values/numerics unavailable on
+the CE pages or in a clean table): the *_CHARSET and FS_* constants of
+the aa450955 translation table, VS_FF_* beyond the fixed-ABI six above
+are all the page lists, WM_SYSCOPYDATA (aa453912, Pwinuser.h -- OEM
+window class range), COPYDATASTRUCT (referenced by aa453921; no CE
+structure leaf, desktop fixed layout would need a Win32 structure
+reference -- deferred).  Deferred function rows kept on file:
+CopyFileEx (aa517311, CE 5.0+; needs the COPY_FILE_* flags + progress
+routine typedef), GetUserNameEx (aa517595; needs EXTENDED_NAME_FORMAT
+values, no CE numeric table), CeHeapCreate (aa450797; OEM Pkfuncs
+callback prototypes), WriteProcessMemory / SetThreadContext (Nk.lib
+only -> kernel scope).  The crypto/NTE/TRUST/CERTSRV/RAS/Net error-code
+table pages are recorded as not yet transcribed: their Value columns
+are not numeric tables on the CE pages (winerror.h stays at the System
+0-1078 numeric table, aa450919).
+
+Export surface: coredll 360 -> 363 (ReadProcessMemory, GetThreadContext,
+TranslateCharsetInfo), total name-only exports 613 -> **616** (33 def
+files).  Host + six CE targets pass warning-free; TU static-asserts
+FONTSIGNATURE=24 / CHARSETINFO=32 / VS_FIXEDFILEINFO=52 on the 32-bit
+ABI (also verified under the CE toolchain targets).
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |
