@@ -2460,6 +2460,38 @@ BOOL IsProcessorFeaturePresent(DWORD dwProcessorFeature);
 BOOL QueryInstructionSet(DWORD dwInstructionSet,
                          LPDWORD lpdwCurrentInstructionSet);
 
+/* ------------------------------------------------------------------ */
+/* Directory-service user name query (GetUserNameEx).                 */
+/*                                                                     */
+/* aa450831 "EXTENDED_NAME_FORMAT (Windows CE 5.0)" (CE .NET 4.0+;     */
+/* Header Windows.h) publishes the full CE enumeration (note the       */
+/* CE-specific NameWindowsCeLocal member, absent from the desktop      */
+/* form); CE 6.0 twin ee483142 restates it verbatim.                   */
+typedef enum {
+    NameUnknown            = 0,
+    NameFullyQualifiedDN   = 1,   /* not supported on CE */
+    NameSamCompatible      = 2,
+    NameDisplay            = 3,
+    NameUniqueId           = 6,   /* not supported on CE */
+    NameCanonical          = 7,
+    NameUserPrincipal      = 8,   /* not supported on CE */
+    NameCanonicalEx        = 9,
+    NameServicePrincipal   = 10,
+    NameWindowsCeLocal     = 0x80000001 /* CE-specific member */
+} EXTENDED_NAME_FORMAT, *PEXTENDED_NAME_FORMAT;
+
+/* aa517595 "GetUserNameEx (Windows CE 5.0)":
+ * BOOLEAN GetUserNameEx(EXTENDED_NAME_FORMAT, LPTSTR, PULONG).
+ * OS CE .NET 4.0+; Winbase.h; Coredll.lib.  CE 6.0 twin ee489621.
+ * Retrieves the name of the current user in the requested format;
+ * nSize carries the buffer size in TCHARs on entry and the required
+ * size on return (ERROR_MORE_DATA when the buffer is too small).
+ * Windows CE is Unicode-only (the CE page types the buffer LPTSTR),
+ * so the export is the wide spelling (gen-doc-def.py UNICODE_ONLY). */
+BOOLEAN GetUserNameExW(EXTENDED_NAME_FORMAT NameFormat,
+                       LPWSTR lpNameBuffer, PULONG nSize);
+#define GetUserNameEx GetUserNameExW
+
 #ifdef __cplusplus
 }
 #endif

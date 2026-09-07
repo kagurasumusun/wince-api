@@ -1645,6 +1645,53 @@ Microsoft's official Win32 *COPYDATASTRUCT* structure reference
 HARDWAREINPUT / CRITICAL_SECTION).  12 bytes on the 32-bit ABI
 (static-asserted).  No new exports (struct-only).
 
+### M34 header batch: NLS string mapping + directory-service user name
+
+Added after the CE 6.0 full-twin reconciliation; every page below was
+read from the CE 5.0 `(v=msdn.10)` page and its CE 6.0
+`(v=winembedded.60)` twin (both saved in the corpus), plus the CE .NET
+`(v=msdn.10)` twins of the NLS functions.
+
+* `LCMapString` ms906221 (twin ee491201, CE .NET ms921462):
+  `int LCMapString(LCID, DWORD, LPCTSTR, int, LPTSTR, int)`.  OS
+  CE .NET 4.0+; Winnls.h; Coreloc.lib.  Declared `LCMapStringW` +
+  `#define LCMapString LCMapStringW` (the page itself states
+  "Windows CE supports only the Unicode version of this function").
+  The LCMAP_* / NORM_* dwMapFlags *names* are listed on the page but
+  the CE page does not publish their numeric values -> no flag
+  constants shipped (recorded; value-table backlog).
+* `FoldString` ms905209 (twin ee491930, CE .NET ms919269): `int
+  FoldString(DWORD, LPCTSTR, int, LPTSTR, int)`.  OS CE 1.0+;
+  Winnls.h; Coreloc.lib.  `FoldStringW` + macro.  The MAP_* flag
+  names (MAP_FOLDCZONE / MAP_PRECOMPOSED / MAP_COMPOSITE /
+  MAP_FOLDDIGITS / MAP_EXPAND_LIGATURES) are on the page with CE
+  support notes but without values -> no MAP_* constants shipped.
+* `EnumSystemCodePages` ms905062 (twin ee491962, CE .NET ms919231):
+  `BOOL EnumSystemCodePages(CODEPAGE_ENUMPROC, DWORD)`.  OS CE .NET
+  4.0+; Winnls.h; Coreloc.lib.  `EnumSystemCodePagesW` + macro.
+* `CODEPAGE_ENUMPROC` typedef added to winnls.h: the callback's
+  prototype comes from the EnumCodePagesProc page ms904723 (twin
+  ee491122; "BOOL CALLBACK EnumCodePagesProc(LPTSTR lpCodePageString)";
+  "The CODEPAGE_ENUMPROC type defines a pointer to this callback
+  function"), and the EnumSystemCodePages parameter is typed
+  CODEPAGE_ENUMPROC on both pages.
+* `GetUserNameEx` aa517595 (twin ee489621, CE .NET ms902915):
+  `BOOLEAN GetUserNameEx(EXTENDED_NAME_FORMAT, LPTSTR, PULONG)`.  OS
+  CE .NET 4.0+; Winbase.h; Coredll.lib.  `GetUserNameExW` + macro
+  (CE Unicode-only; buffer typed LPTSTR on the page).
+* `EXTENDED_NAME_FORMAT` enum added to winbase.h from its CE type page
+  aa450831 (twin ee483142): members NameUnknown 0, NameFullyQualifiedDN
+  1, NameSamCompatible 2, NameDisplay 3, NameUniqueId 6, NameCanonical
+  7, NameUserPrincipal 8, NameCanonicalEx 9, NameServicePrincipal 10
+  and the **CE-specific** member `NameWindowsCeLocal = 0x80000001`
+  (absent from the desktop form); `*PEXTENDED_NAME_FORMAT` pointer
+  typedef per the page.  Values static-asserted in the host TU.
+
+Export surface: coredll 363 -> 364 (GetUserNameExW), coreloc 30 -> 33
+(EnumSystemCodePagesW, FoldStringW, LCMapStringW).  gen-doc-def.py
+UNICODE_ONLY gained the four base-name -> W entries.  Host + all six
+CE targets pass warning-free.
+
 
 ### Documented conflicts (official page vs verified export surface)
 

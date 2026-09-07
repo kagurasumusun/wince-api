@@ -21,6 +21,8 @@ EXPORTS
   CharUpperBuffW
   CompareStringW
   ConvertDefaultLocale
+  EnumSystemCodePagesW
+  FoldStringW
   GetACP
   GetCPInfo
   GetCurrencyFormatW
@@ -40,6 +42,7 @@ EXPORTS
   IsCharUpperW
   IsValidCodePage
   IsValidLocale
+  LCMapStringW
   SetLocaleInfoW
   SetUserDefaultLCID
   wsprintfW

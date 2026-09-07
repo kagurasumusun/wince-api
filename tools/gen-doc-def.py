@@ -85,6 +85,17 @@ UNICODE_ONLY = {
     # NLS comparison/typing (Unicode-only CE).
     "CompareString": "CompareStringW",
     "GetStringTypeEx": "GetStringTypeExW",
+    # NLS string mapping / code-page enumeration (Coreloc.lib): the
+    # FoldString page ms905209 and LCMapString page ms906221 state that
+    # CE supports only the Unicode version; EnumSystemCodePages
+    # ms905062 follows the same Unicode-only rule (its callback receives
+    # wide code-page strings).
+    "FoldString": "FoldStringW",
+    "LCMapString": "LCMapStringW",
+    "EnumSystemCodePages": "EnumSystemCodePagesW",
+    # Directory-service user-name query (Coredll.lib): the CE page
+    # aa517595 types the buffer LPTSTR and Windows CE is Unicode-only.
+    "GetUserNameEx": "GetUserNameExW",
     # File I/O functions whose CE exports are the wide spellings.
     "FindFirstChangeNotification": "FindFirstChangeNotificationW",
     "FindFirstFileEx": "FindFirstFileExW",

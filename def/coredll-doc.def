@@ -194,6 +194,7 @@ EXPORTS
   GetTimeZoneInformation
   GetUpdateRect
   GetUpdateRgn
+  GetUserNameExW
   GetVersionEx
   GetViewportExtEx
   GetViewportOrgEx

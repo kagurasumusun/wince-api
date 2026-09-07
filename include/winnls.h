@@ -247,6 +247,56 @@ int GetLocaleInfoW(LCID Locale, LCTYPE LCType,
 BOOL SetLocaleInfoW(LCID Locale, LCTYPE LCType, LPCWSTR lpLCData);
 #define SetLocaleInfo SetLocaleInfoW
 
+/* ------------------------------------------------------------------ */
+/* String mapping (FoldString / LCMapString) and code-page enumeration */
+/* (EnumSystemCodePages).  Page family: FoldString ms905209 (CE 1.0+), */
+/* LCMapString ms906221 (CE .NET 4.0+), EnumSystemCodePages ms905062   */
+/* (CE .NET 4.0+); Header rows all Winnls.h; Link Library rows all     */
+/* Coreloc.lib.  CE 6.0 twins ee491930 / ee491201 / ee491962 confirm   */
+/* the prototypes and the (v=winembedded.60) requirement rows.         */
+/*                                                                     */
+/* Windows CE is Unicode-only: the CE .NET/CE 5.0 LCMapString page     */
+/* states "Even though Windows CE supports only the Unicode version    */
+/* of this function...", so the exports are the wide spellings         */
+/* (gen-doc-def.py UNICODE_ONLY).                                     */
+
+/* CODEPAGE_ENUMPROC -- pointer to the application-defined callback
+ * that EnumSystemCodePages calls for each code page.  The official
+ * EnumCodePagesProc page (ms904723, CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib) documents "BOOL CALLBACK EnumCodePagesProc(LPTSTR
+ * lpCodePageString)" and states "The CODEPAGE_ENUMPROC type defines a
+ * pointer to this callback function."; the EnumSystemCodePages
+ * parameter is typed CODEPAGE_ENUMPROC.  CE 6.0 twins ee491122 /
+ * ee491962 restate both. */
+typedef BOOL (CALLBACK *CODEPAGE_ENUMPROC)(LPWSTR lpCodePageString);
+
+/* ms905209 "FoldString (Windows CE 5.0)": int FoldString(DWORD, LPCTSTR,
+ * int, LPTSTR, int).  OS CE 1.0+; Winnls.h; Coreloc.lib.  dwMapFlags
+ * combines the MAP_* mapping flags (names and CE support notes are on
+ * the page; the CE page does not publish the flag values, so no
+ * MAP_* constants are shipped -- recorded). */
+int FoldStringW(DWORD dwMapFlags, LPCWSTR lpSrcStr, int cchSrc,
+                LPWSTR lpDestStr, int cchDest);
+#define FoldString FoldStringW
+
+/* ms906221 "LCMapString (Windows CE 5.0)": int LCMapString(LCID, DWORD,
+ * LPCTSTR, int, LPTSTR, int).  OS CE .NET 4.0+; Winnls.h; Coreloc.lib.
+ * dwMapFlags combines the LCMAP_* and NORM_* flags (the page names
+ * them per supported-flag groups; numeric values are not published by
+ * the CE page -> no LCMAP_* or NORM_* constants shipped -- recorded). */
+int LCMapStringW(LCID Locale, DWORD dwMapFlags, LPCWSTR lpSrcStr,
+                 int cchSrc, LPWSTR lpDestStr, int cchDest);
+#define LCMapString LCMapStringW
+
+/* ms905062 "EnumSystemCodePages (Windows CE 5.0)":
+ * BOOL EnumSystemCodePages(CODEPAGE_ENUMPROC, DWORD).  OS CE .NET 4.0+;
+ * Winnls.h; Coreloc.lib.  Enumerates the code pages installed on (or,
+ * with CP_INSTALLED unset, supported by) the system; enumeration stops
+ * when the callback returns FALSE. */
+BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROC lpCodePageEnumProc,
+                          DWORD dwFlags);
+#define EnumSystemCodePages EnumSystemCodePagesW
+
 #ifdef __cplusplus
 }
 #endif

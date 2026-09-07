@@ -608,6 +608,10 @@ static const void *const api_symbols[] = {
     (const void *) &GetCurrencyFormatW, (const void *) &GetNumberFormatW,
     (const void *) &GetDateFormatW, (const void *) &GetTimeFormatW,
     (const void *) &GetLocaleInfoW, (const void *) &SetLocaleInfoW,
+    /* M34: NLS string mapping / code-page enumeration (Coreloc.lib) +
+     * directory-service user-name query (Coredll.lib). */
+    (const void *) &FoldStringW, (const void *) &LCMapStringW,
+    (const void *) &EnumSystemCodePagesW, (const void *) &GetUserNameExW,
     /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
     (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
     (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,
@@ -2077,6 +2081,15 @@ _Static_assert(sizeof(CHARSETINFO) == 32, "CHARSETINFO 32-bit size");
 _Static_assert(sizeof(VS_FIXEDFILEINFO) == 52, "VS_FIXEDFILEINFO 32-bit size");
 _Static_assert(sizeof(CURRENCYFMT) == 32, "CURRENCYFMT 32-bit size");
 _Static_assert(sizeof(NUMBERFMT) == 24, "NUMBERFMT 32-bit size");
+/* aa450831 EXTENDED_NAME_FORMAT members (CE-specific value included). */
+_Static_assert(NameUnknown == 0 && NameFullyQualifiedDN == 1 &&
+               NameSamCompatible == 2 && NameDisplay == 3 &&
+               NameUniqueId == 6 && NameCanonical == 7 &&
+               NameUserPrincipal == 8 && NameCanonicalEx == 9 &&
+               NameServicePrincipal == 10,
+               "EXTENDED_NAME_FORMAT low members");
+_Static_assert((unsigned) NameWindowsCeLocal == 0x80000001u,
+               "EXTENDED_NAME_FORMAT NameWindowsCeLocal");
 _Static_assert(sizeof(COPYDATASTRUCT) == 12, "COPYDATASTRUCT 32-bit size");
 #endif
 
