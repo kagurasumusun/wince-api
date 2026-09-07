@@ -40,6 +40,7 @@ extern "C" {
 #define WINAPI        /* empty on Windows CE (see header note) */
 #define APIENTRY      WINAPI
 #define CALLBACK      WINAPI
+#define WINAPIV       WINAPI   /* varargs public API (e.g. NKDbgPrintfW) */
 #define STDMETHODCALLTYPE WINAPI
 
 #define CONST const

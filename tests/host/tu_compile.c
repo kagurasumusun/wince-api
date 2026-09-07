@@ -15,6 +15,9 @@
 #include <tlhelp32.h>
 #include <psapi.h>
 #include <msgqueue.h>
+#include <excpt.h>
+#include <dbgapi.h>
+#include <errorrep.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -38,10 +41,28 @@ typedef char assert_msgqinfo_cm[(offsetof(MSGQUEUEINFO, dwCurrentMessages) == 16
  * page bit-field layout) 32-bit CE sizes. */
 typedef char assert_ctmo_size[(sizeof(COMMTIMEOUTS) == 20) ? 1 : -1];
 typedef char assert_dcb_size[(sizeof(DCB) == 28) ? 1 : -1];
+/* M24: SEH/debugging 32-bit layout as transcribed from the CE pages:
+ * EXCEPTION_RECORD (ms885216) = 80, DEBUG_EVENT (ms885195) = 96. */
+typedef char assert_exrec_size[(sizeof(EXCEPTION_RECORD) == 80) ? 1 : -1];
+typedef char assert_dbev_size[(sizeof(DEBUG_EVENT) == 96) ? 1 : -1];
 #endif
 
 /* Reference every declared function (no calls, compile-only). */
 static const void *const api_symbols[] = {
+    /* M24: SEH + debugging (winbase.h/excpt.h/dbgapi.h/errorrep.h). */
+    (const void *) &RaiseException,
+    (const void *) &DebugBreak,
+    (const void *) &ContinueDebugEvent,
+    (const void *) &DebugActiveProcess,
+    (const void *) &WaitForDebugEvent,
+    (const void *) &OutputDebugStringW,
+    (const void *) &NKDbgPrintfW,
+    (const void *) &RegisterDbgZones,
+    (const void *) &WriteDebugLED,
+    (const void *) &ReportFault,
+    (const void *) &AbnormalTermination,
+    (const void *) &GetExceptionCode,
+    (const void *) &GetExceptionInformation,
     /* M23: serial communications (winbase.h; Serdev.lib). */
     (const void *) &ClearCommBreak,
     (const void *) &ClearCommError,
@@ -1202,6 +1223,38 @@ static int m23_shaped_usage(void)
     return (dcb.fBinary == 1 && dcb.ByteSize == 8) ? 0 : 1;
 }
 
+/* M24 usage shape (compile-only; SEH/debugging declarations). */
+static int m24_shaped_usage(void)
+{
+    static const WCHAR zone_fmt[] = { 'z','o','n','e','=','%','x','\n',0 };
+    static const WCHAR boot_msg[] = { 'b','o','o','t','\n',0 };
+    DBGPARAM zones;
+    DEBUG_EVENT de;
+    EXCEPTION_POINTERS ep;
+    EXCEPTION_RECORD er;
+
+    zones.lpszName[0] = L'D';
+    zones.ulZoneMask = 0;
+    (void) RegisterDbgZones((HMODULE) 0, &zones);
+    (void) NKDbgPrintfW(zone_fmt, zones.ulZoneMask);
+    (void) WriteDebugLED(0, 1);
+    (void) ReportFault(&ep, 0);
+    (void) WaitForDebugEvent(&de, 0);
+    (void) DebugActiveProcess((DWORD) 0);
+    (void) ContinueDebugEvent(0, 0, DBG_CONTINUE);
+    er.ExceptionCode = EXCEPTION_ACCESS_VIOLATION;
+    ep.ExceptionRecord = &er;
+    (void) RaiseException(er.ExceptionCode, EXCEPTION_NONCONTINUABLE,
+                          0, NULL);
+    (void) OutputDebugStringW(boot_msg);
+    (void) DebugBreak();
+    return (DBG_EXCEPTION_NOT_HANDLED == 0x80010001L
+            && EXCEPTION_DEBUG_EVENT == 1
+            && OUTPUT_DEBUG_STRING_EVENT == 8
+            && de.dwDebugEventCode == 0 && de.u.Exception.dwFirstChance == 0)
+           ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1240,6 +1293,8 @@ int host_tu_entry(void)
     if (m22_shaped_usage() != 0)
         return 1;
     if (m23_shaped_usage() != 0)
+        return 1;
+    if (m24_shaped_usage() != 0)
         return 1;
     return 0;
 }

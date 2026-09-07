@@ -260,3 +260,17 @@ CE 1.0+.  WaitCommEvent lpOverlapped ignored/set NULL on CE; serial
 constants' values unpublished on the pages -> unknown, not defined.
 Host check passes; six-target clang crosscheck pending re-acquisition
 of the (session-deleted) LLVM-WinCE toolchain.
+
+**M24 batch — Exception Reference + Debugging Reference (bulk):**
+new headers excpt.h (AbnormalTermination/GetExceptionCode/
+GetExceptionInformation/EXCEPTION_POINTERS), dbgapi.h (DBGPARAM,
+NKDbgPrintfW, RegisterDbgZones, WriteDebugLED), errorrep.h (ReportFault
+ms886799); winnt.h gained EXCEPTION_RECORD (ms885216), CONTEXT opaque
+(ms885174, layout unpublished -> incomplete), the ms885620 EXCEPTION_*
+codes, EXCEPTION_MAXIMUM_PARAMETERS and continuable flags; winbase.h
+gained RaiseException, DebugBreak, ContinueDebugEvent,
+DebugActiveProcess, WaitForDebugEvent, OutputDebugString(W) and the
+DEBUG_EVENT record family + event-code/DBG_* constants.  Debug macro
+pages recorded but not expanded (driver/zone machinery).  SEH
+intrinsics excluded from export def (NOT_EXPORTS).  coredll def 164 ->
+171.  Host + six CE targets pass; all defs llvm-dlltool-armce verified.

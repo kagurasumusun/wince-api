@@ -2055,6 +2055,177 @@ BOOL TransmitCommChar(HANDLE hFile, char cChar);
 BOOL WaitCommEvent(HANDLE hFile, LPDWORD lpEvtMask,
                    LPOVERLAPPED lpOverlapped);
 
+/* ------------------------------------------------------------------ */
+/* M24: exception + debugging APIs (Exception/Debugging Reference).   */
+/* ------------------------------------------------------------------ */
+
+/* ms886790 "RaiseException (Windows CE 5.0)":
+ * void RaiseException(DWORD, DWORD, DWORD, const DWORD*).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Raises an exception in the calling thread.
+ * dwExceptionFlags is zero (continuable) or EXCEPTION_NONCONTINUABLE;
+ * the system clears bit 28 of dwExceptionCode; nNumberOfArguments
+ * must not exceed EXCEPTION_MAXIMUM_PARAMETERS (ignored if the
+ * argument pointer is NULL). */
+void RaiseException(DWORD dwExceptionCode, DWORD dwExceptionFlags,
+                    DWORD nNumberOfArguments,
+                    const DWORD *lpArguments);
+
+/* Debug-event codes (names per ms885195 "DEBUG_EVENT"; numeric values
+ * are the fixed Win32 ABI codes of the desktop debugging-event
+ * reference).  The CE 5.0 page's DEBUG_EVENT union also carries a
+ * RIP_INFO member, but no RIP_EVENT code row appears on the page. */
+#define EXCEPTION_DEBUG_EVENT        1
+#define CREATE_THREAD_DEBUG_EVENT    2
+#define CREATE_PROCESS_DEBUG_EVENT   3
+#define EXIT_THREAD_DEBUG_EVENT      4
+#define EXIT_PROCESS_DEBUG_EVENT     5
+#define LOAD_DLL_DEBUG_EVENT         6
+#define UNLOAD_DLL_DEBUG_EVENT       7
+#define OUTPUT_DEBUG_STRING_EVENT    8
+
+/* ms885175 "ContinueDebugEvent (Windows CE 5.0)" names the two
+ * continue statuses DBG_CONTINUE / DBG_EXCEPTION_NOT_HANDLED; the
+ * numeric values are the fixed Win32 ABI codes. */
+#define DBG_CONTINUE                 0x00010002L
+#define DBG_EXCEPTION_NOT_HANDLED    0x80010001L
+
+/* The Debugging Reference pages below all print Header: Winbase.h
+ * (except DebugBreak = Kfuncs.h and the Dbgapi.h items in dbgapi.h)
+ * and OS Versions Windows CE 2.0 and later (DebugBreak/OutputDebug
+ * String: CE 1.0 and later).  ContinueDebugEvent, DebugActiveProcess
+ * and WaitForDebugEvent list "Coredll.lib, Nk.lib" as Link Library;
+ * OutputDebugString lists only Nk.lib. */
+
+/* ms885194 "DebugBreak (Windows CE 5.0)":
+ * void DebugBreak(void).  CE 1.0+; the page's Header row is Kfuncs.h;
+ * Coredll.lib.  Causes a breakpoint exception in the calling thread;
+ * ignored when no debugger is attached.  Declared here (Winbase.h
+ * aggregates the user-mode surface) with the Kfuncs.h row recorded. */
+void DebugBreak(void);
+
+/* ms886769 "OutputDebugString (Windows CE 5.0)":
+ * void OutputDebugString(LPCTSTR).  CE 1.0+; Winbase.h.  The page's
+ * Link Library row is Nk.lib (a kernel-side export, not Coredll), so
+ * this name is *not* added to any user-mode doc def.  CE strings are
+ * Unicode; W spelling per the CE convention. */
+void OutputDebugStringW(LPCWSTR lpOutputString);
+#define OutputDebugString OutputDebugStringW
+
+/* ms885175 "ContinueDebugEvent (Windows CE 5.0)":
+ * BOOL ContinueDebugEvent(DWORD, DWORD, DWORD).  CE 2.0+; Winbase.h;
+ * Coredll.lib, Nk.lib.  Continues a thread that reported a debugging
+ * event, with DBG_CONTINUE or DBG_EXCEPTION_NOT_HANDLED. */
+BOOL ContinueDebugEvent(DWORD dwProcessId, DWORD dwThreadId,
+                        DWORD dwContinueStatus);
+
+/* ms885193 "DebugActiveProcess (Windows CE 5.0)":
+ * BOOL DebugActiveProcess(DWORD).  CE 2.0+; Winbase.h; Coredll.lib,
+ * Nk.lib.  Attaches a debugger to an active process; the system then
+ * sends CREATE_PROCESS_DEBUG_EVENT and per-DLL LOAD_DLL_DEBUG_EVENT
+ * events to WaitForDebugEvent and suspends/resumes threads. */
+BOOL DebugActiveProcess(DWORD dwProcessId);
+
+/* Debugging event-info structures (Debugging Reference pages below);
+ * each is used as a member of the DEBUG_EVENT union (ms885195). */
+
+/* ms885183: CREATE_PROCESS_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _CREATE_PROCESS_DEBUG_INFO {
+    HANDLE hFile;                 /* handle to the process's executable */
+    HANDLE hProcess;              /* handle to the process */
+    HANDLE hThread;               /* handle to the initial thread */
+    LPVOID lpBaseOfImage;         /* base address of the executable */
+    DWORD  dwDebugInfoFileOffset; /* debug-information file offset */
+    DWORD  nDebugInfoSize;        /* debug-information size */
+    LPVOID lpThreadLocalBase;     /* base of the thread's TLS */
+    LPTHREAD_START_ROUTINE lpStartAddress; /* thread start address */
+    LPVOID lpImageName;           /* pointer to the executable name */
+    WORD   fUnicode;              /* nonzero if lpImageName is Unicode */
+} CREATE_PROCESS_DEBUG_INFO;
+
+/* ms885187: CREATE_THREAD_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _CREATE_THREAD_DEBUG_INFO {
+    HANDLE hThread;               /* handle to the created thread */
+    LPVOID lpThreadLocalBase;     /* base of the thread's TLS */
+    LPTHREAD_START_ROUTINE lpStartAddress; /* thread start address */
+} CREATE_THREAD_DEBUG_INFO;
+
+/* ms885214: EXCEPTION_DEBUG_INFO (CE 2.0+, Winbase.h).  The
+ * EXCEPTION_RECORD is the type of ms885216 (Winnt.h). */
+typedef struct _EXCEPTION_DEBUG_INFO {
+    EXCEPTION_RECORD ExceptionRecord;
+    DWORD            dwFirstChance;   /* nonzero on first chance */
+} EXCEPTION_DEBUG_INFO;
+
+/* ms885218: EXIT_PROCESS_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _EXIT_PROCESS_DEBUG_INFO {
+    DWORD dwExitCode;
+} EXIT_PROCESS_DEBUG_INFO;
+
+/* ms885220: EXIT_THREAD_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _EXIT_THREAD_DEBUG_INFO {
+    DWORD dwExitCode;
+} EXIT_THREAD_DEBUG_INFO;
+
+/* ms886734: LOAD_DLL_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _LOAD_DLL_DEBUG_INFO {
+    HANDLE hFile;                 /* handle to the loaded DLL */
+    LPVOID lpBaseOfDll;           /* base address of the DLL */
+    DWORD  dwDebugInfoFileOffset; /* debug-information file offset */
+    DWORD  nDebugInfoSize;        /* debug-information size */
+    LPVOID lpImageName;           /* pointer to the DLL name */
+    WORD   fUnicode;              /* nonzero if lpImageName is Unicode */
+} LOAD_DLL_DEBUG_INFO;
+
+/* aa450963: UNLOAD_DLL_DEBUG_INFO (CE 2.0+, Winbase.h). */
+typedef struct _UNLOAD_DLL_DEBUG_INFO {
+    LPVOID lpBaseOfDll;
+} UNLOAD_DLL_DEBUG_INFO;
+
+/* ms886770: OUTPUT_DEBUG_STRING_INFO (CE 2.0+, Winbase.h). */
+typedef struct _OUTPUT_DEBUG_STRING_INFO {
+    LPSTR lpDebugStringData;      /* debug string (A or W per fUnicode) */
+    WORD  fUnicode;               /* nonzero for a Unicode string */
+    WORD  nDebugStringLength;     /* string length in characters */
+} OUTPUT_DEBUG_STRING_INFO;
+
+/* RIP_INFO: the ms885195 DEBUG_EVENT union includes a RIP_INFO
+ * member, but the Debugging Reference publishes no RIP_INFO structure
+ * page; the member layout (dwError/dwType) is taken from Microsoft's
+ * official desktop debugging-structures reference (fixed Win32 ABI,
+ * recorded provenance). */
+typedef struct _RIP_INFO {
+    DWORD dwError;
+    DWORD dwType;
+} RIP_INFO;
+
+/* ms885195 "DEBUG_EVENT (Windows CE 5.0)": debugging-event record
+ * filled by WaitForDebugEvent.  CE 2.0+; Winbase.h.  dwDebugEventCode
+ * is one of the *_DEBUG_EVENT values above; the union member that
+ * applies is selected by the code. */
+typedef struct _DEBUG_EVENT {
+    DWORD dwDebugEventCode;
+    DWORD dwProcessId;
+    DWORD dwThreadId;
+    union {
+        EXCEPTION_DEBUG_INFO      Exception;
+        CREATE_THREAD_DEBUG_INFO  CreateThread;
+        CREATE_PROCESS_DEBUG_INFO CreateProcessInfo;
+        EXIT_THREAD_DEBUG_INFO    ExitThread;
+        EXIT_PROCESS_DEBUG_INFO   ExitProcess;
+        LOAD_DLL_DEBUG_INFO       LoadDll;
+        UNLOAD_DLL_DEBUG_INFO     UnloadDll;
+        OUTPUT_DEBUG_STRING_INFO  DebugString;
+        RIP_INFO                  RipInfo;
+    } u;
+} DEBUG_EVENT;
+typedef DEBUG_EVENT *LPDEBUG_EVENT;
+
+/* aa450986 "WaitForDebugEvent (Windows CE 5.0)":
+ * BOOL WaitForDebugEvent(LPDEBUG_EVENT, DWORD).  CE 2.0+; Winbase.h;
+ * Coredll.lib, Nk.lib.  Waits for a debugging event; dwMilliseconds 0
+ * tests and returns immediately, INFINITE waits forever. */
+BOOL WaitForDebugEvent(LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds);
+
 #ifdef __cplusplus
 }
 #endif

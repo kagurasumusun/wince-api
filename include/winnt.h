@@ -147,4 +147,62 @@ typedef struct _MEMORY_BASIC_INFORMATION {
 }
 #endif
 
+/* ------------------------------------------------------------------ */
+/* M24: structured exception handling base types (Exception Reference)*/
+/* ------------------------------------------------------------------ */
+
+/* ms885216 "EXCEPTION_RECORD (Windows CE 5.0)": machine-independent
+ * description of an exception (filled by GetExceptionInformation).
+ * CE 1.0+; Winnt.h.  The page prints ExceptionInformation as a DWORD
+ * array bounded by EXCEPTION_MAXIMUM_PARAMETERS (the bound symbol is
+ * used by RaiseException ms886790 too; its value is the fixed Win32
+ * ABI 15 -- no CE page prints a number for it). */
+#define EXCEPTION_MAXIMUM_PARAMETERS 15   /* Win32 ABI array bound */
+typedef struct _EXCEPTION_RECORD {
+    DWORD  ExceptionCode;                 /* type of exception */
+    DWORD  ExceptionFlags;                /* continuable or not */
+    struct _EXCEPTION_RECORD *ExceptionRecord; /* chained record */
+    PVOID  ExceptionAddress;              /* address of the exception */
+    DWORD  NumberParameters;              /* count in the tail array */
+    DWORD  ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];
+} EXCEPTION_RECORD;
+typedef EXCEPTION_RECORD *PEXCEPTION_RECORD; /* type used by
+    EXCEPTION_POINTERS (ms885215) */
+
+/* Exception-code names listed by ms885620 (GetExceptionCode) for the
+ * exceptions most likely from common programming errors.  The names
+ * are that CE page's list; the numeric values are the fixed Win32 ABI
+ * codes of the desktop exception reference (recorded provenance). */
+#define EXCEPTION_ACCESS_VIOLATION         0xC0000005L
+#define EXCEPTION_BREAKPOINT               0x80000003L
+#define EXCEPTION_DATATYPE_MISALIGNMENT    0x80000002L
+#define EXCEPTION_SINGLE_STEP              0x80000004L
+#define EXCEPTION_ARRAY_BOUNDS_EXCEEDED    0xC000008CL
+#define EXCEPTION_FLT_DENORMAL_OPERAND     0xC000008DL
+#define EXCEPTION_FLT_DIVIDE_BY_ZERO       0xC000008EL
+#define EXCEPTION_FLT_INEXACT_RESULT       0xC000008FL
+#define EXCEPTION_FLT_INVALID_OPERATION    0xC0000090L
+#define EXCEPTION_FLT_OVERFLOW             0xC0000091L
+#define EXCEPTION_FLT_STACK_CHECK          0xC0000092L
+#define EXCEPTION_FLT_UNDERFLOW            0xC0000093L
+#define EXCEPTION_INT_DIVIDE_BY_ZERO       0xC0000094L
+#define EXCEPTION_INT_OVERFLOW             0xC0000095L
+#define EXCEPTION_PRIV_INSTRUCTION         0xC0000096L
+#define EXCEPTION_NONCONTINUABLE_EXCEPTION 0xC0000025L
+
+/* ms886790 "RaiseException (Windows CE 5.0)": dwExceptionFlags is
+ * zero (continuable) or EXCEPTION_NONCONTINUABLE; continuing a
+ * noncontinuable exception raises EXCEPTION_NONCONTINUABLE_EXCEPTION.
+ * Fixed Win32 ABI flag values. */
+#define EXCEPTION_CONTINUABLE      0x00000000L
+#define EXCEPTION_NONCONTINUABLE   0x00000001L
+
+/* ms885174 "CONTEXT (Windows CE 5.0)": processor-specific register
+ * data (Intel/MIPS/Alpha/SHx/ARM).  The page says the definitions
+ * live in the Winnt.h *header file* -- no layout is published on the
+ * documentation pages -- so only an incomplete type is provided here
+ * (usable by pointer, as PCONTEXT in EXCEPTION_POINTERS ms885215). */
+typedef struct _CONTEXT CONTEXT;
+typedef CONTEXT *PCONTEXT;
+
 #endif /* AKARI_WINNT_H */

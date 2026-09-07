@@ -22,6 +22,7 @@ EXPORTS
   CloseHandle
   CloseMsgQueue
   CompareFileTime
+  ContinueDebugEvent
   ConvertThreadToFiber
   CopyFileW
   CreateDirectoryW
@@ -34,6 +35,8 @@ EXPORTS
   CreateMutexW
   CreateProcessW
   CreateThread
+  DebugActiveProcess
+  DebugBreak
   DeleteFiber
   DeleteFileW
   DisableThreadLibraryCalls
@@ -126,6 +129,7 @@ EXPORTS
   PulseEvent
   QueryPerformanceCounter
   QueryPerformanceFrequency
+  RaiseException
   Random
   ReadFile
   ReadMsgQueue
@@ -142,6 +146,7 @@ EXPORTS
   RegSetValueExW
   ReleaseSemaphore
   RemoveDirectoryW
+  ReportFault
   ResetEvent
   ResumeThread
   SetDaylightTime
@@ -172,7 +177,9 @@ EXPORTS
   VirtualFree
   VirtualProtect
   VirtualQuery
+  WaitForDebugEvent
   WaitForSingleObject
   WideCharToMultiByte
+  WriteDebugLED
   WriteFile
   WriteMsgQueue

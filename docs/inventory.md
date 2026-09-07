@@ -557,6 +557,72 @@ New doc-derived def: `def/serdev-doc.def` (16 exports).  Host checks
 clang crosscheck for this batch is *pending* toolchain re-acquisition
 (the LLVM-WinCE clang cache is deleted each session end by policy).
 
+### M24: Exception Reference + Debugging Reference (excpt.h / dbgapi.h / errorrep.h / winnt.h / winbase.h)
+
+All Exception pages (`aa450784`, `ms885620/621`, `ms886790`, `ms886799`,
+`ms885215/216`) and the Debugging pages (`ms885175/183/187/193/194/195/
+214/218/220`, `ms886734/769/770`, `aa450986/990`, `aa451060/081/083`,
+plus the recorded macro pages `ms887725`, `aa451037`..`aa451087`) were
+fetched in full from the CE 5.0 archive.
+
+| Item | Official page | OS Versions | Header | Link Library | Placement |
+|---|---|---|---|---|---|
+| `EXCEPTION_RECORD`/`PEXCEPTION_RECORD` | `ms885216` | CE 1.0+ | Winnt.h | — | winnt.h |
+| `EXCEPTION_POINTERS` (+P/LP) | `ms885215` | CE 1.0+ | Excpt.h | — | excpt.h |
+| `AbnormalTermination` | `aa450784` | CE 1.0+ | Excpt.h | Coredll.lib(row; intrinsic) | excpt.h |
+| `GetExceptionCode` | `ms885620` | CE 1.0+ | Excpt.h | Coredll.lib(row; intrinsic) | excpt.h |
+| `GetExceptionInformation` | `ms885621` | CE 1.0+ | Excpt.h | Coredll.lib(row; intrinsic) | excpt.h |
+| `RaiseException` | `ms886790` | CE 1.0+ | Winbase.h | Coredll.lib | winbase.h |
+| `ReportFault`/`EFaultRepRetVal` | `ms886799` | CE 5.0+ | ErrorRep.h | Coredll.lib | errorrep.h |
+| `CONTEXT` (opaque) | `ms885174` | CE 2.0+ | Winbase.h | — | winnt.h |
+| `DebugBreak` | `ms885194` | CE 1.0+ | Kfuncs.h | Coredll.lib | winbase.h |
+| `ContinueDebugEvent` | `ms885175` | CE 2.0+ | Winbase.h | Coredll.lib,Nk.lib | winbase.h |
+| `DebugActiveProcess` | `ms885193` | CE 2.0+ | Winbase.h | Coredll.lib,Nk.lib | winbase.h |
+| `WaitForDebugEvent` | `aa450986` | CE 2.0+ | Winbase.h | Coredll.lib,Nk.lib | winbase.h |
+| `OutputDebugString(W)` | `ms886769` | CE 1.0+ | Winbase.h | Nk.lib (not Coredll) | winbase.h |
+| `DEBUG_EVENT` | `ms885195` | CE 2.0+ | Winbase.h | — | winbase.h |
+| `CREATE_PROCESS/THREAD_DEBUG_INFO`, `EXCEPTION/EXIT_*/LOAD_DLL/UNLOAD_DLL_DEBUG_INFO`, `OUTPUT_DEBUG_STRING_INFO` | `ms885183/187/214/218/220`, `ms886734/770`, `aa450963` | CE 2.0+ | Winbase.h | — | winbase.h |
+| `DBGPARAM`/`LPDBGPARAM` | `aa451060` | CE OS 2.10+ | Dbgapi.h | — | dbgapi.h |
+| `NKDbgPrintfW` | `aa451081` | CE OS 2.10+ | Dbgapi.h | none | dbgapi.h |
+| `RegisterDbgZones` | `aa451083` | CE OS 2.10+ | Dbgapi.h | none | dbgapi.h |
+| `WriteDebugLED` | `aa450990` | CE 2.12+ | Dbgapi.h | Coredll.lib | dbgapi.h |
+
+Value/type provenance recorded in the headers and here:
+* `EXCEPTION_MAXIMUM_PARAMETERS` = 15 (Win32 ABI bound used by
+  EXCEPTION_RECORD layout and RaiseException).
+* The 16 `EXCEPTION_*` *codes* are the names listed by `ms885620`;
+  their hex values are the fixed Win32 ABI codes of the desktop
+  exception reference.
+* `EXCEPTION_CONTINUABLE` 0 / `EXCEPTION_NONCONTINUABLE` 1 flags
+  (RaiseException `ms886790`).
+* Debug-event codes 1..8 (`EXCEPTION_DEBUG_EVENT`..`OUTPUT_DEBUG_STRING_EVENT`,
+  names per `ms885195`, values fixed Win32 ABI); the CE 5.0 page names
+  no RIP_EVENT code row.
+* `DBG_CONTINUE` 0x00010002 / `DBG_EXCEPTION_NOT_HANDLED` 0x80010001
+  (names per `ms885175`, values fixed Win32 ABI).
+* `RIP_INFO` (dwError/dwType) is referenced as a DEBUG_EVENT union
+  member by `ms885195` but has no CE structure page; layout taken from
+  Microsoft's official desktop debugging-structures reference.
+* `CONTEXT` is only an incomplete type: `ms885174` says the per-CPU
+  definitions live in the Winnt.h header file and publishes no layout.
+* The Debugging Reference macro pages (ASSERT, ASSERTMSG, DEBUGCHK,
+  DEBUGLED, DEBUGMSG, DEBUGREGISTER/RETAILREGISTERZONES, DEBUGZONE,
+  ERRORMSG, RETAILLED, RETAILMSG — `aa451037`..`aa451087`, `ms887725`)
+  are recorded; their expansions are driver/zone machinery the pages
+  do not specify implementably, and they are not declared here.
+* `ms886799` names two ReportFault returns (`frrvOk`, `frrvErrNoDW`)
+  without numeric values → `EFaultRepRetVal` is a type alias and the
+  `frrv*` constants are recorded unknown (not defined).  dwOpt is
+  reserved, set to zero.
+* `GetExceptionCode`/`GetExceptionInformation`/`AbnormalTermination`
+  are callable only inside SEH constructs and are compiler intrinsics
+  on CE; their pages' "Coredll.lib" rows are recorded but they are
+  kept out of the export def (NOT_EXPORTS in gen-doc-def.py).
+
+New headers: `excpt.h`, `dbgapi.h`, `errorrep.h` (windows.h now
+includes excpt.h).  coredll def 164 -> 171 exports.  Host + six CE
+targets pass (toolchain re-acquired and re-verified this session).
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

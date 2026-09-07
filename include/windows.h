@@ -19,6 +19,7 @@
 #include "winreg.h"
 #include "psapi.h"
 #include "msgqueue.h"
+#include "excpt.h"
 #include "winerror.h"
 
 #ifdef __cplusplus

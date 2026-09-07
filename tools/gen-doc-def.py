@@ -111,6 +111,14 @@ _DECL_RE = re.compile(
     r"^[A-Za-z_][A-Za-z0-9_]*\s+"
     r"([A-Za-z_][A-Za-z0-9_]*)\s*\(", re.M)
 
+# Compiler-provided SEH intrinsics.  The Exception Reference pages
+# (ms885620/ms885621/aa450784) print a Link Library: Coredll.lib
+# row, but the functions are callable only inside try/except/finally
+# constructs and are provided by the CE compiler, not imported from
+# Coredll.dll -- so they must not appear in the export def.
+NOT_EXPORTS = {"GetExceptionCode", "GetExceptionInformation",
+               "AbnormalTermination"}
+
 
 def declared_exports():
     names = set()
@@ -167,7 +175,8 @@ def main():
             # membership check: the export must be declared by our
             # headers (either as the export name itself or as the
             # generic macro base name).
-            ok = export in declared or sn in declared
+            ok = (export in declared or sn in declared) and \
+                 export not in NOT_EXPORTS and sn not in NOT_EXPORTS
             if ok:
                 entries.append((export, pid, sn))
             else:
