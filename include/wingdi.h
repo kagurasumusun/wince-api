@@ -390,254 +390,254 @@ typedef struct _OUTLINETEXTMETRICW {
 /* ------------------------------------------------------------------ */
 
 /* aa452850 "AlphaBlend" */
-BOOL AlphaBlend(HDC hdcDest, int nXOriginDest, int nYOriginDest,
+AKARI_CE_IMPORT BOOL AlphaBlend(HDC hdcDest, int nXOriginDest, int nYOriginDest,
     int nWidthDest, int nHeightDest, HDC hdcSrc, int nXOriginSrc,
     int nYOriginSrc, int nWidthSrc, int nHeightSrc,
-    BLENDFUNCTION blendFunction);
+    BLENDFUNCTION blendFunction) AKARI_CE_NAME(AlphaBlend);
 /* aa452879 "BitBlt" */
-BOOL BitBlt(HDC hdcDest, int nXDest, int nYDest, int nWidth, int nHeight,
-    HDC hdcSrc, int nXSrc, int nYSrc, DWORD dwRop);
+AKARI_CE_IMPORT BOOL BitBlt(HDC hdcDest, int nXDest, int nYDest, int nWidth, int nHeight,
+    HDC hdcSrc, int nXSrc, int nYSrc, DWORD dwRop) AKARI_CE_NAME(BitBlt);
 /* aa452930 "DeleteDC" */
-BOOL DeleteDC(HDC hdc);
+AKARI_CE_IMPORT BOOL DeleteDC(HDC hdc) AKARI_CE_NAME(DeleteDC);
 /* aa452933 "DeleteObject" */
-BOOL DeleteObject(HGDIOBJ hObject);
+AKARI_CE_IMPORT BOOL DeleteObject(HGDIOBJ hObject) AKARI_CE_NAME(DeleteObject);
 /* aa452968 "DrawEdge" */
-BOOL DrawEdge(HDC hdc, LPRECT qrc, UINT edge, UINT grfFlags);
+AKARI_CE_IMPORT BOOL DrawEdge(HDC hdc, LPRECT qrc, UINT edge, UINT grfFlags) AKARI_CE_NAME(DrawEdge);
 /* aa452969 "DrawFocusRect" */
-BOOL DrawFocusRect(HDC hDC, const RECT* lprc);
+AKARI_CE_IMPORT BOOL DrawFocusRect(HDC hDC, const RECT* lprc) AKARI_CE_NAME(DrawFocusRect);
 /* aa452997 "Ellipse" */
-BOOL Ellipse(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT BOOL Ellipse(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(Ellipse);
 /* aa453048 "EnumDisplayDevices" */
-BOOL EnumDisplayDevices(LPCTSTR lpDevice, DWORD iDevNum,
-    PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags);
+AKARI_CE_IMPORT BOOL EnumDisplayDevices(LPCTSTR lpDevice, DWORD iDevNum,
+    PDISPLAY_DEVICE lpDisplayDevice, DWORD dwFlags) AKARI_CE_NAME(EnumDisplayDevices);
 /* aa453049 "EnumDisplaySettings" */
-BOOL EnumDisplaySettings(LPCTSTR lpszDeviceName, DWORD iModeNum,
-    LPDEVMODE lpDevMode);
+AKARI_CE_IMPORT BOOL EnumDisplaySettings(LPCTSTR lpszDeviceName, DWORD iModeNum,
+    LPDEVMODE lpDevMode) AKARI_CE_NAME(EnumDisplaySettings);
 /* aa453056 "EqualRgn" */
-BOOL EqualRgn(HRGN hSrcRgn1, HRGN hSrcRgn2);
+AKARI_CE_IMPORT BOOL EqualRgn(HRGN hSrcRgn1, HRGN hSrcRgn2) AKARI_CE_NAME(EqualRgn);
 /* aa453058 "ExcludeClipRect" */
-int ExcludeClipRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT int ExcludeClipRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(ExcludeClipRect);
 /* aa453061 "ExtCreateRegion" */
-HRGN ExtCreateRegion(CONST XFORM* lpXform, DWORD nCount,
-    CONST RGNDATA* lpRgnData);
+AKARI_CE_IMPORT HRGN ExtCreateRegion(CONST XFORM* lpXform, DWORD nCount,
+    CONST RGNDATA* lpRgnData) AKARI_CE_NAME(ExtCreateRegion);
 /* aa453063 "ExtEscape" */
-int ExtEscape(HDC hdc, int nEscape, int cbInput, LPCSTR lpszInData,
-    int cbOutput, LPSTR lpszOutData);
+AKARI_CE_IMPORT int ExtEscape(HDC hdc, int nEscape, int cbInput, LPCSTR lpszInData,
+    int cbOutput, LPSTR lpszOutData) AKARI_CE_NAME(ExtEscape);
 /* aa453067 "FillRect" */
-int FillRect(HDC hDC, CONST RECT* lprc, HBRUSH hbr);
+AKARI_CE_IMPORT int FillRect(HDC hDC, CONST RECT* lprc, HBRUSH hbr) AKARI_CE_NAME(FillRect);
 /* aa453068 "FillRgn" */
-BOOL FillRgn(HDC hdc, HRGN hrgn, HBRUSH hbr);
+AKARI_CE_IMPORT BOOL FillRgn(HDC hdc, HRGN hrgn, HBRUSH hbr) AKARI_CE_NAME(FillRgn);
 /* aa453133 "GetLayout" */
-DWORD GetLayout(HDC hdc);
+AKARI_CE_IMPORT DWORD GetLayout(HDC hdc) AKARI_CE_NAME(GetLayout);
 /* aa453140 "GetNearestColor" */
-COLORREF GetNearestColor(HDC hdc, COLORREF crColor);
+AKARI_CE_IMPORT COLORREF GetNearestColor(HDC hdc, COLORREF crColor) AKARI_CE_NAME(GetNearestColor);
 /* aa453141 "GetNearestPaletteIndex" */
-UINT GetNearestPaletteIndex(HPALETTE hpal, COLORREF crColor);
+AKARI_CE_IMPORT UINT GetNearestPaletteIndex(HPALETTE hpal, COLORREF crColor) AKARI_CE_NAME(GetNearestPaletteIndex);
 /* aa453147 "GetObject" */
-int GetObject(HGDIOBJ hgdiobj, int cbBuffer, LPVOID lpvObject);
+AKARI_CE_IMPORT int GetObject(HGDIOBJ hgdiobj, int cbBuffer, LPVOID lpvObject) AKARI_CE_NAME(GetObject);
 /* aa453148 "GetObjectType" */
-DWORD GetObjectType(HGDIOBJ h);
+AKARI_CE_IMPORT DWORD GetObjectType(HGDIOBJ h) AKARI_CE_NAME(GetObjectType);
 /* aa453151 "GetPaletteEntries" */
-UINT GetPaletteEntries(HPALETTE hpal, UINT iStartIndex, UINT nEntries,
-    LPPALETTEENTRY lppe);
+AKARI_CE_IMPORT UINT GetPaletteEntries(HPALETTE hpal, UINT iStartIndex, UINT nEntries,
+    LPPALETTEENTRY lppe) AKARI_CE_NAME(GetPaletteEntries);
 /* aa453153 "GetPixel" */
-COLORREF GetPixel(HDC hdc, int nXPos, int nYPos);
+AKARI_CE_IMPORT COLORREF GetPixel(HDC hdc, int nXPos, int nYPos) AKARI_CE_NAME(GetPixel);
 /* aa453157 "GetRegionData" */
-DWORD GetRegionData(HRGN hRgn, DWORD dwCount, LPRGNDATA lpRgnData);
+AKARI_CE_IMPORT DWORD GetRegionData(HRGN hRgn, DWORD dwCount, LPRGNDATA lpRgnData) AKARI_CE_NAME(GetRegionData);
 /* aa453159 "GetRgnBox" */
-int GetRgnBox(HRGN hrgn, LPRECT lprc);
+AKARI_CE_IMPORT int GetRgnBox(HRGN hrgn, LPRECT lprc) AKARI_CE_NAME(GetRgnBox);
 /* aa453160 "GetROP2" */
-int GetROP2(HDC hdc);
+AKARI_CE_IMPORT int GetROP2(HDC hdc) AKARI_CE_NAME(GetROP2);
 /* aa453164 "GetStockObject" */
-HGDIOBJ GetStockObject(int fnObject);
+AKARI_CE_IMPORT HGDIOBJ GetStockObject(int fnObject) AKARI_CE_NAME(GetStockObject);
 /* aa453165 "GetStretchBltMode" */
-int GetStretchBltMode(HDC hdc);
+AKARI_CE_IMPORT int GetStretchBltMode(HDC hdc) AKARI_CE_NAME(GetStretchBltMode);
 /* aa453168 "GetSysColorBrush" */
-HBRUSH GetSysColorBrush(int nIndex);
+AKARI_CE_IMPORT HBRUSH GetSysColorBrush(int nIndex) AKARI_CE_NAME(GetSysColorBrush);
 /* aa453656 "SetSysColors": its prototype takes CONST COLORREF*, so it is
  * declared with the GDI types here even though the official page prints
  * Header: Winuser.h (COLORREF lives with the GDI types; the header
  * layout deviation is recorded in docs/inventory.md).  Link Library row
  * Winmgr.lib (def/winmgr-doc.def). */
-BOOL SetSysColors(int cElements, CONST INT* lpaElements,
-                  CONST COLORREF* lpaRgbValues);
+AKARI_CE_IMPORT BOOL SetSysColors(int cElements, CONST INT* lpaElements,
+                  CONST COLORREF* lpaRgbValues) AKARI_CE_NAME(SetSysColors);
 /* aa453171 "GetSystemPaletteEntries" */
-UINT GetSystemPaletteEntries(HDC hdc, UINT iStartIndex, UINT nEntries,
-    LPPALETTEENTRY lppe);
+AKARI_CE_IMPORT UINT GetSystemPaletteEntries(HDC hdc, UINT iStartIndex, UINT nEntries,
+    LPPALETTEENTRY lppe) AKARI_CE_NAME(GetSystemPaletteEntries);
 /* aa453192 "GradientFill" */
-BOOL GradientFill(HDC hdc, PTRIVERTEX pVertex, ULONG nVertex, PVOID pMesh,
-    ULONG nCount, ULONG ulMode);
+AKARI_CE_IMPORT BOOL GradientFill(HDC hdc, PTRIVERTEX pVertex, ULONG nVertex, PVOID pMesh,
+    ULONG nCount, ULONG ulMode) AKARI_CE_NAME(GradientFill);
 /* aa453296 "LineTo" (CE6 page renders "WINGDIAPI BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL LineTo(HDC hdc, int nXEnd, int nYEnd);
+AKARI_CE_IMPORT BOOL LineTo(HDC hdc, int nXEnd, int nYEnd) AKARI_CE_NAME(LineTo);
 /* aa453602 "PtInRegion" */
-BOOL PtInRegion(HRGN hrgn, int X, int Y);
+AKARI_CE_IMPORT BOOL PtInRegion(HRGN hrgn, int X, int Y) AKARI_CE_NAME(PtInRegion);
 /* aa453638 "RealizePalette" */
-UINT RealizePalette(HDC hdc);
+AKARI_CE_IMPORT UINT RealizePalette(HDC hdc) AKARI_CE_NAME(RealizePalette);
 /* aa453646 "SetPixel" */
-COLORREF SetPixel(HDC hdc, int X, int Y, COLORREF crColor);
+AKARI_CE_IMPORT COLORREF SetPixel(HDC hdc, int X, int Y, COLORREF crColor) AKARI_CE_NAME(SetPixel);
 /* aa453650 "SetRectRgn" */
-BOOL SetRectRgn(HRGN hrgn, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT BOOL SetRectRgn(HRGN hrgn, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(SetRectRgn);
 /* aa453651 "SetROP2" */
-int SetROP2(HDC hdc, int fnDrawMode);
+AKARI_CE_IMPORT int SetROP2(HDC hdc, int fnDrawMode) AKARI_CE_NAME(SetROP2);
 /* aa453655 "SetStretchBltMode" */
-int SetStretchBltMode(HDC hdc, int iStretchMode);
+AKARI_CE_IMPORT int SetStretchBltMode(HDC hdc, int iStretchMode) AKARI_CE_NAME(SetStretchBltMode);
 /* aa453660 "SetViewportOrgEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL SetViewportOrgEx(HDC hdc, int X, int Y, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL SetViewportOrgEx(HDC hdc, int X, int Y, LPPOINT lpPoint) AKARI_CE_NAME(SetViewportOrgEx);
 /* aa453778 "TransparentBlt" (CE5/CE6 pages print the 8th parameter as "int hHeightDest" (sic); parameter is nHeightDest) */
-BOOL TransparentBlt(HDC hdcDest, int nXOriginDest, int nYOriginDest,
+AKARI_CE_IMPORT BOOL TransparentBlt(HDC hdcDest, int nXOriginDest, int nYOriginDest,
     int nWidthDest, int nHeightDest, HDC hdcSrc, int nXOriginSrc,
-    int nYOriginSrc, int nWidthSrc, int nHeightSrc, UINT crTransparent);
+    int nYOriginSrc, int nWidthSrc, int nHeightSrc, UINT crTransparent) AKARI_CE_NAME(TransparentBlt);
 /* aa453779 "TransparentImage" */
-BOOL TransparentImage(HDC hdcDest, LONG DstX, LONG DstY, LONG DstCx,
+AKARI_CE_IMPORT BOOL TransparentImage(HDC hdcDest, LONG DstX, LONG DstY, LONG DstCx,
     LONG DstCy, HANDLE hSrc, LONG SrcX, LONG SrcY, LONG SrcCx, LONG SrcCy,
-    COLORREF TransparentColor);
+    COLORREF TransparentColor) AKARI_CE_NAME(TransparentImage);
 /* aa453949 "GetViewportExtEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL GetViewportExtEx(HDC hdc, LPSIZE lpSize);
+AKARI_CE_IMPORT BOOL GetViewportExtEx(HDC hdc, LPSIZE lpSize) AKARI_CE_NAME(GetViewportExtEx);
 /* aa453950 "GetViewportOrgEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL GetViewportOrgEx(HDC hdc, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL GetViewportOrgEx(HDC hdc, LPPOINT lpPoint) AKARI_CE_NAME(GetViewportOrgEx);
 /* aa453951 "GetWindowExtEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL GetWindowExtEx(HDC hdc, LPSIZE lpSize);
+AKARI_CE_IMPORT BOOL GetWindowExtEx(HDC hdc, LPSIZE lpSize) AKARI_CE_NAME(GetWindowExtEx);
 /* aa453952 "GetWindowOrgEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL GetWindowOrgEx(HDC hdc, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL GetWindowOrgEx(HDC hdc, LPPOINT lpPoint) AKARI_CE_NAME(GetWindowOrgEx);
 /* aa453953 "OffsetViewportOrgEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL OffsetViewportOrgEx(HDC hdc, int nXOffset, int nYOffset,
-    LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL OffsetViewportOrgEx(HDC hdc, int nXOffset, int nYOffset,
+    LPPOINT lpPoint) AKARI_CE_NAME(OffsetViewportOrgEx);
 /* aa453954 "SetWindowOrgEx" (official page omits the return type in the prototype; Return Values "nonzero success / zero failure" => BOOL) */
-BOOL SetWindowOrgEx(HDC hdc, int X, int Y, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL SetWindowOrgEx(HDC hdc, int X, int Y, LPPOINT lpPoint) AKARI_CE_NAME(SetWindowOrgEx);
 /* ms908108 "ChangeDisplaySettingsEx" */
-LONG ChangeDisplaySettingsEx(LPCTSTR lpszDeviceName, LPDEVMODE lpDevMode,
-    HWND hwnd, DWORD dwflags, LPVOID lParam);
+AKARI_CE_IMPORT LONG ChangeDisplaySettingsEx(LPCTSTR lpszDeviceName, LPDEVMODE lpDevMode,
+    HWND hwnd, DWORD dwflags, LPVOID lParam) AKARI_CE_NAME(ChangeDisplaySettingsEx);
 /* ms908163 "CreateBitmap" */
-HBITMAP CreateBitmap(int nWidth, int nHeight, UINT cPlanes, UINT cBitsPerPel,
-    CONST VOID* lpvBits);
+AKARI_CE_IMPORT HBITMAP CreateBitmap(int nWidth, int nHeight, UINT cPlanes, UINT cBitsPerPel,
+    CONST VOID* lpvBits) AKARI_CE_NAME(CreateBitmap);
 /* ms908165 "CreateCompatibleBitmap" */
-HBITMAP CreateCompatibleBitmap(HDC hdc, int nWidth, int nHeight);
+AKARI_CE_IMPORT HBITMAP CreateCompatibleBitmap(HDC hdc, int nWidth, int nHeight) AKARI_CE_NAME(CreateCompatibleBitmap);
 /* ms908166 "CreateCompatibleDC" */
-HDC CreateCompatibleDC(HDC hdc);
+AKARI_CE_IMPORT HDC CreateCompatibleDC(HDC hdc) AKARI_CE_NAME(CreateCompatibleDC);
 /* ms908168 "CreateDC" */
-HDC CreateDC(LPCTSTR lpszDriver, LPCTSTR lpszDevice, LPCTSTR lpszOutput,
-    CONST DEVMODE* lpInitData);
+AKARI_CE_IMPORT HDC CreateDC(LPCTSTR lpszDriver, LPCTSTR lpszDevice, LPCTSTR lpszOutput,
+    CONST DEVMODE* lpInitData) AKARI_CE_NAME(CreateDC);
 /* ms908173 "CreateDIBPatternBrushPt" */
-HBRUSH CreateDIBPatternBrushPt(const void* lpPackedDIB, UINT iUsage);
+AKARI_CE_IMPORT HBRUSH CreateDIBPatternBrushPt(const void* lpPackedDIB, UINT iUsage) AKARI_CE_NAME(CreateDIBPatternBrushPt);
 /* ms908174 "CreateDIBSection" */
-HBITMAP CreateDIBSection(HDC hdc, const BITMAPINFO* pbmi, UINT iUsage,
-    void** ppvBits, HANDLE hSection, DWORD dwOffset);
+AKARI_CE_IMPORT HBITMAP CreateDIBSection(HDC hdc, const BITMAPINFO* pbmi, UINT iUsage,
+    void** ppvBits, HANDLE hSection, DWORD dwOffset) AKARI_CE_NAME(CreateDIBSection);
 /* ms908178 "CreatePalette (GDI)" */
-HPALETTE CreatePalette(CONST LOGPALETTE* lplgpl);
+AKARI_CE_IMPORT HPALETTE CreatePalette(CONST LOGPALETTE* lplgpl) AKARI_CE_NAME(CreatePalette);
 /* ms908179 "CreatePatternBrush" */
-HBRUSH CreatePatternBrush(HBITMAP hbmp);
+AKARI_CE_IMPORT HBRUSH CreatePatternBrush(HBITMAP hbmp) AKARI_CE_NAME(CreatePatternBrush);
 /* ms908180 "CreatePen" */
-HPEN CreatePen(int fnPenStyle, int nWidth, COLORREF crColor);
+AKARI_CE_IMPORT HPEN CreatePen(int fnPenStyle, int nWidth, COLORREF crColor) AKARI_CE_NAME(CreatePen);
 /* ms908181 "CreatePenIndirect" */
-HPEN CreatePenIndirect(const LOGPEN* lplgpn);
+AKARI_CE_IMPORT HPEN CreatePenIndirect(const LOGPEN* lplgpn) AKARI_CE_NAME(CreatePenIndirect);
 /* ms908184 "CreateRectRgn" */
-HRGN CreateRectRgn(int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT HRGN CreateRectRgn(int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(CreateRectRgn);
 /* ms908185 "CreateRectRgnIndirect" */
-HRGN CreateRectRgnIndirect(const RECT* lprc);
+AKARI_CE_IMPORT HRGN CreateRectRgnIndirect(const RECT* lprc) AKARI_CE_NAME(CreateRectRgnIndirect);
 /* ms908187 "CreateSolidBrush" */
-HBRUSH CreateSolidBrush(COLORREF crColor);
+AKARI_CE_IMPORT HBRUSH CreateSolidBrush(COLORREF crColor) AKARI_CE_NAME(CreateSolidBrush);
 /* ms909855 "IntersectClipRect" */
-int IntersectClipRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT int IntersectClipRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(IntersectClipRect);
 /* ms909858 "InvalidateRgn" (CE6 page renders "BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL InvalidateRgn(HWND hWnd, HRGN hRgn, BOOL fErase);
+AKARI_CE_IMPORT BOOL InvalidateRgn(HWND hWnd, HRGN hRgn, BOOL fErase) AKARI_CE_NAME(InvalidateRgn);
 /* ms909859 "InvertRect" */
-BOOL InvertRect(HDC hDC, CONST RECT* lprc);
+AKARI_CE_IMPORT BOOL InvertRect(HDC hDC, CONST RECT* lprc) AKARI_CE_NAME(InvertRect);
 /* ms911792 "MaskBlt" */
-BOOL MaskBlt(HDC hdcDest, int nXDest, int nYDest, int nWidth, int nHeight,
+AKARI_CE_IMPORT BOOL MaskBlt(HDC hdcDest, int nXDest, int nYDest, int nWidth, int nHeight,
     HDC hdcSrc, int nXSrc, int nYSrc, HBITMAP hbmMask, int xMask, int yMask,
-    DWORD dwRop);
+    DWORD dwRop) AKARI_CE_NAME(MaskBlt);
 /* ms911892 "OffsetRgn" */
-int OffsetRgn(HRGN hrgn, int nXOffset, int nYOffset);
+AKARI_CE_IMPORT int OffsetRgn(HRGN hrgn, int nXOffset, int nYOffset) AKARI_CE_NAME(OffsetRgn);
 /* ms911916 "PatBlt" */
-BOOL PatBlt(HDC hdc, int nXLeft, int nYLeft, int nWidth, int nHeight,
-    DWORD dwRop);
+AKARI_CE_IMPORT BOOL PatBlt(HDC hdc, int nXLeft, int nYLeft, int nWidth, int nHeight,
+    DWORD dwRop) AKARI_CE_NAME(PatBlt);
 /* ms911933 "Polygon" */
-BOOL Polygon(HDC hdc, const POINT* lpPoints, int nCount);
+AKARI_CE_IMPORT BOOL Polygon(HDC hdc, const POINT* lpPoints, int nCount) AKARI_CE_NAME(Polygon);
 /* ms911934 "Polyline" */
-BOOL Polyline(HDC hdc, const POINT* lppt, int cPoints);
+AKARI_CE_IMPORT BOOL Polyline(HDC hdc, const POINT* lppt, int cPoints) AKARI_CE_NAME(Polyline);
 /* ms912947 "Rectangle" */
-BOOL Rectangle(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect);
+AKARI_CE_IMPORT BOOL Rectangle(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect) AKARI_CE_NAME(Rectangle);
 /* ms913051 "RectInRegion" */
-BOOL RectInRegion(HRGN hrgn, const RECT* lprc);
+AKARI_CE_IMPORT BOOL RectInRegion(HRGN hrgn, const RECT* lprc) AKARI_CE_NAME(RectInRegion);
 /* ms913070 "RectVisible" */
-BOOL RectVisible(HDC hdc, CONST RECT* lprc);
+AKARI_CE_IMPORT BOOL RectVisible(HDC hdc, CONST RECT* lprc) AKARI_CE_NAME(RectVisible);
 /* ms913080 "RedrawWindow" (CE6 page renders "BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL RedrawWindow(HWND hwnd, CONST RECT* lprcUpdate, HRGN hrgnUpdate,
-    UINT flags);
+AKARI_CE_IMPORT BOOL RedrawWindow(HWND hwnd, CONST RECT* lprcUpdate, HRGN hrgnUpdate,
+    UINT flags) AKARI_CE_NAME(RedrawWindow);
 /* ms914092 "ValidateRgn" (CE6 page renders "BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL ValidateRgn(HWND hWnd, HRGN hRgn);
+AKARI_CE_IMPORT BOOL ValidateRgn(HWND hWnd, HRGN hRgn) AKARI_CE_NAME(ValidateRgn);
 /* ms928608 "CombineRgn" */
-int CombineRgn(HRGN hrgnDest, HRGN hrgnSrc1, HRGN hrgnSrc2,
-    int fnCombineMode);
+AKARI_CE_IMPORT int CombineRgn(HRGN hrgnDest, HRGN hrgnSrc1, HRGN hrgnSrc2,
+    int fnCombineMode) AKARI_CE_NAME(CombineRgn);
 /* ms929205 "GetBkColor" */
-COLORREF GetBkColor(HDC hdc);
+AKARI_CE_IMPORT COLORREF GetBkColor(HDC hdc) AKARI_CE_NAME(GetBkColor);
 /* ms929206 "GetBkMode" */
-int GetBkMode(HDC hdc);
+AKARI_CE_IMPORT int GetBkMode(HDC hdc) AKARI_CE_NAME(GetBkMode);
 /* ms929219 "GetClipBox" */
-int GetClipBox(HDC hdc, LPRECT lprc);
+AKARI_CE_IMPORT int GetClipBox(HDC hdc, LPRECT lprc) AKARI_CE_NAME(GetClipBox);
 /* ms929221 "GetClipRgn" */
-int GetClipRgn(HDC hdc, HRGN hrgn);
+AKARI_CE_IMPORT int GetClipRgn(HDC hdc, HRGN hrgn) AKARI_CE_NAME(GetClipRgn);
 /* ms929223 "GetCurrentObject" */
-HGDIOBJ GetCurrentObject(HDC hdc, UINT uObjectType);
+AKARI_CE_IMPORT HGDIOBJ GetCurrentObject(HDC hdc, UINT uObjectType) AKARI_CE_NAME(GetCurrentObject);
 /* ms929224 "GetCurrentPositionEx" (CE6 page renders "WINGDIAPI BOOL WINAPI"; CE ABI is __cdecl, so no decoration) */
-BOOL GetCurrentPositionEx(HDC hdc, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL GetCurrentPositionEx(HDC hdc, LPPOINT lpPoint) AKARI_CE_NAME(GetCurrentPositionEx);
 /* ms929230 "GetDeviceCaps" */
-int GetDeviceCaps(HDC hdc, int nIndex);
+AKARI_CE_IMPORT int GetDeviceCaps(HDC hdc, int nIndex) AKARI_CE_NAME(GetDeviceCaps);
 /* ms929232 "GetDIBColorTable" (CE6 page renders "WINGDIAPI UINT WINAPI"; CE ABI is __cdecl) */
-UINT GetDIBColorTable(HDC hdc, UINT uStartIndex, UINT cEntries,
-    RGBQUAD* pColors);
+AKARI_CE_IMPORT UINT GetDIBColorTable(HDC hdc, UINT uStartIndex, UINT cEntries,
+    RGBQUAD* pColors) AKARI_CE_NAME(GetDIBColorTable);
 /* ms931457 "MoveToEx" (CE6 page renders "WINGDIAPI BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL MoveToEx(HDC hdc, int X, int Y, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL MoveToEx(HDC hdc, int X, int Y, LPPOINT lpPoint) AKARI_CE_NAME(MoveToEx);
 /* ms932714 "SelectClipRgn" */
-int SelectClipRgn(HDC hdc, HRGN hrgn);
+AKARI_CE_IMPORT int SelectClipRgn(HDC hdc, HRGN hrgn) AKARI_CE_NAME(SelectClipRgn);
 /* ms932715 "SelectObject" */
-HGDIOBJ SelectObject(HDC hdc, HGDIOBJ hgdiobj);
+AKARI_CE_IMPORT HGDIOBJ SelectObject(HDC hdc, HGDIOBJ hgdiobj) AKARI_CE_NAME(SelectObject);
 /* ms932716 "SelectPalette" */
-HPALETTE SelectPalette(HDC hdc, HPALETTE hpal, BOOL bForceBackground);
+AKARI_CE_IMPORT HPALETTE SelectPalette(HDC hdc, HPALETTE hpal, BOOL bForceBackground) AKARI_CE_NAME(SelectPalette);
 /* ms933897 "GetOutlineTextMetrics" */
-UINT GetOutlineTextMetrics(HDC hdc, UINT cbData, LPOUTLINETEXTMETRICW lpOTM);
+AKARI_CE_IMPORT UINT GetOutlineTextMetrics(HDC hdc, UINT cbData, LPOUTLINETEXTMETRICW lpOTM) AKARI_CE_NAME(GetOutlineTextMetrics);
 /* ms939800 "RestoreDC" */
-BOOL RestoreDC(HDC hdc, int nSavedDC);
+AKARI_CE_IMPORT BOOL RestoreDC(HDC hdc, int nSavedDC) AKARI_CE_NAME(RestoreDC);
 /* ms939867 "RoundRect" */
-BOOL RoundRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
-    int nBottomRect, int nWidth, int nHeight);
+AKARI_CE_IMPORT BOOL RoundRect(HDC hdc, int nLeftRect, int nTopRect, int nRightRect,
+    int nBottomRect, int nWidth, int nHeight) AKARI_CE_NAME(RoundRect);
 /* ms939894 "SaveDC" */
-int SaveDC(HDC hdc);
+AKARI_CE_IMPORT int SaveDC(HDC hdc) AKARI_CE_NAME(SaveDC);
 /* ms939987 "SetBitmapBits" */
-LONG SetBitmapBits(HBITMAP hbmp, DWORD cBytes, CONST VOID *lpBits);
+AKARI_CE_IMPORT LONG SetBitmapBits(HBITMAP hbmp, DWORD cBytes, CONST VOID *lpBits) AKARI_CE_NAME(SetBitmapBits);
 /* ms939988 "SetBkColor" */
-COLORREF SetBkColor(HDC hdc, COLORREF crColor);
+AKARI_CE_IMPORT COLORREF SetBkColor(HDC hdc, COLORREF crColor) AKARI_CE_NAME(SetBkColor);
 /* ms939989 "SetBkMode" */
-int SetBkMode(HDC hdc, int iBkMode);
+AKARI_CE_IMPORT int SetBkMode(HDC hdc, int iBkMode) AKARI_CE_NAME(SetBkMode);
 /* ms940010 "SetBrushOrgEx" */
-BOOL SetBrushOrgEx(HDC hdc, int nXOrg, int nYOrg, LPPOINT lppt);
+AKARI_CE_IMPORT BOOL SetBrushOrgEx(HDC hdc, int nXOrg, int nYOrg, LPPOINT lppt) AKARI_CE_NAME(SetBrushOrgEx);
 /* ms940018 "SetDIBColorTable" (CE6 page renders "WINGDIAPI UINT WINAPI"; CE ABI is __cdecl) */
-UINT SetDIBColorTable(HDC hdc, UINT uStartIndex, UINT cEntries,
-    CONST RGBQUAD* pColor);
+AKARI_CE_IMPORT UINT SetDIBColorTable(HDC hdc, UINT uStartIndex, UINT cEntries,
+    CONST RGBQUAD* pColor) AKARI_CE_NAME(SetDIBColorTable);
 /* ms940019 "SetDIBitsToDevice" */
-int SetDIBitsToDevice(HDC hdc, int XDest, int YDest, DWORD dwWidth,
+AKARI_CE_IMPORT int SetDIBitsToDevice(HDC hdc, int XDest, int YDest, DWORD dwWidth,
     DWORD dwHeight, int XSrc, int YSrc, UINT uStartScan, UINT cScanLines,
-    CONST VOID* lpvBits, CONST BITMAPINFO* lpbmi, UINT fuColorUse);
+    CONST VOID* lpvBits, CONST BITMAPINFO* lpbmi, UINT fuColorUse) AKARI_CE_NAME(SetDIBitsToDevice);
 /* ms940026 "SetLayout" (page prints a stray trailing comma in the parameter list) */
-DWORD SetLayout(HDC hdc, DWORD dwLayout);
+AKARI_CE_IMPORT DWORD SetLayout(HDC hdc, DWORD dwLayout) AKARI_CE_NAME(SetLayout);
 /* ms940028 "SetPaletteEntries" */
-UINT SetPaletteEntries(HPALETTE hpal, UINT iStart, UINT cEntries,
-    CONST PALETTEENTRY* lppe);
+AKARI_CE_IMPORT UINT SetPaletteEntries(HPALETTE hpal, UINT iStart, UINT cEntries,
+    CONST PALETTEENTRY* lppe) AKARI_CE_NAME(SetPaletteEntries);
 /* ms940373 "StretchBlt" */
-BOOL StretchBlt(HDC hdcDest, int nXOriginDest, int nYOriginDest,
+AKARI_CE_IMPORT BOOL StretchBlt(HDC hdcDest, int nXOriginDest, int nYOriginDest,
     int nWidthDest, int nHeightDest, HDC hdcSrc, int nXOriginSrc,
-    int nYOriginSrc, int nWidthSrc, int nHeightSrc, DWORD dwRop);
+    int nYOriginSrc, int nWidthSrc, int nHeightSrc, DWORD dwRop) AKARI_CE_NAME(StretchBlt);
 /* ms940374 "StretchDIBits" (CE6 page renders "WINGDIAPI BOOL WINAPI"; CE ABI is __cdecl) */
-BOOL StretchDIBits(HDC hdc, int XDest, int YDest, int nDestWidth,
+AKARI_CE_IMPORT BOOL StretchDIBits(HDC hdc, int XDest, int YDest, int nDestWidth,
     int nDestHeight, int XSrc, int YSrc, int nSrcWidth, int nSrcHeight,
     CONST VOID* lpBits, CONST BITMAPINFO* lpBitsInfo, UINT iUsage,
-    DWORD dwRop);
+    DWORD dwRop) AKARI_CE_NAME(StretchDIBits);
 
 /* ------------------------------------------------------------------ */
 /* M28: Printing Reference (Header: Wingdi.h, Link Library Mgprint.lib */
@@ -660,12 +660,12 @@ typedef struct {
 typedef BOOL (CALLBACK *ABORTPROC)(HDC hdc, int iError);
 
 /* Printing functions (CE 2.0+; Wingdi.h; Mgprint.lib). */
-int  AbortDoc(HDC hdc);                          /* aa452835 */
-int  EndDoc(HDC hdc);                            /* aa453039 */
-int  EndPage(HDC hdc);                           /* aa453040 */
-int  SetAbortProc(HDC hdc, ABORTPROC lpAbortProc); /* ms939985 */
-int  StartDoc(HDC hdc, CONST DOCINFO* lpdi);     /* ms940349 */
-int  StartPage(HDC hDC);                         /* ms940350 */
+AKARI_CE_IMPORT int  AbortDoc(HDC hdc) AKARI_CE_NAME(AbortDoc);                          /* aa452835 */
+AKARI_CE_IMPORT int  EndDoc(HDC hdc) AKARI_CE_NAME(EndDoc);                            /* aa453039 */
+AKARI_CE_IMPORT int  EndPage(HDC hdc) AKARI_CE_NAME(EndPage);                           /* aa453040 */
+AKARI_CE_IMPORT int  SetAbortProc(HDC hdc, ABORTPROC lpAbortProc) AKARI_CE_NAME(SetAbortProc); /* ms939985 */
+AKARI_CE_IMPORT int  StartDoc(HDC hdc, CONST DOCINFO* lpdi) AKARI_CE_NAME(StartDoc);     /* ms940349 */
+AKARI_CE_IMPORT int  StartPage(HDC hDC) AKARI_CE_NAME(StartPage);                         /* ms940350 */
 
 /* aa452959 "DLGITEMTEMPLATEEX" / aa452961 "DLGTEMPLATEEX": the extended
  * in-memory dialog template format (CreateDialogIndirectParam /
@@ -773,8 +773,8 @@ typedef CHARSETINFO *LPCHARSETINFO;
 
 /* aa450955 prints the parameter as "DWORD FAR* lpSrc"; FAR is empty
  * on the flat CE/Win32 ABI. */
-UINT TranslateCharsetInfo(DWORD *lpSrc, LPCHARSETINFO lpCs,
-                          DWORD dwFlags);
+AKARI_CE_IMPORT UINT TranslateCharsetInfo(DWORD *lpSrc, LPCHARSETINFO lpCs,
+                          DWORD dwFlags) AKARI_CE_NAME(TranslateCharsetInfo);
 
 /* ------------------------------------------------------------------ */
 /* M36: Fonts-and-text and display-monitor declarations.               */
@@ -940,13 +940,13 @@ typedef int (CALLBACK *FONTENUMPROC)(const LOGFONT* lpelf,
 
 /* ms901109 "AddFontResource" (ee489896): int AddFontResource(LPCTSTR).
  * OS CE 2.0+; Windows.h.  Export AddFontResourceW (CE Unicode-only). */
-int AddFontResourceW(LPCWSTR lpszFilename);
+AKARI_CE_IMPORT int AddFontResourceW(LPCWSTR lpszFilename) AKARI_CE_NAME(AddFontResourceW);
 #define AddFontResource AddFontResourceW
 
 /* ms901120 "CreateFontIndirect" (ee489863): HFONT
  * CreateFontIndirect(const LOGFONT*).  OS CE 1.0+; Windows.h.  Export
  * CreateFontIndirectW. */
-HFONT CreateFontIndirectW(const LOGFONT* lplf);
+AKARI_CE_IMPORT HFONT CreateFontIndirectW(const LOGFONT* lplf) AKARI_CE_NAME(CreateFontIndirectW);
 #define CreateFontIndirect CreateFontIndirectW
 
 /* ms901121 "DrawText" (ee489886): int DrawText(HDC, LPCTSTR, int,
@@ -954,121 +954,121 @@ HFONT CreateFontIndirectW(const LOGFONT* lplf);
  * last parameter type "UNIT" (sic); the parameter is UINT, and its
  * DT_TABSTOP bit-field description (bits 8-15) matches UINT.  Export
  * DrawTextW. */
-int DrawTextW(HDC hDC, LPCWSTR lpString, int nCount, LPRECT lpRect,
-              UINT uFormat);
+AKARI_CE_IMPORT int DrawTextW(HDC hDC, LPCWSTR lpString, int nCount, LPRECT lpRect,
+              UINT uFormat) AKARI_CE_NAME(DrawTextW);
 #define DrawText DrawTextW
 
 /* ms901123 "EnumFontFamilies" (ee489908): enumerates type families
  * through the FONTENUMPROC callback.  OS CE 1.0+; Windows.h.  Export
  * EnumFontFamiliesW. */
-int EnumFontFamiliesW(HDC hdc, LPCWSTR lpszFamily,
-                      FONTENUMPROC lpEnumFontFamProc, LPARAM lParam);
+AKARI_CE_IMPORT int EnumFontFamiliesW(HDC hdc, LPCWSTR lpszFamily,
+                      FONTENUMPROC lpEnumFontFamProc, LPARAM lParam) AKARI_CE_NAME(EnumFontFamiliesW);
 #define EnumFontFamilies EnumFontFamiliesW
 
 /* ms901124 "EnumFontFamiliesEx" (ee489844): as EnumFontFamilies with
  * an explicit LOGFONT filter.  OS CE 5.0+; Wingdi.h.  dwFlags is "not
  * used; must be 0".  Export EnumFontFamiliesExW. */
-int EnumFontFamiliesExW(HDC hdc, LPLOGFONT lpLogfont,
+AKARI_CE_IMPORT int EnumFontFamiliesExW(HDC hdc, LPLOGFONT lpLogfont,
                         FONTENUMPROC lpEnumFontFamExProc, LPARAM lParam,
-                        DWORD dwFlags);
+                        DWORD dwFlags) AKARI_CE_NAME(EnumFontFamiliesExW);
 #define EnumFontFamiliesEx EnumFontFamiliesExW
 
 /* ms901126 "EnumFonts" (ee489905): enumerates typefaces through the
  * FONTENUMPROC callback.  OS CE 1.0+; Windows.h.  Export EnumFontsW. */
-int EnumFontsW(HDC hdc, LPCWSTR lpFaceName, FONTENUMPROC lpFontFunc,
-               LPARAM lParam);
+AKARI_CE_IMPORT int EnumFontsW(HDC hdc, LPCWSTR lpFaceName, FONTENUMPROC lpFontFunc,
+               LPARAM lParam) AKARI_CE_NAME(EnumFontsW);
 #define EnumFonts EnumFontsW
 
 /* ms901129 "ExtTextOut" (ee489846): BOOL ExtTextOut(HDC, int, int,
  * UINT, const RECT*, LPCTSTR, UINT, const int* lpDx).  OS CE 1.0+;
  * Windows.h.  Export ExtTextOutW. */
-BOOL ExtTextOutW(HDC hdc, int X, int Y, UINT fuOptions,
+AKARI_CE_IMPORT BOOL ExtTextOutW(HDC hdc, int X, int Y, UINT fuOptions,
                  const RECT* lprc, LPCWSTR lpString, UINT cbCount,
-                 const int* lpDx);
+                 const int* lpDx) AKARI_CE_NAME(ExtTextOutW);
 #define ExtTextOut ExtTextOutW
 
 /* ms901130 "GetCharABCWidths" (ee489910): BOOL GetCharABCWidths(HDC,
  * UINT, UINT, LPABC).  OS CE .NET 4.2+; Windows.h.  Export
  * GetCharABCWidthsW. */
-BOOL GetCharABCWidthsW(HDC hdc, UINT uFirstChar, UINT uLastChar,
-                       LPABC lpabc);
+AKARI_CE_IMPORT BOOL GetCharABCWidthsW(HDC hdc, UINT uFirstChar, UINT uLastChar,
+                       LPABC lpabc) AKARI_CE_NAME(GetCharABCWidthsW);
 #define GetCharABCWidths GetCharABCWidthsW
 
 /* ms901131 "GetCharWidth32" (ee489848): WINGDIAPI BOOL WINAPI
  * GetCharWidth32(HDC, UINT, UINT, LPINT); CE ABI is __cdecl.  OS
  * CE .NET 4.0+; Windows.h.  Export GetCharWidth32W. */
-BOOL GetCharWidth32W(HDC hdc, UINT iFirstChar, UINT iLastChar,
-                     LPINT lpBuffer);
+AKARI_CE_IMPORT BOOL GetCharWidth32W(HDC hdc, UINT iFirstChar, UINT iLastChar,
+                     LPINT lpBuffer) AKARI_CE_NAME(GetCharWidth32W);
 #define GetCharWidth32 GetCharWidth32W
 
 /* aa520325 "GetFontData" (ee489901): DWORD GetFontData(HDC, DWORD
  * dwTable, DWORD dwOffset, LPVOID, DWORD).  OS CE 5.0+; Windows.h. */
-DWORD GetFontData(HDC hdc, DWORD dwTable, DWORD dwOffset,
-                  LPVOID lpvBuffer, DWORD cbData);
+AKARI_CE_IMPORT DWORD GetFontData(HDC hdc, DWORD dwTable, DWORD dwOffset,
+                  LPVOID lpvBuffer, DWORD cbData) AKARI_CE_NAME(GetFontData);
 
 /* ms901132 "GetTextAlign" (ee489856): WINGDIAPI UINT WINAPI
  * GetTextAlign(HDC); CE ABI is __cdecl.  OS CE .NET 4.0+; Windows.h. */
-UINT GetTextAlign(HDC hdc);
+AKARI_CE_IMPORT UINT GetTextAlign(HDC hdc) AKARI_CE_NAME(GetTextAlign);
 
 /* ms901133 "GetTextCharacterExtra" (ee489907): int
  * GetTextCharacterExtra(HDC).  OS CE 5.0+; Wingdi.h. */
-int GetTextCharacterExtra(HDC hdc);
+AKARI_CE_IMPORT int GetTextCharacterExtra(HDC hdc) AKARI_CE_NAME(GetTextCharacterExtra);
 
 /* ms901134 "GetTextColor" (ee489912): COLORREF GetTextColor(HDC).
  * OS CE 1.0+; Windows.h. */
-COLORREF GetTextColor(HDC hdc);
+AKARI_CE_IMPORT COLORREF GetTextColor(HDC hdc) AKARI_CE_NAME(GetTextColor);
 
 /* ms901135 "GetTextExtentExPoint" (ee489883): BOOL
  * GetTextExtentExPoint(HDC, LPCTSTR, int, int, LPINT lpnFit,
  * LPINT alpDx, LPSIZE).  OS CE 1.0+; Windows.h.  Export
  * GetTextExtentExPointW. */
-BOOL GetTextExtentExPointW(HDC hdc, LPCWSTR lpszStr, int cchString,
+AKARI_CE_IMPORT BOOL GetTextExtentExPointW(HDC hdc, LPCWSTR lpszStr, int cchString,
                            int nMaxExtent, LPINT lpnFit, LPINT alpDx,
-                           LPSIZE lpSize);
+                           LPSIZE lpSize) AKARI_CE_NAME(GetTextExtentExPointW);
 #define GetTextExtentExPoint GetTextExtentExPointW
 
 /* ms901136 "GetTextExtentPoint" (ee489897): BOOL GetTextExtentPoint(
  * HDC, LPCTSTR, int cbString, LPSIZE).  OS CE 2.0+; Windows.h.
  * Export GetTextExtentPointW. */
-BOOL GetTextExtentPointW(HDC hdc, LPCWSTR lpString, int cbString,
-                         LPSIZE lpSize);
+AKARI_CE_IMPORT BOOL GetTextExtentPointW(HDC hdc, LPCWSTR lpString, int cbString,
+                         LPSIZE lpSize) AKARI_CE_NAME(GetTextExtentPointW);
 #define GetTextExtentPoint GetTextExtentPointW
 
 /* ms901137 "GetTextExtentPoint32" (ee489838): BOOL
  * GetTextExtentPoint32(HDC, LPCTSTR, int, LPSIZE).  OS CE 2.0+;
  * Windows.h.  Export GetTextExtentPoint32W. */
-BOOL GetTextExtentPoint32W(HDC hdc, LPCWSTR lpString, int cbString,
-                           LPSIZE lpSize);
+AKARI_CE_IMPORT BOOL GetTextExtentPoint32W(HDC hdc, LPCWSTR lpString, int cbString,
+                           LPSIZE lpSize) AKARI_CE_NAME(GetTextExtentPoint32W);
 #define GetTextExtentPoint32 GetTextExtentPoint32W
 
 /* ms901138 "GetTextFace" (ee489915): int GetTextFace(HDC, int nCount,
  * LPTSTR).  OS CE 1.0+; Windows.h.  Export GetTextFaceW. */
-int GetTextFaceW(HDC hdc, int nCount, LPWSTR lpFaceName);
+AKARI_CE_IMPORT int GetTextFaceW(HDC hdc, int nCount, LPWSTR lpFaceName) AKARI_CE_NAME(GetTextFaceW);
 #define GetTextFace GetTextFaceW
 
 /* ms901139 "GetTextMetrics" (ee489911): BOOL GetTextMetrics(HDC,
  * LPTEXTMETRIC).  OS CE 1.0+; Windows.h.  Export GetTextMetricsW. */
-BOOL GetTextMetricsW(HDC hdc, LPTEXTMETRIC lptm);
+AKARI_CE_IMPORT BOOL GetTextMetricsW(HDC hdc, LPTEXTMETRIC lptm) AKARI_CE_NAME(GetTextMetricsW);
 #define GetTextMetrics GetTextMetricsW
 
 /* ms901142 "RemoveFontResource" (ee489851): BOOL
  * RemoveFontResource(LPCTSTR).  OS CE 1.0+; Windows.h.  Export
  * RemoveFontResourceW. */
-BOOL RemoveFontResourceW(LPCWSTR lpFileName);
+AKARI_CE_IMPORT BOOL RemoveFontResourceW(LPCWSTR lpFileName) AKARI_CE_NAME(RemoveFontResourceW);
 #define RemoveFontResource RemoveFontResourceW
 
 /* ms901143 "SetTextAlign" (ee489853): WINGDIAPI UINT WINAPI
  * SetTextAlign(HDC, UINT fmode); CE ABI is __cdecl.  OS CE .NET 4.0+;
  * Windows.h. */
-UINT SetTextAlign(HDC hdc, UINT fmode);
+AKARI_CE_IMPORT UINT SetTextAlign(HDC hdc, UINT fmode) AKARI_CE_NAME(SetTextAlign);
 
 /* ms901144 "SetTextCharacterExtra" (ee489860): int
  * SetTextCharacterExtra(HDC, int nCharExtra).  OS CE 5.0+; Wingdi.h. */
-int SetTextCharacterExtra(HDC hdc, int nCharExtra);
+AKARI_CE_IMPORT int SetTextCharacterExtra(HDC hdc, int nCharExtra) AKARI_CE_NAME(SetTextCharacterExtra);
 
 /* ms901145 "SetTextColor" (ee489887): COLORREF SetTextColor(HDC,
  * COLORREF).  OS CE .NET 4.0+; Windows.h. */
-COLORREF SetTextColor(HDC hdc, COLORREF crColor);
+AKARI_CE_IMPORT COLORREF SetTextColor(HDC hdc, COLORREF crColor) AKARI_CE_NAME(SetTextColor);
 
 /* ------------------------------------------------------------------ */
 /* M36: MultiMonitor functions and types (CE .NET 4.0+ pages; Header   */
@@ -1109,12 +1109,12 @@ typedef BOOL (CALLBACK *MONITORENUMPROC)(HMONITOR hMonitor,
                                          LPRECT lprcMonitor,
                                          LPARAM dwData);
 
-BOOL EnumDisplayMonitors(HDC hdc, LPCRECT lprcClip,
-                         MONITORENUMPROC lpfnEnum, LPARAM dwData);
-BOOL GetMonitorInfo(HMONITOR hMonitor, LPMONITORINFO lpmi);
-HMONITOR MonitorFromPoint(POINT pt, DWORD dwFlags);
-HMONITOR MonitorFromRect(LPCRECT lprc, DWORD dwFlags);
-HMONITOR MonitorFromWindow(HWND hwnd, DWORD dwFlags);
+AKARI_CE_IMPORT BOOL EnumDisplayMonitors(HDC hdc, LPCRECT lprcClip,
+                         MONITORENUMPROC lpfnEnum, LPARAM dwData) AKARI_CE_NAME(EnumDisplayMonitors);
+AKARI_CE_IMPORT BOOL GetMonitorInfo(HMONITOR hMonitor, LPMONITORINFO lpmi) AKARI_CE_NAME(GetMonitorInfo);
+AKARI_CE_IMPORT HMONITOR MonitorFromPoint(POINT pt, DWORD dwFlags) AKARI_CE_NAME(MonitorFromPoint);
+AKARI_CE_IMPORT HMONITOR MonitorFromRect(LPCRECT lprc, DWORD dwFlags) AKARI_CE_NAME(MonitorFromRect);
+AKARI_CE_IMPORT HMONITOR MonitorFromWindow(HWND hwnd, DWORD dwFlags) AKARI_CE_NAME(MonitorFromWindow);
 
 #ifdef __cplusplus
 }

@@ -36,7 +36,7 @@ this repository; our headers are written from the official pages
 | GUI: `winuser.h` (WinMain, windows, messages, controls) | queued (WinMain page `ms914104` already in wince-crt records) |
 | Import-library defs (`def/coredll-doc.def` + more per harvested DLL) | M9: derived from the official documentation pages only — `tools/ce-manifest.py` + `tools/ce-fetch.py` harvest the per-page Link Library rows into `build/rows.json`; `tools/gen-doc-def.py` writes the committed def; `llvm-dlltool` builds the import lib. Grows as more reference books are harvested |
 | Real-toolchain compile matrix (headers + TU, `-Werror`) | passing since M8 (now M9 sync + winnt.h): `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 |
-| End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | pending: link a consumer TU with wince-crt against `llvm-dlltool` outputs |
+| End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | shipped (M37): `make e2e` links the tests/e2e consumers (main app / WinMain app / DLL) with the Akari CRT against the doc-derived `llvm-dlltool` import libraries on all six arm/i386-pc-wince{4.2,5.0,6.0} targets; PE machine/CE-subsystem/import names asserted |
 
 ## Ordering principle
 

@@ -43,16 +43,16 @@ extern "C" {
  * Coredll.lib.  Unconditionally ends the process; the exit path of
  * the companion CRT (wince-crt) uses it with the current-process
  * pseudo-handle. */
-BOOL TerminateProcess(HANDLE hProcess, DWORD uExitCode);
+AKARI_CE_IMPORT BOOL TerminateProcess(HANDLE hProcess, DWORD uExitCode) AKARI_CE_NAME(TerminateProcess);
 
 /* ms885219 "ExitThread (Windows CE 5.0)": VOID ExitThread(DWORD).
  * CE 1.0+; Winbase.h; Coredll.lib. */
-VOID ExitThread(DWORD dwExitCode);
+AKARI_CE_IMPORT VOID ExitThread(DWORD dwExitCode) AKARI_CE_NAME(ExitThread);
 
 /* aa450930 "TerminateThread (Windows CE 5.0)":
  * BOOL TerminateThread(HANDLE, DWORD).  CE 1.01+; Winbase.h;
  * Coredll.lib. */
-BOOL TerminateThread(HANDLE hThread, DWORD dwExitCode);
+AKARI_CE_IMPORT BOOL TerminateThread(HANDLE hThread, DWORD dwExitCode) AKARI_CE_NAME(TerminateThread);
 
 /* ------------------------------------------------------------------ */
 /* Module management                                                  */
@@ -63,15 +63,15 @@ BOOL TerminateThread(HANDLE hThread, DWORD dwExitCode);
  * Coredll.lib (page lists "Coredll.lib, Nk.lib").  NULL returns a
  * pseudo-handle of the current process.  Export is GetModuleHandleW
  * (verified import surface; CE is Unicode-only). */
-HMODULE GetModuleHandleW(LPCWSTR lpModuleName);
+AKARI_CE_IMPORT HMODULE GetModuleHandleW(LPCWSTR lpModuleName) AKARI_CE_NAME(GetModuleHandleW);
 #define GetModuleHandle GetModuleHandleW
 
 /* ms885629 "GetModuleFileName (Windows CE 5.0)":
  * DWORD GetModuleFileName(HMODULE, LPWSTR, DWORD).  CE 2.0+;
  * Winbase.h; Coredll.lib.  nSize is in characters; NULL hModule asks
  * for the calling process's file.  Export is GetModuleFileNameW. */
-DWORD GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename,
-                         DWORD nSize);
+AKARI_CE_IMPORT DWORD GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename,
+                         DWORD nSize) AKARI_CE_NAME(GetModuleFileNameW);
 #define GetModuleFileName GetModuleFileNameW
 
 /* ------------------------------------------------------------------ */
@@ -82,7 +82,7 @@ DWORD GetModuleFileNameW(HMODULE hModule, LPWSTR lpFilename,
  * LPTSTR GetCommandLine(void).  CE 3.0+; Winbase.h; Coredll.lib.
  * Remarks: "Windows CE supports only the Unicode version of this
  * function."  Export is GetCommandLineW. */
-LPWSTR GetCommandLineW(void);
+AKARI_CE_IMPORT LPWSTR GetCommandLineW(void) AKARI_CE_NAME(GetCommandLineW);
 #define GetCommandLine GetCommandLineW
 
 /* ------------------------------------------------------------------ */
@@ -95,7 +95,7 @@ LPWSTR GetCommandLineW(void);
  * later, the ASCII version of this function, GetProcAddressA, is
  * supported."  Both exports are present in the CE 4/5/6 import
  * libraries (verified).  Base name maps to the W form. */
-FARPROC GetProcAddressW(HMODULE hModule, LPCWSTR lpProcName);
+AKARI_CE_IMPORT FARPROC GetProcAddressW(HMODULE hModule, LPCWSTR lpProcName) AKARI_CE_NAME(GetProcAddressW);
 FARPROC GetProcAddressA(HMODULE hModule, LPCSTR lpProcName);
 #define GetProcAddress GetProcAddressW
 
@@ -122,13 +122,13 @@ FARPROC GetProcAddressA(HMODULE hModule, LPCSTR lpProcName);
 #define LMEM_MODIFY    0x0080u
 #define LPTR           (LMEM_FIXED | LMEM_ZEROINIT)
 
-HLOCAL LocalAlloc(UINT uFlags, UINT uBytes);
+AKARI_CE_IMPORT HLOCAL LocalAlloc(UINT uFlags, UINT uBytes) AKARI_CE_NAME(LocalAlloc);
 
 /* ms886741 "LocalFree (Windows CE 5.0)": HLOCAL LocalFree(HLOCAL).
  * CE 1.0+; Winbase.h; Coredll.lib.  Page notes: return value NULL
  * indicates success (a handle indicates failure); freeing NULL is
  * ignored and returns NULL. */
-HLOCAL LocalFree(HLOCAL hMem);
+AKARI_CE_IMPORT HLOCAL LocalFree(HLOCAL hMem) AKARI_CE_NAME(LocalFree);
 
 /* ------------------------------------------------------------------ */
 /* Error handling                                                      */
@@ -141,7 +141,7 @@ HLOCAL LocalFree(HLOCAL hMem);
  * (aa450740) and the SDK header WINERROR.H for the code list; those
  * constants land in a later batch (winerror.h) transcribed from
  * aa450740. */
-DWORD GetLastError(void);
+AKARI_CE_IMPORT DWORD GetLastError(void) AKARI_CE_NAME(GetLastError);
 
 /* ------------------------------------------------------------------ */
 /* Process and thread creation                                        */
@@ -183,10 +183,10 @@ typedef DWORD (WINAPI *LPTHREAD_START_ROUTINE)(LPVOID lpvThreadParam);
  * (a CE-only flag); default reservation 64 KB; NULL return on
  * failure; flag values are transcribed with the official constants
  * batch. */
-HANDLE CreateThread(LPSECURITY_ATTRIBUTES lpsa, DWORD cbStack,
+AKARI_CE_IMPORT HANDLE CreateThread(LPSECURITY_ATTRIBUTES lpsa, DWORD cbStack,
                     LPTHREAD_START_ROUTINE lpStartAddr,
                     LPVOID lpvThreadParam, DWORD fdwCreate,
-                    LPDWORD lpIDThread);
+                    LPDWORD lpIDThread) AKARI_CE_NAME(CreateThread);
 
 /* ms885182 "CreateProcess (Windows CE 5.0)":
  * BOOL CreateProcess(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
@@ -204,13 +204,13 @@ HANDLE CreateThread(LPSECURITY_ATTRIBUTES lpsa, DWORD cbStack,
  * priority classes; search order: \windows, root, OEM dir (and
  * \ceshell from CE 2.10); do not call from DllMain.  Export is
  * CreateProcessW. */
-BOOL CreateProcessW(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
+AKARI_CE_IMPORT BOOL CreateProcessW(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
                     LPSECURITY_ATTRIBUTES psaProcess,
                     LPSECURITY_ATTRIBUTES psaThread,
                     BOOL fInheritHandles, DWORD fdwCreate,
                     LPVOID pvEnvironment, LPWSTR pszCurDir,
                     LPSTARTUPINFOW psiStartInfo,
-                    LPPROCESS_INFORMATION pProcInfo);
+                    LPPROCESS_INFORMATION pProcInfo) AKARI_CE_NAME(CreateProcessW);
 #define CreateProcess CreateProcessW
 
 /* ------------------------------------------------------------------ */
@@ -225,14 +225,14 @@ BOOL CreateProcessW(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
  * explicit path, .exe launch directory, \windows, ROM, OEM path;
  * registry HKEY_LOCAL_MACHINE\Loader\SystemPath (<= 260 chars) adds
  * search paths; not safe from DllMain.  Export is LoadLibraryW. */
-HINSTANCE LoadLibraryW(LPCWSTR lpLibFileName);
+AKARI_CE_IMPORT HINSTANCE LoadLibraryW(LPCWSTR lpLibFileName) AKARI_CE_NAME(LoadLibraryW);
 #define LoadLibrary LoadLibraryW
 
 /* ms885601 "FreeLibrary (Windows CE 5.0)": BOOL FreeLibrary(HMODULE).
  * CE 1.0+; Winbase.h; Coredll.lib.  Decrements the per-process
  * reference count; at zero the system calls DllMain with
  * DLL_PROCESS_DETACH before unmapping; not safe from DllMain. */
-BOOL FreeLibrary(HMODULE hLibModule);
+AKARI_CE_IMPORT BOOL FreeLibrary(HMODULE hLibModule) AKARI_CE_NAME(FreeLibrary);
 
 /* ------------------------------------------------------------------ */
 /* Handles, process queries                                           */
@@ -242,13 +242,13 @@ BOOL FreeLibrary(HMODULE hLibModule);
  * CE 1.0+; Winbase.h; Coredll.lib.  Closes handles to files, events,
  * mutexes, processes, threads, sockets, etc.; does not terminate a
  * thread. */
-BOOL CloseHandle(HANDLE hObject);
+AKARI_CE_IMPORT BOOL CloseHandle(HANDLE hObject) AKARI_CE_NAME(CloseHandle);
 
 /* ms886766 "OpenProcess (Windows CE 5.0)":
  * HANDLE OpenProcess(DWORD, BOOL, DWORD).  CE 2.0+; Winbase.h;
  * Coredll.lib.  CE notes: fdwAccess "Not supported; set to zero";
  * fInherit "Not supported; set to FALSE". */
-HANDLE OpenProcess(DWORD fdwAccess, BOOL fInherit, DWORD IDProcess);
+AKARI_CE_IMPORT HANDLE OpenProcess(DWORD fdwAccess, BOOL fInherit, DWORD IDProcess) AKARI_CE_NAME(OpenProcess);
 
 /* ms885622 "GetExitCodeProcess (Windows CE 5.0)":
  * BOOL GetExitCodeProcess(HANDLE, LPDWORD).  CE 2.0+; Winbase.h;
@@ -256,13 +256,13 @@ HANDLE OpenProcess(DWORD fdwAccess, BOOL fInherit, DWORD IDProcess);
  * process runs; after termination the status is the ExitProcess/
  * TerminateProcess exit value, the return value of the process's
  * main/WinMain, or an exception value. */
-BOOL GetExitCodeProcess(HANDLE hProcess, LPDWORD lpExitCode);
+AKARI_CE_IMPORT BOOL GetExitCodeProcess(HANDLE hProcess, LPDWORD lpExitCode) AKARI_CE_NAME(GetExitCodeProcess);
 
 /* ms886817 "SetLastError (Windows CE 5.0)": VOID
  * SetLastError(DWORD).  CE 1.0+; Winbase.h; Coredll.lib.  Last-error
  * code is per-thread (thread local storage); error codes are 32-bit,
  * bit 29 reserved for application-defined codes. */
-VOID SetLastError(DWORD dwErrCode);
+AKARI_CE_IMPORT VOID SetLastError(DWORD dwErrCode) AKARI_CE_NAME(SetLastError);
 
 /* ------------------------------------------------------------------ */
 /* Thread scheduling (Suspend/Resume, exit status)                    */
@@ -274,14 +274,14 @@ VOID SetLastError(DWORD dwErrCode);
  * MAXIMUM_SUSPEND_COUNT); previous suspend count is returned,
  * 0xFFFFFFFF on failure.  CE note: suspending a thread that is
  * making a kernel call fails -- the call may need to be repeated. */
-DWORD SuspendThread(HANDLE hThread);
+AKARI_CE_IMPORT DWORD SuspendThread(HANDLE hThread) AKARI_CE_NAME(SuspendThread);
 
 /* ms886801 "ResumeThread (Windows CE 5.0)": DWORD
  * ResumeThread(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
  * Decrements the suspend count; resumes execution when it reaches
  * zero.  Return: previous suspend count; 0xFFFFFFFF on failure;
  * 0 = the thread was not suspended; 1 = suspended, now running. */
-DWORD ResumeThread(HANDLE hThread);
+AKARI_CE_IMPORT DWORD ResumeThread(HANDLE hThread) AKARI_CE_NAME(ResumeThread);
 
 /* ms885623 "GetExitCodeThread (Windows CE 5.0)":
  * BOOL GetExitCodeThread(HANDLE, LPDWORD).  CE 1.01+; Winbase.h;
@@ -289,7 +289,7 @@ DWORD ResumeThread(HANDLE hThread);
  * termination the status is the ExitThread/TerminateThread exit
  * value, the return value of the thread function, or the exit value
  * of the thread's process. */
-BOOL GetExitCodeThread(HANDLE hThread, LPDWORD lpExitCode);
+AKARI_CE_IMPORT BOOL GetExitCodeThread(HANDLE hThread, LPDWORD lpExitCode) AKARI_CE_NAME(GetExitCodeThread);
 
 /* aa450900 "Sleep (Windows CE 5.0)": VOID Sleep(DWORD).  CE 1.0+;
  * Winbase.h; Coredll.lib.  Suspends the current thread for the
@@ -297,7 +297,7 @@ BOOL GetExitCodeThread(HANDLE hThread, LPDWORD lpExitCode);
  * the rest of the time slice; INFINITE delays forever.  CE note:
  * Sleep(INFINITE) equals SuspendThread(GetCurrentThread()) -- the
  * thread remains resumable via ResumeThread, unlike on desktop. */
-VOID Sleep(DWORD dwMilliseconds);
+AKARI_CE_IMPORT VOID Sleep(DWORD dwMilliseconds) AKARI_CE_NAME(Sleep);
 
 /* INFINITE: infinite-delay constant, cited by the CE Sleep page
  * (aa450900); value per the Win32 ABI. */
@@ -337,7 +337,7 @@ VOID Sleep(DWORD dwMilliseconds);
  * RETURN on failure.  CE has no priority classes; scheduling order
  * is determined by thread priority alone.  For real-time priorities
  * (0-247) use CeGetThreadPriority (aa450795) -- later batch. */
-int GetThreadPriority(HANDLE hThread);
+AKARI_CE_IMPORT int GetThreadPriority(HANDLE hThread) AKARI_CE_NAME(GetThreadPriority);
 
 /* aa450891 "SetThreadPriority (Windows CE 5.0)":
  * BOOL SetThreadPriority(HANDLE, int).  CE 1.0+; Winbase.h;
@@ -345,7 +345,7 @@ int GetThreadPriority(HANDLE hThread);
  * All threads start at THREAD_PRIORITY_NORMAL.  No priority
  * classes on CE.  Real-time range via CeSetThreadPriority
  * (ms885155) -- later batch. */
-BOOL SetThreadPriority(HANDLE hThread, int nPriority);
+AKARI_CE_IMPORT BOOL SetThreadPriority(HANDLE hThread, int nPriority) AKARI_CE_NAME(SetThreadPriority);
 
 /* ------------------------------------------------------------------ */
 /* Thread local storage (TLS)                                         */
@@ -357,20 +357,20 @@ BOOL SetThreadPriority(HANDLE hThread, int nPriority);
  * TLS indexes are not valid across process boundaries; typical use:
  * allocate at process/DLL attach, TlsSetValue per thread, TlsFree at
  * process detach.  TLS_MINIMUM_AVAILABLE is guaranteed at least 64. */
-DWORD TlsAlloc(void);
+AKARI_CE_IMPORT DWORD TlsAlloc(void) AKARI_CE_NAME(TlsAlloc);
 
 /* aa450947 "TlsFree (Windows CE 5.0)": BOOL TlsFree(DWORD).
  * CE 1.0+; Winbase.h; Coredll.lib.  Releases a TLS index for reuse;
  * does NOT free dynamic storage stored in the slot (free it first);
  * DLLs are expected to call it from their process-detach routine. */
-BOOL TlsFree(DWORD dwTlsIndex);
+AKARI_CE_IMPORT BOOL TlsFree(DWORD dwTlsIndex) AKARI_CE_NAME(TlsFree);
 
 /* aa450951 "TlsSetValue (Windows CE 5.0)":
  * BOOL TlsSetValue(DWORD, LPVOID).  CE 1.0+; Winbase.h; Coredll.lib.
  * Stores a value in the calling thread's TLS slot; slots are
  * initialized to NULL.  Minimal parameter validation: succeeds for
  * index 0 .. TLS_MINIMUM_AVAILABLE-1. */
-BOOL TlsSetValue(DWORD dwTlsIndex, LPVOID lpTlsValue);
+AKARI_CE_IMPORT BOOL TlsSetValue(DWORD dwTlsIndex, LPVOID lpTlsValue) AKARI_CE_NAME(TlsSetValue);
 
 /* aa450949 "TlsGetValue (Windows CE 5.0)":
  * LPVOID TlsGetValue(DWORD).  CE 1.0+; Winbase.h; Coredll.lib.
@@ -379,7 +379,7 @@ BOOL TlsSetValue(DWORD dwTlsIndex, LPVOID lpTlsValue);
  * the thread's last error (GetLastError then returns NO_ERROR).
  * CE note: for CE 3.0 and later, NULL is returned when called before
  * TlsSetValue; on CE 1.0-2.12 the value is not guaranteed NULL. */
-LPVOID TlsGetValue(DWORD dwTlsIndex);
+AKARI_CE_IMPORT LPVOID TlsGetValue(DWORD dwTlsIndex) AKARI_CE_NAME(TlsGetValue);
 
 /* TLS_MINIMUM_AVAILABLE: minimum number of TLS indexes per process.
  * The TlsAlloc page guarantees "at least 64"; the ABI value used by
@@ -401,8 +401,8 @@ LPVOID TlsGetValue(DWORD dwTlsIndex);
  * only once, so the dwFlags settings apply to all further loads of
  * the same module.  Because Windows CE is Unicode-only, the export
  * is LoadLibraryExW. */
-HINSTANCE LoadLibraryExW(LPCWSTR lpLibFileName, HANDLE hFile,
-                         DWORD dwFlags);
+AKARI_CE_IMPORT HINSTANCE LoadLibraryExW(LPCWSTR lpLibFileName, HANDLE hFile,
+                         DWORD dwFlags) AKARI_CE_NAME(LoadLibraryExW);
 #define LoadLibraryEx LoadLibraryExW
 
 /* LoadLibraryEx dwFlags (ms886737).  DONT_RESOLVE_DLL_REFERENCES
@@ -511,25 +511,25 @@ typedef LPWIN32_FIND_DATAW LPWIN32_FIND_DATA;
  * be opened; CONn: opens the console if present; use CloseHandle on
  * the returned handle; INVALID_HANDLE_VALUE on failure.  Export is
  * CreateFileW. */
-HANDLE CreateFileW(LPCWSTR lpFileName, DWORD dwDesiredAccess,
+AKARI_CE_IMPORT HANDLE CreateFileW(LPCWSTR lpFileName, DWORD dwDesiredAccess,
                    DWORD dwShareMode,
                    LPSECURITY_ATTRIBUTES lpSecurityAttributes,
                    DWORD dwCreationDisposition,
-                   DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
+                   DWORD dwFlagsAndAttributes, HANDLE hTemplateFile) AKARI_CE_NAME(CreateFileW);
 #define CreateFile CreateFileW
 
 /* ms889001 "DeleteFile (Windows CE 5.0)": BOOL DeleteFile(LPCTSTR).
  * CE 1.0+; Winbase.h; Coredll.lib.  Fails if the file does not
  * exist or is open for I/O or memory-mapped; does not delete
  * directories (use RemoveDirectory).  Export is DeleteFileW. */
-BOOL DeleteFileW(LPCWSTR lpFileName);
+AKARI_CE_IMPORT BOOL DeleteFileW(LPCWSTR lpFileName) AKARI_CE_NAME(DeleteFileW);
 #define DeleteFile DeleteFileW
 
 /* ms890895 "GetFileAttributes (Windows CE 5.0)":
  * DWORD GetFileAttributes(LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.
  * Returns the file/directory attributes (one or more FILE_ATTRIBUTE_
  * values); 0xFFFFFFFF on failure.  Export is GetFileAttributesW. */
-DWORD GetFileAttributesW(LPCWSTR lpFileName);
+AKARI_CE_IMPORT DWORD GetFileAttributesW(LPCWSTR lpFileName) AKARI_CE_NAME(GetFileAttributesW);
 #define GetFileAttributes GetFileAttributesW
 
 /* ms889678 "FindFirstFile (Windows CE 5.0)":
@@ -538,7 +538,7 @@ DWORD GetFileAttributesW(LPCWSTR lpFileName);
  * on the first match; * and ? wildcards allowed in the name; fails
  * with INVALID_HANDLE_VALUE; close the handle with FindClose.
  * Export is FindFirstFileW. */
-HANDLE FindFirstFileW(LPCWSTR lpFileName, LPWIN32_FIND_DATAW lpFindFileData);
+AKARI_CE_IMPORT HANDLE FindFirstFileW(LPCWSTR lpFileName, LPWIN32_FIND_DATAW lpFindFileData) AKARI_CE_NAME(FindFirstFileW);
 #define FindFirstFile FindFirstFileW
 
 /* ms889873 "FindNextFile (Windows CE 5.0)":
@@ -546,13 +546,13 @@ HANDLE FindFirstFileW(LPCWSTR lpFileName, LPWIN32_FIND_DATAW lpFindFileData);
  * Coredll.lib.  Continues the search from FindFirstFile; when no
  * more files match, fails and GetLastError returns
  * ERROR_NO_MORE_FILES.  Export is FindNextFileW. */
-BOOL FindNextFileW(HANDLE hFindFile, LPWIN32_FIND_DATAW lpFindFileData);
+AKARI_CE_IMPORT BOOL FindNextFileW(HANDLE hFindFile, LPWIN32_FIND_DATAW lpFindFileData) AKARI_CE_NAME(FindNextFileW);
 #define FindNextFile FindNextFileW
 
 /* ms889619 "FindClose (Windows CE 5.0)": BOOL FindClose(HANDLE).
  * CE 1.0+; Winbase.h; Coredll.lib.  Closes a search handle opened
  * by FindFirstFile; the handle must not be used afterwards. */
-BOOL FindClose(HANDLE hFindFile);
+AKARI_CE_IMPORT BOOL FindClose(HANDLE hFindFile) AKARI_CE_NAME(FindClose);
 
 /* INVALID_HANDLE_VALUE: failure return of handle-opening functions
  * (cited by the CE CreateFile aa517318 and FindFirstFile ms889678
@@ -597,9 +597,9 @@ typedef OVERLAPPED *LPOVERLAPPED;
  * set to zero before any work or error checking.  lpOverlapped is
  * unsupported -- set to NULL.  At end of file ReadFile returns
  * nonzero and stores zero in lpNumberOfBytesRead. */
-BOOL ReadFile(HANDLE hFile, LPVOID lpBuffer,
+AKARI_CE_IMPORT BOOL ReadFile(HANDLE hFile, LPVOID lpBuffer,
               DWORD nNumberOfBytesToRead,
-              LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+              LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped) AKARI_CE_NAME(ReadFile);
 
 /* ms892380 "WriteFile (Windows CE 5.0)":
  * BOOL WriteFile(HANDLE, LPCVOID, DWORD, LPDWORD, LPOVERLAPPED).
@@ -610,9 +610,9 @@ BOOL ReadFile(HANDLE hFile, LPVOID lpBuffer,
  * A zero byte count is a "null write": no bytes are written but the
  * file time stamp changes.  WriteFile never truncates -- use
  * SetEndOfFile.  lpOverlapped is unsupported -- set to NULL. */
-BOOL WriteFile(HANDLE hFile, LPCVOID lpBuffer,
+AKARI_CE_IMPORT BOOL WriteFile(HANDLE hFile, LPCVOID lpBuffer,
                DWORD nNumberOfBytesToWrite,
-               LPDWORD lpNumberOfBytesWritten, LPOVERLAPPED lpOverlapped);
+               LPDWORD lpNumberOfBytesWritten, LPOVERLAPPED lpOverlapped) AKARI_CE_NAME(WriteFile);
 
 /* ms890939 "GetFileSize (Windows CE 5.0)":
  * DWORD GetFileSize(HANDLE, LPDWORD).  CE 1.0+; Winbase.h;
@@ -620,7 +620,7 @@ BOOL WriteFile(HANDLE hFile, LPCVOID lpBuffer,
  * lpFileSizeHigh is non-NULL it receives the high 32 bits.  A return
  * of 0xFFFFFFFF signals failure -- call GetLastError to distinguish
  * it from a legitimate 32-bit size. */
-DWORD GetFileSize(HANDLE hFile, LPDWORD lpFileSizeHigh);
+AKARI_CE_IMPORT DWORD GetFileSize(HANDLE hFile, LPDWORD lpFileSizeHigh) AKARI_CE_NAME(GetFileSize);
 
 /* ms891933 "SetFilePointer (Windows CE 5.0)":
  * DWORD SetFilePointer(HANDLE, LONG, PLONG, DWORD).  CE 1.0+;
@@ -633,8 +633,8 @@ DWORD GetFileSize(HANDLE hFile, LPDWORD lpFileSizeHigh);
  * also a valid position), so failure must be confirmed with
  * GetLastError.  Not usable on non-seeking devices such as
  * communications devices. */
-DWORD SetFilePointer(HANDLE hFile, LONG lDistanceToMove,
-                     PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod);
+AKARI_CE_IMPORT DWORD SetFilePointer(HANDLE hFile, LONG lDistanceToMove,
+                     PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod) AKARI_CE_NAME(SetFilePointer);
 
 /* ms891916 "SetEndOfFile (Windows CE 5.0)":
  * BOOL SetEndOfFile(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
@@ -642,14 +642,14 @@ DWORD SetFilePointer(HANDLE hFile, LONG lDistanceToMove,
  * pointer position (hFile must have GENERIC_WRITE; not usable on
  * non-seeking devices).  When a file is extended, the contents
  * between the old and new end positions are undefined. */
-BOOL SetEndOfFile(HANDLE hFile);
+AKARI_CE_IMPORT BOOL SetEndOfFile(HANDLE hFile) AKARI_CE_NAME(SetEndOfFile);
 
 /* ms890238 "FlushFileBuffers (Windows CE 5.0)":
  * BOOL FlushFileBuffers(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
  * Writes the buffered data of hFile to the underlying storage; for a
  * communications-device handle it flushes the transmit buffer.  The
  * handle must have GENERIC_WRITE access. */
-BOOL FlushFileBuffers(HANDLE hFile);
+AKARI_CE_IMPORT BOOL FlushFileBuffers(HANDLE hFile) AKARI_CE_NAME(FlushFileBuffers);
 
 /* ms891388 "MoveFile (Windows CE 5.0)":
  * BOOL MoveFile(LPCTSTR, LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.
@@ -658,7 +658,7 @@ BOOL FlushFileBuffers(HANDLE hFile);
  * moved to a different file system or drive; a directory move across
  * volumes fails.  Windows CE is Unicode-only, so the export is
  * MoveFileW. */
-BOOL MoveFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName);
+AKARI_CE_IMPORT BOOL MoveFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName) AKARI_CE_NAME(MoveFileW);
 #define MoveFile MoveFileW
 
 /* aa517309 "CopyFile (Windows CE 5.0)":
@@ -668,8 +668,8 @@ BOOL MoveFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName);
  * to the destination.  bFailIfExists TRUE fails when the destination
  * already exists, FALSE overwrites it.  CopyFile does not operate on
  * directories.  Export is CopyFileW. */
-BOOL CopyFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName,
-               BOOL bFailIfExists);
+AKARI_CE_IMPORT BOOL CopyFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName,
+               BOOL bFailIfExists) AKARI_CE_NAME(CopyFileW);
 #define CopyFile CopyFileW
 
 /* aa517316 "CreateDirectory (Windows CE 5.0)":
@@ -681,8 +681,8 @@ BOOL CopyFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName,
  * (set to NULL).  In CE 5.0 and later the path is canonicalized
  * before use, so trailing backslashes are ignored.  Export is
  * CreateDirectoryW. */
-BOOL CreateDirectoryW(LPCWSTR lpPathName,
-                      LPSECURITY_ATTRIBUTES lpSecurityAttributes);
+AKARI_CE_IMPORT BOOL CreateDirectoryW(LPCWSTR lpPathName,
+                      LPSECURITY_ATTRIBUTES lpSecurityAttributes) AKARI_CE_NAME(CreateDirectoryW);
 #define CreateDirectory CreateDirectoryW
 
 /* ms891470 "RemoveDirectory (Windows CE 5.0)":
@@ -692,7 +692,7 @@ BOOL CreateDirectoryW(LPCWSTR lpPathName,
  * enumerate the contents with FindFirstFile/FindNextFile and delete
  * the children with DeleteFile/RemoveDirectory.  Export is
  * RemoveDirectoryW. */
-BOOL RemoveDirectoryW(LPCWSTR lpPathName);
+AKARI_CE_IMPORT BOOL RemoveDirectoryW(LPCWSTR lpPathName) AKARI_CE_NAME(RemoveDirectoryW);
 #define RemoveDirectory RemoveDirectoryW
 
 /* ms891925 "SetFileAttributes (Windows CE 5.0)":
@@ -704,7 +704,7 @@ BOOL RemoveDirectoryW(LPCWSTR lpPathName);
  * The ROM file system is not affected (attribute support depends on
  * the underlying file system driver).  MAX_PATH is the default path
  * length limit.  Export is SetFileAttributesW. */
-BOOL SetFileAttributesW(LPCWSTR lpFileName, DWORD dwFileAttributes);
+AKARI_CE_IMPORT BOOL SetFileAttributesW(LPCWSTR lpFileName, DWORD dwFileAttributes) AKARI_CE_NAME(SetFileAttributesW);
 #define SetFileAttributes SetFileAttributesW
 
 /* ------------------------------------------------------------------ */
@@ -744,9 +744,9 @@ BOOL SetFileAttributesW(LPCWSTR lpFileName, DWORD dwFileAttributes);
  * an existing object.  A handle to an already existing object returns
  * success with GetLastError == ERROR_ALREADY_EXISTS.  The returned
  * handle has EVENT_ALL_ACCESS.  Export is CreateEventW. */
-HANDLE CreateEventW(LPSECURITY_ATTRIBUTES lpEventAttributes,
+AKARI_CE_IMPORT HANDLE CreateEventW(LPSECURITY_ATTRIBUTES lpEventAttributes,
                     BOOL bManualReset, BOOL bInitialState,
-                    LPCWSTR lpName);
+                    LPCWSTR lpName) AKARI_CE_NAME(CreateEventW);
 #define CreateEvent CreateEventW
 
 /* ms886764 "OpenEvent (Windows CE 5.0)":
@@ -755,8 +755,8 @@ HANDLE CreateEventW(LPSECURITY_ATTRIBUTES lpEventAttributes,
  * existing named event object; dwDesiredAccess must be
  * EVENT_ALL_ACCESS and bInheritHandle must be FALSE.  Name
  * comparison is case sensitive.  Export is OpenEventW. */
-HANDLE OpenEventW(DWORD dwDesiredAccess, BOOL bInheritHandle,
-                  LPCWSTR lpName);
+AKARI_CE_IMPORT HANDLE OpenEventW(DWORD dwDesiredAccess, BOOL bInheritHandle,
+                  LPCWSTR lpName) AKARI_CE_NAME(OpenEventW);
 #define OpenEvent OpenEventW
 
 /* ms886810 "SetEvent (Windows CE 5.0)":
@@ -766,20 +766,20 @@ HANDLE OpenEventW(DWORD dwDesiredAccess, BOOL bInheritHandle,
  * the signaled state; the event stays signaled until a waiting
  * thread is released (auto-reset) or ResetEvent is called
  * (manual-reset). */
-BOOL SetEvent(HANDLE hEvent);
+AKARI_CE_IMPORT BOOL SetEvent(HANDLE hEvent) AKARI_CE_NAME(SetEvent);
 
 /* ms886800 "ResetEvent (Windows CE 5.0)":
  * BOOL ResetEvent(HANDLE).  CE 1.0+; Header: Kfuncs.h per page;
  * Coredll.lib (see SetEvent note).  Sets the event object to the
  * nonsignaled state. */
-BOOL ResetEvent(HANDLE hEvent);
+AKARI_CE_IMPORT BOOL ResetEvent(HANDLE hEvent) AKARI_CE_NAME(ResetEvent);
 
 /* ms886784 "PulseEvent (Windows CE 5.0)":
  * BOOL PulseEvent(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.  Sets
  * the event signaled, releases the appropriate number of waiting
  * threads, then resets it to nonsignaled in one operation.  A CE
  * note on timing: only threads already waiting are released. */
-BOOL PulseEvent(HANDLE hEvent);
+AKARI_CE_IMPORT BOOL PulseEvent(HANDLE hEvent) AKARI_CE_NAME(PulseEvent);
 
 /* ms885181 "CreateMutex (Windows CE 5.0)":
  * HANDLE CreateMutex(LPSECURITY_ATTRIBUTES, BOOL, LPTSTR).  CE 1.01+;
@@ -788,8 +788,8 @@ BOOL PulseEvent(HANDLE hEvent);
  * calling thread initial ownership.  If the named mutex already
  * exists the function succeeds with ERROR_ALREADY_EXISTS.  Export is
  * CreateMutexW. */
-HANDLE CreateMutexW(LPSECURITY_ATTRIBUTES lpMutexAttributes,
-                    BOOL bInitialOwner, LPCWSTR lpName);
+AKARI_CE_IMPORT HANDLE CreateMutexW(LPSECURITY_ATTRIBUTES lpMutexAttributes,
+                    BOOL bInitialOwner, LPCWSTR lpName) AKARI_CE_NAME(CreateMutexW);
 #define CreateMutex CreateMutexW
 
 /* ms886797 "ReleaseMutex (Windows CE 5.0)":
@@ -815,8 +815,8 @@ HANDLE CreateSemaphoreW(LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
  * Coredll.lib.  Increases the semaphore count by lReleaseCount (which
  * must be > 0); lpPreviousCount receives the previous count when
  * non-NULL.  Fails when the count would exceed the maximum. */
-BOOL ReleaseSemaphore(HANDLE hSemaphore, LONG lReleaseCount,
-                      LPLONG lpPreviousCount);
+AKARI_CE_IMPORT BOOL ReleaseSemaphore(HANDLE hSemaphore, LONG lReleaseCount,
+                      LPLONG lpPreviousCount) AKARI_CE_NAME(ReleaseSemaphore);
 
 /* ms885208 "DuplicateHandle (Windows CE 5.0)":
  * BOOL DuplicateHandle(HANDLE, HANDLE, HANDLE, LPHANDLE, DWORD, BOOL,
@@ -827,10 +827,10 @@ BOOL ReleaseSemaphore(HANDLE hSemaphore, LONG lReleaseCount,
  * NULL; dwDesiredAccess is currently ignored; bInheritHandle must be
  * FALSE.  dwOptions may be DUPLICATE_CLOSE_SOURCE and/or
  * DUPLICATE_SAME_ACCESS. */
-BOOL DuplicateHandle(HANDLE hSourceProcessHandle, HANDLE hSourceHandle,
+AKARI_CE_IMPORT BOOL DuplicateHandle(HANDLE hSourceProcessHandle, HANDLE hSourceHandle,
                      HANDLE hTargetProcessHandle,
                      LPHANDLE lpTargetHandle, DWORD dwDesiredAccess,
-                     BOOL bInheritHandle, DWORD dwOptions);
+                     BOOL bInheritHandle, DWORD dwOptions) AKARI_CE_NAME(DuplicateHandle);
 
 /* DuplicateHandle dwOptions (Win32 ABI values, official DuplicateHandle
  * reference). */
@@ -847,7 +847,7 @@ BOOL DuplicateHandle(HANDLE hSourceProcessHandle, HANDLE hSourceHandle,
  * CE: event, mutex, semaphore (CE 3.0+), process and thread handles.
  * CE 1.0-2.12 cannot wait on semaphores; CE 1.0/1.01 cannot wait on
  * process or thread handles. */
-DWORD WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+AKARI_CE_IMPORT DWORD WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds) AKARI_CE_NAME(WaitForSingleObject);
 
 /* aa450987 "WaitForMultipleObjects (Windows CE 5.0)":
  * DWORD WaitForMultipleObjects(DWORD, CONST HANDLE*, BOOL, DWORD).
@@ -902,7 +902,7 @@ VOID DeleteCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
  * Winbase.h; Coredll.lib.  Attempts to enter the critical section
  * without blocking: nonzero if ownership was obtained, zero if
  * another thread owns it. */
-BOOL TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+AKARI_CE_IMPORT BOOL TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection) AKARI_CE_NAME(TryEnterCriticalSection);
 
 /* Interlocked operations.  The CE pages (ms885667..ms885674) declare
  * the classic Win32 interlocked functions and list Link Library:
@@ -912,44 +912,44 @@ BOOL TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
 
 /* ms885670 "InterlockedExchange": LONG
  * InterlockedExchange(LPLONG Target, LONG Value). */
-LONG InterlockedExchange(LPLONG Target, LONG Value);
+AKARI_CE_IMPORT LONG InterlockedExchange(LPLONG Target, LONG Value) AKARI_CE_NAME(InterlockedExchange);
 
 /* ms885673 "InterlockedIncrement": LONG InterlockedIncrement(LPLONG
  * Addend).  Returns the resulting value. */
-LONG InterlockedIncrement(LPLONG Addend);
+AKARI_CE_IMPORT LONG InterlockedIncrement(LPLONG Addend) AKARI_CE_NAME(InterlockedIncrement);
 
 /* ms885669 "InterlockedDecrement": LONG InterlockedDecrement(LPLONG
  * Addend).  Returns the resulting value. */
-LONG InterlockedDecrement(LPLONG Addend);
+AKARI_CE_IMPORT LONG InterlockedDecrement(LPLONG Addend) AKARI_CE_NAME(InterlockedDecrement);
 
 /* ms885671 "InterlockedExchangeAdd": LONG InterlockedExchangeAdd(
  * LPLONG Addend, LONG Increment).  Returns the original value. */
-LONG InterlockedExchangeAdd(LPLONG Addend, LONG Increment);
+AKARI_CE_IMPORT LONG InterlockedExchangeAdd(LPLONG Addend, LONG Increment) AKARI_CE_NAME(InterlockedExchangeAdd);
 
 /* ms885667 "InterlockedCompareExchange": LONG
  * InterlockedCompareExchange(LPLONG Destination, LONG Exchange,
  * LONG Comperand).  Returns the original value of Destination. */
-LONG InterlockedCompareExchange(LPLONG Destination, LONG Exchange,
-                                LONG Comperand);
+AKARI_CE_IMPORT LONG InterlockedCompareExchange(LPLONG Destination, LONG Exchange,
+                                LONG Comperand) AKARI_CE_NAME(InterlockedCompareExchange);
 
 /* ms885674 "InterlockedTestExchange": LONG
  * InterlockedTestExchange(LPLONG Target, LONG OldValue, LONG
  * NewValue).  CE-specific conditional set: stores NewValue in Target
  * only when Target currently equals OldValue; returns the value of
  * Target at the time of the call. */
-LONG InterlockedTestExchange(LPLONG Target, LONG OldValue,
-                             LONG NewValue);
+AKARI_CE_IMPORT LONG InterlockedTestExchange(LPLONG Target, LONG OldValue,
+                             LONG NewValue) AKARI_CE_NAME(InterlockedTestExchange);
 
 /* ms885672 "InterlockedExchangePointer": PVOID
  * InterlockedExchangePointer(PVOID* Target, PVOID Value). */
-PVOID InterlockedExchangePointer(PVOID *Target, PVOID Value);
+AKARI_CE_IMPORT PVOID InterlockedExchangePointer(PVOID *Target, PVOID Value) AKARI_CE_NAME(InterlockedExchangePointer);
 
 /* ms885668 "InterlockedCompareExchangePointer": PVOID
  * InterlockedCompareExchangePointer(PVOID* Destination, PVOID
  * ExChange, PVOID Comperand). */
-PVOID InterlockedCompareExchangePointer(PVOID *Destination,
+AKARI_CE_IMPORT PVOID InterlockedCompareExchangePointer(PVOID *Destination,
                                         PVOID ExChange,
-                                        PVOID Comperand);
+                                        PVOID Comperand) AKARI_CE_NAME(InterlockedCompareExchangePointer);
 
 
 /* ------------------------------------------------------------------ */
@@ -987,7 +987,7 @@ typedef struct _MEMORYSTATUS {
  * Link Library: Lmem.lib (recorded row; the process-heap handle is
  * used by the heap functions below).  Returns a handle usable in
  * HeapAlloc/HeapReAlloc/HeapFree/HeapSize; not to be destroyed. */
-HANDLE GetProcessHeap(void);
+AKARI_CE_IMPORT HANDLE GetProcessHeap(void) AKARI_CE_NAME(GetProcessHeap);
 
 /* ms885656 "HeapCreate (Windows CE 5.0)":
  * HANDLE HeapCreate(DWORD, DWORD, DWORD).  CE 1.0+; Winbase.h;
@@ -996,14 +996,14 @@ HANDLE GetProcessHeap(void);
  * nongrowable).  Heap functions then allocate from the reserved
  * memory.  HEAP_SHARED_READONLY requires kernel mode; the flag is
  * otherwise documented per page. */
-HANDLE HeapCreate(DWORD flOptions, DWORD dwInitialSize,
-                  DWORD dwMaximumSize);
+AKARI_CE_IMPORT HANDLE HeapCreate(DWORD flOptions, DWORD dwInitialSize,
+                  DWORD dwMaximumSize) AKARI_CE_NAME(HeapCreate);
 
 /* ms885657 "HeapDestroy (Windows CE 5.0)":
  * BOOL HeapDestroy(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
  * Destroys a heap created by HeapCreate (not the process heap) and
  * frees its committed memory. */
-BOOL HeapDestroy(HANDLE hHeap);
+AKARI_CE_IMPORT BOOL HeapDestroy(HANDLE hHeap) AKARI_CE_NAME(HeapDestroy);
 
 /* ms885654 "HeapAlloc (Windows CE 5.0)":
  * LPVOID HeapAlloc(HANDLE, DWORD, DWORD).  CE 1.0+; Winbase.h;
@@ -1012,37 +1012,37 @@ BOOL HeapDestroy(HANDLE hHeap);
  * ignored (heaps are always serialized); HEAP_ZERO_MEMORY zero
  * initializes.  NULL indicates failure and no extended error is
  * recorded. */
-LPVOID HeapAlloc(HANDLE hHeap, DWORD dwFlags, DWORD dwBytes);
+AKARI_CE_IMPORT LPVOID HeapAlloc(HANDLE hHeap, DWORD dwFlags, DWORD dwBytes) AKARI_CE_NAME(HeapAlloc);
 
 /* ms885659 "HeapFree (Windows CE 5.0)":
  * BOOL HeapFree(HANDLE, DWORD, LPVOID).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Frees a block allocated by HeapAlloc/HeapReAlloc. */
-BOOL HeapFree(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem);
+AKARI_CE_IMPORT BOOL HeapFree(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem) AKARI_CE_NAME(HeapFree);
 
 /* ms885661 "HeapReAlloc (Windows CE 5.0)":
  * LPVOID HeapReAlloc(HANDLE, DWORD, LPVOID, DWORD).  CE 1.0+;
  * Winbase.h; Coredll.lib.  Reallocates a non-movable heap block;
  * HEAP_NO_SERIALIZE is ignored on CE. */
-LPVOID HeapReAlloc(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem,
-                   DWORD dwBytes);
+AKARI_CE_IMPORT LPVOID HeapReAlloc(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem,
+                   DWORD dwBytes) AKARI_CE_NAME(HeapReAlloc);
 
 /* ms885662 "HeapSize (Windows CE 5.0)":
  * DWORD HeapSize(HANDLE, DWORD, LPCVOID).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Returns the actual size in bytes of an allocated
  * heap block (>= the requested size). */
-DWORD HeapSize(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem);
+AKARI_CE_IMPORT DWORD HeapSize(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem) AKARI_CE_NAME(HeapSize);
 
 /* ms885663 "HeapValidate (Windows CE 5.0)":
  * BOOL HeapValidate(HANDLE, DWORD, LPCVOID).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Validates the heap control structures (whole heap
  * when lpMem is NULL, otherwise the single block). */
-BOOL HeapValidate(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem);
+AKARI_CE_IMPORT BOOL HeapValidate(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem) AKARI_CE_NAME(HeapValidate);
 
 /* ms885655 "HeapCompact (Windows CE 5.0)":
  * UINT HeapCompact(HANDLE, DWORD).  CE 5.0 and later; Winbase.h;
  * Coredll.lib.  Coalesces adjacent free blocks and decommits large
  * free blocks; returns the largest committed free block size. */
-UINT HeapCompact(HANDLE hHeap, DWORD dwFlags);
+AKARI_CE_IMPORT UINT HeapCompact(HANDLE hHeap, DWORD dwFlags) AKARI_CE_NAME(HeapCompact);
 
 /* Local-heap completion (CE: local heap = process heap). */
 
@@ -1050,35 +1050,35 @@ UINT HeapCompact(HANDLE hHeap, DWORD dwFlags);
  * HLOCAL LocalReAlloc(HLOCAL, UINT, UINT).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Changes the size of a local memory object (see
  * LocalAlloc/LocalFree above). */
-HLOCAL LocalReAlloc(HLOCAL hMem, UINT uBytes, UINT fuFlags);
+AKARI_CE_IMPORT HLOCAL LocalReAlloc(HLOCAL hMem, UINT uBytes, UINT fuFlags) AKARI_CE_NAME(LocalReAlloc);
 
 /* ms886743 "LocalSize (Windows CE 5.0)":
  * UINT LocalSize(HLOCAL).  CE 1.0+; Winbase.h; Coredll.lib.  Returns
  * the current size in bytes of a local memory object. */
-UINT LocalSize(HLOCAL hMem);
+AKARI_CE_IMPORT UINT LocalSize(HLOCAL hMem) AKARI_CE_NAME(LocalSize);
 
 /* ms885649 "GlobalMemoryStatus (Windows CE 5.0)":
  * VOID GlobalMemoryStatus(LPMEMORYSTATUS).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Fills a MEMORYSTATUS with current memory
  * availability; the caller sets dwLength to sizeof(MEMORYSTATUS)
  * first. */
-VOID GlobalMemoryStatus(LPMEMORYSTATUS lpBuffer);
+AKARI_CE_IMPORT VOID GlobalMemoryStatus(LPMEMORYSTATUS lpBuffer) AKARI_CE_NAME(GlobalMemoryStatus);
 
 /* Memory-integrity probes (use is discouraged by the pages
  * themselves: "unsafe to use when checking your input parameters"). */
 
 /* ms885687 "IsBadCodePtr (Windows CE 5.0)":
  * BOOL IsBadCodePtr(FARPROC).  CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL IsBadCodePtr(FARPROC lpfn);
+AKARI_CE_IMPORT BOOL IsBadCodePtr(FARPROC lpfn) AKARI_CE_NAME(IsBadCodePtr);
 
 /* ms885688 "IsBadReadPtr (Windows CE 5.0)":
  * BOOL IsBadReadPtr(const void*, UINT).  CE 1.0+; Winbase.h;
  * Coredll.lib.  A zero block size returns zero (valid). */
-BOOL IsBadReadPtr(const void *lp, UINT ucb);
+AKARI_CE_IMPORT BOOL IsBadReadPtr(const void *lp, UINT ucb) AKARI_CE_NAME(IsBadReadPtr);
 
 /* ms885689 "IsBadWritePtr (Windows CE 5.0)":
  * BOOL IsBadWritePtr(LPVOID, UINT).  CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL IsBadWritePtr(LPVOID lp, UINT ucb);
+AKARI_CE_IMPORT BOOL IsBadWritePtr(LPVOID lp, UINT ucb) AKARI_CE_NAME(IsBadWritePtr);
 
 /* MAXDWORD: 32-bit unsigned maximum; cited by the GetIdleTime page
  * (ms885626: "If GetIdleTime returns MAXDWORD, functionality is not
@@ -1110,52 +1110,52 @@ typedef struct _SYSTEMTIME {
 /* ms885628 "GetLocalTime (Windows CE 5.0)": fills lpSystemTime with
  * the current local date/time (time-zone and DST adjusted).  CE 1.0+;
  * Winbase.h; Coredll.lib. */
-void GetLocalTime(LPSYSTEMTIME lpSystemTime);
+AKARI_CE_IMPORT void GetLocalTime(LPSYSTEMTIME lpSystemTime) AKARI_CE_NAME(GetLocalTime);
 
 /* ms885640 "GetSystemTime (Windows CE 5.0)": fills lpSystemTime with
  * the current system date/time expressed in UTC.  CE 1.0+; Winbase.h;
  * Coredll.lib. */
-void GetSystemTime(LPSYSTEMTIME lpSystemTime);
+AKARI_CE_IMPORT void GetSystemTime(LPSYSTEMTIME lpSystemTime) AKARI_CE_NAME(GetSystemTime);
 
 /* ms886818 "SetLocalTime (Windows CE 5.0)": sets the current local
  * time/date; the caller needs the appropriate privilege.  wDayOfWeek
  * is ignored; nonzero success / zero failure (GetLastError).  CE
  * 1.0+; Winbase.h; Coredll.lib. */
-BOOL SetLocalTime(const SYSTEMTIME *lpSystemTime);
+AKARI_CE_IMPORT BOOL SetLocalTime(const SYSTEMTIME *lpSystemTime) AKARI_CE_NAME(SetLocalTime);
 
 /* aa450867 "SetSystemTime (Windows CE 5.0)": sets the current system
  * time/date in UTC; nonzero success / zero failure (GetLastError).
  * CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL SetSystemTime(const SYSTEMTIME *lpSystemTime);
+AKARI_CE_IMPORT BOOL SetSystemTime(const SYSTEMTIME *lpSystemTime) AKARI_CE_NAME(SetSystemTime);
 
 /* ms885589 "FileTimeToLocalFileTime (Windows CE 5.0)": converts a
  * UTC file time to a local file time using current time-zone and DST
  * settings; lpLocalFileTime must not alias lpFileTime.  Nonzero
  * success / zero failure (GetLastError).  CE 1.0+; Winbase.h;
  * Coredll.lib. */
-BOOL FileTimeToLocalFileTime(const FILETIME *lpFileTime,
-                             LPFILETIME lpLocalFileTime);
+AKARI_CE_IMPORT BOOL FileTimeToLocalFileTime(const FILETIME *lpFileTime,
+                             LPFILETIME lpLocalFileTime) AKARI_CE_NAME(FileTimeToLocalFileTime);
 
 /* ms886740 "LocalFileTimeToFileTime (Windows CE 5.0)": converts a
  * local file time to a UTC file time; lpFileTime must not alias
  * lpLocalFileTime.  Nonzero success / zero failure (GetLastError).
  * CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL LocalFileTimeToFileTime(const FILETIME *lpLocalFileTime,
-                             LPFILETIME lpFileTime);
+AKARI_CE_IMPORT BOOL LocalFileTimeToFileTime(const FILETIME *lpLocalFileTime,
+                             LPFILETIME lpFileTime) AKARI_CE_NAME(LocalFileTimeToFileTime);
 
 /* ms885593 "FileTimeToSystemTime (Windows CE 5.0)": converts a 64-bit
  * file time to SYSTEMTIME; only valid for FILETIME values below
  * 0x8000000000000000 (larger values fail).  Nonzero success / zero
  * failure (GetLastError).  CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL FileTimeToSystemTime(const FILETIME *lpFileTime,
-                          LPSYSTEMTIME lpSystemTime);
+AKARI_CE_IMPORT BOOL FileTimeToSystemTime(const FILETIME *lpFileTime,
+                          LPSYSTEMTIME lpSystemTime) AKARI_CE_NAME(FileTimeToSystemTime);
 
 /* aa450925 "SystemTimeToFileTime (Windows CE 5.0)": converts a
  * SYSTEMTIME to a 64-bit file time; the wDayOfWeek member is ignored.
  * Nonzero success / zero failure (GetLastError).  CE 1.0+; Winbase.h;
  * Coredll.lib. */
-BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,
-                          LPFILETIME lpFileTime);
+AKARI_CE_IMPORT BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,
+                          LPFILETIME lpFileTime) AKARI_CE_NAME(SystemTimeToFileTime);
 
 /* ------------------------------------------------------------------ */
 /* Time: tick/counter, file times, time-zone notes (M10)              */
@@ -1164,7 +1164,7 @@ BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,
 /* ms885645 "GetTickCount (Windows CE 5.0)":
  * DWORD GetTickCount(void).  CE 1.0+; Winbase.h; Coredll.lib.
  * Returns the number of milliseconds since the system started. */
-DWORD GetTickCount(void);
+AKARI_CE_IMPORT DWORD GetTickCount(void) AKARI_CE_NAME(GetTickCount);
 
 /* ms885625 "GetFileTime (Windows CE 5.0)":
  * BOOL GetFileTime(HANDLE, LPFILETIME, LPFILETIME, LPFILETIME).
@@ -1172,9 +1172,9 @@ DWORD GetTickCount(void);
  * access and last write times of a file (handle opened with
  * GENERIC_READ).  Any of the three pointers may be NULL when that
  * time is not needed. */
-BOOL GetFileTime(HANDLE hFile, LPFILETIME lpCreationTime,
+AKARI_CE_IMPORT BOOL GetFileTime(HANDLE hFile, LPFILETIME lpCreationTime,
                  LPFILETIME lpLastAccessTime,
-                 LPFILETIME lpLastWriteTime);
+                 LPFILETIME lpLastWriteTime) AKARI_CE_NAME(GetFileTime);
 
 /* ms886812 "SetFileTime (Windows CE 5.0)":
  * BOOL SetFileTime(HANDLE, const FILETIME*, const FILETIME*, const
@@ -1182,50 +1182,50 @@ BOOL GetFileTime(HANDLE hFile, LPFILETIME lpCreationTime,
  * last access and last write times of a file (handle opened with
  * GENERIC_WRITE); NULL pointers leave the corresponding time
  * unchanged. */
-BOOL SetFileTime(HANDLE hFile, const FILETIME *lpCreationTime,
+AKARI_CE_IMPORT BOOL SetFileTime(HANDLE hFile, const FILETIME *lpCreationTime,
                  const FILETIME *lpLastAccessTime,
-                 const FILETIME *lpLastWriteTime);
+                 const FILETIME *lpLastWriteTime) AKARI_CE_NAME(SetFileTime);
 
 /* ms885172 "CompareFileTime (Windows CE 5.0)":
  * LONG CompareFileTime(const FILETIME*, const FILETIME*).  CE 1.0+;
  * Header Windows.h per page; Coredll.lib.  Returns -1 when the first
  * time is earlier, 0 when equal, +1 when later. */
-LONG CompareFileTime(const FILETIME *lpFileTime1,
-                     const FILETIME *lpFileTime2);
+AKARI_CE_IMPORT LONG CompareFileTime(const FILETIME *lpFileTime1,
+                     const FILETIME *lpFileTime2) AKARI_CE_NAME(CompareFileTime);
 
 /* aa451027 "GetCurrentFT (Windows CE 5.0)":
  * void GetCurrentFT(LPFILETIME).  CE 3.0+; Winbase.h; Coredll.lib.
  * Fills the FILETIME with the current system date and time. */
-void GetCurrentFT(LPFILETIME lpFileTime);
+AKARI_CE_IMPORT void GetCurrentFT(LPFILETIME lpFileTime) AKARI_CE_NAME(GetCurrentFT);
 
 /* ms885626 "GetIdleTime (Windows CE 5.0)":
  * DWORD GetIdleTime(void).  CE 3.0+; Winbase.h; Coredll.lib.
  * Returns the number of milliseconds the system has been idle;
  * MAXDWORD means the feature is not supported. */
-DWORD GetIdleTime(void);
+AKARI_CE_IMPORT DWORD GetIdleTime(void) AKARI_CE_NAME(GetIdleTime);
 
 /* ms886791 "Random (Windows CE 5.0)":
  * DWORD Random(void).  CE 1.0+; Winbase.h; Coredll.lib.  Returns a
  * randomly generated DWORD. */
-DWORD Random(void);
+AKARI_CE_IMPORT DWORD Random(void) AKARI_CE_NAME(Random);
 
 /* ms886808 "SetDaylightTime (Windows CE 5.0)":
  * void SetDaylightTime(DWORD).  CE 2.0+; Winbase.h; Coredll.lib.
  * Informs the system whether daylight saving time is in effect:
  * dst 1 = DST in effect, dst 0 = standard time. */
-void SetDaylightTime(DWORD dst);
+AKARI_CE_IMPORT void SetDaylightTime(DWORD dst) AKARI_CE_NAME(SetDaylightTime);
 
 /* ms886788 "QueryPerformanceCounter (Windows CE 5.0)":
  * BOOL QueryPerformanceCounter(LARGE_INTEGER*).  CE 2.0+; Winbase.h;
  * Coredll.lib.  Fills the value with the current high-resolution
  * performance counter (in counts). */
-BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount);
+AKARI_CE_IMPORT BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount) AKARI_CE_NAME(QueryPerformanceCounter);
 
 /* ms886789 "QueryPerformanceFrequency (Windows CE 5.0)":
  * BOOL QueryPerformanceFrequency(LARGE_INTEGER*).  CE 2.0+;
  * Winbase.h; Coredll.lib.  Fills the value with the performance
  * counter frequency, in counts per second. */
-BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency);
+AKARI_CE_IMPORT BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency) AKARI_CE_NAME(QueryPerformanceFrequency);
 
 /* ------------------------------------------------------------------ */
 /* System information (M11): GetSystemInfo, GetVersionEx, version     */
@@ -1278,7 +1278,7 @@ typedef struct _SYSTEM_INFO {
 /* ms885638 "GetSystemInfo (Windows CE 5.0)":
  * VOID GetSystemInfo(LPSYSTEM_INFO).  CE 1.0+; Winbase.h; Coredll.lib.
  * Fills lpSystemInfo; CeGetSystemInfo is the RAPI equivalent. */
-VOID GetSystemInfo(LPSYSTEM_INFO lpSystemInfo);
+AKARI_CE_IMPORT VOID GetSystemInfo(LPSYSTEM_INFO lpSystemInfo) AKARI_CE_NAME(GetSystemInfo);
 
 /* ms886768 "OSVERSIONINFO (Windows CE 5.0)": OS version report filled
  * by GetVersionEx.  CE 1.0+; Winbase.h.  The page typedefs only
@@ -1307,14 +1307,14 @@ typedef struct _OSVERSIONINFO {
  * BOOL GetVersionEx(LPOSVERSIONINFO).  CE 1.0+; Winbase.h; Coredll.lib.
  * Fills the OSVERSIONINFO the caller sized up front; failure (e.g.
  * bad dwOSVersionInfoSize) sets the last error. */
-BOOL GetVersionEx(LPOSVERSIONINFO lpVersionInformation);
+AKARI_CE_IMPORT BOOL GetVersionEx(LPOSVERSIONINFO lpVersionInformation) AKARI_CE_NAME(GetVersionEx);
 
 /* aa450898 "SignalStarted (Windows CE 5.0)":
  * VOID SignalStarted(DWORD).  CE 2.10+; Winbase.h; Coredll.lib.
  * Called by applications the kernel starts via HKEY_LOCAL_MACHINE\
  * \Init once initialization is complete; dw is the sequence number
  * passed on the command line. */
-VOID SignalStarted(DWORD dw);
+AKARI_CE_IMPORT VOID SignalStarted(DWORD dw) AKARI_CE_NAME(SignalStarted);
 
 /* ------------------------------------------------------------------ */
 /* M12: virtual memory, time zone, per-process/thread/DLL times       */
@@ -1356,56 +1356,56 @@ VOID SignalStarted(DWORD dw);
  * Winbase.h; Coredll.lib.  Reserves/commits pages; dwSize 0 is an
  * error; NULL address lets the system choose; regions reserved by
  * VirtualAlloc must be released whole via VirtualFree MEM_RELEASE. */
-LPVOID VirtualAlloc(LPVOID lpAddress, DWORD dwSize,
-                    DWORD flAllocationType, DWORD flProtect);
+AKARI_CE_IMPORT LPVOID VirtualAlloc(LPVOID lpAddress, DWORD dwSize,
+                    DWORD flAllocationType, DWORD flProtect) AKARI_CE_NAME(VirtualAlloc);
 
 /* aa450979 "VirtualFree (Windows CE 5.0)":
  * BOOL VirtualFree(LPVOID, DWORD, DWORD).  CE 1.0+; Winbase.h;
  * Coredll.lib.  Decommits (MEM_DECOMMIT) or releases (MEM_RELEASE,
  * dwSize must be 0). */
-BOOL VirtualFree(LPVOID lpAddress, DWORD dwSize, DWORD dwFreeType);
+AKARI_CE_IMPORT BOOL VirtualFree(LPVOID lpAddress, DWORD dwSize, DWORD dwFreeType) AKARI_CE_NAME(VirtualFree);
 
 /* aa450980 "VirtualProtect (Windows CE 5.0)":
  * BOOL VirtualProtect(LPVOID, DWORD, DWORD, PDWORD).  CE 1.0+;
  * Winbase.h; Coredll.lib.  Changes protection on committed pages;
  * pages must come from one VirtualAlloc region. */
-BOOL VirtualProtect(LPVOID lpAddress, DWORD dwSize, DWORD flNewProtect,
-                    PDWORD lpflOldProtect);
+AKARI_CE_IMPORT BOOL VirtualProtect(LPVOID lpAddress, DWORD dwSize, DWORD flNewProtect,
+                    PDWORD lpflOldProtect) AKARI_CE_NAME(VirtualProtect);
 
 /* aa450981 "VirtualQuery (Windows CE 5.0)":
  * DWORD VirtualQuery(LPCVOID, PMEMORY_BASIC_INFORMATION, DWORD).
  * CE 1.0+; Winbase.h; Coredll.lib.  Fills the buffer for the range
  * starting at lpAddress; returns bytes written (0 = failure). */
-DWORD VirtualQuery(LPCVOID lpAddress,
+AKARI_CE_IMPORT DWORD VirtualQuery(LPCVOID lpAddress,
                    PMEMORY_BASIC_INFORMATION lpBuffer,
-                   DWORD dwLength);
+                   DWORD dwLength) AKARI_CE_NAME(VirtualQuery);
 
 /* ms885595 "FlushInstructionCache (Windows CE 5.0)":
  * BOOL FlushInstructionCache(HANDLE, LPCVOID, DWORD).  CE 2.0+;
  * Winbase.h; Coredll.lib.  Flushes the instruction cache for the
  * specified process (see also the process-and-thread book). */
-BOOL FlushInstructionCache(HANDLE hProcess, LPCVOID lpBaseAddress,
-                           DWORD dwSize);
+AKARI_CE_IMPORT BOOL FlushInstructionCache(HANDLE hProcess, LPCVOID lpBaseAddress,
+                           DWORD dwSize) AKARI_CE_NAME(FlushInstructionCache);
 
 /* ms885636 "GetProcessVersion (Windows CE 5.0)":
  * DWORD GetProcessVersion(DWORD).  CE 3.0+; Winbase.h; Coredll.lib.
  * Version of the system the process expects to run on: high word
  * major, low word minor; 0 + GetLastError on failure. */
-DWORD GetProcessVersion(DWORD ProcessId);
+AKARI_CE_IMPORT DWORD GetProcessVersion(DWORD ProcessId) AKARI_CE_NAME(GetProcessVersion);
 
 /* ms885617 "GetDllVersion (Windows CE 5.0)":
  * DWORD GetDllVersion(HMODULE).  CE 5.0 and later; Winbase.h;
  * Coredll.lib.  Version of the system the DLL expects to run on
  * (high word major, low word minor); 0 + GetLastError on failure. */
-DWORD GetDllVersion(HMODULE hMod);
+AKARI_CE_IMPORT DWORD GetDllVersion(HMODULE hMod) AKARI_CE_NAME(GetDllVersion);
 
 /* ms885644 "GetThreadTimes (Windows CE 5.0)":
  * BOOL GetThreadTimes(HANDLE, LPFILETIME, LPFILETIME, LPFILETIME,
  * LPFILETIME).  CE 2.10+; Winbase.h; Coredll.lib.  Creation, exit,
  * kernel and user time of a thread (FILETIME = 100 ns units). */
-BOOL GetThreadTimes(HANDLE hThread, LPFILETIME lpCreationTime,
+AKARI_CE_IMPORT BOOL GetThreadTimes(HANDLE hThread, LPFILETIME lpCreationTime,
                     LPFILETIME lpExitTime, LPFILETIME lpKernelTime,
-                    LPFILETIME lpUserTime);
+                    LPFILETIME lpUserTime) AKARI_CE_NAME(GetThreadTimes);
 
 /* aa450943 "TIME_ZONE_INFORMATION (Windows CE 5.0)": time-zone
  * parameters used by Get/SetTimeZoneInformation.  CE 1.0+;
@@ -1434,16 +1434,16 @@ typedef struct _TIME_ZONE_INFORMATION {
  * DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION).  CE 1.0+;
  * Winbase.h; Coredll.lib.  Returns TIME_ZONE_ID_* (UTC = local +
  * Bias, Bias in minutes). */
-DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION
-                             lpTimeZoneInformation);
+AKARI_CE_IMPORT DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION
+                             lpTimeZoneInformation) AKARI_CE_NAME(GetTimeZoneInformation);
 
 /* aa450893 "SetTimeZoneInformation (Windows CE 5.0)":
  * BOOL SetTimeZoneInformation(const TIME_ZONE_INFORMATION*).
  * CE 1.0+; Winbase.h; Coredll.lib.  Sets the current time-zone
  * parameters; page notes the data is not persisted to the registry
  * (RegFlushKey(HKEY_LOCAL_MACHINE) persists it). */
-BOOL SetTimeZoneInformation(
-    const TIME_ZONE_INFORMATION *lpTimeZoneInformation);
+AKARI_CE_IMPORT BOOL SetTimeZoneInformation(
+    const TIME_ZONE_INFORMATION *lpTimeZoneInformation) AKARI_CE_NAME(SetTimeZoneInformation);
 
 /* ------------------------------------------------------------------ */
 /* M14: fibers (CE .NET 4.0+; Coredll.lib)                            */
@@ -1461,29 +1461,29 @@ typedef PFIBER_START_ROUTINE LPFIBER_START_ROUTINE;
 /* ms885178 "CreateFiber (Windows CE 5.0)": allocates a fiber object,
  * assigns a stack and sets execution to start at the callback; does
  * not schedule the fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
-LPVOID CreateFiber(DWORD dwStackSize,
+AKARI_CE_IMPORT LPVOID CreateFiber(DWORD dwStackSize,
                    LPFIBER_START_ROUTINE lpStartAddress,
-                   LPVOID lpParameter);
+                   LPVOID lpParameter) AKARI_CE_NAME(CreateFiber);
 
 /* ms885176 "ConvertThreadToFiber (Windows CE 5.0)": converts the
  * calling thread into a fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
-LPVOID ConvertThreadToFiber(LPVOID lpParameter);
+AKARI_CE_IMPORT LPVOID ConvertThreadToFiber(LPVOID lpParameter) AKARI_CE_NAME(ConvertThreadToFiber);
 
 /* ms885197 "DeleteFiber (Windows CE 5.0)": deletes a fiber.
  * CE .NET 4.0+; Winbase.h; Coredll.lib. */
-VOID DeleteFiber(LPVOID lpFiber);
+AKARI_CE_IMPORT VOID DeleteFiber(LPVOID lpFiber) AKARI_CE_NAME(DeleteFiber);
 
 /* ms885611 "GetCurrentFiber (Windows CE 5.0)": address of the current
  * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
-LPVOID GetCurrentFiber(void);
+AKARI_CE_IMPORT LPVOID GetCurrentFiber(void) AKARI_CE_NAME(GetCurrentFiber);
 
 /* ms885624 "GetFiberData (Windows CE 5.0)": fiber data of the current
  * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
-LPVOID GetFiberData(void);
+AKARI_CE_IMPORT LPVOID GetFiberData(void) AKARI_CE_NAME(GetFiberData);
 
 /* aa450915 "SwitchToFiber (Windows CE 5.0)": schedules the given
  * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
-VOID SwitchToFiber(LPVOID lpFiber);
+AKARI_CE_IMPORT VOID SwitchToFiber(LPVOID lpFiber) AKARI_CE_NAME(SwitchToFiber);
 
 /* ------------------------------------------------------------------ */
 /* M17: file I/O continuation (File I/O Reference pages)               */
@@ -1502,20 +1502,20 @@ VOID SwitchToFiber(LPVOID lpFiber);
  * HANDLE FindFirstChangeNotification(LPCTSTR, BOOL, DWORD).
  * CE .NET 4.0+; Winbase.h; Coredll.lib.  Creates a change-notification
  * handle for a directory tree; INVALID_HANDLE_VALUE on failure. */
-HANDLE FindFirstChangeNotificationW(LPCTSTR lpPathName,
+AKARI_CE_IMPORT HANDLE FindFirstChangeNotificationW(LPCTSTR lpPathName,
                                       BOOL bWatchSubtree,
-                                      DWORD dwNotifyFilter);
+                                      DWORD dwNotifyFilter) AKARI_CE_NAME(FindFirstChangeNotificationW);
 #define FindFirstChangeNotification FindFirstChangeNotificationW
 
 /* ms889784 "FindNextChangeNotification (Windows CE 5.0)":
  * BOOL FindNextChangeNotification(HANDLE).  CE .NET 4.0+; Winbase.h;
  * Coredll.lib.  Re-arms the notification handle. */
-BOOL FindNextChangeNotification(HANDLE hChangeHandle);
+AKARI_CE_IMPORT BOOL FindNextChangeNotification(HANDLE hChangeHandle) AKARI_CE_NAME(FindNextChangeNotification);
 
 /* ms889625 "FindCloseChangeNotification (Windows CE 5.0)":
  * BOOL FindCloseChangeNotification(HANDLE).  CE .NET 4.0+; Winbase.h;
  * Coredll.lib.  Stops directory change monitoring. */
-BOOL FindCloseChangeNotification(HANDLE hChangeHandle);
+AKARI_CE_IMPORT BOOL FindCloseChangeNotification(HANDLE hChangeHandle) AKARI_CE_NAME(FindCloseChangeNotification);
 
 /* Search/enumeration level types used by the Ex file-search APIs.
  * The pages print the C enums verbatim: FINDEX_INFO_LEVELS
@@ -1575,44 +1575,44 @@ typedef struct _BY_HANDLE_FILE_INFORMATION {
  * Coredll.lib.  Extended search; lpFindFileData receives the level's
  * data (for FindExInfoStandard the pages use FindFirstFile/WIN32_
  * FIND_DATAW); INVALID_HANDLE_VALUE on failure. */
-HANDLE FindFirstFileExW(LPCTSTR lpFileName,
+AKARI_CE_IMPORT HANDLE FindFirstFileExW(LPCTSTR lpFileName,
                           FINDEX_INFO_LEVELS fInfoLevelId,
                           LPVOID lpFindFileData,
                           FINDEX_SEARCH_OPS fSearchOp,
                           LPVOID lpSearchFilter,
-                          DWORD dwAdditionalFlags);
+                          DWORD dwAdditionalFlags) AKARI_CE_NAME(FindFirstFileExW);
 #define FindFirstFileEx FindFirstFileExW
 
 /* ms890909 "GetFileAttributesEx (Windows CE 5.0)":
  * BOOL GetFileAttributesEx(LPCTSTR, GET_FILEEX_INFO_LEVELS, LPVOID).
  * CE 3.0+; Winbase.h; Coredll.lib.  Fills WIN32_FILE_ATTRIBUTE_DATA
  * at the level GetFileExInfoStandard. */
-BOOL GetFileAttributesExW(LPCTSTR lpFileName,
+AKARI_CE_IMPORT BOOL GetFileAttributesExW(LPCTSTR lpFileName,
                            GET_FILEEX_INFO_LEVELS fInfoLevelId,
-                           LPVOID lpFileInformation);
+                           LPVOID lpFileInformation) AKARI_CE_NAME(GetFileAttributesExW);
 #define GetFileAttributesEx GetFileAttributesExW
 
 /* ms890887 "GetDiskFreeSpaceEx (Windows CE 5.0)":
  * BOOL GetDiskFreeSpaceEx(LPCWSTR, PULARGE_INTEGER, PULARGE_INTEGER,
  * PULARGE_INTEGER).  CE 2.0+; Winbase.h; Coredll.lib.  Free/total
  * bytes on the volume; any of the three out pointers may be NULL. */
-BOOL GetDiskFreeSpaceExW(LPCWSTR lpDirectoryName,
+AKARI_CE_IMPORT BOOL GetDiskFreeSpaceExW(LPCWSTR lpDirectoryName,
                           PULARGE_INTEGER lpFreeBytesAvailableToCaller,
                           PULARGE_INTEGER lpTotalNumberOfBytes,
-                          PULARGE_INTEGER lpTotalNumberOfFreeBytes);
+                          PULARGE_INTEGER lpTotalNumberOfFreeBytes) AKARI_CE_NAME(GetDiskFreeSpaceExW);
 #define GetDiskFreeSpaceEx GetDiskFreeSpaceExW
 
 /* ms890926 "GetFileInformationByHandle (Windows CE 5.0)":
  * BOOL GetFileInformationByHandle(HANDLE, LPBY_HANDLE_FILE_
  * INFORMATION).  CE 1.0+; Winbase.h; Coredll.lib. */
-BOOL GetFileInformationByHandle(
-    HANDLE hFile, LPBY_HANDLE_FILE_INFORMATION lpFileInformation);
+AKARI_CE_IMPORT BOOL GetFileInformationByHandle(
+    HANDLE hFile, LPBY_HANDLE_FILE_INFORMATION lpFileInformation) AKARI_CE_NAME(GetFileInformationByHandle);
 
 /* ms891189 "GetTempPath (Windows CE 5.0)":
  * DWORD GetTempPath(DWORD, LPTSTR).  CE 2.11+; Winbase.h; Coredll.lib.
  * Path of the directory designated for temporary files; returns the
  * length written (0 = failure). */
-DWORD GetTempPathW(DWORD ccBuffer, LPTSTR lpszBuffer);
+AKARI_CE_IMPORT DWORD GetTempPathW(DWORD ccBuffer, LPTSTR lpszBuffer) AKARI_CE_NAME(GetTempPathW);
 #define GetTempPath GetTempPathW
 
 /* ms891186 "GetTempFileName (Windows CE 5.0)":
@@ -1620,8 +1620,8 @@ DWORD GetTempPathW(DWORD ccBuffer, LPTSTR lpszBuffer);
  * Winbase.h; Coredll.lib.  Builds a temporary-file name from path +
  * prefix + unique number (uUnique 0 lets the system choose).  CE note:
  * temp files are not deleted automatically on power-down. */
-UINT GetTempFileNameW(LPCTSTR lpPathName, LPCTSTR lpPrefixString,
-                       UINT uUnique, LPTSTR lpTempFileName);
+AKARI_CE_IMPORT UINT GetTempFileNameW(LPCTSTR lpPathName, LPCTSTR lpPrefixString,
+                       UINT uUnique, LPTSTR lpTempFileName) AKARI_CE_NAME(GetTempFileNameW);
 #define GetTempFileName GetTempFileNameW
 
 /* Region-lock flags (LockFileEx ms891385 names LOCKFILE_EXCLUSIVE_LOCK
@@ -1633,18 +1633,18 @@ UINT GetTempFileNameW(LPCTSTR lpPathName, LPCTSTR lpPrefixString,
  * BOOL LockFileEx(HANDLE, DWORD, DWORD, DWORD, DWORD, LPOVERLAPPED).
  * CE 5.0+; Winbase.h; Coredll.lib.  Locks a byte range (the LPOVERLAPPED
  * supplies the offset on CE as on desktop). */
-BOOL LockFileEx(HANDLE hFile, DWORD dwFlags, DWORD dwReserved,
+AKARI_CE_IMPORT BOOL LockFileEx(HANDLE hFile, DWORD dwFlags, DWORD dwReserved,
                 DWORD nNumberOfBytesToLockLow,
                 DWORD nNumberOfBytesToLockHigh,
-                LPOVERLAPPED lpOverlapped);
+                LPOVERLAPPED lpOverlapped) AKARI_CE_NAME(LockFileEx);
 
 /* ms892364 "UnlockFileEx (Windows CE 5.0)":
  * BOOL UnlockFileEx(HANDLE, DWORD, DWORD, DWORD, LPOVERLAPPED).
  * CE 5.0+; Winbase.h; Coredll.lib. */
-BOOL UnlockFileEx(HANDLE hFile, DWORD dwReserved,
+AKARI_CE_IMPORT BOOL UnlockFileEx(HANDLE hFile, DWORD dwReserved,
                   DWORD nNumberOfBytesToLockLow,
                   DWORD nNumberOfBytesToLockHigh,
-                  LPOVERLAPPED lpOverlapped);
+                  LPOVERLAPPED lpOverlapped) AKARI_CE_NAME(UnlockFileEx);
 
 /* ms887981 "DeleteAndRenameFile (Windows CE 5.0)":
  * BOOL DeleteAndRenameFile(LPCWSTR, LPCWSTR).  CE 1.01+; Winbase.h;
@@ -1663,10 +1663,10 @@ BOOL DeleteAndRenameFileW(LPCWSTR lpszDestFile, LPCWSTR lpszSourceFile);
  * Winbase.h; Coredll.lib.  Copies the file's version information into
  * the lpData buffer; the page notes it is truncated when the buffer
  * is too small.  The documented signature is reproduced as-is. */
-DWORD GetFileVersionInfoSizeW(LPTSTR lptstrFilename, LPDWORD lpdwHandle);
+AKARI_CE_IMPORT DWORD GetFileVersionInfoSizeW(LPTSTR lptstrFilename, LPDWORD lpdwHandle) AKARI_CE_NAME(GetFileVersionInfoSizeW);
 #define GetFileVersionInfoSize GetFileVersionInfoSizeW
-BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
-                         DWORD dwLen, LPVOID lpData);
+AKARI_CE_IMPORT BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
+                         DWORD dwLen, LPVOID lpData) AKARI_CE_NAME(GetFileVersionInfoW);
 #define GetFileVersionInfo GetFileVersionInfoW
 
 /* ------------------------------------------------------------------ */
@@ -1686,13 +1686,13 @@ typedef struct STORE_INFORMATION {
  * function ("use GetDiskFreeSpaceEx instead") and notes it reports
  * 44 KB less than really available (reserved for high-priority
  * system operations). */
-BOOL GetStoreInformation(LPSTORE_INFORMATION lpsi);
+AKARI_CE_IMPORT BOOL GetStoreInformation(LPSTORE_INFORMATION lpsi) AKARI_CE_NAME(GetStoreInformation);
 
 /* aa517140 "CeGenRandom (Windows CE 5.0)":
  * BOOL CeGenRandom(DWORD, BYTE*).  CE .NET 4.1+; Winbase.h;
  * Coredll.lib.  Fills the buffer with random bytes; the caller may
  * seed by pre-filling the buffer. */
-BOOL CeGenRandom(DWORD dwLen, BYTE *pbBuffer);
+AKARI_CE_IMPORT BOOL CeGenRandom(DWORD dwLen, BYTE *pbBuffer) AKARI_CE_NAME(CeGenRandom);
 
 /* aa517144 "CeGetCanonicalPathName (Windows CE 5.0)":
  * DWORD CeGetCanonicalPathName(LPCWSTR, LPWSTR, DWORD, DWORD).
@@ -1700,10 +1700,10 @@ BOOL CeGenRandom(DWORD dwLen, BYTE *pbBuffer);
  * canonical form of the path (0 + ERROR_INVALID_PARAMETER for NULL
  * input, ERROR_INSUFFICIENT_BUFFER when the output buffer is small);
  * the canonical string is written when the buffer is non-NULL. */
-DWORD CeGetCanonicalPathName(LPCWSTR lpPathName,
+AKARI_CE_IMPORT DWORD CeGetCanonicalPathName(LPCWSTR lpPathName,
                              LPWSTR lpCanonicalPathName,
                              DWORD cchCanonicalPathName,
-                             DWORD dwReserved);
+                             DWORD dwReserved) AKARI_CE_NAME(CeGetCanonicalPathName);
 
 /* aa517158 "CeGetFileNotificationInfo (Windows CE 5.0)":
  * BOOL CeGetFileNotificationInfo(HANDLE, DWORD, LPVOID, DWORD,
@@ -1712,10 +1712,10 @@ DWORD CeGetCanonicalPathName(LPCWSTR lpPathName,
  * handle into a FILE_NOTIFY_INFORMATION record.  NULL buffer + 0
  * length returns the available size; ERROR_MORE_DATA when more
  * records exist; ERROR_INSUFFICIENT_BUFFER when they do not fit. */
-BOOL CeGetFileNotificationInfo(HANDLE h, DWORD dwFlags, LPVOID lpBuffer,
+AKARI_CE_IMPORT BOOL CeGetFileNotificationInfo(HANDLE h, DWORD dwFlags, LPVOID lpBuffer,
                                DWORD nBufferLength,
                                LPDWORD lpBytesReturned,
-                               LPDWORD lpBytesAvailable);
+                               LPDWORD lpBytesAvailable) AKARI_CE_NAME(CeGetFileNotificationInfo);
 
 /* ------------------------------------------------------------------ */
 /* M20b: DLL entry-point reasons + DisableThreadLibraryCalls (DLL    */
@@ -1738,7 +1738,7 @@ BOOL CeGetFileNotificationInfo(HANDLE h, DWORD dwFlags, LPVOID lpBuffer,
  * Coredll.lib.  Disables DLL_THREAD_ATTACH/DLL_THREAD_DETACH
  * notifications for the DLL; useful for multithreaded apps.  CE has no
  * static thread-local storage (page note), so any valid module works. */
-BOOL DisableThreadLibraryCalls(HMODULE hLibModule);
+AKARI_CE_IMPORT BOOL DisableThreadLibraryCalls(HMODULE hLibModule) AKARI_CE_NAME(DisableThreadLibraryCalls);
 
 /* ------------------------------------------------------------------ */
 /* M20: file mapping (File Mapping Reference pages).                  */
@@ -1763,12 +1763,12 @@ BOOL DisableThreadLibraryCalls(HMODULE hLibModule);
  * Coredll.lib.  CE-specific: creates/opens a file suitable for memory
  * mapping (recommended over CreateFile for that purpose).  W spelling
  * per the CE Unicode-only convention (page prints the base name). */
-HANDLE CreateFileForMappingW(LPCTSTR lpFileName, DWORD dwDesiredAccess,
+AKARI_CE_IMPORT HANDLE CreateFileForMappingW(LPCTSTR lpFileName, DWORD dwDesiredAccess,
                              DWORD dwShareMode,
                              LPSECURITY_ATTRIBUTES lpSecurityAttributes,
                              DWORD dwCreationDisposition,
                              DWORD dwFlagsAndAttributes,
-                             HANDLE hTemplateFile);
+                             HANDLE hTemplateFile) AKARI_CE_NAME(CreateFileForMappingW);
 #define CreateFileForMapping CreateFileForMappingW
 
 /* aa517331 "CreateFileMapping (Windows CE 5.0)":
@@ -1778,31 +1778,31 @@ HANDLE CreateFileForMappingW(LPCTSTR lpFileName, DWORD dwDesiredAccess,
  * INVALID_HANDLE_VALUE for a physical-memory-backed object (not part
  * of the 32 MB virtual process space, per page); lpFileMappingAttributes
  * ignored (NULL); flProtect = PAGE_READONLY/READWRITE/WRITECOPY. */
-HANDLE CreateFileMappingW(HANDLE hFile,
+AKARI_CE_IMPORT HANDLE CreateFileMappingW(HANDLE hFile,
                           LPSECURITY_ATTRIBUTES lpFileMappingAttributes,
                           DWORD flProtect, DWORD dwMaximumSizeHigh,
-                          DWORD dwMaximumSizeLow, LPCTSTR lpName);
+                          DWORD dwMaximumSizeLow, LPCTSTR lpName) AKARI_CE_NAME(CreateFileMappingW);
 #define CreateFileMapping CreateFileMappingW
 
 /* ms891386 "MapViewOfFile (Windows CE 5.0)":
  * LPVOID MapViewOfFile(HANDLE, DWORD, DWORD, DWORD, DWORD).
  * CE 1.01+; Winbase.h; Coredll.lib.  Maps a view of the mapping
  * object; NULL on failure. */
-LPVOID MapViewOfFile(HANDLE hFileMappingObject, DWORD dwDesiredAccess,
+AKARI_CE_IMPORT LPVOID MapViewOfFile(HANDLE hFileMappingObject, DWORD dwDesiredAccess,
                      DWORD dwFileOffsetHigh, DWORD dwFileOffsetLow,
-                     DWORD dwNumberOfBytesToMap);
+                     DWORD dwNumberOfBytesToMap) AKARI_CE_NAME(MapViewOfFile);
 
 /* ms892373 "UnmapViewOfFile (Windows CE 5.0)":
  * BOOL UnmapViewOfFile(LPCVOID).  CE 1.01+; Winbase.h; Coredll.lib.
  * Unmaps a view; dirty pages are written lazily.  Closing the file
  * handle does not close the file while a view stays mapped (note). */
-BOOL UnmapViewOfFile(LPCVOID lpBaseAddress);
+AKARI_CE_IMPORT BOOL UnmapViewOfFile(LPCVOID lpBaseAddress) AKARI_CE_NAME(UnmapViewOfFile);
 
 /* ms890303 "FlushViewOfFile (Windows CE 5.0)":
  * BOOL FlushViewOfFile(LPCVOID, DWORD).  CE 1.01+; Winbase.h;
  * Coredll.lib.  Writes dirty pages of the range to disk;
  * dwNumberOfBytesToFlush cannot be zero. */
-BOOL FlushViewOfFile(LPCVOID lpBaseAddress, DWORD dwNumberOfBytesToFlush);
+AKARI_CE_IMPORT BOOL FlushViewOfFile(LPCVOID lpBaseAddress, DWORD dwNumberOfBytesToFlush) AKARI_CE_NAME(FlushViewOfFile);
 
 /* ------------------------------------------------------------------ */
 /* M19: character and string helpers (Strings Reference pages).       */
@@ -1815,42 +1815,42 @@ BOOL FlushViewOfFile(LPCVOID lpBaseAddress, DWORD dwNumberOfBytesToFlush);
  * Coredll.lib per ms885161; CharPrev is Coreloc.lib per ms885162). */
 
 /* ms885159 "CharLower": LPTSTR CharLower(LPTSTR).  CE 1.0+. */
-LPTSTR CharLowerW(LPTSTR lpsz);
+AKARI_CE_IMPORT LPTSTR CharLowerW(LPTSTR lpsz) AKARI_CE_NAME(CharLowerW);
 #define CharLower CharLowerW
 
 /* ms885160 "CharLowerBuff": DWORD CharLowerBuff(LPTSTR, DWORD).
  * CE 1.0+. */
-DWORD CharLowerBuffW(LPTSTR lpsz, DWORD cchLength);
+AKARI_CE_IMPORT DWORD CharLowerBuffW(LPTSTR lpsz, DWORD cchLength) AKARI_CE_NAME(CharLowerBuffW);
 #define CharLowerBuff CharLowerBuffW
 
 /* ms885164 "CharUpper": LPTSTR CharUpper(LPTSTR).  CE 1.0+. */
-LPTSTR CharUpperW(LPTSTR lpsz);
+AKARI_CE_IMPORT LPTSTR CharUpperW(LPTSTR lpsz) AKARI_CE_NAME(CharUpperW);
 #define CharUpper CharUpperW
 
 /* ms885165 "CharUpperBuff": DWORD CharUpperBuff(LPTSTR, DWORD).
  * CE 1.0+. */
-DWORD CharUpperBuffW(LPTSTR lpsz, DWORD cchLength);
+AKARI_CE_IMPORT DWORD CharUpperBuffW(LPTSTR lpsz, DWORD cchLength) AKARI_CE_NAME(CharUpperBuffW);
 #define CharUpperBuff CharUpperBuffW
 
 /* ms885161 "CharNext": LPTSTR CharNext(LPCTSTR).  CE 1.0+; Coredll.lib.
  * Returns a pointer to the next character (or to the terminating
  * null).  The page prints the base name only; the W spelling follows
  * the CE Unicode-only convention (recorded in inventory). */
-LPTSTR CharNextW(LPCTSTR lpsz);
+AKARI_CE_IMPORT LPTSTR CharNextW(LPCTSTR lpsz) AKARI_CE_NAME(CharNextW);
 #define CharNext CharNextW
 
 /* ms885162 "CharPrev": LPTSTR CharPrev(LPCTSTR, LPCTSTR).  CE 1.01+. */
-LPTSTR CharPrevW(LPCTSTR lpszStart, LPCTSTR lpszCurrent);
+AKARI_CE_IMPORT LPTSTR CharPrevW(LPCTSTR lpszStart, LPCTSTR lpszCurrent) AKARI_CE_NAME(CharPrevW);
 #define CharPrev CharPrevW
 
 /* Character-class queries (CE 1.0+, Coreloc.lib). */
-BOOL IsCharAlphaW(TCHAR ch);          /* ms885690 */
+AKARI_CE_IMPORT BOOL IsCharAlphaW(TCHAR ch) AKARI_CE_NAME(IsCharAlphaW);          /* ms885690 */
 #define IsCharAlpha IsCharAlphaW
-BOOL IsCharAlphaNumericW(TCHAR ch);   /* ms885691 */
+AKARI_CE_IMPORT BOOL IsCharAlphaNumericW(TCHAR ch) AKARI_CE_NAME(IsCharAlphaNumericW);   /* ms885691 */
 #define IsCharAlphaNumeric IsCharAlphaNumericW
-BOOL IsCharLowerW(TCHAR ch);          /* ms885692 */
+AKARI_CE_IMPORT BOOL IsCharLowerW(TCHAR ch) AKARI_CE_NAME(IsCharLowerW);          /* ms885692 */
 #define IsCharLower IsCharLowerW
-BOOL IsCharUpperW(TCHAR ch);          /* ms885693 */
+AKARI_CE_IMPORT BOOL IsCharUpperW(TCHAR ch) AKARI_CE_NAME(IsCharUpperW);          /* ms885693 */
 #define IsCharUpper IsCharUpperW
 
 /* ms886738 "LoadString (Windows CE 5.0)":
@@ -1859,8 +1859,8 @@ BOOL IsCharUpperW(TCHAR ch);          /* ms885693 */
  * return value is a pointer into the (read-only) resource; string
  * resources are not null-terminated by default (page note).  CE
  * string resources are Unicode; W spelling per the CE convention. */
-int LoadStringW(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer,
-                int cchBufferMax);
+AKARI_CE_IMPORT int LoadStringW(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer,
+                int cchBufferMax) AKARI_CE_NAME(LoadStringW);
 #define LoadString LoadStringW
 
 /* aa450993 "wsprintf (Windows CE 5.0)":
@@ -1868,13 +1868,13 @@ int LoadStringW(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer,
  * Page states only the Unicode version exists (wsprintfW).  The CE
  * page notes the function has no buffer-length parameter and formats
  * at most 1024 characters. */
-int wsprintfW(LPTSTR lpOut, LPCTSTR lpFmt, ...);
+AKARI_CE_IMPORT int wsprintfW(LPTSTR lpOut, LPCTSTR lpFmt, ...) AKARI_CE_NAME(wsprintfW);
 #define wsprintf wsprintfW
 
 /* aa450994 "wvsprintf (Windows CE 5.0)":
  * int wvsprintf(LPTSTR, LPCTSTR, va_list).  CE 1.0+; Winbase.h;
  * Coreloc.lib.  Unicode-only per page. */
-int wvsprintfW(LPTSTR lpOutput, LPCTSTR lpFormat, va_list arglist);
+AKARI_CE_IMPORT int wvsprintfW(LPTSTR lpOutput, LPCTSTR lpFormat, va_list arglist) AKARI_CE_NAME(wvsprintfW);
 #define wvsprintf wvsprintfW
 
 /* ------------------------------------------------------------------ */
@@ -1986,74 +1986,74 @@ typedef COMMPROP *LPCOMMPROP;
 
 /* ms885166: BOOL ClearCommBreak(HANDLE).  Restores character
  * transmission (leaves the break state).  CE 1.0+; Serdev.lib. */
-BOOL ClearCommBreak(HANDLE hFile);
+AKARI_CE_IMPORT BOOL ClearCommBreak(HANDLE hFile) AKARI_CE_NAME(ClearCommBreak);
 
 /* ms885167: BOOL ClearCommError(HANDLE, LPDWORD, LPCOMSTAT).
  * Retrieves error mask + current status.  CE 1.0+; Serdev.lib. */
-BOOL ClearCommError(HANDLE hFile, LPDWORD lpErrors, LPCOMSTAT lpStat);
+AKARI_CE_IMPORT BOOL ClearCommError(HANDLE hFile, LPDWORD lpErrors, LPCOMSTAT lpStat) AKARI_CE_NAME(ClearCommError);
 
 /* ms885213: BOOL EscapeCommFunction(HANDLE, DWORD).  Directs the
  * device to perform an extended function (CLRDTR/SETDTR, CLRRTS/
  * SETRTS, SETXOFF/SETXON, CLRBREAK/SETBREAK codes).  CE 2.10+;
  * Serdev.lib. */
-BOOL EscapeCommFunction(HANDLE hFile, DWORD dwFunc);
+AKARI_CE_IMPORT BOOL EscapeCommFunction(HANDLE hFile, DWORD dwFunc) AKARI_CE_NAME(EscapeCommFunction);
 
 /* ms885606: BOOL GetCommMask(HANDLE, LPDWORD).  Returns the event
  * mask currently enabled for the device.  CE 1.0+; Serdev.lib. */
-BOOL GetCommMask(HANDLE hFile, LPDWORD lpEvtMask);
+AKARI_CE_IMPORT BOOL GetCommMask(HANDLE hFile, LPDWORD lpEvtMask) AKARI_CE_NAME(GetCommMask);
 
 /* ms885607: BOOL GetCommModemStatus(HANDLE, LPDWORD).  Returns the
  * modem control-register values.  CE 1.0+; Serdev.lib. */
-BOOL GetCommModemStatus(HANDLE hFile, LPDWORD lpModemStat);
+AKARI_CE_IMPORT BOOL GetCommModemStatus(HANDLE hFile, LPDWORD lpModemStat) AKARI_CE_NAME(GetCommModemStatus);
 
 /* ms885608: BOOL GetCommProperties(HANDLE, LPCOMMPROP).  Fills a
  * COMMPROP buffer.  CE 1.0+; Serdev.lib. */
-BOOL GetCommProperties(HANDLE hFile, LPCOMMPROP lpCommProp);
+AKARI_CE_IMPORT BOOL GetCommProperties(HANDLE hFile, LPCOMMPROP lpCommProp) AKARI_CE_NAME(GetCommProperties);
 
 /* ms885609: BOOL GetCommState(HANDLE, LPDCB).  Fills a DCB with the
  * current control settings.  CE 1.0+; Serdev.lib. */
-BOOL GetCommState(HANDLE hFile, LPDCB lpDCB);
+AKARI_CE_IMPORT BOOL GetCommState(HANDLE hFile, LPDCB lpDCB) AKARI_CE_NAME(GetCommState);
 
 /* ms885610: BOOL GetCommTimeouts(HANDLE, LPCOMMTIMEOUTS).  Returns
  * the read/write time-out parameters.  CE 1.0+; Serdev.lib. */
-BOOL GetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts);
+AKARI_CE_IMPORT BOOL GetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts) AKARI_CE_NAME(GetCommTimeouts);
 
 /* ms886785: BOOL PurgeComm(HANDLE, DWORD).  Discards characters in
  * the output/input buffer (PURGE_TXABORT, PURGE_RXABORT, PURGE_TXCLEAR,
  * PURGE_RXCLEAR actions).  CE 1.0+; Serdev.lib. */
-BOOL PurgeComm(HANDLE hFile, DWORD dwFlags);
+AKARI_CE_IMPORT BOOL PurgeComm(HANDLE hFile, DWORD dwFlags) AKARI_CE_NAME(PurgeComm);
 
 /* ms886804: BOOL SetCommBreak(HANDLE).  Suspends character
  * transmission (break state) until ClearCommBreak.  CE 1.0+;
  * Serdev.lib. */
-BOOL SetCommBreak(HANDLE hFile);
+AKARI_CE_IMPORT BOOL SetCommBreak(HANDLE hFile) AKARI_CE_NAME(SetCommBreak);
 
 /* ms886805: BOOL SetCommMask(HANDLE, DWORD).  Sets the monitored
  * event mask; zero disables all events.  CE 1.0+; Serdev.lib. */
-BOOL SetCommMask(HANDLE hFile, DWORD dwEvtMask);
+AKARI_CE_IMPORT BOOL SetCommMask(HANDLE hFile, DWORD dwEvtMask) AKARI_CE_NAME(SetCommMask);
 
 /* ms886806: BOOL SetCommState(HANDLE, LPDCB).  Configures the device
  * from a DCB.  CE 1.0+; Serdev.lib. */
-BOOL SetCommState(HANDLE hFile, LPDCB lpDCB);
+AKARI_CE_IMPORT BOOL SetCommState(HANDLE hFile, LPDCB lpDCB) AKARI_CE_NAME(SetCommState);
 
 /* ms886807: BOOL SetCommTimeouts(HANDLE, LPCOMMTIMEOUTS).  Sets the
  * read/write time-out parameters.  CE 1.0+; Serdev.lib. */
-BOOL SetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts);
+AKARI_CE_IMPORT BOOL SetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts) AKARI_CE_NAME(SetCommTimeouts);
 
 /* aa450896: BOOL SetupComm(HANDLE, DWORD, DWORD).  Initializes the
  * communications parameters (recommended input/output buffer sizes).
  * CE 1.0+; Serdev.lib. */
-BOOL SetupComm(HANDLE hFile, DWORD dwInQueue, DWORD dwOutQueue);
+AKARI_CE_IMPORT BOOL SetupComm(HANDLE hFile, DWORD dwInQueue, DWORD dwOutQueue) AKARI_CE_NAME(SetupComm);
 
 /* aa450957: BOOL TransmitCommChar(HANDLE, char).  Transmits one
  * character ahead of pending output.  CE 1.0+; Serdev.lib. */
-BOOL TransmitCommChar(HANDLE hFile, char cChar);
+AKARI_CE_IMPORT BOOL TransmitCommChar(HANDLE hFile, char cChar) AKARI_CE_NAME(TransmitCommChar);
 
 /* aa450985: BOOL WaitCommEvent(HANDLE, LPDWORD, LPOVERLAPPED).
  * Waits for a monitored event; lpOverlapped is unsupported and must
  * be NULL (CE page).  CE 1.0+; Serdev.lib. */
-BOOL WaitCommEvent(HANDLE hFile, LPDWORD lpEvtMask,
-                   LPOVERLAPPED lpOverlapped);
+AKARI_CE_IMPORT BOOL WaitCommEvent(HANDLE hFile, LPDWORD lpEvtMask,
+                   LPOVERLAPPED lpOverlapped) AKARI_CE_NAME(WaitCommEvent);
 
 /* ------------------------------------------------------------------ */
 /* M24: exception + debugging APIs (Exception/Debugging Reference).   */
@@ -2066,9 +2066,9 @@ BOOL WaitCommEvent(HANDLE hFile, LPDWORD lpEvtMask,
  * the system clears bit 28 of dwExceptionCode; nNumberOfArguments
  * must not exceed EXCEPTION_MAXIMUM_PARAMETERS (ignored if the
  * argument pointer is NULL). */
-void RaiseException(DWORD dwExceptionCode, DWORD dwExceptionFlags,
+AKARI_CE_IMPORT void RaiseException(DWORD dwExceptionCode, DWORD dwExceptionFlags,
                     DWORD nNumberOfArguments,
-                    const DWORD *lpArguments);
+                    const DWORD *lpArguments) AKARI_CE_NAME(RaiseException);
 
 /* Debug-event codes (names per ms885195 "DEBUG_EVENT"; numeric values
  * are the fixed Win32 ABI codes of the desktop debugging-event
@@ -2101,7 +2101,7 @@ void RaiseException(DWORD dwExceptionCode, DWORD dwExceptionFlags,
  * Coredll.lib.  Causes a breakpoint exception in the calling thread;
  * ignored when no debugger is attached.  Declared here (Winbase.h
  * aggregates the user-mode surface) with the Kfuncs.h row recorded. */
-void DebugBreak(void);
+AKARI_CE_IMPORT void DebugBreak(void) AKARI_CE_NAME(DebugBreak);
 
 /* ms886769 "OutputDebugString (Windows CE 5.0)":
  * void OutputDebugString(LPCTSTR).  CE 1.0+; Winbase.h.  The page's
@@ -2115,15 +2115,15 @@ void OutputDebugStringW(LPCWSTR lpOutputString);
  * BOOL ContinueDebugEvent(DWORD, DWORD, DWORD).  CE 2.0+; Winbase.h;
  * Coredll.lib, Nk.lib.  Continues a thread that reported a debugging
  * event, with DBG_CONTINUE or DBG_EXCEPTION_NOT_HANDLED. */
-BOOL ContinueDebugEvent(DWORD dwProcessId, DWORD dwThreadId,
-                        DWORD dwContinueStatus);
+AKARI_CE_IMPORT BOOL ContinueDebugEvent(DWORD dwProcessId, DWORD dwThreadId,
+                        DWORD dwContinueStatus) AKARI_CE_NAME(ContinueDebugEvent);
 
 /* ms885193 "DebugActiveProcess (Windows CE 5.0)":
  * BOOL DebugActiveProcess(DWORD).  CE 2.0+; Winbase.h; Coredll.lib,
  * Nk.lib.  Attaches a debugger to an active process; the system then
  * sends CREATE_PROCESS_DEBUG_EVENT and per-DLL LOAD_DLL_DEBUG_EVENT
  * events to WaitForDebugEvent and suspends/resumes threads. */
-BOOL DebugActiveProcess(DWORD dwProcessId);
+AKARI_CE_IMPORT BOOL DebugActiveProcess(DWORD dwProcessId) AKARI_CE_NAME(DebugActiveProcess);
 
 /* Debugging event-info structures (Debugging Reference pages below);
  * each is used as a member of the DEBUG_EVENT union (ms885195). */
@@ -2224,7 +2224,7 @@ typedef DEBUG_EVENT *LPDEBUG_EVENT;
  * BOOL WaitForDebugEvent(LPDEBUG_EVENT, DWORD).  CE 2.0+; Winbase.h;
  * Coredll.lib, Nk.lib.  Waits for a debugging event; dwMilliseconds 0
  * tests and returns immediately, INFINITE waits forever. */
-BOOL WaitForDebugEvent(LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds);
+AKARI_CE_IMPORT BOOL WaitForDebugEvent(LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds) AKARI_CE_NAME(WaitForDebugEvent);
 
 /* ------------------------------------------------------------------ */
 /* M25: Error Values book (FormatMessage) + System/namespace codes     */
@@ -2254,9 +2254,9 @@ BOOL WaitForDebugEvent(LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds);
  * LocalAlloc and stores the buffer pointer at *lpBuffer (free with
  * LocalFree).  Returns the stored character count or zero.  Page
  * states only the Unicode version exists. */
-DWORD FormatMessageW(DWORD dwFlags, LPCVOID lpSource, DWORD dwMessageId,
+AKARI_CE_IMPORT DWORD FormatMessageW(DWORD dwFlags, LPCVOID lpSource, DWORD dwMessageId,
                      DWORD dwLanguageId, LPTSTR lpBuffer, DWORD nSize,
-                     va_list *Arguments);
+                     va_list *Arguments) AKARI_CE_NAME(FormatMessageW);
 #define FormatMessage FormatMessageW
 
 /* ------------------------------------------------------------------ */
@@ -2272,12 +2272,12 @@ BOOL KillTimer(HWND hWnd, UINT uIDEvent);
  * "MsgWaitForMultipleObjectsEx" (CE 2.0+): wait for handles or a
  * thread-message condition (dwWakeMask = QS_* flags).  Header
  * Winbase.h; Link Library Msgque.lib (def/msgque-doc.def). */
-DWORD MsgWaitForMultipleObjects(DWORD nCount, LPHANDLE pHandles,
+AKARI_CE_IMPORT DWORD MsgWaitForMultipleObjects(DWORD nCount, LPHANDLE pHandles,
                                 BOOL fWaitAll, DWORD dwMilliseconds,
-                                DWORD dwWakeMask);
-DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
+                                DWORD dwWakeMask) AKARI_CE_NAME(MsgWaitForMultipleObjects);
+AKARI_CE_IMPORT DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
                                   DWORD dwMilliseconds, DWORD dwWakeMask,
-                                  DWORD dwFlags);
+                                  DWORD dwFlags) AKARI_CE_NAME(MsgWaitForMultipleObjectsEx);
 
 /* ------------------------------------------------------------------ */
 /* M27: GDI rectangle helpers whose CE 5.0 pages list Header:         */
@@ -2287,9 +2287,9 @@ DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
 /* ------------------------------------------------------------------ */
 
 /* ms909847 "InflateRect" */
-BOOL InflateRect(LPRECT lprc, int dx, int dy);
+AKARI_CE_IMPORT BOOL InflateRect(LPRECT lprc, int dx, int dy) AKARI_CE_NAME(InflateRect);
 /* aa453648 "SetRect" */
-BOOL SetRect(LPRECT lprc, int xLeft, int yTop, int xRight, int yBottom);
+AKARI_CE_IMPORT BOOL SetRect(LPRECT lprc, int xLeft, int yTop, int xRight, int yBottom) AKARI_CE_NAME(SetRect);
 
 /* ------------------------------------------------------------------ */
 /* M28: Resources Reference (Header Winbase.h) and System Information  */
@@ -2343,25 +2343,25 @@ typedef struct _SYSTEM_POWER_STATUS_EX2 {
 
 /* aa453172 "GetSystemPowerStatusEx" (CE 2.12+), aa453173
  * "GetSystemPowerStatusEx2" (CE 2.12+). */
-BOOL   GetSystemPowerStatusEx(PSYSTEM_POWER_STATUS_EX pstatus,
-                              BOOL fUpdate);
-DWORD  GetSystemPowerStatusEx2(PSYSTEM_POWER_STATUS_EX2
+AKARI_CE_IMPORT BOOL   GetSystemPowerStatusEx(PSYSTEM_POWER_STATUS_EX pstatus,
+                              BOOL fUpdate) AKARI_CE_NAME(GetSystemPowerStatusEx);
+AKARI_CE_IMPORT DWORD  GetSystemPowerStatusEx2(PSYSTEM_POWER_STATUS_EX2
                                    pSystemPowerStatusEx2,
-                               DWORD dwLen, BOOL fUpdate);
+                               DWORD dwLen, BOOL fUpdate) AKARI_CE_NAME(GetSystemPowerStatusEx2);
 
 /* ms911826 "MessageBeep": plays a sound for uType.  CE 1.0+; Header
  * Winbase.h; Link Library Msgbeep.lib (def/msgbeep-doc.def). */
-BOOL MessageBeep(UINT uType);
+AKARI_CE_IMPORT BOOL MessageBeep(UINT uType) AKARI_CE_NAME(MessageBeep);
 
 /* Resources Reference - module/image resource access (CE 1.0+; Header
  * Winbase.h; Link Library rows "Coredll.lib, Nk.lib": the Coredll.lib
  * membership feeds def/coredll-doc.def; Nk.lib is kernel scope and is
  * kept out of import defs, see docs/inventory.md). */
-HRSRC  FindResourceW(HMODULE hModule, LPCWSTR lpName, LPCWSTR lpType);
+AKARI_CE_IMPORT HRSRC  FindResourceW(HMODULE hModule, LPCWSTR lpName, LPCWSTR lpType) AKARI_CE_NAME(FindResourceW);
 #define FindResource FindResourceW
-HGLOBAL LoadResource(HMODULE hModule, HRSRC hResInfo);  /* aa453416 */
-LPVOID  LockResource(HGLOBAL hResData);                  /* aa453417 */
-DWORD   SizeofResource(HMODULE hModule, HRSRC hResInfo); /* ms940346 */
+AKARI_CE_IMPORT HGLOBAL LoadResource(HMODULE hModule, HRSRC hResInfo) AKARI_CE_NAME(LoadResource);  /* aa453416 */
+AKARI_CE_IMPORT LPVOID  LockResource(HGLOBAL hResData) AKARI_CE_NAME(LockResource);                  /* aa453417 */
+AKARI_CE_IMPORT DWORD   SizeofResource(HMODULE hModule, HRSRC hResInfo) AKARI_CE_NAME(SizeofResource); /* ms940346 */
 
 /* ------------------------------------------------------------------ */
 /* M30: remaining documented Winbase.h functions (CE process/thread,    */
@@ -2382,28 +2382,28 @@ DWORD   SizeofResource(HMODULE hModule, HRSRC hResInfo); /* ms940346 */
 /* ms885602 "FreeLibraryAndExitThread" (CE 3.0+; Coredll.dll): the page
  * states the function is implemented as FreeLibrary(hModule);
  * ExitThread(dwExitCode); same role as its Win32 namesake. */
-void FreeLibraryAndExitThread(HMODULE hModule, DWORD dwExitCode);
+AKARI_CE_IMPORT void FreeLibraryAndExitThread(HMODULE hModule, DWORD dwExitCode) AKARI_CE_NAME(FreeLibraryAndExitThread);
 
 /* ms885158 "CeZeroPointer" (CE .NET 4.2+; Coredll.lib): maps a
  * process-slot pointer to its unmapped (slot-zero) form; returns ptr
  * unchanged when it is not mapped.  The page points at the OEM
  * Pkfuncs.h ZeroPtr macro for the underlying mechanism. */
-LPVOID CeZeroPointer(LPVOID ptr);
+AKARI_CE_IMPORT LPVOID CeZeroPointer(LPVOID ptr) AKARI_CE_NAME(CeZeroPointer);
 
 /* aa450796 "CeGetThreadQuantum" (CE 3.0+; Coredll.lib): current quantum
  * in ms for hThread; MAXDWORD on failure. */
-DWORD CeGetThreadQuantum(HANDLE hThread);
+AKARI_CE_IMPORT DWORD CeGetThreadQuantum(HANDLE hThread) AKARI_CE_NAME(CeGetThreadQuantum);
 
 /* ms885156 "CeSetThreadQuantum" (CE 3.0+; Coredll.lib): quantum in ms;
  * dwTime 0 runs the thread to completion; OEM default 100 ms. */
-BOOL CeSetThreadQuantum(HANDLE hThread, DWORD dwTime);
+AKARI_CE_IMPORT BOOL CeSetThreadQuantum(HANDLE hThread, DWORD dwTime) AKARI_CE_NAME(CeSetThreadQuantum);
 
 /* aa450973 "VerQueryValue" (CE 3.0+; Coredll.lib): resolves a backslash-
  * separated sub-block ("\", "\VarFileInfo\Translation", ...) inside a
  * version-information block returned by GetFileVersionInfoW.  The
  * Unicode-only export spelling is VerQueryValueW. */
-BOOL VerQueryValueW(const LPVOID pBlock, LPTSTR lpSubBlock,
-                    LPVOID *lplpBuffer, UINT *puLen);
+AKARI_CE_IMPORT BOOL VerQueryValueW(const LPVOID pBlock, LPTSTR lpSubBlock,
+                    LPVOID *lplpBuffer, UINT *puLen) AKARI_CE_NAME(VerQueryValueW);
 #define VerQueryValue VerQueryValueW
 
 /* ms885642 "GetThreadContext" (CE 2.0+; Coredll.lib, Nk.lib) and
@@ -2412,10 +2412,10 @@ BOOL VerQueryValueW(const LPVOID pBlock, LPTSTR lpSubBlock,
  * processor-specific register set whose layout the CE Winnt.h header
  * pages do not publish (incomplete type recorded at M24); Nk.lib is
  * kernel scope and stays out of the import def. */
-BOOL GetThreadContext(HANDLE hThread, LPCONTEXT lpContext);
-BOOL ReadProcessMemory(HANDLE hProcess, LPCVOID lpBaseAddress,
+AKARI_CE_IMPORT BOOL GetThreadContext(HANDLE hThread, LPCONTEXT lpContext) AKARI_CE_NAME(GetThreadContext);
+AKARI_CE_IMPORT BOOL ReadProcessMemory(HANDLE hProcess, LPCVOID lpBaseAddress,
                        LPVOID lpBuffer, DWORD nSize,
-                       LPDWORD lpNumberOfBytesRead);
+                       LPDWORD lpNumberOfBytesRead) AKARI_CE_NAME(ReadProcessMemory);
 
 /* aa450983 "VS_FIXEDFILEINFO (Windows CE 5.0)": fixed file-version
  * information structure returned at the root sub-block ("\") of a
@@ -2451,14 +2451,14 @@ typedef struct tagVS_FIXEDFILEINFO {
  * nonzero when the queried processor feature is supported.  The page
  * documents the PF_ARM_* / PF_MIPS_* flag *names* (per-CPU sets) but
  * not their values -> no PF_* constants shipped (recorded). */
-BOOL IsProcessorFeaturePresent(DWORD dwProcessorFeature);
+AKARI_CE_IMPORT BOOL IsProcessorFeaturePresent(DWORD dwProcessorFeature) AKARI_CE_NAME(IsProcessorFeaturePresent);
 
 /* ms886787 "QueryInstructionSet" (CE .NET 4.0+; Coredll.lib): reports
  * whether dwInstructionSet (PROCESSOR_*_INSTRUCTION names, values not
  * published by the page) is supported; optional output in
  * lpdwCurrentInstructionSet. */
-BOOL QueryInstructionSet(DWORD dwInstructionSet,
-                         LPDWORD lpdwCurrentInstructionSet);
+AKARI_CE_IMPORT BOOL QueryInstructionSet(DWORD dwInstructionSet,
+                         LPDWORD lpdwCurrentInstructionSet) AKARI_CE_NAME(QueryInstructionSet);
 
 /* ------------------------------------------------------------------ */
 /* Directory-service user name query (GetUserNameEx).                 */
@@ -2488,8 +2488,8 @@ typedef enum {
  * size on return (ERROR_MORE_DATA when the buffer is too small).
  * Windows CE is Unicode-only (the CE page types the buffer LPTSTR),
  * so the export is the wide spelling (gen-doc-def.py UNICODE_ONLY). */
-BOOLEAN GetUserNameExW(EXTENDED_NAME_FORMAT NameFormat,
-                       LPWSTR lpNameBuffer, PULONG nSize);
+AKARI_CE_IMPORT BOOLEAN GetUserNameExW(EXTENDED_NAME_FORMAT NameFormat,
+                       LPWSTR lpNameBuffer, PULONG nSize) AKARI_CE_NAME(GetUserNameExW);
 #define GetUserNameEx GetUserNameExW
 
 #ifdef __cplusplus

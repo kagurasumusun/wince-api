@@ -388,15 +388,15 @@ void SystemIdleTimerReset(void);
 /* Carets Reference functions (CE 1.0+).                              */
 /* ------------------------------------------------------------------ */
 
-BOOL CreateCaret(HWND hWnd, HBITMAP hBitmap, int nWidth,  /* ms908164 */
-                 int nHeight);
-BOOL DestroyCaret(void);                                  /* aa452936 */
-UINT GetCaretBlinkTime(void);                             /* ms929209 */
-BOOL GetCaretPos(LPPOINT lpPoint);                        /* ms929210 */
-BOOL HideCaret(HWND hWnd);                                /* ms929930 */
-BOOL SetCaretBlinkTime(UINT uMSeconds);                   /* ms940012 */
-BOOL SetCaretPos(int X, int Y);                           /* ms940013 */
-BOOL ShowCaret(HWND hWnd);                                /* aa453729 */
+AKARI_CE_IMPORT BOOL CreateCaret(HWND hWnd, HBITMAP hBitmap, int nWidth,  /* ms908164 */
+                 int nHeight) AKARI_CE_NAME(CreateCaret);
+AKARI_CE_IMPORT BOOL DestroyCaret(void) AKARI_CE_NAME(DestroyCaret);                                  /* aa452936 */
+AKARI_CE_IMPORT UINT GetCaretBlinkTime(void) AKARI_CE_NAME(GetCaretBlinkTime);                             /* ms929209 */
+AKARI_CE_IMPORT BOOL GetCaretPos(LPPOINT lpPoint) AKARI_CE_NAME(GetCaretPos);                        /* ms929210 */
+AKARI_CE_IMPORT BOOL HideCaret(HWND hWnd) AKARI_CE_NAME(HideCaret);                                /* ms929930 */
+AKARI_CE_IMPORT BOOL SetCaretBlinkTime(UINT uMSeconds) AKARI_CE_NAME(SetCaretBlinkTime);                   /* ms940012 */
+AKARI_CE_IMPORT BOOL SetCaretPos(int X, int Y) AKARI_CE_NAME(SetCaretPos);                           /* ms940013 */
+AKARI_CE_IMPORT BOOL ShowCaret(HWND hWnd) AKARI_CE_NAME(ShowCaret);                                /* aa453729 */
 
 /* ------------------------------------------------------------------ */
 /* Atoms Reference functions.  The official pages (aa453188/aa453189/ */
@@ -410,53 +410,53 @@ BOOL ShowCaret(HWND hWnd);                                /* aa453729 */
 /* Link Library row feed def/coredll-doc.def).                        */
 /* ------------------------------------------------------------------ */
 
-BOOL GetMessage(LPMSG lpMsg, HWND hWnd, UINT wMsgFilterMin,    /* aa453135 */
-                 UINT wMsgFilterMax);
-BOOL PeekMessage(LPMSG lpMsg, HWND hWnd, UINT wMsgFilterMin,   /* ms911928 */
-                  UINT wMsgFilterMax, UINT wRemoveMsg);
+AKARI_CE_IMPORT BOOL GetMessage(LPMSG lpMsg, HWND hWnd, UINT wMsgFilterMin,    /* aa453135 */
+                 UINT wMsgFilterMax) AKARI_CE_NAME(GetMessage);
+AKARI_CE_IMPORT BOOL PeekMessage(LPMSG lpMsg, HWND hWnd, UINT wMsgFilterMin,   /* ms911928 */
+                  UINT wMsgFilterMax, UINT wRemoveMsg) AKARI_CE_NAME(PeekMessage);
 
 /* aa452956 "DispatchMessage": dispatches to the window procedure.  The
  * page prints LONG as the return type. */
-LONG DispatchMessage(const MSG *lpmsg);
+AKARI_CE_IMPORT LONG DispatchMessage(const MSG *lpmsg) AKARI_CE_NAME(DispatchMessage);
 
 /* aa453776 "TranslateMessage": translates virtual-key messages into
  * character messages. */
-BOOL TranslateMessage(const MSG *lpMsg);
+AKARI_CE_IMPORT BOOL TranslateMessage(const MSG *lpMsg) AKARI_CE_NAME(TranslateMessage);
 
 /* ms911937 "PostMessage" / ms911939 "PostThreadMessage" /
  * ms939980 "SendMessage" / ms939983 "SendNotifyMessage". */
-BOOL PostMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
-BOOL PostThreadMessage(DWORD idThread, UINT Msg, WPARAM wParam,
-                        LPARAM lParam);
-LRESULT SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
-BOOL SendNotifyMessage(HWND hWnd, UINT Msg, WPARAM wParam,
-                        LPARAM lParam);
+AKARI_CE_IMPORT BOOL PostMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) AKARI_CE_NAME(PostMessage);
+AKARI_CE_IMPORT BOOL PostThreadMessage(DWORD idThread, UINT Msg, WPARAM wParam,
+                        LPARAM lParam) AKARI_CE_NAME(PostThreadMessage);
+AKARI_CE_IMPORT LRESULT SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) AKARI_CE_NAME(SendMessage);
+AKARI_CE_IMPORT BOOL SendNotifyMessage(HWND hWnd, UINT Msg, WPARAM wParam,
+                        LPARAM lParam) AKARI_CE_NAME(SendNotifyMessage);
 
 /* ms911938 "PostQuitMessage": posts WM_QUIT (wParam = nExitCode). */
-void PostQuitMessage(int nExitCode);
+AKARI_CE_IMPORT void PostQuitMessage(int nExitCode) AKARI_CE_NAME(PostQuitMessage);
 
 /* ms939737 "RegisterWindowMessage": registers a unique message number
  * for the given string.  CE 2.0+. */
-UINT RegisterWindowMessageW(LPCTSTR lpString);
+AKARI_CE_IMPORT UINT RegisterWindowMessageW(LPCTSTR lpString) AKARI_CE_NAME(RegisterWindowMessageW);
 #define RegisterWindowMessage RegisterWindowMessageW
 
 /* aa453136 "GetMessagePos": cursor position packed into a DWORD
  * (x = low word, y = high word) at the last message read. */
-DWORD GetMessagePos(void);
+AKARI_CE_IMPORT DWORD GetMessagePos(void) AKARI_CE_NAME(GetMessagePos);
 
 /* aa453137 "GetMessageQueueReadyTimeStamp": the page prints Header:
  * Windows.h, so it is declared in windows.h. */
 
 /* aa453138 "GetMessageSource": returns a value identifying the source
  * of the current message. */
-UINT GetMessageSource(void);
+AKARI_CE_IMPORT UINT GetMessageSource(void) AKARI_CE_NAME(GetMessageSource);
 
 /* aa453156 "GetQueueStatus": returns the QS_* queue-status flags of
  * the calling thread's queue (CE .NET 4.2+). */
-DWORD GetQueueStatus(UINT flags);
+AKARI_CE_IMPORT DWORD GetQueueStatus(UINT flags) AKARI_CE_NAME(GetQueueStatus);
 
 /* ms909852 "InSendMessage": TRUE while processing a sent message. */
-BOOL InSendMessage(VOID);
+AKARI_CE_IMPORT BOOL InSendMessage(VOID) AKARI_CE_NAME(InSendMessage);
 
 /* ------------------------------------------------------------------ */
 /* Keyboard Reference functions (Header: Winuser.h unless noted).     */
@@ -471,64 +471,64 @@ BOOL InSendMessage(VOID);
 /* and recorded in docs/inventory.md.                                  */
 /* ------------------------------------------------------------------ */
 
-SHORT GetKeyState(int nVirtKey);                       /* aa453132 */
-SHORT GetAsyncKeyState(int vKey);                      /* ms929204 */
-HWND  GetFocus(void);                                  /* ms929240 */
-HWND  SetFocus(HWND hWnd);                             /* ms940023 */
-HWND  GetActiveWindow(void);                           /* ms929203 */
-HWND  SetActiveWindow(HWND hWnd);                      /* ms939986 */
-BOOL  EnableWindow(HWND hWnd, BOOL bEnable);           /* aa453035 */
-BOOL  IsWindowEnabled(HWND hWnd);                      /* aa453234 */
+AKARI_CE_IMPORT SHORT GetKeyState(int nVirtKey) AKARI_CE_NAME(GetKeyState);                       /* aa453132 */
+AKARI_CE_IMPORT SHORT GetAsyncKeyState(int vKey) AKARI_CE_NAME(GetAsyncKeyState);                      /* ms929204 */
+AKARI_CE_IMPORT HWND  GetFocus(void) AKARI_CE_NAME(GetFocus);                                  /* ms929240 */
+AKARI_CE_IMPORT HWND  SetFocus(HWND hWnd) AKARI_CE_NAME(SetFocus);                             /* ms940023 */
+AKARI_CE_IMPORT HWND  GetActiveWindow(void) AKARI_CE_NAME(GetActiveWindow);                           /* ms929203 */
+AKARI_CE_IMPORT HWND  SetActiveWindow(HWND hWnd) AKARI_CE_NAME(SetActiveWindow);                      /* ms939986 */
+AKARI_CE_IMPORT BOOL  EnableWindow(HWND hWnd, BOOL bEnable) AKARI_CE_NAME(EnableWindow);           /* aa453035 */
+AKARI_CE_IMPORT BOOL  IsWindowEnabled(HWND hWnd) AKARI_CE_NAME(IsWindowEnabled);                      /* aa453234 */
 
 /* Keyboard layout (HKL). */
-HKL   ActivateKeyboardLayout(HKL hkl, UINT Flags);     /* aa452845 */
-HKL   GetKeyboardLayout(DWORD idThread);               /* ms929249 */
-UINT  GetKeyboardLayoutList(int nBuff, HKL *lpList);   /* ms929250 */
-BOOL  GetKeyboardLayoutNameW(LPTSTR pwszKLID);         /* ms929252 */
+AKARI_CE_IMPORT HKL   ActivateKeyboardLayout(HKL hkl, UINT Flags) AKARI_CE_NAME(ActivateKeyboardLayout);     /* aa452845 */
+AKARI_CE_IMPORT HKL   GetKeyboardLayout(DWORD idThread) AKARI_CE_NAME(GetKeyboardLayout);               /* ms929249 */
+AKARI_CE_IMPORT UINT  GetKeyboardLayoutList(int nBuff, HKL *lpList) AKARI_CE_NAME(GetKeyboardLayoutList);   /* ms929250 */
+AKARI_CE_IMPORT BOOL  GetKeyboardLayoutNameW(LPTSTR pwszKLID) AKARI_CE_NAME(GetKeyboardLayoutNameW);         /* ms929252 */
 #define GetKeyboardLayoutName GetKeyboardLayoutNameW
-DWORD GetKeyboardStatus(VOID);                         /* ms929253 */
-int   GetKeyboardType(int nTypeFlag);                  /* ms929254 */
+AKARI_CE_IMPORT DWORD GetKeyboardStatus(VOID) AKARI_CE_NAME(GetKeyboardStatus);                         /* ms929253 */
+AKARI_CE_IMPORT int   GetKeyboardType(int nTypeFlag) AKARI_CE_NAME(GetKeyboardType);                  /* ms929254 */
 
 /* ms911789 "MapVirtualKey". */
-UINT MapVirtualKey(UINT uCode, UINT uMapType);
+AKARI_CE_IMPORT UINT MapVirtualKey(UINT uCode, UINT uMapType) AKARI_CE_NAME(MapVirtualKey);
 
 /* keybd_event (aa453245): synthesizes a keystroke; dwFlags is
  * KEYEVENTF_EXTENDEDKEY / KEYEVENTF_KEYUP. */
-VOID keybd_event(BYTE bVk, BYTE bScan, DWORD dwFlags, DWORD dwExtraInfo);
+AKARI_CE_IMPORT VOID keybd_event(BYTE bVk, BYTE bScan, DWORD dwFlags, DWORD dwExtraInfo) AKARI_CE_NAME(keybd_event);
 
 /* LoadKeyboardLayout (aa453414): the page's signature takes LPCSTR
  * pwszKLID (a layout identifier string). */
-HKL LoadKeyboardLayout(LPCSTR pwszKLID, UINT Flags);
+AKARI_CE_IMPORT HKL LoadKeyboardLayout(LPCSTR pwszKLID, UINT Flags) AKARI_CE_NAME(LoadKeyboardLayout);
 
 /* Hot keys (CE 2.0+). */
-BOOL RegisterHotKey(HWND hWnd, int id, UINT fsModifiers, UINT vk);
+AKARI_CE_IMPORT BOOL RegisterHotKey(HWND hWnd, int id, UINT fsModifiers, UINT vk) AKARI_CE_NAME(RegisterHotKey);
 BOOL UnregisterHotKey(HWND hWnd, int id);
 
 /* Accelerator tables (CE 1.0+; Link Library Accel.lib). */
-HACCEL CreateAcceleratorTable(LPACCEL lpaccl, int cEntries); /* ms908162 */
-HACCEL LoadAcceleratorsW(HINSTANCE hInstance,                /* aa453407 */
-                         LPCTSTR lpTableName);
+AKARI_CE_IMPORT HACCEL CreateAcceleratorTable(LPACCEL lpaccl, int cEntries) AKARI_CE_NAME(CreateAcceleratorTable); /* ms908162 */
+AKARI_CE_IMPORT HACCEL LoadAcceleratorsW(HINSTANCE hInstance,                /* aa453407 */
+                         LPCTSTR lpTableName) AKARI_CE_NAME(LoadAcceleratorsW);
 #define LoadAccelerators LoadAcceleratorsW
-BOOL   DestroyAcceleratorTable(HACCEL hAccel);              /* aa452935 */
-int    TranslateAccelerator(HWND hWnd, HACCEL hAccTable,    /* aa453775 */
-                            LPMSG lpMsg);
+AKARI_CE_IMPORT BOOL   DestroyAcceleratorTable(HACCEL hAccel) AKARI_CE_NAME(DestroyAcceleratorTable);              /* aa452935 */
+AKARI_CE_IMPORT int    TranslateAccelerator(HWND hWnd, HACCEL hAccTable,    /* aa453775 */
+                            LPMSG lpMsg) AKARI_CE_NAME(TranslateAccelerator);
 
 /* ms932719 "SendInput": synthesizes mouse/keyboard/hardware input. */
-UINT SendInput(UINT nInputs, LPINPUT pInputs, int cbSize);
+AKARI_CE_IMPORT UINT SendInput(UINT nInputs, LPINPUT pInputs, int cbSize) AKARI_CE_NAME(SendInput);
 
 /* ------------------------------------------------------------------ */
 /* Scroll Bars Reference functions (Header: Winuser.h).              */
 /* ------------------------------------------------------------------ */
 
-BOOL GetScrollInfo(HWND hwnd, int fnBar, LPSCROLLINFO lpsi); /* aa453163 */
-int  SetScrollInfo(HWND hwnd, int fnBar, LPSCROLLINFO lpsi,  /* aa453652 */
-                   BOOL fRedraw);
-int  SetScrollPos(HWND hWnd, int nBar, int nPos, BOOL bRedraw); /* aa453653 */
-BOOL SetScrollRange(HWND hWnd, int nBar, int nMinPos,          /* aa453654 */
-                    int nMaxPos, BOOL bRedraw);
-int  ScrollWindowEx(HWND hWnd, int dx, int dy,                 /* ms932713 */
+AKARI_CE_IMPORT BOOL GetScrollInfo(HWND hwnd, int fnBar, LPSCROLLINFO lpsi) AKARI_CE_NAME(GetScrollInfo); /* aa453163 */
+AKARI_CE_IMPORT int  SetScrollInfo(HWND hwnd, int fnBar, LPSCROLLINFO lpsi,  /* aa453652 */
+                   BOOL fRedraw) AKARI_CE_NAME(SetScrollInfo);
+AKARI_CE_IMPORT int  SetScrollPos(HWND hWnd, int nBar, int nPos, BOOL bRedraw) AKARI_CE_NAME(SetScrollPos); /* aa453653 */
+AKARI_CE_IMPORT BOOL SetScrollRange(HWND hWnd, int nBar, int nMinPos,          /* aa453654 */
+                    int nMaxPos, BOOL bRedraw) AKARI_CE_NAME(SetScrollRange);
+AKARI_CE_IMPORT int  ScrollWindowEx(HWND hWnd, int dx, int dy,                 /* ms932713 */
                     const RECT *prcScroll, const RECT *prcClip,
-                    HRGN hrgnUpdate, LPRECT prcUpdate, UINT flags);
+                    HRGN hrgnUpdate, LPRECT prcUpdate, UINT flags) AKARI_CE_NAME(ScrollWindowEx);
 
 /* ------------------------------------------------------------------ */
 /* Entry-point and window-procedure prototypes published by the CE    */
@@ -566,61 +566,61 @@ typedef struct tagPAINTSTRUCT {
 } PAINTSTRUCT, *LPPAINTSTRUCT;
 
 /* aa452871 "BeginPaint" */
-HDC BeginPaint(HWND hwnd, LPPAINTSTRUCT lpPaint);
+AKARI_CE_IMPORT HDC BeginPaint(HWND hwnd, LPPAINTSTRUCT lpPaint) AKARI_CE_NAME(BeginPaint);
 /* ms928584 "ClientToScreen" */
-BOOL ClientToScreen(HWND hWnd, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL ClientToScreen(HWND hWnd, LPPOINT lpPoint) AKARI_CE_NAME(ClientToScreen);
 /* ms908152 "CopyRect" */
-BOOL CopyRect(LPRECT lprcDst, const RECT* lprcSrc);
+AKARI_CE_IMPORT BOOL CopyRect(LPRECT lprcDst, const RECT* lprcSrc) AKARI_CE_NAME(CopyRect);
 /* aa452970 "DrawFrameControl" */
-BOOL DrawFrameControl(HDC hdc, LPRECT lprc, UINT uType, UINT uState);
+AKARI_CE_IMPORT BOOL DrawFrameControl(HDC hdc, LPRECT lprc, UINT uType, UINT uState) AKARI_CE_NAME(DrawFrameControl);
 /* aa453041 "EndPaint" */
-BOOL EndPaint(HWND hWnd, CONST PAINTSTRUCT* lpPaint);
+AKARI_CE_IMPORT BOOL EndPaint(HWND hWnd, CONST PAINTSTRUCT* lpPaint) AKARI_CE_NAME(EndPaint);
 /* aa453055 "EqualRect" */
-BOOL EqualRect(const RECT* lprc1, const RECT* lprc2);
+AKARI_CE_IMPORT BOOL EqualRect(const RECT* lprc1, const RECT* lprc2) AKARI_CE_NAME(EqualRect);
 /* ms929227 "GetDC" */
-HDC GetDC(HWND hWnd);
+AKARI_CE_IMPORT HDC GetDC(HWND hWnd) AKARI_CE_NAME(GetDC);
 /* ms929228 "GetDCEx" */
-HDC GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags);
+AKARI_CE_IMPORT HDC GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags) AKARI_CE_NAME(GetDCEx);
 /* aa453174 "GetUpdateRect" */
-BOOL GetUpdateRect(HWND hWnd, LPRECT lpRect, BOOL bErase);
+AKARI_CE_IMPORT BOOL GetUpdateRect(HWND hWnd, LPRECT lpRect, BOOL bErase) AKARI_CE_NAME(GetUpdateRect);
 /* aa453175 "GetUpdateRgn" */
-int GetUpdateRgn(HWND hWnd, HRGN hRgn, BOOL bErase);
+AKARI_CE_IMPORT int GetUpdateRgn(HWND hWnd, HRGN hRgn, BOOL bErase) AKARI_CE_NAME(GetUpdateRgn);
 /* aa453179 "GetWindowDC" */
-HDC GetWindowDC(HWND hWnd);
+AKARI_CE_IMPORT HDC GetWindowDC(HWND hWnd) AKARI_CE_NAME(GetWindowDC);
 /* aa453182 "GetWindowRgn" */
-int GetWindowRgn(HWND hWnd, HRGN hRgn);
+AKARI_CE_IMPORT int GetWindowRgn(HWND hWnd, HRGN hRgn) AKARI_CE_NAME(GetWindowRgn);
 /* ms909856 "IntersectRect" */
-BOOL IntersectRect(LPRECT lprcDst, const RECT* lprcSrc1,
-    const RECT* lprcSrc2);
+AKARI_CE_IMPORT BOOL IntersectRect(LPRECT lprcDst, const RECT* lprcSrc1,
+    const RECT* lprcSrc2) AKARI_CE_NAME(IntersectRect);
 /* ms909857 "InvalidateRect" */
-BOOL InvalidateRect(HWND hWnd, const RECT* lpRect, BOOL bErase);
+AKARI_CE_IMPORT BOOL InvalidateRect(HWND hWnd, const RECT* lpRect, BOOL bErase) AKARI_CE_NAME(InvalidateRect);
 /* ms909894 "IsRectEmpty" */
-BOOL IsRectEmpty(const RECT* lprc);
+AKARI_CE_IMPORT BOOL IsRectEmpty(const RECT* lprc) AKARI_CE_NAME(IsRectEmpty);
 /* aa453409 "LoadBitmap" */
-HBITMAP LoadBitmap(HINSTANCE hInstance, LPCTSTR lpBitmapName);
+AKARI_CE_IMPORT HBITMAP LoadBitmap(HINSTANCE hInstance, LPCTSTR lpBitmapName) AKARI_CE_NAME(LoadBitmap);
 /* ms911790 "MapWindowPoints" */
-int MapWindowPoints(HWND hWndFrom, HWND hWndTo, LPPOINT lpPoints,
-    UINT cPoints);
+AKARI_CE_IMPORT int MapWindowPoints(HWND hWndFrom, HWND hWndTo, LPPOINT lpPoints,
+    UINT cPoints) AKARI_CE_NAME(MapWindowPoints);
 /* ms911891 "OffsetRect" */
-BOOL OffsetRect(LPRECT lprc, int dx, int dy);
+AKARI_CE_IMPORT BOOL OffsetRect(LPRECT lprc, int dx, int dy) AKARI_CE_NAME(OffsetRect);
 /* aa453601 "PtInRect" */
-BOOL PtInRect(const RECT* lprc, POINT pt);
+AKARI_CE_IMPORT BOOL PtInRect(const RECT* lprc, POINT pt) AKARI_CE_NAME(PtInRect);
 /* ms939760 "ReleaseDC" */
-int ReleaseDC(HWND hWnd, HDC hDC);
+AKARI_CE_IMPORT int ReleaseDC(HWND hWnd, HDC hDC) AKARI_CE_NAME(ReleaseDC);
 /* ms932582 "ScreenToClient" */
-BOOL ScreenToClient(HWND hWnd, LPPOINT lpPoint);
+AKARI_CE_IMPORT BOOL ScreenToClient(HWND hWnd, LPPOINT lpPoint) AKARI_CE_NAME(ScreenToClient);
 /* aa453649 "SetRectEmpty" */
-BOOL SetRectEmpty(LPRECT lprc);
+AKARI_CE_IMPORT BOOL SetRectEmpty(LPRECT lprc) AKARI_CE_NAME(SetRectEmpty);
 /* aa453663 "SetWindowRgn" */
-int SetWindowRgn(HWND hWnd, HRGN hRgn, BOOL bRedraw);
+AKARI_CE_IMPORT int SetWindowRgn(HWND hWnd, HRGN hRgn, BOOL bRedraw) AKARI_CE_NAME(SetWindowRgn);
 /* ms940381 "SubtractRect" */
-BOOL SubtractRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2);
+AKARI_CE_IMPORT BOOL SubtractRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2) AKARI_CE_NAME(SubtractRect);
 /* ms914081 "UnionRect" */
-BOOL UnionRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2);
+AKARI_CE_IMPORT BOOL UnionRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2) AKARI_CE_NAME(UnionRect);
 /* ms914085 "UpdateWindow" */
-BOOL UpdateWindow(HWND hWnd);
+AKARI_CE_IMPORT BOOL UpdateWindow(HWND hWnd) AKARI_CE_NAME(UpdateWindow);
 /* ms914091 "ValidateRect" */
-BOOL ValidateRect(HWND hWnd, const RECT* lpRect);
+AKARI_CE_IMPORT BOOL ValidateRect(HWND hWnd, const RECT* lpRect) AKARI_CE_NAME(ValidateRect);
 
 /* ------------------------------------------------------------------ */
 /* M28: Dialog Boxes / Menus / Clipboards / Resources(icon) / System-  */
@@ -743,31 +743,31 @@ typedef struct _ICONINFO {
 BOOL  AppendMenuW(HMENU hMenu, UINT uFlags, UINT uIDNewItem,
                   LPCTSTR lpNewItem);                 /* aa452862 */
 #define AppendMenu AppendMenuW
-BOOL  CheckMenuItem(HMENU hmenu, UINT uIDCheckItem, UINT uCheck); /* ms928575 */
-BOOL  CheckMenuRadioItem(HMENU hmenu, UINT idFirst, UINT idLast,  /* ms928576 */
-                         UINT idCheck, UINT uFlags);
-HMENU CreateMenu(void);                               /* ms908177 */
-HMENU CreatePopupMenu(void);                          /* ms908182 */
-BOOL  DeleteMenu(HMENU hMenu, UINT uPosition, UINT uFlags);       /* aa452932 */
-BOOL  DestroyMenu(HMENU hMenu);                       /* aa452940 */
-BOOL  DrawMenuBar(HWND hWnd);                         /* aa452975 */
-BOOL  EnableMenuItem(HMENU hMenu, UINT uIDEnableItem, UINT uEnable); /* aa453034 */
-BOOL  GetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
-                      LPMENUITEMINFO lpmii);          /* aa453134 */
-HMENU GetSubMenu(HMENU hMenu, int nPos);              /* aa453166 */
-HMENU GetSystemMenu(HWND hWnd, BOOL bRevert);         /* aa453169 */
-BOOL  InsertMenuW(HMENU hMenu, UINT uPosition, UINT uFlags,
-                  UINT uIDNewItem, LPCTSTR lpNewItem);             /* ms909853 */
+AKARI_CE_IMPORT BOOL  CheckMenuItem(HMENU hmenu, UINT uIDCheckItem, UINT uCheck) AKARI_CE_NAME(CheckMenuItem); /* ms928575 */
+AKARI_CE_IMPORT BOOL  CheckMenuRadioItem(HMENU hmenu, UINT idFirst, UINT idLast,  /* ms928576 */
+                         UINT idCheck, UINT uFlags) AKARI_CE_NAME(CheckMenuRadioItem);
+AKARI_CE_IMPORT HMENU CreateMenu(void) AKARI_CE_NAME(CreateMenu);                               /* ms908177 */
+AKARI_CE_IMPORT HMENU CreatePopupMenu(void) AKARI_CE_NAME(CreatePopupMenu);                          /* ms908182 */
+AKARI_CE_IMPORT BOOL  DeleteMenu(HMENU hMenu, UINT uPosition, UINT uFlags) AKARI_CE_NAME(DeleteMenu);       /* aa452932 */
+AKARI_CE_IMPORT BOOL  DestroyMenu(HMENU hMenu) AKARI_CE_NAME(DestroyMenu);                       /* aa452940 */
+AKARI_CE_IMPORT BOOL  DrawMenuBar(HWND hWnd) AKARI_CE_NAME(DrawMenuBar);                         /* aa452975 */
+AKARI_CE_IMPORT BOOL  EnableMenuItem(HMENU hMenu, UINT uIDEnableItem, UINT uEnable) AKARI_CE_NAME(EnableMenuItem); /* aa453034 */
+AKARI_CE_IMPORT BOOL  GetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
+                      LPMENUITEMINFO lpmii) AKARI_CE_NAME(GetMenuItemInfo);          /* aa453134 */
+AKARI_CE_IMPORT HMENU GetSubMenu(HMENU hMenu, int nPos) AKARI_CE_NAME(GetSubMenu);              /* aa453166 */
+AKARI_CE_IMPORT HMENU GetSystemMenu(HWND hWnd, BOOL bRevert) AKARI_CE_NAME(GetSystemMenu);         /* aa453169 */
+AKARI_CE_IMPORT BOOL  InsertMenuW(HMENU hMenu, UINT uPosition, UINT uFlags,
+                  UINT uIDNewItem, LPCTSTR lpNewItem) AKARI_CE_NAME(InsertMenuW);             /* ms909853 */
 #define InsertMenu InsertMenuW
-HMENU LoadMenuW(HINSTANCE hInstance, LPCTSTR lpMenuName);          /* aa453415 */
+AKARI_CE_IMPORT HMENU LoadMenuW(HINSTANCE hInstance, LPCTSTR lpMenuName) AKARI_CE_NAME(LoadMenuW);          /* aa453415 */
 #define LoadMenu LoadMenuW
-BOOL  RemoveMenu(HMENU hMenu, UINT uPosition, UINT uFlags);        /* ms939775 */
-BOOL  SetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
-                      LPCMENUITEMINFO lpmii);        /* ms940027 */
-BOOL  TrackPopupMenu(HMENU hMenu, UINT uFlags, int x, int y,
-                     int nReserved, HWND hWnd, const RECT* prcRect); /* aa453773 */
-BOOL  TrackPopupMenuEx(HMENU hmenu, UINT uFlags, int x, int y,     /* aa453774 */
-                       HWND hwnd, LPTPMPARAMS lptpm);
+AKARI_CE_IMPORT BOOL  RemoveMenu(HMENU hMenu, UINT uPosition, UINT uFlags) AKARI_CE_NAME(RemoveMenu);        /* ms939775 */
+AKARI_CE_IMPORT BOOL  SetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
+                      LPCMENUITEMINFO lpmii) AKARI_CE_NAME(SetMenuItemInfo);        /* ms940027 */
+AKARI_CE_IMPORT BOOL  TrackPopupMenu(HMENU hMenu, UINT uFlags, int x, int y,
+                     int nReserved, HWND hWnd, const RECT* prcRect) AKARI_CE_NAME(TrackPopupMenu); /* aa453773 */
+AKARI_CE_IMPORT BOOL  TrackPopupMenuEx(HMENU hmenu, UINT uFlags, int x, int y,     /* aa453774 */
+                       HWND hwnd, LPTPMPARAMS lptpm) AKARI_CE_NAME(TrackPopupMenuEx);
 
 /* ------------------------------------------------------------------ */
 /* Dialog Boxes Reference functions.  Header Winuser.h except where    */
@@ -779,106 +779,106 @@ BOOL  TrackPopupMenuEx(HMENU hmenu, UINT uFlags, int x, int y,     /* aa453774 *
 HWND CreateDialogW(HINSTANCE hInstance, LPCTSTR lpTemplate,       /* ms908169 */
                    HWND hWndParent, DLGPROC lpDialogFunc);
 #define CreateDialog CreateDialogW
-HWND CreateDialogIndirect(HINSTANCE hInstance,                    /* ms908170 */
+AKARI_CE_IMPORT HWND CreateDialogIndirect(HINSTANCE hInstance,                    /* ms908170 */
                           LPCDLGTEMPLATE lpTemplate, HWND hWndParent,
-                          DLGPROC lpDialogFunc);
-HWND CreateDialogIndirectParam(HINSTANCE hInstance,               /* ms908171 */
+                          DLGPROC lpDialogFunc) AKARI_CE_NAME(CreateDialogIndirect);
+AKARI_CE_IMPORT HWND CreateDialogIndirectParam(HINSTANCE hInstance,               /* ms908171 */
                                LPCDLGTEMPLATE lpTemplate, HWND hWndParent,
-                               DLGPROC lpDialogFunc, LPARAM lParamInit);
+                               DLGPROC lpDialogFunc, LPARAM lParamInit) AKARI_CE_NAME(CreateDialogIndirectParam);
 HWND CreateDialogParamW(HINSTANCE hInstance, LPCTSTR lpTemplateName, /* ms908172 */
                         HWND hWndParent, DLGPROC lpDialogFunc,
                         LPARAM dwInitParam);
 #define CreateDialogParam CreateDialogParamW
-LRESULT DefDlgProc(HWND hDlg, UINT Msg, WPARAM wParam,            /* ms908209 */
-                   LPARAM lParam);
+AKARI_CE_IMPORT LRESULT DefDlgProc(HWND hDlg, UINT Msg, WPARAM wParam,            /* ms908209 */
+                   LPARAM lParam) AKARI_CE_NAME(DefDlgProc);
 int    DialogBoxW(HINSTANCE hInstance, LPCTSTR lpTemplate,        /* aa452947 */
                   HWND hWndParent, DLGPROC lpDialogFunc);
 #define DialogBox DialogBoxW
 int    DialogBoxIndirect(HINSTANCE hInstance, LPDLGTEMPLATE lpTemplate, /* aa452948 */
                          HWND hWndParent, DLGPROC lpDialogFunc);
-int    DialogBoxIndirectParam(HINSTANCE hInstance,                /* aa452949 */
+AKARI_CE_IMPORT int    DialogBoxIndirectParam(HINSTANCE hInstance,                /* aa452949 */
                               LPCDLGTEMPLATE hDialogTemplate, HWND hWndParent,
-                              DLGPROC lpDialogFunc, LPARAM dwInitParam);
+                              DLGPROC lpDialogFunc, LPARAM dwInitParam) AKARI_CE_NAME(DialogBoxIndirectParam);
 int    DialogBoxParamW(HINSTANCE hInstance, LPCTSTR lpTemplateName, /* aa452950 */
                        HWND hWndParent, DLGPROC lpDialogFunc, LPARAM dwInitParam);
 #define DialogBoxParam DialogBoxParamW
-BOOL   EndDialog(HWND hDlg, int nResult);                         /* aa453038 */
-LONG   GetDialogBaseUnits(void);                                  /* ms929231 */
-int    GetDlgCtrlID(HWND hwndCtl);                                /* ms929233 */
-HWND   GetDlgItem(HWND hDlg, int nIDDlgItem);                     /* ms929234 */
-UINT   GetDlgItemInt(HWND hDlg, int nIDDlgItem, BOOL* lpTranslated,
-                     BOOL bSigned);                               /* ms929235 */
-UINT   GetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPTSTR lpString,
-                       int nMaxCount);                            /* ms929236 */
+AKARI_CE_IMPORT BOOL   EndDialog(HWND hDlg, int nResult) AKARI_CE_NAME(EndDialog);                         /* aa453038 */
+AKARI_CE_IMPORT LONG   GetDialogBaseUnits(void) AKARI_CE_NAME(GetDialogBaseUnits);                                  /* ms929231 */
+AKARI_CE_IMPORT int    GetDlgCtrlID(HWND hwndCtl) AKARI_CE_NAME(GetDlgCtrlID);                                /* ms929233 */
+AKARI_CE_IMPORT HWND   GetDlgItem(HWND hDlg, int nIDDlgItem) AKARI_CE_NAME(GetDlgItem);                     /* ms929234 */
+AKARI_CE_IMPORT UINT   GetDlgItemInt(HWND hDlg, int nIDDlgItem, BOOL* lpTranslated,
+                     BOOL bSigned) AKARI_CE_NAME(GetDlgItemInt);                               /* ms929235 */
+AKARI_CE_IMPORT UINT   GetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPTSTR lpString,
+                       int nMaxCount) AKARI_CE_NAME(GetDlgItemTextW);                            /* ms929236 */
 #define GetDlgItemText GetDlgItemTextW
-HWND   GetNextDlgGroupItem(HWND hDlg, HWND hCtl, BOOL bPrevious);  /* aa453145 */
-HWND   GetNextDlgTabItem(HWND hDlg, HWND hCtl, BOOL bPrevious);    /* aa453146 */
-BOOL   IsDialogMessage(HWND hDlg, LPMSG lpMsg);                   /* ms909864 */
-BOOL   MapDialogRect(HWND hDlg, LPRECT lpRect);                   /* ms911788 */
-LONG   SendDlgItemMessage(HWND hDlg, int nIDDlgItem, UINT Msg,    /* ms932717 */
-                          WPARAM wParam, LPARAM lParam);
-BOOL   SetDlgItemInt(HWND hDlg, int nIDDlgItem, UINT uValue,      /* ms940020 */
-                     BOOL bSigned);
-BOOL   SetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPCTSTR lpString); /* ms940021 */
+AKARI_CE_IMPORT HWND   GetNextDlgGroupItem(HWND hDlg, HWND hCtl, BOOL bPrevious) AKARI_CE_NAME(GetNextDlgGroupItem);  /* aa453145 */
+AKARI_CE_IMPORT HWND   GetNextDlgTabItem(HWND hDlg, HWND hCtl, BOOL bPrevious) AKARI_CE_NAME(GetNextDlgTabItem);    /* aa453146 */
+AKARI_CE_IMPORT BOOL   IsDialogMessage(HWND hDlg, LPMSG lpMsg) AKARI_CE_NAME(IsDialogMessage);                   /* ms909864 */
+AKARI_CE_IMPORT BOOL   MapDialogRect(HWND hDlg, LPRECT lpRect) AKARI_CE_NAME(MapDialogRect);                   /* ms911788 */
+AKARI_CE_IMPORT LONG   SendDlgItemMessage(HWND hDlg, int nIDDlgItem, UINT Msg,    /* ms932717 */
+                          WPARAM wParam, LPARAM lParam) AKARI_CE_NAME(SendDlgItemMessage);
+AKARI_CE_IMPORT BOOL   SetDlgItemInt(HWND hDlg, int nIDDlgItem, UINT uValue,      /* ms940020 */
+                     BOOL bSigned) AKARI_CE_NAME(SetDlgItemInt);
+AKARI_CE_IMPORT BOOL   SetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPCTSTR lpString) AKARI_CE_NAME(SetDlgItemTextW); /* ms940021 */
 #define SetDlgItemText SetDlgItemTextW
 
 /* ms909866 "IsDlgButtonChecked" and ms928573 "CheckDlgButton" are     */
 /* declared in windows.h (their pages list Header Windows.h).           */
 
 /* Buttons Reference: ms928577 "CheckRadioButton" (Header Winuser.h).   */
-BOOL CheckRadioButton(HWND hDlg, int nIDFirstButton, int nIDLastButton,
-                      int nIDCheckButton);
+AKARI_CE_IMPORT BOOL CheckRadioButton(HWND hDlg, int nIDFirstButton, int nIDLastButton,
+                      int nIDCheckButton) AKARI_CE_NAME(CheckRadioButton);
 
 /* ------------------------------------------------------------------ */
 /* Clipboards Reference functions (Header Winuser.h).                 */
 /* ------------------------------------------------------------------ */
 
-BOOL   CloseClipboard(void);                       /* ms928586 */
-int    CountClipboardFormats(void);                /* ms908153 */
-BOOL   EmptyClipboard(void);                       /* aa453019 */
-UINT   EnumClipboardFormats(UINT format);          /* aa453047 */
-HANDLE GetClipboardData(UINT uFormat);             /* ms929215 */
-HANDLE GetClipboardDataAlloc(UINT uFormat);        /* ms929216 */
-int    GetClipboardFormatNameW(UINT format, LPTSTR lpszFormatName,
-                               int cchMaxCount);   /* ms929217 */
+AKARI_CE_IMPORT BOOL   CloseClipboard(void) AKARI_CE_NAME(CloseClipboard);                       /* ms928586 */
+AKARI_CE_IMPORT int    CountClipboardFormats(void) AKARI_CE_NAME(CountClipboardFormats);                /* ms908153 */
+AKARI_CE_IMPORT BOOL   EmptyClipboard(void) AKARI_CE_NAME(EmptyClipboard);                       /* aa453019 */
+AKARI_CE_IMPORT UINT   EnumClipboardFormats(UINT format) AKARI_CE_NAME(EnumClipboardFormats);          /* aa453047 */
+AKARI_CE_IMPORT HANDLE GetClipboardData(UINT uFormat) AKARI_CE_NAME(GetClipboardData);             /* ms929215 */
+AKARI_CE_IMPORT HANDLE GetClipboardDataAlloc(UINT uFormat) AKARI_CE_NAME(GetClipboardDataAlloc);        /* ms929216 */
+AKARI_CE_IMPORT int    GetClipboardFormatNameW(UINT format, LPTSTR lpszFormatName,
+                               int cchMaxCount) AKARI_CE_NAME(GetClipboardFormatNameW);   /* ms929217 */
 #define GetClipboardFormatName GetClipboardFormatNameW
-HWND   GetClipboardOwner(void);                    /* ms929218 */
-HWND   GetOpenClipboardWindow(void);               /* aa453149 */
-int    GetPriorityClipboardFormat(UINT* paFormatPriorityList,
-                                  int cFormats);   /* aa453154 */
-BOOL   IsClipboardFormatAvailable(UINT format);    /* ms909863 */
-BOOL   OpenClipboard(HWND hWndNewOwner);           /* ms911905 */
-UINT   RegisterClipboardFormatW(LPCWSTR lpszFormat); /* ms913094; the page
+AKARI_CE_IMPORT HWND   GetClipboardOwner(void) AKARI_CE_NAME(GetClipboardOwner);                    /* ms929218 */
+AKARI_CE_IMPORT HWND   GetOpenClipboardWindow(void) AKARI_CE_NAME(GetOpenClipboardWindow);               /* aa453149 */
+AKARI_CE_IMPORT int    GetPriorityClipboardFormat(UINT* paFormatPriorityList,
+                                  int cFormats) AKARI_CE_NAME(GetPriorityClipboardFormat);   /* aa453154 */
+AKARI_CE_IMPORT BOOL   IsClipboardFormatAvailable(UINT format) AKARI_CE_NAME(IsClipboardFormatAvailable);    /* ms909863 */
+AKARI_CE_IMPORT BOOL   OpenClipboard(HWND hWndNewOwner) AKARI_CE_NAME(OpenClipboard);           /* ms911905 */
+AKARI_CE_IMPORT UINT   RegisterClipboardFormatW(LPCWSTR lpszFormat) AKARI_CE_NAME(RegisterClipboardFormatW); /* ms913094; the page
                                                       * states only the
                                                       * Unicode version */
 #define RegisterClipboardFormat RegisterClipboardFormatW
-HANDLE SetClipboardData(UINT uFormat, HANDLE hMem); /* ms940015 */
+AKARI_CE_IMPORT HANDLE SetClipboardData(UINT uFormat, HANDLE hMem) AKARI_CE_NAME(SetClipboardData); /* ms940015 */
 
 /* ------------------------------------------------------------------ */
 /* Resources Reference icon/image functions (Header Winuser.h).        */
 /* ------------------------------------------------------------------ */
 
-HICON  CreateIconIndirect(PICONINFO piconinfo);     /* ms908175 */
-BOOL   DestroyIcon(HICON hIcon);                    /* aa452938 */
-BOOL   DrawIconEx(HDC hdc, int xLeft, int yTop, HICON hIcon,
+AKARI_CE_IMPORT HICON  CreateIconIndirect(PICONINFO piconinfo) AKARI_CE_NAME(CreateIconIndirect);     /* ms908175 */
+AKARI_CE_IMPORT BOOL   DestroyIcon(HICON hIcon) AKARI_CE_NAME(DestroyIcon);                    /* aa452938 */
+AKARI_CE_IMPORT BOOL   DrawIconEx(HDC hdc, int xLeft, int yTop, HICON hIcon,
                   int cxWidth, int cyWidth, UINT istepIfAniCur,
-                  HBRUSH hbrFlickerFreeDraw, UINT diFlags);   /* aa452972 */
-BOOL   GetIconInfo(HICON hIcon, PICONINFO piconinfo);         /* ms929247 */
-HICON  LoadIconW(HINSTANCE hInstance, LPCTSTR lpIconName);    /* aa453411 */
+                  HBRUSH hbrFlickerFreeDraw, UINT diFlags) AKARI_CE_NAME(DrawIconEx);   /* aa452972 */
+AKARI_CE_IMPORT BOOL   GetIconInfo(HICON hIcon, PICONINFO piconinfo) AKARI_CE_NAME(GetIconInfo);         /* ms929247 */
+AKARI_CE_IMPORT HICON  LoadIconW(HINSTANCE hInstance, LPCTSTR lpIconName) AKARI_CE_NAME(LoadIconW);    /* aa453411 */
 #define LoadIcon LoadIconW
-HANDLE LoadImageW(HINSTANCE hinst, LPCTSTR lpszName, UINT uType,
-                  int cxDesired, int cyDesired, UINT fuLoad);  /* aa453413 */
+AKARI_CE_IMPORT HANDLE LoadImageW(HINSTANCE hinst, LPCTSTR lpszName, UINT uType,
+                  int cxDesired, int cyDesired, UINT fuLoad) AKARI_CE_NAME(LoadImageW);  /* aa453413 */
 #define LoadImage LoadImageW
 
 /* ------------------------------------------------------------------ */
 /* System Information Reference functions (Header Winuser.h).          */
 /* ------------------------------------------------------------------ */
 
-BOOL  EnableHardwareKeyboard(BOOL bEnable);          /* aa453033 */
-DWORD GetSysColor(int nIndex);                       /* aa453167 */
-int   GetSystemMetrics(int nIndex);                  /* aa453170 */
-BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
-                            UINT fWinIni);           /* ms940383; the page
+AKARI_CE_IMPORT BOOL  EnableHardwareKeyboard(BOOL bEnable) AKARI_CE_NAME(EnableHardwareKeyboard);          /* aa453033 */
+AKARI_CE_IMPORT DWORD GetSysColor(int nIndex) AKARI_CE_NAME(GetSysColor);                       /* aa453167 */
+AKARI_CE_IMPORT int   GetSystemMetrics(int nIndex) AKARI_CE_NAME(GetSystemMetrics);                  /* aa453170 */
+AKARI_CE_IMPORT BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
+                            UINT fWinIni) AKARI_CE_NAME(SystemParametersInfoW);           /* ms940383; the page
                                                       * states only the
                                                       * Unicode version */
 #define SystemParametersInfo SystemParametersInfoW

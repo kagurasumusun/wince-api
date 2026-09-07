@@ -134,6 +134,8 @@ tools/              manifest/fetch/parse/generate tools
 docs/inventory.md   per-declaration official-source matrix
                     (page ID, OS Versions, Header, Link Library)
 tests/host/         host compile checks (types, syntax, mappings)
+tests/e2e/          end-to-end link consumers (main / WinMain / DLL;
+                    `make e2e`)
 Makefile            make check  (host syntax/type checks for CE
                     0x420/0x500/0x600); make crosscheck WINCECLANG=...
 ```
@@ -146,21 +148,49 @@ make check          # host: headers + TU compile warning-free under
 make crosscheck WINCECLANG=/path/to/LLVM-WinCE/clang
                     # real-toolchain compile checks for the six
                     # arm/i386-pc-wince{4.2,5.0,6.0} targets
+make e2e WINCECLANG=/path/to/LLVM-WinCE/clang CRTDIR=/path/to/wince-crt
+                    # doc-derived import libraries (llvm-dlltool) +
+                    # Akari CRT: link the tests/e2e consumers into
+                    # PE images on all six targets (main app /
+                    # WinMain app / DLL) and assert machine, CE
+                    # subsystem and import names
 ```
 
-Cross checks with the real toolchain (32-bit pointer model, link
-against the sysroot import libraries, x86 decoration) run in a later
-phase exactly like wince-crt's: build with the `LLVM-WinCE` toolchain
-and link end-to-end against the verified sysroot.  See
-`docs/verification.md`.  As of the M10 batch the freestanding compile
-matrix (headers + TU, `-Werror`) passes for `arm-pc-wince4.2/5.0/6.0`
-and `i386-pc-wince4.2/5.0/6.0`.
+Cross checks with the real toolchain (32-bit pointer model, x86
+decoration) run exactly like wince-crt's: build with the
+`LLVM-WinCE` toolchain.  As of the M10 batch the freestanding
+compile matrix (headers + TU, `-Werror`) passes for
+`arm-pc-wince4.2/5.0/6.0` and `i386-pc-wince4.2/5.0/6.0`.  End-to-end
+linking is shipped (M37): `make e2e WINCECLANG=... CRTDIR=...`
+builds the doc-derived import libraries (`llvm-dlltool`), links the
+`tests/e2e` consumers with the Akari CRT against them on all six
+targets, and asserts the PE machine/subsystem/import surface — the
+x86 headers are pinned to the undecorated CE export names
+(`AKARI_CE_IMPORT`/`AKARI_CE_NAME` in windef.h).
 
 ## Status / roadmap
 
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M37 (landed):** x86 CE undecorated import surface + end-to-end
+  link harness.  CE coredll/component-DLL export names are
+  undecorated on x86 as well as ARM (verified import surface); the
+  shipped headers, declared as plain C, produced
+  leading-underscore references on i386 that the undecorated import
+  libraries cannot satisfy.  `windef.h` gains `AKARI_CE_IMPORT`
+  (`__declspec(dllimport)` on x86) and `AKARI_CE_NAME(n)`
+  (`__asm(#n)` on x86); all 602 component-DLL declarations are
+  pinned.  The dllimport indirection is required because
+  uppercase-`L` names (LocalAlloc, LoadLibraryW, ...) cannot be
+  referenced by a bare asm label (MC local-label rule; verified
+  toolchain diagnostic).  New `tests/e2e` consumers + `make e2e`:
+  all 33 doc-derived defs -> llvm-dlltool import libraries
+  (armce / i386 `--no-leading-underscore`), Akari CRT per triple,
+  `lld-link -wince` PE images (mainACRTStartup / WinMainCRTStartup /
+  DllMainCRTStartup) with machine/subsystem-9/undecorated-import
+  assertions — passing on all six arm/i386-pc-wince{4.2,5.0,6.0}
+  targets.  Stray `a.out` removed.
 * **M36 (landed):** GDI fonts-and-text + MultiMonitor in wingdi.h --
   22 font/text functions (AddFontResourceW … SetTextColor) and 5
   MultiMonitor functions from the official CE 5.0 Fonts-and-Text GDI

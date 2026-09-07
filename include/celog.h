@@ -33,17 +33,17 @@ extern "C" {
  * CE 3.0+; Celog.h; Coredll.lib.  Called by the kernel whenever a
  * loggable event occurs; apps/drivers normally reach it through the
  * zone macros. */
-void CeLogData(BOOL fTimeStamp, WORD wID, PVOID pData, WORD wLen,
+AKARI_CE_IMPORT void CeLogData(BOOL fTimeStamp, WORD wID, PVOID pData, WORD wLen,
                DWORD dwZoneUser, DWORD dwZoneCE, WORD wFlag,
-               BOOL fFlagged);
+               BOOL fFlagged) AKARI_CE_NAME(CeLogData);
 
 /* aa450824 "CeLogGetZones (Windows CE 5.0)":
  * BOOL CeLogGetZones(LPDWORD, LPDWORD, LPDWORD, LPDWORD).  CE .NET
  * 4.0+; Celog.h; Coredll.lib.  Returns the active user zones, active
  * predefined system zones, the processes being logged, and the zones
  * the kernel supports (any output pointer may be NULL). */
-BOOL CeLogGetZones(LPDWORD lpdwZoneUser, LPDWORD lpdwZoneCE,
-                   LPDWORD lpdwZoneProcess, LPDWORD lpdwAvailableZones);
+AKARI_CE_IMPORT BOOL CeLogGetZones(LPDWORD lpdwZoneUser, LPDWORD lpdwZoneCE,
+                   LPDWORD lpdwZoneProcess, LPDWORD lpdwAvailableZones) AKARI_CE_NAME(CeLogGetZones);
 
 /* aa451043 "CeLogInterrupt (Windows CE 5.0)":
  * void CeLogInterrupt(DWORD).  CE .NET 3.0+; Celog.h; Coredll.lib.
@@ -51,34 +51,34 @@ BOOL CeLogGetZones(LPDWORD lpdwZoneUser, LPDWORD lpdwZoneCE,
  * the ISR returns).  The value packs the CEL_INT_DATA wSysIntr (upper
  * word) and wNestingLevel (lower word) members; the nesting level's
  * upper bit marks interrupt entry vs exit. */
-void CeLogInterrupt(DWORD dwlogvalue);
+AKARI_CE_IMPORT void CeLogInterrupt(DWORD dwlogvalue) AKARI_CE_NAME(CeLogInterrupt);
 
 /* aa450825 "CeLogMsg (Windows CE 5.0)":
  * void CeLogMsg(WCHAR *format, ...).  CE .NET 4.0+; Celog.h;
  * Coredll.lib.  Prints a formatted Unicode string to CeLogData; the
  * RETAILCELOGMSG / DEBUGCELOGMSG macros output conditionally. */
-void CeLogMsg(WCHAR *format, ...);
+AKARI_CE_IMPORT void CeLogMsg(WCHAR *format, ...) AKARI_CE_NAME(CeLogMsg);
 
 /* aa450826 "CeLogQueryZones (Windows CE 5.0)":
  * BOOL CeLogQueryZones(LPDWORD, LPDWORD, LPDWORD).  CE .NET 4.0+;
  * Celog.h (page: "Not applicable"); Coredll.lib.  Called by the kernel
  * to query zone state from the event-tracking DLL. */
-BOOL CeLogQueryZones(LPDWORD lpdwZoneUser, LPDWORD lpdwZoneCE,
-                     LPDWORD ldpwZoneProcess);
+AKARI_CE_IMPORT BOOL CeLogQueryZones(LPDWORD lpdwZoneUser, LPDWORD lpdwZoneCE,
+                     LPDWORD ldpwZoneProcess) AKARI_CE_NAME(CeLogQueryZones);
 
 /* aa450827 "CeLogReSync (Windows CE 5.0)":
  * BOOL CeLogReSync(void).  CE 3.0+; Celog.h; Coredll.lib.  Tells the
  * logging engine to dump all current threads and processes (for an
  * event viewer that restarts logging); the page notes this function is
  * part of the kernel and generates CeLogData calls. */
-BOOL CeLogReSync(void);
+AKARI_CE_IMPORT BOOL CeLogReSync(void) AKARI_CE_NAME(CeLogReSync);
 
 /* aa450828 "CeLogSetZones (Windows CE 5.0)":
  * void CeLogSetZones(DWORD, DWORD, DWORD).  CE 3.0+; Celog.h;
  * Coredll.lib.  Changes the active logging zones: user zones, OS zones
  * (default 0xFFBFFFFF, KCALLS off) and logged processes (default
  * 0xFFFFFFFF, all). */
-void CeLogSetZones(DWORD dwZoneUser, DWORD dwZoneCE, DWORD dwZoneProcess);
+AKARI_CE_IMPORT void CeLogSetZones(DWORD dwZoneUser, DWORD dwZoneCE, DWORD dwZoneProcess) AKARI_CE_NAME(CeLogSetZones);
 
 #ifdef __cplusplus
 }

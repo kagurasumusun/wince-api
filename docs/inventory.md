@@ -1875,8 +1875,75 @@ the harvested official pages (`tools/gen-doc-def.py` over
   CE toolchain; the freestanding `-Werror` compile matrix for
   `arm/i386-pc-wince{4.2,5.0,6.0}` (headers + TU) passes since M8
   (`make crosscheck WINCECLANG=...`).
-* x86 decoration: link checks with `llvm-dlltool -m i386
-  --no-leading-underscore` import libraries, mirroring wince-crt.
-* End-to-end: link wince-crt + Akari API consumer TUs against the
-  sysroot import libraries on `arm-pc-wince` and `i386-pc-wince`
-  (needs the regenerated audited import surface).
+* x86 decoration: **shipped (M37)** — the headers pin every
+  component-DLL declaration to the undecorated CE export surface
+  (`AKARI_CE_IMPORT`/`AKARI_CE_NAME`), link-verified against
+  `llvm-dlltool -m i386 --no-leading-underscore` import libraries.
+* End-to-end: **shipped (M37)** — `make e2e WINCECLANG=...
+  CRTDIR=...` links wince-crt + Akari API consumer TUs against the
+  doc-derived import libraries on all six `arm/i386-pc-wince`
+  triples (EXE main/WinMain + DLL; machine/subsystem/imports
+  asserted).
+
+### M37: x86 CE undecorated import surface + end-to-end link harness
+
+**Fact (verified import surface, wince-crt audit):** CE component-DLL
+export names are undecorated on **x86 as well as ARM** — the CE
+import libraries define `__imp_<name>` without a leading underscore.
+The shipped headers declared plain C functions, so `i386-pc-wince`
+objects referenced the leading-underscore spelling (`_GetTickCount`)
+and could not resolve against the undecorated import libraries that
+the Akari CRT itself requires.  The x86 CE link path was therefore
+broken in the shipped header set (ARM was unaffected: no C symbol
+decoration).
+
+**Fix (own design from the verified surface):** `windef.h` defines
+
+* `AKARI_CE_IMPORT` = `__declspec(dllimport)` on x86, empty elsewhere;
+* `AKARI_CE_NAME(n)` = `__asm(#n)` on x86, empty elsewhere;
+
+and every one of the 602 component-DLL function declarations across
+the shipped headers is written
+`AKARI_CE_IMPORT <ret> <name>(...) AKARI_CE_NAME(<name>);`.  On x86
+the object then references the import variable `__imp_<name>`
+(undecorated spelling, set by the asm pin), which resolves against
+`llvm-dlltool -m i386 --no-leading-underscore` import libraries and
+yields PE import-table entries with the documented undecorated export
+names.  On ARM/Thumb both macros are empty (plain declarations; C
+symbols already undecorated).
+
+`__declspec(dllimport)` is required (not only the asm pin) because
+export names beginning with an uppercase `L` (`LocalAlloc`,
+`LocalFree`, `LocalReAlloc`, `LoadLibraryW`, ...) cannot be
+referenced by a bare asm label: the LLVM MC assembler treats
+uppercase-`L` labels as local labels and rejects the undefined
+reference ("assembler label 'X' can not be undefined" — verified on
+clang 22.1.8, `i386-pc-wince*` and `i686-unknown-windows-gnu`; ARM
+and x86-64 unaffected).  Through the `__imp_` variable the reference
+always carries the `_` prefix and the constraint is avoided; the
+verified toolchain's own CRT pins its coredll imports the same way
+(wince-crt audit).
+
+**End-to-end harness (shipped):** `tests/e2e/e2e_console.c` (a
+`main()` app: GetTickCount / GetSystemInfo / LocalAlloc+LocalFree /
+GetModuleHandleW / SetLastError), `tests/e2e/e2e_winmain.c` (a
+`WinMain()` app: MessageBoxW from msgbox.dll, the documented CE
+WinMain shape, ms914104) and `tests/e2e/e2e_module.c` (a DLL:
+DllMain per ms885202 + exported `E2EDemo`).  `make e2e
+WINCECLANG=... CRTDIR=...` builds import libraries from all 33
+doc-derived defs (armce / i386 `--no-leading-underscore`), builds the
+Akari CRT per triple, compiles the consumers `-Werror`, and links
+three PE images per triple with `lld-link -wince`
+(`/subsystem:windowsce`, entries `mainACRTStartup` /
+`WinMainCRTStartup` / `DllMainCRTStartup`, `/export:E2EDemo`), then
+asserts with llvm-readobj: machine (ARM 0x1C0 / I386 0x14C), EXE
+subsystem `IMAGE_SUBSYSTEM_WINDOWS_CE_GUI` (9), coredll.dll import
+names (undecorated), MessageBoxW import, E2EDemo export.  Passes all
+six `arm/i386-pc-wince{4.2,5.0,6.0}` targets against the
+`LLVM-WinCE` toolchain (CI run 34078339236, head 29d8b882ab, clang
+22.1.8) — the import libraries are wince-api's own
+doc-derived products, i.e. the sysroot-import-library role the
+parity target requires.
+
+Housekeeping: the stray `a.out` (x86-64 host test residue) is
+removed from the tree; `*.exe` / `*.dll` / `a.out` are gitignored.

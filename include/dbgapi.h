@@ -55,7 +55,7 @@ BOOL RegisterDbgZones(HMODULE hMod, LPDBGPARAM lpdbgparam);
  * void WriteDebugLED(WORD wIndex, DWORD dwPattern).  CE 2.12+;
  * Dbgapi.h; Coredll.lib.  Sends a debug event to an OEM-supplied LED;
  * wIndex 0..MAX_OEM_LEDINDEX (the OS reserves its own index range). */
-void WriteDebugLED(WORD wIndex, DWORD dwPattern);
+AKARI_CE_IMPORT void WriteDebugLED(WORD wIndex, DWORD dwPattern) AKARI_CE_NAME(WriteDebugLED);
 
 #ifdef __cplusplus
 }

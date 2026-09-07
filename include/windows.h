@@ -44,7 +44,7 @@ extern "C" {
 /* ms885217 "ExitProcess (Windows CE 5.0)" lists Header: Windows.h,
  * which is why this declaration lives here (see winbase.h for the
  * export-surface conflict note). */
-VOID ExitProcess(UINT uExitCode);
+AKARI_CE_IMPORT VOID ExitProcess(UINT uExitCode) AKARI_CE_NAME(ExitProcess);
 
 /* ------------------------------------------------------------------ */
 /* GWES items whose official pages give Header: Windows.h.            */
@@ -53,14 +53,14 @@ VOID ExitProcess(UINT uExitCode);
 /* Window properties (Window Properties Reference; CE .NET 4.0+;
  * Header Windows.h; Link Library Coredll.lib).  Window properties are
  * per-window data keyed by a string or atom. */
-BOOL   SetPropW(HWND hWnd, LPCTSTR lpString, HANDLE hData);  /* aa453647 */
+AKARI_CE_IMPORT BOOL   SetPropW(HWND hWnd, LPCTSTR lpString, HANDLE hData) AKARI_CE_NAME(SetPropW);  /* aa453647 */
 #define SetProp SetPropW
-HANDLE GetPropW(HWND hWnd, LPCTSTR lpString);               /* aa453155 */
+AKARI_CE_IMPORT HANDLE GetPropW(HWND hWnd, LPCTSTR lpString) AKARI_CE_NAME(GetPropW);               /* aa453155 */
 #define GetProp GetPropW
-HANDLE RemovePropW(HWND hWnd, LPCTSTR lpString);            /* ms939781 */
+AKARI_CE_IMPORT HANDLE RemovePropW(HWND hWnd, LPCTSTR lpString) AKARI_CE_NAME(RemovePropW);            /* ms939781 */
 #define RemoveProp RemovePropW
-int    EnumPropsExW(HWND hWnd, PROPENUMPROCEX lpEnumFunc,   /* aa453050 */
-                    LPARAM lParam);
+AKARI_CE_IMPORT int    EnumPropsExW(HWND hWnd, PROPENUMPROCEX lpEnumFunc,   /* aa453050 */
+                    LPARAM lParam) AKARI_CE_NAME(EnumPropsExW);
 #define EnumPropsEx EnumPropsExW
 
 /* aa453551 "PropEnumProcEx (Windows CE 5.0)": the enumeration callback
@@ -70,29 +70,29 @@ BOOL CALLBACK PropEnumProcEx(HWND hwnd, LPTSTR lpszString,
 
 /* Atoms (Atoms Reference; CE .NET 4.0+; Header Windows.h; Link
  * Library Coredll.lib). */
-ATOM GlobalAddAtomW(LPCTSTR lpString);      /* aa453188 */
+AKARI_CE_IMPORT ATOM GlobalAddAtomW(LPCTSTR lpString) AKARI_CE_NAME(GlobalAddAtomW);      /* aa453188 */
 #define GlobalAddAtom GlobalAddAtomW
-ATOM GlobalDeleteAtom(ATOM nAtom);          /* aa453189 */
-ATOM GlobalFindAtomW(LPCTSTR lpString);     /* aa453190 */
+AKARI_CE_IMPORT ATOM GlobalDeleteAtom(ATOM nAtom) AKARI_CE_NAME(GlobalDeleteAtom);          /* aa453189 */
+AKARI_CE_IMPORT ATOM GlobalFindAtomW(LPCTSTR lpString) AKARI_CE_NAME(GlobalFindAtomW);     /* aa453190 */
 #define GlobalFindAtom GlobalFindAtomW
 
 /* aa453137 "GetMessageQueueReadyTimeStamp (CE .NET 4.0+)": returns the
  * time stamp of the first message in the queue.  Header Windows.h;
  * Link Library Coredll.lib. */
-DWORD GetMessageQueueReadyTimeStamp(HWND hWnd);
+AKARI_CE_IMPORT DWORD GetMessageQueueReadyTimeStamp(HWND hWnd) AKARI_CE_NAME(GetMessageQueueReadyTimeStamp);
 
 /* ms939981 "SendMessageTimeout (Windows CE 5.0)":
  * LRESULT SendMessageTimeout(HWND, UINT, WPARAM, LPARAM, UINT, UINT,
  * PDWORD_PTR).  CE .NET 4.0+; Windows.h; Coredll.lib. */
-LRESULT SendMessageTimeout(HWND hWnd, UINT Msg, WPARAM wParam,
+AKARI_CE_IMPORT LRESULT SendMessageTimeout(HWND hWnd, UINT Msg, WPARAM wParam,
                             LPARAM lParam, UINT fuFlags, UINT uTimeout,
-                            PDWORD_PTR lpdwResult);
+                            PDWORD_PTR lpdwResult) AKARI_CE_NAME(SendMessageTimeout);
 
 /* ms932696 "ScrollDC (Windows CE 5.0)":
  * BOOL ScrollDC(HDC, int, int, const RECT*, const RECT*, HRGN, LPRECT).
  * CE 1.0+; Windows.h; Coredll.lib. */
-BOOL ScrollDC(HDC hDC, int dx, int dy, const RECT *lprcScroll,
-              const RECT *lprcClip, HRGN hrgnUpdate, LPRECT lprcUpdate);
+AKARI_CE_IMPORT BOOL ScrollDC(HDC hDC, int dx, int dy, const RECT *lprcScroll,
+              const RECT *lprcClip, HRGN hrgnUpdate, LPRECT lprcUpdate) AKARI_CE_NAME(ScrollDC);
 
 /* M28 dialog-book items whose official pages give Header: Windows.h. */
 
@@ -100,18 +100,18 @@ BOOL ScrollDC(HDC hDC, int dx, int dy, const RECT *lprcScroll,
  * Header: Windows.h; Link Library Msgbox.lib.  Windows CE supports only
  * the wide form (the repo rule for text functions); uType combines the
  * MB_* styles documented in the "Message Box Styles" book. */
-int MessageBoxW(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);
+AKARI_CE_IMPORT int MessageBoxW(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType) AKARI_CE_NAME(MessageBoxW);
 #define MessageBox MessageBoxW
 
 /* ms928573 "CheckDlgButton": sets the check state of a button control
  * (its official page prints an __inline prototype with Header:
  * Windows.h; Link Library Coredll.lib). */
-BOOL CheckDlgButton(HWND hDlg, int nIDButton, UINT uCheck);
+AKARI_CE_IMPORT BOOL CheckDlgButton(HWND hDlg, int nIDButton, UINT uCheck) AKARI_CE_NAME(CheckDlgButton);
 
 /* ms909866 "IsDlgButtonChecked": returns the check state of a button
  * (official page prints __inline UINT WINAPI ...; Header: Windows.h;
  * Link Library Coredll.lib). */
-UINT IsDlgButtonChecked(HWND hDlg, int nIDButton);
+AKARI_CE_IMPORT UINT IsDlgButtonChecked(HWND hDlg, int nIDButton) AKARI_CE_NAME(IsDlgButtonChecked);
 
 /* aa452974 "DRAWITEMSTRUCT (Windows CE 5.0)": owner-draw item passed as
  * the lParam of WM_DRAWITEM; Header: Windows.h.  The typedef is shared
@@ -133,7 +133,7 @@ typedef struct tagDRAWITEMSTRUCT {
  * page; Link Library Coreloc.lib -> def/coreloc-doc.def).  Sets the
  * user default locale; the page requires broadcasting WM_WININICHANGE
  * with wParam INI_INTL afterwards. */
-BOOL SetUserDefaultLCID(LCID Locale);
+AKARI_CE_IMPORT BOOL SetUserDefaultLCID(LCID Locale) AKARI_CE_NAME(SetUserDefaultLCID);
 
 #ifdef __cplusplus
 }

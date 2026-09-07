@@ -117,63 +117,63 @@ typedef struct tagHEAPENTRY32 {
  * HANDLE WINAPI CreateToolhelp32Snapshot(DWORD, DWORD).  CE 2.0+;
  * Tlhelp32.h; Toolhelp.lib.  Takes a snapshot of processes, threads,
  * modules and heaps; INVALID_HANDLE_VALUE on failure. */
-HANDLE CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID);
+AKARI_CE_IMPORT HANDLE CreateToolhelp32Snapshot(DWORD dwFlags, DWORD th32ProcessID) AKARI_CE_NAME(CreateToolhelp32Snapshot);
 
 /* ms885169 "CloseToolhelp32Snapshot (Windows CE 5.0)":
  * BOOL WINAPI CloseToolhelp32Snapshot(HANDLE).  CE 2.0+; Tlhelp32.h;
  * Toolhelp.lib. */
-BOOL CloseToolhelp32Snapshot(HANDLE hSnapshot);
+AKARI_CE_IMPORT BOOL CloseToolhelp32Snapshot(HANDLE hSnapshot) AKARI_CE_NAME(CloseToolhelp32Snapshot);
 
 /* Process enumeration (snapshot must include TH32CS_SNAPPROCESS). */
 
 /* ms886772/ms886773 "Process32First/Process32Next (CE 5.0)":
  * BOOL WINAPI Process32First/Next(HANDLE, LPPROCESSENTRY32).
  * CE 2.0+; Tlhelp32.h; Toolhelp.lib.  First/Next process entry. */
-BOOL Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe);
-BOOL Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe);
+AKARI_CE_IMPORT BOOL Process32First(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) AKARI_CE_NAME(Process32First);
+AKARI_CE_IMPORT BOOL Process32Next(HANDLE hSnapshot, LPPROCESSENTRY32 lppe) AKARI_CE_NAME(Process32Next);
 
 /* Thread enumeration (snapshot must include TH32CS_SNAPTHREAD). */
 
 /* aa450934/aa450936 "Thread32First/Thread32Next (CE 5.0)":
  * BOOL WINAPI Thread32First/Next(HANDLE, LPTHREADENTRY32).
  * CE 2.0+; Tlhelp32.h; Toolhelp.lib. */
-BOOL Thread32First(HANDLE hSnapshot, LPTHREADENTRY32 lpte);
-BOOL Thread32Next(HANDLE hSnapshot, LPTHREADENTRY32 lpte);
+AKARI_CE_IMPORT BOOL Thread32First(HANDLE hSnapshot, LPTHREADENTRY32 lpte) AKARI_CE_NAME(Thread32First);
+AKARI_CE_IMPORT BOOL Thread32Next(HANDLE hSnapshot, LPTHREADENTRY32 lpte) AKARI_CE_NAME(Thread32Next);
 
 /* Module enumeration (snapshot must include TH32CS_SNAPMODULE). */
 
 /* ms886754/ms886755 "Module32First/Module32Next (CE 5.0)":
  * BOOL WINAPI Module32First/Next(HANDLE, LPMODULEENTRY32).
  * CE 2.0+; Tlhelp32.h; Toolhelp.lib. */
-BOOL Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme);
-BOOL Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme);
+AKARI_CE_IMPORT BOOL Module32First(HANDLE hSnapshot, LPMODULEENTRY32 lpme) AKARI_CE_NAME(Module32First);
+AKARI_CE_IMPORT BOOL Module32Next(HANDLE hSnapshot, LPMODULEENTRY32 lpme) AKARI_CE_NAME(Module32Next);
 
 /* Heap enumeration (snapshot must include TH32CS_SNAPHEAPLIST). */
 
 /* ms885651/ms885652 "Heap32ListFirst/Heap32ListNext (CE 5.0)":
  * BOOL WINAPI Heap32ListFirst/Next(HANDLE, LPHEAPLIST32).
  * CE 2.0+; Tlhelp32.h (page ms885651 prints "Tlhelp.h"); Toolhelp.lib. */
-BOOL Heap32ListFirst(HANDLE hSnapshot, LPHEAPLIST32 lphl);
-BOOL Heap32ListNext(HANDLE hSnapshot, LPHEAPLIST32 lphl);
+AKARI_CE_IMPORT BOOL Heap32ListFirst(HANDLE hSnapshot, LPHEAPLIST32 lphl) AKARI_CE_NAME(Heap32ListFirst);
+AKARI_CE_IMPORT BOOL Heap32ListNext(HANDLE hSnapshot, LPHEAPLIST32 lphl) AKARI_CE_NAME(Heap32ListNext);
 
 /* ms885650/ms885653 "Heap32First/Heap32Next (CE 5.0)":
  * BOOL WINAPI Heap32First(HANDLE, LPHEAPENTRY32, DWORD, DWORD) and
  * Heap32Next(HANDLE, LPHEAPENTRY32).  CE 2.0+; Tlhelp32.h (page
  * ms885650 prints "Tlhelp.h"); Toolhelp.lib.  th32ProcessID/
  * th32HeapID of Heap32First come from a HEAPLIST32 entry. */
-BOOL Heap32First(HANDLE hSnapshot, LPHEAPENTRY32 lphe,
-                 DWORD th32ProcessID, DWORD th32HeapID);
-BOOL Heap32Next(HANDLE hSnapshot, LPHEAPENTRY32 lphe);
+AKARI_CE_IMPORT BOOL Heap32First(HANDLE hSnapshot, LPHEAPENTRY32 lphe,
+                 DWORD th32ProcessID, DWORD th32HeapID) AKARI_CE_NAME(Heap32First);
+AKARI_CE_IMPORT BOOL Heap32Next(HANDLE hSnapshot, LPHEAPENTRY32 lphe) AKARI_CE_NAME(Heap32Next);
 
 /* aa450953 "Toolhelp32ReadProcessMemory (Windows CE 5.0)":
  * BOOL WINAPI Toolhelp32ReadProcessMemory(DWORD, LPCVOID, LPVOID,
  * DWORD, LPDWORD).  CE 2.0+; Tlhelp32.h; Toolhelp.lib.  Reads another
  * process's memory (process identifiers may be cast to handles; other
  * processes require SetProcPermissions per the page). */
-BOOL Toolhelp32ReadProcessMemory(DWORD th32ProcessID,
+AKARI_CE_IMPORT BOOL Toolhelp32ReadProcessMemory(DWORD th32ProcessID,
                                  LPCVOID lpBaseAddress,
                                  LPVOID lpBuffer, DWORD cbRead,
-                                 LPDWORD lpNumberOfBytesRead);
+                                 LPDWORD lpNumberOfBytesRead) AKARI_CE_NAME(Toolhelp32ReadProcessMemory);
 
 #ifdef __cplusplus
 }

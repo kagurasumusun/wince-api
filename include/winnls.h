@@ -53,28 +53,28 @@ extern "C" {
  * int MultiByteToWideChar(UINT, DWORD, LPCSTR, int, LPWSTR, int).
  * CE 1.01+; Winnls.h; Coredll.lib.  Maps a (not necessarily
  * multibyte) character string to a wide-character string. */
-int MultiByteToWideChar(UINT CodePage, DWORD dwFlags,
+AKARI_CE_IMPORT int MultiByteToWideChar(UINT CodePage, DWORD dwFlags,
                         LPCSTR lpMultiByteStr, int cbMultiByte,
-                        LPWSTR lpWideCharStr, int cchWideChar);
+                        LPWSTR lpWideCharStr, int cchWideChar) AKARI_CE_NAME(MultiByteToWideChar);
 
 /* aa450989 "WideCharToMultiByte (Windows CE 5.0)":
  * int WideCharToMultiByte(UINT, DWORD, LPCWSTR, int, LPSTR, int,
  * LPCSTR, LPBOOL).  CE 1.01+; Winnls.h; Coredll.lib.  Maps a wide
  * string to the given code page. */
-int WideCharToMultiByte(UINT CodePage, DWORD dwFlags,
+AKARI_CE_IMPORT int WideCharToMultiByte(UINT CodePage, DWORD dwFlags,
                         LPCWSTR lpWideCharStr, int cchWideChar,
                         LPSTR lpMultiByteStr, int cbMultiByte,
                         LPCSTR lpDefaultChar,
-                        LPBOOL lpUsedDefaultChar);
+                        LPBOOL lpUsedDefaultChar) AKARI_CE_NAME(WideCharToMultiByte);
 
 /* ms886515 "IsDBCSLeadByte (Windows CE 5.0)":
  * BOOL IsDBCSLeadByte(BYTE).  CE 1.01+; Winnls.h; Coredll.lib. */
-BOOL IsDBCSLeadByte(BYTE TestChar);
+AKARI_CE_IMPORT BOOL IsDBCSLeadByte(BYTE TestChar) AKARI_CE_NAME(IsDBCSLeadByte);
 
 /* ms886608 "IsDBCSLeadByteEx (Windows CE 5.0)":
  * BOOL IsDBCSLeadByteEx(UINT, BYTE).  CE 1.01+; Winnls.h;
  * Coredll.lib. */
-BOOL IsDBCSLeadByteEx(UINT CodePage, BYTE TestChar);
+AKARI_CE_IMPORT BOOL IsDBCSLeadByteEx(UINT CodePage, BYTE TestChar) AKARI_CE_NAME(IsDBCSLeadByteEx);
 
 /* ------------------------------------------------------------------ */
 /* M16: locale/code-page functions (official NLS Reference pages).    */
@@ -113,41 +113,41 @@ typedef struct _cpinfo {
 /* ms905215 "GetACP (Windows CE 5.0)": UINT GetACP(VOID).  Returns the
  * current ANSI code-page identifier for the system.  CE .NET 4.0+;
  * Winnls.h; Coreloc.lib. */
-UINT GetACP(void);
+AKARI_CE_IMPORT UINT GetACP(void) AKARI_CE_NAME(GetACP);
 
 /* ms905256 "GetOEMCP (Windows CE 5.0)": UINT GetOEMCP(void).  Returns
  * the current OEM code-page identifier.  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib. */
-UINT GetOEMCP(void);
+AKARI_CE_IMPORT UINT GetOEMCP(void) AKARI_CE_NAME(GetOEMCP);
 
 /* ms905298 "GetSystemDefaultLCID (Windows CE 5.0)":
  * LCID GetSystemDefaultLCID(void).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib. */
-LCID GetSystemDefaultLCID(void);
+AKARI_CE_IMPORT LCID GetSystemDefaultLCID(void) AKARI_CE_NAME(GetSystemDefaultLCID);
 
 /* ms905323 "GetUserDefaultLCID (Windows CE 5.0)":
  * LCID GetUserDefaultLCID(void).  CE .NET 4.0+; Winnls.h; Coreloc.lib. */
-LCID GetUserDefaultLCID(void);
+AKARI_CE_IMPORT LCID GetUserDefaultLCID(void) AKARI_CE_NAME(GetUserDefaultLCID);
 
 /* ms905289 "GetSystemDefaultLangID (Windows CE 5.0)":
  * LANGID GetSystemDefaultLangID(void).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib. */
-LANGID GetSystemDefaultLangID(void);
+AKARI_CE_IMPORT LANGID GetSystemDefaultLangID(void) AKARI_CE_NAME(GetSystemDefaultLangID);
 
 /* ms905315 "GetUserDefaultLangID (Windows CE 5.0)":
  * LANGID GetUserDefaultLangID(void).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib. */
-LANGID GetUserDefaultLangID(void);
+AKARI_CE_IMPORT LANGID GetUserDefaultLangID(void) AKARI_CE_NAME(GetUserDefaultLangID);
 
 /* ms906218 "IsValidCodePage (Windows CE 5.0)":
  * BOOL IsValidCodePage(UINT).  CE .NET 4.0+; Winnls.h; Coreloc.lib. */
-BOOL IsValidCodePage(UINT CodePage);
+AKARI_CE_IMPORT BOOL IsValidCodePage(UINT CodePage) AKARI_CE_NAME(IsValidCodePage);
 
 /* ms906219 "IsValidLocale (Windows CE 5.0)":
  * BOOL IsValidLocale(LCID, DWORD).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib.  dwFlags = LCID_INSTALLED and/or LCID_SUPPORTED; CE
  * cannot download code pages to a device (page note). */
-BOOL IsValidLocale(LCID Locale, DWORD dwFlags);
+AKARI_CE_IMPORT BOOL IsValidLocale(LCID Locale, DWORD dwFlags) AKARI_CE_NAME(IsValidLocale);
 
 /* ms904713 "CompareString (Windows CE 5.0)":
  * int CompareString(LCID, DWORD, LPCTSTR, int, LPCTSTR, int).
@@ -155,34 +155,34 @@ BOOL IsValidLocale(LCID Locale, DWORD dwFlags);
  * locale; returns CSTR_LESS_THAN/EQUAL/GREATER_THAN (0 on failure).
  * cchCount -1 means null-terminated.  Fastest at dwCmpFlags 0 or
  * NORM_IGNORECASE with -1 counts (page note). */
-int CompareStringW(LCID Locale, DWORD dwCmpFlags,
+AKARI_CE_IMPORT int CompareStringW(LCID Locale, DWORD dwCmpFlags,
                    LPCWSTR lpString1, int cchCount1,
-                   LPCWSTR lpString2, int cchCount2);
+                   LPCWSTR lpString2, int cchCount2) AKARI_CE_NAME(CompareStringW);
 #define CompareString CompareStringW
 
 /* ms904716 "ConvertDefaultLocale (Windows CE 5.0)":
  * LCID ConvertDefaultLocale(LCID).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib. */
-LCID ConvertDefaultLocale(LCID Locale);
+AKARI_CE_IMPORT LCID ConvertDefaultLocale(LCID Locale) AKARI_CE_NAME(ConvertDefaultLocale);
 
 /* ms905221 "GetCPInfo (Windows CE 5.0)":
  * BOOL GetCPInfo(UINT, LPCPINFO).  CE .NET 4.0+; Winnls.h;
  * Coreloc.lib.  Fills the code-page info structure. */
-BOOL GetCPInfo(UINT CodePage, LPCPINFO lpCPInfo);
+AKARI_CE_IMPORT BOOL GetCPInfo(UINT CodePage, LPCPINFO lpCPInfo) AKARI_CE_NAME(GetCPInfo);
 
 /* ms905272 "GetStringTypeW (Windows CE 5.0)":
  * BOOL GetStringTypeW(DWORD, LPCWSTR, int, LPWORD).  CE 1.0+;
  * Winnls.h; **Coredll.lib** (page row).  Sets one or more CT_* bits
  * per source character in the output WORD array. */
-BOOL GetStringTypeW(DWORD dwInfoType, LPCWSTR lpSrcStr, int cchSrc,
-                    LPWORD lpCharType);
+AKARI_CE_IMPORT BOOL GetStringTypeW(DWORD dwInfoType, LPCWSTR lpSrcStr, int cchSrc,
+                    LPWORD lpCharType) AKARI_CE_NAME(GetStringTypeW);
 
 /* ms905283 "GetStringTypeEx (Windows CE 5.0)":
  * BOOL GetStringTypeEx(LCID, DWORD, LPCTSTR, int, LPWORD).  CE 1.0+;
  * Winnls.h; Coreloc.lib. */
-BOOL GetStringTypeExW(LCID Locale, DWORD dwInfoType,
+AKARI_CE_IMPORT BOOL GetStringTypeExW(LCID Locale, DWORD dwInfoType,
                       LPCWSTR lpSrcStr, int cchSrc,
-                      LPWORD lpCharType);
+                      LPWORD lpCharType) AKARI_CE_NAME(GetStringTypeExW);
 #define GetStringTypeEx GetStringTypeExW
 
 /* ------------------------------------------------------------------ */
@@ -225,26 +225,26 @@ typedef struct _numberfmt {
     UINT   NegativeOrder;
 } NUMBERFMT;
 
-int GetCurrencyFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
+AKARI_CE_IMPORT int GetCurrencyFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
                        const CURRENCYFMT *lpFormat,
-                       LPWSTR lpCurrencyStr, int cchCurrency);
+                       LPWSTR lpCurrencyStr, int cchCurrency) AKARI_CE_NAME(GetCurrencyFormatW);
 #define GetCurrencyFormat GetCurrencyFormatW
-int GetNumberFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
+AKARI_CE_IMPORT int GetNumberFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
                      const NUMBERFMT *lpFormat,
-                     LPWSTR lpNumberStr, int cchNumber);
+                     LPWSTR lpNumberStr, int cchNumber) AKARI_CE_NAME(GetNumberFormatW);
 #define GetNumberFormat GetNumberFormatW
-int GetDateFormatW(LCID Locale, DWORD dwFlags,
+AKARI_CE_IMPORT int GetDateFormatW(LCID Locale, DWORD dwFlags,
                    const SYSTEMTIME *lpDate, LPCWSTR lpFormat,
-                   LPWSTR lpDateStr, int cchDate);
+                   LPWSTR lpDateStr, int cchDate) AKARI_CE_NAME(GetDateFormatW);
 #define GetDateFormat GetDateFormatW
-int GetTimeFormatW(LCID Locale, DWORD dwFlags,
+AKARI_CE_IMPORT int GetTimeFormatW(LCID Locale, DWORD dwFlags,
                    const SYSTEMTIME *lpTime, LPCWSTR lpFormat,
-                   LPWSTR lpTimeStr, int cchTime);
+                   LPWSTR lpTimeStr, int cchTime) AKARI_CE_NAME(GetTimeFormatW);
 #define GetTimeFormat GetTimeFormatW
-int GetLocaleInfoW(LCID Locale, LCTYPE LCType,
-                   LPWSTR lpLCData, int cchData);
+AKARI_CE_IMPORT int GetLocaleInfoW(LCID Locale, LCTYPE LCType,
+                   LPWSTR lpLCData, int cchData) AKARI_CE_NAME(GetLocaleInfoW);
 #define GetLocaleInfo GetLocaleInfoW
-BOOL SetLocaleInfoW(LCID Locale, LCTYPE LCType, LPCWSTR lpLCData);
+AKARI_CE_IMPORT BOOL SetLocaleInfoW(LCID Locale, LCTYPE LCType, LPCWSTR lpLCData) AKARI_CE_NAME(SetLocaleInfoW);
 #define SetLocaleInfo SetLocaleInfoW
 
 /* ------------------------------------------------------------------ */
@@ -275,8 +275,8 @@ typedef BOOL (CALLBACK *CODEPAGE_ENUMPROC)(LPWSTR lpCodePageString);
  * combines the MAP_* mapping flags (names and CE support notes are on
  * the page; the CE page does not publish the flag values, so no
  * MAP_* constants are shipped -- recorded). */
-int FoldStringW(DWORD dwMapFlags, LPCWSTR lpSrcStr, int cchSrc,
-                LPWSTR lpDestStr, int cchDest);
+AKARI_CE_IMPORT int FoldStringW(DWORD dwMapFlags, LPCWSTR lpSrcStr, int cchSrc,
+                LPWSTR lpDestStr, int cchDest) AKARI_CE_NAME(FoldStringW);
 #define FoldString FoldStringW
 
 /* ms906221 "LCMapString (Windows CE 5.0)": int LCMapString(LCID, DWORD,
@@ -284,8 +284,8 @@ int FoldStringW(DWORD dwMapFlags, LPCWSTR lpSrcStr, int cchSrc,
  * dwMapFlags combines the LCMAP_* and NORM_* flags (the page names
  * them per supported-flag groups; numeric values are not published by
  * the CE page -> no LCMAP_* or NORM_* constants shipped -- recorded). */
-int LCMapStringW(LCID Locale, DWORD dwMapFlags, LPCWSTR lpSrcStr,
-                 int cchSrc, LPWSTR lpDestStr, int cchDest);
+AKARI_CE_IMPORT int LCMapStringW(LCID Locale, DWORD dwMapFlags, LPCWSTR lpSrcStr,
+                 int cchSrc, LPWSTR lpDestStr, int cchDest) AKARI_CE_NAME(LCMapStringW);
 #define LCMapString LCMapStringW
 
 /* ms905062 "EnumSystemCodePages (Windows CE 5.0)":
@@ -293,8 +293,8 @@ int LCMapStringW(LCID Locale, DWORD dwMapFlags, LPCWSTR lpSrcStr,
  * Winnls.h; Coreloc.lib.  Enumerates the code pages installed on (or,
  * with CP_INSTALLED unset, supported by) the system; enumeration stops
  * when the callback returns FALSE. */
-BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROC lpCodePageEnumProc,
-                          DWORD dwFlags);
+AKARI_CE_IMPORT BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROC lpCodePageEnumProc,
+                          DWORD dwFlags) AKARI_CE_NAME(EnumSystemCodePagesW);
 #define EnumSystemCodePages EnumSystemCodePagesW
 
 #ifdef __cplusplus

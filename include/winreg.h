@@ -78,7 +78,7 @@ typedef DWORD  REGSAM;
 /* ms891448 "RegCloseKey (Windows CE 5.0)":
  * LONG RegCloseKey(HKEY).  CE 1.0+; Winreg.h; Coredll.lib.  Releases
  * the handle of a key opened/created by the key functions above. */
-LONG RegCloseKeyW(HKEY hKey);
+AKARI_CE_IMPORT LONG RegCloseKeyW(HKEY hKey) AKARI_CE_NAME(RegCloseKeyW);
 #define RegCloseKey RegCloseKeyW
 
 /* ms891460 "RegOpenKeyEx (Windows CE 5.0)":
@@ -87,8 +87,8 @@ LONG RegCloseKeyW(HKEY hKey);
  * predefined key); ulOptions reserved (0); samDesired ignored (0 on
  * CE); ERROR_SUCCESS or a Winerror.h code.  Max key name 255 chars,
  * nesting 16 levels. */
-LONG RegOpenKeyExW(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions,
-                   REGSAM samDesired, PHKEY phkResult);
+AKARI_CE_IMPORT LONG RegOpenKeyExW(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions,
+                   REGSAM samDesired, PHKEY phkResult) AKARI_CE_NAME(RegOpenKeyExW);
 #define RegOpenKeyEx RegOpenKeyExW
 
 /* ms891450 "RegCreateKeyEx (Windows CE 5.0)":
@@ -98,22 +98,22 @@ LONG RegOpenKeyExW(HKEY hKey, LPCWSTR lpSubKey, DWORD ulOptions,
  * lpSecurityAttributes must be NULL on CE (default descriptor);
  * dwOptions REG_OPTION_NON_VOLATILE/VOLATILE; disposition in
  * lpdwDisposition when non-NULL. */
-LONG RegCreateKeyExW(HKEY hKey, LPCWSTR lpSubKey, DWORD Reserved,
+AKARI_CE_IMPORT LONG RegCreateKeyExW(HKEY hKey, LPCWSTR lpSubKey, DWORD Reserved,
                      LPWSTR lpClass, DWORD dwOptions, REGSAM samDesired,
                      LPSECURITY_ATTRIBUTES lpSecurityAttributes,
-                     PHKEY phkResult, LPDWORD lpdwDisposition);
+                     PHKEY phkResult, LPDWORD lpdwDisposition) AKARI_CE_NAME(RegCreateKeyExW);
 #define RegCreateKeyEx RegCreateKeyExW
 
 /* ms891451 "RegDeleteKey (Windows CE 5.0)":
  * LONG RegDeleteKey(HKEY, LPCWSTR).  CE 1.0+; Winreg.h; Coredll.lib.
  * Deletes a subkey (recursively on CE per page) of an open key. */
-LONG RegDeleteKeyW(HKEY hKey, LPCWSTR lpSubKey);
+AKARI_CE_IMPORT LONG RegDeleteKeyW(HKEY hKey, LPCWSTR lpSubKey) AKARI_CE_NAME(RegDeleteKeyW);
 #define RegDeleteKey RegDeleteKeyW
 
 /* ms891452 "RegDeleteValue (Windows CE 5.0)":
  * LONG RegDeleteValue(HKEY, LPCWSTR).  CE 1.0+; Winreg.h; Coredll.lib.
  * Removes a named value. */
-LONG RegDeleteValueW(HKEY hKey, LPCWSTR lpValueName);
+AKARI_CE_IMPORT LONG RegDeleteValueW(HKEY hKey, LPCWSTR lpValueName) AKARI_CE_NAME(RegDeleteValueW);
 #define RegDeleteValue RegDeleteValueW
 
 /* ms891453 "RegEnumKeyEx (Windows CE 5.0)":
@@ -121,18 +121,18 @@ LONG RegDeleteValueW(HKEY hKey, LPCWSTR lpValueName);
  * LPDWORD, PFILETIME).  CE 1.0+; Winreg.h; Coredll.lib.  Enumerates
  * subkeys by index from 0 until ERROR_NO_MORE_ITEMS; ERROR_MORE_DATA
  * if lpName is too small. */
-LONG RegEnumKeyExW(HKEY hKey, DWORD dwIndex, LPWSTR lpName,
+AKARI_CE_IMPORT LONG RegEnumKeyExW(HKEY hKey, DWORD dwIndex, LPWSTR lpName,
                    LPDWORD lpcName, LPDWORD lpReserved, LPWSTR lpClass,
-                   LPDWORD lpcbClass, PFILETIME lpftLastWriteTime);
+                   LPDWORD lpcbClass, PFILETIME lpftLastWriteTime) AKARI_CE_NAME(RegEnumKeyExW);
 #define RegEnumKeyEx RegEnumKeyExW
 
 /* ms891454 "RegEnumValue (Windows CE 5.0)":
  * LONG RegEnumValue(HKEY, DWORD, LPWSTR, LPDWORD, LPDWORD, LPDWORD,
  * LPBYTE, LPDWORD).  CE 1.0+; Winreg.h; Coredll.lib.  Enumerates the
  * values of a key by index from 0 until ERROR_NO_MORE_ITEMS. */
-LONG RegEnumValueW(HKEY hKey, DWORD dwIndex, LPWSTR lpValueName,
+AKARI_CE_IMPORT LONG RegEnumValueW(HKEY hKey, DWORD dwIndex, LPWSTR lpValueName,
                    LPDWORD lpcchValueName, LPDWORD lpReserved,
-                   LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData);
+                   LPDWORD lpType, LPBYTE lpData, LPDWORD lpcbData) AKARI_CE_NAME(RegEnumValueW);
 #define RegEnumValue RegEnumValueW
 
 /* ms891461 "RegQueryInfoKey (Windows CE 5.0)":
@@ -140,13 +140,13 @@ LONG RegEnumValueW(HKEY hKey, DWORD dwIndex, LPWSTR lpValueName,
  * LPDWORD, LPDWORD, LPDWORD, LPDWORD, LPDWORD, LPDWORD, PFILETIME).
  * CE 1.0+; Winreg.h; Coredll.lib.  Class name, subkey/value counts
  * and longest-name lengths of an open key. */
-LONG RegQueryInfoKeyW(HKEY hKey, LPWSTR lpClass, LPDWORD lpcbClass,
+AKARI_CE_IMPORT LONG RegQueryInfoKeyW(HKEY hKey, LPWSTR lpClass, LPDWORD lpcbClass,
                       LPDWORD lpReserved, LPDWORD lpcSubKeys,
                       LPDWORD lpcbMaxSubKeyLen, LPDWORD lpcbMaxClassLen,
                       LPDWORD lpcValues, LPDWORD lpcbMaxValueNameLen,
                       LPDWORD lpcbMaxValueLen,
                       LPDWORD lpcbSecurityDescriptor,
-                      PFILETIME lpftLastWriteTime);
+                      PFILETIME lpftLastWriteTime) AKARI_CE_NAME(RegQueryInfoKeyW);
 #define RegQueryInfoKey RegQueryInfoKeyW
 
 /* ms891462 "RegQueryValueEx (Windows CE 5.0)":
@@ -155,9 +155,9 @@ LONG RegQueryInfoKeyW(HKEY hKey, LPWSTR lpClass, LPDWORD lpcbClass,
  * a named value (NULL/empty name = the key's unnamed value).  A
  * NULL lpData with a size pointer returns the required size;
  * ERROR_MORE_DATA when the buffer is too small. */
-LONG RegQueryValueExW(HKEY hKey, LPCWSTR lpValueName,
+AKARI_CE_IMPORT LONG RegQueryValueExW(HKEY hKey, LPCWSTR lpValueName,
                       LPDWORD lpReserved, LPDWORD lpType,
-                      LPBYTE lpData, LPDWORD lpcbData);
+                      LPBYTE lpData, LPDWORD lpcbData) AKARI_CE_NAME(RegQueryValueExW);
 #define RegQueryValueEx RegQueryValueExW
 
 /* ms891469 "RegSetValueEx (Windows CE 5.0)":
@@ -166,8 +166,8 @@ LONG RegQueryValueExW(HKEY hKey, LPCWSTR lpValueName,
  * (creates it when absent); cbData must include the terminator for
  * REG_SZ/REG_EXPAND_SZ/REG_MULTI_SZ; value names max 255 chars; the
  * page caps value data at 4 KB on CE. */
-LONG RegSetValueExW(HKEY hKey, LPCWSTR lpValueName, DWORD Reserved,
-                    DWORD dwType, const BYTE *lpData, DWORD cbData);
+AKARI_CE_IMPORT LONG RegSetValueExW(HKEY hKey, LPCWSTR lpValueName, DWORD Reserved,
+                    DWORD dwType, const BYTE *lpData, DWORD cbData) AKARI_CE_NAME(RegSetValueExW);
 #define RegSetValueEx RegSetValueExW
 
 /* ms891455 "RegFlushKey (Windows CE 5.0)":
@@ -175,7 +175,7 @@ LONG RegSetValueExW(HKEY hKey, LPCWSTR lpValueName, DWORD Reserved,
  * the open key's attributes into the registry.  CE does no lazy
  * flush by default (OEM may add one), so important changes should be
  * flushed in groups, not per change. */
-LONG RegFlushKeyW(HKEY hKey);
+AKARI_CE_IMPORT LONG RegFlushKeyW(HKEY hKey) AKARI_CE_NAME(RegFlushKeyW);
 #define RegFlushKey RegFlushKeyW
 
 /* Registry change notification (CE 5.0 and later; Coredll.lib). */
@@ -185,18 +185,18 @@ LONG RegFlushKeyW(HKEY hKey);
  * notification handle; waiting on it succeeds when a matching change
  * occurs.  dwNotifyFilter = REG_NOTIFY_CHANGE_NAME and/or
  * REG_NOTIFY_CHANGE_LAST_SET.  INVALID_HANDLE_VALUE on failure. */
-HANDLE CeFindFirstRegChange(HKEY hKey, BOOL bWatchSubtree,
-                            DWORD dwNotifyFilter);
+AKARI_CE_IMPORT HANDLE CeFindFirstRegChange(HKEY hKey, BOOL bWatchSubtree,
+                            DWORD dwNotifyFilter) AKARI_CE_NAME(CeFindFirstRegChange);
 
 /* aa517123 "CeFindNextRegChange (Windows CE 5.0)":
  * BOOL CeFindNextRegChange(HANDLE).  Re-arms the notification handle
  * for the next matching change. */
-BOOL CeFindNextRegChange(HANDLE hChangeHandle);
+AKARI_CE_IMPORT BOOL CeFindNextRegChange(HANDLE hChangeHandle) AKARI_CE_NAME(CeFindNextRegChange);
 
 /* aa517103 "CeFindCloseRegChange (Windows CE 5.0)":
  * BOOL CeFindCloseRegChange(HANDLE).  Stops change monitoring; the
  * handle must not be used afterwards. */
-BOOL CeFindCloseRegChange(HANDLE hChangeHandle);
+AKARI_CE_IMPORT BOOL CeFindCloseRegChange(HANDLE hChangeHandle) AKARI_CE_NAME(CeFindCloseRegChange);
 
 #ifdef __cplusplus
 }

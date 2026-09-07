@@ -33,8 +33,8 @@ typedef struct _MODULEINFO {
  * BOOL GetModuleInformation(HANDLE, HMODULE, LPMODULEINFO, DWORD).
  * CE .NET 4.1+; Psapi.h; Coredll.lib.  Fills the MODULEINFO for a
  * module of the given process; cb = sizeof(MODULEINFO). */
-BOOL GetModuleInformation(HANDLE hProcess, HMODULE hModule,
-                          LPMODULEINFO lpmodinfo, DWORD cb);
+AKARI_CE_IMPORT BOOL GetModuleInformation(HANDLE hProcess, HMODULE hModule,
+                          LPMODULEINFO lpmodinfo, DWORD cb) AKARI_CE_NAME(GetModuleInformation);
 
 #ifdef __cplusplus
 }

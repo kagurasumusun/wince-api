@@ -65,7 +65,7 @@ typedef struct {
  * BOOL CloseMsgQueue(HANDLE hMsgQ).  CE .NET 4.0+; Msgqueue.h;
  * Coredll.lib.  Closes a message-queue handle returned by
  * CreateMsgQueue or OpenMsgQueue. */
-BOOL CloseMsgQueue(HANDLE hMsgQ);
+AKARI_CE_IMPORT BOOL CloseMsgQueue(HANDLE hMsgQ) AKARI_CE_NAME(CloseMsgQueue);
 
 /* ms885180 "CreateMsgQueue (Windows CE 5.0)":
  * HANDLE CreateMsgQueue(LPCWSTR lpszName, LPMSGQUEUEOPTIONS lpOptions).
@@ -78,13 +78,13 @@ BOOL CloseMsgQueue(HANDLE hMsgQ);
  * are limited to MAX_PATH characters; queue handles are signalable to
  * WaitForSingleObject/WaitForMultipleObjects (writeable handles signal
  * when not full, readable handles when not empty). */
-HANDLE CreateMsgQueue(LPCWSTR lpszName, LPMSGQUEUEOPTIONS lpOptions);
+AKARI_CE_IMPORT HANDLE CreateMsgQueue(LPCWSTR lpszName, LPMSGQUEUEOPTIONS lpOptions) AKARI_CE_NAME(CreateMsgQueue);
 
 /* ms885632 "GetMsgQueueInfo (Windows CE 5.0)":
  * BOOL GetMsgQueueInfo(HANDLE hMsgQ, LPMSGQUEUEINFO lpInfo).
  * CE .NET 4.0+; Msgqueue.h; Coredll.lib.  Fills an MSGQUEUEINFO with
  * information about an open message queue. */
-BOOL GetMsgQueueInfo(HANDLE hMsgQ, LPMSGQUEUEINFO lpInfo);
+AKARI_CE_IMPORT BOOL GetMsgQueueInfo(HANDLE hMsgQ, LPMSGQUEUEINFO lpInfo) AKARI_CE_NAME(GetMsgQueueInfo);
 
 /* ms886765 "OpenMsgQueue (Windows CE 5.0)":
  * HANDLE OpenMsgQueue(HANDLE hSrcProc, HANDLE hMsgQ,
@@ -93,8 +93,8 @@ BOOL GetMsgQueueInfo(HANDLE hMsgQ, LPMSGQUEUEINFO lpInfo);
  * existing queue, using a source-process handle and a queue handle
  * from CreateMsgQueue; only MSGQUEUEOPTIONS.dwSize and bReadAccess
  * are checked.  Returns the new handle or NULL. */
-HANDLE OpenMsgQueue(HANDLE hSrcProc, HANDLE hMsgQ,
-                    LPMSGQUEUEOPTIONS lpOptions);
+AKARI_CE_IMPORT HANDLE OpenMsgQueue(HANDLE hSrcProc, HANDLE hMsgQ,
+                    LPMSGQUEUEOPTIONS lpOptions) AKARI_CE_NAME(OpenMsgQueue);
 
 /* ms886793 "ReadMsgQueue (Windows CE 5.0)":
  * BOOL ReadMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbBufferSize,
@@ -107,9 +107,9 @@ HANDLE OpenMsgQueue(HANDLE hSrcProc, HANDLE hMsgQ,
  * ERROR_INSUFFICIENT_BUFFER (short copy succeeds), ERROR_PIPE_NOT_
  * CONNECTED (no writers and MSGQUEUE_ALLOW_BROKEN not set),
  * ERROR_TIMEOUT (no data with zero timeout). */
-BOOL ReadMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbBufferSize,
+AKARI_CE_IMPORT BOOL ReadMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbBufferSize,
                   LPDWORD lpNumberOfBytesRead, DWORD dwTimeout,
-                  LPDWORD pdwFlags);
+                  LPDWORD pdwFlags) AKARI_CE_NAME(ReadMsgQueue);
 
 /* aa450991 "WriteMsgQueue (Windows CE 5.0)":
  * BOOL WriteMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbDataSize,
@@ -120,8 +120,8 @@ BOOL ReadMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbBufferSize,
  * large), ERROR_PIPE_NOT_CONNECTED (no readers and MSGQUEUE_ALLOW_
  * BROKEN not set), ERROR_TIMEOUT, ERROR_OUTOFMEMORY (MSGQUEUE_
  * NOPRECOMMIT without memory). */
-BOOL WriteMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbDataSize,
-                   DWORD dwTimeout, DWORD dwFlags);
+AKARI_CE_IMPORT BOOL WriteMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbDataSize,
+                   DWORD dwTimeout, DWORD dwFlags) AKARI_CE_NAME(WriteMsgQueue);
 
 #ifdef __cplusplus
 }

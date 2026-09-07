@@ -43,6 +43,28 @@ extern "C" {
 #define WINAPIV       WINAPI   /* varargs public API (e.g. NKDbgPrintfW) */
 #define STDMETHODCALLTYPE WINAPI
 
+/* CE component-DLL export names are undecorated on every CE
+ * architecture: the verified import surface defines __imp_<name>
+ * without a leading underscore on x86 as well (see the header
+ * note above).  Plain C declarations on i386 would reference the
+ * leading-underscore spelling, so on x86 every component-DLL
+ * function declaration is (a) dllimport-pinned, which makes the
+ * object reference the import variable __imp_<name>, and (b)
+ * asm-pinned to the documented export name, which sets that
+ * variable's spelling.  On ARM (and Thumb) C symbols already carry
+ * no decoration and both macros are empty, leaving plain
+ * declarations.  (The import variable indirection is used on x86
+ * because an asm label alone is not referenceable for export names
+ * beginning with an uppercase L: the MC assembler treats such
+ * labels as local labels and rejects the undefined reference.) */
+#if defined(_M_IX86) || defined(__i386__)
+#define AKARI_CE_IMPORT __declspec(dllimport)
+#define AKARI_CE_NAME(n) __asm(#n)
+#else
+#define AKARI_CE_IMPORT
+#define AKARI_CE_NAME(n)
+#endif
+
 #define CONST const
 
 /* ------------------------------------------------------------------ */

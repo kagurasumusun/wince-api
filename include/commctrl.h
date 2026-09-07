@@ -112,59 +112,59 @@ typedef struct _IMAGELISTDRAWPARAMS {
 /* "Commctrl.lib, Imgctl.lib.").                                       */
 /* ------------------------------------------------------------------ */
 
-int      ImageList_Add(HIMAGELIST himl, HBITMAP hbmImage,     /* ms909786 */
-                       HBITMAP hbmMask);
-int      ImageList_AddMasked(HIMAGELIST himl, HBITMAP hbmImage,
-                             COLORREF crMask);                 /* ms909795 */
-BOOL     ImageList_BeginDrag(HIMAGELIST himlTrack, int iTrack,
-                             int dxHotspot, int dyHotspot);    /* ms909799 */
-BOOL     ImageList_Copy(HIMAGELIST himlDst, int iDst,
+AKARI_CE_IMPORT int      ImageList_Add(HIMAGELIST himl, HBITMAP hbmImage,     /* ms909786 */
+                       HBITMAP hbmMask) AKARI_CE_NAME(ImageList_Add);
+AKARI_CE_IMPORT int      ImageList_AddMasked(HIMAGELIST himl, HBITMAP hbmImage,
+                             COLORREF crMask) AKARI_CE_NAME(ImageList_AddMasked);                 /* ms909795 */
+AKARI_CE_IMPORT BOOL     ImageList_BeginDrag(HIMAGELIST himlTrack, int iTrack,
+                             int dxHotspot, int dyHotspot) AKARI_CE_NAME(ImageList_BeginDrag);    /* ms909799 */
+AKARI_CE_IMPORT BOOL     ImageList_Copy(HIMAGELIST himlDst, int iDst,
                         HIMAGELIST himlSrc, int iSrc,
-                        UINT uFlags);                          /* ms909805 */
-HIMAGELIST ImageList_Create(int cx, int cy, UINT flags,
-                            int cInitial, int cGrow);          /* ms909810 */
+                        UINT uFlags) AKARI_CE_NAME(ImageList_Copy);                          /* ms909805 */
+AKARI_CE_IMPORT HIMAGELIST ImageList_Create(int cx, int cy, UINT flags,
+                            int cInitial, int cGrow) AKARI_CE_NAME(ImageList_Create);          /* ms909810 */
 BOOL     ImageList_Destroy(HIMAGELIST himl);                   /* ms909811 */
-BOOL     ImageList_DragEnter(HWND hwndLock, int x, int y);     /* ms909812 */
-BOOL     ImageList_DragLeave(HWND hwndLock);                   /* ms909813 */
-BOOL     ImageList_DragMove(int x, int y);                     /* ms909814 */
-BOOL     ImageList_DragShowNolock(BOOL fShow);                 /* ms909815 */
-BOOL     ImageList_Draw(HIMAGELIST himl, int i, HDC hdcDst,    /* ms909816 */
-                        int x, int y, UINT fStyle);
-BOOL     ImageList_DrawEx(HIMAGELIST himl, int i, HDC hdcDst,  /* ms909817 */
+AKARI_CE_IMPORT BOOL     ImageList_DragEnter(HWND hwndLock, int x, int y) AKARI_CE_NAME(ImageList_DragEnter);     /* ms909812 */
+AKARI_CE_IMPORT BOOL     ImageList_DragLeave(HWND hwndLock) AKARI_CE_NAME(ImageList_DragLeave);                   /* ms909813 */
+AKARI_CE_IMPORT BOOL     ImageList_DragMove(int x, int y) AKARI_CE_NAME(ImageList_DragMove);                     /* ms909814 */
+AKARI_CE_IMPORT BOOL     ImageList_DragShowNolock(BOOL fShow) AKARI_CE_NAME(ImageList_DragShowNolock);                 /* ms909815 */
+AKARI_CE_IMPORT BOOL     ImageList_Draw(HIMAGELIST himl, int i, HDC hdcDst,    /* ms909816 */
+                        int x, int y, UINT fStyle) AKARI_CE_NAME(ImageList_Draw);
+AKARI_CE_IMPORT BOOL     ImageList_DrawEx(HIMAGELIST himl, int i, HDC hdcDst,  /* ms909817 */
                           int x, int y, int dx, int dy,
                           COLORREF rgbBk, COLORREF rgbFg,
-                          UINT fStyle);
-BOOL     ImageList_DrawIndirect(IMAGELISTDRAWPARAMS *pimldp);  /* ms909818 */
-HIMAGELIST ImageList_Duplicate(HIMAGELIST himl);               /* ms909820 */
-BOOL     ImageList_EndDrag(void);                              /* ms909821 */
-COLORREF ImageList_GetBkColor(HIMAGELIST himl);                /* ms909823 */
-HIMAGELIST ImageList_GetDragImage(POINT *ppt, POINT *pptHotspot); /* ms909824 */
-HICON    ImageList_GetIcon(HIMAGELIST himl, int i, UINT flags); /* ms909825 */
-BOOL     ImageList_GetIconSize(HIMAGELIST himl, int *cx,
-                               int *cy);                       /* ms909826 */
-int      ImageList_GetImageCount(HIMAGELIST himl);             /* ms909827 */
-BOOL     ImageList_GetImageInfo(HIMAGELIST himl, int i,
-                                IMAGEINFO *pImageInfo);        /* ms909828 */
-HIMAGELIST ImageList_LoadImage(HINSTANCE hi, LPCSTR lpbmp,     /* ms909830 */
+                          UINT fStyle) AKARI_CE_NAME(ImageList_DrawEx);
+AKARI_CE_IMPORT BOOL     ImageList_DrawIndirect(IMAGELISTDRAWPARAMS *pimldp) AKARI_CE_NAME(ImageList_DrawIndirect);  /* ms909818 */
+AKARI_CE_IMPORT HIMAGELIST ImageList_Duplicate(HIMAGELIST himl) AKARI_CE_NAME(ImageList_Duplicate);               /* ms909820 */
+AKARI_CE_IMPORT BOOL     ImageList_EndDrag(void) AKARI_CE_NAME(ImageList_EndDrag);                              /* ms909821 */
+AKARI_CE_IMPORT COLORREF ImageList_GetBkColor(HIMAGELIST himl) AKARI_CE_NAME(ImageList_GetBkColor);                /* ms909823 */
+AKARI_CE_IMPORT HIMAGELIST ImageList_GetDragImage(POINT *ppt, POINT *pptHotspot) AKARI_CE_NAME(ImageList_GetDragImage); /* ms909824 */
+AKARI_CE_IMPORT HICON    ImageList_GetIcon(HIMAGELIST himl, int i, UINT flags) AKARI_CE_NAME(ImageList_GetIcon); /* ms909825 */
+AKARI_CE_IMPORT BOOL     ImageList_GetIconSize(HIMAGELIST himl, int *cx,
+                               int *cy) AKARI_CE_NAME(ImageList_GetIconSize);                       /* ms909826 */
+AKARI_CE_IMPORT int      ImageList_GetImageCount(HIMAGELIST himl) AKARI_CE_NAME(ImageList_GetImageCount);             /* ms909827 */
+AKARI_CE_IMPORT BOOL     ImageList_GetImageInfo(HIMAGELIST himl, int i,
+                                IMAGEINFO *pImageInfo) AKARI_CE_NAME(ImageList_GetImageInfo);        /* ms909828 */
+AKARI_CE_IMPORT HIMAGELIST ImageList_LoadImage(HINSTANCE hi, LPCSTR lpbmp,     /* ms909830 */
                                int cx, int cGrow, COLORREF crMask,
-                               UINT uType, UINT uFlags);
-HIMAGELIST ImageList_Merge(HIMAGELIST himl1, int i1,           /* ms909831 */
-                           HIMAGELIST himl2, int i2, int dx, int dy);
-BOOL     ImageList_Remove(HIMAGELIST himl, int i);             /* ms909832 */
-BOOL     ImageList_RemoveAll(HIMAGELIST himl);                 /* ms909833 */
-BOOL     ImageList_Replace(HIMAGELIST himl, int i,             /* ms909834 */
-                           HBITMAP hbmImage, HBITMAP hbmMask);
-int      ImageList_ReplaceIcon(HIMAGELIST himl, int i,         /* ms909835 */
-                               HICON hicon);
-COLORREF ImageList_SetBkColor(HIMAGELIST himl, COLORREF clrBk); /* ms909836 */
-BOOL     ImageList_SetDragCursorImage(HIMAGELIST himlDrag,     /* ms909837 */
+                               UINT uType, UINT uFlags) AKARI_CE_NAME(ImageList_LoadImage);
+AKARI_CE_IMPORT HIMAGELIST ImageList_Merge(HIMAGELIST himl1, int i1,           /* ms909831 */
+                           HIMAGELIST himl2, int i2, int dx, int dy) AKARI_CE_NAME(ImageList_Merge);
+AKARI_CE_IMPORT BOOL     ImageList_Remove(HIMAGELIST himl, int i) AKARI_CE_NAME(ImageList_Remove);             /* ms909832 */
+AKARI_CE_IMPORT BOOL     ImageList_RemoveAll(HIMAGELIST himl) AKARI_CE_NAME(ImageList_RemoveAll);                 /* ms909833 */
+AKARI_CE_IMPORT BOOL     ImageList_Replace(HIMAGELIST himl, int i,             /* ms909834 */
+                           HBITMAP hbmImage, HBITMAP hbmMask) AKARI_CE_NAME(ImageList_Replace);
+AKARI_CE_IMPORT int      ImageList_ReplaceIcon(HIMAGELIST himl, int i,         /* ms909835 */
+                               HICON hicon) AKARI_CE_NAME(ImageList_ReplaceIcon);
+AKARI_CE_IMPORT COLORREF ImageList_SetBkColor(HIMAGELIST himl, COLORREF clrBk) AKARI_CE_NAME(ImageList_SetBkColor); /* ms909836 */
+AKARI_CE_IMPORT BOOL     ImageList_SetDragCursorImage(HIMAGELIST himlDrag,     /* ms909837 */
                                       int iDrag, int dxHotspot,
-                                      int dyHotspot);
-BOOL     ImageList_SetIconSize(HIMAGELIST himl, int cx, int cy); /* ms909838 */
-BOOL     ImageList_SetImageCount(HIMAGELIST himl,              /* ms909839 */
-                                 UINT uNewCount);
-BOOL     ImageList_SetOverlayImage(HIMAGELIST himl, int iImage,
-                                   int iOverlay);              /* ms909840 */
+                                      int dyHotspot) AKARI_CE_NAME(ImageList_SetDragCursorImage);
+AKARI_CE_IMPORT BOOL     ImageList_SetIconSize(HIMAGELIST himl, int cx, int cy) AKARI_CE_NAME(ImageList_SetIconSize); /* ms909838 */
+AKARI_CE_IMPORT BOOL     ImageList_SetImageCount(HIMAGELIST himl,              /* ms909839 */
+                                 UINT uNewCount) AKARI_CE_NAME(ImageList_SetImageCount);
+AKARI_CE_IMPORT BOOL     ImageList_SetOverlayImage(HIMAGELIST himl, int iImage,
+                                   int iOverlay) AKARI_CE_NAME(ImageList_SetOverlayImage);              /* ms909840 */
 
 /* ------------------------------------------------------------------ */
 /* Image List Macros (Header Commctrl.h; no Link Library row).         */

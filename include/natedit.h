@@ -95,76 +95,76 @@ typedef IP_NAT_REGISTER_EDITOR *PNAT_REGISTER_EDITOR;
  * NTSTATUS EditorInitialize(PNAT_REGISTER_EDITOR).  Lets the OS
  * initialize a NAT editor (called by the driver with the editor's
  * registration entry). */
-NTSTATUS EditorInitialize(PNAT_REGISTER_EDITOR RegisterEditor);
+AKARI_CE_IMPORT NTSTATUS EditorInitialize(PNAT_REGISTER_EDITOR RegisterEditor) AKARI_CE_NAME(EditorInitialize);
 
 /* ms886796 "RegisterEditor (Windows CE 5.0)":
  * NTSTATUS RegisterEditor(PIP_NAT_REGISTER_EDITOR).  Registers a NAT
  * editor with the NAT driver. */
-NTSTATUS RegisterEditor(PIP_NAT_REGISTER_EDITOR RegisterContext);
+AKARI_CE_IMPORT NTSTATUS RegisterEditor(PIP_NAT_REGISTER_EDITOR RegisterContext) AKARI_CE_NAME(RegisterEditor);
 
 /* --- Editor-implemented callback prototypes (pages publish them in
  * full; the driver calls into the registered editor). -------------- */
 
 /* ms885179 "CreateHandler (Windows CE 5.0)": called by the NAT driver
  * when a mapping associated with a registered editor is created. */
-NTSTATUS CreateHandler(PVOID EditorContext, ULONG PrivateAddress,
+AKARI_CE_IMPORT NTSTATUS CreateHandler(PVOID EditorContext, ULONG PrivateAddress,
                        USHORT PrivatePort, ULONG PublicAddress,
                        USHORT PublicPort, ULONG RemoteAddress,
-                       USHORT RemotePort, PVOID *EditorSessionContextp);
+                       USHORT RemotePort, PVOID *EditorSessionContextp) AKARI_CE_NAME(CreateHandler);
 
 /* ms885191 "DataHandler (Windows CE 5.0)": called by the NAT driver
  * for each packet received during an editor-controlled session. */
-NTSTATUS DataHandler(PVOID InterfaceHandle, PVOID SessionHandle,
+AKARI_CE_IMPORT NTSTATUS DataHandler(PVOID InterfaceHandle, PVOID SessionHandle,
                      PVOID DataHandle, PVOID EditorContext,
                      PVOID EditorSessionContext, PIPRCVBUF RecvBuffer,
-                     ULONG DataOffset);
+                     ULONG DataOffset) AKARI_CE_NAME(DataHandler);
 
 /* ms885198 "DeleteHandler (Windows CE 5.0)": called by the NAT driver
  * when a mapping associated with an editor is removed. */
-NTSTATUS DeleteHandler(PVOID InterfaceHandle, PVOID SessionHandle,
-                       PVOID EditorContext, PVOID EditorSessionContext);
+AKARI_CE_IMPORT NTSTATUS DeleteHandler(PVOID InterfaceHandle, PVOID SessionHandle,
+                       PVOID EditorContext, PVOID EditorSessionContext) AKARI_CE_NAME(DeleteHandler);
 
 /* --- NAT ticket (port mapping) management. ------------------------ */
 
 /* ms885188 "CreateTicket (Windows CE 5.0)": creates a port mapping for
  * an inbound session.  Protocol is one of the NAT_PROTOCOL_* values of
  * IPNat.h (values not published on this page; recorded unknown). */
-NTSTATUS CreateTicket(PVOID InterfaceHandle, UCHAR Protocol,
+AKARI_CE_IMPORT NTSTATUS CreateTicket(PVOID InterfaceHandle, UCHAR Protocol,
                       ULONG PrivateAddress, USHORT PrivatePort,
                       ULONG RemoteAddress, USHORT RemotePort,
-                      PULONG PublicAddress, PUSHORT PublicPort);
+                      PULONG PublicAddress, PUSHORT PublicPort) AKARI_CE_NAME(CreateTicket);
 
 /* ms885199 "DeleteTicket (Windows CE 5.0)": removes a NAT editor port
  * mapping (public endpoint identified by address/port/protocol). */
-NTSTATUS DeleteTicket(PVOID InterfaceHandle, ULONG PublicAddress,
+AKARI_CE_IMPORT NTSTATUS DeleteTicket(PVOID InterfaceHandle, ULONG PublicAddress,
                       UCHAR Protocol, USHORT PublicPort,
-                      ULONG RemoteAddress, USHORT RemotePort);
+                      ULONG RemoteAddress, USHORT RemotePort) AKARI_CE_NAME(DeleteTicket);
 
 /* ms885211 "EditSession (Windows CE 5.0)": replaces one range of bytes
  * in a packet with another range of bytes. */
-NTSTATUS EditSession(PVOID DataHandle, PIPRCVBUF RecvBuffer,
+AKARI_CE_IMPORT NTSTATUS EditSession(PVOID DataHandle, PIPRCVBUF RecvBuffer,
                      ULONG OldDataOffset, ULONG OldDataLength,
-                     PUCHAR NewData, ULONG NewDataLength);
+                     PUCHAR NewData, ULONG NewDataLength) AKARI_CE_NAME(EditSession);
 
 /* ms886786 "QueryInfoSession (Windows CE 5.0)": obtains statistics for
  * a session; the endpoint output pointers are optional. */
-NTSTATUS QueryInfoSession(PVOID SessionHandle, PULONG PrivateAddress,
+AKARI_CE_IMPORT NTSTATUS QueryInfoSession(PVOID SessionHandle, PULONG PrivateAddress,
                           PUSHORT PrivatePort, PULONG RemoteAddress,
                           PUSHORT RemotePort, PULONG PublicAddress,
                           PUSHORT PublicPort,
-                          PIP_NAT_SESSION_MAPPING_STATISTICS Statistics);
+                          PIP_NAT_SESSION_MAPPING_STATISTICS Statistics) AKARI_CE_NAME(QueryInfoSession);
 
 /* aa450941 "TimeoutSession (Windows CE 5.0)": causes a session to time
  * out. */
-NTSTATUS TimeoutSession(PVOID EditorHandle, PVOID SessionHandle);
+AKARI_CE_IMPORT NTSTATUS TimeoutSession(PVOID EditorHandle, PVOID SessionHandle) AKARI_CE_NAME(TimeoutSession);
 
 /* ms885201 "DisassociateSession (Windows CE 5.0)": stops an editor from
  * editing data on a specific session. */
-NTSTATUS DisassociateSession(PVOID EditorHandle, PVOID SessionHandle);
+AKARI_CE_IMPORT NTSTATUS DisassociateSession(PVOID EditorHandle, PVOID SessionHandle) AKARI_CE_NAME(DisassociateSession);
 
 /* ms885209 "EditorDeregister (Windows CE 5.0)": removes the
  * registration of an editor. */
-NTSTATUS EditorDeregister(PVOID EditorHandle);
+AKARI_CE_IMPORT NTSTATUS EditorDeregister(PVOID EditorHandle) AKARI_CE_NAME(EditorDeregister);
 
 /* --- NAT logging callback prototypes (client monitoring DLLs;
  * ms886745..ms886748, CE .NET 4.1+).  The pages document these as

@@ -2,3 +2,6 @@
 build/
 *.pyc
 __pycache__/
+a.out
+*.exe
+*.dll

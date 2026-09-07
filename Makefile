@@ -18,7 +18,7 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/winuser.h include/winerror.h include/winnt.h include/wingdi.h include/tvout.h \
        include/notify.h include/shellapi.h include/commctrl.h
 
-.PHONY: check hostcheck defcheck defdoc clean
+.PHONY: check hostcheck defcheck defdoc e2e clean
 
 check: hostcheck defcheck
 
@@ -98,3 +98,68 @@ hostcheck: $(HDRS)
 
 clean:
 	rm -rf build
+
+# End-to-end link checks: the doc-derived def files are turned into
+# import libraries with llvm-dlltool (armce for ARM, i386
+# --no-leading-underscore for x86 -- the CE coredll x86 export
+# surface is undecorated, the headers are pinned to it, see
+# windef.h), and the tests/e2e consumers are linked with lld-link
+# -wince against the Akari CRT (wince-crt) startup objects into PE
+# images (main app / WinMain app / DLL).  The images' machine type,
+# CE subsystem and coredll import names are asserted with
+# llvm-readobj.
+#   make e2e WINCECLANG=/path/to/clang CRTDIR=/path/to/wince-crt
+CRTDIR    ?= $(abspath $(CURDIR)/../wince-crt)
+
+e2e:
+	@if [ -z "$(WINCECLANG)" ]; then \
+	  echo "[e2e] set WINCECLANG to the WinCE clang binary" >&2; \
+	  exit 2; \
+	fi; \
+	if [ ! -f "$(CRTDIR)/src/crt/crt0.c" ]; then \
+	  echo "[e2e] set CRTDIR to a wince-crt checkout (got $(CRTDIR))" >&2; \
+	  exit 2; \
+	fi; \
+	bin=$$(dirname "$(WINCECLANG)"); \
+	tmp=$$(mktemp -d); trap 'rm -rf "$$tmp"' EXIT; \
+	for t in $(CE_TRIPLES); do \
+	  case $$t in arm*) dtf="-m armce"; mchk="IMAGE_FILE_MACHINE_ARM";; \
+	             *)    dtf="-m i386 --no-leading-underscore"; mchk="IMAGE_FILE_MACHINE_I386";; \
+	  esac; \
+	  d=build/e2e/$$t; mkdir -p $$d; \
+	  for f in def/*-doc.def; do \
+	    b=$$(basename $$f .def); \
+	    "$$bin/llvm-dlltool" $$dtf -d $$f -l $$d/$$b.lib >/dev/null || exit 1; \
+	  done; \
+	  (cd "$(CRTDIR)" && make clean >/dev/null 2>&1 \
+	     && make TARGET=$$t CC=$$bin/clang AR=$$bin/llvm-ar >/dev/null 2>&1) || { \
+	    echo "[e2e] wince-crt build failed for $$t" >&2; exit 1; }; \
+	  for s in e2e_console e2e_winmain e2e_module; do \
+	    echo "[e2e] $$t compile: $$s"; \
+	    "$(WINCECLANG)" -target $$t -std=c11 -ffreestanding \
+	      --sysroot=$$tmp -Wno-wince-sysroot-missing \
+	      $(CFLAGS) -Werror -I include -c tests/e2e/$$s.c -o $$d/$$s.o || exit 1; \
+	  done; \
+	  echo "[e2e] $$t link: main app / WinMain app / DLL"; \
+	  "$$bin/lld-link" -wince /subsystem:windowsce /entry:mainACRTStartup \
+	    /base:0x10000 /fixed $$d/e2e_console.o \
+	    "$(CRTDIR)/build/akari_crt0.o" "$(CRTDIR)/build/libakari.a" \
+	    $$d/*.lib /out:$$d/e2e_console.exe 2>/dev/null || exit 1; \
+	  "$$bin/lld-link" -wince /subsystem:windowsce /entry:WinMainCRTStartup \
+	    /base:0x10000 /fixed $$d/e2e_winmain.o \
+	    "$(CRTDIR)/build/akari_crt0.o" "$(CRTDIR)/build/libakari.a" \
+	    $$d/*.lib /out:$$d/e2e_winmain.exe 2>/dev/null || exit 1; \
+	  "$$bin/lld-link" -wince /dll /entry:DllMainCRTStartup /base:0x10000 \
+	    /export:E2EDemo $$d/e2e_module.o \
+	    "$(CRTDIR)/build/akari_dllcrt.o" "$(CRTDIR)/build/libakari.a" \
+	    $$d/*.lib /out:$$d/e2e_module.dll 2>/dev/null || exit 1; \
+	  "$$bin/llvm-readobj" -h $$d/e2e_console.exe | grep -q "$$mchk" || exit 1; \
+	  "$$bin/llvm-readobj" -h $$d/e2e_console.exe \
+	    | grep -q "IMAGE_SUBSYSTEM_WINDOWS_CE_GUI" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Name: coredll.dll" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
+	    | grep -q "Symbol: MessageBoxW" || exit 1; \
+	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \
+	done; \
+	echo "[e2e] OK -- $(words $(CE_TRIPLES)) WinCE targets linked against the doc-derived import libraries"

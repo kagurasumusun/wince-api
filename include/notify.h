@@ -62,25 +62,25 @@ typedef struct UserNotificationInfoHeader {
 
 /* Notify Reference functions (Header Notify.h; Link Library
  * Coredll.lib). */
-BOOL   CeClearUserNotification(HANDLE hNotification);              /* ms908074 */
-BOOL   CeGetUserNotification(HANDLE hNotification,                 /* ms908076 */
+AKARI_CE_IMPORT BOOL   CeClearUserNotification(HANDLE hNotification) AKARI_CE_NAME(CeClearUserNotification);              /* ms908074 */
+AKARI_CE_IMPORT BOOL   CeGetUserNotification(HANDLE hNotification,                 /* ms908076 */
                              DWORD cBufferSize, LPDWORD pcBytesNeeded,
-                             LPBYTE pBuffer);
-BOOL   CeGetUserNotificationHandles(HANDLE* rghNotifications,      /* ms908077 */
+                             LPBYTE pBuffer) AKARI_CE_NAME(CeGetUserNotification);
+AKARI_CE_IMPORT BOOL   CeGetUserNotificationHandles(HANDLE* rghNotifications,      /* ms908077 */
                                     DWORD cHandles,
-                                    LPDWORD pcHandlesNeeded);
-BOOL   CeGetUserNotificationPreferences(HWND hWndParent,           /* ms908078 */
+                                    LPDWORD pcHandlesNeeded) AKARI_CE_NAME(CeGetUserNotificationHandles);
+AKARI_CE_IMPORT BOOL   CeGetUserNotificationPreferences(HWND hWndParent,           /* ms908078 */
                                         PCE_USER_NOTIFICATION
-                                            lpNotification);
-BOOL   CeHandleAppNotifications(TCHAR* pwszAppName);               /* ms908079 */
-BOOL   CeRunAppAtEvent(TCHAR* pwszAppName, LONG lWhichEvent);      /* ms908102 */
-BOOL   CeRunAppAtTime(TCHAR* pwszAppName, SYSTEMTIME* lpTime);     /* ms908103 */
-HANDLE CeSetUserNotification(HANDLE hNotification, TCHAR* pwszAppName,
+                                            lpNotification) AKARI_CE_NAME(CeGetUserNotificationPreferences);
+AKARI_CE_IMPORT BOOL   CeHandleAppNotifications(TCHAR* pwszAppName) AKARI_CE_NAME(CeHandleAppNotifications);               /* ms908079 */
+AKARI_CE_IMPORT BOOL   CeRunAppAtEvent(TCHAR* pwszAppName, LONG lWhichEvent) AKARI_CE_NAME(CeRunAppAtEvent);      /* ms908102 */
+AKARI_CE_IMPORT BOOL   CeRunAppAtTime(TCHAR* pwszAppName, SYSTEMTIME* lpTime) AKARI_CE_NAME(CeRunAppAtTime);     /* ms908103 */
+AKARI_CE_IMPORT HANDLE CeSetUserNotification(HANDLE hNotification, TCHAR* pwszAppName,
                              SYSTEMTIME* lpTime,                   /* ms908104 */
-                             PCE_USER_NOTIFICATION lpUserNotification);
-HANDLE CeSetUserNotificationEx(HANDLE hNotification,               /* ms908105 */
+                             PCE_USER_NOTIFICATION lpUserNotification) AKARI_CE_NAME(CeSetUserNotification);
+AKARI_CE_IMPORT HANDLE CeSetUserNotificationEx(HANDLE hNotification,               /* ms908105 */
                                CE_NOTIFICATION_TRIGGER* pcnt,
-                               CE_USER_NOTIFICATION* pceun);
+                               CE_USER_NOTIFICATION* pceun) AKARI_CE_NAME(CeSetUserNotificationEx);
 
 #ifdef __cplusplus
 }

@@ -36,7 +36,7 @@ typedef int EFaultRepRetVal;
  * EFaultRepRetVal ReportFault(LPEXCEPTION_POINTERS pep, DWORD dwOpt).
  * CE 5.0+; ErrorRep.h; Coredll.lib.  Lets an application that does its
  * own exception handling report faults; dwOpt is reserved (zero). */
-EFaultRepRetVal ReportFault(LPEXCEPTION_POINTERS pep, DWORD dwOpt);
+AKARI_CE_IMPORT EFaultRepRetVal ReportFault(LPEXCEPTION_POINTERS pep, DWORD dwOpt) AKARI_CE_NAME(ReportFault);
 
 #ifdef __cplusplus
 }
