@@ -2279,6 +2279,17 @@ DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
                                   DWORD dwMilliseconds, DWORD dwWakeMask,
                                   DWORD dwFlags);
 
+/* ------------------------------------------------------------------ */
+/* M27: GDI rectangle helpers whose CE 5.0 pages list Header:         */
+/* Winbase.h (Link Library: Rectapi.lib).  Their sibling helpers       */
+/* (CopyRect, OffsetRect, ...) carry Header Winuser.h and live in      */
+/* winuser.h.                                                          */
+/* ------------------------------------------------------------------ */
+
+/* ms909847 "InflateRect" */
+BOOL InflateRect(LPRECT lprc, int dx, int dy);
+/* aa453648 "SetRect" */
+BOOL SetRect(LPRECT lprc, int xLeft, int yTop, int xRight, int yBottom);
 #ifdef __cplusplus
 }
 #endif

@@ -18,6 +18,12 @@
 
 #include "windef.h"
 #include "winbase.h"
+/* GDI: CE 5.0 Requirement rows for the GDI Reference items list
+ * "Header: Windows.h" (the CE 5.0 headers were monolithic); the items
+ * live in wingdi.h -- the component header of the CE 6.0 era -- and
+ * are included here so Windows.h still provides them (see wingdi.h). */
+#include "wingdi.h"
+#include "tvout.h"    /* ms914096 VIDEOPARAMETERS (Header: Tvout.h) */
 #include "winnls.h"
 #include "winreg.h"
 #include "psapi.h"

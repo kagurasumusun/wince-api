@@ -75,6 +75,22 @@ Official public sources say so structurally:
   and its 6.0 redesign as *CE* history ("Kernel Migration… for
   Windows Embedded CE 6.0"), not as adoption of NT internals.
 
+
+* **Windows Embedded team member, official MSDN archive blog "Windows CE
+  is NOT dead!" (Olivier Bloch, Windows Embedded team, May 4, 2010,
+  learn.microsoft.com/en-us/archive/blogs/obloch/windows-ce-is-not-dead).**
+  Asked how Windows Embedded CE/Compact differs from Windows, the
+  response states outright: "Windows Embedded CE and its next version,
+  Windows Embedded Compact 7 are **not based on Windows binaries** (vs.
+  Windows Embedded Standard which is a componentized embedded version
+  of Windows).  Windows CE has been developed **from scratch with a
+  different OS architecture and driver model** ensuring hard real time
+  and very small footprint."  This is a Microsoft-published, first-party
+  statement distinguishing the CE/Compact lineage (independent kernel,
+  own driver model, cross-CPU) from the NT-based embedded line
+  (Windows Embedded Standard = componentized Windows/NT) -- the same
+  structural claim the Learn archive trees make (see above).
+
 Consequence for this repository is unchanged: nothing NT-kernel-internal
 is imported; CE SDK header names and the Win32-API subset shape are
 what Microsoft's CE pages document.

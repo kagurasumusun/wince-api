@@ -34,6 +34,11 @@ extern "C" {
 typedef long long          LONGLONG;
 typedef unsigned long long ULONGLONG;
 
+/* FLOAT: single-precision IEEE-754, 4 bytes (fixed Win32 ABI).  Used
+ * by the GDI XFORM structure (ExtCreateRegion aa453061); like desktop
+ * winnt.h, the typedef lives here. */
+typedef float FLOAT;
+
 /* LARGE_INTEGER: union used by the performance-counter and file-size
  * APIs (QueryPerformanceCounter ms891120, GetFileSizeEx and the
  * LARGE_INTEGER official structure reference).  The anonymous struct
@@ -53,6 +58,21 @@ typedef union _ULARGE_INTEGER {
     };
     ULONGLONG QuadPart;
 } ULARGE_INTEGER, *PULARGE_INTEGER;
+
+/* ------------------------------------------------------------------ */
+/* GUID (fixed Win32 ABI object identifier).                          */
+/*                                                                     */
+/* Referenced as the leading member of VIDEOPARAMETERS (ms914096) and   */
+/* by CE GUID-typed APIs; the CE archive documents no separate GUID    */
+/* structure page, so the fixed Win32 ABI layout (Data1/Data2/Data3/   */
+/* Data4[8], 16 bytes) is used, recorded in docs/inventory.md.         */
+/* ------------------------------------------------------------------ */
+typedef struct _GUID {
+    unsigned long Data1;
+    unsigned short Data2;
+    unsigned short Data3;
+    unsigned char  Data4[8];
+} GUID;
 
 /* ------------------------------------------------------------------ */
 /* Critical section object                                            */

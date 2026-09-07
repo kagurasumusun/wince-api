@@ -95,8 +95,10 @@ typedef const void     *LPCVOID;
 typedef void           *PVOID;   /* generic pointer (Interlocked*Pointer) */
 typedef CHAR           *LPSTR;
 typedef const CHAR     *LPCSTR;
+typedef CHAR           *PSTR;    /* char pointer (OUTLINETEXTMETRICW) */
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
+typedef WCHAR          *PWSTR;   /* WCHAR pointer (CE doc spellings) */
 typedef DWORD *LPDWORD;
 typedef DWORD *PDWORD;  /* DWORD pointer (VirtualProtect aa450980) */
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */
@@ -154,6 +156,16 @@ typedef void           *HRGN;     /* region handle */
 typedef void           *HDWP;     /* deferred-window-position handle */
 typedef HANDLE          HKL;      /* keyboard-layout handle */
 
+/* GDI object handles (fixed Win32 ABI).  The CE archive has no
+ * structure page for these opaque handles; the CE GDI function pages
+ * type every object-bearing function with them (SelectObject ms932715
+ * takes HGDIOBJ, CreatePen ms908180 returns HPEN, SelectPalette
+ * ms932716 takes HPALETTE).  Like the other handles they are opaque
+ * void pointers. */
+typedef void           *HGDIOBJ;  /* GDI object handle */
+typedef void           *HPEN;     /* pen handle (CreatePen/CreatePenIndirect) */
+typedef void           *HPALETTE; /* palette handle (CreatePalette) */
+
 /* Geometric ABI structures referenced by the GWES pages (GetClientRect
  * ms929214 uses LPRECT, WindowFromPoint ms914099 takes POINT,
  * GetCaretPos ms929210 takes LPPOINT; layouts are the fixed Win32-ABI
@@ -175,6 +187,22 @@ typedef struct tagSIZE {
     LONG cx;
     LONG cy;
 } SIZE, *PSIZE, *LPSIZE;
+
+/* GDI Structures book (official Windef.h pages): POINTS (ms911931)
+ * and RECTL (ms913063).  RECT (ms912843) and POINT (ms911930) are the
+ * tagRECT/tagPOINT forms already declared above (the same Win32 ABI
+ * layout); the RECTL page prints struct _RECTL. */
+typedef struct tagPOINTS {
+    SHORT x;
+    SHORT y;
+} POINTS;
+
+typedef struct _RECTL {
+    LONG left;
+    LONG top;
+    LONG right;
+    LONG bottom;
+} RECTL, *PRECTL;
 
 /* MAKELONG: fixed Win32-ABI packing macro used by the GWES
  * MAKELPARAM/MAKEWPARAM/MAKELRESULT pages (aa453543/ms911780/

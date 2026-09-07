@@ -152,7 +152,12 @@ def declared_exports():
 
 
 def short_title(title):
-    return re.sub(r"\s*\(Windows CE [^)]*\)\s*$", "", title).strip()
+    t = re.sub(r"\s*\(Windows CE [^)]*\)\s*$", "", title).strip()
+    # Disambiguation suffixes appended by the archive (e.g. the GDI
+    # book prints "CreatePalette (GDI)" for the page whose export is
+    # CreatePalette) are annotations, not part of the export name.
+    t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+    return t
 
 
 def main():

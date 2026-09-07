@@ -13,6 +13,9 @@
 LIBRARY coredll.dll
 EXPORTS
   ActivateKeyboardLayout
+  AlphaBlend
+  BeginPaint
+  BitBlt
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
@@ -26,13 +29,22 @@ EXPORTS
   CeLogQueryZones
   CeLogReSync
   CeLogSetZones
+  ChangeDisplaySettingsEx
   CharNextW
+  ClientToScreen
   CloseHandle
   CloseMsgQueue
+  CombineRgn
   CompareFileTime
   ContinueDebugEvent
   ConvertThreadToFiber
   CopyFileW
+  CreateBitmap
+  CreateCompatibleBitmap
+  CreateCompatibleDC
+  CreateDC
+  CreateDIBPatternBrushPt
+  CreateDIBSection
   CreateDirectoryW
   CreateEventW
   CreateFiber
@@ -42,28 +54,48 @@ EXPORTS
   CreateHandler
   CreateMsgQueue
   CreateMutexW
+  CreatePalette
+  CreatePatternBrush
+  CreatePen
+  CreatePenIndirect
   CreateProcessW
+  CreateRectRgn
+  CreateRectRgnIndirect
+  CreateSolidBrush
   CreateThread
   CreateTicket
   DataHandler
   DebugActiveProcess
   DebugBreak
+  DeleteDC
   DeleteFiber
   DeleteFileW
   DeleteHandler
+  DeleteObject
   DeleteTicket
   DisableThreadLibraryCalls
   DisassociateSession
   DispatchMessage
+  DrawEdge
+  DrawFocusRect
   DuplicateHandle
   EditSession
   EditorDeregister
   EditorInitialize
+  Ellipse
+  EnumDisplayDevices
+  EnumDisplaySettings
   EnumPropsExW
+  EqualRgn
+  ExcludeClipRect
   ExitProcess
   ExitThread
+  ExtCreateRegion
+  ExtEscape
   FileTimeToLocalFileTime
   FileTimeToSystemTime
+  FillRect
+  FillRgn
   FindClose
   FindCloseChangeNotification
   FindFirstChangeNotificationW
@@ -75,9 +107,19 @@ EXPORTS
   FlushInstructionCache
   FlushViewOfFile
   FreeLibrary
+  GetBkColor
+  GetBkMode
+  GetClipBox
+  GetClipRgn
   GetCommandLineW
   GetCurrentFT
   GetCurrentFiber
+  GetCurrentObject
+  GetCurrentPositionEx
+  GetDC
+  GetDCEx
+  GetDIBColorTable
+  GetDeviceCaps
   GetDiskFreeSpaceExW
   GetDllVersion
   GetExitCodeProcess
@@ -94,6 +136,7 @@ EXPORTS
   GetKeyboardLayoutList
   GetKeyboardType
   GetLastError
+  GetLayout
   GetLocalTime
   GetMessage
   GetMessagePos
@@ -103,13 +146,27 @@ EXPORTS
   GetModuleHandleW
   GetModuleInformation
   GetMsgQueueInfo
+  GetNearestColor
+  GetNearestPaletteIndex
+  GetObject
+  GetObjectType
+  GetOutlineTextMetrics
+  GetPaletteEntries
+  GetPixel
   GetProcAddressW
   GetProcessVersion
   GetPropW
   GetQueueStatus
+  GetROP2
+  GetRegionData
+  GetRgnBox
+  GetStockObject
   GetStoreInformation
+  GetStretchBltMode
   GetStringTypeW
+  GetSysColorBrush
   GetSystemInfo
+  GetSystemPaletteEntries
   GetSystemTime
   GetTempFileNameW
   GetTempPathW
@@ -117,11 +174,20 @@ EXPORTS
   GetThreadTimes
   GetTickCount
   GetTimeZoneInformation
+  GetUpdateRect
+  GetUpdateRgn
   GetVersionEx
+  GetViewportExtEx
+  GetViewportOrgEx
+  GetWindowDC
+  GetWindowExtEx
+  GetWindowOrgEx
+  GetWindowRgn
   GlobalAddAtomW
   GlobalDeleteAtom
   GlobalFindAtomW
   GlobalMemoryStatus
+  GradientFill
   HeapAlloc
   HeapCompact
   HeapCreate
@@ -139,11 +205,16 @@ EXPORTS
   InterlockedExchangePointer
   InterlockedIncrement
   InterlockedTestExchange
+  IntersectClipRect
+  InvalidateRect
+  InvalidateRgn
+  InvertRect
   IsBadCodePtr
   IsBadReadPtr
   IsBadWritePtr
   IsDBCSLeadByte
   IsDBCSLeadByteEx
+  LineTo
   LoadKeyboardLayout
   LoadLibraryW
   LoadLibraryExW
@@ -154,15 +225,24 @@ EXPORTS
   LocalSize
   LockFileEx
   MapViewOfFile
+  MapWindowPoints
+  MaskBlt
   MoveFileW
+  MoveToEx
   MultiByteToWideChar
+  OffsetRgn
+  OffsetViewportOrgEx
   OpenEventW
   OpenMsgQueue
   OpenProcess
+  PatBlt
   PeekMessage
+  Polygon
+  Polyline
   PostMessage
   PostQuitMessage
   PostThreadMessage
+  PtInRegion
   PulseEvent
   QueryInfoSession
   QueryPerformanceCounter
@@ -171,6 +251,11 @@ EXPORTS
   Random
   ReadFile
   ReadMsgQueue
+  RealizePalette
+  RectInRegion
+  RectVisible
+  Rectangle
+  RedrawWindow
   RegCloseKeyW
   RegCreateKeyExW
   RegDeleteKeyW
@@ -184,17 +269,31 @@ EXPORTS
   RegSetValueExW
   RegisterEditor
   RegisterWindowMessageW
+  ReleaseDC
   ReleaseSemaphore
   RemoveDirectoryW
   RemovePropW
   ReportFault
   ResetEvent
+  RestoreDC
   ResumeThread
+  RoundRect
+  SaveDC
+  ScreenToClient
   ScrollDC
   ScrollWindowEx
+  SelectClipRgn
+  SelectObject
+  SelectPalette
   SendMessage
   SendMessageTimeout
   SendNotifyMessage
+  SetBitmapBits
+  SetBkColor
+  SetBkMode
+  SetBrushOrgEx
+  SetDIBColorTable
+  SetDIBitsToDevice
   SetDaylightTime
   SetEndOfFile
   SetEvent
@@ -202,13 +301,23 @@ EXPORTS
   SetFilePointer
   SetFileTime
   SetLastError
+  SetLayout
   SetLocalTime
+  SetPaletteEntries
+  SetPixel
   SetPropW
+  SetROP2
+  SetRectRgn
+  SetStretchBltMode
   SetSystemTime
   SetThreadPriority
   SetTimeZoneInformation
+  SetViewportOrgEx
+  SetWindowOrgEx
   SignalStarted
   Sleep
+  StretchBlt
+  StretchDIBits
   SuspendThread
   SwitchToFiber
   SystemTimeToFileTime
@@ -220,9 +329,14 @@ EXPORTS
   TlsGetValue
   TlsSetValue
   TranslateMessage
+  TransparentBlt
+  TransparentImage
   TryEnterCriticalSection
   UnlockFileEx
   UnmapViewOfFile
+  UpdateWindow
+  ValidateRect
+  ValidateRgn
   VirtualAlloc
   VirtualFree
   VirtualProtect

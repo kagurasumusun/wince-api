@@ -1074,6 +1074,83 @@ Documented conflicts and unknown facts recorded for M26:
   LoadKeyboardLayout, GetQueueStatus, foreground-input pages).
 
 
+### M27: GDI Reference -- GDI Functions + GDI Structures (bulk)
+
+Second graphics/user-interface batch, landed together as one large unit
+with the full **GDI Reference** book of the CE 5.0 archive: two
+manifests (`tools/manifests/gdi-functions.manifest`, 132 leaves;
+`tools/manifests/gdi-structures.manifest`, 29 leaves) -> 161 unique
+leaf pages; `build/rows.json` grows 666 -> **827** rows.
+
+**Prototype recovery note.**  The migrated CE 5.0 pages (`(v=msdn.10)`)
+serve their `<pre>` prototypes with inter-token whitespace removed
+(`ce-fetch.py` reports "no-sig" for 99 of the GDI pages), while the CE
+6.0 twins (`(v=winembedded.60)`, the same GDI book re-published with
+`ee…`/`ms…` ids) still carry whitespace-preserved prototypes.  Every
+M27 signature was therefore recovered from its **official CE 6.0 twin
+page** (both archives were fetched; id pairs are listed
+per-declaration in the headers), cross-checked against the CE 5.0
+page bodies and the desktop-official fixed Win32 ABI where a CE page
+omits a value.  No signature was invented: pages that print a bare
+prototype without a return type are annotated inline with the page's
+own "Return Values" text that fixes the type (the seven viewport/window
+origin-and-extent getters/setters return BOOL -- nonzero success / zero
+failure).  Two page typos are preserved with notes rather than silently
+"fixed": TransparentBlt prints its 8th parameter as `int hHeightDest`
+(sic; parameter is nHeightDest) and SetLayout prints a stray trailing
+comma.  Three color accessor pages (GetRValue/GetGValue/GetBValue) are
+documented by the official pages as **macros** with verbatim bodies and
+no Link Library row, so they are defined as macros, not declared as
+functions (129 declared functions + 3 macros from the 132 leaves).
+
+**Header-home / new files.**  The CE 5.0 GDI Requirement rows name
+Header Windows.h for the GDI bulk (CE 5 headers were monolithic).  This
+substitute groups those items in a new **`include/wingdi.h`** (the CE
+6.0-era component header, and the header the CE 5.0 TEXTMETRIC page
+`ms901146` itself names), included by `windows.h`, so both CE 5-style
+(`#include <windows.h>`) and CE 6-style (`#include <wingdi.h>`)
+programs compile the same surface.  Items whose rows name Winuser.h
+(27 functions incl. PAINTSTRUCT) live in winuser.h; the two rows naming
+Winbase.h (InflateRect, SetRect) live in winbase.h; POINTS/RECTL
+(Windef.h rows) and the three fixed-ABI GDI handle typedefs
+HGDIOBJ/HPEN/HPALETTE were added to windef.h; VIDEOPARAMETERS (Header
+Tvout.h) has a new `include/tvout.h`.  Fixed Win32-ABI support types
+with **no CE structure page** are provided and recorded as such:
+XFORM (ExtCreateRegion `aa453061` requires it, "[in] not supported; set
+to NULL"), PANOSE (member type of OUTLINETEXTMETRICW `ms934025`),
+GUID (leading member of VIDEOPARAMETERS `ms914096`), FLOAT, COLOR16 and
+the DEVMODE string constants CCHDEVICENAME/CCHFORMNAME plus BCHAR.
+
+Export-surface effect: coredll 221 -> **335** exports; the
+Winuser.h-row window-manager items add winmgr 1 -> **17**; the
+Rectapi.lib rows open `def/rectapi-doc.def` (11), the Loadbmp.lib row
+`def/loadbmp-doc.def` (1) and the Nclient.lib row
+`def/nclient-doc.def` (1): 18 -> **21** def files, **457** name-only
+exports, every def llvm-dlltool-`-m armce` verified.  gen-doc-def.py
+`short_title` now strips trailing "(GDI)"-style disambiguation
+annotations so the page "CreatePalette (GDI)" contributes the export
+`CreatePalette`.
+
+#### GDI Functions (132 leaves; 129 declared + 3 color macros)
+
+Requirement rows as published (declared location follows the Header
+column per the note above; the three macro pages are marked *macro* in
+wingdi.h).
+
+%s
+
+#### GDI Structures (29 leaves)
+
+Requirement rows as published.  POINT (ms911930) and RECT (ms912843)
+and SIZE (ms940344, page row Windows.h) are the tagPOINT/tagRECT/
+tagSIZE forms already declared in windef.h for the GWES batch (same
+fixed Win32-ABI layout); POINTS (ms911931) and RECTL (ms913063) are
+new Windef.h-row additions.  PAINTSTRUCT (ms911912, Header Winuser.h)
+is declared in winuser.h next to BeginPaint/EndPaint.  VIDEOPARAMETERS
+(ms914096, Header Tvout.h) is in tvout.h.
+
+%s
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

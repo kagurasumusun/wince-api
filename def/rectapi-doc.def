@@ -1,4 +1,4 @@
-; winmgr-doc.def -- winmgr.lib export surface for Windows CE.
+; rectapi-doc.def -- rectapi.lib export surface for Windows CE.
 ;
 ; Copyright (c) 2026 Akari API contributors
 ; SPDX-License-Identifier: MIT
@@ -10,24 +10,18 @@
 ; harvest; docs/inventory.md records every page).  No
 ; shared-source/device-dump/VS/PB-derived name is used.
 ; Ordinals are not published; entries are name-only.
-; LIBRARY tag = documented Link Library row (winmgr.lib); the on-device module name is
+; LIBRARY tag = documented Link Library row (rectapi.lib); the on-device module name is
 ; not published by the CE documentation.
-LIBRARY winmgr.dll
+LIBRARY rectapi.dll
 EXPORTS
-  BeginPaint
-  ClientToScreen
-  EndPaint
-  GetDC
-  GetDCEx
-  GetUpdateRect
-  GetUpdateRgn
-  GetWindowDC
-  GetWindowRgn
-  InvalidateRect
-  MapWindowPoints
-  ReleaseDC
-  ScreenToClient
-  ScrollWindowEx
-  SetWindowRgn
-  UpdateWindow
-  ValidateRect
+  CopyRect
+  EqualRect
+  InflateRect
+  IntersectRect
+  IsRectEmpty
+  OffsetRect
+  PtInRect
+  SetRect
+  SetRectEmpty
+  SubtractRect
+  UnionRect

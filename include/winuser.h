@@ -545,6 +545,82 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam,
                             LPARAM lParam);
 
+/* ------------------------------------------------------------------ */
+/* M27: GDI Reference items whose CE 5.0 pages list Header: Winuser.h. */
+/*                                                                     */
+/* Painting/DC, coordinate, window-region and rectangle helpers.  Page */
+/* "Link Library" rows name Coredll.lib (+Winmgr.lib for the window-   */
+/* manager set), Rectapi.lib for the rectangle helpers, Nclient.lib    */
+/* for DrawFrameControl and Loadbmp.lib for LoadBitmap; see the        */
+/* per-page comments in docs/inventory.md.                             */
+/* ------------------------------------------------------------------ */
+
+/* ms911912 "PAINTSTRUCT": paint information filled by BeginPaint. */
+typedef struct tagPAINTSTRUCT {
+    HDC  hdc;
+    BOOL fErase;
+    RECT rcPaint;
+    BOOL fRestore;
+    BOOL fIncUpdate;
+    BYTE rgbReserved[32];
+} PAINTSTRUCT, *LPPAINTSTRUCT;
+
+/* aa452871 "BeginPaint" */
+HDC BeginPaint(HWND hwnd, LPPAINTSTRUCT lpPaint);
+/* ms928584 "ClientToScreen" */
+BOOL ClientToScreen(HWND hWnd, LPPOINT lpPoint);
+/* ms908152 "CopyRect" */
+BOOL CopyRect(LPRECT lprcDst, const RECT* lprcSrc);
+/* aa452970 "DrawFrameControl" */
+BOOL DrawFrameControl(HDC hdc, LPRECT lprc, UINT uType, UINT uState);
+/* aa453041 "EndPaint" */
+BOOL EndPaint(HWND hWnd, CONST PAINTSTRUCT* lpPaint);
+/* aa453055 "EqualRect" */
+BOOL EqualRect(const RECT* lprc1, const RECT* lprc2);
+/* ms929227 "GetDC" */
+HDC GetDC(HWND hWnd);
+/* ms929228 "GetDCEx" */
+HDC GetDCEx(HWND hWnd, HRGN hrgnClip, DWORD flags);
+/* aa453174 "GetUpdateRect" */
+BOOL GetUpdateRect(HWND hWnd, LPRECT lpRect, BOOL bErase);
+/* aa453175 "GetUpdateRgn" */
+int GetUpdateRgn(HWND hWnd, HRGN hRgn, BOOL bErase);
+/* aa453179 "GetWindowDC" */
+HDC GetWindowDC(HWND hWnd);
+/* aa453182 "GetWindowRgn" */
+int GetWindowRgn(HWND hWnd, HRGN hRgn);
+/* ms909856 "IntersectRect" */
+BOOL IntersectRect(LPRECT lprcDst, const RECT* lprcSrc1,
+    const RECT* lprcSrc2);
+/* ms909857 "InvalidateRect" */
+BOOL InvalidateRect(HWND hWnd, const RECT* lpRect, BOOL bErase);
+/* ms909894 "IsRectEmpty" */
+BOOL IsRectEmpty(const RECT* lprc);
+/* aa453409 "LoadBitmap" */
+HBITMAP LoadBitmap(HINSTANCE hInstance, LPCTSTR lpBitmapName);
+/* ms911790 "MapWindowPoints" */
+int MapWindowPoints(HWND hWndFrom, HWND hWndTo, LPPOINT lpPoints,
+    UINT cPoints);
+/* ms911891 "OffsetRect" */
+BOOL OffsetRect(LPRECT lprc, int dx, int dy);
+/* aa453601 "PtInRect" */
+BOOL PtInRect(const RECT* lprc, POINT pt);
+/* ms939760 "ReleaseDC" */
+int ReleaseDC(HWND hWnd, HDC hDC);
+/* ms932582 "ScreenToClient" */
+BOOL ScreenToClient(HWND hWnd, LPPOINT lpPoint);
+/* aa453649 "SetRectEmpty" */
+BOOL SetRectEmpty(LPRECT lprc);
+/* aa453663 "SetWindowRgn" */
+int SetWindowRgn(HWND hWnd, HRGN hRgn, BOOL bRedraw);
+/* ms940381 "SubtractRect" */
+BOOL SubtractRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2);
+/* ms914081 "UnionRect" */
+BOOL UnionRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2);
+/* ms914085 "UpdateWindow" */
+BOOL UpdateWindow(HWND hWnd);
+/* ms914091 "ValidateRect" */
+BOOL ValidateRect(HWND hWnd, const RECT* lpRect);
 #ifdef __cplusplus
 }
 #endif

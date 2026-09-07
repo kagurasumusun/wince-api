@@ -319,3 +319,39 @@ surface: 14 GWES manifests (156 pages, rows 510 -> 666) add coredll
 foregnd, hotkey, kbdui, coreimm, msgque, sbcmn, uibase, winmgr,
 wmgr_c): 7 -> 18 defs.  All 18 defs llvm-dlltool-armce verified;
 host + six CE targets pass.
+
+**M27 batch — GDI Reference, GDI Functions + GDI Structures (bulk):**
+second graphics/user-interface batch, landed together as one unit with
+the whole GDI book of the CE 5.0 archive: 132 GDI Functions + 29 GDI
+Structures leaves (manifests tools/manifests/gdi-*.manifest), rows 666
+-> 827.  Prototype recovery: the CE 5.0 (v=msdn.10) migration strips
+whitespace inside <pre> prototypes (99 of 161 GDI pages parse
+"no-sig"), so each signature was recovered from the official CE 6.0
+(v=winembedded.60) twin of the same page (161/161 fetched, spaced
+intact) and cross-checked to the CE 5.0 body; both archives' page ids
+are on the declarations.  New include/wingdi.h (129 declared GDI
+functions + bitmap/color/palette/pen/brush/region/DEVMODE/display/
+gradient/font structures; the GDI items whose CE 5.0 rows name Header
+Windows.h) and include/tvout.h (VIDEOPARAMETERS ms914096, Header
+Tvout.h); windef.h gains the fixed-ABI GDI handles HGDIOBJ/HPEN/
+HPALETTE and the Windef.h-row structures POINTS/RECTL; winuser.h gains
+the 27 Header-Winuser.h items (paint/DC/update/coordinate/rectangle)
+plus PAINTSTRUCT; winbase.h gains InflateRect and SetRect (Header
+Winbase.h rows).  GetRValue/GetGValue/GetBValue are documented by the
+official pages as macros with verbatim bodies and no Link Library row
+and are defined as macros (not exports).  Fixed Win32-ABI types the CE
+pages reference but never define are provided with records: XFORM
+(ExtCreateRegion aa453061, "not supported; set NULL"), PANOSE
+(OUTLINETEXTMETRICW ms934025), GUID (VIDEOPARAMETERS ms914096),
+FLOAT/COLOR16/BCHAR/CCHDEVICENAME/CCHFORMNAME.  Page typos preserved
+with notes: TransparentBlt 8th parameter "hHeightDest" (sic), SetLayout
+stray trailing comma, BITMAPINFOHEADER code block missing a separator
+(authoritative member list used).  Seven viewport/window origin/extent
+pages omit the prototype return type; their "Return Values" text fixes
+BOOL.  Export surface: coredll 221 -> 335, winmgr 1 -> 17, new defs
+rectapi-doc.def (11), loadbmp-doc.def (1), nclient-doc.def (1): 18 ->
+21 def files, 457 name-only exports, all llvm-dlltool-armce verified.
+gen-doc-def.py gained trailing-annotation stripping in short_title
+("CreatePalette (GDI)" -> export CreatePalette) and host TU exercises
+all 129 functions with typed calls plus structure-layout checks.  Host
++ six CE targets (arm/i386 x 4.2/5.0/6.0) pass warning-free.

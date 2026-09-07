@@ -406,6 +406,139 @@ static const void *const api_symbols[] = {
     (const void *) &CeFindFirstRegChange,
     (const void *) &CeFindNextRegChange,
     (const void *) &CeFindCloseRegChange,
+    /* M27: GDI bulk (wingdi.h/winuser.h/winbase.h): 129 GDI
+     * Functions declared as exports + 3 GDI color macros
+     * (GetRValue/GetGValue/GetBValue) that the official
+     * pages define as macros (no Link Library row). */
+    (const void *) &AlphaBlend,
+    (const void *) &BeginPaint,
+    (const void *) &BitBlt,
+    (const void *) &ChangeDisplaySettingsEx,
+    (const void *) &ClientToScreen,
+    (const void *) &CombineRgn,
+    (const void *) &CopyRect,
+    (const void *) &CreateBitmap,
+    (const void *) &CreateCompatibleBitmap,
+    (const void *) &CreateCompatibleDC,
+    (const void *) &CreateDC,
+    (const void *) &CreateDIBPatternBrushPt,
+    (const void *) &CreateDIBSection,
+    (const void *) &CreatePalette,
+    (const void *) &CreatePatternBrush,
+    (const void *) &CreatePen,
+    (const void *) &CreatePenIndirect,
+    (const void *) &CreateRectRgn,
+    (const void *) &CreateRectRgnIndirect,
+    (const void *) &CreateSolidBrush,
+    (const void *) &DeleteDC,
+    (const void *) &DeleteObject,
+    (const void *) &DrawEdge,
+    (const void *) &DrawFocusRect,
+    (const void *) &DrawFrameControl,
+    (const void *) &Ellipse,
+    (const void *) &EndPaint,
+    (const void *) &EnumDisplayDevices,
+    (const void *) &EnumDisplaySettings,
+    (const void *) &EqualRect,
+    (const void *) &EqualRgn,
+    (const void *) &ExcludeClipRect,
+    (const void *) &ExtCreateRegion,
+    (const void *) &ExtEscape,
+    (const void *) &FillRect,
+    (const void *) &FillRgn,
+    (const void *) &GetBkColor,
+    (const void *) &GetBkMode,
+    (const void *) &GetClipBox,
+    (const void *) &GetClipRgn,
+    (const void *) &GetCurrentObject,
+    (const void *) &GetCurrentPositionEx,
+    (const void *) &GetDC,
+    (const void *) &GetDCEx,
+    (const void *) &GetDeviceCaps,
+    (const void *) &GetDIBColorTable,
+    (const void *) &GetLayout,
+    (const void *) &GetNearestColor,
+    (const void *) &GetNearestPaletteIndex,
+    (const void *) &GetObject,
+    (const void *) &GetObjectType,
+    (const void *) &GetOutlineTextMetrics,
+    (const void *) &GetPaletteEntries,
+    (const void *) &GetPixel,
+    (const void *) &GetRegionData,
+    (const void *) &GetRgnBox,
+    (const void *) &GetROP2,
+    (const void *) &GetStockObject,
+    (const void *) &GetStretchBltMode,
+    (const void *) &GetSysColorBrush,
+    (const void *) &GetSystemPaletteEntries,
+    (const void *) &GetUpdateRect,
+    (const void *) &GetUpdateRgn,
+    (const void *) &GetViewportExtEx,
+    (const void *) &GetViewportOrgEx,
+    (const void *) &GetWindowDC,
+    (const void *) &GetWindowExtEx,
+    (const void *) &GetWindowOrgEx,
+    (const void *) &GetWindowRgn,
+    (const void *) &GradientFill,
+    (const void *) &InflateRect,
+    (const void *) &IntersectClipRect,
+    (const void *) &IntersectRect,
+    (const void *) &InvalidateRect,
+    (const void *) &InvalidateRgn,
+    (const void *) &InvertRect,
+    (const void *) &IsRectEmpty,
+    (const void *) &LineTo,
+    (const void *) &LoadBitmap,
+    (const void *) &MapWindowPoints,
+    (const void *) &MaskBlt,
+    (const void *) &MoveToEx,
+    (const void *) &OffsetRect,
+    (const void *) &OffsetRgn,
+    (const void *) &OffsetViewportOrgEx,
+    (const void *) &PatBlt,
+    (const void *) &Polygon,
+    (const void *) &Polyline,
+    (const void *) &PtInRect,
+    (const void *) &PtInRegion,
+    (const void *) &RealizePalette,
+    (const void *) &Rectangle,
+    (const void *) &RectInRegion,
+    (const void *) &RectVisible,
+    (const void *) &RedrawWindow,
+    (const void *) &ReleaseDC,
+    (const void *) &RestoreDC,
+    (const void *) &RoundRect,
+    (const void *) &SaveDC,
+    (const void *) &ScreenToClient,
+    (const void *) &SelectClipRgn,
+    (const void *) &SelectObject,
+    (const void *) &SelectPalette,
+    (const void *) &SetBitmapBits,
+    (const void *) &SetBkColor,
+    (const void *) &SetBkMode,
+    (const void *) &SetBrushOrgEx,
+    (const void *) &SetDIBColorTable,
+    (const void *) &SetDIBitsToDevice,
+    (const void *) &SetLayout,
+    (const void *) &SetPaletteEntries,
+    (const void *) &SetPixel,
+    (const void *) &SetRect,
+    (const void *) &SetRectEmpty,
+    (const void *) &SetRectRgn,
+    (const void *) &SetROP2,
+    (const void *) &SetStretchBltMode,
+    (const void *) &SetViewportOrgEx,
+    (const void *) &SetWindowOrgEx,
+    (const void *) &SetWindowRgn,
+    (const void *) &StretchBlt,
+    (const void *) &StretchDIBits,
+    (const void *) &SubtractRect,
+    (const void *) &TransparentBlt,
+    (const void *) &TransparentImage,
+    (const void *) &UnionRect,
+    (const void *) &UpdateWindow,
+    (const void *) &ValidateRect,
+    (const void *) &ValidateRgn,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -1550,6 +1683,166 @@ static int m26_shaped_usage(void)
            ? 0 : 1;
 }
 
+/* M27: GDI Reference -- exercise every GDI declaration with typed
+ * null arguments; verify the documented (pointer-free) structure
+ * layouts and the GetR/GetG/GetB color-byte macros.
+ * BITMAPFILEHEADER is 14 bytes on disk; its in-memory C layout
+ * (natural DWORD alignment) is 16 bytes, like the desktop SDK. */
+static int m27_shaped_usage(void)
+{
+    if (sizeof(BITMAPINFOHEADER) != 40
+        || sizeof(BITMAPFILEHEADER) != 16
+        || sizeof(BITMAPCOREHEADER) != 12
+        || sizeof(RGBQUAD) != 4
+        || sizeof(RGBTRIPLE) != 3
+        || sizeof(PALETTEENTRY) != 4
+        || sizeof(BLENDFUNCTION) != 4
+        || sizeof(TRIVERTEX) != 16
+        || sizeof(GRADIENT_RECT) != 8
+        || sizeof(LOGBRUSH) != 12
+        || sizeof(LOGPEN) != 16
+        || sizeof(LOGPALETTE) != 8
+        || sizeof(POINTS) != 4
+        || sizeof(RECTL) != 16
+        || sizeof(RGNDATAHEADER) != 32
+        || sizeof(COLORREF) != 4)
+        return 1;
+    if (!(GetRValue(0x112233u) == 0x33
+          && GetGValue(0x112233u) == 0x22
+          && GetBValue(0x112233u) == 0x11))
+        return 1;
+    (void) AlphaBlend((HDC)0, (int)0, (int)0, (int)0, (int)0, (HDC)0, (int)0, (int)0, (int)0, (int)0, (BLENDFUNCTION){0, 0, 0, 0});
+    (void) BeginPaint((HWND)0, (LPPAINTSTRUCT)0);
+    (void) BitBlt((HDC)0, (int)0, (int)0, (int)0, (int)0, (HDC)0, (int)0, (int)0, (DWORD)0);
+    (void) ChangeDisplaySettingsEx((LPCTSTR)0, (LPDEVMODE)0, (HWND)0, (DWORD)0, (LPVOID)0);
+    (void) ClientToScreen((HWND)0, (LPPOINT)0);
+    (void) CombineRgn((HRGN)0, (HRGN)0, (HRGN)0, (int)0);
+    (void) CopyRect((LPRECT)0, (const RECT*)0);
+    (void) CreateBitmap((int)0, (int)0, (UINT)0, (UINT)0, (CONST VOID*)0);
+    (void) CreateCompatibleBitmap((HDC)0, (int)0, (int)0);
+    (void) CreateCompatibleDC((HDC)0);
+    (void) CreateDC((LPCTSTR)0, (LPCTSTR)0, (LPCTSTR)0, (CONST DEVMODE*)0);
+    (void) CreateDIBPatternBrushPt((const void*)0, (UINT)0);
+    (void) CreateDIBSection((HDC)0, (const BITMAPINFO*)0, (UINT)0, (void**)0, (HANDLE)0, (DWORD)0);
+    (void) CreatePalette((CONST LOGPALETTE*)0);
+    (void) CreatePatternBrush((HBITMAP)0);
+    (void) CreatePen((int)0, (int)0, (COLORREF)0);
+    (void) CreatePenIndirect((const LOGPEN*)0);
+    (void) CreateRectRgn((int)0, (int)0, (int)0, (int)0);
+    (void) CreateRectRgnIndirect((const RECT*)0);
+    (void) CreateSolidBrush((COLORREF)0);
+    (void) DeleteDC((HDC)0);
+    (void) DeleteObject((HGDIOBJ)0);
+    (void) DrawEdge((HDC)0, (LPRECT)0, (UINT)0, (UINT)0);
+    (void) DrawFocusRect((HDC)0, (const RECT*)0);
+    (void) DrawFrameControl((HDC)0, (LPRECT)0, (UINT)0, (UINT)0);
+    (void) Ellipse((HDC)0, (int)0, (int)0, (int)0, (int)0);
+    (void) EndPaint((HWND)0, (CONST PAINTSTRUCT*)0);
+    (void) EnumDisplayDevices((LPCTSTR)0, (DWORD)0, (PDISPLAY_DEVICE)0, (DWORD)0);
+    (void) EnumDisplaySettings((LPCTSTR)0, (DWORD)0, (LPDEVMODE)0);
+    (void) EqualRect((const RECT*)0, (const RECT*)0);
+    (void) EqualRgn((HRGN)0, (HRGN)0);
+    (void) ExcludeClipRect((HDC)0, (int)0, (int)0, (int)0, (int)0);
+    (void) ExtCreateRegion((CONST XFORM*)0, (DWORD)0, (CONST RGNDATA*)0);
+    (void) ExtEscape((HDC)0, (int)0, (int)0, (LPCSTR)0, (int)0, (LPSTR)0);
+    (void) FillRect((HDC)0, (CONST RECT*)0, (HBRUSH)0);
+    (void) FillRgn((HDC)0, (HRGN)0, (HBRUSH)0);
+    (void) GetBkColor((HDC)0);
+    (void) GetBkMode((HDC)0);
+    (void) GetClipBox((HDC)0, (LPRECT)0);
+    (void) GetClipRgn((HDC)0, (HRGN)0);
+    (void) GetCurrentObject((HDC)0, (UINT)0);
+    (void) GetCurrentPositionEx((HDC)0, (LPPOINT)0);
+    (void) GetDC((HWND)0);
+    (void) GetDCEx((HWND)0, (HRGN)0, (DWORD)0);
+    (void) GetDeviceCaps((HDC)0, (int)0);
+    (void) GetDIBColorTable((HDC)0, (UINT)0, (UINT)0, (RGBQUAD*)0);
+    (void) GetLayout((HDC)0);
+    (void) GetNearestColor((HDC)0, (COLORREF)0);
+    (void) GetNearestPaletteIndex((HPALETTE)0, (COLORREF)0);
+    (void) GetObject((HGDIOBJ)0, (int)0, (LPVOID)0);
+    (void) GetObjectType((HGDIOBJ)0);
+    (void) GetOutlineTextMetrics((HDC)0, (UINT)0, (LPOUTLINETEXTMETRICW)0);
+    (void) GetPaletteEntries((HPALETTE)0, (UINT)0, (UINT)0, (LPPALETTEENTRY)0);
+    (void) GetPixel((HDC)0, (int)0, (int)0);
+    (void) GetRegionData((HRGN)0, (DWORD)0, (LPRGNDATA)0);
+    (void) GetRgnBox((HRGN)0, (LPRECT)0);
+    (void) GetROP2((HDC)0);
+    (void) GetStockObject((int)0);
+    (void) GetStretchBltMode((HDC)0);
+    (void) GetSysColorBrush((int)0);
+    (void) GetSystemPaletteEntries((HDC)0, (UINT)0, (UINT)0, (LPPALETTEENTRY)0);
+    (void) GetUpdateRect((HWND)0, (LPRECT)0, (BOOL)0);
+    (void) GetUpdateRgn((HWND)0, (HRGN)0, (BOOL)0);
+    (void) GetViewportExtEx((HDC)0, (LPSIZE)0);
+    (void) GetViewportOrgEx((HDC)0, (LPPOINT)0);
+    (void) GetWindowDC((HWND)0);
+    (void) GetWindowExtEx((HDC)0, (LPSIZE)0);
+    (void) GetWindowOrgEx((HDC)0, (LPPOINT)0);
+    (void) GetWindowRgn((HWND)0, (HRGN)0);
+    (void) GradientFill((HDC)0, (PTRIVERTEX)0, (ULONG)0, (PVOID)0, (ULONG)0, (ULONG)0);
+    (void) InflateRect((LPRECT)0, (int)0, (int)0);
+    (void) IntersectClipRect((HDC)0, (int)0, (int)0, (int)0, (int)0);
+    (void) IntersectRect((LPRECT)0, (const RECT*)0, (const RECT*)0);
+    (void) InvalidateRect((HWND)0, (const RECT*)0, (BOOL)0);
+    (void) InvalidateRgn((HWND)0, (HRGN)0, (BOOL)0);
+    (void) InvertRect((HDC)0, (CONST RECT*)0);
+    (void) IsRectEmpty((const RECT*)0);
+    (void) LineTo((HDC)0, (int)0, (int)0);
+    (void) LoadBitmap((HINSTANCE)0, (LPCTSTR)0);
+    (void) MapWindowPoints((HWND)0, (HWND)0, (LPPOINT)0, (UINT)0);
+    (void) MaskBlt((HDC)0, (int)0, (int)0, (int)0, (int)0, (HDC)0, (int)0, (int)0, (HBITMAP)0, (int)0, (int)0, (DWORD)0);
+    (void) MoveToEx((HDC)0, (int)0, (int)0, (LPPOINT)0);
+    (void) OffsetRect((LPRECT)0, (int)0, (int)0);
+    (void) OffsetRgn((HRGN)0, (int)0, (int)0);
+    (void) OffsetViewportOrgEx((HDC)0, (int)0, (int)0, (LPPOINT)0);
+    (void) PatBlt((HDC)0, (int)0, (int)0, (int)0, (int)0, (DWORD)0);
+    (void) Polygon((HDC)0, (const POINT*)0, (int)0);
+    (void) Polyline((HDC)0, (const POINT*)0, (int)0);
+    (void) PtInRect((const RECT*)0, (POINT){0, 0});
+    (void) PtInRegion((HRGN)0, (int)0, (int)0);
+    (void) RealizePalette((HDC)0);
+    (void) Rectangle((HDC)0, (int)0, (int)0, (int)0, (int)0);
+    (void) RectInRegion((HRGN)0, (const RECT*)0);
+    (void) RectVisible((HDC)0, (CONST RECT*)0);
+    (void) RedrawWindow((HWND)0, (CONST RECT*)0, (HRGN)0, (UINT)0);
+    (void) ReleaseDC((HWND)0, (HDC)0);
+    (void) RestoreDC((HDC)0, (int)0);
+    (void) RoundRect((HDC)0, (int)0, (int)0, (int)0, (int)0, (int)0, (int)0);
+    (void) SaveDC((HDC)0);
+    (void) ScreenToClient((HWND)0, (LPPOINT)0);
+    (void) SelectClipRgn((HDC)0, (HRGN)0);
+    (void) SelectObject((HDC)0, (HGDIOBJ)0);
+    (void) SelectPalette((HDC)0, (HPALETTE)0, (BOOL)0);
+    (void) SetBitmapBits((HBITMAP)0, (DWORD)0, (CONST VOID *)0);
+    (void) SetBkColor((HDC)0, (COLORREF)0);
+    (void) SetBkMode((HDC)0, (int)0);
+    (void) SetBrushOrgEx((HDC)0, (int)0, (int)0, (LPPOINT)0);
+    (void) SetDIBColorTable((HDC)0, (UINT)0, (UINT)0, (CONST RGBQUAD*)0);
+    (void) SetDIBitsToDevice((HDC)0, (int)0, (int)0, (DWORD)0, (DWORD)0, (int)0, (int)0, (UINT)0, (UINT)0, (CONST VOID*)0, (CONST BITMAPINFO*)0, (UINT)0);
+    (void) SetLayout((HDC)0, (DWORD)0);
+    (void) SetPaletteEntries((HPALETTE)0, (UINT)0, (UINT)0, (CONST PALETTEENTRY*)0);
+    (void) SetPixel((HDC)0, (int)0, (int)0, (COLORREF)0);
+    (void) SetRect((LPRECT)0, (int)0, (int)0, (int)0, (int)0);
+    (void) SetRectEmpty((LPRECT)0);
+    (void) SetRectRgn((HRGN)0, (int)0, (int)0, (int)0, (int)0);
+    (void) SetROP2((HDC)0, (int)0);
+    (void) SetStretchBltMode((HDC)0, (int)0);
+    (void) SetViewportOrgEx((HDC)0, (int)0, (int)0, (LPPOINT)0);
+    (void) SetWindowOrgEx((HDC)0, (int)0, (int)0, (LPPOINT)0);
+    (void) SetWindowRgn((HWND)0, (HRGN)0, (BOOL)0);
+    (void) StretchBlt((HDC)0, (int)0, (int)0, (int)0, (int)0, (HDC)0, (int)0, (int)0, (int)0, (int)0, (DWORD)0);
+    (void) StretchDIBits((HDC)0, (int)0, (int)0, (int)0, (int)0, (int)0, (int)0, (int)0, (int)0, (CONST VOID*)0, (CONST BITMAPINFO*)0, (UINT)0, (DWORD)0);
+    (void) SubtractRect((LPRECT)0, (const RECT*)0, (const RECT*)0);
+    (void) TransparentBlt((HDC)0, (int)0, (int)0, (int)0, (int)0, (HDC)0, (int)0, (int)0, (int)0, (int)0, (UINT)0);
+    (void) TransparentImage((HDC)0, (LONG)0, (LONG)0, (LONG)0, (LONG)0, (HANDLE)0, (LONG)0, (LONG)0, (LONG)0, (LONG)0, (COLORREF)0);
+    (void) UnionRect((LPRECT)0, (const RECT*)0, (const RECT*)0);
+    (void) UpdateWindow((HWND)0);
+    (void) ValidateRect((HWND)0, (const RECT*)0);
+    (void) ValidateRgn((HWND)0, (HRGN)0);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1594,6 +1887,8 @@ int host_tu_entry(void)
     if (m24_shaped_usage() != 0)
         return 1;
     if (m25_shaped_usage() != 0)
+        return 1;
+    if (m27_shaped_usage() != 0)
         return 1;
     return 0;
 }

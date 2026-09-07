@@ -91,7 +91,16 @@ official pages.
 include/windows.h   umbrella (declarations whose page says Header:
                     Windows.h, e.g. ExitProcess)
 include/windef.h    base types/macros (CE: TCHAR = WCHAR, WINAPI
-                    empty, WCHAR 16-bit)
+                    empty, WCHAR 16-bit), GDI handle types
+                    (HGDIOBJ/HPEN/HPALETTE), POINTS/RECTL
+include/winuser.h   user-interface API (window/class/message/paint &
+                    DC/coordinate & rectangle helpers, Header-row
+                    Winuser.h)
+include/wingdi.h    GDI Reference: bitmap/pen/brush/palette/region/
+                    font/DEVMODE structures + the 129 GDI functions
+                    whose CE 5.0 pages print Header Windows.h (CE 6
+                    component name; see header note)
+include/tvout.h     VIDEOPARAMETERS (TV-out; Header Tvout.h)
 include/winnt.h     base 64-bit types (LONGLONG/LARGE_INTEGER),
                     MEMORY_BASIC_INFORMATION, MAKELANGID/MAKELCID,
                     SecureZeroMemory
@@ -144,6 +153,20 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M27 (landed):** GDI Reference bulk -- GDI Functions + GDI
+  Structures (161 CE 5.0 leaves, rows 666 -> 827): new
+  `include/wingdi.h` (129 GDI functions + the bitmap/color/palette/
+  pen/brush/region/DEVMODE/display/font structures; the three color
+  accessors GetRValue/GetGValue/GetBValue are declared *as macros* per
+  the official pages), `include/tvout.h` (VIDEOPARAMETERS).  Signatures
+  recovered from the official CE 6.0 `(v=winembedded.60)` twins
+  (whitespace-preserved prototypes; the CE 5.0 migration strips code
+  spacing); per-declaration id pairs in the headers.  Windef.h gains
+  HGDIOBJ/HPEN/HPALETTE + POINTS/RECTL; winuser.h gains the paint/DC/
+  coordinate/rectangle helpers whose rows say Winuser.h; winbase.h
+  gains InflateRect/SetRect (rows say Winbase.h).  coredll def 221 ->
+  335; winmgr 1 -> 17; new component defs rectapi(11), loadbmp(1),
+  nclient(1); 18 -> 21 def files, all armce-verified.
 * **M26 (landed):** GWES window-manager core — new `include/winuser.h`
   (Windows / Window Class / Window Properties / Windows Timer /
   Carets / Atoms / Message Queue / Keyboard / Scroll Bars books, 156

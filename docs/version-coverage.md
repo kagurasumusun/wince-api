@@ -66,28 +66,35 @@ inventory row for the CE 6.0 twins).
   Windows CE 5.0 "Core OS Reference" alone has 340 leaves across 17
   books; the Feature-area reference books (GWES, GDI, shell, …
   ~15–20k reference leaves) are still largely un-harvested.
-* Harvested with Requirement rows in `build/rows.json` (each page read
-  once): 203 (10 Core OS books) → **337** after the Exception /
-  Message-Queue pages were added (two batches this session).
-* Declared exports in the shipped headers: 215 across all def files;
-  `def/coredll-doc.def` alone lists 164 name-only exports, every one
+* Pages harvested into `build/rows.json` (each page read once): 203
+  (Core OS Reference books) → **827** after the GWES window-manager
+  books (M26, 156 leaves) and the full **GDI Reference** book
+  (M27: 132 GDI Functions + 29 GDI Structures, 161 leaves) were added.
+  Every page is an official `(v=msdn.10)` CE 5.0 page; GDI signatures
+  were additionally recovered from the official CE 6.0
+  `(v=winembedded.60)` twins of the same book.
+* Declared exports in the shipped headers: 457 name-only exports
+  across 21 def files; `def/coredll-doc.def` alone lists 335, every one
   traced to an official Link-Library row in `docs/inventory.md`.
 
 ## 4. Staged backlog (CE 5.0 Core OS Reference, remaining user-mode books)
 
-Feature-area GWES books opened in M26: the first slice of the GWES
-Reference (Shell and User Interface) is implemented with **14
-manifests** (`tools/manifests/gwes-*.manifest`, 156 CE 5.0 leaves):
-Windows Functions (35) / Window Class (8) / Window Properties (5) /
-Windows Timer (4) / Carets (8) / Atoms (3) / Message Queue (16) /
-Message Synchronization (2) / Keyboard Functions (30) / Keyboard
-Structures (5) / Scroll Bars (6) / Windows Structures (6) /
-Windows Messages (14) / Keyboard Messages (14).  The remaining GWES
-ladder (GDI Functions 132, GDI Structures 29, Combo/List/Edit
-messages ~134, Dialog/Control/Menu/Image-List books, …) and the
-network/comms books are the backlog; each book = new manifest +
-batches, with the CE6 `(v=winembedded.60)` twins used where a CE5
-leaf is a stub (e.g. SCROLLINFO `ee504371`).
+Feature-area GWES/GDI books opened in M26/M27: the window-manager
+slice of the GWES Reference is implemented with **14 manifests**
+(`tools/manifests/gwes-*.manifest`, 156 CE 5.0 leaves): Windows
+Functions (35) / Window Class (8) / Window Properties (5) / Windows
+Timer (4) / Carets (8) / Atoms (3) / Message Queue (16) / Message
+Synchronization (2) / Keyboard Functions (30) / Keyboard Structures
+(5) / Scroll Bars (6) / Windows Structures (6) / Windows Messages
+(14) / Keyboard Messages (14).  The full **GDI Reference** book is
+implemented (M27; `tools/manifests/gdi-*.manifest`, 161 leaves) with
+every signature recovered from the CE 6.0 `(v=winembedded.60)` twin
+pages (the CE 5.0 `(v=msdn.10)` migration strips whitespace inside
+prototypes).  Remaining GWES ladder: Window Control Reference message/
+notification books (Combo Boxes 47, List Boxes 45, Edit Boxes 42,
+Control Styles 21, …), Dialog/Control/Menu/Image-List books, plus the
+network/comms books; each book = new manifest + batches, with CE6
+twins used where a CE5 leaf is a stub (e.g. SCROLLINFO `ee504371`).
 
 ## 5. Notes for future sessions
 
