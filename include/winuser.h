@@ -1138,6 +1138,182 @@ typedef struct tagCOPYDATASTRUCT {
 #define WM_MEASUREITEM                 0x002C         /* aa453883 */
 #define WM_COPYDATA                    0x004A         /* aa453921 */
 
+/* ------------------------------------------------------------------ */
+/* M35: GWES window and control style bits.                            */
+/*                                                                     */
+/* Name list and CE-supported set come from the official CE 5.0 GWES   */
+/* style pages (CE 6.0 twins are listed in parentheses): Basic Window  */
+/* Styles aa452869 (ee504355), Non-client Area Styles ms911872         */
+/* (ee506097), Message Box Styles ms911829 (ee502245), the button      */
+/* style pages aa453604/ms928572/aa453607 (ee501475/ee504569/ee505912), */
+/* Edit Control Styles aa452995 (ee504833), List Box Styles aa453299   */
+/* (ee501958), Combo Box Styles ms908112 (ee501099), Scroll Bar Styles */
+/* ms932612 (ee505682), Static Control Styles ms940359 (ee505845).     */
+/*                                                                     */
+/* The CE pages document each style name and meaning but do not        */
+/* republish the numeric value; Windows CE GWES implements the         */
+/* standard Win32 style ABI, so the numeric values are the fixed       */
+/* Win32 ABI style bits (same fixed-ABI policy as the message-         */
+/* identifier block above).  CE-only styles whose numeric value the    */
+/* CE pages do not publish are recorded but intentionally not          */
+/* defined here: WS_NONAVDONEBUTTON, WS_EX_NOANIMATION, WS_EX_NODRAG,  */
+/* WS_EX_CAPTIONOKBTN.                                                 */
+/* ------------------------------------------------------------------ */
+
+/* --- Window styles (aa452869/ee504355 + ms911872/ee506097) --- */
+#define WS_OVERLAPPED               0x00000000
+#define WS_POPUP                    0x80000000
+#define WS_CHILD                    0x40000000
+#define WS_VISIBLE                  0x10000000
+#define WS_DISABLED                 0x08000000
+#define WS_CLIPSIBLINGS             0x04000000
+#define WS_CLIPCHILDREN             0x02000000
+#define WS_CAPTION                  0x00C00000
+#define WS_BORDER                   0x00800000
+#define WS_DLGFRAME                 0x00400000
+#define WS_VSCROLL                  0x00200000
+#define WS_HSCROLL                  0x00100000
+#define WS_SYSMENU                  0x00080000
+#define WS_SIZEBOX                  0x00040000
+#define WS_GROUP                    0x00020000
+#define WS_TABSTOP                  0x00010000
+
+/* --- Extended window styles (aa452869/ee504355 + ms911872/ee506097).
+ * The page documents WS_EX_OVERLAPPEDWINDOW as the combination of
+ * WS_EX_CLIENTEDGE and WS_EX_WINDOWEDGE. --- */
+#define WS_EX_DLGMODALFRAME         0x00000001
+#define WS_EX_TOPMOST               0x00000008
+#define WS_EX_WINDOWEDGE            0x00000100
+#define WS_EX_CLIENTEDGE            0x00000200
+#define WS_EX_CONTEXTHELP           0x00000400
+#define WS_EX_STATICEDGE            0x00020000
+#define WS_EX_NOACTIVATE            0x08000000
+#define WS_EX_OVERLAPPEDWINDOW      (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE)
+
+/* --- Message box styles (ms911829/ee502245) --- */
+#define MB_OK                       0x0000
+#define MB_OKCANCEL                 0x0001
+#define MB_ABORTRETRYIGNORE         0x0002
+#define MB_YESNOCANCEL              0x0003
+#define MB_YESNO                    0x0004
+#define MB_RETRYCANCEL              0x0005
+#define MB_ICONHAND                 0x0010
+#define MB_ICONQUESTION             0x0020
+#define MB_ICONEXCLAMATION          0x0030
+#define MB_ICONASTERISK             0x0040
+#define MB_APPLMODAL                0x0000
+#define MB_DEFBUTTON1               0x0000
+#define MB_DEFBUTTON2               0x0100
+#define MB_DEFBUTTON3               0x0200
+#define MB_SETFOREGROUND            0x00010000
+#define MB_TOPMOST                  0x00040000
+/* aliases the CE page lists in the same cells (same value) */
+#define MB_ICONERROR                MB_ICONHAND
+#define MB_ICONSTOP                 MB_ICONHAND
+#define MB_ICONWARNING              MB_ICONEXCLAMATION
+#define MB_ICONINFORMATION          MB_ICONASTERISK
+
+/* --- Button styles: push aa453604/ee501475, check ms928572/ee504569,
+ * radio aa453607/ee505912 (the pages also list WS_TABSTOP, which is a
+ * window style). --- */
+#define BS_PUSHBUTTON               0x0000
+#define BS_DEFPUSHBUTTON            0x0001
+#define BS_CHECKBOX                 0x0002
+#define BS_AUTOCHECKBOX             0x0003
+#define BS_RADIOBUTTON              0x0004
+#define BS_3STATE                   0x0005
+#define BS_AUTO3STATE               0x0006
+#define BS_AUTORADIOBUTTON          0x0009
+#define BS_OWNERDRAW                0x000B
+#define BS_RIGHTBUTTON              0x0020   /* == BS_LEFTTEXT on desktop */
+#define BS_LEFT                     0x0100
+#define BS_RIGHT                    0x0200
+#define BS_CENTER                   0x0300
+#define BS_TOP                      0x0400
+#define BS_BOTTOM                   0x0800
+#define BS_VCENTER                  0x0C00
+#define BS_PUSHLIKE                 0x1000
+#define BS_NOTIFY                   0x4000
+
+/* --- Edit control styles (aa452995/ee504833) --- */
+#define ES_LEFT                     0x0000
+#define ES_CENTER                   0x0001
+#define ES_RIGHT                    0x0002
+#define ES_MULTILINE                0x0004
+#define ES_UPPERCASE                0x0008
+#define ES_LOWERCASE                0x0010
+#define ES_PASSWORD                 0x0020
+#define ES_AUTOVSCROLL              0x0040
+#define ES_AUTOHSCROLL              0x0080
+#define ES_NOHIDESEL                0x0100
+#define ES_OEMCONVERT               0x0400
+#define ES_READONLY                 0x0800
+#define ES_WANTRETURN               0x1000
+#define ES_NUMBER                   0x2000
+
+/* --- List box styles (aa453299/ee501958); LBS_STANDARD is documented
+ * as the combination of LBS_NOTIFY and LBS_SORT. --- */
+#define LBS_NOTIFY                  0x0001
+#define LBS_SORT                    0x0002
+#define LBS_NOREDRAW                0x0004
+#define LBS_MULTIPLESEL             0x0008
+#define LBS_OWNERDRAWFIXED          0x0010
+#define LBS_OWNERDRAWVARIABLE       0x0020
+#define LBS_HASSTRINGS              0x0040
+#define LBS_USETABSTOPS             0x0080
+#define LBS_NOINTEGRALHEIGHT        0x0100
+#define LBS_MULTICOLUMN             0x0200
+#define LBS_WANTKEYBOARDINPUT       0x0400
+#define LBS_EXTENDEDSEL             0x0800
+#define LBS_DISABLENOSCROLL         0x1000
+#define LBS_NOSEL                   0x4000
+#define LBS_STANDARD                (LBS_NOTIFY | LBS_SORT)
+
+/* --- Combo box styles (ms908112/ee501099) --- */
+#define CBS_DROPDOWN                0x0002
+#define CBS_DROPDOWNLIST            0x0003
+#define CBS_AUTOHSCROLL             0x0040
+#define CBS_OEMCONVERT              0x0080
+#define CBS_SORT                    0x0100
+#define CBS_HASSTRINGS              0x0200
+#define CBS_NOINTEGRALHEIGHT        0x0400
+#define CBS_DISABLENOSCROLL         0x0800
+#define CBS_UPPERCASE               0x2000
+#define CBS_LOWERCASE               0x4000
+
+/* --- Scroll bar styles (ms932612/ee505682) --- */
+#define SBS_HORZ                    0x0000
+#define SBS_VERT                    0x0001
+
+/* --- Static control styles (ms940359/ee505845) --- */
+#define SS_LEFT                     0x0000
+#define SS_CENTER                   0x0001
+#define SS_RIGHT                    0x0002
+#define SS_ICON                     0x0003
+#define SS_LEFTNOWORDWRAP           0x000C
+#define SS_BITMAP                   0x000E
+#define SS_NOPREFIX                 0x0080
+#define SS_NOTIFY                   0x0100
+#define SS_CENTERIMAGE              0x0200
+
+/* --- Dialog box styles (the DLGTEMPLATE aa452960 / DLGTEMPLATEEX
+ * aa452961 pages document which DS_* style may be combined into a
+ * dialog template; values are the fixed Win32 ABI style bits). --- */
+#define DS_ABSALIGN                 0x0001
+#define DS_SYSMODAL                 0x0002
+#define DS_3DLOOK                   0x0004
+#define DS_FIXEDSYS                 0x0008
+#define DS_NOFAILCREATE             0x0010
+#define DS_LOCALEDIT                0x0020
+#define DS_SETFONT                  0x0040
+#define DS_MODALFRAME               0x0080
+#define DS_NOIDLEMSG                0x0100
+#define DS_SETFOREGROUND            0x0200
+#define DS_CONTROL                  0x0400
+#define DS_CENTER                   0x0800
+#define DS_CENTERMOUSE              0x1000
+#define DS_CONTEXTHELP              0x2000
+
 /* --- Image-type constants for LoadImage / ImageList_LoadImage uType --- */
 #define IMAGE_BITMAP                   0            
 #define IMAGE_ICON                     1            

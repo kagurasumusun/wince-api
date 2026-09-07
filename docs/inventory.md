@@ -1693,6 +1693,56 @@ UNICODE_ONLY gained the four base-name -> W entries.  Host + all six
 CE targets pass warning-free.
 
 
+
+### M35: GWES window / control / dialog style bits (winuser.h)
+
+126 style constants added to winuser.h.  Name lists and the
+CE-supported set come verbatim from the official CE 5.0 GWES style
+pages (CE 6.0 twins in parentheses):
+
+* Basic Window Styles aa452869 (ee504355): WS_CHILD / WS_CLIPCHILDREN /
+  WS_CLIPSIBLINGS / WS_DISABLED / WS_GROUP / WS_POPUP / WS_TABSTOP /
+  WS_VISIBLE + extended styles WS_EX_TOPMOST and WS_EX_NOACTIVATE.
+* Non-client Area Styles ms911872 (ee506097): WS_BORDER / WS_CAPTION /
+  WS_DLGFRAME / WS_HSCROLL / WS_OVERLAPPED / WS_SIZEBOX / WS_SYSMENU /
+  WS_VSCROLL + WS_EX_DLGMODALFRAME / WS_EX_CLIENTEDGE / WS_EX_CONTEXTHELP /
+  WS_EX_STATICEDGE / WS_EX_WINDOWEDGE / WS_EX_OVERLAPPEDWINDOW
+  (documented as WS_EX_CLIENTEDGE | WS_EX_WINDOWEDGE).
+* Message Box Styles ms911829 (ee502245): MB_OK / MB_OKCANCEL /
+  MB_ABORTRETRYIGNORE / MB_YESNOCANCEL / MB_YESNO / MB_RETRYCANCEL /
+  MB_DEFBUTTON1-3 / MB_ICON* (incl. the alias pairs the page lists in
+  one cell: ICONERROR=ICONHAND=ICONSTOP, ICONWARNING=ICONEXCLAMATION,
+  ICONINFORMATION=ICONASTERISK) / MB_APPLMODAL / MB_SETFOREGROUND /
+  MB_TOPMOST.
+* Button styles: push aa453604 (ee501475), check ms928572 (ee504569),
+  radio aa453607 (ee505912) -> BS_PUSHBUTTON / BS_DEFPUSHBUTTON /
+  BS_CHECKBOX / BS_AUTOCHECKBOX / BS_RADIOBUTTON / BS_3STATE /
+  BS_AUTO3STATE / BS_AUTORADIOBUTTON / BS_OWNERDRAW / BS_RIGHTBUTTON /
+  BS_LEFT/RIGHT/CENTER/TOP/BOTTOM/VCENTER / BS_PUSHLIKE / BS_NOTIFY.
+* Edit Control Styles aa452995 (ee504833) -> ES_* (14).
+* List Box Styles aa453299 (ee501958) -> LBS_* (incl. LBS_STANDARD =
+  LBS_NOTIFY | LBS_SORT as documented).
+* Combo Box Styles ms908112 (ee501099) -> CBS_* (10 documented; CE
+  does not list CBS_SIMPLE or the owner-draw combo styles).
+* Scroll Bar Styles ms932612 (ee505682) -> SBS_HORZ / SBS_VERT.
+* Static Control Styles ms940359 (ee505845) -> SS_* (9).
+* Dialog styles (from the DLGTEMPLATE aa452960 / DLGTEMPLATEEX aa452961
+  pages) -> DS_* (14).
+
+The CE style pages document each style name and meaning but do not
+republish its numeric value; Windows CE GWES implements the standard
+Win32 style ABI, so the numeric values are the fixed Win32 ABI style
+bits (same fixed-ABI policy as the message-identifier block).  Host TU
+pins every family's key values and the documented composites
+(WS_CAPTION = WS_BORDER|WS_DLGFRAME, LBS_STANDARD, WS_EX_OVERLAPPED-
+WINDOW, MB_* aliases, BS_RIGHTBUTTON) with static asserts.
+
+CE-only styles the pages name but whose numeric value is NOT published
+anywhere on the CE pages are recorded and left undefined (not
+invented): WS_NONAVDONEBUTTON, WS_EX_NOANIMATION, WS_EX_NODRAG,
+WS_EX_CAPTIONOKBTN.
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

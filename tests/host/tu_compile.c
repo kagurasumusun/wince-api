@@ -2090,6 +2090,90 @@ _Static_assert(NameUnknown == 0 && NameFullyQualifiedDN == 1 &&
                "EXTENDED_NAME_FORMAT low members");
 _Static_assert((unsigned) NameWindowsCeLocal == 0x80000001u,
                "EXTENDED_NAME_FORMAT NameWindowsCeLocal");
+/* M35: GWES style bits -- composite/alias relations documented on the
+ * CE pages, and ABI value pins against the header literals. */
+_Static_assert(WS_CAPTION == (WS_BORDER | WS_DLGFRAME),
+               "WS_CAPTION = WS_BORDER | WS_DLGFRAME");
+_Static_assert(WS_EX_OVERLAPPEDWINDOW ==
+               (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE),
+               "WS_EX_OVERLAPPEDWINDOW composite");
+_Static_assert(LBS_STANDARD == (LBS_NOTIFY | LBS_SORT),
+               "LBS_STANDARD composite");
+_Static_assert(MB_ICONERROR == MB_ICONHAND && MB_ICONSTOP == MB_ICONHAND,
+               "MB_ICONERROR/STOP alias MB_ICONHAND");
+_Static_assert(MB_ICONWARNING == MB_ICONEXCLAMATION &&
+               MB_ICONINFORMATION == MB_ICONASTERISK,
+               "MB icon aliases");
+_Static_assert(WS_CHILD == 0x40000000u && WS_POPUP == 0x80000000u,
+               "WS_CHILD/WS_POPUP ABI");
+_Static_assert(WS_VISIBLE == 0x10000000u && WS_DISABLED == 0x08000000u,
+               "WS_VISIBLE/WS_DISABLED ABI");
+_Static_assert((unsigned) WS_CAPTION == 0x00C00000u &&
+               (unsigned) WS_BORDER == 0x00800000u,
+               "WS_CAPTION/WS_BORDER ABI");
+_Static_assert((unsigned) WS_SYSMENU == 0x00080000u &&
+               (unsigned) WS_SIZEBOX == 0x00040000u &&
+               WS_GROUP == 0x00020000u && WS_TABSTOP == 0x00010000u,
+               "WS_* low ABI pins");
+_Static_assert(BS_DEFPUSHBUTTON == 0x0001 && BS_CHECKBOX == 0x0002 &&
+               BS_AUTOCHECKBOX == 0x0003 && BS_RADIOBUTTON == 0x0004,
+               "BS_* low ABI pins");
+_Static_assert(BS_3STATE == 0x0005 && BS_AUTO3STATE == 0x0006 &&
+               BS_AUTORADIOBUTTON == 0x0009 && BS_OWNERDRAW == 0x000B,
+               "BS_* low ABI pins 2");
+_Static_assert(BS_RIGHTBUTTON == 0x0020 && BS_LEFT == 0x0100 &&
+               BS_RIGHT == 0x0200 && BS_CENTER == 0x0300,
+               "BS_* alignment ABI");
+_Static_assert(BS_TOP == 0x0400 && BS_BOTTOM == 0x0800 &&
+               BS_VCENTER == 0x0C00 && BS_PUSHLIKE == 0x1000 &&
+               BS_NOTIFY == 0x4000,
+               "BS_* layout ABI");
+_Static_assert(ES_MULTILINE == 0x0004 && ES_PASSWORD == 0x0020 &&
+               ES_AUTOVSCROLL == 0x0040 && ES_AUTOHSCROLL == 0x0080 &&
+               ES_READONLY == 0x0800 && ES_WANTRETURN == 0x1000 &&
+               ES_NUMBER == 0x2000,
+               "ES_* ABI pins");
+_Static_assert(LBS_NOTIFY == 0x0001 && LBS_SORT == 0x0002 &&
+               LBS_MULTIPLESEL == 0x0008 && LBS_HASSTRINGS == 0x0040 &&
+               LBS_EXTENDEDSEL == 0x0800 && LBS_DISABLENOSCROLL == 0x1000 &&
+               LBS_NOSEL == 0x4000,
+               "LBS_* ABI pins");
+_Static_assert(CBS_DROPDOWN == 0x0002 && CBS_DROPDOWNLIST == 0x0003 &&
+               CBS_SORT == 0x0100 && CBS_HASSTRINGS == 0x0200 &&
+               CBS_NOINTEGRALHEIGHT == 0x0400 &&
+               CBS_DISABLENOSCROLL == 0x0800 && CBS_UPPERCASE == 0x2000 &&
+               CBS_LOWERCASE == 0x4000,
+               "CBS_* ABI pins");
+_Static_assert(SBS_HORZ == 0x0000 && SBS_VERT == 0x0001,
+               "SBS_* ABI pins");
+_Static_assert(SS_ICON == 0x0003 && SS_LEFTNOWORDWRAP == 0x000C &&
+               SS_BITMAP == 0x000E && SS_NOPREFIX == 0x0080 &&
+               SS_NOTIFY == 0x0100 && SS_CENTERIMAGE == 0x0200,
+               "SS_* ABI pins");
+_Static_assert(DS_ABSALIGN == 0x0001 && DS_SYSMODAL == 0x0002 &&
+               DS_3DLOOK == 0x0004 && DS_FIXEDSYS == 0x0008 &&
+               DS_NOFAILCREATE == 0x0010 && DS_LOCALEDIT == 0x0020 &&
+               DS_SETFONT == 0x0040 && DS_MODALFRAME == 0x0080,
+               "DS_* ABI pins");
+_Static_assert(DS_NOIDLEMSG == 0x0100 && DS_SETFOREGROUND == 0x0200 &&
+               DS_CONTROL == 0x0400 && DS_CENTER == 0x0800 &&
+               DS_CENTERMOUSE == 0x1000 && DS_CONTEXTHELP == 0x2000,
+               "DS_* ABI pins 2");
+_Static_assert(WS_EX_DLGMODALFRAME == 0x00000001 &&
+               WS_EX_TOPMOST == 0x00000008 &&
+               WS_EX_WINDOWEDGE == 0x00000100 &&
+               WS_EX_CLIENTEDGE == 0x00000200 &&
+               WS_EX_CONTEXTHELP == 0x00000400 &&
+               (unsigned) WS_EX_STATICEDGE == 0x00020000u,
+               "WS_EX_* ABI pins");
+_Static_assert(MB_OK == 0x0000 && MB_OKCANCEL == 0x0001 &&
+               MB_ABORTRETRYIGNORE == 0x0002 && MB_YESNOCANCEL == 0x0003 &&
+               MB_YESNO == 0x0004 && MB_RETRYCANCEL == 0x0005,
+               "MB_* button ABI pins");
+_Static_assert(MB_ICONHAND == 0x0010 && MB_ICONQUESTION == 0x0020 &&
+               MB_ICONEXCLAMATION == 0x0030 && MB_ICONASTERISK == 0x0040 &&
+               MB_DEFBUTTON2 == 0x0100 && MB_DEFBUTTON3 == 0x0200,
+               "MB_* icon/default ABI pins");
 _Static_assert(sizeof(COPYDATASTRUCT) == 12, "COPYDATASTRUCT 32-bit size");
 #endif
 

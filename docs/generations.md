@@ -510,3 +510,18 @@ CE-specific NameWindowsCeLocal = 0x80000001 member.  All four are
 Unicode-only exports (gen-doc-def.py UNICODE_ONLY).  Exports 622 ->
 626 (coredll 363->364, coreloc 30->33).  Host + six CE targets pass
 warning-free; enum members static-asserted in the host TU.
+
+
+**M35 -- GWES style bits (winuser.h).**
+
+126 style constants (window/class-less basic + non-client WS_*/WS_EX_*,
+message-box MB_*, button BS_*, edit ES_*, list-box LBS_*, combo CBS_*,
+scroll-bar SBS_*, static SS_*, dialog DS_*) added from the official CE
+5.0 GWES style pages (Basic Window Styles aa452869, Non-client Area
+Styles ms911872, Message Box Styles ms911829, the push/check/radio
+button style pages, Edit/List/Combo/Scroll/Static control style pages,
+DLGTEMPLATE aa452960 / DLGTEMPLATEEX aa452961; CE 6.0 twins confirmed
+for each).  Names/supported sets per the CE pages; numeric values are
+the fixed Win32 ABI style bits (repo policy, asserted in the host TU).
+CE-only styles whose value the pages do not publish (WS_NONAVDONEBUTTON,
+WS_EX_NOANIMATION/NODRAG/CAPTIONOKBTN) recorded, not invented.
