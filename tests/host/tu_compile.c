@@ -92,6 +92,35 @@ static const void *const api_symbols[] = {
     (const void *) &RemoveDirectory,
     (const void *) &SetFileAttributesW,
     (const void *) &SetFileAttributes,
+    (const void *) &CreateEventW,
+    (const void *) &CreateEvent,
+    (const void *) &OpenEventW,
+    (const void *) &OpenEvent,
+    (const void *) &SetEvent,
+    (const void *) &ResetEvent,
+    (const void *) &PulseEvent,
+    (const void *) &CreateMutexW,
+    (const void *) &CreateMutex,
+    (const void *) &ReleaseMutex,
+    (const void *) &CreateSemaphoreW,
+    (const void *) &CreateSemaphore,
+    (const void *) &ReleaseSemaphore,
+    (const void *) &WaitForSingleObject,
+    (const void *) &WaitForMultipleObjects,
+    (const void *) &DuplicateHandle,
+    (const void *) &InitializeCriticalSection,
+    (const void *) &EnterCriticalSection,
+    (const void *) &LeaveCriticalSection,
+    (const void *) &DeleteCriticalSection,
+    (const void *) &TryEnterCriticalSection,
+    (const void *) &InterlockedExchange,
+    (const void *) &InterlockedIncrement,
+    (const void *) &InterlockedDecrement,
+    (const void *) &InterlockedExchangeAdd,
+    (const void *) &InterlockedCompareExchange,
+    (const void *) &InterlockedTestExchange,
+    (const void *) &InterlockedExchangePointer,
+    (const void *) &InterlockedCompareExchangePointer,
     (const void *) &GetLocalTime,
     (const void *) &GetSystemTime,
     (const void *) &SetLocalTime,
@@ -134,6 +163,35 @@ typedef char assert_file_vals[
 typedef char assert_fileptr_vals[
     (FILE_BEGIN == 0u && FILE_CURRENT == 1u && FILE_END == 2u &&
      INVALID_SET_FILE_POINTER == (DWORD)0xFFFFFFFFu) ? 1 : -1];
+
+/* Synchronization constants (winbase.h; names per CE pages
+ * ms885177/aa450988/aa450987/ms885208; numeric values are the fixed
+ * Win32 ABI values). */
+typedef char assert_sync_vals[
+    (WAIT_OBJECT_0 == 0u && WAIT_ABANDONED_0 == 0x80u &&
+     WAIT_TIMEOUT == 0x102u && WAIT_FAILED == (DWORD)0xFFFFFFFFu &&
+     MAXIMUM_WAIT_OBJECTS == 64 &&
+     DUPLICATE_CLOSE_SOURCE == 1u && DUPLICATE_SAME_ACCESS == 2u &&
+     EVENT_ALL_ACCESS == 0x1F0003u) ? 1 : -1];
+
+/* 64-bit integer forms and their unions (winnt.h). */
+typedef char assert_large_int_size[sizeof(LARGE_INTEGER) == 8 ? 1 : -1];
+typedef char assert_ll_size[sizeof(LONGLONG) == 8 ? 1 : -1];
+
+#if __SIZEOF_POINTER__ == 4
+/* CRITICAL_SECTION layout on 32-bit (desktop-official member order
+ * recorded in winnt.h): the six fields occupy 24 bytes. */
+typedef char assert_cs_layout[
+    (offsetof(CRITICAL_SECTION, DebugInfo) == 0 &&
+     offsetof(CRITICAL_SECTION, LockCount) == 4 &&
+     offsetof(CRITICAL_SECTION, RecursionCount) == 8 &&
+     offsetof(CRITICAL_SECTION, OwningThread) == 12 &&
+     offsetof(CRITICAL_SECTION, LockSemaphore) == 16 &&
+     offsetof(CRITICAL_SECTION, SpinCount) == 20 &&
+     sizeof(CRITICAL_SECTION) == 24) ? 1 : -1];
+typedef char assert_li_layout[
+    (offsetof(LARGE_INTEGER, QuadPart) == 0) ? 1 : -1];
+#endif
 typedef char assert_tls_vals[
     (TLS_MINIMUM_AVAILABLE == 64 &&
      TLS_OUT_OF_INDEXES == (DWORD)0xFFFFFFFFu) ? 1 : -1];
@@ -302,10 +360,79 @@ static int ce_shaped_usage(void)
                   + nwrote + sizehi);
 }
 
+/* Synchronization usage shapes (compile-only; never run): events,
+ * mutexes, semaphores, wait functions, critical sections and the
+ * interlocked calls, with the CE parameter rules applied (attributes
+ * NULL, OpenEvent's EVENT_ALL_ACCESS and bInheritHandle FALSE,
+ * DuplicateHandle with bInheritHandle FALSE).  The process handle
+ * that DuplicateHandle needs is supplied by a helper that is never
+ * executed (the CE kernel-scope GetCurrentProcess is not part of
+ * this user-mode header set). */
+static HANDLE shape_current_process(void)
+{
+    return (HANDLE) 0;
+}
+
+static DWORD sync_worker(LPVOID p)
+{
+    LONG x = 0;
+    (void) p;
+    InterlockedIncrement(&x);
+    InterlockedExchangeAdd(&x, 1);
+    InterlockedCompareExchange(&x, 0, 1);
+    InterlockedTestExchange(&x, 1, 0);
+    return (DWORD) x;
+}
+
+static int sync_shaped_usage(void)
+{
+    HANDLE hev, hmut, hsem, hdup;
+    CRITICAL_SECTION cs;
+    LONG prev;
+    DWORD rc;
+    LPVOID p = 0;
+
+    InitializeCriticalSection(&cs);
+    EnterCriticalSection(&cs);
+    if (!TryEnterCriticalSection(&cs))
+        return (int) GetLastError();
+    LeaveCriticalSection(&cs);
+    DeleteCriticalSection(&cs);
+
+    hev = CreateEventW(NULL, FALSE, FALSE, NULL);
+    hmut = CreateMutexW(NULL, FALSE, NULL);
+    hsem = CreateSemaphoreW(NULL, 0, 1, NULL);
+    if (hev == NULL || hmut == NULL || hsem == NULL)
+        return (int) GetLastError();
+    SetEvent(hev);
+    ResetEvent(hev);
+    PulseEvent(hev);
+    ReleaseMutex(hmut);
+    ReleaseSemaphore(hsem, 1, &prev);
+    rc = WaitForSingleObject(hev, INFINITE);
+    if (rc != WAIT_OBJECT_0)
+        return (int) rc;
+    rc = WaitForMultipleObjects(1, (const HANDLE[]) { hev }, FALSE,
+                                INFINITE);
+    hdup = 0;
+    if (!DuplicateHandle(shape_current_process(), hev,
+                         shape_current_process(), &hdup, 0,
+                         FALSE, DUPLICATE_SAME_ACCESS))
+        return (int) GetLastError();
+    CloseHandle(hdup);
+    CloseHandle(hev);
+    CloseHandle(hmut);
+    CloseHandle(hsem);
+    (void) sync_worker(p);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
     (void) api_flags;
     (void) LocalAlloc(LPTR, 16u);
-    return ce_shaped_usage() == 0 ? 0 : 1;
+    if (ce_shaped_usage() != 0)
+        return 1;
+    return sync_shaped_usage() == 0 ? 0 : 1;
 }

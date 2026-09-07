@@ -1,0 +1,25 @@
+aa450771	Time Functions
+ms885172	CompareFileTime
+ms885589	FileTimeToLocalFileTime
+ms885593	FileTimeToSystemTime
+aa451027	GetCurrentFT
+ms885625	GetFileTime
+ms885626	GetIdleTime
+ms885628	GetLocalTime
+ms885640	GetSystemTime
+ms885645	GetTickCount
+ms885646	GetTimeZoneInformation
+ms886740	LocalFileTimeToFileTime
+ms886788	QueryPerformanceCounter
+ms886789	QueryPerformanceFrequency
+ms886791	Random
+ms886808	SetDaylightTime
+ms886812	SetFileTime
+ms886818	SetLocalTime
+aa450867	SetSystemTime
+aa450893	SetTimeZoneInformation
+aa450925	SystemTimeToFileTime
+aa450773	Time Structures
+ms885586	FILETIME
+aa450923	SYSTEMTIME
+aa450943	TIME_ZONE_INFORMATION

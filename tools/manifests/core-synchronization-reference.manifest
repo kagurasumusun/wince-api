@@ -1,0 +1,26 @@
+aa450749	Synchronization Functions
+ms885177	CreateEvent
+ms885181	CreateMutex
+ms885184	CreateSemaphore
+ms885196	DeleteCriticalSection
+ms885208	DuplicateHandle
+ms885212	EnterCriticalSection
+ms885665	InitializeCriticalSection
+ms885667	InterlockedCompareExchange
+ms885668	InterlockedCompareExchangePointer
+ms885669	InterlockedDecrement
+ms885670	InterlockedExchange
+ms885671	InterlockedExchangeAdd
+ms885672	InterlockedExchangePointer
+ms885673	InterlockedIncrement
+ms885674	InterlockedTestExchange
+ms886733	LeaveCriticalSection
+ms886764	OpenEvent
+ms886784	PulseEvent
+ms886797	ReleaseMutex
+ms886798	ReleaseSemaphore
+ms886800	ResetEvent
+ms886810	SetEvent
+aa450959	TryEnterCriticalSection
+aa450987	WaitForMultipleObjects
+aa450988	WaitForSingleObject

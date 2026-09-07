@@ -24,6 +24,7 @@
 #define AKARI_WINBASE_H
 
 #include "windef.h"
+#include "winnt.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -697,6 +698,251 @@ BOOL RemoveDirectoryW(LPCWSTR lpPathName);
  * length limit.  Export is SetFileAttributesW. */
 BOOL SetFileAttributesW(LPCWSTR lpFileName, DWORD dwFileAttributes);
 #define SetFileAttributes SetFileAttributesW
+
+/* ------------------------------------------------------------------ */
+/* Synchronization: event / mutex / semaphore objects                 */
+/* ------------------------------------------------------------------ */
+
+/* Wait-function return values (ms885177 and aa450988 return tables;
+ * the numeric values are the fixed Win32 ABI values of the wait
+ * results).  WAIT_OBJECT_0 is the base value: WaitForMultipleObjects
+ * returns WAIT_OBJECT_0+n for the n-th satisfied object and
+ * WAIT_ABANDONED_0+n for abandoned mutexes. */
+#define WAIT_OBJECT_0      0x00000000u
+#define WAIT_ABANDONED     0x00000080u
+#define WAIT_ABANDONED_0   0x00000080u
+#define WAIT_TIMEOUT       0x00000102u
+#define WAIT_FAILED        ((DWORD)0xFFFFFFFFu)
+
+/* MAXIMUM_WAIT_OBJECTS: nCount limit cited by the CE
+ * WaitForMultipleObjects page (aa450987); the Win32 ABI value is 64.
+ * nCount must be in 1..MAXIMUM_WAIT_OBJECTS. */
+#define MAXIMUM_WAIT_OBJECTS 64
+
+/* Event object access right required by OpenEvent (ms886764 lists
+ * EVENT_ALL_ACCESS as the required value); value per Microsoft's
+ * official synchronization access-rights reference. */
+#define EVENT_ALL_ACCESS 0x001F0003u
+
+/* ms885177 "CreateEvent (Windows CE 5.0)":
+ * HANDLE CreateEvent(LPSECURITY_ATTRIBUTES, BOOL, BOOL, LPTSTR).
+ * CE 1.0+; Winbase.h; Coredll.lib, Nk.lib.  Creates a named or
+ * unnamed event object.  lpEventAttributes is ignored (NULL).
+ * bManualReset TRUE creates a manual-reset event (ResetEvent must
+ * reset it), FALSE an auto-reset event (reset automatically after a
+ * single waiting thread is released).  bInitialState TRUE starts the
+ * event signaled.  Names are limited to MAX_PATH characters, may not
+ * contain a backslash, compare case-sensitively, and are ignored for
+ * an existing object.  A handle to an already existing object returns
+ * success with GetLastError == ERROR_ALREADY_EXISTS.  The returned
+ * handle has EVENT_ALL_ACCESS.  Export is CreateEventW. */
+HANDLE CreateEventW(LPSECURITY_ATTRIBUTES lpEventAttributes,
+                    BOOL bManualReset, BOOL bInitialState,
+                    LPCWSTR lpName);
+#define CreateEvent CreateEventW
+
+/* ms886764 "OpenEvent (Windows CE 5.0)":
+ * HANDLE OpenEvent(DWORD, BOOL, LPTSTR).  CE .NET 4.0 and later
+ * (present in CE 4.x/5.x/6.x); Winbase.h; Coredll.lib.  Opens an
+ * existing named event object; dwDesiredAccess must be
+ * EVENT_ALL_ACCESS and bInheritHandle must be FALSE.  Name
+ * comparison is case sensitive.  Export is OpenEventW. */
+HANDLE OpenEventW(DWORD dwDesiredAccess, BOOL bInheritHandle,
+                  LPCWSTR lpName);
+#define OpenEvent OpenEventW
+
+/* ms886810 "SetEvent (Windows CE 5.0)":
+ * BOOL SetEvent(HANDLE).  CE 1.0+; the page lists Header: Kfuncs.h;
+ * Coredll.lib (kernel-scope header row; the function is the user-mode
+ * event API and is exported by Coredll).  Sets the event object to
+ * the signaled state; the event stays signaled until a waiting
+ * thread is released (auto-reset) or ResetEvent is called
+ * (manual-reset). */
+BOOL SetEvent(HANDLE hEvent);
+
+/* ms886800 "ResetEvent (Windows CE 5.0)":
+ * BOOL ResetEvent(HANDLE).  CE 1.0+; Header: Kfuncs.h per page;
+ * Coredll.lib (see SetEvent note).  Sets the event object to the
+ * nonsignaled state. */
+BOOL ResetEvent(HANDLE hEvent);
+
+/* ms886784 "PulseEvent (Windows CE 5.0)":
+ * BOOL PulseEvent(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.  Sets
+ * the event signaled, releases the appropriate number of waiting
+ * threads, then resets it to nonsignaled in one operation.  A CE
+ * note on timing: only threads already waiting are released. */
+BOOL PulseEvent(HANDLE hEvent);
+
+/* ms885181 "CreateMutex (Windows CE 5.0)":
+ * HANDLE CreateMutex(LPSECURITY_ATTRIBUTES, BOOL, LPTSTR).  CE 1.01+;
+ * Winbase.h; Coredll.lib, Nk.lib.  Creates a named or unnamed mutex.
+ * lpMutexAttributes is ignored (NULL); bInitialOwner TRUE gives the
+ * calling thread initial ownership.  If the named mutex already
+ * exists the function succeeds with ERROR_ALREADY_EXISTS.  Export is
+ * CreateMutexW. */
+HANDLE CreateMutexW(LPSECURITY_ATTRIBUTES lpMutexAttributes,
+                    BOOL bInitialOwner, LPCWSTR lpName);
+#define CreateMutex CreateMutexW
+
+/* ms886797 "ReleaseMutex (Windows CE 5.0)":
+ * BOOL ReleaseMutex(HANDLE).  CE 1.01+; Winbase.h; Nk.lib row on the
+ * page.  Releases ownership of the mutex object; fails if the calling
+ * thread does not own the mutex. */
+BOOL ReleaseMutex(HANDLE hMutex);
+
+/* ms885184 "CreateSemaphore (Windows CE 5.0)":
+ * HANDLE CreateSemaphore(LPSECURITY_ATTRIBUTES, LONG, LONG, LPTSTR).
+ * CE 3.0+; Winbase.h; Nk.lib row on the page.  Creates a named or
+ * unnamed semaphore with initial count lInitialCount (0 ..
+ * lMaximumCount) and maximum count lMaximumCount (>= 1).
+ * lpSemaphoreAttributes is ignored (NULL).  Export is
+ * CreateSemaphoreW. */
+HANDLE CreateSemaphoreW(LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
+                        LONG lInitialCount, LONG lMaximumCount,
+                        LPCWSTR lpName);
+#define CreateSemaphore CreateSemaphoreW
+
+/* ms886798 "ReleaseSemaphore (Windows CE 5.0)":
+ * BOOL ReleaseSemaphore(HANDLE, LONG, LPLONG).  CE 3.0+; Winbase.h;
+ * Coredll.lib.  Increases the semaphore count by lReleaseCount (which
+ * must be > 0); lpPreviousCount receives the previous count when
+ * non-NULL.  Fails when the count would exceed the maximum. */
+BOOL ReleaseSemaphore(HANDLE hSemaphore, LONG lReleaseCount,
+                      LPLONG lpPreviousCount);
+
+/* ms885208 "DuplicateHandle (Windows CE 5.0)":
+ * BOOL DuplicateHandle(HANDLE, HANDLE, HANDLE, LPHANDLE, DWORD, BOOL,
+ *                      DWORD).  CE .NET 4.0 and later; Header
+ *                      Windows.h per page; Coredll.lib.  Duplicates
+ * an object handle into the target process.  CE notes: the duplicate
+ * must be valid in the target process and lpTargetHandle cannot be
+ * NULL; dwDesiredAccess is currently ignored; bInheritHandle must be
+ * FALSE.  dwOptions may be DUPLICATE_CLOSE_SOURCE and/or
+ * DUPLICATE_SAME_ACCESS. */
+BOOL DuplicateHandle(HANDLE hSourceProcessHandle, HANDLE hSourceHandle,
+                     HANDLE hTargetProcessHandle,
+                     LPHANDLE lpTargetHandle, DWORD dwDesiredAccess,
+                     BOOL bInheritHandle, DWORD dwOptions);
+
+/* DuplicateHandle dwOptions (Win32 ABI values, official DuplicateHandle
+ * reference). */
+#define DUPLICATE_CLOSE_SOURCE  0x00000001u
+#define DUPLICATE_SAME_ACCESS   0x00000002u
+
+/* aa450988 "WaitForSingleObject (Windows CE 5.0)":
+ * DWORD WaitForSingleObject(HANDLE, DWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Returns when the object is signaled or the time-out
+ * elapses.  dwMilliseconds zero polls the state; INFINITE waits
+ * forever.  CE time-out cap: values between 0x7FFFFFFF and INFINITE
+ * (0x80000000..0xFFFFFFFE) are treated as 0x7FFFFFFF.  Returns
+ * WAIT_OBJECT_0 / WAIT_TIMEOUT / WAIT_FAILED.  Objects waitable on
+ * CE: event, mutex, semaphore (CE 3.0+), process and thread handles.
+ * CE 1.0-2.12 cannot wait on semaphores; CE 1.0/1.01 cannot wait on
+ * process or thread handles. */
+DWORD WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+
+/* aa450987 "WaitForMultipleObjects (Windows CE 5.0)":
+ * DWORD WaitForMultipleObjects(DWORD, CONST HANDLE*, BOOL, DWORD).
+ * CE 1.01+; Winbase.h; Nk.lib row on the page.  nCount (1 ..
+ * MAXIMUM_WAIT_OBJECTS) handles are waited on; fWaitAll TRUE waits
+ * for all, FALSE returns when any single object is signaled.  Return
+ * values are WAIT_OBJECT_0+n, WAIT_ABANDONED_0+n (mutexes),
+ * WAIT_TIMEOUT, WAIT_FAILED. */
+DWORD WaitForMultipleObjects(DWORD nCount,
+                             const HANDLE *lpHandles,
+                             BOOL fWaitAll, DWORD dwMilliseconds);
+
+/* ------------------------------------------------------------------ */
+/* Synchronization: critical sections and interlocked access          */
+/* ------------------------------------------------------------------ */
+
+/* CRITICAL_SECTION object (RTL_CRITICAL_SECTION in winnt.h).  The CE
+ * critical-section pages (ms885665, ms885196, ms885212, ms886733,
+ * aa450959) declare the object via LPCRITICAL_SECTION and require no
+ * return value; the page rows list Link Library: Coremain.lib for the
+ * four base functions (see docs/inventory.md "documented link-library
+ * rows" note) and Coredll.lib for TryEnterCriticalSection.  The
+ * layout itself is the desktop-official RTL_CRITICAL_SECTION (see
+ * winnt.h). */
+
+/* ms885665 "InitializeCriticalSection (Windows CE 5.0)":
+ * VOID InitializeCriticalSection(LPCRITICAL_SECTION).  CE 1.0+;
+ * Winbase.h; Coremain.lib row.  Initializes a critical-section object
+ * for use by a single process. */
+VOID InitializeCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+
+/* ms885212 "EnterCriticalSection (Windows CE 5.0)":
+ * VOID EnterCriticalSection(LPCRITICAL_SECTION).  CE 1.0+; Winbase.h;
+ * Coremain.lib row.  Waits for ownership of the critical-section
+ * object; the calling thread is blocked until it can enter. */
+VOID EnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+
+/* ms886733 "LeaveCriticalSection (Windows CE 5.0)":
+ * VOID LeaveCriticalSection(LPCRITICAL_SECTION).  CE 1.0+; Winbase.h;
+ * Coremain.lib row.  Releases ownership of the critical-section
+ * object held by the calling thread. */
+VOID LeaveCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+
+/* ms885196 "DeleteCriticalSection (Windows CE 5.0)":
+ * VOID DeleteCriticalSection(LPCRITICAL_SECTION).  CE 1.0+;
+ * Winbase.h; Coremain.lib row.  Releases all resources of an
+ * initialized critical-section object; the object must not be in use. */
+VOID DeleteCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+
+/* aa450959 "TryEnterCriticalSection (Windows CE 5.0)":
+ * BOOL TryEnterCriticalSection(LPCRITICAL_SECTION).  CE 3.0+;
+ * Winbase.h; Coredll.lib.  Attempts to enter the critical section
+ * without blocking: nonzero if ownership was obtained, zero if
+ * another thread owns it. */
+BOOL TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
+
+/* Interlocked operations.  The CE pages (ms885667..ms885674) declare
+ * the classic Win32 interlocked functions and list Link Library:
+ * Coredll.lib (Header rows are Windows.h / Winbase.h per page); the
+ * x86/ARM code generator lowers the corresponding C11/Clang atomic
+ * builtins to calls of these names on Windows CE. */
+
+/* ms885670 "InterlockedExchange": LONG
+ * InterlockedExchange(LPLONG Target, LONG Value). */
+LONG InterlockedExchange(LPLONG Target, LONG Value);
+
+/* ms885673 "InterlockedIncrement": LONG InterlockedIncrement(LPLONG
+ * Addend).  Returns the resulting value. */
+LONG InterlockedIncrement(LPLONG Addend);
+
+/* ms885669 "InterlockedDecrement": LONG InterlockedDecrement(LPLONG
+ * Addend).  Returns the resulting value. */
+LONG InterlockedDecrement(LPLONG Addend);
+
+/* ms885671 "InterlockedExchangeAdd": LONG InterlockedExchangeAdd(
+ * LPLONG Addend, LONG Increment).  Returns the original value. */
+LONG InterlockedExchangeAdd(LPLONG Addend, LONG Increment);
+
+/* ms885667 "InterlockedCompareExchange": LONG
+ * InterlockedCompareExchange(LPLONG Destination, LONG Exchange,
+ * LONG Comperand).  Returns the original value of Destination. */
+LONG InterlockedCompareExchange(LPLONG Destination, LONG Exchange,
+                                LONG Comperand);
+
+/* ms885674 "InterlockedTestExchange": LONG
+ * InterlockedTestExchange(LPLONG Target, LONG OldValue, LONG
+ * NewValue).  CE-specific conditional set: stores NewValue in Target
+ * only when Target currently equals OldValue; returns the value of
+ * Target at the time of the call. */
+LONG InterlockedTestExchange(LPLONG Target, LONG OldValue,
+                             LONG NewValue);
+
+/* ms885672 "InterlockedExchangePointer": PVOID
+ * InterlockedExchangePointer(PVOID* Target, PVOID Value). */
+PVOID InterlockedExchangePointer(PVOID *Target, PVOID Value);
+
+/* ms885668 "InterlockedCompareExchangePointer": PVOID
+ * InterlockedCompareExchangePointer(PVOID* Destination, PVOID
+ * ExChange, PVOID Comperand). */
+PVOID InterlockedCompareExchangePointer(PVOID *Destination,
+                                        PVOID ExChange,
+                                        PVOID Comperand);
+
 
 /* ------------------------------------------------------------------ */
 /* Time management (SYSTEMTIME + time conversion).                    */

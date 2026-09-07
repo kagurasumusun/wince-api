@@ -1,0 +1,67 @@
+; coredll-doc.def -- coredll.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+LIBRARY coredll.dll
+EXPORTS
+  CreateEventW
+  CreateMutexW
+  CreateProcessW
+  CreateThread
+  DuplicateHandle
+  ExitProcess
+  ExitThread
+  FileTimeToLocalFileTime
+  FileTimeToSystemTime
+  FreeLibrary
+  GetCommandLineW
+  GetExitCodeProcess
+  GetExitCodeThread
+  GetLocalTime
+  GetModuleFileNameW
+  GetModuleHandleW
+  GetProcAddressW
+  GetSystemTime
+  GetThreadPriority
+  InterlockedCompareExchange
+  InterlockedCompareExchangePointer
+  InterlockedDecrement
+  InterlockedExchange
+  InterlockedExchangeAdd
+  InterlockedExchangePointer
+  InterlockedIncrement
+  InterlockedTestExchange
+  LoadLibraryW
+  LoadLibraryExW
+  LocalAlloc
+  LocalFileTimeToFileTime
+  LocalFree
+  OpenEventW
+  OpenProcess
+  PulseEvent
+  ReleaseSemaphore
+  ResetEvent
+  ResumeThread
+  SetEvent
+  SetLocalTime
+  SetSystemTime
+  SetThreadPriority
+  Sleep
+  SuspendThread
+  SystemTimeToFileTime
+  TerminateProcess
+  TerminateThread
+  TlsAlloc
+  TlsFree
+  TlsGetValue
+  TlsSetValue
+  TryEnterCriticalSection
+  WaitForSingleObject

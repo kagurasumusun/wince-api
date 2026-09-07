@@ -67,12 +67,14 @@ typedef intptr_t        INT_PTR;
 
 typedef void           *LPVOID;
 typedef const void     *LPCVOID;
+typedef void           *PVOID;   /* generic pointer (Interlocked*Pointer) */
 typedef CHAR           *LPSTR;
 typedef const CHAR     *LPCSTR;
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
 typedef DWORD *LPDWORD;
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */
+typedef LONG  *LPLONG;  /* LONG pointer (synchronization functions) */
 
 /* MAX_PATH: default path length limit, cited by the CE CreateFile
  * (aa517318), FindFirstFile (ms889678) and GetFileAttributes
@@ -92,6 +94,7 @@ typedef HANDLE          HINSTANCE;
 typedef HANDLE          HMODULE;
 typedef HANDLE          HLOCAL;
 typedef HANDLE          HGLOBAL;
+typedef HANDLE         *LPHANDLE;  /* HANDLE pointer (DuplicateHandle ms885208) */
 
 typedef UINT_PTR (WINAPI *FARPROC)(void);
 

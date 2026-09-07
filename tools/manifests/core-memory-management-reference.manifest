@@ -1,0 +1,28 @@
+aa450751	Memory Management Functions
+aa450797	CeHeapCreate
+ms885617	GetDllVersion
+ms885635	GetProcessHeap
+ms885649	GlobalMemoryStatus
+ms885654	HeapAlloc
+ms885655	HeapCompact
+ms885656	HeapCreate
+ms885657	HeapDestroy
+ms885659	HeapFree
+ms885661	HeapReAlloc
+ms885662	HeapSize
+ms885663	HeapValidate
+ms885687	IsBadCodePtr
+ms885688	IsBadReadPtr
+ms885689	IsBadWritePtr
+ms886739	LocalAlloc
+ms886741	LocalFree
+ms886742	LocalReAlloc
+ms886743	LocalSize
+ms886803	SecureZeroMemory
+aa450975	VirtualAlloc
+aa450979	VirtualFree
+aa450980	VirtualProtect
+aa450981	VirtualQuery
+aa450753	Memory Management Structures
+ms886752	MEMORY_BASIC_INFORMATION
+ms886753	MEMORYSTATUS

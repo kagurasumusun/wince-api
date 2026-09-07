@@ -1,0 +1,13 @@
+aa450708	DLL Functions
+ms885200	DisableThreadLibraryCalls
+ms885202	DllMain
+ms885601	FreeLibrary
+ms885602	FreeLibraryAndExitThread
+ms885629	GetModuleFileName
+ms885630	GetModuleHandle
+ms885631	GetModuleInformation
+ms885634	GetProcAddress
+ms886736	LoadLibrary
+ms886737	LoadLibraryEx
+aa450738	DLL Structures
+ms886757	MODULEINFO

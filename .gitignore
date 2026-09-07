@@ -1,0 +1,4 @@
+# Generated artifacts (kept out of the tree; see README)
+build/
+*.pyc
+__pycache__/

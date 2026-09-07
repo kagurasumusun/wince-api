@@ -1,0 +1,11 @@
+aa450778	Unicode Functions
+ms886515	IsDBCSLeadByte
+ms886608	IsDBCSLeadByteEx
+ms886760	MultiByteToWideChar
+aa450955	TranslateCharsetInfo
+aa450989	WideCharToMultiByte
+aa450779	Unicode Macros
+aa450932	TEXT
+aa450781	Unicode Structures
+ms885163	CHARSETINFO
+ms885597	FONTSIGNATURE

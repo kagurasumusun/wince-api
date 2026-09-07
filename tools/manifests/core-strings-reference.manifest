@@ -1,0 +1,14 @@
+aa450766	Strings Functions
+ms885159	CharLower
+ms885160	CharLowerBuff
+ms885161	CharNext
+ms885162	CharPrev
+ms885164	CharUpper
+ms885165	CharUpperBuff
+ms885690	IsCharAlpha
+ms885691	IsCharAlphaNumeric
+ms885692	IsCharLower
+ms885693	IsCharUpper
+ms886738	LoadString
+aa450993	wsprintf
+aa450994	wvsprintf

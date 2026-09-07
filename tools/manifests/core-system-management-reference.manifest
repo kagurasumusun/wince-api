@@ -1,0 +1,17 @@
+aa450768	System Management Functions
+ms885638	GetSystemInfo
+ms885648	GetVersionEx
+ms886726	IsProcessorFeaturePresent
+ms886787	QueryInstructionSet
+aa450898	SignalStarted
+aa450973	VerQueryValue
+aa450770	System Management Structures
+ms886768	OSVERSIONINFO
+aa450907	String
+aa450909	StringFileInfo
+aa450911	StringTable
+aa450921	SYSTEM_INFO
+aa450969	Var
+aa450972	VarFileInfo
+aa450983	VS_FIXEDFILEINFO
+aa450984	VS_VERSIONINFO

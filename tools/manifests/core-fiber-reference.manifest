@@ -1,0 +1,8 @@
+aa450744	Fiber Functions
+ms885178	CreateFiber
+ms885176	ConvertThreadToFiber
+ms885197	DeleteFiber
+ms885221	FiberProc
+ms885611	GetCurrentFiber
+ms885624	GetFiberData
+aa450915	SwitchToFiber

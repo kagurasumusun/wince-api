@@ -1,0 +1,20 @@
+aa450774	ToolHelp Functions
+ms885169	CloseToolhelp32Snapshot
+ms885189	CreateToolhelp32Snapshot
+ms885650	Heap32First
+ms885651	Heap32ListFirst
+ms885652	Heap32ListNext
+ms885653	Heap32Next
+ms886754	Module32First
+ms886755	Module32Next
+ms886772	Process32First
+ms886773	Process32Next
+aa450934	Thread32First
+aa450936	Thread32Next
+aa450953	Toolhelp32ReadProcessMemory
+aa450776	ToolHelp Structures
+ms885658	HEAPENTRY32
+ms885660	HEAPLIST32
+ms886756	MODULEENTRY32
+ms886774	PROCESSENTRY32
+aa450938	THREADENTRY32

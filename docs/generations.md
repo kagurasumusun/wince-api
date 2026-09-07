@@ -56,6 +56,33 @@ error table System Errors - Numerical Order `aa450919`; index page
 Error Values `aa450740`; priority levels `aa450596`; kernel-scope
 kfuncs pages `ms885613`–`ms885616` (conflict rows only).
 
+**M9 batch — harvested from the official TOC (learn.microsoft.com
+`previous-versions/windows/embedded/toc.json`) with
+`tools/ce-manifest.py` + `tools/ce-fetch.py`; manifests in
+`tools/manifests/core-*.manifest`:**
+
+* *Core OS Reference → Synchronization Reference* (26 pages):
+  CreateEvent `ms885177`, CreateMutex `ms885181`, CreateSemaphore
+  `ms885184`, DeleteCriticalSection `ms885196`, DuplicateHandle
+  `ms885208`, EnterCriticalSection `ms885212`, InitializeCriticalSection
+  `ms885665`, the interlocked family `ms885667`–`ms885674`,
+  LeaveCriticalSection `ms886733`, OpenEvent `ms886764`, PulseEvent
+  `ms886784`, ReleaseMutex `ms886797`, ReleaseSemaphore `ms886798`,
+  ResetEvent `ms886800`, SetEvent `ms886810`, TryEnterCriticalSection
+  `aa450959`, WaitForMultipleObjects `aa450987`, WaitForSingleObject
+  `aa450988`.
+* Also manifested and fetched for the next batches (records in
+  `build/rows.json`, def membership validated there): *Memory
+  Management Reference* (28), *Time Reference* (25), *Process and
+  Thread Reference* (41), *Strings Reference* (14), *Unicode
+  Reference* (11), *System Management Reference* (17), *DLL Reference*
+  (13), *ToolHelp Reference* (20), *Fiber Reference* (8).
+* Cross-book page count fetched and parsed so far: 203 official pages.
+
+The 25 M9 synchronization declarations (plus `winnt.h`) are shipped;
+their page rows (including the Nk.lib / Coremain.lib rows) and the
+critical-section layout basis are transcribed in `docs/inventory.md`.
+
 **CE 6.0 archive (`(v=winembedded.60)`): Input and Output
 `ee479262` (CE 6.0 run-time I/O overview: CE 6.0 CRT includes the
 security-enhanced `_s` variants and deprecates plain forms; the

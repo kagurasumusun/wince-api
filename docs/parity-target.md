@@ -34,9 +34,9 @@ this repository; our headers are written from the official pages
 | Constants (`winerror.h` rows 0–1078 from official numeric table `aa450919`; file/directory + creation/flag + priority + TLS + load-library values) | shipped (M1–M8) |
 | Remaining winbase families (heap, sync/wait, string, registry) | queued; official page per function |
 | GUI: `winuser.h` (WinMain, windows, messages, controls) | queued (WinMain page `ms914104` already in wince-crt records) |
-| Import-library defs (`coredll*.def` per generation/arch + DLL defs) | generated out-of-tree: `./gen-defs.sh` from the device-dump-audited export surface, then `llvm-dlltool` (defs not committed — see README) |
-| Real-toolchain compile matrix (headers + TU, `-Werror`) | passing since M8: `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 |
-| End-to-end links (wince-crt + wince-api consumer, against real import libraries) | pending (toolchain; requires the audited import surface) |
+| Import-library defs (`def/coredll-doc.def` + more per harvested DLL) | M9: derived from the official documentation pages only — `tools/ce-manifest.py` + `tools/ce-fetch.py` harvest the per-page Link Library rows into `build/rows.json`; `tools/gen-doc-def.py` writes the committed def; `llvm-dlltool` builds the import lib. Grows as more reference books are harvested |
+| Real-toolchain compile matrix (headers + TU, `-Werror`) | passing since M8 (now M9 sync + winnt.h): `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 |
+| End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | pending: link a consumer TU with wince-crt against `llvm-dlltool` outputs |
 
 ## Ordering principle
 

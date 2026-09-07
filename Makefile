@@ -13,30 +13,36 @@ INCLUDES = -Iinclude
 # docs/verification.md).
 CE_VERSIONS = 0x420 0x500 0x600
 
-HDRS = include/windef.h include/winbase.h include/windows.h include/winerror.h
+HDRS = include/windef.h include/winbase.h include/windows.h \
+       include/winerror.h include/winnt.h
 
-.PHONY: check hostcheck defcheck clean
+.PHONY: check hostcheck defcheck defdoc clean
 
 check: hostcheck defcheck
 
-# Import-library export defs (def/*.def) are OS-interface facts that
-# ./gen-defs.sh regenerates out-of-tree from the device-dump-audited
-# coredll export surface (audit-coredll.py in kagurasumusun/cellvm-build);
-# they are intentionally not committed.  When present they are validated;
-# when absent that is not an error.
+# defdoc regenerates def/*-doc.def from build/rows.json, the record set
+# harvested from the official CE documentation pages by tools/ce-fetch.py
+# (Requirement rows of the (v=msdn.10) archive).  tools/gen-doc-def.py
+# only lists names that both (a) appear on a harvested page whose
+# documented Link Library row names the DLL and (b) are declared as
+# exports by these headers.  No shared-source, device-dump, VS or
+# Platform Builder material is an input.
+defdoc:
+	@test -f build/rows.json || { echo "build/rows.json missing: run \
+tools/ce-fetch.py on tools/manifests/core-*.manifest first" >&2; exit 1; }
+	python3 tools/gen-doc-def.py
+
+# defcheck validates the committed doc-derived defs.
 defcheck:
-	@found=0; for f in def/coredll.def def/coredll4.def def/coredll6.def \
-	  def/coredll6-x86.def; do \
-	  if [ -f "$$f" ]; then found=1; \
-	    n=$$(awk '/^EXPORTS/{e=1;next} e && NF && $$0 !~ /^;/' "$$f" | wc -l); \
+	@for f in def/coredll-doc.def; do \
+	  if [ -f "$$f" ]; then \
+	    n=$$(awk '/^EXPORTS/{e=1;next} e && NF && $$0 !~ /^[;#]/' "$$f" | wc -l); \
 	    echo "[defcheck] $$f: $$n exports"; \
-	    [ $$n -gt 1000 ] || { echo "def $$f looks empty" >&2; exit 1; }; \
+	    [ $$n -gt 0 ] || { echo "def $$f looks empty" >&2; exit 1; }; \
+	  else \
+	    echo "[defcheck] missing $$f (run 'make defdoc')" >&2; exit 1; \
 	  fi; \
-	done; \
-	if [ $$found -eq 0 ]; then \
-	  echo "[defcheck] no def/*.def present (regenerate with ./gen-defs.sh \
-from the audited export surface when needed)"; \
-	fi
+	done
 
 # Cross checks with the real Windows CE LLVM/Clang toolchain
 # (kagurasumusun/llvm-project, branch LLVM-WinCE).  The driver is

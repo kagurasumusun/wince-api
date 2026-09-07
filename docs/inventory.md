@@ -95,8 +95,71 @@ the official page body via the Learn archive.
 | `FileTimeToSystemTime` | `ms885593` | CE 1.0 and later | Winbase.h | Coredll.lib | fails for FILETIME ≥ 0x8000000000000000 |
 | `SystemTimeToFileTime` | `aa450925` | CE 1.0 and later | Winbase.h | Coredll.lib | wDayOfWeek ignored; nonzero success, zero failure |
 | System error-code block (winerror.h rows 0–1078) | `aa450919` (System Errors - Numerical Order, Windows CE 5.0) | — | Winerror.h | — | full numeric table transcribed (0–1078 incl. registry 1009–1022 and service 1051–1078 groups); rows the CE table omits stay undefined; names/values are ABI facts; index page `aa450740` |
+
+### M9: Synchronization Reference batch (winbase.h + winnt.h)
+
+All function pages are official `(v=msdn.10)` CE 5.0 pages under
+*Core OS Reference → Synchronization Reference*.  Page-derived
+Requirement rows vary between Coredll.lib, "Coredll.lib, Nk.lib",
+"Nk.lib" and "Coremain.lib"; rows are transcribed verbatim in the
+table and their import-provider interpretation is discussed under
+"Link-library row notes" below.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `CreateEvent(W)` | `ms885177` | CE 1.0+ | Winbase.h | Coredll.lib, Nk.lib | lpEventAttributes ignored/NULL; manual/auto reset; name ≤ MAX_PATH, no backslash, case-sensitive; existing name ⇒ ERROR_ALREADY_EXISTS; EVENT_ALL_ACCESS; Unicode-only export CreateEventW |
+| `OpenEvent(W)` | `ms886764` | CE .NET 4.0+ | Winbase.h | Coredll.lib | dwDesiredAccess must be EVENT_ALL_ACCESS; bInheritHandle FALSE; export OpenEventW |
+| `SetEvent` | `ms886810` | CE 1.0+ | Kfuncs.h (page) | Coredll.lib | sets signaled; kernel-scope header row, user-mode export |
+| `ResetEvent` | `ms886800` | CE 1.0+ | Kfuncs.h (page) | Coredll.lib | sets nonsignaled; as SetEvent |
+| `PulseEvent` | `ms886784` | CE 1.0+ | Winbase.h | Coredll.lib | signal/release/reset in one operation |
+| `CreateMutex(W)` | `ms885181` | CE 1.01+ | Winbase.h | Coredll.lib, Nk.lib | attributes ignored; bInitialOwner; ERROR_ALREADY_EXISTS on existing name; export CreateMutexW |
+| `ReleaseMutex` | `ms886797` | CE 1.01+ | Winbase.h | Nk.lib (page) | caller must own the mutex |
+| `CreateSemaphore(W)` | `ms885184` | CE 3.0+ | Winbase.h | Nk.lib (page) | counts LONG; lInitialCount 0..lMaximumCount; attributes ignored; export CreateSemaphoreW |
+| `ReleaseSemaphore` | `ms886798` | CE 3.0+ | Winbase.h | Coredll.lib | lReleaseCount>0; previous count via lpPreviousCount |
+| `WaitForSingleObject` | `aa450988` | CE 1.0+ | Winbase.h | Coredll.lib | CE time-out cap 0x7FFFFFFF; WAIT_OBJECT_0/TIMEOUT/FAILED; waitable: event, mutex, semaphore (3.0+), process, thread |
+| `WaitForMultipleObjects` | `aa450987` | CE 1.01+ | Winbase.h | Nk.lib (page) | nCount ≤ MAXIMUM_WAIT_OBJECTS; WAIT_OBJECT_0+n / WAIT_ABANDONED_0+n |
+| `DuplicateHandle` | `ms885208` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | CE: dwDesiredAccess ignored, bInheritHandle FALSE; DUPLICATE_CLOSE_SOURCE / DUPLICATE_SAME_ACCESS |
+| `InitializeCriticalSection` | `ms885665` | CE 1.0+ | Winbase.h | Coremain.lib (page) | VOID; object per RTL_CRITICAL_SECTION (winnt.h) |
+| `EnterCriticalSection` | `ms885212` | CE 1.0+ | Winbase.h | Coremain.lib (page) | VOID |
+| `LeaveCriticalSection` | `ms886733` | CE 1.0+ | Winbase.h | Coremain.lib (page) | VOID |
+| `DeleteCriticalSection` | `ms885196` | CE 1.0+ | Winbase.h | Coremain.lib (page) | VOID |
+| `TryEnterCriticalSection` | `aa450959` | CE 3.0+ | Winbase.h | Coredll.lib | nonzero on success |
+| `InterlockedExchange` | `ms885670` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | |
+| `InterlockedIncrement` | `ms885673` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | returns new value |
+| `InterlockedDecrement` | `ms885669` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | returns new value |
+| `InterlockedExchangeAdd` | `ms885671` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | returns original value |
+| `InterlockedCompareExchange` | `ms885667` | CE .NET 4.0+ | Windows.h (page) | Coredll.lib | returns original value |
+| `InterlockedTestExchange` | `ms885674` | CE .NET 4.0+ | Winbase.h | Coredll.lib | CE-only conditional set; returns old value |
+| `InterlockedExchangePointer` | `ms885672` | CE .NET 4.0+ | Winbase.h | Coredll.lib | |
+| `InterlockedCompareExchangePointer` | `ms885668` | CE .NET 4.0+ | Winbase.h | Coredll.lib | |
+| `RTL_CRITICAL_SECTION`/`CRITICAL_SECTION`, `PRTL_CRITICAL_SECTION_DEBUG` | desktop-official debugger structure reference (offsets 0x0/0x4/0x8/0xc/0x10/0x14, 24 bytes on 32-bit) | — | Winnt.h | — | CE publishes no separate layout; desktop-official member order used, see link-library/ABI note below |
+| `LONGLONG`/`ULONGLONG`/`LARGE_INTEGER`/`ULARGE_INTEGER` | official Windows Data Types / LARGE_INTEGER structure reference | — | Winnt.h | — | union with anonymous LowPart/HighPart + QuadPart |
+| `WAIT_OBJECT_0`, `WAIT_ABANDONED_0`, `WAIT_TIMEOUT`, `WAIT_FAILED`, `MAXIMUM_WAIT_OBJECTS` | names per `aa450988`/`aa450987`; numeric values per the fixed Win32 wait-result ABI | — | Winbase.h | — | |
+| `DUPLICATE_CLOSE_SOURCE`, `DUPLICATE_SAME_ACCESS` | names per `ms885208`; values per official DuplicateHandle reference | — | Winbase.h | — | |
+| `EVENT_ALL_ACCESS` | `ms886764`; value per official synchronization access-rights reference | — | Winbase.h | — | |
+
+### M9 link-library and ABI notes (documented, not inferred)
+
+* Several M9 pages list **Nk.lib** or **Coremain.lib** as the only
+  Link Library (ReleaseMutex, CreateSemaphore, WaitForMultipleObjects,
+  the four base critical-section functions).  Those rows are
+  transcribed verbatim.  The doc-derived coredll export def includes
+  only functions whose page row names **Coredll.lib** (see the def
+  section below); the Nk/Coremain-named functions are tracked
+  separately and flagged for device-surface verification, exactly like
+  the ExitProcess conflict model.
+* Windows CE publishes no critical-section object layout, so
+  `CRITICAL_SECTION` is declared with the desktop-official
+  `RTL_CRITICAL_SECTION` member order (Microsoft Learn debugger
+  reference; 24 bytes on 32-bit).  This is an *own design* ABI
+  decision recorded here, not claimed as CE documentation.
+* Pages listing Header **Windows.h** (DuplicateHandle, most
+  Interlocked pages) or **Kfuncs.h** (SetEvent/ResetEvent) are
+  declared in winbase.h/winnt.h with the page row recorded; the base
+  names map to the Unicode exports where the page documents Unicode
+  only.
 | `ERROR_NO_UNICODE_TRANSLATION` | outside rows above; cited by `ms915519`/`ms961248` | — | Winerror.h | — | value 1113 |
-| Export defs (`def/coredll{,4,6,-x86}.def`) | names/ordinals = OS facts from the device-dump-audited toolchain export surface | — | — | coredll.dll | generation mapping: coredll=CE5, coredll4=CE4, coredll6=CE6 ARM, coredll6-x86=CE6 x86; **regenerated by `./gen-defs.sh` from the audited surface and not committed** (see README) |
+| Export defs (public-info derived) | names = documented exports, taken ONLY from the official per-function "Link Library" rows harvested from the `(v=msdn.10)` pages (see `tools/ce-manifest.py`, `tools/ce-fetch.py`, `tools/gen-doc-def.py`); no shared-source/device-dump/VS/PB-derived names | — | — | coredll.dll | `def/coredll-doc.def` lists pages whose row names Coredll.lib; name-only (ordinals are not published); generated and committed from `build/rows.json` (see README) |
 
 ### Documented conflicts (official page vs verified export surface)
 
@@ -127,11 +190,12 @@ toolchain sysroot; device-dump-audited defs, `audit-coredll.py`):
   `LocalAlloc`, `LocalFree`.
 * `ExitProcess`: not exported on any generation (conflict above).
 
-The M8 file/directory spellings follow the same documented rule
-(Windows CE is Unicode-only ⇒ the base names map to the W exports,
-plain names for the handle-based I/O functions).  The audited defs
-are regenerated out-of-tree (`./gen-defs.sh`) and re-checked against
-the export surface on the next audit run.
+The M8/M9 spellings follow the same documented rule (Windows CE is
+Unicode-only ⇒ the base names map to the W exports, plain names for
+the handle-based I/O functions).  Export defs are no longer produced
+from a device/audit surface: `def/coredll-doc.def` is generated from
+the harvested official pages (`tools/gen-doc-def.py` over
+`build/rows.json`); see the def section above and README.
 
 ## Remaining verification (roadmap)
 
