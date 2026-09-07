@@ -30,6 +30,11 @@
 #include "msgqueue.h"
 #include "excpt.h"
 #include "winuser.h"
+/* Component headers of the CE SDK that CE applications include either
+ * directly or via Windows.h: Notify.h (Notify Reference) and Shellapi.h
+ * (Resources Reference items with Header: Shellapi.h). */
+#include "notify.h"
+#include "shellapi.h"
 #include "winerror.h"
 
 #ifdef __cplusplus
@@ -88,6 +93,40 @@ LRESULT SendMessageTimeout(HWND hWnd, UINT Msg, WPARAM wParam,
  * CE 1.0+; Windows.h; Coredll.lib. */
 BOOL ScrollDC(HDC hDC, int dx, int dy, const RECT *lprcScroll,
               const RECT *lprcClip, HRGN hrgnUpdate, LPRECT lprcUpdate);
+
+/* M28 dialog-book items whose official pages give Header: Windows.h. */
+
+/* ms911827 "MessageBox (Windows CE 5.0)": modal message box.  CE 1.0+;
+ * Header: Windows.h; Link Library Msgbox.lib.  Windows CE supports only
+ * the wide form (the repo rule for text functions); uType combines the
+ * MB_* styles documented in the "Message Box Styles" book. */
+int MessageBoxW(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);
+#define MessageBox MessageBoxW
+
+/* ms928573 "CheckDlgButton": sets the check state of a button control
+ * (its official page prints an __inline prototype with Header:
+ * Windows.h; Link Library Coredll.lib). */
+BOOL CheckDlgButton(HWND hDlg, int nIDButton, UINT uCheck);
+
+/* ms909866 "IsDlgButtonChecked": returns the check state of a button
+ * (official page prints __inline UINT WINAPI ...; Header: Windows.h;
+ * Link Library Coredll.lib). */
+UINT IsDlgButtonChecked(HWND hDlg, int nIDButton);
+
+/* aa452974 "DRAWITEMSTRUCT (Windows CE 5.0)": owner-draw item passed as
+ * the lParam of WM_DRAWITEM; Header: Windows.h.  The typedef is shared
+ * with the Combo Boxes / Menus owner-draw documentation. */
+typedef struct tagDRAWITEMSTRUCT {
+    UINT      CtlType;    /* ODT_* control type */
+    UINT      CtlID;
+    UINT      itemID;
+    UINT      itemAction; /* ODA_* */
+    UINT      itemState;  /* ODS_* */
+    HWND      hwndItem;
+    HDC       hDC;
+    RECT      rcItem;
+    ULONG_PTR itemData;
+} DRAWITEMSTRUCT;
 
 #ifdef __cplusplus
 }

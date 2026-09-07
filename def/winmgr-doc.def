@@ -28,6 +28,7 @@ EXPORTS
   ReleaseDC
   ScreenToClient
   ScrollWindowEx
+  SetSysColors
   SetWindowRgn
   UpdateWindow
   ValidateRect

@@ -16,12 +16,17 @@ EXPORTS
   AlphaBlend
   BeginPaint
   BitBlt
+  CeClearUserNotification
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
   CeGenRandom
   CeGetCanonicalPathName
   CeGetFileNotificationInfo
+  CeGetUserNotification
+  CeGetUserNotificationHandles
+  CeGetUserNotificationPreferences
+  CeHandleAppNotifications
   CeLogData
   CeLogGetZones
   CeLogInterrupt
@@ -29,8 +34,13 @@ EXPORTS
   CeLogQueryZones
   CeLogReSync
   CeLogSetZones
+  CeRunAppAtEvent
+  CeRunAppAtTime
+  CeSetUserNotification
+  CeSetUserNotificationEx
   ChangeDisplaySettingsEx
   CharNextW
+  CheckDlgButton
   ClientToScreen
   CloseHandle
   CloseMsgQueue
@@ -103,6 +113,7 @@ EXPORTS
   FindFirstFileExW
   FindNextChangeNotification
   FindNextFileW
+  FindResourceW
   FlushFileBuffers
   FlushInstructionCache
   FlushViewOfFile
@@ -167,6 +178,8 @@ EXPORTS
   GetSysColorBrush
   GetSystemInfo
   GetSystemPaletteEntries
+  GetSystemPowerStatusEx
+  GetSystemPowerStatusEx2
   GetSystemTime
   GetTempFileNameW
   GetTempPathW
@@ -214,16 +227,19 @@ EXPORTS
   IsBadWritePtr
   IsDBCSLeadByte
   IsDBCSLeadByteEx
+  IsDlgButtonChecked
   LineTo
   LoadKeyboardLayout
   LoadLibraryW
   LoadLibraryExW
+  LoadResource
   LocalAlloc
   LocalFileTimeToFileTime
   LocalFree
   LocalReAlloc
   LocalSize
   LockFileEx
+  LockResource
   MapViewOfFile
   MapWindowPoints
   MaskBlt
@@ -315,11 +331,13 @@ EXPORTS
   SetViewportOrgEx
   SetWindowOrgEx
   SignalStarted
+  SizeofResource
   Sleep
   StretchBlt
   StretchDIBits
   SuspendThread
   SwitchToFiber
+  SystemParametersInfoW
   SystemTimeToFileTime
   TerminateProcess
   TerminateThread

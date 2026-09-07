@@ -1,0 +1,7 @@
+aa453033	EnableHardwareKeyboard
+aa453167	GetSysColor
+aa453170	GetSystemMetrics
+aa453172	GetSystemPowerStatusEx
+aa453173	GetSystemPowerStatusEx2
+aa453656	SetSysColors
+ms940383	SystemParametersInfo

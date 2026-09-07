@@ -1,0 +1,11 @@
+ms908175	CreateIconIndirect
+aa452938	DestroyIcon
+aa452972	DrawIconEx
+aa453065	ExtractIconEx
+aa453069	FindResource
+ms929247	GetIconInfo
+aa453411	LoadIcon
+aa453413	LoadImage
+aa453416	LoadResource
+aa453417	LockResource
+ms940346	SizeofResource

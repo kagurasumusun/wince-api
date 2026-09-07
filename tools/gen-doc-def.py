@@ -110,6 +110,26 @@ UNICODE_ONLY = {
     "GlobalFindAtom": "GlobalFindAtomW",
     "GetKeyboardLayoutName": "GetKeyboardLayoutNameW",
     "LoadAccelerators": "LoadAcceleratorsW",
+    # M28 window-control text functions (Menus / Dialog Boxes / Clipboards
+    # / Resources / System-Information pages; CE is Unicode-only, so the
+    # exported spellings are the wide forms, matching the repo rule).
+    "AppendMenu": "AppendMenuW",
+    "InsertMenu": "InsertMenuW",
+    "LoadMenu": "LoadMenuW",
+    "CreateDialog": "CreateDialogW",
+    "CreateDialogParam": "CreateDialogParamW",
+    "DialogBox": "DialogBoxW",
+    "DialogBoxParam": "DialogBoxParamW",
+    "GetDlgItemText": "GetDlgItemTextW",
+    "SetDlgItemText": "SetDlgItemTextW",
+    "MessageBox": "MessageBoxW",
+    "LoadIcon": "LoadIconW",
+    "LoadImage": "LoadImageW",
+    "RegisterClipboardFormat": "RegisterClipboardFormatW",
+    "GetClipboardFormatName": "GetClipboardFormatNameW",
+    "SystemParametersInfo": "SystemParametersInfoW",
+    "FindResource": "FindResourceW",
+    "ExtractIconEx": "ExtractIconExW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

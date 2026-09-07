@@ -621,6 +621,272 @@ BOOL UnionRect(LPRECT lprcDst, const RECT* lprcSrc1, const RECT* lprcSrc2);
 BOOL UpdateWindow(HWND hWnd);
 /* ms914091 "ValidateRect" */
 BOOL ValidateRect(HWND hWnd, const RECT* lpRect);
+
+/* ------------------------------------------------------------------ */
+/* M28: Dialog Boxes / Menus / Clipboards / Resources(icon) / System-  */
+/* Information Reference books.  All items in this block have official  */
+/* pages whose Requirements row prints Header: Winuser.h unless a       */
+/* comment says otherwise; per-page Link Library rows are noted and     */
+/* feed the export defs under def/.                                     */
+/* ------------------------------------------------------------------ */
+
+/* aa452951 "DialogProc (Windows CE 5.0)" documents the dialog-callback */
+/* prototype (BOOL CALLBACK DialogProc(HWND, UINT, WPARAM, LPARAM));    */
+/* DLGPROC is the typedef used by the CreateDialog / DialogBox family.  */
+typedef BOOL (CALLBACK *DLGPROC)(HWND hDlg, UINT uMsg, WPARAM wParam,
+                                 LPARAM lParam);
+
+/* aa452958 "DLGITEMTEMPLATE": in-memory standard dialog template for   */
+/* one control (combined with DLGTEMPLATE).  CE 1.0+; Winuser.h.        */
+typedef struct {
+    DWORD style;         /* window + control styles (WS_*, BS_*, ...)  */
+    DWORD dwExtendedStyle;
+    short x;             /* dialog-box units */
+    short y;
+    short cx;
+    short cy;
+    WORD  id;            /* control identifier */
+} DLGITEMTEMPLATE;
+
+/* aa452960 "DLGTEMPLATE": in-memory standard dialog template header.   */
+/* CE 1.0+; Winuser.h.  (The CE page notes Windows CE does not support  */
+/* dialog menus.)                                                       */
+typedef struct {
+    DWORD style;         /* window + DS_* styles */
+    DWORD dwExtendedStyle;
+    WORD  cdit;          /* number of DLGITEMTEMPLATE structures */
+    short x;             /* dialog-box units */
+    short y;
+    short cx;
+    short cy;
+} DLGTEMPLATE;
+
+typedef DLGTEMPLATE       *LPDLGTEMPLATE;
+typedef const DLGTEMPLATE *LPCDLGTEMPLATE;
+typedef DLGITEMTEMPLATE   *LPDLGITEMTEMPLATE;
+typedef const DLGITEMTEMPLATE *LPCDLGITEMTEMPLATE;
+
+/* ms911822 "MENUITEMINFO": menu-item information (Get/SetMenuItemInfo).*/
+/* CE 1.0+; Winuser.h.  (CE member list: UINT wID and DWORD dwItemData; */
+/* dwTypeData carries the item text for MIIM_TYPE / MFT_STRING.)        */
+typedef struct tagMENUITEMINFO {
+    UINT    cbSize;        /* sizeof(MENUITEMINFO) */
+    UINT    fMask;         /* MIIM_* */
+    UINT    fType;         /* MFT_* */
+    UINT    fState;        /* MFS_* */
+    UINT    wID;           /* application-defined menu-item id */
+    HMENU   hSubMenu;
+    HBITMAP hbmpChecked;
+    HBITMAP hbmpUnchecked;
+    DWORD   dwItemData;
+    LPTSTR  dwTypeData;    /* item text */
+    UINT    cch;           /* length of dwTypeData in characters */
+} MENUITEMINFO, *LPMENUITEMINFO, *LPCMENUITEMINFO;
+
+/* aa453766 "TPMPARAMS": extended TrackPopupMenuEx parameters.  CE     */
+/* 1.0+; Winuser.h.                                                     */
+typedef struct tagTPMPARAMS {
+    UINT cbSize;          /* sizeof(TPMPARAMS) */
+    RECT rcExclude;       /* rectangle to exclude (screen coords) */
+} TPMPARAMS, *LPTPMPARAMS;
+
+/* ms928818 "COMBOBOXINFO": combo box status (CB_GETCOMBOBOXINFO).      */
+typedef struct tagCOMBOBOXINFO {
+    DWORD cbSize;         /* sizeof(COMBOBOXINFO); caller sets */
+    RECT  rcItem;         /* edit-box rectangle */
+    RECT  rcButton;       /* drop-down button rectangle */
+    DWORD stateButton;    /* unsupported on CE */
+    HWND  hwndCombo;
+    HWND  hwndItem;       /* edit control */
+    HWND  hwndList;       /* drop-down list */
+} COMBOBOXINFO, *PCOMBOBOXINFO, *LPCOMBOBOXINFO;
+
+/* ms911820 "MEASUREITEMSTRUCT": owner-drawn dimensions (WM_MEASUREITEM).*/
+typedef struct tagMEASUREITEMSTRUCT {
+    UINT  CtlType;        /* ODT_* */
+    UINT  CtlID;
+    UINT  itemID;
+    UINT  itemWidth;
+    UINT  itemHeight;
+    DWORD itemData;
+} MEASUREITEMSTRUCT;
+
+/* aa452931 "DELETEITEMSTRUCT": deleted list/combo item (WM_DELETEITEM).*/
+typedef struct tagDELETEITEMSTRUCT {
+    UINT CtlType;         /* ODT_LISTBOX / ODT_COMBOBOX */
+    UINT CtlID;
+    UINT itemID;
+    HWND hwndItem;
+    UINT itemData;
+} DELETEITEMSTRUCT;
+
+/* ms929934 "ICONINFO (Windows CE 5.0)": the official page lists Header:*/
+/* Commctrl.h; CreateIconIndirect (ms908175) and GetIconInfo (ms929247) */
+/* list Header: Winuser.h.  Fixed Win32-ABI member layout.             */
+typedef struct _ICONINFO {
+    BOOL    fIcon;        /* TRUE = icon, FALSE = cursor */
+    DWORD   xHotspot;
+    DWORD   yHotspot;
+    HBITMAP hbmMask;
+    HBITMAP hbmColor;
+} ICONINFO, *PICONINFO, *LPICONINFO;
+
+/* aa453542 "MAKEINTRESOURCE": converts an integer resource identifier  */
+/* into a resource-name string pointer.  The CE page prints the macro   */
+/* body; Header: Winuser.h.                                             */
+#define MAKEINTRESOURCE(i) ((LPTSTR) ((DWORD) ((WORD) (i))))
+
+/* ------------------------------------------------------------------ */
+/* Menus Reference functions (CE 1.0+, Header Winuser.h).             */
+/* ------------------------------------------------------------------ */
+
+BOOL  AppendMenuW(HMENU hMenu, UINT uFlags, UINT uIDNewItem,
+                  LPCTSTR lpNewItem);                 /* aa452862 */
+#define AppendMenu AppendMenuW
+BOOL  CheckMenuItem(HMENU hmenu, UINT uIDCheckItem, UINT uCheck); /* ms928575 */
+BOOL  CheckMenuRadioItem(HMENU hmenu, UINT idFirst, UINT idLast,  /* ms928576 */
+                         UINT idCheck, UINT uFlags);
+HMENU CreateMenu(void);                               /* ms908177 */
+HMENU CreatePopupMenu(void);                          /* ms908182 */
+BOOL  DeleteMenu(HMENU hMenu, UINT uPosition, UINT uFlags);       /* aa452932 */
+BOOL  DestroyMenu(HMENU hMenu);                       /* aa452940 */
+BOOL  DrawMenuBar(HWND hWnd);                         /* aa452975 */
+BOOL  EnableMenuItem(HMENU hMenu, UINT uIDEnableItem, UINT uEnable); /* aa453034 */
+BOOL  GetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
+                      LPMENUITEMINFO lpmii);          /* aa453134 */
+HMENU GetSubMenu(HMENU hMenu, int nPos);              /* aa453166 */
+HMENU GetSystemMenu(HWND hWnd, BOOL bRevert);         /* aa453169 */
+BOOL  InsertMenuW(HMENU hMenu, UINT uPosition, UINT uFlags,
+                  UINT uIDNewItem, LPCTSTR lpNewItem);             /* ms909853 */
+#define InsertMenu InsertMenuW
+HMENU LoadMenuW(HINSTANCE hInstance, LPCTSTR lpMenuName);          /* aa453415 */
+#define LoadMenu LoadMenuW
+BOOL  RemoveMenu(HMENU hMenu, UINT uPosition, UINT uFlags);        /* ms939775 */
+BOOL  SetMenuItemInfo(HMENU hMenu, UINT uItem, BOOL fByPosition,
+                      LPCMENUITEMINFO lpmii);        /* ms940027 */
+BOOL  TrackPopupMenu(HMENU hMenu, UINT uFlags, int x, int y,
+                     int nReserved, HWND hWnd, const RECT* prcRect); /* aa453773 */
+BOOL  TrackPopupMenuEx(HMENU hmenu, UINT uFlags, int x, int y,     /* aa453774 */
+                       HWND hwnd, LPTPMPARAMS lptpm);
+
+/* ------------------------------------------------------------------ */
+/* Dialog Boxes Reference functions.  Header Winuser.h except where    */
+/* noted: MessageBox / CheckDlgButton / IsDlgButtonChecked print       */
+/* Header Windows.h (windows.h); MessageBeep prints Header Winbase.h   */
+/* (winbase.h).                                                        */
+/* ------------------------------------------------------------------ */
+
+HWND CreateDialogW(HINSTANCE hInstance, LPCTSTR lpTemplate,       /* ms908169 */
+                   HWND hWndParent, DLGPROC lpDialogFunc);
+#define CreateDialog CreateDialogW
+HWND CreateDialogIndirect(HINSTANCE hInstance,                    /* ms908170 */
+                          LPCDLGTEMPLATE lpTemplate, HWND hWndParent,
+                          DLGPROC lpDialogFunc);
+HWND CreateDialogIndirectParam(HINSTANCE hInstance,               /* ms908171 */
+                               LPCDLGTEMPLATE lpTemplate, HWND hWndParent,
+                               DLGPROC lpDialogFunc, LPARAM lParamInit);
+HWND CreateDialogParamW(HINSTANCE hInstance, LPCTSTR lpTemplateName, /* ms908172 */
+                        HWND hWndParent, DLGPROC lpDialogFunc,
+                        LPARAM dwInitParam);
+#define CreateDialogParam CreateDialogParamW
+LRESULT DefDlgProc(HWND hDlg, UINT Msg, WPARAM wParam,            /* ms908209 */
+                   LPARAM lParam);
+int    DialogBoxW(HINSTANCE hInstance, LPCTSTR lpTemplate,        /* aa452947 */
+                  HWND hWndParent, DLGPROC lpDialogFunc);
+#define DialogBox DialogBoxW
+int    DialogBoxIndirect(HINSTANCE hInstance, LPDLGTEMPLATE lpTemplate, /* aa452948 */
+                         HWND hWndParent, DLGPROC lpDialogFunc);
+int    DialogBoxIndirectParam(HINSTANCE hInstance,                /* aa452949 */
+                              LPCDLGTEMPLATE hDialogTemplate, HWND hWndParent,
+                              DLGPROC lpDialogFunc, LPARAM dwInitParam);
+int    DialogBoxParamW(HINSTANCE hInstance, LPCTSTR lpTemplateName, /* aa452950 */
+                       HWND hWndParent, DLGPROC lpDialogFunc, LPARAM dwInitParam);
+#define DialogBoxParam DialogBoxParamW
+BOOL   EndDialog(HWND hDlg, int nResult);                         /* aa453038 */
+LONG   GetDialogBaseUnits(void);                                  /* ms929231 */
+int    GetDlgCtrlID(HWND hwndCtl);                                /* ms929233 */
+HWND   GetDlgItem(HWND hDlg, int nIDDlgItem);                     /* ms929234 */
+UINT   GetDlgItemInt(HWND hDlg, int nIDDlgItem, BOOL* lpTranslated,
+                     BOOL bSigned);                               /* ms929235 */
+UINT   GetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPTSTR lpString,
+                       int nMaxCount);                            /* ms929236 */
+#define GetDlgItemText GetDlgItemTextW
+HWND   GetNextDlgGroupItem(HWND hDlg, HWND hCtl, BOOL bPrevious);  /* aa453145 */
+HWND   GetNextDlgTabItem(HWND hDlg, HWND hCtl, BOOL bPrevious);    /* aa453146 */
+BOOL   IsDialogMessage(HWND hDlg, LPMSG lpMsg);                   /* ms909864 */
+BOOL   MapDialogRect(HWND hDlg, LPRECT lpRect);                   /* ms911788 */
+LONG   SendDlgItemMessage(HWND hDlg, int nIDDlgItem, UINT Msg,    /* ms932717 */
+                          WPARAM wParam, LPARAM lParam);
+BOOL   SetDlgItemInt(HWND hDlg, int nIDDlgItem, UINT uValue,      /* ms940020 */
+                     BOOL bSigned);
+BOOL   SetDlgItemTextW(HWND hDlg, int nIDDlgItem, LPCTSTR lpString); /* ms940021 */
+#define SetDlgItemText SetDlgItemTextW
+
+/* ms909866 "IsDlgButtonChecked" and ms928573 "CheckDlgButton" are     */
+/* declared in windows.h (their pages list Header Windows.h).           */
+
+/* Buttons Reference: ms928577 "CheckRadioButton" (Header Winuser.h).   */
+BOOL CheckRadioButton(HWND hDlg, int nIDFirstButton, int nIDLastButton,
+                      int nIDCheckButton);
+
+/* ------------------------------------------------------------------ */
+/* Clipboards Reference functions (Header Winuser.h).                 */
+/* ------------------------------------------------------------------ */
+
+BOOL   CloseClipboard(void);                       /* ms928586 */
+int    CountClipboardFormats(void);                /* ms908153 */
+BOOL   EmptyClipboard(void);                       /* aa453019 */
+UINT   EnumClipboardFormats(UINT format);          /* aa453047 */
+HANDLE GetClipboardData(UINT uFormat);             /* ms929215 */
+HANDLE GetClipboardDataAlloc(UINT uFormat);        /* ms929216 */
+int    GetClipboardFormatNameW(UINT format, LPTSTR lpszFormatName,
+                               int cchMaxCount);   /* ms929217 */
+#define GetClipboardFormatName GetClipboardFormatNameW
+HWND   GetClipboardOwner(void);                    /* ms929218 */
+HWND   GetOpenClipboardWindow(void);               /* aa453149 */
+int    GetPriorityClipboardFormat(UINT* paFormatPriorityList,
+                                  int cFormats);   /* aa453154 */
+BOOL   IsClipboardFormatAvailable(UINT format);    /* ms909863 */
+BOOL   OpenClipboard(HWND hWndNewOwner);           /* ms911905 */
+UINT   RegisterClipboardFormatW(LPCWSTR lpszFormat); /* ms913094; the page
+                                                      * states only the
+                                                      * Unicode version */
+#define RegisterClipboardFormat RegisterClipboardFormatW
+HANDLE SetClipboardData(UINT uFormat, HANDLE hMem); /* ms940015 */
+
+/* ------------------------------------------------------------------ */
+/* Resources Reference icon/image functions (Header Winuser.h).        */
+/* ------------------------------------------------------------------ */
+
+HICON  CreateIconIndirect(PICONINFO piconinfo);     /* ms908175 */
+BOOL   DestroyIcon(HICON hIcon);                    /* aa452938 */
+BOOL   DrawIconEx(HDC hdc, int xLeft, int yTop, HICON hIcon,
+                  int cxWidth, int cyWidth, UINT istepIfAniCur,
+                  HBRUSH hbrFlickerFreeDraw, UINT diFlags);   /* aa452972 */
+BOOL   GetIconInfo(HICON hIcon, PICONINFO piconinfo);         /* ms929247 */
+HICON  LoadIconW(HINSTANCE hInstance, LPCTSTR lpIconName);    /* aa453411 */
+#define LoadIcon LoadIconW
+HANDLE LoadImageW(HINSTANCE hinst, LPCTSTR lpszName, UINT uType,
+                  int cxDesired, int cyDesired, UINT fuLoad);  /* aa453413 */
+#define LoadImage LoadImageW
+
+/* ------------------------------------------------------------------ */
+/* System Information Reference functions (Header Winuser.h).          */
+/* ------------------------------------------------------------------ */
+
+BOOL  EnableHardwareKeyboard(BOOL bEnable);          /* aa453033 */
+DWORD GetSysColor(int nIndex);                       /* aa453167 */
+int   GetSystemMetrics(int nIndex);                  /* aa453170 */
+BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
+                            UINT fWinIni);           /* ms940383; the page
+                                                      * states only the
+                                                      * Unicode version */
+#define SystemParametersInfo SystemParametersInfoW
+
+/* aa453656 "SetSysColors" takes CONST COLORREF*, and COLORREF is
+ * defined with the GDI types in wingdi.h -- see wingdi.h for the
+ * declaration (its official page prints Header Winuser.h). */
+
 #ifdef __cplusplus
 }
 #endif

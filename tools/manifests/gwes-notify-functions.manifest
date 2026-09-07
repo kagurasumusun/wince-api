@@ -1,0 +1,9 @@
+ms908074	CeClearUserNotification
+ms908076	CeGetUserNotification
+ms908077	CeGetUserNotificationHandles
+ms908078	CeGetUserNotificationPreferences
+ms908079	CeHandleAppNotifications
+ms908102	CeRunAppAtEvent
+ms908103	CeRunAppAtTime
+ms908104	CeSetUserNotification
+ms908105	CeSetUserNotificationEx

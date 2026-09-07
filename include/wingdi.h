@@ -455,6 +455,13 @@ HGDIOBJ GetStockObject(int fnObject);
 int GetStretchBltMode(HDC hdc);
 /* aa453168 "GetSysColorBrush" */
 HBRUSH GetSysColorBrush(int nIndex);
+/* aa453656 "SetSysColors": its prototype takes CONST COLORREF*, so it is
+ * declared with the GDI types here even though the official page prints
+ * Header: Winuser.h (COLORREF lives with the GDI types; the header
+ * layout deviation is recorded in docs/inventory.md).  Link Library row
+ * Winmgr.lib (def/winmgr-doc.def). */
+BOOL SetSysColors(int cElements, CONST INT* lpaElements,
+                  CONST COLORREF* lpaRgbValues);
 /* aa453171 "GetSystemPaletteEntries" */
 UINT GetSystemPaletteEntries(HDC hdc, UINT iStartIndex, UINT nEntries,
     LPPALETTEENTRY lppe);
@@ -630,6 +637,65 @@ BOOL StretchDIBits(HDC hdc, int XDest, int YDest, int nDestWidth,
     int nDestHeight, int XSrc, int YSrc, int nSrcWidth, int nSrcHeight,
     CONST VOID* lpBits, CONST BITMAPINFO* lpBitsInfo, UINT iUsage,
     DWORD dwRop);
+
+/* ------------------------------------------------------------------ */
+/* M28: Printing Reference (Header: Wingdi.h, Link Library Mgprint.lib */
+/* per the CE 5.0 pages) and the extended dialog-template structures   */
+/* (their pages list Header: Wingdi.h).                                */
+/* ------------------------------------------------------------------ */
+
+/* aa452964 "DOCINFO": input to StartDoc.  CE 2.0+; Wingdi.h.  The CE
+ * page marks lpszDatatype and fwType as unsupported (set to zero). */
+typedef struct {
+    int      cbSize;        /* sizeof(DOCINFO) */
+    LPCTSTR  lpszDocName;
+    LPCTSTR  lpszOutput;    /* output-file name, or NULL for the device */
+    LPCTSTR  lpszDatatype;  /* unsupported; set to zero */
+    DWORD    fwType;        /* unsupported; set to zero */
+} DOCINFO;
+
+/* aa452836 "AbortProc": abort callback installed by SetAbortProc; the
+ * page documents BOOL CALLBACK AbortProc(HDC, int). */
+typedef BOOL (CALLBACK *ABORTPROC)(HDC hdc, int iError);
+
+/* Printing functions (CE 2.0+; Wingdi.h; Mgprint.lib). */
+int  AbortDoc(HDC hdc);                          /* aa452835 */
+int  EndDoc(HDC hdc);                            /* aa453039 */
+int  EndPage(HDC hdc);                           /* aa453040 */
+int  SetAbortProc(HDC hdc, ABORTPROC lpAbortProc); /* ms939985 */
+int  StartDoc(HDC hdc, CONST DOCINFO* lpdi);     /* ms940349 */
+int  StartPage(HDC hDC);                         /* ms940350 */
+
+/* aa452959 "DLGITEMTEMPLATEEX" / aa452961 "DLGTEMPLATEEX": the extended
+ * in-memory dialog template format (CreateDialogIndirectParam /
+ * DialogBoxIndirectParam).  Both official pages state the structures
+ * are "not defined in any standard header file" and print Header:
+ * Wingdi.h; the variable-length arrays (windowClass / title / menu /
+ * font, and sz_Or_Ord placeholders) follow each fixed header in
+ * memory, so only the fixed prefix is typed here.  CE 2.0+. */
+typedef struct {
+    DWORD helpID;
+    DWORD dwExtendedStyle;
+    DWORD style;
+    short x;
+    short y;
+    short cx;
+    short cy;
+    WORD  id;
+} DLGITEMTEMPLATEEX;
+
+typedef struct {
+    WORD  dlgVer;          /* must be 1 */
+    WORD  signature;       /* 0xFFFF marks an extended template */
+    DWORD helpID;
+    DWORD exStyle;
+    DWORD style;
+    WORD  cDlgItems;
+    short x;
+    short y;
+    short cx;
+    short cy;
+} DLGTEMPLATEEX;
 #ifdef __cplusplus
 }
 #endif

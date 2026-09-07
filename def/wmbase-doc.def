@@ -1,4 +1,4 @@
-; wmgr_c-doc.def -- wmgr_c.lib export surface for Windows CE.
+; wmbase-doc.def -- wmbase.lib export surface for Windows CE.
 ;
 ; Copyright (c) 2026 Akari API contributors
 ; SPDX-License-Identifier: MIT
@@ -10,11 +10,8 @@
 ; harvest; docs/inventory.md records every page).  No
 ; shared-source/device-dump/VS/PB-derived name is used.
 ; Ordinals are not published; entries are name-only.
-; LIBRARY tag = documented Link Library row (wmgr_c.lib); the on-device module name is
+; LIBRARY tag = documented Link Library row (wmbase.lib); the on-device module name is
 ; not published by the CE documentation.
-LIBRARY wmgr_c.dll
+LIBRARY wmbase.dll
 EXPORTS
-  EnableWindow
-  GetSysColor
-  IsWindowEnabled
-  SendInput
+  GetSystemMetrics

@@ -153,6 +153,24 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M28 (landed):** window-control function layer -- Menus / Dialog
+  Boxes / Buttons / Clipboards / Printing / Resources / System
+  Information functions+structures, the Notify Reference books and the
+  owner-draw/icon support structures (DRAWITEMSTRUCT / COMBOBOXINFO /
+  MEASUREITEMSTRUCT / DELETEITEMSTRUCT / ICONINFO) (112 CE 5.0 leaves,
+  rows 827 -> 939; CE 6.0 twins used for whitespace-preserved
+  signatures).  New headers `include/notify.h` (Notify.h rows) and
+  `include/shellapi.h` (Shellapi.h row); winbase.h gains the
+  resource-module functions + power-status structs/functions, wingdi.h
+  the printing book + DOCINFO/ABORTPROC + extended dialog templates,
+  windows.h the Header-Windows.h items (MessageBox, CheckDlgButton,
+  IsDlgButtonChecked, DRAWITEMSTRUCT); HRSRC added to windef.h.  New
+  component defs clipbd/dlgmgr/drawmbar/icon/loadimg/menu/mgprint/
+  msgbeep/msgbox/wmbase; coredll 335 -> 353, winmgr 17 -> 18, wmgr_c
+  3 -> 4, kbdui 5 -> 6; 21 -> 31 def files, all armce-verified.
+  GWES sub-book manifests now regenerate from the official TOC
+  (`tools/ce-gwes-manifest.py`, 32 manifests; CE 5.0 archive located by
+  title search, no fixed nesting assumption).
 * **M27 (landed):** GDI Reference bulk -- GDI Functions + GDI
   Structures (161 CE 5.0 leaves, rows 666 -> 827): new
   `include/wingdi.h` (129 GDI functions + the bitmap/color/palette/

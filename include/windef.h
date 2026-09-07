@@ -123,6 +123,9 @@ typedef HANDLE          HINSTANCE;
 typedef HANDLE          HMODULE;
 typedef HANDLE          HLOCAL;
 typedef HANDLE          HGLOBAL;
+typedef HANDLE          HRSRC;     /* resource handle (FindResource aa453069 /
+                                    * SizeofResource ms940346: Header Winbase.h;
+                                    * desktop Win32 also types HRSRC as HANDLE) */
 typedef HANDLE         *LPHANDLE;  /* HANDLE pointer (DuplicateHandle ms885208) */
 
 typedef UINT_PTR (WINAPI *FARPROC)(void);

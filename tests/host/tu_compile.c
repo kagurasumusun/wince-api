@@ -539,6 +539,61 @@ static const void *const api_symbols[] = {
     (const void *) &UpdateWindow,
     (const void *) &ValidateRect,
     (const void *) &ValidateRgn,
+    /* M28: window-control function layer (dialog/menu/clipboard/button
+     * + resource/icon + printing + system-info + notification).  Base
+     * names below expand through their generic-text macros where the
+     * CE pages are Unicode-only (see the headers). */
+    (const void *) &AppendMenu, (const void *) &CheckMenuItem,
+    (const void *) &CheckMenuRadioItem, (const void *) &CreateMenu,
+    (const void *) &CreatePopupMenu, (const void *) &DeleteMenu,
+    (const void *) &DestroyMenu, (const void *) &DrawMenuBar,
+    (const void *) &EnableMenuItem, (const void *) &GetMenuItemInfo,
+    (const void *) &GetSubMenu, (const void *) &GetSystemMenu,
+    (const void *) &InsertMenu, (const void *) &LoadMenu,
+    (const void *) &RemoveMenu, (const void *) &SetMenuItemInfo,
+    (const void *) &TrackPopupMenu, (const void *) &TrackPopupMenuEx,
+    (const void *) &CreateDialog, (const void *) &CreateDialogIndirect,
+    (const void *) &CreateDialogIndirectParam, (const void *) &CreateDialogParam,
+    (const void *) &DefDlgProc, (const void *) &DialogBox,
+    (const void *) &DialogBoxIndirect, (const void *) &DialogBoxIndirectParam,
+    (const void *) &DialogBoxParam, (const void *) &EndDialog,
+    (const void *) &GetDialogBaseUnits, (const void *) &GetDlgCtrlID,
+    (const void *) &GetDlgItem, (const void *) &GetDlgItemInt,
+    (const void *) &GetDlgItemText, (const void *) &GetNextDlgGroupItem,
+    (const void *) &GetNextDlgTabItem, (const void *) &IsDialogMessage,
+    (const void *) &MapDialogRect, (const void *) &SendDlgItemMessage,
+    (const void *) &SetDlgItemInt, (const void *) &SetDlgItemText,
+    (const void *) &MessageBox, (const void *) &MessageBeep,
+    (const void *) &CheckDlgButton, (const void *) &IsDlgButtonChecked,
+    (const void *) &CheckRadioButton,
+    (const void *) &CloseClipboard, (const void *) &CountClipboardFormats,
+    (const void *) &EmptyClipboard, (const void *) &EnumClipboardFormats,
+    (const void *) &GetClipboardData, (const void *) &GetClipboardDataAlloc,
+    (const void *) &GetClipboardFormatName, (const void *) &GetClipboardOwner,
+    (const void *) &GetOpenClipboardWindow,
+    (const void *) &GetPriorityClipboardFormat,
+    (const void *) &IsClipboardFormatAvailable, (const void *) &OpenClipboard,
+    (const void *) &RegisterClipboardFormat, (const void *) &SetClipboardData,
+    (const void *) &CreateIconIndirect, (const void *) &DestroyIcon,
+    (const void *) &DrawIconEx, (const void *) &GetIconInfo,
+    (const void *) &LoadIcon, (const void *) &LoadImage,
+    (const void *) &FindResource, (const void *) &LoadResource,
+    (const void *) &LockResource, (const void *) &SizeofResource,
+    (const void *) &ExtractIconEx,
+    (const void *) &AbortDoc, (const void *) &EndDoc, (const void *) &EndPage,
+    (const void *) &SetAbortProc, (const void *) &StartDoc,
+    (const void *) &StartPage,
+    (const void *) &EnableHardwareKeyboard, (const void *) &GetSysColor,
+    (const void *) &GetSystemMetrics, (const void *) &SystemParametersInfo,
+    (const void *) &SetSysColors, (const void *) &GetSystemPowerStatusEx,
+    (const void *) &GetSystemPowerStatusEx2,
+    (const void *) &CeClearUserNotification,
+    (const void *) &CeGetUserNotification,
+    (const void *) &CeGetUserNotificationHandles,
+    (const void *) &CeGetUserNotificationPreferences,
+    (const void *) &CeHandleAppNotifications,
+    (const void *) &CeRunAppAtEvent, (const void *) &CeRunAppAtTime,
+    (const void *) &CeSetUserNotification, (const void *) &CeSetUserNotificationEx,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -1843,6 +1898,145 @@ static int m27_shaped_usage(void)
     return 0;
 }
 
+/* M28: window-control function layer -- exercise every declaration with
+ * typed null arguments and verify the documented CE structure layouts.
+ * Pointer-bearing structures are checked under the 32-bit pointer guard
+ * (CE is always 32-bit; the CE toolchain matrix verifies the model). */
+static int m28_shaped_usage(void)
+{
+    /* Menus */
+    (void) AppendMenu((HMENU)0, (UINT)0, (UINT)0, (LPCTSTR)0);
+    (void) CheckMenuItem((HMENU)0, (UINT)0, (UINT)0);
+    (void) CheckMenuRadioItem((HMENU)0, (UINT)0, (UINT)0, (UINT)0, (UINT)0);
+    (void) CreateMenu();
+    (void) CreatePopupMenu();
+    (void) DeleteMenu((HMENU)0, (UINT)0, (UINT)0);
+    (void) DestroyMenu((HMENU)0);
+    (void) DrawMenuBar((HWND)0);
+    (void) EnableMenuItem((HMENU)0, (UINT)0, (UINT)0);
+    (void) GetMenuItemInfo((HMENU)0, (UINT)0, (BOOL)0, (LPMENUITEMINFO)0);
+    (void) GetSubMenu((HMENU)0, (int)0);
+    (void) GetSystemMenu((HWND)0, (BOOL)0);
+    (void) InsertMenu((HMENU)0, (UINT)0, (UINT)0, (UINT)0, (LPCTSTR)0);
+    (void) LoadMenu((HINSTANCE)0, (LPCTSTR)0);
+    (void) RemoveMenu((HMENU)0, (UINT)0, (UINT)0);
+    (void) SetMenuItemInfo((HMENU)0, (UINT)0, (BOOL)0, (LPCMENUITEMINFO)0);
+    (void) TrackPopupMenu((HMENU)0, (UINT)0, (int)0, (int)0, (int)0,
+                          (HWND)0, (const RECT*)0);
+    (void) TrackPopupMenuEx((HMENU)0, (UINT)0, (int)0, (int)0, (HWND)0,
+                            (LPTPMPARAMS)0);
+    /* Dialog boxes */
+    (void) CreateDialog((HINSTANCE)0, (LPCTSTR)0, (HWND)0, (DLGPROC)0);
+    (void) CreateDialogIndirect((HINSTANCE)0, (LPCDLGTEMPLATE)0, (HWND)0,
+                                (DLGPROC)0);
+    (void) CreateDialogIndirectParam((HINSTANCE)0, (LPCDLGTEMPLATE)0, (HWND)0,
+                                     (DLGPROC)0, (LPARAM)0);
+    (void) CreateDialogParam((HINSTANCE)0, (LPCTSTR)0, (HWND)0, (DLGPROC)0,
+                             (LPARAM)0);
+    (void) DefDlgProc((HWND)0, (UINT)0, (WPARAM)0, (LPARAM)0);
+    (void) DialogBox((HINSTANCE)0, (LPCTSTR)0, (HWND)0, (DLGPROC)0);
+    (void) DialogBoxIndirect((HINSTANCE)0, (LPDLGTEMPLATE)0, (HWND)0,
+                             (DLGPROC)0);
+    (void) DialogBoxIndirectParam((HINSTANCE)0, (LPCDLGTEMPLATE)0, (HWND)0,
+                                  (DLGPROC)0, (LPARAM)0);
+    (void) DialogBoxParam((HINSTANCE)0, (LPCTSTR)0, (HWND)0, (DLGPROC)0,
+                          (LPARAM)0);
+    (void) EndDialog((HWND)0, (int)0);
+    (void) GetDialogBaseUnits();
+    (void) GetDlgCtrlID((HWND)0);
+    (void) GetDlgItem((HWND)0, (int)0);
+    (void) GetDlgItemInt((HWND)0, (int)0, (BOOL*)0, (BOOL)0);
+    (void) GetDlgItemText((HWND)0, (int)0, (LPTSTR)0, (int)0);
+    (void) GetNextDlgGroupItem((HWND)0, (HWND)0, (BOOL)0);
+    (void) GetNextDlgTabItem((HWND)0, (HWND)0, (BOOL)0);
+    (void) IsDialogMessage((HWND)0, (LPMSG)0);
+    (void) MapDialogRect((HWND)0, (LPRECT)0);
+    (void) SendDlgItemMessage((HWND)0, (int)0, (UINT)0, (WPARAM)0, (LPARAM)0);
+    (void) SetDlgItemInt((HWND)0, (int)0, (UINT)0, (BOOL)0);
+    (void) SetDlgItemText((HWND)0, (int)0, (LPCTSTR)0);
+    (void) MessageBox((HWND)0, (LPCTSTR)0, (LPCTSTR)0, (UINT)0);
+    (void) MessageBeep((UINT)0);
+    (void) CheckDlgButton((HWND)0, (int)0, (UINT)0);
+    (void) IsDlgButtonChecked((HWND)0, (int)0);
+    (void) CheckRadioButton((HWND)0, (int)0, (int)0, (int)0);
+    /* Clipboard */
+    (void) CloseClipboard();
+    (void) CountClipboardFormats();
+    (void) EmptyClipboard();
+    (void) EnumClipboardFormats((UINT)0);
+    (void) GetClipboardData((UINT)0);
+    (void) GetClipboardDataAlloc((UINT)0);
+    (void) GetClipboardFormatName((UINT)0, (LPTSTR)0, (int)0);
+    (void) GetClipboardOwner();
+    (void) GetOpenClipboardWindow();
+    (void) GetPriorityClipboardFormat((UINT*)0, (int)0);
+    (void) IsClipboardFormatAvailable((UINT)0);
+    (void) OpenClipboard((HWND)0);
+    (void) RegisterClipboardFormat((LPCWSTR)0);
+    (void) SetClipboardData((UINT)0, (HANDLE)0);
+    /* Resources: icons/images/modules */
+    (void) CreateIconIndirect((PICONINFO)0);
+    (void) DestroyIcon((HICON)0);
+    (void) DrawIconEx((HDC)0, (int)0, (int)0, (HICON)0, (int)0, (int)0,
+                      (UINT)0, (HBRUSH)0, (UINT)0);
+    (void) GetIconInfo((HICON)0, (PICONINFO)0);
+    (void) LoadIcon((HINSTANCE)0, (LPCTSTR)0);
+    (void) LoadImage((HINSTANCE)0, (LPCTSTR)0, (UINT)0, (int)0, (int)0,
+                     (UINT)0);
+    (void) FindResource((HMODULE)0, (LPCWSTR)0, (LPCWSTR)0);
+    (void) LoadResource((HMODULE)0, (HRSRC)0);
+    (void) LockResource((HGLOBAL)0);
+    (void) SizeofResource((HMODULE)0, (HRSRC)0);
+    (void) ExtractIconEx((LPCTSTR)0, (int)0, (HICON*)0, (HICON*)0, (UINT)0);
+    /* Printing */
+    (void) AbortDoc((HDC)0);
+    (void) EndDoc((HDC)0);
+    (void) EndPage((HDC)0);
+    (void) SetAbortProc((HDC)0, (ABORTPROC)0);
+    (void) StartDoc((HDC)0, (CONST DOCINFO*)0);
+    (void) StartPage((HDC)0);
+    /* System information */
+    (void) EnableHardwareKeyboard((BOOL)0);
+    (void) GetSysColor((int)0);
+    (void) GetSystemMetrics((int)0);
+    (void) SystemParametersInfo((UINT)0, (UINT)0, (PVOID)0, (UINT)0);
+    (void) SetSysColors((int)0, (CONST INT*)0, (CONST COLORREF*)0);
+    (void) GetSystemPowerStatusEx((PSYSTEM_POWER_STATUS_EX)0, (BOOL)0);
+    (void) GetSystemPowerStatusEx2((PSYSTEM_POWER_STATUS_EX2)0, (DWORD)0,
+                                   (BOOL)0);
+    /* Notifications (notify.h) */
+    (void) CeClearUserNotification((HANDLE)0);
+    (void) CeGetUserNotification((HANDLE)0, (DWORD)0, (LPDWORD)0, (LPBYTE)0);
+    (void) CeGetUserNotificationHandles((HANDLE*)0, (DWORD)0, (LPDWORD)0);
+    (void) CeGetUserNotificationPreferences((HWND)0, (PCE_USER_NOTIFICATION)0);
+    (void) CeHandleAppNotifications((TCHAR*)0);
+    (void) CeRunAppAtEvent((TCHAR*)0, (LONG)0);
+    (void) CeRunAppAtTime((TCHAR*)0, (SYSTEMTIME*)0);
+    (void) CeSetUserNotification((HANDLE)0, (TCHAR*)0, (SYSTEMTIME*)0,
+                                 (PCE_USER_NOTIFICATION)0);
+    (void) CeSetUserNotificationEx((HANDLE)0, (CE_NOTIFICATION_TRIGGER*)0,
+                                   (CE_USER_NOTIFICATION*)0);
+
+    /* Pointer-free layouts (verified on every host). */
+    if (sizeof(DLGITEMTEMPLATE) != 20 || sizeof(DLGTEMPLATE) != 20
+        || sizeof(TPMPARAMS) != 20 || sizeof(MEASUREITEMSTRUCT) != 24
+        || sizeof(DELETEITEMSTRUCT) != 20
+        || sizeof(SYSTEM_POWER_STATUS_EX) != 24
+        || sizeof(SYSTEM_POWER_STATUS_EX2) != 56)
+        return 1;
+#if __SIZEOF_POINTER__ == 4
+    if (sizeof(MENUITEMINFO) != 44
+        || offsetof(MENUITEMINFO, dwTypeData) != 36
+        || sizeof(ICONINFO) != 20 || sizeof(COMBOBOXINFO) != 52
+        || sizeof(DOCINFO) != 20
+        || sizeof(CE_NOTIFICATION_TRIGGER) != 52
+        || sizeof(CE_USER_NOTIFICATION) != 24
+        || sizeof(CE_NOTIFICATION_INFO_HEADER) != 16)
+        return 1;
+#endif
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1889,6 +2083,8 @@ int host_tu_entry(void)
     if (m25_shaped_usage() != 0)
         return 1;
     if (m27_shaped_usage() != 0)
+        return 1;
+    if (m28_shaped_usage() != 0)
         return 1;
     return 0;
 }

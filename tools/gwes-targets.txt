@@ -1,0 +1,36 @@
+# GWES Reference sub-book targets for manifest regeneration.
+# Each line: TOC title path below Product Documentation (full chain from
+# the CE5 product-doc root) TAB explicit manifest slug.
+# Paths are suffix-matched against each leaf's ancestor titles.
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Buttons Reference/Buttons Functions	buttons-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Buttons Reference/Buttons Messages	buttons-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Clipboards Reference/Clipboards Functions	clipboard-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Clipboards Reference/Clipboards Messages	clipboard-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Combo Boxes Reference/Combo Boxes Messages	combo-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Combo Boxes Reference/Combo Boxes Structures	combo-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Dialog Boxes Reference/Dialog Boxes Functions	dialog-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Dialog Boxes Reference/Dialog Boxes Messages	dialog-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Dialog Boxes Reference/Dialog Boxes Structures	dialog-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Edit Boxes Reference/Edit Boxes Messages	edit-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Image Lists Reference/Image List Functions	imagelist-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Image Lists Reference/Image List Macros	imagelist-macros
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Image Lists Reference/Image List Structures	imagelist-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/List Boxes Reference/List Boxes Messages	listbox-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/List Boxes Reference/List Boxes Structures	listbox-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Menus Reference/Menus Functions	menus-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Menus Reference/Menus Messages	menus-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Menus Reference/Menus Structures	menus-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window Control Reference/Static Controls Reference/Static Controls Messages	static-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Notify Reference/Notify Functions	notify-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Notify Reference/Notify Structures	notify-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Printing Reference/Printing Functions	printing-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Printing Reference/Printing Structures	printing-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Resources Reference/Resources Functions	resources-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Resources Reference/Resources Macros	resources-macros
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/System Information Reference/System Information Functions	sysinfo-functions
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/System Information Reference/System Information Structures	sysinfo-structures
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window and Control Styles/Control Styles	control-styles
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Window and Control Styles/Window and Message Box Styles	window-styles
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/GDI Reference/GDI Messages	gdi-messages
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/GDI Reference/Raster Operation Codes	rop-codes
+Windows CE Features/Shell and User Interface/Graphics, Windowing and Events/GWES Reference/Interprocess Communication Reference/Interprocess Communication Messages	ipc-messages

@@ -1,0 +1,14 @@
+ms928586	CloseClipboard
+ms908153	CountClipboardFormats
+aa453019	EmptyClipboard
+aa453047	EnumClipboardFormats
+ms929215	GetClipboardData
+ms929216	GetClipboardDataAlloc
+ms929217	GetClipboardFormatName
+ms929218	GetClipboardOwner
+aa453149	GetOpenClipboardWindow
+aa453154	GetPriorityClipboardFormat
+ms909863	IsClipboardFormatAvailable
+ms911905	OpenClipboard
+ms913094	RegisterClipboardFormat
+ms940015	SetClipboardData

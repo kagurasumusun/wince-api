@@ -2290,6 +2290,78 @@ DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
 BOOL InflateRect(LPRECT lprc, int dx, int dy);
 /* aa453648 "SetRect" */
 BOOL SetRect(LPRECT lprc, int xLeft, int yTop, int xRight, int yBottom);
+
+/* ------------------------------------------------------------------ */
+/* M28: Resources Reference (Header Winbase.h) and System Information  */
+/* power-status items (Header Winbase.h).                              */
+/* ------------------------------------------------------------------ */
+
+/* ms940384 "SYSTEM_POWER_STATUS_EX": power status returned by
+ * GetSystemPowerStatusEx.  CE 1.0+; Winbase.h. */
+typedef struct _SYSTEM_POWER_STATUS_EX {
+    BYTE  ACLineStatus;              /* AC_LINE_* */
+    BYTE  BatteryFlag;               /* BATTERY_FLAG_* */
+    BYTE  BatteryLifePercent;        /* 0-100 or unknown */
+    BYTE  Reserved1;
+    DWORD BatteryLifeTime;           /* seconds remaining */
+    DWORD BatteryFullLifeTime;       /* seconds at full charge */
+    BYTE  Reserved2;
+    BYTE  BackupBatteryFlag;
+    BYTE  BackupBatteryLifePercent;
+    BYTE  Reserved3;
+    DWORD BackupBatteryLifeTime;
+    DWORD BackupBatteryFullLifeTime;
+} SYSTEM_POWER_STATUS_EX, *PSYSTEM_POWER_STATUS_EX, *LPSYSTEM_POWER_STATUS_EX;
+
+/* ms940385 "SYSTEM_POWER_STATUS_EX2": extended status used by
+ * GetSystemPowerStatusEx2 (the official page's member list ends with
+ * BatteryChemistry plus an open-ended comment; only the members the
+ * page lists are declared).  CE 5.0+; Winbase.h. */
+typedef struct _SYSTEM_POWER_STATUS_EX2 {
+    BYTE  ACLineStatus;
+    BYTE  BatteryFlag;
+    BYTE  BatteryLifePercent;
+    BYTE  Reserved1;
+    DWORD BatteryLifeTime;
+    DWORD BatteryFullLifeTime;
+    BYTE  Reserved2;
+    BYTE  BackupBatteryFlag;
+    BYTE  BackupBatteryLifePercent;
+    BYTE  Reserved3;
+    DWORD BackupBatteryLifeTime;
+    DWORD BackupBatteryFullLifeTime;
+    DWORD BatteryVoltage;
+    DWORD BatteryCurrent;
+    DWORD BatteryAverageCurrent;
+    DWORD BatteryAverageInterval;
+    DWORD BatterymAHourConsumed;
+    DWORD BatteryTemperature;
+    DWORD BackupBatteryVoltage;
+    BYTE  BatteryChemistry;
+} SYSTEM_POWER_STATUS_EX2, *PSYSTEM_POWER_STATUS_EX2,
+    *LPSYSTEM_POWER_STATUS_EX2;
+
+/* aa453172 "GetSystemPowerStatusEx" (CE 2.12+), aa453173
+ * "GetSystemPowerStatusEx2" (CE 2.12+). */
+BOOL   GetSystemPowerStatusEx(PSYSTEM_POWER_STATUS_EX pstatus,
+                              BOOL fUpdate);
+DWORD  GetSystemPowerStatusEx2(PSYSTEM_POWER_STATUS_EX2
+                                   pSystemPowerStatusEx2,
+                               DWORD dwLen, BOOL fUpdate);
+
+/* ms911826 "MessageBeep": plays a sound for uType.  CE 1.0+; Header
+ * Winbase.h; Link Library Msgbeep.lib (def/msgbeep-doc.def). */
+BOOL MessageBeep(UINT uType);
+
+/* Resources Reference - module/image resource access (CE 1.0+; Header
+ * Winbase.h; Link Library rows "Coredll.lib, Nk.lib": the Coredll.lib
+ * membership feeds def/coredll-doc.def; Nk.lib is kernel scope and is
+ * kept out of import defs, see docs/inventory.md). */
+HRSRC  FindResourceW(HMODULE hModule, LPCWSTR lpName, LPCWSTR lpType);
+#define FindResource FindResourceW
+HGLOBAL LoadResource(HMODULE hModule, HRSRC hResInfo);  /* aa453416 */
+LPVOID  LockResource(HGLOBAL hResData);                  /* aa453417 */
+DWORD   SizeofResource(HMODULE hModule, HRSRC hResInfo); /* ms940346 */
 #ifdef __cplusplus
 }
 #endif

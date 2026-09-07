@@ -1151,6 +1151,215 @@ is declared in winuser.h next to BeginPaint/EndPaint.  VIDEOPARAMETERS
 
 %s
 
+### M28: Window-control function layer (Menus / Dialog Boxes / Buttons / Clipboards / Printing / Resources / System Information / Notify + their Structures)
+
+Landing as one large unit: the Dialog Boxes, Menus, Clipboards, Buttons, Printing, Resources and System-Information **Functions** and **Structures** books plus the Notify Reference books and the owner-draw/icon support structures (DRAWITEMSTRUCT / COMBOBOXINFO / MEASUREITEMSTRUCT / DELETEITEMSTRUCT / ICONINFO).  Regenerated GWES sub-book manifests (tools/ce-gwes-manifest.py + tools/gwes-targets.txt) all cross-check against tools/catalogs/books-windows-ce-50.tsv; build/rows.json grows 827 -> **939** rows (112 new leaf pages fetched: CE 5.0 + CE 6.0 twin, (v=msdn.10) + (v=winembedded.60)).
+
+**Prototype recovery.**  As in M27 the migrated CE 5.0 pages serve `<pre>` prototypes with inter-token whitespace removed, so function signatures were recovered from the official CE 6.0 twin pages (identical API; ids recorded in the per-book manifests and headers) and cross-checked against the CE 5.0 body text.  Structure bodies (MENUITEMINFO, TPMPARAMS, DLG*, DOCINFO, SYSTEM_POWER_STATUS_EX(_2), the three CE_USER_NOTIFICATION/CE_NOTIFICATION_* and the owner-draw structs) are transcribed from the CE 5.0 structure pages, which print full `typedef struct` bodies.  No signature or member was invented; page-only facts are annotated inline.
+
+**Header homes.**  Rows naming Winuser.h -> winuser.h; Winbase.h rows (FindResource/LoadResource/LockResource/SizeofResource, MessageBeep, GetSystemPowerStatusEx/Ex2 + both SYSTEM_POWER_STATUS_EX structs) -> winbase.h; Wingdi.h rows (printing book + DOCINFO + ABORTPROC, and DLGTEMPLATEEX/DLGITEMTEMPLATEEX whose pages print Header Wingdi.h) -> wingdi.h; the Header-Windows.h items (MessageBox, CheckDlgButton, IsDlgButtonChecked, DRAWITEMSTRUCT) stay in windows.h; SetSysColors is declared in wingdi.h because its prototype takes CONST COLORREF* and COLORREF is a GDI type (page row prints Header Winuser.h; deviation recorded here); Notify.h rows open a new **include/notify.h**; the Shellapi.h row (ExtractIconEx) opens **include/shellapi.h**; both are included by windows.h.  HRSRC (resource handle) was added to windef.h.
+
+Export-surface effect: new def files clipbd (14), dlgmgr (18), drawmbar (1), icon (5), loadimg (1), menu (17), mgprint (6), msgbeep (1), msgbox (1 MessageBoxW), wmbase (1); coredll 335 -> **353** (notify x9, power x2, resource-module x4, SystemParametersInfoW, CheckDlgButton/IsDlgButtonChecked); winmgr -> 18 (SetSysColors), wmgr_c -> 4 (GetSysColor), kbdui -> 6 (EnableHardwareKeyboard): 21 -> **31** def files, all llvm-dlltool `-m armce` verified.  Text/Unicode-only functions are declared as W exports + generic macros per the repo rule and map in gen-doc-def.py.
+
+
+#### Menus Functions (18 leaves; Header Winuser.h; Link Library rows Menu.lib for all but the text/creator pages, which publish no .lib row)
+
+```
+  aa452862  AppendMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  ms928575  CheckMenuItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms928576  CheckMenuRadioItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms908177  CreateMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms908182  CreatePopupMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa452932  DeleteMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa452940  DestroyMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa452975  DrawMenuBar  OS: Windows CE 2.0 and later.  Header: Winuser.h.  Lib: Drawmbar.lib. Menu.lib.
+  aa453034  EnableMenuItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453134  GetMenuItemInfo  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453166  GetSubMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453169  GetSystemMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms909853  InsertMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453415  LoadMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms939775  RemoveMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  ms940027  SetMenuItemInfo  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453773  TrackPopupMenu  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+  aa453774  TrackPopupMenuEx  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Menu.lib.
+```
+
+#### Menus Structures (2)
+
+```
+  ms911822  MENUITEMINFO  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa453766  TPMPARAMS  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+```
+
+#### Dialog Boxes Functions (27; Header Winuser.h except MessageBox/CheckDlgButton/IsDlgButtonChecked = Windows.h and MessageBeep = Winbase.h; Link Library rows Dlgmgr.lib / Msgbox.lib / Msgbeep.lib / Coredll.lib)
+
+```
+  ms928573  CheckDlgButton  OS: Windows CE .NET 4.0 and later.  Header: Windows.h.  Lib: Coredll.lib.
+  ms908169  CreateDialog  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  ms908170  CreateDialogIndirect  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms908171  CreateDialogIndirectParam  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms908172  CreateDialogParam  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  ms908209  DefDlgProc  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  aa452947  DialogBox  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452948  DialogBoxIndirect  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452949  DialogBoxIndirectParam  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  aa452950  DialogBoxParam  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452951  DialogProc  OS: Windows CE 1.0 and later.  Header: Developer implemented.  Lib: Developer implemented.
+  aa453038  EndDialog  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms929231  GetDialogBaseUnits  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms929233  GetDlgCtrlID  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms929234  GetDlgItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms929235  GetDlgItemInt  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms929236  GetDlgItemText  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  aa453145  GetNextDlgGroupItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  aa453146  GetNextDlgTabItem  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms909864  IsDialogMessage  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms909866  IsDlgButtonChecked  OS: Windows CE .NET 4.0 and later.  Header: Windows.h.  Lib: Coredll.lib.
+  ms911788  MapDialogRect  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms911826  MessageBeep  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Msgbeep.lib.
+  ms911827  MessageBox  OS: Windows CE 1.0 and later.  Header: Windows.h.  Lib: Msgbox.lib.
+  ms932717  SendDlgItemMessage  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms940020  SetDlgItemInt  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+  ms940021  SetDlgItemText  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+```
+
+#### Dialog Boxes Structures (4)
+
+```
+  aa452958  DLGITEMTEMPLATE  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452959  DLGITEMTEMPLATEEX  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: 
+  aa452960  DLGTEMPLATE  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452961  DLGTEMPLATEEX  OS: Windows CE 2.12 and later.  Header: Winuser.h.  Lib: 
+```
+
+#### Buttons Functions (1)
+
+```
+  ms928577  CheckRadioButton  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Dlgmgr.lib.
+```
+
+#### Clipboards Functions (14; Header Winuser.h; Clipbd.lib)
+
+```
+  ms928586  CloseClipboard  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms908153  CountClipboardFormats  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  aa453019  EmptyClipboard  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  aa453047  EnumClipboardFormats  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms929215  GetClipboardData  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms929216  GetClipboardDataAlloc  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms929217  GetClipboardFormatName  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms929218  GetClipboardOwner  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  aa453149  GetOpenClipboardWindow  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  aa453154  GetPriorityClipboardFormat  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms909863  IsClipboardFormatAvailable  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms911905  OpenClipboard  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms913094  RegisterClipboardFormat  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+  ms940015  SetClipboardData  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Clipbd.lib.
+```
+
+#### Printing Functions (7; Header Wingdi.h; Mgprint.lib)
+
+```
+  aa452835  AbortDoc  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  aa452836  AbortProc  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  aa453039  EndDoc  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  aa453040  EndPage  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  ms939985  SetAbortProc  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  ms940349  StartDoc  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+  ms940350  StartPage  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: Mgprint.lib.
+```
+
+#### Printing Structures (1)
+
+```
+  aa452964  DOCINFO  OS: Windows CE 2.0 and later.  Header: Wingdi.h.  Lib: 
+```
+
+#### Resources Functions (11; Headers Winuser.h / Winbase.h / Shellapi.h per row; libs Icon.lib, Loadimg.lib, Coredll.lib/Nk.lib)
+
+```
+  ms908175  CreateIconIndirect  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Icon.lib.
+  aa452938  DestroyIcon  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Icon.lib.
+  aa452972  DrawIconEx  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Icon.lib.
+  aa453065  ExtractIconEx  OS: Windows CE 1.0 and later.  Header: Shellapi.h.  Lib: 
+  aa453069  FindResource  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Coredll.lib, Nk.lib.
+  ms929247  GetIconInfo  OS: Windows CE 5.0 and later.  Header: Winuser.h.  Lib: Icon.lib.
+  aa453411  LoadIcon  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Icon.lib.
+  aa453413  LoadImage  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Loadimg.lib.
+  aa453416  LoadResource  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Coredll.lib, Nk.lib
+  aa453417  LockResource  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Coredll.lib, Nk.lib
+  ms940346  SizeofResource  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Coredll.lib.
+```
+
+#### Resources Macros (1: MAKEINTRESOURCE)
+
+```
+  aa453542  MAKEINTRESOURCE  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+```
+
+#### System Information Functions (7; Headers Winuser.h / Winbase.h)
+
+```
+  aa453033  EnableHardwareKeyboard  OS: Windows CE 2.0 and later.  Header: Winuser.h.  Lib: Kbdui.lib.
+  aa453167  GetSysColor  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Wmgr_c.lib.
+  aa453170  GetSystemMetrics  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: Wmbase.lib.
+  aa453172  GetSystemPowerStatusEx  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: Coredll.lib.
+  aa453173  GetSystemPowerStatusEx2  OS: Windows CE 2.12 and later.  Header: Winbase.h.  Lib: Coredll.lib.
+  aa453656  SetSysColors  OS: Windows CE 2.0 and later.  Header: Winuser.h.  Lib: Winmgr.lib.
+  ms940383  SystemParametersInfo  OS: Windows CE 2.0 and later.  Header: Winuser.h.  Lib: Coredll.lib.
+```
+
+#### System Information Structures (2)
+
+```
+  ms940384  SYSTEM_POWER_STATUS_EX  OS: Windows CE 1.0 and later.  Header: Winbase.h.  Lib: 
+  ms940385  SYSTEM_POWER_STATUS_EX2  OS: Windows CE 2.12 and later.  Header: Winbase.h.  Lib: 
+```
+
+#### Notify Functions (9; Header Notify.h; Coredll.lib)
+
+```
+  ms908074  CeClearUserNotification  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908076  CeGetUserNotification  OS: Windows CE 2.12 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908077  CeGetUserNotificationHandles  OS: Windows CE 2.12 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908078  CeGetUserNotificationPreferences  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908079  CeHandleAppNotifications  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908102  CeRunAppAtEvent  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908103  CeRunAppAtTime  OS: Windows CE 1.0 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908104  CeSetUserNotification  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: Coredll.lib.
+  ms908105  CeSetUserNotificationEx  OS: Windows CE 2.12 and later.  Header: Notify.h.  Lib: Coredll.lib.
+```
+
+#### Notify Structures (3)
+
+```
+  ms908082  CE_NOTIFICATION_INFO_HEADER  OS: Windows CE 2.12 and later.  Header: Notify.h.  Lib: 
+  ms908083  CE_NOTIFICATION_TRIGGER  OS: Windows CE 2.12 and later.  Header: Notify.h.  Lib: 
+  ms908106  CE_USER_NOTIFICATION  OS: Windows CE 1.01 and later.  Header: Notify.h.  Lib: 
+```
+
+#### Combo Boxes Structures (3)
+
+```
+  ms928818  COMBOBOXINFO  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+  aa452974  DRAWITEMSTRUCT  OS: Windows CE 1.0 and later.  Header: Windows.h.  Lib: 
+  ms911820  MEASUREITEMSTRUCT  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+```
+
+#### List Boxes Structures (1)
+
+```
+  aa452931  DELETEITEMSTRUCT  OS: Windows CE 1.0 and later.  Header: Winuser.h.  Lib: 
+```
+
+#### ICONINFO (support structure for the Resources icon functions; catalog leaf ms929934)
+```
+  ms929934  ICONINFO  OS: Windows CE 1.0 and later.  Header: Commctrl.h.  Lib: 
+```
+
+Notes: MENUITEMINFO/TPMPARAMS/COMBOBOXINFO/MEASUREITEMSTRUCT/DELETEITEMSTRUCT/DRAWITEMSTRUCT/ICONINFO/DOCINFO/CE_NOTIFICATION_TRIGGER/CE_USER_NOTIFICATION/CE_NOTIFICATION_INFO_HEADER layouts come from the structure pages above (see the inline member comments for the CE-specific member sets, e.g. CE MENUITEMINFO has UINT wID and no hbmpItem).  DLGTEMPLATE/DLGITEMTEMPLATE are in winuser.h and the DLGTEMPLATEEX/DLGITEMTEMPLATEEX fixed prefixes (variable-length arrays follow in memory) in wingdi.h per their pages.  The power-status structs declare only the members the official pages list.  DialogProc (aa452951) and AbortProc (aa452836) are documented callbacks, not imports, so they are typedefs (DLGPROC / ABORTPROC), not exports.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

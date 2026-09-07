@@ -14,6 +14,7 @@
 ; not published by the CE documentation.
 LIBRARY kbdui.dll
 EXPORTS
+  EnableHardwareKeyboard
   GetAsyncKeyState
   GetKeyState
   GetKeyboardLayoutNameW
