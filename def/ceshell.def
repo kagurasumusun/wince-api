@@ -1,0 +1,4 @@
+LIBRARY ceshell.dll
+EXPORTS
+    SHGetSpecialFolderPathW
+    SHCreateDirectoryExW

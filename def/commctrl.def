@@ -1,0 +1,4 @@
+LIBRARY commctrl.dll
+EXPORTS
+    InitCommonControlsEx
+    InitCommonControls

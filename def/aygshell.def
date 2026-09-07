@@ -1,0 +1,12 @@
+LIBRARY aygshell.dll
+EXPORTS
+    SipShowIM
+    SipGetInfo
+    SipSetInfo
+    SipRegisterNotification
+    CommandBar_Create
+    CommandBar_Show
+    CommandBar_Destroy
+    CommandBar_AddAdornments
+    CommandBar_InsertMenubar
+    SHFullScreen

@@ -1,0 +1,17 @@
+LIBRARY ws2.dll
+EXPORTS
+    WSAStartup
+    WSACleanup
+    WSAGetLastError
+    socket
+    closesocket
+    bind
+    listen
+    accept
+    connect
+    send
+    recv
+    htons
+    htonl
+    ntohs
+    ntohl
