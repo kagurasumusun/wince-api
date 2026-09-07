@@ -343,6 +343,7 @@ typedef struct tagTEXTMETRIC {
     BYTE tmPitchAndFamily;
     BYTE tmCharSet;
 } TEXTMETRIC;
+typedef TEXTMETRIC *LPTEXTMETRIC;  /* GetTextMetrics ms901139 lptm */
 
 /* ms934025 "OUTLINETEXTMETRICW": outline-font metrics (CE 5.0+;
  * Header Windows.h).  Text pointers are PSTR/char* on the page. */
@@ -774,6 +775,346 @@ typedef CHARSETINFO *LPCHARSETINFO;
  * on the flat CE/Win32 ABI. */
 UINT TranslateCharsetInfo(DWORD *lpSrc, LPCHARSETINFO lpCs,
                           DWORD dwFlags);
+
+/* ------------------------------------------------------------------ */
+/* M36: Fonts-and-text and display-monitor declarations.               */
+/*                                                                     */
+/* Spec basis: the official CE 5.0 Fonts-and-Text GDI pages and the    */
+/* CE .NET 4.0+ MultiMonitor pages of the (v=msdn.10) archive, with    */
+/* their (v=winembedded.60) CE 6.0 twins (page identifiers below).     */
+/* Requirement rows: Header Windows.h (CE 5.0-era) / Wingdi.h (the     */
+/* pages added for CE 5.0/CE 6.0, e.g. ms901124/ee489844, print       */
+/* wingdi.h), Link Library Coredll.lib, unless a declaration notes     */
+/* otherwise.  Windows CE is Unicode-only, so the wide export         */
+/* spellings are declared and the generic names are macro-mapped, per */
+/* the repo Unicode-only rule; functions that take no text use their   */
+/* plain names.  The pages type the DrawText uFormat parameter UNIT   */
+/* (sic) and the LOGFONT/TEXTMETRIC structures exactly as printed      */
+/* below (TEXTMETRIC glyph members are char; NEWTEXTMETRIC uses        */
+/* BCHAR).                                                             */
+/* ------------------------------------------------------------------ */
+
+/* LF_FACESIZE / LF_FULLFACESIZE: typeface-name buffer sizes used by
+ * LOGFONT (ms901140/ee489840) and ENUMLOGFONT (ms901128/ee489900).
+ * The CE pages name the constants only; the values are the fixed
+ * Win32 ABI sizes, recorded per repo policy. */
+#define LF_FACESIZE     32
+#define LF_FULLFACESIZE 64
+
+/* ms901140 "LOGFONT" (ee489840): logical-font definition.  OS
+ * Windows CE 1.0+; Wingdi.h.  The page prints the typeface member as
+ * TCHAR lfFaceName[LF_FACESIZE] (Unicode-only CE) and the glyph/flag
+ * members as BYTE. */
+typedef struct tagLOGFONT {
+    LONG  lfHeight;
+    LONG  lfWidth;
+    LONG  lfEscapement;
+    LONG  lfOrientation;
+    LONG  lfWeight;
+    BYTE  lfItalic;
+    BYTE  lfUnderline;
+    BYTE  lfStrikeOut;
+    BYTE  lfCharSet;
+    BYTE  lfOutPrecision;
+    BYTE  lfClipPrecision;
+    BYTE  lfQuality;
+    BYTE  lfPitchAndFamily;
+    TCHAR lfFaceName[LF_FACESIZE];
+} LOGFONT;
+typedef LOGFONT *LPLOGFONT;  /* EnumFontFamiliesEx ms901124 lpLogfont */
+
+/* ms901128 "ENUMLOGFONT" (ee489900): per-font enumeration record
+ * (embedded LOGFONT + full face name + style).  OS CE 1.0+; Wingdi.h. */
+typedef struct tagENUMLOGFONT {
+    LOGFONT elfLogFont;
+    TCHAR   elfFullName[LF_FULLFACESIZE];
+    TCHAR   elfStyle[LF_FACESIZE];
+} ENUMLOGFONT;
+
+/* ms901141 "NEWTEXTMETRIC" (ee489904): TEXTMETRIC prefix plus the
+ * TrueType extension fields (page prints the full member list).  OS
+ * CE 1.0+; Wingdi.h.  Unlike TEXTMETRIC -- whose page types the four
+ * glyph members tmFirstChar..tmBreakChar as char -- the NEWTEXTMETRIC
+ * page types those members BCHAR (the wide character), per page. */
+typedef struct tagNEWTEXTMETRIC {
+    LONG  tmHeight;
+    LONG  tmAscent;
+    LONG  tmDescent;
+    LONG  tmInternalLeading;
+    LONG  tmExternalLeading;
+    LONG  tmAveCharWidth;
+    LONG  tmMaxCharWidth;
+    LONG  tmWeight;
+    LONG  tmOverhang;
+    LONG  tmDigitizedAspectX;
+    LONG  tmDigitizedAspectY;
+    BCHAR tmFirstChar;
+    BCHAR tmLastChar;
+    BCHAR tmDefaultChar;
+    BCHAR tmBreakChar;
+    BYTE  tmItalic;
+    BYTE  tmUnderlined;
+    BYTE  tmStruckOut;
+    BYTE  tmPitchAndFamily;
+    BYTE  tmCharSet;
+    DWORD ntmFlags;
+    UINT  ntmSizeEM;
+    UINT  ntmCellHeight;
+    UINT  ntmAvgWidth;
+} NEWTEXTMETRIC;
+
+/* ms901108 "ABC" (ee489865): character ABC widths returned by
+ * GetCharABCWidths.  OS CE .NET 4.2+; Windows.h.  The page prints the
+ * alias PABC; LPABC is the GetCharABCWidths ms901130 parameter type. */
+typedef struct _ABC {
+    int  abcA;
+    UINT abcB;
+    int  abcC;
+} ABC, *PABC;
+typedef ABC *LPABC;
+
+/* Font-type constants of the enumeration callbacks (EnumFontFamProc
+ * ms901125 / EnumFontsProc ms901127 FontType tables; also referenced
+ * by the RASTER/DEVICE/TRUETYPE descriptions on the EnumFontFamilies
+ * page).  Fixed Win32 ABI values. */
+#define RASTER_FONTTYPE    1
+#define DEVICE_FONTTYPE    2
+#define TRUETYPE_FONTTYPE  4
+
+/* FONTENUMPROC: callback-pointer type of the font-enumeration
+ * functions.  EnumFontFamilies ms901123 and EnumFonts ms901126 type
+ * their callback parameters FONTENUMPROC.  The CE archive publishes no
+ * separate FONTENUMPROC typedef page; the shape below is that of the
+ * EnumFontFamProc callback page ms901125 that EnumFontFamilies names
+ * as the callback it registers.  EnumFonts registers EnumFontsProc
+ * (ms901127), whose page spells the two font pointers (LOGFONT* and
+ * TEXTMETRIC*) without the const qualifiers. */
+typedef int (CALLBACK *FONTENUMPROC)(const LOGFONT* lpelf,
+                                     const TEXTMETRIC* lpntm,
+                                     DWORD FontType, LPARAM lParam);
+
+/* Formatting, spacing and alignment flag name lists below come from
+ * the uFormat (DrawText ms901121), fuOptions (ExtTextOut ms901129) and
+ * fmode (SetTextAlign ms901143 / GetTextAlign ms901132) value tables;
+ * the CE pages document names and meanings only, so the numeric values
+ * are the fixed Win32 ABI values (recorded per repo policy). */
+
+/* DrawText formatting flags (the DT_TABSTOP description on the page
+ * defines the tab-stop field as bits 8-15 of uFormat). */
+#define DT_TOP            0x0000
+#define DT_LEFT           0x0000
+#define DT_CENTER         0x0001
+#define DT_RIGHT          0x0002
+#define DT_VCENTER        0x0004
+#define DT_BOTTOM         0x0008
+#define DT_WORDBREAK      0x0010
+#define DT_SINGLELINE     0x0020
+#define DT_EXPANDTABS     0x0040
+#define DT_TABSTOP        0x0080
+#define DT_NOCLIP         0x0100
+#define DT_EXTERNALLEADING 0x0200
+#define DT_CALCRECT       0x0400
+#define DT_NOPREFIX       0x0800
+#define DT_INTERNAL       0x1000
+#define DT_END_ELLIPSIS   0x8000
+#define DT_RTLREADING     0x20000
+#define DT_WORD_ELLIPSIS  0x40000
+
+/* ExtTextOut options. */
+#define ETO_OPAQUE        0x0002
+#define ETO_CLIPPED       0x0004
+#define ETO_RTLREADING    0x0080
+
+/* Text-alignment modes (GetTextAlign / SetTextAlign). */
+#define TA_NOUPDATECP     0x0000
+#define TA_UPDATECP       0x0001
+#define TA_LEFT           0x0000
+#define TA_RIGHT          0x0002
+#define TA_CENTER         0x0006
+#define TA_TOP            0x0000
+#define TA_BOTTOM         0x0008
+#define TA_BASELINE       0x0018
+#define TA_RTLREADING     0x0100
+
+/* Fonts-and-text functions (Header Windows.h / Wingdi.h; Coredll.lib). */
+
+/* ms901109 "AddFontResource" (ee489896): int AddFontResource(LPCTSTR).
+ * OS CE 2.0+; Windows.h.  Export AddFontResourceW (CE Unicode-only). */
+int AddFontResourceW(LPCWSTR lpszFilename);
+#define AddFontResource AddFontResourceW
+
+/* ms901120 "CreateFontIndirect" (ee489863): HFONT
+ * CreateFontIndirect(const LOGFONT*).  OS CE 1.0+; Windows.h.  Export
+ * CreateFontIndirectW. */
+HFONT CreateFontIndirectW(const LOGFONT* lplf);
+#define CreateFontIndirect CreateFontIndirectW
+
+/* ms901121 "DrawText" (ee489886): int DrawText(HDC, LPCTSTR, int,
+ * LPRECT, UNIT uFormat).  OS CE 1.0+; Windows.h.  The page prints the
+ * last parameter type "UNIT" (sic); the parameter is UINT, and its
+ * DT_TABSTOP bit-field description (bits 8-15) matches UINT.  Export
+ * DrawTextW. */
+int DrawTextW(HDC hDC, LPCWSTR lpString, int nCount, LPRECT lpRect,
+              UINT uFormat);
+#define DrawText DrawTextW
+
+/* ms901123 "EnumFontFamilies" (ee489908): enumerates type families
+ * through the FONTENUMPROC callback.  OS CE 1.0+; Windows.h.  Export
+ * EnumFontFamiliesW. */
+int EnumFontFamiliesW(HDC hdc, LPCWSTR lpszFamily,
+                      FONTENUMPROC lpEnumFontFamProc, LPARAM lParam);
+#define EnumFontFamilies EnumFontFamiliesW
+
+/* ms901124 "EnumFontFamiliesEx" (ee489844): as EnumFontFamilies with
+ * an explicit LOGFONT filter.  OS CE 5.0+; Wingdi.h.  dwFlags is "not
+ * used; must be 0".  Export EnumFontFamiliesExW. */
+int EnumFontFamiliesExW(HDC hdc, LPLOGFONT lpLogfont,
+                        FONTENUMPROC lpEnumFontFamExProc, LPARAM lParam,
+                        DWORD dwFlags);
+#define EnumFontFamiliesEx EnumFontFamiliesExW
+
+/* ms901126 "EnumFonts" (ee489905): enumerates typefaces through the
+ * FONTENUMPROC callback.  OS CE 1.0+; Windows.h.  Export EnumFontsW. */
+int EnumFontsW(HDC hdc, LPCWSTR lpFaceName, FONTENUMPROC lpFontFunc,
+               LPARAM lParam);
+#define EnumFonts EnumFontsW
+
+/* ms901129 "ExtTextOut" (ee489846): BOOL ExtTextOut(HDC, int, int,
+ * UINT, const RECT*, LPCTSTR, UINT, const int* lpDx).  OS CE 1.0+;
+ * Windows.h.  Export ExtTextOutW. */
+BOOL ExtTextOutW(HDC hdc, int X, int Y, UINT fuOptions,
+                 const RECT* lprc, LPCWSTR lpString, UINT cbCount,
+                 const int* lpDx);
+#define ExtTextOut ExtTextOutW
+
+/* ms901130 "GetCharABCWidths" (ee489910): BOOL GetCharABCWidths(HDC,
+ * UINT, UINT, LPABC).  OS CE .NET 4.2+; Windows.h.  Export
+ * GetCharABCWidthsW. */
+BOOL GetCharABCWidthsW(HDC hdc, UINT uFirstChar, UINT uLastChar,
+                       LPABC lpabc);
+#define GetCharABCWidths GetCharABCWidthsW
+
+/* ms901131 "GetCharWidth32" (ee489848): WINGDIAPI BOOL WINAPI
+ * GetCharWidth32(HDC, UINT, UINT, LPINT); CE ABI is __cdecl.  OS
+ * CE .NET 4.0+; Windows.h.  Export GetCharWidth32W. */
+BOOL GetCharWidth32W(HDC hdc, UINT iFirstChar, UINT iLastChar,
+                     LPINT lpBuffer);
+#define GetCharWidth32 GetCharWidth32W
+
+/* aa520325 "GetFontData" (ee489901): DWORD GetFontData(HDC, DWORD
+ * dwTable, DWORD dwOffset, LPVOID, DWORD).  OS CE 5.0+; Windows.h. */
+DWORD GetFontData(HDC hdc, DWORD dwTable, DWORD dwOffset,
+                  LPVOID lpvBuffer, DWORD cbData);
+
+/* ms901132 "GetTextAlign" (ee489856): WINGDIAPI UINT WINAPI
+ * GetTextAlign(HDC); CE ABI is __cdecl.  OS CE .NET 4.0+; Windows.h. */
+UINT GetTextAlign(HDC hdc);
+
+/* ms901133 "GetTextCharacterExtra" (ee489907): int
+ * GetTextCharacterExtra(HDC).  OS CE 5.0+; Wingdi.h. */
+int GetTextCharacterExtra(HDC hdc);
+
+/* ms901134 "GetTextColor" (ee489912): COLORREF GetTextColor(HDC).
+ * OS CE 1.0+; Windows.h. */
+COLORREF GetTextColor(HDC hdc);
+
+/* ms901135 "GetTextExtentExPoint" (ee489883): BOOL
+ * GetTextExtentExPoint(HDC, LPCTSTR, int, int, LPINT lpnFit,
+ * LPINT alpDx, LPSIZE).  OS CE 1.0+; Windows.h.  Export
+ * GetTextExtentExPointW. */
+BOOL GetTextExtentExPointW(HDC hdc, LPCWSTR lpszStr, int cchString,
+                           int nMaxExtent, LPINT lpnFit, LPINT alpDx,
+                           LPSIZE lpSize);
+#define GetTextExtentExPoint GetTextExtentExPointW
+
+/* ms901136 "GetTextExtentPoint" (ee489897): BOOL GetTextExtentPoint(
+ * HDC, LPCTSTR, int cbString, LPSIZE).  OS CE 2.0+; Windows.h.
+ * Export GetTextExtentPointW. */
+BOOL GetTextExtentPointW(HDC hdc, LPCWSTR lpString, int cbString,
+                         LPSIZE lpSize);
+#define GetTextExtentPoint GetTextExtentPointW
+
+/* ms901137 "GetTextExtentPoint32" (ee489838): BOOL
+ * GetTextExtentPoint32(HDC, LPCTSTR, int, LPSIZE).  OS CE 2.0+;
+ * Windows.h.  Export GetTextExtentPoint32W. */
+BOOL GetTextExtentPoint32W(HDC hdc, LPCWSTR lpString, int cbString,
+                           LPSIZE lpSize);
+#define GetTextExtentPoint32 GetTextExtentPoint32W
+
+/* ms901138 "GetTextFace" (ee489915): int GetTextFace(HDC, int nCount,
+ * LPTSTR).  OS CE 1.0+; Windows.h.  Export GetTextFaceW. */
+int GetTextFaceW(HDC hdc, int nCount, LPWSTR lpFaceName);
+#define GetTextFace GetTextFaceW
+
+/* ms901139 "GetTextMetrics" (ee489911): BOOL GetTextMetrics(HDC,
+ * LPTEXTMETRIC).  OS CE 1.0+; Windows.h.  Export GetTextMetricsW. */
+BOOL GetTextMetricsW(HDC hdc, LPTEXTMETRIC lptm);
+#define GetTextMetrics GetTextMetricsW
+
+/* ms901142 "RemoveFontResource" (ee489851): BOOL
+ * RemoveFontResource(LPCTSTR).  OS CE 1.0+; Windows.h.  Export
+ * RemoveFontResourceW. */
+BOOL RemoveFontResourceW(LPCWSTR lpFileName);
+#define RemoveFontResource RemoveFontResourceW
+
+/* ms901143 "SetTextAlign" (ee489853): WINGDIAPI UINT WINAPI
+ * SetTextAlign(HDC, UINT fmode); CE ABI is __cdecl.  OS CE .NET 4.0+;
+ * Windows.h. */
+UINT SetTextAlign(HDC hdc, UINT fmode);
+
+/* ms901144 "SetTextCharacterExtra" (ee489860): int
+ * SetTextCharacterExtra(HDC, int nCharExtra).  OS CE 5.0+; Wingdi.h. */
+int SetTextCharacterExtra(HDC hdc, int nCharExtra);
+
+/* ms901145 "SetTextColor" (ee489887): COLORREF SetTextColor(HDC,
+ * COLORREF).  OS CE .NET 4.0+; Windows.h. */
+COLORREF SetTextColor(HDC hdc, COLORREF crColor);
+
+/* ------------------------------------------------------------------ */
+/* M36: MultiMonitor functions and types (CE .NET 4.0+ pages; Header   */
+/* Windows.h, Link Library Coredll.lib).  The page set is shared with  */
+/* the desktop MultiMonitor API surface, but the declarations below    */
+/* come from the CE pages: EnumDisplayMonitors aa451688, GetMonitorInfo */
+/* aa451738, MonitorEnumProc ms932091, MonitorFromPoint ms932198,       */
+/* MonitorFromRect ms932208, MonitorFromWindow ms932212, MONITORINFO    */
+/* ms932213 (CE 6.0 twins ee490277 / ee491682 / ee490724 / ee491624 /   */
+/* ee491307 / ee490720 / ee491429).  The pages document the screen      */
+/* handles and virtual-screen coordinates.                              */
+/* ------------------------------------------------------------------ */
+
+/* ms932213 "MONITORINFO": screen information returned by
+ * GetMonitorInfo.  rcMonitor / rcWork are virtual-screen RECTs.
+ * dwFlags: 0 = not the primary screen; MONITORINFOF_PRIMARY (fixed
+ * Win32 ABI value 1) = the primary screen. */
+typedef struct tagMONITORINFO {
+    DWORD cbSize;
+    RECT  rcMonitor;
+    RECT  rcWork;
+    DWORD dwFlags;
+} MONITORINFO, *LPMONITORINFO;
+
+#define MONITORINFOF_PRIMARY 1
+
+/* MonitorFrom* dwFlags values (value tables on ms932198/ms932208/
+ * ms932212).  Fixed Win32 ABI values. */
+#define MONITOR_DEFAULTTONULL     0
+#define MONITOR_DEFAULTTOPRIMARY  1
+#define MONITOR_DEFAULTTONEAREST  2
+
+/* ms932091 "MonitorEnumProc": application-defined callback of
+ * EnumDisplayMonitors.  The page states "A value of type
+ * MONITORENUMPROC is a pointer to this function." */
+typedef BOOL (CALLBACK *MONITORENUMPROC)(HMONITOR hMonitor,
+                                         HDC hdcMonitor,
+                                         LPRECT lprcMonitor,
+                                         LPARAM dwData);
+
+BOOL EnumDisplayMonitors(HDC hdc, LPCRECT lprcClip,
+                         MONITORENUMPROC lpfnEnum, LPARAM dwData);
+BOOL GetMonitorInfo(HMONITOR hMonitor, LPMONITORINFO lpmi);
+HMONITOR MonitorFromPoint(POINT pt, DWORD dwFlags);
+HMONITOR MonitorFromRect(LPCRECT lprc, DWORD dwFlags);
+HMONITOR MonitorFromWindow(HWND hwnd, DWORD dwFlags);
 
 #ifdef __cplusplus
 }

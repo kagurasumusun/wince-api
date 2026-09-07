@@ -612,6 +612,21 @@ static const void *const api_symbols[] = {
      * directory-service user-name query (Coredll.lib). */
     (const void *) &FoldStringW, (const void *) &LCMapStringW,
     (const void *) &EnumSystemCodePagesW, (const void *) &GetUserNameExW,
+    /* M36: Fonts-and-text (wingdi.h) and MultiMonitor functions. */
+    (const void *) &AddFontResourceW, (const void *) &CreateFontIndirectW,
+    (const void *) &DrawTextW, (const void *) &EnumFontFamiliesW,
+    (const void *) &EnumFontFamiliesExW, (const void *) &EnumFontsW,
+    (const void *) &ExtTextOutW, (const void *) &GetCharABCWidthsW,
+    (const void *) &GetCharWidth32W, (const void *) &GetFontData,
+    (const void *) &GetTextAlign, (const void *) &GetTextCharacterExtra,
+    (const void *) &GetTextColor, (const void *) &GetTextExtentExPointW,
+    (const void *) &GetTextExtentPointW,
+    (const void *) &GetTextExtentPoint32W, (const void *) &GetTextFaceW,
+    (const void *) &GetTextMetricsW, (const void *) &RemoveFontResourceW,
+    (const void *) &SetTextAlign, (const void *) &SetTextCharacterExtra,
+    (const void *) &SetTextColor, (const void *) &EnumDisplayMonitors,
+    (const void *) &GetMonitorInfo, (const void *) &MonitorFromPoint,
+    (const void *) &MonitorFromRect, (const void *) &MonitorFromWindow,
     /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
     (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
     (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,
@@ -2176,6 +2191,60 @@ _Static_assert(MB_ICONHAND == 0x0010 && MB_ICONQUESTION == 0x0020 &&
                "MB_* icon/default ABI pins");
 _Static_assert(sizeof(COPYDATASTRUCT) == 12, "COPYDATASTRUCT 32-bit size");
 #endif
+
+/* M36: Fonts-and-text and MultiMonitor ABI pins.
+ *
+ * Layout checks: the structures below contain no pointers, so their
+ * sizes are pointer-width independent.  The member transcriptions come
+ * from the CE pages cited in wingdi.h (LOGFONT ms901140, TEXTMETRIC
+ * ms901146, ENUMLOGFONT ms901128, NEWTEXTMETRIC ms901141, ABC ms901108,
+ * MONITORINFO ms932213) -- 11 LONGs then 4 glyph chars/BCHARs, the
+ * BYTE attribute block, and for NEWTEXTMETRIC the four DWORD/UINT
+ * extensions. */
+_Static_assert(sizeof(TEXTMETRIC) == 56, "TEXTMETRIC size");
+_Static_assert(sizeof(LOGFONT) == 92, "LOGFONT size");
+_Static_assert(offsetof(LOGFONT, lfFaceName) == 28,
+               "LOGFONT lfFaceName offset");
+_Static_assert(offsetof(LOGFONT, lfCharSet) == 23,
+               "LOGFONT lfCharSet offset");
+_Static_assert(sizeof(ENUMLOGFONT) == 284, "ENUMLOGFONT size");
+_Static_assert(offsetof(ENUMLOGFONT, elfFullName) == 92,
+               "ENUMLOGFONT elfFullName offset");
+_Static_assert(sizeof(NEWTEXTMETRIC) == 76, "NEWTEXTMETRIC size");
+_Static_assert(offsetof(NEWTEXTMETRIC, ntmFlags) == 60,
+               "NEWTEXTMETRIC ntmFlags offset");
+_Static_assert(sizeof(ABC) == 12, "ABC size");
+_Static_assert(sizeof(MONITORINFO) == 40, "MONITORINFO size");
+_Static_assert(offsetof(MONITORINFO, rcMonitor) == 4 &&
+               offsetof(MONITORINFO, dwFlags) == 36,
+               "MONITORINFO member offsets");
+
+/* Value pins (fixed Win32 ABI values, per repo policy; the CE pages
+ * publish the names, meanings and bit-field layouts documented in
+ * wingdi.h). */
+_Static_assert(LF_FACESIZE == 32 && LF_FULLFACESIZE == 64,
+               "LF_FACESIZE / LF_FULLFACESIZE");
+_Static_assert(RASTER_FONTTYPE == 1 && DEVICE_FONTTYPE == 2 &&
+               TRUETYPE_FONTTYPE == 4, "font-type constants");
+_Static_assert(DT_TOP == 0 && DT_LEFT == 0 && DT_CENTER == 1 &&
+               DT_RIGHT == 2 && DT_VCENTER == 4 && DT_BOTTOM == 8 &&
+               DT_WORDBREAK == 0x10 && DT_SINGLELINE == 0x20 &&
+               DT_EXPANDTABS == 0x40 && DT_TABSTOP == 0x80 &&
+               DT_NOCLIP == 0x100 && DT_EXTERNALLEADING == 0x200 &&
+               DT_CALCRECT == 0x400 && DT_NOPREFIX == 0x800 &&
+               DT_INTERNAL == 0x1000 && DT_END_ELLIPSIS == 0x8000 &&
+               DT_RTLREADING == 0x20000 && DT_WORD_ELLIPSIS == 0x40000,
+               "DT_* fixed ABI values");
+_Static_assert(ETO_OPAQUE == 2 && ETO_CLIPPED == 4 &&
+               ETO_RTLREADING == 0x80, "ETO_* fixed ABI values");
+_Static_assert(TA_NOUPDATECP == 0 && TA_LEFT == 0 && TA_UPDATECP == 1 &&
+               TA_RIGHT == 2 && TA_CENTER == 6 && TA_TOP == 0 &&
+               TA_BOTTOM == 8 && TA_BASELINE == 0x18 &&
+               TA_RTLREADING == 0x100, "TA_* fixed ABI values");
+_Static_assert(MONITOR_DEFAULTTONULL == 0 &&
+               MONITOR_DEFAULTTOPRIMARY == 1 &&
+               MONITOR_DEFAULTTONEAREST == 2 && MONITORINFOF_PRIMARY == 1,
+               "monitor flag values");
 
 
 /* M29: Image List API + message/ROP constants -- typed calls and

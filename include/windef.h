@@ -103,6 +103,8 @@ typedef DWORD *LPDWORD;
 typedef DWORD *PDWORD;  /* DWORD pointer (VirtualProtect aa450980) */
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */
 typedef LONG  *LPLONG;  /* LONG pointer (synchronization functions) */
+typedef INT   *LPINT;   /* INT pointer (GetCharWidth32 ms901131 / */
+                        /* GetTextExtentExPoint ms901135 lpDx arrays)   */
 
 /* MAX_PATH: default path length limit, cited by the CE CreateFile
  * (aa517318), FindFirstFile (ms889678) and GetFileAttributes
@@ -168,6 +170,14 @@ typedef HANDLE          HKL;      /* keyboard-layout handle */
 typedef void           *HGDIOBJ;  /* GDI object handle */
 typedef void           *HPEN;     /* pen handle (CreatePen/CreatePenIndirect) */
 typedef void           *HPALETTE; /* palette handle (CreatePalette) */
+typedef void           *HFONT;    /* font handle (CreateFontIndirect ms901120) */
+
+/* Display-monitor handle (fixed Win32 ABI).  The CE MultiMonitor
+ * function pages (GetMonitorInfo aa451738, MonitorFromPoint ms932198,
+ * MonitorFromRect ms932208, MonitorFromWindow ms932212,
+ * EnumDisplayMonitors aa451688 and the MonitorEnumProc callback page
+ * ms932091) type every monitor-bearing function with HMONITOR. */
+typedef void           *HMONITOR; /* display-monitor handle */
 
 /* Geometric ABI structures referenced by the GWES pages (GetClientRect
  * ms929214 uses LPRECT, WindowFromPoint ms914099 takes POINT,

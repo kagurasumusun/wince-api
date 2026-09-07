@@ -161,6 +161,15 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M36 (landed):** GDI fonts-and-text + MultiMonitor in wingdi.h --
+  22 font/text functions (AddFontResourceW … SetTextColor) and 5
+  MultiMonitor functions from the official CE 5.0 Fonts-and-Text GDI
+  pages and CE .NET 4.0+ MultiMonitor pages (CE 6.0 twins), with
+  LOGFONT / ENUMLOGFONT / NEWTEXTMETRIC / ABC / MONITORINFO structures,
+  FONTENUMPROC / MONITORENUMPROC callback typedefs, LF_FACESIZE,
+  font-type, DT_* / ETO_* / TA_* and monitor flag constants (fixed
+  Win32 ABI values); HFONT / HMONITOR / LPINT in windef.h.  coredll
+  def 364 → 391 (total 626 → 653).
 * **M35 (landed):** GWES style bits in winuser.h -- 126 constants
   (WS_*/WS_EX_*, MB_*, BS_*, ES_*, LBS_*, CBS_*, SBS_*, SS_*, DS_*)
   from the official CE 5.0 style pages with CE 6.0 twins; fixed Win32

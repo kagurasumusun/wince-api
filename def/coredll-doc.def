@@ -13,6 +13,7 @@
 LIBRARY coredll.dll
 EXPORTS
   ActivateKeyboardLayout
+  AddFontResourceW
   AlphaBlend
   BeginPaint
   BitBlt
@@ -64,6 +65,7 @@ EXPORTS
   CreateFileW
   CreateFileForMappingW
   CreateFileMappingW
+  CreateFontIndirectW
   CreateHandler
   CreateMsgQueue
   CreateMutexW
@@ -91,13 +93,18 @@ EXPORTS
   DispatchMessage
   DrawEdge
   DrawFocusRect
+  DrawTextW
   DuplicateHandle
   EditSession
   EditorDeregister
   EditorInitialize
   Ellipse
   EnumDisplayDevices
+  EnumDisplayMonitors
   EnumDisplaySettings
+  EnumFontFamiliesW
+  EnumFontFamiliesExW
+  EnumFontsW
   EnumPropsExW
   EqualRgn
   ExcludeClipRect
@@ -105,6 +112,7 @@ EXPORTS
   ExitThread
   ExtCreateRegion
   ExtEscape
+  ExtTextOutW
   FileTimeToLocalFileTime
   FileTimeToSystemTime
   FillRect
@@ -124,6 +132,8 @@ EXPORTS
   FreeLibraryAndExitThread
   GetBkColor
   GetBkMode
+  GetCharABCWidthsW
+  GetCharWidth32W
   GetClipBox
   GetClipRgn
   GetCommandLineW
@@ -147,6 +157,7 @@ EXPORTS
   GetFileTime
   GetFileVersionInfoW
   GetFileVersionInfoSizeW
+  GetFontData
   GetIdleTime
   GetKeyboardLayoutList
   GetKeyboardType
@@ -160,6 +171,7 @@ EXPORTS
   GetModuleFileNameW
   GetModuleHandleW
   GetModuleInformation
+  GetMonitorInfo
   GetMsgQueueInfo
   GetNearestColor
   GetNearestPaletteIndex
@@ -187,6 +199,14 @@ EXPORTS
   GetSystemTime
   GetTempFileNameW
   GetTempPathW
+  GetTextAlign
+  GetTextCharacterExtra
+  GetTextColor
+  GetTextExtentExPointW
+  GetTextExtentPointW
+  GetTextExtentPoint32W
+  GetTextFaceW
+  GetTextMetricsW
   GetThreadContext
   GetThreadPriority
   GetThreadTimes
@@ -250,6 +270,9 @@ EXPORTS
   MapViewOfFile
   MapWindowPoints
   MaskBlt
+  MonitorFromPoint
+  MonitorFromRect
+  MonitorFromWindow
   MoveFileW
   MoveToEx
   MultiByteToWideChar
@@ -297,6 +320,7 @@ EXPORTS
   ReleaseDC
   ReleaseSemaphore
   RemoveDirectoryW
+  RemoveFontResourceW
   RemovePropW
   ReportFault
   ResetEvent
@@ -335,6 +359,9 @@ EXPORTS
   SetRectRgn
   SetStretchBltMode
   SetSystemTime
+  SetTextAlign
+  SetTextCharacterExtra
+  SetTextColor
   SetThreadPriority
   SetTimeZoneInformation
   SetViewportOrgEx

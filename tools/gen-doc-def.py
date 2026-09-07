@@ -154,6 +154,26 @@ UNICODE_ONLY = {
     "GetTimeFormat": "GetTimeFormatW",
     "GetLocaleInfo": "GetLocaleInfoW",
     "SetLocaleInfo": "SetLocaleInfoW",
+    # M36 GDI fonts-and-text functions whose CE pages take LPCTSTR/
+    # LPTSTR parameters; Windows CE is Unicode-only, so the exports are
+    # the wide spellings (pages ms901109/ms901120/ms901121/ms901123/
+    # ms901124/ms901126/ms901129/ms901130/ms901131/ms901135/ms901136/
+    # ms901137/ms901138/ms901139/ms901142; CE 6.0 twins ee489896..).
+    "AddFontResource": "AddFontResourceW",
+    "CreateFontIndirect": "CreateFontIndirectW",
+    "DrawText": "DrawTextW",
+    "EnumFontFamilies": "EnumFontFamiliesW",
+    "EnumFontFamiliesEx": "EnumFontFamiliesExW",
+    "EnumFonts": "EnumFontsW",
+    "ExtTextOut": "ExtTextOutW",
+    "GetCharABCWidths": "GetCharABCWidthsW",
+    "GetCharWidth32": "GetCharWidth32W",
+    "GetTextExtentExPoint": "GetTextExtentExPointW",
+    "GetTextExtentPoint": "GetTextExtentPointW",
+    "GetTextExtentPoint32": "GetTextExtentPoint32W",
+    "GetTextFace": "GetTextFaceW",
+    "GetTextMetrics": "GetTextMetricsW",
+    "RemoveFontResource": "RemoveFontResourceW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

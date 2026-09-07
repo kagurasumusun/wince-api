@@ -1742,6 +1742,94 @@ anywhere on the CE pages are recorded and left undefined (not
 invented): WS_NONAVDONEBUTTON, WS_EX_NOANIMATION, WS_EX_NODRAG,
 WS_EX_CAPTIONOKBTN.
 
+### M36: GDI fonts-and-text + MultiMonitor (wingdi.h / windef.h)
+
+Pages harvested (36 leaves, CE 5.0 + CE 6.0 twins; fonts-and-text ids
+below, MultiMonitor ids listed per item).  Every CE 5.0 Requirement row
+names Coredll.lib; header rows are Windows.h except where noted.
+
+* Fonts-and-text functions (22): `AddFontResource` ms901109 (ee489896,
+  CE 2.0+), `CreateFontIndirect` ms901120 (ee489863), `DrawText`
+  ms901121 (ee489886), `EnumFontFamilies` ms901123 (ee489908),
+  `EnumFontFamiliesEx` ms901124 (ee489844, CE 5.0+; Header wingdi.h),
+  `EnumFonts` ms901126 (ee489905), `ExtTextOut` ms901129 (ee489846),
+  `GetCharABCWidths` ms901130 (ee489910, CE .NET 4.2+), `GetCharWidth32`
+  ms901131 (ee489848, CE .NET 4.0+), `GetFontData` aa520325 (ee489901,
+  CE 5.0+), `GetTextAlign` ms901132 (ee489856, CE .NET 4.0+),
+  `GetTextCharacterExtra` ms901133 (ee489907, CE 5.0+; Wingdi.h),
+  `GetTextColor` ms901134 (ee489912), `GetTextExtentExPoint` ms901135
+  (ee489883), `GetTextExtentPoint` ms901136 (ee489897, CE 2.0+),
+  `GetTextExtentPoint32` ms901137 (ee489838, CE 2.0+), `GetTextFace`
+  ms901138 (ee489915), `GetTextMetrics` ms901139 (ee489911),
+  `RemoveFontResource` ms901142 (ee489851), `SetTextAlign` ms901143
+  (ee489853, CE .NET 4.0+), `SetTextCharacterExtra` ms901144 (ee489860,
+  CE 5.0+; Wingdi.h), `SetTextColor` ms901145 (ee489887, CE .NET 4.0+).
+  String-bearing exports are the wide spellings (CE Unicode-only; e.g.
+  AddFontResourceW, CreateFontIndirectW, DrawTextW, EnumFontFamiliesW,
+  EnumFontFamiliesExW, EnumFontsW, ExtTextOutW, GetCharABCWidthsW,
+  GetCharWidth32W, GetTextExtentExPointW, GetTextExtentPointW,
+  GetTextExtentPoint32W, GetTextFaceW, GetTextMetricsW,
+  RemoveFontResourceW) with the generic-name `#define` mapping.
+  TextOut is **not** declared: no CE .NET / CE 5.0 / CE 6.0 catalog
+  leaf documents it, so there is no official signature to transcribe.
+* DrawText's official page types the last parameter `UNIT uFormat`
+  (sic) on both trees; the DT_TABSTOP description defines its tab-stop
+  field as bits 8-15 of uFormat, so the parameter is declared `UINT`
+  (recorded conflict -- page typo, ABI UINT).  EnumFontFamiliesEx
+  dwFlags is "not used; must be 0".  EnumFonts/EnumFontFamilies/Ex
+  return `int` (last callback return).
+* Structures/types from their CE pages: `LOGFONT` ms901140 (ee489840;
+  Header Wingdi.h) with `TCHAR lfFaceName[LF_FACESIZE]`, `ENUMLOGFONT`
+  ms901128 (ee489900) with `TCHAR elfFullName[LF_FULLFACESIZE]` +
+  `elfStyle[LF_FACESIZE]`, `NEWTEXTMETRIC` ms901141 (ee489904; its
+  page types the four glyph members BCHAR), `ABC` ms901108 (ee489865;
+  CE .NET 4.2+; `ABC, *PABC`; LPABC is the GetCharABCWidths parameter
+  type).  TEXTMETRIC (ms901146, char glyph members) and
+  OUTLINETEXTMETRICW already shipped; `LPTEXTMETRIC` alias added.
+  `LF_FACESIZE` 32 / `LF_FULLFACESIZE` 64 (fixed Win32 ABI sizes; the
+  pages name the constants without values).
+* Callbacks: `EnumFontFamProc` ms901125 (ee489849) and `EnumFontsProc`
+  ms901127 (ee489833) callback pages; the enumeration function pages
+  type the callback parameters `FONTENUMPROC`.  The archive publishes
+  no FONTENUMPROC typedef page, so the typedef follows the
+  EnumFontFamProc shape the enumeration pages reference
+  (`int (CALLBACK *)(const LOGFONT*, const TEXTMETRIC*, DWORD,
+  LPARAM)`); EnumFonts' own EnumFontsProc page spells the two font
+  pointers without const (recorded in wingdi.h).  Font-type constants
+  RASTER_FONTTYPE / DEVICE_FONTTYPE / TRUETYPE_FONTTYPE = 1/2/4.
+* Constant families from the value tables (names only on the CE pages;
+  fixed Win32 ABI values, host-pinned): DrawText DT_* (18 flags: TOP/
+  LEFT/CENTER/RIGHT/VCENTER/BOTTOM/WORDBREAK/SINGLELINE/EXPANDTABS/
+  TABSTOP/NOCLIP/EXTERNALLEADING/CALCRECT/NOPREFIX/INTERNAL/END_ELLIPSIS/
+  RTLREADING/WORD_ELLIPSIS), ExtTextOut ETO_OPAQUE/CLIPPED/RTLREADING,
+  text alignment TA_NOUPDATECP/UPDATECP/LEFT/RIGHT/CENTER/TOP/BOTTOM/
+  BASELINE/RTLREADING.  DT_EDITCONTROL / DT_MODIFYSTRING /
+  DT_HIDEPREFIX / DT_PREFIXONLY / DT_PATH_ELLIPSIS and TA_VCENTER are
+  absent from the CE tables and are left undefined.
+* MultiMonitor functions and type (all CE .NET 4.0+, Header Windows.h,
+  Coredll.lib): `EnumDisplayMonitors` aa451688 (ee490277, takes
+  MONITORENUMPROC), `GetMonitorInfo` aa451738 (ee491682),
+  `MonitorEnumProc` ms932091 (ee490724; "A value of type
+  MONITORENUMPROC is a pointer to this function" -> MONITORENUMPROC
+  typedef `BOOL (CALLBACK *)(HMONITOR, HDC, LPRECT, LPARAM)`),
+  `MonitorFromPoint` ms932198 (ee491624), `MonitorFromRect` ms932208
+  (ee491307), `MonitorFromWindow` ms932212 (ee490720), and the
+  `MONITORINFO` structure ms932213 (ee491429: cbSize / rcMonitor /
+  rcWork / dwFlags).  MonitorFrom* dwFlags values and the MONITORINFO
+  dwFlags bit MONITORINFOF_PRIMARY (fixed Win32 ABI values 0/1/2 and 1).
+  The pages call the display handles HMONITOR; added to windef.h with
+  HFONT and LPINT (all fixed-ABI opaque/spelling types used by these
+  pages).
+* ABI pins in tests/host/tu_compile.c: TEXTMETRIC 56 / LOGFONT 92
+  (lfFaceName@28, lfCharSet@23) / ENUMLOGFONT 284 (elfFullName@92) /
+  NEWTEXTMETRIC 76 (ntmFlags@60) / ABC 12 / MONITORINFO 40
+  (rcMonitor@4, dwFlags@36), plus the DT_*/ETO_*/TA_*/font-type/LF/
+  monitor flag values.
+* Export surface: coredll 364 → 391 (+27: the 22 font/text functions
+  plus EnumDisplayMonitors, GetMonitorInfo, MonitorFromPoint,
+  MonitorFromRect, MonitorFromWindow); total 626 → 653.  `TextOut` is
+  not exported (no page, no signature).
+
 
 ### Documented conflicts (official page vs verified export surface)
 

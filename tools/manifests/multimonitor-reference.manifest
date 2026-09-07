@@ -1,0 +1,7 @@
+aa451688(v=msdn.10)	EnumDisplayMonitors
+aa451738(v=msdn.10)	GetMonitorInfo
+ms932091(v=msdn.10)	MonitorEnumProc
+ms932198(v=msdn.10)	MonitorFromPoint
+ms932208(v=msdn.10)	MonitorFromRect
+ms932212(v=msdn.10)	MonitorFromWindow
+ms932213(v=msdn.10)	MONITORINFO
