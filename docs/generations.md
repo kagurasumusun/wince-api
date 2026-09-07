@@ -442,3 +442,19 @@ transcribed.  Export surface: coredll 360 -> 363, total name-only
 exports 613 -> 616 (33 def files).  Host + six CE targets pass
 warning-free; TU static-asserts FONTSIGNATURE=24 / CHARSETINFO=32 /
 VS_FIXEDFILEINFO=52 on the 32-bit ABI.
+
+
+**M32 batch — NLS formatting / locale-info unit (Coreloc.lib):** the
+Coreloc formatting surface declared from official pages (Header
+Winnls.h, Coreloc.lib, CE .NET 4.0+): CURRENCYFMT (ms904720) and
+NUMBERFMT (ms906228) with their verbatim member lists; GetCurrencyFormatW
+(ms905229), GetNumberFormatW (ms905250), GetDateFormatW (ms905235),
+GetTimeFormatW (ms905310), GetLocaleInfoW (ms905243) and SetLocaleInfoW
+(ms906277) plus the generic macros and an LCTYPE (DWORD) typedef.
+DATE_/TIME_ flag names and the LCTYPE value table (ms906223) are
+recorded-not-transcribed (no numeric values republished on the pages;
+dwFlags=0 is the documented locale-default call).  winnls.h now
+includes winbase.h for SYSTEMTIME.  Export surface: coreloc 24 -> 30,
+total name-only exports 616 -> 622 (33 def files).  Host + six CE
+targets pass warning-free; TU static-asserts CURRENCYFMT=32 /
+NUMBERFMT=24 on the 32-bit ABI.

@@ -1579,6 +1579,42 @@ FONTSIGNATURE=24 / CHARSETINFO=32 / VS_FIXEDFILEINFO=52 on the 32-bit
 ABI (also verified under the CE toolchain targets).
 
 
+
+### M32: NLS formatting / locale-info unit (Coreloc.lib; winnls.h)
+
+The NLS *formatting* layer of the Coreloc export surface: functions
+whose pages print Header Winnls.h and Link Library Coreloc.lib, OS
+Versions "Windows CE .NET 4.0 and later" (exceptions noted per page).
+
+| Item | Official page (CE 5.0) | Header | Link Library | Notes |
+|---|---|---|---|---|
+| `CURRENCYFMT` struct | `ms904720` | Winnls.h | — | member list verbatim: NumDigits/LeadingZero/Grouping, lpDecimalSep/lpThousandSep, NegativeOrder/PositiveOrder, lpCurrencySymbol |
+| `NUMBERFMT` struct | `ms906228` | Winnls.h | — | NumDigits/LeadingZero/Grouping, lpDecimalSep/lpThousandSep, NegativeOrder |
+| `GetCurrencyFormatW` | `ms905229` | Winnls.h | Coreloc.lib | returns char count; cch 0 -> required size; dwFlags must be 0 when lpFormat non-NULL |
+| `GetNumberFormatW` | `ms905250` | Winnls.h | Coreloc.lib | same contract |
+| `GetDateFormatW` | `ms905235` | Winnls.h | Coreloc.lib | lpFormat picture string or locale default; Locale ignored on CE 1.0 |
+| `GetTimeFormatW` | `ms905310` | Winnls.h | Coreloc.lib | same contract |
+| `GetLocaleInfoW` | `ms905243` | Winnls.h | Coreloc.lib | LCType param takes the LCTYPE constants |
+| `SetLocaleInfoW` | `ms906277` | Winnls.h | Coreloc.lib | LCType param takes the LCTYPE constants |
+| `LCTYPE` typedef (DWORD) | `ms905243` + `ms906223` | Winnls.h | — | the LCTYPE constant *space*; the ms906223 table values are recorded-not-transcribed (follow-on) |
+
+The `DATE_*` / `TIME_*` flag names the GetDateFormat/GetTimeFormat
+pages document (dwFlags) are recorded but not defined -- the pages do
+not republish numeric values; every function is callable with
+dwFlags = 0 for the locale default, which the pages define.  The NLS
+macro/identifier pages (MAKELCID `ms906226`, LCTYPE Constants
+`ms906223`, Language Identifiers and Locales `ms903928`, NLS Locale
+Identifiers `ms906224`) remain recorded follow-ons.  CE is
+Unicode-only, so the exports are the W spellings with generic macros
+(gen-doc-def Unicode map updated).
+
+Export surface: coreloc 24 -> **30** (the six W functions above);
+total name-only exports 616 -> **622** (33 def files).  winnls.h now
+includes winbase.h for SYSTEMTIME (the date/time formatters type
+against it).  Host + six CE targets pass warning-free; TU
+static-asserts CURRENCYFMT=32 / NUMBERFMT=24 on the 32-bit ABI.
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

@@ -134,6 +134,15 @@ UNICODE_ONLY = {
     # exported spelling is the wide form of the LPTSTR sub-block
     # parameter; repo Unicode-only rule, page aa450973).
     "VerQueryValue": "VerQueryValueW",
+    # M32: NLS formatting / locale-info functions (CE is Unicode-only;
+    # the exported spellings are the wide forms; pages ms905229/
+    # ms905250/ms905235/ms905310/ms905243/ms906277).
+    "GetCurrencyFormat": "GetCurrencyFormatW",
+    "GetNumberFormat": "GetNumberFormatW",
+    "GetDateFormat": "GetDateFormatW",
+    "GetTimeFormat": "GetTimeFormatW",
+    "GetLocaleInfo": "GetLocaleInfoW",
+    "SetLocaleInfo": "SetLocaleInfoW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

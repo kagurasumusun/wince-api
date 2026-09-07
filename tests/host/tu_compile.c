@@ -604,6 +604,10 @@ static const void *const api_symbols[] = {
      * version-resource helpers. */
     (const void *) &ReadProcessMemory, (const void *) &GetThreadContext,
     (const void *) &TranslateCharsetInfo,
+    /* M32: NLS formatting / locale-info (winnls.h; Coreloc.lib). */
+    (const void *) &GetCurrencyFormatW, (const void *) &GetNumberFormatW,
+    (const void *) &GetDateFormatW, (const void *) &GetTimeFormatW,
+    (const void *) &GetLocaleInfoW, (const void *) &SetLocaleInfoW,
     /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
     (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
     (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,
@@ -2071,6 +2075,8 @@ static int m28_shaped_usage(void)
 _Static_assert(sizeof(FONTSIGNATURE) == 24, "FONTSIGNATURE 32-bit size");
 _Static_assert(sizeof(CHARSETINFO) == 32, "CHARSETINFO 32-bit size");
 _Static_assert(sizeof(VS_FIXEDFILEINFO) == 52, "VS_FIXEDFILEINFO 32-bit size");
+_Static_assert(sizeof(CURRENCYFMT) == 32, "CURRENCYFMT 32-bit size");
+_Static_assert(sizeof(NUMBERFMT) == 24, "NUMBERFMT 32-bit size");
 #endif
 
 

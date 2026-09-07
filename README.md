@@ -161,6 +161,12 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M32 (landed):** NLS formatting / locale-info (Coreloc.lib):
+  CURRENCYFMT/NUMBERFMT structures and GetCurrencyFormatW /
+  GetNumberFormatW / GetDateFormatW / GetTimeFormatW / GetLocaleInfoW /
+  SetLocaleInfoW + LCTYPE typedef (winnls.h).  coreloc 24 -> 30, 622
+  name-only exports across 33 def files; DATE_/TIME_ flag names and the
+  LCTYPE value table recorded-not-transcribed.
 * **M31 (landed):** WM_COPYDATA (winuser.h) + cross-process
   read/thread-context (ReadProcessMemory/GetThreadContext + LPCONTEXT),
   VS_FIXEDFILEINFO + VS_FF_* version flags (winbase.h), and

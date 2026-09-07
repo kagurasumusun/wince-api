@@ -23,10 +23,15 @@ EXPORTS
   ConvertDefaultLocale
   GetACP
   GetCPInfo
+  GetCurrencyFormatW
+  GetDateFormatW
+  GetLocaleInfoW
+  GetNumberFormatW
   GetOEMCP
   GetStringTypeExW
   GetSystemDefaultLCID
   GetSystemDefaultLangID
+  GetTimeFormatW
   GetUserDefaultLCID
   GetUserDefaultLangID
   IsCharAlphaW
@@ -35,6 +40,7 @@ EXPORTS
   IsCharUpperW
   IsValidCodePage
   IsValidLocale
+  SetLocaleInfoW
   SetUserDefaultLCID
   wsprintfW
   wvsprintfW

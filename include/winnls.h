@@ -16,6 +16,7 @@
 #define AKARI_WINNLS_H
 
 #include "windef.h"
+#include "winbase.h"   /* SYSTEMTIME for the date/time formatters */
 
 #ifdef __cplusplus
 extern "C" {
@@ -183,6 +184,68 @@ BOOL GetStringTypeExW(LCID Locale, DWORD dwInfoType,
                       LPCWSTR lpSrcStr, int cchSrc,
                       LPWORD lpCharType);
 #define GetStringTypeEx GetStringTypeExW
+
+/* ------------------------------------------------------------------ */
+/* M32: NLS formatting / locale-info functions (Coreloc.lib; Winnls.h).*/
+/*                                                                     */
+/* All pages below print Header Winnls.h and Link Library Coreloc.lib, */
+/* OS Versions Windows CE .NET 4.0 and later, except where noted.      */
+/* The CURRENCYFMT / NUMBERFMT member lists are transcribed verbatim   */
+/* from their structure pages (ms904720 / ms906228); the LPTSTR format */
+/* fields are per the pages.  LCType takes the LCTYPE constants (the   */
+/* ms906223 table); their values are not yet transcribed (recorded),   */
+/* so GetLocaleInfoW/SetLocaleInfoW are declared and the LCTYPE table  */
+/* is a recorded follow-on.  The DATE_ and TIME_ flag names are        */
+/* documented by the GetDateFormat/GetTimeFormat pages; numeric values */
+/* are not republished there (fixed-ABI follow-on, recorded).          */
+/* republished there (fixed-ABI follow-on, recorded).  dwFlags=0 gives */
+/* the default locale format for every function here.  CE is           */
+/* Unicode-only: exports are the W spellings.                          */
+/* ------------------------------------------------------------------ */
+
+typedef DWORD LCTYPE;   /* LCTYPE constant space (UINT-sized) */
+
+typedef struct _currencyfmt {
+    UINT   NumDigits;
+    UINT   LeadingZero;
+    UINT   Grouping;
+    LPTSTR lpDecimalSep;
+    LPTSTR lpThousandSep;
+    UINT   NegativeOrder;
+    UINT   PositiveOrder;
+    LPTSTR lpCurrencySymbol;
+} CURRENCYFMT;
+
+typedef struct _numberfmt {
+    UINT   NumDigits;
+    UINT   LeadingZero;
+    UINT   Grouping;
+    LPTSTR lpDecimalSep;
+    LPTSTR lpThousandSep;
+    UINT   NegativeOrder;
+} NUMBERFMT;
+
+int GetCurrencyFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
+                       const CURRENCYFMT *lpFormat,
+                       LPWSTR lpCurrencyStr, int cchCurrency);
+#define GetCurrencyFormat GetCurrencyFormatW
+int GetNumberFormatW(LCID Locale, DWORD dwFlags, LPCWSTR lpValue,
+                     const NUMBERFMT *lpFormat,
+                     LPWSTR lpNumberStr, int cchNumber);
+#define GetNumberFormat GetNumberFormatW
+int GetDateFormatW(LCID Locale, DWORD dwFlags,
+                   const SYSTEMTIME *lpDate, LPCWSTR lpFormat,
+                   LPWSTR lpDateStr, int cchDate);
+#define GetDateFormat GetDateFormatW
+int GetTimeFormatW(LCID Locale, DWORD dwFlags,
+                   const SYSTEMTIME *lpTime, LPCWSTR lpFormat,
+                   LPWSTR lpTimeStr, int cchTime);
+#define GetTimeFormat GetTimeFormatW
+int GetLocaleInfoW(LCID Locale, LCTYPE LCType,
+                   LPWSTR lpLCData, int cchData);
+#define GetLocaleInfo GetLocaleInfoW
+BOOL SetLocaleInfoW(LCID Locale, LCTYPE LCType, LPCWSTR lpLCData);
+#define SetLocaleInfo SetLocaleInfoW
 
 #ifdef __cplusplus
 }
