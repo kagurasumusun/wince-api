@@ -196,6 +196,11 @@ declarations, recorded in `docs/inventory.md`):
   LocalReAlloc/LocalSize, GlobalMemoryStatus + MEMORYSTATUS,
   IsBadCodePtr/IsBadReadPtr/IsBadWritePtr).  `def/coredll-doc.def`
   regenerated 53 → 77 name-only exports.
+* **M11 (landed):** System Management Reference (part 1) — SYSTEM_INFO
+  + GetSystemInfo `ms885638`/`aa450921`, OSVERSIONINFO + GetVersionEx
+  `ms885648`/`ms886768`, SignalStarted `aa450898` (PROCESSOR_
+  ARCHITECTURE_* and VER_PLATFORM_* with fixed Win32 ABI values).
+  def 77 → 80 exports.
 
 Remaining roadmap: the other *Core OS Reference* books already
 manifested (Process and Thread, Strings, Unicode, System Management,
