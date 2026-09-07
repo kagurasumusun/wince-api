@@ -15,9 +15,18 @@ CE_VERSIONS = 0x420 0x500 0x600
 
 HDRS = include/windef.h include/winbase.h include/windows.h
 
-.PHONY: check hostcheck clean
+.PHONY: check hostcheck defcheck clean
 
-check: hostcheck
+check: hostcheck defcheck
+
+defcheck:
+	@for f in def/coredll.def def/coredll4.def def/coredll6.def \
+	  def/coredll6-x86.def; do \
+	  [ -f $$f ] || { echo "missing $$f" >&2; exit 1; }; \
+	  n=$$(awk '/^EXPORTS/{e=1;next} e && NF' $$f | wc -l); \
+	  echo "[defcheck] $$f: $$n exports"; \
+	  [ $$n -gt 1000 ] || { echo "def $$f looks empty" >&2; exit 1; }; \
+	done
 
 hostcheck: $(HDRS)
 	@for v in $(CE_VERSIONS); do \

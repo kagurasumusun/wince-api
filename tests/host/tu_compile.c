@@ -49,7 +49,17 @@ static const void *const api_symbols[] = {
     (const void *) &LoadLibraryW,
     (const void *) &LoadLibrary,
     (const void *) &FreeLibrary,
+    (const void *) &CloseHandle,
+    (const void *) &OpenProcess,
+    (const void *) &GetExitCodeProcess,
+    (const void *) &SetLastError,
 };
+
+/* Error constants exercised (values from winerror.h). */
+typedef char assert_winerror_vals[
+    (ERROR_SUCCESS == 0 && ERROR_INVALID_PARAMETER == 87 &&
+     ERROR_ALREADY_EXISTS == 183 && STILL_ACTIVE == 259 &&
+     ERROR_INSUFFICIENT_BUFFER == 122) ? 1 : -1];
 
 static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,

@@ -225,6 +225,36 @@ HINSTANCE LoadLibraryW(LPCWSTR lpLibFileName);
  * DLL_PROCESS_DETACH before unmapping; not safe from DllMain. */
 BOOL FreeLibrary(HMODULE hLibModule);
 
+/* ------------------------------------------------------------------ */
+/* Handles, process queries                                           */
+/* ------------------------------------------------------------------ */
+
+/* aa517300 "CloseHandle (Windows CE 5.0)": BOOL CloseHandle(HANDLE).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Closes handles to files, events,
+ * mutexes, processes, threads, sockets, etc.; does not terminate a
+ * thread. */
+BOOL CloseHandle(HANDLE hObject);
+
+/* ms886766 "OpenProcess (Windows CE 5.0)":
+ * HANDLE OpenProcess(DWORD, BOOL, DWORD).  CE 2.0+; Winbase.h;
+ * Coredll.lib.  CE notes: fdwAccess "Not supported; set to zero";
+ * fInherit "Not supported; set to FALSE". */
+HANDLE OpenProcess(DWORD fdwAccess, BOOL fInherit, DWORD IDProcess);
+
+/* ms885622 "GetExitCodeProcess (Windows CE 5.0)":
+ * BOOL GetExitCodeProcess(HANDLE, LPDWORD).  CE 2.0+; Winbase.h;
+ * Coredll.lib.  STILL_ACTIVE (winerror.h) is returned while the
+ * process runs; after termination the status is the ExitProcess/
+ * TerminateProcess exit value, the return value of the process's
+ * main/WinMain, or an exception value. */
+BOOL GetExitCodeProcess(HANDLE hProcess, LPDWORD lpExitCode);
+
+/* ms886817 "SetLastError (Windows CE 5.0)": VOID
+ * SetLastError(DWORD).  CE 1.0+; Winbase.h; Coredll.lib.  Last-error
+ * code is per-thread (thread local storage); error codes are 32-bit,
+ * bit 29 reserved for application-defined codes. */
+VOID SetLastError(DWORD dwErrCode);
+
 #ifdef __cplusplus
 }
 #endif
