@@ -72,6 +72,7 @@ typedef const CHAR     *LPCSTR;
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
 typedef DWORD *LPDWORD;
+typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */
 
 /* MAX_PATH: default path length limit, cited by the CE CreateFile
  * (aa517318), FindFirstFile (ms889678) and GetFileAttributes

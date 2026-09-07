@@ -76,6 +76,22 @@ static const void *const api_symbols[] = {
     (const void *) &FindClose,
     (const void *) &GetFileAttributes,
     (const void *) &GetFileAttributesW,
+    (const void *) &ReadFile,
+    (const void *) &WriteFile,
+    (const void *) &GetFileSize,
+    (const void *) &SetFilePointer,
+    (const void *) &SetEndOfFile,
+    (const void *) &FlushFileBuffers,
+    (const void *) &MoveFileW,
+    (const void *) &MoveFile,
+    (const void *) &CopyFileW,
+    (const void *) &CopyFile,
+    (const void *) &CreateDirectoryW,
+    (const void *) &CreateDirectory,
+    (const void *) &RemoveDirectoryW,
+    (const void *) &RemoveDirectory,
+    (const void *) &SetFileAttributesW,
+    (const void *) &SetFileAttributes,
     (const void *) &GetLocalTime,
     (const void *) &GetSystemTime,
     (const void *) &SetLocalTime,
@@ -114,7 +130,10 @@ typedef char assert_file_vals[
      FILE_FLAG_WRITE_THROUGH == 0x80000000u &&
      ERROR_NO_MORE_FILES == 18L) ? 1 : -1];
 
-/* TLS constants exercised (winbase.h). */
+/* File-pointer constants (winbase.h, ms891933 + Win32 ABI values). */
+typedef char assert_fileptr_vals[
+    (FILE_BEGIN == 0u && FILE_CURRENT == 1u && FILE_END == 2u &&
+     INVALID_SET_FILE_POINTER == (DWORD)0xFFFFFFFFu) ? 1 : -1];
 typedef char assert_tls_vals[
     (TLS_MINIMUM_AVAILABLE == 64 &&
      TLS_OUT_OF_INDEXES == (DWORD)0xFFFFFFFFu) ? 1 : -1];
@@ -204,14 +223,28 @@ static const WCHAR w_app[] = { 'a', 'p', 'p', '.', 'e', 'x', 'e', 0 };
 static const WCHAR w_cmd[] = {
     'a', 'p', 'p', '.', 'e', 'x', 'e', ' ', 'a', 'r', 'g', 0
 };
+static const WCHAR w_file[] = {
+    't', 'm', 'p', '\\', 'f', '.', 't', 'x', 't', 0
+};
+static const WCHAR w_copy[] = {
+    't', 'm', 'p', '\\', 'f', '2', '.', 't', 'x', 't', 0
+};
+static const WCHAR w_moved[] = {
+    't', 'm', 'p', '\\', 'f', '3', '.', 't', 'x', 't', 0
+};
+static const WCHAR w_dir[] = {
+    't', 'm', 'p', '\\', 'd', 'i', 'r', 0
+};
 
 static int ce_shaped_usage(void)
 {
     PROCESS_INFORMATION pi;
     SYSTEMTIME st;
     FILETIME ft1, ft2;
-    HANDLE h;
-    DWORD tid;
+    HANDLE h, hf;
+    DWORD tid, cb, nread, nwrote, sizehi;
+    BOOL ok;
+    char io_buf[8] = "abcdefg";
 
     if (!CreateProcessW(w_app, w_cmd, NULL, NULL,
                         FALSE, 0, NULL, NULL, NULL, &pi))
@@ -232,7 +265,41 @@ static int ce_shaped_usage(void)
     if (!FileTimeToSystemTime(&ft1, &st))
         return (int) GetLastError();
     GetSystemTime(&st);
-    return (int) (pi.dwProcessId + tid + st.wSecond);
+
+    /* Synchronous file I/O and file/directory management: exercises
+     * the argument types of every declaration of the file batch
+     * (ReadFile ms891445, WriteFile ms892380, GetFileSize ms890939,
+     * SetFilePointer ms891933, SetEndOfFile ms891916,
+     * FlushFileBuffers ms890238, MoveFileW ms891388, CopyFileW
+     * aa517309, CreateDirectoryW aa517316, RemoveDirectoryW
+     * ms891470, SetFileAttributesW ms891925).  Compile-only: the
+     * checks never link or run these calls. */
+    hf = CreateFileW(w_file, GENERIC_READ | GENERIC_WRITE,
+                     FILE_SHARE_READ, NULL, CREATE_ALWAYS,
+                     FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hf == INVALID_HANDLE_VALUE)
+        return (int) GetLastError();
+    ok = WriteFile(hf, io_buf, (DWORD) sizeof(io_buf), &nwrote,
+                   NULL) != 0;
+    ok = FlushFileBuffers(hf) && ok;
+    ok = (SetFilePointer(hf, 0, NULL, FILE_BEGIN)
+          != INVALID_SET_FILE_POINTER) && ok;
+    cb = GetFileSize(hf, &sizehi);
+    ok = (cb != INVALID_SET_FILE_POINTER) && ok;
+    ok = SetEndOfFile(hf) && ok;
+    ok = ReadFile(hf, io_buf, (DWORD) sizeof(io_buf), &nread,
+                  NULL) && ok;
+    ok = CloseHandle(hf) && ok;
+    ok = CreateDirectoryW(w_dir, NULL) && ok;
+    ok = SetFileAttributesW(w_file, FILE_ATTRIBUTE_NORMAL) && ok;
+    ok = CopyFileW(w_file, w_copy, FALSE) && ok;
+    ok = MoveFileW(w_copy, w_moved) && ok;
+    ok = DeleteFileW(w_moved) && ok;
+    ok = RemoveDirectoryW(w_dir) && ok;
+    if (!ok)
+        return (int) GetLastError();
+    return (int) (pi.dwProcessId + tid + st.wSecond + cb + nread
+                  + nwrote + sizehi);
 }
 
 int host_tu_entry(void)

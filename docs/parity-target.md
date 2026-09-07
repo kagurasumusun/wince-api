@@ -29,13 +29,14 @@ this repository; our headers are written from the official pages
 |---|---|
 | `windows.h` umbrella | shipped (M1) |
 | `windef.h` base types/macros | shipped (M1) |
-| `winbase.h` — process/thread/module/memory/error core | M1+M2 shipped: TerminateProcess, TerminateThread, ExitThread, ExitProcess*, GetModuleHandle(W), GetModuleFileName(W), GetCommandLine(W), GetProcAddress(W/A), LocalAlloc, LocalFree, CreateProcess(W), CreateThread, GetLastError, LoadLibrary(W), FreeLibrary (*ExitProcess = documented conflict, declared for source compat) |
-| Structures (PROCESS_INFORMATION defined; SECURITY_ATTRIBUTES/STARTUPINFOW opaque NULL-only tags) | M2 (pending: official structure-page batches) |
-| Constants (`winerror.h` error values from official Error Values `aa450740`; creation/flag values) | next batch |
-| Remaining winbase families (file, heap, sync, wait, time, registry, string) | queued; official page per function |
+| `winbase.h` — process/thread/module/memory/error core | M1–M8 shipped (ExitProcess = documented conflict, declared for source compat; kernel-scope kfuncs intentionally not declared) |
+| Structures (PROCESS_INFORMATION, FILETIME, SYSTEMTIME, WIN32_FIND_DATAW defined; SECURITY_ATTRIBUTES/STARTUPINFOW/OVERLAPPED opaque NULL-only tags) | shipped (M1–M8) |
+| Constants (`winerror.h` rows 0–1078 from official numeric table `aa450919`; file/directory + creation/flag + priority + TLS + load-library values) | shipped (M1–M8) |
+| Remaining winbase families (heap, sync/wait, string, registry) | queued; official page per function |
 | GUI: `winuser.h` (WinMain, windows, messages, controls) | queued (WinMain page `ms914104` already in wince-crt records) |
-| Import-library defs (`coredll*.def` per generation/arch + DLL defs) | M3 (self-authored from the verified export surface + official pages; llvm-dlltool) |
-| End-to-end links (wince-crt + wince-api consumer) | M4 (toolchain) |
+| Import-library defs (`coredll*.def` per generation/arch + DLL defs) | generated out-of-tree: `./gen-defs.sh` from the device-dump-audited export surface, then `llvm-dlltool` (defs not committed — see README) |
+| Real-toolchain compile matrix (headers + TU, `-Werror`) | passing since M8: `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 |
+| End-to-end links (wince-crt + wince-api consumer, against real import libraries) | pending (toolchain; requires the audited import surface) |
 
 ## Ordering principle
 

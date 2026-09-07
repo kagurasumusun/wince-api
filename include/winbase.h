@@ -551,6 +551,154 @@ BOOL FindClose(HANDLE hFindFile);
 #define INVALID_HANDLE_VALUE ((HANDLE)-1)
 
 /* ------------------------------------------------------------------ */
+/* File I/O (synchronous) and file/directory management               */
+/* ------------------------------------------------------------------ */
+
+/* Windows CE does not support asynchronous ("overlapped") file I/O:
+ * the ReadFile (ms891445) and WriteFile (ms892380) pages state that
+ * the lpOverlapped parameter is unsupported and must be NULL.
+ * OVERLAPPED is therefore an opaque tag here: source that passes the
+ * required NULL compiles, while code that instantiates an OVERLAPPED
+ * (an unsupported CE construct) does not. */
+typedef struct _OVERLAPPED OVERLAPPED;
+typedef OVERLAPPED *LPOVERLAPPED;
+/* CE: "Unsupported; set to NULL" (ms891445, ms892380). */
+
+/* SetFilePointer dwMoveMethod starting points (ms891933 lists the
+ * FILE_BEGIN/FILE_CURRENT/FILE_END names; the numeric values are the
+ * Win32 ABI values of Microsoft's official File Management
+ * Constants reference). */
+#define FILE_BEGIN    0u
+#define FILE_CURRENT  1u
+#define FILE_END      2u
+
+/* INVALID_SET_FILE_POINTER: the SetFilePointer failure return.  The
+ * CE page (ms891933) notes that 0xFFFFFFFF is at the same time a
+ * valid new file pointer position (CE file sizes are limited to
+ * 0xFFFFFFFF), so failure must be distinguished with GetLastError.
+ * Name/value per the Win32 ABI. */
+#define INVALID_SET_FILE_POINTER ((DWORD)0xFFFFFFFFu)
+
+/* ms891445 "ReadFile (Windows CE 5.0)":
+ * BOOL ReadFile(HANDLE, LPVOID, DWORD, LPDWORD, LPOVERLAPPED).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Reads up to
+ * nNumberOfBytesToRead bytes from the current file pointer of hFile
+ * (which must have been opened with GENERIC_READ and cannot be a
+ * socket handle).  lpNumberOfBytesRead receives the count read; it is
+ * set to zero before any work or error checking.  lpOverlapped is
+ * unsupported -- set to NULL.  At end of file ReadFile returns
+ * nonzero and stores zero in lpNumberOfBytesRead. */
+BOOL ReadFile(HANDLE hFile, LPVOID lpBuffer,
+              DWORD nNumberOfBytesToRead,
+              LPDWORD lpNumberOfBytesRead, LPOVERLAPPED lpOverlapped);
+
+/* ms892380 "WriteFile (Windows CE 5.0)":
+ * BOOL WriteFile(HANDLE, LPCVOID, DWORD, LPDWORD, LPOVERLAPPED).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Writes up to
+ * nNumberOfBytesToWrite bytes from lpBuffer at the current file
+ * pointer (hFile must have GENERIC_WRITE).  lpNumberOfBytesWritten
+ * receives the count and is zeroed before any work/error checking.
+ * A zero byte count is a "null write": no bytes are written but the
+ * file time stamp changes.  WriteFile never truncates -- use
+ * SetEndOfFile.  lpOverlapped is unsupported -- set to NULL. */
+BOOL WriteFile(HANDLE hFile, LPCVOID lpBuffer,
+               DWORD nNumberOfBytesToWrite,
+               LPDWORD lpNumberOfBytesWritten, LPOVERLAPPED lpOverlapped);
+
+/* ms890939 "GetFileSize (Windows CE 5.0)":
+ * DWORD GetFileSize(HANDLE, LPDWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Returns the low 32 bits of the file size; when
+ * lpFileSizeHigh is non-NULL it receives the high 32 bits.  A return
+ * of 0xFFFFFFFF signals failure -- call GetLastError to distinguish
+ * it from a legitimate 32-bit size. */
+DWORD GetFileSize(HANDLE hFile, LPDWORD lpFileSizeHigh);
+
+/* ms891933 "SetFilePointer (Windows CE 5.0)":
+ * DWORD SetFilePointer(HANDLE, LONG, PLONG, DWORD).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Moves the file pointer by
+ * lDistanceToMove bytes from the dwMoveMethod starting point and
+ * returns the new pointer position.  CE notes: lpDistanceToMoveHigh
+ * is not supported and must be NULL or point to a value of zero; CE
+ * file sizes are limited to 0xFFFFFFFF so the pointer cannot be moved
+ * past that value.  The return value 0xFFFFFFFF is ambiguous (it is
+ * also a valid position), so failure must be confirmed with
+ * GetLastError.  Not usable on non-seeking devices such as
+ * communications devices. */
+DWORD SetFilePointer(HANDLE hFile, LONG lDistanceToMove,
+                     PLONG lpDistanceToMoveHigh, DWORD dwMoveMethod);
+
+/* ms891916 "SetEndOfFile (Windows CE 5.0)":
+ * BOOL SetEndOfFile(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Truncates or extends the file so its end is at the current file
+ * pointer position (hFile must have GENERIC_WRITE; not usable on
+ * non-seeking devices).  When a file is extended, the contents
+ * between the old and new end positions are undefined. */
+BOOL SetEndOfFile(HANDLE hFile);
+
+/* ms890238 "FlushFileBuffers (Windows CE 5.0)":
+ * BOOL FlushFileBuffers(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Writes the buffered data of hFile to the underlying storage; for a
+ * communications-device handle it flushes the transmit buffer.  The
+ * handle must have GENERIC_WRITE access. */
+BOOL FlushFileBuffers(HANDLE hFile);
+
+/* ms891388 "MoveFile (Windows CE 5.0)":
+ * BOOL MoveFile(LPCTSTR, LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Renames or moves an existing file or directory, including all its
+ * children.  The new name must not already exist.  A file may be
+ * moved to a different file system or drive; a directory move across
+ * volumes fails.  Windows CE is Unicode-only, so the export is
+ * MoveFileW. */
+BOOL MoveFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName);
+#define MoveFile MoveFileW
+
+/* aa517309 "CopyFile (Windows CE 5.0)":
+ * BOOL CopyFile(LPCTSTR, LPCTSTR, BOOL).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Copies an existing file to a new file; the attribute
+ * bits of the source (for example FILE_ATTRIBUTE_READONLY) are copied
+ * to the destination.  bFailIfExists TRUE fails when the destination
+ * already exists, FALSE overwrites it.  CopyFile does not operate on
+ * directories.  Export is CopyFileW. */
+BOOL CopyFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName,
+               BOOL bFailIfExists);
+#define CopyFile CopyFileW
+
+/* aa517316 "CreateDirectory (Windows CE 5.0)":
+ * BOOL CreateDirectory(LPCTSTR, LPSECURITY_ATTRIBUTES).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Creates a new directory.  Only the final
+ * component of the path is created -- the function is not recursive,
+ * and a missing parent fails with ERROR_PATH_NOT_FOUND.  MAX_PATH is
+ * the default path length limit.  lpSecurityAttributes is ignored
+ * (set to NULL).  In CE 5.0 and later the path is canonicalized
+ * before use, so trailing backslashes are ignored.  Export is
+ * CreateDirectoryW. */
+BOOL CreateDirectoryW(LPCWSTR lpPathName,
+                      LPSECURITY_ATTRIBUTES lpSecurityAttributes);
+#define CreateDirectory CreateDirectoryW
+
+/* ms891470 "RemoveDirectory (Windows CE 5.0)":
+ * BOOL RemoveDirectory(LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Deletes an existing empty directory; the caller must have delete
+ * access to it.  For non-empty directories, applications first
+ * enumerate the contents with FindFirstFile/FindNextFile and delete
+ * the children with DeleteFile/RemoveDirectory.  Export is
+ * RemoveDirectoryW. */
+BOOL RemoveDirectoryW(LPCWSTR lpPathName);
+#define RemoveDirectory RemoveDirectoryW
+
+/* ms891925 "SetFileAttributes (Windows CE 5.0)":
+ * BOOL SetFileAttributes(LPCTSTR, DWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Sets the given FILE_ATTRIBUTE_* combination on a
+ * file; any other value overrides FILE_ATTRIBUTE_NORMAL (which is
+ * valid only alone).  FILE_ATTRIBUTE_DIRECTORY cannot be set with
+ * this function, and directories are created with CreateDirectory.
+ * The ROM file system is not affected (attribute support depends on
+ * the underlying file system driver).  MAX_PATH is the default path
+ * length limit.  Export is SetFileAttributesW. */
+BOOL SetFileAttributesW(LPCWSTR lpFileName, DWORD dwFileAttributes);
+#define SetFileAttributes SetFileAttributesW
+
+/* ------------------------------------------------------------------ */
 /* Time management (SYSTEMTIME + time conversion).                    */
 /* ------------------------------------------------------------------ */
 
