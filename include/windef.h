@@ -71,7 +71,13 @@ typedef CHAR           *LPSTR;
 typedef const CHAR     *LPCSTR;
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
-typedef DWORD          *LPDWORD;
+typedef DWORD *LPDWORD;
+
+/* MAX_PATH: default path length limit, cited by the CE CreateFile
+ * (aa517318), FindFirstFile (ms889678) and GetFileAttributes
+ * (ms890895) pages as the default string size limit for paths
+ * (Win32 ABI value 260). */
+#define MAX_PATH 260
 
 /* Windows CE is Unicode-only: the generic-text forms are the wide ones. */
 typedef WCHAR           TCHAR;

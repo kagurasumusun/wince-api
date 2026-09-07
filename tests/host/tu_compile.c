@@ -65,7 +65,46 @@ static const void *const api_symbols[] = {
     (const void *) &TlsGetValue,
     (const void *) &LoadLibraryEx,
     (const void *) &LoadLibraryExW,
+    (const void *) &CreateFile,
+    (const void *) &CreateFileW,
+    (const void *) &DeleteFile,
+    (const void *) &DeleteFileW,
+    (const void *) &FindFirstFile,
+    (const void *) &FindFirstFileW,
+    (const void *) &FindNextFile,
+    (const void *) &FindNextFileW,
+    (const void *) &FindClose,
+    (const void *) &GetFileAttributes,
+    (const void *) &GetFileAttributesW,
 };
+
+/* File structures: layout checks (winbase.h).  CE 32-bit: each
+ * FILETIME = 8 bytes; WIN32_FIND_DATAW has no alternate-name member
+ * on CE (dwOID instead), so offsetof(cFileName) must be 4+3*8+4+4+4
+ * = 40 and the total size 40+260*2 = 560. */
+typedef char assert_filetime_size[sizeof(FILETIME) == 8 ? 1 : -1];
+typedef char assert_finddata_offsets[
+    (offsetof(WIN32_FIND_DATAW, ftCreationTime) == 4 &&
+     offsetof(WIN32_FIND_DATAW, ftLastWriteTime) == 20 &&
+     offsetof(WIN32_FIND_DATAW, nFileSizeHigh) == 28 &&
+     offsetof(WIN32_FIND_DATAW, dwOID) == 36 &&
+     offsetof(WIN32_FIND_DATAW, cFileName) == 40 &&
+     sizeof(WIN32_FIND_DATAW) == 560) ? 1 : -1];
+
+/* File constants exercised (winbase.h + winerror.h). */
+typedef char assert_file_vals[
+    (MAX_PATH == 260 &&
+     FILE_ATTRIBUTE_READONLY == 1u &&
+     FILE_ATTRIBUTE_DIRECTORY == 0x10u &&
+     FILE_ATTRIBUTE_ENCRYPTED == 0x4000u &&
+     GENERIC_READ == 0x80000000u &&
+     GENERIC_WRITE == 0x40000000u &&
+     FILE_SHARE_READ == 1u &&
+     CREATE_NEW == 1u && CREATE_ALWAYS == 2u &&
+     OPEN_EXISTING == 3u && OPEN_ALWAYS == 4u &&
+     TRUNCATE_EXISTING == 5u &&
+     FILE_FLAG_WRITE_THROUGH == 0x80000000u &&
+     ERROR_NO_MORE_FILES == 18L) ? 1 : -1];
 
 /* TLS constants exercised (winbase.h). */
 typedef char assert_tls_vals[

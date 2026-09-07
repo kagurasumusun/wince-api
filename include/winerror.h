@@ -35,6 +35,10 @@ extern "C" {
  * (ms885186: NULL start address returns ERROR_INVALID_PARAMETER). */
 #define ERROR_INVALID_PARAMETER     87L
 
+/* ERROR_NO_MORE_FILES: cited by the CE FindNextFile page (ms889873:
+ * no more matching files). */
+#define ERROR_NO_MORE_FILES         18L
+
 /* ERROR_INSUFFICIENT_BUFFER / ERROR_NO_UNICODE_TRANSLATION: cited by
  * the CE conversion-function pages (ms915519 / ms961248). */
 #define ERROR_INSUFFICIENT_BUFFER  122L

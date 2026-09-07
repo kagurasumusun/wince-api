@@ -61,7 +61,18 @@ the official page body via the Learn archive.
 | `TlsSetValue` | `aa450951` | CE 1.0 and later | Winbase.h | Coredll.lib | minimal validation: index 0..TLS_MINIMUM_AVAILABLE-1 |
 | `TlsGetValue` | `aa450949` | CE 1.0 and later | Winbase.h | Coredll.lib | clears last error on success; NULL-before-set guaranteed only CE 3.0+ |
 | `LoadLibraryEx(W)` | `ms886737` | CE 3.0 and later | Winbase.h | Coredll.lib | hFile reserved NULL; flags per CE page: DONT_RESOLVE_DLL_REFERENCES, LOAD_LIBRARY_AS_DATAFILE (implies DONT_RESOLVE), LOAD_WITH_ALTERED_SEARCH_PATH = not supported; CE loads a module once so flags stick |
-| `NO_ERROR` (winerror.h) | `aa450949` | — | Winerror.h | — | cited by TlsGetValue page |
+| `CreateFile(W)` | `aa517318` | CE 1.0 and later | Winbase.h | Coredll.lib | security attr + template ignored (NULL); no current dir; \Windows+root search; ROM modules not accessible; INVALID_HANDLE_VALUE on failure; export CreateFileW |
+| `DeleteFile(W)` | `ms889001` | CE 1.0 and later | Winbase.h | Coredll.lib | fails if missing or open/mapped; dirs need RemoveDirectory; export DeleteFileW |
+| `GetFileAttributes(W)` | `ms890895` | CE 1.0 and later | Winbase.h | Coredll.lib | 0xFFFFFFFF failure; attribute list incl. CE ROM attrs; export GetFileAttributesW |
+| `FindFirstFile(W)` | `ms889678` | CE 1.0 and later | Winbase.h | Coredll.lib | wildcards `*`/`?`; INVALID_HANDLE_VALUE failure; name-only search; export FindFirstFileW |
+| `FindNextFile(W)` | `ms889873` | CE 1.0 and later | Winbase.h | Coredll.lib | ERROR_NO_MORE_FILES at end; export FindNextFileW |
+| `FindClose` | `ms889619` | CE 1.0 and later | Winbase.h | Coredll.lib | file search handles only (DB handles: CloseHandle) |
+| `FILETIME` struct | `ms885586` | CE 1.0 and later | Winbase.h | — | 100ns since 1601; low/high DWORD halves |
+| `WIN32_FIND_DATAW` struct | `ms892378` | CE 1.0 and later | Winbase.h | — | CE layout: dwOID, no cAlternateFileName; UTC times; long-name support |
+| `FILE_ATTRIBUTE_*` / GENERIC / share / disposition / flag constants | names per CE pages (`aa517318`, `ms892378`, `ms890895`); values per official Win32 File Attribute Constants + Generic Access Rights references (INROM/ROMMODULE bit values parity-checked) | — | Winbase.h | — | ROMSTATICREF named by CE pages but value not yet defined (pending official numeric source) |
+| `MAX_PATH` (windef.h) | cited by `aa517318`/`ms889678`/`ms890895` | — | Windef.h | — | Win32 ABI value 260 |
+| `ERROR_NO_MORE_FILES` | `ms889873` | — | Winerror.h | — | value 18 |
+| `INVALID_HANDLE_VALUE` | `aa517318`/`ms889678` | — | Winbase.h | — | ((HANDLE)-1) |
 | Export defs (`def/coredll{,4,6,-x86}.def`) | names/ordinals = OS facts from the device-dump-audited toolchain export surface | — | — | coredll.dll | generation mapping: coredll=CE5, coredll4=CE4, coredll6=CE6 ARM, coredll6-x86=CE6 x86 |
 
 ### Documented conflicts (official page vs verified export surface)

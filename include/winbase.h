@@ -407,6 +407,149 @@ HINSTANCE LoadLibraryExW(LPCWSTR lpLibFileName, HANDLE hFile,
 #define LOAD_LIBRARY_AS_DATAFILE      0x00000002u
 #define LOAD_WITH_ALTERED_SEARCH_PATH 0x00000008u
 
+/* ------------------------------------------------------------------ */
+/* File management                                                    */
+/* ------------------------------------------------------------------ */
+
+/* ms885586 "FILETIME (Windows CE 5.0)": 64-bit value counting
+ * 100-nanosecond intervals since January 1, 1601; used by the file
+ * time conversion functions.  CE 1.0+; Winbase.h. */
+typedef struct _FILETIME {
+    DWORD dwLowDateTime;   /* low 32 bits of the date/time value */
+    DWORD dwHighDateTime;  /* upper 32 bits of the date/time value */
+} FILETIME, *PFILETIME, *LPFILETIME;
+
+/* ms892378 "WIN32_FIND_DATA (Windows CE 5.0)": filled by
+ * FindFirstFile/FindNextFile.  CE 1.0+; Winbase.h.  CE layout per
+ * the page: the file times are UTC (zero if the file system does
+ * not support them), the size is nFileSizeHigh*2^32+nFileSizeLow,
+ * dwOID is the object-store object identifier, cFileName is a
+ * null-terminated name (long names appear in full).  Unlike the
+ * desktop layout there is no cAlternateFileName member on CE. */
+typedef struct _WIN32_FIND_DATAW {
+    DWORD    dwFileAttributes;
+    FILETIME ftCreationTime;
+    FILETIME ftLastAccessTime;
+    FILETIME ftLastWriteTime;
+    DWORD    nFileSizeHigh;
+    DWORD    nFileSizeLow;
+    DWORD    dwOID;
+    WCHAR    cFileName[MAX_PATH];
+} WIN32_FIND_DATAW, *PWIN32_FIND_DATAW, *LPWIN32_FIND_DATAW;
+typedef WIN32_FIND_DATAW WIN32_FIND_DATA;
+typedef LPWIN32_FIND_DATAW LPWIN32_FIND_DATA;
+
+/* File attribute constants.  The common values below are the
+ * Win32/CE ABI bit values published in Microsoft's official File
+ * Attribute Constants reference (WinNT.h); FILE_ATTRIBUTE_INROM and
+ * FILE_ATTRIBUTE_ROMMODULE are the CE ROM-file attributes named by
+ * the CE WIN32_FIND_DATA (ms892378) and GetFileAttributes (ms890895)
+ * pages -- their CE bit values were cross-checked for parity only
+ * (INROM reuses the desktop DEVICE bit position 0x40, ROMMODULE the
+ * NOT_CONTENT_INDEXED position 0x2000).  FILE_ATTRIBUTE_ROMSTATICREF
+ * is named by the same CE pages but its value is not defined here
+ * pending an official numeric source. */
+#define FILE_ATTRIBUTE_READONLY   0x00000001u
+#define FILE_ATTRIBUTE_HIDDEN     0x00000002u
+#define FILE_ATTRIBUTE_SYSTEM     0x00000004u
+#define FILE_ATTRIBUTE_DIRECTORY  0x00000010u
+#define FILE_ATTRIBUTE_ARCHIVE    0x00000020u
+#define FILE_ATTRIBUTE_INROM      0x00000040u
+#define FILE_ATTRIBUTE_NORMAL     0x00000080u
+#define FILE_ATTRIBUTE_TEMPORARY  0x00000100u
+#define FILE_ATTRIBUTE_SPARSE_FILE 0x00000200u
+#define FILE_ATTRIBUTE_REPARSE_POINT 0x00000400u
+#define FILE_ATTRIBUTE_COMPRESSED 0x00000800u
+#define FILE_ATTRIBUTE_ROMMODULE  0x00002000u
+#define FILE_ATTRIBUTE_ENCRYPTED  0x00004000u
+
+/* Generic access rights (CreateFile dwDesiredAccess; values per
+ * Microsoft's official Generic Access Rights reference). */
+#define GENERIC_READ    0x80000000u
+#define GENERIC_WRITE   0x40000000u
+#define GENERIC_EXECUTE 0x20000000u
+#define GENERIC_ALL     0x10000000u
+
+/* Share modes (CreateFile dwShareMode; ms885182 CreateFile page
+ * lists FILE_SHARE_READ/FILE_SHARE_WRITE; Win32 ABI values). */
+#define FILE_SHARE_READ   0x00000001u
+#define FILE_SHARE_WRITE  0x00000002u
+
+/* Creation dispositions (CreateFile dwCreationDisposition; per the
+ * CE CreateFile page aa517318; Win32 ABI values). */
+#define CREATE_NEW          1u
+#define CREATE_ALWAYS       2u
+#define OPEN_EXISTING       3u
+#define OPEN_ALWAYS         4u
+#define TRUNCATE_EXISTING   5u
+
+/* Flags and attributes (CreateFile dwFlagsAndAttributes; per the CE
+ * CreateFile page aa517318; Win32 ABI values).  FILE_ATTRIBUTE_
+ * values are above; FILE_FLAG_OVERLAPPED is listed by the CE page as
+ * "not supported", but the name/value is kept for source
+ * compatibility with code written for the Win32 ABI. */
+#define FILE_FLAG_WRITE_THROUGH   0x80000000u
+#define FILE_FLAG_OVERLAPPED      0x40000000u
+#define FILE_FLAG_RANDOM_ACCESS   0x10000000u
+
+/* aa517318 "CreateFile (Windows CE 5.0)":
+ * HANDLE CreateFile(LPCTSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES,
+ *                   DWORD, DWORD, HANDLE).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Creates/opens files, COM ports, devices, services,
+ * consoles.  CE notes: lpSecurityAttributes ignored (NULL);
+ * hTemplateFile ignored; no current-directory concept (relative
+ * names resolve against \Windows and the root); ROM modules cannot
+ * be opened; CONn: opens the console if present; use CloseHandle on
+ * the returned handle; INVALID_HANDLE_VALUE on failure.  Export is
+ * CreateFileW. */
+HANDLE CreateFileW(LPCWSTR lpFileName, DWORD dwDesiredAccess,
+                   DWORD dwShareMode,
+                   LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+                   DWORD dwCreationDisposition,
+                   DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
+#define CreateFile CreateFileW
+
+/* ms889001 "DeleteFile (Windows CE 5.0)": BOOL DeleteFile(LPCTSTR).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Fails if the file does not
+ * exist or is open for I/O or memory-mapped; does not delete
+ * directories (use RemoveDirectory).  Export is DeleteFileW. */
+BOOL DeleteFileW(LPCWSTR lpFileName);
+#define DeleteFile DeleteFileW
+
+/* ms890895 "GetFileAttributes (Windows CE 5.0)":
+ * DWORD GetFileAttributes(LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Returns the file/directory attributes (one or more FILE_ATTRIBUTE_
+ * values); 0xFFFFFFFF on failure.  Export is GetFileAttributesW. */
+DWORD GetFileAttributesW(LPCWSTR lpFileName);
+#define GetFileAttributes GetFileAttributesW
+
+/* ms889678 "FindFirstFile (Windows CE 5.0)":
+ * HANDLE FindFirstFile(LPCTSTR, LPWIN32_FIND_DATA).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Opens a search handle and returns data
+ * on the first match; * and ? wildcards allowed in the name; fails
+ * with INVALID_HANDLE_VALUE; close the handle with FindClose.
+ * Export is FindFirstFileW. */
+HANDLE FindFirstFileW(LPCWSTR lpFileName, LPWIN32_FIND_DATAW lpFindFileData);
+#define FindFirstFile FindFirstFileW
+
+/* ms889873 "FindNextFile (Windows CE 5.0)":
+ * BOOL FindNextFile(HANDLE, LPWIN32_FIND_DATA).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Continues the search from FindFirstFile; when no
+ * more files match, fails and GetLastError returns
+ * ERROR_NO_MORE_FILES.  Export is FindNextFileW. */
+BOOL FindNextFileW(HANDLE hFindFile, LPWIN32_FIND_DATAW lpFindFileData);
+#define FindNextFile FindNextFileW
+
+/* ms889619 "FindClose (Windows CE 5.0)": BOOL FindClose(HANDLE).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Closes a search handle opened
+ * by FindFirstFile; the handle must not be used afterwards. */
+BOOL FindClose(HANDLE hFindFile);
+
+/* INVALID_HANDLE_VALUE: failure return of handle-opening functions
+ * (cited by the CE CreateFile aa517318 and FindFirstFile ms889678
+ * pages). */
+#define INVALID_HANDLE_VALUE ((HANDLE)-1)
+
 #ifdef __cplusplus
 }
 #endif
