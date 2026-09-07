@@ -201,6 +201,31 @@ declarations, recorded in `docs/inventory.md`):
   LocalReAlloc/LocalSize, GlobalMemoryStatus + MEMORYSTATUS,
   IsBadCodePtr/IsBadReadPtr/IsBadWritePtr).  `def/coredll-doc.def`
   regenerated 53 → 77 name-only exports.
+* **M15 (landed):** Registry Reference — new `include/winreg.h`
+  (RegOpenKeyExW/RegCreateKeyExW/RegEnum*/RegQuery*/RegSetValueEx,
+  CeFind*RegChange, HKEY/REGSAM/REG_* constants).  def 100 → 114.
+* **M16 (landed):** NLS part 1 (locale/code-page getters, CompareString,
+  GetStringTypeW/Ex, CPINFO; LANGID/LCID; MAKELANGID/MAKELCID in
+  winnt.h).  def 114 → 115.
+* **M17 (landed):** File I/O continuation (change notifications,
+  FindFirstFileEx + enum levels, GetFileAttributesEx/GetDiskFreeSpaceEx/
+  GetFileInformationByHandle + CE dwOID record, GetTempPath/FileName,
+  LockFileEx/UnlockFileEx, DeleteAndRenameFile, GetFileVersionInfo*).
+  def 115 → 147.
+* **M18 (landed):** ToolHelp Reference — new `include/tlhelp32.h`
+  (snapshot enumeration + PROCESSENTRY32/THREADENTRY32/MODULEENTRY32/
+  HEAPLIST32/HEAPENTRY32 with their CE-only members).
+* **M19 (landed):** Strings Reference (Char*Lower/Upper*, CharNext/
+  CharPrev, IsChar*, wsprintfW/wvsprintfW, LoadString) and def
+  generation generalized to one def per documented Link Library
+  (coreloc/toolhelp/lmem/loadstr + coredll).
+* **M20/M20b (landed):** File Mapping Reference (CreateFileForMapping/
+  CreateFileMapping/MapViewOfFile/UnmapViewOfFile/FlushViewOfFile),
+  DisableThreadLibraryCalls + DLL_* reason constants, new
+  `include/psapi.h` (MODULEINFO/GetModuleInformation).  def 148 → 154.
+* **M21 (landed):** GetStoreInformation + STORE_INFORMATION,
+  CeGenRandom/CeGetCanonicalPathName/CeGetFileNotificationInfo,
+  FILE_NOTIFY_INFORMATION/FILE_ACTION_* (winnt.h).  def 154 → 158.
 * **M11 (landed):** System Management Reference (part 1) — SYSTEM_INFO
   + GetSystemInfo `ms885638`/`aa450921`, OSVERSIONINFO + GetVersionEx
   `ms885648`/`ms886768`, SignalStarted `aa450898` (PROCESSOR_
