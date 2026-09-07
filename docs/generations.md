@@ -130,3 +130,12 @@ local/global memory completion, string functions (lstrlen/lstrcpy/
 ...), and the winuser.h (GUI) / winreg.h (registry) header sets.
 Category index pages to mine: Process and Thread Functions
 `aa450760` and the winuser/winreg category indices.
+
+**M11 batch — System Management Reference (part 1):** GetSystemInfo
+`ms885638`, SYSTEM_INFO `aa450921`, GetVersionEx `ms885648`,
+OSVERSIONINFO `ms886768`, SignalStarted `aa450898` (+ the
+PROCESSOR_ARCHITECTURE_* and VER_PLATFORM_* constants with fixed
+Win32 ABI values).  QueryInstructionSet `ms886787`,
+IsProcessorFeaturePresent `ms886726` and VerQueryValue `aa450973` are
+recorded as deferred (unpublished numeric flag values / Coredll.dll
+row); rows in `docs/inventory.md`.  Def: 77 -> 80 exports.

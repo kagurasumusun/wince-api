@@ -1226,6 +1226,95 @@ BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount);
  * counter frequency, in counts per second. */
 BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency);
 
+/* ------------------------------------------------------------------ */
+/* System information (M11): GetSystemInfo, GetVersionEx, version     */
+/* ------------------------------------------------------------------ */
+
+/* aa450921 "SYSTEM_INFO (Windows CE 5.0)": information about the
+ * current computer system filled by GetSystemInfo.  CE 1.0+;
+ * Winbase.h.  Layout is the union followed by the six DWORD pointers
+ * / masks and the trailing WORD pair exactly as the page prints it
+ * (anonymous union/struct, so dwOemId and the architecture WORDs
+ * share storage).  Names of the documented wProcessorArchitecture /
+ * dwProcessorType values are listed in the member comments; only
+ * PROCESSOR_ARCHITECTURE_* macros are defined, with the fixed Win32
+ * ABI values. */
+typedef struct _SYSTEM_INFO {
+    union {
+        DWORD dwOemId;                 /* obsolete; do not use */
+        struct {
+            WORD wProcessorArchitecture;
+            WORD wReserved;
+        };
+    };
+    DWORD dwPageSize;
+    LPVOID lpMinimumApplicationAddress;
+    LPVOID lpMaximumApplicationAddress;
+    DWORD dwActiveProcessorMask;
+    DWORD dwNumberOfProcessors;
+    DWORD dwProcessorType;             /* obsolete; see architecture */
+    DWORD dwAllocationGranularity;
+    WORD wProcessorLevel;
+    WORD wProcessorRevision;
+} SYSTEM_INFO, *LPSYSTEM_INFO;
+
+/* wProcessorArchitecture values documented by aa450921 (INTEL, MIPS,
+ * UNKNOWN, SHX, ARM); numeric values are the fixed Win32 ABI values
+ * (Microsoft's official processor-architecture reference). */
+#define PROCESSOR_ARCHITECTURE_INTEL    0
+#define PROCESSOR_ARCHITECTURE_MIPS     1
+#define PROCESSOR_ARCHITECTURE_SHX      4
+#define PROCESSOR_ARCHITECTURE_ARM      5
+#define PROCESSOR_ARCHITECTURE_UNKNOWN  0xFFFF
+
+/* dwProcessorType values named by aa450921 (PROCESSOR_INTEL_386/486/
+ * PENTIUM/PENTIUMII, PROCESSOR_MIPS_R4000/R5000, PROCESSOR_HITACHI_
+ * SH3/SH4, PROCESSOR_ARM720, PROCESSOR_STRONGARM, PROCESSOR_SHx_
+ * SH3DSP).  The page marks the member obsolete and publishes no
+ * numeric values; none are defined here (unknown facts stay
+ * undefined rather than invented). */
+
+/* ms885638 "GetSystemInfo (Windows CE 5.0)":
+ * VOID GetSystemInfo(LPSYSTEM_INFO).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Fills lpSystemInfo; CeGetSystemInfo is the RAPI equivalent. */
+VOID GetSystemInfo(LPSYSTEM_INFO lpSystemInfo);
+
+/* ms886768 "OSVERSIONINFO (Windows CE 5.0)": OS version report filled
+ * by GetVersionEx.  CE 1.0+; Winbase.h.  The page typedefs only
+ * OSVERSIONINFO (whose szCSDVersion member is TCHAR = WCHAR on CE);
+ * LPOSVERSIONINFO is the pointer form the GetVersionEx page's
+ * signature uses.  Caller sets dwOSVersionInfoSize first. */
+typedef struct _OSVERSIONINFO {
+    DWORD dwOSVersionInfoSize;
+    DWORD dwMajorVersion;
+    DWORD dwMinorVersion;
+    DWORD dwBuildNumber;
+    DWORD dwPlatformId;
+    TCHAR szCSDVersion[128];
+} OSVERSIONINFO, *LPOSVERSIONINFO;
+
+/* dwPlatformId values documented by ms886768 (WIN32s / WIN32_WINDOWS
+ * / WIN32_NT / WIN32_CE); numeric values are the fixed Win32 ABI
+ * values.  GetVersionEx's remarks state CE fills
+ * VER_PLATFORM_WIN32_CE. */
+#define VER_PLATFORM_WIN32s          0
+#define VER_PLATFORM_WIN32_WINDOWS   1
+#define VER_PLATFORM_WIN32_NT        2
+#define VER_PLATFORM_WIN32_CE        3
+
+/* ms885648 "GetVersionEx (Windows CE 5.0)":
+ * BOOL GetVersionEx(LPOSVERSIONINFO).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Fills the OSVERSIONINFO the caller sized up front; failure (e.g.
+ * bad dwOSVersionInfoSize) sets the last error. */
+BOOL GetVersionEx(LPOSVERSIONINFO lpVersionInformation);
+
+/* aa450898 "SignalStarted (Windows CE 5.0)":
+ * VOID SignalStarted(DWORD).  CE 2.10+; Winbase.h; Coredll.lib.
+ * Called by applications the kernel starts via HKEY_LOCAL_MACHINE\
+ * \Init once initialization is complete; dw is the sequence number
+ * passed on the command line. */
+VOID SignalStarted(DWORD dw);
+
 #ifdef __cplusplus
 }
 #endif

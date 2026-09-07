@@ -33,9 +33,11 @@ EXPORTS
   GetModuleFileNameW
   GetModuleHandleW
   GetProcAddressW
+  GetSystemInfo
   GetSystemTime
   GetThreadPriority
   GetTickCount
+  GetVersionEx
   GlobalMemoryStatus
   HeapAlloc
   HeapCompact
@@ -78,6 +80,7 @@ EXPORTS
   SetLocalTime
   SetSystemTime
   SetThreadPriority
+  SignalStarted
   Sleep
   SuspendThread
   SystemTimeToFileTime

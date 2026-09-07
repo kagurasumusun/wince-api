@@ -156,6 +156,10 @@ static const void *const api_symbols[] = {
     (const void *) &SetDaylightTime,
     (const void *) &QueryPerformanceCounter,
     (const void *) &QueryPerformanceFrequency,
+    /* M11: system information. */
+    (const void *) &GetSystemInfo,
+    (const void *) &GetVersionEx,
+    (const void *) &SignalStarted,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -293,6 +297,34 @@ typedef char assert_memstatus_layout[
      offsetof(MEMORYSTATUS, dwMemoryLoad) == 4 &&
      offsetof(MEMORYSTATUS, dwAvailVirtual) == 28 &&
      sizeof(MEMORYSTATUS) == 32) ? 1 : -1];
+
+/* M11 system-information layout (winbase.h, from the CE pages):
+ * SYSTEM_INFO is 36 bytes on 32-bit CE (union + 7 DWORDs + 2 WORDs)
+ * with the anonymous dwOemId union first; OSVERSIONINFO is
+ * 5 DWORDs + 128 TCHARs = 276 bytes. */
+#if __SIZEOF_POINTER__ == 4
+/* SYSTEM_INFO layout is pointer-dependent; checked only on 32-bit
+ * hosts and, precisely, by the CE toolchain matrix (32-bit model). */
+typedef char assert_sysinfo_layout[
+    (offsetof(SYSTEM_INFO, dwPageSize) == 4 &&
+     offsetof(SYSTEM_INFO, lpMinimumApplicationAddress) == 8 &&
+     offsetof(SYSTEM_INFO, dwAllocationGranularity) == 28 &&
+     offsetof(SYSTEM_INFO, wProcessorLevel) == 32 &&
+     offsetof(SYSTEM_INFO, wProcessorRevision) == 34 &&
+     sizeof(SYSTEM_INFO) == 36) ? 1 : -1];
+#endif
+typedef char assert_osversioninfo_layout[
+    (offsetof(OSVERSIONINFO, dwPlatformId) == 16 &&
+     offsetof(OSVERSIONINFO, szCSDVersion) == 20 &&
+     sizeof(OSVERSIONINFO) == 276) ? 1 : -1];
+typedef char assert_sysinfo_vals[
+    (PROCESSOR_ARCHITECTURE_INTEL == 0 &&
+     PROCESSOR_ARCHITECTURE_ARM == 5 &&
+     PROCESSOR_ARCHITECTURE_UNKNOWN == 0xFFFF &&
+     VER_PLATFORM_WIN32s == 0 &&
+     VER_PLATFORM_WIN32_WINDOWS == 1 &&
+     VER_PLATFORM_WIN32_NT == 2 &&
+     VER_PLATFORM_WIN32_CE == 3) ? 1 : -1];
 
 static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,
@@ -545,6 +577,23 @@ static int m10_shaped_usage(void)
     return (ticks == (DWORD) -1) ? (int) ERROR_INVALID_PARAMETER : ok;
 }
 
+/* M11 usage shape: system-information report (compile-only; never
+ * linked/run). */
+static int m11_shaped_usage(void)
+{
+    SYSTEM_INFO si;
+    OSVERSIONINFO ovi;
+
+    GetSystemInfo(&si);
+    if (si.dwPageSize == 0)
+        return (int) GetLastError();
+    ovi.dwOSVersionInfoSize = (DWORD) sizeof(OSVERSIONINFO);
+    if (!GetVersionEx(&ovi))
+        return (int) GetLastError();
+    SignalStarted(0);
+    return ovi.dwPlatformId == VER_PLATFORM_WIN32_CE ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -554,5 +603,7 @@ int host_tu_entry(void)
         return 1;
     if (sync_shaped_usage() != 0)
         return 1;
-    return m10_shaped_usage() == 0 ? 0 : 1;
+    if (m10_shaped_usage() != 0)
+        return 1;
+    return m11_shaped_usage() == 0 ? 0 : 1;
 }
