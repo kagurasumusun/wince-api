@@ -478,3 +478,35 @@ twin map docs/ce6-twins.tsv and reproducible resolver
 tools/ce-twins.py.  winuser.h gains COPYDATASTRUCT (fixed Win32 ABI
 structure reference; CE page aa453921 types WM_COPYDATA lParam with it;
 12 bytes on the 32-bit ABI).  Host + six CE targets pass warning-free.
+
+
+**M34 (a+b) -- Windows CE .NET tree read in full; NLS string mapping
++ directory-service user-name batch; pages4 corpus.**
+
+The Windows CE .NET archive -- the earliest *complete* CE tree on
+Learn, documenting CE 1.0 through CE .NET 4.2 -- was harvested
+end-to-end: **6,361/6,363 catalog leaves** saved and pushed to the
+page corpus as `pages4/` (see docs/cenet-readout.md).  Catalog
+anomalies recorded: `dd320882(v=vs.100)` is a foreign Visual Studio
+leaf (CE URL verified 404, excluded), one row duplicates an id, and
+ms938306 is the archive's `#message` sign-in stub (kept as published).
+Fetch engineering note: the Learn CDN rate-limits at ~1000 rapid
+requests (HTTP 429); bursts of ~550 pages at 6 parallel workers with
+150 s pauses completed all 12 bursts with zero throttling.
+
+Parsed records: `build/rows4.json` 6,361 leaves, 4,030 with a
+Requirements/OS/Header/Library row, 1,709 with a documented prototype.
+OS-span rows carried: CE 1.0 (207), 1.01 (28), 2.0 (547), 2.10 (190),
+2.12 (176), 3.0 (772), .NET 4.0 (1,918), 4.1 (110), 4.2 (69) --
+the Requirement evidence for CE 1.0-4.x.  Cross-tree union: 1,373 of
+the 1,674 plain-identifier signature leaves also exist in both the CE
+5.0 and CE 6.0 catalogs by exact title.
+
+Implementation (M34a, commit a024b2c): winnls.h gained
+LCMapStringW/FoldStringW/EnumSystemCodePagesW (+ CODEPAGE_ENUMPROC
+callback typedef from the EnumCodePagesProc page); winbase.h gained
+GetUserNameExW with the CE EXTENDED_NAME_FORMAT enum incl. the
+CE-specific NameWindowsCeLocal = 0x80000001 member.  All four are
+Unicode-only exports (gen-doc-def.py UNICODE_ONLY).  Exports 622 ->
+626 (coredll 363->364, coreloc 30->33).  Host + six CE targets pass
+warning-free; enum members static-asserted in the host TU.

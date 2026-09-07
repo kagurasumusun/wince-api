@@ -48,18 +48,25 @@ Then delete the corpus clone and `build/` from the session.
 
 ## Current corpus (2026-09-08)
 
-* `pages5/`: 1175 CE 5.0 pages (the full committed manifest set —
-  69 manifests, every harvest through M30).
-* `pages6/`: **1133 CE 6.0 twins** of the full harvested CE 5.0
-  corpus (every resolvable leaf; the CE 5.0 index pages have no CE 6.0
-  leaf).  Reconciliation: `docs/ce6-reconciliation.md`; twin map
-  `docs/ce6-twins.tsv`.
-* `rows.json`: 1175 Requirement-row records.
-* CE 6.0 fetch URL form: `https://learn.microsoft.com/.../previous-versions/
-  windows/embedded/<id>(v=winembedded.60)` (the official catalog stores
-  the id *with* the `(v=winembedded.60)` suffix; strip it before
-  building the URL).
-
-New trees (CE .NET `(v=msdn.10)` API leaves) will be added as
-`pages4/` when those books are opened (see `docs/ce-api-census.md` /
-`docs/version-coverage.md` for the per-version tree sizes).
+* `pages5/`: 1176 CE 5.0 `(v=msdn.10)` pages — the full committed
+  manifest set (69 manifests) plus the M34a type/callback pages
+  (aa450831 EXTENDED_NAME_FORMAT, ms904723 EnumCodePagesProc).
+* `pages6/`: 1134 CE 6.0 `(v=winembedded.60)` pages — the twins of the
+  CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
+  CE 6.0 leaf) plus the M34a twins ee483142 / ee491122.
+* `pages4/`: **6361 Windows CE .NET `(v=msdn.10)` pages — the full
+  earliest-complete CE tree, read end-to-end in M34**
+  (see `docs/cenet-readout.md`).  One catalog leaf,
+  `dd320882(v=vs.100)` "IsValidPtrIn", is a foreign Visual Studio page
+  cross-linked by the archived TOC: its CE URL is a verified 404 and
+  it is excluded; one preserved page (ms938306) is the archive's
+  `#message` sign-in-gated stub, kept as published.
+* `rows.json`: 1175 CE 5.0 Requirement-row records; `rows4.json` (in
+  `build/`, regenerable via `tools/cenet-rows.py`) holds the 6361 CE
+  .NET parsed records.
+* Catalog caveats: the CE 6.0 catalog stores ids with the
+  `(v=winembedded.60)` suffix (strip it before fetching); the CE .NET
+  catalog is `(v=msdn.10)` except the single foreign `(v=vs.100)`
+  row.  Rate limiting: the Learn CDN returns HTTP 429 after ~1000
+  rapid requests; harvest in bursts (~550 at 6 parallel) with pauses
+  (see docs/cenet-readout.md).

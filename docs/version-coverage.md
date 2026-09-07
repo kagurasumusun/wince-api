@@ -83,16 +83,13 @@ inventory row for the CE 6.0 twins).
   M29 (Image List) function signatures were additionally recovered
   from the official CE 6.0 `(v=winembedded.60)` twins of the same
   books.
-* Declared exports in the shipped headers: 622 name-only exports
-  across 33 def files; `def/coredll-doc.def` alone lists 363, every one
-  traced to an official Link-Library row in `docs/inventory.md`.
-  M29 added `commctrl-doc.def` and `imgctl-doc.def` (31 exports each,
-  the Image List functions' documented `Commctrl.lib, Imgctl.lib.`
-  rows); M30 grew coredll 353 -> 360 and coreloc 23 -> 24
-  (SetUserDefaultLCID); M31 grew coredll 360 -> 363
-  (ReadProcessMemory / GetThreadContext / TranslateCharsetInfo); M32
-  grew coreloc 24 -> 30 (NLS formatting/locale-info W functions).
-
+* Declared exports in the shipped headers: **626** name-only exports
+  across 33 def files; `def/coredll-doc.def` lists 364 and
+  `def/coreloc-doc.def` 33, every one traced to an official
+  Link-Library row in `docs/inventory.md`.  M33 added COPYDATASTRUCT
+  (struct-only) and M34a added the NLS string-mapping /
+  directory-service user-name batch (LCMapStringW, FoldStringW,
+  EnumSystemCodePagesW -> coreloc 33; GetUserNameExW -> coredll 364).
 ## 4. Staged backlog (CE 5.0 Core OS Reference, remaining user-mode books)
 
 Feature-area GWES/GDI books opened in M26–M28.  The window-manager
@@ -142,3 +139,26 @@ generators do not depend on the exact nesting.
   multi-hour grind and Learn rate-limits burst requests; batch work is
   per-book, and the CE 5.0 ladder plus name-based twins above is the
   reconciliation method.
+
+## M34 status (CE .NET tree + cross-tree union)
+
+* The **Windows CE .NET tree is read in full**: 6,361 of its 6,363
+  catalog leaves harvested and preserved (`docs/cenet-readout.md`,
+  corpus `pages4/`).  One catalog leaf is foreign
+  (`dd320882(v=vs.100)`, a Visual Studio page cross-linked in the
+  archived TOC; CE URL verified 404); one preserved page (ms938306) is
+  the archive's `#message` sign-in-gated stub.
+* 4,030 of the CE .NET leaves carry a Requirements/OS/Header/Library
+  row; 1,709 document a prototype.  These pages are the OS-span
+  evidence for CE 1.0 -> CE .NET 4.2 (1.0: 207 pages, 2.0: 547,
+  2.10: 190, 2.12: 176, 3.0: 772, .NET 4.0: 1918, ...).
+* The CE .NET tree is component/add-on API material (OLE/COM ~880
+  leaves, multimedia ~370, security/network ~190, Bluetooth 82,
+  Coredll.lib function pages 318, coreimm 55, winsock2/tapi/ldap/snmp/
+  winscard) plus Platform Builder / driver / IDE / compiler-intrinsic
+  pages -- the base Win32-style reference lives in the CE 5.0 tree.
+* Name-based union across the three trees (same API, independent page
+  per version) is the reconciliation key: 1,373 of 1,674 CE .NET
+  signature leaves with plain-identifier titles exist in both the CE
+  5.0 and CE 6.0 catalogs by exact title (see the union table in
+  docs/cenet-readout.md for the M34a names).

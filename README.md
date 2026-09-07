@@ -161,6 +161,12 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M34 (landed):** Windows CE .NET tree read in full (6,361 leaves
+  -> corpus pages4/; rows4.json 4,030 Requirement-row pages; cross-tree
+  union vs CE 5.0/CE 6.0; docs/cenet-readout.md) + NLS string mapping
+  & directory-service user-name batch (LCMapStringW, FoldStringW,
+  EnumSystemCodePagesW, GetUserNameExW + CODEPAGE_ENUMPROC +
+  EXTENDED_NAME_FORMAT; exports 622 -> 626).
 * **M33 (landed):** CE 6.0 full-twin corpus + reconciliation
   (1133/1133 CE 6.0 twins of the harvested CE 5.0 corpus fetched and
   compared: 1039 identical Requirement rows; 51 categorized diffs --

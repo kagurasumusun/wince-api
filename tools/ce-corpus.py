@@ -19,7 +19,9 @@ version archive; page ids are unique per archive):
 
     pages5/<id>.html   ...  CE 5.0 archive      (v=msdn.10)
     pages6/<id>.html   ...  Windows Embedded CE 6.0  (v=winembedded.60)
-    (future: pages4/ for the CE .NET tree when harvested)
+    pages4/<id>.html   ...  Windows CE .NET archive   (v=msdn.10; the
+                            earliest complete CE tree, CE .NET 4.0-4.2
+                            product doc -- harvested in M34)
     rows.json          ...  the harvested Requirement records
     catalogs/*.tsv     ...  official TOC snapshots
     INDEX.txt          ...  id<TAB>title<TAB>tree of every preserved page
@@ -48,6 +50,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TREES = [
     ("pages", "pages5"),      # CE 5.0 archive, (v=msdn.10)
     ("pages6", "pages6"),     # Windows Embedded CE 6.0 archive
+    ("pages4", "pages4"),     # Windows CE .NET archive (v=msdn.10)
 ]
 
 
