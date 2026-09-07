@@ -1,0 +1,47 @@
+; commctrl-doc.def -- commctrl.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (commctrl.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY commctrl.dll
+EXPORTS
+  ImageList_Add
+  ImageList_AddMasked
+  ImageList_BeginDrag
+  ImageList_Copy
+  ImageList_Create
+  ImageList_DragEnter
+  ImageList_DragLeave
+  ImageList_DragMove
+  ImageList_DragShowNolock
+  ImageList_Draw
+  ImageList_DrawEx
+  ImageList_DrawIndirect
+  ImageList_Duplicate
+  ImageList_EndDrag
+  ImageList_GetBkColor
+  ImageList_GetDragImage
+  ImageList_GetIcon
+  ImageList_GetIconSize
+  ImageList_GetImageCount
+  ImageList_GetImageInfo
+  ImageList_LoadImage
+  ImageList_Merge
+  ImageList_Remove
+  ImageList_RemoveAll
+  ImageList_Replace
+  ImageList_ReplaceIcon
+  ImageList_SetBkColor
+  ImageList_SetDragCursorImage
+  ImageList_SetIconSize
+  ImageList_SetImageCount
+  ImageList_SetOverlayImage

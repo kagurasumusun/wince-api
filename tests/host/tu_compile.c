@@ -20,6 +20,7 @@
 #include <errorrep.h>
 #include <celog.h>
 #include <natedit.h>
+#include <commctrl.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -594,6 +595,25 @@ static const void *const api_symbols[] = {
     (const void *) &CeHandleAppNotifications,
     (const void *) &CeRunAppAtEvent, (const void *) &CeRunAppAtTime,
     (const void *) &CeSetUserNotification, (const void *) &CeSetUserNotificationEx,
+    /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
+    (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
+    (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,
+    (const void *) &ImageList_Create, (const void *) &ImageList_Destroy,
+    (const void *) &ImageList_DragEnter, (const void *) &ImageList_DragLeave,
+    (const void *) &ImageList_DragMove,
+    (const void *) &ImageList_DragShowNolock, (const void *) &ImageList_Draw,
+    (const void *) &ImageList_DrawEx, (const void *) &ImageList_DrawIndirect,
+    (const void *) &ImageList_Duplicate, (const void *) &ImageList_EndDrag,
+    (const void *) &ImageList_GetBkColor, (const void *) &ImageList_GetDragImage,
+    (const void *) &ImageList_GetIcon, (const void *) &ImageList_GetIconSize,
+    (const void *) &ImageList_GetImageCount,
+    (const void *) &ImageList_GetImageInfo, (const void *) &ImageList_LoadImage,
+    (const void *) &ImageList_Merge, (const void *) &ImageList_Remove,
+    (const void *) &ImageList_RemoveAll, (const void *) &ImageList_Replace,
+    (const void *) &ImageList_ReplaceIcon, (const void *) &ImageList_SetBkColor,
+    (const void *) &ImageList_SetDragCursorImage,
+    (const void *) &ImageList_SetIconSize, (const void *) &ImageList_SetImageCount,
+    (const void *) &ImageList_SetOverlayImage,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -2037,6 +2057,91 @@ static int m28_shaped_usage(void)
     return 0;
 }
 
+/* M29: Image List API + message/ROP constants -- typed calls and
+ * pointer-free layout checks; representative constant spot-checks. */
+static int m29_shaped_usage(void)
+{
+    HIMAGELIST himl = (HIMAGELIST)0;
+    (void) himl;
+    (void) ImageList_Add(himl, (HBITMAP)0, (HBITMAP)0);
+    (void) ImageList_AddMasked(himl, (HBITMAP)0, (COLORREF)0);
+    (void) ImageList_BeginDrag(himl, (int)0, (int)0, (int)0);
+    (void) ImageList_Copy(himl, (int)0, himl, (int)0, (UINT)0);
+    (void) ImageList_Create((int)0, (int)0, ILC_COLOR8 | ILC_MASK, (int)0, (int)0);
+    (void) ImageList_Destroy(himl);
+    (void) ImageList_DragEnter((HWND)0, (int)0, (int)0);
+    (void) ImageList_DragLeave((HWND)0);
+    (void) ImageList_DragMove((int)0, (int)0);
+    (void) ImageList_DragShowNolock((BOOL)0);
+    (void) ImageList_Draw(himl, (int)0, (HDC)0, (int)0, (int)0, ILD_NORMAL);
+    (void) ImageList_DrawEx(himl, (int)0, (HDC)0, (int)0, (int)0, (int)0,
+                            (int)0, CLR_NONE, CLR_DEFAULT, ILD_TRANSPARENT);
+    (void) ImageList_DrawIndirect((IMAGELISTDRAWPARAMS*)0);
+    (void) ImageList_Duplicate(himl);
+    (void) ImageList_EndDrag();
+    (void) ImageList_GetBkColor(himl);
+    (void) ImageList_GetDragImage((POINT*)0, (POINT*)0);
+    (void) ImageList_GetIcon(himl, (int)0, (UINT)0);
+    (void) ImageList_GetIconSize(himl, (int*)0, (int*)0);
+    (void) ImageList_GetImageCount(himl);
+    (void) ImageList_GetImageInfo(himl, (int)0, (IMAGEINFO*)0);
+    (void) ImageList_LoadImage((HINSTANCE)0, (LPCSTR)0, (int)0, (int)0,
+                               (COLORREF)0, IMAGE_BITMAP, (UINT)0);
+    (void) ImageList_Merge(himl, (int)0, himl, (int)0, (int)0, (int)0);
+    (void) ImageList_Remove(himl, (int)0);
+    (void) ImageList_RemoveAll(himl);
+    (void) ImageList_Replace(himl, (int)0, (HBITMAP)0, (HBITMAP)0);
+    (void) ImageList_ReplaceIcon(himl, (int)0, (HICON)0);
+    (void) ImageList_SetBkColor(himl, (COLORREF)0);
+    (void) ImageList_SetDragCursorImage(himl, (int)0, (int)0, (int)0);
+    (void) ImageList_SetIconSize(himl, (int)0, (int)0);
+    (void) ImageList_SetImageCount(himl, (UINT)0);
+    (void) ImageList_SetOverlayImage(himl, (int)0, (int)0);
+    (void) ImageList_AddIcon(himl, (HICON)0);
+    (void) ImageList_LoadBitmap((HINSTANCE)0, (LPCSTR)0, (int)0, (int)0,
+                                (COLORREF)0);
+    (void) ImageList_ExtractIcon((HINSTANCE)0, himl, (int)0);
+    /* Message identifiers + notification codes (spot checks + one
+     * expression spanning the control-notification space). */
+    if (!(WM_USER == 0x0400 && WM_CREATE == 0x0001 && WM_COMMAND == 0x0111
+          && WM_KEYDOWN == 0x0100 && WM_CHAR == 0x0102
+          && WM_DESTROY == 0x0002 && WM_QUIT == 0x0012
+          && WM_CTLCOLORBTN == 0x0135 && WM_CTLCOLORSTATIC == 0x0138
+          && WM_CTLCOLOREDIT == 0x0133 && WM_CTLCOLORLISTBOX == 0x0134
+          && BM_CLICK == 0x00F5 && STM_SETIMAGE == 0x0172
+          && DM_GETDEFID == 0x0400 && DM_SETDEFID == 0x0401
+          && CB_ADDSTRING == 0x0143 && LB_ADDSTRING == 0x0180
+          && EM_GETSEL == 0x00B0 && WM_UNDO == 0x0304
+          && WM_PAINT == 0x000F && WM_SETREDRAW == 0x000B
+          && WM_SYSCOLORCHANGE == 0x0015 && WM_QUERYNEWPALETTE == 0x030F
+          && WM_PALETTECHANGED == 0x0311 && WM_CUT == 0x0300
+          && WM_RENDERALLFORMATS == 0x0306 && WM_GETDLGCODE == 0x0087
+          && WM_NEXTDLGCTL == 0x0028 && WM_MENUCHAR == 0x0120
+          && WM_SYSCOMMAND == 0x0112 && WM_HOTKEY == 0x0312
+          && WM_INITMENUPOPUP == 0x0117 && WM_CONTEXTMENU == 0x007B))
+        return 1;
+    if (!(SRCCOPY == 0x00CC0020L && SRCPAINT == 0x00EE0086L
+          && SRCAND == 0x008800C6L && SRCINVERT == 0x00660046L
+          && NOTSRCCOPY == 0x00330008L && PATCOPY == 0x00F00021L
+          && PATPAINT == 0x00FB0A09L && DSTINVERT == 0x00550009L
+          && BLACKNESS == 0x00000042L && WHITENESS == 0x00FF0062L
+          && MERGECOPY == 0x00C000CAL && MERGEPAINT == 0x00BB0226L
+          && NOTSRCERASE == 0x001100A6L && SRCERASE == 0x00440328L
+          && PATINVERT == 0x005A0049L && R2_BLACK == 1 && R2_COPYPEN == 13
+          && R2_XORPEN == 7 && R2_NOT == 6 && R2_NOP == 11 && R2_WHITE == 16))
+        return 1;
+    if (!(IMAGE_BITMAP == 0 && IMAGE_ICON == 1 && IMAGE_CURSOR == 2))
+        return 1;
+#if __SIZEOF_POINTER__ == 4
+    /* IMAGEINFO (ms909781): 2 handles + 2 ints + RECT = 32 bytes on the
+     * 32-bit CE ABI; IMAGELISTDRAWPARAMS (ms909819) = 56 bytes. */
+    _Static_assert(sizeof(IMAGEINFO) == 32, "IMAGEINFO 32-bit size");
+    _Static_assert(sizeof(IMAGELISTDRAWPARAMS) == 56,
+                   "IMAGELISTDRAWPARAMS 32-bit size");
+#endif
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -2085,6 +2190,8 @@ int host_tu_entry(void)
     if (m27_shaped_usage() != 0)
         return 1;
     if (m28_shaped_usage() != 0)
+        return 1;
+    if (m29_shaped_usage() != 0)
         return 1;
     return 0;
 }

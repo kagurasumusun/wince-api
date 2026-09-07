@@ -887,6 +887,247 @@ BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
  * defined with the GDI types in wingdi.h -- see wingdi.h for the
  * declaration (its official page prints Header Winuser.h). */
 
+/* ------------------------------------------------------------------ */
+/* M29: window/control message identifiers and notification codes.   */
+/*                                                                     */
+/* Names and semantics come from the CE 5.0 GWES message books (each  */
+/* name carries its official (v=msdn.10) page id; notification-code   */
+/* pages belong to the owning control message book).  Windows CE GWES */
+/* implements the standard Win32 message protocol: the CE pages       */
+/* document each name, wParam and lParam without republishing the     */
+/* numeric identifier, so the numeric values are the fixed Win32 ABI  */
+/* message numbers (the same fixed-ABI policy as the SIF / SB / SW    */
+/* value macros above).  WM_USER (0x0400) is the base of the          */
+/* application-defined message range.                                 */
+/* ------------------------------------------------------------------ */
+#define WM_USER 0x0400
+
+/* --- GDI Messages --- */
+#define WM_PAINT                       0x000F         /* aa453891 */
+#define WM_SETREDRAW                   0x000B         /* aa453904 */
+#define WM_SYSCOLORCHANGE              0x0015         /* aa453910 */
+#define WM_QUERYNEWPALETTE             0x030F         /* aa453894 */
+#define WM_PALETTECHANGED              0x0311         /* aa453892 */
+
+/* --- Windows Messages --- */
+#define WM_CANCELMODE                  0x001F         /* ms914108 */
+#define WM_CLOSE                       0x0010         /* ms914114 */
+#define WM_CREATE                      0x0001         /* ms914118 */
+#define WM_DESTROY                     0x0002         /* aa453854 */
+#define WM_ENABLE                      0x000A         /* aa453856 */
+#define WM_ERASEBKGND                  0x0014         /* aa453858 */
+#define WM_GETTEXT                     0x000D         /* aa453864 */
+#define WM_GETTEXTLENGTH               0x000E         /* aa453865 */
+#define WM_MOVE                        0x0003         /* aa453887 */
+#define WM_QUIT                        0x0012         /* aa453895 */
+#define WM_SETTEXT                     0x000C         /* aa453905 */
+#define WM_SIZE                        0x0005         /* aa453907 */
+#define WM_STYLECHANGED                0x007D         /* aa453908 */
+#define WM_WINDOWPOSCHANGED            0x0047         /* aa453920 */
+
+/* --- Keyboard Messages --- */
+#define WM_ACTIVATE                    0x0006         /* ms914105 */
+#define WM_CHAR                        0x0102         /* ms914110 */
+#define WM_HOTKEY                      0x0312         /* aa453868 */
+#define WM_INITMENUPOPUP               0x0117         /* aa453872 */
+#define WM_KEYDOWN                     0x0100         /* aa453873 */
+#define WM_KEYUP                       0x0101         /* aa453876 */
+#define WM_KILLFOCUS                   0x0008         /* aa453877 */
+#define WM_MENUCHAR                    0x0120         /* aa453884 */
+#define WM_SETFOCUS                    0x0007         /* aa453901 */
+#define WM_SYSCHAR                     0x0106         /* aa453909 */
+#define WM_SYSCOMMAND                  0x0112         /* aa453911 */
+#define WM_SYSDEADCHAR                 0x0107         /* aa453913 */
+#define WM_SYSKEYDOWN                  0x0104         /* aa453914 */
+#define WM_SYSKEYUP                    0x0105         /* aa453915 */
+
+/* --- Buttons Messages --- */
+#define BM_CLICK                       0x00F5         /* aa452890 */
+#define BM_GETCHECK                    0x00F0         /* aa452891 */
+#define BM_GETSTATE                    0x00F2         /* aa452892 */
+#define BM_SETCHECK                    0x00F1         /* aa452893 */
+#define BM_SETSTATE                    0x00F3         /* aa452894 */
+#define BM_SETSTYLE                    0x00F4         /* aa452895 */
+#define BN_CLICKED                     0              /* aa452896 */
+#define BN_KILLFOCUS                   7              /* aa452897 */
+#define BN_SETFOCUS                    6              /* aa452898 */
+#define WM_CTLCOLORBTN                 0x0135         /* ms914119 */
+
+/* --- Static Controls Messages --- */
+#define STM_SETIMAGE                   0x0172         /* ms940367 */
+#define STM_GETIMAGE                   0x0173         /* ms940366 */
+#define STN_CLICKED                    0              /* ms940368 */
+#define STN_ENABLE                     2              /* ms940370 */
+#define STN_DISABLE                    3              /* ms940369 */
+#define WM_CTLCOLORSTATIC              0x0138         /* aa453851 */
+
+/* --- Menus Messages --- */
+#define WM_COMMAND                     0x0111         /* ms914115 */
+#define WM_CONTEXTMENU                 0x007B         /* ms914116 */
+#define WM_ENTERMENULOOP               0x0211         /* aa453857 */
+#define WM_EXITMENULOOP                0x0212         /* aa453859 */
+
+/* --- Dialog Boxes Messages --- */
+#define DM_GETDEFID                    (WM_USER + 0)   /* aa452962 */
+#define DM_SETDEFID                    (WM_USER + 1)   /* aa452963 */
+#define WM_CTLCOLORDLG                 0x0136         /* aa453847 */
+#define WM_GETDLGCODE                  0x0087         /* aa453861 */
+#define WM_INITDIALOG                  0x0110         /* aa453871 */
+#define WM_NEXTDLGCTL                  0x0028         /* aa453889 */
+
+/* --- Clipboards Messages --- */
+#define WM_CLEAR                       0x0303         /* ms914113 */
+#define WM_COPY                        0x0301         /* ms914117 */
+#define WM_CUT                         0x0300         /* aa453852 */
+#define WM_PASTE                       0x0302         /* aa453893 */
+#define WM_RENDERALLFORMATS            0x0306         /* aa453898 */
+#define WM_RENDERFORMAT                0x0305         /* aa453899 */
+#define WM_UNDO                        0x0304         /* aa453917 */
+
+/* --- Combo Boxes Messages --- */
+#define CB_GETEDITSEL                  0x0140         /* ms928352 */
+#define CB_LIMITTEXT                   0x0141         /* ms908045 */
+#define CB_SETEDITSEL                  0x0142         /* ms908063 */
+#define CB_ADDSTRING                   0x0143         /* aa452924 */
+#define CB_DELETESTRING                0x0144         /* aa452925 */
+#define CB_GETCOUNT                    0x0146         /* ms939290 */
+#define CB_GETCURSEL                   0x0147         /* ms939382 */
+#define CB_GETLBTEXT                   0x0148         /* ms928386 */
+#define CB_GETLBTEXTLEN                0x0149         /* ms928395 */
+#define CB_INSERTSTRING                0x014A         /* ms908036 */
+#define CB_RESETCONTENT                0x014B         /* ms908059 */
+#define CB_FINDSTRING                  0x014C         /* aa452926 */
+#define CB_SELECTSTRING                0x014D         /* ms908060 */
+#define CB_SETCURSEL                   0x014E         /* ms908061 */
+#define CB_SHOWDROPDOWN                0x014F         /* ms908070 */
+#define CB_GETITEMDATA                 0x0150         /* ms928374 */
+#define CB_SETITEMDATA                 0x0151         /* ms908066 */
+#define CB_GETDROPPEDCONTROLRECT       0x0152         /* ms928334 */
+#define CB_SETITEMHEIGHT               0x0153         /* ms908067 */
+#define CB_GETITEMHEIGHT               0x0154         /* ms928376 */
+#define CB_SETEXTENDEDUI               0x0155         /* ms908064 */
+#define CB_GETEXTENDEDUI               0x0156         /* ms928359 */
+#define CB_GETDROPPEDSTATE             0x0157         /* ms928340 */
+#define CB_FINDSTRINGEXACT             0x0158         /* aa452927 */
+#define CB_SETLOCALE                   0x0159         /* ms908068 */
+#define CB_GETLOCALE                   0x015A         /* ms907898 */
+#define CB_GETTOPINDEX                 0x015B         /* ms907963 */
+#define CB_SETTOPINDEX                 0x015C         /* ms908069 */
+#define CB_GETHORIZONTALEXTENT         0x015D         /* ms928366 */
+#define CB_SETHORIZONTALEXTENT         0x015E         /* ms908065 */
+#define CB_GETDROPPEDWIDTH             0x015F         /* ms928343 */
+#define CB_SETDROPPEDWIDTH             0x0160         /* ms908062 */
+#define CB_INITSTORAGE                 0x0161         /* ms908027 */
+#define CB_GETCOMBOBOXINFO             0x0164         /* aa452928 */
+#define CBN_ERRSPACE                   -1           
+#define CBN_SELCHANGE                  0x0001       
+#define CBN_DBLCLK                     0x0002       
+#define CBN_SETFOCUS                   0x0003       
+#define CBN_KILLFOCUS                  0x0004       
+#define CBN_EDITCHANGE                 0x0005       
+#define CBN_EDITUPDATE                 0x0006       
+#define CBN_DROPDOWN                   0x0007       
+#define CBN_CLOSEUP                    0x0008       
+#define CBN_SELENDOK                   0x0009       
+#define CBN_SELENDCANCEL               0x000A       
+
+/* --- List Boxes Messages --- */
+#define LB_ADDSTRING                   0x0180         /* aa453251 */
+#define LB_INSERTSTRING                0x0181         /* aa453271 */
+#define LB_DELETESTRING                0x0182         /* aa453252 */
+#define LB_SELITEMRANGEEX              0x0183         /* aa453282 */
+#define LB_RESETCONTENT                0x0184         /* aa453279 */
+#define LB_SETSEL                      0x0185         /* aa453291 */
+#define LB_SETCURSEL                   0x0186         /* aa453286 */
+#define LB_GETSEL                      0x0187         /* aa453264 */
+#define LB_GETCURSEL                   0x0188         /* aa453258 */
+#define LB_GETTEXT                     0x0189         /* aa453267 */
+#define LB_GETTEXTLEN                  0x018A         /* aa453268 */
+#define LB_GETCOUNT                    0x018B         /* aa453257 */
+#define LB_SELECTSTRING                0x018C         /* aa453280 */
+#define LB_GETTOPINDEX                 0x018E         /* aa453269 */
+#define LB_FINDSTRING                  0x018F         /* aa453253 */
+#define LB_GETSELCOUNT                 0x0190         /* aa453265 */
+#define LB_GETSELITEMS                 0x0191         /* aa453266 */
+#define LB_SETTABSTOPS                 0x0192         /* aa453292 */
+#define LB_GETHORIZONTALEXTENT         0x0193         /* aa453259 */
+#define LB_SETHORIZONTALEXTENT         0x0194         /* aa453287 */
+#define LB_SETCOLUMNWIDTH              0x0195         /* aa453285 */
+#define LB_SETTOPINDEX                 0x0197         /* aa453293 */
+#define LB_GETITEMRECT                 0x0198         /* aa453262 */
+#define LB_GETITEMDATA                 0x0199         /* aa453260 */
+#define LB_SETITEMDATA                 0x019A         /* aa453288 */
+#define LB_SELITEMRANGE                0x019B         /* aa453281 */
+#define LB_SETANCHORINDEX              0x019C         /* aa453283 */
+#define LB_GETANCHORINDEX              0x019D         /* aa453255 */
+#define LB_SETCARETINDEX               0x019E         /* aa453284 */
+#define LB_GETCARETINDEX               0x019F         /* aa453256 */
+#define LB_SETITEMHEIGHT               0x01A0         /* aa453289 */
+#define LB_GETITEMHEIGHT               0x01A1         /* aa453261 */
+#define LB_FINDSTRINGEXACT             0x01A2         /* aa453254 */
+#define LB_SETLOCALE                   0x01A5         /* aa453290 */
+#define LB_GETLOCALE                   0x01A6         /* aa453263 */
+#define LB_INITSTORAGE                 0x01A8         /* aa453270 */
+#define LB_ITEMFROMPOINT               0x01A9         /* aa453272 */
+#define LBN_ERRSPACE                   -2           
+#define LBN_SELCHANGE                  0x0001       
+#define LBN_DBLCLK                     0x0002       
+#define LBN_SELCANCEL                  0x0003       
+#define LBN_SETFOCUS                   0x0004       
+#define LBN_KILLFOCUS                  0x0005       
+#define WM_CTLCOLORLISTBOX             0x0134         /* aa453849 */
+#define WM_DRAWITEM                    0x002B         /* aa453855 */
+#define WM_DELETEITEM                  0x002D         /* aa453853 */
+
+/* --- Edit Boxes Messages --- */
+#define EM_GETSEL                      0x00B0         /* aa453012 */
+#define EM_SETSEL                      0x00B1         /* aa453030 */
+#define EM_GETRECT                     0x00B2         /* aa453011 */
+#define EM_SETRECT                     0x00B3         /* aa453028 */
+#define EM_SETRECTNP                   0x00B4         /* aa453029 */
+#define EM_SCROLL                      0x00B5         /* aa453021 */
+#define EM_LINESCROLL                  0x00B6         /* aa453017 */
+#define EM_SCROLLCARET                 0x00B7         /* aa453022 */
+#define EM_GETMODIFY                   0x00B8         /* aa453009 */
+#define EM_SETMODIFY                   0x00B9         /* aa453025 */
+#define EM_GETLINECOUNT                0x00BA         /* aa453007 */
+#define EM_LINEINDEX                   0x00BB         /* aa453015 */
+#define EM_LINELENGTH                  0x00BF         /* aa453016 */
+#define EM_REPLACESEL                  0x00C2         /* aa453020 */
+#define EM_GETLINE                     0x00C4         /* aa453006 */
+#define EM_LIMITTEXT                   0x00C5         /* aa453013 */
+#define EM_CANUNDO                     0x00C6         /* aa452998 */
+#define EM_UNDO                        0x00C7         /* aa453032 */
+#define EM_FMTLINES                    0x00C8         /* aa453003 */
+#define EM_LINEFROMCHAR                0x00C9         /* aa453014 */
+#define EM_SETTABSTOPS                 0x00CB         /* aa453031 */
+#define EM_SETPASSWORDCHAR             0x00CC         /* aa453026 */
+#define EM_EMPTYUNDOBUFFER             0x00CD         /* aa453002 */
+#define EM_GETFIRSTVISIBLELINE         0x00CE         /* aa453004 */
+#define EM_SETREADONLY                 0x00CF         /* aa453027 */
+#define EM_GETPASSWORDCHAR             0x00D2         /* aa453010 */
+#define EM_SETMARGINS                  0x00D3         /* aa453024 */
+#define EM_GETMARGINS                  0x00D4         /* aa453008 */
+#define EM_SETLIMITTEXT                0x00C5         /* aa453023: identical to EM_LIMITTEXT (aa453013) */
+#define EM_GETLIMITTEXT                0x00D5         /* aa453005 */
+#define EM_POSFROMCHAR                 0x00D6         /* aa453018 */
+#define EM_CHARFROMPOS                 0x00D7         /* aa453001 */
+#define EN_SETFOCUS                  0x0100         /* aa453046 */
+#define EN_KILLFOCUS                 0x0200         /* aa453044 */
+#define EN_CHANGE                    0x0300         /* aa453036 */
+#define EN_UPDATE                    0x0400         /* aa453053 */
+#define EN_ERRSPACE                  0x0500         /* aa453042 */
+#define EN_MAXTEXT                   0x0501         /* aa453045 */
+#define EN_HSCROLL                   0x0601         /* aa453043 */
+#define EN_VSCROLL                   0x0602         /* aa453054 */
+#define WM_CTLCOLOREDIT                0x0133         /* aa453848 */
+#define WM_MEASUREITEM                 0x002C         /* aa453883 */
+
+/* --- Image-type constants for LoadImage / ImageList_LoadImage uType --- */
+#define IMAGE_BITMAP                   0            
+#define IMAGE_ICON                     1            
+#define IMAGE_CURSOR                   2            
+
 #ifdef __cplusplus
 }
 #endif

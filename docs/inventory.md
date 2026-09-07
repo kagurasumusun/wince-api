@@ -1360,6 +1360,134 @@ Export-surface effect: new def files clipbd (14), dlgmgr (18), drawmbar (1), ico
 
 Notes: MENUITEMINFO/TPMPARAMS/COMBOBOXINFO/MEASUREITEMSTRUCT/DELETEITEMSTRUCT/DRAWITEMSTRUCT/ICONINFO/DOCINFO/CE_NOTIFICATION_TRIGGER/CE_USER_NOTIFICATION/CE_NOTIFICATION_INFO_HEADER layouts come from the structure pages above (see the inline member comments for the CE-specific member sets, e.g. CE MENUITEMINFO has UINT wID and no hbmpItem).  DLGTEMPLATE/DLGITEMTEMPLATE are in winuser.h and the DLGTEMPLATEEX/DLGITEMTEMPLATEEX fixed prefixes (variable-length arrays follow in memory) in wingdi.h per their pages.  The power-status structs declare only the members the official pages list.  DialogProc (aa452951) and AbortProc (aa452836) are documented callbacks, not imports, so they are typedefs (DLGPROC / ABORTPROC), not exports.
 
+
+### M29: Image List Reference books + GWES message/notification constants
+
+Two units landed together: the full **Image Lists** book of the CE 5.0
+GWES documentation (Functions 32 / Macros 4 / Structures 2 = 38
+leaves) and the **message / notification** leaves of the Buttons /
+Static Controls / Menus / Dialog Boxes / Clipboards / GDI / ROP
+books (39 leaves), plus the numeric transcription of the already
+harvested Windows-Messages and Keyboard-Messages leaves (M26) into
+message identifiers.  New header `include/commctrl.h`; the message
+identifiers and notification codes join the GWES message constants in
+`include/winuser.h` and the binary/ternary raster-operation codes go
+into `include/wingdi.h`.  The message block also carries the Combo
+Boxes / List Boxes / Edit Boxes message and notification identifiers
+(CB_*/CBN_*, LB_*/LBN_*, EM_*/EN_*, with their CE page ids) -- those
+leaves were already-harvested manifests and the same
+fixed-Win32-ABI numeric policy applies to them.  Rows grow 939 ->
+**1175** (69 manifests; this session fetched the full committed
+manifest set -- every CE 5.0 leaf -- and regenerated `build/rows.json`
+from scratch, so the 236-row delta includes leaves of the Combo/List/
+Edit message and style books that were harvested for the first time,
+not only the two M29 units).
+
+#### Image List Functions / Macros / Structures (Commctrl.h; Link Library row Commctrl.lib, Imgctl.lib.)
+
+Every function page prints Header **Commctrl.h** and Link Library
+**Commctrl.lib, Imgctl.lib.** except `ImageList_Destroy` (ms909811),
+whose page omits the Link Library row in both the CE 5.0 and the CE
+6.0 twin (ee501989) -- so the documented import defs (below) carry
+the other 31 functions but not ImageList_Destroy.  Signatures were
+recovered from the official CE 6.0 `(v=winembedded.60)` twins of the
+same books (the CE 5.0 migration strips whitespace inside `<pre>`
+prototypes) and cross-checked to the CE 5.0 bodies; each declaration
+in commctrl.h annotates both page ids.  HIMAGELIST is typed
+`typedef void *HIMAGELIST;` -- the CE pages use the type everywhere
+without republishing its typedef, so it is supplied as an opaque
+handle like the other GWES handles (own-design record of the fixed
+ABI).  The ILC_* / ILD_* / CLR_* / CLR_DEFAULT flag values are named
+by the CE pages; the numeric values are the fixed Win32 ABI values
+(the CE pages do not republish them), recorded per the repo fixed-ABI
+policy.
+
+```
+  ms909786  ImageList_Add          CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909795  ImageList_AddMasked    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909799  ImageList_BeginDrag    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909805  ImageList_Copy         CE 2.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909810  ImageList_Create       CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909811  ImageList_Destroy      CE 1.0+   Commctrl.h   (no Link Library row)
+  ms909812  ImageList_DragEnter    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909813  ImageList_DragLeave    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909814  ImageList_DragMove     CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909815  ImageList_DragShowNolock CE 1.0+ Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909816  ImageList_Draw         CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909817  ImageList_DrawEx       CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909818  ImageList_DrawIndirect CE 2.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909820  ImageList_Duplicate    CE 2.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909821  ImageList_EndDrag      CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909823  ImageList_GetBkColor   CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909824  ImageList_GetDragImage CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909825  ImageList_GetIcon      CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909826  ImageList_GetIconSize  CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909827  ImageList_GetImageCount CE 1.0+  Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909828  ImageList_GetImageInfo CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909830  ImageList_LoadImage    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909831  ImageList_Merge        CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909832  ImageList_Remove       CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909833  ImageList_RemoveAll    CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909834  ImageList_Replace      CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909835  ImageList_ReplaceIcon  CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909836  ImageList_SetBkColor   CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909837  ImageList_SetDragCursorImage CE 1.0+ Commctrl.h Commctrl.lib, Imgctl.lib.
+  ms909838  ImageList_SetIconSize  CE 1.0+   Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909839  ImageList_SetImageCount CE 2.0+  Commctrl.h   Commctrl.lib, Imgctl.lib.
+  ms909840  ImageList_SetOverlayImage CE 1.0+ Commctrl.h  Commctrl.lib, Imgctl.lib.
+```
+
+Image List Macros (4): `ImageList_AddIcon` ms909790 (macro = ImageList_ReplaceIcon(himl, -1, hicon)), `ImageList_ExtractIcon` ms909822, `ImageList_LoadBitmap` ms909829 and `INDEXTOOVERLAYMASK` ms909843; bodies are verbatim from the CE 5.0 page text; no Link Library row (macros, not imports).  The CE `ImageList_LoadImage` page (ms909830) documents uType values **IMAGE_BITMAP** and **IMAGE_ICON** only, and the CE LoadImage page (aa453413) documents IMAGE_BITMAP / IMAGE_CURSOR / IMAGE_ICON; IMAGE_ENHMETAFILE is not documented for CE and is not shipped (the three documented image-type values live in winuser.h: IMAGE_BITMAP 0 / IMAGE_ICON 1 / IMAGE_CURSOR 2, fixed Win32 ABI).
+
+Image List Structures (2): `IMAGEINFO` ms909781 (hbmImage, hbmMask, Unused1, Unused2, rcImage) and `IMAGELISTDRAWPARAMS` ms909819 (14 members, first cbSize).  IMAGEINFO is 32 bytes and IMAGELISTDRAWPARAMS 56 bytes on the 32-bit CE ABI (checked with static asserts under the CE toolchain).
+
+#### Buttons / Static / Menus / Dialog / Clipboards / GDI message and ROP books (39 leaves)
+
+These leaves name the constants the GWES messages protocol is built
+on; the CE pages document each name and its wParam/lParam but do not
+republish the numeric identifiers.  The numeric values shipped in
+winuser.h/wingdi.h are the fixed Win32 ABI values of the message
+protocol GWES implements (same fixed-ABI policy as the SIF / SB / SW
+and message-id transcription recorded since M26; every define carries
+its CE page id).  Notification codes with CE pages (BN_*/STN_*/CBN_*/
+LBN_*/EN_*) use the fixed Win32 ABI notification-code values.
+STN_DBLCLK has no CE leaf (desktop-only) and is not shipped.
+
+```
+  aa452890..aa452898  BM_CLICK / BM_GETCHECK / BM_GETSTATE / BM_SETCHECK /
+                      BM_SETSTATE / BM_SETSTYLE / BN_CLICKED / BN_KILLFOCUS / BN_SETFOCUS
+                      (Buttons Messages; CE 1.0+; Header Winuser.h/Windows.h rows as published)
+  ms940366..ms940370  STM_GETIMAGE / STM_SETIMAGE / STN_CLICKED / STN_ENABLE / STN_DISABLE
+  aa452962..aa452963  DM_GETDEFID / DM_SETDEFID  (Dialog Boxes Messages)
+  aa453847..aa453851  WM_CTLCOLORDLG / WM_CTLCOLOREDIT / WM_CTLCOLORLISTBOX / WM_CTLCOLORSTATIC
+  ms914115..ms914119  WM_COMMAND / WM_CONTEXTMENU / WM_COPY / WM_CTLCOLORBTN  (as pages print)
+  aa453852,aa453893,aa453898,aa453899  WM_CUT/WM_PASTE/WM_RENDERALLFORMATS/WM_RENDERFORMAT (Clipboards Messages)
+  aa453891..aa453911  GDI window messages (WM_PAINT, WM_SETREDRAW, WM_SYSCOLORCHANGE,
+                      WM_QUERYNEWPALETTE, WM_PALETTECHANGED) per the GDI Messages book
+  aa452783/aa452878   Ternary / Binary Raster Operation code tables -> SRC*/PAT*/R2_* macros in wingdi.h
+```
+
+winuser.h message block totals ~250 defines: the M26 Windows Messages
+(14) and Keyboard Messages (14) leaves (the M26-announced numeric
+follow-on), the Buttons/Static/Menus/Dialog/Clipboard/GDI message
+books, and the Combo/List/Edit message and notification leaves (pages
+harvested with the M26-era manifests); each name keeps its CE page id.  WM_USER
+is 0x0400; DM_GETDEFID/DM_SETDEFID are (WM_USER+0)/(WM_USER+1) as the
+pages describe.  The EN_* edit notification codes are the fixed Win32
+ABI 0x0100-range values (EN_SETFOCUS 0x0100 ... EN_VSCROLL 0x0602)
+with their CE page ids (aa453036/aa453042..aa453054).
+
+Export surface: 31 -> **33** def files; new `def/commctrl-doc.def`
+and `def/imgctl-doc.def` (31 name-only exports each, the documented
+Link Library rows of the Image List functions), both
+llvm-dlltool-`-m armce` verified; total name-only exports 543 -> 605.
+ImageList_Destroy is declared (its page documents it) but appears in
+no import def (no documented Link Library row; recorded).  Host +
+six CE targets (arm/i386 x 4.2/5.0/6.0) pass warning-free; the TU
+type-checks every Image List function call and static-asserts the two
+structure sizes on the 32-bit ABI.
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

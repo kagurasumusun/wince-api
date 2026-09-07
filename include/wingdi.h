@@ -696,6 +696,48 @@ typedef struct {
     short cx;
     short cy;
 } DLGTEMPLATEEX;
+
+/* ------------------------------------------------------------------ */
+/* M29: Raster Operation Codes (book aa452783 Ternary / aa452878       */
+/* Binary).  The CE pages name the common ternary codes (published in   */
+/* Wingdi.h) and the R2_* drawing modes (GetROP2/SetROP2) and define     */
+/* the encoding (32-bit value whose high word is the Boolean operation  */
+/* index); the numeric values are the fixed Win32 ABI values, recorded   */
+/* per the repo fixed-ABI policy.                                       */
+/* ------------------------------------------------------------------ */
+#define BLACKNESS       0x00000042L
+#define DSTINVERT       0x00550009L
+#define MERGECOPY       0x00C000CAL
+#define MERGEPAINT      0x00BB0226L
+#define NOTSRCCOPY      0x00330008L
+#define NOTSRCERASE     0x001100A6L
+#define PATCOPY         0x00F00021L
+#define PATINVERT       0x005A0049L
+#define PATPAINT        0x00FB0A09L
+#define SRCAND          0x008800C6L
+#define SRCCOPY         0x00CC0020L
+#define SRCERASE        0x00440328L
+#define SRCINVERT       0x00660046L
+#define SRCPAINT        0x00EE0086L
+#define WHITENESS       0x00FF0062L
+
+/* Binary raster-operation (ROP2) drawing modes for GetROP2/SetROP2. */
+#define R2_BLACK         1
+#define R2_NOTMERGEPEN   2
+#define R2_MASKNOTPEN    3
+#define R2_NOTCOPYPEN    4
+#define R2_MASKPENNOT    5
+#define R2_NOT           6
+#define R2_XORPEN        7
+#define R2_NOTMASKPEN    8
+#define R2_MASKPEN       9
+#define R2_NOTXORPEN    10
+#define R2_NOP          11
+#define R2_MERGENOTPEN  12
+#define R2_COPYPEN      13
+#define R2_MERGEPENNOT  14
+#define R2_MERGEPEN     15
+#define R2_WHITE        16
 #ifdef __cplusplus
 }
 #endif

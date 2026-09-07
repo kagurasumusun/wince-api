@@ -355,3 +355,40 @@ gen-doc-def.py gained trailing-annotation stripping in short_title
 ("CreatePalette (GDI)" -> export CreatePalette) and host TU exercises
 all 129 functions with typed calls plus structure-layout checks.  Host
 + six CE targets (arm/i386 x 4.2/5.0/6.0) pass warning-free.
+
+**M29 batch — Image List Reference book + GWES message/notification
+constants (two units landed together):** new `include/commctrl.h` for
+the full CE 5.0 **Image Lists** book (Functions 32 / Macros 4 /
+Structures 2 = 38 leaves; Header Commctrl.h, Link Library rows
+Commctrl.lib + Imgctl.lib; HIMAGELIST supplied as an opaque handle
+typedef, the pages use the type without republishing it), with every
+signature recovered from the official CE 6.0 `(v=winembedded.60)`
+twins (the CE 5.0 migration strips prototype whitespace) and the twin
+ids on the declarations.  `include/winuser.h` gains the GWES
+message/notification constant surface: the Buttons / Static Controls /
+Menus / Dialog Boxes / Clipboards / GDI message leaves (BM/BN/STM/STN/
+WM_COMMAND/WM_CONTEXTMENU/menu/dialog/clipboard/CTLCOLOR numbers), the
+M26-announced numeric transcription of the Windows-Messages and
+Keyboard-Messages leaves, the Combo/List/Edit message and notification
+identifiers (CB_*/CBN_*, LB_*/LBN_*, EM_*/EN_*), and the
+IMAGE_BITMAP/ICON/CURSOR uType values (IMAGE_ENHMETAFILE is not
+documented for CE and is not shipped); `include/wingdi.h` gains the
+ternary/binary ROP code macros
+(SRC*/PAT*/R2_*).  CE pages document message names and parameters but
+not the numeric identifiers, so all numeric values are recorded as the
+fixed Win32 ABI values of the message protocol GWES implements
+(CE-6-twin-checked; notification codes with CE pages keep their page
+ids).  EN_* edit codes use the fixed 0x0100-range values
+(EN_SETFOCUS 0x0100 .. EN_VSCROLL 0x0602).  rows.json 939 -> 1175
+(69 manifests; the full committed CE 5.0 manifest set was re-fetched
+and `build/rows.json` regenerated from scratch, harvesting for the
+first time the Combo/List/Edit message and style book leaves).
+Export surface: 31 -> 33 def files via new commctrl-doc.def and
+imgctl-doc.def (31 exports each, from the documented Link Library
+rows), coredll unchanged, 543 -> 605 name-only exports, both new defs
+llvm-dlltool-`-m armce` verified.  ImageList_Destroy (ms909811) is
+declared but carries no Link Library row in either archive and enters
+no import def (recorded).  Host TU type-checks all 32 Image List calls
+and static-asserts IMAGEINFO = 32 and IMAGELISTDRAWPARAMS = 56 bytes
+on the 32-bit ABI; host + six CE targets (arm/i386 x 4.2/5.0/6.0)
+pass warning-free.

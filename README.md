@@ -108,6 +108,11 @@ include/winnls.h    code-page / NLS API (MultiByteToWideChar,
                     WideCharToMultiByte, IsDBCSLeadByte*, locale/
                     code-page getters, CompareString, GetStringType*)
 include/winreg.h    registry API (Reg* + CeFind*RegChange)
+include/commctrl.h  Image List API (Header Commctrl.h rows of the CE
+                    5.0 Image Lists book): HIMAGELIST / IMAGEINFO /
+                    IMAGELISTDRAWPARAMS, the 32 ImageList_* functions,
+                    the four documented macros and the ILC_*/ILD_*/
+                    CLR_* value constants (include Windows.h first)
 include/winbase.h   base OS API: process/thread/module/command line,
                     dynamic-link, local memory, file management +
                     synchronous file I/O + directory management,
@@ -153,6 +158,20 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M29 (landed):** Image List Reference book + GWES message/
+  notification constants (two units together).  New
+  `include/commctrl.h` (CE 5.0 Image Lists book: HIMAGELIST /
+  IMAGEINFO / IMAGELISTDRAWPARAMS, 32 ImageList_* functions, macros
+  ImageList_AddIcon/ExtractIcon/LoadBitmap/INDEXTOOVERLAYMASK, ILC_*/
+  ILD_*/CLR_* values; 38 leaves; signatures from the official CE 6.0
+  twins).  winuser.h gains the BM/BN/STM/STN/menu/dialog/clipboard/
+  GDI-message identifiers and notifications + the M26-announced WM_*
+  numeric transcription + IMAGE_BITMAP/ICON/CURSOR; wingdi.h gains the
+  ternary/binary ROP codes (SRC*/PAT*/R2_*).  Numeric message values
+  are fixed Win32 ABI (CE pages document names/parameters, not
+  numbers); every define carries its CE page id.  Rows 939 -> 1175;
+  defs 31 -> 33 (commctrl-doc.def + imgctl-doc.def, 31 exports each,
+  armce-verified), total name-only exports 543 -> 605.
 * **M28 (landed):** window-control function layer -- Menus / Dialog
   Boxes / Buttons / Clipboards / Printing / Resources / System
   Information functions+structures, the Notify Reference books and the

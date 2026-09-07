@@ -73,13 +73,22 @@ inventory row for the CE 6.0 twins).
   then → **939** with the M28 window-control function layer
   (Menus/Dialog Boxes/Buttons/Clipboards/Printing/Resources/System
   Information functions and structures + Notify Reference + the
-  owner-draw/icon support structures, 112 leaf pages).
-  Every page is an official `(v=msdn.10)` CE 5.0 page; GDI and M28
-  function signatures were additionally recovered from the official
-  CE 6.0 `(v=winembedded.60)` twins of the same books.
-* Declared exports in the shipped headers: 543 name-only exports
-  across 31 def files; `def/coredll-doc.def` alone lists 353, every one
+  owner-draw/icon support structures, 112 leaf pages), then → **1175**
+  with M29 (Image List Reference book + GWES message/notification
+  constant units), which re-fetched the full committed CE 5.0 manifest
+  set (69 manifests) and regenerated `build/rows.json` from scratch —
+  the 236-row delta includes the Combo/List/Edit message and style
+  book leaves harvested for the first time.
+  Every page is an official `(v=msdn.10)` CE 5.0 page; GDI, M28 and
+  M29 (Image List) function signatures were additionally recovered
+  from the official CE 6.0 `(v=winembedded.60)` twins of the same
+  books.
+* Declared exports in the shipped headers: 605 name-only exports
+  across 33 def files; `def/coredll-doc.def` alone lists 353, every one
   traced to an official Link-Library row in `docs/inventory.md`.
+  M29 added `commctrl-doc.def` and `imgctl-doc.def` (31 exports each,
+  the Image List functions' documented `Commctrl.lib, Imgctl.lib.`
+  rows).
 
 ## 4. Staged backlog (CE 5.0 Core OS Reference, remaining user-mode books)
 
@@ -104,14 +113,16 @@ List Boxes owner-draw structures (DRAWITEMSTRUCT etc.) and ICONINFO —
 `tools/ce-gwes-manifest.py` over the official TOC; totals cross-check
 against `tools/catalogs/books-windows-ce-50.tsv`).
 
-Remaining GWES ladder: the *message/notification constant* books
-(Combo Boxes Messages 47, List Boxes Messages 45, Edit Boxes
-Messages 42, Control Styles 21, Window and Message Box Styles 3, …),
-the Image-List book (Functions 32 / Macros 4 / Structures 2) and the
-remaining per-control reference books (buttons/static messages, menu
-messages, dialog messages, clipboard messages), plus the network/
-comms books; each book = new manifest + batches, with CE6 twins used
-where a CE5 leaf is a stub (e.g. SCROLLINFO `ee504371`).  The CE 5.0
+Remaining GWES ladder: the *message/notification constant* books not
+yet transcribed -- Control Styles 21, Window and Message Box Styles 3
+(harvested leaves; numeric block is a follow-on like M26's was) --
+plus the network/comms books; each book = new manifest + batches,
+with CE6 twins used where a CE5 leaf is a stub (e.g. SCROLLINFO
+`ee504371`).  Landed in M29: the Image-List book (Functions 32 /
+Macros 4 / Structures 2), the Buttons/Static/Menus/Dialog/Clipboard/
+GDI message books, the numeric transcription of the Windows/Keyboard
+message books, and the Combo/List/Edit message and notification
+identifier transcription (CB_*/CBN_*, LB_*/LBN_*, EM_*/EN_*).  The CE 5.0
 archive currently lives three levels deep in the Learn TOC
 (`Mobile and Embedded Development / Windows Embedded / Windows
 Embedded Compact / Windows CE 5.0`), which `tools/ce-manifest.py`
