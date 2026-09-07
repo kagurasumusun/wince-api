@@ -888,6 +888,20 @@ BOOL  SystemParametersInfoW(UINT uiAction, UINT uiParam, PVOID pvParam,
  * declaration (its official page prints Header Winuser.h). */
 
 /* ------------------------------------------------------------------ */
+/* WM_COPYDATA support: aa453921 "WM_COPYDATA (Windows CE 5.0)" types */
+/* lParam with a pointer to a COPYDATASTRUCT (pcds) but the CE GWES   */
+/* books publish no structure leaf for it; the fixed layout is taken  */
+/* from Microsoft's official Win32 *COPYDATASTRUCT* structure         */
+/* reference (winuser.h, learn.microsoft.com) -- a fixed-ABI record   */
+/* (same policy as HARDWAREINPUT / CRITICAL_SECTION).                  */
+/* ------------------------------------------------------------------ */
+typedef struct tagCOPYDATASTRUCT {
+    ULONG_PTR dwData;   /* application-defined data type tag */
+    DWORD     cbData;   /* size, in bytes, of lpData */
+    PVOID     lpData;   /* data to pass; can be NULL */
+} COPYDATASTRUCT, *PCOPYDATASTRUCT;
+
+/* ------------------------------------------------------------------ */
 /* M29: window/control message identifiers and notification codes.   */
 /*                                                                     */
 /* Names and semantics come from the CE 5.0 GWES message books (each  */

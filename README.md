@@ -161,6 +161,14 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M33 (landed):** CE 6.0 full-twin corpus + reconciliation
+  (1133/1133 CE 6.0 twins of the harvested CE 5.0 corpus fetched and
+  compared: 1039 identical Requirement rows; 51 categorized diffs --
+  editorial wording, CE6 kernel-mode Nkstub.lib/OEMMain.lib rows
+  (import defs unchanged), and 3 CE6 information fills; docs/
+  ce6-reconciliation.md + docs/ce6-twins.tsv + tools/ce-twins.py;
+  corpus pages6/ 38 -> 1133).  COPYDATASTRUCT added to winuser.h
+  (fixed-ABI structure reference for WM_COPYDATA; 12 bytes on 32-bit).
 * **M32 (landed):** NLS formatting / locale-info (Coreloc.lib):
   CURRENCYFMT/NUMBERFMT structures and GetCurrencyFormatW /
   GetNumberFormatW / GetDateFormatW / GetTimeFormatW / GetLocaleInfoW /

@@ -2077,6 +2077,7 @@ _Static_assert(sizeof(CHARSETINFO) == 32, "CHARSETINFO 32-bit size");
 _Static_assert(sizeof(VS_FIXEDFILEINFO) == 52, "VS_FIXEDFILEINFO 32-bit size");
 _Static_assert(sizeof(CURRENCYFMT) == 32, "CURRENCYFMT 32-bit size");
 _Static_assert(sizeof(NUMBERFMT) == 24, "NUMBERFMT 32-bit size");
+_Static_assert(sizeof(COPYDATASTRUCT) == 12, "COPYDATASTRUCT 32-bit size");
 #endif
 
 

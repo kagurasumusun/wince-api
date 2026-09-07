@@ -50,8 +50,15 @@ Then delete the corpus clone and `build/` from the session.
 
 * `pages5/`: 1175 CE 5.0 pages (the full committed manifest set —
   69 manifests, every harvest through M30).
-* `pages6/`: 38 CE 6.0 twins (Image List book).
+* `pages6/`: **1133 CE 6.0 twins** of the full harvested CE 5.0
+  corpus (every resolvable leaf; the CE 5.0 index pages have no CE 6.0
+  leaf).  Reconciliation: `docs/ce6-reconciliation.md`; twin map
+  `docs/ce6-twins.tsv`.
 * `rows.json`: 1175 Requirement-row records.
+* CE 6.0 fetch URL form: `https://learn.microsoft.com/.../previous-versions/
+  windows/embedded/<id>(v=winembedded.60)` (the official catalog stores
+  the id *with* the `(v=winembedded.60)` suffix; strip it before
+  building the URL).
 
 New trees (CE .NET `(v=msdn.10)` API leaves) will be added as
 `pages4/` when those books are opened (see `docs/ce-api-census.md` /

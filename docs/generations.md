@@ -458,3 +458,23 @@ includes winbase.h for SYSTEMTIME.  Export surface: coreloc 24 -> 30,
 total name-only exports 616 -> 622 (33 def files).  Host + six CE
 targets pass warning-free; TU static-asserts CURRENCYFMT=32 /
 NUMBERFMT=24 on the 32-bit ABI.
+
+
+**M33 batch — CE 6.0 full-twin corpus + reconciliation; COPYDATASTRUCT:**
+all 1133 resolvable CE 6.0 twins of the harvested CE 5.0 corpus were
+fetched in full (the corpus repo's pages6/ grows 38 -> 1133 pages;
+URL caveat: the official CE 6.0 catalog stores ids *with* the
+`(v=winembedded.60)` suffix, which must be stripped before fetching).
+Requirement rows compared per twin: 1039 identical, 51 differing --
+categorized in docs/ce6-reconciliation.md as editorial Not-applicable/
+Developer-Implemented wording (28), CE 6.0 kernel-mode library rows
+Nkstub.lib / OEMMain.lib (user-mode apps link Coredll; import defs
+unchanged; kernel/OEM libraries are never import-def sources), header/
+library case-order-punctuation, and three CE 6.0 *information fills*
+for pages whose CE 5.0 row was blank (DISPLAY_DEVICE, GRADIENT_RECT:
+.NET 4.2+ / windows.h; FILECHANGEINFO adds shlobj.h + ceshell.lib).
+42 CE 5.0 leaves have no CE 6.0 twin (book index pages).  New committed
+twin map docs/ce6-twins.tsv and reproducible resolver
+tools/ce-twins.py.  winuser.h gains COPYDATASTRUCT (fixed Win32 ABI
+structure reference; CE page aa453921 types WM_COPYDATA lParam with it;
+12 bytes on the 32-bit ABI).  Host + six CE targets pass warning-free.

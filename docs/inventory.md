@@ -1615,6 +1615,37 @@ against it).  Host + six CE targets pass warning-free; TU
 static-asserts CURRENCYFMT=32 / NUMBERFMT=24 on the 32-bit ABI.
 
 
+
+### M33: CE 6.0 full-twin corpus + reconciliation; COPYDATASTRUCT
+
+All 1133 resolvable CE 6.0 twins of the harvested CE 5.0 corpus were
+fetched in full and reconciled (see `docs/ce6-reconciliation.md` and
+the committed map `docs/ce6-twins.tsv`; `tools/ce-twins.py` regenerates
+the map from the committed official catalogs).  The corpus
+preservation repo's `pages6/` grows 38 -> 1133 pages.  1039 of the
+1133 twins have Requirement rows identical to the CE 5.0 record; the
+51 differences are categorized in the doc: editorial wording of
+Not-applicable/Developer-Implemented rows, the CE 6.0 kernel-mode
+library row `Nkstub.lib` / OEM `OEMMain.lib` (user-mode apps still
+link Coredll; import defs unchanged; Nkstub/OEMMain are never
+import-def sources, same rule as Nk.lib/Coremain.lib), header/library
+case-order-punctuation, and three *information fills* where the CE 5.0
+page row was blank:
+  DISPLAY_DEVICE  (CE6 ee499040: OS .NET 4.2+, Header windows.h),
+  GRADIENT_RECT   (CE6 ee504211: OS .NET 4.2+, Header windows.h),
+  FILECHANGEINFO  (CE6 ee490403 adds Header extfile.h, shlobj.h and
+                   Link Library ceshell.lib).
+42 CE 5.0 leaves have no CE 6.0 twin -- all book index pages.
+
+Also added (WM_COPYDATA support): `COPYDATASTRUCT` in winuser.h.  The
+CE page aa453921 types lParam with a pointer to the structure but the
+CE books publish no structure leaf; the fixed layout is taken from
+Microsoft's official Win32 *COPYDATASTRUCT* structure reference
+(winuser.h, learn.microsoft.com) -- fixed-ABI record (same policy as
+HARDWAREINPUT / CRITICAL_SECTION).  12 bytes on the 32-bit ABI
+(static-asserted).  No new exports (struct-only).
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |
