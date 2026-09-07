@@ -226,6 +226,8 @@ static const void *const api_symbols[] = {
     (const void *) &MoveFile,
     (const void *) &CopyFileW,
     (const void *) &CopyFile,
+    (const void *) &CopyFileExW,
+    (const void *) &CopyFileEx,
     (const void *) &CreateDirectoryW,
     (const void *) &CreateDirectory,
     (const void *) &RemoveDirectoryW,
@@ -675,6 +677,34 @@ typedef char assert_file_vals[
      TRUNCATE_EXISTING == 5u &&
      FILE_FLAG_WRITE_THROUGH == 0x80000000u &&
      ERROR_NO_MORE_FILES == 18L) ? 1 : -1];
+
+/* CopyFileEx (winbase.h; CE 5.0+, aa517311 / ee490791): the
+ * progress constants are the fixed Win32 ABI values, and the
+ * documented LPPROGRESS_ROUTINE shape must accept a nine-argument
+ * callback (official Win32 reference prototype; the CE page names
+ * only the parameter type). */
+static DWORD tu_progress_stub(LARGE_INTEGER TotalFileSize,
+                              LARGE_INTEGER TotalBytesTransferred,
+                              LARGE_INTEGER StreamSize,
+                              LARGE_INTEGER StreamBytesTransferred,
+                              DWORD dwStreamNumber,
+                              DWORD dwCallbackReason,
+                              HANDLE hSourceFile,
+                              HANDLE hDestinationFile,
+                              LPVOID lpData)
+{
+    (void)TotalFileSize; (void)TotalBytesTransferred;
+    (void)StreamSize; (void)StreamBytesTransferred;
+    (void)dwStreamNumber; (void)dwCallbackReason;
+    (void)hSourceFile; (void)hDestinationFile; (void)lpData;
+    return PROGRESS_CONTINUE;
+}
+typedef char assert_progress_vals[
+    (PROGRESS_CONTINUE == 0 && PROGRESS_CANCEL == 1 &&
+     PROGRESS_STOP == 2 &&
+     COPY_FILE_FAIL_IF_EXISTS == 0x1u && COPY_FILE_RESTARTABLE == 0x2u &&
+     COPY_FILE_ALLOW_DECRYPTED_DESTINATION == 0x8u) ? 1 : -1];
+static LPPROGRESS_ROUTINE tu_progress_assign = tu_progress_stub;
 
 /* File-pointer constants (winbase.h, ms891933 + Win32 ABI values). */
 typedef char assert_fileptr_vals[
@@ -2336,6 +2366,7 @@ int host_tu_entry(void)
 {
     (void) api_symbols;
     (void) api_flags;
+    (void) tu_progress_assign;
     (void) LocalAlloc(LPTR, 16u);
     if (m26_shaped_usage() != 0)
         return 1;

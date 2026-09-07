@@ -50,6 +50,7 @@ UNICODE_ONLY = {
     "FindNextFile": "FindNextFileW",
     "MoveFile": "MoveFileW",
     "CopyFile": "CopyFileW",
+    "CopyFileEx": "CopyFileExW",
     "CreateDirectory": "CreateDirectoryW",
     "RemoveDirectory": "RemoveDirectoryW",
     "SetFileAttributes": "SetFileAttributesW",
@@ -184,8 +185,12 @@ DB = os.path.join(ROOT, "build", "rows.json")
 # Export spellings declared by this repository's headers: every
 # function-like declaration (identifier followed by '(') in the
 # shipped headers, minus macro/typedef noise caught by the pattern.
+# The optional AKARI_CE_IMPORT prefix is the x86 dllimport pin of
+# windef.h (M37): the line is
+#   AKARI_CE_IMPORT <ret> <name>(...
 _DECL_RE = re.compile(
-    r"^[A-Za-z_][A-Za-z0-9_]*\s+"
+    r"^(?:AKARI_CE_IMPORT\s+)?"
+    r"[A-Za-z_][A-Za-z0-9_]*\s+"
     r"([A-Za-z_][A-Za-z0-9_]*)\s*\(", re.M)
 
 # Compiler-provided SEH intrinsics.  The Exception Reference pages

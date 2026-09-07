@@ -1947,3 +1947,23 @@ parity target requires.
 
 Housekeeping: the stray `a.out` (x86-64 host test residue) is
 removed from the tree; `*.exe` / `*.dll` / `a.out` are gitignored.
+
+### M38: CopyFileEx unit (winbase.h; closes the M31 deferral)
+
+| Item | Official page (CE 5.0) | OS Versions | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| `CopyFileExW` (`#define CopyFileEx`) | `aa517311` (CE 6.0 twin `ee490791`) | Windows CE 5.0 and later | Winbase.h | Coredll.lib | prototype per the CE page (LPCTSTR forms; CE Unicode-only ⇒ export `CopyFileExW`); dwCopyFlags table names three flags; Remarks document ERROR_ACCESS_DENIED on a HIDDEN/READONLY destination and ERROR_REQUEST_ABORTED with delete-on-CANCEL / keep-on-STOP semantics; `#define` mapping + `CopyFileEx -> CopyFileExW` added to gen-doc-def's Unicode-only map |
+| `LPPROGRESS_ROUTINE` typedef | shape: Microsoft's official Win32 reference LPPROGRESS_ROUTINE page | — | Winbase.h | — | the CE page names the parameter type only and does not publish the prototype; the official reference page "defines a pointer to this callback function" (nine arguments: four LARGE_INTEGERs, dwStreamNumber, dwCallbackReason, two HANDLEs, lpData; DWORD return).  Single function-pointer typedef (the desktop SDK's double-pointer form is not what the official page states) |
+| `PROGRESS_CONTINUE` 0 / `PROGRESS_CANCEL` 1 / `PROGRESS_STOP` 2 | names: `aa517311` Remarks (CANCEL/STOP); values + CONTINUE: official Win32 reference | — | Winbase.h | — | fixed Win32 ABI; PROGRESS_QUIET (desktop-only) recorded-not-defined |
+| `COPY_FILE_FAIL_IF_EXISTS` 0x00000001 / `COPY_FILE_RESTARTABLE` 0x00000002 / `COPY_FILE_ALLOW_DECRYPTED_DESTINATION` 0x00000008 | names: `aa517311` Value table; values: official CopyFileExW reference | — | Winbase.h | — | fixed Win32 ABI; the desktop-only COPY_FILE_OPEN_SOURCE_FOR_WRITE / COPY_FILE_COPY_SYMLINK / COPY_FILE_NO_BUFFERING / COPY_FILE_REQUEST_COMPRESSED_TRAFFIC are recorded-not-defined (not named on the CE pages) |
+
+Tooling: `tools/gen-doc-def.py`'s declaration matcher now accepts the
+M37 `AKARI_CE_IMPORT` declaration prefix (verified: regeneration
+reproduces the committed defs byte-identically before this batch, and
+adds exactly `CopyFileExW` after it).
+
+Export surface: coredll 391 -> **392** (total 653 -> **654**).  The
+TU static-asserts the three progress values and the three copy flags
+and assigns a nine-argument callback to `LPPROGRESS_ROUTINE`
+(signature-fit check); the e2e console app links `CopyFileExW` and
+`make e2e` asserts it in the import table of all six target images.

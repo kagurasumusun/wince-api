@@ -53,6 +53,7 @@ EXPORTS
   ContinueDebugEvent
   ConvertThreadToFiber
   CopyFileW
+  CopyFileExW
   CreateBitmap
   CreateCompatibleBitmap
   CreateCompatibleDC

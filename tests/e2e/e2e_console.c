@@ -9,9 +9,10 @@
  * files, via llvm-dlltool -m armce) into a Windows CE PE executable; it
  * exercises the coredll import surface the headers declare
  * (GetTickCount, GetSystemInfo, the local heap, GetModuleHandleW,
- * GetLastError).  It must compile warning-free for every
- * *-pc-wince target and link to a PE whose import directory names
- * only the real CE DLLs (coredll.dll and friends).
+ * GetLastError, and the CE 5.0+ CopyFileExW export, M38).  It must
+ * compile warning-free for every *-pc-wince target and link to a PE
+ * whose import directory names only the real CE DLLs (coredll.dll
+ * and friends).
  */
 
 #include <windows.h>
@@ -33,6 +34,10 @@ int main(void)
     mod = GetModuleHandleW(L"coredll.dll");
     if (mod == NULL)
         ok = FALSE;
+    /* M38: CopyFileExW (CE 5.0+, aa517311) -- linked, not run: the
+     * image must export it per the doc-derived def. */
+    (void) CopyFileExW(L"a", L"b", NULL, NULL, NULL,
+                       COPY_FILE_FAIL_IF_EXISTS);
     (void)tick;
     (void)si;
     (void)mod;

@@ -173,6 +173,16 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M38 (landed):** CopyFileEx unit (winbase.h; closes the M31
+  deferral) -- `CopyFileExW` (CE 5.0+, `aa517311` / CE 6.0 twin
+  `ee490791`; Winbase.h, Coredll.lib), `LPPROGRESS_ROUTINE` (the
+  official Win32 reference callback shape; the CE page names the type
+  only), PROGRESS_CONTINUE/CANCEL/STOP and the three COPY_FILE_*
+  flags (names per the CE page; fixed Win32 ABI values per the
+  official CopyFileExW reference; desktop-only variants
+  recorded-not-defined).  gen-doc-def.py's declaration matcher
+  accepts the M37 import pin.  coredll 391 -> 392 (total 654); e2e
+  console links CopyFileExW on all six targets.
 * **M37 (landed):** x86 CE undecorated import surface + end-to-end
   link harness.  CE coredll/component-DLL export names are
   undecorated on x86 as well as ARM (verified import surface); the

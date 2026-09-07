@@ -672,6 +672,60 @@ AKARI_CE_IMPORT BOOL CopyFileW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName
                BOOL bFailIfExists) AKARI_CE_NAME(CopyFileW);
 #define CopyFile CopyFileW
 
+/* LPPROGRESS_ROUTINE: the CopyFileEx progress callback type.  The CE
+ * page (aa517311) types the parameter but does not publish the
+ * prototype, so the shape is the fixed Win32 ABI from Microsoft's
+ * official Win32 reference LPPROGRESS_ROUTINE page, which "defines a
+ * pointer to this callback function"; the routine is invoked with
+ * CALLBACK_CHUNK_FINISHED / CALLBACK_STREAM_SWITCH reasons (the
+ * desktop value table; recorded-not-defined -- the CE pages do not
+ * name the constants). */
+typedef DWORD (WINAPI *LPPROGRESS_ROUTINE)(LARGE_INTEGER TotalFileSize,
+                                           LARGE_INTEGER TotalBytesTransferred,
+                                           LARGE_INTEGER StreamSize,
+                                           LARGE_INTEGER StreamBytesTransferred,
+                                           DWORD dwStreamNumber,
+                                           DWORD dwCallbackReason,
+                                           HANDLE hSourceFile,
+                                           HANDLE hDestinationFile,
+                                           LPVOID lpData);
+
+/* Progress results of the CopyFileEx callback.  The CE page names
+ * PROGRESS_CANCEL and PROGRESS_STOP in its remarks (either aborts
+ * the copy, returns zero, sets ERROR_REQUEST_ABORTED; the partially
+ * copied destination is deleted on CANCEL, left intact on STOP).
+ * PROGRESS_CONTINUE is the keep-copying return of the callback
+ * contract (official Win32 reference; fixed Win32 ABI values).  The
+ * desktop-only PROGRESS_QUIET is recorded-not-defined (not named on
+ * the CE pages). */
+#define PROGRESS_CONTINUE 0
+#define PROGRESS_CANCEL   1
+#define PROGRESS_STOP     2
+
+/* CopyFileEx dwCopyFlags: the CE page (aa517311) names the three
+ * flags without values; the values are the fixed Win32 ABI from
+ * Microsoft's official CopyFileExW reference (the desktop-only
+ * COPY_FILE_OPEN_SOURCE_FOR_WRITE / COPY_FILE_COPY_SYMLINK /
+ * COPY_FILE_NO_BUFFERING / COPY_FILE_REQUEST_COMPRESSED_TRAFFIC are
+ * recorded-not-defined -- not named on the CE pages). */
+#define COPY_FILE_FAIL_IF_EXISTS              0x00000001
+#define COPY_FILE_RESTARTABLE                 0x00000002
+#define COPY_FILE_ALLOW_DECRYPTED_DESTINATION 0x00000008
+
+/* aa517311 "CopyFileEx (Windows CE 5.0)" (CE 6.0 twin ee490791):
+ * BOOL CopyFileEx(LPCTSTR, LPCTSTR, LPPROGRESS_ROUTINE, LPVOID,
+ * LPBOOL, DWORD).  CE 5.0 and later; Winbase.h; Coredll.lib.
+ * Copies an existing file to a new file, calling the progress
+ * routine as portions are copied (NULL callback: plain copy).
+ * Fails with ERROR_ACCESS_DENIED if the destination exists with
+ * FILE_ATTRIBUTE_HIDDEN or FILE_ATTRIBUTE_READONLY set.  The
+ * callback's lpData is passed through; *pbCancel set TRUE cancels.
+ * Export is CopyFileExW (CE is Unicode-only). */
+AKARI_CE_IMPORT BOOL CopyFileExW(LPCWSTR lpExistingFileName, LPCWSTR lpNewFileName,
+                 LPPROGRESS_ROUTINE lpProgressRoutine, LPVOID lpData,
+                 LPBOOL pbCancel, DWORD dwCopyFlags) AKARI_CE_NAME(CopyFileExW);
+#define CopyFileEx CopyFileExW
+
 /* aa517316 "CreateDirectory (Windows CE 5.0)":
  * BOOL CreateDirectory(LPCTSTR, LPSECURITY_ATTRIBUTES).  CE 1.0+;
  * Winbase.h; Coredll.lib.  Creates a new directory.  Only the final
