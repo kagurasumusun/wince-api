@@ -97,8 +97,9 @@ include/winnt.h     base 64-bit types (LONGLONG/LARGE_INTEGER),
 include/winbase.h   base OS API: process/thread/module/command line,
                     dynamic-link, local memory, file management +
                     synchronous file I/O + directory management,
-                    synchronization (events/mutexes/semaphores/wait/
-                    critical sections/interlocked), time (M1-M9)
+                    time (M7), synchronization (M9: events/mutexes/
+                    semaphores/wait/critical sections/interlocked),
+                    heaps + memory status + tick/time helpers (M10)
 include/winerror.h  error-code constants (rows 0-1078 of the official
                     CE numeric table, aa450919)
 def/                coredll export def derived from the official
@@ -129,7 +130,7 @@ Cross checks with the real toolchain (32-bit pointer model, link
 against the sysroot import libraries, x86 decoration) run in a later
 phase exactly like wince-crt's: build with the `LLVM-WinCE` toolchain
 and link end-to-end against the verified sysroot.  See
-`docs/verification.md`.  As of the M8 batch the freestanding compile
+`docs/verification.md`.  As of the M10 batch the freestanding compile
 matrix (headers + TU, `-Werror`) passes for `arm-pc-wince4.2/5.0/6.0`
 and `i386-pc-wince4.2/5.0/6.0`.
 
@@ -185,14 +186,24 @@ declarations, recorded in `docs/inventory.md`):
   Nk.lib/Coremain.lib link-library rows are recorded and kept out of
   the coredll doc def (documented conflict model, see inventory M9
   notes).
+* **M10 (landed):** Time Reference + Memory Management Reference
+  batch (no new page fetches; the 203 harvested rows already covered
+  these two books): tick/counter and file-time helpers (GetTickCount,
+  GetFileTime/SetFileTime, CompareFileTime, GetCurrentFT, GetIdleTime,
+  Random, SetDaylightTime, QueryPerformanceCounter/Frequency) and the
+  heap/local-memory/status/probe set (GetProcessHeap [Lmem.lib row],
+  HeapCreate/Destroy/Alloc/Free/ReAlloc/Size/Validate/Compact,
+  LocalReAlloc/LocalSize, GlobalMemoryStatus + MEMORYSTATUS,
+  IsBadCodePtr/IsBadReadPtr/IsBadWritePtr).  `def/coredll-doc.def`
+  regenerated 53 → 77 name-only exports.
 
 Remaining roadmap: the other *Core OS Reference* books already
-manifested (Time, Memory Management, Process and Thread, Strings,
-Unicode, System Management, DLL, ToolHelp, Fiber) and the File
-Systems / Shell&UI / Registry / Communication reference books —
-each batch adds only official-page-grounded declarations; continuing
-def harvesting for those pages; end-to-end link verification with
-wince-crt on the `LLVM-WinCE` toolchain (host + cross).
+manifested (Process and Thread, Strings, Unicode, System Management,
+DLL, ToolHelp, Fiber) and the File Systems / Shell&UI / Registry /
+Communication reference books — each batch adds only
+official-page-grounded declarations; continuing def harvesting for
+those pages; end-to-end link verification with wince-crt on the
+`LLVM-WinCE` toolchain (host + cross).
 
 ## Verification rules (same as wince-crt)
 

@@ -12,6 +12,7 @@
 ; Ordinals are not published; entries are name-only.
 LIBRARY coredll.dll
 EXPORTS
+  CompareFileTime
   CreateEventW
   CreateMutexW
   CreateProcessW
@@ -23,14 +24,27 @@ EXPORTS
   FileTimeToSystemTime
   FreeLibrary
   GetCommandLineW
+  GetCurrentFT
   GetExitCodeProcess
   GetExitCodeThread
+  GetFileTime
+  GetIdleTime
   GetLocalTime
   GetModuleFileNameW
   GetModuleHandleW
   GetProcAddressW
   GetSystemTime
   GetThreadPriority
+  GetTickCount
+  GlobalMemoryStatus
+  HeapAlloc
+  HeapCompact
+  HeapCreate
+  HeapDestroy
+  HeapFree
+  HeapReAlloc
+  HeapSize
+  HeapValidate
   InterlockedCompareExchange
   InterlockedCompareExchangePointer
   InterlockedDecrement
@@ -39,18 +53,28 @@ EXPORTS
   InterlockedExchangePointer
   InterlockedIncrement
   InterlockedTestExchange
+  IsBadCodePtr
+  IsBadReadPtr
+  IsBadWritePtr
   LoadLibraryW
   LoadLibraryExW
   LocalAlloc
   LocalFileTimeToFileTime
   LocalFree
+  LocalReAlloc
+  LocalSize
   OpenEventW
   OpenProcess
   PulseEvent
+  QueryPerformanceCounter
+  QueryPerformanceFrequency
+  Random
   ReleaseSemaphore
   ResetEvent
   ResumeThread
+  SetDaylightTime
   SetEvent
+  SetFileTime
   SetLocalTime
   SetSystemTime
   SetThreadPriority

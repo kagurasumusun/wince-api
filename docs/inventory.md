@@ -161,6 +161,50 @@ table and their import-provider interpretation is discussed under
 | `ERROR_NO_UNICODE_TRANSLATION` | outside rows above; cited by `ms915519`/`ms961248` | — | Winerror.h | — | value 1113 |
 | Export defs (public-info derived) | names = documented exports, taken ONLY from the official per-function "Link Library" rows harvested from the `(v=msdn.10)` pages (see `tools/ce-manifest.py`, `tools/ce-fetch.py`, `tools/gen-doc-def.py`); no shared-source/device-dump/VS/PB-derived names | — | — | coredll.dll | `def/coredll-doc.def` lists pages whose row names Coredll.lib; name-only (ordinals are not published); generated and committed from `build/rows.json` (see README) |
 
+### M10: Time Reference + Memory Management Reference batch (winbase.h)
+
+Harvested from the same manifest pipeline (books *Core OS Reference →
+Time Reference* and *Memory Management Reference*; official
+`(v=msdn.10)` CE 5.0 pages, already in `build/rows.json`).  All rows
+below are transcribed verbatim from the page Requirements; link
+libraries are Coredll.lib except where noted.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `GetTickCount` | `ms885645` | CE 1.0+ | Winbase.h | Coredll.lib | milliseconds since system start |
+| `GetFileTime` | `ms885625` | CE 1.0+ | Winbase.h | Coredll.lib | creation/access/write times; hFile needs GENERIC_READ; NULL out-pointers allowed |
+| `SetFileTime` | `ms886812` | CE 1.0+ | Winbase.h | Coredll.lib | hFile needs GENERIC_WRITE; NULL in-pointers leave the time unchanged |
+| `CompareFileTime` | `ms885172` | CE 1.0+ | Windows.h (page) | Coredll.lib | −1/0/+1 ordering of two 64-bit file times |
+| `GetCurrentFT` | `aa451027` | CE 3.0+ | Winbase.h | Coredll.lib | fills a FILETIME with the current system date/time; void |
+| `GetIdleTime` | `ms885626` | CE 3.0+ | Winbase.h | Coredll.lib | idle milliseconds; MAXDWORD ⇒ feature unsupported (source of MAXDWORD) |
+| `Random` | `ms886791` | CE 1.0+ | Winbase.h | Coredll.lib | CE-only pseudo-random DWORD |
+| `SetDaylightTime` | `ms886808` | CE 2.0+ | Winbase.h | Coredll.lib | dst = 1 DST in effect, 0 standard time; void |
+| `QueryPerformanceCounter` | `ms886788` | CE 2.0+ | Winbase.h | Coredll.lib | 64-bit count via LARGE_INTEGER |
+| `QueryPerformanceFrequency` | `ms886789` | CE 2.0+ | Winbase.h | Coredll.lib | counts per second via LARGE_INTEGER |
+| `GetProcessHeap` | `ms885635` | CE 1.0+ | Winbase.h | **Lmem.lib** (page) | handle usable by the Heap* functions; not destroyable; excluded from the coredll def |
+| `HeapCreate` | `ms885656` | CE 1.0+ | Winbase.h | Coredll.lib | CE: reserves shared-memory-area memory; dwMaximumSize 0 = growable; HEAP_SHARED_READONLY (kernel mode only) named, numeric value not published |
+| `HeapDestroy` | `ms885657` | CE 1.0+ | Winbase.h | Coredll.lib | destroys a HeapCreate heap (not the process heap) without prior HeapFree |
+| `HeapAlloc` | `ms885654` | CE 1.0+ | Winbase.h | Coredll.lib | non-movable; HEAP_NO_SERIALIZE ignored (always serialized); HEAP_ZERO_MEMORY; NULL failure, no extended error |
+| `HeapFree` | `ms885659` | CE 1.0+ | Winbase.h | Coredll.lib | | 
+| `HeapReAlloc` | `ms885661` | CE 1.0+ | Winbase.h | Coredll.lib | HEAP_NO_SERIALIZE ignored |
+| `HeapSize` | `ms885662` | CE 1.0+ | Winbase.h | Coredll.lib | actual (≥ requested) size of an allocated block |
+| `HeapValidate` | `ms885663` | CE 1.0+ | Winbase.h | Coredll.lib | whole heap when lpMem NULL, else the one block |
+| `HeapCompact` | `ms885655` | CE 5.0+ | Winbase.h | Coredll.lib | coalesces free blocks, decommits large ones |
+| `LocalReAlloc` | `ms886742` | CE 1.0+ | Winbase.h | Coredll.lib | LMEM_MODIFY changes attributes (uBytes ignored); else LMEM_MOVEABLE/LMEM_ZEROINIT reallocation flags |
+| `LocalSize` | `ms886743` | CE 1.0+ | Winbase.h | Coredll.lib | size in bytes of a local memory object |
+| `GlobalMemoryStatus` | `ms885649` | CE 1.0+ | Winbase.h | Coredll.lib | fills MEMORYSTATUS; caller sets dwLength first |
+| `IsBadCodePtr` | `ms885687` | CE 1.0+ | Winbase.h | Coredll.lib | page itself warns the function is unsafe for input validation |
+| `IsBadReadPtr` | `ms885688` | CE 1.0+ | Winbase.h | Coredll.lib | ucb 0 ⇒ valid (returns zero) |
+| `IsBadWritePtr` | `ms885689` | CE 1.0+ | Winbase.h | Coredll.lib | as IsBadReadPtr |
+| `MEMORYSTATUS`/`LPMEMORYSTATUS` struct | `ms886753` | CE 1.0+ | Winbase.h | — | 8 DWORD members ending at dwAvailVirtual (32 bytes; no desktop-only dwAvailExtendedVirtual on CE) |
+| `HEAP_NO_SERIALIZE`, `HEAP_ZERO_MEMORY` | names per `ms885654`/`ms885656` | — | Winbase.h | — | numeric values fixed Win32 ABI (1, 8) |
+| `LMEM_MOVEABLE`, `LMEM_MODIFY` | names per `ms886742` (LocalAlloc page `ms886739` defines LMEM_FIXED/ZEROINIT/LPTR) | — | Winbase.h | — | numeric values fixed Win32 ABI (2, 0x80) |
+| `MAXDWORD` | cited by `ms885626` | — | Winbase.h | — | `(DWORD)0xFFFFFFFF` |
+
+Note the M10 def effect: after this batch `def/coredll-doc.def` grows
+53 → 77 name-only exports (regenerated by `make defdoc`); the coredll
+def still excludes GetProcessHeap (Lmem.lib row).
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

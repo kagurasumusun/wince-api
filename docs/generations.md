@@ -83,6 +83,26 @@ The 25 M9 synchronization declarations (plus `winnt.h`) are shipped;
 their page rows (including the Nk.lib / Coremain.lib rows) and the
 critical-section layout basis are transcribed in `docs/inventory.md`.
 
+**M10 batch — Time Reference + Memory Management Reference**
+(no new fetches: the 203 harvested rows already covered these books;
+the pages are the same `(v=msdn.10)` CE 5.0 archive):
+
+* *Time Reference* (10 shipped): GetTickCount `ms885645`, GetFileTime
+  `ms885625`, SetFileTime `ms886812`, CompareFileTime `ms885172`,
+  GetCurrentFT `aa451027`, GetIdleTime `ms885626`, Random `ms886791`,
+  SetDaylightTime `ms886808`, QueryPerformanceCounter `ms886788`,
+  QueryPerformanceFrequency `ms886789`.
+* *Memory Management Reference* (16 shipped): GetProcessHeap
+  `ms885635` (Lmem.lib row), HeapCreate `ms885656`, HeapDestroy
+  `ms885657`, HeapAlloc `ms885654`, HeapFree `ms885659`, HeapReAlloc
+  `ms885661`, HeapSize `ms885662`, HeapValidate `ms885663`,
+  HeapCompact `ms885655`, LocalReAlloc `ms886742`, LocalSize
+  `ms886743`, GlobalMemoryStatus `ms885649`, IsBadCodePtr `ms885687`,
+  IsBadReadPtr `ms885688`, IsBadWritePtr `ms885689`, plus the
+  `MEMORYSTATUS` structure page `ms886753`.
+* Both M10 batches are shipped in winbase.h; def regenerated
+  (53 → 77 exports).  Full rows in `docs/inventory.md`.
+
 **CE 6.0 archive (`(v=winembedded.60)`): Input and Output
 `ee479262` (CE 6.0 run-time I/O overview: CE 6.0 CRT includes the
 security-enhanced `_s` variants and deprecates plain forms; the

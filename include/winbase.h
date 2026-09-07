@@ -110,8 +110,15 @@ FARPROC GetProcAddressA(HMODULE hModule, LPCSTR lpProcName);
  * zero, LPTR combines both; NULL means failure.  Flag values below
  * are the documented Win32 ABI values (Microsoft's official
  * memory-management reference). */
+
+/* LMEM_MOVEABLE and LMEM_MODIFY are named (with the behaviour above)
+ * by the LocalReAlloc page ms886742; numeric values are the Win32
+ * ABI values from Microsoft's official memory-management reference
+ * (LMEM_MODIFY applies to LocalReAlloc's fuFlags only). */
 #define LMEM_FIXED     0x0000u
+#define LMEM_MOVEABLE  0x0002u
 #define LMEM_ZEROINIT  0x0040u
+#define LMEM_MODIFY    0x0080u
 #define LPTR           (LMEM_FIXED | LMEM_ZEROINIT)
 
 HLOCAL LocalAlloc(UINT uFlags, UINT uBytes);
@@ -945,6 +952,139 @@ PVOID InterlockedCompareExchangePointer(PVOID *Destination,
 
 
 /* ------------------------------------------------------------------ */
+/* Memory management: heaps, process heap, local heap completion      */
+/* ------------------------------------------------------------------ */
+
+/* ms886753 "MEMORYSTATUS (Windows CE 5.0)": memory availability
+ * report filled by GlobalMemoryStatus.  CE 1.0+; Winbase.h.  CE
+ * layout is eight DWORD members (there is no
+ * dwAvailExtendedVirtual member on CE).  dwLength must be set to
+ * sizeof(MEMORYSTATUS) by the caller. */
+typedef struct _MEMORYSTATUS {
+    DWORD dwLength;        /* size of the structure, in bytes */
+    DWORD dwMemoryLoad;    /* 0..100 estimate of memory use */
+    DWORD dwTotalPhys;     /* total physical memory, in bytes */
+    DWORD dwAvailPhys;     /* available physical memory, in bytes */
+    DWORD dwTotalPageFile; /* bytes storable in the paging file */
+    DWORD dwAvailPageFile; /* bytes available in the paging file */
+    DWORD dwTotalVirtual;  /* user-mode virtual address space, bytes */
+    DWORD dwAvailVirtual;  /* unreserved/uncommitted virtual memory */
+} MEMORYSTATUS, *LPMEMORYSTATUS;
+
+/* Heap allocation flags.  The CE HeapAlloc/HeapReAlloc/HeapCreate
+ * pages (ms885654/ms885661/ms885656) name HEAP_NO_SERIALIZE (ignored
+ * on CE: heaps are always serialized), HEAP_ZERO_MEMORY and
+ * HEAP_SHARED_READONLY (HeapCreate; numeric value not published);
+ * numeric values for the first two are the fixed Win32 ABI values.
+ * HEAP_SHARED_READONLY is intentionally not defined (no official
+ * numeric value). */
+#define HEAP_NO_SERIALIZE 0x00000001u
+#define HEAP_ZERO_MEMORY  0x00000008u
+
+/* ms885635 "GetProcessHeap (Windows CE 5.0)":
+ * HANDLE GetProcessHeap(VOID).  CE 1.0+; Winbase.h; the page lists
+ * Link Library: Lmem.lib (recorded row; the process-heap handle is
+ * used by the heap functions below).  Returns a handle usable in
+ * HeapAlloc/HeapReAlloc/HeapFree/HeapSize; not to be destroyed. */
+HANDLE GetProcessHeap(void);
+
+/* ms885656 "HeapCreate (Windows CE 5.0)":
+ * HANDLE HeapCreate(DWORD, DWORD, DWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Reserves memory for a private heap (dwMaximumSize
+ * zero makes it growable; a nonzero dwMaximumSize makes it
+ * nongrowable).  Heap functions then allocate from the reserved
+ * memory.  HEAP_SHARED_READONLY requires kernel mode; the flag is
+ * otherwise documented per page. */
+HANDLE HeapCreate(DWORD flOptions, DWORD dwInitialSize,
+                  DWORD dwMaximumSize);
+
+/* ms885657 "HeapDestroy (Windows CE 5.0)":
+ * BOOL HeapDestroy(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Destroys a heap created by HeapCreate (not the process heap) and
+ * frees its committed memory. */
+BOOL HeapDestroy(HANDLE hHeap);
+
+/* ms885654 "HeapAlloc (Windows CE 5.0)":
+ * LPVOID HeapAlloc(HANDLE, DWORD, DWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Allocates a non-movable block from a heap
+ * (HeapCreate or GetProcessHeap handle).  HEAP_NO_SERIALIZE is
+ * ignored (heaps are always serialized); HEAP_ZERO_MEMORY zero
+ * initializes.  NULL indicates failure and no extended error is
+ * recorded. */
+LPVOID HeapAlloc(HANDLE hHeap, DWORD dwFlags, DWORD dwBytes);
+
+/* ms885659 "HeapFree (Windows CE 5.0)":
+ * BOOL HeapFree(HANDLE, DWORD, LPVOID).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Frees a block allocated by HeapAlloc/HeapReAlloc. */
+BOOL HeapFree(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem);
+
+/* ms885661 "HeapReAlloc (Windows CE 5.0)":
+ * LPVOID HeapReAlloc(HANDLE, DWORD, LPVOID, DWORD).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Reallocates a non-movable heap block;
+ * HEAP_NO_SERIALIZE is ignored on CE. */
+LPVOID HeapReAlloc(HANDLE hHeap, DWORD dwFlags, LPVOID lpMem,
+                   DWORD dwBytes);
+
+/* ms885662 "HeapSize (Windows CE 5.0)":
+ * DWORD HeapSize(HANDLE, DWORD, LPCVOID).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Returns the actual size in bytes of an allocated
+ * heap block (>= the requested size). */
+DWORD HeapSize(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem);
+
+/* ms885663 "HeapValidate (Windows CE 5.0)":
+ * BOOL HeapValidate(HANDLE, DWORD, LPCVOID).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Validates the heap control structures (whole heap
+ * when lpMem is NULL, otherwise the single block). */
+BOOL HeapValidate(HANDLE hHeap, DWORD dwFlags, LPCVOID lpMem);
+
+/* ms885655 "HeapCompact (Windows CE 5.0)":
+ * UINT HeapCompact(HANDLE, DWORD).  CE 5.0 and later; Winbase.h;
+ * Coredll.lib.  Coalesces adjacent free blocks and decommits large
+ * free blocks; returns the largest committed free block size. */
+UINT HeapCompact(HANDLE hHeap, DWORD dwFlags);
+
+/* Local-heap completion (CE: local heap = process heap). */
+
+/* ms886742 "LocalReAlloc (Windows CE 5.0)":
+ * HLOCAL LocalReAlloc(HLOCAL, UINT, UINT).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Changes the size of a local memory object (see
+ * LocalAlloc/LocalFree above). */
+HLOCAL LocalReAlloc(HLOCAL hMem, UINT uBytes, UINT fuFlags);
+
+/* ms886743 "LocalSize (Windows CE 5.0)":
+ * UINT LocalSize(HLOCAL).  CE 1.0+; Winbase.h; Coredll.lib.  Returns
+ * the current size in bytes of a local memory object. */
+UINT LocalSize(HLOCAL hMem);
+
+/* ms885649 "GlobalMemoryStatus (Windows CE 5.0)":
+ * VOID GlobalMemoryStatus(LPMEMORYSTATUS).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Fills a MEMORYSTATUS with current memory
+ * availability; the caller sets dwLength to sizeof(MEMORYSTATUS)
+ * first. */
+VOID GlobalMemoryStatus(LPMEMORYSTATUS lpBuffer);
+
+/* Memory-integrity probes (use is discouraged by the pages
+ * themselves: "unsafe to use when checking your input parameters"). */
+
+/* ms885687 "IsBadCodePtr (Windows CE 5.0)":
+ * BOOL IsBadCodePtr(FARPROC).  CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL IsBadCodePtr(FARPROC lpfn);
+
+/* ms885688 "IsBadReadPtr (Windows CE 5.0)":
+ * BOOL IsBadReadPtr(const void*, UINT).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  A zero block size returns zero (valid). */
+BOOL IsBadReadPtr(const void *lp, UINT ucb);
+
+/* ms885689 "IsBadWritePtr (Windows CE 5.0)":
+ * BOOL IsBadWritePtr(LPVOID, UINT).  CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL IsBadWritePtr(LPVOID lp, UINT ucb);
+
+/* MAXDWORD: 32-bit unsigned maximum; cited by the GetIdleTime page
+ * (ms885626: "If GetIdleTime returns MAXDWORD, functionality is not
+ * supported"). */
+#define MAXDWORD ((DWORD)0xFFFFFFFFu)
+
+/* ------------------------------------------------------------------ */
 /* Time management (SYSTEMTIME + time conversion).                    */
 /* ------------------------------------------------------------------ */
 
@@ -1015,6 +1155,76 @@ BOOL FileTimeToSystemTime(const FILETIME *lpFileTime,
  * Coredll.lib. */
 BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,
                           LPFILETIME lpFileTime);
+
+/* ------------------------------------------------------------------ */
+/* Time: tick/counter, file times, time-zone notes (M10)              */
+/* ------------------------------------------------------------------ */
+
+/* ms885645 "GetTickCount (Windows CE 5.0)":
+ * DWORD GetTickCount(void).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Returns the number of milliseconds since the system started. */
+DWORD GetTickCount(void);
+
+/* ms885625 "GetFileTime (Windows CE 5.0)":
+ * BOOL GetFileTime(HANDLE, LPFILETIME, LPFILETIME, LPFILETIME).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Retrieves the creation, last
+ * access and last write times of a file (handle opened with
+ * GENERIC_READ).  Any of the three pointers may be NULL when that
+ * time is not needed. */
+BOOL GetFileTime(HANDLE hFile, LPFILETIME lpCreationTime,
+                 LPFILETIME lpLastAccessTime,
+                 LPFILETIME lpLastWriteTime);
+
+/* ms886812 "SetFileTime (Windows CE 5.0)":
+ * BOOL SetFileTime(HANDLE, const FILETIME*, const FILETIME*, const
+ * FILETIME*).  CE 1.0+; Winbase.h; Coredll.lib.  Sets the creation,
+ * last access and last write times of a file (handle opened with
+ * GENERIC_WRITE); NULL pointers leave the corresponding time
+ * unchanged. */
+BOOL SetFileTime(HANDLE hFile, const FILETIME *lpCreationTime,
+                 const FILETIME *lpLastAccessTime,
+                 const FILETIME *lpLastWriteTime);
+
+/* ms885172 "CompareFileTime (Windows CE 5.0)":
+ * LONG CompareFileTime(const FILETIME*, const FILETIME*).  CE 1.0+;
+ * Header Windows.h per page; Coredll.lib.  Returns -1 when the first
+ * time is earlier, 0 when equal, +1 when later. */
+LONG CompareFileTime(const FILETIME *lpFileTime1,
+                     const FILETIME *lpFileTime2);
+
+/* aa451027 "GetCurrentFT (Windows CE 5.0)":
+ * void GetCurrentFT(LPFILETIME).  CE 3.0+; Winbase.h; Coredll.lib.
+ * Fills the FILETIME with the current system date and time. */
+void GetCurrentFT(LPFILETIME lpFileTime);
+
+/* ms885626 "GetIdleTime (Windows CE 5.0)":
+ * DWORD GetIdleTime(void).  CE 3.0+; Winbase.h; Coredll.lib.
+ * Returns the number of milliseconds the system has been idle;
+ * MAXDWORD means the feature is not supported. */
+DWORD GetIdleTime(void);
+
+/* ms886791 "Random (Windows CE 5.0)":
+ * DWORD Random(void).  CE 1.0+; Winbase.h; Coredll.lib.  Returns a
+ * randomly generated DWORD. */
+DWORD Random(void);
+
+/* ms886808 "SetDaylightTime (Windows CE 5.0)":
+ * void SetDaylightTime(DWORD).  CE 2.0+; Winbase.h; Coredll.lib.
+ * Informs the system whether daylight saving time is in effect:
+ * dst 1 = DST in effect, dst 0 = standard time. */
+void SetDaylightTime(DWORD dst);
+
+/* ms886788 "QueryPerformanceCounter (Windows CE 5.0)":
+ * BOOL QueryPerformanceCounter(LARGE_INTEGER*).  CE 2.0+; Winbase.h;
+ * Coredll.lib.  Fills the value with the current high-resolution
+ * performance counter (in counts). */
+BOOL QueryPerformanceCounter(LARGE_INTEGER *lpPerformanceCount);
+
+/* ms886789 "QueryPerformanceFrequency (Windows CE 5.0)":
+ * BOOL QueryPerformanceFrequency(LARGE_INTEGER*).  CE 2.0+;
+ * Winbase.h; Coredll.lib.  Fills the value with the performance
+ * counter frequency, in counts per second. */
+BOOL QueryPerformanceFrequency(LARGE_INTEGER *lpFrequency);
 
 #ifdef __cplusplus
 }

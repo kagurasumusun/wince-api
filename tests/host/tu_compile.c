@@ -129,6 +129,33 @@ static const void *const api_symbols[] = {
     (const void *) &LocalFileTimeToFileTime,
     (const void *) &FileTimeToSystemTime,
     (const void *) &SystemTimeToFileTime,
+    /* M10: memory management (heaps/local/status/probes). */
+    (const void *) &GetProcessHeap,
+    (const void *) &HeapCreate,
+    (const void *) &HeapDestroy,
+    (const void *) &HeapAlloc,
+    (const void *) &HeapFree,
+    (const void *) &HeapReAlloc,
+    (const void *) &HeapSize,
+    (const void *) &HeapValidate,
+    (const void *) &HeapCompact,
+    (const void *) &LocalReAlloc,
+    (const void *) &LocalSize,
+    (const void *) &GlobalMemoryStatus,
+    (const void *) &IsBadCodePtr,
+    (const void *) &IsBadReadPtr,
+    (const void *) &IsBadWritePtr,
+    /* M10: ticks/file times/time helpers. */
+    (const void *) &GetTickCount,
+    (const void *) &GetFileTime,
+    (const void *) &SetFileTime,
+    (const void *) &CompareFileTime,
+    (const void *) &GetCurrentFT,
+    (const void *) &GetIdleTime,
+    (const void *) &Random,
+    (const void *) &SetDaylightTime,
+    (const void *) &QueryPerformanceCounter,
+    (const void *) &QueryPerformanceFrequency,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -253,8 +280,23 @@ typedef char assert_systemtime_offsets[
      offsetof(SYSTEMTIME, wSecond) == 12 &&
      offsetof(SYSTEMTIME, wMilliseconds) == 14) ? 1 : -1];
 
+/* M10 memory constants (winbase.h): heap flags (numeric values are
+ * the fixed Win32 ABI values) and the local-allocation flags. */
+typedef char assert_heap_vals[
+    (HEAP_NO_SERIALIZE == 0x1u && HEAP_ZERO_MEMORY == 0x8u &&
+     MAXDWORD == (DWORD)0xFFFFFFFFu) ? 1 : -1];
+
+/* M10 MEMORYSTATUS layout (winbase.h, ms886753): eight DWORDs,
+ * dwAvailVirtual last (no desktop-only dwAvailExtendedVirtual). */
+typedef char assert_memstatus_layout[
+    (offsetof(MEMORYSTATUS, dwLength) == 0 &&
+     offsetof(MEMORYSTATUS, dwMemoryLoad) == 4 &&
+     offsetof(MEMORYSTATUS, dwAvailVirtual) == 28 &&
+     sizeof(MEMORYSTATUS) == 32) ? 1 : -1];
+
 static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,
+    HEAP_NO_SERIALIZE, HEAP_ZERO_MEMORY,
 };
 
 /* Generic-text forms are the wide ones on CE. */
@@ -427,6 +469,82 @@ static int sync_shaped_usage(void)
     return 0;
 }
 
+/* M10 usage shapes (winbase.h memory + time batch; compile-only for
+ * the resource-hungry calls): process heap, private heaps, the local
+ * memory completion pair, the memory status/probe functions, ticks,
+ * file times, and the performance counter.  Runtime side effects are
+ * avoided (no file created: GetFileTime/SetFileTime are only called
+ * with INVALID_HANDLE_VALUE and their failure accepted). */
+static int m10_shaped_usage(void)
+{
+    HANDLE hheap, hproc, hf;
+    LPVOID blk;
+    MEMORYSTATUS ms;
+    FILETIME ft, ftc, fta, ftw;
+    LARGE_INTEGER qpc, qpf;
+    DWORD ticks, idle, rnd, sz;
+    BOOL ok = FALSE;
+    HLOCAL hloc;
+
+    hproc = GetProcessHeap();
+    if (hproc == NULL)
+        return (int) GetLastError();
+    blk = HeapAlloc(hproc, HEAP_ZERO_MEMORY, 64u);
+    if (blk == NULL)
+        return (int) GetLastError();
+    sz = HeapSize(hproc, 0, blk);
+    blk = HeapReAlloc(hproc, HEAP_ZERO_MEMORY, blk, 128u);
+    if (blk == NULL)
+        return (int) GetLastError();
+    ok = (sz >= 64u && HeapSize(hproc, 0, blk) >= sz) && ok;
+    ok = HeapFree(hproc, 0, blk) != 0;
+    ok = HeapValidate(hproc, 0, NULL) && ok;
+
+    hheap = HeapCreate(0, 0, 0);
+    if (hheap == NULL)
+        return (int) GetLastError();
+    blk = HeapAlloc(hheap, 0, 32u);
+    if (blk == NULL)
+        return (int) GetLastError();
+    ok = HeapSize(hheap, 0, blk) >= 32u && ok;
+    ok = HeapFree(hheap, 0, blk) && ok;
+    (void) HeapCompact(hheap, 0);
+    ok = HeapDestroy(hheap) && ok;
+
+    hloc = LocalReAlloc((HLOCAL) 0, 16u, LMEM_MOVEABLE);
+    if (hloc != NULL)
+        ok = LocalSize(hloc) != 0 && ok;
+    GlobalMemoryStatus(&ms);
+    ok = ms.dwLength == sizeof(MEMORYSTATUS) && ok;
+
+    /* Memory-integrity probes (compile shape only). */
+    ok = (IsBadCodePtr((FARPROC) 0) != 0) && ok;
+    ok = (IsBadReadPtr((const void *) 0, 0u) == 0) && ok;
+    ok = (IsBadWritePtr((LPVOID) 0, 0u) == 0) && ok;
+
+    /* Time/tick surface. */
+    ticks = GetTickCount();
+    idle = GetIdleTime();
+    rnd = Random();
+    (void) idle; (void) rnd;
+    SetDaylightTime(0);
+    GetCurrentFT(&ft);
+    if (GetFileTime(INVALID_HANDLE_VALUE, &ftc, &fta, &ftw))
+        return (int) GetLastError();
+    (void) CompareFileTime(&ftc, &ftw);
+    hf = CreateFileW(w_file, GENERIC_WRITE, FILE_SHARE_READ, NULL,
+                     CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hf != INVALID_HANDLE_VALUE) {
+        (void) SetFileTime(hf, NULL, NULL, &ft);
+        ok = CloseHandle(hf) && ok;
+    }
+    ok = (QueryPerformanceCounter(&qpc) != 0) && ok;
+    ok = (QueryPerformanceFrequency(&qpf) != 0 && qpf.QuadPart != 0)
+         && ok;
+    (void) qpc.QuadPart;
+    return (ticks == (DWORD) -1) ? (int) ERROR_INVALID_PARAMETER : ok;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -434,5 +552,7 @@ int host_tu_entry(void)
     (void) LocalAlloc(LPTR, 16u);
     if (ce_shaped_usage() != 0)
         return 1;
-    return sync_shaped_usage() == 0 ? 0 : 1;
+    if (sync_shaped_usage() != 0)
+        return 1;
+    return m10_shaped_usage() == 0 ? 0 : 1;
 }
