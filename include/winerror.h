@@ -21,6 +21,7 @@ extern "C" {
 
 /* General error values. */
 #define ERROR_SUCCESS                0L   /* The operation completed successfully. */
+#define NO_ERROR                     0L   /* Same value as ERROR_SUCCESS; cited by the CE TlsGetValue page (aa450949: "GetLastError returns NO_ERROR"). */
 #define ERROR_INVALID_FUNCTION       1L   /* Incorrect function. */
 #define ERROR_FILE_NOT_FOUND         2L   /* The system cannot find the file. */
 #define ERROR_PATH_NOT_FOUND         3L   /* The system cannot find the path. */

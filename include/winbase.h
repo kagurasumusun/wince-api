@@ -255,6 +255,102 @@ BOOL GetExitCodeProcess(HANDLE hProcess, LPDWORD lpExitCode);
  * bit 29 reserved for application-defined codes. */
 VOID SetLastError(DWORD dwErrCode);
 
+/* ------------------------------------------------------------------ */
+/* Thread scheduling (Suspend/Resume, exit status)                    */
+/* ------------------------------------------------------------------ */
+
+/* aa450913 "SuspendThread (Windows CE 5.0)":
+ * DWORD SuspendThread(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Suspends the thread and increments its suspend count (max
+ * MAXIMUM_SUSPEND_COUNT); previous suspend count is returned,
+ * 0xFFFFFFFF on failure.  CE note: suspending a thread that is
+ * making a kernel call fails -- the call may need to be repeated. */
+DWORD SuspendThread(HANDLE hThread);
+
+/* ms886801 "ResumeThread (Windows CE 5.0)": DWORD
+ * ResumeThread(HANDLE).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Decrements the suspend count; resumes execution when it reaches
+ * zero.  Return: previous suspend count; 0xFFFFFFFF on failure;
+ * 0 = the thread was not suspended; 1 = suspended, now running. */
+DWORD ResumeThread(HANDLE hThread);
+
+/* ms885623 "GetExitCodeThread (Windows CE 5.0)":
+ * BOOL GetExitCodeThread(HANDLE, LPDWORD).  CE 1.01+; Winbase.h;
+ * Coredll.lib.  STILL_ACTIVE while the thread runs; after
+ * termination the status is the ExitThread/TerminateThread exit
+ * value, the return value of the thread function, or the exit value
+ * of the thread's process. */
+BOOL GetExitCodeThread(HANDLE hThread, LPDWORD lpExitCode);
+
+/* ------------------------------------------------------------------ */
+/* Thread local storage (TLS)                                         */
+/* ------------------------------------------------------------------ */
+
+/* aa450945 "TlsAlloc (Windows CE 5.0)": DWORD TlsAlloc(void).
+ * CE 1.0+; Header listed as Winuser.h on the page; Coredll.lib.
+ * Returns a TLS index; 0xFFFFFFFF (TLS_OUT_OF_INDEXES) on failure.
+ * TLS indexes are not valid across process boundaries; typical use:
+ * allocate at process/DLL attach, TlsSetValue per thread, TlsFree at
+ * process detach.  TLS_MINIMUM_AVAILABLE is guaranteed at least 64. */
+DWORD TlsAlloc(void);
+
+/* aa450947 "TlsFree (Windows CE 5.0)": BOOL TlsFree(DWORD).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Releases a TLS index for reuse;
+ * does NOT free dynamic storage stored in the slot (free it first);
+ * DLLs are expected to call it from their process-detach routine. */
+BOOL TlsFree(DWORD dwTlsIndex);
+
+/* aa450951 "TlsSetValue (Windows CE 5.0)":
+ * BOOL TlsSetValue(DWORD, LPVOID).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Stores a value in the calling thread's TLS slot; slots are
+ * initialized to NULL.  Minimal parameter validation: succeeds for
+ * index 0 .. TLS_MINIMUM_AVAILABLE-1. */
+BOOL TlsSetValue(DWORD dwTlsIndex, LPVOID lpTlsValue);
+
+/* aa450949 "TlsGetValue (Windows CE 5.0)":
+ * LPVOID TlsGetValue(DWORD).  CE 1.0+; Winbase.h; Coredll.lib.
+ * Retrieves the calling thread's TLS slot value; a stored zero is
+ * indistinguishable from failure, so on success the function clears
+ * the thread's last error (GetLastError then returns NO_ERROR).
+ * CE note: for CE 3.0 and later, NULL is returned when called before
+ * TlsSetValue; on CE 1.0-2.12 the value is not guaranteed NULL. */
+LPVOID TlsGetValue(DWORD dwTlsIndex);
+
+/* TLS_MINIMUM_AVAILABLE: minimum number of TLS indexes per process.
+ * The TlsAlloc page guarantees "at least 64"; the ABI value used by
+ * the CE/Win32 runtimes is 64. */
+#define TLS_MINIMUM_AVAILABLE 64
+
+/* TLS_OUT_OF_INDEXES: TlsAlloc failure return (aa450945 documents
+ * the failure value 0xFFFFFFFF). */
+#define TLS_OUT_OF_INDEXES ((DWORD)0xFFFFFFFFu)
+
+/* ------------------------------------------------------------------ */
+/* Extended module loading (LoadLibraryEx)                            */
+/* ------------------------------------------------------------------ */
+
+/* ms886737 "LoadLibraryEx (Windows CE 5.0)":
+ * HMODULE LoadLibraryEx(LPCTSTR, HANDLE, DWORD).  CE 3.0+; Winbase.h;
+ * Coredll.lib.  hFile is reserved and must be NULL.  dwFlags = 0
+ * behaves exactly like LoadLibrary.  CE-specific: a module is loaded
+ * only once, so the dwFlags settings apply to all further loads of
+ * the same module.  Because Windows CE is Unicode-only, the export
+ * is LoadLibraryExW. */
+HINSTANCE LoadLibraryExW(LPCWSTR lpLibFileName, HANDLE hFile,
+                         DWORD dwFlags);
+#define LoadLibraryEx LoadLibraryExW
+
+/* LoadLibraryEx dwFlags (ms886737).  DONT_RESOLVE_DLL_REFERENCES
+ * maps the DLL without calling DllMain and without loading its
+ * imports; LOAD_LIBRARY_AS_DATAFILE maps the file as a data file
+ * (implies DONT_RESOLVE_DLL_REFERENCES) for resource extraction;
+ * LOAD_WITH_ALTERED_SEARCH_PATH is listed as "Windows CE: not
+ * supported."  Values are the Win32 ABI constants given in
+ * Microsoft's official LoadLibraryExW reference page. */
+#define DONT_RESOLVE_DLL_REFERENCES   0x00000001u
+#define LOAD_LIBRARY_AS_DATAFILE      0x00000002u
+#define LOAD_WITH_ALTERED_SEARCH_PATH 0x00000008u
+
 #ifdef __cplusplus
 }
 #endif

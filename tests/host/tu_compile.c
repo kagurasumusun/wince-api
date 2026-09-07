@@ -53,7 +53,27 @@ static const void *const api_symbols[] = {
     (const void *) &OpenProcess,
     (const void *) &GetExitCodeProcess,
     (const void *) &SetLastError,
+    (const void *) &GetExitCodeThread,
+    (const void *) &SuspendThread,
+    (const void *) &ResumeThread,
+    (const void *) &TlsAlloc,
+    (const void *) &TlsFree,
+    (const void *) &TlsSetValue,
+    (const void *) &TlsGetValue,
+    (const void *) &LoadLibraryEx,
+    (const void *) &LoadLibraryExW,
 };
+
+/* TLS constants exercised (winbase.h). */
+typedef char assert_tls_vals[
+    (TLS_MINIMUM_AVAILABLE == 64 &&
+     TLS_OUT_OF_INDEXES == (DWORD)0xFFFFFFFFu) ? 1 : -1];
+
+/* LoadLibraryEx flags (winbase.h, values per official Win32 ABI). */
+typedef char assert_loadlib_flags[
+    (DONT_RESOLVE_DLL_REFERENCES == 1u &&
+     LOAD_LIBRARY_AS_DATAFILE == 2u &&
+     LOAD_WITH_ALTERED_SEARCH_PATH == 8u) ? 1 : -1];
 
 /* Error constants exercised (values from winerror.h). */
 typedef char assert_winerror_vals[
