@@ -268,6 +268,21 @@ System Management Reference books; already in `build/rows.json`).
 | `IsDBCSLeadByteEx` | `ms886608` | CE 1.01+ | Winnls.h | Coredll.lib | |
 | `BYTE`, `LPBOOL` (windef.h) | used by NLS signatures (`ms886515`, `aa450989`) | — | Windef.h | — | windef base types |
 
+### M14: Fiber Reference batch (winbase.h)
+
+*Fiber Reference* book; official `(v=msdn.10)` CE 5.0 pages.  All
+functions are CE .NET 4.0 and later with Link Library Coredll.lib.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `CreateFiber` | `ms885178` | CE .NET 4.0+ | Winbase.h | Coredll.lib | dwStackSize 0 = default stack; does not schedule the fiber |
+| `ConvertThreadToFiber` | `ms885176` | CE .NET 4.0+ | Winbase.h | Coredll.lib | converts calling thread into a fiber |
+| `DeleteFiber` | `ms885197` | CE .NET 4.0+ | Winbase.h | Coredll.lib | |
+| `GetCurrentFiber` | `ms885611` | CE .NET 4.0+ | Winbase.h | Coredll.lib | address of current fiber |
+| `GetFiberData` | `ms885624` | CE .NET 4.0+ | Winbase.h | Coredll.lib | data pointer of current fiber |
+| `SwitchToFiber` | `aa450915` | CE .NET 4.0+ | Winbase.h | Coredll.lib | schedules the fiber |
+| `PFIBER_START_ROUTINE`/`LPFIBER_START_ROUTINE` | `ms885221` (FiberProc) | CE .NET 4.0+ | Windows.h (page) | — | callback type; FiberProc is the developer's own function name (placeholder), so no export and no macro |
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

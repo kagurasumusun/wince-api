@@ -154,3 +154,9 @@ MultiByteToWideChar `ms886760`, WideCharToMultiByte `aa450989`,
 IsDBCSLeadByte `ms886515`, IsDBCSLeadByteEx `ms886608` + CP_*, MB_*,
 WC_* constants; `BYTE`/`LPBOOL` added to windef.h.  Def: 90 -> 94
 exports.
+
+**M14 batch — Fiber Reference:** CreateFiber `ms885178`,
+ConvertThreadToFiber `ms885176`, DeleteFiber `ms885197`,
+GetCurrentFiber `ms885611`, GetFiberData `ms885624`, SwitchToFiber
+`aa450915`, LPFIBER_START_ROUTINE/PFIBER_START_ROUTINE per FiberProc
+`ms885221`.  Def: 94 -> 100 exports.

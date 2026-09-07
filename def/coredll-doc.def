@@ -13,10 +13,13 @@
 LIBRARY coredll.dll
 EXPORTS
   CompareFileTime
+  ConvertThreadToFiber
   CreateEventW
+  CreateFiber
   CreateMutexW
   CreateProcessW
   CreateThread
+  DeleteFiber
   DuplicateHandle
   ExitProcess
   ExitThread
@@ -26,9 +29,11 @@ EXPORTS
   FreeLibrary
   GetCommandLineW
   GetCurrentFT
+  GetCurrentFiber
   GetDllVersion
   GetExitCodeProcess
   GetExitCodeThread
+  GetFiberData
   GetFileTime
   GetIdleTime
   GetLocalTime
@@ -92,6 +97,7 @@ EXPORTS
   SignalStarted
   Sleep
   SuspendThread
+  SwitchToFiber
   SystemTimeToFileTime
   TerminateProcess
   TerminateThread

@@ -1444,6 +1444,46 @@ DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION
 BOOL SetTimeZoneInformation(
     const TIME_ZONE_INFORMATION *lpTimeZoneInformation);
 
+/* ------------------------------------------------------------------ */
+/* M14: fibers (CE .NET 4.0+; Coredll.lib)                            */
+/* ------------------------------------------------------------------ */
+
+/* ms885221 "FiberProc (Windows CE 5.0)": application-defined callback
+ * placeholder run by a fiber.  The page gives its shape as
+ * VOID CALLBACK FiberProc(PVOID) and says the LPFIBER_START_ROUTINE
+ * type is a pointer to this callback.  CE .NET 4.0+; Header Windows.h
+ * per page; the callback itself is not an export (the name FiberProc
+ * is the developer's own function name, so no macro is defined). */
+typedef VOID (CALLBACK *PFIBER_START_ROUTINE)(PVOID lpFiberParameter);
+typedef PFIBER_START_ROUTINE LPFIBER_START_ROUTINE;
+
+/* ms885178 "CreateFiber (Windows CE 5.0)": allocates a fiber object,
+ * assigns a stack and sets execution to start at the callback; does
+ * not schedule the fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
+LPVOID CreateFiber(DWORD dwStackSize,
+                   LPFIBER_START_ROUTINE lpStartAddress,
+                   LPVOID lpParameter);
+
+/* ms885176 "ConvertThreadToFiber (Windows CE 5.0)": converts the
+ * calling thread into a fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
+LPVOID ConvertThreadToFiber(LPVOID lpParameter);
+
+/* ms885197 "DeleteFiber (Windows CE 5.0)": deletes a fiber.
+ * CE .NET 4.0+; Winbase.h; Coredll.lib. */
+VOID DeleteFiber(LPVOID lpFiber);
+
+/* ms885611 "GetCurrentFiber (Windows CE 5.0)": address of the current
+ * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
+LPVOID GetCurrentFiber(void);
+
+/* ms885624 "GetFiberData (Windows CE 5.0)": fiber data of the current
+ * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
+LPVOID GetFiberData(void);
+
+/* aa450915 "SwitchToFiber (Windows CE 5.0)": schedules the given
+ * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
+VOID SwitchToFiber(LPVOID lpFiber);
+
 #ifdef __cplusplus
 }
 #endif

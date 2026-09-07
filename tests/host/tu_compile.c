@@ -176,6 +176,13 @@ static const void *const api_symbols[] = {
     (const void *) &WideCharToMultiByte,
     (const void *) &IsDBCSLeadByte,
     (const void *) &IsDBCSLeadByteEx,
+    /* M14: fibers (CE .NET 4.0+). */
+    (const void *) &CreateFiber,
+    (const void *) &ConvertThreadToFiber,
+    (const void *) &DeleteFiber,
+    (const void *) &GetCurrentFiber,
+    (const void *) &GetFiberData,
+    (const void *) &SwitchToFiber,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -702,6 +709,31 @@ static int m13_shaped_usage(void)
     return 0;
 }
 
+/* M14 usage shape (compile-only): fiber callbacks and handles. */
+static VOID CALLBACK fiber_proc_shaper(PVOID lpParam)
+{
+    (void) lpParam;
+}
+
+static int m14_shaped_usage(void)
+{
+    LPVOID fiber, mainfiber;
+
+    mainfiber = ConvertThreadToFiber(NULL);
+    if (mainfiber == NULL)
+        return (int) GetLastError();
+    fiber = CreateFiber(0, fiber_proc_shaper, NULL);
+    if (fiber == NULL)
+        return (int) GetLastError();
+    (void) GetCurrentFiber();
+    (void) GetFiberData();
+    SwitchToFiber(fiber);
+    DeleteFiber(fiber);
+    SwitchToFiber(mainfiber);
+    DeleteFiber(mainfiber);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -717,5 +749,7 @@ int host_tu_entry(void)
         return 1;
     if (m12_shaped_usage() != 0)
         return 1;
-    return m13_shaped_usage() == 0 ? 0 : 1;
+    if (m13_shaped_usage() != 0)
+        return 1;
+    return m14_shaped_usage() == 0 ? 0 : 1;
 }
