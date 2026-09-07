@@ -71,6 +71,7 @@ typedef CHAR           *LPSTR;
 typedef const CHAR     *LPCSTR;
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
+typedef DWORD          *LPDWORD;
 
 /* Windows CE is Unicode-only: the generic-text forms are the wide ones. */
 typedef WCHAR           TCHAR;

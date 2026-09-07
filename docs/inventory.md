@@ -37,7 +37,12 @@ the official page body via the Learn archive.
 | `GetProcAddressW` / `GetProcAddressA` | `ms885634` | CE 1.0 and later (W); A: CE 3.0+ per Remarks | Winbase.h | Coredll.lib | lpProcName Unicode for the W form; both exports present in the CE 4/5/6 import libraries (verified) |
 | `LocalAlloc` | `ms886739` | CE 1.0 and later | Winbase.h | Coredll.lib | CE: local heap = global heap; LPTR = fixed + zeroinit; NULL = failure |
 | `LocalFree` | `ms886741` | CE 1.0 and later | Winbase.h | Coredll.lib | NULL on success; NULL argument ignored |
-| `GetLastError` (M2) | `ms885627` | — | — | — | page identified (cited by CE pages' Return Values); declaration lands in M2 with its own fetch/record |
+| `GetLastError` | `ms885627` | CE 1.0 and later | Winbase.h | Coredll.lib, Nk.lib | per-thread; page points to official Error Values `aa450740` (constants batch) and WINERROR.H |
+| `CreateThread` | `ms885186` | CE 1.01 and later | Winbase.h | Coredll.lib | lpsa ignored/NULL; cbStack ignored unless CE-only STACK_SIZE_PARAM_IS_A_RESERVATION; 64 KB default reservation |
+| `CreateProcessW` | `ms885182` | CE 1.0 and later | Winbase.h | Coredll.lib | CE-specific W signature; psaProcess/psaThread/fInheritHandles/pvEnvironment/pszCurDir/psiStartInfo not supported (NULL/FALSE); pszCmdLine NULL ⇒ image name as command line; .EXE appended when no extension; no priority classes; search order \windows, root, OEM dir, (CE 2.10+) \ceshell; not from DllMain |
+| `LoadLibraryW` | `ms886736` | CE 1.0 and later | Winbase.h | Coredll.lib | loaded once, mapped per process; paths ignored for module identity; .cpl treated as .dll; .dll appended by default; search order + HKEY_LOCAL_MACHINE\Loader\SystemPath (≤260 chars); not from DllMain |
+| `FreeLibrary` | `ms885601` | CE 1.0 and later | Winbase.h | Coredll.lib | per-process refcount; DllMain DLL_PROCESS_DETACH at zero; not from DllMain |
+| Structures | `PROCESS_INFORMATION` defined (hProcess, hThread, dwProcessId, dwThreadId; handles with ALL_ACCESS per `ms885182`; official structure page `ms886775` pending full transcription).  `SECURITY_ATTRIBUTES`/`STARTUPINFOW`: opaque NULL-only tags per "Not supported; set to NULL" (`ms885182`) | — | Winbase.h | — | full layouts in structure batches |
 
 ## Export-surface cross-check
 
@@ -46,10 +51,11 @@ coredll export surface (import libraries of the toolchain sysroot;
 device-dump-audited defs, `audit-coredll.py`):
 
 * W spellings exported on all generations: `GetModuleHandleW`,
-  `GetModuleFileNameW`, `GetCommandLineW`, `GetProcAddressW`; `A`
-  spelling: `GetProcAddressA`.
+  `GetModuleFileNameW`, `GetCommandLineW`, `GetProcAddressW`,
+  `CreateProcessW`, `LoadLibraryW`; `A` spelling: `GetProcAddressA`.
 * Undecorated single names: `TerminateProcess`, `TerminateThread`,
-  `ExitThread`, `LocalAlloc`, `LocalFree`.
+  `ExitThread`, `GetLastError`, `CreateThread`, `FreeLibrary`,
+  `LocalAlloc`, `LocalFree`.
 * `ExitProcess`: not exported on any generation (conflict above).
 
 ## Remaining verification (roadmap)

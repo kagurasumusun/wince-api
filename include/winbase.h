@@ -121,6 +121,110 @@ HLOCAL LocalAlloc(UINT uFlags, UINT uBytes);
  * ignored and returns NULL. */
 HLOCAL LocalFree(HLOCAL hMem);
 
+/* ------------------------------------------------------------------ */
+/* Error handling                                                      */
+/* ------------------------------------------------------------------ */
+
+/* ms885627 "GetLastError (Windows CE 5.0)": DWORD GetLastError(void).
+ * CE 1.0+; Winbase.h; "Coredll.lib, Nk.lib".  Per-thread last error;
+ * error codes are 32-bit values, bit 29 reserved for application
+ * codes.  The page points to the official *Error Values* page
+ * (aa450740) and the SDK header WINERROR.H for the code list; those
+ * constants land in a later batch (winerror.h) transcribed from
+ * aa450740. */
+DWORD GetLastError(void);
+
+/* ------------------------------------------------------------------ */
+/* Process and thread creation                                        */
+/* ------------------------------------------------------------------ */
+
+/* On Windows CE the security/startup parameters of CreateProcess and
+ * CreateThread are NOT supported and must be NULL/FALSE (documented
+ * per page, below); the structures are therefore left as opaque tags
+ * here (pointer use compiles, instantiation is impossible) until
+ * their official structure pages are processed into a later batch.
+ * PROCESS_INFORMATION is the one real output structure and is fully
+ * defined below (fields per the official PROCESS_INFORMATION page,
+ * ms886775, referenced by the CreateProcess page). */
+
+typedef struct _SECURITY_ATTRIBUTES SECURITY_ATTRIBUTES;
+typedef SECURITY_ATTRIBUTES *LPSECURITY_ATTRIBUTES;
+/* CE: "Not supported; set to NULL" (ms885182). */
+
+typedef struct _STARTUPINFOW STARTUPINFOW;
+typedef STARTUPINFOW *LPSTARTUPINFOW;
+/* CE: "Not supported; set to NULL" (ms885182). */
+
+typedef struct _PROCESS_INFORMATION {
+    HANDLE hProcess;    /* process handle, PROCESS_ALL_ACCESS */
+    HANDLE hThread;     /* primary-thread handle, THREAD_ALL_ACCESS */
+    DWORD  dwProcessId; /* 32-bit process identifier */
+    DWORD  dwThreadId;  /* 32-bit thread identifier */
+} PROCESS_INFORMATION, *LPPROCESS_INFORMATION;
+
+/* Thread entry type (CreateThread ms885186; the ThreadProc page is
+ * aa450940). */
+typedef DWORD (WINAPI *LPTHREAD_START_ROUTINE)(LPVOID lpvThreadParam);
+
+/* ms885186 "CreateThread (Windows CE 5.0)":
+ * HANDLE CreateThread(LPSECURITY_ATTRIBUTES, DWORD,
+ *                     LPTHREAD_START_ROUTINE, LPVOID, DWORD, LPDWORD).
+ * CE 1.01+; Winbase.h; Coredll.lib.  CE notes: lpsa ignored, must be
+ * NULL; cbStack ignored unless STACK_SIZE_PARAM_IS_A_RESERVATION
+ * (a CE-only flag); default reservation 64 KB; NULL return on
+ * failure; flag values are transcribed with the official constants
+ * batch. */
+HANDLE CreateThread(LPSECURITY_ATTRIBUTES lpsa, DWORD cbStack,
+                    LPTHREAD_START_ROUTINE lpStartAddr,
+                    LPVOID lpvThreadParam, DWORD fdwCreate,
+                    LPDWORD lpIDThread);
+
+/* ms885182 "CreateProcess (Windows CE 5.0)":
+ * BOOL CreateProcess(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
+ *                    LPSECURITY_ATTRIBUTES psaProcess,
+ *                    LPSECURITY_ATTRIBUTES psaThread,
+ *                    BOOL fInheritHandles, DWORD fdwCreate,
+ *                    LPVOID pvEnvironment, LPWSTR pszCurDir,
+ *                    LPSTARTUPINFOW psiStartInfo,
+ *                    LPPROCESS_INFORMATION pProcInfo).
+ * CE 1.0+; Winbase.h; Coredll.lib.  CE notes: image name must be
+ * non-NULL and name the module; psaProcess/psaThread/fInheritHandles/
+ * pvEnvironment/pszCurDir/psiStartInfo are not supported (NULL/FALSE);
+ * pszCmdLine NULL means the image name is used as the command line;
+ * ".EXE" is appended when the name has no extension; CE has no
+ * priority classes; search order: \windows, root, OEM dir (and
+ * \ceshell from CE 2.10); do not call from DllMain.  Export is
+ * CreateProcessW. */
+BOOL CreateProcessW(LPCWSTR pszImageName, LPCWSTR pszCmdLine,
+                    LPSECURITY_ATTRIBUTES psaProcess,
+                    LPSECURITY_ATTRIBUTES psaThread,
+                    BOOL fInheritHandles, DWORD fdwCreate,
+                    LPVOID pvEnvironment, LPWSTR pszCurDir,
+                    LPSTARTUPINFOW psiStartInfo,
+                    LPPROCESS_INFORMATION pProcInfo);
+#define CreateProcess CreateProcessW
+
+/* ------------------------------------------------------------------ */
+/* Dynamic loading of modules (LoadLibrary/FreeLibrary)               */
+/* ------------------------------------------------------------------ */
+
+/* ms886736 "LoadLibrary (Windows CE 5.0)": HINSTANCE
+ * LoadLibrary(LPCTSTR).  CE 1.0+; Winbase.h; Coredll.lib.  CE notes:
+ * a DLL is loaded once and mapped per process; module names ignore
+ * paths (name collisions load the first); ".cpl" is treated as
+ * ".dll"; default extension ".dll" is appended; search order:
+ * explicit path, .exe launch directory, \windows, ROM, OEM path;
+ * registry HKEY_LOCAL_MACHINE\Loader\SystemPath (<= 260 chars) adds
+ * search paths; not safe from DllMain.  Export is LoadLibraryW. */
+HINSTANCE LoadLibraryW(LPCWSTR lpLibFileName);
+#define LoadLibrary LoadLibraryW
+
+/* ms885601 "FreeLibrary (Windows CE 5.0)": BOOL FreeLibrary(HMODULE).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Decrements the per-process
+ * reference count; at zero the system calls DllMain with
+ * DLL_PROCESS_DETACH before unmapping; not safe from DllMain. */
+BOOL FreeLibrary(HMODULE hLibModule);
+
 #ifdef __cplusplus
 }
 #endif

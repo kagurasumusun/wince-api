@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  *
  * Compiled with -c for each CE generation value of _WIN32_WCE
- * (0x420, 0x500, 0x600).  Exercises every M1 declaration and the
+ * (0x420, 0x500, 0x600).  Exercises every shipped declaration and the
  * generic-text mappings; verifies the target-independent type widths.
  * Pointer sizes are verified when the host is 32-bit; the 32-bit
  * pointer model itself is checked on the real CE toolchain later
@@ -25,8 +25,8 @@ typedef char assert_ce_pointer_size[(sizeof(HANDLE) == 4) ? 1 : -1];
 typedef char assert_ce_ulongptr_size[(sizeof(ULONG_PTR) == 4) ? 1 : -1];
 #endif
 
-/* Reference every M1 declaration (no calls, compile-only). */
-static const void *const m1_symbols[] = {
+/* Reference every declared function (no calls, compile-only). */
+static const void *const api_symbols[] = {
     (const void *) &TerminateProcess,
     (const void *) &TerminateThread,
     (const void *) &ExitThread,
@@ -42,9 +42,16 @@ static const void *const m1_symbols[] = {
     (const void *) &GetProcAddress,
     (const void *) &LocalAlloc,
     (const void *) &LocalFree,
+    (const void *) &GetLastError,
+    (const void *) &CreateThread,
+    (const void *) &CreateProcessW,
+    (const void *) &CreateProcess,
+    (const void *) &LoadLibraryW,
+    (const void *) &LoadLibrary,
+    (const void *) &FreeLibrary,
 };
 
-static const unsigned m1_flags[] = {
+static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,
 };
 
@@ -52,17 +59,46 @@ static const unsigned m1_flags[] = {
 typedef char assert_tchar_wide[(sizeof(TCHAR) == sizeof(WCHAR)) ? 1 : -1];
 typedef char assert_lpctstr_wide[(sizeof(LPCTSTR) == sizeof(LPCWSTR)) ? 1 : -1];
 
-/* Handle/model sanity for the classic WinMain-shaped program. */
-static int uses_handles(HMODULE h, HLOCAL l, HINSTANCE i)
+/* PROCESS_INFORMATION field order (official structure page ms886775
+ * is pending full transcription; layout below is the standard
+ * hProcess/hThread/dwProcessId/dwThreadId order). */
+typedef char assert_pi_first[(offsetof(PROCESS_INFORMATION, hProcess) == 0) ? 1 : -1];
+
+/* CE-shaped usage snippets (compile-only): process creation passes
+ * NULL/FALSE for every unsupported parameter, per ms885182; the
+ * thread entry type is exercised through CreateThread's signature. */
+static DWORD worker(LPVOID p)
 {
-    return h != 0 || l != 0 || i != 0;
+    return p != 0;
+}
+
+/* Wide-string literals are 32-bit wchar_t on the host but 16-bit on
+ * the CE target; build explicit WCHAR strings so the TU is
+ * host-independent. */
+static const WCHAR w_app[] = { 'a', 'p', 'p', '.', 'e', 'x', 'e', 0 };
+static const WCHAR w_cmd[] = {
+    'a', 'p', 'p', '.', 'e', 'x', 'e', ' ', 'a', 'r', 'g', 0
+};
+
+static int ce_shaped_usage(void)
+{
+    PROCESS_INFORMATION pi;
+    HANDLE h;
+    DWORD tid;
+
+    if (!CreateProcessW(w_app, w_cmd, NULL, NULL,
+                        FALSE, 0, NULL, NULL, NULL, &pi))
+        return (int) GetLastError();
+    h = CreateThread(NULL, 0, worker, NULL, 0, &tid);
+    if (h == NULL)
+        return (int) GetLastError();
+    return (int) (pi.dwProcessId + tid);
 }
 
 int host_tu_entry(void)
 {
-    (void) m1_symbols;
-    (void) m1_flags;
-    (void) uses_handles;
+    (void) api_symbols;
+    (void) api_flags;
     (void) LocalAlloc(LPTR, 16u);
-    return 0;
+    return ce_shaped_usage() == 0 ? 0 : 1;
 }

@@ -79,11 +79,31 @@ and link end-to-end against the verified sysroot.  See
   ExitThread, ExitProcess (with its documented export conflict),
   GetModuleHandle(W), GetModuleFileName(W), GetCommandLine(W),
   GetProcAddress(W/A), LocalAlloc, LocalFree.  Host checks pass.
-* **M2:** next official-page batches — heap/file/registry/time,
-  process/thread creation and synchronization (official category page
-  *Process and Thread Functions* `aa450760` is the inventory seed),
-  error handling; each function added only after its official page is
-  fetched into `docs/inventory.md`.
+* **M2 (landed):** process/thread/module/error batch from official
+  pages fetched in full: GetLastError (`ms885627`), CreateThread
+  (`ms885186`, incl. the CE-only STACK_SIZE_PARAM_IS_A_RESERVATION
+  note), CreateProcessW (`ms885182`, CE-specific signature and
+  unsupported-parameter rules), LoadLibraryW (`ms886736`),
+  FreeLibrary (`ms885601`); `PROCESS_INFORMATION` defined,
+  `SECURITY_ATTRIBUTES`/`STARTUPINFOW` opaque NULL-only tags;
+  `docs/clean-room.md` (definition and scope of the clean-room
+  conditions), `docs/generations.md` (official sources per CE
+  generation) and `docs/parity-target.md` (CeGCC w32api replacement
+  scope, measured) added.  Host checks pass.
+* **M3:** next official-page batches — remaining winbase families
+  (queued with official IDs: OpenProcess `ms886766`, GetExitCode*
+  `ms885622`/`ms885623`, ResumeThread `ms886801`, CloseHandle
+  `aa517300`, LoadLibraryEx `ms886737`, SetLastError `ms886817`,
+  Error Values `aa450740`, category index Process and Thread
+  Functions `aa450760`), then winuser/winreg and the rest; each
+  function added only after its official page is fetched into
+  `docs/inventory.md`.
+* **M4:** import-library deliverables: self-authored `coredll*.def`
+  per CE generation (4/5/6) and architecture (ARM/x86), generated
+  with `llvm-dlltool`, validated against the verified export surface.
+* **M5:** end-to-end link verification with wince-crt on the
+  `LLVM-WinCE` toolchain (host + cross), and the documented
+  discrepancies review (the ExitProcess page conflict is the model).
 * **M3:** import-library deliverables: self-authored `coredll*.def`
   per CE generation (4/5/6) and architecture (ARM/x86), generated
   with `llvm-dlltool`, validated against the verified export surface;

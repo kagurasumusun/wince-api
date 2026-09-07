@@ -1,0 +1,50 @@
+# CeGCC w32api parity target
+
+wince-api must be able to *replace the role* of the CeGCC-lineage
+w32api in the WinCE sysroot (kagurasumusun/w32api).  This page
+records the measured target scope and the status of each part.
+
+Method note: the numbers and file/DLL names below were obtained by
+listing the third-party tree (existence inspection only, per
+`clean-room.md` §4).  No content of those files is used anywhere in
+this repository; our headers are written from the official pages
+(`inventory.md`).
+
+## Measured target (existence only, 2026-09)
+
+* Headers in the sysroot w32api `include/`: **255 files** (the
+  CE-relevant subset is smaller; the official per-function "Header:"
+  requirement rows define the file set a CE program can legitimately
+  need).
+* Import-library sources in `libce/`: **59 entries** (DLL def files
+  such as aygshell.def, commctrl.def, crypt32.def, CellCore.def,
+  htmlview.def, winsock-family defs, plus GUID source files); the
+  coredll defs (CE 4/5/6, ARM/x86) live in the mingwrt tree.
+* These DLLs are the *second-order* target: after the coredll core,
+  each DLL's official function pages are processed the same way.
+
+## Coverage status
+
+| Area | Status |
+|---|---|
+| `windows.h` umbrella | shipped (M1) |
+| `windef.h` base types/macros | shipped (M1) |
+| `winbase.h` — process/thread/module/memory/error core | M1+M2 shipped: TerminateProcess, TerminateThread, ExitThread, ExitProcess*, GetModuleHandle(W), GetModuleFileName(W), GetCommandLine(W), GetProcAddress(W/A), LocalAlloc, LocalFree, CreateProcess(W), CreateThread, GetLastError, LoadLibrary(W), FreeLibrary (*ExitProcess = documented conflict, declared for source compat) |
+| Structures (PROCESS_INFORMATION defined; SECURITY_ATTRIBUTES/STARTUPINFOW opaque NULL-only tags) | M2 (pending: official structure-page batches) |
+| Constants (`winerror.h` error values from official Error Values `aa450740`; creation/flag values) | next batch |
+| Remaining winbase families (file, heap, sync, wait, time, registry, string) | queued; official page per function |
+| GUI: `winuser.h` (WinMain, windows, messages, controls) | queued (WinMain page `ms914104` already in wince-crt records) |
+| Import-library defs (`coredll*.def` per generation/arch + DLL defs) | M3 (self-authored from the verified export surface + official pages; llvm-dlltool) |
+| End-to-end links (wince-crt + wince-api consumer) | M4 (toolchain) |
+
+## Ordering principle
+
+1. coredll core (this package must make a console-less CE "hello"
+   program with wince-crt compile and link);
+2. then per-DLL batches, each function grounded on its official page;
+3. def/import-library production once the header set covers a DLL's
+   surface; cross-verified against the device-dump-audited export
+   surface.
+
+Every batch adds only page-grounded declarations; the third-party
+tree is never consulted for content.
