@@ -15,6 +15,9 @@ EXPORTS
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
+  CeGenRandom
+  CeGetCanonicalPathName
+  CeGetFileNotificationInfo
   CharNextW
   CloseHandle
   CompareFileTime
@@ -70,6 +73,7 @@ EXPORTS
   GetModuleInformation
   GetProcAddressW
   GetProcessVersion
+  GetStoreInformation
   GetStringTypeW
   GetSystemInfo
   GetSystemTime

@@ -230,3 +230,11 @@ ATTACH/DETACH constants (per DllMain `ms885202`); new header
 `ms885631` (Psapi.h / Coredll.lib rows).  New manifest
 `file-mapping-reference.manifest` (6 pages); coredll def
 148 -> 154 exports.
+
+**M21 batch — store info + Ce* file helpers + FILE_NOTIFY:**
+GetStoreInformation `ms891023` + STORE_INFORMATION `ms891279`
+(deprecated by the page; recorded as such), CeGenRandom `aa517140`,
+CeGetCanonicalPathName `aa517144`, CeGetFileNotificationInfo
+`aa517158` + FILE_NOTIFY_INFORMATION/FILE_ACTION_* (winnt.h,
+`ms889597`).  Manifest file-io-reference.manifest 51 -> 52 pages.
+coredll def 154 -> 158 exports.

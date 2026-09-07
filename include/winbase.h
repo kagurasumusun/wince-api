@@ -1670,6 +1670,54 @@ BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
 #define GetFileVersionInfo GetFileVersionInfoW
 
 /* ------------------------------------------------------------------ */
+/* M21: store info + Ce* file helpers (File I/O Reference pages).    */
+/* ------------------------------------------------------------------ */
+
+/* ms891279 "STORE_INFORMATION (Windows CE 5.0)": object-store size
+ * and free space, filled by GetStoreInformation.  CE 1.0+; Winbase.h. */
+typedef struct STORE_INFORMATION {
+    DWORD dwStoreSize;   /* object-store size, in bytes */
+    DWORD dwFreeSize;    /* free object-store space, in bytes */
+} STORE_INFORMATION, *LPSTORE_INFORMATION;
+
+/* ms891023 "GetStoreInformation (Windows CE 5.0)":
+ * BOOL GetStoreInformation(LPSTORE_INFORMATION).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Fills STORE_INFORMATION.  The page deprecates this
+ * function ("use GetDiskFreeSpaceEx instead") and notes it reports
+ * 44 KB less than really available (reserved for high-priority
+ * system operations). */
+BOOL GetStoreInformation(LPSTORE_INFORMATION lpsi);
+
+/* aa517140 "CeGenRandom (Windows CE 5.0)":
+ * BOOL CeGenRandom(DWORD, BYTE*).  CE .NET 4.1+; Winbase.h;
+ * Coredll.lib.  Fills the buffer with random bytes; the caller may
+ * seed by pre-filling the buffer. */
+BOOL CeGenRandom(DWORD dwLen, BYTE *pbBuffer);
+
+/* aa517144 "CeGetCanonicalPathName (Windows CE 5.0)":
+ * DWORD CeGetCanonicalPathName(LPCWSTR, LPWSTR, DWORD, DWORD).
+ * CE 5.0+; Winbase.h; Coredll.lib.  Returns the length of the
+ * canonical form of the path (0 + ERROR_INVALID_PARAMETER for NULL
+ * input, ERROR_INSUFFICIENT_BUFFER when the output buffer is small);
+ * the canonical string is written when the buffer is non-NULL. */
+DWORD CeGetCanonicalPathName(LPCWSTR lpPathName,
+                             LPWSTR lpCanonicalPathName,
+                             DWORD cchCanonicalPathName,
+                             DWORD dwReserved);
+
+/* aa517158 "CeGetFileNotificationInfo (Windows CE 5.0)":
+ * BOOL CeGetFileNotificationInfo(HANDLE, DWORD, LPVOID, DWORD,
+ * LPDWORD, LPDWORD).  CE .NET 4.2+; Winbase.h; Coredll.lib.
+ * Retrieves the notification info behind a FindFirstChangeNotification
+ * handle into a FILE_NOTIFY_INFORMATION record.  NULL buffer + 0
+ * length returns the available size; ERROR_MORE_DATA when more
+ * records exist; ERROR_INSUFFICIENT_BUFFER when they do not fit. */
+BOOL CeGetFileNotificationInfo(HANDLE h, DWORD dwFlags, LPVOID lpBuffer,
+                               DWORD nBufferLength,
+                               LPDWORD lpBytesReturned,
+                               LPDWORD lpBytesAvailable);
+
+/* ------------------------------------------------------------------ */
 /* M20b: DLL entry-point reasons + DisableThreadLibraryCalls (DLL    */
 /* Reference pages).                                                  */
 /* ------------------------------------------------------------------ */

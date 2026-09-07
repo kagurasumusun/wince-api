@@ -199,6 +199,11 @@ static const void *const api_symbols[] = {
     (const void *) &GetCPInfo,
     (const void *) &GetStringTypeW,
     (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
+    /* M21: store info + Ce* file helpers (winbase.h). */
+    (const void *) &GetStoreInformation,
+    (const void *) &CeGenRandom,
+    (const void *) &CeGetCanonicalPathName,
+    (const void *) &CeGetFileNotificationInfo,
     /* M20/M20b: file mapping + DLL entry helpers (winbase.h/psapi.h). */
     (const void *) &CreateFileForMappingW, (const void *) &CreateFileForMapping,
     (const void *) &CreateFileMappingW, (const void *) &CreateFileMapping,
@@ -1082,6 +1087,24 @@ static int m20b_shaped_usage(void)
             DLL_THREAD_ATTACH == 2 && DLL_THREAD_DETACH == 3) ? 0 : 1;
 }
 
+/* M21 usage shape (compile-only). */
+static int m21_shaped_usage(void)
+{
+    static const WCHAR c_path[] = { 't', 'm', 'p', 0 };
+    STORE_INFORMATION si;
+    WCHAR canon[MAX_PATH];
+    BYTE rnd[8];
+    DWORD cbret = 0, cbavail = 0;
+
+    (void) GetStoreInformation(&si);
+    (void) CeGenRandom(sizeof(rnd), rnd);
+    (void) CeGetCanonicalPathName(c_path, canon, MAX_PATH, 0);
+    (void) CeGetFileNotificationInfo((HANDLE) 0, 0, NULL, 0,
+                                     &cbret, &cbavail);
+    return (FILE_ACTION_ADDED == 1 && FILE_ACTION_RENAMED_NEW_NAME == 5
+            && si.dwStoreSize == 0) ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1113,5 +1136,7 @@ int host_tu_entry(void)
         return 1;
     if (m20_shaped_usage() != 0)
         return 1;
-    return m20b_shaped_usage() == 0 ? 0 : 1;
+    if (m20b_shaped_usage() != 0)
+        return 1;
+    return m21_shaped_usage() == 0 ? 0 : 1;
 }

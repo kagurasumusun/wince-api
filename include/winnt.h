@@ -94,6 +94,27 @@ typedef PCRITICAL_SECTION LPCRITICAL_SECTION;
         _szm_p[_szm_i] = 0;                              \
 } while (0)
 
+/* ms889597 "FILE_NOTIFY_INFORMATION (Windows CE 5.0)": record
+ * describing one file-system change, returned by
+ * CeGetFileNotificationInfo.  CE 1.01+; Header Winnt.h per the page.
+ * NextEntryOffset 0 marks the last record; Action is one of the
+ * FILE_ACTION_* values; FileName is a variable-length array. */
+typedef struct _FILE_NOTIFY_INFORMATION {
+    DWORD NextEntryOffset;   /* bytes to the next record; 0 = last */
+    DWORD Action;            /* FILE_ACTION_* change type */
+    DWORD FileNameLength;    /* FileName length, in bytes */
+    WCHAR FileName[1];       /* variable-length file name */
+} FILE_NOTIFY_INFORMATION, *PFILE_NOTIFY_INFORMATION;
+
+/* Change-action codes for the FILE_NOTIFY_INFORMATION Action member
+ * (names per ms889597; numeric values are the fixed Win32 ABI
+ * values of the official File Management FILE_ACTION_* reference). */
+#define FILE_ACTION_ADDED            1
+#define FILE_ACTION_REMOVED          2
+#define FILE_ACTION_MODIFIED         3
+#define FILE_ACTION_RENAMED_OLD_NAME 4
+#define FILE_ACTION_RENAMED_NEW_NAME 5
+
 /* ms886752 "MEMORY_BASIC_INFORMATION (Windows CE 5.0)": page-range
  * report filled by VirtualQuery.  CE 1.0+; Header Winnt.h (per the
  * page).  CE 32-bit layout: two pointers + six DWORDs = 32 bytes.

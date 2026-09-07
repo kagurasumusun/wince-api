@@ -461,6 +461,20 @@ Psapi.h where noted), all Link Library rows Coredll.lib.
 New manifest `tools/manifests/file-mapping-reference.manifest` (6
 pages); coredll def 148 -> 154 exports.
 
+### M21: store info + Ce* file helpers + FILE_NOTIFY (winbase.h/winnt.h)
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `STORE_INFORMATION`/`LPSTORE_INFORMATION` | `ms891279` | CE 1.0+ | Winbase.h | — | dwStoreSize/dwFreeSize (object store) |
+| `GetStoreInformation` | `ms891023` | CE 1.0+ | Winbase.h | Coredll.lib | page deprecates (use GetDiskFreeSpaceEx); reports 44 KB less than available |
+| `CeGenRandom` | `aa517140` | CE .NET 4.1+ | Winbase.h | Coredll.lib | fills a buffer with random bytes; optional seed |
+| `CeGetCanonicalPathName` | `aa517144` | CE 5.0+ | Winbase.h | Coredll.lib | canonical-path length / string; ERROR_INSUFFICIENT_BUFFER rule |
+| `CeGetFileNotificationInfo` | `aa517158` | CE .NET 4.2+ | Winbase.h | Coredll.lib | returns FILE_NOTIFY_INFORMATION record(s); ERROR_MORE_DATA / ERROR_INSUFFICIENT_BUFFER semantics |
+| `FILE_NOTIFY_INFORMATION`/`PFILE_NOTIFY_INFORMATION` | `ms889597` | CE 1.01+ | **Winnt.h** | — | variable-length FileName[1] record |
+| `FILE_ACTION_ADDED/REMOVED/MODIFIED/RENAMED_OLD_NAME/RENAMED_NEW_NAME` | names per `ms889597`; values fixed Win32 ABI | — | Winnt.h | — | |
+
+coredll def 154 -> 158 exports.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |
