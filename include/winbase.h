@@ -550,6 +550,78 @@ BOOL FindClose(HANDLE hFindFile);
  * pages). */
 #define INVALID_HANDLE_VALUE ((HANDLE)-1)
 
+/* ------------------------------------------------------------------ */
+/* Time management (SYSTEMTIME + time conversion).                    */
+/* ------------------------------------------------------------------ */
+
+/* ms885586 "FILETIME (Windows CE 5.0)" (see above) anchors all
+ * file-time conversions in this section. */
+
+/* aa450923 "SYSTEMTIME (Windows CE 5.0)": 100-ns-epoch-independent
+ * calendar/time structure with one WORD per field; wDayOfWeek is
+ * ignored by SetLocalTime and SystemTimeToFileTime.  CE 1.0+;
+ * Winbase.h. */
+typedef struct _SYSTEMTIME {
+    WORD wYear;
+    WORD wMonth;
+    WORD wDayOfWeek;
+    WORD wDay;
+    WORD wHour;
+    WORD wMinute;
+    WORD wSecond;
+    WORD wMilliseconds;
+} SYSTEMTIME, *PSYSTEMTIME, *LPSYSTEMTIME;
+
+/* ms885628 "GetLocalTime (Windows CE 5.0)": fills lpSystemTime with
+ * the current local date/time (time-zone and DST adjusted).  CE 1.0+;
+ * Winbase.h; Coredll.lib. */
+void GetLocalTime(LPSYSTEMTIME lpSystemTime);
+
+/* ms885640 "GetSystemTime (Windows CE 5.0)": fills lpSystemTime with
+ * the current system date/time expressed in UTC.  CE 1.0+; Winbase.h;
+ * Coredll.lib. */
+void GetSystemTime(LPSYSTEMTIME lpSystemTime);
+
+/* ms886818 "SetLocalTime (Windows CE 5.0)": sets the current local
+ * time/date; the caller needs the appropriate privilege.  wDayOfWeek
+ * is ignored; nonzero success / zero failure (GetLastError).  CE
+ * 1.0+; Winbase.h; Coredll.lib. */
+BOOL SetLocalTime(const SYSTEMTIME *lpSystemTime);
+
+/* aa450867 "SetSystemTime (Windows CE 5.0)": sets the current system
+ * time/date in UTC; nonzero success / zero failure (GetLastError).
+ * CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL SetSystemTime(const SYSTEMTIME *lpSystemTime);
+
+/* ms885589 "FileTimeToLocalFileTime (Windows CE 5.0)": converts a
+ * UTC file time to a local file time using current time-zone and DST
+ * settings; lpLocalFileTime must not alias lpFileTime.  Nonzero
+ * success / zero failure (GetLastError).  CE 1.0+; Winbase.h;
+ * Coredll.lib. */
+BOOL FileTimeToLocalFileTime(const FILETIME *lpFileTime,
+                             LPFILETIME lpLocalFileTime);
+
+/* ms886740 "LocalFileTimeToFileTime (Windows CE 5.0)": converts a
+ * local file time to a UTC file time; lpFileTime must not alias
+ * lpLocalFileTime.  Nonzero success / zero failure (GetLastError).
+ * CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL LocalFileTimeToFileTime(const FILETIME *lpLocalFileTime,
+                             LPFILETIME lpFileTime);
+
+/* ms885593 "FileTimeToSystemTime (Windows CE 5.0)": converts a 64-bit
+ * file time to SYSTEMTIME; only valid for FILETIME values below
+ * 0x8000000000000000 (larger values fail).  Nonzero success / zero
+ * failure (GetLastError).  CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL FileTimeToSystemTime(const FILETIME *lpFileTime,
+                          LPSYSTEMTIME lpSystemTime);
+
+/* aa450925 "SystemTimeToFileTime (Windows CE 5.0)": converts a
+ * SYSTEMTIME to a 64-bit file time; the wDayOfWeek member is ignored.
+ * Nonzero success / zero failure (GetLastError).  CE 1.0+; Winbase.h;
+ * Coredll.lib. */
+BOOL SystemTimeToFileTime(const SYSTEMTIME *lpSystemTime,
+                          LPFILETIME lpFileTime);
+
 #ifdef __cplusplus
 }
 #endif

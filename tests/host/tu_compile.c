@@ -76,6 +76,14 @@ static const void *const api_symbols[] = {
     (const void *) &FindClose,
     (const void *) &GetFileAttributes,
     (const void *) &GetFileAttributesW,
+    (const void *) &GetLocalTime,
+    (const void *) &GetSystemTime,
+    (const void *) &SetLocalTime,
+    (const void *) &SetSystemTime,
+    (const void *) &FileTimeToLocalFileTime,
+    (const void *) &LocalFileTimeToFileTime,
+    (const void *) &FileTimeToSystemTime,
+    (const void *) &SystemTimeToFileTime,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -127,11 +135,46 @@ typedef char assert_priority_vals[
      THREAD_PRIORITY_ERROR_RETURN == (int)0x7FFFFFFF &&
      INFINITE == 0xFFFFFFFFu) ? 1 : -1];
 
-/* Error constants exercised (values from winerror.h). */
+/* Error constants exercised (values from winerror.h, per the official
+ * CE numeric table aa450919 rows 0-1078; spot checks cover each
+ * numeric group edge plus the independently cited constants). */
 typedef char assert_winerror_vals[
-    (ERROR_SUCCESS == 0 && ERROR_INVALID_PARAMETER == 87 &&
-     ERROR_ALREADY_EXISTS == 183 && STILL_ACTIVE == 259 &&
-     ERROR_INSUFFICIENT_BUFFER == 122) ? 1 : -1];
+    (ERROR_SUCCESS == 0 && NO_ERROR == 0 &&
+     ERROR_TOO_MANY_OPEN_FILES == 4 && ERROR_ACCESS_DENIED == 5 &&
+     ERROR_OUTOFMEMORY == 14 && ERROR_NO_MORE_FILES == 18 &&
+     ERROR_HANDLE_DISK_FULL == 39 && ERROR_NOT_SUPPORTED == 50 &&
+     ERROR_NETNAME_DELETED == 64 && ERROR_FILE_EXISTS == 80 &&
+     ERROR_INVALID_PARAMETER == 87 && ERROR_TOO_MANY_SEMAPHORES == 100 &&
+     ERROR_BROKEN_PIPE == 109 && ERROR_BUFFER_OVERFLOW == 111 &&
+     ERROR_DISK_FULL == 112 && ERROR_CALL_NOT_IMPLEMENTED == 120 &&
+     ERROR_INSUFFICIENT_BUFFER == 122 && ERROR_INVALID_NAME == 123 &&
+     ERROR_MOD_NOT_FOUND == 126 && ERROR_PROC_NOT_FOUND == 127 &&
+     ERROR_DIR_NOT_EMPTY == 145 && ERROR_SIGNAL_PENDING == 162 &&
+     ERROR_BUSY == 170 && ERROR_ALREADY_EXISTS == 183 &&
+     ERROR_BAD_EXE_FORMAT == 193 && ERROR_EXE_MACHINE_TYPE_MISMATCH == 216 &&
+     ERROR_BAD_PIPE == 230 && ERROR_PIPE_BUSY == 231 &&
+     ERROR_NO_DATA == 232 && ERROR_MORE_DATA == 234 &&
+     ERROR_NO_MORE_ITEMS == 259 && STILL_ACTIVE == 259 &&
+     ERROR_DIRECTORY == 267 && ERROR_NOT_OWNER == 288 &&
+     ERROR_PARTIAL_COPY == 299 && ERROR_PIPE_LISTENING == 536 &&
+     ERROR_IO_PENDING == 997 && ERROR_NOACCESS == 998 &&
+     ERROR_STACK_OVERFLOW == 1001 && ERROR_UNRECOGNIZED_VOLUME == 1005 &&
+     ERROR_BADDB == 1009 && ERROR_KEY_DELETED == 1018 &&
+     ERROR_DUPLICATE_SERVICE_NAME == 1078 &&
+     ERROR_NO_UNICODE_TRANSLATION == 1113) ? 1 : -1];
+
+/* Time structures (winbase.h): SYSTEMTIME is eight WORDs in the
+ * documented order (aa450923), so sizeof must be 16. */
+typedef char assert_systemtime_size[sizeof(SYSTEMTIME) == 16 ? 1 : -1];
+typedef char assert_systemtime_offsets[
+    (offsetof(SYSTEMTIME, wYear) == 0 &&
+     offsetof(SYSTEMTIME, wMonth) == 2 &&
+     offsetof(SYSTEMTIME, wDayOfWeek) == 4 &&
+     offsetof(SYSTEMTIME, wDay) == 6 &&
+     offsetof(SYSTEMTIME, wHour) == 8 &&
+     offsetof(SYSTEMTIME, wMinute) == 10 &&
+     offsetof(SYSTEMTIME, wSecond) == 12 &&
+     offsetof(SYSTEMTIME, wMilliseconds) == 14) ? 1 : -1];
 
 static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,
@@ -165,6 +208,8 @@ static const WCHAR w_cmd[] = {
 static int ce_shaped_usage(void)
 {
     PROCESS_INFORMATION pi;
+    SYSTEMTIME st;
+    FILETIME ft1, ft2;
     HANDLE h;
     DWORD tid;
 
@@ -174,7 +219,20 @@ static int ce_shaped_usage(void)
     h = CreateThread(NULL, 0, worker, NULL, 0, &tid);
     if (h == NULL)
         return (int) GetLastError();
-    return (int) (pi.dwProcessId + tid);
+
+    /* Time round trip (compile + exercise): the conversions must
+     * succeed for the current clock value on any host. */
+    GetLocalTime(&st);
+    if (!SystemTimeToFileTime(&st, &ft1))
+        return (int) GetLastError();
+    if (!FileTimeToLocalFileTime(&ft1, &ft2))
+        return (int) GetLastError();
+    if (!LocalFileTimeToFileTime(&ft2, &ft1))
+        return (int) GetLastError();
+    if (!FileTimeToSystemTime(&ft1, &st))
+        return (int) GetLastError();
+    GetSystemTime(&st);
+    return (int) (pi.dwProcessId + tid + st.wSecond);
 }
 
 int host_tu_entry(void)

@@ -73,6 +73,17 @@ the official page body via the Learn archive.
 | `MAX_PATH` (windef.h) | cited by `aa517318`/`ms889678`/`ms890895` | — | Windef.h | — | Win32 ABI value 260 |
 | `ERROR_NO_MORE_FILES` | `ms889873` | — | Winerror.h | — | value 18 |
 | `INVALID_HANDLE_VALUE` | `aa517318`/`ms889678` | — | Winbase.h | — | ((HANDLE)-1) |
+| `SYSTEMTIME` struct | `aa450923` | CE 1.0 and later | Winbase.h | — | 8 WORD fields in order year..ms; wDayOfWeek ignored by SetLocalTime/SystemTimeToFileTime |
+| `GetLocalTime` | `ms885628` | CE 1.0 and later | Winbase.h | Coredll.lib | current local time (TZ/DST-adjusted); returns void |
+| `GetSystemTime` | `ms885640` | CE 1.0 and later | Winbase.h | Coredll.lib | current system time in UTC; returns void |
+| `SetLocalTime` | `ms886818` | CE 1.0 and later | Winbase.h | Coredll.lib | wDayOfWeek ignored; nonzero success, zero failure (GetLastError) |
+| `SetSystemTime` | `aa450867` | CE 1.0 and later | Winbase.h | Coredll.lib | sets UTC time; nonzero success, zero failure (GetLastError) |
+| `FileTimeToLocalFileTime` | `ms885589` | CE 1.0 and later | Winbase.h | Coredll.lib | out param must not alias in; uses TZ + DST current settings |
+| `LocalFileTimeToFileTime` | `ms886740` | CE 1.0 and later | Winbase.h | Coredll.lib | out param must not alias in |
+| `FileTimeToSystemTime` | `ms885593` | CE 1.0 and later | Winbase.h | Coredll.lib | fails for FILETIME ≥ 0x8000000000000000 |
+| `SystemTimeToFileTime` | `aa450925` | CE 1.0 and later | Winbase.h | Coredll.lib | wDayOfWeek ignored; nonzero success, zero failure |
+| System error-code block (winerror.h rows 0–1078) | `aa450919` (System Errors - Numerical Order, Windows CE 5.0) | — | Winerror.h | — | full numeric table transcribed (0–1078 incl. registry 1009–1022 and service 1051–1078 groups); rows the CE table omits stay undefined; names/values are ABI facts; index page `aa450740` |
+| `ERROR_NO_UNICODE_TRANSLATION` | outside rows above; cited by `ms915519`/`ms961248` | — | Winerror.h | — | value 1113 |
 | Export defs (`def/coredll{,4,6,-x86}.def`) | names/ordinals = OS facts from the device-dump-audited toolchain export surface | — | — | coredll.dll | generation mapping: coredll=CE5, coredll4=CE4, coredll6=CE6 ARM, coredll6-x86=CE6 x86 |
 
 ### Documented conflicts (official page vs verified export surface)
