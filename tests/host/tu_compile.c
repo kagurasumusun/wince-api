@@ -160,6 +160,17 @@ static const void *const api_symbols[] = {
     (const void *) &GetSystemInfo,
     (const void *) &GetVersionEx,
     (const void *) &SignalStarted,
+    /* M12: virtual memory / time zone / times. */
+    (const void *) &VirtualAlloc,
+    (const void *) &VirtualFree,
+    (const void *) &VirtualProtect,
+    (const void *) &VirtualQuery,
+    (const void *) &FlushInstructionCache,
+    (const void *) &GetProcessVersion,
+    (const void *) &GetDllVersion,
+    (const void *) &GetThreadTimes,
+    (const void *) &GetTimeZoneInformation,
+    (const void *) &SetTimeZoneInformation,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -325,6 +336,33 @@ typedef char assert_sysinfo_vals[
      VER_PLATFORM_WIN32_WINDOWS == 1 &&
      VER_PLATFORM_WIN32_NT == 2 &&
      VER_PLATFORM_WIN32_CE == 3) ? 1 : -1];
+
+/* M12 memory/time-zone constants (winbase.h/winnt.h; values per the
+ * fixed Win32 ABI). */
+typedef char assert_m12_vals[
+    (MEM_COMMIT == 0x1000u && MEM_RESERVE == 0x2000u &&
+     MEM_DECOMMIT == 0x4000u && MEM_RELEASE == 0x8000u &&
+     MEM_FREE == 0x10000u && MEM_PRIVATE == 0x20000u &&
+     MEM_MAPPED == 0x40000u && MEM_IMAGE == 0x1000000u &&
+     PAGE_NOACCESS == 0x1u && PAGE_READONLY == 0x2u &&
+     PAGE_READWRITE == 0x4u && PAGE_EXECUTE_READWRITE == 0x40u &&
+     PAGE_GUARD == 0x100u && PAGE_NOCACHE == 0x200u &&
+     TIME_ZONE_ID_UNKNOWN == 0 && TIME_ZONE_ID_STANDARD == 1 &&
+     TIME_ZONE_ID_DAYLIGHT == 2) ? 1 : -1];
+#if __SIZEOF_POINTER__ == 4
+typedef char assert_mbi_layout[
+    (offsetof(MEMORY_BASIC_INFORMATION, AllocationBase) == 4 &&
+     offsetof(MEMORY_BASIC_INFORMATION, RegionSize) == 12 &&
+     offsetof(MEMORY_BASIC_INFORMATION, State) == 16 &&
+     offsetof(MEMORY_BASIC_INFORMATION, Type) == 24 &&
+     sizeof(MEMORY_BASIC_INFORMATION) == 28) ? 1 : -1];
+#endif
+typedef char assert_tzi_layout[
+    (offsetof(TIME_ZONE_INFORMATION, StandardName) == 4 &&
+     offsetof(TIME_ZONE_INFORMATION, StandardBias) == 84 &&
+     offsetof(TIME_ZONE_INFORMATION, DaylightName) == 88 &&
+     offsetof(TIME_ZONE_INFORMATION, DaylightBias) == 168 &&
+     sizeof(TIME_ZONE_INFORMATION) == 172) ? 1 : -1];
 
 static const unsigned api_flags[] = {
     LMEM_FIXED, LMEM_ZEROINIT, LPTR,
@@ -594,6 +632,42 @@ static int m11_shaped_usage(void)
     return ovi.dwPlatformId == VER_PLATFORM_WIN32_CE ? 0 : 1;
 }
 
+/* M12 usage shape: virtual memory + time zone + process/DLL/thread
+ * version & timing helpers (compile-only; never linked/run). */
+static int m12_shaped_usage(void)
+{
+    LPVOID p;
+    MEMORY_BASIC_INFORMATION mbi;
+    TIME_ZONE_INFORMATION tzi;
+    FILETIME ft1, ft2, ft3, ft4;
+    DWORD oldp, tzid, cb;
+
+    p = VirtualAlloc(NULL, 4096u, MEM_RESERVE | MEM_COMMIT,
+                     PAGE_READWRITE);
+    if (p == NULL)
+        return (int) GetLastError();
+    if (!VirtualProtect(p, 4096u, PAGE_READONLY, &oldp))
+        return (int) GetLastError();
+    cb = VirtualQuery(p, &mbi, sizeof(mbi));
+    if (cb != sizeof(mbi) || mbi.State != MEM_COMMIT)
+        return (int) ERROR_INVALID_PARAMETER;
+    if (!VirtualFree(p, 0, MEM_RELEASE))
+        return (int) GetLastError();
+    if (GetProcessVersion(0) == 0)
+        return (int) GetLastError();
+    if (GetDllVersion((HMODULE) 0) == 0)
+        return (int) GetLastError();
+    if (!FlushInstructionCache(INVALID_HANDLE_VALUE, p, 0))
+        return (int) GetLastError();
+    if (!GetThreadTimes(INVALID_HANDLE_VALUE, &ft1, &ft2, &ft3, &ft4))
+        return (int) GetLastError();
+    tzid = GetTimeZoneInformation(&tzi);
+    if (tzid == TIME_ZONE_ID_UNKNOWN && GetLastError() != 0)
+        return (int) GetLastError();
+    (void) SetTimeZoneInformation(&tzi);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -605,5 +679,7 @@ int host_tu_entry(void)
         return 1;
     if (m10_shaped_usage() != 0)
         return 1;
-    return m11_shaped_usage() == 0 ? 0 : 1;
+    if (m11_shaped_usage() != 0)
+        return 1;
+    return m12_shaped_usage() == 0 ? 0 : 1;
 }

@@ -228,6 +228,30 @@ published), `VerQueryValue` `aa450973` + version structures
 (VS_FIXEDFILEINFO etc. — version-resource batch).  These are recorded
 here, not invented.
 
+### M12: virtual memory, time zone, version/timing helpers (winbase.h + winnt.h)
+
+All pages official `(v=msdn.10)` CE 5.0 (Time Reference /
+Memory Management Reference / Process and Thread Reference /
+System Management Reference books; already in `build/rows.json`).
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `VirtualAlloc` | `aa450975` | CE 1.0+ | Winbase.h | Coredll.lib | MEM_RESET "not supported", MEM_TOP_DOWN ignored on CE (page); dwSize 0 invalid |
+| `VirtualFree` | `aa450979` | CE 1.0+ | Winbase.h | Coredll.lib | MEM_RELEASE requires dwSize 0 and the VirtualAlloc base address |
+| `VirtualProtect` | `aa450980` | CE 1.0+ | Winbase.h | Coredll.lib | pages must belong to one VirtualAlloc region; `PDWORD` out for old protection |
+| `VirtualQuery` | `aa450981` | CE 1.0+ | Winbase.h | Coredll.lib | fills MEMORY_BASIC_INFORMATION; returns bytes written |
+| `MEMORY_BASIC_INFORMATION`/`PMEMORY_BASIC_INFORMATION` | `ms886752` | CE 1.0+ | **Winnt.h** (page) | — | 2 pointers + 6 DWORDs (28 bytes on 32-bit CE); State = MEM_COMMIT/FREE/RESERVE, Type = MEM_IMAGE/MAPPED/PRIVATE |
+| `MEM_COMMIT/RESERVE/DECOMMIT/RELEASE/FREE/PRIVATE/MAPPED/IMAGE/RESET/TOP_DOWN`, `PAGE_NOACCESS/READONLY/READWRITE/WRITECOPY/EXECUTE/EXECUTE_READ/EXECUTE_READWRITE/EXECUTE_WRITECOPY/GUARD/NOCACHE` | names per `aa450975`/`aa450980`/`ms886752`; numeric values fixed Win32 ABI | — | Winbase.h | — | MEM_RESET/MEM_TOP_DOWN retained for source compatibility with CE notes (see header) |
+| `FlushInstructionCache` | `ms885595` | CE 2.0+ | Winbase.h | Coredll.lib | |
+| `GetProcessVersion` | `ms885636` | CE 3.0+ | Winbase.h | Coredll.lib | high word major / low word minor; 0 + GetLastError on failure |
+| `GetDllVersion` | `ms885617` | CE 5.0+ | Winbase.h | Coredll.lib | version of the system the DLL expects to run on |
+| `GetThreadTimes` | `ms885644` | CE 2.10+ | Winbase.h | Coredll.lib | creation/exit/kernel/user FILETIMEs |
+| `TIME_ZONE_INFORMATION`/`PTIME_ZONE_INFORMATION`/`LPTIME_ZONE_INFORMATION` | `aa450943` | CE 1.0+ | Winbase.h | — | Bias + WCHAR name[32] + SYSTEMTIME transition + Bias triplets; 172 bytes on CE |
+| `GetTimeZoneInformation` | `ms885646` | CE 1.0+ | Winbase.h | Coredll.lib | returns TIME_ZONE_ID_*; failure also reports TIME_ZONE_ID_UNKNOWN (page) — no TIME_ZONE_ID_INVALID on CE |
+| `SetTimeZoneInformation` | `aa450893` | CE 1.0+ | Winbase.h | Coredll.lib | not persisted to registry; RegFlushKey(HKEY_LOCAL_MACHINE) persists |
+| `TIME_ZONE_ID_UNKNOWN/STANDARD/DAYLIGHT` | names per `ms885646`; values fixed Win32 ABI (0/1/2) | — | Winbase.h | — | |
+| `PDWORD` (windef.h) | used by VirtualProtect page signature `aa450980` | — | Windef.h | — | DWORD pointer typedef |
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

@@ -94,6 +94,21 @@ typedef PCRITICAL_SECTION LPCRITICAL_SECTION;
         _szm_p[_szm_i] = 0;                              \
 } while (0)
 
+/* ms886752 "MEMORY_BASIC_INFORMATION (Windows CE 5.0)": page-range
+ * report filled by VirtualQuery.  CE 1.0+; Header Winnt.h (per the
+ * page).  CE 32-bit layout: two pointers + six DWORDs = 32 bytes.
+ * State = MEM_COMMIT/MEM_FREE/MEM_RESERVE; Type =
+ * MEM_IMAGE/MEM_MAPPED/MEM_PRIVATE. */
+typedef struct _MEMORY_BASIC_INFORMATION {
+    PVOID  BaseAddress;       /* base address of the region */
+    PVOID  AllocationBase;    /* base of the VirtualAlloc range */
+    DWORD  AllocationProtect; /* protection at allocation time */
+    DWORD  RegionSize;        /* size of the region, in bytes */
+    DWORD  State;             /* MEM_COMMIT / MEM_FREE / MEM_RESERVE */
+    DWORD  Protect;           /* current access protection */
+    DWORD  Type;              /* MEM_IMAGE / MEM_MAPPED / MEM_PRIVATE */
+} MEMORY_BASIC_INFORMATION, *PMEMORY_BASIC_INFORMATION;
+
 #ifdef __cplusplus
 }
 #endif

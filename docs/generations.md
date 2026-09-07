@@ -139,3 +139,12 @@ Win32 ABI values).  QueryInstructionSet `ms886787`,
 IsProcessorFeaturePresent `ms886726` and VerQueryValue `aa450973` are
 recorded as deferred (unpublished numeric flag values / Coredll.dll
 row); rows in `docs/inventory.md`.  Def: 77 -> 80 exports.
+
+**M12 batch — virtual memory / time zone / version-timing:** VirtualAlloc
+`aa450975`, VirtualFree `aa450979`, VirtualProtect `aa450980`,
+VirtualQuery `aa450981` (+ MEMORY_BASIC_INFORMATION `ms886752` in
+winnt.h, MEM_*/PAGE_* constants), FlushInstructionCache `ms885595`,
+GetProcessVersion `ms885636`, GetDllVersion `ms885617`, GetThreadTimes
+`ms885644`, TIME_ZONE_INFORMATION `aa450943`, GetTimeZoneInformation
+`ms885646`, SetTimeZoneInformation `aa450893`, TIME_ZONE_ID_*
+constants.  Def: 80 -> 90 exports.

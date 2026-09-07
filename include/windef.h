@@ -73,6 +73,7 @@ typedef const CHAR     *LPCSTR;
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
 typedef DWORD *LPDWORD;
+typedef DWORD *PDWORD;  /* DWORD pointer (VirtualProtect aa450980) */
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */
 typedef LONG  *LPLONG;  /* LONG pointer (synchronization functions) */
 

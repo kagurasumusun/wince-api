@@ -1315,6 +1315,135 @@ BOOL GetVersionEx(LPOSVERSIONINFO lpVersionInformation);
  * passed on the command line. */
 VOID SignalStarted(DWORD dw);
 
+/* ------------------------------------------------------------------ */
+/* M12: virtual memory, time zone, per-process/thread/DLL times       */
+/* ------------------------------------------------------------------ */
+
+/* Virtual-memory allocation/reservation flags (aa450975/aa450979;
+ * values are the fixed Win32 ABI values).  The CE pages note
+ * MEM_RESET is "Not supported" and MEM_TOP_DOWN is ignored on CE;
+ * both are kept as named constants (source compatibility) with the
+ * CE note recorded. */
+#define MEM_COMMIT    0x00001000u
+#define MEM_RESERVE   0x00002000u
+#define MEM_DECOMMIT  0x00004000u
+#define MEM_RELEASE   0x00008000u
+#define MEM_FREE      0x00010000u
+#define MEM_PRIVATE   0x00020000u
+#define MEM_MAPPED    0x00040000u
+#define MEM_TOP_DOWN  0x00100000u  /* ignored on Windows CE */
+#define MEM_RESET     0x00080000u  /* not supported on Windows CE */
+#define MEM_IMAGE     0x01000000u
+
+/* Page access-protection flags named by the CE VirtualAlloc /
+ * VirtualProtect / MEMORY_BASIC_INFORMATION pages (aa450975,
+ * aa450980, ms886752); PAGE_GUARD and PAGE_NOCACHE are modifiers.
+ * Values are the fixed Win32 ABI values. */
+#define PAGE_NOACCESS          0x0001u
+#define PAGE_READONLY          0x0002u
+#define PAGE_READWRITE         0x0004u
+#define PAGE_WRITECOPY         0x0008u
+#define PAGE_EXECUTE           0x0010u
+#define PAGE_EXECUTE_READ      0x0020u
+#define PAGE_EXECUTE_READWRITE 0x0040u
+#define PAGE_EXECUTE_WRITECOPY 0x0080u
+#define PAGE_GUARD             0x0100u
+#define PAGE_NOCACHE           0x0200u
+
+/* aa450975 "VirtualAlloc (Windows CE 5.0)":
+ * LPVOID VirtualAlloc(LPVOID, DWORD, DWORD, DWORD).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Reserves/commits pages; dwSize 0 is an
+ * error; NULL address lets the system choose; regions reserved by
+ * VirtualAlloc must be released whole via VirtualFree MEM_RELEASE. */
+LPVOID VirtualAlloc(LPVOID lpAddress, DWORD dwSize,
+                    DWORD flAllocationType, DWORD flProtect);
+
+/* aa450979 "VirtualFree (Windows CE 5.0)":
+ * BOOL VirtualFree(LPVOID, DWORD, DWORD).  CE 1.0+; Winbase.h;
+ * Coredll.lib.  Decommits (MEM_DECOMMIT) or releases (MEM_RELEASE,
+ * dwSize must be 0). */
+BOOL VirtualFree(LPVOID lpAddress, DWORD dwSize, DWORD dwFreeType);
+
+/* aa450980 "VirtualProtect (Windows CE 5.0)":
+ * BOOL VirtualProtect(LPVOID, DWORD, DWORD, PDWORD).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Changes protection on committed pages;
+ * pages must come from one VirtualAlloc region. */
+BOOL VirtualProtect(LPVOID lpAddress, DWORD dwSize, DWORD flNewProtect,
+                    PDWORD lpflOldProtect);
+
+/* aa450981 "VirtualQuery (Windows CE 5.0)":
+ * DWORD VirtualQuery(LPCVOID, PMEMORY_BASIC_INFORMATION, DWORD).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Fills the buffer for the range
+ * starting at lpAddress; returns bytes written (0 = failure). */
+DWORD VirtualQuery(LPCVOID lpAddress,
+                   PMEMORY_BASIC_INFORMATION lpBuffer,
+                   DWORD dwLength);
+
+/* ms885595 "FlushInstructionCache (Windows CE 5.0)":
+ * BOOL FlushInstructionCache(HANDLE, LPCVOID, DWORD).  CE 2.0+;
+ * Winbase.h; Coredll.lib.  Flushes the instruction cache for the
+ * specified process (see also the process-and-thread book). */
+BOOL FlushInstructionCache(HANDLE hProcess, LPCVOID lpBaseAddress,
+                           DWORD dwSize);
+
+/* ms885636 "GetProcessVersion (Windows CE 5.0)":
+ * DWORD GetProcessVersion(DWORD).  CE 3.0+; Winbase.h; Coredll.lib.
+ * Version of the system the process expects to run on: high word
+ * major, low word minor; 0 + GetLastError on failure. */
+DWORD GetProcessVersion(DWORD ProcessId);
+
+/* ms885617 "GetDllVersion (Windows CE 5.0)":
+ * DWORD GetDllVersion(HMODULE).  CE 5.0 and later; Winbase.h;
+ * Coredll.lib.  Version of the system the DLL expects to run on
+ * (high word major, low word minor); 0 + GetLastError on failure. */
+DWORD GetDllVersion(HMODULE hMod);
+
+/* ms885644 "GetThreadTimes (Windows CE 5.0)":
+ * BOOL GetThreadTimes(HANDLE, LPFILETIME, LPFILETIME, LPFILETIME,
+ * LPFILETIME).  CE 2.10+; Winbase.h; Coredll.lib.  Creation, exit,
+ * kernel and user time of a thread (FILETIME = 100 ns units). */
+BOOL GetThreadTimes(HANDLE hThread, LPFILETIME lpCreationTime,
+                    LPFILETIME lpExitTime, LPFILETIME lpKernelTime,
+                    LPFILETIME lpUserTime);
+
+/* aa450943 "TIME_ZONE_INFORMATION (Windows CE 5.0)": time-zone
+ * parameters used by Get/SetTimeZoneInformation.  CE 1.0+;
+ * Winbase.h.  Member order per the page; the name members are wide
+ * strings (TCHAR/WCHAR) on CE. */
+typedef struct _TIME_ZONE_INFORMATION {
+    LONG       Bias;
+    WCHAR      StandardName[32];
+    SYSTEMTIME StandardDate;
+    LONG       StandardBias;
+    WCHAR      DaylightName[32];
+    SYSTEMTIME DaylightDate;
+    LONG       DaylightBias;
+} TIME_ZONE_INFORMATION, *PTIME_ZONE_INFORMATION,
+                        *LPTIME_ZONE_INFORMATION;
+
+/* Return values of GetTimeZoneInformation (ms885646 names the three
+ * TIME_ZONE_ID_* values; numeric values fixed Win32 ABI).  The page
+ * says a failure also returns TIME_ZONE_ID_UNKNOWN (with
+ * GetLastError), so no TIME_ZONE_ID_INVALID is defined here. */
+#define TIME_ZONE_ID_UNKNOWN   0
+#define TIME_ZONE_ID_STANDARD  1
+#define TIME_ZONE_ID_DAYLIGHT  2
+
+/* ms885646 "GetTimeZoneInformation (Windows CE 5.0)":
+ * DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION).  CE 1.0+;
+ * Winbase.h; Coredll.lib.  Returns TIME_ZONE_ID_* (UTC = local +
+ * Bias, Bias in minutes). */
+DWORD GetTimeZoneInformation(LPTIME_ZONE_INFORMATION
+                             lpTimeZoneInformation);
+
+/* aa450893 "SetTimeZoneInformation (Windows CE 5.0)":
+ * BOOL SetTimeZoneInformation(const TIME_ZONE_INFORMATION*).
+ * CE 1.0+; Winbase.h; Coredll.lib.  Sets the current time-zone
+ * parameters; page notes the data is not persisted to the registry
+ * (RegFlushKey(HKEY_LOCAL_MACHINE) persists it). */
+BOOL SetTimeZoneInformation(
+    const TIME_ZONE_INFORMATION *lpTimeZoneInformation);
+
 #ifdef __cplusplus
 }
 #endif
