@@ -75,6 +75,21 @@ typedef uint32_t        ULONG_PTR;
 typedef uintptr_t       UINT_PTR;
 typedef intptr_t        INT_PTR;
 
+/* Fixed Win32-ABI integer typedefs used by CE documentation pages that
+ * were not yet covered above (Network Address Translation Reference
+ * pages, e.g. ms885188/ms885684/ms885685; debugging/driver pages use
+ * the same ABI spellings).  All are plain fixed-width aliases. */
+typedef unsigned char   UCHAR;    /* ms885188: "unsigned character"  */
+typedef unsigned short  USHORT;   /* ms885188: "unsigned short"      */
+typedef uint64_t        ULONG64;  /* ms885684 IP_NAT_SESSION_MAPPING_ */
+                                   /* STATISTICS counter members      */
+typedef unsigned char   BOOLEAN;  /* logical boolean (CE docs, e.g.  */
+                                   /* ms886745 InboundConnection)     */
+typedef ULONG          *PULONG;   /* ULONG pointer (ms886786)         */
+typedef USHORT         *PUSHORT;  /* USHORT pointer (ms886786)        */
+typedef UCHAR          *PUCHAR;   /* UCHAR pointer (ms885211)         */
+typedef LONG            NTSTATUS; /* NT status result type (NAT pages)*/
+
 typedef void           *LPVOID;
 typedef const void     *LPCVOID;
 typedef void           *PVOID;   /* generic pointer (Interlocked*Pointer) */

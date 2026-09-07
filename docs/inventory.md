@@ -623,6 +623,63 @@ New headers: `excpt.h`, `dbgapi.h`, `errorrep.h` (windows.h now
 includes excpt.h).  coredll def 164 -> 171 exports.  Host + six CE
 targets pass (toolchain re-acquired and re-verified this session).
 
+### M25: Error Values book + NAT Reference + CeLog functions (bulk)
+
+**Error Values.**  winerror.h now carries the *complete* official
+"System Errors - Numerical Order (Windows CE 5.0)" page (`aa450919`,
+alphabetical twin `aa450917`): the earlier capture covered codes 0..1078
+and M25 appends the remaining **427 rows** through code 6118 (zero
+value conflicts with the prior 250 defines; NO_ERROR / STILL_ACTIVE
+kept from other page provenance).  Also appended from the official CE
+5.0 pages: **NTE error codes** `aa451033` (+30), **CRYPT error codes**
+`aa451026` (+46), **CERTSRV error codes** `aa451023`, **TRUST error
+codes** `aa451035` (hex values printed verbatim).  Recorded *unknown,
+not defined*: **RAS error values** `ms886792` (page defines values only
+as "RASBASE+n") and **NERR_** net errors `ms886761`/`ms886762` (the CE
+page's NERR_ values conflict with the desktop Net Error Codes
+reference, e.g. NERR_LastAdmin 242 vs 2219 — documented conflict; no
+NERR constant emitted).  winerror.h: 251 -> 769 #defines.
+
+`FormatMessageW` (`ms885599`, Header Winbase.h, **Link Library
+Fmtmsg.lib** -> new `def/fmtmsg-doc.def`, 1 export; CE Unicode-only;
+dwLanguageId unsupported; system message tables are a selectable OS
+component) plus the FORMAT_MESSAGE_* flag names (fixed Win32-ABI
+values) added to winbase.h.  GetLastError/SetLastError were already
+implemented from these same book pages (ms885627/ms886817).
+
+**Network Address Translation Reference** (new header `natedit.h`; all
+pages Header **Natedit.h**, Link Library **Coredll.dll**, OS CE 3.0+
+except the logging pages ms886745..748 = CE .NET 4.1+):
+IP_NAT_DIRECTION enum (`ms885682`), IP_NAT_SESSION_MAPPING_STATISTICS
+(`ms885684`, ULONG64 counters), IPRcvBuf (`ms885685`; page prints the
+member types as lowercase tokens "uint"/"uchar" read as the fixed
+UINT/UCHAR types used on the NAT pages), the driver entry points
+EditorInitialize/RegisterEditor (`ms885210`/`ms886796`), the ticket/
+session APIs CreateTicket, DeleteTicket, EditSession, QueryInfoSession,
+TimeoutSession, DisassociateSession, EditorDeregister, and the
+editor-implemented callback prototypes CreateHandler/DataHandler/
+DeleteHandler.  The NAT logging typedefs PNAT_LOG_* (`ms886745..748`)
+are declared.  Clean-room boundary: IP_NAT_REGISTER_EDITOR
+(`ms885683`) is an *anonymous* typedef whose members consume
+PNAT_EDITOR_* callback types that no CE page defines separately, so
+the structure is provided as an **incomplete type** with the two
+pointer spellings the pages use (PIP_NAT_REGISTER_EDITOR,
+PNAT_REGISTER_EDITOR).  windef.h gained the fixed ABI typedefs UCHAR/
+USHORT/ULONG64/BOOLEAN/PULONG/PUSHORT/PUCHAR/NTSTATUS used by these
+pages.
+
+**CeLog Event Tracking functions** (new header `celog.h`; all seven
+function pages Header Celog.h, Link Library Coredll.lib):
+CeLogData `aa450823` (CE 3.0+), CeLogGetZones `aa450824`,
+CeLogInterrupt `aa451043`, CeLogMsg `aa450825`, CeLogQueryZones
+`aa450826`, CeLogReSync `aa450827`, CeLogSetZones `aa450828`.  The
+~60 CEL_* event-record pages (`CEL_EVENT_CREATE`, CEL_HEADER,
+MAPHEADER, ...) plus the CeLog event-identifier / zone pages document
+the payload format of the kernel event-log stream and carry no Header/
+Link rows; they are **recorded, not transcribed** (no user-mode API).
+NAT exports join coredll: coredll def 171 -> **192**.  Host + six CE
+targets pass; all defs llvm-dlltool-armce verified.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

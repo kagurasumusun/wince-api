@@ -1,0 +1,22 @@
+aa450757	Network Address Translation Functions
+ms885179	CreateHandler
+ms885188	CreateTicket
+ms885191	DataHandler
+ms885198	DeleteHandler
+ms885199	DeleteTicket
+ms885201	DisassociateSession
+ms885209	EditorDeregister
+ms885210	EditorInitialize
+ms885211	EditSession
+ms886745	LogConnectionCreation
+ms886746	LogConnectionDeletion
+ms886747	LogDroppedPacket
+ms886748	LogInit
+ms886786	QueryInfoSession
+ms886796	RegisterEditor
+aa450941	TimeoutSession
+aa450759	Network Address Translation Structures
+ms885682	IP_NAT_DIRECTION
+ms885683	IP_NAT_REGISTER_EDITOR
+ms885684	IP_NAT_SESSION_MAPPING_STATISTICS
+ms885685	IPRcvBuf

@@ -274,3 +274,21 @@ DEBUG_EVENT record family + event-code/DBG_* constants.  Debug macro
 pages recorded but not expanded (driver/zone machinery).  SEH
 intrinsics excluded from export def (NOT_EXPORTS).  coredll def 164 ->
 171.  Host + six CE targets pass; all defs llvm-dlltool-armce verified.
+
+**M25 batch — Error Values + NAT Reference + CeLog functions (bulk):**
+winerror.h completed to the full official System Errors page (aa450919:
++427 rows to code 6118) and the NTE/CRYPT/CERTSRV/TRUST namespaces
+(+91; aa451033/026/023/035); RAS (ms886792 "RASBASE+n") and NERR
+(ms886761/762 conflict with desktop Net Error Codes) recorded unknown.
+251 -> 769 defines.  FormatMessageW (ms885599; Fmtmsg.lib) +
+FORMAT_MESSAGE_* flags in winbase.h; new def/fmtmsg-doc.def.  New
+include/natedit.h (NAT Reference: Natedit.h / Coredll.dll rows;
+IP_NAT_DIRECTION, IP_NAT_SESSION_MAPPING_STATISTICS, IPRcvBuf, ticket/
+session/editor APIs, PNAT_LOG_* typedefs; IP_NAT_REGISTER_EDITOR as
+incomplete type -- PNAT_EDITOR_* member types unpublished).  New
+include/celog.h (seven CeLog functions, Celog.h/Coredll.lib; CEL_*
+event-record pages recorded not transcribed).  windef.h ABI typedefs
+UCHAR..NTSTATUS added.  coredll def 171 -> 192 exports (192 + coreloc
+23 + toolhelp 13 + serdev 16 + fmtmsg 1 + lmem 1 + loadstr 1 = 247).
+Host + six CE targets pass; toolchain re-acquired from the Actions
+artifact; all defs llvm-dlltool-armce verified.

@@ -223,6 +223,12 @@ declarations, recorded in `docs/inventory.md`):
   CreateFileMapping/MapViewOfFile/UnmapViewOfFile/FlushViewOfFile),
   DisableThreadLibraryCalls + DLL_* reason constants, new
   `include/psapi.h` (MODULEINFO/GetModuleInformation).  def 148 → 154.
+* **M25 (landed):** Error Values + NAT + CeLog (bulk) — winerror.h
+  completed to the full official CE System-Errors page (769 defines,
+  incl. NTE/CRYPT/CERTSRV/TRUST namespaces), FormatMessageW + new
+  `fmtmsg-doc.def`; new `include/natedit.h` (NAT editor API) and
+  `include/celog.h` (CeLog tracking functions).  coredll def 171 → 192
+  (247 exports across all libs).
 * **M24 (landed):** Exception + Debugging References (bulk) — new
   `excpt.h` (SEH intrinsics + EXCEPTION_POINTERS), `dbgapi.h`
   (DBGPARAM/NKDbgPrintfW/RegisterDbgZones/WriteDebugLED), `errorrep.h`

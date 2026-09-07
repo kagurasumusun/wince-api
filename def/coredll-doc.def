@@ -18,6 +18,13 @@ EXPORTS
   CeGenRandom
   CeGetCanonicalPathName
   CeGetFileNotificationInfo
+  CeLogData
+  CeLogGetZones
+  CeLogInterrupt
+  CeLogMsg
+  CeLogQueryZones
+  CeLogReSync
+  CeLogSetZones
   CharNextW
   CloseHandle
   CloseMsgQueue
@@ -31,16 +38,25 @@ EXPORTS
   CreateFileW
   CreateFileForMappingW
   CreateFileMappingW
+  CreateHandler
   CreateMsgQueue
   CreateMutexW
   CreateProcessW
   CreateThread
+  CreateTicket
+  DataHandler
   DebugActiveProcess
   DebugBreak
   DeleteFiber
   DeleteFileW
+  DeleteHandler
+  DeleteTicket
   DisableThreadLibraryCalls
+  DisassociateSession
   DuplicateHandle
+  EditSession
+  EditorDeregister
+  EditorInitialize
   ExitProcess
   ExitThread
   FileTimeToLocalFileTime
@@ -72,6 +88,7 @@ EXPORTS
   GetFileVersionInfoW
   GetFileVersionInfoSizeW
   GetIdleTime
+  GetLastError
   GetLocalTime
   GetModuleFileNameW
   GetModuleHandleW
@@ -127,6 +144,7 @@ EXPORTS
   OpenMsgQueue
   OpenProcess
   PulseEvent
+  QueryInfoSession
   QueryPerformanceCounter
   QueryPerformanceFrequency
   RaiseException
@@ -144,6 +162,7 @@ EXPORTS
   RegQueryInfoKeyW
   RegQueryValueExW
   RegSetValueExW
+  RegisterEditor
   ReleaseSemaphore
   RemoveDirectoryW
   ReportFault
@@ -155,6 +174,7 @@ EXPORTS
   SetFileAttributesW
   SetFilePointer
   SetFileTime
+  SetLastError
   SetLocalTime
   SetSystemTime
   SetThreadPriority
@@ -166,6 +186,7 @@ EXPORTS
   SystemTimeToFileTime
   TerminateProcess
   TerminateThread
+  TimeoutSession
   TlsAlloc
   TlsFree
   TlsGetValue

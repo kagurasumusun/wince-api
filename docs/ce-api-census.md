@@ -38,13 +38,14 @@ documentation totals ~19.8k reference leaves.
 
 ## Progress markers (update as batches land)
 
-* `build/rows.json` pages harvested with Requirements rows: 396
+* `build/rows.json` pages harvested with Requirements rows: 510
   manifest lines parsed across all current manifests (page corpus
   re-fetched each session into the non-committed `build/`; see
   docs/version-coverage.md).  Core OS Reference user-mode books landed
-  through the Exception / Debugging / Serial / Message Queue books;
-  CeLog, NAT, Error Values, State & Notifications Broker and the
-  Feature-area reference books (GWES/GDI/Shell/...) remain as backlog.
+  through the Exception / Debugging / Serial / Message Queue / CeLog /
+  NAT / Error Values books; the Feature-area reference books
+  (GWES/GDI/Shell/...) and the network/comms reference books remain as
+  the backlog.
 * Shipped declarations: see `make check` / `def/coredll-doc.def`
   (name-only doc-derived exports, one per harvested Link-Library row
   whose export is declared by these headers).

@@ -97,6 +97,7 @@ UNICODE_ONLY = {
     "CreateFileForMapping": "CreateFileForMappingW",
     "CreateFileMapping": "CreateFileMappingW",
     "GetModuleInformation": "GetModuleInformation",
+    "FormatMessage": "FormatMessageW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -157,7 +158,13 @@ def main():
         if not lib:
             continue
         sn = short_title(r.get("title", ""))
-        for token in re.findall(r"[a-z0-9]+\.lib", lib):
+        tokens = re.findall(r"[a-z0-9]+\.lib", lib)
+        # Some CE3-era pages print "Link Library: Coredll.dll." (module
+        # form).  Map that documented module token onto the coredll.lib
+        # export group (module Coredll.dll).
+        if not tokens and re.search(r"coredll\.dll", lib):
+            tokens = ["coredll.lib"]
+        for token in tokens:
             bylib.setdefault(token, {})[sn] = r["id"]
 
     # Kernel-scope link rows (Nk.lib / Coremain.lib) are tracked but

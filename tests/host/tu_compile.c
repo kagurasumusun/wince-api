@@ -18,6 +18,8 @@
 #include <excpt.h>
 #include <dbgapi.h>
 #include <errorrep.h>
+#include <celog.h>
+#include <natedit.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -49,6 +51,27 @@ typedef char assert_dbev_size[(sizeof(DEBUG_EVENT) == 96) ? 1 : -1];
 
 /* Reference every declared function (no calls, compile-only). */
 static const void *const api_symbols[] = {
+    /* M25: Error Values + NAT + CeLog (winbase.h/celog.h/natedit.h). */
+    (const void *) &FormatMessageW, (const void *) &FormatMessage,
+    (const void *) &CeLogData,
+    (const void *) &CeLogGetZones,
+    (const void *) &CeLogInterrupt,
+    (const void *) &CeLogMsg,
+    (const void *) &CeLogQueryZones,
+    (const void *) &CeLogReSync,
+    (const void *) &CeLogSetZones,
+    (const void *) &EditorInitialize,
+    (const void *) &RegisterEditor,
+    (const void *) &CreateHandler,
+    (const void *) &DataHandler,
+    (const void *) &DeleteHandler,
+    (const void *) &CreateTicket,
+    (const void *) &DeleteTicket,
+    (const void *) &EditSession,
+    (const void *) &QueryInfoSession,
+    (const void *) &TimeoutSession,
+    (const void *) &DisassociateSession,
+    (const void *) &EditorDeregister,
     /* M24: SEH + debugging (winbase.h/excpt.h/dbgapi.h/errorrep.h). */
     (const void *) &RaiseException,
     (const void *) &DebugBreak,
@@ -1255,6 +1278,36 @@ static int m24_shaped_usage(void)
            ? 0 : 1;
 }
 
+/* M25 usage shape (compile-only; winerror/FormatMessage/NAT/CeLog). */
+static int m25_shaped_usage(void)
+{
+    static const WCHAR mfmt[] = { '%','1','\n',0 };
+    WCHAR zstr[] = { 'z','\n',0 };
+    DWORD dwZoneUser = 0, dwZoneCE = 0, dwProc = 0, dwAvail = 0;
+    WCHAR buf[80];
+    va_list vl;
+    DWORD n;
+
+    n = FormatMessageW(FORMAT_MESSAGE_FROM_STRING
+                       | FORMAT_MESSAGE_IGNORE_INSERTS,
+                       (LPCVOID) mfmt, 0, 0, buf, 80, &vl);
+    (void) n;
+    (void) CeLogSetZones(dwZoneUser, dwZoneCE, dwProc);
+    (void) CeLogGetZones(&dwZoneUser, &dwZoneCE, &dwProc, &dwAvail);
+    (void) CeLogQueryZones(&dwZoneUser, &dwZoneCE, &dwProc);
+    (void) CeLogMsg(zstr);
+    (void) CeLogInterrupt(0);
+    (void) CeLogReSync();
+    (void) EditorDeregister((PVOID) 0);
+    (void) TimeoutSession((PVOID) 0, (PVOID) 0);
+    (void) DisassociateSession((PVOID) 0, (PVOID) 0);
+    return (FORMAT_MESSAGE_ALLOCATE_BUFFER == 0x100
+            && FORMAT_MESSAGE_ARGUMENT_ARRAY == 0x2000
+            && ERROR_SUCCESS == 0
+            && NatInboundDirection == 0 && NatOutboundDirection == 1
+            && dwZoneCE == 0) ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1295,6 +1348,8 @@ int host_tu_entry(void)
     if (m23_shaped_usage() != 0)
         return 1;
     if (m24_shaped_usage() != 0)
+        return 1;
+    if (m25_shaped_usage() != 0)
         return 1;
     return 0;
 }

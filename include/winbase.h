@@ -2226,6 +2226,39 @@ typedef DEBUG_EVENT *LPDEBUG_EVENT;
  * tests and returns immediately, INFINITE waits forever. */
 BOOL WaitForDebugEvent(LPDEBUG_EVENT lpDebugEvent, DWORD dwMilliseconds);
 
+/* ------------------------------------------------------------------ */
+/* M25: Error Values book (FormatMessage) + System/namespace codes     */
+/* (see winerror.h for the full aa450919 / aa451033 &c. constant       */
+/* harvest; winbase.h carries the Error Functions).                   */
+/* ------------------------------------------------------------------ */
+
+/* FormatMessage flag names (per ms885599; numeric values are the
+ * fixed Win32-ABI codes of the desktop FormatMessage reference).
+ * The low byte is FORMAT_MESSAGE_MAX_WIDTH_MASK. */
+#define FORMAT_MESSAGE_ALLOCATE_BUFFER  0x00000100
+#define FORMAT_MESSAGE_IGNORE_INSERTS   0x00000200
+#define FORMAT_MESSAGE_FROM_STRING      0x00000400
+#define FORMAT_MESSAGE_FROM_HMODULE     0x00000800
+#define FORMAT_MESSAGE_FROM_SYSTEM      0x00001000
+#define FORMAT_MESSAGE_ARGUMENT_ARRAY   0x00002000
+#define FORMAT_MESSAGE_MAX_WIDTH_MASK   0x000000FF
+
+/* ms885599 "FormatMessage (Windows CE 5.0)":
+ * DWORD FormatMessage(DWORD, LPCVOID, DWORD, DWORD, LPTSTR, DWORD,
+ *                     va_list *).  CE 1.0+; Winbase.h; Fmtmsg.lib.
+ * Formats a message string from a message-table resource / system
+ * message table / in-memory definition (per dwFlags).  dwLanguageId
+ * is "Not supported" on CE; the system message-table resources are a
+ * selectable OS component often removed to save space (page note).
+ * With FORMAT_MESSAGE_ALLOCATE_BUFFER the function allocates with
+ * LocalAlloc and stores the buffer pointer at *lpBuffer (free with
+ * LocalFree).  Returns the stored character count or zero.  Page
+ * states only the Unicode version exists. */
+DWORD FormatMessageW(DWORD dwFlags, LPCVOID lpSource, DWORD dwMessageId,
+                     DWORD dwLanguageId, LPTSTR lpBuffer, DWORD nSize,
+                     va_list *Arguments);
+#define FormatMessage FormatMessageW
+
 #ifdef __cplusplus
 }
 #endif
