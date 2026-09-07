@@ -183,6 +183,20 @@ static const void *const api_symbols[] = {
     (const void *) &GetCurrentFiber,
     (const void *) &GetFiberData,
     (const void *) &SwitchToFiber,
+    /* M16: NLS locale/code-page (winnls.h). */
+    (const void *) &GetACP,
+    (const void *) &GetOEMCP,
+    (const void *) &GetSystemDefaultLCID,
+    (const void *) &GetUserDefaultLCID,
+    (const void *) &GetSystemDefaultLangID,
+    (const void *) &GetUserDefaultLangID,
+    (const void *) &IsValidCodePage,
+    (const void *) &IsValidLocale,
+    (const void *) &CompareStringW, (const void *) &CompareString,
+    (const void *) &ConvertDefaultLocale,
+    (const void *) &GetCPInfo,
+    (const void *) &GetStringTypeW,
+    (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
     /* M15: registry (winreg.h). */
     (const void *) &RegOpenKeyExW, (const void *) &RegOpenKeyEx,
     (const void *) &RegCreateKeyExW, (const void *) &RegCreateKeyEx,
@@ -694,6 +708,17 @@ static int m12_shaped_usage(void)
     return 0;
 }
 
+/* M16 NLS constants/macros (winnls.h + winnt.h). */
+typedef char assert_nls2_vals[
+    (CT_CTYPE1 == 1u && CT_CTYPE2 == 2u && CT_CTYPE3 == 4u &&
+     LCID_INSTALLED == 1u && LCID_SUPPORTED == 2u &&
+     CSTR_LESS_THAN == 1 && CSTR_EQUAL == 2 &&
+     CSTR_GREATER_THAN == 3 &&
+     MAX_DEFAULTCHAR == 2 && MAX_LEADBYTES == 12 &&
+     MAKELANGID(9, 1) == 0x409 &&
+     PRIMARYLANGID(0x409) == 9 && SUBLANGID(0x409) == 1 &&
+     MAKELCID(0x409, 0) == 0x409) ? 1 : -1];
+
 /* M15 registry constants (winreg.h; values per fixed Win32 ABI). */
 typedef char assert_reg_vals[
     (REG_NONE == 0 && REG_SZ == 1 && REG_EXPAND_SZ == 2 &&
@@ -756,6 +781,43 @@ static int m14_shaped_usage(void)
     DeleteFiber(fiber);
     SwitchToFiber(mainfiber);
     DeleteFiber(mainfiber);
+    return 0;
+}
+
+/* M16 usage shape (compile-only). */
+static int m16_shaped_usage(void)
+{
+    static const WCHAR w_a[] = { 'a', 0 };
+    static const WCHAR w_b[] = { 'b', 0 };
+    CPINFO cpi;
+    WORD ctypes[4] = { 0, 0, 0, 0 };
+    LCID lcid;
+    LANGID lang;
+    UINT cp;
+
+    cp = GetACP();
+    if (cp == 0)
+        return (int) GetLastError();
+    (void) GetOEMCP();
+    lcid = GetSystemDefaultLCID();
+    (void) GetUserDefaultLCID();
+    lang = GetSystemDefaultLangID();
+    (void) GetUserDefaultLangID();
+    if (!IsValidCodePage(CP_ACP))
+        return (int) GetLastError();
+    if (!IsValidLocale(lcid, LCID_INSTALLED))
+        return (int) GetLastError();
+    if (CompareStringW(lcid, 0, w_a, -1, w_b, -1) == 0)
+        return (int) GetLastError();
+    (void) ConvertDefaultLocale(lcid);
+    if (GetCPInfo(CP_ACP, &cpi) == 0)
+        return (int) GetLastError();
+    (void) GetStringTypeW(CT_CTYPE1, w_a, -1, ctypes);
+    (void) GetStringTypeExW(lcid, CT_CTYPE1, w_a, -1, ctypes);
+    (void) lang;
+    (void) PRIMARYLANGID(lang);
+    (void) SUBLANGID(lang);
+    (void) MAKELCID(lang, 0);
     return 0;
 }
 
@@ -825,5 +887,7 @@ int host_tu_entry(void)
         return 1;
     if (m14_shaped_usage() != 0)
         return 1;
-    return m15_shaped_usage() == 0 ? 0 : 1;
+    if (m15_shaped_usage() != 0)
+        return 1;
+    return m16_shaped_usage() == 0 ? 0 : 1;
 }

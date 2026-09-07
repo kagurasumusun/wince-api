@@ -61,6 +61,13 @@ typedef unsigned int    UINT;
 typedef int             BOOL;
 typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
 typedef BYTE           *LPBYTE; /* byte pointer (registry value data)  */
+typedef WORD           *LPWORD; /* WORD pointer (GetStringType* arrays) */
+
+/* Locale/language identifier types: LANGID = WORD, LCID = DWORD.
+ * Base-level types so both winnt.h (MAKELANGID/MAKELCID macros) and
+ * winnls.h can use them (official NLS pages, e.g. ms905298/ms905289). */
+typedef WORD   LANGID;  /* language identifier (16-bit) */
+typedef DWORD  LCID;    /* locale identifier (32-bit)   */
 
 typedef int32_t         LONG_PTR;
 typedef uint32_t        ULONG_PTR;

@@ -75,6 +75,115 @@ BOOL IsDBCSLeadByte(BYTE TestChar);
  * Coredll.lib. */
 BOOL IsDBCSLeadByteEx(UINT CodePage, BYTE TestChar);
 
+/* ------------------------------------------------------------------ */
+/* M16: locale/code-page functions (official NLS Reference pages).    */
+/* The NLS pages list Link Library Coreloc.lib except where noted.    */
+/* ------------------------------------------------------------------ */
+
+/* Character-type flag groups for GetStringTypeW/GetStringTypeEx
+ * (ms905272/ms905283 name CT_CTYPE1/2/3; the values 1/2/4 are the
+ * fixed Win32 ABI values). */
+#define CT_CTYPE1 0x00000001u
+#define CT_CTYPE2 0x00000002u
+#define CT_CTYPE3 0x00000004u
+
+/* Validity-test flags for IsValidLocale (ms906219). */
+#define LCID_INSTALLED   0x00000001u
+#define LCID_SUPPORTED   0x00000002u
+
+/* String comparison results of CompareString (ms904713). */
+#define CSTR_LESS_THAN    1
+#define CSTR_EQUAL        2
+#define CSTR_GREATER_THAN 3
+
+/* CPINFO array sizes (names from the CPINFO page ms904717; values are
+ * the fixed Win32 NLS-ABI sizes MAX_DEFAULTCHAR/MAX_LEADBYTES). */
+#define MAX_DEFAULTCHAR 2
+#define MAX_LEADBYTES   12
+
+/* ms904717 "CPINFO (Windows CE 5.0)": code-page information filled by
+ * GetCPInfo.  CE .NET 4.0+; Winnls.h. */
+typedef struct _cpinfo {
+    UINT MaxCharSize;              /* max length, in bytes, of a char */
+    BYTE DefaultChar[MAX_DEFAULTCHAR]; /* default character */
+    BYTE LeadByte[MAX_LEADBYTES];  /* lead-byte ranges, zero-terminated */
+} CPINFO, *LPCPINFO;
+
+/* ms905215 "GetACP (Windows CE 5.0)": UINT GetACP(VOID).  Returns the
+ * current ANSI code-page identifier for the system.  CE .NET 4.0+;
+ * Winnls.h; Coreloc.lib. */
+UINT GetACP(void);
+
+/* ms905256 "GetOEMCP (Windows CE 5.0)": UINT GetOEMCP(void).  Returns
+ * the current OEM code-page identifier.  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib. */
+UINT GetOEMCP(void);
+
+/* ms905298 "GetSystemDefaultLCID (Windows CE 5.0)":
+ * LCID GetSystemDefaultLCID(void).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib. */
+LCID GetSystemDefaultLCID(void);
+
+/* ms905323 "GetUserDefaultLCID (Windows CE 5.0)":
+ * LCID GetUserDefaultLCID(void).  CE .NET 4.0+; Winnls.h; Coreloc.lib. */
+LCID GetUserDefaultLCID(void);
+
+/* ms905289 "GetSystemDefaultLangID (Windows CE 5.0)":
+ * LANGID GetSystemDefaultLangID(void).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib. */
+LANGID GetSystemDefaultLangID(void);
+
+/* ms905315 "GetUserDefaultLangID (Windows CE 5.0)":
+ * LANGID GetUserDefaultLangID(void).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib. */
+LANGID GetUserDefaultLangID(void);
+
+/* ms906218 "IsValidCodePage (Windows CE 5.0)":
+ * BOOL IsValidCodePage(UINT).  CE .NET 4.0+; Winnls.h; Coreloc.lib. */
+BOOL IsValidCodePage(UINT CodePage);
+
+/* ms906219 "IsValidLocale (Windows CE 5.0)":
+ * BOOL IsValidLocale(LCID, DWORD).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib.  dwFlags = LCID_INSTALLED and/or LCID_SUPPORTED; CE
+ * cannot download code pages to a device (page note). */
+BOOL IsValidLocale(LCID Locale, DWORD dwFlags);
+
+/* ms904713 "CompareString (Windows CE 5.0)":
+ * int CompareString(LCID, DWORD, LPCTSTR, int, LPCTSTR, int).
+ * CE 1.0+; Winnls.h; Coreloc.lib.  Compares two strings under the
+ * locale; returns CSTR_LESS_THAN/EQUAL/GREATER_THAN (0 on failure).
+ * cchCount -1 means null-terminated.  Fastest at dwCmpFlags 0 or
+ * NORM_IGNORECASE with -1 counts (page note). */
+int CompareStringW(LCID Locale, DWORD dwCmpFlags,
+                   LPCWSTR lpString1, int cchCount1,
+                   LPCWSTR lpString2, int cchCount2);
+#define CompareString CompareStringW
+
+/* ms904716 "ConvertDefaultLocale (Windows CE 5.0)":
+ * LCID ConvertDefaultLocale(LCID).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib. */
+LCID ConvertDefaultLocale(LCID Locale);
+
+/* ms905221 "GetCPInfo (Windows CE 5.0)":
+ * BOOL GetCPInfo(UINT, LPCPINFO).  CE .NET 4.0+; Winnls.h;
+ * Coreloc.lib.  Fills the code-page info structure. */
+BOOL GetCPInfo(UINT CodePage, LPCPINFO lpCPInfo);
+
+/* ms905272 "GetStringTypeW (Windows CE 5.0)":
+ * BOOL GetStringTypeW(DWORD, LPCWSTR, int, LPWORD).  CE 1.0+;
+ * Winnls.h; **Coredll.lib** (page row).  Sets one or more CT_* bits
+ * per source character in the output WORD array. */
+BOOL GetStringTypeW(DWORD dwInfoType, LPCWSTR lpSrcStr, int cchSrc,
+                    LPWORD lpCharType);
+
+/* ms905283 "GetStringTypeEx (Windows CE 5.0)":
+ * BOOL GetStringTypeEx(LCID, DWORD, LPCTSTR, int, LPWORD).  CE 1.0+;
+ * Winnls.h; Coreloc.lib. */
+BOOL GetStringTypeExW(LCID Locale, DWORD dwInfoType,
+                      LPCWSTR lpSrcStr, int cchSrc,
+                      LPWORD lpCharType);
+#define GetStringTypeEx GetStringTypeExW
+
 #ifdef __cplusplus
 }
 #endif

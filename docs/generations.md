@@ -172,3 +172,14 @@ HKEY/PHKEY/REGSAM types, predefined-key and REG_*/REG_OPTION_*/REG_
 NOTIFY_* constants.  Def: 100 -> 114 exports.  New manifests:
 `tools/manifests/core-registry-reference.manifest` (16 pages) and
 `core-nls-reference.manifest` (46 pages); harvested rows 203 -> 265.
+
+**M16 batch — NLS Reference (part 1):** GetACP `ms905215`, GetOEMCP
+`ms905256`, GetSystemDefaultLCID `ms905298`, GetUserDefaultLCID
+`ms905323`, GetSystemDefaultLangID `ms905289`, GetUserDefaultLangID
+`ms905315`, IsValidCodePage `ms906218`, IsValidLocale `ms906219`,
+CompareString `ms904713`, ConvertDefaultLocale `ms904716`, GetCPInfo
+`ms905221` + CPINFO `ms904717`, GetStringTypeW `ms905272` (Coredll.lib
+row), GetStringTypeEx `ms905283`; CT_*/LCID_*/CSTR_*/MAX_* constants;
+LANGID/LCID types (windef.h); PRIMARYLANGID/SUBLANGID/MAKELANGID/
+MAKELCID macros (winnt.h, formulas printed on the pages).  Def:
+114 -> 115 exports.

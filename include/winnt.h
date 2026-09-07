@@ -99,6 +99,19 @@ typedef PCRITICAL_SECTION LPCRITICAL_SECTION;
  * page).  CE 32-bit layout: two pointers + six DWORDs = 32 bytes.
  * State = MEM_COMMIT/MEM_FREE/MEM_RESERVE; Type =
  * MEM_IMAGE/MEM_MAPPED/MEM_PRIVATE. */
+/* Language/locale id macros (official NLS pages, Header row Winnt.h).
+ * ms906230 prints the PRIMARYLANGID formula and ms906441 the
+ * SUBLANGID formula verbatim: primary id = low 10 bits of the LANGID,
+ * sublanguage id = the upper 6 bits (bits 10-15).  MAKELANGID is the
+ * documented inverse (ms906225) and MAKELCID (ms906226) packs a sort
+ * id into the high 16 bits of the LCID.  Macro argument evaluation is
+ * standard-practice (parens around every use). */
+#define PRIMARYLANGID(lgid) ((WORD) (lgid) & 0x3ff)
+#define SUBLANGID(lgid)     ((WORD) (lgid) >> 10)
+#define MAKELANGID(p, s)    ((((WORD) (s)) << 10) | (WORD) (p))
+#define MAKELCID(lgid, srtid) \
+    ((LCID) ((((DWORD) (srtid)) << 16) | ((DWORD) (lgid))))
+
 typedef struct _MEMORY_BASIC_INFORMATION {
     PVOID  BaseAddress;       /* base address of the region */
     PVOID  AllocationBase;    /* base of the VirtualAlloc range */

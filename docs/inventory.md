@@ -314,6 +314,38 @@ functions are plain names.
 | `CeFindCloseRegChange` | `aa517103` | CE 5.0+ | Winreg.h | Coredll.lib | stops monitoring |
 | `LPBYTE` (windef.h) | registry value-data pointer (`ms891454`/`ms891462`/`ms891469`) | — | Windef.h | — | windef base type |
 
+### M16: NLS Reference batch, part 1 (winnls.h + winnt.h + windef.h)
+
+Official `(v=msdn.10)` CE 5.0 pages of *International → National
+Language Support (NLS) Reference*.  Winnls.h is the pages' Header row;
+Link Library is Coreloc.lib except where a page row says Coredll.lib.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `LANGID`/`LCID` (windef.h) | NLS pages use both (`ms905289`/`ms905298`) | — | Windef.h | — | WORD/DWORD aliases |
+| `PRIMARYLANGID`/`SUBLANGID` macros | `ms906230`/`ms906441` (formulas printed verbatim on the pages) | — | Winnt.h | — | primary = lgid & 0x3ff; sub = lgid >> 10 |
+| `MAKELANGID`/`MAKELCID` macros | `ms906225`/`ms906226` | — | Winnt.h | — | documented inverses; sort id in high 16 bits of LCID |
+| `GetACP` | `ms905215` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | UINT; current ANSI code page |
+| `GetOEMCP` | `ms905256` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `GetSystemDefaultLCID` | `ms905298` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `GetUserDefaultLCID` | `ms905323` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `GetSystemDefaultLangID` | `ms905289` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `GetUserDefaultLangID` | `ms905315` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `IsValidCodePage` | `ms906218` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `IsValidLocale` | `ms906219` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | LCID_INSTALLED/SUPPORTED; no code-page download on CE |
+| `CompareString(W)` | `ms904713` | CE 1.0+ | Winnls.h | Coreloc.lib | CSTR_LESS_THAN/EQUAL/GREATER_THAN; −1 counts = null-terminated |
+| `ConvertDefaultLocale` | `ms904716` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | |
+| `GetCPInfo` + `CPINFO` | `ms905221`/`ms904717` | CE .NET 4.0+ | Winnls.h | Coreloc.lib | MAX_DEFAULTCHAR 2 / MAX_LEADBYTES 12 (fixed Win32 NLS sizes) |
+| `GetStringTypeW` | `ms905272` | CE 1.0+ | Winnls.h | **Coredll.lib** | CT_CTYPE1/2/3 (1/2/4) |
+| `GetStringTypeEx(W)` | `ms905283` | CE 1.0+ | Winnls.h | Coreloc.lib | |
+| `LPWORD` (windef.h) | GetStringType* arrays | — | Windef.h | — | WORD pointer |
+
+*Deferred from this book:* GetLocaleInfo/SetLocaleInfo (needs the
+LOCALE_* LCTYPE constant set), Enum*/format functions (GetDateFormat,
+GetTimeFormat, GetCurrencyFormat, GetNumberFormat + ENUMPROC types),
+LCMapString/FoldString (LCMAP_*/MAPFOLD_* flag set).  Recorded here,
+implemented only once their official pages are processed.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |
