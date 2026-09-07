@@ -34,10 +34,31 @@ typedef char assert_msgqopt_ro[(offsetof(MSGQUEUEOPTIONS, bReadAccess) == 16) ? 
 typedef char assert_msgqinfo_size[(sizeof(MSGQUEUEINFO) == 28) ? 1 : -1];
 typedef char assert_msgqinfo_wo[(offsetof(MSGQUEUEINFO, wNumWriters) == 26) ? 1 : -1];
 typedef char assert_msgqinfo_cm[(offsetof(MSGQUEUEINFO, dwCurrentMessages) == 16) ? 1 : -1];
+/* M23: serial COMMTIMEOUTS (ms885171, 5 DWORDs) and DCB (ms885192,
+ * page bit-field layout) 32-bit CE sizes. */
+typedef char assert_ctmo_size[(sizeof(COMMTIMEOUTS) == 20) ? 1 : -1];
+typedef char assert_dcb_size[(sizeof(DCB) == 28) ? 1 : -1];
 #endif
 
 /* Reference every declared function (no calls, compile-only). */
 static const void *const api_symbols[] = {
+    /* M23: serial communications (winbase.h; Serdev.lib). */
+    (const void *) &ClearCommBreak,
+    (const void *) &ClearCommError,
+    (const void *) &EscapeCommFunction,
+    (const void *) &GetCommMask,
+    (const void *) &GetCommModemStatus,
+    (const void *) &GetCommProperties,
+    (const void *) &GetCommState,
+    (const void *) &GetCommTimeouts,
+    (const void *) &PurgeComm,
+    (const void *) &SetCommBreak,
+    (const void *) &SetCommMask,
+    (const void *) &SetCommState,
+    (const void *) &SetCommTimeouts,
+    (const void *) &SetupComm,
+    (const void *) &TransmitCommChar,
+    (const void *) &WaitCommEvent,
     /* M22: point-to-point message queues (msgqueue.h; Coredll.lib). */
     (const void *) &CloseMsgQueue,
     (const void *) &CreateMsgQueue,
@@ -1148,6 +1169,39 @@ static int m22_shaped_usage(void)
             && opt.cbMaxMessage == 64 && opt.bReadAccess == TRUE) ? 0 : 1;
 }
 
+/* M23 usage shape (compile-only; winbase.h serial API). */
+static int m23_shaped_usage(void)
+{
+    DCB dcb;
+    COMMTIMEOUTS cto;
+    COMMPROP prop;
+    COMSTAT stat;
+    DWORD mask = 0, errs = 0;
+
+    dcb.DCBlength = sizeof(DCB);
+    dcb.BaudRate = 9600u;         /* CBR_* named values unpublished */
+    dcb.fBinary = 1;
+    dcb.fParity = 0;
+    dcb.fDtrControl = 0;
+    dcb.fRtsControl = 0;
+    dcb.fDummy2 = 0;
+    dcb.ByteSize = 8;
+    dcb.Parity = 0;
+    dcb.StopBits = 0;
+    (void) GetCommState((HANDLE) 0, &dcb);
+    (void) SetCommState((HANDLE) 0, &dcb);
+    (void) SetCommTimeouts((HANDLE) 0, &cto);
+    (void) GetCommTimeouts((HANDLE) 0, &cto);
+    (void) GetCommProperties((HANDLE) 0, &prop);
+    (void) ClearCommError((HANDLE) 0, &errs, &stat);
+    (void) GetCommModemStatus((HANDLE) 0, &mask);
+    (void) PurgeComm((HANDLE) 0, 0);
+    (void) WaitCommEvent((HANDLE) 0, &mask, NULL);
+    (void) TransmitCommChar((HANDLE) 0, 'A');
+    (void) SetupComm((HANDLE) 0, 4096u, 4096u);
+    return (dcb.fBinary == 1 && dcb.ByteSize == 8) ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1184,6 +1238,8 @@ int host_tu_entry(void)
     if (m21_shaped_usage() != 0)
         return 1;
     if (m22_shaped_usage() != 0)
+        return 1;
+    if (m23_shaped_usage() != 0)
         return 1;
     return 0;
 }

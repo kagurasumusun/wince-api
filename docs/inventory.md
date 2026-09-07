@@ -505,6 +505,58 @@ so the internal tags are treated as unpublished and none is invented.
 
 coredll def 158 -> 164 exports; `windows.h` now includes `msgqueue.h`.
 
+### M23: Serial Communications Reference (winbase.h)
+
+All 16 function pages and 4 structure pages of the CE 5.0 archive
+(`ms885166`–`ms885173`, `ms885192`, `ms885213`, `ms885606`–`ms885610`,
+`ms886785`, `ms886804`–`ms886807`, `aa450896`, `aa450957`, `aa450985`)
+were fetched in full.  Every function page states **Header: Winbase.h**
+and **Link Library: Serdev.lib** (the serial device-driver module — NOT
+Coredll.dll, so these exports live in a separate `def/serdev-doc.def`);
+OS Versions is **Windows CE 1.0 and later** except EscapeCommFunction =
+**CE 2.10 and later**.  Structures carry no Link Library row.
+
+| Item | Official page | OS Versions | Header | Link Library |
+|---|---|---|---|---|
+| `ClearCommBreak` | `ms885166` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `ClearCommError` | `ms885167` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `EscapeCommFunction` | `ms885213` | CE 2.10+ | Winbase.h | Serdev.lib |
+| `GetCommMask` | `ms885606` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `GetCommModemStatus` | `ms885607` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `GetCommProperties` | `ms885608` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `GetCommState` | `ms885609` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `GetCommTimeouts` | `ms885610` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `PurgeComm` | `ms886785` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `SetCommBreak` | `ms886804` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `SetCommMask` | `ms886805` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `SetCommState` | `ms886806` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `SetCommTimeouts` | `ms886807` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `SetupComm` | `aa450896` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `TransmitCommChar` | `aa450957` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `WaitCommEvent` | `aa450985` | CE 1.0+ | Winbase.h | Serdev.lib |
+| `COMMTIMEOUTS`/`LPCOMMTIMEOUTS` | `ms885171` | CE 1.0+ | Winbase.h | — |
+| `COMSTAT`/`LPCOMSTAT` | `ms885173` | CE 1.0+ | Winbase.h | — |
+| `DCB`/`LPDCB` | `ms885192` | CE 1.0+ | Winbase.h | — |
+| `COMMPROP` + `LPCOMMPROP` | `ms885170` | CE 1.0+ | Winbase.h | — |
+
+Notes recorded verbatim from the pages: WaitCommEvent's `lpOverlapped`
+is "Ignored; set to NULL" on CE; COMMTIMEOUTS semantics (MAXDWORD
+interval + multiplier with a small constant) follow the page; DCB's
+`fBinary` must be TRUE (the CE page: nonbinary mode is not supported);
+COMMPROP's typedef is transcribed with its page-listed members
+(including `WORD dwCurrentTxQueue` followed by `DWORD dwCurrentRxQueue`
+as the page prints them) and the pointer alias `LPCOMMPROP` is supplied
+because the function pages type the parameter `LPCOMMPROP`.  Named
+serial constants (CBR_* / BAUD_* indexes, DTR/RTS control values,
+PURGE_* actions, CLR/SET escape codes, EV_* masks, CE_* errors,
+SP_SERIALCOMM) are described on the pages **without numeric values** →
+recorded unknown, not defined.
+
+New doc-derived def: `def/serdev-doc.def` (16 exports).  Host checks
+(CE 0x420/0x500/0x600 + standalone headers) pass; the six-target WinCE
+clang crosscheck for this batch is *pending* toolchain re-acquisition
+(the LLVM-WinCE clang cache is deleted each session end by policy).
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

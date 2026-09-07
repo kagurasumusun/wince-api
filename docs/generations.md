@@ -249,3 +249,14 @@ wired into windows.h + Makefile + host TU (32-bit layout asserts).
 Flag values (MSGQUEUE_NOPRECOMMIT / MSGQUEUE_ALLOW_BROKEN /
 MSGQUEUE_MSGALERT) unpublished on the pages -> recorded unknown, not
 defined.  coredll def 158 -> 164 exports.
+
+**M23 batch — Serial Communications Reference (winbase.h):** all 16
+functions + COMMTIMEOUTS/COMSTAT/DCB/COMMPROP structures from the CE
+5.0 archive pages (ms885166-885173, 885192, 885213, 885606-885610,
+886785, 886804-886807, aa450896/450957/450985).  Function pages:
+Header Winbase.h, Link Library Serdev.lib (new def/serdev-doc.def, 16
+exports; NOT in coredll).  EscapeCommFunction is CE 2.10+, the rest
+CE 1.0+.  WaitCommEvent lpOverlapped ignored/set NULL on CE; serial
+constants' values unpublished on the pages -> unknown, not defined.
+Host check passes; six-target clang crosscheck pending re-acquisition
+of the (session-deleted) LLVM-WinCE toolchain.

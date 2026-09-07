@@ -1877,6 +1877,184 @@ int wsprintfW(LPTSTR lpOut, LPCTSTR lpFmt, ...);
 int wvsprintfW(LPTSTR lpOutput, LPCTSTR lpFormat, va_list arglist);
 #define wvsprintf wvsprintfW
 
+/* ------------------------------------------------------------------ */
+/* M23: serial communications (Serial Communications Reference pages). */
+/*                                                                     */
+/* Every item is transcribed from the CE 5.0 archive page noted.  All  */
+/* 16 function pages state Header: Winbase.h and Link Library:         */
+/* Serdev.lib (the serial device-driver module -- these exports belong */
+/* to Serdev.dll, not Coredll.dll, so def/serdev-doc.def keeps them    */
+/* out of coredll); OS Versions is "Windows CE 1.0 and later" except   */
+/* EscapeCommFunction "Windows CE 2.10 and later".  The pages print no */
+/* numeric values for the serial flag/control constants they name      */
+/* (CBR_*, BAUD_*, DTR/RTS_CONTROL_*, PurgeComm PURGE_*, EscapeComm-   */
+/* Function CLR/SET*, EV_* masks, CE_* errors, SP_SERIALCOMM), so the  */
+/* values are recorded as *unknown* and nothing is #defined.           */
+/* ------------------------------------------------------------------ */
+
+/* ms885171 "COMMTIMEOUTS (Windows CE 5.0)": read/write time-out
+ * parameters for a communications device (used by ReadFile/WriteFile).
+ * CE 1.0+; Winbase.h. */
+typedef struct _COMMTIMEOUTS {
+    DWORD ReadIntervalTimeout;         /* max ms between two characters */
+    DWORD ReadTotalTimeoutMultiplier;  /* ms * requested bytes */
+    DWORD ReadTotalTimeoutConstant;    /* ms added per read */
+    DWORD WriteTotalTimeoutMultiplier; /* ms * bytes to write */
+    DWORD WriteTotalTimeoutConstant;   /* ms added per write */
+} COMMTIMEOUTS, *LPCOMMTIMEOUTS;
+
+/* ms885173 "COMSTAT (Windows CE 5.0)": communications-device status,
+ * filled by ClearCommError.  CE 1.0+; Winbase.h.  The first eight
+ * members are one-bit flags; fReserved is 25 bits (32-bit DWORD). */
+typedef struct _COMSTAT {
+    DWORD fCtsHold : 1;    /* waiting on CTS */
+    DWORD fDsrHold : 1;    /* waiting on DSR */
+    DWORD fRlsdHold : 1;   /* waiting on RLSD */
+    DWORD fXoffHold : 1;   /* waiting because XOFF received */
+    DWORD fXoffSent : 1;   /* waiting because XOFF transmitted */
+    DWORD fEof : 1;        /* EOF character received */
+    DWORD fTxim : 1;       /* TransmitCommChar char queued ahead */
+    DWORD fReserved : 25;  /* reserved; do not use */
+    DWORD cbInQue;         /* bytes received but not yet read */
+    DWORD cbOutQue;        /* bytes remaining to transmit */
+} COMSTAT, *LPCOMSTAT;
+
+/* ms885192 "DCB (Windows CE 5.0)": device-control block for a serial
+ * communications device.  CE 1.0+; Winbase.h.  The bit-field members
+ * occupy one 32-bit DWORD exactly as the page prints them; member
+ * value names (CBR_* baud indexes, DTR_CONTROL_ and RTS_CONTROL_
+ * values, and so on) are described on the page but carry no published
+ * numeric values. */
+typedef struct _DCB {
+    DWORD DCBlength;       /* structure length, in bytes */
+    DWORD BaudRate;        /* actual rate or a CBR_* index */
+    DWORD fBinary : 1;            /* must be TRUE on CE (no binary off) */
+    DWORD fParity : 1;            /* parity checking enabled */
+    DWORD fOutxCtsFlow : 1;       /* CTS monitored for output flow */
+    DWORD fOutxDsrFlow : 1;       /* DSR monitored for output flow */
+    DWORD fDtrControl : 2;        /* DTR_CONTROL_* value */
+    DWORD fDsrSensitivity : 1;    /* comm driver sensitive to DSR */
+    DWORD fTXContinueOnXoff : 1;  /* transmission continues after XOFF */
+    DWORD fOutX : 1;              /* XON/XOFF used for output */
+    DWORD fInX : 1;               /* XON/XOFF used for input */
+    DWORD fErrorChar : 1;         /* replace parity errors w/ ErrorChar */
+    DWORD fNull : 1;              /* null bytes discarded on receive */
+    DWORD fRtsControl : 2;        /* RTS_CONTROL_* value */
+    DWORD fAbortOnError : 1;      /* abort reads/writes on driver error */
+    DWORD fDummy2 : 17;           /* reserved */
+    WORD  wReserved;              /* not used; set to zero */
+    WORD  XonLim;                 /* XON transmit threshold */
+    WORD  XoffLim;                /* XOFF transmit threshold */
+    BYTE  ByteSize;               /* bits per byte */
+    BYTE  Parity;                 /* parity scheme */
+    BYTE  StopBits;               /* number of stop bits */
+    char  XonChar;                /* XON character */
+    char  XoffChar;               /* XOFF character */
+    char  ErrorChar;              /* replacement for parity errors */
+    char  EofChar;                /* end-of-input character */
+    char  EvtChar;                /* event character */
+    WORD  wReserved1;             /* not used */
+} DCB, *LPDCB;
+
+/* ms885170 "COMMPROP (Windows CE 5.0)": provider/driver capability
+ * data returned by GetCommProperties.  CE 1.0+; Winbase.h.  Member
+ * values: dwServiceMask always contains SP_SERIALCOMM; dwMaxBaud uses
+ * BAUD_* values.  The structure typedef as the page prints it carries
+ * no pointer alias, but the function pages type their output
+ * parameter LPCOMMPROP, so that alias is provided here. */
+typedef struct _COMMPROP {
+    WORD  wPacketLength;    /* data-packet size, in bytes */
+    WORD  wPacketVersion;   /* structure version */
+    DWORD dwServiceMask;    /* implemented services (SP_SERIALCOMM) */
+    DWORD dwReserved1;      /* reserved */
+    DWORD dwMaxTxQueue;     /* max driver output buffer, in bytes */
+    DWORD dwMaxRxQueue;     /* max driver input buffer, in bytes */
+    DWORD dwMaxBaud;        /* max baud rate (BAUD_* value) */
+    DWORD dwProvSubType;    /* provider subtype */
+    DWORD dwProvCapabilities; /* provider capabilities */
+    DWORD dwSettableParams;   /* settable communication parameters */
+    DWORD dwSettableBaud;     /* settable baud rates */
+    WORD  wSettableData;      /* settable data bits */
+    WORD  wSettableStopParity;/* settable stop bits and parity */
+    WORD  dwCurrentTxQueue;   /* current output buffer size (page) */
+    DWORD dwCurrentRxQueue;   /* current input buffer size (page) */
+    DWORD dwProvSpec1;        /* provider-specific data */
+    DWORD dwProvSpec2;        /* provider-specific data */
+    WCHAR wcProvChar[1];      /* provider-specific character data */
+} COMMPROP;
+typedef COMMPROP *LPCOMMPROP;
+
+/* ms885166: BOOL ClearCommBreak(HANDLE).  Restores character
+ * transmission (leaves the break state).  CE 1.0+; Serdev.lib. */
+BOOL ClearCommBreak(HANDLE hFile);
+
+/* ms885167: BOOL ClearCommError(HANDLE, LPDWORD, LPCOMSTAT).
+ * Retrieves error mask + current status.  CE 1.0+; Serdev.lib. */
+BOOL ClearCommError(HANDLE hFile, LPDWORD lpErrors, LPCOMSTAT lpStat);
+
+/* ms885213: BOOL EscapeCommFunction(HANDLE, DWORD).  Directs the
+ * device to perform an extended function (CLRDTR/SETDTR, CLRRTS/
+ * SETRTS, SETXOFF/SETXON, CLRBREAK/SETBREAK codes).  CE 2.10+;
+ * Serdev.lib. */
+BOOL EscapeCommFunction(HANDLE hFile, DWORD dwFunc);
+
+/* ms885606: BOOL GetCommMask(HANDLE, LPDWORD).  Returns the event
+ * mask currently enabled for the device.  CE 1.0+; Serdev.lib. */
+BOOL GetCommMask(HANDLE hFile, LPDWORD lpEvtMask);
+
+/* ms885607: BOOL GetCommModemStatus(HANDLE, LPDWORD).  Returns the
+ * modem control-register values.  CE 1.0+; Serdev.lib. */
+BOOL GetCommModemStatus(HANDLE hFile, LPDWORD lpModemStat);
+
+/* ms885608: BOOL GetCommProperties(HANDLE, LPCOMMPROP).  Fills a
+ * COMMPROP buffer.  CE 1.0+; Serdev.lib. */
+BOOL GetCommProperties(HANDLE hFile, LPCOMMPROP lpCommProp);
+
+/* ms885609: BOOL GetCommState(HANDLE, LPDCB).  Fills a DCB with the
+ * current control settings.  CE 1.0+; Serdev.lib. */
+BOOL GetCommState(HANDLE hFile, LPDCB lpDCB);
+
+/* ms885610: BOOL GetCommTimeouts(HANDLE, LPCOMMTIMEOUTS).  Returns
+ * the read/write time-out parameters.  CE 1.0+; Serdev.lib. */
+BOOL GetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts);
+
+/* ms886785: BOOL PurgeComm(HANDLE, DWORD).  Discards characters in
+ * the output/input buffer (PURGE_TXABORT, PURGE_RXABORT, PURGE_TXCLEAR,
+ * PURGE_RXCLEAR actions).  CE 1.0+; Serdev.lib. */
+BOOL PurgeComm(HANDLE hFile, DWORD dwFlags);
+
+/* ms886804: BOOL SetCommBreak(HANDLE).  Suspends character
+ * transmission (break state) until ClearCommBreak.  CE 1.0+;
+ * Serdev.lib. */
+BOOL SetCommBreak(HANDLE hFile);
+
+/* ms886805: BOOL SetCommMask(HANDLE, DWORD).  Sets the monitored
+ * event mask; zero disables all events.  CE 1.0+; Serdev.lib. */
+BOOL SetCommMask(HANDLE hFile, DWORD dwEvtMask);
+
+/* ms886806: BOOL SetCommState(HANDLE, LPDCB).  Configures the device
+ * from a DCB.  CE 1.0+; Serdev.lib. */
+BOOL SetCommState(HANDLE hFile, LPDCB lpDCB);
+
+/* ms886807: BOOL SetCommTimeouts(HANDLE, LPCOMMTIMEOUTS).  Sets the
+ * read/write time-out parameters.  CE 1.0+; Serdev.lib. */
+BOOL SetCommTimeouts(HANDLE hFile, LPCOMMTIMEOUTS lpCommTimeouts);
+
+/* aa450896: BOOL SetupComm(HANDLE, DWORD, DWORD).  Initializes the
+ * communications parameters (recommended input/output buffer sizes).
+ * CE 1.0+; Serdev.lib. */
+BOOL SetupComm(HANDLE hFile, DWORD dwInQueue, DWORD dwOutQueue);
+
+/* aa450957: BOOL TransmitCommChar(HANDLE, char).  Transmits one
+ * character ahead of pending output.  CE 1.0+; Serdev.lib. */
+BOOL TransmitCommChar(HANDLE hFile, char cChar);
+
+/* aa450985: BOOL WaitCommEvent(HANDLE, LPDWORD, LPOVERLAPPED).
+ * Waits for a monitored event; lpOverlapped is unsupported and must
+ * be NULL (CE page).  CE 1.0+; Serdev.lib. */
+BOOL WaitCommEvent(HANDLE hFile, LPDWORD lpEvtMask,
+                   LPOVERLAPPED lpOverlapped);
+
 #ifdef __cplusplus
 }
 #endif

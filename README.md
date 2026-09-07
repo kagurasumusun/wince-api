@@ -223,6 +223,9 @@ declarations, recorded in `docs/inventory.md`):
   CreateFileMapping/MapViewOfFile/UnmapViewOfFile/FlushViewOfFile),
   DisableThreadLibraryCalls + DLL_* reason constants, new
   `include/psapi.h` (MODULEINFO/GetModuleInformation).  def 148 → 154.
+* **M23 (landed):** Serial Communications Reference — 16 functions
+  (ClearCommBreak…WaitCommEvent) + COMMTIMEOUTS/COMSTAT/DCB/COMMPROP
+  in winbase.h; new def/serdev-doc.def (16 Serdev.lib exports).
 * **M22 (landed):** Message Queue Point-to-Point Reference — new
   `include/msgqueue.h` (Close/CreateMsgQueue, GetMsgQueueInfo,
   OpenMsgQueue, ReadMsgQueue, WriteMsgQueue, MSGQUEUEOPTIONS,
