@@ -1,0 +1,8 @@
+ms929211	GetClassInfo
+ms929212	GetClassLong
+ms929213	GetClassName
+aa453180	GetWindowLong
+ms913089	RegisterClass
+ms940014	SetClassLong
+aa453661	SetWindowLong
+ms914082	UnregisterClass

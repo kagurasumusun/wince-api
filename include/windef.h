@@ -125,6 +125,64 @@ typedef HANDLE         *LPHANDLE;  /* HANDLE pointer (DuplicateHandle ms885208) 
 
 typedef UINT_PTR (WINAPI *FARPROC)(void);
 
+/* ------------------------------------------------------------------ */
+/* Message-parameter and window types (Win32 ABI).                    */
+/*                                                                     */
+/* Basis: the GWES pages of the CE 5.0 archive type every window/      */
+/* message function with WPARAM/LPARAM/LRESULT/HWND/... (e.g. Send     */
+/* Message ms939980, SetWindowLong aa453661); the *forms* below are    */
+/* the fixed Win32-ABI aliases those pages use.  HWND and friends are  */
+/* opaque handles like the existing HANDLE typedefs.                   */
+/* ------------------------------------------------------------------ */
+typedef int16_t         SHORT;    /* signed 16-bit (GetKeyState) */
+typedef uintptr_t       WPARAM;   /* message parameter (UINT_PTR) */
+typedef intptr_t        LPARAM;   /* message parameter (LONG_PTR) */
+typedef LONG_PTR        LRESULT;  /* window-proc return value */
+typedef ULONG_PTR       DWORD_PTR;
+typedef DWORD_PTR      *PDWORD_PTR;   /* SendMessageTimeout ms939981 */
+typedef DWORD_PTR      *LPDWORD_PTR;
+typedef WORD            ATOM;     /* atom table handle (Global*Atom) */
+typedef void           *HWND;     /* window handle */
+typedef void           *HMENU;    /* menu handle */
+typedef void           *HACCEL;   /* accelerator-table handle */
+typedef void           *HBITMAP;  /* bitmap handle (CreateCaret) */
+typedef void           *HICON;    /* icon handle (WNDCLASS) */
+typedef void           *HCURSOR;  /* cursor handle (WNDCLASS) */
+typedef void           *HBRUSH;   /* brush handle (WNDCLASS) */
+typedef void           *HDC;      /* device context handle */
+typedef void           *HRGN;     /* region handle */
+typedef void           *HDWP;     /* deferred-window-position handle */
+typedef HANDLE          HKL;      /* keyboard-layout handle */
+
+/* Geometric ABI structures referenced by the GWES pages (GetClientRect
+ * ms929214 uses LPRECT, WindowFromPoint ms914099 takes POINT,
+ * GetCaretPos ms929210 takes LPPOINT; layouts are the fixed Win32-ABI
+ * forms). */
+typedef struct tagPOINT {
+    LONG x;
+    LONG y;
+} POINT, *PPOINT, *LPPOINT;
+
+typedef struct tagRECT {
+    LONG left;
+    LONG top;
+    LONG right;
+    LONG bottom;
+} RECT, *PRECT, *LPRECT;
+typedef const RECT *LPCRECT;
+
+typedef struct tagSIZE {
+    LONG cx;
+    LONG cy;
+} SIZE, *PSIZE, *LPSIZE;
+
+/* MAKELONG: fixed Win32-ABI packing macro used by the GWES
+ * MAKELPARAM/MAKEWPARAM/MAKELRESULT pages (aa453543/ms911780/
+ * ms911640). */
+#define MAKELONG(a, b)  \
+    ((LONG)(((WORD) ((DWORD_PTR) (a) & 0xffff)) | \
+            (((DWORD) ((WORD) ((DWORD_PTR) (b) & 0xffff))) << 16)))
+
 #define FALSE 0
 #define TRUE  1
 

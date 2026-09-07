@@ -1,0 +1,6 @@
+aa453163	GetScrollInfo
+ms932696	ScrollDC
+ms932713	ScrollWindowEx
+aa453652	SetScrollInfo
+aa453653	SetScrollPos
+aa453654	SetScrollRange

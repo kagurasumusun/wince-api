@@ -12,6 +12,7 @@
 ; Ordinals are not published; entries are name-only.
 LIBRARY coredll.dll
 EXPORTS
+  ActivateKeyboardLayout
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
@@ -53,10 +54,12 @@ EXPORTS
   DeleteTicket
   DisableThreadLibraryCalls
   DisassociateSession
+  DispatchMessage
   DuplicateHandle
   EditSession
   EditorDeregister
   EditorInitialize
+  EnumPropsExW
   ExitProcess
   ExitThread
   FileTimeToLocalFileTime
@@ -88,14 +91,22 @@ EXPORTS
   GetFileVersionInfoW
   GetFileVersionInfoSizeW
   GetIdleTime
+  GetKeyboardLayoutList
+  GetKeyboardType
   GetLastError
   GetLocalTime
+  GetMessage
+  GetMessagePos
+  GetMessageQueueReadyTimeStamp
+  GetMessageSource
   GetModuleFileNameW
   GetModuleHandleW
   GetModuleInformation
   GetMsgQueueInfo
   GetProcAddressW
   GetProcessVersion
+  GetPropW
+  GetQueueStatus
   GetStoreInformation
   GetStringTypeW
   GetSystemInfo
@@ -107,6 +118,9 @@ EXPORTS
   GetTickCount
   GetTimeZoneInformation
   GetVersionEx
+  GlobalAddAtomW
+  GlobalDeleteAtom
+  GlobalFindAtomW
   GlobalMemoryStatus
   HeapAlloc
   HeapCompact
@@ -116,6 +130,7 @@ EXPORTS
   HeapReAlloc
   HeapSize
   HeapValidate
+  InSendMessage
   InterlockedCompareExchange
   InterlockedCompareExchangePointer
   InterlockedDecrement
@@ -129,6 +144,7 @@ EXPORTS
   IsBadWritePtr
   IsDBCSLeadByte
   IsDBCSLeadByteEx
+  LoadKeyboardLayout
   LoadLibraryW
   LoadLibraryExW
   LocalAlloc
@@ -143,6 +159,10 @@ EXPORTS
   OpenEventW
   OpenMsgQueue
   OpenProcess
+  PeekMessage
+  PostMessage
+  PostQuitMessage
+  PostThreadMessage
   PulseEvent
   QueryInfoSession
   QueryPerformanceCounter
@@ -163,11 +183,18 @@ EXPORTS
   RegQueryValueExW
   RegSetValueExW
   RegisterEditor
+  RegisterWindowMessageW
   ReleaseSemaphore
   RemoveDirectoryW
+  RemovePropW
   ReportFault
   ResetEvent
   ResumeThread
+  ScrollDC
+  ScrollWindowEx
+  SendMessage
+  SendMessageTimeout
+  SendNotifyMessage
   SetDaylightTime
   SetEndOfFile
   SetEvent
@@ -176,6 +203,7 @@ EXPORTS
   SetFileTime
   SetLastError
   SetLocalTime
+  SetPropW
   SetSystemTime
   SetThreadPriority
   SetTimeZoneInformation
@@ -191,6 +219,7 @@ EXPORTS
   TlsFree
   TlsGetValue
   TlsSetValue
+  TranslateMessage
   TryEnterCriticalSection
   UnlockFileEx
   UnmapViewOfFile

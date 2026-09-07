@@ -38,14 +38,16 @@ documentation totals ~19.8k reference leaves.
 
 ## Progress markers (update as batches land)
 
-* `build/rows.json` pages harvested with Requirements rows: 510
+* `build/rows.json` pages harvested with Requirements rows: 666
   manifest lines parsed across all current manifests (page corpus
   re-fetched each session into the non-committed `build/`; see
   docs/version-coverage.md).  Core OS Reference user-mode books landed
   through the Exception / Debugging / Serial / Message Queue / CeLog /
-  NAT / Error Values books; the Feature-area reference books
-  (GWES/GDI/Shell/...) and the network/comms reference books remain as
-  the backlog.
+  NAT / Error Values books; the Feature-area reference books are now
+  open with the GWES window-manager core (Windows/Class/Property/
+  Timer/Caret/Atom/Message-Queue/Keyboard/Scroll, 156 pages: M26);
+  GDI, control (Combo/List/Edit/Buttons), Shell, resources and the
+  network/comms reference books remain as the backlog.
 * Shipped declarations: see `make check` / `def/coredll-doc.def`
   (name-only doc-derived exports, one per harvested Link-Library row
   whose export is declared by these headers).

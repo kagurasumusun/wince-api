@@ -144,6 +144,16 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M26 (landed):** GWES window-manager core — new `include/winuser.h`
+  (Windows / Window Class / Window Properties / Windows Timer /
+  Carets / Atoms / Message Queue / Keyboard / Scroll Bars books, 156
+  GWES pages harvested, rows.json 510 → 666); Header-home moves the
+  Windows.h-row items (properties, atoms, SendMessageTimeout, ScrollDC,
+  GetMessageQueueReadyTimeStamp) into windows.h and Winbase.h-row items
+  (KillTimer, MsgWaitForMultipleObjects/Ex) into winbase.h; windef.h
+  gains POINT/RECT/SIZE/HWND-family + MAKELONG.  coredll def 192 → 221;
+  new component-module defs accel/caret/foregnd/hotkey/kbdui/coreimm/
+  msgque/sbcmn/uibase/winmgr/wmgr_c (7 → 18 defs, all armce-verified).
 * **M1 (landed):** foundation + windef/winbase/windows.h — process
   termination, module/command-line/proc-address, local memory.
 * **M2 (landed):** process/thread/module/error batch (GetLastError,

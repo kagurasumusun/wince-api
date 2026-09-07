@@ -51,6 +51,62 @@ typedef char assert_dbev_size[(sizeof(DEBUG_EVENT) == 96) ? 1 : -1];
 
 /* Reference every declared function (no calls, compile-only). */
 static const void *const api_symbols[] = {
+    /* M26: GWES window/class/property/timer/caret/atom/message-queue/
+     * keyboard/scroll surface (winuser.h/winbase.h/windows.h). */
+    (const void *) &CreateWindowExW, (const void *) &CreateWindowW,
+    (const void *) &RegisterClassW, (const void *) &UnregisterClassW,
+    (const void *) &GetClassInfoW, (const void *) &GetClassLongW,
+    (const void *) &SetClassLongW, (const void *) &GetClassNameW,
+    (const void *) &GetWindowLongW, (const void *) &SetWindowLongW,
+    (const void *) &GetDesktopWindow, (const void *) &GetForegroundWindow,
+    (const void *) &SetForegroundWindow, (const void *) &IsWindow,
+    (const void *) &IsWindowVisible, (const void *) &IsChild,
+    (const void *) &GetParent, (const void *) &SetParent,
+    (const void *) &FindWindowW, (const void *) &ChildWindowFromPoint,
+    (const void *) &WindowFromPoint, (const void *) &EnumWindows,
+    (const void *) &GetWindow, (const void *) &GetClientRect,
+    (const void *) &GetWindowRect, (const void *) &GetWindowTextLengthW,
+    (const void *) &GetWindowTextW, (const void *) &SetWindowTextW,
+    (const void *) &GetWindowThreadProcessId, (const void *) &ShowWindow,
+    (const void *) &BringWindowToTop, (const void *) &MoveWindow,
+    (const void *) &SetWindowPos, (const void *) &AdjustWindowRectEx,
+    (const void *) &DefWindowProc, (const void *) &CallWindowProc,
+    (const void *) &DestroyWindow, (const void *) &BeginDeferWindowPos,
+    (const void *) &DeferWindowPos, (const void *) &EndDeferWindowPos,
+    (const void *) &SetTimer, (const void *) &KillTimer,
+    (const void *) &SystemIdleTimerReset, (const void *) &CreateCaret,
+    (const void *) &DestroyCaret, (const void *) &GetCaretBlinkTime,
+    (const void *) &GetCaretPos, (const void *) &HideCaret,
+    (const void *) &SetCaretBlinkTime, (const void *) &SetCaretPos,
+    (const void *) &ShowCaret, (const void *) &GlobalAddAtomW,
+    (const void *) &GlobalDeleteAtom, (const void *) &GlobalFindAtomW,
+    (const void *) &GetMessage, (const void *) &PeekMessage,
+    (const void *) &DispatchMessage, (const void *) &TranslateMessage,
+    (const void *) &PostMessage, (const void *) &PostThreadMessage,
+    (const void *) &SendMessage, (const void *) &SendNotifyMessage,
+    (const void *) &PostQuitMessage, (const void *) &RegisterWindowMessageW,
+    (const void *) &GetMessagePos, (const void *) &GetMessageQueueReadyTimeStamp,
+    (const void *) &GetMessageSource, (const void *) &GetQueueStatus,
+    (const void *) &InSendMessage, (const void *) &GetKeyState,
+    (const void *) &GetAsyncKeyState, (const void *) &GetFocus,
+    (const void *) &SetFocus, (const void *) &GetActiveWindow,
+    (const void *) &SetActiveWindow, (const void *) &EnableWindow,
+    (const void *) &IsWindowEnabled, (const void *) &ActivateKeyboardLayout,
+    (const void *) &GetKeyboardLayout, (const void *) &GetKeyboardLayoutList,
+    (const void *) &GetKeyboardLayoutNameW, (const void *) &GetKeyboardStatus,
+    (const void *) &GetKeyboardType, (const void *) &MapVirtualKey,
+    (const void *) &keybd_event, (const void *) &LoadKeyboardLayout,
+    (const void *) &RegisterHotKey, (const void *) &UnregisterHotKey,
+    (const void *) &CreateAcceleratorTable, (const void *) &LoadAcceleratorsW,
+    (const void *) &DestroyAcceleratorTable, (const void *) &TranslateAccelerator,
+    (const void *) &SendInput, (const void *) &GetScrollInfo,
+    (const void *) &SetScrollInfo, (const void *) &SetScrollPos,
+    (const void *) &SetScrollRange, (const void *) &ScrollWindowEx,
+    (const void *) &ScrollDC, (const void *) &SetPropW,
+    (const void *) &GetPropW, (const void *) &RemovePropW,
+    (const void *) &EnumPropsExW, (const void *) &SendMessageTimeout,
+    (const void *) &MsgWaitForMultipleObjects,
+    (const void *) &MsgWaitForMultipleObjectsEx,
     /* M25: Error Values + NAT + CeLog (winbase.h/celog.h/natedit.h). */
     (const void *) &FormatMessageW, (const void *) &FormatMessage,
     (const void *) &CeLogData,
@@ -1308,11 +1364,199 @@ static int m25_shaped_usage(void)
             && dwZoneCE == 0) ? 0 : 1;
 }
 
+/* M26 usage shape (compile-only; GWES winuser surface).  Exercises the
+ * declared prototypes, the struct layouts used by the official pages,
+ * and the fixed ABI values currently in the headers. */
+static BOOL CALLBACK tu_enumproc(HWND hwnd, LPARAM lParam)
+{
+    (void) hwnd;
+    (void) lParam;
+    return TRUE;
+}
+
+static LRESULT CALLBACK tu_wndproc(HWND hwnd, UINT uMsg, WPARAM wParam,
+                                   LPARAM lParam)
+{
+    (void) hwnd;
+    (void) uMsg;
+    (void) wParam;
+    (void) lParam;
+    return 0;
+}
+
+static VOID CALLBACK tu_timerproc(HWND hwnd, UINT uMsg, UINT idEvent,
+                                  DWORD dwTime)
+{
+    (void) hwnd;
+    (void) uMsg;
+    (void) idEvent;
+    (void) dwTime;
+}
+
+static BOOL CALLBACK tu_propenum(HWND hwnd, LPTSTR lpszString,
+                                 HANDLE hData, ULONG_PTR dwData)
+{
+    (void) hwnd;
+    (void) lpszString;
+    (void) hData;
+    (void) dwData;
+    return TRUE;
+}
+
+static int m26_shaped_usage(void)
+{
+    WCHAR cls[] = { 'C', 0 };
+    WNDCLASS wc;
+    MSG msg;
+    INPUT inp;
+    ACCEL acc;
+    SCROLLINFO si;
+    CREATESTRUCT cs;
+    STYLESTRUCT ss;
+    WINDOWPOS wp;
+    RECT rc = { 0, 0, 0, 0 };
+    POINT pt = { 0, 0 };
+    HWND hwnd;
+    WPARAM wp_lo;
+    HKL kl;
+
+    wc.style = 0;
+    wc.lpfnWndProc = tu_wndproc;
+    wc.cbClsExtra = 0;
+    wc.cbWndExtra = 0;
+    wc.hInstance = (HINSTANCE) 0;
+    wc.hIcon = (HICON) 0;
+    wc.hCursor = (HCURSOR) 0;
+    wc.hbrBackground = (HBRUSH) 0;
+    wc.lpszMenuName = NULL;
+    wc.lpszClassName = cls;
+    (void) RegisterClassW(&wc);
+    (void) GetClassInfoW((HINSTANCE) 0, cls, &wc);
+    hwnd = CreateWindowW(cls, NULL, 0, 0, 0, 100, 100, (HWND) 0,
+                         (HMENU) 0, (HANDLE) 0, NULL);
+    (void) CreateWindowExW(0, cls, NULL, 0, 0, 0, 100, 100,
+                           (HWND) 0, (HMENU) 0, (HINSTANCE) 0, NULL);
+    (void) GetClassLongW(hwnd, 0);
+    (void) SetClassLongW(hwnd, 0, 0);
+    (void) GetClassNameW(hwnd, (LPTSTR) cls, 2);
+    (void) GetWindowLongW(hwnd, 0);
+    (void) SetWindowLongW(hwnd, 0, 0);
+    (void) GetDesktopWindow();
+    (void) GetForegroundWindow();
+    (void) SetForegroundWindow(hwnd);
+    (void) IsWindow(hwnd);
+    (void) IsWindowVisible(hwnd);
+    (void) IsChild(hwnd, hwnd);
+    (void) GetParent(hwnd);
+    (void) SetParent(hwnd, hwnd);
+    (void) FindWindowW(cls, NULL);
+    (void) ChildWindowFromPoint(hwnd, pt);
+    (void) WindowFromPoint(pt);
+    (void) EnumWindows(tu_enumproc, 0);
+    (void) GetWindow(hwnd, 0);
+    (void) GetClientRect(hwnd, &rc);
+    (void) GetWindowRect(hwnd, &rc);
+    (void) GetWindowTextLengthW(hwnd);
+    (void) SetWindowTextW(hwnd, cls);
+    (void) GetWindowThreadProcessId(hwnd, NULL);
+    (void) ShowWindow(hwnd, 0);
+    (void) BringWindowToTop(hwnd);
+    (void) MoveWindow(hwnd, 0, 0, 100, 100, TRUE);
+    (void) SetWindowPos(hwnd, (HWND) 0, 0, 0, 100, 100, 0);
+    (void) AdjustWindowRectEx(&rc, 0, FALSE, 0);
+    (void) DefWindowProc(hwnd, 0, 0, 0);
+    (void) CallWindowProc(tu_wndproc, hwnd, 0, 0, 0);
+    (void) BeginDeferWindowPos(1);
+    (void) SetTimer(hwnd, 1, 100, tu_timerproc);
+    (void) KillTimer(hwnd, 1);
+    (void) SystemIdleTimerReset();
+    (void) CreateCaret(hwnd, (HBITMAP) 0, 1, 1);
+    (void) GetCaretPos(&pt);
+    (void) SetCaretPos(1, 1);
+    (void) GlobalAddAtomW(cls);
+    (void) GetMessage(&msg, hwnd, 0, 0);
+    (void) PeekMessage(&msg, hwnd, 0, 0, 0);
+    (void) DispatchMessage(&msg);
+    (void) TranslateMessage(&msg);
+    (void) PostMessage(hwnd, 0, 0, 0);
+    (void) PostThreadMessage(0, 0, 0, 0);
+    (void) SendMessage(hwnd, 0, 0, 0);
+    (void) SendNotifyMessage(hwnd, 0, 0, 0);
+    (void) PostQuitMessage(0);
+    (void) RegisterWindowMessageW(cls);
+    (void) GetMessagePos();
+    (void) GetQueueStatus(0);
+    (void) GetAsyncKeyState(0);
+    (void) SetFocus(hwnd);
+    (void) SetActiveWindow(hwnd);
+    (void) EnableWindow(hwnd, TRUE);
+    (void) IsWindowEnabled(hwnd);
+    kl = ActivateKeyboardLayout((HKL) 0, 0);
+    (void) GetKeyboardLayoutList(0, NULL);
+    (void) MapVirtualKey(0, 0);
+    (void) keybd_event(0, 0, 0, 0);
+    (void) LoadKeyboardLayout("00000409", 0);
+    (void) RegisterHotKey(hwnd, 1, 0, 0);
+    (void) UnregisterHotKey(hwnd, 1);
+    acc.fVirt = 0;
+    acc.key = 0;
+    acc.cmd = 0;
+    acc.pad = 0;
+    (void) CreateAcceleratorTable(&acc, 1);
+    inp.type = 0;
+    inp.ki.wVk = 0;
+    inp.ki.wScan = 0;
+    inp.ki.dwFlags = 0;
+    (void) SendInput(1, &inp, (int) sizeof(inp));
+    si.cbSize = (UINT) sizeof(SCROLLINFO);
+    si.fMask = SIF_ALL;
+    si.nMin = 0;
+    si.nMax = 100;
+    (void) GetScrollInfo(hwnd, SB_VERT, &si);
+    (void) SetScrollInfo(hwnd, SB_VERT, &si, FALSE);
+    (void) SetScrollPos(hwnd, SB_HORZ, 0, FALSE);
+    (void) SetScrollRange(hwnd, SB_VERT, 0, 100, FALSE);
+    (void) ScrollWindowEx(hwnd, 0, -1, NULL, NULL, (HRGN) 0, NULL, 0);
+    (void) ScrollDC((HDC) 0, 0, 0, &rc, NULL, (HRGN) 0, NULL);
+    (void) SetPropW(hwnd, cls, (HANDLE) 1);
+    (void) GetPropW(hwnd, cls);
+    (void) RemovePropW(hwnd, cls);
+    (void) EnumPropsExW(hwnd, tu_propenum, 0);
+    (void) SendMessageTimeout(hwnd, 0, 0, 0, 0, 0, NULL);
+    (void) MsgWaitForMultipleObjects(0, NULL, TRUE, 0, 0);
+    (void) MsgWaitForMultipleObjectsEx(0, NULL, 0, 0, 0);
+    cs.lpCreateParams = NULL;
+    cs.hwndParent = hwnd;
+    cs.dwExStyle = 0;
+    ss.styleOld = 0;
+    ss.styleNew = 0;
+    wp.hwnd = hwnd;
+    wp.flags = 0;
+    (void) cs;
+    (void) ss;
+    (void) wp;
+    (void) kl;
+    wp_lo = MAKEWPARAM(0x1234, 0x5678);
+    (void) wp_lo;
+    return (SIF_RANGE == 0x0001 && SIF_PAGE == 0x0002
+            && SIF_POS == 0x0004 && SIF_DISABLENOSCROLL == 0x0008
+            && SIF_TRACKPOS == 0x0010 && SIF_ALL == 0x0017
+            && SB_HORZ == 0 && SB_VERT == 1 && SB_CTL == 2 && SB_BOTH == 3
+            && SW_SCROLLCHILDREN == 0x0001 && SW_INVALIDATE == 0x0002
+            && SW_ERASE == 0x0004 && SW_SMOOTHSCROLL == 0x0010
+            && MAKEWPARAM(0x1234, 0x5678) == ((WPARAM) 0x56781234)
+            && MAKELPARAM(0x1234, 0x5678) == ((LPARAM) 0x56781234)
+            && MAKELRESULT(0, 1) == ((LRESULT) 0x10000))
+           ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
     (void) api_flags;
     (void) LocalAlloc(LPTR, 16u);
+    if (m26_shaped_usage() != 0)
+        return 1;
     if (ce_shaped_usage() != 0)
         return 1;
     if (sync_shaped_usage() != 0)

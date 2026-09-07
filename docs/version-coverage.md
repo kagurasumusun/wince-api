@@ -75,17 +75,19 @@ inventory row for the CE 6.0 twins).
 
 ## 4. Staged backlog (CE 5.0 Core OS Reference, remaining user-mode books)
 
-Manifests already written (page ids only), not yet implemented:
-
-    tools/manifests/core-msgqueue-reference.manifest    10 leaves  (landed M22)
-    tools/manifests/core-exception-reference.manifest   9 leaves  (SEH/raise set)
-    tools/manifests/core-debugging-reference.manifest  32 leaves  (debug API + macros)
-    tools/manifests/core-serial-reference.manifest     22 leaves  (DCB/COMM* …)
-
-Follow-on books (manifests to generate from the same TOC): Error
-Values (13), State and Notifications Broker (12), Network Address
-Translation (20).  Feature-area books (GWES/GDI/Shell/….) come after the
-Core OS Reference is complete; each is a new manifest + batches.
+Feature-area GWES books opened in M26: the first slice of the GWES
+Reference (Shell and User Interface) is implemented with **14
+manifests** (`tools/manifests/gwes-*.manifest`, 156 CE 5.0 leaves):
+Windows Functions (35) / Window Class (8) / Window Properties (5) /
+Windows Timer (4) / Carets (8) / Atoms (3) / Message Queue (16) /
+Message Synchronization (2) / Keyboard Functions (30) / Keyboard
+Structures (5) / Scroll Bars (6) / Windows Structures (6) /
+Windows Messages (14) / Keyboard Messages (14).  The remaining GWES
+ladder (GDI Functions 132, GDI Structures 29, Combo/List/Edit
+messages ~134, Dialog/Control/Menu/Image-List books, …) and the
+network/comms books are the backlog; each book = new manifest +
+batches, with the CE6 `(v=winembedded.60)` twins used where a CE5
+leaf is a stub (e.g. SCROLLINFO `ee504371`).
 
 ## 5. Notes for future sessions
 

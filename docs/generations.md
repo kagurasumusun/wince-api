@@ -292,3 +292,30 @@ UCHAR..NTSTATUS added.  coredll def 171 -> 192 exports (192 + coreloc
 23 + toolhelp 13 + serdev 16 + fmtmsg 1 + lmem 1 + loadstr 1 = 247).
 Host + six CE targets pass; toolchain re-acquired from the Actions
 artifact; all defs llvm-dlltool-armce verified.
+
+**M26 batch — GWES window-manager core (Windows / Window Class /
+Window Properties / Windows Timer / Carets / Atoms / Message Queue /
+Message Synchronization / Keyboard / Scroll Bars books):** first
+user-interface batch.  New `include/winuser.h` declares the window,
+class, property (typedefs only), timer, caret, atom, message-queue,
+keyboard and scroll API surface; Header-home follows each page's
+Header row, so window properties, atoms, GetMessageQueueReadyTimeStamp,
+SendMessageTimeout and ScrollDC (pages print Windows.h) live in
+windows.h and KillTimer + MsgWaitForMultipleObjects(Ex) (Winbase.h)
+in winbase.h.  windef.h gained the fixed Win32-ABI window/message
+types (HWND/HMENU/.../HKL, ATOM, WPARAM/LPARAM/LRESULT/DWORD_PTR,
+POINT/RECT/SIZE, SHORT, MAKELONG).  Transcribed structures:
+CREATESTRUCT/STYLESTRUCT/WINDOWPOS, ACCEL (WORD pad member),
+KEYBDINPUT/MOUSEINPUT/INPUT + HARDWAREINPUT (fixed layout from MS's
+official Win32 structure reference; no CE leaf), SCROLLINFO (CE 5
+Scroll-Bars-Structures book points at the CE 6 twin ee504371).
+Message books (28 WM_* pages) fetched and recorded; CE pages publish
+no numeric message values so WM_* constants wait for the follow-on
+messages batch.  Six OEM Keyboard leaves (Header Pwinuser.h/Keybd.h,
+GET_FOREGROUND_INFO/KEY_STATE_FLAGS types) deferred to an
+OEM/input-method batch (KEY_STATE_FLAGS values unpublished).  Export
+surface: 14 GWES manifests (156 pages, rows 510 -> 666) add coredll
+192 -> 221 and eleven new component-module defs (accel, caret,
+foregnd, hotkey, kbdui, coreimm, msgque, sbcmn, uibase, winmgr,
+wmgr_c): 7 -> 18 defs.  All 18 defs llvm-dlltool-armce verified;
+host + six CE targets pass.

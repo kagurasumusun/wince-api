@@ -680,6 +680,400 @@ Link rows; they are **recorded, not transcribed** (no user-mode API).
 NAT exports join coredll: coredll def 171 -> **192**.  Host + six CE
 targets pass; all defs llvm-dlltool-armce verified.
 
+### M26: GWES window-manager core (Windows / Class / Property / Timer / Caret / Atom / Message-Queue / Keyboard / Scroll books)
+
+First user-interface batch.  Implemented from the CE 5.0 GWES
+documentation in the learn.microsoft.com previous-versions archive
+(`(v=msdn.10)`): **14 manifests** (`tools/manifests/gwes-*.manifest`,
+156 unique leaf pages) were generated from the official CE 5.0 TOC and
+fetched this session; `build/rows.json` grows 510 -> **666** rows.
+New `include/winuser.h` (the CE user-interface header) plus additions
+to `include/windef.h` (fixed Win32-ABI window/message types and
+MAKELONG), `include/windows.h` (every M26 page whose Header row is
+Windows.h: window properties, atoms, GetMessageQueueReadyTimeStamp,
+SendMessageTimeout, ScrollDC) and `include/winbase.h` (KillTimer,
+MsgWaitForMultipleObjects/Ex).  Export surface: coredll 192 -> **221**
+exports, and the documented component-module Link rows become new def
+files (accel, caret, foregnd, hotkey, kbdui, coreimm, msgque, sbcmn,
+uibase, winmgr, wmgr_c): 7 -> **18** def files, every one
+llvm-dlltool-`-m armce` verified.  gen-doc-def.py fixes this session:
+the `.lib`-token regex keeps underscores (`wmgr_c.lib` had split into a
+bogus `c.lib`) and the declared-name filter accepts underscore names
+(`keybd_event`).
+
+Leaf record per book (id / title / Header / Link Library as
+published).  Declarations live in winuser.h unless a book note says
+otherwise; header-home follows each page's Header row.
+
+
+#### Windows Functions (35 leaves)
+
+The Windows Functions book (35 leaves; every Header row is Winuser.h).
+These pages carry OS-Versions rows but *no Link Library row at all*:
+on CE the window manager is a GWES module service and the CE 5.0
+documentation publishes no import-library token for it, so none of
+these names enter any export def (recorded as documented "no link
+library"; apps link these through the OS image, not through a
+documented .lib).  EnumWindowsProc (aa453052), WindowProc (ms914102)
+and WinMain (ms914104) are callback/entry prototypes.  Declared in
+winuser.h (W exports + generic macros for the text/class-taking
+forms, per the CE Unicode-only rule).
+
+```
+  aa452849  AdjustWindowRectEx   Header: Winuser.h.  no Link Library row
+  aa452870  BeginDeferWindowPos   Header: Winuser.h.  no Link Library row
+  aa452899  BringWindowToTop   Header: Winuser.h.  no Link Library row
+  aa452919  CallWindowProc   Header: Winuser.h.  no Link Library row
+  ms928578  ChildWindowFromPoint   Header: Winuser.h.  no Link Library row
+  ms908192  CreateWindow   Header: Winuser.h.  no Link Library row
+  ms908193  CreateWindowEx   Header: Winuser.h.  no Link Library row
+  ms908210  DeferWindowPos   Header: Winuser.h.  no Link Library row
+  aa452929  DefWindowProc   Header: Winuser.h.  no Link Library row
+  aa452942  DestroyWindow   Header: Winuser.h.  no Link Library row
+  aa453037  EndDeferWindowPos   Header: Winuser.h.  no Link Library row
+  aa453051  EnumWindows   Header: Winuser.h.  no Link Library row
+  aa453052  EnumWindowsProc   Header: Winuser.h.  no Link Library row
+  aa453070  FindWindow   Header: Winuser.h.  no Link Library row
+  ms929214  GetClientRect   Header: Winuser.h.  no Link Library row
+  ms929229  GetDesktopWindow   Header: Winuser.h.  no Link Library row
+  ms929244  GetForegroundWindow   Header: Winuser.h.  no Link Library row
+  aa453152  GetParent   Header: Winuser.h.  no Link Library row
+  aa453178  GetWindow   Header: Winuser.h.  no Link Library row
+  aa453181  GetWindowRect   Header: Winuser.h.  no Link Library row
+  aa453183  GetWindowText   Header: Winuser.h.  no Link Library row
+  aa453184  GetWindowTextLength   Header: Winuser.h.  no Link Library row
+  aa453185  GetWindowThreadProcessId   Header: Winuser.h.  no Link Library row
+  ms909862  IsChild   Header: Winuser.h.  no Link Library row
+  aa453233  IsWindow   Header: Winuser.h.  no Link Library row
+  aa453235  IsWindowVisible   Header: Winuser.h.  no Link Library row
+  ms931458  MoveWindow   Header: Winuser.h.  no Link Library row
+  ms940024  SetForegroundWindow   Header: Winuser.h.  no Link Library row
+  aa453645  SetParent   Header: Winuser.h.  no Link Library row
+  aa453662  SetWindowPos   Header: Winuser.h.  no Link Library row
+  aa453664  SetWindowText   Header: Winuser.h.  no Link Library row
+  aa453731  ShowWindow   Header: Winuser.h.  no Link Library row
+  ms914099  WindowFromPoint   Header: Winuser.h.  no Link Library row
+  ms914102  WindowProc   Header: Winuser.h.  no Link Library row
+  ms914104  WinMain   Header: Winuser.h.  no Link Library row
+```
+
+#### Window Class Functions (8)
+
+Window Class Functions (8; Header Winuser.h, no Link Library rows --
+same GWES-module model).  Declared in winuser.h.
+
+```
+  ms929211  GetClassInfo   Header: Winuser.h.  no Link Library row
+  ms929212  GetClassLong   Header: Winuser.h.  no Link Library row
+  ms929213  GetClassName   Header: Winuser.h.  no Link Library row
+  aa453180  GetWindowLong   Header: Winuser.h.  no Link Library row
+  ms913089  RegisterClass   Header: Winuser.h.  no Link Library row
+  ms940014  SetClassLong   Header: Winuser.h.  no Link Library row
+  aa453661  SetWindowLong   Header: Winuser.h.  no Link Library row
+  ms914082  UnregisterClass   Header: Winuser.h.  no Link Library row
+```
+
+#### Window Properties Functions (5)
+
+Window Properties Functions (5; OS rows "Windows CE .NET 4.0 and
+later").  The pages' Header row is **Windows.h** (Link Library
+Coredll.lib on the four API pages; PropEnumProcEx aa453551 is a
+callback prototype with no link row), so the properties live in
+windows.h and the enumeration-callback typedef PROPENUMPROCEX lives
+in winuser.h.  Text-taking -> W exports (SetPropW/GetPropW/
+RemovePropW/EnumPropsExW) in def/coredll-doc.def.
+
+```
+  aa453050  EnumPropsEx   Header: Windows.h.  Coredll.lib.
+  aa453155  GetProp   Header: Windows.h.  Coredll.lib.
+  aa453551  PropEnumProcEx   Header: Windows.h.  no Link Library row
+  ms939781  RemoveProp   Header: Windows.h.  Coredll.lib.
+  aa453647  SetProp   Header: Windows.h.  Coredll.lib.
+```
+
+#### Windows Timer Functions (4)
+
+Windows Timer Functions (4).  SetTimer aa453657 (CE 2.0+) and
+SystemIdleTimerReset ms940382 (CE 2.0+) print Header Winuser.h and no
+link row -> winuser.h.  KillTimer aa453248 and TimerProc aa453746
+print Header **Winbase.h** -> winbase.h (the timer-callback prototype
+TimerProc is typedef'd TIMERPROC in winuser.h).
+
+```
+  aa453248  KillTimer   Header: Winbase.h.  no Link Library row
+  aa453657  SetTimer   Header: Winuser.h.  no Link Library row
+  ms940382  SystemIdleTimerReset   Header: Winuser.h.  no Link Library row
+  aa453746  TimerProc   Header: Winbase.h.  no Link Library row
+```
+
+#### Carets Functions (8)
+
+Carets Functions (8; CE 1.0+; Header Winuser.h; Link Library
+**Caret.lib** -> def/caret-doc.def).  GetActiveWindow/SetActiveWindow/
+GetFocus/SetFocus also carry Caret.lib (and Foregnd.lib) rows from the
+Keyboard book, so caret-doc.def ends up with 12 exports and
+foregnd-doc.def with 3.
+
+```
+  ms908164  CreateCaret   Header: Winuser.h.  Caret.lib.
+  aa452936  DestroyCaret   Header: Winuser.h.  Caret.lib.
+  ms929209  GetCaretBlinkTime   Header: Winuser.h.  Caret.lib.
+  ms929210  GetCaretPos   Header: Winuser.h.  Caret.lib.
+  ms929930  HideCaret   Header: Winuser.h.  Caret.lib.
+  ms940012  SetCaretBlinkTime   Header: Winuser.h.  Caret.lib.
+  ms940013  SetCaretPos   Header: Winuser.h.  Caret.lib.
+  aa453729  ShowCaret   Header: Winuser.h.  Caret.lib.
+```
+
+#### Atoms Functions (3)
+
+Atoms Functions (3; OS rows "Windows CE .NET 4.0 and later"; Header
+**Windows.h**; Link Library Coredll.lib).  Declared in windows.h;
+GlobalAddAtomW/GlobalFindAtomW (W) and GlobalDeleteAtom enter
+def/coredll-doc.def.
+
+```
+  aa453188  GlobalAddAtom   Header: Windows.h.  Coredll.lib.
+  aa453189  GlobalDeleteAtom   Header: Windows.h.  Coredll.lib.
+  aa453190  GlobalFindAtom   Header: Windows.h.  Coredll.lib.
+```
+
+#### GWES Message Queue Functions (16)
+
+GWES Message Queue Functions (16).  Header Winuser.h except
+GetMessageQueueReadyTimeStamp aa453137 and SendMessageTimeout ms939981
+(Header Windows.h -> windows.h).  Every page has a **Coredll.lib**
+Link Library row: these sixteen are the M26 coredll export additions.
+Text-free functions keep their documented base names (GetMessage,
+PostMessage, SendMessage, DispatchMessage, TranslateMessage, ...);
+RegisterWindowMessage is text-taking -> RegisterWindowMessageW.
+
+```
+  aa452956  DispatchMessage   Header: Winuser.h.  Coredll.lib.
+  aa453135  GetMessage   Header: Winuser.h.  Coredll.lib.
+  aa453136  GetMessagePos   Header: Winuser.h.  Coredll.lib.
+  aa453137  GetMessageQueueReadyTimeStamp   Header: Windows.h.  Coredll.lib.
+  aa453138  GetMessageSource   Header: Winuser.h.  Coredll.lib.
+  aa453156  GetQueueStatus   Header: Winuser.h.  Coredll.lib.
+  ms909852  InSendMessage   Header: Winuser.h.  Coredll.lib.
+  ms911928  PeekMessage   Header: Winuser.h.  Coredll.lib.
+  ms911937  PostMessage   Header: Winuser.h.  Coredll.lib.
+  ms911938  PostQuitMessage   Header: Winuser.h.  Coredll.lib.
+  ms911939  PostThreadMessage   Header: Winuser.h.  Coredll.lib.
+  ms939737  RegisterWindowMessage   Header: Winuser.h.  Coredll.lib.
+  ms939980  SendMessage   Header: Winuser.h.  Coredll.lib.
+  ms939981  SendMessageTimeout   Header: Windows.h.  Coredll.lib.
+  ms939983  SendNotifyMessage   Header: Winuser.h.  Coredll.lib.
+  aa453776  TranslateMessage   Header: Winuser.h.  Coredll.lib.
+```
+
+#### Message Synchronization Functions (2)
+
+Message Synchronization Functions (2): MsgWaitForMultipleObjects
+ms931460 (CE 1.0+) / MsgWaitForMultipleObjectsEx ms931461 (CE 2.0+).
+Header **Winbase.h** -> winbase.h; Link Library **Msgque.lib** ->
+def/msgque-doc.def.
+
+```
+  ms931460  MsgWaitForMultipleObjects   Header: Winbase.h.  Msgque.lib.
+  ms931461  MsgWaitForMultipleObjectsEx   Header: Winbase.h.  Msgque.lib.
+```
+
+#### Keyboard Functions (30)
+
+Keyboard Functions (30).  Header Winuser.h except six OEM pages whose
+Header row is Pwinuser.h.  Link Library rows are the CE 5.0 component
+modules (Kbdui.lib, Caret.lib+Foregnd.lib, Wmgr_c.lib, Uibase.lib,
+Accel.lib, Hotkey.lib, Coreimm.lib) plus Coredll.lib on the
+keyboard-layout/type rows, producing the accel/caret/foregnd/kbdui/
+wmgr_c/uibase/hotkey/coreimm def files (a documented export may appear
+in several module defs, mirroring rows that print e.g. "Caret.lib,
+Foregnd.lib").  Six leaves are **deferred to the OEM/input-method
+batch** (recorded here so they are not lost): GetAsyncShiftFlags
+aa453955, GetForegroundInfo ms929241, GetForegroundKeyboardLayoutHandle
+ms929242, GetForegroundKeyboardTarget ms929243, KeybdGetDeviceInfo
+aa453246 and PostKeybdMessage ms911936 -- their Header rows name
+Pwinuser.h and their signatures need the OEM keybd types
+GET_FOREGROUND_INFO (aa453186) and KEY_STATE_FLAGS (ms902150, Header
+Keybd.h), whose flag values the CE documentation does not publish
+numerically.
+
+```
+  aa452845  ActivateKeyboardLayout   Header: Winuser.h.  Coredll.lib.
+  ms908162  CreateAcceleratorTable   Header: Winuser.h.  Accel.lib.
+  aa452935  DestroyAcceleratorTable   Header: Winuser.h.  Accel.lib.
+  aa453035  EnableWindow   Header: Winuser.h.  Wmgr_c.lib.
+  ms929203  GetActiveWindow   Header: Winuser.h.  Caret.lib, Foregnd.lib.
+  ms929204  GetAsyncKeyState   Header: Winuser.h.  Kbdui.lib.
+  aa453955  GetAsyncShiftFlags   Header: Pwinuser.h.  Kbdui.lib.
+  ms929240  GetFocus   Header: Winuser.h.  Caret.lib, Foregnd.lib.
+  ms929241  GetForegroundInfo   Header: Pwinuser.h.  Linked during platform build
+  ms929242  GetForegroundKeyboardLayoutHandle   Header: Pwinuser.h.  Linked during build.
+  ms929243  GetForegroundKeyboardTarget   Header: Pwinuser.h.  Linked during build.
+  ms929249  GetKeyboardLayout   Header: Winuser.h.  Coreimm.lib.
+  ms929250  GetKeyboardLayoutList   Header: Winuser.h.  Coredll.lib.
+  ms929252  GetKeyboardLayoutName   Header: Winuser.h.  Kbdui.lib.
+  ms929253  GetKeyboardStatus   Header: Winuser.h.  Kbdui.lib.
+  ms929254  GetKeyboardType   Header: Winuser.h.  Coredll.lib.
+  aa453132  GetKeyState   Header: Winuser.h.  Kbdui.lib.
+  aa453234  IsWindowEnabled   Header: Winuser.h.  Wmgr_c.lib.
+  aa453245  keybd_event   Header: Winuser.h.  Uibase.lib.
+  aa453246  KeybdGetDeviceInfo   Header: Pwinuser.h.  Coredll.lib.
+  aa453407  LoadAccelerators   Header: Winuser.h.  Accel.lib.
+  aa453414  LoadKeyboardLayout   Header: Winuser.h.  Coredll.lib.
+  ms911789  MapVirtualKey   Header: Winuser.h.  Kbdui.lib.
+  ms911936  PostKeybdMessage   Header: Winuser.h.  Kbdui.lib.
+  ms913104  RegisterHotKey   Header: Winuser.h.  Hotkey.lib.
+  ms932719  SendInput   Header: Winuser.h.  Wmgr_c.lib, Uibase.lib.
+  ms939986  SetActiveWindow   Header: Winuser.h.  Caret.lib.
+  ms940023  SetFocus   Header: Winuser.h.  Caret.lib, Foregnd.lib.
+  aa453775  TranslateAccelerator   Header: Winuser.h.  Accel.lib.
+  ms914083  UnregisterHotKey   Header: Winuser.h.  no Link Library row
+```
+
+#### Scroll Bars Functions (6)
+
+Scroll Bars Functions (6).  GetScrollInfo aa453163 (CE 1.0+) /
+SetScrollInfo aa453652 (CE 1.0+) / SetScrollPos aa453653 (CE 2.0+) /
+SetScrollRange aa453654 (CE 2.0+): Header Winuser.h, Link Library
+**Sbcmn.lib** -> def/sbcmn-doc.def.  ScrollWindowEx ms932713: Winuser.h,
+"Coredll.lib, Winmgr.lib" -> coredll + def/winmgr-doc.def.  ScrollDC
+ms932696: Header **Windows.h**, Coredll.lib -> declared in windows.h,
+in def/coredll-doc.def.
+
+```
+  aa453163  GetScrollInfo   Header: Winuser.h.  Sbcmn.lib.
+  ms932696  ScrollDC   Header: Windows.h.  Coredll.lib.
+  ms932713  ScrollWindowEx   Header: Winuser.h.  Coredll.lib, Winmgr.lib.
+  aa453652  SetScrollInfo   Header: Winuser.h.  Sbcmn.lib.
+  aa453653  SetScrollPos   Header: Winuser.h.  Sbcmn.lib.
+  aa453654  SetScrollRange   Header: Winuser.h.  Sbcmn.lib.
+```
+
+#### Windows Structures (6)
+
+Windows Structures (6): CREATESTRUCT ms908189, STYLESTRUCT ms940380,
+WINDOWPOS ms914101 (member blocks transcribed verbatim from the CE
+pages) and the message-parameter packing macros MAKEWPARAM ms911780 /
+MAKELPARAM aa453543 / MAKELRESULT ms911640.  The macro pages print
+their bodies in terms of MAKELONG (windef.h now provides it);
+MAKEWPARAM's page prints "(LPARAM)" where the cast belongs to WPARAM --
+documented typo, conflict recorded in the notes below.
+
+```
+  ms908189  CREATESTRUCT   Header: Winuser.h.  no Link Library row
+  aa453543  MAKELPARAM   Header: Winuser.h.  no Link Library row
+  ms911640  MAKELRESULT   Header: Winuser.h.  no Link Library row
+  ms911780  MAKEWPARAM   Header: Winuser.h.  no Link Library row
+  ms940380  STYLESTRUCT   Header: Winuser.h.  no Link Library row
+  ms914101  WINDOWPOS   Header: Winuser.h.  no Link Library row
+```
+
+#### Keyboard Structures (5)
+
+Keyboard Structures (5): ACCEL aa452837 (CE 1.0+), INPUT ms909851 /
+KEYBDINPUT aa453247 / MOUSEINPUT ms931454 (CE 2.0+), member layouts
+transcribed verbatim from the CE pages; GET_FOREGROUND_INFO aa453186
+(Header Pwinuser.h) is fetched and recorded, deferred with the OEM
+keyboard batch.  HARDWAREINPUT, referenced by the INPUT union, has no
+CE leaf -- fixed layout from Microsoft's official Win32 HARDWAREINPUT
+structure reference (notes below).
+
+```
+  aa452837  ACCEL   Header: Winuser.h.  no Link Library row
+  aa453186  GET_FOREGROUND_INFO   Header: Pwinuser.h.  no Link Library row
+  ms909851  INPUT   Header: Winuser.h.  no Link Library row
+  aa453247  KEYBDINPUT   Header: Winuser.h.  no Link Library row
+  ms931454  MOUSEINPUT   Header: Winuser.h.  no Link Library row
+```
+
+#### Windows Messages (14)
+
+Windows Messages (14, Header Winuser.h): fetched and recorded.  The
+CE 5.0 WM_* pages document behavior and parameters but do **not**
+publish the numeric message values, so no WM_* constant is defined
+yet; the follow-on messages batch will transcribe values from fixed
+Win32-ABI references with provenance.
+
+```
+  ms914108  WM_CANCELMODE   Header: Winuser.h.  no Link Library row
+  ms914114  WM_CLOSE   Header: Winuser.h.  no Link Library row
+  ms914118  WM_CREATE   Header: Winuser.h.  no Link Library row
+  aa453854  WM_DESTROY   Header: Winuser.h.  no Link Library row
+  aa453856  WM_ENABLE   Header: Winuser.h.  no Link Library row
+  aa453858  WM_ERASEBKGND   Header: Winuser.h.  no Link Library row
+  aa453864  WM_GETTEXT   Header: Winuser.h.  no Link Library row
+  aa453865  WM_GETTEXTLENGTH   Header: Winuser.h.  no Link Library row
+  aa453887  WM_MOVE   Header: Winuser.h.  no Link Library row
+  aa453895  WM_QUIT   Header: Winuser.h.  no Link Library row
+  aa453905  WM_SETTEXT   Header: Winuser.h.  no Link Library row
+  aa453907  WM_SIZE   Header: Winuser.h.  no Link Library row
+  aa453908  WM_STYLECHANGED   Header: Winuser.h.  no Link Library row
+  aa453920  WM_WINDOWPOSCHANGED   Header: Winuser.h.  no Link Library row
+```
+
+#### Keyboard Messages (14)
+
+Keyboard Messages (14, Header Winuser.h): same status as the Windows
+Messages leaves above (WM_KEYDOWN/WM_KEYUP/WM_CHAR/... recorded; no
+numeric values published by the CE pages).
+
+```
+  ms914105  WM_ACTIVATE   Header: Winuser.h.  no Link Library row
+  ms914110  WM_CHAR   Header: Winuser.h.  no Link Library row
+  aa453868  WM_HOTKEY   Header: Winuser.h.  no Link Library row
+  aa453872  WM_INITMENUPOPUP   Header: Winuser.h.  no Link Library row
+  aa453873  WM_KEYDOWN   Header: Winuser.h.  no Link Library row
+  aa453876  WM_KEYUP   Header: Winuser.h.  no Link Library row
+  aa453877  WM_KILLFOCUS   Header: Winuser.h.  no Link Library row
+  aa453884  WM_MENUCHAR   Header: Winuser.h.  no Link Library row
+  aa453901  WM_SETFOCUS   Header: Winuser.h.  no Link Library row
+  aa453909  WM_SYSCHAR   Header: Winuser.h.  no Link Library row
+  aa453911  WM_SYSCOMMAND   Header: Winuser.h.  no Link Library row
+  aa453913  WM_SYSDEADCHAR   Header: Winuser.h.  no Link Library row
+  aa453914  WM_SYSKEYDOWN   Header: Winuser.h.  no Link Library row
+  aa453915  WM_SYSKEYUP   Header: Winuser.h.  no Link Library row
+```
+
+Window entry/class records: RegisterClass ms913089 returns an ATOM;
+the class-registration pages (WNDCLASS/RegisterClass/GetClassInfo)
+are Winuser.h / no-link-row like the rest of the window-manager book.
+windef.h gained the fixed Win32-ABI window/message types the GWES
+pages type against: HWND/HMENU/HACCEL/HBITMAP/HICON/HCURSOR/HBRUSH/
+HDC/HRGN/HDWP/HKL handles, ATOM, WPARAM/LPARAM/LRESULT/
+DWORD_PTR/PDWORD_PTR, SHORT, POINT/RECT/SIZE, and MAKELONG.
+
+Documented conflicts and unknown facts recorded for M26:
+
+* `MAKEWPARAM` (`ms911780`): the page prints the cast as "(LPARAM)";
+  the macro's role is to build a WPARAM, so the definition casts to
+  WPARAM (documentation typo; recorded, not silently copied).
+* `HARDWAREINPUT` (referenced by `INPUT` ms909851): no CE GWES leaf
+  defines the type.  The fixed layout `DWORD uMsg; WORD wParamL;
+  WORD wParamH;` is taken from Microsoft's official Win32
+  *HARDWAREINPUT* structure reference (winuser.h, learn.microsoft.com)
+  -- a fixed-ABI reference, recorded as such.
+* `SCROLLINFO`: the CE 5.0 Scroll Bars Structures book has no
+  `(v=msdn.10)` leaf; its catalog entry points at the WinCE 6.0 twin
+  `ee504371(v=winembedded.60)`.  The fixed Win32-ABI layout is used.
+  SIF_*/SB_*/SW_* values are the fixed Win32-ABI values of the official
+  scroll-bar reference the CE function pages type against.
+* `KEY_STATE_FLAGS` (`ms902150`, Header Keybd.h): the page defines the
+  type (`typedef UINT32 KEY_STATE_FLAGS`) and names the flag constants
+  but publishes **no numeric values**; the six Pwinuser.h keyboard
+  leaves that need it are deferred (values would have to be invented).
+* WM_* message pages (28 leaves fetched) do not publish numeric values
+  -> no WM_* constants yet (fixed-Win32-ABI transcription with
+  provenance is the follow-on messages batch).
+* OS rows cited in inline comments come from each page's "OS Versions"
+  requirement: CE 1.0 (most window/caret/scroll/keyboard functions),
+  CE 2.0/2.10 (SetTimer, RegisterWindowMessage, deferred window
+  positioning, keyboard-layout-name), CE .NET 4.0 (properties, atoms,
+  SendMessageTimeout, GetMessageQueueReadyTimeStamp) and CE .NET 4.2
+  (ActivateKeyboardLayout/GetKeyboardLayoutList/GetKeyboardType/
+  LoadKeyboardLayout, GetQueueStatus, foreground-input pages).
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

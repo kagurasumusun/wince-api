@@ -1,0 +1,16 @@
+aa452956	DispatchMessage
+aa453135	GetMessage
+aa453136	GetMessagePos
+aa453137	GetMessageQueueReadyTimeStamp
+aa453138	GetMessageSource
+aa453156	GetQueueStatus
+ms909852	InSendMessage
+ms911928	PeekMessage
+ms911937	PostMessage
+ms911938	PostQuitMessage
+ms911939	PostThreadMessage
+ms939737	RegisterWindowMessage
+ms939980	SendMessage
+ms939981	SendMessageTimeout
+ms939983	SendNotifyMessage
+aa453776	TranslateMessage

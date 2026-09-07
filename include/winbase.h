@@ -2259,6 +2259,26 @@ DWORD FormatMessageW(DWORD dwFlags, LPCVOID lpSource, DWORD dwMessageId,
                      va_list *Arguments);
 #define FormatMessage FormatMessageW
 
+/* ------------------------------------------------------------------ */
+/* M26: GWES items whose pages give Header: Winbase.h.               */
+/* ------------------------------------------------------------------ */
+
+/* aa453248 "KillTimer": the CE page prints Header Winbase.h (unlike
+ * SetTimer aa453657, Header Winuser.h, declared in winuser.h).
+ * CE 1.0+. */
+BOOL KillTimer(HWND hWnd, UINT uIDEvent);
+
+/* ms931460 "MsgWaitForMultipleObjects" (CE 1.0+) / ms931461
+ * "MsgWaitForMultipleObjectsEx" (CE 2.0+): wait for handles or a
+ * thread-message condition (dwWakeMask = QS_* flags).  Header
+ * Winbase.h; Link Library Msgque.lib (def/msgque-doc.def). */
+DWORD MsgWaitForMultipleObjects(DWORD nCount, LPHANDLE pHandles,
+                                BOOL fWaitAll, DWORD dwMilliseconds,
+                                DWORD dwWakeMask);
+DWORD MsgWaitForMultipleObjectsEx(DWORD nCount, LPHANDLE pHandles,
+                                  DWORD dwMilliseconds, DWORD dwWakeMask,
+                                  DWORD dwFlags);
+
 #ifdef __cplusplus
 }
 #endif

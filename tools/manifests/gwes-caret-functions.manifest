@@ -1,0 +1,8 @@
+ms908164	CreateCaret
+aa452936	DestroyCaret
+ms929209	GetCaretBlinkTime
+ms929210	GetCaretPos
+ms929930	HideCaret
+ms940012	SetCaretBlinkTime
+ms940013	SetCaretPos
+aa453729	ShowCaret

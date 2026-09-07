@@ -98,6 +98,18 @@ UNICODE_ONLY = {
     "CreateFileMapping": "CreateFileMappingW",
     "GetModuleInformation": "GetModuleInformation",
     "FormatMessage": "FormatMessageW",
+    # M26 GWES: window-property, atom and window-message text functions
+    # (pages aa453647/aa453155/ms939781/aa453050/aa453188/aa453190/
+    # ms939737); CE is Unicode-only so the exports are the wide forms.
+    "RegisterWindowMessage": "RegisterWindowMessageW",
+    "SetProp": "SetPropW",
+    "GetProp": "GetPropW",
+    "RemoveProp": "RemovePropW",
+    "EnumPropsEx": "EnumPropsExW",
+    "GlobalAddAtom": "GlobalAddAtomW",
+    "GlobalFindAtom": "GlobalFindAtomW",
+    "GetKeyboardLayoutName": "GetKeyboardLayoutNameW",
+    "LoadAccelerators": "LoadAcceleratorsW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -136,7 +148,7 @@ def declared_exports():
             "define"}
     return {n for n in names if n not in drop and
             not n.startswith("_RTL_") and
-            re.match(r"^[A-Z][A-Za-z0-9]+$|^[a-z][A-Za-z0-9]{2,}$", n)}
+            re.match(r"^[A-Z][A-Za-z0-9_]+$|^[a-z][A-Za-z0-9_]{2,}$", n)}
 
 
 def short_title(title):
@@ -158,7 +170,7 @@ def main():
         if not lib:
             continue
         sn = short_title(r.get("title", ""))
-        tokens = re.findall(r"[a-z0-9]+\.lib", lib)
+        tokens = re.findall(r"[a-z0-9_]+\.lib", lib)
         # Some CE3-era pages print "Link Library: Coredll.dll." (module
         # form).  Map that documented module token onto the coredll.lib
         # export group (module Coredll.dll).
