@@ -407,6 +407,40 @@ def).
 | `Heap32First`/`Heap32Next` | `ms885650`/`ms885653` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | |
 | `Toolhelp32ReadProcessMemory` | `aa450953` | CE 2.0+ | Tlhelp32.h | Toolhelp.lib | ids castable to handles; SetProcPermissions for other processes |
 
+### M19: Strings Reference batch (winbase.h) + multi-lib defs
+
+Official `(v=msdn.10)` CE 5.0 pages of *Core OS Reference → Strings
+Reference*.  Every page's Header row is Winbase.h.  All pages except
+CharNext state "Windows CE supports only the Unicode version of this
+function"; the W spellings below are therefore the documented exports
+(base names provided as macros).  CharNext/CharPrev print no A/W
+suffix; the W spelling follows the CE Unicode-only convention
+(recorded as an inference in the header comment).
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `CharLower(W)` | `ms885159` | CE 1.0+ | Winbase.h | Coreloc.lib | Unicode-only per page |
+| `CharLowerBuff(W)` | `ms885160` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `CharUpper(W)` | `ms885164` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `CharUpperBuff(W)` | `ms885165` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `CharNext(W)` | `ms885161` | CE 1.0+ | Winbase.h | Coredll.lib | page prints base name only; W inferred |
+| `CharPrev(W)` | `ms885162` | CE 1.01+ | Winbase.h | Coreloc.lib | |
+| `IsCharAlpha(W)` | `ms885690` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `IsCharAlphaNumeric(W)` | `ms885691` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `IsCharLower(W)` | `ms885692` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `IsCharUpper(W)` | `ms885693` | CE 1.0+ | Winbase.h | Coreloc.lib | |
+| `LoadString(W)` | `ms886738` | CE 1.0+ | Winbase.h | Loadstr.lib | NULL buffer ⇒ read-only resource pointer; not null-terminated by default; W inferred from CE Unicode resources |
+| `wsprintf(W)` | `aa450993` | CE 1.0+ | Winbase.h | Coreloc.lib | Unicode-only per page; ≤1024 chars (page note); no length parameter |
+| `wvsprintf(W)` | `aa450994` | CE 1.0+ | Winbase.h | Coreloc.lib | Unicode-only per page; va_list argument |
+
+**Def generation is now multi-library.**  `tools/gen-doc-def.py` emits
+one `def/*-doc.def` per documented user-mode Link Library token:
+`coredll-doc.def` (148), `coreloc-doc.def` (23), `toolhelp-doc.def`
+(13), `lmem-doc.def` (1), `loadstr-doc.def` (1).  Nk.lib/Coremain.lib
+rows stay excluded (kernel-scope conflict model).  Auxiliary defs note
+that only the import-library token is documented (module names are not
+published); all are name-only and build with `llvm-dlltool -m armce`.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

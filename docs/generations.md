@@ -209,3 +209,14 @@ th32CurrentProcessID), MODULEENTRY32 `ms886756`, HEAPLIST32
 `ms885660`, HEAPENTRY32 `ms885658`, TH32CS_* flags.  Header per the
 pages (Tlhelp32.h); Link Library Toolhelp.lib (not coredll).  Layout
 asserts 32-bit model pass on the CE toolchain.
+
+**M19 batch — Strings Reference + multi-lib def generation:**
+CharLower/CharLowerBuff `ms885159`/`ms885160`, CharUpper/CharUpperBuff
+`ms885164`/`ms885165`, CharNext `ms885161` (Coredll.lib), CharPrev
+`ms885162`, IsCharAlpha/IsCharAlphaNumeric/IsCharLower/IsCharUpper
+`ms885690`-`ms885693`, LoadString `ms886738` (Loadstr.lib), wsprintf
+`aa450993`, wvsprintf `aa450994`.  Most pages state Unicode-only ⇒ W
+exports + base macros.  def generation generalized to one def per
+documented user-mode Link Library: coredll 148, coreloc 23, toolhelp
+13, lmem 1, loadstr 1 (all llvm-dlltool-verified); Nk/Coremain rows
+remain excluded.

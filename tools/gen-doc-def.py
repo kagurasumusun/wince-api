@@ -67,6 +67,24 @@ UNICODE_ONLY = {
     "RegQueryValueEx": "RegQueryValueExW",
     "RegSetValueEx": "RegSetValueExW",
     "RegFlushKey": "RegFlushKeyW",
+    # Strings/char functions whose pages state "Windows CE supports
+    # only the Unicode version of this function".
+    "CharLower": "CharLowerW",
+    "CharLowerBuff": "CharLowerBuffW",
+    "CharUpper": "CharUpperW",
+    "CharUpperBuff": "CharUpperBuffW",
+    "CharNext": "CharNextW",
+    "CharPrev": "CharPrevW",
+    "IsCharAlpha": "IsCharAlphaW",
+    "IsCharAlphaNumeric": "IsCharAlphaNumericW",
+    "IsCharLower": "IsCharLowerW",
+    "IsCharUpper": "IsCharUpperW",
+    "LoadString": "LoadStringW",
+    "wsprintf": "wsprintfW",
+    "wvsprintf": "wvsprintfW",
+    # NLS comparison/typing (Unicode-only CE).
+    "CompareString": "CompareStringW",
+    "GetStringTypeEx": "GetStringTypeExW",
     # File I/O functions whose CE exports are the wide spellings.
     "FindFirstChangeNotification": "FindFirstChangeNotificationW",
     "FindFirstFileEx": "FindFirstFileExW",
@@ -132,9 +150,14 @@ def main():
         for token in re.findall(r"[a-z0-9]+\.lib", lib):
             bylib.setdefault(token, {})[sn] = r["id"]
 
+    # Kernel-scope link rows (Nk.lib / Coremain.lib) are tracked but
+    # kept out of import defs (documented conflict model, inventory).
+    # The remaining tokens are user-mode import libraries whose rows
+    # the official pages publish.
+    KERNEL_TOKENS = {"nk.lib", "coremain.lib"}
     os.makedirs(DEFDIR, exist_ok=True)
     for token, pages in sorted(bylib.items()):
-        if token != "coredll.lib":
+        if token in KERNEL_TOKENS:
             continue
         entries, skipped = [], []
         for sn, pid in sorted(pages.items()):
@@ -148,8 +171,6 @@ def main():
             else:
                 skipped.append((sn, pid))
         stem = token.replace(".lib", "").replace(".", "-")
-        if stem == "coredll":
-            stem = "coredll"
         out = os.path.join(DEFDIR, f"{stem}-doc.def")
         with open(out, "w", encoding="utf-8") as fh:
             # ';' comment style: GNU/LLVM dlltool rejects '#' lines.
@@ -164,7 +185,17 @@ def main():
             fh.write("; harvest; docs/inventory.md records every page).  No\n")
             fh.write("; shared-source/device-dump/VS/PB-derived name is used.\n")
             fh.write("; Ordinals are not published; entries are name-only.\n")
-            fh.write("LIBRARY coredll.dll\nEXPORTS\n")
+            if token == "coredll.lib":
+                fh.write("LIBRARY coredll.dll\nEXPORTS\n")
+            else:
+                # Only the import-library name (the page's Link
+                # Library row) is documented for the auxiliary
+                # libraries; the module name is not published, so the
+                # LIBRARY tag below is the row token itself.
+                fh.write("; LIBRARY tag = documented Link Library row "
+                         "(" + token + "); the on-device module name is\n"
+                         "; not published by the CE documentation.\n")
+                fh.write(f"LIBRARY {stem}.dll\nEXPORTS\n")
             for export, pid, sn in entries:
                 fh.write(f"  {export}\n")
         n = len(entries)

@@ -15,6 +15,7 @@ EXPORTS
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
+  CharNextW
   CloseHandle
   CompareFileTime
   ConvertThreadToFiber

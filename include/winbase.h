@@ -25,6 +25,7 @@
 
 #include "windef.h"
 #include "winnt.h"
+#include <stdarg.h>   /* va_list (wvsprintfW aa450994) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -1667,6 +1668,79 @@ DWORD GetFileVersionInfoSizeW(LPTSTR lptstrFilename, LPDWORD lpdwHandle);
 BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
                          DWORD dwLen, LPVOID lpData);
 #define GetFileVersionInfo GetFileVersionInfoW
+
+/* ------------------------------------------------------------------ */
+/* M19: character and string helpers (Strings Reference pages).       */
+/* ------------------------------------------------------------------ */
+
+/* Each page below states "Windows CE supports only the Unicode
+ * version of this function", so the exported spelling is the W form
+ * and the base name is a macro.  Pages' Header row: Winbase.h; Link
+ * Library row: Coreloc.lib except where noted (CharNext is
+ * Coredll.lib per ms885161; CharPrev is Coreloc.lib per ms885162). */
+
+/* ms885159 "CharLower": LPTSTR CharLower(LPTSTR).  CE 1.0+. */
+LPTSTR CharLowerW(LPTSTR lpsz);
+#define CharLower CharLowerW
+
+/* ms885160 "CharLowerBuff": DWORD CharLowerBuff(LPTSTR, DWORD).
+ * CE 1.0+. */
+DWORD CharLowerBuffW(LPTSTR lpsz, DWORD cchLength);
+#define CharLowerBuff CharLowerBuffW
+
+/* ms885164 "CharUpper": LPTSTR CharUpper(LPTSTR).  CE 1.0+. */
+LPTSTR CharUpperW(LPTSTR lpsz);
+#define CharUpper CharUpperW
+
+/* ms885165 "CharUpperBuff": DWORD CharUpperBuff(LPTSTR, DWORD).
+ * CE 1.0+. */
+DWORD CharUpperBuffW(LPTSTR lpsz, DWORD cchLength);
+#define CharUpperBuff CharUpperBuffW
+
+/* ms885161 "CharNext": LPTSTR CharNext(LPCTSTR).  CE 1.0+; Coredll.lib.
+ * Returns a pointer to the next character (or to the terminating
+ * null).  The page prints the base name only; the W spelling follows
+ * the CE Unicode-only convention (recorded in inventory). */
+LPTSTR CharNextW(LPCTSTR lpsz);
+#define CharNext CharNextW
+
+/* ms885162 "CharPrev": LPTSTR CharPrev(LPCTSTR, LPCTSTR).  CE 1.01+. */
+LPTSTR CharPrevW(LPCTSTR lpszStart, LPCTSTR lpszCurrent);
+#define CharPrev CharPrevW
+
+/* Character-class queries (CE 1.0+, Coreloc.lib). */
+BOOL IsCharAlphaW(TCHAR ch);          /* ms885690 */
+#define IsCharAlpha IsCharAlphaW
+BOOL IsCharAlphaNumericW(TCHAR ch);   /* ms885691 */
+#define IsCharAlphaNumeric IsCharAlphaNumericW
+BOOL IsCharLowerW(TCHAR ch);          /* ms885692 */
+#define IsCharLower IsCharLowerW
+BOOL IsCharUpperW(TCHAR ch);          /* ms885693 */
+#define IsCharUpper IsCharUpperW
+
+/* ms886738 "LoadString (Windows CE 5.0)":
+ * int LoadString(HINSTANCE, UINT, LPTSTR, int).  CE 1.0+; Winbase.h;
+ * Loadstr.lib.  Loads a string resource.  With lpBuffer NULL the
+ * return value is a pointer into the (read-only) resource; string
+ * resources are not null-terminated by default (page note).  CE
+ * string resources are Unicode; W spelling per the CE convention. */
+int LoadStringW(HINSTANCE hInstance, UINT uID, LPTSTR lpBuffer,
+                int cchBufferMax);
+#define LoadString LoadStringW
+
+/* aa450993 "wsprintf (Windows CE 5.0)":
+ * int wsprintf(LPTSTR, LPCTSTR, ...).  CE 1.0+; Winbase.h; Coreloc.lib.
+ * Page states only the Unicode version exists (wsprintfW).  The CE
+ * page notes the function has no buffer-length parameter and formats
+ * at most 1024 characters. */
+int wsprintfW(LPTSTR lpOut, LPCTSTR lpFmt, ...);
+#define wsprintf wsprintfW
+
+/* aa450994 "wvsprintf (Windows CE 5.0)":
+ * int wvsprintf(LPTSTR, LPCTSTR, va_list).  CE 1.0+; Winbase.h;
+ * Coreloc.lib.  Unicode-only per page. */
+int wvsprintfW(LPTSTR lpOutput, LPCTSTR lpFormat, va_list arglist);
+#define wvsprintf wvsprintfW
 
 #ifdef __cplusplus
 }

@@ -198,6 +198,20 @@ static const void *const api_symbols[] = {
     (const void *) &GetCPInfo,
     (const void *) &GetStringTypeW,
     (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
+    /* M19: strings (winbase.h; Coreloc.lib except CharNext Coredll). */
+    (const void *) &CharLowerW, (const void *) &CharLower,
+    (const void *) &CharLowerBuffW, (const void *) &CharLowerBuff,
+    (const void *) &CharUpperW, (const void *) &CharUpper,
+    (const void *) &CharUpperBuffW, (const void *) &CharUpperBuff,
+    (const void *) &CharNextW, (const void *) &CharNext,
+    (const void *) &CharPrevW, (const void *) &CharPrev,
+    (const void *) &IsCharAlphaW, (const void *) &IsCharAlpha,
+    (const void *) &IsCharAlphaNumericW, (const void *) &IsCharAlphaNumeric,
+    (const void *) &IsCharLowerW, (const void *) &IsCharLower,
+    (const void *) &IsCharUpperW, (const void *) &IsCharUpper,
+    (const void *) &LoadStringW, (const void *) &LoadString,
+    (const void *) &wsprintfW, (const void *) &wsprintf,
+    (const void *) &wvsprintfW, (const void *) &wvsprintf,
     /* M18: Toolhelp32 (tlhelp32.h; Toolhelp.lib). */
     (const void *) &CreateToolhelp32Snapshot,
     (const void *) &CloseToolhelp32Snapshot,
@@ -1001,6 +1015,26 @@ static int m18_shaped_usage(void)
     return 0;
 }
 
+/* M19 usage shape (compile-only). */
+static int m19_shaped_usage(void)
+{
+    static const WCHAR w_fmt[] = { '%', 'd', 0 };
+    WCHAR buf[64];
+    (void) CharLowerW(buf);
+    (void) CharUpperW(buf);
+    (void) CharLowerBuffW(buf, 4u);
+    (void) CharUpperBuffW(buf, 4u);
+    (void) CharNextW(buf);
+    (void) CharPrevW(buf, buf);
+    (void) IsCharAlphaW(buf[0]);
+    (void) IsCharAlphaNumericW(buf[0]);
+    (void) IsCharLowerW(buf[0]);
+    (void) IsCharUpperW(buf[0]);
+    (void) wsprintfW(buf, w_fmt, 3);
+    (void) LoadStringW((HINSTANCE) 0, 1u, buf, 64);
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1026,5 +1060,7 @@ int host_tu_entry(void)
         return 1;
     if (m17_shaped_usage() != 0)
         return 1;
-    return m18_shaped_usage() == 0 ? 0 : 1;
+    if (m18_shaped_usage() != 0)
+        return 1;
+    return m19_shaped_usage() == 0 ? 0 : 1;
 }

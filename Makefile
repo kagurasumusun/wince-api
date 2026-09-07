@@ -32,17 +32,22 @@ defdoc:
 tools/ce-fetch.py on tools/manifests/core-*.manifest first" >&2; exit 1; }
 	python3 tools/gen-doc-def.py
 
-# defcheck validates the committed doc-derived defs.
+# defcheck validates the committed doc-derived defs (one per documented
+# Link Library token, e.g. coredll-doc.def, coreloc-doc.def,
+# toolhelp-doc.def, lmem-doc.def, loadstr-doc.def).
 defcheck:
-	@for f in def/coredll-doc.def; do \
-	  if [ -f "$$f" ]; then \
-	    n=$$(awk '/^EXPORTS/{e=1;next} e && NF && $$0 !~ /^[;#]/' "$$f" | wc -l); \
-	    echo "[defcheck] $$f: $$n exports"; \
-	    [ $$n -gt 0 ] || { echo "def $$f looks empty" >&2; exit 1; }; \
-	  else \
-	    echo "[defcheck] missing $$f (run 'make defdoc')" >&2; exit 1; \
-	  fi; \
-	done
+	@ok=1; found=0; \
+	for f in def/*-doc.def; do \
+	  [ -e "$$f" ] || continue; found=1; \
+	  n=$$(awk '/^EXPORTS/{e=1;next} e && NF && $$0 !~ /^[;#]/' "$$f" | wc -l); \
+	  echo "[defcheck] $$f: $$n exports"; \
+	  [ $$n -gt 0 ] || { echo "def $$f looks empty" >&2; ok=0; }; \
+	done; \
+	if [ $$found -eq 0 ]; then \
+	  echo "[defcheck] missing def/*-doc.def (run 'make defdoc')" >&2; \
+	  exit 1; \
+	fi; \
+	[ $$ok -eq 1 ]
 
 # Cross checks with the real Windows CE LLVM/Clang toolchain
 # (kagurasumusun/llvm-project, branch LLVM-WinCE).  The driver is
