@@ -223,6 +223,11 @@ declarations, recorded in `docs/inventory.md`):
   CreateFileMapping/MapViewOfFile/UnmapViewOfFile/FlushViewOfFile),
   DisableThreadLibraryCalls + DLL_* reason constants, new
   `include/psapi.h` (MODULEINFO/GetModuleInformation).  def 148 → 154.
+* **M22 (landed):** Message Queue Point-to-Point Reference — new
+  `include/msgqueue.h` (Close/CreateMsgQueue, GetMsgQueueInfo,
+  OpenMsgQueue, ReadMsgQueue, WriteMsgQueue, MSGQUEUEOPTIONS,
+  MSGQUEUEINFO).  All pages CE .NET 4.0+, Msgqueue.h, Coredll.lib.
+  def 158 → 164.
 * **M21 (landed):** GetStoreInformation + STORE_INFORMATION,
   CeGenRandom/CeGetCanonicalPathName/CeGetFileNotificationInfo,
   FILE_NOTIFY_INFORMATION/FILE_ACTION_* (winnt.h).  def 154 → 158.

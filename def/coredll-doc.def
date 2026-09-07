@@ -20,6 +20,7 @@ EXPORTS
   CeGetFileNotificationInfo
   CharNextW
   CloseHandle
+  CloseMsgQueue
   CompareFileTime
   ConvertThreadToFiber
   CopyFileW
@@ -29,6 +30,7 @@ EXPORTS
   CreateFileW
   CreateFileForMappingW
   CreateFileMappingW
+  CreateMsgQueue
   CreateMutexW
   CreateProcessW
   CreateThread
@@ -71,6 +73,7 @@ EXPORTS
   GetModuleFileNameW
   GetModuleHandleW
   GetModuleInformation
+  GetMsgQueueInfo
   GetProcAddressW
   GetProcessVersion
   GetStoreInformation
@@ -118,12 +121,14 @@ EXPORTS
   MoveFileW
   MultiByteToWideChar
   OpenEventW
+  OpenMsgQueue
   OpenProcess
   PulseEvent
   QueryPerformanceCounter
   QueryPerformanceFrequency
   Random
   ReadFile
+  ReadMsgQueue
   RegCloseKeyW
   RegCreateKeyExW
   RegDeleteKeyW
@@ -170,3 +175,4 @@ EXPORTS
   WaitForSingleObject
   WideCharToMultiByte
   WriteFile
+  WriteMsgQueue

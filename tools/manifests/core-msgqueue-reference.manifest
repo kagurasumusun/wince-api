@@ -1,0 +1,10 @@
+aa450754	Message Queue Point-to-Point Functions
+ms885168	CloseMsgQueue
+ms885180	CreateMsgQueue
+ms885632	GetMsgQueueInfo
+ms886765	OpenMsgQueue
+ms886793	ReadMsgQueue
+aa450991	WriteMsgQueue
+aa450756	Message Queue Point-to-Point Structures
+ms886758	MSGQUEUEINFO
+ms886759	MSGQUEUEOPTIONS

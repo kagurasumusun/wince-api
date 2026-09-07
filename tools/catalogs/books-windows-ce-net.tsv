@@ -1,0 +1,938 @@
+1	Windows CE .NET :: Product Documentation
+8	Windows CE .NET :: Product Documentation :: Application Development :: Accessibility
+6	Windows CE .NET :: Product Documentation :: Application Development :: Accessibility :: Accessibility Reference :: Accessibility Structures
+5	Windows CE .NET :: Product Documentation :: Application Development :: Active Server Pages
+1	Windows CE .NET :: Product Documentation :: Application Development :: Active Server Pages :: Server and Collection Objects :: Collection Objects
+3	Windows CE .NET :: Product Documentation :: Application Development :: Active Server Pages :: Server and Collection Objects :: Server Objects
+5	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth
+3	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Enumerations
+12	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Functions
+13	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Interfaces :: ISdpNodeContainer
+9	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Interfaces :: ISdpRecord
+8	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Interfaces :: ISdpStream
+2	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Interfaces :: ISdpWalk
+16	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Reference :: Bluetooth Structures
+1	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Registry Settings
+12	Windows CE .NET :: Product Documentation :: Application Development :: Bluetooth :: Bluetooth Samples
+6	Windows CE .NET :: Product Documentation :: Application Development :: Certificates
+76	Windows CE .NET :: Product Documentation :: Application Development :: Certificates :: Certificates Reference :: Certificates Functions
+7	Windows CE .NET :: Product Documentation :: Application Development :: Certificates :: Managing Certificates with Certificate Stores
+1	Windows CE .NET :: Product Documentation :: Application Development :: Command Processor Shell
+29	Windows CE .NET :: Product Documentation :: Application Development :: Command Processor Shell :: Command Processor Commands
+10	Windows CE .NET :: Product Documentation :: Application Development :: Communications Service :: Real-time Communications Architecture
+11	Windows CE .NET :: Product Documentation :: Application Development :: Communications Service :: Real-time Communications Architecture :: Real-time Communications Client API Examples
+1	Windows CE .NET :: Product Documentation :: Application Development :: Communications Service :: Real-time Communications Architecture :: Using XML Profiles
+12	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM)
+7	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Data Types
+7	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Enumerations
+154	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ICreateErrorInfo
+21	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ICreateTypeInfo
+14	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ICreateTypeInfo2
+8	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ICreateTypeLib
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ICreateTypeLib2
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: IDispatch
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: IEnumVARIANT
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: IErrorInfo
+19	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ITypeInfo
+14	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ITypeInfo2
+10	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ITypeLib
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Interfaces :: ITypeLib2
+20	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Automation Reference :: Automation Structures
+86	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IAccessControl
+10	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IBindCtx
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: ICatInformation
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: ICatRegister
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IClassActivator
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IClassFactory
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IClassFactory2
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IClientSecurity
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IConnectionPoint
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IConnectionPointContainer
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IContinueCallback
+9	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IDataObject
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IDccMan
+8	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IDccManSink
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumConnectionPoints
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumConnections
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumFORMATETC
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumMoniker
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumSTATDATA
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumSTATSTG
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IEnumString
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IErrorlog
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IExternalConnection
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IFillLockBytes
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IGlobalInterfaceTable
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMalloc
+12	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMallocSpy
+7	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMarshal
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMessageFilter
+15	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMoniker
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IMultiQI
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IObjectSafety
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IOleItemContainer
+11	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IOleLink
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IParseDisplayName
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IPersistFile
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IPersistPropertyBag
+2	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IPropertyBag
+3	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IUnknown
+1	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IViewObject2
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Interfaces :: IViewObjectEx
+19	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Reference :: COM Structures and Enumerations
+8	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Registry Settings
+4	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: COM Security
+82	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Interfaces :: IAdviseSink
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Interfaces :: IOleAdviseHolder
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Interfaces :: IOleClientSite
+21	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Interfaces :: IOleObject
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Interfaces :: IViewObject
+6	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: OLE Reference :: OLE Structures
+7	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Storage Reference :: Storage Enumerations
+8	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Storage Reference :: Storage Functions
+7	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Storage Reference :: Storage Interfaces :: ILockBytes
+17	Windows CE .NET :: Product Documentation :: Application Development :: Component Services (COM and DCOM) :: Storage Reference :: Storage Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API
+7	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDescriptionDocument
+1	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDescriptionDocumentCallback
+19	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDevice
+5	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDeviceFinder
+3	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDeviceFinderCallback
+3	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPDevices
+6	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPService
+2	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPServiceCallback
+3	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Control Point API Reference :: Control Point API Interfaces :: IUPnPServices
+2	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Device Control
+4	Windows CE .NET :: Product Documentation :: Application Development :: Control Point API :: Device Location
+3	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography
+8	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: About Cryptographic Service Provider
+4	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Cryptography Reference :: Cryptography Data Types
+35	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Cryptography Reference :: Cryptography Functions
+54	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Cryptography Reference :: Cryptography Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Microsoft Cryptographic System
+1	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Microsoft Cryptographic System :: Microsoft DSS and Diffie-Hellman Cryptographic Provider
+13	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Using Basic Cryptography Services
+2	Windows CE .NET :: Product Documentation :: Application Development :: Cryptography :: Using Basic Cryptography Services :: Encrypting and Decrypting Data
+2	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Data Types
+6	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Enumerated Types
+14	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDDataSearchInfo
+13	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDDomain
+13	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDHighlightInfo
+2	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDMenu
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDNavDataStatusSink
+8	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDNavigationManager
+11	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDNavigatorSink
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDParentalManagementTable
+15	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDProgramChain
+8	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDROM
+6	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDStreamAttributes
+16	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDStreamControlInfo
+3	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDTextManager
+2	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDTimeMap
+8	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDTitleSet
+24	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDUserOperation
+17	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IDVDVideoVolume
+7	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Interfaces :: IEnumDVD_XXXX
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Macros
+14	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: DVD-Video API Reference :: DVD-Video API Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Understanding the DVD-Video API :: Architectural Overview
+7	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Understanding the DVD-Video API :: The DVD Standard
+2	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Adding More Player Features
+4	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Advanced DVD Player Application Topics
+3	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Advanced DVD Player Application Topics :: Examining the DVDSample Sample Application
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Advanced DVD Player Application Topics :: Examining the DVDSample Sample Application :: The DVDSample Control Panel
+1	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Advanced DVD Player Application Topics :: Examining the DVDSample Sample Application :: The DVDSample Startup Sequence
+4	Windows CE .NET :: Product Documentation :: Application Development :: DVD-Video API :: Using the DVD-Video API :: Creating a Simple DVD Player
+30	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: Database Reference :: Database Functions
+4	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: Database Reference :: Database Macros
+6	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: Database Reference :: Database Messages
+11	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: Database Reference :: Database Structures
+1	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: FSD Reference
+7	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: FSD Reference :: FSD Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: FSD Reference :: FSD Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: File I/O Reference :: File I/O Enumerations
+15	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: File I/O Reference :: File I/O Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: File I/O Reference :: File I/O Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: File Mapping Reference :: File Mapping Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Data Store and Registry :: Registry Reference
+13	Windows CE .NET :: Product Documentation :: Application Development :: Device Management
+4	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Operation
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Operation :: Device Download Event
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Operation :: Reports to the Server
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Functions
+4	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: Conditional Expressions
+6	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: Environment Commands
+5	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: File System Commands
+2	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: Registry Commands
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: Schedule/Report Commands
+6	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: Scripting Support Commands
+2	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Script Engine Commands :: System Commands
+4	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Download Event Status Document Elements
+2	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Instruction Request Document Elements
+15	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Instruction Response Document Elements
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Machine Inventory Report Document Elements
+7	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Package Location Request Document Elements
+12	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Package Location Response Document Elements
+20	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Poll Request Document Elements
+20	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Poll Response Document Elements
+3	Windows CE .NET :: Product Documentation :: Application Development :: Device Management :: Device Management Reference :: Device Management XML Elements :: Software Inventory Report Document Elements
+2	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking
+9	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Overview of RAS
+5	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Phone-Book Operation
+4	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Point-to-Point Protocol
+5	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Point-to-Point Protocol :: Creating a PPP Dial-up Session
+2	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS AutoDial
+6	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS Custom Scripting
+2	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS Reference :: RAS Enumerations
+21	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS Reference :: RAS Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS Reference :: RAS Messages
+11	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: RAS Reference :: RAS Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Sample Application
+2	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Sample Application :: Receiving Connection Data
+6	Windows CE .NET :: Product Documentation :: Application Development :: Dial-up Networking :: Scripting Reference :: Scripting Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw
+9	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Advanced DirectDraw Information
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Advanced DirectDraw Information :: Porting Older DirectDraw Code
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Advanced DirectDraw Information :: Taking Advantage of DMA Support
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Advanced DirectDraw Information :: Using DirectDraw Palettes in Windowed Mode
+10	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Advanced DirectDraw Information :: Video Ports
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Callback Functions
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Functions
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDDVideoPortContainer
+23	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDraw4
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDrawClipper
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDrawColorControl
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDrawPalette
+42	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDrawSurface5
+14	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Interfaces :: IDirectDrawVideoPort
+18	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: DirectDraw Reference :: DirectDraw Structures
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Exploring Graphics Concepts
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Getting Started with DirectDraw
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Getting Started with DirectDraw :: Cooperative Levels
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Getting Started with DirectDraw :: DirectDraw Architecture
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Getting Started with DirectDraw :: Display Modes
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Clippers
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Objects
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Palettes
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Basic Concepts of Surfaces
+11	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Blitting to Surfaces
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: COM Reference Count Semantics for Surfaces
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Color Controls
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Creating Surfaces
+10	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Overlay Surfaces
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with DirectDraw Surfaces :: Surfaces and Device Contexts
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectDraw :: Working with Graphics Devices
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow Architecture
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow Architecture :: Event Notification in DirectShow
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow Architecture :: Graph Building with Intelligent Connect
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow Architecture :: The Filter Graph And Its Components
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow C++ Class Library :: Base Classes
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow C++ Class Library :: Base Classes :: Base Classes that Implement Interfaces
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow C++ Class Library :: Base Classes :: Base Classes that Implement Interfaces :: Transport Base Classes
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectShow C++ Class Library :: Utility Classes
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: DMO Base Class Reference :: IMediaObjectImpl Class Template
+9	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Enumerated Types
+11	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IDMOQualityControl
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IDMOVideoOutputOptimizations
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IEnumDMO
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IMediaBuffer
+21	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IMediaObject
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Interfaces :: IMediaObjectInPlace
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMO Reference :: Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: DMOs and Media Types
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: DirectX Media Objects :: Using DirectX Media Objects
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Getting Started with DirectShow :: Introduction to DirectShow Application Programming
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Getting Started with DirectShow :: Playing a Media File
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Getting Started with DirectShow :: Responding to Events
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Getting Started with DirectShow :: Setting the Video Window
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: DirectShow Architecture for Filter Developers
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: DirectShow Architecture for Filter Developers :: Data Flow in the Filter Graph
+2	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: DirectShow Architecture for Filter Developers :: How Filters Connect
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: DirectShow and COM
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: File Formats
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: File Formats :: AVI RIFF File Reference
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters :: Connecting Transform Filters
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters :: Creating a Transform Filter
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters :: Creating a Transform Filter :: Override the Base Class Member Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters :: Using the CTransformFilter and CTransInPlaceFilter Transform Base Classes
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Transform Filters :: Write a Transform Filter in C/C++
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Video Renderers
+9	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Video Renderers :: Alternative Video Renderers
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectShow :: Writing DirectShow Filters :: Video Renderers :: Full-Screen Video Renderer
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Architecture
+13	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Essentials :: DirectSound Buffers
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Essentials :: DirectSound Devices
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Essentials :: DirectSoundCapture
+4	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Essentials :: Optimizing DirectSound Performance
+5	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces
+6	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IDirectSound
+18	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IDirectSoundBuffer
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IDirectSoundCapture
+9	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IDirectSoundCaptureBuffer
+1	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IDirectSoundNotify
+3	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Interfaces :: IKsPropertySet
+7	Windows CE .NET :: Product Documentation :: Application Development :: DirectSound :: DirectSound Reference :: DirectSound Structures
+4	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol
+1	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: Configuration User Interface
+4	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: EAP Authentication Protocols
+4	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: EAP Implementation Details
+2	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: Extensible Authentication Protocol Reference :: Extensible Authentication Protocol Enumerations
+9	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: Extensible Authentication Protocol Reference :: Extensible Authentication Protocol Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Extensible Authentication Protocol :: Extensible Authentication Protocol Reference :: Extensible Authentication Protocol Structures
+4	Windows CE .NET :: Product Documentation :: Application Development :: FTP Server
+1	Windows CE .NET :: Product Documentation :: Application Development :: FTP Server :: Accessing the FTP Protocol
+5	Windows CE .NET :: Product Documentation :: Application Development :: FTP Server :: FTP Server Implementation
+1	Windows CE .NET :: Product Documentation :: Application Development :: File and Print Server
+2	Windows CE .NET :: Product Documentation :: Application Development :: File and Print Server :: SMB Server Registry Settings
+9	Windows CE .NET :: Product Documentation :: Application Development :: Fonts
+2	Windows CE .NET :: Product Documentation :: Application Development :: Fonts :: Creating End User Defined Characters
+7	Windows CE .NET :: Product Documentation :: Application Development :: Fonts :: Font Registry Settings
+21	Windows CE .NET :: Product Documentation :: Application Development :: Fonts :: Fonts Reference :: Fonts Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Fonts :: Fonts Reference :: Fonts Messages
+5	Windows CE .NET :: Product Documentation :: Application Development :: Fonts :: Fonts Reference :: Fonts Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Handwriting Recognition
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Handwriting Recognition :: Recognizing a Hand-Drawn Character
+5	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Appendix :: Input Method Editor Constants
+3	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Appendix :: Locale Identifiers
+30	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Function Identifiers
+107	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Functions
+9	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Interfaces :: IFEDictionary
+9	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Interfaces :: IImeIPoint2
+17	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Interfaces :: IImeIPointNotifySink
+8	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Interfaces :: IKoreanImeUI
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Macros
+48	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Messages
+21	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Reference :: Internationalization Structures
+8	Windows CE .NET :: Product Documentation :: Application Development :: Internationalization :: Internationalization Registry Settings
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: Auto Dial for ICS
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: DHCP Allocator
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: DNS Proxy
+5	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: ICS Reference :: ICS Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: ICS Web-based Configuration Utility
+6	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: Internet Connection Sharing Registry Settings
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: NAT Editor
+6	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: Network Address Translation
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: Network Address Translation :: NAT Traversal
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Connection Sharing :: Network Address Translation :: NAT and Applications
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer 6.0
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Browser Control Host
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Browser Control Host :: Adding Internet Browsing Functionality to Your Application
+10	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer MSHTML/DHTML API
+10	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API
+6	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Enumerations
+6	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IEnumCodePage
+3	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IEnumRfc1766
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IEnumScript
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMLangCodePages
+7	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMLangConvertCharset
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMLangFontLink
+7	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMLangFontLink2
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMLangLineBreakConsole
+14	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMultiLanguage
+23	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMultiLanguage2
+2	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Interfaces :: IMultiLanguage3
+5	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Objects
+6	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Multiple-Language API :: Internet Explorer MLang Reference :: Internet Explorer MLang Structures
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Television-Style Navigation
+1	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Television-Style Navigation :: Internet Explorer Television-Style Navigation Reference :: Internet Explorer Television-Style Navigation Enumerations
+4	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Television-Style Navigation :: Internet Explorer Television-Style Navigation Reference :: Internet Explorer Television-Style Navigation Interfaces :: IOleControlNavigation2
+7	Windows CE .NET :: Product Documentation :: Application Development :: Internet Explorer Television-Style Navigation :: Internet Explorer Television-Style Navigation Reference :: Internet Explorer Television-Style Navigation Interfaces :: IOleControlNavigation2AdviseSink
+3	Windows CE .NET :: Product Documentation :: Application Development :: JScript 5.5
+2	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client
+3	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Directory Service
+3	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Protocol Operations
+1	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference
+1	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Callback Functions
+14	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Directory Entry Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Error Handling Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Memory Management Functions
+14	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Search Functions
+6	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: LDAP Session Functions
+18	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Functions :: Other LDAP Functions
+8	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: LDAP Reference :: LDAP Structures
+8	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: Using the LDAP API
+2	Windows CE .NET :: Product Documentation :: Application Development :: LDAP Client :: Using the LDAP API :: Processing Search
+9	Windows CE .NET :: Product Documentation :: Application Development :: Multiple Screens
+6	Windows CE .NET :: Product Documentation :: Application Development :: Multiple Screens :: Multiple Screens Reference :: Multiple Screens Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: Multiple Screens :: Multiple Screens Reference :: Multiple Screens Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Network Bridging
+3	Windows CE .NET :: Product Documentation :: Application Development :: Network Bridging :: Network Bridging Object Identifiers
+1	Windows CE .NET :: Product Documentation :: Application Development :: Network Bridging :: Network Bridging Registry Settings
+2	Windows CE .NET :: Product Documentation :: Application Development :: Network Bridging :: Network Bridging Spanning Tree Algorithm
+1	Windows CE .NET :: Product Documentation :: Application Development :: Network User Interface
+12	Windows CE .NET :: Product Documentation :: Application Development :: Network User Interface :: Network User Interface Reference :: Network User Interface Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Network User Interface :: Network User Interface Reference :: Network User Interface Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol
+9	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: Client Support
+1	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: Client Support :: Device Discovery
+1	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Enumerations
+3	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IDeviceEnum
+22	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IHeaderCollection
+3	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IHeaderEnum
+7	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IObex
+8	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IObexDevice
+1	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Interfaces :: IObexSink
+3	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Reference :: OBEX Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: OBEX Samples
+2	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: Server Support
+2	Windows CE .NET :: Product Documentation :: Application Development :: Object Exchange Protocol :: Server Support :: OBEX Server Services
+2	Windows CE .NET :: Product Documentation :: Application Development :: PPTP
+1	Windows CE .NET :: Product Documentation :: Application Development :: PPTP :: Establishing a PPTP Connection
+4	Windows CE .NET :: Product Documentation :: Application Development :: Pocket Internet Explorer
+2	Windows CE .NET :: Product Documentation :: Application Development :: Pocket Internet Explorer :: Pocket Internet Explorer Registry Settings
+1	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Mouse
+2	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Mouse :: Receiving Mouse Messages
+23	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Reference :: Functions
+13	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Reference :: Messages
+1	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Reference :: Strucutures
+1	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Stylus
+1	Windows CE .NET :: Product Documentation :: Application Development :: Pointer :: Stylus :: Capturing Stylus Input
+1	Windows CE .NET :: Product Documentation :: Application Development :: Printing
+6	Windows CE .NET :: Product Documentation :: Application Development :: Printing :: Printing Reference :: Printing Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Printing :: Printing Reference :: Printing Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming)
+1	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming) :: Configuring the RAS Server
+1	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming) :: RAS Server Reference :: RAS Server Enumerations
+1	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming) :: RAS Server Reference :: RAS Server Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming) :: RAS Server Reference :: RAS Server Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: RAS Server/PPTP Server (Incoming) :: RAS Server Registry Settings
+4	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol
+5	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: Implementing Virtual Channels
+7	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: RDP Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: RDP Structures
+5	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsRdpClient
+1	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsRdpClientAdvancedSettings
+5	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsRdpClientAdvancedSettings :: IMsRdpClientAdvancedSettings Property Descriptions
+2	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsRdpClientNonScriptable
+1	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsRdpClientSecuredSettings
+14	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsTscAdvancedSettings
+23	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsTscAx
+9	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsTscAxEvents
+10	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsTscNonScriptable
+4	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: RDP Reference :: Remote Desktop ActiveX Control Interface :: IMsTscSecuredSettings
+3	Windows CE .NET :: Product Documentation :: Application Development :: Remote Desktop Protocol :: Terminal Services Programming Guidelines
+5	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe
+2	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Configuring Services.exe to Load a Standalone Service
+2	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Controlling a Running Service
+17	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Services.exe Reference :: Services.exe Functions
+17	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Services.exe Reference :: Services.exe IOCTLS
+2	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Services.exe Reference :: Services.exe Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Services.exe :: Super Services
+7	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol
+3	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: Management Information Base :: Developing a MIB
+5	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: Management Information Base :: Host Resources MIB
+8	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: Management Information Base :: MIB-II
+2	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP API Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP Extension Agent :: Extension-Agent Architecture
+1	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP Extension Agent :: Writing an SNMP Extension Agent
+36	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP Reference :: SNMP Functions
+6	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP Reference :: SNMP Structures
+6	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SNMP Registry Settings
+3	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SnmpTfx Framework
+4	Windows CE .NET :: Product Documentation :: Application Development :: Simple Network Management Protocol :: SnmpTfx Framework :: SnmpTfx Framework Structures
+1	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card
+2	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card CSP
+5	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card Concepts
+1	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card Reference
+27	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card Reference :: Smart Card Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card Reference :: Smart Card Structures
+6	Windows CE .NET :: Product Documentation :: Application Development :: Smart Card :: Smart Card Resource Manager
+5	Windows CE .NET :: Product Documentation :: Application Development :: Spell Checker
+14	Windows CE .NET :: Product Documentation :: Application Development :: Spell Checker :: Spell Checker Reference :: Spell Checker Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: Spell Checker :: Spell Checker Reference :: Spell Checker Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API
+6	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Establishing a Modem Connection
+3	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Establishing a Modem Connection :: Incoming Calls
+1	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Establishing a Modem Connection :: Shutting Down TAPI
+2	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Establishing a Modem Connection :: Supplementary Telephony Functions
+65	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Reference :: TAPI Constants
+67	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Reference :: TAPI Functions :: TAPI Line Device Functions
+24	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Reference :: TAPI Functions :: TAPI Phone Device Functions
+21	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Reference :: TAPI Messages
+27	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Reference :: TAPI Structures
+7	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TAPI Registry Settings
+1	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TSPI Reference
+2	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TSPI Reference :: TSPI Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TSPI Reference :: TSPI Functions :: TSPI Callback Functions
+46	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: TSPI Reference :: TSPI Functions :: TSPI Line Device Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Telephony Service Provider Interface
+2	Windows CE .NET :: Product Documentation :: Application Development :: Telephony API :: Telephony Service Provider Interface :: Sample TSP
+4	Windows CE .NET :: Product Documentation :: Application Development :: Telnet Server
+7	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services
+3	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Enumerations
+3	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetBindInfo
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetPriority
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetProtocol
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetProtocolInfo
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetProtocolRoot
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetProtocolSink
+3	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetProtocolSinkStackable
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Interfaces :: IInternetSession
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Asynchronous Pluggable Protocols Reference :: Asynchronous Pluggable Protocols Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Hit Logging Reference :: Hit Logging Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: Hit Logging Reference :: Hit Logging Structures
+9	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Enumerations
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Errors
+32	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IAuthenticate
+3	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IBindHost
+7	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IBindStatusCallback
+4	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IBinding
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IHttpNegotiate
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IHttpSecurity
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IMonikerProp
+6	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IPersistMoniker
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IWinInetHttpInfo
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IWinInetInfo
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Interfaces :: IWindowForBindingUI
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Moniker Services Reference :: URL Moniker Services Structures
+5	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Constants
+7	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Enumerations
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Functions
+3	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Interfaces :: IInternetHostSecurityManager
+8	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Interfaces :: IInternetSecurityManager
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Interfaces :: IInternetSecurityMgrSite
+9	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Interfaces :: IInternetZoneManager
+2	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Objects
+1	Windows CE .NET :: Product Documentation :: Application Development :: URL Moniker Services :: URL Security Zones Reference :: URL Security Zones Structures
+3	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development)
+1	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP C Device Host Reference (Windows CE .NET Application Development) :: UPnP C Device Host Enumerations (Windows CE .NET Application Development)
+11	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP C Device Host Reference (Windows CE .NET Application Development) :: UPnP C Device Host Functions (Windows CE .NET Application Development)
+4	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP C Device Host Reference (Windows CE .NET Application Development) :: UPnP C Device Host Structures (Windows CE .NET Application Development)
+2	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Device Host Reference (Windows CE .NET Application Development) :: UPnP Device Host Interfaces (Windows CE .NET Application Development) :: IUPnPDeviceControl (Windows CE .NET Application Development)
+2	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Device Host Reference (Windows CE .NET Application Development) :: UPnP Device Host Interfaces (Windows CE .NET Application Development) :: IUPnPEventSink (Windows CE .NET Application Development)
+2	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Device Host Reference (Windows CE .NET Application Development) :: UPnP Device Host Interfaces (Windows CE .NET Application Development) :: IUPnPEventSource (Windows CE .NET Application Development)
+4	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Device Host Reference (Windows CE .NET Application Development) :: UPnP Device Host Interfaces (Windows CE .NET Application Development) :: IUPnPRegistrar (Windows CE .NET Application Development)
+2	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Device Host Reference (Windows CE .NET Application Development) :: UPnP Device Host Interfaces (Windows CE .NET Application Development) :: IUPnPReregistrar (Windows CE .NET Application Development)
+6	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: UPnP Framework (Windows CE .NET Application Development)
+2	Windows CE .NET :: Product Documentation :: Application Development :: Universal Plug and Play (UPnP) (Windows CE .NET Application Development) :: Using the UPnP Device Host API (Windows CE .NET Application Development)
+3	Windows CE .NET :: Product Documentation :: Application Development :: VBScript 5.5 for Internet Explorer
+13	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Player Control
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Player Control :: Unsupported Items
+21	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Player Control :: Windows Media Player Control Reference :: Windows Media Player Events
+20	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Player Control :: Windows Media Player Control Reference :: Windows Media Player Methods
+84	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Player Control :: Windows Media Player Control Reference :: Windows Media Player Properties
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Technologies
+17	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Technologies :: ASX Elements Reference
+11	Windows CE .NET :: Product Documentation :: Application Development :: Windows Media Technologies :: Windows Media Event Notification Codes
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Messenger
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Messenger :: Windows Messenger Registry Settings
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector
+4	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Accessing Remote File Systems
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Managing Network Connections with WNet
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Managing Network Connections with WNet :: Connecting to a Network
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Managing Network Connections with WNet :: Retrieving Network Data
+11	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Windows Networking API/Redirector Reference :: Windows Networking API/Redirector Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Networking API/Redirector :: Windows Networking API/Redirector Reference :: Windows Networking API/Redirector Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Application Development
+8	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Application Development :: Creating an IP Multicast Application
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Backward Compatibility for Windows Sockets 1.1 Applications
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Multiple Transport Protocols
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Winsock Name Resolution
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Winsock Name Resolution :: Protocol-Independent Name Resolution
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Winsock Overlapped I/O and Event Objects
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock 2.2 :: Winsock Features :: Winsock Secure Sockets
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Reference
+29	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Reference :: Winsock Functions :: Socket Functions
+31	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Reference :: Winsock Functions :: Windows-Specific Extension Functions
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Reference :: Winsock Structures
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock SPI Reference
+4	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI)
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Event Objects in the Winsock SPI
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Name Resolution Service Provider Requirements
+4	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Namespace Provider Configuration and Installation
+4	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Namespace Provider Configuration and Installation :: Compatible Name Resolution for TCP/IP in the Windows Sockets 1.1 SPI
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Notification of Network Events
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Protocol-Independent Multicast and Multipoint in the SPI
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Socket Connections on Connection-Oriented Protocols
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Socket Connections on Connectionless Protocols
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Socket Creation and Descriptor Management
+5	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Socket I/O
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Socket Options and IOCTLs
+3	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Summary of SPI Functions
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Winsock as a WOSA Component
+2	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Winsock as a WOSA Component :: Data Transport Providers
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Winsock as a WOSA Component :: Function Interface Model
+1	Windows CE .NET :: Product Documentation :: Application Development :: Windows Sockets :: Winsock Service Provider Interface (SPI) :: Winsock as a WOSA Component :: Winsock Service Providers
+5	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference
+4	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Error Messages
+3	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Events
+65	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Methods
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: DOMDocument
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMAttribute
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMCDATASection
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMCharacterData
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMComment
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMDocument2
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMDocumentFragment
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMDocumentType
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMElement
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMEntity
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMEntityReference
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMImplementation
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMNamedNodeMap
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMNode
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMNodeList
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMNotation
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMParseError
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMProcessingInstruction
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMSelection
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: IXMLDOMText
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Objects/Interfaces :: XMLSchemaCache/IXMLDOMSchemaCollection
+67	Windows CE .NET :: Product Documentation :: Application Development :: XML Core Services and Document Object Model :: XML DOM Reference :: XML DOM Properties
+6	Windows CE .NET :: Product Documentation :: Application Development :: XML HTTP :: XML HTTP Reference :: XML HTTP Methods
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML HTTP :: XML HTTP Reference :: XML HTTP Objects/Interfaces :: IXMLHTTPRequest
+8	Windows CE .NET :: Product Documentation :: Application Development :: XML HTTP :: XML HTTP Reference :: XML HTTP Properties
+2	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT)
+7	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Exploring XSLT Capabilities :: Advanced XSLT Features
+12	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Exploring XSLT Capabilities :: Controlling White Space with XSLT
+5	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Exploring XSLT Capabilities :: XPath
+5	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Exploring XSLT Capabilities :: XSLT Fundamentals
+2	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Getting Started with XSLT
+5	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Developer Guide :: Getting Started with XSLT :: Tutorial: Getting Started with XSLT
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Reference
+36	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Reference :: XSLT Elements
+8	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Reference :: XSLT Functions
+1	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Reference :: XSLT Interfaces :: IXTLRuntime
+9	Windows CE .NET :: Product Documentation :: Application Development :: XML Stylesheet Language Transformations (XSLT) :: XSLT Reference :: XSLT Methods
+5	Windows CE .NET :: Product Documentation :: Getting Started
+7	Windows CE .NET :: Product Documentation :: Getting Started :: Finding Information in Help
+5	Windows CE .NET :: Product Documentation :: Getting Started :: Finding Information in Help :: Using Full-Text Search
+8	Windows CE .NET :: Product Documentation :: Getting Started :: Platform Builder Tutorials :: Tutorial: Creating a Feature and Adding It to a Platform
+9	Windows CE .NET :: Product Documentation :: Getting Started :: Platform Builder Tutorials :: Tutorial: Using Platform Builder with a CEPC
+8	Windows CE .NET :: Product Documentation :: Getting Started :: Platform Builder Tutorials :: Tutorial: Using Platform Builder with the Emulator
+1	Windows CE .NET :: Product Documentation :: Glossary
+8	Windows CE .NET :: Product Documentation :: How-to Topics
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET
+12	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Catalog Features
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Core OS Services
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Core OS Services :: Device Manager
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Multimedia Technologies
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Multimedia Technologies :: Audio Technologies
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Multimedia Technologies :: Graphics Technologies
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Multimedia Technologies :: Media Support Technologies
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: About Windows CE .NET :: Multimedia Technologies :: Media Support Technologies :: Windows Media Summary
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Optional Boot Loader Functions
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions :: Control Flow Functions
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions :: Debug Functions
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions :: Download Functions
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions :: Flash Functions
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Reference :: Required Boot Loader Functions :: Initialization Functions
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Boot Loader Support Libraries
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Ethernet Boot Loader
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Modes for Booting the OS
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Specialized Boot Loaders
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Specialized Boot Loaders :: x86 BIOS Boot Loader
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Boot Loaders :: Specialized Boot Loaders :: x86 ROM Boot Loader
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: Device Driver Libraries
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Event Tracking Implementation
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Event Tracking Implementation :: Event Tracking with OSCapture.exe
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Kernel Independent Transport Layer
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Kernel Independent Transport Layer :: Ethernet Debugging Services
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Kernel Scheduler
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: Kernel States
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Enumerations
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions
+16	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Optional KITL Functions
+38	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Optional OAL Functions
+23	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Other OAL Functions
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Required ILTiming Functions
+13	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Required KITL Functions
+13	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Required OAL Functions
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Functions :: Required Profiling Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Global Variables
+35	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Global Variables :: Optional OAL Variables
+10	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Global Variables :: Required OAL Variables
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: CEDDK IOCTLs
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: Device Information IOCTLs
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: Filesys.exe IOCTLs
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: KITL IOCTLs
+12	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: Other OAL IOCTLs
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: Power Manager IOCTLs
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: Security IOCTLs
+11	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL IOCTLs :: VMINI IOCTLs
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Macros
+76	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Board Support Packages :: OEM Adaptation Layer :: OAL Reference :: OAL Structures
+28	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop a Boot Loader
+9	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Adding KITL Initialization Code
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Completing an OAL
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Completing an OAL :: Implementing CEDDK.dll :: CEDDK Enumerations
+34	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Completing an OAL :: Implementing CEDDK.dll :: CEDDK Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Completing an OAL :: Implementing CEDDK.dll :: CEDDK Structures
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Completing an OAL :: Supporting High-Resolution Timers
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Customizing Memory
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Customizing Memory :: Configuring System Memory
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Enabling Power Management
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Enabling Power Management :: Sample Platform Implementations of OEMIdle
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Enabling Power Management :: Sample Platform Implementations of OEMIdle :: Boilerplate Interface Routines
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Implementing an ISR
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Implementing the OEMInit Function
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Implementing the OEMIoControl Function
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Implementing the OEMIoControl Function :: Supporting Interrupt Latency Timing
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Microprocessor-specific Issues
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: Microprocessor-specific Issues :: x86 Microprocessor
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: OAL StartUp Function Implementation :: CPU Initialization
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: OAL StartUp Function Implementation :: CPU Initialization :: ARM Kernels
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: OAL StartUp Function Implementation :: Kernel Initialization
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: OAL StartUp Function Implementation :: Kernel Initialization :: Other Kernel Tasks
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: How to Create a Board Support Package :: How to Develop an OEM Adaptation Layer :: OEMCacheRangeFlush Function Implementation
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: ARM Board Support Packages :: How to Use the BSP for the ARM Integrator AP SDB
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: ARM Board Support Packages :: How to Use the BSP for the Intel XScale DBPXA250 Development Platform
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: ARM Board Support Packages :: How to Use the BSP for the SMDK2410 Samsung MCU Development Kit
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: MIPS Board Support Packages :: How to Use the BSP for the AMD DBAu1500 Development Board
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: MIPS Board Support Packages :: How to Use the BSP for the NEC DDB-Vr4122 (Eagle) SDB
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: MIPS Board Support Packages :: How to Use the BSP for the NEC Solution Gear 2 Series Development Kit
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: SHx Board Support Packages :: How to Use the BSP for the Hitachi US7729 HARP (Keywest) SDB
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: SHx Board Support Packages :: How to Use the BSP for the Hitachi US7750 HARP (Aspen) SDB
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: Advantech PCM-5822 and PCM-5823 Biscuit PC
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Add a CEPC to an Ethernet Network
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Boot an OS Image on a CEPC from a Hard Disk Drive
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Configure a CEPC to Download an OS Image
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Configure a Hard Disk Drive on a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Configure and Build an OS Image for a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Customize Memory on a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Debug an OS Image on a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Decrease Run-Time Image Size on a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Develop an Application for a CEPC
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: How to Set Up a CEPC
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: CEPC-based SDBs :: Other CEPC-based SDBs
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: Lanner EM-350 and EM-351 Embedded Single Board Computers
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Board Support Package Development :: Supported Board Support Packages :: x86 Board Support Packages :: National Geode SP4SC30 Development Platform
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Choosing an Internet Browser
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Digital Media Receiver Configuration
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Enterprise Terminal Configuration
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Enterprise Web Pad Configuration
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Enterprise Web Pad Configuration :: Enterprise Web Pad Features
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Gateway Configuration
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Gateway Configuration :: How to Create a Gateway
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Gateway Configuration :: How to Create a Gateway :: Customizing the Gateway
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: IP Phone Configuration
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: IP Phone Configuration :: How to Create an IP Phone on a CEPC
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: IP Phone Configuration :: How to Create an IP Phone on an Emulator
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: IP Phone Configuration :: How to Use the IP Phone to Call Windows Messenger
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Industrial Controller Configuration
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Internet Appliance Configuration
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Mobile Handheld Configuration
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Mobile Phone Configuration
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Set-Top Box Configuration
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Tiny Kernel Configuration
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Windows Thin Client Configuration
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Windows Thin Client Configuration :: How to Create a Windows Thin Client Platform
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Windows Thin Client Configuration :: How to Create a Windows Thin Client Platform :: Customizing the Thin Client OS Image
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Configuration Selection :: Windows Thin Client Configuration :: Working with UUIDs
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating a Custom Shell
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating a Custom Shell :: Shell Components
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating a Custom Shell :: Shell Components :: Common Dialog Boxes
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating a Custom Shell :: Shell Reference :: Shell Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating a Custom Shell :: Shell Reference :: Shell Structures
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Creating an Internet Browser
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: Customizing File Storage
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: Customizing File Storage :: Adding an Installable File System
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: Customizing the Registry
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: Customizing the Registry :: Hive-based Registry
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: Customizing the Registry :: RAM-based Registry
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: File and Database Replication
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the File System :: User Profiles
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Creating a Skin
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Customizing Dialog Boxes and Message Boxes
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Customizing Fonts
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Customizing Fonts :: How to Implement ClearType
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Customizing Fonts :: Replacing Fonts
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Customizing a UI Component
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: How to Implement Screen Rotation
+11	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Out of Memory User Interface Reference :: Out of Memory User Interface Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Out of Memory User Interface Reference :: Out of Memory User Interface Structures
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Startup User Interface Reference :: Startup User Interface Functions
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: Touch Screen Calibration Reference :: Touch Screen Calibration Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs
+9	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: ButtonView_t
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: CacheView_t
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: ComboBoxView_t
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: CommCtrlView_t
+98	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: Gdi
+50	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: GweBypassCoredllThunk_t
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: HeaderView_t
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: ProgressBarView_t
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: RebarView_t
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: ScrollBarView_t
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: StaticControlView_t
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: StockObjectHandles
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: TabView_t
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: ToolBarView_t
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Classes and Methods :: TrackBarView_t
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Enumerations
+9	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Macros
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Customizing the User Interface :: User Interface Reference for OEMs :: User Interface Structures
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack
+47	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Bluetooth Platform Development Reference :: Bluetooth Platform Development Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Bluetooth Stack Extension Layer Reference :: Bluetooth Stack Extension Layer Data Types
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Bluetooth Stack Extension Layer Reference :: Bluetooth Stack Extension Layer Functions
+19	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Bluetooth Stack Extension Layer Reference :: Bluetooth Stack Extension Layer IOCTLs
+7	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Bluetooth Stack Extension Layer Reference :: Bluetooth Stack Extension Layer Structures
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Establishing Connections through HCI
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Bluetooth Stack :: Interface References
+10	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Security of a Device
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Security of a Device :: Create a Trusted Environment
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enhancing the Security of a Device :: Create a Trusted Environment :: Creating a Signature
+17	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Enrolling for a Certificate
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Build a Multilingual Platform Using MUI
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Configure the Web Server
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Replace the Network UI for a Target Device
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Replace the Network UI for a Target Device :: Functions Exported by the Network UI
+14	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Set Up a Wireless Network with a Security Infrastructure
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Set Up a Wireless Network with a Security Infrastructure :: Configuring the Wireless Access Points for a Network with a Security Infrastructure
+13	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Set Up an 802.1x Network and Connect to It with a CEPC
+4	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: How to Set Up an 802.1x Network and Connect to It with a CEPC :: Testing Wireless Connectivity
+6	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Implementing Notifications
+17	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Implementing Notifications :: Notification Reference :: Notification Functions
+1	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Implementing Notifications :: Notification Reference :: Notification Global Variables
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Implementing Notifications :: Notification Reference :: Notification Structures
+5	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Implementing Notifications :: Using the Base Notification Engine
+2	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: Developing Platform Elements :: Troubleshooting: Platform Performance Insufficient
+3	Windows CE .NET :: Product Documentation :: Operating System Development :: Platform Development :: How to Create a Windows CE .NET-based Platform
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Add-in Events
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Add-in Interfaces :: IApplication
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Add-in Interfaces :: IDSAddIn
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tool Commands
+14	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: CAB Wizard Overview
+7	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: CAB Wizard Overview :: Creating an .inf File
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: CAB Wizard Overview :: Creating an .inf File :: DefaultInstall
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Cvrtbin Tool
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Load CEPC Tool
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Make Binary Image Tool
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Nmake Tool
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Nmake Tool :: Commands in a .mak File
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Nmake Tool :: Description Blocks
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Nmake Tool :: Inference Rules
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Nmake Tool :: Macros and Nmake.exe
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Set Environment Variable Tool
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: Sysgen Capture Tool
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Builder Reference :: Command-Line Tools :: fMerge Tool
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: BSP Wizard Overview
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: Catalog Feature Creation :: Catalog Feature Files
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: Export Wizard
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: How to Add a Device Driver to the Catalog
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: How to Add an Application to the Catalog
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Catalog Customization :: How to Edit .cec Files Using a Text Editor
+15	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Platform Localization
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Platform Localization :: Code Page Selection
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Platform Localization :: Configuration File Localization
+7	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Platform Localization :: East Asian Locale Localization
+7	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Project Creation
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: CPU Configurations
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: Development Language Selection for an SDK
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: Emulator Support for an SDK
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: OEM End User License Agreement
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: OEM Help Files
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: SDK Installation and Product Properties
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: About Platform Builder :: Platform Customization :: Software Development Kit Customization :: User-defined Files in an SDK
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: About Microprocessor Compilers
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: About Microprocessor Compilers :: Compiler Options
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: About Microprocessor Compilers :: Compiler Options :: General-Purpose Compiler Options
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: About Microprocessor Compilers :: Compiler Setup Mechanisms
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: About Microprocessor Compilers :: Compiler-generated Decorated Function Names
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: Microprocessor Intrinsic Functions
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: Microprocessor Intrinsic Functions :: Common Intrinsic Functions
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: Microprocessor Intrinsic Functions :: Microprocessor-specific Intrinsic Functions
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: Microprocessor Intrinsic Functions :: Microprocessor-specific Intrinsic Functions :: Intrinsic Functions for ARM Microprocessors
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: Microprocessor Intrinsic Functions :: Microprocessor-specific Intrinsic Functions :: Intrinsic Functions for MIPS Microprocessors
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: About Supported Microprocessors :: What's New in Supported Microprocessors
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Assembler Reference :: ARM Assembler Error Messages
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Assembler Reference :: Assembler Directive Examples
+10	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Assembler Reference :: Assembler Macros
+8	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Assembler Reference :: Hitachi Assembler Error Messages
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Assembler Reference :: MIPS Assembler Error Messages
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: ARM Compiler Command-Line Options
+68	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: General Compiler Command-Line Options
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: General Compiler Command-Line Options :: /YX - Automate Precompiled Header
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: General Compiler Command-Line Options :: /Ze - Enable Language Extensions
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: Hitachi Compiler Command-Line Options
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: MIPS Compiler Command-Line Options
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Compiler Reference :: Microprocessor pdata Structures
+31	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Intrinsic Function Reference :: ARM Intrinsic Functions
+27	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Intrinsic Function Reference :: Common Intrinsics
+15	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Intrinsic Function Reference :: Hitachi Intrinsic Functions
+213	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Intrinsic Function Reference :: MIPS Intrinsic Functions
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Intrinsic Function Reference :: Macros for Common Intrinsics
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: ARM Assembler :: ARM Assembler Command-Line Options
+9	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: ARM Assembler :: ARM Assembler Directives
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: ARM Calling Sequence Specification
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: ARM Calling Sequence Specification :: ARM Prolog and Epilog
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: THUMB-enabled ARM Implementation
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: THUMB-enabled ARM Implementation :: Declspecs
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: ARM Guide :: THUMB-enabled ARM Implementation :: Linker-Generated Thunking Routines
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-3 Calling Sequence Specification
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-3 Calling Sequence Specification :: SH-3 Prolog and Epilog
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-4 Calling Sequence Specification
+5	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-4 Calling Sequence Specification :: SH-4 Parameter Passing
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-4 Calling Sequence Specification :: SH-4 Prolog and Epilog
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH-4 Calling Sequence Specification :: SH-4 Stack Frame Layout
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH3-DSP Calling Sequence Specifications
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH3-DSP Calling Sequence Specifications :: SH3-DSP Instructions
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH3-DSP Calling Sequence Specifications :: SH3-DSP Instructions :: DSP Data Transfer Instructions
+6	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SH3-DSP Calling Sequence Specifications :: SH3-DSP Registers
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Inline Assembly Language
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Inline Assembly Language :: Elements of the SHx __asm Block
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Inline Assembly Language :: Elements of the SHx __asm Block :: SHx Inline Assembly Parameters
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Inline Assembly Language :: SHx Inline Assembly Samples
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHASM Macro Directives
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Assembler Command-line Options
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Series Assembler Directives
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Series Assembler Directives :: SHASM Data and Data Area Directives
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Series Assembler Directives :: SHASM Listing Directives
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Series Assembler Directives :: SHASM Section and Location Directives
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: SHx Series Assembler Directives :: SHASM Symbol Handling Directives
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: Hitachi Guide :: SHx Series Assembler :: What's New for SH-4
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Calling Sequence Specification
+1	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Calling Sequence Specification :: MIPS Parameter Passing
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Calling Sequence Specification :: MIPS Prolog and Epilog :: MIPS Epilog
+2	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Calling Sequence Specification :: MIPS Prolog and Epilog :: MIPS Prolog
+4	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Calling Sequence Specification :: MIPS Stack Frame and Argument Registers
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Device Inline Assembly Language
+3	Windows CE .NET :: Product Documentation :: Platform Builder :: Microprocessor Reference :: Supported Microprocessor Families :: MIPS Guide :: MIPS Device Inline Assembly Language :: The _asm Keyword in MIPS Inline Assembly
+45	Windows CE .NET :: Technical Articles

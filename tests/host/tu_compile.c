@@ -14,6 +14,7 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <psapi.h>
+#include <msgqueue.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -25,10 +26,25 @@ typedef char assert_handle_pointer[(sizeof(HANDLE) == sizeof(void *)) ? 1 : -1];
 #if __SIZEOF_POINTER__ == 4
 typedef char assert_ce_pointer_size[(sizeof(HANDLE) == 4) ? 1 : -1];
 typedef char assert_ce_ulongptr_size[(sizeof(ULONG_PTR) == 4) ? 1 : -1];
+/* M22: MSGQUEUEOPTIONS (ms886759) / MSGQUEUEINFO (ms886758) 32-bit CE
+ * layout as transcribed from the official pages (Msqqueue.h; no tag
+ * published, plain DWORD/BOOL/WORD members, 4-byte alignment). */
+typedef char assert_msgqopt_size[(sizeof(MSGQUEUEOPTIONS) == 20) ? 1 : -1];
+typedef char assert_msgqopt_ro[(offsetof(MSGQUEUEOPTIONS, bReadAccess) == 16) ? 1 : -1];
+typedef char assert_msgqinfo_size[(sizeof(MSGQUEUEINFO) == 28) ? 1 : -1];
+typedef char assert_msgqinfo_wo[(offsetof(MSGQUEUEINFO, wNumWriters) == 26) ? 1 : -1];
+typedef char assert_msgqinfo_cm[(offsetof(MSGQUEUEINFO, dwCurrentMessages) == 16) ? 1 : -1];
 #endif
 
 /* Reference every declared function (no calls, compile-only). */
 static const void *const api_symbols[] = {
+    /* M22: point-to-point message queues (msgqueue.h; Coredll.lib). */
+    (const void *) &CloseMsgQueue,
+    (const void *) &CreateMsgQueue,
+    (const void *) &GetMsgQueueInfo,
+    (const void *) &OpenMsgQueue,
+    (const void *) &ReadMsgQueue,
+    (const void *) &WriteMsgQueue,
     (const void *) &TerminateProcess,
     (const void *) &TerminateThread,
     (const void *) &ExitThread,
@@ -1105,6 +1121,33 @@ static int m21_shaped_usage(void)
             && si.dwStoreSize == 0) ? 0 : 1;
 }
 
+/* M22 usage shape (compile-only; msgqueue.h). */
+static int m22_shaped_usage(void)
+{
+    static const WCHAR qname[] = { 'A', 'k', 'a', 'r', 'i', 'Q', 0 };
+    BYTE buf[64];
+    MSGQUEUEOPTIONS opt;
+    MSGQUEUEINFO info;
+    DWORD cb = 0, got = 0;
+    HANDLE q = 0, q2 = 0;
+
+    opt.dwSize = sizeof(MSGQUEUEOPTIONS);
+    opt.dwFlags = 0;              /* flag values unpublished on the CE
+                                     pages (MSGQUEUE_NOPRECOMMIT etc.) */
+    opt.dwMaxMessages = 8;
+    opt.cbMaxMessage = 64;
+    opt.bReadAccess = TRUE;
+    q = CreateMsgQueue(qname, &opt);
+    q2 = OpenMsgQueue((HANDLE) 0, q, &opt);
+    (void) CloseMsgQueue(q2);
+    (void) CloseMsgQueue(q);
+    (void) GetMsgQueueInfo(q, &info);
+    (void) ReadMsgQueue(q, buf, sizeof(buf), &cb, 0, &got);
+    (void) WriteMsgQueue(q, buf, sizeof(buf), 0, 0);
+    return (info.dwCurrentMessages == 0
+            && opt.cbMaxMessage == 64 && opt.bReadAccess == TRUE) ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1138,5 +1181,9 @@ int host_tu_entry(void)
         return 1;
     if (m20b_shaped_usage() != 0)
         return 1;
-    return m21_shaped_usage() == 0 ? 0 : 1;
+    if (m21_shaped_usage() != 0)
+        return 1;
+    if (m22_shaped_usage() != 0)
+        return 1;
+    return 0;
 }

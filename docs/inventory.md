@@ -475,6 +475,36 @@ pages); coredll def 148 -> 154 exports.
 
 coredll def 154 -> 158 exports.
 
+### M22: Message Queue Point-to-Point Reference (new header `msgqueue.h`)
+
+All pages `ms885168/ms885180/ms885632/ms886765/ms886793/aa450991/ms886758/ms886759`
+were fetched in full from the (v=msdn.10) CE 5.0 archive.  Every
+function page states **Header: Msgqueue.h** and **Link Library:
+Coredll.lib**; OS Versions is **Windows CE .NET 4.0 and later** for
+every item (the APIs were introduced with CE .NET; they remain
+documented in the CE 6.0 / later archives under twin page IDs, e.g.
+CloseMsgQueue `ee488787(v=winembedded.60)`).
+
+| Item | Official page | OS Versions | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| `CloseMsgQueue` | `ms885168` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | closes a queue handle |
+| `CreateMsgQueue` | `ms885180` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | LPCWSTR name (NULL=unnamed, max MAX_PATH); read *or* write access; ERROR_ALREADY_EXISTS if present; handles signalable |
+| `GetMsgQueueInfo` | `ms885632` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | fills MSGQUEUEINFO |
+| `OpenMsgQueue` | `ms886765` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | source-process handle + queue handle; checks dwSize/bReadAccess only |
+| `ReadMsgQueue` | `ms886793` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | ERROR_INSUFFICIENT_BUFFER / ERROR_PIPE_NOT_CONNECTED / ERROR_TIMEOUT |
+| `WriteMsgQueue` | `aa450991` | CE .NET 4.0+ | Msgqueue.h | Coredll.lib | dwFlags = MSGQUEUE_MSGALERT; ERROR_OUTOFMEMORY with MSGQUEUE_NOPRECOMMIT |
+| `MSGQUEUEOPTIONS` + `PMSGQUEUEOPTIONS`/`LPMSGQUEUEOPTIONS` | `ms886759` | CE .NET 4.0+ | Msgqueue.h | — | dwSize/dwFlags/dwMaxMessages/cbMaxMessage/bReadAccess (32-bit layout: size 20) |
+| `MSGQUEUEINFO` + `PMSGQUEUEINFO`/`LPMSGQUEUEINFO` | `ms886758` | CE .NET 4.0+ | Msgqueue.h | — | adds dwCurrentMessages/dwMaxQueueMessages/wNumReaders/wNumWriters (size 28) |
+
+Flag names documented but **values unpublished on the CE pages** (recorded unknown, not defined): `MSGQUEUE_NOPRECOMMIT`, `MSGQUEUE_ALLOW_BROKEN`
+(MSGQUEUEOPTIONS/MSGQUEUEINFO dwFlags) and `MSGQUEUE_MSGALERT`
+(ReadMsgQueue pdwFlags / WriteMsgQueue dwFlags).  The page syntax lines
+print the two struct typedefs without an internal tag ("typedef
+MSGQUEUEINFO{…} MSGQUEUEINFO, …" / "typedef MSGQUEUEOPTIONS_OS{…} …"),
+so the internal tags are treated as unpublished and none is invented.
+
+coredll def 158 -> 164 exports; `windows.h` now includes `msgqueue.h`.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

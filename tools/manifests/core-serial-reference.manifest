@@ -1,0 +1,22 @@
+aa450763	Serial Communications Functions
+ms885166	ClearCommBreak
+ms885167	ClearCommError
+ms885213	EscapeCommFunction
+ms885606	GetCommMask
+ms885607	GetCommModemStatus
+ms885608	GetCommProperties
+ms885609	GetCommState
+ms885610	GetCommTimeouts
+ms886785	PurgeComm
+ms886804	SetCommBreak
+ms886805	SetCommMask
+ms886806	SetCommState
+ms886807	SetCommTimeouts
+aa450896	SetupComm
+aa450957	TransmitCommChar
+aa450985	WaitCommEvent
+aa450765	Serial Communications Structures
+ms885170	COMMPROP
+ms885171	COMMTIMEOUTS
+ms885173	COMSTAT
+ms885192	DCB

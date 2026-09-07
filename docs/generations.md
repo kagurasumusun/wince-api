@@ -238,3 +238,14 @@ CeGetCanonicalPathName `aa517144`, CeGetFileNotificationInfo
 `aa517158` + FILE_NOTIFY_INFORMATION/FILE_ACTION_* (winnt.h,
 `ms889597`).  Manifest file-io-reference.manifest 51 -> 52 pages.
 coredll def 154 -> 158 exports.
+
+**M22 batch — Message Queue Point-to-Point Reference (msgqueue.h):**
+CloseMsgQueue `ms885168`, CreateMsgQueue `ms885180`, GetMsgQueueInfo
+`ms885632`, OpenMsgQueue `ms886765`, ReadMsgQueue `ms886793`,
+WriteMsgQueue `aa450991`, MSGQUEUEOPTIONS `ms886759`, MSGQUEUEINFO
+`ms886758`.  Every page: OS Versions Windows CE .NET 4.0+, Header
+Msgqueue.h, Link Library Coredll.lib.  New header include/msgqueue.h,
+wired into windows.h + Makefile + host TU (32-bit layout asserts).
+Flag values (MSGQUEUE_NOPRECOMMIT / MSGQUEUE_ALLOW_BROKEN /
+MSGQUEUE_MSGALERT) unpublished on the pages -> recorded unknown, not
+defined.  coredll def 158 -> 164 exports.

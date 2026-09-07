@@ -1,0 +1,9 @@
+aa450741	Exception Functions
+aa450784	AbnormalTermination
+ms885620	GetExceptionCode
+ms885621	GetExceptionInformation
+ms886790	RaiseException
+ms886799	ReportFault
+aa450743	Exception Structures
+ms885215	EXCEPTION_POINTERS
+ms885216	EXCEPTION_RECORD

@@ -37,11 +37,22 @@ OUT = "build/pages"
 CACHE = os.path.join(os.path.dirname(__file__), "..", "build", "pages")
 
 
+def split_id(pid):
+    """'ms891279(v=msdn.10)' -> ('ms891279', 'msdn.10').  A bare id
+    (as in the per-book manifests) defaults to the CE 5.0 archive tag."""
+    pid = pid.strip()
+    m = re.match(r"^(.*?)\((v=[\w.]+)\)$", pid)
+    if m:
+        return m.group(1), m.group(2)
+    return pid, "msdn.10"
+
+
 def fetch(pid):
-    path = os.path.join(CACHE, pid + ".html")
+    root, tag = split_id(pid)
+    path = os.path.join(CACHE, root + ".html")
     if os.path.exists(path) and os.path.getsize(path) > 20000:
         return path
-    url = BASE.format(pid + "(v=msdn.10)")
+    url = BASE.format(root + "(" + tag + ")")
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     for attempt in range(3):
         try:
@@ -75,7 +86,8 @@ def text_of(raw):
 
 
 def parse(pid, title):
-    raw = open(os.path.join(CACHE, pid + ".html"), encoding="utf-8",
+    root, _tag = split_id(pid)
+    raw = open(os.path.join(CACHE, root + ".html"), encoding="utf-8",
                errors="replace").read()
     flat = text_of(raw)
     rec = {"id": pid, "title": title, "sig": "", "os": "", "header": "",
@@ -171,9 +183,10 @@ def main():
     if os.path.exists(dbpath):
         with open(dbpath, encoding="utf-8") as fh:
             out = json.load(fh)
-    have = {r["id"] for r in out}
+    have = {split_id(r["id"])[0] for r in out}
     for pid, title in rows:
-        if pid in have:
+        root, _tag = split_id(pid)
+        if root in have:
             print(f"{pid}\t{title[:52]:54} (cached)")
             continue
         try:
