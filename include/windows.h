@@ -15,6 +15,7 @@
 
 #include "windef.h"
 #include "winbase.h"
+#include "winnls.h"
 #include "winerror.h"
 
 #ifdef __cplusplus

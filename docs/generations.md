@@ -148,3 +148,9 @@ GetProcessVersion `ms885636`, GetDllVersion `ms885617`, GetThreadTimes
 `ms885644`, TIME_ZONE_INFORMATION `aa450943`, GetTimeZoneInformation
 `ms885646`, SetTimeZoneInformation `aa450893`, TIME_ZONE_ID_*
 constants.  Def: 80 -> 90 exports.
+
+**M13 batch — code-page / NLS (new header `winnls.h`):**
+MultiByteToWideChar `ms886760`, WideCharToMultiByte `aa450989`,
+IsDBCSLeadByte `ms886515`, IsDBCSLeadByteEx `ms886608` + CP_*, MB_*,
+WC_* constants; `BYTE`/`LPBOOL` added to windef.h.  Def: 90 -> 94
+exports.

@@ -93,7 +93,9 @@ include/windows.h   umbrella (declarations whose page says Header:
 include/windef.h    base types/macros (CE: TCHAR = WCHAR, WINAPI
                     empty, WCHAR 16-bit)
 include/winnt.h     base 64-bit types (LONGLONG/LARGE_INTEGER),
-                    critical-section object, SecureZeroMemory
+                    MEMORY_BASIC_INFORMATION, SecureZeroMemory
+include/winnls.h    code-page / NLS API (MultiByteToWideChar,
+                    WideCharToMultiByte, IsDBCSLeadByte*)
 include/winbase.h   base OS API: process/thread/module/command line,
                     dynamic-link, local memory, file management +
                     synchronous file I/O + directory management,
@@ -201,6 +203,17 @@ declarations, recorded in `docs/inventory.md`):
   `ms885648`/`ms886768`, SignalStarted `aa450898` (PROCESSOR_
   ARCHITECTURE_* and VER_PLATFORM_* with fixed Win32 ABI values).
   def 77 → 80 exports.
+* **M12 (landed):** virtual memory + time zone + version/timing —
+  VirtualAlloc/Free/Protect/Query + MEMORY_BASIC_INFORMATION and
+  MEM_*/PAGE_* constants (`aa450975`/`aa450979`/`aa450980`/`aa450981`/
+  `ms886752`), FlushInstructionCache `ms885595`, GetProcessVersion
+  `ms885636`, GetDllVersion `ms885617`, GetThreadTimes `ms885644`,
+  TIME_ZONE_INFORMATION + Get/SetTimeZoneInformation
+  (`aa450943`/`ms885646`/`aa450893`).  def 80 → 90 exports.
+* **M13 (landed):** code-page / NLS — new `include/winnls.h`
+  (MultiByteToWideChar `ms886760`, WideCharToMultiByte `aa450989`,
+  IsDBCSLeadByte/Ex `ms886515`/`ms886608`, CP_*/MB_*/WC_* constants),
+  `BYTE`/`LPBOOL` in windef.h.  def 90 → 94 exports.
 
 Remaining roadmap: the other *Core OS Reference* books already
 manifested (Process and Thread, Strings, Unicode, System Management,

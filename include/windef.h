@@ -59,6 +59,7 @@ typedef uint32_t        ULONG;
 typedef int             INT;
 typedef unsigned int    UINT;
 typedef int             BOOL;
+typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
 
 typedef int32_t         LONG_PTR;
 typedef uint32_t        ULONG_PTR;
@@ -87,6 +88,7 @@ typedef LONG  *LPLONG;  /* LONG pointer (synchronization functions) */
 typedef WCHAR           TCHAR;
 typedef WCHAR          *LPTSTR;
 typedef const WCHAR    *LPCTSTR;
+typedef BOOL           *LPBOOL;  /* BOOL pointer (WideCharToMultiByte aa450989) */
 
 /* Handle types: opaque pointers (module base addresses on CE; a module
  * handle equals its base address per the CE DllMain documentation). */

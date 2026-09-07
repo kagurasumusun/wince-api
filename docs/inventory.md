@@ -252,6 +252,22 @@ System Management Reference books; already in `build/rows.json`).
 | `TIME_ZONE_ID_UNKNOWN/STANDARD/DAYLIGHT` | names per `ms885646`; values fixed Win32 ABI (0/1/2) | — | Winbase.h | — | |
 | `PDWORD` (windef.h) | used by VirtualProtect page signature `aa450980` | — | Windef.h | — | DWORD pointer typedef |
 
+### M13: code-page / NLS batch (new header `winnls.h`)
+
+*Unicode Reference* book pages; official `(v=msdn.10)` CE 5.0 pages.
+`winnls.h` is the Header row those pages name (Winnls.h).
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `CP_ACP`/`CP_OEMCP`/`CP_MACCP`/`CP_THREAD_ACP`/`CP_SYMBOL`/`CP_UTF7`/`CP_UTF8` | names per `ms886760`/`aa450989`; values fixed Win32 ABI | — | Winnls.h | — | CP_MACCP/CP_SYMBOL/CP_THREAD_ACP marked "Not supported" by the CE pages; kept as constants with the note |
+| `MB_PRECOMPOSED`/`MB_COMPOSITE`/`MB_USEGLYPHCHARS`/`MB_ERR_INVALID_CHARS` | names per `ms886760`; values fixed Win32 ABI | — | Winnls.h | — | |
+| `WC_COMPOSITECHECK`/`WC_DISCARDNS`/`WC_SEPCHARS`/`WC_DEFAULTCHAR` | names per `aa450989`; values fixed Win32 ABI | — | Winnls.h | — | WC_NO_BEST_FIT_CHARS not published by the CE page → undefined |
+| `MultiByteToWideChar` | `ms886760` | CE 1.01+ | Winnls.h | Coredll.lib | maps (not necessarily multibyte) string to wide |
+| `WideCharToMultiByte` | `aa450989` | CE 1.01+ | Winnls.h | Coredll.lib | |
+| `IsDBCSLeadByte` | `ms886515` | CE 1.01+ | Winnls.h | Coredll.lib | BYTE arg |
+| `IsDBCSLeadByteEx` | `ms886608` | CE 1.01+ | Winnls.h | Coredll.lib | |
+| `BYTE`, `LPBOOL` (windef.h) | used by NLS signatures (`ms886515`, `aa450989`) | — | Windef.h | — | windef base types |
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

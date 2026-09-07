@@ -171,6 +171,11 @@ static const void *const api_symbols[] = {
     (const void *) &GetThreadTimes,
     (const void *) &GetTimeZoneInformation,
     (const void *) &SetTimeZoneInformation,
+    /* M13: code-page / NLS (winnls.h). */
+    (const void *) &MultiByteToWideChar,
+    (const void *) &WideCharToMultiByte,
+    (const void *) &IsDBCSLeadByte,
+    (const void *) &IsDBCSLeadByteEx,
 };
 
 /* File structures: layout checks (winbase.h).  CE 32-bit: each
@@ -668,6 +673,35 @@ static int m12_shaped_usage(void)
     return 0;
 }
 
+/* M13 NLS constants (winnls.h; values per fixed Win32 ABI). */
+typedef char assert_nls_vals[
+    (CP_ACP == 0 && CP_OEMCP == 1 && CP_UTF7 == 65000 &&
+     CP_UTF8 == 65001 &&
+     MB_PRECOMPOSED == 1u && MB_ERR_INVALID_CHARS == 8u &&
+     WC_SEPCHARS == 0x20u && WC_DEFAULTCHAR == 0x40u &&
+     WC_COMPOSITECHECK == 0x200u) ? 1 : -1];
+
+/* M13 usage shape (compile-only). */
+static int m13_shaped_usage(void)
+{
+    WCHAR wbuf[16];
+    char abuf[16];
+    int n;
+
+    n = MultiByteToWideChar(CP_UTF8, 0, "abc", 3, wbuf, 16);
+    if (n <= 0)
+        return (int) GetLastError();
+    n = WideCharToMultiByte(CP_UTF8, WC_SEPCHARS, wbuf, n,
+                            abuf, 16, NULL, NULL);
+    if (n <= 0)
+        return (int) GetLastError();
+    if (!IsDBCSLeadByte((BYTE) 0))
+        return (int) GetLastError();
+    if (!IsDBCSLeadByteEx(CP_ACP, (BYTE) 0))
+        return (int) GetLastError();
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -681,5 +715,7 @@ int host_tu_entry(void)
         return 1;
     if (m11_shaped_usage() != 0)
         return 1;
-    return m12_shaped_usage() == 0 ? 0 : 1;
+    if (m12_shaped_usage() != 0)
+        return 1;
+    return m13_shaped_usage() == 0 ? 0 : 1;
 }

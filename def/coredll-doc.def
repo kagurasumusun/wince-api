@@ -63,6 +63,8 @@ EXPORTS
   IsBadCodePtr
   IsBadReadPtr
   IsBadWritePtr
+  IsDBCSLeadByte
+  IsDBCSLeadByteEx
   LoadLibraryW
   LoadLibraryExW
   LocalAlloc
@@ -70,6 +72,7 @@ EXPORTS
   LocalFree
   LocalReAlloc
   LocalSize
+  MultiByteToWideChar
   OpenEventW
   OpenProcess
   PulseEvent
@@ -102,3 +105,4 @@ EXPORTS
   VirtualProtect
   VirtualQuery
   WaitForSingleObject
+  WideCharToMultiByte
