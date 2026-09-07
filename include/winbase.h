@@ -1484,6 +1484,190 @@ LPVOID GetFiberData(void);
  * fiber.  CE .NET 4.0+; Winbase.h; Coredll.lib. */
 VOID SwitchToFiber(LPVOID lpFiber);
 
+/* ------------------------------------------------------------------ */
+/* M17: file I/O continuation (File I/O Reference pages)               */
+/* ------------------------------------------------------------------ */
+
+/* Change-notification filter bits (FindFirstChangeNotification
+ * ms889670 names FILE_NOTIFY_CHANGE_FILE_NAME / _DIR_NAME / _SIZE /
+ * _LAST_WRITE; values are the fixed Win32 ABI bits).  Only these four
+ * are documented for CE. */
+#define FILE_NOTIFY_CHANGE_FILE_NAME   0x00000001u
+#define FILE_NOTIFY_CHANGE_DIR_NAME    0x00000002u
+#define FILE_NOTIFY_CHANGE_SIZE        0x00000008u
+#define FILE_NOTIFY_CHANGE_LAST_WRITE  0x00000010u
+
+/* ms889670 "FindFirstChangeNotification (Windows CE 5.0)":
+ * HANDLE FindFirstChangeNotification(LPCTSTR, BOOL, DWORD).
+ * CE .NET 4.0+; Winbase.h; Coredll.lib.  Creates a change-notification
+ * handle for a directory tree; INVALID_HANDLE_VALUE on failure. */
+HANDLE FindFirstChangeNotificationW(LPCTSTR lpPathName,
+                                      BOOL bWatchSubtree,
+                                      DWORD dwNotifyFilter);
+#define FindFirstChangeNotification FindFirstChangeNotificationW
+
+/* ms889784 "FindNextChangeNotification (Windows CE 5.0)":
+ * BOOL FindNextChangeNotification(HANDLE).  CE .NET 4.0+; Winbase.h;
+ * Coredll.lib.  Re-arms the notification handle. */
+BOOL FindNextChangeNotification(HANDLE hChangeHandle);
+
+/* ms889625 "FindCloseChangeNotification (Windows CE 5.0)":
+ * BOOL FindCloseChangeNotification(HANDLE).  CE .NET 4.0+; Winbase.h;
+ * Coredll.lib.  Stops directory change monitoring. */
+BOOL FindCloseChangeNotification(HANDLE hChangeHandle);
+
+/* Search/enumeration level types used by the Ex file-search APIs.
+ * The pages print the C enums verbatim: FINDEX_INFO_LEVELS
+ * (ms889654) { FindExInfoStandard, FindExInfoMaxInfoLevel },
+ * FINDEX_SEARCH_OPS (ms889664) { FindExSearchNameMatch,
+ * FindExSearchLimitToDirectories, FindExSearchLimitToDevices },
+ * GET_FILEEX_INFO_LEVELS (ms890917) { GetFileExInfoStandard }. */
+typedef enum _FINDEX_INFO_LEVELS {
+    FindExInfoStandard,
+    FindExInfoMaxInfoLevel
+} FINDEX_INFO_LEVELS;
+
+typedef enum _FINDEX_SEARCH_OPS {
+    FindExSearchNameMatch,
+    FindExSearchLimitToDirectories,
+    FindExSearchLimitToDevices
+} FINDEX_SEARCH_OPS;
+
+typedef enum _GET_FILEEX_INFO_LEVELS {
+    GetFileExInfoStandard
+} GET_FILEEX_INFO_LEVELS;
+
+/* ms892377 "WIN32_FILE_ATTRIBUTE_DATA (Windows CE 5.0)": file
+ * attribute/time/size record filled by GetFileAttributesEx (level
+ * GetFileExInfoStandard).  CE 3.0+; Winbase.h. */
+typedef struct _WIN32_FILE_ATTRIBUTE_DATA {
+    DWORD    dwFileAttributes;
+    FILETIME ftCreationTime;
+    FILETIME ftLastAccessTime;
+    FILETIME ftLastWriteTime;
+    DWORD    nFileSizeHigh;
+    DWORD    nFileSizeLow;
+} WIN32_FILE_ATTRIBUTE_DATA, *LPWIN32_FILE_ATTRIBUTE_DATA;
+
+/* aa516973 "BY_HANDLE_FILE_INFORMATION (Windows CE 5.0)": per-handle
+ * file information filled by GetFileInformationByHandle.  CE 1.0+;
+ * Winbase.h.  Layout per the page, including the CE-only trailing
+ * dwOID (object-store object identifier) member. */
+typedef struct _BY_HANDLE_FILE_INFORMATION {
+    DWORD    dwFileAttributes;
+    FILETIME ftCreationTime;
+    FILETIME ftLastAccessTime;
+    FILETIME ftLastWriteTime;
+    DWORD    dwVolumeSerialNumber;
+    DWORD    nFileSizeHigh;
+    DWORD    nFileSizeLow;
+    DWORD    nNumberOfLinks;
+    DWORD    nFileIndexHigh;
+    DWORD    nFileIndexLow;
+    DWORD    dwOID;   /* CE: object-store object identifier */
+} BY_HANDLE_FILE_INFORMATION, *PBY_HANDLE_FILE_INFORMATION,
+                              *LPBY_HANDLE_FILE_INFORMATION;
+
+/* ms889683 "FindFirstFileEx (Windows CE 5.0)":
+ * HANDLE FindFirstFileEx(LPCTSTR, FINDEX_INFO_LEVELS, LPVOID,
+ * FINDEX_SEARCH_OPS, LPVOID, DWORD).  CE 3.0+; Winbase.h;
+ * Coredll.lib.  Extended search; lpFindFileData receives the level's
+ * data (for FindExInfoStandard the pages use FindFirstFile/WIN32_
+ * FIND_DATAW); INVALID_HANDLE_VALUE on failure. */
+HANDLE FindFirstFileExW(LPCTSTR lpFileName,
+                          FINDEX_INFO_LEVELS fInfoLevelId,
+                          LPVOID lpFindFileData,
+                          FINDEX_SEARCH_OPS fSearchOp,
+                          LPVOID lpSearchFilter,
+                          DWORD dwAdditionalFlags);
+#define FindFirstFileEx FindFirstFileExW
+
+/* ms890909 "GetFileAttributesEx (Windows CE 5.0)":
+ * BOOL GetFileAttributesEx(LPCTSTR, GET_FILEEX_INFO_LEVELS, LPVOID).
+ * CE 3.0+; Winbase.h; Coredll.lib.  Fills WIN32_FILE_ATTRIBUTE_DATA
+ * at the level GetFileExInfoStandard. */
+BOOL GetFileAttributesExW(LPCTSTR lpFileName,
+                           GET_FILEEX_INFO_LEVELS fInfoLevelId,
+                           LPVOID lpFileInformation);
+#define GetFileAttributesEx GetFileAttributesExW
+
+/* ms890887 "GetDiskFreeSpaceEx (Windows CE 5.0)":
+ * BOOL GetDiskFreeSpaceEx(LPCWSTR, PULARGE_INTEGER, PULARGE_INTEGER,
+ * PULARGE_INTEGER).  CE 2.0+; Winbase.h; Coredll.lib.  Free/total
+ * bytes on the volume; any of the three out pointers may be NULL. */
+BOOL GetDiskFreeSpaceExW(LPCWSTR lpDirectoryName,
+                          PULARGE_INTEGER lpFreeBytesAvailableToCaller,
+                          PULARGE_INTEGER lpTotalNumberOfBytes,
+                          PULARGE_INTEGER lpTotalNumberOfFreeBytes);
+#define GetDiskFreeSpaceEx GetDiskFreeSpaceExW
+
+/* ms890926 "GetFileInformationByHandle (Windows CE 5.0)":
+ * BOOL GetFileInformationByHandle(HANDLE, LPBY_HANDLE_FILE_
+ * INFORMATION).  CE 1.0+; Winbase.h; Coredll.lib. */
+BOOL GetFileInformationByHandle(
+    HANDLE hFile, LPBY_HANDLE_FILE_INFORMATION lpFileInformation);
+
+/* ms891189 "GetTempPath (Windows CE 5.0)":
+ * DWORD GetTempPath(DWORD, LPTSTR).  CE 2.11+; Winbase.h; Coredll.lib.
+ * Path of the directory designated for temporary files; returns the
+ * length written (0 = failure). */
+DWORD GetTempPathW(DWORD ccBuffer, LPTSTR lpszBuffer);
+#define GetTempPath GetTempPathW
+
+/* ms891186 "GetTempFileName (Windows CE 5.0)":
+ * UINT GetTempFileName(LPCTSTR, LPCTSTR, UINT, LPTSTR).  CE 3.0+;
+ * Winbase.h; Coredll.lib.  Builds a temporary-file name from path +
+ * prefix + unique number (uUnique 0 lets the system choose).  CE note:
+ * temp files are not deleted automatically on power-down. */
+UINT GetTempFileNameW(LPCTSTR lpPathName, LPCTSTR lpPrefixString,
+                       UINT uUnique, LPTSTR lpTempFileName);
+#define GetTempFileName GetTempFileNameW
+
+/* Region-lock flags (LockFileEx ms891385 names LOCKFILE_EXCLUSIVE_LOCK
+ * and LOCKFILE_FAIL_IMMEDIATELY; values fixed Win32 ABI). */
+#define LOCKFILE_FAIL_IMMEDIATELY 0x00000001u
+#define LOCKFILE_EXCLUSIVE_LOCK   0x00000002u
+
+/* ms891385 "LockFileEx (Windows CE 5.0)":
+ * BOOL LockFileEx(HANDLE, DWORD, DWORD, DWORD, DWORD, LPOVERLAPPED).
+ * CE 5.0+; Winbase.h; Coredll.lib.  Locks a byte range (the LPOVERLAPPED
+ * supplies the offset on CE as on desktop). */
+BOOL LockFileEx(HANDLE hFile, DWORD dwFlags, DWORD dwReserved,
+                DWORD nNumberOfBytesToLockLow,
+                DWORD nNumberOfBytesToLockHigh,
+                LPOVERLAPPED lpOverlapped);
+
+/* ms892364 "UnlockFileEx (Windows CE 5.0)":
+ * BOOL UnlockFileEx(HANDLE, DWORD, DWORD, DWORD, LPOVERLAPPED).
+ * CE 5.0+; Winbase.h; Coredll.lib. */
+BOOL UnlockFileEx(HANDLE hFile, DWORD dwReserved,
+                  DWORD nNumberOfBytesToLockLow,
+                  DWORD nNumberOfBytesToLockHigh,
+                  LPOVERLAPPED lpOverlapped);
+
+/* ms887981 "DeleteAndRenameFile (Windows CE 5.0)":
+ * BOOL DeleteAndRenameFile(LPCWSTR, LPCWSTR).  CE 1.01+; Winbase.h;
+ * Coredll.lib.  CE-only: copies the source file over the destination
+ * and deletes the source (atomic rename-with-overwrite helper). */
+BOOL DeleteAndRenameFileW(LPCWSTR lpszDestFile, LPCWSTR lpszSourceFile);
+#define DeleteAndRenameFile DeleteAndRenameFileW
+
+/* ms890963 "GetFileVersionInfoSize (Windows CE 5.0)":
+ * DWORD GetFileVersionInfoSize(LPTSTR, LPDWORD).  CE 3.0+; Winbase.h;
+ * Coredll.lib.  Determines whether version information is obtainable
+ * and returns its size, in bytes (call before GetFileVersionInfo to
+ * size the buffer).
+ * ms890951 "GetFileVersionInfo (Windows CE 5.0)":
+ * BOOL GetFileVersionInfo(LPTSTR, DWORD, DWORD, LPVOID).  CE 3.0+;
+ * Winbase.h; Coredll.lib.  Copies the file's version information into
+ * the lpData buffer; the page notes it is truncated when the buffer
+ * is too small.  The documented signature is reproduced as-is. */
+DWORD GetFileVersionInfoSizeW(LPTSTR lptstrFilename, LPDWORD lpdwHandle);
+#define GetFileVersionInfoSize GetFileVersionInfoSizeW
+BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
+                         DWORD dwLen, LPVOID lpData);
+#define GetFileVersionInfo GetFileVersionInfoW
+
 #ifdef __cplusplus
 }
 #endif

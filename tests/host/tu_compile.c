@@ -197,6 +197,21 @@ static const void *const api_symbols[] = {
     (const void *) &GetCPInfo,
     (const void *) &GetStringTypeW,
     (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
+    /* M17: file I/O continuation (winbase.h). */
+    (const void *) &FindFirstChangeNotification,
+    (const void *) &FindNextChangeNotification,
+    (const void *) &FindCloseChangeNotification,
+    (const void *) &FindFirstFileEx,
+    (const void *) &GetFileAttributesEx,
+    (const void *) &GetDiskFreeSpaceEx,
+    (const void *) &GetFileInformationByHandle,
+    (const void *) &GetTempPath,
+    (const void *) &GetTempFileName,
+    (const void *) &LockFileEx,
+    (const void *) &UnlockFileEx,
+    (const void *) &DeleteAndRenameFile,
+    (const void *) &GetFileVersionInfoSize,
+    (const void *) &GetFileVersionInfo,
     /* M15: registry (winreg.h). */
     (const void *) &RegOpenKeyExW, (const void *) &RegOpenKeyEx,
     (const void *) &RegCreateKeyExW, (const void *) &RegCreateKeyEx,
@@ -719,6 +734,22 @@ typedef char assert_nls2_vals[
      PRIMARYLANGID(0x409) == 9 && SUBLANGID(0x409) == 1 &&
      MAKELCID(0x409, 0) == 0x409) ? 1 : -1];
 
+/* M17 file-info structure layouts (winbase.h, from the CE pages). */
+typedef char assert_fileinfo_layouts[
+    (sizeof(BY_HANDLE_FILE_INFORMATION) == 56 &&
+     offsetof(BY_HANDLE_FILE_INFORMATION, dwVolumeSerialNumber) == 28 &&
+     offsetof(BY_HANDLE_FILE_INFORMATION, nFileIndexLow) == 48 &&
+     offsetof(BY_HANDLE_FILE_INFORMATION, dwOID) == 52 &&
+     sizeof(WIN32_FILE_ATTRIBUTE_DATA) == 36 &&
+     offsetof(WIN32_FILE_ATTRIBUTE_DATA, nFileSizeLow) == 32) ? 1 : -1];
+typedef char assert_m17_vals[
+    (FILE_NOTIFY_CHANGE_FILE_NAME == 1u &&
+     FILE_NOTIFY_CHANGE_DIR_NAME == 2u &&
+     FILE_NOTIFY_CHANGE_SIZE == 8u &&
+     FILE_NOTIFY_CHANGE_LAST_WRITE == 0x10u &&
+     LOCKFILE_FAIL_IMMEDIATELY == 1u &&
+     LOCKFILE_EXCLUSIVE_LOCK == 2u) ? 1 : -1];
+
 /* M15 registry constants (winreg.h; values per fixed Win32 ABI). */
 typedef char assert_reg_vals[
     (REG_NONE == 0 && REG_SZ == 1 && REG_EXPAND_SZ == 2 &&
@@ -821,6 +852,45 @@ static int m16_shaped_usage(void)
     return 0;
 }
 
+/* M17 usage shape (compile-only). */
+static int m17_shaped_usage(void)
+{
+    static const WCHAR v_dir[] = { 't', 'm', 'p', 0 };
+    static const WCHAR v_pref[] = { 'a', 'k', 0 };
+    BY_HANDLE_FILE_INFORMATION bhi;
+    WIN32_FILE_ATTRIBUTE_DATA wad;
+    ULARGE_INTEGER freeavail, total, freebytes;
+    HANDLE hch, hsrch;
+    WCHAR wbuf[260];
+    DWORD n;
+
+    hch = FindFirstChangeNotification(v_dir, TRUE,
+                                      FILE_NOTIFY_CHANGE_LAST_WRITE);
+    if (hch != INVALID_HANDLE_VALUE) {
+        (void) FindNextChangeNotification(hch);
+        (void) FindCloseChangeNotification(hch);
+    }
+    n = GetTempPath(260u, wbuf);
+    if (n == 0 || n > 260u)
+        return (int) GetLastError();
+    if (GetTempFileName(v_dir, v_pref, 0, wbuf) == 0)
+        return (int) GetLastError();
+    hsrch = FindFirstFileEx(v_dir, FindExInfoStandard, &wad,
+                            FindExSearchLimitToDirectories, NULL, 0);
+    if (hsrch != INVALID_HANDLE_VALUE)
+        (void) FindClose(hsrch);
+    (void) GetFileAttributesEx(v_dir, GetFileExInfoStandard, &wad);
+    (void) GetDiskFreeSpaceEx(v_dir, &freeavail, &total, &freebytes);
+    (void) GetFileInformationByHandle(INVALID_HANDLE_VALUE, &bhi);
+    (void) DeleteAndRenameFile(wbuf, v_dir);
+    (void) LockFileEx(INVALID_HANDLE_VALUE, LOCKFILE_EXCLUSIVE_LOCK,
+                      0, 0, 0, NULL);
+    (void) UnlockFileEx(INVALID_HANDLE_VALUE, 0, 0, 0, NULL);
+    (void) GetFileVersionInfoSize(wbuf, NULL);
+    (void) GetFileVersionInfo(wbuf, 0, 0u, wbuf);
+    return 0;
+}
+
 /* M15 usage shape (compile-only): registry round trip on a
  * volatile test key under HKEY_CURRENT_USER.  Never run/linked. */
 static int m15_shaped_usage(void)
@@ -889,5 +959,7 @@ int host_tu_entry(void)
         return 1;
     if (m15_shaped_usage() != 0)
         return 1;
-    return m16_shaped_usage() == 0 ? 0 : 1;
+    if (m16_shaped_usage() != 0)
+        return 1;
+    return m17_shaped_usage() == 0 ? 0 : 1;
 }

@@ -15,29 +15,50 @@ EXPORTS
   CeFindCloseRegChange
   CeFindFirstRegChange
   CeFindNextRegChange
+  CloseHandle
   CompareFileTime
   ConvertThreadToFiber
+  CopyFileW
+  CreateDirectoryW
   CreateEventW
   CreateFiber
+  CreateFileW
   CreateMutexW
   CreateProcessW
   CreateThread
+  DeleteAndRenameFileW
   DeleteFiber
+  DeleteFileW
   DuplicateHandle
   ExitProcess
   ExitThread
   FileTimeToLocalFileTime
   FileTimeToSystemTime
+  FindClose
+  FindCloseChangeNotification
+  FindFirstChangeNotificationW
+  FindFirstFileW
+  FindFirstFileExW
+  FindNextChangeNotification
+  FindNextFileW
+  FlushFileBuffers
   FlushInstructionCache
   FreeLibrary
   GetCommandLineW
   GetCurrentFT
   GetCurrentFiber
+  GetDiskFreeSpaceExW
   GetDllVersion
   GetExitCodeProcess
   GetExitCodeThread
   GetFiberData
+  GetFileAttributesW
+  GetFileAttributesExW
+  GetFileInformationByHandle
+  GetFileSize
   GetFileTime
+  GetFileVersionInfoW
+  GetFileVersionInfoSizeW
   GetIdleTime
   GetLocalTime
   GetModuleFileNameW
@@ -47,6 +68,8 @@ EXPORTS
   GetStringTypeW
   GetSystemInfo
   GetSystemTime
+  GetTempFileNameW
+  GetTempPathW
   GetThreadPriority
   GetThreadTimes
   GetTickCount
@@ -81,6 +104,8 @@ EXPORTS
   LocalFree
   LocalReAlloc
   LocalSize
+  LockFileEx
+  MoveFileW
   MultiByteToWideChar
   OpenEventW
   OpenProcess
@@ -88,6 +113,7 @@ EXPORTS
   QueryPerformanceCounter
   QueryPerformanceFrequency
   Random
+  ReadFile
   RegCloseKeyW
   RegCreateKeyExW
   RegDeleteKeyW
@@ -100,10 +126,14 @@ EXPORTS
   RegQueryValueExW
   RegSetValueExW
   ReleaseSemaphore
+  RemoveDirectoryW
   ResetEvent
   ResumeThread
   SetDaylightTime
+  SetEndOfFile
   SetEvent
+  SetFileAttributesW
+  SetFilePointer
   SetFileTime
   SetLocalTime
   SetSystemTime
@@ -121,9 +151,11 @@ EXPORTS
   TlsGetValue
   TlsSetValue
   TryEnterCriticalSection
+  UnlockFileEx
   VirtualAlloc
   VirtualFree
   VirtualProtect
   VirtualQuery
   WaitForSingleObject
   WideCharToMultiByte
+  WriteFile

@@ -346,6 +346,42 @@ GetTimeFormat, GetCurrencyFormat, GetNumberFormat + ENUMPROC types),
 LCMapString/FoldString (LCMAP_*/MAPFOLD_* flag set).  Recorded here,
 implemented only once their official pages are processed.
 
+### M17: File I/O Reference continuation (winbase.h)
+
+Official `(v=msdn.10)` CE 5.0 pages of *File Systems and Data Store →
+File I/O Reference*; Winbase.h / Coredll.lib rows throughout.
+Wide-string functions use the W spellings (CE Unicode-only), macro
+base names provided; handle-only functions are plain.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `FindFirstChangeNotification(W)` | `ms889670` | CE .NET 4.0+ | Winbase.h | Coredll.lib | directory change notification handle |
+| `FindNextChangeNotification` | `ms889784` | CE .NET 4.0+ | Winbase.h | Coredll.lib | |
+| `FindCloseChangeNotification` | `ms889625` | CE .NET 4.0+ | Winbase.h | Coredll.lib | |
+| `FILE_NOTIFY_CHANGE_FILE_NAME/_DIR_NAME/_SIZE/_LAST_WRITE` | `ms889670` | — | Winbase.h | — | only these 4 documented for CE; values fixed Win32 ABI |
+| `FINDEX_INFO_LEVELS` enum | `ms889654` | CE 3.0+ | Winbase.h | — | {FindExInfoStandard, FindExInfoMaxInfoLevel} (C enum printed on page) |
+| `FINDEX_SEARCH_OPS` enum | `ms889664` | CE 3.0+ | Winbase.h | — | {NameMatch, LimitToDirectories, LimitToDevices}; CE notes on filters |
+| `GET_FILEEX_INFO_LEVELS` enum | `ms890917` | CE 3.0+ | Winbase.h | — | {GetFileExInfoStandard} |
+| `FindFirstFileEx(W)` | `ms889683` | CE 3.0+ | Winbase.h | Coredll.lib | INVALID_HANDLE_VALUE on failure |
+| `GetFileAttributesEx(W)` | `ms890909` | CE 3.0+ | Winbase.h | Coredll.lib | level GetFileExInfoStandard ⇒ WIN32_FILE_ATTRIBUTE_DATA |
+| `WIN32_FILE_ATTRIBUTE_DATA` | `ms892377` | CE 3.0+ | Winbase.h | — | attr + 3 FILETIME + size (36 bytes) |
+| `GetDiskFreeSpaceEx(W)` | `ms890887` | CE 2.0+ | Winbase.h | Coredll.lib | three ULARGE_INTEGER outs; each may be NULL |
+| `GetFileInformationByHandle` | `ms890926` | CE 1.0+ | Winbase.h | Coredll.lib | |
+| `BY_HANDLE_FILE_INFORMATION` | `aa516973` | CE 1.0+ | Winbase.h | — | 10 shared members + CE-only trailing `dwOID` (56 bytes) |
+| `GetTempPath(W)` | `ms891189` | CE 2.11+ | Winbase.h | Coredll.lib | temp directory path |
+| `GetTempFileName(W)` | `ms891186` | CE 3.0+ | Winbase.h | Coredll.lib | temp files not auto-deleted on power-down (CE note) |
+| `LockFileEx` | `ms891385` | CE 5.0+ | Winbase.h | Coredll.lib | offset via LPOVERLAPPED; LOCKFILE_EXCLUSIVE_LOCK/FAIL_IMMEDIATELY named |
+| `UnlockFileEx` | `ms892364` | CE 5.0+ | Winbase.h | Coredll.lib | |
+| `DeleteAndRenameFile(W)` | `ms887981` | CE 1.01+ | Winbase.h | Coredll.lib | CE-only copy-over + delete (rename helper) |
+| `GetFileVersionInfoSize(W)`/`GetFileVersionInfo(W)` | `ms890963`/`ms890951` | CE 3.0+ | Winbase.h | Coredll.lib | buffer-size query + version-info copy (truncation note) |
+| `PLARGE_INTEGER`/`PULARGE_INTEGER` (winnt.h) | `ms890887` | — | Winnt.h | — | ULARGE_INTEGER pointer forms |
+
+*Deferred:* CopyFileEx `aa517311` (CE 5.0+, needs the progress-callback
+type + LPPROGRESS_ROUTINE processing), GetStoreInformation `ms891023`
+(needs the STORE_INFORMATION record), the Ce* RAPI forms
+(CeGenRandom/CeGetCanonicalPathName/CeGetFileNotificationInfo),
+FindFirstFileEx's FILE_NOTIFY_INFORMATION-related pairs.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

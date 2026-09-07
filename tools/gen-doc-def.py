@@ -67,6 +67,16 @@ UNICODE_ONLY = {
     "RegQueryValueEx": "RegQueryValueExW",
     "RegSetValueEx": "RegSetValueExW",
     "RegFlushKey": "RegFlushKeyW",
+    # File I/O functions whose CE exports are the wide spellings.
+    "FindFirstChangeNotification": "FindFirstChangeNotificationW",
+    "FindFirstFileEx": "FindFirstFileExW",
+    "GetFileAttributesEx": "GetFileAttributesExW",
+    "GetDiskFreeSpaceEx": "GetDiskFreeSpaceExW",
+    "GetTempFileName": "GetTempFileNameW",
+    "GetTempPath": "GetTempPathW",
+    "GetFileVersionInfoSize": "GetFileVersionInfoSizeW",
+    "GetFileVersionInfo": "GetFileVersionInfoW",
+    "DeleteAndRenameFile": "DeleteAndRenameFileW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

@@ -183,3 +183,16 @@ row), GetStringTypeEx `ms905283`; CT_*/LCID_*/CSTR_*/MAX_* constants;
 LANGID/LCID types (windef.h); PRIMARYLANGID/SUBLANGID/MAKELANGID/
 MAKELCID macros (winnt.h, formulas printed on the pages).  Def:
 114 -> 115 exports.
+
+**M17 batch — File I/O Reference continuation:** FindFirst/Next/
+CloseChangeNotification `ms889670`/`ms889784`/`ms889625`, FindFirstFileEx
+`ms889683` + FINDEX_INFO_LEVELS/FINDEX_SEARCH_OPS `ms889654`/`ms889664`,
+GetFileAttributesEx `ms890909` + WIN32_FILE_ATTRIBUTE_DATA `ms892377`,
+GetDiskFreeSpaceEx `ms890887`, GetFileInformationByHandle `ms890926` +
+BY_HANDLE_FILE_INFORMATION `aa516973` (CE dwOID member), GetTempPath
+`ms891189`, GetTempFileName `ms891186`, LockFileEx `ms891385`,
+UnlockFileEx `ms892364`, DeleteAndRenameFile `ms887981`,
+GetFileVersionInfoSize/GetFileVersionInfo `ms890963`/`ms890951`.
+New manifest `tools/manifests/file-io-reference.manifest` (51 pages);
+rows 265 -> 316.  Def: 115 -> 147 exports (file I/O rows now included
+in the public record set, e.g. CreateFileW/ReadFile/WriteFile).
