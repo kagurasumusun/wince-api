@@ -392,3 +392,29 @@ no import def (recorded).  Host TU type-checks all 32 Image List calls
 and static-asserts IMAGEINFO = 32 and IMAGELISTDRAWPARAMS = 56 bytes
 on the 32-bit ABI; host + six CE targets (arm/i386 x 4.2/5.0/6.0)
 pass warning-free.
+
+
+**M30 batch — corpus-preservation pipeline + remaining
+Winbase.h/Windows.h gap fill:** `tools/ce-corpus.py` (export/import/
+verify) + `docs/corpus.md` establish the owner workflow of saving every
+official page fully, pushing it to `kagurasumusun/wince-docs-corpus`
+(CE 5.0 1175 + CE 6.0 38 pages + rows.json + catalogs, pushed 2026-09),
+deleting it at session end and re-fetching from GitHub at the next
+session start (raw MS Learn HTML never enters the MIT tree).  A machine
+audit of rows.json vs headers found 63 signature-bearing rows without a
+declaration; after removing the recorded intentional non-exports
+(debug macros, Kfuncs/Pwinuser scope, callbacks, keyword false
+positives) the genuine missing user-mode exports were implemented:
+FreeLibraryAndExitThread (ms885602), CeZeroPointer (ms885158),
+CeGetThreadQuantum (aa450796), CeSetThreadQuantum (ms885156),
+VerQueryValueW (aa450973, Unicode-only spelling), IsProcessorFeaturePresent
+(ms886726), QueryInstructionSet (ms886787) in winbase.h and
+SetUserDefaultLCID (ms906279, Header Windows.h, Coreloc.lib) in
+windows.h.  Flag/value sets the CE pages document by name only
+(PF_ARM_*, PROCESSOR_*_INSTRUCTION) are recorded, not invented.
+Deferred with reasons: CeHeapCreate (OEM Pkfuncs callback prototypes),
+thread/process context functions (per-CPU CONTEXT layout unpublished),
+TranslateCharsetInfo (needs CHARSETINFO + TCI_*).  Export surface:
+coredll 353 -> 360, coreloc 23 -> 24, total name-only exports 605 ->
+613 (33 def files); gen-doc-def gains VerQueryValue -> VerQueryValueW.
+Host + six CE targets (arm/i386 x 4.2/5.0/6.0) pass warning-free.

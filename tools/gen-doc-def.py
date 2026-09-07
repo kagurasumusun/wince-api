@@ -130,6 +130,10 @@ UNICODE_ONLY = {
     "SystemParametersInfo": "SystemParametersInfoW",
     "FindResource": "FindResourceW",
     "ExtractIconEx": "ExtractIconExW",
+    # M30: version-information helper (CE is Unicode-only, so the
+    # exported spelling is the wide form of the LPTSTR sub-block
+    # parameter; repo Unicode-only rule, page aa450973).
+    "VerQueryValue": "VerQueryValueW",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")

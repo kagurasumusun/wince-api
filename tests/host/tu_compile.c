@@ -595,6 +595,11 @@ static const void *const api_symbols[] = {
     (const void *) &CeHandleAppNotifications,
     (const void *) &CeRunAppAtEvent, (const void *) &CeRunAppAtTime,
     (const void *) &CeSetUserNotification, (const void *) &CeSetUserNotificationEx,
+    /* M30: remaining Winbase.h/Windows.h documented functions. */
+    (const void *) &FreeLibraryAndExitThread, (const void *) &CeZeroPointer,
+    (const void *) &CeGetThreadQuantum, (const void *) &CeSetThreadQuantum,
+    (const void *) &VerQueryValueW, (const void *) &IsProcessorFeaturePresent,
+    (const void *) &QueryInstructionSet, (const void *) &SetUserDefaultLCID,
     /* M29: Image List API (commctrl.h; Header Commctrl.h rows). */
     (const void *) &ImageList_Add, (const void *) &ImageList_AddMasked,
     (const void *) &ImageList_BeginDrag, (const void *) &ImageList_Copy,

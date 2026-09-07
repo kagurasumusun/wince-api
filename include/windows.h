@@ -128,6 +128,13 @@ typedef struct tagDRAWITEMSTRUCT {
     ULONG_PTR itemData;
 } DRAWITEMSTRUCT;
 
+
+/* ms906279 "SetUserDefaultLCID" (CE .NET 4.0+; Header Windows.h per the
+ * page; Link Library Coreloc.lib -> def/coreloc-doc.def).  Sets the
+ * user default locale; the page requires broadcasting WM_WININICHANGE
+ * with wParam INI_INTL afterwards. */
+BOOL SetUserDefaultLCID(LCID Locale);
+
 #ifdef __cplusplus
 }
 #endif

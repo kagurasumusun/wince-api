@@ -2362,6 +2362,63 @@ HRSRC  FindResourceW(HMODULE hModule, LPCWSTR lpName, LPCWSTR lpType);
 HGLOBAL LoadResource(HMODULE hModule, HRSRC hResInfo);  /* aa453416 */
 LPVOID  LockResource(HGLOBAL hResData);                  /* aa453417 */
 DWORD   SizeofResource(HMODULE hModule, HRSRC hResInfo); /* ms940346 */
+
+/* ------------------------------------------------------------------ */
+/* M30: remaining documented Winbase.h functions (CE process/thread,    */
+/* system-management and version-information books).                   */
+/*                                                                     */
+/* Every prototype below is transcribed from its official CE 5.0       */
+/* (v=msdn.10) page (id in the comment).  Header rows are all          */
+/* Winbase.h; Link Library rows as noted.  CeZeroPointer and the       */
+/* Ce*(Thread)Quantum pair are CE-specific exports;                   */
+/* FreeLibraryAndExitThread and VerQueryValue are documented with      */
+/* Coredll rows.  IsProcessorFeaturePresent and QueryInstructionSet    */
+/* document their flag/value *names* but publish no numeric values     */
+/* (CE-specific flag sets, cf. the KEY_STATE_FLAGS record), so those   */
+/* constants are not defined here -- the functions are declared and    */
+/* the flag names recorded in docs/inventory.md.                       */
+/* ------------------------------------------------------------------ */
+
+/* ms885602 "FreeLibraryAndExitThread" (CE 3.0+; Coredll.dll): the page
+ * states the function is implemented as FreeLibrary(hModule);
+ * ExitThread(dwExitCode); same role as its Win32 namesake. */
+void FreeLibraryAndExitThread(HMODULE hModule, DWORD dwExitCode);
+
+/* ms885158 "CeZeroPointer" (CE .NET 4.2+; Coredll.lib): maps a
+ * process-slot pointer to its unmapped (slot-zero) form; returns ptr
+ * unchanged when it is not mapped.  The page points at the OEM
+ * Pkfuncs.h ZeroPtr macro for the underlying mechanism. */
+LPVOID CeZeroPointer(LPVOID ptr);
+
+/* aa450796 "CeGetThreadQuantum" (CE 3.0+; Coredll.lib): current quantum
+ * in ms for hThread; MAXDWORD on failure. */
+DWORD CeGetThreadQuantum(HANDLE hThread);
+
+/* ms885156 "CeSetThreadQuantum" (CE 3.0+; Coredll.lib): quantum in ms;
+ * dwTime 0 runs the thread to completion; OEM default 100 ms. */
+BOOL CeSetThreadQuantum(HANDLE hThread, DWORD dwTime);
+
+/* aa450973 "VerQueryValue" (CE 3.0+; Coredll.lib): resolves a backslash-
+ * separated sub-block ("\", "\VarFileInfo\Translation", ...) inside a
+ * version-information block returned by GetFileVersionInfoW.  The
+ * Unicode-only export spelling is VerQueryValueW. */
+BOOL VerQueryValueW(const LPVOID pBlock, LPTSTR lpSubBlock,
+                    LPVOID *lplpBuffer, UINT *puLen);
+#define VerQueryValue VerQueryValueW
+
+/* ms886726 "IsProcessorFeaturePresent" (CE .NET 4.1+; Coredll.dll):
+ * nonzero when the queried processor feature is supported.  The page
+ * documents the PF_ARM_* / PF_MIPS_* flag *names* (per-CPU sets) but
+ * not their values -> no PF_* constants shipped (recorded). */
+BOOL IsProcessorFeaturePresent(DWORD dwProcessorFeature);
+
+/* ms886787 "QueryInstructionSet" (CE .NET 4.0+; Coredll.lib): reports
+ * whether dwInstructionSet (PROCESSOR_*_INSTRUCTION names, values not
+ * published by the page) is supported; optional output in
+ * lpdwCurrentInstructionSet. */
+BOOL QueryInstructionSet(DWORD dwInstructionSet,
+                         LPDWORD lpdwCurrentInstructionSet);
+
 #ifdef __cplusplus
 }
 #endif

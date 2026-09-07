@@ -1488,6 +1488,52 @@ type-checks every Image List function call and static-asserts the two
 structure sizes on the 32-bit ABI.
 
 
+
+### M30: remaining documented Winbase.h/Windows.h functions (coredll/coreloc gap fill)
+
+Machine audit of `build/rows.json` (1175 harvested CE 5.0 leaves)
+against the shipped headers found 63 signature-bearing rows whose page
+name was not declared anywhere; most are intentionally non-exports
+(debug *macros* documented but not specified in implementable form --
+recorded in M24; Kfuncs.h kernel scope; Pwinuser.h OEM; callback
+typedefs ThreadProc/FiberProc/DllMain/AbortProc/PropEnumProcEx; the
+keyword false positives "for/if/switch"; macro pages
+MAKEINT*/*MAKEL*/MAKEINTRESOURCE/*MAKELANGID).  The genuine missing
+user-mode exports are added here.  Header homes follow each page's
+Header row (Windows.h page -> include/windows.h).
+
+| Function | Official page (CE 5.0) | OS Versions | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| `FreeLibraryAndExitThread` | `ms885602` | CE 3.0+ | Winbase.h | Coredll.dll | page: implemented as FreeLibrary(hModule); ExitThread(dwExitCode) |
+| `CeZeroPointer` | `ms885158` | CE .NET 4.2+ | Winbase.h | Coredll.lib | maps a process-slot pointer to slot-zero; page points to OEM Pkfuncs.h ZeroPtr macro |
+| `CeGetThreadQuantum` | `aa450796` | CE 3.0+ | Winbase.h | Coredll.lib | quantum in ms; MAXDWORD on failure |
+| `CeSetThreadQuantum` | `ms885156` | CE 3.0+ | Winbase.h | Coredll.lib | dwTime 0 runs to completion; OEM default 100 ms |
+| `VerQueryValueW` | `aa450973` | CE 3.0+ | Winbase.h | Coredll.lib | Unicode-only export spelling of VerQueryValue (LPTSTR sub-block); resolves \\VarFileInfo\\Translation etc. |
+| `IsProcessorFeaturePresent` | `ms886726` | CE .NET 4.1+ | Winbase.h | Coredll.dll | flag *names* PF_ARM_*/PF_MIPS_* documented, values unpublished -> no PF_* constants shipped (recorded, cf. KEY_STATE_FLAGS) |
+| `QueryInstructionSet` | `ms886787` | CE .NET 4.0+ | Winbase.h | Coredll.lib | PROCESSOR_*_INSTRUCTION names documented, values unpublished -> not defined |
+| `SetUserDefaultLCID` | `ms906279` | CE .NET 4.0+ | Windows.h | Coreloc.lib | page requires broadcasting WM_WININICHANGE (wParam INI_INTL) after |
+
+Deferred with reasons (recorded here so they are not re-derived):
+CeHeapCreate (aa450797) needs the PFN_AllocHeapMem/PFN_FreeHeapMem
+callback prototypes that the page defers to the OEM Pkfuncs.h
+(unpublished); GetThreadContext (ms885642) / ReadProcessMemory
+(ms886794) / WriteProcessMemory (aa450992) / SetThreadContext
+(ms885155-family) operate on the per-CPU CONTEXT whose layout the
+Winnt.h header pages do not publish (incomplete CONTEXT type already
+recorded, M24); TranslateCharsetInfo (aa450955, Coredll.lib) needs the
+CHARSETINFO structure + TCI_* values (no CE structure leaf in the
+harvested set).  CeSetThreadPriority (ms885155) and SetThreadContext
+rows name Nk.lib only -> kernel scope, not declared.  Dbgapi.h debug
+macros (ASSERT/DEBUGMSG/RETAILMSG/ERRORMSG/DEBUGZONE/DEBUGCHK/
+ASSERTMSG/DEBUGLED/RETAILLED/ERRORMSG) remain intentionally undeclared
+(macro machinery not specified in implementable form; M24 record).
+
+Export surface: coredll 353 -> 360, coreloc 23 -> 24 (SetUserDefaultLCID),
+total name-only exports 605 -> **613**.  gen-doc-def.py's Unicode-only
+map gains VerQueryValue -> VerQueryValueW.  Host + six CE targets pass
+warning-free.
+
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

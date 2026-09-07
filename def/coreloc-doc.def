@@ -35,5 +35,6 @@ EXPORTS
   IsCharUpperW
   IsValidCodePage
   IsValidLocale
+  SetUserDefaultLCID
   wsprintfW
   wvsprintfW

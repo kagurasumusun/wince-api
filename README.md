@@ -127,7 +127,10 @@ def/                coredll export def derived from the official
                     build/rows.json and committed
 tools/              manifest/fetch/parse/generate tools
                     (ce-manifest.py, ce-fetch.py, ce-text.py,
-                    gen-doc-def.py); manifests under tools/manifests/
+                    gen-doc-def.py, ce-corpus.py); manifests under
+                    tools/manifests/; page-corpus round trip via
+                    ce-corpus.py + kagurasumusun/wince-docs-corpus
+                    (docs/corpus.md)
 docs/inventory.md   per-declaration official-source matrix
                     (page ID, OS Versions, Header, Link Library)
 tests/host/         host compile checks (types, syntax, mappings)
@@ -158,6 +161,17 @@ and `i386-pc-wince4.2/5.0/6.0`.
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M30 (landed):** corpus-preservation pipeline + remaining
+  Winbase.h/Windows.h gap fill.  `tools/ce-corpus.py` + `docs/corpus.md`
+  implement save-all-pages / push / delete-per-session / refetch-from-
+  GitHub (`kagurasumusun/wince-docs-corpus`: 1175 CE 5.0 + 38 CE 6.0
+  pages + rows + catalogs; raw MS HTML stays out of this MIT tree).
+  Audited rows.json vs headers and added the missing documented
+  exports: FreeLibraryAndExitThread, CeZeroPointer, CeGetThreadQuantum,
+  CeSetThreadQuantum, VerQueryValueW, IsProcessorFeaturePresent,
+  QueryInstructionSet (winbase.h) and SetUserDefaultLCID (windows.h).
+  coredll 353 -> 360, coreloc 23 -> 24, 613 name-only exports across 33
+  def files; deferred items recorded with reasons in docs/inventory.md.
 * **M29 (landed):** Image List Reference book + GWES message/
   notification constants (two units together).  New
   `include/commctrl.h` (CE 5.0 Image Lists book: HIMAGELIST /

@@ -83,12 +83,13 @@ inventory row for the CE 6.0 twins).
   M29 (Image List) function signatures were additionally recovered
   from the official CE 6.0 `(v=winembedded.60)` twins of the same
   books.
-* Declared exports in the shipped headers: 605 name-only exports
-  across 33 def files; `def/coredll-doc.def` alone lists 353, every one
+* Declared exports in the shipped headers: 613 name-only exports
+  across 33 def files; `def/coredll-doc.def` alone lists 360, every one
   traced to an official Link-Library row in `docs/inventory.md`.
   M29 added `commctrl-doc.def` and `imgctl-doc.def` (31 exports each,
   the Image List functions' documented `Commctrl.lib, Imgctl.lib.`
-  rows).
+  rows); M30 grew coredll 353 -> 360 and coreloc 23 -> 24
+  (SetUserDefaultLCID).
 
 ## 4. Staged backlog (CE 5.0 Core OS Reference, remaining user-mode books)
 

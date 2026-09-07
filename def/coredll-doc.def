@@ -23,6 +23,7 @@ EXPORTS
   CeGenRandom
   CeGetCanonicalPathName
   CeGetFileNotificationInfo
+  CeGetThreadQuantum
   CeGetUserNotification
   CeGetUserNotificationHandles
   CeGetUserNotificationPreferences
@@ -36,8 +37,10 @@ EXPORTS
   CeLogSetZones
   CeRunAppAtEvent
   CeRunAppAtTime
+  CeSetThreadQuantum
   CeSetUserNotification
   CeSetUserNotificationEx
+  CeZeroPointer
   ChangeDisplaySettingsEx
   CharNextW
   CheckDlgButton
@@ -118,6 +121,7 @@ EXPORTS
   FlushInstructionCache
   FlushViewOfFile
   FreeLibrary
+  FreeLibraryAndExitThread
   GetBkColor
   GetBkMode
   GetClipBox
@@ -228,6 +232,7 @@ EXPORTS
   IsDBCSLeadByte
   IsDBCSLeadByteEx
   IsDlgButtonChecked
+  IsProcessorFeaturePresent
   LineTo
   LoadKeyboardLayout
   LoadLibraryW
@@ -261,6 +266,7 @@ EXPORTS
   PtInRegion
   PulseEvent
   QueryInfoSession
+  QueryInstructionSet
   QueryPerformanceCounter
   QueryPerformanceFrequency
   RaiseException
@@ -355,6 +361,7 @@ EXPORTS
   UpdateWindow
   ValidateRect
   ValidateRgn
+  VerQueryValueW
   VirtualAlloc
   VirtualFree
   VirtualProtect
