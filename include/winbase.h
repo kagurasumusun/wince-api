@@ -1670,6 +1670,93 @@ BOOL GetFileVersionInfoW(LPTSTR lptstrFilename, DWORD dwHandle,
 #define GetFileVersionInfo GetFileVersionInfoW
 
 /* ------------------------------------------------------------------ */
+/* M20b: DLL entry-point reasons + DisableThreadLibraryCalls (DLL    */
+/* Reference pages).                                                  */
+/* ------------------------------------------------------------------ */
+
+/* DllMain dwReason values (names per ms885202; values are the fixed
+ * Win32 ABI reason codes).  DllMain itself is the developer-defined
+ * DLL entry point -- BOOL WINAPI DllMain(HANDLE hinstDLL, DWORD
+ * dwReason, LPVOID lpvReserved) per ms885202 -- and is not declared
+ * here (it is the library's own function; hinstDLL equals the HMODULE/
+ * base address, matching this header set's HMODULE semantics). */
+#define DLL_PROCESS_DETACH  0
+#define DLL_PROCESS_ATTACH  1
+#define DLL_THREAD_ATTACH   2
+#define DLL_THREAD_DETACH   3
+
+/* ms885200 "DisableThreadLibraryCalls (Windows CE 5.0)":
+ * BOOL DisableThreadLibraryCalls(HMODULE).  CE 3.0+; Winbase.h;
+ * Coredll.lib.  Disables DLL_THREAD_ATTACH/DLL_THREAD_DETACH
+ * notifications for the DLL; useful for multithreaded apps.  CE has no
+ * static thread-local storage (page note), so any valid module works. */
+BOOL DisableThreadLibraryCalls(HMODULE hLibModule);
+
+/* ------------------------------------------------------------------ */
+/* M20: file mapping (File Mapping Reference pages).                  */
+/* ------------------------------------------------------------------ */
+
+/* File-view access flags for MapViewOfFile (ms891386 names
+ * FILE_MAP_WRITE / FILE_MAP_READ / FILE_MAP_ALL_ACCESS; READ and
+ * WRITE take the fixed Win32 ABI values, and the page states
+ * FILE_MAP_ALL_ACCESS is the same as FILE_MAP_WRITE). */
+#define FILE_MAP_WRITE       0x00000002u
+#define FILE_MAP_READ        0x00000004u
+#define FILE_MAP_ALL_ACCESS  FILE_MAP_WRITE  /* ms891386: same as WRITE */
+
+/* Mapping-size allocation flags are named by the CreateFileMapping
+ * page (SEC_COMMIT / SEC_IMAGE / SEC_NOCACHE / SEC_RESERVE); their
+ * numeric values are not published by the CE page, so they stay
+ * undefined here (no invented values). */
+
+/* aa517321 "CreateFileForMapping (Windows CE 5.0)":
+ * HANDLE CreateFileForMapping(LPCTSTR, DWORD, DWORD,
+ * LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE).  CE 1.01+; Winbase.h;
+ * Coredll.lib.  CE-specific: creates/opens a file suitable for memory
+ * mapping (recommended over CreateFile for that purpose).  W spelling
+ * per the CE Unicode-only convention (page prints the base name). */
+HANDLE CreateFileForMappingW(LPCTSTR lpFileName, DWORD dwDesiredAccess,
+                             DWORD dwShareMode,
+                             LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+                             DWORD dwCreationDisposition,
+                             DWORD dwFlagsAndAttributes,
+                             HANDLE hTemplateFile);
+#define CreateFileForMapping CreateFileForMappingW
+
+/* aa517331 "CreateFileMapping (Windows CE 5.0)":
+ * HANDLE CreateFileMapping(HANDLE, LPSECURITY_ATTRIBUTES, DWORD, DWORD,
+ * DWORD, LPCTSTR).  CE 1.01+; Winbase.h; Coredll.lib.  Creates a named
+ * or unnamed file-mapping object.  hFile may be (HANDLE)
+ * INVALID_HANDLE_VALUE for a physical-memory-backed object (not part
+ * of the 32 MB virtual process space, per page); lpFileMappingAttributes
+ * ignored (NULL); flProtect = PAGE_READONLY/READWRITE/WRITECOPY. */
+HANDLE CreateFileMappingW(HANDLE hFile,
+                          LPSECURITY_ATTRIBUTES lpFileMappingAttributes,
+                          DWORD flProtect, DWORD dwMaximumSizeHigh,
+                          DWORD dwMaximumSizeLow, LPCTSTR lpName);
+#define CreateFileMapping CreateFileMappingW
+
+/* ms891386 "MapViewOfFile (Windows CE 5.0)":
+ * LPVOID MapViewOfFile(HANDLE, DWORD, DWORD, DWORD, DWORD).
+ * CE 1.01+; Winbase.h; Coredll.lib.  Maps a view of the mapping
+ * object; NULL on failure. */
+LPVOID MapViewOfFile(HANDLE hFileMappingObject, DWORD dwDesiredAccess,
+                     DWORD dwFileOffsetHigh, DWORD dwFileOffsetLow,
+                     DWORD dwNumberOfBytesToMap);
+
+/* ms892373 "UnmapViewOfFile (Windows CE 5.0)":
+ * BOOL UnmapViewOfFile(LPCVOID).  CE 1.01+; Winbase.h; Coredll.lib.
+ * Unmaps a view; dirty pages are written lazily.  Closing the file
+ * handle does not close the file while a view stays mapped (note). */
+BOOL UnmapViewOfFile(LPCVOID lpBaseAddress);
+
+/* ms890303 "FlushViewOfFile (Windows CE 5.0)":
+ * BOOL FlushViewOfFile(LPCVOID, DWORD).  CE 1.01+; Winbase.h;
+ * Coredll.lib.  Writes dirty pages of the range to disk;
+ * dwNumberOfBytesToFlush cannot be zero. */
+BOOL FlushViewOfFile(LPCVOID lpBaseAddress, DWORD dwNumberOfBytesToFlush);
+
+/* ------------------------------------------------------------------ */
 /* M19: character and string helpers (Strings Reference pages).       */
 /* ------------------------------------------------------------------ */
 

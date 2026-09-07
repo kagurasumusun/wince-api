@@ -1,0 +1,6 @@
+aa516942	File Mapping Functions
+aa517321	CreateFileForMapping
+aa517331	CreateFileMapping
+ms890303	FlushViewOfFile
+ms891386	MapViewOfFile
+ms892373	UnmapViewOfFile

@@ -441,6 +441,26 @@ rows stay excluded (kernel-scope conflict model).  Auxiliary defs note
 that only the import-library token is documented (module names are not
 published); all are name-only and build with `llvm-dlltool -m armce`.
 
+### M20/M20b: File Mapping Reference + DLL entry batch
+
+Official `(v=msdn.10)` CE 5.0 pages.  All Header rows Winbase.h (or
+Psapi.h where noted), all Link Library rows Coredll.lib.
+
+| Item | Official page | OS Versions | Header | Link Library (page row) | Notes |
+|---|---|---|---|---|---|
+| `CreateFileForMapping(W)` | `aa517321` | CE 1.01+ | Winbase.h | Coredll.lib | CE-specific CreateFile-for-mapping; empty string is a named object (CE note); W per Unicode convention (base printed) |
+| `CreateFileMapping(W)` | `aa517331` | CE 1.01+ | Winbase.h | Coredll.lib | INVALID_HANDLE_VALUE ⇒ physical-memory-backed object outside the 32 MB process space; attrs NULL; PAGE_READONLY/READWRITE/WRITECOPY; SEC_COMMIT/IMAGE/NOCACHE/RESERVE named, values unpublished → undefined |
+| `MapViewOfFile` | `ms891386` | CE 1.01+ | Winbase.h | Coredll.lib | FILE_MAP_WRITE/READ/ALL_ACCESS (ALL_ACCESS = WRITE per page) |
+| `UnmapViewOfFile` | `ms892373` | CE 1.01+ | Winbase.h | Coredll.lib | file stays open while views are mapped |
+| `FlushViewOfFile` | `ms890303` | CE 1.01+ | Winbase.h | Coredll.lib | byte count cannot be 0; FILE_FLAG_WRITE_THROUGH for physical-write wait |
+| `DisableThreadLibraryCalls` | `ms885200` | CE 3.0+ | Winbase.h | Coredll.lib | disables DLL_THREAD_* notifications; CE has no static TLS |
+| `DLL_PROCESS_ATTACH/DETACH`/`DLL_THREAD_ATTACH/DETACH` | names per `ms885202` (DllMain); values fixed Win32 ABI | — | Winbase.h | — | DllMain itself is developer-defined (BOOL WINAPI DllMain(HANDLE,DWORD,LPVOID)); hinstDLL = HMODULE = base address |
+| `MODULEINFO`/`LPMODULEINFO` struct | `ms886757` | CE .NET 4.1+ | Psapi.h | — | load address = HMODULE; SizeOfImage/EntryPoint from the PE header |
+| `GetModuleInformation` | `ms885631` | CE .NET 4.1+ | Psapi.h | Coredll.lib | new header `include/psapi.h` |
+
+New manifest `tools/manifests/file-mapping-reference.manifest` (6
+pages); coredll def 148 -> 154 exports.
+
 ### Documented conflicts (official page vs verified export surface)
 
 | Item | Official page says | Verified coredll surface (CE 4/5/6 × ARM/x86) | Resolution |

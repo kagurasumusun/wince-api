@@ -13,6 +13,7 @@
 
 #include <windows.h>
 #include <tlhelp32.h>
+#include <psapi.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -198,6 +199,14 @@ static const void *const api_symbols[] = {
     (const void *) &GetCPInfo,
     (const void *) &GetStringTypeW,
     (const void *) &GetStringTypeExW, (const void *) &GetStringTypeEx,
+    /* M20/M20b: file mapping + DLL entry helpers (winbase.h/psapi.h). */
+    (const void *) &CreateFileForMappingW, (const void *) &CreateFileForMapping,
+    (const void *) &CreateFileMappingW, (const void *) &CreateFileMapping,
+    (const void *) &MapViewOfFile,
+    (const void *) &UnmapViewOfFile,
+    (const void *) &FlushViewOfFile,
+    (const void *) &DisableThreadLibraryCalls,
+    (const void *) &GetModuleInformation,
     /* M19: strings (winbase.h; Coreloc.lib except CharNext Coredll). */
     (const void *) &CharLowerW, (const void *) &CharLower,
     (const void *) &CharLowerBuffW, (const void *) &CharLowerBuff,
@@ -1035,6 +1044,44 @@ static int m19_shaped_usage(void)
     return 0;
 }
 
+/* M20 usage shape (compile-only): file mapping round trip. */
+static int m20_shaped_usage(void)
+{
+    static const WCHAR m_name[] = { 'm', 'a', 'p', 0 };
+    HANDLE hf, hm;
+    LPVOID view;
+
+    hf = CreateFileForMappingW(m_name, GENERIC_READ | GENERIC_WRITE,
+                               FILE_SHARE_READ, NULL, OPEN_ALWAYS,
+                               FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hf == INVALID_HANDLE_VALUE)
+        return (int) GetLastError();
+    hm = CreateFileMappingW(hf, NULL, PAGE_READWRITE, 0, 4096u, NULL);
+    if (hm == NULL) {
+        (void) CloseHandle(hf);
+        return (int) GetLastError();
+    }
+    view = MapViewOfFile(hm, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+    if (view != NULL) {
+        (void) FlushViewOfFile(view, 4096u);
+        (void) UnmapViewOfFile(view);
+    }
+    (void) CloseHandle(hm);
+    (void) CloseHandle(hf);
+    return 0;
+}
+
+static int m20b_shaped_usage(void)
+{
+    MODULEINFO mi;
+
+    (void) DisableThreadLibraryCalls((HMODULE) 0);
+    (void) GetModuleInformation((HANDLE) 0, (HMODULE) 0, &mi,
+                                sizeof(mi));
+    return (DLL_PROCESS_ATTACH == 1 && DLL_PROCESS_DETACH == 0 &&
+            DLL_THREAD_ATTACH == 2 && DLL_THREAD_DETACH == 3) ? 0 : 1;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -1062,5 +1109,9 @@ int host_tu_entry(void)
         return 1;
     if (m18_shaped_usage() != 0)
         return 1;
-    return m19_shaped_usage() == 0 ? 0 : 1;
+    if (m19_shaped_usage() != 0)
+        return 1;
+    if (m20_shaped_usage() != 0)
+        return 1;
+    return m20b_shaped_usage() == 0 ? 0 : 1;
 }

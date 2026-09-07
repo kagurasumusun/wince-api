@@ -24,12 +24,14 @@ EXPORTS
   CreateEventW
   CreateFiber
   CreateFileW
+  CreateFileForMappingW
+  CreateFileMappingW
   CreateMutexW
   CreateProcessW
   CreateThread
-  DeleteAndRenameFileW
   DeleteFiber
   DeleteFileW
+  DisableThreadLibraryCalls
   DuplicateHandle
   ExitProcess
   ExitThread
@@ -44,6 +46,7 @@ EXPORTS
   FindNextFileW
   FlushFileBuffers
   FlushInstructionCache
+  FlushViewOfFile
   FreeLibrary
   GetCommandLineW
   GetCurrentFT
@@ -64,6 +67,7 @@ EXPORTS
   GetLocalTime
   GetModuleFileNameW
   GetModuleHandleW
+  GetModuleInformation
   GetProcAddressW
   GetProcessVersion
   GetStringTypeW
@@ -106,6 +110,7 @@ EXPORTS
   LocalReAlloc
   LocalSize
   LockFileEx
+  MapViewOfFile
   MoveFileW
   MultiByteToWideChar
   OpenEventW
@@ -153,6 +158,7 @@ EXPORTS
   TlsSetValue
   TryEnterCriticalSection
   UnlockFileEx
+  UnmapViewOfFile
   VirtualAlloc
   VirtualFree
   VirtualProtect

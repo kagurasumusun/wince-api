@@ -220,3 +220,13 @@ exports + base macros.  def generation generalized to one def per
 documented user-mode Link Library: coredll 148, coreloc 23, toolhelp
 13, lmem 1, loadstr 1 (all llvm-dlltool-verified); Nk/Coremain rows
 remain excluded.
+
+**M20/M20b batch — File Mapping Reference + DLL entry:**
+CreateFileForMapping `aa517321`, CreateFileMapping `aa517331`,
+MapViewOfFile `ms891386`, UnmapViewOfFile `ms892373`, FlushViewOfFile
+`ms890303`, DisableThreadLibraryCalls `ms885200`, DLL_PROCESS/THREAD_
+ATTACH/DETACH constants (per DllMain `ms885202`); new header
+`include/psapi.h` with MODULEINFO `ms886757` + GetModuleInformation
+`ms885631` (Psapi.h / Coredll.lib rows).  New manifest
+`file-mapping-reference.manifest` (6 pages); coredll def
+148 -> 154 exports.

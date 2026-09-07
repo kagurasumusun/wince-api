@@ -94,7 +94,9 @@ UNICODE_ONLY = {
     "GetTempPath": "GetTempPathW",
     "GetFileVersionInfoSize": "GetFileVersionInfoSizeW",
     "GetFileVersionInfo": "GetFileVersionInfoW",
-    "DeleteAndRenameFile": "DeleteAndRenameFileW",
+    "CreateFileForMapping": "CreateFileForMappingW",
+    "CreateFileMapping": "CreateFileMappingW",
+    "GetModuleInformation": "GetModuleInformation",
 }
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
