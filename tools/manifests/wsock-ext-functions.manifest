@@ -1,0 +1,34 @@
+ms898727	WSAAccept
+ms898728	WSAAddressToString
+ms898730	WSACleanup
+ms898731	WSACloseEvent
+ms898733	WSAConnect
+ms898734	WSACreateEvent
+ms898737	WSAEnumNameSpaceProviders
+ms898738	WSAEnumNetworkEvents
+ms898739	WSAEnumProtocols
+ms898740	WSAEventSelect
+ms898741	WSAGetLastError
+ms898742	WSAGetOverlappedResult
+ms898743	WSAHtonl
+ms898744	WSAHtons
+ms898745	WSAIoctl
+ms898746	WSAJoinLeaf
+ms898748	WSALookupServiceBegin (Windows Sockets)
+ms898750	WSALookupServiceEnd (Windows Sockets)
+ms898752	WSALookupServiceNext (Windows Sockets)
+ms898755	WSANSPIoctl
+ms898756	WSANtohl
+ms898757	WSANtohs
+ms898763	WSARecv
+ms898764	WSARecvFrom
+ms898765	WSAResetEvent
+ms898766	WSASend
+ms898767	WSASendTo
+ms898769	WSASetEvent
+ms898770	WSASetLastError
+ms898772	WSASetService (Windows Sockets)
+ms898773	WSASocket
+ms898774	WSAStartup
+ms898775	WSAStringToAddress
+ms900456	WSAWaitForMultipleEvents

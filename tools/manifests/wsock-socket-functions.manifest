@@ -1,0 +1,30 @@
+aa450277	accept (Windows Sockets)
+aa450301	bind (Windows Sockets)
+ms887908	closesocket
+ms887913	connect (Windows Sockets)
+aa450383	freeaddrinfo
+aa450395	getaddrinfo
+aa450403	gethostbyaddr
+aa450404	gethostbyname
+aa450405	gethostname
+aa450416	getnameinfo
+aa450420	getpeername (Windows Sockets)
+ms890293	getsockname (Windows Sockets)
+ms890305	getsockopt (Windows Sockets)
+ms890324	htonl
+ms890325	htons
+ms890981	inet_addr
+ms890984	inet_ntoa
+ms891129	ioctlsocket
+ms894564	listen
+ms895778	ntohl
+ms895783	ntohs
+aa450869	recv
+aa450870	recvfrom
+aa450882	select
+aa450883	send
+aa450885	sendto
+aa450918	sethostname
+aa450935	setsockopt (Windows Sockets)
+aa450939	shutdown
+aa450958	socket (Windows Sockets)
