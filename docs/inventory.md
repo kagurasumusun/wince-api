@@ -2823,3 +2823,232 @@ archive -- same policy as the M39-M41/M46 held constant sets)
 
 Export surface: `def/coredll-doc.def` 560 -> **602** exports.
 rows.json 1801 -> **1852** records.
+
+## M48 -- Cryptography certificate / encode / OID / PFX unit (wincrypt.h; Crypt32.lib) + structure trees
+
+Scope: the certificate-store surface of the CE 5.0 Cryptography book,
+154 documented leaves harvested across three manifests
+(`crypt-cert.manifest` 54 Cert* functions, `crypt-encode-pfx.manifest`
+29 encode/OID/PFX functions, `crypt-structs.manifest` 71 structure
+pages -- BLOB/CMSG_STREAM_INFO/VTableProvStruc/CERT_INFO already
+harvested in M47).  Every function page lists Header: Wincrypt.h and
+Link Library: **Crypt32.lib** (new doc-derived def).
+
+### Functions (83 declared, all Crypt32.lib imports)
+
+* Cert* store/context functions (54, all CE 3.0+):
+  CertAddCertificateContextToStore (ms937018), CertAddCertificateLinkToStore
+  (ms937019), CertAddEncodedCertificateToStore (ms937020),
+  CertAddEnhancedKeyUsageIdentifier (ms937021),
+  CertAddSerializedElementToStore (ms937022), CertAlgIdToOID (ms937023),
+  CertCloseStore (ms937035), CertCompareCertificate (ms937036),
+  CertCompareCertificateName (ms937037), CertCompareIntegerBlob
+  (ms937038), CertComparePublicKeyInfo (ms937039), CertControlStore
+  (ms937042), CertCreateCertificateContext (ms937043),
+  CertDeleteCertificateFromStore (ms937044), CertDuplicateCertificateChain
+  (ms937235), CertDuplicateCertificateContext (ms937328),
+  CertDuplicateStore (ms937422), CertEnumCertificateContextProperties
+  (ms937534), CertEnumCertificatesInStore (ms937636),
+  CertEnumPhysicalStore (aa452564), CertEnumSystemStore (ms937645),
+  CertEnumSystemStoreLocation (ms937650), CertFindAttribute (ms937652),
+  CertFindCertificateInStore (ms937653), CertFindExtension (ms937655),
+  CertFindRDNAttr (ms937657), CertFreeCertificateChain (ms937658, void
+  return as printed), CertFreeCertificateContext (ms937659),
+  CertGetCertificateChain (ms937660), CertGetCertificateContextProperty
+  (ms937661), CertGetEnhancedKeyUsage (ms937662), CertGetIntendedKeyUsage
+  (ms937663), CertGetIssuerCertificateFromStore (ms937664),
+  CertGetNameString (ms937665), CertGetPublicKeyLength (ms937667),
+  CertGetStoreProperty (ms937668, no qualifier printed),
+  CertGetSubjectCertificateFromStore (ms937670), CertGetValidUsages
+  (aa452565), CertIsRDNAttrsInCertificateName (ms937674), CertNameToStr
+  (ms937681), CertOIDToAlgId (ms937682), CertOpenStore (ms937683),
+  CertOpenSystemStore (ms937684), CertRDNValueToStr (ms937693),
+  CertRemoveEnhancedKeyUsageIdentifier (ms937694), CertSaveStore
+  (ms937696), CertSerializeCertificateStoreElement (ms937697),
+  CertSetCertificateContextProperty (ms937698), CertSetEnhancedKeyUsage
+  (ms937699), CertSetStoreProperty (ms937700, no qualifier printed),
+  CertStrToName (ms937703), CertVerifySubjectCertificateContext
+  (ms937709), CertVerifyTimeValidity (ms937710), CertVerifyValidityNesting
+  (ms937711).
+* Encode/decode/OID/key-identifier functions (25, CE 3.0+):
+  CryptAcquireCertificatePrivateKey (ms937732),
+  CryptCreateKeyIdentifierFromCSP (ms937739), CryptDecodeObjectEx
+  (ms937740), CryptEncodeObjectEx (ms937747),
+  CryptEnumKeyIdentifierProperties (ms937995), CryptEnumOIDInfo
+  (ms938004), CryptExportPublicKeyInfoEx (ms938031),
+  CryptFindCertificateKeyProvInfo (ms938040), CryptFindOIDInfo
+  (ms938050), CryptFreeOIDFunctionAddress (ms938057),
+  CryptGetDefaultOIDFunctionAddress (ms938079),
+  CryptGetKeyIdentifierProperty (ms938099), CryptGetOIDFunctionAddress
+  (ms938109), CryptHashCertificate (ms938130), CryptHashPublicKeyInfo
+  (ms938149), CryptHashToBeSigned (ms938167), CryptImportPublicKeyInfoEx
+  (ms938185), CryptInitOIDFunctionSet (ms938191),
+  CryptInstallDefaultContext (ms938197), CryptInstallOIDFunctionAddress
+  (ms938204), CryptSetKeyIdentifierProperty (ms938330),
+  CryptSignAndEncodeCertificate (ms938360), CryptSignCertificate
+  (ms938364), CryptVerifyCertificateSignature (aa452567, CE 2.10+),
+  CryptUninstallDefaultContext (ms938372).
+* PFX (4, CE 5.0+): PFXExportCertStoreEx (ms926224), PFXImportCertStore
+  (ms926229), PFXIsPFXBlob (ms926234), PFXVerifyPassword (ms926241).
+
+### Types completed from the structure pages (transcribed verbatim)
+
+Handle carriers (no type pages): HCERTSTORE, HCERTCHAINENGINE,
+HCRYPTOIDFUNCSET, HCRYPTOIDFUNCADDR, HCRYPTDEFAULTCONTEXT.
+
+CRYPT_BIT_BLOB, CRYPT_ALGORITHM_IDENTIFIER, CRYPT_ATTRIBUTE,
+CRYPT_ATTRIBUTES (+CMSG_ATTR), CRYPT_KEY_PROV_PARAM, CRYPT_KEY_PROV_INFO,
+CRYPT_OID_FUNC_ENTRY, CRYPT_OID_INFO (+CCRYPT_OID_INFO/PCCRYPT_OID_INFO),
+HMAC_INFO (tag _HMAC_Info), PROV_ENUMALGS, PROV_ENUMALGS_EX,
+PUBLICKEYSTRUC (+BLOBHEADER), RSAPUBKEY, CTL_USAGE (+CERT_ENHKEY_USAGE),
+CERT_TRUST_STATUS, CERT_EXTENSION, CERT_ISSUER_SERIAL_NUMBER,
+CERT_PRIVATE_KEY_VALIDITY, CERT_PUBLIC_KEY_INFO, **CERT_INFO** (closing
+the M47 hold), CERT_CONTEXT (+PCCERT_CONTEXT), CERT_RDN_ATTR, CERT_RDN,
+CERT_NAME_INFO, CERT_POLICY_QUALIFIER_INFO, CERT_POLICY_ID,
+CERT_POLICY_INFO, CERT_POLICIES_INFO, CERT_KEY_ATTRIBUTES_INFO,
+CERT_KEY_CONTEXT, CERT_KEY_USAGE_RESTRICTION_INFO,
+CERT_KEYGEN_REQUEST_INFO, CERT_ID, CERT_ALT_NAME_ENTRY,
+CERT_ALT_NAME_INFO, CERT_ACCESS_DESCRIPTION,
+CERT_AUTHORITY_INFO_ACCESS, CERT_AUTHORITY_KEY_ID_INFO,
+CERT_AUTHORITY_KEY_ID2_INFO, CERT_BASIC_CONSTRAINTS_INFO,
+CERT_BASIC_CONSTRAINTS2_INFO, CERT_REQUEST_INFO,
+CERT_SIGNED_CONTENT_INFO, CERT_USAGE_MATCH, CERT_CHAIN_ELEMENT,
+CERT_SIMPLE_CHAIN, CERT_CHAIN_CONTEXT (+PCCERT_CHAIN_CONTEXT),
+CERT_CHAIN_ENGINE_CONFIG, CERT_CHAIN_PARA, CERT_TRUST_LIST_INFO,
+CERT_SYSTEM_STORE_INFO, CERT_SYSTEM_STORE_RELOCATE_PARA,
+CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA, CMSG_CTRL_DECRYPT_PARA,
+CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA, CMSG_CTRL_KEY_AGREE_DECRYPT_PARA,
+CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA, CMSG_KEY_TRANS_RECIPIENT_INFO,
+CMSG_MAIL_LIST_RECIPIENT_INFO, CMSG_CMS_RECIPIENT_INFO,
+CMSG_CMS_SIGNER_INFO, CMSG_SIGNER_INFO, CMSG_SIGNER_ENCODE_INFO,
+CMSG_SIGNED_ENCODE_INFO, CMSG_ENVELOPED_ENCODE_INFO,
+CMSG_HASHED_ENCODE_INFO, CRYPT_ENCODE_PARA.
+
+Callback pointer types: PFN_CERT_ENUM_SYSTEM_STORE and
+PFN_CERT_ENUM_SYSTEM_STORE_LOCATION have documented callback shapes
+(ms937645 / ms937650, incl. the printed pvszStoreLoocations spelling);
+PFN_CERT_ENUM_PHYSICAL_STORE / PFN_CRYPT_ENUM_KEYID_PROP /
+PFN_CRYPT_ENUM_OID_INFO / PFN_CRYPT_ALLOC / PFN_CRYPT_FREE publish no
+callback signatures on the CE pages -> generic function pointer
+(documented design decision).
+
+### Opaque (pointer-only, no layout page in the CE archive)
+
+PCERT_OTHER_NAME, PCERT_REVOCATION_INFO, PCTL_ENTRY, PCCTL_CONTEXT,
+PCMSG_KEY_AGREE_RECIPIENT_INFO, PCRYPT_ATTRIBUTE_TYPE_VALUE,
+PCMSG_RECIPIENT_ENCODE_INFO, PCRYPT_DECODE_PARA -- each is referenced
+only through a pointer member/parameter; forward-declared tags keep
+every documented struct complete.
+
+### Title/print fix-ups
+
+* ms937719 CMSG_HASHED_ENCODE_INFO: the page print reuses the
+  ENVELOPED struct name; the topic title declares the hashed one.
+* ms937701 CERT_SIGNED_CONTENT_INFO: the print is truncated before the
+  closing brace; completed from the same print.
+* ms937721 CMSG_SIGNED_ENCODE_INFO: the pointer alias is missing from
+  the print; completed (printed member spelling cAttrCertlEncoded
+  kept).
+* CertGetStoreProperty / CertSetStoreProperty print no calling
+  convention; CertFreeCertificateChain prints a void return -- all as
+  printed (WINAPI is empty on CE either way).
+
+### 32-bit sizes (measured on the CE target, TU-asserted)
+
+PROV_ENUMALGS 52, PROV_ENUMALGS_EX 148, PUBLICKEYSTRUC/BLOBHEADER 8,
+RSAPUBKEY 12, CERT_SYSTEM_STORE_INFO 4, CERT_TRUST_STATUS 8;
+pointer-bearing (32-bit model): CTL_USAGE 8, CRYPT_BIT_BLOB 12,
+CRYPT_ALGORITHM_IDENTIFIER 12, CRYPT_ATTRIBUTE 12, CRYPT_ATTRIBUTES 8,
+CRYPT_KEY_PROV_PARAM 16, CRYPT_KEY_PROV_INFO 28, CRYPT_OID_INFO 28,
+CRYPT_ENCODE_PARA 12, HMAC_INFO 20, CERT_EXTENSION 16,
+CERT_ISSUER_SERIAL_NUMBER 16, CERT_PRIVATE_KEY_VALIDITY 16,
+CERT_PUBLIC_KEY_INFO 24, CERT_INFO 112, CERT_CONTEXT 20,
+CERT_RDN_ATTR 16, CERT_RDN 8, CERT_NAME_INFO 8,
+CERT_POLICY_QUALIFIER_INFO 12, CERT_POLICY_ID 8, CERT_POLICY_INFO 12,
+CERT_POLICIES_INFO 8, CERT_KEY_ATTRIBUTES_INFO 24, CERT_KEY_CONTEXT 12,
+CERT_KEY_USAGE_RESTRICTION_INFO 20, CERT_KEYGEN_REQUEST_INFO 32,
+CERT_ID 20, CERT_ALT_NAME_ENTRY 12, CERT_ALT_NAME_INFO 8,
+CERT_ACCESS_DESCRIPTION 16, CERT_AUTHORITY_INFO_ACCESS 8,
+CERT_AUTHORITY_KEY_ID_INFO 24, CERT_AUTHORITY_KEY_ID2_INFO 24,
+CERT_BASIC_CONSTRAINTS_INFO 28, CERT_BASIC_CONSTRAINTS2_INFO 12,
+CERT_REQUEST_INFO 44, CERT_SIGNED_CONTENT_INFO 32, CERT_USAGE_MATCH 12,
+CERT_CHAIN_ELEMENT 20, CERT_SIMPLE_CHAIN 24, CERT_CHAIN_CONTEXT 20,
+CERT_CHAIN_ENGINE_CONFIG 40, CERT_CHAIN_PARA 16, CERT_TRUST_LIST_INFO 12,
+CERT_SYSTEM_STORE_RELOCATE_PARA 8, CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA 16,
+CMSG_CTRL_DECRYPT_PARA 16, CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA 12,
+CMSG_CTRL_KEY_AGREE_DECRYPT_PARA 36, CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA 20,
+CMSG_KEY_TRANS_RECIPIENT_INFO 44, CMSG_MAIL_LIST_RECIPIENT_INFO 44,
+CMSG_CMS_RECIPIENT_INFO 8, CMSG_CMS_SIGNER_INFO 72, CMSG_SIGNER_INFO 68,
+CMSG_SIGNER_ENCODE_INFO 84, CMSG_SIGNED_ENCODE_INFO 36,
+CMSG_ENVELOPED_ENCODE_INFO 68, CMSG_HASHED_ENCODE_INFO 24.
+
+### Recorded-not-defined (values absent from the CE archive)
+
+CERT_NAME_* / CERT_FIND_* / CERT_STORE_* / CERT_CHAIN_* / CMSG_* /
+szOID_* identifier sets that the parameter tables name without numeric
+values (same held-set policy as M39-M41/M46/M47).
+
+### Verification
+
+* `make check` GREEN (TU exercises all 83 functions + both documented
+  callback shapes + every struct; defcheck `crypt32-doc.def` **83**).
+* `make crosscheck` GREEN on all six targets (all sizes above asserted
+  there).
+* `make e2e` GREEN: asserts `Name: crypt32.dll` + CertOpenStore /
+  CryptEncodeObjectEx / PFXImportCertStore imports on all six images.
+
+Export surface: new `def/crypt32-doc.def` **83** exports.
+rows.json 1852 -> **2033** records (incl. M49 below).
+
+## M49 -- Smart Card subsystem unit (new header winscard.h; Winscard.lib)
+
+Scope: the Smart Card book of the CE 5.0 Cryptography chapter -- 28
+SCard* functions (every page Header: Winscard.h / Link Library:
+Winscard.lib) + 3 structures, 31 leaves
+(`tools/manifests/smartcard.manifest`).
+
+### Functions (28)
+
+SCardBeginTransaction (ms938481), SCardCancel (ms938495), SCardConnect
+(ms938504), SCardControl (ms938510), SCardDisconnect (ms938517),
+SCardEndTransaction (ms938526), SCardEstablishContext (ms938536),
+SCardForgetCardType (ms938545), SCardForgetReader (ms938553),
+SCardFreeMemory (ms938564, CE 5.0+, trailing-comma print fixed),
+SCardGetAttrib (ms938574), SCardGetCardTypeProviderName (ms926375),
+SCardGetProviderId (ms926397), SCardGetStatusChange (ms926406),
+SCardIntroduceCardType (ms926415), SCardIntroduceReader (ms926416),
+SCardIsValidContext (ms926418, CE .NET 4.1+), SCardListCards (ms926419),
+SCardListInterfaces (ms926420), SCardListReaders (ms926422),
+SCardLocateCards (ms926423), SCardLocateCardsByATR (ms926424, CE .NET
+4.1+; page prints the SCardLocateCards name -- title wins),
+SCardReconnect (ms926426), SCardReleaseContext (ms926427),
+SCardSetAttrib (ms926428), SCardSetCardTypeProviderName (ms926429),
+SCardStatus (ms926430), SCardTransmit (ms926431; printed
+LPCSCARD_I0_REQUEST declared as the const pointer to SCARD_IO_REQUEST).
+
+### Types
+
+* SCARD_IO_REQUEST (ms926417, anonymous tag as printed; LPSCARD_IO_REQUEST
+  / LPCSCARD_IO_REQUEST named by the SCardTransmit prototype).
+* SCARD_READERSTATE (ms926425, 32-bit size 56 TU-asserted).
+* SCARD_ATRMASK (ms938473, size 76 TU-asserted, CE .NET 4.1+).
+* SCARDCONTEXT / SCARDHANDLE: no type pages -> handle carriers
+  (documented design decision).
+* New windef/winnt helpers added for documented spellings: PBYTE
+  (M48), LPCBYTE, LPCGUID.
+
+### Recorded-not-defined
+
+SCARD_STATE_* / SCARD_PROTOCOL_* / SCARD_ATTR_* / SCARD_SCOPE_* /
+SCARD_SHARE_* value sets: named without values on the CE pages
+(held-set policy).
+
+### Verification
+
+* `make check` GREEN (TU m49 exercises all 28 functions + the three
+  structures; defcheck `winscard-doc.def` **28**).
+* `make crosscheck` GREEN on all six targets.
+* `make e2e` GREEN: asserts `Name: winscard.dll` + SCardEstablishContext
+  / SCardTransmit imports on all six images.
+
+Export surface: new `def/winscard-doc.def` **28** exports.

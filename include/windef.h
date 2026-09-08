@@ -84,6 +84,8 @@ typedef unsigned int    UINT;
 typedef int             BOOL;
 typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
 typedef BYTE           *LPBYTE; /* byte pointer (registry value data)  */
+typedef BYTE           *PBYTE;  /* CryptSignAndEncodeCertificate page  */
+typedef const BYTE     *LPCBYTE;/* SCardIntroduceCardType page (Winscard) */
 typedef WORD           *LPWORD; /* WORD pointer (GetStringType* arrays) */
 
 /* Locale/language identifier types: LANGID = WORD, LCID = DWORD.

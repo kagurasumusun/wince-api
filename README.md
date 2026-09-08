@@ -173,6 +173,28 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M48 (landed):** Cryptography certificate / encode / OID / PFX
+  unit (wincrypt.h; **Crypt32.lib**) -- the 54 documented Cert*
+  store/context functions, the 25 encode/decode/OID/key-identifier
+  functions and the 4 PFX functions (every page Header: Wincrypt.h /
+  Link Library: Crypt32.lib), plus the full CERT_* / CMSG_* / CRYPT_*
+  structure trees transcribed from the 71 structure pages (CERT_INFO
+  closes the M47 hold; 8 pointer-only targets stay opaque by design),
+  the 5 crypto handle carriers, the two documented callback shapes
+  (PFN_CERT_ENUM_SYSTEM_STORE / _LOCATION) and 63 TU-asserted 32-bit
+  sizes measured on the CE target.  New `crypt32-doc.def` with 83
+  exports; e2e asserts crypt32.dll + CertOpenStore +
+  CryptEncodeObjectEx + PFXImportCertStore on all six targets.
+* **M49 (landed):** Smart Card subsystem unit (new `include/winscard.h`;
+  Winscard.lib) -- the 28 documented SCard* functions (SCardBeginTransaction
+  .. SCardTransmit) plus SCARD_IO_REQUEST / SCARD_READERSTATE /
+  SCARD_ATRMASK, SCARDCONTEXT/SCARDHANDLE handle carriers and the
+  LPCBYTE/LPCGUID documented spellings.  New `winscard-doc.def` with
+  28 exports; e2e asserts winscard.dll + SCardEstablishContext +
+  SCardTransmit on all six targets.  Also this batch:
+  `docs/ce-not-nt.md` records the official-source readout that
+  Windows CE 1.x-6.x is a separate OS family with its own kernel
+  (not NT-derived), quoting the learn.microsoft.com archive pages.
 * **M47 (landed):** Cryptography base CSP unit (new
   `include/wincrypt.h`; Coredll.lib) -- the 42 documented Crypt*
   functions of the CE 5.0 Cryptography book (CryptAcquireContext ..
@@ -489,7 +511,7 @@ values) -- those need the documented on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
 lockstep (coredll at 602 name-only exports incl. the 42 M47 Crypt*
-functions; coreimm 56, M46);
+functions; coreimm 56, M46; crypt32 83 + winscard 28, M48/M49);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

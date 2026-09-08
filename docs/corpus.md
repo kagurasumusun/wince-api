@@ -48,19 +48,21 @@ Then delete the corpus clone and `build/` from the session.
 
 ## Current corpus (2026-09-08, M47)
 
-* `pages5/`: 1771 CE 5.0 `(v=msdn.10)` pages — the full committed
+* `pages5/`: 1954 CE 5.0 `(v=msdn.10)` pages — the full committed
   manifest set (83 manifests incl. the M43 TAPI/TSPI manifests, the
   M45 `tapi-client-functions.manifest`, the M46
   `imm-reference.manifest` and the M47
   `crypt-csp-base.manifest`, 51 pages harvested in M47) plus the
   M34a type/callback pages (aa450831 EXTENDED_NAME_FORMAT, ms904723
   EnumCodePagesProc).
-* `pages6/`: 1180 CE 6.0 `(v=winembedded.60)` pages — the twins of the
+* `pages6/`: 1182 CE 6.0 `(v=winembedded.60)` pages — the twins of the
   CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
   CE 6.0 leaf) plus the M34a twins ee483142 / ee491122, the M44
-  CE 6.0 twins and the M46 IMM constant twins (ee490906 / ee491772 /
+  CE 6.0 twins, the M46 IMM constant twins (ee490906 / ee491772 /
   ee491563 / ee492116 / ee491945 / ee491174 / ee491913 / ee491163 /
-  ee491938 / ee491940).
+  ee491938 / ee491940) and the two CE 6.0 architecture/kernel pages
+  read for docs/ce-not-nt.md (ee504804 Windows CE OS model,
+  ee482762 Kernel Servers: CE 5.0 vs CE 6.0).
 * `pages4/`: **6468 Windows CE .NET `(v=msdn.10)` pages — the full
   earliest-complete CE tree, read end-to-end in M34**
   (see `docs/cenet-readout.md`).  One catalog leaf,
@@ -68,11 +70,19 @@ Then delete the corpus clone and `build/` from the session.
   cross-linked by the archived TOC: its CE URL is a verified 404 and
   it is excluded; one preserved page (ms938306) is the archive's
   `#message` sign-in-gated stub, kept as published.
-* `rows.json`: 1852 CE 5.0 Requirement-row records (1560 pre-M45 +
+* `rows.json`: 2033 CE 5.0 Requirement-row records (1560 pre-M45 +
   the 89 M45 TAPI client function pages + the 152 M46 IMM reference
-  pages + the 51 M47 crypto base-CSP pages); `rows4.json` (in
-  `build/`, regenerable via `tools/cenet-rows.py`) holds the CE .NET
-  parsed records.
+  pages + the 51 M47 crypto base-CSP pages + the 181 M48/M49 crypto
+  certificate/PFX + smart-card pages, counting 4 struct pages already
+  cached in M47 only once); `rows4.json` (in `build/`, regenerable
+  via `tools/cenet-rows.py`) holds the CE .NET parsed records.
+* M48/M49 harvest (cert/encode/PFX + smart card): manifests
+  `crypt-cert.manifest` (54), `crypt-encode-pfx.manifest` (29),
+  `crypt-structs.manifest` (71; BLOB/CMSG_STREAM_INFO/VTableProvStruc/
+  CERT_INFO already harvested) and `smartcard.manifest` (31); plus two
+  preserved architecture pages in pages5 (ms905093 Windows CE
+  Architecture, ms905342 Overview of Windows CE Development) backing
+  docs/ce-not-nt.md.
 * M47 parser fix: `tools/ce-fetch.py` now parses Requirements fields
   whose colon sits outside the label tag (`<strong>OS Versions</strong>:`);
   the whole cached corpus was re-parsed, which corrected 4 CryptMsg*

@@ -28,6 +28,7 @@
 #include <tapicomn.h>
 #include <imm.h>
 #include <wincrypt.h>
+#include <winscard.h>
 #include <objbase.h>
 #include <stddef.h>
 
@@ -3804,6 +3805,418 @@ static int m47_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M48: Cryptography certificate / encode / OID / PFX unit            */
+/*      (wincrypt.h; Crypt32.lib) -- the 83 documented Crypt32.lib    */
+/*      functions, the CERT_* / CMSG_* / CRYPT_* structure trees and  */
+/*      the callback pointer shapes.                                  */
+/* ------------------------------------------------------------------ */
+
+/* Pointer-free M48 layouts (hold on every host). */
+_Static_assert(sizeof(PROV_ENUMALGS) == 52, "PROV_ENUMALGS size");
+_Static_assert(sizeof(PROV_ENUMALGS_EX) == 148, "PROV_ENUMALGS_EX size");
+_Static_assert(sizeof(PUBLICKEYSTRUC) == 8, "PUBLICKEYSTRUC size");
+_Static_assert(sizeof(BLOBHEADER) == 8, "BLOBHEADER alias size");
+_Static_assert(sizeof(RSAPUBKEY) == 12, "RSAPUBKEY size");
+_Static_assert(sizeof(CERT_SYSTEM_STORE_INFO) == 4,
+               "CERT_SYSTEM_STORE_INFO size");
+_Static_assert(sizeof(CERT_TRUST_STATUS) == 8, "CERT_TRUST_STATUS size");
+
+/* Pointer-bearing M48 layouts -- 32-bit CE model only (the CE
+ * toolchain matrix is the arbiter). */
+/* All sizes below measured on the CE 32-bit target with the
+ * LLVM-WinCE toolchain (-fdump-record-layouts), i.e. the CE ABI
+ * itself, not a calculation. */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(CTL_USAGE) == 8, "CTL_USAGE 32-bit size");
+_Static_assert(sizeof(CERT_ENHKEY_USAGE) == 8,
+               "CERT_ENHKEY_USAGE alias 32-bit size");
+_Static_assert(sizeof(CRYPT_BIT_BLOB) == 12, "CRYPT_BIT_BLOB 32-bit size");
+_Static_assert(sizeof(CRYPT_ALGORITHM_IDENTIFIER) == 12,
+               "CRYPT_ALGORITHM_IDENTIFIER 32-bit size");
+_Static_assert(sizeof(CRYPT_ATTRIBUTE) == 12, "CRYPT_ATTRIBUTE 32-bit size");
+_Static_assert(sizeof(CRYPT_ATTRIBUTES) == 8, "CRYPT_ATTRIBUTES 32-bit size");
+_Static_assert(sizeof(CRYPT_KEY_PROV_PARAM) == 16,
+               "CRYPT_KEY_PROV_PARAM 32-bit size");
+_Static_assert(sizeof(CRYPT_KEY_PROV_INFO) == 28,
+               "CRYPT_KEY_PROV_INFO 32-bit size");
+_Static_assert(sizeof(CRYPT_OID_INFO) == 28, "CRYPT_OID_INFO 32-bit size");
+_Static_assert(sizeof(CRYPT_ENCODE_PARA) == 12, "CRYPT_ENCODE_PARA 32-bit size");
+_Static_assert(sizeof(HMAC_INFO) == 20, "HMAC_INFO 32-bit size");
+_Static_assert(sizeof(CERT_EXTENSION) == 16, "CERT_EXTENSION 32-bit size");
+_Static_assert(sizeof(CERT_ISSUER_SERIAL_NUMBER) == 16,
+               "CERT_ISSUER_SERIAL_NUMBER 32-bit size");
+_Static_assert(sizeof(CERT_PRIVATE_KEY_VALIDITY) == 16,
+               "CERT_PRIVATE_KEY_VALIDITY 32-bit size");
+_Static_assert(sizeof(CERT_PUBLIC_KEY_INFO) == 24,
+               "CERT_PUBLIC_KEY_INFO 32-bit size");
+_Static_assert(sizeof(CERT_INFO) == 112, "CERT_INFO 32-bit size");
+_Static_assert(sizeof(CERT_CONTEXT) == 20, "CERT_CONTEXT 32-bit size");
+_Static_assert(sizeof(CERT_RDN_ATTR) == 16, "CERT_RDN_ATTR 32-bit size");
+_Static_assert(sizeof(CERT_RDN) == 8, "CERT_RDN 32-bit size");
+_Static_assert(sizeof(CERT_NAME_INFO) == 8, "CERT_NAME_INFO 32-bit size");
+_Static_assert(sizeof(CERT_POLICY_QUALIFIER_INFO) == 12,
+               "CERT_POLICY_QUALIFIER_INFO 32-bit size");
+_Static_assert(sizeof(CERT_POLICY_ID) == 8, "CERT_POLICY_ID 32-bit size");
+_Static_assert(sizeof(CERT_POLICY_INFO) == 12, "CERT_POLICY_INFO 32-bit size");
+_Static_assert(sizeof(CERT_POLICIES_INFO) == 8, "CERT_POLICIES_INFO 32-bit size");
+_Static_assert(sizeof(CERT_KEY_ATTRIBUTES_INFO) == 24,
+               "CERT_KEY_ATTRIBUTES_INFO 32-bit size");
+_Static_assert(sizeof(CERT_KEY_CONTEXT) == 12, "CERT_KEY_CONTEXT 32-bit size");
+_Static_assert(sizeof(CERT_KEY_USAGE_RESTRICTION_INFO) == 20,
+               "CERT_KEY_USAGE_RESTRICTION_INFO 32-bit size");
+_Static_assert(sizeof(CERT_KEYGEN_REQUEST_INFO) == 32,
+               "CERT_KEYGEN_REQUEST_INFO 32-bit size");
+_Static_assert(sizeof(CERT_ID) == 20, "CERT_ID 32-bit size");
+_Static_assert(sizeof(CERT_ALT_NAME_ENTRY) == 12,
+               "CERT_ALT_NAME_ENTRY 32-bit size");
+_Static_assert(sizeof(CERT_ALT_NAME_INFO) == 8, "CERT_ALT_NAME_INFO 32-bit size");
+_Static_assert(sizeof(CERT_ACCESS_DESCRIPTION) == 16,
+               "CERT_ACCESS_DESCRIPTION 32-bit size");
+_Static_assert(sizeof(CERT_AUTHORITY_INFO_ACCESS) == 8,
+               "CERT_AUTHORITY_INFO_ACCESS 32-bit size");
+_Static_assert(sizeof(CERT_AUTHORITY_KEY_ID_INFO) == 24,
+               "CERT_AUTHORITY_KEY_ID_INFO 32-bit size");
+_Static_assert(sizeof(CERT_AUTHORITY_KEY_ID2_INFO) == 24,
+               "CERT_AUTHORITY_KEY_ID2_INFO 32-bit size");
+_Static_assert(sizeof(CERT_BASIC_CONSTRAINTS_INFO) == 28,
+               "CERT_BASIC_CONSTRAINTS_INFO 32-bit size");
+_Static_assert(sizeof(CERT_BASIC_CONSTRAINTS2_INFO) == 12,
+               "CERT_BASIC_CONSTRAINTS2_INFO 32-bit size");
+_Static_assert(sizeof(CERT_REQUEST_INFO) == 44, "CERT_REQUEST_INFO 32-bit size");
+_Static_assert(sizeof(CERT_SIGNED_CONTENT_INFO) == 32,
+               "CERT_SIGNED_CONTENT_INFO 32-bit size");
+_Static_assert(sizeof(CERT_USAGE_MATCH) == 12, "CERT_USAGE_MATCH 32-bit size");
+_Static_assert(sizeof(CERT_CHAIN_ELEMENT) == 20, "CERT_CHAIN_ELEMENT 32-bit size");
+_Static_assert(sizeof(CERT_SIMPLE_CHAIN) == 24, "CERT_SIMPLE_CHAIN 32-bit size");
+_Static_assert(sizeof(CERT_CHAIN_CONTEXT) == 20,
+               "CERT_CHAIN_CONTEXT 32-bit size");
+_Static_assert(sizeof(CERT_CHAIN_ENGINE_CONFIG) == 40,
+               "CERT_CHAIN_ENGINE_CONFIG 32-bit size");
+_Static_assert(sizeof(CERT_CHAIN_PARA) == 16, "CERT_CHAIN_PARA 32-bit size");
+_Static_assert(sizeof(CERT_TRUST_LIST_INFO) == 12,
+               "CERT_TRUST_LIST_INFO 32-bit size");
+_Static_assert(sizeof(CERT_SYSTEM_STORE_RELOCATE_PARA) == 8,
+               "CERT_SYSTEM_STORE_RELOCATE_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA) == 16,
+               "CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_CTRL_DECRYPT_PARA) == 16,
+               "CMSG_CTRL_DECRYPT_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA) == 12,
+               "CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_CTRL_KEY_AGREE_DECRYPT_PARA) == 36,
+               "CMSG_CTRL_KEY_AGREE_DECRYPT_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA) == 20,
+               "CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA 32-bit size");
+_Static_assert(sizeof(CMSG_KEY_TRANS_RECIPIENT_INFO) == 44,
+               "CMSG_KEY_TRANS_RECIPIENT_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_MAIL_LIST_RECIPIENT_INFO) == 44,
+               "CMSG_MAIL_LIST_RECIPIENT_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_CMS_RECIPIENT_INFO) == 8,
+               "CMSG_CMS_RECIPIENT_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_CMS_SIGNER_INFO) == 72,
+               "CMSG_CMS_SIGNER_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_SIGNER_INFO) == 68, "CMSG_SIGNER_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_SIGNER_ENCODE_INFO) == 84,
+               "CMSG_SIGNER_ENCODE_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_SIGNED_ENCODE_INFO) == 36,
+               "CMSG_SIGNED_ENCODE_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_ENVELOPED_ENCODE_INFO) == 68,
+               "CMSG_ENVELOPED_ENCODE_INFO 32-bit size");
+_Static_assert(sizeof(CMSG_HASHED_ENCODE_INFO) == 24,
+               "CMSG_HASHED_ENCODE_INFO 32-bit size");
+#endif
+
+static BOOL WINAPI m48_enum_system_store(const void *pvSystemStore,
+                                         DWORD dwFlags,
+                                         PCERT_SYSTEM_STORE_INFO pStoreInfo,
+                                         void *pvReserved, void *pvArg)
+{ (void) pvSystemStore; (void) dwFlags; (void) pStoreInfo;
+  (void) pvReserved; (void) pvArg; return TRUE; }
+
+static BOOL WINAPI m48_enum_store_location(LPCWSTR pvszStoreLoocations,
+                                           DWORD dwFlags, void *pvReserved,
+                                           void *pvArg)
+{ (void) pvszStoreLoocations; (void) dwFlags; (void) pvReserved;
+  (void) pvArg; return TRUE; }
+
+static int m48_shaped_usage(void)
+{
+    HCERTSTORE           hStore = 0;
+    HCRYPTPROV           hProv  = 0;
+    HCRYPTKEY            hKey   = 0;
+    HCRYPTOIDFUNCSET     hFuncSet = 0;
+    HCRYPTOIDFUNCADDR    hFuncAddr = 0;
+    HCRYPTDEFAULTCONTEXT hDefCtx = 0;
+    PCCERT_CONTEXT       pCert  = (PCCERT_CONTEXT)0;
+    PCCERT_CHAIN_CONTEXT pChain = (PCCERT_CHAIN_CONTEXT)0;
+    DWORD                dw     = 0;
+    BYTE                 buf[8] = {0};
+    FILETIME             ft     = {0};
+
+    CERT_INFO                     cinfo = {0};
+    CERT_CONTEXT                  cctx  = {0};
+    CERT_EXTENSION                cext  = {0};
+    CERT_PUBLIC_KEY_INFO          pki   = {0};
+    CERT_NAME_BLOB                name  = {0};
+    CERT_RDN_ATTR                 rattr = {0};
+    CERT_NAME_INFO                cname = {0};
+    CERT_ENHKEY_USAGE             eku   = {0};
+    CERT_CHAIN_PARA               cpara = {0};
+    CERT_CHAIN_ENGINE_CONFIG      ceng  = {0};
+    CERT_SYSTEM_STORE_INFO        ssi   = {0};
+    CERT_SYSTEM_STORE_RELOCATE_PARA srp = {0};
+    CRYPT_ALGORITHM_IDENTIFIER    algid = {0};
+    CRYPT_ATTRIBUTE               cattr = {0};
+    CRYPT_ATTRIBUTES              cattrs = {0};
+    CRYPT_BIT_BLOB                bits  = {0};
+    CRYPT_ENCODE_PARA             encpara = {0};
+    CRYPT_OID_INFO                oidinfo = {0};
+    CRYPT_OID_FUNC_ENTRY          oidentry = {0};
+    CRYPT_KEY_PROV_INFO           kpi   = {0};
+    CRYPT_KEY_PROV_PARAM          kpp   = {0};
+    CRYPT_DATA_BLOB               data  = {0};
+    CRYPT_HASH_BLOB               hash  = {0};
+    CMSG_SIGNED_ENCODE_INFO       sgn   = {0};
+    CMSG_ENVELOPED_ENCODE_INFO    env   = {0};
+    CMSG_HASHED_ENCODE_INFO       hsd   = {0};
+    CMSG_CTRL_DECRYPT_PARA        dec   = {0};
+    CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA vsx = {0};
+    CMSG_SIGNER_INFO              sgni  = {0};
+    CMSG_CMS_SIGNER_INFO          cmsi  = {0};
+    CMSG_CMS_RECIPIENT_INFO       rcpt  = {0};
+    CMSG_KEY_TRANS_RECIPIENT_INFO ktri  = {0};
+    CMSG_MAIL_LIST_RECIPIENT_INFO mlri  = {0};
+    PUBLICKEYSTRUC                pks   = {0};
+    BLOBHEADER                    bh    = {0};
+    RSAPUBKEY                     rsa   = {0};
+    PROV_ENUMALGS                 pea   = {0};
+    PROV_ENUMALGS_EX              peaex = {0};
+    HMAC_INFO                     hmac  = {0};
+    CERT_ID                       cid   = {0};
+    CERT_USAGE_MATCH              um    = {0};
+    CERT_TRUST_STATUS             tstat = {0};
+    PFN_CERT_ENUM_SYSTEM_STORE          pfnss = m48_enum_system_store;
+    PFN_CERT_ENUM_SYSTEM_STORE_LOCATION pfnsl = m48_enum_store_location;
+
+    /* callback typedef shapes */
+    (void) pfnss; (void) pfnsl;
+
+    /* certificate store management */
+    hStore = CertOpenStore((LPCSTR)0, 0, hProv, 0, (const void *)0);
+    hStore = CertOpenSystemStore(hProv, (LPCTSTR)0);
+    (void) CertCloseStore(hStore, 0);
+    hStore = CertDuplicateStore(hStore);
+    (void) CertControlStore(hStore, 0, 0, (const void *)0);
+    (void) CertSaveStore(hStore, 0, 0, 0, (void *)0, 0);
+    (void) CertGetStoreProperty(hStore, 0, (void *)0, &dw);
+    (void) CertSetStoreProperty(hStore, 0, 0, (const void *)0);
+
+    /* certificate context management */
+    pCert = CertCreateCertificateContext(0, (const BYTE *)0, 0);
+    pCert = CertDuplicateCertificateContext(pCert);
+    (void) CertAddCertificateContextToStore(hStore, pCert, 0, &pCert);
+    (void) CertAddCertificateLinkToStore(hStore, pCert, 0, &pCert);
+    (void) CertAddEncodedCertificateToStore(hStore, 0, (const BYTE *)0, 0,
+                                            0, &pCert);
+    (void) CertDeleteCertificateFromStore(pCert);
+    pCert = CertEnumCertificatesInStore(hStore, pCert);
+    pCert = CertFindCertificateInStore(hStore, 0, 0, 0, (const void *)0,
+                                       pCert);
+    pCert = CertGetIssuerCertificateFromStore(hStore, pCert, pCert, &dw);
+    pCert = CertGetSubjectCertificateFromStore(hStore, 0, &cinfo);
+    (void) CertFreeCertificateContext(pCert);
+    (void) CertGetCertificateContextProperty(pCert, 0, (void *)0, &dw);
+    (void) CertSetCertificateContextProperty(pCert, 0, 0, (const void *)0);
+    dw = CertEnumCertificateContextProperties(pCert, 0);
+    (void) CertSerializeCertificateStoreElement(pCert, 0, buf, &dw);
+    (void) CertAddSerializedElementToStore(hStore, (const BYTE *)0, 0, 0,
+                                           0, 0, &dw, (const void **)0);
+
+    /* certificate comparison / naming / properties */
+    (void) CertCompareCertificate(0, &cinfo, &cinfo);
+    (void) CertCompareCertificateName(0, &name, &name);
+    (void) CertCompareIntegerBlob((PCRYPT_INTEGER_BLOB)0,
+                                  (PCRYPT_INTEGER_BLOB)0);
+    (void) CertComparePublicKeyInfo(0, &pki, &pki);
+    dw = CertGetNameString(pCert, 0, 0, (void *)0, (LPTSTR)0, 0);
+    dw = CertNameToStr(0, &name, 0, (LPTSTR)0, 0);
+    dw = CertRDNValueToStr(0, (PCERT_RDN_VALUE_BLOB)0, (LPTSTR)0, 0);
+    (void) CertStrToName(0, (LPCTSTR)0, 0, (void *)0, buf, &dw,
+                         (LPCTSTR *)0);
+    (void) CertIsRDNAttrsInCertificateName(0, 0, &name, (PCERT_RDN)0);
+    (void) CertAddEnhancedKeyUsageIdentifier(pCert, (LPCSTR)0);
+    (void) CertRemoveEnhancedKeyUsageIdentifier(pCert, (LPCSTR)0);
+    (void) CertGetEnhancedKeyUsage(pCert, 0, &eku, &dw);
+    (void) CertSetEnhancedKeyUsage(pCert, &eku);
+    (void) CertGetIntendedKeyUsage(0, &cinfo, buf, 0);
+    dw = CertGetPublicKeyLength(0, &pki);
+
+    /* OID <-> algorithm id mapping */
+    (void) CertAlgIdToOID(0);
+    dw = CertOIDToAlgId((LPCSTR)0);
+
+    /* find helpers */
+    (void) CertFindAttribute((LPCSTR)0, 0, (CRYPT_ATTRIBUTE *)0);
+    (void) CertFindExtension((LPCSTR)0, 0, (CERT_EXTENSION *)0);
+    (void) CertFindRDNAttr((LPCSTR)0, &cname);
+
+    /* enumeration callbacks */
+    (void) CertEnumSystemStore(0, (void *)0, (void *)0, pfnss);
+    (void) CertEnumSystemStoreLocation(0, (void *)0, pfnsl);
+    (void) CertEnumPhysicalStore((const void *)0, 0, (void *)0,
+                                 (PFN_CERT_ENUM_PHYSICAL_STORE)0);
+    (void) CertGetValidUsages(0, &pCert, (int *)0, (LPSTR *)0, &dw);
+
+    /* verification */
+    (void) CertVerifySubjectCertificateContext(pCert, pCert, &dw);
+    (void) CertVerifyTimeValidity(&ft, &cinfo);
+    (void) CertVerifyValidityNesting(&cinfo, &cinfo);
+
+    /* certificate chains */
+    (void) CertGetCertificateChain((HCERTCHAINENGINE)0, pCert, &ft,
+                                   hStore, &cpara, 0, (LPVOID)0, &pChain);
+    pChain = CertDuplicateCertificateChain(pChain);
+    CertFreeCertificateChain(pChain);
+
+    /* key identifier / private key access */
+    (void) CryptAcquireCertificatePrivateKey(pCert, 0, (void *)0, &hProv,
+                                             &dw, (BOOL *)0);
+    (void) CryptCreateKeyIdentifierFromCSP(0, (LPCSTR)0, &pks, 0, 0,
+                                           (void *)0, buf, &dw);
+    (void) CryptEnumKeyIdentifierProperties(&hash, 0, 0, (LPCWSTR)0,
+                                            (void *)0, (void *)0,
+                                            (PFN_CRYPT_ENUM_KEYID_PROP)0);
+    (void) CryptGetKeyIdentifierProperty(&hash, 0, 0, (LPCWSTR)0,
+                                         (void *)0, (void *)0, &dw);
+    (void) CryptSetKeyIdentifierProperty(&hash, 0, 0, (LPCWSTR)0,
+                                         (void *)0, (const void *)0);
+    (void) CryptFindCertificateKeyProvInfo(pCert, 0, (void *)0);
+
+    /* encode / decode */
+    (void) CryptEncodeObjectEx(0, (LPCSTR)0, (const void *)0, 0,
+                               &encpara, (void *)0, &dw);
+    (void) CryptDecodeObjectEx(0, (LPCSTR)0, (const BYTE *)0, 0, 0,
+                               (PCRYPT_DECODE_PARA)0, (void *)0, &dw);
+    (void) CryptSignAndEncodeCertificate(hProv, 0, 0, (LPCSTR)0,
+                                         (const void *)0, &algid,
+                                         (const void *)0, (PBYTE)0, &dw);
+    (void) CryptSignCertificate(hProv, 0, 0, (const BYTE *)0, 0, &algid,
+                                (const void *)0, buf, &dw);
+    (void) CryptVerifyCertificateSignature(hProv, 0, buf, 0, &pki);
+    (void) CryptHashCertificate(hProv, 0, 0, (const BYTE *)0, 0, buf,
+                                &dw);
+    (void) CryptHashPublicKeyInfo(hProv, 0, 0, 0, &pki, buf, &dw);
+    (void) CryptHashToBeSigned(hProv, 0, (const BYTE *)0, 0, buf, &dw);
+
+    /* public key import/export */
+    (void) CryptExportPublicKeyInfoEx(hProv, 0, 0, (LPSTR)0, 0,
+                                      (void *)0, &pki, &dw);
+    (void) CryptImportPublicKeyInfoEx(hProv, 0, &pki, 0, 0, (void *)0,
+                                      &hKey);
+
+    /* OID registry */
+    (void) CryptFindOIDInfo(0, (void *)0, 0);
+    (void) CryptEnumOIDInfo(0, 0, (void *)0,
+                            (PFN_CRYPT_ENUM_OID_INFO)0);
+    hFuncSet = CryptInitOIDFunctionSet((LPCSTR)0, 0);
+    (void) CryptGetOIDFunctionAddress(hFuncSet, 0, (LPCSTR)0, 0,
+                                      (void **)0, &hFuncAddr);
+    (void) CryptGetDefaultOIDFunctionAddress(hFuncSet, 0, (LPCWSTR)0, 0,
+                                             (void **)0, &hFuncAddr);
+    (void) CryptInstallOIDFunctionAddress((HMODULE)0, 0, (LPCSTR)0, 0,
+                                          &oidentry, 0);
+    (void) CryptFreeOIDFunctionAddress(hFuncAddr, 0);
+
+    /* default contexts */
+    (void) CryptInstallDefaultContext(hProv, 0, (const void *)0, 0,
+                                      (void *)0, &hDefCtx);
+    (void) CryptUninstallDefaultContext(hDefCtx, 0, (void *)0);
+
+    /* PFX */
+    (void) PFXExportCertStoreEx(hStore, &data, (LPCWSTR)0, (void *)0, 0);
+    hStore = PFXImportCertStore(&data, (LPCWSTR)0, 0);
+    (void) PFXIsPFXBlob(&data);
+    (void) PFXVerifyPassword(&data, (LPCWSTR)0, 0);
+
+    /* keep the structure trees referenced */
+    (void) cctx; (void) cext; (void) rattr; (void) srp; (void) cattr;
+    (void) cattrs; (void) bits; (void) oidinfo; (void) kpi; (void) kpp;
+    (void) sgn; (void) env; (void) hsd; (void) dec; (void) vsx;
+    (void) sgni; (void) cmsi; (void) rcpt; (void) ktri; (void) mlri;
+    (void) bh; (void) rsa; (void) pea; (void) peaex; (void) hmac;
+    (void) cid; (void) um; (void) tstat; (void) ssi; (void) ceng;
+    (void) dw;
+    return 0;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* M49: Smart Card subsystem (winscard.h; Winscard.lib) -- the 28     */
+/*      documented SCard* functions and the three documented          */
+/*      structures.                                                   */
+/* ------------------------------------------------------------------ */
+
+/* Pointer-free smart-card layouts. */
+_Static_assert(sizeof(SCARD_IO_REQUEST) == 8, "SCARD_IO_REQUEST size");
+_Static_assert(sizeof(SCARD_ATRMASK) == 76, "SCARD_ATRMASK size");
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(SCARD_READERSTATE) == 56,
+               "SCARD_READERSTATE 32-bit size");
+#endif
+
+static int m49_shaped_usage(void)
+{
+    SCARDCONTEXT    hContext = 0;
+    SCARDHANDLE     hCard    = 0;
+    DWORD           dw       = 0;
+    BYTE            atr[36]  = {0};
+    GUID            guid     = {0};
+    SCARD_IO_REQUEST   io    = {0};
+    SCARD_READERSTATE  rs    = {0};
+    SCARD_ATRMASK      mask  = {0};
+
+    /* resource-manager context */
+    (void) SCardEstablishContext(0, (LPCVOID)0, (LPCVOID)0, &hContext);
+    (void) SCardIsValidContext(hContext);
+    (void) SCardReleaseContext(hContext);
+    (void) SCardCancel(hContext);
+
+    /* reader / card database */
+    (void) SCardIntroduceReader(hContext, (LPCTSTR)0, (LPCTSTR)0);
+    (void) SCardForgetReader(hContext, (LPCTSTR)0);
+    (void) SCardIntroduceCardType(hContext, (LPCTSTR)0, &guid, &guid, 0,
+                                  atr, atr, 0);
+    (void) SCardForgetCardType(hContext, (LPCTSTR)0);
+    (void) SCardSetCardTypeProviderName(hContext, (LPCTSTR)0, 0,
+                                        (LPCTSTR)0);
+    (void) SCardGetCardTypeProviderName(hContext, (LPCTSTR)0, 0,
+                                        (LPTSTR)0, &dw);
+    (void) SCardGetProviderId(hContext, (LPCTSTR)0, &guid);
+    (void) SCardListReaders(hContext, (LPCTSTR)0, (LPTSTR)0, &dw);
+    (void) SCardListCards(hContext, atr, (LPCGUID)0, 0, (LPTSTR)0, &dw);
+    (void) SCardListInterfaces(hContext, (LPCTSTR)0, &guid, &dw);
+
+    /* monitoring */
+    (void) SCardGetStatusChange(hContext, 0, &rs, 0);
+    (void) SCardLocateCards(hContext, (LPCTSTR)0, &rs, 0);
+    (void) SCardLocateCardsByATR(hContext, &mask, 0, &rs, 0);
+
+    /* card connect / transact */
+    (void) SCardConnect(hContext, (LPCTSTR)0, 0, 0, &hCard, &dw);
+    (void) SCardReconnect(hCard, 0, 0, 0, &dw);
+    (void) SCardBeginTransaction(hCard);
+    (void) SCardEndTransaction(hCard, 0);
+    (void) SCardStatus(hCard, (LPTSTR)0, &dw, &dw, &dw, atr, &dw);
+    (void) SCardGetAttrib(hCard, 0, atr, &dw);
+    (void) SCardSetAttrib(hCard, 0, atr, 0);
+    (void) SCardControl(hCard, 0, (LPCVOID)0, 0, (LPVOID)0, 0, &dw);
+    (void) SCardTransmit(hCard, &io, atr, 0, &io, atr, &dw);
+    (void) SCardDisconnect(hCard, 0);
+    (void) SCardFreeMemory(hContext, (LPCVOID)0);
+    return 0;
+}
+
 
 int host_tu_entry(void)
 {
@@ -3872,6 +4285,10 @@ int host_tu_entry(void)
     if (m46_shaped_usage() != 0)
         return 1;
     if (m47_shaped_usage() != 0)
+        return 1;
+    if (m48_shaped_usage() != 0)
+        return 1;
+    if (m49_shaped_usage() != 0)
         return 1;
     return 0;
 }

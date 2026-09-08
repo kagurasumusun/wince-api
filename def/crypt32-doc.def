@@ -1,0 +1,99 @@
+; crypt32-doc.def -- crypt32.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (crypt32.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY crypt32.dll
+EXPORTS
+  CertAddCertificateContextToStore
+  CertAddCertificateLinkToStore
+  CertAddEncodedCertificateToStore
+  CertAddEnhancedKeyUsageIdentifier
+  CertAddSerializedElementToStore
+  CertAlgIdToOID
+  CertCloseStore
+  CertCompareCertificate
+  CertCompareCertificateName
+  CertCompareIntegerBlob
+  CertComparePublicKeyInfo
+  CertControlStore
+  CertCreateCertificateContext
+  CertDeleteCertificateFromStore
+  CertDuplicateCertificateChain
+  CertDuplicateCertificateContext
+  CertDuplicateStore
+  CertEnumCertificateContextProperties
+  CertEnumCertificatesInStore
+  CertEnumPhysicalStore
+  CertEnumSystemStore
+  CertEnumSystemStoreLocation
+  CertFindAttribute
+  CertFindCertificateInStore
+  CertFindExtension
+  CertFindRDNAttr
+  CertFreeCertificateChain
+  CertFreeCertificateContext
+  CertGetCertificateChain
+  CertGetCertificateContextProperty
+  CertGetEnhancedKeyUsage
+  CertGetIntendedKeyUsage
+  CertGetIssuerCertificateFromStore
+  CertGetNameString
+  CertGetPublicKeyLength
+  CertGetStoreProperty
+  CertGetSubjectCertificateFromStore
+  CertGetValidUsages
+  CertIsRDNAttrsInCertificateName
+  CertNameToStr
+  CertOIDToAlgId
+  CertOpenStore
+  CertOpenSystemStore
+  CertRDNValueToStr
+  CertRemoveEnhancedKeyUsageIdentifier
+  CertSaveStore
+  CertSerializeCertificateStoreElement
+  CertSetCertificateContextProperty
+  CertSetEnhancedKeyUsage
+  CertSetStoreProperty
+  CertStrToName
+  CertVerifySubjectCertificateContext
+  CertVerifyTimeValidity
+  CertVerifyValidityNesting
+  CryptAcquireCertificatePrivateKey
+  CryptCreateKeyIdentifierFromCSP
+  CryptDecodeObjectEx
+  CryptEncodeObjectEx
+  CryptEnumKeyIdentifierProperties
+  CryptEnumOIDInfo
+  CryptExportPublicKeyInfoEx
+  CryptFindCertificateKeyProvInfo
+  CryptFindOIDInfo
+  CryptFreeOIDFunctionAddress
+  CryptGetDefaultOIDFunctionAddress
+  CryptGetKeyIdentifierProperty
+  CryptGetOIDFunctionAddress
+  CryptHashCertificate
+  CryptHashPublicKeyInfo
+  CryptHashToBeSigned
+  CryptImportPublicKeyInfoEx
+  CryptInitOIDFunctionSet
+  CryptInstallDefaultContext
+  CryptInstallOIDFunctionAddress
+  CryptSetKeyIdentifierProperty
+  CryptSignAndEncodeCertificate
+  CryptSignCertificate
+  CryptUninstallDefaultContext
+  CryptVerifyCertificateSignature
+  PFXExportCertStoreEx
+  PFXImportCertStore
+  PFXIsPFXBlob
+  PFXVerifyPassword

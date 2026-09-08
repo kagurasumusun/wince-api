@@ -74,6 +74,7 @@ typedef struct _GUID {
     unsigned char  Data4[8];
 } GUID;
 typedef GUID *LPGUID;   /* named by the CE WSAQUERYSET page (ms898762) */
+typedef const GUID *LPCGUID; /* named by the CE SCardListCards page    */
 
 /* ------------------------------------------------------------------ */
 /* Critical section object                                            */

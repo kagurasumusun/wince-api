@@ -23,6 +23,7 @@
 #include <tapicomn.h>
 #include <imm.h>
 #include <wincrypt.h>
+#include <winscard.h>
 #include <objbase.h>
 
 int main(void)
@@ -119,6 +120,39 @@ int main(void)
         hMsg = CryptMsgOpenToEncode(0, 0, 0, NULL, NULL, NULL);
         (void) CryptMsgClose(hMsg);
         (void) CryptProtectData(&in, NULL, NULL, NULL, NULL, 0, &out);
+    }
+    /* M48: Cryptography certificate / encode / OID / PFX unit
+     * (Wincrypt.h / Crypt32.lib) -- linked, not run: the image must
+     * import the documented Crypt32.lib names from crypt32.dll per
+     * the doc-derived def. */
+    {
+        HCERTSTORE hStore = 0;
+        CRYPT_DATA_BLOB pfx = {0};
+        PCCERT_CONTEXT pCert = 0;
+        hStore = CertOpenStore(0, 0, 0, 0, 0);
+        pCert = CertCreateCertificateContext(0, 0, 0);
+        (void) CertFindCertificateInStore(hStore, 0, 0, 0, 0, 0);
+        (void) CertCloseStore(hStore, 0);
+        (void) CryptEncodeObjectEx(0, 0, 0, 0, 0, 0, 0);
+        (void) PFXImportCertStore(&pfx, 0, 0);
+        (void) PFXIsPFXBlob(&pfx);
+        (void) pCert;
+    }
+    /* M49: Smart Card subsystem (Winscard.h / Winscard.lib) --
+     * linked, not run: the image must import the documented
+     * Winscard.lib names from winscard.dll per the doc-derived def. */
+    {
+        /* static: keeps the zeroing out of the AEABI memclr path the
+         * CRT does not ship (linked, never run). */
+        static SCARD_READERSTATE rs;
+        SCARDCONTEXT hContext = 0;
+        SCARDHANDLE  hCard    = 0;
+        (void) SCardEstablishContext(0, 0, 0, &hContext);
+        (void) SCardConnect(hContext, 0, 0, 0, &hCard, 0);
+        (void) SCardGetStatusChange(hContext, 0, &rs, 0);
+        (void) SCardTransmit(hCard, 0, 0, 0, 0, 0, 0);
+        (void) SCardDisconnect(hCard, 0);
+        (void) SCardReleaseContext(hContext);
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-

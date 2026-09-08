@@ -19,7 +19,7 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/notify.h include/shellapi.h include/commctrl.h \
        include/winsock2.h include/ws2tcpip.h include/ws2spi.h \
        include/tapi.h include/tapicomn.h \
-       include/imm.h include/wincrypt.h \
+       include/imm.h include/wincrypt.h include/winscard.h \
        include/objbase.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
@@ -226,6 +226,20 @@ e2e:
 	  | grep -q "Symbol: CryptMsgClose" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: CryptProtectData" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: crypt32.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CertOpenStore" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CryptEncodeObjectEx" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: PFXImportCertStore" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: winscard.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SCardEstablishContext" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SCardTransmit" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \
