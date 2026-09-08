@@ -1994,7 +1994,7 @@ qualifiers (a Winsock 1.1 / 16-bit relic); Windows CE has a single
 | Winsock 1.1 functions: `accept` `bind` `closesocket` `connect` `gethostbyaddr` `gethostbyname` `gethostname` `getpeername` `getsockname` `getsockopt` `htonl` `htons` `inet_addr` `inet_ntoa` `ioctlsocket` `listen` `ntohl` `ntohs` `recv` `recvfrom` `select` `send` `sendto` `sethostname` `setsockopt` `shutdown` `socket` | 27 pages of the Socket Functions book (aa450277, aa450301, ms887908, ms887913, aa450403, aa450404, aa450405, aa450420, ms890293, ms890305, ms890324, ms890325, ms890981, ms890984, ms891129, ms894564, ms895778, ms895783, aa450869, aa450870, aa450882, aa450883, aa450885, aa450918, aa450935, aa450939, aa450958) | Windows CE 1.0 and later | Winsock2.h | Ws2.lib | prototypes verbatim (whitespace compressed by the archive, restored); `select` uses the CE counted-array `fd_set` |
 | `getaddrinfo` / `freeaddrinfo` / `getnameinfo` | `aa450395` / `aa450383` / `aa450416` | Windows CE .NET 4.1 and later | **Ws2tcpip.h** (⇒ `include/ws2tcpip.h`) | Ws2.lib | the CE pages name Ws2tcpip.h as the header; the addrinfo structure (aa450282) and AI_* flags live in winsock2.h |
 | WSA core functions: `WSAAccept` `WSAAddressToString` `WSACleanup` `WSACloseEvent` `WSAConnect` `WSACreateEvent` `WSAEnumNetworkEvents` `WSAEnumProtocols` `WSAEventSelect` `WSAGetLastError` `WSAGetOverlappedResult` `WSAHtonl` `WSAHtons` `WSAIoctl` `WSAJoinLeaf` `WSANtohl` `WSANtohs` `WSARecv` `WSARecvFrom` `WSAResetEvent` `WSASend` `WSASendTo` `WSASetEvent` `WSASetLastError` `WSASocket` `WSAStartup` `WSAStringToAddress` `WSAWaitForMultipleEvents` | 28 pages of the Windows-Specific Extension Functions book (ms898727..ms900456) | Windows CE .NET 4.0 and later (WSACleanup / WSAGetLastError / WSASetLastError CE 1.0+; WSAIoctl CE 2.0+) | Winsock2.h | Ws2.lib | CE 6.0 twins for the five no-space prototypes (see above); the CE WSAConnect/WSAJoinLeaf pages mark `lpSQOS`/`lpGQOS` "Reserved" ⇒ `QOS` is declared opaque, callers pass NULL; `LPCONDITIONPROC` and the overlapped-completion-routine typedefs are transcribed from the prototypes the CE WSAAccept (ms898727) and WSAIoctl (ms898745) pages print |
-| Name-service WSA functions: `WSAEnumNameSpaceProviders` `WSALookupServiceBegin` `WSALookupServiceEnd` `WSALookupServiceNext` `WSANSPIoctl` `WSASetService` (+ the WSAQUERYSET / WSANAMESPACE_INFO / NS_SERVICE_INFO / SERVICE_ADDRESS / SERVICE_ADDRESSES / SERVICE_INFO / SERVICE_TYPE_INFO_ABS / SERVICE_TYPE_VALUE_ABS / CSADDR_INFO / BLOB / WSASERVICECLASSINFO / WSACOMPLETION structures and the WSAECOMPARATOR enumeration) | function pages ms898737 / ms898748 / ms898750 / ms898752 / ms898755 / ms898772; structure pages aa450302, ms887919, ms895775, aa450894, aa450895, aa450902, aa450910, aa450912, ms898732, ms898753, ms898762, ms898768; enumeration page ms898736 | .NET 4.0+ | Winsock2.h | Ws2.lib | **deferred (M41)**: not declared in this batch; the rows are in build/rows.json and the six name-service pages are already listed as skipped by gen-doc-def |
+| Name-service WSA functions: `WSAEnumNameSpaceProviders` `WSALookupServiceBegin` `WSALookupServiceEnd` `WSALookupServiceNext` `WSANSPIoctl` `WSASetService` (+ the WSAQUERYSET / WSANAMESPACE_INFO / NS_SERVICE_INFO / SERVICE_ADDRESS / SERVICE_ADDRESSES / SERVICE_INFO / SERVICE_TYPE_INFO_ABS / SERVICE_TYPE_VALUE_ABS / CSADDR_INFO / BLOB / WSASERVICECLASSINFO / WSACOMPLETION structures and the WSAECOMPARATOR enumeration) | function pages ms898737 / ms898748 / ms898750 / ms898752 / ms898755 / ms898772; structure pages aa450302, ms887919, ms895775, aa450894, aa450895, aa450902, aa450910, aa450912, ms898732, ms898753, ms898762, ms898768; enumeration page ms898736 | .NET 4.0+ | Winsock2.h | Ws2.lib | **implemented in M41** (see the M41 section); `WSANSPIoctl` (ms898755) remains recorded-not-defined there (no documented link library) |
 | Structures: `sockaddr` `sockaddr_in` `in_addr` `in6_addr` `sockaddr_in6` `linger` `hostent` `servent` `protoent` `timeval` `fd_set` `WSADATA` `WSABUF` `WSAOVERLAPPED` `AFPROTOCOLS` `PROTOCOL_INFO` `WSAPROTOCOL_INFO` `WSAPROTOCOLCHAIN` `SOCKET_ADDRESS` `WSANETWORKEVENTS` `TRANSMIT_FILE_BUFFERS` `addrinfo` | 22 structure pages (aa450282, aa450284, aa450370, ms890319, ms890973, ms890972, ms894561, ms896340, ms896341, aa450886, aa450942, aa450946, aa450948, aa450954, aa450970, aa450974, ms898729, ms898735, ms898754, ms898758, ms898760, ms898759) | per page (mostly .NET 4.0+; sockaddr / sockaddr_in CE 1.0+; in6_addr / sockaddr_in6 / addrinfo .NET 4.1+) | Winsock2.h | — | member names/order/types verbatim from the CE pages; the TU static-asserts the 32-bit sizes (sockaddr/sockaddr_in 16, in_addr 4, sockaddr_in6 28, linger 4, hostent 16, servent 16, protoent 12, timeval 8, fd_set 4+4×FD_SETSIZE, WSADATA 400, WSABUF 8, WSAOVERLAPPED 20, AFPROTOCOLS 8, PROTOCOL_INFO 32, WSAPROTOCOLCHAIN 4+4×MAX_PROTOCOL_CHAIN, WSAPROTOCOL_INFO 628, SOCKET_ADDRESS 8, WSANETWORKEVENTS 4+4×FD_MAX_EVENTS, TRANSMIT_FILE_BUFFERS 16, addrinfo 32) |
 | `SOCKADDR_STORAGE` | aa450952 | .NET 4.1+ | Winsock2.h | — | **recorded-not-defined**: the page prints `_SS_PAD1SIZE`/`_SS_PAD2SIZE` without values; the 32-bit CE size is not derivable from official pages |
 | `FD_ZERO` / `FD_SET` / `FD_CLR` / `FD_ISSET` macros | select page aa450882 (names) + official FD_ macro reference pages (semantics: FD_SET "adds a file descriptor ... If the file descriptor already exist within the set, a duplicate will not be added") | — | Winsock2.h | — | implemented as header macros over the CE counted-array fd_set (documented design decision from the documented semantics) |
@@ -2034,3 +2034,72 @@ functions (including the two callback prototypes); the e2e console app
 links `socket` / `WSAStartup` / `getaddrinfo` and `make e2e` asserts
 `Name: ws2.dll` plus the three symbols in the import table of all six
 target images.
+
+### M41: Winsock name service (name spaces) unit (winsock2.h + winnt.h; Ws2.lib)
+
+Closes the M39 name-service deferral: the WSA name-space provider and
+service-registration surface of the official CE 5.0 documentation, from
+pages already harvested in the M39 manifests (function pages
+`tools/manifests/wsock-ext-functions.manifest`, structure pages
+`wsock-structures.manifest`, enumeration page
+`wsock-enumerations.manifest`).
+
+Prototypes: the CE 5.0 pages ms898737 / ms898748 / ms898750 / ms898752
+print their prototypes with the archive's whitespace intact; the
+WSASetService prototype is taken from the documented CE 6.0 twin
+**ee493906** (the CE 5.0 page ms898772 prints
+`INTWSASetService(LPWSAQUERYSETlpqsRegInfo, WSAESETSERVICEOPessOperation,
+DWORDdwControlFlags);` unspaced) — the M27 documented-twin procedure,
+as recorded for the M39 batch.
+
+| Item | Official page | OS Versions | Header | Notes |
+|---|---|---|---|---|
+| `WSAEnumNameSpaceProviders` | ms898737 | .NET 4.0+ | Winsock2.h | returns the number of `WSANAMESPACE_INFO` structures copied, or SOCKET_ERROR |
+| `WSALookupServiceBegin` / `WSALookupServiceEnd` / `WSALookupServiceNext` | ms898748 / ms898750 / ms898752 | .NET 4.0+ | Winsock2.h | begin/next use `WSAQUERYSET` + a lookup HANDLE; the CE provider ignores `dwControlFlags` (silently); "continue to call this function until it returns WSA_E_NOMORE" — the page prints WSAENOMORE (10102) and WSA_E_NO_MORE (10110), both already defined in M39 |
+| `WSASetService` | ms898772 (twin ee493906) | .NET 4.0+ | Winsock2.h | not supported by the default DNS/WINS provider (Nspm.dll) in CE; supported by the PNRP provider (documented notes) |
+| `WSANAMESPACE_INFO` | ms898753 | .NET 4.0+ | Winsock2.h | 32-bit size 32 (TU-asserted) |
+| `WSAQUERYSET` | ms898762 | .NET 4.0+ | Winsock2.h | 15 members verbatim; 32-bit size 60 (TU-asserted); the page's typedef alias is `PWSAQUERYSETW`, the prototypes name `LPWSAQUERYSET` (both declared, the latter as a documented prototype requirement) |
+| `CSADDR_INFO` | ms887919 | .NET 4.0+ | Winsock2.h | 32-bit size 24 (TU-asserted); the CE form carries the two `SOCKET_ADDRESS` members directly (no desktop ADDRESSLIST); `LPCSAADDR_INFO` named by the WSAQUERYSET page |
+| `BLOB` | aa450302 | .NET 4.0+ | Winsock2.h | 32-bit size 8 (TU-asserted); "For Bluetooth, this structure defines values in the SDP record" |
+| `WSASERVICECLASSINFO` | ms898768 | .NET 4.0+ | Winsock2.h | 32-bit size 16 (TU-asserted); `WSANSCLASSINFOW` layout not published ⇒ opaque pointer type |
+| `SERVICE_ADDRESS` / `SERVICE_ADDRESSES` / `SERVICE_INFO` / `SERVICE_TYPE_VALUE_ABS` / `SERVICE_TYPE_INFO_ABS` | aa450894 / aa450895 / aa450902 / aa450912 / aa450910 | .NET 4.0+ | Winsock2.h | 32-bit sizes 24 / 28 / 44 / 20 / 28 (TU-asserted); `LPSERVICE_ADDRESSES` named by the SERVICE_INFO page |
+| `NS_SERVICE_INFO` | ms895775 | .NET 4.0+ | Winsock2.h | 32-bit size 48 (TU-asserted) |
+| `WSAECOMPARATOR` | ms898736 | .NET 4.0+ | Winsock2.h | the page prints `typedef enum _WSAEcomparator {COMP_EQUAL = 0,COMP_NOTLESS} WSAECOMPARATOR, *PWSAECOMPARATOR;` — COMP_EQUAL 0 / COMP_NOTLESS 1 asserted |
+| `WSAESETSERVICEOP` | ms898772 (operation table) | .NET 4.0+ | Winsock2.h | RNRSERVICE_REGISTER / RNRSERVICE_DEREGISTER / RNRSERVICE_DELETE; **(c) flagged**: the page publishes the operation names but no numeric values; the C-enum ordinals (0/1/2) follow the documented listing order |
+| `WSAVERSION` | (referenced by ms898762) | — | Winsock2.h | the WSAQUERYSET page documents `LPWSAVERSION lpVersion` ("References desired version number and provides version comparison semantics") but no CE page publishes the layout ⇒ opaque pointer type |
+| `LPGUID` | named by ms898762 (`LPGUID lpServiceClassId`) | — | **winnt.h** | pointer typedef next to the M39 GUID definition |
+| `WSANSPIoctl` | ms898755 | — | — | **recorded-not-defined**: the CE page documents the function (signature in build/rows.json) but its Requirements section names no link library, so it cannot enter the doc-derived ws2.dll def; not declared |
+
+Constants **recorded-not-defined** (the CE pages publish the names
+without numeric values; same policy as the M39 held set):
+
+* `LUP_DEEP` `LUP_NOCONTAINERS` `LUP_NEAREST` `LUP_RES_SERVICE`
+  `LUP_RETURN_ALIASES` `LUP_RETURN_NAME` `LUP_RETURN_TYPE`
+  `LUP_RETURN_VERSION` `LUP_RETURN_COMMENT` `LUP_RETURN_ADDR`
+  `LUP_RETURN_BLOB` `LUP_RETURN_ALL` — the WSALookupServiceBegin
+  dwControlFlags table (ms898748)
+* `NS_DEFAULT` `NS_DNS` `NS_MS` `NS_NDS` `NS_NETBT` `NS_NIS` `NS_SAP`
+  `NS_STDA` `NS_TCPIP_HOSTS` `NS_TCPIP_LOCAL` `NS_WINS` `NS_X500` and
+  `NS_ALL` — the name-space tables on ms895775 / aa450912 and the
+  WSAQUERYSET page's `dwNameSpace` member (ms898762)
+* `SERVICE_ADDRESS_FLAG_RPC_CN` `SERVICE_ADDRESS_FLAG_RPC_DG`
+  `SERVICE_ADDRESS_FLAG_RPC_NB` — the SERVICE_ADDRESS dwAddressFlags
+  table (aa450894)
+* `RESOURCEDISPLAYTYPE_DOMAIN` `RESOURCEDISPLAYTYPE_FILE`
+  `RESOURCEDISPLAYTYPE_GENERIC` `RESOURCEDISPLAYTYPE_GROUP`
+  `RESOURCEDISPLAYTYPE_SERVER` — the SERVICE_INFO dwDisplayHint table
+  (aa450902)
+* the WSAQUERYSET `dwOutputFlags` field names no table on any CE page
+  (the desktop WSAFL_* set is not an official CE source)
+
+Verification: `make check` GREEN (hostcheck all CE versions; defcheck
+`ws2-doc.def` 63 exports); `make crosscheck` GREEN on all six arm/i386
+× CE 4.2/5.0/6.0 targets (the 32-bit name-service sizes above);
+`make e2e` GREEN — the e2e console app now references the five
+name-service functions and the recipe asserts `WSAEnumNameSpaceProviders`
+/ `WSALookupServiceBegin` / `WSASetService` in the ws2.dll import table
+of all six target images.
+
+Export surface: `def/ws2-doc.def` 58 -> **63** exports (name-only,
+`LIBRARY ws2.dll`); the defdoc total is now 34 def files, 717 name-only
+lines.

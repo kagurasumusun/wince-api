@@ -47,6 +47,12 @@ int main(void)
     (void) WSAStartup(WSAVersion(2, 2), (LPWSADATA)0);
     (void) getaddrinfo((const char *)0, (const char *)0,
                        (const struct addrinfo *)0, (struct addrinfo **)0);
+    /* M41: Winsock name service (name spaces) -- linked, not run. */
+    (void) WSAEnumNameSpaceProviders(NULL, NULL);
+    (void) WSALookupServiceBegin(NULL, 0, NULL);
+    (void) WSALookupServiceEnd(NULL);
+    (void) WSALookupServiceNext(NULL, 0, NULL, NULL);
+    (void) WSASetService(NULL, RNRSERVICE_REGISTER, 0);
     (void)tick;
     (void)si;
     (void)mod;

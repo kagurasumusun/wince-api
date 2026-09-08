@@ -2660,6 +2660,75 @@ static int m39_shaped_usage(void)
     return 0;
 }
 
+/* M41: Winsock name-service (name space) types, per the official CE
+ * pages (WSAECOMPARATOR ms898736, BLOB aa450302, CSADDR_INFO
+ * ms887919, WSAQUERYSET ms898762, WSANAMESPACE_INFO ms898753,
+ * WSASERVICECLASSINFO ms898768, SERVICE_* aa450894/aa450895/
+ * aa450902/aa450910/aa450912, NS_SERVICE_INFO ms895775). */
+_Static_assert(COMP_EQUAL == 0 && COMP_NOTLESS == 1,
+               "WSAECOMPARATOR documented ordinals");
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(BLOB) == 8, "BLOB 32-bit size");
+_Static_assert(sizeof(WSAECOMPARATOR) == 4, "WSAECOMPARATOR 32-bit size");
+_Static_assert(sizeof(WSAESETSERVICEOP) == 4, "WSAESETSERVICEOP 32-bit size");
+_Static_assert(sizeof(CSADDR_INFO) == 24, "CSADDR_INFO 32-bit size");
+_Static_assert(sizeof(WSAQUERYSET) == 60, "WSAQUERYSET 32-bit size");
+_Static_assert(sizeof(WSANAMESPACE_INFO) == 32, "WSANAMESPACE_INFO 32-bit size");
+_Static_assert(sizeof(WSASERVICECLASSINFO) == 16,
+               "WSASERVICECLASSINFO 32-bit size");
+_Static_assert(sizeof(SERVICE_ADDRESS) == 24, "SERVICE_ADDRESS 32-bit size");
+_Static_assert(sizeof(SERVICE_ADDRESSES) == 28,
+               "SERVICE_ADDRESSES 32-bit size");
+_Static_assert(sizeof(SERVICE_INFO) == 44, "SERVICE_INFO 32-bit size");
+_Static_assert(sizeof(NS_SERVICE_INFO) == 48, "NS_SERVICE_INFO 32-bit size");
+_Static_assert(sizeof(SERVICE_TYPE_VALUE_ABS) == 20,
+               "SERVICE_TYPE_VALUE_ABS 32-bit size");
+_Static_assert(sizeof(SERVICE_TYPE_INFO_ABS) == 28,
+               "SERVICE_TYPE_INFO_ABS 32-bit size");
+#endif
+
+static int m41_shaped_usage(void)
+{
+    DWORD blen = 0;
+    HANDLE hLookup = (HANDLE)0;
+    WSANAMESPACE_INFO nsi = {0};
+    WSAQUERYSET qs = {0};
+    CSADDR_INFO csi = {0};
+    BLOB blob = {0};
+    WSAVERSION *pver = (WSAVERSION *)0;
+    WSANSCLASSINFOW *pcls = (WSANSCLASSINFOW *)0;
+    WSAESETSERVICEOP op = RNRSERVICE_DEREGISTER;
+    INT r;
+
+    (void) WSAEnumNameSpaceProviders(&blen, &nsi);
+    qs.dwSize = sizeof(qs);
+    qs.lpszServiceInstanceName = (LPTSTR)0;
+    qs.lpServiceClassId = (LPGUID)0;
+    qs.lpVersion = pver;
+    qs.dwNameSpace = 0;
+    qs.lpNSProviderId = (LPGUID)0;
+    qs.dwNumberOfProtocols = 0;
+    qs.lpafpProtocols = (LPAFPROTOCOLS)0;
+    qs.dwNumberOfCsAddrs = 1;
+    qs.lpcsaBuffer = &csi;
+    qs.lpBlob = &blob;
+    blob.cbSize = 0;
+    blob.pBlobData = (BYTE *)0;
+    csi.LocalAddr.lpSockaddr = (LPSOCKADDR)0;
+    csi.LocalAddr.iSockaddrLength = 0;
+    csi.RemoteAddr.lpSockaddr = (LPSOCKADDR)0;
+    csi.RemoteAddr.iSockaddrLength = 0;
+    csi.iSocketType = 0;
+    csi.iProtocol = 0;
+    r = WSALookupServiceBegin(&qs, 0, &hLookup);
+    (void) WSALookupServiceNext(hLookup, 0, &blen, &qs);
+    (void) WSALookupServiceEnd(hLookup);
+    (void) WSASetService(&qs, op, 0);
+    (void) pcls;
+    (void) r;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -2713,6 +2782,8 @@ int host_tu_entry(void)
     if (m29_shaped_usage() != 0)
         return 1;
     if (m39_shaped_usage() != 0)
+        return 1;
+    if (m41_shaped_usage() != 0)
         return 1;
     return 0;
 }

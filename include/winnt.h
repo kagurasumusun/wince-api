@@ -73,6 +73,7 @@ typedef struct _GUID {
     unsigned short Data3;
     unsigned char  Data4[8];
 } GUID;
+typedef GUID *LPGUID;   /* named by the CE WSAQUERYSET page (ms898762) */
 
 /* ------------------------------------------------------------------ */
 /* Critical section object                                            */

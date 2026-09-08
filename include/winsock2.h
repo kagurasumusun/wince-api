@@ -583,6 +583,166 @@ typedef int (WSAAPI *LPCONDITIONPROC)(
     GROUP *g, DWORD dwCallbackData);
 
 /* ------------------------------------------------------------------ */
+/* Name service (Winsock name spaces)                                  */
+/* ------------------------------------------------------------------ */
+
+/* CE WSAECOMPARATOR page (ms898736): "This enumeration is used for
+ * Winsock version comparison semantics."  The page prints the syntax
+ *     typedef enum _WSAEcomparator {COMP_EQUAL = 0,COMP_NOTLESS}
+ *     WSAECOMPARATOR, *PWSAECOMPARATOR;
+ * and documents COMP_EQUAL as "determining whether version values
+ * are equal" and COMP_NOTLESS as "no less than a specified value". */
+typedef enum _WSAEcomparator {
+    COMP_EQUAL   = 0,
+    COMP_NOTLESS
+} WSAECOMPARATOR;
+typedef WSAECOMPARATOR *PWSAECOMPARATOR;
+
+/* The CE WSAQUERYSET page (ms898762) documents the member
+ * "LPWSAVERSION lpVersion ... References desired version number and
+ * provides version comparison semantics", but no CE page publishes
+ * the WSAVERSION layout, so the type is opaque here (the documented
+ * use is by pointer only). */
+typedef struct _WSAVERSION WSAVERSION;
+typedef WSAVERSION *LPWSAVERSION;
+
+/* CE BLOB page (aa450302): "derived from a binary large object (BLOB)
+ * and contains information about a block of data. For Bluetooth, this
+ * structure defines values in the SDP record." */
+typedef struct _BLOB {
+    ULONG cbSize;
+    BYTE  *pBlobData;
+} BLOB, *LPBLOB;
+
+/* CE CSADDR_INFO page (ms887919): "contains Windows Sockets address
+ * information for a network service or name space provider."  The CE
+ * form carries the two SOCKET_ADDRESS members directly; iSocketType
+ * is one of the SOCK_* socket types, iProtocol the protocol. */
+typedef struct _CSADDR_INFO {
+    SOCKET_ADDRESS LocalAddr;
+    SOCKET_ADDRESS RemoteAddr;
+    INT            iSocketType;
+    INT            iProtocol;
+} CSADDR_INFO;
+typedef CSADDR_INFO *LPCSAADDR_INFO;   /* named by the WSAQUERYSET page */
+
+/* CE WSAQUERYSET page (ms898762): "provides relevant information
+ * about a given service, including service class ID, service name,
+ * applicable name-space identifier and protocol information, as well
+ * as a set of transport addresses at which the service listens." */
+typedef struct _WSAQuerySet {
+    DWORD            dwSize;
+    LPTSTR           lpszServiceInstanceName;
+    LPGUID           lpServiceClassId;
+    LPWSAVERSION     lpVersion;
+    LPTSTR           lpszComment;
+    DWORD            dwNameSpace;
+    LPGUID           lpNSProviderId;
+    LPTSTR           lpszContext;
+    DWORD            dwNumberOfProtocols;
+    LPAFPROTOCOLS    lpafpProtocols;
+    LPTSTR           lpszQueryString;
+    DWORD            dwNumberOfCsAddrs;
+    LPCSAADDR_INFO   lpcsaBuffer;
+    DWORD            dwOutputFlags;
+    LPBLOB           lpBlob;
+} WSAQUERYSET;
+typedef WSAQUERYSET *PWSAQUERYSETW;
+typedef WSAQUERYSET *LPWSAQUERYSET;   /* named by the CE prototypes */
+
+/* CE WSANAMESPACE_INFO page (ms898753): "contains all registration
+ * information for a name space provider." */
+typedef struct _WSANAMESPACE_INFO {
+    GUID   NSProviderId;
+    DWORD  dwNameSpace;
+    BOOL   fActive;
+    DWORD  dwVersion;
+    LPTSTR lpszIdentifier;
+} WSANAMESPACE_INFO;
+typedef WSANAMESPACE_INFO *PWSANAMESPACE_INFO;
+typedef WSANAMESPACE_INFO *LPWSANAMESPACE_INFO;   /* named by the page */
+
+/* CE WSASERVICECLASSINFO page (ms898768): "For each service class in
+ * Windows Sockets 2, there is a single WSASERVICECLASSINFO
+ * structure."  No CE page publishes the WSANSCLASSINFOW layout, so
+ * only the pointer form is documented. */
+typedef struct _WSANSCLASSINFOW WSANSCLASSINFOW;
+typedef WSANSCLASSINFOW *LPWSANSCLASSINFOW;
+typedef struct _WSAServiceClassInfo {
+    LPGUID lpServiceClassId;
+    LPTSTR lpszServiceClassName;
+    DWORD  dwCount;
+    LPWSANSCLASSINFOW lpClassInfos;
+} WSASERVICECLASSINFO;
+typedef WSASERVICECLASSINFO *PWSASERVICECLASSINFOW;
+
+/* Name-service registration structures: CE pages aa450894
+ * (SERVICE_ADDRESS), aa450895 (SERVICE_ADDRESSES), aa450902
+ * (SERVICE_INFO), aa450910 (SERVICE_TYPE_INFO_ABS), aa450912
+ * (SERVICE_TYPE_VALUE_ABS), ms895775 (NS_SERVICE_INFO).  The CE
+ * pages publish the flag/display-hint constant NAMES (the
+ * SERVICE_ADDRESS_FLAG_*, RESOURCEDISPLAYTYPE_* and NS_* tables)
+ * without numeric values, so those constants are held as gaps in
+ * docs/inventory.md rather than defined here. */
+typedef struct _SERVICE_ADDRESS {
+    DWORD dwAddressType;
+    DWORD dwAddressFlags;
+    DWORD dwAddressLength;
+    DWORD dwPrincipalLength;
+    BYTE  *lpAddress;
+    BYTE  *lpPrincipal;
+} SERVICE_ADDRESS;
+
+typedef struct _SERVICE_ADDRESSES {
+    DWORD           dwAddressCount;
+    SERVICE_ADDRESS Addresses[1];
+} SERVICE_ADDRESSES;
+typedef SERVICE_ADDRESSES *LPSERVICE_ADDRESSES;
+
+typedef struct _SERVICE_INFO {
+    LPGUID                lpServiceType;
+    LPTSTR                lpServiceName;
+    LPTSTR                lpComment;
+    LPTSTR                lpLocale;
+    DWORD                 dwDisplayHint;
+    DWORD                 dwVersion;
+    DWORD                 dwTime;
+    LPTSTR                lpMachineName;
+    LPSERVICE_ADDRESSES   lpServiceAddress;
+    BLOB                  ServiceSpecificInfo;
+} SERVICE_INFO;
+
+typedef struct _NS_SERVICE_INFO {
+    DWORD        dwNameSpace;
+    SERVICE_INFO ServiceInfo;
+} NS_SERVICE_INFO;
+
+typedef struct _SERVICE_TYPE_VALUE_ABS {
+    DWORD  dwNameSpace;
+    DWORD  dwValueType;
+    DWORD  dwValueSize;
+    LPTSTR lpValueName;
+    PVOID  lpValue;
+} SERVICE_TYPE_VALUE_ABS;
+
+typedef struct _SERVICE_TYPE_INFO_ABS {
+    LPTSTR                 lpTypeName;
+    DWORD                  dwValueCount;
+    SERVICE_TYPE_VALUE_ABS Values[1];
+} SERVICE_TYPE_INFO_ABS;
+
+/* CE WSASetService page (ms898772): essOperation is the
+ * WSAESETSERVICEOP enumeration, listed as RNRSERVICE_REGISTER,
+ * RNRSERVICE_DEREGISTER, RNRSERVICE_DELETE; the page publishes no
+ * numeric values, so the ordinals follow the documented listing
+ * order.  (c)-flagged: values not officially published. */
+typedef enum _WSAESETSERVICEOP {
+    RNRSERVICE_REGISTER    = 0,   /* (c) value not officially published */
+    RNRSERVICE_DEREGISTER,        /* (c) value not officially published */
+    RNRSERVICE_DELETE             /* (c) value not officially published */
+} WSAESETSERVICEOP;
+
+/* ------------------------------------------------------------------ */
 /* Winsock 1.1 socket functions (CE 1.0 and later unless noted)        */
 /* ------------------------------------------------------------------ */
 
@@ -670,6 +830,12 @@ AKARI_CE_IMPORT WSAEVENT WSACreateEvent(void)
 AKARI_CE_IMPORT int WSAEnumNetworkEvents(SOCKET s, WSAEVENT hEventObject,
                                          LPWSANETWORKEVENTS lpNetworkEvents)
     AKARI_CE_NAME(WSAEnumNetworkEvents);
+/* CE WSAEnumNameSpaceProviders page (ms898737): "retrieves
+ * information about available name spaces."  Returns the number of
+ * WSANAMESPACE_INFO structures copied, or SOCKET_ERROR. */
+AKARI_CE_IMPORT INT WSAEnumNameSpaceProviders(LPDWORD lpdwBufferLength,
+                                              PWSANAMESPACE_INFO lpnspBuffer)
+    AKARI_CE_NAME(WSAEnumNameSpaceProviders);
 AKARI_CE_IMPORT int WSAEnumProtocols(LPINT lpiProtocols,
                                      LPWSAPROTOCOL_INFO lpProtocolBuffer,
                                      LPDWORD lpdwBufferLength)
@@ -700,6 +866,33 @@ AKARI_CE_IMPORT SOCKET WSAJoinLeaf(SOCKET s, const struct sockaddr *name,
                                    LPWSABUF lpCalleeData, LPQOS lpSQOS,
                                    LPQOS lpGQOS, DWORD dwFlags)
     AKARI_CE_NAME(WSAJoinLeaf);
+/* CE WSALookupServiceBegin page (ms898748): "initiates a client query
+ * that is constrained by the information contained within a
+ * WSAQUERYSET structure. This function only returns a handle, which
+ * should be used by subsequent calls to WSALookupServiceNext to get
+ * the actual results."  dwControlFlags takes the LUP_* flags listed
+ * on the page (values unpublished: gaps in docs/inventory.md). */
+AKARI_CE_IMPORT INT WSALookupServiceBegin(LPWSAQUERYSET lpqsRestrictions,
+                                          DWORD dwControlFlags,
+                                          LPHANDLE lphLookup)
+    AKARI_CE_NAME(WSALookupServiceBegin);
+/* CE WSALookupServiceEnd page (ms898750): "called to free the handle
+ * after previous calls to WSALookupServiceBegin and
+ * WSALookupServiceNext."  If another thread's WSALookupServiceNext is
+ * blocked, the end call cancels it. */
+AKARI_CE_IMPORT INT WSALookupServiceEnd(HANDLE hLookup)
+    AKARI_CE_NAME(WSALookupServiceEnd);
+/* CE WSALookupServiceNext page (ms898752): retrieves the requested
+ * service information from the handle obtained from
+ * WSALookupServiceBegin; "The client should continue to call this
+ * function until it returns WSA_E_NOMORE, indicating that all of
+ * WSAQUERYSET has been returned."  The CE provider ignores
+ * dwControlFlags (silently). */
+AKARI_CE_IMPORT INT WSALookupServiceNext(HANDLE hLookup,
+                                         DWORD dwControlFlags,
+                                         LPDWORD lpdwBufferLength,
+                                         LPWSAQUERYSET lpqsResults)
+    AKARI_CE_NAME(WSALookupServiceNext);
 AKARI_CE_IMPORT int WSANtohl(SOCKET s, u_long netlong, u_long *lphostlong)
     AKARI_CE_NAME(WSANtohl);
 AKARI_CE_IMPORT int WSANtohs(SOCKET s, u_short netshort,
@@ -741,6 +934,15 @@ AKARI_CE_IMPORT BOOL WSASetEvent(WSAEVENT hEvent)
     AKARI_CE_NAME(WSASetEvent);
 AKARI_CE_IMPORT void WSASetLastError(int iError)
     AKARI_CE_NAME(WSASetLastError);
+/* CE WSASetService page (ms898772, prototype from the documented
+ * CE 6.0 twin ee493906): "registers or removes from the registry a
+ * service instance within one or more name spaces."  Not supported by
+ * the default DNS/WINS namespace provider (Nspm.dll) in CE; supported
+ * by the PNRP provider. */
+AKARI_CE_IMPORT INT WSASetService(LPWSAQUERYSET lpqsRegInfo,
+                                  WSAESETSERVICEOP essOperation,
+                                  DWORD dwControlFlags)
+    AKARI_CE_NAME(WSASetService);
 AKARI_CE_IMPORT SOCKET WSASocket(int af, int type, int protocol,
                                  LPWSAPROTOCOL_INFO lpProtocolInfo,
                                  GROUP g, DWORD dwFlags)

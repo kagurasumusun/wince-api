@@ -20,6 +20,7 @@ EXPORTS
   WSACloseEvent
   WSAConnect
   WSACreateEvent
+  WSAEnumNameSpaceProviders
   WSAEnumNetworkEvents
   WSAEnumProtocols
   WSAEventSelect
@@ -29,6 +30,9 @@ EXPORTS
   WSAHtons
   WSAIoctl
   WSAJoinLeaf
+  WSALookupServiceBegin
+  WSALookupServiceEnd
+  WSALookupServiceNext
   WSANtohl
   WSANtohs
   WSARecv
@@ -38,6 +42,7 @@ EXPORTS
   WSASendTo
   WSASetEvent
   WSASetLastError
+  WSASetService
   WSASocket
   WSAStartup
   WSAStringToAddress
