@@ -20,7 +20,9 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/winsock2.h include/ws2tcpip.h include/ws2spi.h \
        include/tapi.h include/tapicomn.h \
        include/imm.h include/wincrypt.h include/winscard.h \
-       include/objbase.h
+       include/objbase.h \
+       include/aygshell.h include/shellsdk.h include/newmenu.h \
+       include/shlobj.h include/extfile.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -240,6 +242,16 @@ e2e:
 	  | grep -q "Symbol: SCardEstablishContext" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: SCardTransmit" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: aygshell.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SHCreateMenuBar" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SHHandleWMActivate" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SHInitDialog" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SHGetAutoRunPath" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

@@ -173,6 +173,26 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M50 (landed):** AYGShell unit (new `include/aygshell.h`,
+  `shellsdk.h`, `newmenu.h`, `shlobj.h`, `extfile.h`; Aygshell.lib) --
+  the CE 5.0 AYGShell Reference book (62 leaves): 33 exported
+  functions (SHChangeNotifyRegister .. SHSipInfo, plus SHInitDialog in
+  its documented shellsdk.h home and SHGetAutoRunPath in windows.h),
+  the SHNP enumeration, 9 documented structures (SHACTIVATEINFO,
+  SHCHANGENOTIFYENTRY, SHINITDLGINFO, SHMENUBARINFO, SHNOTIFICATIONDATA,
+  SHRGINFO, NMNEWMENU, FILECHANGENOTIFY, FILECHANGEINFO) with 10
+  TU-asserted 32-bit sizes, the WC_SIPPREF control class, the
+  application-implemented INewMenuItemServer / IShellNotificationCallback
+  interfaces (opaque tags + method records), NMHDR + WM_NOTIFY +
+  WM_SETTINGCHANGE added to winuser.h, and the three SendMessage macros
+  + SHCMBM_*/NMN_*/WM_FILECHANGEINFO message shapes recorded verbatim.
+  SHSipPreference is held (SIPSTATE has no published definition
+  anywhere in the official CE trees); the extensive name-without-value
+  flag sets (SHIDIF_/SHCMBF_/SHRG_/SHNF_/SHFS_/SHDB_/SHNUM_/SPI_*)
+  are recorded as gaps per the held-set policy.  New
+  `aygshell-doc.def` with 33 exports; e2e asserts aygshell.dll +
+  SHCreateMenuBar + SHHandleWMActivate + SHInitDialog +
+  SHGetAutoRunPath on all six targets.
 * **M48 (landed):** Cryptography certificate / encode / OID / PFX
   unit (wincrypt.h; **Crypt32.lib**) -- the 54 documented Cert*
   store/context functions, the 25 encode/decode/OID/key-identifier
@@ -503,15 +523,17 @@ declarations, recorded in `docs/inventory.md`):
   `BYTE`/`LPBOOL` in windef.h.  def 90 → 94 exports.
 
 Remaining roadmap (queued, page-grounded): the second-order DLL
-books (crypt32 / aygshell / other component modules), the CE books
+books (other component modules), the CE books
 not yet harvested in full (e.g. the CE 4.2 book pages), and the
 held constant sets whose official pages publish names without values
 (the M39-M41 Winsock SO_/LUP_/NS_ set, the TSPI callback-message
-values) -- those need the documented on-device readback procedure
+values, the M50 AYGShell flag sets) -- those need the documented
+on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
 lockstep (coredll at 602 name-only exports incl. the 42 M47 Crypt*
-functions; coreimm 56, M46; crypt32 83 + winscard 28, M48/M49);
+functions; coreimm 56, M46; crypt32 83 + winscard 28, M48/M49;
+aygshell 33, M50);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

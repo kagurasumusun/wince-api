@@ -123,24 +123,55 @@ def parse(pid, title):
 
     # --- Requirements rows (inside the "Requirements" section, where
     # fields are <strong>OS Versions:</strong> ... <br> ... </p>).
+    # The archive prints the field label in two shapes:
+    # <strong>OS Versions:</strong> ... (colon inside the
+    # label tag) and <strong>OS Versions</strong>: ... (colon
+    # outside it, sometimes with a leading space); match both.
+    # The AYGShell book (M50) prints three more shapes: labels carry
+    # non-breaking spaces (<strong>OS&nbsp;Versions:</strong>), the
+    # library row is labelled "Library:" instead of "Link Library:"
+    # (<strong>Library:</strong> aygshell.lib), and a following
+    # "Windows Mobile Requirements" subsection carries the Windows
+    # Mobile platform rows (Header: shlobj.h / Library: ceshell.lib).
+    # The main section is the Windows CE layer: the segment stops at
+    # the Windows Mobile subsection, whose rows are recorded
+    # separately in rec["wm"] and never override the CE rows.
     seg = ""
-    m = re.search(r'id="requirements"(.*?)(?:id="see-also"|id="feedback"|\Z)',
+    m = re.search(r'id="requirements"(.*?)'
+                  r'(?:id="windows-mobile-requirements"|id="see-also"|'
+                  r'id="feedback"|\Z)',
                   raw, flags=re.S | re.I)
     if m:
-        seg = m.group(1)
+        seg = m.group(1).replace("&nbsp;", " ")
     if seg:
-        for key, field in (("OS Versions:", "os"), ("Header:", "header"),
-                           ("Link Library:", "lib")):
-            # The archive prints the field label in two shapes:
-            # <strong>OS Versions:</strong> ... (colon inside the
-            # label tag) and <strong>OS Versions</strong>: ... (colon
-            # outside it, sometimes with a leading space); match both.
-            fm = re.search(re.escape(key.rstrip(":")) +
-                           r"(?:\s*</\w+>)?\s*:\s*(.*?)"
-                           r"(?:<br\s*/?>|</p>)",
+        # Alternation order matters: "Link Library" is preferred over
+        # the shorter "Library" tail of the same label (the leftmost
+        # match wins), so both label spellings parse.
+        for key, field in (("OS Versions", "os"), ("Header", "header"),
+                           ("Link Library|Library", "lib")):
+            fm = re.search(r"\b(?:" + key + r")" +
+                           r"(?:\s*</\w+>)?\s*:\s*(.*?)" +
+                           r"(?:<br\s*/?>|</p>|<h\d)",
                            seg, flags=re.S | re.I)
             if fm:
                 rec[field] = re.sub(r"\s+", " ", strip_tags(fm.group(1))).strip()
+    wm = re.search(r'id="windows-mobile-requirements"(.*?)'
+                   r'(?:id="see-also"|id="feedback"|\Z)',
+                   raw, flags=re.S | re.I)
+    if wm:
+        wseg = wm.group(1).replace("&nbsp;", " ")
+        wrows = []
+        for key in ("Header", "Library", "OS Versions"):
+            fm = re.search(r"\b" + key +
+                           r"(?:\s*</\w+>)?\s*:\s*(.*?)"
+                           r"(?:<br\s*/?>|</p>|<h\d)",
+                           wseg, flags=re.S | re.I)
+            if fm:
+                wrows.append(key + ": " +
+                             re.sub(r"\s+", " ",
+                                    strip_tags(fm.group(1))).strip())
+        if wrows:
+            rec["wm"] = "; ".join(wrows)
     if not seg:  # fallback: textual scan of the last occurrences
         for key, field in (("OS Versions:", "os"), ("Header:", "header"),
                            ("Link Library:", "lib")):

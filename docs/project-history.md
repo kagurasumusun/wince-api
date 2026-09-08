@@ -206,7 +206,7 @@ M44 added the COM/OLE/Storage/Automation surface (`objbase.h`, `Ole32.lib`, `Ole
 M45 completed the documented TAPI client surface, including line/phone functions, callbacks,
 client handles and the previously held `TSPI_lineForward` case.
 
-## 15. M46-M49: advanced subsystems
+## 15. M46-M50: advanced subsystems
 
 The latest milestones expanded the API into additional CE subsystems:
 
@@ -218,8 +218,13 @@ The latest milestones expanded the API into additional CE subsystems:
   and encoding structure trees and 83 documented imports.
 - **M49:** Smart Card support (`winscard.h`, `Winscard.lib`), including 28 documented
   `SCard*` functions and the documented smart-card structures/handles.
+- **M50:** AYGShell shell-extension layer (`aygshell.h` plus `shellsdk.h`, `newmenu.h`,
+  `shlobj.h`, `extfile.h`; `aygshell.lib`), including 33 documented imports, the SHNP
+  enumeration, nine documented structures, `WC_SIPPREF`, the `NMHDR`/`WM_NOTIFY`/
+  `WM_SETTINGCHANGE` notification layer, and the held `SHSipPreference`/flag-value sets
+  recorded as gaps.
 
-The M49 state is the latest committed API milestone as of 2026-09-09.
+The M50 state is the latest committed API milestone as of 2026-09-09.
 
 ## 16. Wider WinCE system and device work
 

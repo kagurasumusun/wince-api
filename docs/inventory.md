@@ -3052,3 +3052,174 @@ SCARD_SHARE_* value sets: named without values on the CE pages
   / SCardTransmit imports on all six images.
 
 Export surface: new `def/winscard-doc.def` **28** exports.
+
+## M50 -- AYGShell unit (new headers aygshell.h, shellsdk.h, newmenu.h, shlobj.h, extfile.h; Aygshell.lib)
+
+Scope: the AYGShell Reference book of the CE 5.0 Shell documentation
+(Shell and User Interface :: Shell :: Shell Reference :: AYGShell
+Reference; book root ms907090) -- 62 API leaves
+(`tools/manifests/aygshell.manifest`): 34 SH* function pages,
+2 interface roots + 4 method pages, 3 macros, 9 messages, 8 structures,
+1 enumeration (SHNP), 1 control class (WC_SIPPREF).  The CE 6.0 twins
+(`build/aygshell-ce60.manifest`, 63 pages; INewMenuItemServer and
+IShellNotificationCallback roots have no twin) were harvested for
+cross-checking only -- they stay in pages6/ in the corpus.
+
+### Functions (34 pages; aygshell.lib unless noted)
+
+SHChangeNotifyDeregister (aa453670, CE .NET 4.2+), SHChangeNotifyFree
+(aa453672, CE .NET 4.2+), SHChangeNotifyRegister (aa453673, CE .NET
+4.2+), SHCloseApps (aa453674), SHCreateMenuBar (aa453678, CE .NET
+4.2+), SHCreateNewItem (aa453679), SHDoneButton (aa453682),
+SHEnumPropSheetHandlers (aa453688; stub on CE devices, returns FALSE),
+SHFindMenuBar (aa453692), SHFreeContextMenuExtensions (aa453693),
+SHFullScreen (aa453694; CE 6.0 twin ee499392 prints Header: shellsdk.h
+-- CE 5.0 home aygshell.h kept, divergence recorded), SHGetAppKeyAssoc
+(aa453695), SHGetAutoRunPath (aa453696, CE .NET 4.2+; Header: windows.h
+-- declared in windows.h, library aygshell.lib), SHGetEmergencyCallList
+(aa453699; stub, E_NOTIMPL), SHGetInputContext (aa453701, CE .NET 4.0+;
+stub, E_NOTIMPL; token spacing restored from twin ee503391),
+SHHandleWMActivate (aa453710), SHHandleWMSettingChange (aa453711),
+SHInitDialog (aa453713; Header: shellsdk.h, library aygshell.lib --
+declared in shellsdk.h; twin ee501722 repeats shellsdk.h),
+SHInitExtraControls (aa453715), SHInputDialog (aa453716),
+SHInvokeContextMenuCommand (aa453717), SHLoadContextMenuExtensions
+(aa453719), SHNavigateBack (aa453722; stub), SHNotificationAdd
+(aa453723), SHNotificationGetData (aa453725), SHNotificationRemove
+(aa453726), SHNotificationUpdate (aa453727), SHRecognizeGesture
+(aa453732), SHSetAppKeyWndAssoc (aa453734), SHSetBack (aa453735,
+CE 5.0+; stub, ERROR_CALL_NOT_IMPLEMENTED), SHSetInputContext
+(aa453736, CE .NET 4.0+; stub, E_NOTIMPL; spacing from twin ee502532),
+SHSetNavBarText (aa453737), SHSipInfo (aa453740).  SHSipPreference
+(aa453741) is HELD entirely (see below).  Windows CE 3.0+ unless noted.
+Library-row spellings alternate between "Link Library:" and "Library:"
+in this book (parser handles both).
+
+### Interfaces (application-implemented; not DLL exports)
+
+* INewMenuItemServer (ms909845, CE .NET 4.2+; Link Library:
+  Application-defined) + CreateNewItem (ms909846).  Opaque interface
+  tag + documented method record (M44 objbase.h model).
+* IShellNotificationCallback (ms909877) + OnCommandSelected (ms909878),
+  OnDismiss (ms909879), OnLinkSelected (ms909880); OnShow is Reserved,
+  returns E_NOTIMPL, no signature page.  Vtable order as the page
+  table prints (IUnknown, OnShow, OnCommandSelected, OnLinkSelected,
+  OnDismiss).  Opaque tag + method records.
+
+### Structures / enumeration / control class
+
+* SHACTIVATEINFO (aa453665; 32-bit size 12 TU-asserted; page prints
+  stray periods after member names -- "cbSize.", "fSipUp.:1" --
+  removed; 1/1/1/29 bitfield split as printed).
+* SHCHANGENOTIFYENTRY (aa453671, CE .NET 4.2+; size 12 TU-asserted;
+  fRecursive "Not supported" per the page; SHCNE_* event names held).
+* SHINITDLGINFO (aa453714; size 12 TU-asserted; tag tagSHINITDIALOG;
+  carries the one published value SHIDIM_FLAGS 0x0001).
+* SHMENUBARINFO (aa453721; size 36 TU-asserted; SHCMBF_* held).
+* SHNOTIFICATIONDATA (aa453724; size 56 TU-asserted; tag
+  _SHNOTIFICATIONDATA; SHNP priority, SHNF_* held; the page prints
+  "SHNF_SHNF_SPINNERS" doubled -- verbatim record:
+  SHNF_ SHNF_SPINNERS.  The CE 6.0 twin ee499049 extends the layout
+  with union { SOFTKEYMENU skm; SOFTKEYNOTIFY rgskn
+  [NOTIF_NUM_SOFTKEYS]; } + pszTodaySK / pszTodayExec; SOFTKEYMENU /
+  SOFTKEYNOTIFY / NOTIF_NUM_SOFTKEYS have no pages in any official CE
+  catalog, so the extension is HELD.  Internal inconsistency: the
+  CE 5.0 page's own example uses rgskn / pszTodaySK / pszTodayExec).
+* SHRGINFO (aa453733; size 20 TU-asserted; tag tagSHRGI; SHRG_* held).
+* NMNEWMENU (ms931659; size 196 TU-asserted; newmenu.h; no library
+  row; member type printed "IpropertyBag **" -- documented
+  IPropertyBag spelling used).
+* FILECHANGENOTIFY (aa453066, CE .NET 4.2+; size 40 TU-asserted).
+  Main Requirements row prints the multi-header list "Commctrl.h,
+  Prsht.h, Shlguid.h." with no library; the Windows Mobile row and the
+  WM_FILECHANGEINFO carrier page name shlobj.h + ceshell.lib.  Design
+  decision: co-located with its carrier message in shlobj.h (the
+  Prsht.h/Shlguid.h homes belong to unharvested books).  CE 6.0 twin
+  ee500811 repeats the multi-header list.
+* FILECHANGEINFO (ms889030; size 36 TU-asserted; Extfile.h, CE 2.10+;
+  dependency harvest from the File I/O Structures book; no library
+  row; page prints the layout without the typedef keyword -- restored;
+  SHCNE_* / SHCNF_* names held.  CE 6.0 twin ee490403 prints extfile.h,
+  shlobj.h / ceshell.lib).
+* SHNP (aa453728): complete enum body printed (SHNP_INFORM,
+  SHNP_ICONIC), implicit enumerator values.
+* WC_SIPPREF (ms914097, CE .NET 4.2+): L"SIPPREF" -- value published.
+
+### Messages / macros / dependencies (winuser.h, windows.h)
+
+* NMHDR (ms931479, CE 1.0+; Winuser.h; size 12 TU-asserted) added to
+  winuser.h: hwndFrom / idFrom / code, the notification header of
+  WM_NOTIFY (aa453890 types the lParam LPNMHDR; the NMN_* New-button
+  notifications and common-control notifications ride on it).  The
+  NMHDR page's remark names NM_RCLICK / NM_RDBCLICK (sic) as mouse
+  support -- names only, no values, recorded.
+* WM_NOTIFY (aa453890) = 0x004E and WM_SETTINGCHANGE (aa453906) =
+  0x001A (== WM_WININICHANGE) added to winuser.h via the M29
+  fixed-Win32-ABI-value policy (both are fixed Win32 ABI identifiers
+  with published Win32 values; both CE pages print Winuser.h, CE 1.0+).
+* SHGetAutoRunPath declared in windows.h per its documented Header row
+  (library aygshell.lib feeds def/aygshell-doc.def).
+* Macros SHGetMenu (aa453703) / SHGetSubMenu (aa453708) / SHSetSubMenu
+  (aa453738): recorded verbatim in aygshell.h comments, not defined --
+  they expand to SendMessage calls on the SHCMBM_* messages whose
+  values are unpublished (held-set policy).  CE 6.0 twins confirm
+  aygshell.lib for all three and CE 4.2+ availability.
+* Messages SHCMBM_GETMENU (aa453675) / SHCMBM_GETSUBMENU (aa453676) /
+  SHCMBM_SETSUBMENU (aa453677): shapes documented (lParam = menuid /
+  (HMENU) hmenu), values held.  Page quirk: SHCMBM_SETSUBMENU's lParam
+  is (HMENU) hmenu while the SHSetSubMenu macro passes ID_MENU.
+* WM_FILECHANGEINFO (aa453860; shlobj.h + ceshell.lib; CE 3.0+):
+  shape documented (wParam reserved 0, lParam = FILECHANGENOTIFY*), CE
+  shell message, value held.  ceshell.lib has no other sole-link
+  function pages, so no ceshell-doc.def is written (gen-doc-def
+  reports 1 co-listed page skipped).
+
+### Recorded-not-defined (held sets; names published, values not,
+in any official CE tree -- M39-M41 policy)
+
+SHIDIF_* (8), SHCMBF_* (5), SHRG_* (4), SHNF_* (10), SHNUM_*,
+SPI_GETSIPINFO / SPI_SETSIPINFO / SPI_GETCURRENTIM / SPI_SETCURRENTIM
+(SHSipInfo actions; *SIPINFO take SIPINFO*, *CURRENTIM take CLSID*;
+uiParam 0 or the WM_SETTINGCHANGE lParam; fWinIni reserved 0), SHFS_*
+(6), SHDB_* (3), SHCMBM_* (3), NMN_* (5), WM_FILECHANGEINFO,
+GN_CONTEXTMENU, SHIC_FEATURE (enumeration named, no page), SHA_INPUTDIALOG,
+SIP_INPUTDIALOG, SHCNE_* / SHCNF_* (ms889030 tables), VK_APP1..VK_APP6
+(SHSetAppKeyWndAssoc remarks), NM_RCLICK / NM_RDBCLICK (sic).
+
+### Held entire
+
+* SHSipPreference (aa453741): parameter type SIPSTATE has no published
+  definition in any official CE tree (no SIPSTATE page in the CE 5.0 /
+  CE .NET / CE 6.0 catalogs; SIP_UP / SIP_DOWN / SIP_FORCEDOWN /
+  SIP_UNCHANGED appear only as prose names), so the documented
+  signature cannot be typed in C without inventing the enum.  Held
+  with a verbatim record in aygshell.h; excluded from
+  def/aygshell-doc.def.
+* SHNOTIFICATIONDATA CE 6.0 layout extension (see above; types
+  unpublished).
+
+### Handle carriers / opaque tags (design decisions)
+
+HPROPSHEETPAGE = HANDLE (aa453688 types a HPROPSHEETPAGE* array; no CE
+page publishes the carrier -- its home is the unharvested Property
+Sheets book).  IShellPropSheetExt opaque tag (aa453688; the Remarks
+name its AddPages method; no interface page in any catalog).
+
+### Verification
+
+* `make check` GREEN (TU m50 exercises all 33 exported functions + the
+  structures / enum / WC_SIPPREF / NMNEWMENU / FILECHANGENOTIFY /
+  FILECHANGEINFO / NMHDR; 10 new 32-bit size asserts, pointer-guarded,
+  fired by the CE targets in crosscheck).
+* `make crosscheck` GREEN on all six targets (real LLVM-WinCE clang,
+  `-Werror`; the five new headers standalone + full TU).
+* `make e2e` GREEN: the M50 consumer unit links 17 SH* calls against
+  def/aygshell-doc.def; asserts `Name: aygshell.dll` + SHCreateMenuBar
+  + SHHandleWMActivate + SHInitDialog + SHGetAutoRunPath imports on
+  all six images.  (The e2e block avoids aggregate zero-initializers:
+  the freestanding ARM link has no __aeabi_memclr helpers -- M44
+  style, explicit member stores.)
+
+Export surface: new `def/aygshell-doc.def` **33** exports (31
+aygshell.h functions + SHInitDialog + SHGetAutoRunPath; SHSipPreference
+held).  Header count 30 -> 35; def count 38 -> 39.

@@ -135,6 +135,16 @@ typedef struct tagDRAWITEMSTRUCT {
  * with wParam INI_INTL afterwards. */
 AKARI_CE_IMPORT BOOL SetUserDefaultLCID(LCID Locale) AKARI_CE_NAME(SetUserDefaultLCID);
 
+/* aa453696 "SHGetAutoRunPath" (CE .NET 4.2+; Header Windows.h per the
+ * page -- the AYGShell book's one Windows.h-row function; Link Library
+ * aygshell.lib -> def/aygshell-doc.def).  Constructs the
+ * \Storage Card\<cpu-id>\autorun.exe path of the first storage card
+ * into a caller buffer of at least MAX_PATH TCHARs (the OS names the
+ * subdirectory with the microprocessor ID).  The full AYGShell unit
+ * lives in aygshell.h; this declaration follows its documented Header
+ * row. */
+AKARI_CE_IMPORT BOOL SHGetAutoRunPath(LPTSTR pAutoRunPath) AKARI_CE_NAME(SHGetAutoRunPath);
+
 #ifdef __cplusplus
 }
 #endif

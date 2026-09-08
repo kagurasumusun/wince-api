@@ -25,6 +25,10 @@
 #include <wincrypt.h>
 #include <winscard.h>
 #include <objbase.h>
+#include <aygshell.h>
+#include <shellsdk.h>
+#include <shlobj.h>
+#include <newmenu.h>
 
 int main(void)
 {
@@ -153,6 +157,40 @@ int main(void)
         (void) SCardTransmit(hCard, 0, 0, 0, 0, 0, 0);
         (void) SCardDisconnect(hCard, 0);
         (void) SCardReleaseContext(hContext);
+    }
+    /* M50: AYGShell unit (Aygshell.h / Shellsdk.h / Newmenu.h /
+     * Shlobj.h; Aygshell.lib) -- linked, not run: the image must
+     * import the documented Aygshell.lib names from aygshell.dll per
+     * the doc-derived def.  Locals are left uninitialized (M44
+     * style): the freestanding ARM link has no compiler-rt memclr
+     * helpers, so aggregate zero-initializers are avoided. */
+    {
+        SHMENUBARINFO      mbi;
+        SHNOTIFICATIONDATA nd;
+        SHACTIVATEINFO     sai;
+        SHINITDLGINFO      sidi;
+        CLSID              clsid;
+        mbi.cbSize    = sizeof(mbi);
+        nd.cbStruct   = sizeof(nd);
+        sai.cbSize    = sizeof(sai);
+        sidi.dwMask   = SHIDIM_FLAGS;
+        sidi.hDlg      = (HWND)0;
+        clsid.Data1   = 0;
+        (void) SHCreateMenuBar(&mbi);
+        (void) SHFindMenuBar((HWND)0);
+        (void) SHFullScreen((HWND)0, 0);
+        (void) SHDoneButton((HWND)0, 0);
+        (void) SHHandleWMActivate((HWND)0, 0, 0, &sai, 0);
+        (void) SHHandleWMSettingChange((HWND)0, 0, 0, &sai);
+        (void) SHInitDialog(&sidi);
+        (void) SHInitExtraControls();
+        (void) SHSipInfo(0, 0, (PVOID)0, 0);
+        (void) SHNotificationAdd(&nd);
+        (void) SHNotificationRemove(&clsid, 0);
+        (void) SHChangeNotifyRegister((HWND)0, (SHCHANGENOTIFYENTRY *)0);
+        (void) SHChangeNotifyFree((LPVOID)0);
+        (void) SHRecognizeGesture((SHRGINFO *)0);
+        (void) SHGetAutoRunPath((LPTSTR)0);
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-

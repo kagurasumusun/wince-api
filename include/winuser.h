@@ -902,6 +902,24 @@ typedef struct tagCOPYDATASTRUCT {
 } COPYDATASTRUCT, *PCOPYDATASTRUCT;
 
 /* ------------------------------------------------------------------ */
+/* M50: NMHDR (ms931479, Windows CE 1.0 and later; Header Winuser.h):  */
+/* the notification header carried by the lParam of WM_NOTIFY          */
+/* (aa453890 types it LPNMHDR; the NMN_* New-button notifications of   */
+/* newmenu.h and the WM_NOTIFY-based common-control notifications      */
+/* embed it as the first member of their structures).  The page also   */
+/* lists the NM_RCLICK / NM_RDBCLICK (sic -- page spelling) common     */
+/* notification-code names "if you include mouse support in your       */
+/* device platform" without values; they belong to the unharvested     */
+/* Common Controls notifications book and are held in                  */
+/* docs/inventory.md.                                                  */
+/* ------------------------------------------------------------------ */
+typedef struct tagNMHDR {
+    HWND hwndFrom;   /* window handle of the control sending the message */
+    UINT idFrom;     /* identifier of the control sending the message */
+    UINT code;       /* notification code */
+} NMHDR, *LPNMHDR;
+
+/* ------------------------------------------------------------------ */
 /* M29: window/control message identifiers and notification codes.   */
 /*                                                                     */
 /* Names and semantics come from the CE 5.0 GWES message books (each  */
@@ -933,8 +951,10 @@ typedef struct tagCOPYDATASTRUCT {
 #define WM_GETTEXT                     0x000D         /* aa453864 */
 #define WM_GETTEXTLENGTH               0x000E         /* aa453865 */
 #define WM_MOVE                        0x0003         /* aa453887 */
+#define WM_NOTIFY                      0x004E         /* aa453890 */
 #define WM_QUIT                        0x0012         /* aa453895 */
 #define WM_SETTEXT                     0x000C         /* aa453905 */
+#define WM_SETTINGCHANGE               0x001A         /* aa453906 */
 #define WM_SIZE                        0x0005         /* aa453907 */
 #define WM_STYLECHANGED                0x007D         /* aa453908 */
 #define WM_WINDOWPOSCHANGED            0x0047         /* aa453920 */

@@ -30,6 +30,11 @@
 #include <wincrypt.h>
 #include <winscard.h>
 #include <objbase.h>
+#include <aygshell.h>
+#include <shellsdk.h>
+#include <newmenu.h>
+#include <shlobj.h>
+#include <extfile.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4218,6 +4223,127 @@ static int m49_shaped_usage(void)
 }
 
 
+/* ------------------------------------------------------------------ */
+/* M50: AYGShell unit (aygshell.h / shellsdk.h / newmenu.h /          */
+/*      shlobj.h / extfile.h; Aygshell.lib) -- the 31 declared        */
+/*      SH* functions, the documented structures and the dependency   */
+/*      records (NMHDR, WM_NOTIFY/WM_SETTINGCHANGE in winuser.h,      */
+/*      SHGetAutoRunPath in windows.h).                                */
+/* ------------------------------------------------------------------ */
+
+/* Pointer-free layouts. */
+_Static_assert(sizeof(FILECHANGEINFO) == 36, "FILECHANGEINFO size");
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(NMHDR) == 12, "NMHDR 32-bit size");
+_Static_assert(sizeof(FILECHANGENOTIFY) == 40,
+               "FILECHANGENOTIFY 32-bit size");
+_Static_assert(sizeof(SHACTIVATEINFO) == 12, "SHACTIVATEINFO 32-bit size");
+_Static_assert(sizeof(SHCHANGENOTIFYENTRY) == 12,
+               "SHCHANGENOTIFYENTRY 32-bit size");
+_Static_assert(sizeof(SHINITDLGINFO) == 12, "SHINITDLGINFO 32-bit size");
+_Static_assert(sizeof(SHMENUBARINFO) == 36, "SHMENUBARINFO 32-bit size");
+_Static_assert(sizeof(SHNOTIFICATIONDATA) == 56,
+               "SHNOTIFICATIONDATA 32-bit size");
+_Static_assert(sizeof(SHRGINFO) == 20, "SHRGINFO 32-bit size");
+_Static_assert(sizeof(NMNEWMENU) == 196, "NMNEWMENU 32-bit size");
+#endif
+
+static int m50_shaped_usage(void)
+{
+    HWND                hwnd      = (HWND)0;
+    CLSID               clsid     = {0};
+    GUID                guid      = {0};
+    SHACTIVATEINFO      sai       = {0};
+    SHMENUBARINFO       mbi       = {0};
+    SHNOTIFICATIONDATA  nd        = {0};
+    SHRGINFO            shrg      = {0};
+    SHINITDLGINFO       shidi     = {0};
+    SHCHANGENOTIFYENTRY shcne     = {0};
+    NMNEWMENU           nmnm      = {0};
+    FILECHANGENOTIFY    fcn       = {0};
+    NMHDR               nmh       = {0};
+    TCHAR               buf[MAX_PATH] = {0};
+    HPROPSHEETPAGE      hpsp      = 0;
+    IShellPropSheetExt *ispse     = 0;
+    IUnknown           *punk      = 0;
+    IPropertyBag       *ppb       = 0;
+    HANDLE              hCMExt    = 0;
+    int                 cPages    = 0;
+    BYTE                vk        = 0;
+
+    /* dialog / full-screen / input-panel management */
+    shidi.dwMask = SHIDIM_FLAGS;
+    shidi.hDlg = hwnd;
+    (void) SHInitDialog(&shidi);
+    (void) SHInitExtraControls();
+    (void) SHFullScreen(hwnd, 0);
+    (void) SHDoneButton(hwnd, 0);
+    (void) SHInputDialog(hwnd, WM_ACTIVATE, 0);
+    (void) SHHandleWMActivate(hwnd, 0, 0, &sai, 0);
+    (void) SHHandleWMSettingChange(hwnd, 0, 0, &sai);
+    (void) SHSipInfo(0, 0, (PVOID)0, 0);
+
+    /* menu bar */
+    (void) SHCreateMenuBar(&mbi);
+    (void) SHFindMenuBar(hwnd);
+    (void) SHSetNavBarText(hwnd, (LPCTSTR)0);
+
+    /* New button / context menus */
+    (void) SHCreateNewItem(hwnd, &clsid);
+    (void) SHLoadContextMenuExtensions(punk, (LPCTSTR)0, (LPCTSTR)0,
+                                       (HMENU)0, 0, 0, &hCMExt);
+    (void) SHInvokeContextMenuCommand(hwnd, 0, hCMExt);
+    (void) SHFreeContextMenuExtensions(hCMExt);
+
+    /* property-sheet handler enumeration (stub on plain CE) */
+    (void) SHEnumPropSheetHandlers((HKEY)0, &cPages, &hpsp, &ispse);
+
+    /* notifications */
+    nd.clsid = clsid;
+    nd.npPriority = SHNP_ICONIC;
+    (void) SHNotificationAdd(&nd);
+    (void) SHNotificationGetData(&clsid, 0, &nd);
+    (void) SHNotificationUpdate(0, &nd);
+    (void) SHNotificationRemove(&clsid, 0);
+
+    /* gestures */
+    shrg.hwndClient = hwnd;
+    (void) SHRecognizeGesture(&shrg);
+
+    /* application-key / memory / back navigation */
+    (void) SHSetAppKeyWndAssoc(vk, hwnd);
+    (void) SHGetAppKeyAssoc((LPCTSTR)0);
+    (void) SHCloseApps(0);
+    (void) SHNavigateBack();
+    (void) SHSetBack(0, hwnd);
+
+    /* input context (stub on plain CE) */
+    (void) SHGetInputContext(hwnd, 0, (LPVOID)0, (LPDWORD)0);
+    (void) SHSetInputContext(hwnd, 0, (const LPVOID)0);
+
+    /* file change notifications (WM_FILECHANGEINFO layer) */
+    (void) SHChangeNotifyRegister(hwnd, &shcne);
+    (void) SHChangeNotifyDeregister(hwnd);
+    (void) SHChangeNotifyFree(&fcn);
+
+    /* autorun path (windows.h home; aygshell.lib link row) */
+    (void) SHGetAutoRunPath(buf);
+
+    /* emergency call list (stub on plain CE) */
+    (void) SHGetEmergencyCallList(buf, MAX_PATH);
+
+    /* NMNEWMENU / NMHDR / WM_NOTIFY layer */
+    nmnm.hdr = nmh;
+    nmnm.clsid = guid;
+    nmnm.pppropbag = &ppb;
+    (void) nmnm;
+    (void) WM_NOTIFY;
+    (void) WM_SETTINGCHANGE;
+    (void) WC_SIPPREF;
+    return 0;
+}
+
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -4289,6 +4415,8 @@ int host_tu_entry(void)
     if (m48_shaped_usage() != 0)
         return 1;
     if (m49_shaped_usage() != 0)
+        return 1;
+    if (m50_shaped_usage() != 0)
         return 1;
     return 0;
 }
