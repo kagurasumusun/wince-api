@@ -32,13 +32,16 @@
  *      No CE page publishes the carrier types, so all are declared as
  *      HANDLE and DRV_REQUESTID as DWORD (documented design decision).
  *
- *  (e) recorded-not-defined (no official CE layout): LINEFORWARD (the
- *      element type of LINEFORWARDLIST, named by the LINEFORWARDLIST
- *      page without a layout of its own) and therefore LINEFORWARDLIST
- *      itself; consequently TSPI_lineForward and
- *      TSPI_lineSetCurrentLocation ("This function is obsolete", no
- *      prototype printed) are recorded, not declared.  The LINE_* / PHONE_* callback-message values (17 TSPI message pages) publish
- *      names without numeric values: recorded-not-defined.
+ *  (e) LINEFORWARDLIST (page ms894148) documents a layout whose array
+ *      element type LINEFORWARD has no layout page in any official CE
+ *      tree (CE 5.0 / CE .NET / CE 6.0 catalogs), so the structure
+ *      cannot be completed in C.  LPLINEFORWARDLIST is therefore
+ *      declared as a pointer to an incomplete tag (documented design
+ *      decision); the client lineForward (M45) and TSPI_lineForward
+ *      (resolved in M45 from the M43 hold) take that pointer type.
+ *      The LINE_* / PHONE_* callback-message values (17 TSPI message
+ *      pages) publish names without numeric values:
+ *      recorded-not-defined.
  */
 
 #ifndef _TAPI_H
@@ -69,11 +72,47 @@ typedef HANDLE HDRVPHONE;      /* provider-side phone handle (TSPI prototypes)  
 typedef HANDLE HLINE;          /* LINECALLINFO.hLine member (the TAPI line handle)       */
 typedef DWORD  DRV_REQUESTID;  /* "the identifier passed in the original request"        */
 
+/* Client-side opaque object handles (M45).  The official client
+ * function pages document each as a TAPI object handle without
+ * publishing a carrier type, so they are declared as HANDLE exactly
+ * like the M43 set above (documented design decision):
+ *   HLINEAPP  "Handle to the application's registration with TAPI."
+ *             (lineOpen hLineApp parameter, ms894420; lineInitialize
+ *             lphLineApp, ms894369: "Pointer to a location that is
+ *             filled with the application's usage handle for TAPI.")
+ *   HCALL     "Pointer to an HCALL handle." (lineMakeCall lphCall
+ *             parameter, ms894387)
+ *   HPHONE    "Pointer to an HPHONE handle that identifies the open
+ *             phone device." (phoneOpen lphPhone parameter, ms895944)
+ *   HPHONEAPP "Handle to the application's registration with TAPI."
+ *             (phoneOpen hPhoneApp parameter, ms895944)             */
+typedef HANDLE HLINEAPP;
+typedef HANDLE HCALL;
+typedef HANDLE HPHONE;
+typedef HANDLE HPHONEAPP;
+
 typedef HDRVLINE  *LPHDRVLINE;
 typedef HDRVCALL  *LPHDRVCALL;
 typedef HDRVPHONE *LPHDRVPHONE;
 typedef HANDLE HPROVIDER;   /* TSPI provider handle (provider function pages) */
 typedef HICON  *LPHICON;   /* GetIcon pairs (TSPI_line/phoneGetIcon) */
+
+typedef HLINE     *LPHLINE;      /* lineOpen lphLine (ms894420)               */
+typedef HLINEAPP  *LPHLINEAPP;   /* lineInitialize lphLineApp (ms894369)      */
+typedef HCALL     *LPHCALL;      /* lineMakeCall lphCall (ms894387)           */
+typedef HPHONE    *LPHPHONE;     /* phoneOpen lphPhone (ms895944)             */
+typedef HPHONEAPP *LPHPHONEAPP;  /* phoneInitializeEx lphPhoneApp (ms895937)  */
+
+/* LINEFORWARDLIST page (ms894148) prints the typedef
+ *     struct lineforwardlist_tag { DWORD dwTotalSize;
+ *         DWORD dwNumEntries; LINEFORWARD ForwardList[1]; }
+ * and documents the element type LINEFORWARD, but no CE archive page
+ * (CE 5.0 / CE .NET / CE 6.0 catalogs) publishes the LINEFORWARD
+ * layout, so the structure cannot be completed in C.  The pointer
+ * alias is declared against an incomplete tag (same policy as header
+ * note (e)); callers pass a buffer assembled from the documented
+ * list header.  CE 3.0 and later (the page's Requirements). */
+typedef struct LINEFORWARDLIST *LPLINEFORWARDLIST;
 
 /* ------------------------------------------------------------------ */
 /* TSPI callback prototypes (the TSPI Callback Functions pages)        */
@@ -94,6 +133,32 @@ typedef void (CALLBACK *PHONEEVENT)(HTAPIPHONE htPhone, DWORD dwMsg,
 /* ASYNC_COMPLETION page (aa450289): same for TSPI_providerInit. */
 typedef void (CALLBACK *ASYNC_COMPLETION)(DRV_REQUESTID dwRequestID,
                                           LONG lResult);
+
+/* ------------------------------------------------------------------ */
+/* TAPI client callback prototypes (the client Callback pages)         */
+/* ------------------------------------------------------------------ */
+
+/* lineCallbackFunc page (ms893424): "This function is a placeholder
+ * for the application-supplied function name."  Printed shape:
+ *   VOID FAR PASCAL lineCallbackFunc(DWORD hDevice, DWORD dwMsg,
+ *       DWORD dwCallbackInstance, DWORD dwParam1, DWORD dwParam2,
+ *       DWORD dwParam3);
+ * The page's hDevice note: "Applications must use the DWORD type for
+ * this parameter because using the HANDLE type makes the code not
+ * portable" -- hence DWORD, not HANDLE.  FAR/PASCAL reduce to the
+ * single CE calling convention (header note (c) model). */
+typedef void (CALLBACK *LINECALLBACK)(DWORD hDevice, DWORD dwMsg,
+                                      DWORD dwCallbackInstance,
+                                      DWORD dwParam1, DWORD dwParam2,
+                                      DWORD dwParam3);
+
+/* phoneCallbackFunc page (ms895910): same placeholder model for the
+ * phone device; its printed shape types the first parameter HANDLE
+ * ("Handle to a phone device associated with the callback."). */
+typedef void (CALLBACK *PHONECALLBACK)(HANDLE hDevice, DWORD dwMsg,
+                                       DWORD dwCallbackInstance,
+                                       DWORD dwParam1, DWORD dwParam2,
+                                       DWORD dwParam3);
 
 /* ------------------------------------------------------------------ */
 /* TAPI structures (the TAPI Structures pages)                         */
@@ -1442,5 +1507,350 @@ typedef VARSTRING *LPVARSTRING;
 /* PHONESTATUSFLAGS (ms896255) */
 #define PHONESTATUSFLAGS_CONNECTED   0x00000001
 #define PHONESTATUSFLAGS_SUSPENDED   0x00000002
+
+/* ------------------------------------------------------------------ */
+/* TAPI client functions (M45)                                         */
+/*                                                                     */
+/* Every prototype below is transcribed from its official CE 5.0      */
+/* "Telephony API" function page (id in the trailing comment); every  */
+/* page's Requirements rows read: Header: Tapi.h, Link Library:       */
+/* Coredll.lib.  The CE 5.0 archive strips whitespace inside code     */
+/* blocks; the type/name boundaries of the glued prototypes were      */
+/* restored against the documented types above (the same mechanical   */
+/* restoration documented for the TSPI batch, M43).  The pages print  */
+/* `LONG WINAPI`; WINAPI is empty for CE (windef.h) and the           */
+/* declarations follow the repository's single-convention style.      */
+/* `const` qualifiers on structure-pointer parameters are printed by  */
+/* the pages themselves.                                              */
+/* ------------------------------------------------------------------ */
+
+/* line initialization / shutdown                     */
+
+AKARI_CE_IMPORT LONG lineInitialize(LPHLINEAPP lphLineApp,
+    HINSTANCE hInstance, LINECALLBACK lpfnCallback,
+    LPCWSTR lpszAppName, LPDWORD lpdwNumDevs)
+    AKARI_CE_NAME(lineInitialize);                          /* ms894369, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineInitializeEx(LPHLINEAPP lphLineApp,
+    HINSTANCE hInstance, LINECALLBACK lpfnCallback,
+    LPCWSTR lpszFriendlyAppName, LPDWORD lpdwNumDevs,
+    LPDWORD lpdwAPIVersion,
+    LPLINEINITIALIZEEXPARAMS lpLineInitializeExParams)
+    AKARI_CE_NAME(lineInitializeEx);                        /* ms894370, CE 3.0+  */
+AKARI_CE_IMPORT LONG lineShutdown(HLINEAPP hLineApp)
+    AKARI_CE_NAME(lineShutdown);                            /* ms894517, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineNegotiateAPIVersion(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAPILowVersion,
+    DWORD dwAPIHighVersion, LPDWORD lpdwAPIVersion,
+    LPLINEEXTENSIONID lpExtensionID)
+    AKARI_CE_NAME(lineNegotiateAPIVersion);                 /* ms894402, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineNegotiateExtVersion(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion,
+    DWORD dwExtLowVersion, DWORD dwExtHighVersion,
+    LPDWORD lpdwExtVersion)
+    AKARI_CE_NAME(lineNegotiateExtVersion);                 /* ms894404, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetMessage(HLINEAPP hLineApp,
+    LPLINEMESSAGE lpMessage, DWORD dwTimeout)
+    AKARI_CE_NAME(lineGetMessage);                          /* ms894338, CE 3.0+  */
+AKARI_CE_IMPORT LONG lineSetCurrentLocation(HLINEAPP hLineApp,
+    DWORD dwLocation)
+    AKARI_CE_NAME(lineSetCurrentLocation);                  /* ms894481, CE 2.10+ */
+AKARI_CE_IMPORT LONG lineAddProvider(LPCWSTR lpszProviderFilename,
+    HWND hwndOwner, LPDWORD lpdwPermanentProviderID)
+    AKARI_CE_NAME(lineAddProvider);                         /* ms893340, CE 2.0+  */
+AKARI_CE_IMPORT LONG lineGetProviderList(DWORD dwAPIVersion,
+    LPLINEPROVIDERLIST lpProviderList)
+    AKARI_CE_NAME(lineGetProviderList);                     /* ms894352, CE 1.0+  */
+
+/* line device open / close / capabilities            */
+
+AKARI_CE_IMPORT LONG lineOpen(HLINEAPP hLineApp, DWORD dwDeviceID,
+    LPHLINE lphLine, DWORD dwAPIVersion, DWORD dwExtVersion,
+    DWORD dwCallbackInstance, DWORD dwPrivileges,
+    DWORD dwMediaModes, LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(lineOpen);                                /* ms894420, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineClose(HLINE hLine)
+    AKARI_CE_NAME(lineClose);                               /* ms894118, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetDevCaps(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion, DWORD dwExtVersion,
+    LPLINEDEVCAPS lpLineDevCaps)
+    AKARI_CE_NAME(lineGetDevCaps);                          /* ms894165, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetLineDevStatus(HLINE hLine,
+    LPLINEDEVSTATUS lpLineDevStatus)
+    AKARI_CE_NAME(lineGetLineDevStatus);                    /* ms894336, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetAddressCaps(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAddressID, DWORD dwAPIVersion,
+    DWORD dwExtVersion, LPLINEADDRESSCAPS lpAddressCaps)
+    AKARI_CE_NAME(lineGetAddressCaps);                      /* ms894158, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetAddressStatus(HLINE hLine,
+    DWORD dwAddressID, LPLINEADDRESSSTATUS lpAddressStatus)
+    AKARI_CE_NAME(lineGetAddressStatus);                    /* ms894160, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetAddressID(HLINE hLine,
+    LPDWORD lpdwAddressID, DWORD dwAddressMode,
+    LPCWSTR lpsAddress, DWORD dwSize)
+    AKARI_CE_NAME(lineGetAddressID);                        /* ms894159, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetID(HLINE hLine, DWORD dwAddressID,
+    HCALL hCall, DWORD dwSelect, LPVARSTRING lpDeviceID,
+    LPCWSTR lpszDeviceClass)
+    AKARI_CE_NAME(lineGetID);                               /* ms894331, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetIcon(DWORD dwDeviceID,
+    LPCWSTR lpszDeviceClass, LPHICON lphIcon)
+    AKARI_CE_NAME(lineGetIcon);                             /* ms894313, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetStatusMessages(HLINE hLine,
+    LPDWORD lpdwLineStates, LPDWORD lpdwAddressStates)
+    AKARI_CE_NAME(lineGetStatusMessages);                   /* ms894356, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetStatusMessages(HLINE hLine,
+    DWORD dwLineStates, DWORD dwAddressStates)
+    AKARI_CE_NAME(lineSetStatusMessages);                   /* ms894500, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetNewCalls(HLINE hLine,
+    DWORD dwAddressID, DWORD dwSelect,
+    LPLINECALLLIST lpCallList)
+    AKARI_CE_NAME(lineGetNewCalls);                         /* ms894341, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetNumRings(HLINE hLine,
+    DWORD dwAddressID, LPDWORD lpdwNumRings)
+    AKARI_CE_NAME(lineGetNumRings);                         /* ms894350, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetNumRings(HLINE hLine,
+    DWORD dwAddressID, DWORD dwNumRings)
+    AKARI_CE_NAME(lineSetNumRings);                         /* ms894494, CE 1.0+  */
+
+/* call setup / control                               */
+
+AKARI_CE_IMPORT LONG lineMakeCall(HLINE hLine, LPHCALL lphCall,
+    LPCWSTR lpszDestAddress, DWORD dwCountryCode,
+    LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(lineMakeCall);                            /* ms894387, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineAnswer(HCALL hCall,
+    LPCSTR lpsUserUserInfo, DWORD dwSize)
+    AKARI_CE_NAME(lineAnswer);                              /* ms893395, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineAccept(HCALL hCall,
+    LPCSTR lpsUserUserInfo, DWORD dwSize)
+    AKARI_CE_NAME(lineAccept);                              /* ms893325, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineDeallocateCall(HCALL hCall)
+    AKARI_CE_NAME(lineDeallocateCall);                      /* ms894128, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineDrop(HCALL hCall,
+    LPCTSTR lpsUserUserInfo, DWORD dwSize)
+    AKARI_CE_NAME(lineDrop);                                /* ms894142, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineDial(HCALL hCall,
+    LPCWSTR lpszDestAddress, DWORD dwCountryCode)
+    AKARI_CE_NAME(lineDial);                                /* ms894137, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineHold(HCALL hCall)
+    AKARI_CE_NAME(lineHold);                                /* ms894368, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineUnhold(HCALL hCall)
+    AKARI_CE_NAME(lineUnhold);                              /* ms894557, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSwapHold(HCALL hActiveCall,
+    HCALL hHeldCall)
+    AKARI_CE_NAME(lineSwapHold);                            /* ms894522, CE 1.0+  */
+AKARI_CE_IMPORT LONG linePickup(HLINE hLine, DWORD dwAddressID,
+    LPHCALL lphCall, LPCSTR lpszDestAddress,
+    LPCSTR lpszGroupID)
+    AKARI_CE_NAME(linePickup);                              /* ms894423, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineRedirect(HCALL hCall,
+    LPCSTR lpszDestAddress, DWORD dwCountryCode)
+    AKARI_CE_NAME(lineRedirect);                            /* ms894435, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineForward(HLINE hLine, DWORD bAllAddresses,
+    DWORD dwAddressID, LPLINEFORWARDLIST const lpForwardList,
+    DWORD dwNumRingsNoAnswer, LPHCALL lphConsultCall,
+    LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(lineForward);                             /* ms894147, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineHandoff(HCALL hCall,
+    LPCSTR lpszFileName, DWORD dwMediaMode)
+    AKARI_CE_NAME(lineHandoff);                             /* ms894363, CE 1.0+  */
+
+/* call information                                   */
+
+AKARI_CE_IMPORT LONG lineGetCallInfo(HCALL hCall,
+    LPLINECALLINFO lpCallInfo)
+    AKARI_CE_NAME(lineGetCallInfo);                         /* ms894162, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetCallStatus(HCALL hCall,
+    LPLINECALLSTATUS lpCallStatus)
+    AKARI_CE_NAME(lineGetCallStatus);                       /* ms894163, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetConfRelatedCalls(HCALL hCall,
+    LPLINECALLLIST lpCallList)
+    AKARI_CE_NAME(lineGetConfRelatedCalls);                 /* ms894164, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetCallParams(HCALL hCall,
+    DWORD dwBearerMode, DWORD dwMinRate, DWORD dwMaxRate,
+    LPLINEDIALPARAMS const lpDialParams)
+    AKARI_CE_NAME(lineSetCallParams);                       /* ms894473, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetCallPrivilege(HCALL hCall,
+    DWORD dwCallPrivilege)
+    AKARI_CE_NAME(lineSetCallPrivilege);                    /* ms894475, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetMediaMode(HCALL hCall,
+    DWORD dwMediaModes)
+    AKARI_CE_NAME(lineSetMediaMode);                        /* ms894491, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetTerminal(HLINE hLine,
+    DWORD dwAddressID, HCALL hCall, DWORD dwSelect,
+    DWORD dwTerminalModes, DWORD dwTerminalID, DWORD bEnable)
+    AKARI_CE_NAME(lineSetTerminal);                         /* ms894505, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineMonitorDigits(HCALL hCall,
+    DWORD dwDigitModes)
+    AKARI_CE_NAME(lineMonitorDigits);                       /* ms894391, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineMonitorMedia(HCALL hCall,
+    DWORD dwMediaModes)
+    AKARI_CE_NAME(lineMonitorMedia);                        /* ms894395, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGenerateDigits(HCALL hCall,
+    DWORD dwDigitMode, LPCWSTR lpszDigits, DWORD dwDuration)
+    AKARI_CE_NAME(lineGenerateDigits);                      /* ms894152, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGenerateTone(HCALL hCall,
+    DWORD dwToneMode, DWORD dwDuration, DWORD dwNumTones,
+    LPLINEGENERATETONE const lpTones)
+    AKARI_CE_NAME(lineGenerateTone);                        /* ms894156, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSendUserUserInfo(HCALL hCall,
+    LPCSTR lpsUserUserInfo, DWORD dwSize)
+    AKARI_CE_NAME(lineSendUserUserInfo);                    /* ms894466, CE 3.0+  */
+AKARI_CE_IMPORT LONG lineReleaseUserUserInfo(HCALL hCall)
+    AKARI_CE_NAME(lineReleaseUserUserInfo);                 /* ms894438, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineDevSpecific(HLINE hLine,
+    DWORD dwAddressID, HCALL hCall, LPVOID lpParams,
+    DWORD dwSize)
+    AKARI_CE_NAME(lineDevSpecific);                         /* ms894131, CE 1.0+  */
+
+/* conference and transfer                            */
+
+AKARI_CE_IMPORT LONG lineAddToConference(HCALL hConfCall,
+    HCALL hConsultCall)
+    AKARI_CE_NAME(lineAddToConference);                     /* ms893390, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineRemoveFromConference(HCALL hCall)
+    AKARI_CE_NAME(lineRemoveFromConference);                /* ms894452, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetupConference(HCALL hCall,
+    HLINE hLine, LPHCALL lphConfCall, LPHCALL lphConsultCall,
+    DWORD dwNumParties, LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(lineSetupConference);                     /* ms894512, CE 1.0+  */
+AKARI_CE_IMPORT LONG linePrepareAddToConference(HCALL hConfCall,
+    LPHCALL lphConsultCall,
+    LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(linePrepareAddToConference);              /* ms894429, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetupTransfer(HCALL hCall,
+    LPHCALL lphConsultCall,
+    LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(lineSetupTransfer);                       /* ms894514, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineCompleteTransfer(HCALL hCall,
+    HCALL hConsultCall, LPHCALL lphConfCall,
+    DWORD dwTransferMode)
+    AKARI_CE_NAME(lineCompleteTransfer);                    /* ms894122, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineBlindTransfer(HCALL hCall,
+    LPCWSTR lpszDestAddress, DWORD dwCountryCode)
+    AKARI_CE_NAME(lineBlindTransfer);                       /* ms893412, CE 1.0+  */
+
+/* device configuration / translation / priority      */
+
+AKARI_CE_IMPORT LONG lineGetDevConfig(DWORD dwDeviceID,
+    LPVARSTRING lpDeviceConfig, LPCSTR lpszDeviceClass)
+    AKARI_CE_NAME(lineGetDevConfig);                        /* ms894177, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetDevConfig(DWORD dwDeviceID,
+    LPVOID const lpDeviceConfig, DWORD dwSize,
+    LPCTSTR lpszDeviceClass)
+    AKARI_CE_NAME(lineSetDevConfig);                        /* ms894488, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineConfigDialogEdit(DWORD dwDeviceID,
+    HWND hwndOwner, LPCWSTR lpszDeviceClass,
+    LPVOID const lpDeviceConfigIn, DWORD dwSize,
+    LPVARSTRING lpDeviceConfigOut)
+    AKARI_CE_NAME(lineConfigDialogEdit);                    /* ms894123, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineGetTranslateCaps(HLINEAPP hLineApp,
+    DWORD dwAPIVersion, LPLINETRANSLATECAPS lpTranslateCaps)
+    AKARI_CE_NAME(lineGetTranslateCaps);                    /* ms894361, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineTranslateAddress(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion, LPCWSTR lpszAddressIn,
+    DWORD dwCard, DWORD dwTranslateOptions,
+    LPLINETRANSLATEOUTPUT lpTranslateOutput)
+    AKARI_CE_NAME(lineTranslateAddress);                    /* ms894539, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineTranslateDialog(HLINEAPP hLineApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion, HWND hwndOwner,
+    LPCWSTR lpszAddressIn)
+    AKARI_CE_NAME(lineTranslateDialog);                     /* ms894543, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetTollList(HLINEAPP hLineApp,
+    DWORD dwDeviceID, LPCWSTR lpszAddressIn,
+    DWORD dwTollListOption)
+    AKARI_CE_NAME(lineSetTollList);                         /* ms894509, CE .NET 4.0+ */
+AKARI_CE_IMPORT LONG lineGetAppPriority(LPCWSTR lpszAppFilename,
+    DWORD dwMediaMode, LPLINEEXTENSIONID lpExtensionID,
+    DWORD dwRequestMode, LPVARSTRING lpExtensionName,
+    LPDWORD lpdwPriority)
+    AKARI_CE_NAME(lineGetAppPriority);                      /* ms894161, CE 1.0+  */
+AKARI_CE_IMPORT LONG lineSetAppPriority(LPCSTR lpszAppFilename,
+    DWORD dwMediaMode, LPLINEEXTENSIONID lpExtensionID,
+    DWORD dwRequestMode, LPCSTR lpszExtensionName,
+    DWORD dwPriority)
+    AKARI_CE_NAME(lineSetAppPriority);                      /* ms894470, CE 1.0+  */
+
+/* phone device functions                             */
+
+AKARI_CE_IMPORT LONG phoneInitializeEx(LPHPHONEAPP lphPhoneApp,
+    HINSTANCE hInstance, PHONECALLBACK lpfnCallback,
+    LPCWSTR lpszFriendlyAppName, LPDWORD lpdwNumDevs,
+    LPDWORD lpdwAPIVersion,
+    LPPHONEINITIALIZEEXPARAMS lpPhoneInitializeExParams)
+    AKARI_CE_NAME(phoneInitializeEx);                       /* ms895937, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneShutdown(HPHONEAPP hPhoneApp)
+    AKARI_CE_NAME(phoneShutdown);                           /* ms896208, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneOpen(HPHONEAPP hPhoneApp,
+    DWORD dwDeviceID, LPHPHONE lphPhone, DWORD dwAPIVersion,
+    DWORD dwExtVersion, DWORD_PTR dwCallbackInstance,
+    DWORD dwPrivilege)
+    AKARI_CE_NAME(phoneOpen);                               /* ms895944, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneClose(HPHONE hPhone)
+    AKARI_CE_NAME(phoneClose);                              /* ms895912, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneNegotiateAPIVersion(HPHONEAPP hPhoneApp,
+    DWORD dwDeviceID, DWORD dwAPILowVersion,
+    DWORD dwAPIHighVersion, LPDWORD lpdwAPIVersion,
+    LPPHONEEXTENSIONID lpExtensionID)
+    AKARI_CE_NAME(phoneNegotiateAPIVersion);                /* ms895942, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneNegotiateExtVersion(HPHONEAPP hPhoneApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion,
+    DWORD dwExtLowVersion, DWORD dwExtHighVersion,
+    LPDWORD lpdwExtVersion)
+    AKARI_CE_NAME(phoneNegotiateExtVersion);                /* ms895943, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetMessage(HPHONEAPP hPhoneApp,
+    LPPHONEMESSAGE lpMessage, DWORD dwTimeout)
+    AKARI_CE_NAME(phoneGetMessage);                         /* ms895930, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetDevCaps(HPHONEAPP hPhoneApp,
+    DWORD dwDeviceID, DWORD dwAPIVersion, DWORD dwExtVersion,
+    LPPHONECAPS lpPhoneCaps)
+    AKARI_CE_NAME(phoneGetDevCaps);                         /* ms895925, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetStatus(HPHONE hPhone,
+    LPPHONESTATUS lpPhoneStatus)
+    AKARI_CE_NAME(phoneGetStatus);                          /* ms895932, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetGain(HPHONE hPhone,
+    DWORD dwHookSwitchDev, LPDWORD lpdwGain)
+    AKARI_CE_NAME(phoneGetGain);                            /* ms895926, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneSetGain(HPHONE hPhone,
+    DWORD dwHookSwitchDev, DWORD dwGain)
+    AKARI_CE_NAME(phoneSetGain);                            /* ms896179, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetVolume(HPHONE hPhone,
+    DWORD dwHookSwitchDev, LPDWORD lpdwVolume)
+    AKARI_CE_NAME(phoneGetVolume);                          /* ms895934, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneSetVolume(HPHONE hPhone,
+    DWORD dwHookSwitchDev, DWORD dwVolume)
+    AKARI_CE_NAME(phoneSetVolume);                          /* ms896201, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetHookSwitch(HPHONE hPhone,
+    LPDWORD lpdwHookSwitchDevs)
+    AKARI_CE_NAME(phoneGetHookSwitch);                      /* ms895927, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneSetHookSwitch(HPHONE hPhone,
+    DWORD dwHookSwitchDevs, DWORD dwHookSwitchMode)
+    AKARI_CE_NAME(phoneSetHookSwitch);                      /* ms896185, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetRing(HPHONE hPhone,
+    LPDWORD lpdwRingMode, LPDWORD lpdwVolume)
+    AKARI_CE_NAME(phoneGetRing);                            /* ms895931, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneSetRing(HPHONE hPhone, DWORD dwRingMode,
+    DWORD dwVolume)
+    AKARI_CE_NAME(phoneSetRing);                            /* ms896190, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetStatusMessages(HPHONE hPhone,
+    LPDWORD lpdwPhoneStates, LPDWORD lpdwButtonModes,
+    LPDWORD lpdwButtonStates)
+    AKARI_CE_NAME(phoneGetStatusMessages);                  /* ms895933, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneSetStatusMessages(HPHONE hPhone,
+    DWORD dwPhoneStates, DWORD dwButtonModes,
+    DWORD dwButtonStates)
+    AKARI_CE_NAME(phoneSetStatusMessages);                  /* ms896197, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetIcon(DWORD dwDeviceID,
+    LPCWSTR lpszDeviceClass, LPHICON lphIcon)
+    AKARI_CE_NAME(phoneGetIcon);                            /* ms895928, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneGetID(HPHONE hPhone,
+    LPVARSTRING lpDeviceID, LPCWSTR lpszDeviceClass)
+    AKARI_CE_NAME(phoneGetID);                              /* ms895929, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneConfigDialog(DWORD dwDeviceID,
+    HWND hwndOwner, LPCSTR lpszDeviceClass)
+    AKARI_CE_NAME(phoneConfigDialog);                       /* ms895915, CE 3.0+  */
+AKARI_CE_IMPORT LONG phoneDevSpecific(HPHONE hPhone,
+    LPVOID lpParams, DWORD dwSize)
+    AKARI_CE_NAME(phoneDevSpecific);                        /* ms895918, CE 3.0+  */
 
 #endif /* _TAPI_H */

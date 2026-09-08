@@ -2443,3 +2443,147 @@ Export surface: new `def/ole32-doc.def` 84 exports (name-only,
 (`LIBRARY oleaut32.dll`). `tools/gen-doc-def.py` gained a no-sole-link
 rule: co-listed library tokens with no sole-link exports (Uuid.lib,
 co-listed on 238 COM pages) get no def file.
+
+## M45 -- TAPI client runtime unit (tapi.h; closes the M43 client hold)
+
+The TAPI **client** surface of the official CE 5.0 "Telephony API"
+book: `tools/manifests/tapi-client-functions.manifest` (91 leaves).
+89 pages were harvested in this session (the two callback-shape pages
+ms893424 lineCallbackFunc / ms895910 phoneCallbackFunc were already
+in rows.json via the M43 structures/constants manifest).  Every
+function page carries the Requirements rows **Header: Tapi.h, Link
+Library: Coredll.lib**; the per-page OS Versions are noted in the
+header comments (most CE 1.0+; lineGetMessage / lineInitializeEx /
+lineSendUserUserInfo and all phone* functions CE 3.0+; lineAddProvider
+CE 2.0+; lineSetCurrentLocation CE 2.10+; lineSetTollList CE .NET
+4.0+).
+
+### Prototypes
+
+70 of the 89 pages print their prototypes with whitespace intact in
+the archive; 19 print them glued (the archive's code-block spacing
+strip).  The glued prototypes were restored mechanically against the
+documented tapi.h types (the same documented restoration as the M43
+TSPI batch): ms893340 lineAddProvider, ms894118 lineClose, ms894123
+lineConfigDialogEdit, ms894128 lineDeallocateCall, ms894142 lineDrop,
+ms894156 lineGenerateTone, ms894165 lineGetDevCaps, ms894331
+lineGetID, ms894361 lineGetTranslateCaps, ms894369 lineInitialize,
+ms894387 lineMakeCall, ms894402 lineNegotiateAPIVersion, ms894420
+lineOpen, ms894475 lineSetCallPrivilege, ms894481
+lineSetCurrentLocation, ms894488 lineSetDevConfig, ms894500
+lineSetStatusMessages, ms894517 lineShutdown, ms894539
+lineTranslateAddress, ms894543 lineTranslateDialog, ms895932
+phoneGetStatus.  Restorations verified against the raw archive prints
+(`LPVOIDconstlpDeviceConfigIn` -> `LPVOID const lpDeviceConfigIn`,
+`LPLINECALLPARAMSconstlpCallParams` -> `LPLINECALLPARAMS const
+lpCallParams`, `DWORD_PTRdwCallbackInstance` -> `DWORD_PTR
+dwCallbackInstance`, etc.).  The pages print `LONG WINAPI`; WINAPI is
+empty for CE and the declarations follow the repository's
+single-convention style.
+
+### New types (tapi.h)
+
+| Item | Basis | Notes |
+|---|---|---|
+| `HLINEAPP` / `HCALL` / `HPHONE` / `HPHONEAPP` | client function pages: "Handle to the application's registration with TAPI." (lineOpen ms894420 hLineApp, phoneOpen ms895944 hPhoneApp); "Pointer to an HCALL handle." (lineMakeCall ms894387 lphCall); "Pointer to an HPHONE handle that identifies the open phone device." (phoneOpen ms895944 lphPhone); "Pointer to a location that is filled with the application's usage handle for TAPI." (lineInitialize ms894369 lphLineApp) | opaque object handles documented without a carrier type -> `typedef HANDLE`, same documented design decision as note (d) |
+| `LPHLINE` / `LPHLINEAPP` / `LPHCALL` / `LPHPHONE` / `LPHPHONEAPP` | named by the prototypes above | pointer aliases |
+| `LINECALLBACK` | lineCallbackFunc page ms893424: printed shape `VOID FAR PASCAL lineCallbackFunc(DWORD hDevice, DWORD dwMsg, DWORD dwCallbackInstance, DWORD dwParam1, DWORD dwParam2, DWORD dwParam3)`; the page's hDevice note ("Applications must use the DWORD type for this parameter...") | `typedef void (CALLBACK *)(DWORD, DWORD, DWORD, DWORD, DWORD, DWORD)` |
+| `PHONECALLBACK` | phoneCallbackFunc page ms895910: same placeholder model, first parameter printed `HANDLE hDevice` | `typedef void (CALLBACK *)(HANDLE, DWORD, DWORD, DWORD, DWORD, DWORD)` |
+| `LPLINEFORWARDLIST` | LINEFORWARDLIST page ms894148 prints the typedef (dwTotalSize / dwNumEntries / `LINEFORWARD ForwardList[1]`, CE 3.0+); the LINEFORWARD element has no layout page in any official CE tree (CE 5.0 / CE .NET / CE 6.0 catalogs verified) | pointer to an incomplete tag (documented design decision; the structure cannot be completed in C from official information) |
+
+### M43 hold closed: TSPI_lineForward
+
+`TSPI_lineForward` (aa451032) was recorded-not-declared in M43
+because its `LPLINEFORWARDLIST` parameter needed the LINEFORWARD
+element layout.  With the opaque pointer declaration above the
+prototype needs nothing more, so it is declared in tapicomn.h in M45
+(restored from the glued archive print against the documented types).
+The client `lineForward` (ms894147) is declared the same way.  This
+completes the TSPI surface to 79 declared entry points.
+
+### Functions declared (89: 66 line* + 23 phone*)
+
+lineAccept `ms893325`, lineAddProvider `ms893340`, lineAddToConference
+`ms893390`, lineAnswer `ms893395`, lineBlindTransfer `ms893412`,
+lineClose `ms894118`, lineCompleteTransfer `ms894122`,
+lineConfigDialogEdit `ms894123`, lineDeallocateCall `ms894128`,
+lineDevSpecific `ms894131`, lineDial `ms894137`, lineDrop `ms894142`,
+lineForward `ms894147`, lineGenerateDigits `ms894152`, lineGenerateTone
+`ms894156`, lineGetAddressCaps `ms894158`, lineGetAddressID `ms894159`,
+lineGetAddressStatus `ms894160`, lineGetAppPriority `ms894161`,
+lineGetCallInfo `ms894162`, lineGetCallStatus `ms894163`,
+lineGetConfRelatedCalls `ms894164`, lineGetDevCaps `ms894165`,
+lineGetDevConfig `ms894177`, lineGetIcon `ms894313`, lineGetID
+`ms894331`, lineGetLineDevStatus `ms894336`, lineGetMessage `ms894338`,
+lineGetNewCalls `ms894341`, lineGetNumRings `ms894350`,
+lineGetProviderList `ms894352`, lineGetStatusMessages `ms894356`,
+lineGetTranslateCaps `ms894361`, lineHandoff `ms894363`, lineHold
+`ms894368`, lineInitialize `ms894369`, lineInitializeEx `ms894370`,
+lineMakeCall `ms894387`, lineMonitorDigits `ms894391`, lineMonitorMedia
+`ms894395`, lineNegotiateAPIVersion `ms894402`, lineNegotiateExtVersion
+`ms894404`, lineOpen `ms894420`, linePickup `ms894423`,
+linePrepareAddToConference `ms894429`, lineRedirect `ms894435`,
+lineReleaseUserUserInfo `ms894438`, lineRemoveFromConference
+`ms894452`, lineSendUserUserInfo `ms894466`, lineSetAppPriority
+`ms894470`, lineSetCallParams `ms894473`, lineSetCallPrivilege
+`ms894475`, lineSetCurrentLocation `ms894481`, lineSetDevConfig
+`ms894488`, lineSetMediaMode `ms894491`, lineSetNumRings `ms894494`,
+lineSetStatusMessages `ms894500`, lineSetTerminal `ms894505`,
+lineSetTollList `ms894509`, lineSetupConference `ms894512`,
+lineSetupTransfer `ms894514`, lineShutdown `ms894517`, lineSwapHold
+`ms894522`, lineTranslateAddress `ms894539`, lineTranslateDialog
+`ms894543`, lineUnhold `ms894557`; phoneClose `ms895912`,
+phoneConfigDialog `ms895915`, phoneDevSpecific `ms895918`,
+phoneGetDevCaps `ms895925`, phoneGetGain `ms895926`, phoneGetHookSwitch
+`ms895927`, phoneGetIcon `ms895928`, phoneGetID `ms895929`,
+phoneGetMessage `ms895930`, phoneGetRing `ms895931`, phoneGetStatus
+`ms895932`, phoneGetStatusMessages `ms895933`, phoneGetVolume
+`ms895934`, phoneInitializeEx `ms895937`, phoneNegotiateAPIVersion
+`ms895942`, phoneNegotiateExtVersion `ms895943`, phoneOpen `ms895944`,
+phoneSetGain `ms896179`, phoneSetHookSwitch `ms896185`, phoneSetRing
+`ms896190`, phoneSetStatusMessages `ms896197`, phoneSetVolume
+`ms896201`, phoneShutdown `ms896208`.
+
+Documented parameter-form notes kept verbatim: lineDrop /
+lineSetDevConfig print `LPCTSTR` (CE Unicode-only -> the wide string);
+linePickup / lineRedirect / lineHandoff / lineSetAppPriority /
+lineGetDevConfig / phoneConfigDialog print narrow-string parameters
+(`LPCSTR`) exactly as on the pages; phoneOpen prints `DWORD_PTR
+dwCallbackInstance`; lineGenerateTone / lineMakeCall / lineOpen /
+lineForward / lineSetupConference / lineSetupTransfer /
+linePrepareAddToConference / lineConfigDialogEdit / lineSetDevConfig
+carry the page-printed `const` qualifiers.
+
+### Recorded-not-declared
+
+* lineCallbackFunc / phoneCallbackFunc (ms893424 / ms895910) are
+  application-supplied callback *shapes*, not exports: implemented as
+  the LINECALLBACK / PHONECALLBACK typedefs above.  Their pages'
+  Coredll.lib rows therefore do not enter the def (the matcher keys on
+  header-declared export names).
+* All M43 recorded-not-defined items stand except TSPI_lineForward
+  (closed above): TSPI_lineSetCurrentLocation ("obsolete", no
+  prototype), TSPI_lineConditionalMediaDetection (corrupted archive
+  print), the LINE_*/PHONE_* TSPI callback-message values (names
+  without numbers).
+
+### Verification
+
+* `make check` GREEN: hostcheck (headers + TU, warning-free under
+  `_WIN32_WCE` 0x420/0x500/0x600; the TU exercises all 89 client
+  functions, both callback shapes and TSPI_lineForward), defcheck
+  `coredll-doc.def` **560** exports.
+* `make crosscheck` GREEN on all six arm/i386 × CE 4.2/5.0/6.0
+  targets.
+* `make e2e` GREEN: the e2e console app references lineInitializeEx /
+  lineNegotiateAPIVersion / lineOpen / lineMakeCall / lineForward /
+  lineDrop / lineClose / lineShutdown / phoneOpen / phoneGetStatus /
+  phoneClose / TSPI_lineForward; the recipe asserts
+  `Symbol: lineInitializeEx`, `Symbol: lineOpen`, `Symbol: lineForward`,
+  `Symbol: phoneOpen`, `Symbol: TSPI_lineForward` in the coredll.dll
+  import table of all six target images (x86 imports verified
+  undecorated).
+
+Export surface: `def/coredll-doc.def` 470 -> **560** exports (+89
+client + TSPI_lineForward; name-only, `LIBRARY coredll.dll`).  rows
+1560 -> 1649.  Corpus pages5 1479 -> 1568.

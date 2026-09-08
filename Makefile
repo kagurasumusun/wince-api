@@ -203,6 +203,16 @@ e2e:
 	  | grep -q "Symbol: VariantInit" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: LoadTypeLib" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: lineInitializeEx" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: lineOpen (" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: lineForward (" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: phoneOpen" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: TSPI_lineForward" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

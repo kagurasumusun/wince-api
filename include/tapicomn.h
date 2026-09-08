@@ -16,14 +16,15 @@
  *      against the documented types of tapi.h (no CE page needs the
  *      documented CE 6.0 twin procedure).
  *
- *  (c) recorded-not-defined: TSPI_lineForward (its LINEFORWARDLIST
- *      parameter type needs the LINEFORWARD element layout, which no
- *      CE page publishes), TSPI_lineSetCurrentLocation ("This
+ *  (c) recorded-not-defined: TSPI_lineSetCurrentLocation ("This
  *      function is obsolete" -- no prototype printed) and
  *      TSPI_lineConditionalMediaDetection (the archive prototype is
  *      corrupted beyond unambiguous restoration:
  *      "(HDRVLINEhdLine,hdConsultCalldwMediaModes,hdConsultCallconst
- *      lpCallParams)").  docs/inventory.md (M43) records each.
+ *      lpCallParams)").  TSPI_lineForward was held in M43 for the
+ *      unpublished LINEFORWARD element layout; it is declared in M45
+ *      through the opaque LPLINEFORWARDLIST pointer (tapi.h note
+ *      (e)).  docs/inventory.md (M43/M45) records each.
  */
 
 #ifndef _TAPICOMN_H
@@ -110,6 +111,22 @@ AKARI_CE_IMPORT LONG TSPI_lineDrop(
     LPCSTR lpsUserUserInfo,
     DWORD dwSize)
     AKARI_CE_NAME(TSPI_lineDrop);
+
+/* M45: the M43 hold is resolved -- the LPLINEFORWARDLIST parameter
+ * is declared as an opaque pointer (tapi.h note (e)), which is all
+ * the prototype needs.  Prototype restored from the glued archive
+ * print of page aa451032 against the documented tapi.h types. */
+AKARI_CE_IMPORT LONG TSPI_lineForward(
+    DRV_REQUESTID dwRequestID,
+    HDRVLINE hdLine,
+    DWORD bAllAddresses,
+    DWORD dwAddressID,
+    LPLINEFORWARDLIST const lpForwardList,
+    DWORD dwNumRingsNoAnswer,
+    HTAPICALL htConsultCall,
+    LPHDRVCALL lphdConsultCall,
+    LPLINECALLPARAMS const lpCallParams)
+    AKARI_CE_NAME(TSPI_lineForward);
 
 AKARI_CE_IMPORT LONG TSPI_lineGenerateDigits(
     HDRVCALL hdCall,

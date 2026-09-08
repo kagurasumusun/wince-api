@@ -173,6 +173,21 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M45 (landed):** TAPI client runtime unit (tapi.h; closes the M43
+  client hold) -- the 89 documented TAPI client functions (66 line* +
+  23 phone*) of the official CE 5.0 Telephony API book
+  (`tapi-client-functions.manifest`, 89 pages harvested this session;
+  every page Header: Tapi.h / Link Library: Coredll.lib), the
+  LINECALLBACK / PHONECALLBACK callback shapes (lineCallbackFunc
+  ms893424 / phoneCallbackFunc ms895910), the client-side opaque
+  handles HLINEAPP/HCALL/HPHONE/HPHONEAPP + LPH* aliases (documented
+  parameter-wording basis), and the LPLINEFORWARDLIST opaque pointer
+  (the LINEFORWARDLIST layout ms894148 names a LINEFORWARD element
+  whose layout no official CE tree publishes).  The opaque pointer
+  also closes the M43 TSPI_lineForward hold: the TSPI surface is now
+  79 declared entry points.  coredll 470 -> 560 exports; e2e asserts
+  lineInitializeEx / lineOpen / lineForward / phoneOpen /
+  TSPI_lineForward in the coredll import table on all six targets.
 * **M38 (landed):** CopyFileEx unit (winbase.h; closes the M31
   deferral) -- `CopyFileExW` (CE 5.0+, `aa517311` / CE 6.0 twin
   `ee490791`; Winbase.h, Coredll.lib), `LPPROGRESS_ROUTINE` (the
@@ -427,13 +442,17 @@ declarations, recorded in `docs/inventory.md`):
   IsDBCSLeadByte/Ex `ms886515`/`ms886608`, CP_*/MB_*/WC_* constants),
   `BYTE`/`LPBOOL` in windef.h.  def 90 → 94 exports.
 
-Remaining roadmap: the other reference books already manifested
-(Strings, Unicode part 2, System Management part 2, DLL, ToolHelp,
-Process and Thread part 2) and the Shell&UI / GDI / Communication /
-File-Mapping books — each batch adds only official-page-grounded
-declarations; def harvesting continues in lockstep (coredll at 147
-name-only exports); end-to-end link verification with wince-crt on
-the `LLVM-WinCE` toolchain (host + cross).
+Remaining roadmap (queued, page-grounded): the second-order DLL
+books (crypt32 / aygshell / other component modules), the CE books
+not yet harvested in full (e.g. the CE 4.2 book pages), and the
+held constant sets whose official pages publish names without values
+(the M39-M41 Winsock SO_/LUP_/NS_ set, the TSPI callback-message
+values) -- those need the documented on-device readback procedure
+before they can be defined.  Each batch adds only
+official-page-grounded declarations; def harvesting continues in
+lockstep (coredll at 560 name-only exports, M45); end-to-end link
+verification with wince-crt on the `LLVM-WinCE` toolchain (host +
+cross) runs for every milestone.
 
 ## Verification rules (same as wince-crt)
 

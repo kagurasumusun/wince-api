@@ -387,6 +387,7 @@ EXPORTS
   TSPI_lineDevSpecific
   TSPI_lineDial
   TSPI_lineDrop
+  TSPI_lineForward
   TSPI_lineGenerateDigits
   TSPI_lineGenerateTone
   TSPI_lineGetAddressCaps
@@ -482,3 +483,92 @@ EXPORTS
   WriteDebugLED
   WriteFile
   WriteMsgQueue
+  lineAccept
+  lineAddProvider
+  lineAddToConference
+  lineAnswer
+  lineBlindTransfer
+  lineClose
+  lineCompleteTransfer
+  lineConfigDialogEdit
+  lineDeallocateCall
+  lineDevSpecific
+  lineDial
+  lineDrop
+  lineForward
+  lineGenerateDigits
+  lineGenerateTone
+  lineGetAddressCaps
+  lineGetAddressID
+  lineGetAddressStatus
+  lineGetAppPriority
+  lineGetCallInfo
+  lineGetCallStatus
+  lineGetConfRelatedCalls
+  lineGetDevCaps
+  lineGetDevConfig
+  lineGetID
+  lineGetIcon
+  lineGetLineDevStatus
+  lineGetMessage
+  lineGetNewCalls
+  lineGetNumRings
+  lineGetProviderList
+  lineGetStatusMessages
+  lineGetTranslateCaps
+  lineHandoff
+  lineHold
+  lineInitialize
+  lineInitializeEx
+  lineMakeCall
+  lineMonitorDigits
+  lineMonitorMedia
+  lineNegotiateAPIVersion
+  lineNegotiateExtVersion
+  lineOpen
+  linePickup
+  linePrepareAddToConference
+  lineRedirect
+  lineReleaseUserUserInfo
+  lineRemoveFromConference
+  lineSendUserUserInfo
+  lineSetAppPriority
+  lineSetCallParams
+  lineSetCallPrivilege
+  lineSetCurrentLocation
+  lineSetDevConfig
+  lineSetMediaMode
+  lineSetNumRings
+  lineSetStatusMessages
+  lineSetTerminal
+  lineSetTollList
+  lineSetupConference
+  lineSetupTransfer
+  lineShutdown
+  lineSwapHold
+  lineTranslateAddress
+  lineTranslateDialog
+  lineUnhold
+  phoneClose
+  phoneConfigDialog
+  phoneDevSpecific
+  phoneGetDevCaps
+  phoneGetGain
+  phoneGetHookSwitch
+  phoneGetID
+  phoneGetIcon
+  phoneGetMessage
+  phoneGetRing
+  phoneGetStatus
+  phoneGetStatusMessages
+  phoneGetVolume
+  phoneInitializeEx
+  phoneNegotiateAPIVersion
+  phoneNegotiateExtVersion
+  phoneOpen
+  phoneSetGain
+  phoneSetHookSwitch
+  phoneSetRing
+  phoneSetStatusMessages
+  phoneSetVolume
+  phoneShutdown

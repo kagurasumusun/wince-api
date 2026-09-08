@@ -46,23 +46,27 @@ git -C ../wince-docs-corpus push
 
 Then delete the corpus clone and `build/` from the session.
 
-## Current corpus (2026-09-08)
+## Current corpus (2026-09-08, M45)
 
-* `pages5/`: 1176 CE 5.0 `(v=msdn.10)` pages — the full committed
-  manifest set (69 manifests) plus the M34a type/callback pages
-  (aa450831 EXTENDED_NAME_FORMAT, ms904723 EnumCodePagesProc).
-* `pages6/`: 1134 CE 6.0 `(v=winembedded.60)` pages — the twins of the
+* `pages5/`: 1568 CE 5.0 `(v=msdn.10)` pages — the full committed
+  manifest set (81 manifests incl. the M43 TAPI/TSPI manifests and
+  the M45 `tapi-client-functions.manifest`, 89 pages harvested in
+  M45) plus the M34a type/callback pages (aa450831
+  EXTENDED_NAME_FORMAT, ms904723 EnumCodePagesProc).
+* `pages6/`: 1170 CE 6.0 `(v=winembedded.60)` pages — the twins of the
   CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
-  CE 6.0 leaf) plus the M34a twins ee483142 / ee491122.
-* `pages4/`: **6361 Windows CE .NET `(v=msdn.10)` pages — the full
+  CE 6.0 leaf) plus the M34a twins ee483142 / ee491122 and the M44
+  CE 6.0 twins.
+* `pages4/`: **6468 Windows CE .NET `(v=msdn.10)` pages — the full
   earliest-complete CE tree, read end-to-end in M34**
   (see `docs/cenet-readout.md`).  One catalog leaf,
   `dd320882(v=vs.100)` "IsValidPtrIn", is a foreign Visual Studio page
   cross-linked by the archived TOC: its CE URL is a verified 404 and
   it is excluded; one preserved page (ms938306) is the archive's
   `#message` sign-in-gated stub, kept as published.
-* `rows.json`: 1175 CE 5.0 Requirement-row records; `rows4.json` (in
-  `build/`, regenerable via `tools/cenet-rows.py`) holds the 6361 CE
+* `rows.json`: 1649 CE 5.0 Requirement-row records (1560 pre-M45 +
+  the 89 M45 TAPI client function pages); `rows4.json` (in
+  `build/`, regenerable via `tools/cenet-rows.py`) holds the CE
   .NET parsed records.
 * Catalog caveats: the CE 6.0 catalog stores ids with the
   `(v=winembedded.60)` suffix (strip it before fetching); the CE .NET

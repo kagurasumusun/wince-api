@@ -2823,7 +2823,8 @@ static int m42_shaped_usage(void)
 
 /* ------------------------------------------------------------------ */
 /* M43: TAPI/TSPI -- tapi.h (types/structs/callbacks/constants) +     */
-/*      tapicomn.h (the 78 TSPI service-provider entry points).       */
+/*      tapicomn.h (the TSPI service-provider entry points; 78 in     */
+/*      M43, 79 since the M45 TSPI_lineForward closure).              */
 /* ------------------------------------------------------------------ */
 
 #if __SIZEOF_POINTER__ == 4
@@ -3341,6 +3342,199 @@ static int m43_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M45: TAPI client runtime -- the 89 documented TAPI client          */
+/*      functions (66 line* + 23 phone*) plus the LINECALLBACK /      */
+/*      PHONECALLBACK shapes and the TSPI_lineForward hold closure.   */
+/* ------------------------------------------------------------------ */
+
+static void m45_line_callback(DWORD hDevice, DWORD dwMsg,
+                              DWORD dwCallbackInstance, DWORD dwParam1,
+                              DWORD dwParam2, DWORD dwParam3)
+{ (void) hDevice; (void) dwMsg; (void) dwCallbackInstance;
+  (void) dwParam1; (void) dwParam2; (void) dwParam3; }
+
+static void m45_phone_callback(HANDLE hDevice, DWORD dwMsg,
+                               DWORD dwCallbackInstance, DWORD dwParam1,
+                               DWORD dwParam2, DWORD dwParam3)
+{ (void) hDevice; (void) dwMsg; (void) dwCallbackInstance;
+  (void) dwParam1; (void) dwParam2; (void) dwParam3; }
+
+static int m45_shaped_usage(void)
+{
+    HLINEAPP   hLineApp  = (HLINEAPP)0;
+    HLINE      hLine     = (HLINE)0;
+    HCALL      hCall     = (HCALL)0;
+    HPHONEAPP  hPhoneApp = (HPHONEAPP)0;
+    HPHONE     hPhone    = (HPHONE)0;
+    HINSTANCE  hInst     = (HINSTANCE)0;
+    HWND       hwnd      = (HWND)0;
+    HICON      hIcon     = (HICON)0;
+    DWORD      dw        = 0;
+    DWORD      dw2       = 0;
+    DWORD_PTR  dp        = 0;
+
+    LPHLINE      lphLine     = &hLine;
+    LPHLINEAPP   lphLineApp  = &hLineApp;
+    LPHCALL      lphCall     = &hCall;
+    LPHPHONE     lphPhone    = &hPhone;
+    LPHPHONEAPP  lphPhoneApp = &hPhoneApp;
+
+    LINECALLPARAMS          cparams = {0};
+    LINECALLINFO            cinfo   = {0};
+    LINECALLSTATUS          cstat   = {0};
+    LINECALLLIST            clist   = {0};
+    LINEADDRESSCAPS         acaps   = {0};
+    LINEADDRESSSTATUS       astat   = {0};
+    LINEDEVCAPS             dcaps   = {0};
+    LINEDEVSTATUS           dstat   = {0};
+    LINEDIALPARAMS          dial    = {0};
+    LINEEXTENSIONID         lext    = {0};
+    LINEGENERATETONE        tone    = {0};
+    LINEINITIALIZEEXPARAMS  lix     = {0};
+    LINEMESSAGE             lmsg    = {0};
+    LINEPROVIDERLIST        plist   = {0};
+    LINETRANSLATECAPS       tcaps   = {0};
+    LINETRANSLATEOUTPUT     tout    = {0};
+    PHONECAPS               pcaps   = {0};
+    PHONESTATUS             pstat   = {0};
+    PHONEMESSAGE            pmsg    = {0};
+    PHONEEXTENSIONID        pext    = {0};
+    PHONEINITIALIZEEXPARAMS pix     = {0};
+    VARSTRING               vs      = {0};
+    LPLINEFORWARDLIST       fwd     = (LPLINEFORWARDLIST)0;
+
+    /* callback typedef shapes (lineCallbackFunc ms893424 prints the
+     * hDevice parameter as DWORD; phoneCallbackFunc ms895910 as
+     * HANDLE -- both assignments below must fit). */
+    LINECALLBACK  lc = m45_line_callback;
+    PHONECALLBACK pc = m45_phone_callback;
+    (void) lc; (void) pc;
+
+    /* line initialization / shutdown */
+    (void) lineInitialize(lphLineApp, hInst, m45_line_callback,
+                          (LPCWSTR)0, &dw);
+    (void) lineInitializeEx(lphLineApp, hInst, m45_line_callback,
+                            (LPCWSTR)0, &dw, &dw2, &lix);
+    (void) lineShutdown(hLineApp);
+    (void) lineNegotiateAPIVersion(hLineApp, 0, 0, 0, &dw, &lext);
+    (void) lineNegotiateExtVersion(hLineApp, 0, 0, 0, 0, &dw);
+    (void) lineGetMessage(hLineApp, &lmsg, 0);
+    (void) lineSetCurrentLocation(hLineApp, 0);
+    (void) lineAddProvider((LPCWSTR)0, hwnd, &dw);
+    (void) lineGetProviderList(0, &plist);
+
+    /* line device open / close / capabilities */
+    (void) lineOpen(hLineApp, 0, lphLine, 0, 0, 0, 0, 0,
+                    (LPLINECALLPARAMS)&cparams);
+    (void) lineClose(hLine);
+    (void) lineGetDevCaps(hLineApp, 0, 0, 0, &dcaps);
+    (void) lineGetLineDevStatus(hLine, &dstat);
+    (void) lineGetAddressCaps(hLineApp, 0, 0, 0, 0, &acaps);
+    (void) lineGetAddressStatus(hLine, 0, &astat);
+    (void) lineGetAddressID(hLine, &dw, 0, (LPCWSTR)0, 0);
+    (void) lineGetID(hLine, 0, hCall, 0, &vs, (LPCWSTR)0);
+    (void) lineGetIcon(0, (LPCWSTR)0, &hIcon);
+    (void) lineGetStatusMessages(hLine, &dw, &dw2);
+    (void) lineSetStatusMessages(hLine, 0, 0);
+    (void) lineGetNewCalls(hLine, 0, 0, &clist);
+    (void) lineGetNumRings(hLine, 0, &dw);
+    (void) lineSetNumRings(hLine, 0, 0);
+
+    /* call setup / control */
+    (void) lineMakeCall(hLine, lphCall, (LPCWSTR)0, 0,
+                        (LPLINECALLPARAMS)&cparams);
+    (void) lineAnswer(hCall, (LPCSTR)0, 0);
+    (void) lineAccept(hCall, (LPCSTR)0, 0);
+    (void) lineDeallocateCall(hCall);
+    (void) lineDrop(hCall, (LPCTSTR)0, 0);
+    (void) lineDial(hCall, (LPCWSTR)0, 0);
+    (void) lineHold(hCall);
+    (void) lineUnhold(hCall);
+    (void) lineSwapHold(hCall, (HCALL)0);
+    (void) linePickup(hLine, 0, lphCall, (LPCSTR)0, (LPCSTR)0);
+    (void) lineRedirect(hCall, (LPCSTR)0, 0);
+    (void) lineForward(hLine, 0, 0, fwd, 0, lphCall,
+                       (LPLINECALLPARAMS)&cparams);
+    (void) lineHandoff(hCall, (LPCSTR)0, 0);
+
+    /* call information */
+    (void) lineGetCallInfo(hCall, &cinfo);
+    (void) lineGetCallStatus(hCall, &cstat);
+    (void) lineGetConfRelatedCalls(hCall, &clist);
+    (void) lineSetCallParams(hCall, 0, 0, 0,
+                             (LPLINEDIALPARAMS)&dial);
+    (void) lineSetCallPrivilege(hCall, 0);
+    (void) lineSetMediaMode(hCall, 0);
+    (void) lineSetTerminal(hLine, 0, hCall, 0, 0, 0, 0);
+    (void) lineMonitorDigits(hCall, 0);
+    (void) lineMonitorMedia(hCall, 0);
+    (void) lineGenerateDigits(hCall, 0, (LPCWSTR)0, 0);
+    (void) lineGenerateTone(hCall, 0, 0, 0,
+                            (LPLINEGENERATETONE)&tone);
+    (void) lineSendUserUserInfo(hCall, (LPCSTR)0, 0);
+    (void) lineReleaseUserUserInfo(hCall);
+    (void) lineDevSpecific(hLine, 0, hCall, (LPVOID)0, 0);
+
+    /* conference and transfer */
+    (void) lineAddToConference(hCall, (HCALL)0);
+    (void) lineRemoveFromConference(hCall);
+    (void) lineSetupConference(hCall, hLine, lphCall, lphCall, 0,
+                               (LPLINECALLPARAMS)&cparams);
+    (void) linePrepareAddToConference(hCall, lphCall,
+                                      (LPLINECALLPARAMS)&cparams);
+    (void) lineSetupTransfer(hCall, lphCall,
+                             (LPLINECALLPARAMS)&cparams);
+    (void) lineCompleteTransfer(hCall, (HCALL)0, lphCall, 0);
+    (void) lineBlindTransfer(hCall, (LPCWSTR)0, 0);
+
+    /* device configuration / translation / priority */
+    (void) lineGetDevConfig(0, &vs, (LPCSTR)0);
+    (void) lineSetDevConfig(0, (LPVOID)0, 0, (LPCTSTR)0);
+    (void) lineConfigDialogEdit(0, hwnd, (LPCWSTR)0, (LPVOID)0, 0,
+                                &vs);
+    (void) lineGetTranslateCaps(hLineApp, 0, &tcaps);
+    (void) lineTranslateAddress(hLineApp, 0, 0, (LPCWSTR)0, 0, 0,
+                                &tout);
+    (void) lineTranslateDialog(hLineApp, 0, 0, hwnd, (LPCWSTR)0);
+    (void) lineSetTollList(hLineApp, 0, (LPCWSTR)0, 0);
+    (void) lineGetAppPriority((LPCWSTR)0, 0, &lext, 0, &vs, &dw);
+    (void) lineSetAppPriority((LPCSTR)0, 0, &lext, 0, (LPCSTR)0, 0);
+
+    /* phone device functions */
+    (void) phoneInitializeEx(lphPhoneApp, hInst, m45_phone_callback,
+                             (LPCWSTR)0, &dw, &dw2, &pix);
+    (void) phoneShutdown(hPhoneApp);
+    (void) phoneOpen(hPhoneApp, 0, lphPhone, 0, 0, dp, 0);
+    (void) phoneClose(hPhone);
+    (void) phoneNegotiateAPIVersion(hPhoneApp, 0, 0, 0, &dw, &pext);
+    (void) phoneNegotiateExtVersion(hPhoneApp, 0, 0, 0, 0, &dw);
+    (void) phoneGetMessage(hPhoneApp, &pmsg, 0);
+    (void) phoneGetDevCaps(hPhoneApp, 0, 0, 0, &pcaps);
+    (void) phoneGetStatus(hPhone, &pstat);
+    (void) phoneGetGain(hPhone, 0, &dw);
+    (void) phoneSetGain(hPhone, 0, 0);
+    (void) phoneGetVolume(hPhone, 0, &dw);
+    (void) phoneSetVolume(hPhone, 0, 0);
+    (void) phoneGetHookSwitch(hPhone, &dw);
+    (void) phoneSetHookSwitch(hPhone, 0, 0);
+    (void) phoneGetRing(hPhone, &dw, &dw2);
+    (void) phoneSetRing(hPhone, 0, 0);
+    (void) phoneGetStatusMessages(hPhone, &dw, &dw2, &dw);
+    (void) phoneSetStatusMessages(hPhone, 0, 0, 0);
+    (void) phoneGetIcon(0, (LPCWSTR)0, &hIcon);
+    (void) phoneGetID(hPhone, &vs, (LPCWSTR)0);
+    (void) phoneConfigDialog(0, hwnd, (LPCSTR)0);
+    (void) phoneDevSpecific(hPhone, (LPVOID)0, 0);
+
+    /* M43 hold closed: TSPI_lineForward through the opaque list
+     * pointer (aa451032). */
+    (void) TSPI_lineForward(0, (HDRVLINE)0, 0, 0, fwd, 0,
+                            (HTAPICALL)0, (LPHDRVCALL)0,
+                            (LPLINECALLPARAMS)&cparams);
+    return 0;
+}
+
 
 int host_tu_entry(void)
 {
@@ -3403,6 +3597,8 @@ int host_tu_entry(void)
     if (m43_shaped_usage() != 0)
         return 1;
     if (m44_shaped_usage() != 0)
+        return 1;
+    if (m45_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -65,6 +65,32 @@ int main(void)
     /* M43: TAPI/TSPI (Tapicomn.h) import surface -- linked, not run. */
     (void) TSPI_lineOpen(0, NULL, NULL, 0, NULL);
     (void) TSPI_phoneGetDevCaps(0, 0, 0, NULL);
+    /* M45: TAPI client runtime (Tapi.h) import surface + the M43
+     * TSPI_lineForward hold closure -- linked, not run: the image
+     * must import the documented coredll names per the doc-derived
+     * def. */
+    {
+        HLINE hLine = (HLINE)0;
+        HCALL hCall = (HCALL)0;
+        HPHONE hPhone = (HPHONE)0;
+        (void) lineInitializeEx(NULL, NULL, NULL, NULL, NULL, NULL,
+                                NULL);
+        (void) lineNegotiateAPIVersion((HLINEAPP)0, 0, 0, 0, NULL,
+                                       NULL);
+        (void) lineOpen((HLINEAPP)0, 0, &hLine, 0, 0, 0, 0, 0, NULL);
+        (void) lineMakeCall(hLine, &hCall, NULL, 0, NULL);
+        (void) lineForward(hLine, 0, 0, (LPLINEFORWARDLIST)0, 0, NULL,
+                           NULL);
+        (void) lineDrop(hCall, NULL, 0);
+        (void) lineClose(hLine);
+        (void) lineShutdown((HLINEAPP)0);
+        (void) phoneOpen((HPHONEAPP)0, 0, &hPhone, 0, 0, 0, 0);
+        (void) phoneGetStatus(hPhone, NULL);
+        (void) phoneClose(hPhone);
+        (void) TSPI_lineForward(0, (HDRVLINE)0, 0, 0,
+                                (LPLINEFORWARDLIST)0, 0, (HTAPICALL)0,
+                                NULL, NULL);
+    }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-
      * documented names from ole32.dll/oleaut32.dll per the doc-derived
