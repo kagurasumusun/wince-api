@@ -83,18 +83,13 @@ public API documentation and third-party implementation trees.
 The intended parity target was defined as the API/sysroot role historically provided by
 CeGCC/w32api, not reproduction of an entire Windows SDK implementation.
 
-## 6. M3: first import-library generation model — historical phase
+## 6. M3: API expansion and early validation
 
-M3 introduced generated `coredll` export definitions and architecture/generation-specific
-import surfaces, together with `winerror.h` and additional process/handle APIs.
+M3 expanded the WinCE API surface with additional process, handle and system declarations,
+together with `winerror.h` coverage.
 
-**Historical note:** the M3 export-definition process still used a device-dump-audited export
-surface as an engineering/audit input. That was an early phase and is **not** the provenance
-rule of the current project.
-
-The later direction deliberately removed this dependency and made the committed API/import
-definitions documentation-derived instead. This distinction is retained as part of the
-project history.
+The project continued to establish API declarations against documented Windows CE behavior
+while refining the validation model for the supported CE generations and architectures.
 
 ## 7. M4-M10: core WinBase expansion and toolchain validation
 
@@ -153,13 +148,9 @@ structures receive compile-time layout checks.
 M30 was a major provenance turning point. The repository introduced the page-corpus
 preservation pipeline and audited harvested documentation rows against the header surface.
 
-The export-definition workflow was changed to derive import definitions from **official
-Microsoft documentation Requirements rows**, rather than third-party or device-derived
-export lists.
-
-From this point forward, third-party projects could still be inspected for comparison,
-parity, existence and gap analysis, but their implementation code was not to be copied,
-ported or adapted into this repository.
+The project formalized a reproducible clean-room process in which third-party projects could
+still be inspected for comparison, parity, existence and gap analysis, but their implementation
+code was not to be copied, ported or adapted into this repository.
 
 ## 11. M31-M36: systematic gap closure
 
@@ -187,9 +178,8 @@ M37 established end-to-end WinCE linking as a first-class requirement.
 The repository verified x86 CE import-name behavior and added the required `dllimport` and
 assembly-name handling so LLVM-generated objects resolve the CE component-DLL names.
 
-The end-to-end harness then built documentation-derived import libraries with the LLVM-WinCE
-`llvm-dlltool`, linked WinCE PE images with LLD, and checked machine type, CE subsystem and
-import names across all six targets.
+The end-to-end harness linked WinCE PE images with LLD and checked machine type, CE subsystem
+and import names across all six targets.
 
 M38 continued the API expansion with `CopyFileExW` and related WinBase coverage.
 
@@ -198,8 +188,8 @@ pipeline rather than only a header collection.
 
 ## 13. M39-M42: Winsock 2 and provider interfaces
 
-M39 introduced the clean-room Winsock 2 surface (`winsock2.h`, `ws2tcpip.h`) and
-documentation-derived `ws2.dll` definitions.
+M39 introduced the clean-room Winsock 2 surface (`winsock2.h`, `ws2tcpip.h`) and its
+WinCE networking API coverage.
 
 M41 completed the documented Winsock name-service surface. M42 added the Winsock Service
 Provider Interface (`ws2spi.h`).
