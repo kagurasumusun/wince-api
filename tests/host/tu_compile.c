@@ -50,6 +50,7 @@
 #include <winber.h>
 #include <cchannel.h>
 #include <discodlg.h>
+#include <prsht.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4876,6 +4877,38 @@ static int m54_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M55: Property Sheets (Prsht.h; no Link Library rows -- the          */
+/* Shell_NotifyIcon def-less precedent).                               */
+/* ------------------------------------------------------------------ */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(PROPSHEETPAGE) == 40, "PROPSHEETPAGE 32-bit size");
+_Static_assert(sizeof(PROPSHEETHEADER) == 40, "PROPSHEETHEADER 32-bit size");
+_Static_assert(sizeof(PSHNOTIFY) == 16, "PSHNOTIFY 32-bit size");
+#endif
+
+static int m55_shaped_usage(void)
+{
+    PROPSHEETPAGE    psp;
+    PROPSHEETHEADER  psh;
+    PSHNOTIFY        psn;
+    HPROPSHEETPAGE   hpsp = (HPROPSHEETPAGE)0;
+
+    psp.dwSize   = sizeof(PROPSHEETPAGE);
+    psh.dwSize   = sizeof(PROPSHEETHEADER);
+    psn.hdr.code = 0;
+    (void) CreatePropertySheetPage(&psp);
+    (void) DestroyPropertySheetPage(hpsp);
+    (void) PropertySheet(&psh);
+    (void) ExtensionPropSheetPageProc((LPVOID)0,
+                                      (LPFNADDPROPSHEETPAGE)0, 0);
+    (void) PropSheetPageProc((HWND)0, 0, &psp);
+    (void) PropSheetProc((HWND)0, 0, 0);
+    (void) AddPropSheetPageProc(hpsp, 0);
+    (void) psn;
+    return 0;
+}
+
 static int m53_shaped_usage(void)
 {
     BROWSEINFO        bi;
@@ -5028,6 +5061,7 @@ int host_tu_entry(void)
         return 1;
     if (m54_shaped_usage() != 0)
         return 1;
+    if (m55_shaped_usage() != 0)
+        return 1;
     return 0;
 }
-

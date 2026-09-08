@@ -157,7 +157,11 @@ typedef struct ITaskbarList2    ITaskbarList2;
  * but no CE 5.0 SHCONTF page exists) are likewise dangling references
  * from the CE pages; the DROPEFFECT_* effect names and the MK_* key
  * state names of the IDropTarget pages have no CE value tables either.
- * All are listed as gaps in docs/inventory.md M53. */
+ * All are listed as gaps in docs/inventory.md M53.  The
+ * LPFNADDPROPSHEETPAGE parameter of ms909882 AddPropertySheetPages is
+ * no longer dangling: the M55 Property Sheets book documents
+ * AddPropSheetPageProc (aa452848) and prsht.h declares the pointer
+ * type. */
 
 /* IDropTarget: documented methods (4 pages; Windows CE .NET 4.2 and
  * later; Shobjidl.h/Shobjidl.idl; Link Library: Implementation

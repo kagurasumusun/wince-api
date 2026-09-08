@@ -3996,3 +3996,39 @@ held, ldap_sasl_bind held), `def/commdlg-doc.def` **new, 4**,
 Corpus: pages5 2152 -> 2672, pages6 1259 -> 1702 (442 M54 twins),
 pagesw 16 -> 20 (2 MS-RDPBCGR + LOGFONTW + PBM_SETPOS), rows.json
 2233 -> 2753 (+ twin records), rows4.json unchanged (6361).
+
+## M55 -- Property Sheets (new header prsht.h; def-less Prsht.h layer) + CC batch 2 harvest
+
+* prsht.h: the CE 5.0 Property Sheets Reference book (57 leaves,
+  tools/manifests/cc-propertysheets.manifest).  Structures:
+  PROPSHEETPAGE (aa453562, 40, verbatim unions; ANSI-spelled string
+  members kept as printed), PROPSHEETHEADER (aa453560, 40, verbatim
+  unions), PSHNOTIFY (aa453576, 16).  Functions:
+  CreatePropertySheetPage (ms908183), DestroyPropertySheetPage
+  (aa452941), PropertySheet (aa453552) -- all Prsht.h with NO Link
+  Library row on CE, so no def and no import pin (the
+  Shell_NotifyIcon precedent).  Callbacks: PropSheetPageProc
+  (aa453563; LPFNPSPCALLBACK built from it -- mutually recursive
+  with the struct, parameter spelled via the struct tag), PropSheetProc
+  (aa453565; PFNPROPSHEETCALLBACK), AddPropSheetPageProc (aa452848;
+  LPFNADDPROPSHEETPAGE -- closes the M53 shobjidl.h dangling-type
+  note), ExtensionPropSheetPageProc (aa453062).  HELD: the 18
+  PropSheet_* macro bodies (signatures only), PSM_/PSN_ messages,
+  PSP_/PSH_/PSPCB_/PSCB_/PSBTN_/PSWIZB_/ID_PS* values (names-only).
+* Batch 2 harvest (for the next milestones): the remaining seven
+  Common Controls sub-books fetched and preserved -- Date and Time
+  Picker (36), Header (49), List-View (220), Month Calendar (54),
+  Rebar (36), Tab (61), Tree View (88) = 601 CE 5.0 pages
+  (cc-dateandtimepicker/cc-header/cc-listview/cc-monthcalendar/
+  cc-rebar/cc-tab/cc-treeview.manifest) + 569 CE 6.0 twins
+  (m55-ce60.manifest; 32 titles have no CE 6.0 twin).
+* Verification: make check / crosscheck / e2e GREEN on all six
+  targets (TU m55: 3 struct sizes + shaped usage of the def-less
+  Prsht.h surface).
+
+Export surface: unchanged (Prsht.h carries no Link Library rows).
+Header count 51 -> **52**; def count 44.  Corpus: pages5
+2673 -> 3273 (+601), pages6 1702 -> 2270 (+568 twins; one
+m55-ce60.manifest title 404s -- no CE 6.0 twin page),
+rows.json 2753 -> 4365 (cumulative parsed records incl. the corpus
+baseline twins).

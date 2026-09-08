@@ -173,6 +173,13 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M55 (landed):** Property Sheets (new `include/prsht.h`,
+  def-less Prsht.h layer: PROPSHEETPAGE/PROPSHEETHEADER/PSHNOTIFY,
+  CreatePropertySheetPage/DestroyPropertySheetPage/PropertySheet and
+  the four callback types -- LPFNADDPROPSHEETPAGE closes the M53
+  dangle) + the Common Controls batch 2 harvest (Date/Time Picker,
+  Header, List-View, Month Calendar, Rebar, Tab, Tree View: 601 CE 5.0
+  pages + 569 CE 6.0 twins preserved in the corpus).  Headers 51 -> 52.
 * **M54 (landed):** Common Controls batch 1 + LDAP Client + RDP
   virtual channels (new `include/winldap.h`, `include/winber.h`,
   `include/cchannel.h`, `include/discodlg.h`; `commctrl.h` and

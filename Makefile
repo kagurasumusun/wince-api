@@ -28,7 +28,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/keybd.h include/pwinuser.h \
        include/windowsx.h include/commdlg.h \
        include/winldap.h include/winber.h \
-       include/cchannel.h include/discodlg.h
+       include/cchannel.h include/discodlg.h \
+       include/prsht.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 

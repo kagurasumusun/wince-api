@@ -1,0 +1,57 @@
+ms938704	Property Sheets Functions
+aa452848	AddPropSheetPageProc
+ms908183	CreatePropertySheetPage
+aa452941	DestroyPropertySheetPage
+aa453062	ExtensionPropSheetPageProc
+aa453552	PropertySheet
+aa453563	PropSheetPageProc
+aa453565	PropSheetProc
+ms938705	Property Sheets Macros
+aa453553	PropSheet_AddPage
+aa453554	PropSheet_Apply
+aa453556	PropSheet_CancelToClose
+aa453557	PropSheet_Changed
+aa453558	PropSheet_GetCurrentPageHwnd
+aa453559	PropSheet_GetTabControl
+aa453561	PropSheet_IsDialogMessage
+aa453564	PropSheet_PressButton
+aa453566	PropSheet_QuerySiblings
+aa453567	PropSheet_RebootSystem
+aa453568	PropSheet_RemovePage
+aa453569	PropSheet_RestartWindows
+aa453570	PropSheet_SetCurSel
+aa453571	PropSheet_SetCurSelByID
+aa453572	PropSheet_SetFinishText
+aa453573	PropSheet_SetTitle
+aa453574	PropSheet_SetWizButtons
+aa453575	PropSheet_UnChanged
+ms938706	Property Sheets Messages
+aa453577	PSM_ADDPAGE
+aa453578	PSM_APPLY
+aa453579	PSM_CANCELTOCLOSE
+aa453580	PSM_CHANGED
+aa453581	PSM_GETCURRENTPAGEHWND
+aa453582	PSM_GETTABCONTROL
+aa453583	PSM_ISDIALOGMESSAGE
+aa453584	PSM_PRESSBUTTON
+aa453585	PSM_QUERYSIBLINGS
+aa453586	PSM_REBOOTSYSTEM
+aa453587	PSM_REMOVEPAGE
+aa453588	PSM_RESTARTWINDOWS
+aa453589	PSM_SETCURSEL
+aa453590	PSM_SETCURSELID
+aa453591	PSM_SETFINISHTEXT
+aa453592	PSM_SETTITLE
+aa453593	PSM_SETWIZBUTTONS
+aa453594	PSM_UNCHANGED
+ms938707	Property Sheets Notifications
+aa453595	PSN_APPLY
+aa453596	PSN_HELP
+aa453597	PSN_KILLACTIVE
+aa453598	PSN_QUERYCANCEL
+aa453599	PSN_RESET
+aa453600	PSN_SETACTIVE
+ms938709	Property Sheets Structures
+aa453560	PROPSHEETHEADER
+aa453562	PROPSHEETPAGE
+aa453576	PSHNOTIFY
