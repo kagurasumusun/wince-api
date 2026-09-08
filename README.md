@@ -173,6 +173,17 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M54 (landed):** Common Controls batch 1 + LDAP Client + RDP
+  virtual channels (new `include/winldap.h`, `include/winber.h`,
+  `include/cchannel.h`, `include/discodlg.h`; `commctrl.h` and
+  `commdlg.h` extended, `windef.h`/`winuser.h` touched).  Wldap32.lib
+  (96 exports, the full LDAP Reference book), Commctrl.lib 31 -> 52
+  (Command Bars / Command Bands / Status Bars / InitCommonControls*),
+  Commdlg.lib (4) and Fileopen.lib (2) from the Common Dialog Boxes
+  book.  442 CE 6.0 twin pages fetched as whitespace-preserved
+  signature cross-reads; [MS-RDPBCGR] grounds the derived
+  CHANNEL_NAME_LEN / CHANNEL_OPTION_* / CHANNEL_FLAG_* values.
+  Headers 47 -> 51, defs 41 -> 44.
 * **M53 (landed):** Standard Shell Reference book + WM gesture
   supplement (new `include/shtypes.h`, `include/shobjidl.h`,
   `include/cpl.h`, `include/shelwapi.h`, `include/windowsx.h`,

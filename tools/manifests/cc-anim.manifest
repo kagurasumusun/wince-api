@@ -1,0 +1,16 @@
+aa452859	Animation Controls Messages
+aa452840	ACM_OPEN (Shell and User Interface)
+aa452841	ACM_PLAY
+aa452842	ACM_STOP
+aa452858	Animation Controls Macros
+aa452851	Animate_Close
+aa452852	Animate_Create
+aa452853	Animate_Open
+aa452854	Animate_OpenEx
+aa452855	Animate_Play
+aa452856	Animate_Seek
+aa452857	Animate_Stop
+aa452860	Animation Controls Notifications
+aa452843	ACN_START
+aa452844	ACN_STOP
+aa452861	Animation Controls Styles

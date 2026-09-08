@@ -40,6 +40,10 @@
 #include <shelwapi.h>
 #include <windowsx.h>
 #include <commdlg.h>
+#include <commctrl.h>
+#include <winldap.h>
+#include <winber.h>
+#include <cchannel.h>
 
 int main(void)
 {
@@ -312,6 +316,42 @@ int main(void)
         (void) VariantClear(&va);
         (void) SafeArrayDestroy((SAFEARRAY *)0);
         (void) LoadTypeLib((OLECHAR *)0, (ITypeLib **)0);
+    }
+    /* M54: Common Controls batch 1 (Commctrl.lib / Commdlg.lib /
+     * Fileopen.lib / Wldap32.lib import surfaces) -- linked, not run:
+     * the image must import the doc-def-documented names. */
+    {
+        INITCOMMONCONTROLSEX icc;
+        CHOOSECOLOR cc;
+        OPENFILENAME ofn;
+        REBARBANDINFO rbbi;
+        LDAPControl lc;
+        icc.dwSize = sizeof(icc);
+        cc.lStructSize = sizeof(cc);
+        ofn.lStructSize = sizeof(ofn);
+        rbbi.cbSize = sizeof(rbbi);
+        lc.ldctl_iscritical = (BOOLEAN)1;
+        (void) InitCommonControls();
+        (void) InitCommonControlsEx(&icc);
+        (void) CommandBar_Create((HINSTANCE)0, (HWND)0, 1);
+        (void) CommandBar_AddAdornments((HWND)0, 0, 0);
+        (void) CommandBar_Height((HWND)0);
+        (void) CommandBands_Create((HINSTANCE)0, (HWND)0, 1, 0,
+                                   (HIMAGELIST)0);
+        (void) CommandBands_AddBands((HWND)0, (HINSTANCE)0, 1, &rbbi);
+        (void) CreateStatusWindow(0, (LPSTR)0, (HWND)0, 1);
+        (void) DrawStatusText((HDC)0, (LPRECT)0, (LPCWSTR)0, 0);
+        (void) ChooseColor(&cc);
+        (void) CommDlgExtendedError();
+        (void) GetOpenFileName(&ofn);
+        (void) GetSaveFileName(&ofn);
+        (void) ldap_init((PTCHAR)0, 389);
+        (void) ldap_unbind((LDAP *)0);
+        (void) ldap_get_option((LDAP *)0, LDAP_OPT_DESC, (void *)0);
+        (void) ldap_control_free(&lc);
+        (void) LdapGetLastError();
+        (void) ber_alloc_t(LBER_USE_DER);
+        (void) ber_free((BerElement *)0, 0);
     }
     (void)tick;
     (void)si;

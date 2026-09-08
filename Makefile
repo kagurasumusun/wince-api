@@ -26,7 +26,9 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/extfile.h include/shelwapi.h include/cpl.h \
        include/sipapi.h include/sip.h \
        include/keybd.h include/pwinuser.h \
-       include/windowsx.h include/commdlg.h
+       include/windowsx.h include/commdlg.h \
+       include/winldap.h include/winber.h \
+       include/cchannel.h include/discodlg.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -186,6 +188,16 @@ e2e:
 	  | grep -q "Symbol: WSALookupServiceBegin" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WSASetService" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CommandBar_Create" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CommandBands_Create" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: GetOpenFileName" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: ldap_init" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: ber_alloc_t" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WSPStartup" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \

@@ -42,6 +42,12 @@ extern "C" {
 #define CALLBACK      WINAPI
 #define WINAPIV       WINAPI   /* varargs public API (e.g. NKDbgPrintfW) */
 #define STDMETHODCALLTYPE WINAPI
+/* FAR / NEAR: legacy segmentation decorations still printed verbatim
+ * by CE-era reference pages (e.g. the M54 common-control structure
+ * pages print "NMKEY, FAR* LPNMKEY"): empty, like WINAPI -- CE has a
+ * flat 32-bit address space. */
+#define FAR
+#define NEAR
 
 /* CE component-DLL export names are undecorated on every CE
  * architecture: the verified import surface defines __imp_<name>
@@ -146,6 +152,17 @@ typedef WCHAR           TCHAR;
 typedef WCHAR          *LPTSTR;
 typedef const WCHAR    *LPCTSTR;
 typedef BOOL           *LPBOOL;  /* BOOL pointer (WideCharToMultiByte aa450989) */
+
+/* PTCHAR / PWCHAR / PCHAR: pointer forms printed verbatim by the CE
+ * LDAP book pages (Winldap.h, M54): ldap_init ms892275 prints
+ * "UNICODE PTCHAR HostName", LDAPControl ms891757 prints
+ * "PWCHAR ldctl_oid", NOTIFYOFNEWCONNECTION ms892585 prints
+ * "PCHAR HostName".  (The "UNICODE" prefix those pages print before
+ * PTCHAR is the documentation's Unicode-only marker, not a C type
+ * qualifier -- recorded in winldap.h.) */
+typedef TCHAR          *PTCHAR;
+typedef WCHAR          *PWCHAR;
+typedef char           *PCHAR;
 
 /* Handle types: opaque pointers (module base addresses on CE; a module
  * handle equals its base address per the CE DllMain documentation). */

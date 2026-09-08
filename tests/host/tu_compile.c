@@ -46,6 +46,10 @@
 #include <shelwapi.h>
 #include <windowsx.h>
 #include <commdlg.h>
+#include <winldap.h>
+#include <winber.h>
+#include <cchannel.h>
+#include <discodlg.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4565,6 +4569,313 @@ _Static_assert(sizeof(ITEMIDLIST) == 4, "ITEMIDLIST 32-bit size");
 _Static_assert(sizeof(NMRGINFO) == 24, "NMRGINFO 32-bit size");
 #endif
 
+/* ------------------------------------------------------------------ */
+/* M54: Common Controls batch 1 (Common/Common Dialogs/Animation/      */
+/* CapEdit/Command Bands/Command Bars/Custom Draw/Progress/SbEdit/    */
+/* Status Bars/Toolbar/ToolTips/Trackbar/Up-Down + REBARBANDINFO),    */
+/* LDAP Client (Winldap.h/Winber.h) and RDP (Cchannel.h/Pchannel.h/   */
+/* Discodlg.h).                                                        */
+/* ------------------------------------------------------------------ */
+
+/* -- pointer-free layouts -- */
+_Static_assert(sizeof(LDAP_TIMEVAL) == 8, "LDAP_TIMEVAL size");
+_Static_assert(sizeof(CHANNEL_DEF) == 12, "CHANNEL_DEF size");
+_Static_assert(sizeof(CHANNEL_PDU_HEADER) == 8, "CHANNEL_PDU_HEADER size");
+_Static_assert(sizeof(INITCOMMONCONTROLSEX) == 8,
+               "INITCOMMONCONTROLSEX size");
+_Static_assert(sizeof(TBBUTTON) == 20, "TBBUTTON size");
+_Static_assert(sizeof(PBRANGE) == 8, "PBRANGE size");
+_Static_assert(sizeof(UDACCEL) == 8, "UDACCEL size");
+_Static_assert(sizeof(DEVNAMES) == 8, "DEVNAMES size");
+_Static_assert(sizeof(COMMANDBANDSRESTOREINFO) == 20,
+               "COMMANDBANDSRESTOREINFO size");
+
+#if __SIZEOF_POINTER__ == 4
+/* -- 32-bit CE layouts containing handles or pointers -- */
+_Static_assert(sizeof(BerElement) == 4, "BerElement 32-bit size");
+_Static_assert(sizeof(BERVAL) == 8, "berval 32-bit size");
+_Static_assert(sizeof(LDAPControl) == 16, "LDAPControl 32-bit size");
+_Static_assert(sizeof(LDAPMod) == 12, "LDAPMod 32-bit size");
+_Static_assert(sizeof(LDAPSortKey) == 12, "LDAPSortKey 32-bit size");
+_Static_assert(sizeof(LDAP_REFERRAL_CALLBACK) == 16,
+               "LDAP_REFERRAL_CALLBACK 32-bit size");
+_Static_assert(sizeof(CHANNEL_ENTRY_POINTS) == 24,
+               "CHANNEL_ENTRY_POINTS 32-bit size");
+_Static_assert(sizeof(CHANNEL_ENTRY_POINTS_EX) == 24,
+               "CHANNEL_ENTRY_POINTS_EX 32-bit size");
+_Static_assert(sizeof(NMKEY) == 20, "NMKEY 32-bit size");
+_Static_assert(sizeof(NMMOUSE) == 28, "NMMOUSE 32-bit size");
+_Static_assert(sizeof(NMCUSTOMDRAW) == 48, "NMCUSTOMDRAW 32-bit size");
+_Static_assert(sizeof(NMTTCUSTOMDRAW) == 52, "NMTTCUSTOMDRAW 32-bit size");
+_Static_assert(sizeof(TBBUTTONINFOA) == 32, "TBBUTTONINFO 32-bit size");
+_Static_assert(sizeof(TBADDBITMAP) == 8, "TBADDBITMAP 32-bit size");
+_Static_assert(sizeof(TBREPLACEBITMAP) == 20, "TBREPLACEBITMAP 32-bit size");
+_Static_assert(sizeof(NMTOOLBAR) == 44, "NMTOOLBAR 32-bit size");
+_Static_assert(sizeof(TTTOOLINFO) == 44, "TOOLINFO 32-bit size");
+_Static_assert(sizeof(TTHITTESTINFO) == 56, "TTHITTESTINFO 32-bit size");
+_Static_assert(sizeof(NMTTDISPINFO) == 188, "NMTTDISPINFO 32-bit size");
+_Static_assert(sizeof(NMUPDOWN) == 20, "NMUPDOWN 32-bit size");
+_Static_assert(sizeof(REBARBANDINFO) == 76, "REBARBANDINFO 32-bit size");
+#endif
+
+/* -- winldap.h values (ms892299 LDAP_RETCODE, ms892279, ms893453) -- */
+_Static_assert(LDAP_SUCCESS == 0x00, "LDAP_SUCCESS value");
+_Static_assert(LDAP_REFERRAL_V2 == 0x09 && LDAP_PARTIAL_RESULTS == 0x09,
+               "LDAP_REFERRAL_V2/LDAP_PARTIAL_RESULTS values");
+_Static_assert(LDAP_REFERRAL == 0x0a, "LDAP_REFERRAL value");
+_Static_assert(LDAP_REFERRAL_LIMIT_EXCEEDED == 0x61,
+               "LDAP_RETCODE last member value");
+_Static_assert(LDAP_MOD_ADD == 0x00 && LDAP_MOD_DELETE == 0x01 &&
+               LDAP_MOD_REPLACE == 0x02, "LDAP_MOD_* values");
+_Static_assert(LDAP_OPT_DESC == 0x01 && LDAP_OPT_DEREF == 0x02 &&
+               LDAP_OPT_SIZELIMIT == 0x03 && LDAP_OPT_TIMELIMIT == 0x04 &&
+               LDAP_OPT_REFERRALS == 0x08 && LDAP_OPT_RESTART == 0x09 &&
+               LDAP_OPT_SSL == 0x0a &&
+               LDAP_OPT_REFERRAL_HOP_LIMIT == 0x10 &&
+               LDAP_OPT_PROTOCOL_VERSION == 0x11 &&
+               LDAP_OPT_VERSION == 0x11, "LDAP_OPT_* core values");
+_Static_assert(LDAP_OPT_HOST_NAME == 0x30 &&
+               LDAP_OPT_ERROR_NUMBER == 0x31 &&
+               LDAP_OPT_ERROR_STRING == 0x32 &&
+               LDAP_OPT_SERVER_ERROR == 0x33 &&
+               LPDA_OPT_SERVER_EXT_ERROR == 0x34 &&
+               LDAP_OPT_DNSDOMAIN_NAME == 0x3B &&
+               LDAP_OPT_HOST_REACHABLE == 0x3E &&
+               LDAP_OPT_PROMPT_CREDENTIALS == 0x3F &&
+               LDAP_OPT_AUTO_RECONNECT == 0x91 &&
+               LDAP_OPT_SSPI_FLAGS == 0x92 &&
+               LDAP_OPT_AREC_EXCLUSIVE == 0x98, "LDAP_OPT_* extended values");
+_Static_assert(PING_KEEP_ALIVE == 0x36 && PING_WAIT_TIME == 0x37 &&
+               PING_LIMIT == 0x38, "PING_* values");
+_Static_assert(LDAP_DEREF_NEVER == 0x00 && LDAP_DEREF_SEARCHING == 0x01 &&
+               LDAP_DEREF_FINDING == 0x02 && LDAP_DEREF_ALWAYS == 0x03,
+               "LDAP_DEREF_* values");
+_Static_assert(LDAP_NO_LIMIT == 0, "LDAP_NO_LIMIT value");
+_Static_assert(LBER_USE_DER == 0x01, "LBER_USE_DER value");
+
+/* -- discodlg.h enumeration (aa513913) -- */
+_Static_assert(exDiscReasonNoInfo == 0x0000 &&
+               exDiscReasonServerDeniedConnection == 0x0007 &&
+               exDiscReasonLicenseInternal == 0x0100 &&
+               exDiscReasonLicenseNoRemoteConnections == 0x010A,
+               "ExtendedDisconnectReasonCode values");
+
+/* -- cchannel.h derived values (aa513856/aa513859/aa513858/aa513861
+ *    + MS-RDPBCGR 2.2.1.3.4.1 / 2.2.6.1.1) -- */
+_Static_assert(CHANNEL_NAME_LEN == 7, "CHANNEL_NAME_LEN derived value");
+_Static_assert(CHANNEL_OPTION_INITIALIZED == 0x80000000 &&
+               CHANNEL_OPTION_ENCRYPT_RDP == 0x40000000 &&
+               CHANNEL_OPTION_ENCRYPT_SC == 0x20000000 &&
+               CHANNEL_OPTION_ENCRYPT_CS == 0x10000000 &&
+               CHANNEL_OPTION_PRI_HIGH == 0x08000000 &&
+               CHANNEL_OPTION_PRI_MED == 0x04000000 &&
+               CHANNEL_OPTION_PRI_LOW == 0x02000000 &&
+               CHANNEL_OPTION_COMPRESS_RDP == 0x00800000 &&
+               CHANNEL_OPTION_COMPRESS == 0x00400000 &&
+               CHANNEL_OPTION_SHOW_PROTOCOL == 0x00200000 &&
+               CHANNEL_OPTION_REMOTE_CONTROL_PERSISTENT == 0x00100000,
+               "CHANNEL_OPTION_* derived values");
+_Static_assert(CHANNEL_FLAG_FIRST == 0x1 && CHANNEL_FLAG_LAST == 0x2 &&
+               CHANNEL_FLAG_MIDDLE == 0x0 &&
+               CHANNEL_FLAG_ONLY == (CHANNEL_FLAG_FIRST | CHANNEL_FLAG_LAST),
+               "CHANNEL_FLAG_* derived values");
+
+#if __SIZEOF_POINTER__ == 4
+/* -- commdlg.h 32-bit CE layouts -- */
+_Static_assert(sizeof(CHOOSECOLOR) == 36, "CHOOSECOLOR 32-bit size");
+_Static_assert(sizeof(CHOOSEFONTW) == 60, "CHOOSEFONT 32-bit size");
+_Static_assert(sizeof(OPENFILENAME) == 76, "OPENFILENAME 32-bit size");
+_Static_assert(sizeof(OFNOTIFY) == 20, "OFNOTIFY 32-bit size");
+_Static_assert(sizeof(PAGESETUPDLG) == 84, "PAGESETUPDLG 32-bit size");
+_Static_assert(sizeof(PRINTDLG) == 68, "PRINTDLG 32-bit size");
+#endif
+
+/* -- winuser.h M54 controls messages (fixed-ABI values, M29 policy) -- */
+_Static_assert(WM_SETFONT == 0x0030, "WM_SETFONT fixed-ABI value");
+_Static_assert(WM_GETFONT == 0x0031, "WM_GETFONT fixed-ABI value");
+
+static int m54_shaped_usage(void)
+{
+    INITCOMMONCONTROLSEX   icc;
+    CHOOSECOLOR            cc;
+    CHOOSEFONTW            cf;
+    OPENFILENAME           ofn;
+    PAGESETUPDLG           psd;
+    PRINTDLG               pd;
+    LDAPControl            lc;
+    LDAPMod                lm;
+    LDAP_TIMEVAL           tv;
+    LDAPSortKey            sk;
+    struct berval          bv;
+    LDAP_REFERRAL_CALLBACK rcb;
+    CHANNEL_DEF            cdef;
+    CHANNEL_PDU_HEADER     cpdu;
+    CHANNEL_ENTRY_POINTS   cep;
+    CHANNEL_ENTRY_POINTS_EX cepx;
+    REBARBANDINFO          rbbi;
+    COMMANDBANDSRESTOREINFO cbri;
+    TBBUTTON               tbb;
+    TBBUTTONINFOA          tbbi;
+    TBADDBITMAP            tbab;
+    NMTOOLBAR              nmtb;
+    TTTOOLINFO             tti;
+    TTHITTESTINFO          ttht;
+    NMTTDISPINFO           nttdi;
+    NMCUSTOMDRAW           nmcd;
+    PBRANGE                pbr;
+    NMUPDOWN               nmud;
+    UDACCEL                uda;
+    ExtendedDisconnectReasonCode exd;
+    LDAP                  *ld = (LDAP *)0;
+    BerElement            *be = (BerElement *)0;
+    BERVAL                *bvp = (BERVAL *)0;
+    HWND                   hwnd = (HWND)0;
+    HINSTANCE              hinst = (HINSTANCE)0;
+    HIMAGELIST             himl = (HIMAGELIST)0;
+    int                    id = 0; /* the printed FORWARD_WM_NOTIFY body
+                                     * references (id); see commctrl.h */
+    void                 (*fn)(HWND, int, NMHDR *) =
+                             (void (*)(HWND, int, NMHDR *))0;
+    void                 (*fn4)(HWND, UINT, WPARAM, LPARAM) =
+                             (void (*)(HWND, UINT, WPARAM, LPARAM))0;
+    NMHDR                  nmh;
+
+    icc.dwSize   = sizeof(INITCOMMONCONTROLSEX);
+    cc.lStructSize = sizeof(CHOOSECOLOR);
+    cf.lStructSize = sizeof(CHOOSEFONTW);
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    psd.lStructSize = sizeof(PAGESETUPDLG);
+    pd.cbStruct  = sizeof(PRINTDLG);
+    lc.ldctl_iscritical = (BOOLEAN)1;
+    lm.mod_op    = LDAP_MOD_REPLACE;
+    tv.tv_sec    = 0;
+    sk.sk_reverseorder = (BOOLEAN)0;
+    bv.bv_len    = 0;
+    rcb.SizeOfCallbacks = sizeof(rcb);
+    cdef.options = CHANNEL_OPTION_SHOW_PROTOCOL;
+    cpdu.flags   = CHANNEL_FLAG_FIRST | CHANNEL_FLAG_LAST;
+    cep.cbSize   = sizeof(cep);
+    cepx.cbSize  = sizeof(cepx);
+    rbbi.cbSize  = sizeof(REBARBANDINFO);
+    cbri.cbSize  = sizeof(COMMANDBANDSRESTOREINFO);
+    tbb.idCommand = 0;
+    tbbi.cbSize  = sizeof(TBBUTTONINFOA);
+    tbab.nID     = 0;
+    nmtb.iItem   = 0;
+    tti.cbSize   = sizeof(TTTOOLINFO);
+    ttht.hwnd    = hwnd;
+    nttdi.hdr.code = 0;
+    nmcd.dwDrawStage = 0;
+    pbr.iLow     = 0;
+    nmud.iDelta  = 0;
+    uda.nInc     = 0;
+    exd          = exDiscReasonServerDeniedConnection;
+    nmh.code     = 0;
+
+    /* Commctrl.lib import surface (M54 batch). */
+    (void) InitCommonControls();
+    (void) InitCommonControlsEx(&icc);
+    (void) CommandBar_Create(hinst, hwnd, 1);
+    (void) CommandBar_AddAdornments(hwnd, 0, 0);
+    (void) CommandBar_AddBitmap(hwnd, hinst, 0, 0, 16, 16);
+    (void) CommandBar_AlignAdornments(hwnd);
+    (void) CommandBar_DrawMenuBar(hwnd, 0);
+    (void) CommandBar_GetMenu(hwnd, 0);
+    (void) CommandBar_Height(hwnd);
+    (void) CommandBar_InsertComboBox(hwnd, hinst, 100, 0, 1, 0);
+    (void) CommandBar_InsertMenubar(hwnd, hinst, 1, 0);
+    (void) CommandBar_InsertMenubarEx(hwnd, hinst, (LPTSTR)L"MENU", 0);
+    (void) CommandBar_Show(hwnd, TRUE);
+    (void) CommandBands_Create(hinst, hwnd, 1, 0, himl);
+    (void) CommandBands_AddAdornments(hwnd, hinst, 0, &rbbi);
+    (void) CommandBands_AddBands(hwnd, hinst, 1, &rbbi);
+    (void) CommandBands_GetCommandBar(hwnd, 0);
+    (void) CommandBands_GetRestoreInformation(hwnd, 0, &cbri);
+    (void) CommandBands_Show(hwnd, TRUE);
+    (void) CreateStatusWindow(0, (LPSTR)0, hwnd, 1);
+    (void) DrawStatusText((HDC)0, (LPRECT)0, (LPCWSTR)0, 0);
+    (void) CreateToolbarEx(hwnd, 0, 1, 1, hinst, 0, &tbb, 1, 16, 16,
+                           16, 16, sizeof(TBBUTTON));
+    (void) CreateUpDownControl(0, 0, 0, 10, 10, hwnd, 1, hinst, hwnd,
+                               100, 0, 50);
+
+    /* Wldap32.lib import surface. */
+    (void) cldap_open((PTCHAR)0, 389);
+    (void) ldap_init((PTCHAR)0, 389);
+    (void) ldap_open((PTCHAR)0, 389);
+    (void) ldap_sslinit((PTCHAR)0, 389, 0);
+    (void) ldap_unbind(ld);
+    (void) ldap_unbind_s(ld);
+    (void) ldap_connect(ld, (PLDAP_TIMEVAL *)&tv);
+    (void) ldap_get_option(ld, LDAP_OPT_DESC, (void *)0);
+    (void) ldap_set_option(ld, LDAP_OPT_PROTOCOL_VERSION, (void *)0);
+    (void) ldap_simple_bind(ld, (PTCHAR)0, (PTCHAR)0);
+    (void) ldap_simple_bind_s(ld, (PTCHAR)0, (PTCHAR)0);
+    (void) ldap_search_s(ld, (PTCHAR)0, 0, (PTCHAR)0,
+                         (PTCHAR *)0, 0, (LDAPMessage **)0);
+    (void) ldap_first_entry(ld, (LDAPMessage *)0);
+    (void) ldap_next_entry(ld, (LDAPMessage *)0);
+    (void) ldap_count_entries(ld, (LDAPMessage *)0);
+    (void) ldap_msgfree((LDAPMessage *)0);
+    (void) ldap_get_values(ld, (LDAPMessage *)0, (PTCHAR)0);
+    (void) ldap_get_values_len(ld, (LDAPMessage *)0, (PTCHAR)0);
+    (void) ldap_value_free((PTCHAR *)0);
+    (void) ldap_value_free_len((struct berval **)0);
+    (void) ldap_control_free(&lc);
+    (void) ldap_controls_free((LDAPControl **)0);
+    (void) ldap_explode_dn((PTCHAR)0, 0);
+    (void) ldap_dn2ufn((PTCHAR)0);
+    (void) ldap_err2string(LDAP_PROTOCOL_ERROR);
+    (void) ldap_result2error(ld, (LDAPMessage *)0, 0);
+    (void) LdapGetLastError();
+    (void) LdapMapErrorToWin32(LDAP_SERVER_DOWN);
+    (void) LdapUnicodeToUTF8((LPCWSTR)0, 0, (LPSTR)0, 0);
+    (void) LdapUTF8ToUnicode((LPCSTR)0, 0, (LPWSTR)0, 0);
+    (void) ber_alloc_t(LBER_USE_DER);
+    (void) ber_init(bvp);
+    (void) ber_free(be, 0);
+    (void) ber_bvfree(bvp);
+    (void) ber_bvecfree((BERVAL **)0);
+    (void) ber_printf(be, (PTCHAR)0, 0);
+    (void) ber_scanf(be, (PTCHAR)0, 0);
+
+    /* Cchannel developer-implemented surface (no def; compile-only). */
+    (void) VirtualChannelEntry(&cep);
+    (void) VirtualChannelInitEvent((LPVOID)0, 0, (LPVOID)0, 0);
+    (void) VirtualChannelOpenEvent(0, 0, (LPVOID)0, 0, 0, 0);
+
+    /* Commdlg/Fileopen import surface. */
+    (void) ChooseColor(&cc);
+    (void) ChooseFont((LPCHOOSEFONT)&cf);
+    (void) CommDlgExtendedError();
+    (void) GetOpenFileName(&ofn);
+    (void) GetSaveFileName(&ofn);
+    (void) PageSetupDlg(&psd);
+    (void) PrintDlg(&pd);
+    (void) CCHookProc((HWND)0, 0, (WPARAM)0, (LPARAM)0);
+    (void) PagePaintHook((HWND)0, 0, (WPARAM)0, (LPARAM)0);
+    (void) PageSetupHook((HWND)0, 0, (WPARAM)0, (LPARAM)0);
+    (void) PrintHookProc((HWND)0, 0, (WPARAM)0, (LPARAM)0);
+
+    /* Common-control macros with printed bodies. */
+    (void) INDEXTOSTATEIMAGEMASK(3);
+    (void) HANDLE_WM_NOTIFY(hwnd, (WPARAM)0, (LPARAM)&nmh, fn);
+    (void) FORWARD_WM_NOTIFY(hwnd, id, &nmh, fn4);
+
+    /* Class-name literals (aa452920 / ms939903). */
+    (void) WC_CAPEDIT;
+    (void) WC_SBEDIT;
+
+    (void) himl; (void) bvp; (void) sk; (void) ttht; (void) nmcd;
+    (void) nttdi; (void) nmtb; (void) tbab; (void) tbbi; (void) tbb;
+    (void) cbri; (void) rbbi; (void) cepx; (void) cep; (void) cpdu;
+    (void) cdef; (void) rcb; (void) bv; (void) lm; (void) lc; (void) exd;
+    (void) id; (void) fn; (void) fn4; (void) nmh; (void) tti; (void) uda; (void) nmud;
+    (void) pbr; (void) be; (void) ld; (void) pd; (void) psd; (void) ofn;
+    (void) cf; (void) cc; (void) icc; (void) tv; (void) himl;
+    return 0;
+}
+
 static int m53_shaped_usage(void)
 {
     BROWSEINFO        bi;
@@ -4715,5 +5026,8 @@ int host_tu_entry(void)
         return 1;
     if (m53_shaped_usage() != 0)
         return 1;
+    if (m54_shaped_usage() != 0)
+        return 1;
     return 0;
 }
+

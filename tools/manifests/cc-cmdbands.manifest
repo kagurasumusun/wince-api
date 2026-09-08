@@ -1,0 +1,11 @@
+ms907179	Command Bands Functions
+ms908118	CommandBands_AddAdornments
+ms908120	CommandBands_AddBands
+ms908121	CommandBands_Create
+ms908122	CommandBands_GetCommandBar
+ms908123	CommandBands_GetRestoreInformation
+ms908126	CommandBands_Show
+ms907189	Command Bands Macros
+ms908124	CommandBands_Height
+ms907205	Command Bands Structures
+ms908125	COMMANDBANDSRESTOREINFO

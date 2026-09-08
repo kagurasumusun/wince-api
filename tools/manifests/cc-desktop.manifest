@@ -1,0 +1,10 @@
+; cc-desktop.manifest -- desktop Win32 reference pages fetched as M54
+; derivation sources into build/pagesw/ (the established pagesw/
+; provenance tree, M52/M53).  Pages publish the values (or ground the
+; held analysis) that back the derived constants and the held message
+; values of the M54 Common Controls batch; every derivation path is
+; recorded in docs/inventory.md M54.  Pages are learn.microsoft.com
+; windows/win32 pages (re-fetchable; preserved copies live in the
+; corpus pagesw/ tree).
+https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-logfontw	LOGFONTW (lfFaceName[LF_FACESIZE] + "must not exceed 32 TCHAR values, including the terminating NULL" -> LF_FACESIZE=32 derived; grounds the CE ms901140 LOGFONT implementation)
+https://learn.microsoft.com/en-us/windows/win32/controls/pbm-setpos	PBM_SETPOS (checked valueless -- the desktop controls reference also publishes no numeric message identifier; grounds the M54 Common Controls message-value hold)

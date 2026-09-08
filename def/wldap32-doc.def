@@ -1,0 +1,112 @@
+; wldap32-doc.def -- wldap32.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (wldap32.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY wldap32.dll
+EXPORTS
+  LdapGetLastError
+  LdapMapErrorToWin32
+  LdapUTF8ToUnicode
+  LdapUnicodeToUTF8
+  ber_alloc_t
+  ber_bvdup
+  ber_bvecfree
+  ber_bvfree
+  ber_first_element
+  ber_flatten
+  ber_free
+  ber_init
+  ber_next_element
+  ber_peek_tag
+  ber_printf
+  ber_scanf
+  ber_skip_tag
+  cldap_open
+  ldap_abandon
+  ldap_add
+  ldap_add_ext
+  ldap_add_ext_s
+  ldap_add_s
+  ldap_bind
+  ldap_bind_s
+  ldap_check_filter
+  ldap_close_extended_op
+  ldap_compare
+  ldap_compare_ext
+  ldap_compare_ext_s
+  ldap_compare_s
+  ldap_connect
+  ldap_control_free
+  ldap_controls_free
+  ldap_count_entries
+  ldap_count_references
+  ldap_count_values
+  ldap_count_values_len
+  ldap_create_page_control
+  ldap_create_sort_control
+  ldap_delete
+  ldap_delete_ext
+  ldap_delete_ext_s
+  ldap_delete_s
+  ldap_dn2ufn
+  ldap_err2string
+  ldap_escape_filter_element
+  ldap_explode_dn
+  ldap_extended_operation
+  ldap_first_attribute
+  ldap_first_entry
+  ldap_first_reference
+  ldap_get_dn
+  ldap_get_next_page
+  ldap_get_next_page_s
+  ldap_get_option
+  ldap_get_paged_count
+  ldap_get_values
+  ldap_get_values_len
+  ldap_init
+  ldap_memfree
+  ldap_modify
+  ldap_modify_ext
+  ldap_modify_ext_s
+  ldap_modify_s
+  ldap_msgfree
+  ldap_next_attribute
+  ldap_next_entry
+  ldap_next_reference
+  ldap_open
+  ldap_parse_extended_result
+  ldap_parse_page_control
+  ldap_parse_reference
+  ldap_parse_result
+  ldap_parse_sort_control
+  ldap_rename_ext
+  ldap_rename_ext_s
+  ldap_result
+  ldap_result2error
+  ldap_sasl_bind_s
+  ldap_search
+  ldap_search_abandon_page
+  ldap_search_ext
+  ldap_search_ext_s
+  ldap_search_init_page
+  ldap_search_s
+  ldap_search_st
+  ldap_set_option
+  ldap_simple_bind
+  ldap_simple_bind_s
+  ldap_sslinit
+  ldap_ufn2dn
+  ldap_unbind
+  ldap_unbind_s
+  ldap_value_free
+  ldap_value_free_len

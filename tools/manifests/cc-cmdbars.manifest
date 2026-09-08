@@ -1,0 +1,18 @@
+ms907210	Command Bars Functions
+ms908127	CommandBar_AddAdornments
+ms908128	CommandBar_AddBitmap
+aa453948	CommandBar_AlignAdornments
+ms908131	CommandBar_Create
+ms908133	CommandBar_DrawMenuBar
+ms908134	CommandBar_GetMenu
+ms908135	CommandBar_Height
+ms908137	CommandBar_InsertComboBox
+ms908138	CommandBar_InsertMenubar
+ms908139	CommandBar_InsertMenubarEx
+ms908141	CommandBar_Show
+ms907216	Command Bars Macros
+ms908129	CommandBar_AddButtons
+ms908130	CommandBar_AddToolTips
+ms908132	CommandBar_Destroy
+ms908136	CommandBar_InsertButton
+ms908140	CommandBar_IsVisible

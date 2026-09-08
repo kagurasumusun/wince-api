@@ -3787,3 +3787,212 @@ def count 39 -> **41**.  aygshell (34) and kbdui (8) unchanged;
 Shell_NotifyIcon / SHGetFileInfo / CPlApplet / BrowseCallbackProc are
 deliberately def-less (no Link Library row / developer-implemented /
 callback).
+
+## M54 -- Common Controls batch 1 + LDAP Client + RDP virtual channels (new headers winldap.h, winber.h, cchannel.h, discodlg.h; Wldap32.lib / Commctrl.lib / Commdlg.lib / Fileopen.lib)
+
+Three queues landed together per the multi-queue directive.  Source
+books: CE 5.0 "Shell and User Interface :: Shell :: Common Controls
+Reference" batch 1 (the Animation, CapEdit, Command Bands, Command
+Bars, Common Dialog Boxes, Common Control, Custom Draw, Progress,
+SbEdit, Status Bars, Toolbar, ToolTips, Trackbar and Up-Down
+sub-books, 293 leaves, tools/manifests/cc-*.manifest) plus the Rebar
+REBARBANDINFO dependency (cc-cmdbands-dep.manifest); CE 5.0
+"Communications and Services :: Network Protocols :: Lightweight
+Directory Access Protocol (LDAP) Client :: LDAP Reference" (124
+leaves, ldap.manifest); CE 5.0 "Remote Desktop Protocol :: RDP
+Reference" (105 leaves, rdp.manifest).  Every page was fetched with
+tools/ce-fetch.py (0 errors) and 442 CE 6.0 (v=winembedded.60) twins
+with whitespace-preserved prototypes were fetched as signature
+cross-reads (m54-ce60.manifest; the twin ids are noted per
+declaration where the CE 5.0 print is ambiguous).  rows.json
+2233 -> 2753 CE 5.0 records + 453 twin records.
+
+### Queue A: Common Controls batch 1 (commctrl.h extension + commdlg.h full book)
+
+* INITCOMMONCONTROLSEX (ms909850, 8 bytes), InitCommonControls
+  (ms909848, Commctrl.lib, CE 2.0+), InitCommonControlsEx (ms909849);
+  the twelve ICC_* class flags are names-only (held).
+* Notification records: NMKEY (ms931482, 20), NMMOUSE (ms931655, 28),
+  NMCUSTOMDRAW (ms931470, 48; member lItemlParam [sic] and the
+  missing member semicolon kept as printed), NMTTCUSTOMDRAW
+  (ms911865, 52), NMTOOLBAR (ms911863, 44), NMUPDOWN (ms911870, 20);
+  NMHDR itself stays in winuser.h (M50).  The CDDS_*/CDIS_*/TBCD_*,
+  NM_* notification values and NM_CUSTOMDRAW are names-only (held).
+* Toolbar structures: TBBUTTON (ms940418, 20) + LPCTBBUTTON,
+  TBBUTTONINFO (ms940420, 32; both CE 5.0 and twin ee503445 print the
+  typedef names TBBUTTONINFOA/LPTBBUTTONINFOA -- the unsuffixed alias
+  is bridged from the TB_GETBUTTONINFO page ms940430, the CHOOSEFONT
+  model), TBADDBITMAP (ms940414, 8; member type printed "INSTANCE"
+  [sic] restored as HINSTANCE), TBREPLACEBITMAP (ms913817, 20);
+  CreateToolbarEx (ms908190, no Link Library row -> no def, no
+  import pin).
+* ToolTips structures: TOOLINFO (aa453757, 44; CE typedef names
+  TTTOOLINFO/PTOOLINFO/LPTTTOOLINFO), TTHITTESTINFO (aa453819, 56),
+  NMTTDISPINFO (ms911866, 188).  TTF_* flags names-only (held).
+* Progress/Up-Down: PBRANGE (ms911927, 8), NMUPDONE above, UDACCEL
+  (ms914067, 8), CreateUpDownControl (ms908191, no lib row -> no
+  def).  PBM_*/UDM_*/UDN_* names-only (held).
+* Rebar dependency: REBARBANDINFO (aa453639, 76, CE 2.0+; fetched as
+  the CommandBands dependency; RBBIM_*/RBBS_* names-only, held).
+* Command Bars (CE-specific, Commctrl.lib, CE 1.0+): 11 functions
+  (Create/AddAdornments/AddBitmap/AlignAdornments [CE 4.0+]/
+  DrawMenuBar/GetMenu/Height/InsertComboBox/InsertMenubar/
+  InsertMenubarEx/Show).  The five macro pages (AddButtons,
+  AddToolTips, Destroy, InsertButton, IsVisible) print signatures but
+  no macro bodies -- held, signatures recorded in commctrl.h.
+  CMDBAR_HELP/CMDBAR_OK, IDB_STD_*/IDB_VIEW_*, STD_*/VIEW_* image
+  indices names-only (held).
+* Command Bands (CE-specific, Commctrl.lib, CE 2.0+): 6 functions
+  (Create/AddAdornments/AddBands/GetCommandBar/
+  GetRestoreInformation/Show) + COMMANDBANDSRESTOREINFO (ms908125,
+  20).  CommandBands_Height macro (ms908124) body not printed: held.
+* Status Bars: CreateStatusWindow (ms908188 -- text parameter
+  printed LPSTR, kept verbatim) and DrawStatusText (aa452976 -- text
+  parameter LPCWSTR), both Commctrl.lib CE 1.0+.  SB_*/SBT_*/SBN_*
+  names-only (held).
+* Class names: WC_CAPEDIT L"CAPEDIT" (aa452920), WC_SBEDIT
+  L"sbedit" (ms939903).  ANIMATE_CLASS not published anywhere (held).
+* Macros with printed bodies: INDEXTOSTATEIMAGEMASK(i) ((i)<<12)
+  (ms909844); FORWARD_WM_NOTIFY (aa453073 -- the printed body
+  references (id) while the parameter is named idFrom [sic, printed
+  identically by twin ee505696]; kept verbatim, the TU exercises it
+  with a local id) and HANDLE_WM_NOTIFY (ms929879).
+* WM_SETFONT (aa453902) / WM_GETFONT (aa452862) added to winuser.h
+  at the fixed Win32 ABI values 0x0030/0x0031 (the M29 fixed-ABI
+  message policy; the CE Controls Messages pages publish names +
+  wParam/lParam only).  windef.h gained PTCHAR/PWCHAR/PCHAR (printed
+  verbatim by the LDAP book) and FAR/NEAR (empty segmentation
+  decorations printed by the common-control structure pages).
+* Common Dialog Boxes book (commdlg.h): structures CHOOSECOLOR
+  (ms928580, 36), CHOOSEFONT (ms928582, 60; CHOOSEFONTW/
+  LPCHOOSEFONTW as printed + the unsuffixed alias bridged from the
+  function page ms928581 which prints LPCHOOSEFONT; the
+  ___MISSING_ALIGNMENT__ placeholder member kept verbatim [sic];
+  lpLogFont typed LPLOGFONTW bridged to the wingdi.h LOGFONT --
+  ms901140 already shipped with LF_FACESIZE 32), OPENFILENAME
+  (ms911906, 76; ANSI-spelled string members kept as printed;
+  lpfnHook printed LPOFNHOOKPROC but no CE page defines it and
+  OFN_ENABLEHOOK is "Not supported" -> typed as layout-neutral
+  void*), OFNOTIFY (ms911893, 20), PAGESETUPDLG (ms911910, 84),
+  PRINTDLG (aa453544, 68; CE-specific layout, OS row "Windows CE 2.0
+  and 2.01" -- dropped after 2.01), DEVNAMES (aa452944, 8).
+  Functions: ChooseColor/CommDlgExtendedError/PageSetupDlg/PrintDlg
+  (Commdlg.lib), GetOpenFileName/GetSaveFileName (Fileopen.lib,
+  CE 1.0+), ChooseFont (ms928581, no Link Library row -> no def, no
+  pin).  Hook pointer typedefs built from the documented hook
+  signatures (M51 IMENUMPROC model); LPCFHOOKPROC printed directly by
+  ms908107.  All flag families (CC_*, CF_*/FONTTYPE, OFN_*, PD_*,
+  PSD_*, CDERR/PDERR, WM_PSD_*, CDM_*/CDN_*) names-only (held).
+* **CC message-value hold (recorded decision):** none of the ~200
+  control messages (ACM_/PBM_/SB_/TB_/TBM_/TTM_/UDM_/CEM_/
+  CDN_...) publishes a numeric identifier or a WM_USER formula on any
+  CE page, and the desktop Win32 controls reference publishes none
+  either (verified on the PBM_SETPOS desktop page,
+  pagesw/controls-pbm-setpos.html) -- every message name is recorded
+  in the commctrl.h held ledger with its book, no #define (the M53
+  BFFM_* precedent).
+
+### Queue B: LDAP Client (winldap.h + winber.h, Wldap32.lib)
+
+* Opaque handles: LDAP/PLDAP (ms891742), LDAPMessage/PLDAPMessage
+  (ms892278), LDAPSearch/PLDAPSearch (ms892309), BerElement
+  (ms863747, one documented member), berval -> LDAP_BERVAL/BERVAL
+  (ms863826: LDAP_BERVAL/PLDAP_BERVAL/BERVAL/PBERVAL).
+* Value structures: LDAPControl (ms891757, 16), LDAPMod (ms892279,
+  12), LDAP_TIMEVAL (ms892315, 8), LDAPSortKey (ms892313, 12),
+  LDAP_REFERRAL_CALLBACK (ms892294, 16).
+* LDAP_RETCODE (ms892299): full enum with published values 0x00-0x61
+  (including the double-published 0x09 LDAP_REFERRAL_V2 /
+  LDAP_PARTIAL_RESULTS).
+* Published values: LDAP_MOD_ADD/DELETE/REPLACE (0x00-0x02, ms892279);
+  the ms893453 Session Options tables (LDAP_OPT_* 0x01-0x98 including
+  the page's "LPDA_OPT_SERVER_EXT_ERROR (0x34)" [sic] spelling, the
+  PING_* trio 0x36-0x38); LDAP_DEREF_* 0x00-0x03; LDAP_NO_LIMIT 0.
+  LBER_USE_DER 0x01 (ms863718 page text).
+* 94 functions declared and pinned (Wldap32.lib, CE .NET 4.0+): the
+  full session/directory-entry/search/parse/memory/error/UTF-8
+  function set of the LDAP Reference book.  Documented readings
+  recorded per declaration: ldap_connect (ms891756 + ee485147)
+  prints PLDAP_TIMEVAL* (pointer to PLDAP_TIMEVAL) -- kept verbatim;
+  ldap_parse_extended_result (ms892289 + ee486808) prints a bare
+  "LDAP Connection" (no indirection, cannot compile) -- declared as
+  the connection pointer; ldap_add_ext (ms891745 + ee483743) and
+  ldap_sasl_bind_s (ms892301 + ee486753) print LDAPControlA** where
+  no CE page defines an LDAPControlA (ms891757 defines LDAPControl
+  only) -- declared with the documented LDAPControl spelling
+  (layout-identical).
+* Referral callbacks: DEREFERENCECONNECTION (ms864415),
+  NOTIFYOFNEWCONNECTION (ms892585), QUERYFORCONNECTION (ms892640),
+  VERIFYSERVERCERT (ms897184; PCCERT_CONTEXT from wincrypt.h) --
+  declared as CALLBACK function types (pages print "_cdecl" [sic],
+  one underscore); QUERYCLIENTCERT (ms892639) HELD: its parameter
+  type PSecPkgContext_IssuerListInfoEx (SSPI) has no CE page in the
+  harvested corpus.
+* HELD: ldap_sasl_bind (ms892300) -- both the CE 5.0 page and twin
+  ee484725 mis-print the ldap_sasl_bind_s prototype on the
+  asynchronous page; the asynchronous prototype cannot be confirmed.
+  Names-only holds: LDAP_AUTH_SIMPLE/NTLM/NEGOTIATE, LDAP_SCOPE_*,
+  LDAP_RES_*, LDAP_OPT_ON/OFF, LDAP_ON/OFF, LDAP_VERSION2/3,
+  LDAP_CHASE_*_REFERRALS, LDAP_OPT_SIGN.
+* winber.h: the 13 ber_* functions (Winber.h, Wldap32.lib) with
+  LBER_USE_DER.
+
+### Queue C: RDP (cchannel.h + discodlg.h)
+
+* CHANNEL_DEF (aa513856, 12) with CHANNEL_NAME_LEN **derived = 7**:
+  the CE pages print name[CHANNEL_NAME_LEN + 1] without a value; the
+  official Microsoft open specification [MS-RDPBCGR] 2.2.1.3.4.1
+  publishes name as an 8-byte array of seven ANSI characters (page
+  preserved in pagesw/openspecs-msrdpbcgr-channel-def.html; path
+  recorded in cchannel.h and tools/manifests/rdp-openspecs.manifest).
+* CHANNEL_PDU_HEADER (aa513859, 8).  CHANNEL_OPTION_* (11) and
+  CHANNEL_FLAG_FIRST/LAST/MIDDLE/ONLY **derived from [MS-RDPBCGR]**
+  2.2.1.3.4.1 / 2.2.6.1.1 (pages preserved in pagesw/; MIDDLE = 0
+  from the "neither FIRST nor LAST" wording, ONLY = FIRST|LAST from
+  the CE ms879661 wording; the CE page's
+  CHANNEL_OPTION_REMOTE_CONTROL_PERSISTENT is the spec's
+  REMOTE_CONTROL_PERSISTENT 0x00100000).
+* The 7 base virtual-channel entry points + 7 Ex typedefs + the two
+  entry-points tables (aa513858/aa513861, 24 bytes each) + the event
+  callbacks; all "Developer implemented" (no def).  The Ex function
+  set and the interface container pages have no CE 6.0 twins (the
+  17 no-twin titles of m54-ce60.manifest analysis).  CHANNEL_EVENT_*,
+  CHANNEL_RC_*, CHANNEL_MAX_COUNT names-only (held).  VCAPITYPE
+  mapped to the empty-on-CE convention (windef.h).
+* discodlg.h: nine Remote Desktop ActiveX interfaces as opaque
+  records with verbatim method-signature comments (66 method pages,
+  M44 model; no vtables, no defs), ExtendedDisconnectReasonCode
+  published in full (aa513913, 0x0000-0x010A + the 0x1000-0x7FFF
+  protocol-error range recorded), ControlCloseStatus names-only
+  (held).  IMsRdpClientAdvancedSettings / IMsRdpClientSecuredSettings
+  property sets documented as property-description pages (ms861195/
+  ms861243/ms861737/aa514412/aa514423/aa513933) -- names recorded in
+  the inventory ledger, no method records.
+
+### Verification
+
+* `make check` GREEN (TU m54: 42 published/derived-value asserts +
+  32 struct sizes split pointer-free/32-bit-guarded + shaped usage of
+  the full Commctrl/Wldap32/Commdlg/Fileopen import surface, the
+  def-less trio (CreateToolbarEx/CreateUpDownControl/ChooseFont)
+  host-compiled, and the cchannel/discodlg record surface).
+* `make crosscheck` GREEN on all six targets (51 headers standalone +
+  full TU, -Werror).
+* `make e2e` GREEN on all six targets; new import assertions:
+  CommandBar_Create, CommandBands_Create, GetOpenFileName, ldap_init,
+  ber_alloc_t (commctrl.dll/commdlg.dll/fileopen.dll/wldap32.dll
+  verified in the PE import tables on x86 and ARM).
+* gen-doc-def.py: the export scanner now strips comments and accepts
+  pointer-returning / multi-word-return declarations (M54; this also
+  fixed a latent mis-capture -- the ws2 def had carried names matched
+  only inside comments) and lstrip("*") handles the attached-star
+  AKARI_CE_IMPORT forms.
+
+Export surface: `def/wldap32-doc.def` **new, 96 exports** (6 skipped:
+the four declared referral callbacks are function types, QUERYCLIENTCERT
+held, ldap_sasl_bind held), `def/commdlg-doc.def` **new, 4**,
+`def/fileopen-doc.def` **new, 2**, `def/commctrl-doc.def` 31 ->
+**52** (+21).  Header count 47 -> **51**; def count 41 -> **44**.
+Corpus: pages5 2152 -> 2672, pages6 1259 -> 1702 (442 M54 twins),
+pagesw 16 -> 20 (2 MS-RDPBCGR + LOGFONTW + PBM_SETPOS), rows.json
+2233 -> 2753 (+ twin records), rows4.json unchanged (6361).

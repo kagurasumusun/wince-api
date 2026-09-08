@@ -1233,6 +1233,8 @@ typedef struct tagNMHDR {
 #define WM_DESTROY                     0x0002         /* aa453854 */
 #define WM_ENABLE                      0x000A         /* aa453856 */
 #define WM_ERASEBKGND                  0x0014         /* aa453858 */
+#define WM_SETFONT                     0x0030         /* aa453902 (M54 Controls Messages) */
+#define WM_GETFONT                     0x0031         /* aa453862 (M54 Controls Messages) */
 #define WM_GETTEXT                     0x000D         /* aa453864 */
 #define WM_GETTEXTLENGTH               0x000E         /* aa453865 */
 #define WM_MOVE                        0x0003         /* aa453887 */

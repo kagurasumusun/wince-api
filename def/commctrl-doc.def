@@ -14,6 +14,25 @@
 ; not published by the CE documentation.
 LIBRARY commctrl.dll
 EXPORTS
+  CommandBands_AddAdornments
+  CommandBands_AddBands
+  CommandBands_Create
+  CommandBands_GetCommandBar
+  CommandBands_GetRestoreInformation
+  CommandBands_Show
+  CommandBar_AddAdornments
+  CommandBar_AddBitmap
+  CommandBar_AlignAdornments
+  CommandBar_Create
+  CommandBar_DrawMenuBar
+  CommandBar_GetMenu
+  CommandBar_Height
+  CommandBar_InsertComboBox
+  CommandBar_InsertMenubar
+  CommandBar_InsertMenubarEx
+  CommandBar_Show
+  CreateStatusWindow
+  DrawStatusText
   ImageList_Add
   ImageList_AddMasked
   ImageList_BeginDrag
@@ -45,3 +64,5 @@ EXPORTS
   ImageList_SetIconSize
   ImageList_SetImageCount
   ImageList_SetOverlayImage
+  InitCommonControls
+  InitCommonControlsEx

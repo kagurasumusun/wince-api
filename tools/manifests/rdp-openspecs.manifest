@@ -1,0 +1,11 @@
+; rdp-openspecs.manifest -- Microsoft open-specification pages fetched as
+; M54 derivation sources into build/pagesw/ (the established pagesw/
+; provenance tree, M52/M53).  [MS-RDPBCGR] publishes the CHANNEL_DEF
+; layout (name = 8 bytes of seven ANSI characters -> CHANNEL_NAME_LEN=7)
+; and the CHANNEL_OPTION_* / CHANNEL_FLAG_* values that ground the
+; derived constants in include/cchannel.h; every derivation path is
+; recorded in docs/inventory.md M54.  Pages are learn.microsoft.com
+; openspecs pages (re-fetchable; preserved copies live in the corpus
+; pagesw/ tree).
+https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rdpbcgr/a9b9dc4a-6ae4-4b04-a6f5-87e5ed6fd7e7	[MS-RDPBCGR] 2.2.1.3.4.1 Channel Definition Structure (CHANNEL_DEF): name 8 bytes / seven ANSI chars -> CHANNEL_NAME_LEN=7; CHANNEL_OPTION_* values 0x80000000..0x00100000 (spec prints REMOTE_CONTROL_PERSISTENT for the CE CHANNEL_OPTION_REMOTE_CONTROL_PERSISTENT)
+https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-rdpbcgr/f125c65e-6901-43c3-8071-d7d5aaee7ae4	[MS-RDPBCGR] 2.2.6.1.1 Channel PDU Header (CHANNEL_PDU_HEADER): CHANNEL_FLAG_FIRST=0x1, LAST=0x2 (-> MIDDLE=0, ONLY=FIRST|LAST per the CE ms879661 wording)

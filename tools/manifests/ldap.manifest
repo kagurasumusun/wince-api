@@ -1,0 +1,124 @@
+aa513733	LDAP Enumerations
+ms892299	LDAP_RETCODE
+aa513735	LDAP Functions
+aa513739	LDAP Session Functions
+ms863877	cldap_open
+ms891743	ldap_abandon
+ms891748	ldap_bind
+ms891749	ldap_bind_s
+ms891756	ldap_connect
+ms892271	ldap_get_option
+ms892275	ldap_init
+ms892288	ldap_open
+ms892300	ldap_sasl_bind
+ms892301	ldap_sasl_bind_s
+ms892310	ldap_set_option
+ms892311	ldap_simple_bind
+ms892312	ldap_simple_bind_s
+ms892314	ldap_sslinit
+ms892317	ldap_unbind
+ms892318	ldap_unbind_s
+aa513732	LDAP Directory Entry Functions
+ms891744	ldap_add
+ms891745	ldap_add_ext
+ms891746	ldap_add_ext_s
+ms891747	ldap_add_s
+ms891751	ldap_close_extended_op
+ms891752	ldap_compare
+ms891753	ldap_compare_ext
+ms891754	ldap_compare_ext_s
+ms891755	ldap_compare_s
+ms891766	ldap_delete
+ms891767	ldap_delete_ext
+ms891768	ldap_delete_ext_s
+ms891769	ldap_delete_s
+ms892261	ldap_extended_operation
+ms892280	ldap_modify
+ms892281	ldap_modify_ext
+ms892282	ldap_modify_ext_s
+ms892283	ldap_modify_s
+ms892295	ldap_rename_ext
+ms892296	ldap_rename_ext_s
+aa513738	LDAP Search Functions
+ms891750	ldap_check_filter
+ms891760	ldap_count_entries
+ms891761	ldap_count_references
+ms891762	ldap_count_values
+ms891763	ldap_count_values_len
+ms891764	ldap_create_page_control
+ms891765	ldap_create_sort_control
+ms892136	ldap_escape_filter_element
+ms892263	ldap_first_attribute
+ms892264	ldap_first_entry
+ms892265	ldap_first_reference
+ms892268	ldap_get_next_page
+ms892269	ldap_get_next_page_s
+ms892272	ldap_get_paged_count
+ms892273	ldap_get_values
+ms892274	ldap_get_values_len
+ms892285	ldap_next_attribute
+ms892286	ldap_next_entry
+ms892287	ldap_next_reference
+ms892289	ldap_parse_extended_result
+ms892290	ldap_parse_page_control
+ms892291	ldap_parse_reference
+ms892292	ldap_parse_result
+ms892293	ldap_parse_sort_control
+ms892297	ldap_result
+ms892302	ldap_search
+ms892303	ldap_search_abandon_page
+ms892304	ldap_search_ext
+ms892305	ldap_search_ext_s
+ms892306	ldap_search_init_page
+ms892307	ldap_search_s
+ms892308	ldap_search_st
+aa513734	LDAP Error Handling Functions
+ms892105	ldap_err2string
+ms892298	ldap_result2error
+ms892267	LdapGetLastError
+ms892276	LdapMapErrorToWin32
+aa513736	LDAP Memory Management Functions
+ms891758	ldap_control_free
+ms891759	ldap_controls_free
+ms892277	ldap_memfree
+ms892284	ldap_msgfree
+ms892321	ldap_value_free
+ms892322	ldap_value_free_len
+aa513731	LDAP Callback Functions
+ms864415	DEREFERENCECONNECTION
+ms892585	NOTIFYOFNEWCONNECTION
+ms892639	QUERYCLIENTCERT
+ms892640	QUERYFORCONNECTION
+ms897184	VERIFYSERVERCERT
+ms862667	Other LDAP Functions
+ms863718	ber_alloc_t
+ms863725	ber_bvdup
+ms863730	ber_bvecfree
+ms863737	ber_bvfree
+ms863754	ber_first_element
+ms863761	ber_flatten
+ms863769	ber_free
+ms863775	ber_init
+ms863786	ber_next_element
+ms863791	ber_peek_tag
+ms863798	ber_printf
+ms863810	ber_scanf
+ms863817	ber_skip_tag
+ms891770	ldap_dn2ufn
+ms892251	ldap_explode_dn
+ms892266	ldap_get_dn
+ms892316	ldap_ufn2dn
+ms892319	LdapUnicodeToUTF8
+ms892320	LdapUTF8ToUnicode
+aa513740	LDAP Structures
+ms863747	BerElement
+ms863826	berval
+ms891742	LDAP
+ms892294	LDAP_REFERRAL_CALLBACK
+ms892315	LDAP_TIMEVAL
+ms891757	LDAPControl
+ms892278	LDAPMessage
+ms892279	LDAPMod
+ms892309	LDAPSearch
+ms892313	LDAPSortKey
+ms893453	Session Options

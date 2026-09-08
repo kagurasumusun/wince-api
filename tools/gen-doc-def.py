@@ -208,25 +208,37 @@ def declared_exports():
         if not fn.endswith(".h"):
             continue
         txt = open(os.path.join(INCLUDE, fn), encoding="utf-8").read()
+        # Strip block/line comments first so the broader multi-word /
+        # pointer-return fallback below cannot pick up documented
+        # signatures quoted inside comments (M54).
+        txt = re.sub(r"/\*.*?\*/", " ", txt, flags=re.S)
+        txt = re.sub(r"//[^\n]*", " ", txt)
         for m in _DECL_RE.finditer(txt):
             names.add(m.group(1))
-        # AKARI_CE_IMPORT lines whose return type is multi-word or a
-        # pointer (e.g. "struct hostent *gethostbyaddr",
-        # "unsigned long inet_addr"): _DECL_RE above only matches a
-        # single-token return type, so take the last identifier
-        # before the first '(' of the line as the export name.
+        # Declarations whose return type is multi-word or carries
+        # pointer stars (M54, e.g. "LDAP* ldap_init", "struct berval**
+        # ldap_get_values_len", "UINT APIENTRY CCHookProc",
+        # "AKARI_CE_IMPORT struct hostent *gethostbyaddr"):
+        # _DECL_RE only matches a single-token return type, so take
+        # the last identifier before the first '(' of the line.
+        # Typedef and preprocessor lines are excluded (their pre-'('
+        # tail names a type or macro parameter, not an export).
         for line in txt.splitlines():
             s = line.strip()
-            if not s.startswith("AKARI_CE_IMPORT"):
+            if not s or s.startswith(("#", "typedef", "}", "*")):
                 continue
-            body = s[len("AKARI_CE_IMPORT"):].strip()
-            i = body.find("(")
-            if i < 0:
+            i = s.find("(")
+            if i <= 0:
                 continue
-            parts = body[:i].strip().split()
-            if not parts:
+            pre = s[:i].rstrip()
+            if not pre or pre.endswith("*") or pre.endswith(")"):
                 continue
-            names.add(parts[-1].lstrip("*"))
+            parts = pre.split()
+            if len(parts) < 2:
+                continue  # single-token returns: _DECL_RE above
+            name = parts[-1].lstrip("*")
+            if re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", name):
+                names.add(name)
     # Keep only names that look like exports (function declarations);
     # drop common false positives from type/macro text.
     drop = {"if", "for", "while", "do", "switch", "sizeof", "return",

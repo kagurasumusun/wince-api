@@ -1,0 +1,24 @@
+ms907541	Common Dialog Boxes Functions
+ms908071	CCHookProc
+ms908107	CFHookProc
+ms928579	ChooseColor (function)
+ms928581	ChooseFont (function)
+ms908144	CommDlgExtendedError
+aa453150	GetOpenFileName
+aa453162	GetSaveFileName
+ms911908	PagePaintHook
+ms911909	PageSetupDlg (function)
+ms911911	PageSetupHook
+ms911940	PrintDlg (function)
+aa453545	PrintHookProc
+ms907548	Common Dialog Boxes Messages
+ms908072	CDM_SETDEFEXT
+ms908073	CDN_TYPECHANGE
+ms907558	Common Dialog Boxes Structures
+ms928580	CHOOSECOLOR (structure)
+ms928582	CHOOSEFONT (structure)
+aa452944	DEVNAMES
+ms911893	OFNOTIFY
+ms911906	OPENFILENAME
+ms911910	PAGESETUPDLG (structure)
+aa453544	PRINTDLG (structure)
