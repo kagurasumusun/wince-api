@@ -173,6 +173,13 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M56 (landed):** Common Controls batch 2 structures (commctrl.h
+  extended with the Rebar, Header, Tab, Date/Time Picker, Month
+  Calendar, Tree View and List View structure layers: 43 structures +
+  HTREEITEM + PFNTVCOMPARE + the title/print alias bridges; the
+  _WIN32_IE conditional members of LVITEM/NMLVCUSTOMDRAW reproduced
+  verbatim).  All names-only values held.  No new defs (no Link
+  Library rows in the batch).
 * **M55 (landed):** Property Sheets (new `include/prsht.h`,
   def-less Prsht.h layer: PROPSHEETPAGE/PROPSHEETHEADER/PSHNOTIFY,
   CreatePropertySheetPage/DestroyPropertySheetPage/PropertySheet and

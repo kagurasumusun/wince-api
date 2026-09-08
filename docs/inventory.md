@@ -4032,3 +4032,61 @@ Header count 51 -> **52**; def count 44.  Corpus: pages5
 m55-ce60.manifest title 404s -- no CE 6.0 twin page),
 rows.json 2753 -> 4365 (cumulative parsed records incl. the corpus
 baseline twins).
+
+## M56 -- Common Controls batch 2 structures (commctrl.h extension; no defs)
+
+The seven remaining Common Controls sub-books' structure layers landed
+in commctrl.h (batch-2 pages fetched and preserved in M55; prototypes
+cross-read against the m55-ce60.manifest twins).  No page of this
+batch carries a Link Library row, so no defs and no import pins.
+
+* Rebar: REBARINFO (aa453640, 12), NMRBAUTOSIZE (ms911836, 48),
+  NMREBAR (ms911851, 28), RBHITTESTINFO (aa453620, 16).
+* Header: HDITEM (ms929881, 36; HD_ITEM alias per the HDM_* message
+  pages' spelling, twin ee502857 identical), HD_LAYOUT/HDLAYOUT
+  (ms929882, 8), HD_HITTESTINFO/HDHITTESTINFO (ms929880, 16),
+  NMHDDISPINFO (ms931478, 36), NMHEADER (ms931480, 24).
+* Tab: TCITEM (ms913857, 28), TCITEMHEADER (ms913860, 24),
+  TCHITTESTINFO (ms913854, 12), NMTCKEYDOWN (ms911862, 20).
+* Date and Time Picker: NMDATETIMECHANGE (ms931471, 32),
+  NMDATETIMEFORMAT (ms931472, 164), NMDATETIMEFORMATQUERY (ms931473,
+  24), NMDATETIMESTRING (ms931474, 36), NMDATETIMEWMKEYDOWN
+  (ms931475, 36).
+* Month Calendar: MCHITTESTINFO (ms911793, 32), NMSELCHANGE
+  (ms911859, 44), NMDAYSTATE (ms931476, 36 -- the LPMONTHDAYSTATE
+  member type has no CE page: typed layout-neutral void* with the
+  print recorded, the SHCONTF precedent).
+* Tree View: HTREEITEM (opaque handle, HIMAGELIST model), TVITEM
+  (ms913992, 40 -- the "tvi UINT mask" print artifact is present in
+  BOTH the CE 5.0 page and twin ee502863 [recorded]; TV_ITEM alias
+  ms914064 identical), TV_INSERTSTRUCT (ms914063, 48),
+  TV_HITTESTINFO/TVHITTESTINFO (ms914062/ms913985, 16),
+  TVSORTCB/TV_SORTCB (ms914061/ms914065, 12; the legacy page prints
+  the "tvscb" prefix artifact [recorded]), NM_TREEVIEW (ms911864,
+  104), TV_DISPINFO (ms913978, 52), NMTVCUSTOMDRAW (ms911867, 56),
+  NMTVKEYDOWN/TV_KEYDOWN (ms911869/ms913996, 20), PFNTVCOMPARE (the
+  ms914065 page prints the CompareFunc example; M51 model).
+* List View: LVITEM (aa453430, 40 -- the page's
+  "#if (_WIN32_IE >= 0x0300) int iIndent; #endif" conditional member
+  reproduced verbatim; this repo never defines _WIN32_IE), LVCOLUMN
+  (aa453423, 32), LVBKIMAGE (aa453422, 24), LVFINDINFO (aa453425, 24
+  -- pointer alias printed LPFINDINFO [sic, kept]; LV_FINDINFO alias
+  aa453540 identical), LVHITTESTINFO (aa453428, 20), NMLISTVIEW
+  (ms931605, 44), NMLVCACHEHINT (ms931617, 20), NMLVCUSTOMDRAW
+  (ms931627, 80 -- the "#if (_WIN32_IE >= 0x0400) int iSubItem;
+  #endif" conditional reproduced verbatim), NMLVFINDITEM (ms931633,
+  40), NMLVGETINFOTIP (ms931639, 36), NMLVKEYDOWN (ms931645, 20),
+  NMLVODSTATECHANGE (ms931653, 28), LV_DISPINFO (aa453424, 52 -- tag
+  printed "tag LV_DISPINFO" with a space [sic]).
+* commctrl.h now includes winbase.h (SYSTEMTIME for the DTPicker /
+  Month Cal structures).
+* HELD: every message / notification / style / flag family of the
+  seven sub-books (names-only; full ledger in the commctrl.h batch-2
+  held block).  Notably the 15 Header_* macros DO print SNDMSG bodies
+  (ms929911..) but reference the unpublished HDM_ message values, so
+  their definitions are held; all other sub-books' macro bodies are
+  not printed at all.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m56: 43 struct-size asserts + shaped usage + alias-bridge
+checks).  Export surface unchanged; headers 52; defs 44.

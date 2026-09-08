@@ -40,7 +40,8 @@
  * standalone crosscheck. */
 #include "windef.h"
 #include "wingdi.h"   /* COLORREF, RECT via windef; HDC/HBITMAP/HICON */
-#include "winuser.h"  /* NMHDR (ms931479), HMENU, WM_NOTIFY */
+#include "winuser.h"  /* NMHDR (ms931479), HMENU, WM_NOTIFY, WINDOWPOS */
+#include "winbase.h"  /* SYSTEMTIME (aa450923; M56 DTPicker/MonthCal) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -685,6 +686,607 @@ HWND     CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
  *   up-down:   UDM_* messages (12) and UDN_DELTAPOS (ms914080);
  *             UDS_* styles (referenced by name)
  *   progress:  PBM_DELTAPOS..PBM_STEPIT (8 messages, ms911919..926)
+ * ------------------------------------------------------------------ */
+
+
+/* ================================================================== */
+/* M56: Common Controls Reference, batch 2 (the Date and Time Picker,  */
+/* Header, List View, Month Calendar, Rebar, Tab and Tree View         */
+/* sub-books; tools/manifests/cc-{dateandtimepicker,header,listview,  */
+/* monthcalendar,rebar,tab,treeview}.manifest).  Structures only --   */
+/* every message / notification / style / flag family of these books  */
+/* publishes names without numeric values (held ledger below) and no  */
+/* page of this batch carries a Link Library row, so no defs and no   */
+/* import pins are generated.  Prototypes were cross-read against     */
+/* the CE 6.0 twins (tools/manifests/m55-ce60.manifest).              */
+/* ================================================================== */
+
+/* HTREEITEM: tree-view item handle, typed by every Tree View page but
+ * never laid out (the HIMAGELIST model, M29). */
+typedef void *HTREEITEM;
+
+/* ------------------------------------------------------------------ */
+/* Rebar Controls Structures (CE 2.0+).                                */
+/* ------------------------------------------------------------------ */
+
+/* aa453640 "REBARINFO": "typedef struct tagREBARINFO {UINT cbSize;
+ * UINT fMask; HIMAGELIST himl;} REBARINFO, FAR* LPREBARINFO;".
+ * fMask takes RBIM_IMAGELIST (name published, value held).
+ * 32-bit size 12, TU-asserted. */
+typedef struct tagREBARINFO {
+    UINT        cbSize;
+    UINT        fMask;
+    HIMAGELIST  himl;
+} REBARINFO, FAR *LPREBARINFO;
+
+/* ms911836 "NMRBAUTOSIZE": "typedef struct tagNMRBAUTOSIZE {NMHDR
+ * hdr; BOOL fChanged; RECT rcTarget; RECT rcActual;} NMRBAUTOSIZE,
+ * *LPNMRBAUTOSIZE;".  32-bit size 48, TU-asserted. */
+typedef struct tagNMRBAUTOSIZE {
+    NMHDR    hdr;
+    BOOL     fChanged;
+    RECT     rcTarget;
+    RECT     rcActual;
+} NMRBAUTOSIZE, *LPNMRBAUTOSIZE;
+
+/* ms911851 "NMREBAR": "typedef struct tagNMREBAR {NMHDR hdr; UINT
+ * uBand; UINT wID; UINT cyChild; UINT cyBand;} NMREBAR, *LPNMREBAR;".
+ * 32-bit size 28, TU-asserted. */
+typedef struct tagNMREBAR {
+    NMHDR    hdr;
+    UINT     uBand;
+    UINT     wID;
+    UINT     cyChild;
+    UINT     cyBand;
+} NMREBAR, *LPNMREBAR;
+
+/* aa453620 "RBHITTESTINFO" (page title spelling): "typedef struct
+ * _RB_HITTESTINFO {POINT pt; UINT flags; int iBand;} RBHITTESTINFO,
+ * FAR* LPRBHITTESTINFO;".  flags takes the RBHT_* values (names
+ * published on the page, values held).  32-bit size 16, TU-asserted. */
+typedef struct _RB_HITTESTINFO {
+    POINT    pt;
+    UINT     flags;
+    int      iBand;
+} RBHITTESTINFO, FAR *LPRBHITTESTINFO;
+
+/* ------------------------------------------------------------------ */
+/* Header Controls Structures.                                         */
+/* ------------------------------------------------------------------ */
+
+/* ms929881 "HDITEM": "typedef struct _HDITEM { UINT mask; int cxy;
+ * LPTSTR pszText; HBITMAP hbm; int cchTextMax; int fmt; LPARAM
+ * lParam; int iImage; int iOrder;} HDITEM;" (twin ee502857 identical;
+ * the HDM_* message pages spell the type HD_ITEM -- alias bridged
+ * below, the TBBUTTONINFO model).  mask takes the HDI_* values and
+ * fmt the HDF_* values (names published, values held).
+ * 32-bit size 36, TU-asserted. */
+typedef struct _HDITEM {
+    UINT     mask;
+    int      cxy;
+    LPTSTR   pszText;
+    HBITMAP  hbm;
+    int      cchTextMax;
+    int      fmt;
+    LPARAM   lParam;
+    int      iImage;
+    int      iOrder;
+} HDITEM, FAR *LPHDITEM;
+typedef HDITEM  HD_ITEM;      /* HDM_GETITEM/SETITEM/INSERTITEM spell */
+typedef LPHDITEM LPHD_ITEM;
+
+/* ms929882 "HDLAYOUT" (page title spelling): "typedef struct
+ * _HD_LAYOUT { RECT FAR* prc; WINDOWPOS FAR* pwpos;} HD_LAYOUT;".
+ * 32-bit size 8, TU-asserted. */
+typedef struct _HD_LAYOUT {
+    RECT  FAR *prc;
+    WINDOWPOS FAR *pwpos;
+} HD_LAYOUT, FAR *LPHD_LAYOUT;
+typedef HD_LAYOUT  HDLAYOUT;      /* page title spelling */
+typedef LPHD_LAYOUT LPHDLAYOUT;
+
+/* ms929880 "HDHITTESTINFO" (page title spelling): "typedef struct
+ * _HD_HITTESTINFO { POINT pt; UINT flags; int iItem;}
+ * HD_HITTESTINFO;".  flags takes the HHT_* values (names published,
+ * values held).  32-bit size 16, TU-asserted. */
+typedef struct _HD_HITTESTINFO {
+    POINT    pt;
+    UINT     flags;
+    int      iItem;
+} HD_HITTESTINFO;
+typedef HD_HITTESTINFO HDHITTESTINFO;   /* page title spelling */
+
+/* ms931478 "NMHDDISPINFO": "typedef struct tagNMHDDISPINFO { NMHDR
+ * hdr; int iItem; UINT mask; LPTSTR pszText; int cchTextMax; int
+ * iImage; LPARAM lParam;} NMHDDISPINFO, FAR* LPNMHDDISPINFO;".
+ * 32-bit size 36, TU-asserted. */
+typedef struct tagNMHDDISPINFO {
+    NMHDR    hdr;
+    int      iItem;
+    UINT     mask;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iImage;
+    LPARAM   lParam;
+} NMHDDISPINFO, FAR *LPNMHDDISPINFO;
+
+/* ms931480 "NMHEADER": "typedef struct tagNMHEADER { NMHDR hdr; int
+ * iItem; int iButton; HDITEM FAR* pItem;} NMHEADER, FAR* LPNMHEADER;".
+ * 32-bit size 24, TU-asserted. */
+typedef struct tagNMHEADER {
+    NMHDR        hdr;
+    int          iItem;
+    int          iButton;
+    HDITEM FAR  *pItem;
+} NMHEADER, FAR *LPNMHEADER;
+
+/* ------------------------------------------------------------------ */
+/* Tab Controls Structures.                                            */
+/* ------------------------------------------------------------------ */
+
+/* ms913857 "TCITEM": "typedef struct tagTCITEM {UINT mask; DWORD
+ * dwState; DWORD dwStateMask; LPTSTR pszText; int cchTextMax; int
+ * iImage; LPARAM lParam;} TCITEM;".  mask takes the TCIF_* values,
+ * dwState the TCIS_* values (names published, values held).
+ * 32-bit size 28, TU-asserted. */
+typedef struct tagTCITEM {
+    UINT     mask;
+    DWORD    dwState;
+    DWORD    dwStateMask;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iImage;
+    LPARAM   lParam;
+} TCITEM, FAR *LPTCITEM;
+
+/* ms913860 "TCITEMHEADER": "typedef struct tagTCITEMHEADER {UINT
+ * mask; UINT lpReserved1; UINT lpReserved2; LPTSTR pszText; int
+ * cchTextMax; int iImage;} TCITEMHEADER, FAR* LPTCITEMHEADER;".
+ * 32-bit size 24, TU-asserted. */
+typedef struct tagTCITEMHEADER {
+    UINT     mask;
+    UINT     lpReserved1;
+    UINT     lpReserved2;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iImage;
+} TCITEMHEADER, FAR *LPTCITEMHEADER;
+
+/* ms913854 "TCHITTESTINFO": "typedef struct _TCHITTESTINFO { POINT
+ * pt; UINT flags; } TCHITTESTINFO;".  flags takes the TCHT_* values
+ * (names published, values held).  32-bit size 12, TU-asserted. */
+typedef struct _TCHITTESTINFO {
+    POINT    pt;
+    UINT     flags;
+} TCHITTESTINFO, FAR *LPTCHITTESTINFO;
+
+/* ms911862 "NMTCKEYDOWN": "typedef struct tagNMTCKEYDOWN {NMHDR hdr;
+ * WORD wVKey; UINT flags;} NMTCKEYDOWN;".  32-bit size 20,
+ * TU-asserted. */
+typedef struct tagNMTCKEYDOWN {
+    NMHDR    hdr;
+    WORD     wVKey;
+    UINT     flags;
+} NMTCKEYDOWN, FAR *LPNMTCKEYDOWN;
+
+/* ------------------------------------------------------------------ */
+/* Date and Time Picker Controls Structures.                           */
+/* ------------------------------------------------------------------ */
+
+/* ms931471 "NMDATETIMECHANGE": "typedef struct tagNMDATETIMECHANGE
+ * {NMHDR nmhdr; DWORD dwFlags; SYSTEMTIME st;} NMDATETIMECHANGE,
+ * FAR* LPNMDATETIMECHANGE;".  dwFlags takes GDT_NONE/GDT_VALID
+ * (names published, values held).  32-bit size 32, TU-asserted. */
+typedef struct tagNMDATETIMECHANGE {
+    NMHDR       nmhdr;
+    DWORD       dwFlags;
+    SYSTEMTIME  st;
+} NMDATETIMECHANGE, FAR *LPNMDATETIMECHANGE;
+
+/* ms931472 "NMDATETIMEFORMAT": "typedef struct tagNMDATETIMEFORMAT
+ * {NMHDR nmhdr; LPCTSTR pszFormat; SYSTEMTIME st; LPCTSTR pszDisplay;
+ * TCHAR szDisplay[64];} NMDATETIMEFORMAT, FAR* LPNMDATETIMEFORMAT;".
+ * 32-bit size 164, TU-asserted. */
+typedef struct tagNMDATETIMEFORMAT {
+    NMHDR       nmhdr;
+    LPCTSTR     pszFormat;
+    SYSTEMTIME  st;
+    LPCTSTR     pszDisplay;
+    TCHAR       szDisplay[64];
+} NMDATETIMEFORMAT, FAR *LPNMDATETIMEFORMAT;
+
+/* ms931473 "NMDATETIMEFORMATQUERY": "typedef struct
+ * tagNMDATETIMEFORMATQUERY {NMHDR nmhdr; LPCTSTR pszFormat; SIZE
+ * szMax;} NMDATETIMEFORMATQUERY, FAR* LPNMDATETIMEFORMATQUERY;".
+ * 32-bit size 24, TU-asserted. */
+typedef struct tagNMDATETIMEFORMATQUERY {
+    NMHDR       nmhdr;
+    LPCTSTR     pszFormat;
+    SIZE        szMax;
+} NMDATETIMEFORMATQUERY, FAR *LPNMDATETIMEFORMATQUERY;
+
+/* ms931474 "NMDATETIMESTRING": "typedef struct tagNMDATETIMESTRING
+ * {NMHDR nmhdr; LPCTSTR pszUserString; SYSTEMTIME st; DWORD dwFlags;}
+ * NMDATETIMESTRING, FAR* LPNMDATETIMESTRING;".  32-bit size 36,
+ * TU-asserted. */
+typedef struct tagNMDATETIMESTRING {
+    NMHDR       nmhdr;
+    LPCTSTR     pszUserString;
+    SYSTEMTIME  st;
+    DWORD       dwFlags;
+} NMDATETIMESTRING, FAR *LPNMDATETIMESTRING;
+
+/* ms931475 "NMDATETIMEWMKEYDOWN": "typedef struct
+ * tagNMDATETIMEWMKEYDOWN {NMHDR nmhdr; int nVirtKey; LPCTSTR
+ * pszFormat; SYSTEMTIME st;} NMDATETIMEWMKEYDOWN, FAR*
+ * LPNMDATETIMEWMKEYDOWN;".  32-bit size 36, TU-asserted. */
+typedef struct tagNMDATETIMEWMKEYDOWN {
+    NMHDR       nmhdr;
+    int         nVirtKey;
+    LPCTSTR     pszFormat;
+    SYSTEMTIME  st;
+} NMDATETIMEWMKEYDOWN, FAR *LPNMDATETIMEWMKEYDOWN;
+
+/* ------------------------------------------------------------------ */
+/* Month Calendar Controls Structures.                                 */
+/* ------------------------------------------------------------------ */
+
+/* ms911793 "MCHITTESTINFO": "typedef struct {UINT cbSize; POINT pt;
+ * UINT uHit; SYSTEMTIME st;} MCHITTESTINFO, *PMCHITTESTINFO;" (tag
+ * printed anonymous).  uHit takes the MCHT_* values (names published,
+ * values held).  32-bit size 32, TU-asserted. */
+typedef struct {
+    UINT        cbSize;
+    POINT       pt;
+    UINT        uHit;
+    SYSTEMTIME  st;
+} MCHITTESTINFO, *PMCHITTESTINFO;
+
+/* ms911859 "NMSELCHANGE": "typedef struct tagNMSELCHANGE {NMHDR
+ * nmhdr; SYSTEMTIME stSelStart; SYSTEMTIME stSelEnd;} NMSELCHANGE,
+ * FAR* LPNMSELCHANGE;".  32-bit size 44, TU-asserted. */
+typedef struct tagNMSELCHANGE {
+    NMHDR       nmhdr;
+    SYSTEMTIME  stSelStart;
+    SYSTEMTIME  stSelEnd;
+} NMSELCHANGE, FAR *LPNMSELCHANGE;
+
+/* ms931476 "NMDAYSTATE": "typedef struct tagNMDAYSTATE {NMHDR
+ * nmhdr; SYSTEMTIME stStart; int cDayState; LPMONTHDAYSTATE
+ * prgDayState;} NMDAYSTATE, FAR* LPNMDAYSTATE;" -- LPMONTHDAYSTATE
+ * has no CE page (dangling type, the SHCONTF precedent): the member
+ * is typed layout-neutral void* with the print recorded.
+ * 32-bit size 36, TU-asserted. */
+typedef struct tagNMDAYSTATE {
+    NMHDR       nmhdr;
+    SYSTEMTIME  stStart;
+    int         cDayState;
+    void       *prgDayState;   /* printed LPMONTHDAYSTATE; no CE page */
+} NMDAYSTATE, FAR *LPNMDAYSTATE;
+
+/* ------------------------------------------------------------------ */
+/* Tree View Controls Structures.                                      */
+/* ------------------------------------------------------------------ */
+
+/* PFNTVCOMPARE: the TV_SORTCB lpfnCompare member type; the ms914065
+ * page prints the comparison callback as
+ * "int CALLBACK CompareFunc(LPARAM lParam1, LPARAM lParam2,
+ * LPARAM lParamSort);" -- pointer built from the documented signature
+ * (M51 IMENUMPROC model). */
+typedef int (CALLBACK *PFNTVCOMPARE)(LPARAM lParam1, LPARAM lParam2,
+                                     LPARAM lParamSort);
+
+/* ms913992 "TVITEM": "typedef struct _TVITEM { tvi UINT mask;
+ * HTREEITEM hItem; UINT state; UINT stateMask; LPSTR pszText; int
+ * cchTextMax; int iImage; int iSelectedImage; int cChildren; LPARAM
+ * lParam; } TVITEM, FAR* LPTVITEM;" -- the leading "tvi" of the
+ * first member is a print artifact present in BOTH the CE 5.0 page
+ * and the CE 6.0 twin ee502863 [recorded]; the member type is UINT.
+ * The legacy-spelling page ms914064 "TV_ITEM" prints the identical
+ * layout -- alias bridged below.  mask takes the TVIF_* values,
+ * state the TVIS_* values, and hInsertAfter the TVI_* values (names
+ * published, values held).  32-bit size 40, TU-asserted. */
+typedef struct _TVITEM {
+    UINT        mask;
+    HTREEITEM   hItem;
+    UINT        state;
+    UINT        stateMask;
+    LPSTR       pszText;
+    int         cchTextMax;
+    int         iImage;
+    int         iSelectedImage;
+    int         cChildren;
+    LPARAM      lParam;
+} TVITEM, FAR *LPTVITEM;
+typedef TVITEM   TV_ITEM;      /* ms914064, identical layout */
+typedef LPTVITEM LPTV_ITEM;
+
+/* ms914063 "TV_INSERTSTRUCT": "typedef struct _TV_INSERTSTRUCT {
+ * HTREEITEM hParent; HTREEITEM hInsertAfter; TV_ITEM item; }
+ * TV_INSERTSTRUCT, FAR* LPTV_INSERTSTRUCT;" (twin ee505024
+ * identical).  32-bit size 48, TU-asserted. */
+typedef struct _TV_INSERTSTRUCT {
+    HTREEITEM   hParent;
+    HTREEITEM   hInsertAfter;
+    TV_ITEM     item;
+} TV_INSERTSTRUCT, FAR *LPTV_INSERTSTRUCT;
+
+/* ms914062 "TV_HITTESTINFO": "typedef struct _TVHITTESTINFO { POINT
+ * pt; UINT flags; HTREEITEM hItem; } TV_HITTESTINFO, FAR*
+ * LPTV_HITTESTINFO;".  The new-spelling page ms913985 "TVHITTESTINFO"
+ * prints the identical layout -- alias bridged below.  flags takes
+ * the TVHT_* values (names published, values held).  32-bit size 16,
+ * TU-asserted. */
+typedef struct _TVHITTESTINFO {
+    POINT       pt;
+    UINT        flags;
+    HTREEITEM   hItem;
+} TV_HITTESTINFO, FAR *LPTV_HITTESTINFO;
+typedef TV_HITTESTINFO   TVHITTESTINFO;      /* ms913985 */
+typedef LPTV_HITTESTINFO LPTVHITTESTINFO;
+
+/* ms914061 "TVSORTCB": "typedef struct _TVSORTCB { HTREEITEM
+ * hParent; PFNTVCOMPARE lpfnCompare; LPARAM lParam; } TVSORTCB,
+ * FAR* LPTVSORTCB;" -- the legacy page ms914065 "TV_SORTCB" prints
+ * the identical layout with a "tvscb" prefix artifact on the first
+ * member [recorded].  32-bit size 12, TU-asserted. */
+typedef struct _TVSORTCB {
+    HTREEITEM     hParent;
+    PFNTVCOMPARE  lpfnCompare;
+    LPARAM        lParam;
+} TVSORTCB, FAR *LPTVSORTCB;
+typedef TVSORTCB   TV_SORTCB;      /* ms914065, identical layout */
+typedef LPTVSORTCB LPTV_SORTCB;
+
+/* ms911864 "NM_TREEVIEW": "typedef struct _NM_TREEVIEW { NMHDR hdr;
+ * UINT action; TV_ITEM itemOld; TV_ITEM itemNew; POINT ptDrag; }
+ * NM_TREEVIEW; typedef NM_TREEVIEW FAR* LPNM_TREEVIEW;".
+ * 32-bit size 104, TU-asserted. */
+typedef struct _NM_TREEVIEW {
+    NMHDR     hdr;
+    UINT      action;
+    TV_ITEM   itemOld;
+    TV_ITEM   itemNew;
+    POINT     ptDrag;
+} NM_TREEVIEW, FAR *LPNM_TREEVIEW;
+
+/* ms913978 "TV_DISPINFO": "typedef struct _TV_DISPINFO { NMHDR hdr;
+ * TV_ITEM item; } TV_DISPINFO;".  32-bit size 52, TU-asserted. */
+typedef struct _TV_DISPINFO {
+    NMHDR     hdr;
+    TV_ITEM   item;
+} TV_DISPINFO;
+
+/* ms911867 "NMTVCUSTOMDRAW": "typedef struct tagNMTVCUSTOMDRAW
+ * {NMCUSTOMDRAW nmcd; COLORREF clrText; COLORREF clrTextBk;}
+ * NMTVCUSTOMDRAW, *LPNMTVCUSTOMDRAW;".  32-bit size 56,
+ * TU-asserted. */
+typedef struct tagNMTVCUSTOMDRAW {
+    NMCUSTOMDRAW  nmcd;
+    COLORREF      clrText;
+    COLORREF      clrTextBk;
+} NMTVCUSTOMDRAW, *LPNMTVCUSTOMDRAW;
+
+/* ms911869 "NMTVKEYDOWN": "typedef struct tagTVKEYDOWN {NMHDR hdr;
+ * WORD wVKey; UINT flags;} NMTVKEYDOWN, FAR* LPNMTVKEYDOWN;" -- the
+ * legacy page ms913996 "TV_KEYDOWN" prints the identical layout
+ * under the tag _TV_KEYDOWN; alias bridged below (single definition,
+ * both page ids recorded).  32-bit size 20, TU-asserted. */
+typedef struct tagTVKEYDOWN {
+    NMHDR    hdr;
+    WORD     wVKey;
+    UINT     flags;
+} NMTVKEYDOWN, FAR *LPNMTVKEYDOWN;
+typedef NMTVKEYDOWN  TV_KEYDOWN;      /* ms913996, identical layout */
+typedef LPNMTVKEYDOWN LPTV_KEYDOWN;
+
+/* ------------------------------------------------------------------ */
+/* List View Controls Structures.                                      */
+/* ------------------------------------------------------------------ */
+
+/* aa453430 "LVITEM": "typedef struct _LVITEM {UINT mask; int iItem;
+ * int iSubItem; UINT state; UINT stateMask; LPTSTR pszText; int
+ * cchTextMax; int iImage; LPARAM lParam; #if (_WIN32_IE >= 0x0300)
+ * int iIndent; #endif int iGroupId;} LVITEM;" -- the _WIN32_IE
+ * conditional member is printed verbatim by the page and reproduced
+ * here (this repo never defines _WIN32_IE, so iIndent is absent and
+ * the 32-bit size is 40, TU-asserted; with _WIN32_IE >= 0x0300 it
+ * would be 44).  mask takes the LVIF_* values, state the LVIS_*
+ * values (names published, values held). */
+typedef struct _LVITEM {
+    UINT     mask;
+    int      iItem;
+    int      iSubItem;
+    UINT     state;
+    UINT     stateMask;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iImage;
+    LPARAM   lParam;
+#if (_WIN32_IE >= 0x0300)
+    int      iIndent;
+#endif
+    int      iGroupId;
+} LVITEM, FAR *LPLVITEM;
+
+/* aa453423 "LVCOLUMN": "typedef struct _LVCOLUMN {UINT mask; int
+ * fmt; int cx; LPTSTR pszText; int cchTextMax; int iSubItem; int
+ * iOrder; int iImage;} LVCOLUMN;" (twin ee499089 identical).
+ * 32-bit size 32, TU-asserted. */
+typedef struct _LVCOLUMN {
+    UINT     mask;
+    int      fmt;
+    int      cx;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iSubItem;
+    int      iOrder;
+    int      iImage;
+} LVCOLUMN, FAR *LPLVCOLUMN;
+
+/* aa453422 "LVBKIMAGE": "typedef struct tagLVBKIMAGE { ULONG
+ * ulFlags; HBITMAP hbm; LPTSTR pszImage; UINT cchImageMax; int
+ * xOffsetPercent; int yOffsetPercent;} LVBKIMAGE, *LPLVBKIMAGE;".
+ * ulFlags takes the LVBKIF_* values (names published, values held).
+ * 32-bit size 24, TU-asserted. */
+typedef struct tagLVBKIMAGE {
+    ULONG    ulFlags;
+    HBITMAP  hbm;
+    LPTSTR   pszImage;
+    UINT     cchImageMax;
+    int      xOffsetPercent;
+    int      yOffsetPercent;
+} LVBKIMAGE, *LPLVBKIMAGE;
+
+/* aa453425 "LVFINDINFO": "typedef struct tagLVFINDINFO {UINT flags;
+ * LPCTSTR psz; LPARAM lParam; POINT pt; UINT vkDirection;} LVFINDINFO,
+ * FAR* LPFINDINFO;" -- the page's pointer alias is printed LPFINDINFO
+ * [sic, no LV prefix; kept as printed].  The legacy page aa453540
+ * "LV_FINDINFO" prints the identical layout with psz typed LPCSTR --
+ * alias bridged below.  flags takes the LVFI_* values (names
+ * published, values held).  32-bit size 24, TU-asserted. */
+typedef struct tagLVFINDINFO {
+    UINT     flags;
+    LPCTSTR  psz;
+    LPARAM   lParam;
+    POINT    pt;
+    UINT     vkDirection;
+} LVFINDINFO, FAR *LPFINDINFO;
+typedef LVFINDINFO  LV_FINDINFO;      /* aa453540, identical layout */
+
+/* aa453428 "LVHITTESTINFO": "typedef struct _LVHITTESTINFO {POINT
+ * pt; UINT flags; int iItem; int iSubItem;} LVHITTESTINFO;".
+ * flags takes the LVHT_* values (names published, values held).
+ * 32-bit size 20, TU-asserted. */
+typedef struct _LVHITTESTINFO {
+    POINT    pt;
+    UINT     flags;
+    int      iItem;
+    int      iSubItem;
+} LVHITTESTINFO, FAR *LPLVHITTESTINFO;
+
+/* ms931605 "NMLISTVIEW": "typedef struct tagNMLISTVIEW {NMHDR hdr;
+ * int iItem; int iSubItem; UINT uNewState; UINT uOldState; UINT
+ * uChanged; POINT ptAction; LPARAM lParam;} NMLISTVIEW, FAR*
+ * LPNMLISTVIEW;".  32-bit size 44, TU-asserted. */
+typedef struct tagNMLISTVIEW {
+    NMHDR    hdr;
+    int      iItem;
+    int      iSubItem;
+    UINT     uNewState;
+    UINT     uOldState;
+    UINT     uChanged;
+    POINT    ptAction;
+    LPARAM   lParam;
+} NMLISTVIEW, FAR *LPNMLISTVIEW;
+
+/* ms931617 "NMLVCACHEHINT": "typedef struct tagNMLVCACHEHINT {NMHDR
+ * hdr; int iFrom; int iTo;} NMLVCACHEHINT, *PNMLVCACHEHINT;".
+ * 32-bit size 20, TU-asserted. */
+typedef struct tagNMLVCACHEHINT {
+    NMHDR    hdr;
+    int      iFrom;
+    int      iTo;
+} NMLVCACHEHINT, *PNMLVCACHEHINT;
+
+/* ms931627 "NMLVCUSTOMDRAW": "typedef struct tagNMLVCUSTOMDRAW {
+ * NMCUSTOMDRAW nmcd; COLORREF clrText; COLORREF clrTextBk;
+ * #if (_WIN32_IE >= 0x0400) int iSubItem; #endif DWORD dwItemType;
+ * RECT rcText; UINT uAlign;} NMLVCUSTOMDRAW, *LPNMLVCUSTOMDRAW;" --
+ * the _WIN32_IE conditional member is printed verbatim by the page
+ * and reproduced here (absent in this repo: 32-bit size 80,
+ * TU-asserted).  dwItemType takes the LVCDI_* values and uAlign the
+ * LVA_* values (names published, values held). */
+typedef struct tagNMLVCUSTOMDRAW {
+    NMCUSTOMDRAW  nmcd;
+    COLORREF      clrText;
+    COLORREF      clrTextBk;
+#if (_WIN32_IE >= 0x0400)
+    int           iSubItem;
+#endif
+    DWORD         dwItemType;
+    RECT          rcText;
+    UINT          uAlign;
+} NMLVCUSTOMDRAW, *LPNMLVCUSTOMDRAW;
+
+/* ms931633 "NMLVFINDITEM": "typedef struct _NMLVFINDITEM {NMHDR
+ * hdr; int iStart; LVFINDINFO lvfi;} NMLVFINDITEM, *PNMLVFINDITEM;".
+ * 32-bit size 40, TU-asserted. */
+typedef struct _NMLVFINDITEM {
+    NMHDR       hdr;
+    int         iStart;
+    LVFINDINFO  lvfi;
+} NMLVFINDITEM, *PNMLVFINDITEM;
+
+/* ms931639 "NMLVGETINFOTIP": "typedef struct tagNMLVGETINFOTIP {
+ * NMHDR hdr; DWORD dwFlags; LPTSTR pszText; int cchTextMax; int
+ * iItem; int iSubItem; LPARAM lParam;} NMLVGETINFOTIP,
+ * *LPNMLVGETINFOTIP;".  32-bit size 36, TU-asserted. */
+typedef struct tagNMLVGETINFOTIP {
+    NMHDR    hdr;
+    DWORD    dwFlags;
+    LPTSTR   pszText;
+    int      cchTextMax;
+    int      iItem;
+    int      iSubItem;
+    LPARAM   lParam;
+} NMLVGETINFOTIP, *LPNMLVGETINFOTIP;
+
+/* ms931645 "NMLVKEYDOWN": "typedef struct tagLVKEYDOWN {NMHDR hdr;
+ * WORD wVKey; UINT flags;} NMLVKEYDOWN, FAR* LPNMLVKEYDOWN;".
+ * 32-bit size 20, TU-asserted. */
+typedef struct tagLVKEYDOWN {
+    NMHDR    hdr;
+    WORD     wVKey;
+    UINT     flags;
+} NMLVKEYDOWN, FAR *LPNMLVKEYDOWN;
+
+/* ms931653 "NMLVODSTATECHANGE": "typedef struct
+ * tagNMLVODSTATECHANGE {NMHDR hdr; int iFrom; int iTo; UINT
+ * uNewState; UINT uOldState;} NMLVODSTATECHANGE, FAR*
+ * LPNMLVODSTATECHANGE;".  32-bit size 28, TU-asserted. */
+typedef struct tagNMLVODSTATECHANGE {
+    NMHDR    hdr;
+    int      iFrom;
+    int      iTo;
+    UINT     uNewState;
+    UINT     uOldState;
+} NMLVODSTATECHANGE, FAR *LPNMLVODSTATECHANGE;
+
+/* aa453424 "LV_DISPINFO": "typedef struct tag LV_DISPINFO {NMHDR
+ * hdr; LVITEM item; } LV_DISPINFO;" -- the tag is printed with a
+ * space ("tag LV_DISPINFO") [sic]; tag spelled tagLV_DISPINFO here.
+ * 32-bit size 52, TU-asserted. */
+typedef struct tagLV_DISPINFO {
+    NMHDR    hdr;
+    LVITEM   item;
+} LV_DISPINFO;
+
+/* ------------------------------------------------------------------ */
+/* HELD ledger, batch 2 (names published without numeric values; full
+ * page-id accounting in docs/inventory.md M56):
+ *   rebar:    RB_ messages (aa453608..), RBN_ notifications
+ *             (aa453625..), RBBIM_/RBBS_ (aa453639),
+ *             RBIM_IMAGELIST (aa453640), RBHT_ (aa453620), RBS_
+ *             styles
+ *   header:   HDM_ messages (ms929883..), HDN_ notifications,
+ *             HDI_/HDF_/HHT_ (ms929880/81), the 15 Header_ macros --
+ *             their SNDMSG bodies ARE printed (ms929911..) but
+ *             reference the unpublished HDM_ values, so the macro
+ *             definitions are held
+ *   tab:      TCM_/TCN_ (ms9138xx/aa45278x), TCIF_/TCIS_/TCHT_
+ *             (ms913854/57/60), the TabCtrl_ macro bodies (not
+ *             printed)
+ *   dtpicker: DTM_ messages (aa452979..), DTN_ notifications, DTS_
+ *             styles, MCSC_/GDTR_/GDT_ (names, values held)
+ *   monthcal: MCM_/MCN_ (aa452xxx), MCHT_ (ms911793), the MonthCal_
+ *             macro bodies (not printed)
+ *   treeview: TVM_/TVN_ (ms913xxx/aa45280x), TVIF_/TVIS_/TVHT_/TVI_
+ *             (ms913992 etc.), the TreeView_ macro bodies (not
+ *             printed)
+ *   listview: LVM_/LVN_ (aa4534xx/ms931xxx), LVIF_/LVIS_/LVFI_/
+ *             LVHT_/LVBKIF_/LVCDI_/LVA_ (aa453422..), the ListView_
+ *             macro bodies (not printed)
  * ------------------------------------------------------------------ */
 
 #ifdef __cplusplus

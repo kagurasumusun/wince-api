@@ -4909,6 +4909,139 @@ static int m55_shaped_usage(void)
     return 0;
 }
 
+
+/* ------------------------------------------------------------------ */
+/* M56: Common Controls batch 2 structures (Rebar, Header, Tab, DTP,   */
+/* MonthCal, Tree View, List View; no Link Library rows).              */
+/* ------------------------------------------------------------------ */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(REBARINFO) == 12, "REBARINFO 32-bit size");
+_Static_assert(sizeof(NMRBAUTOSIZE) == 48, "NMRBAUTOSIZE 32-bit size");
+_Static_assert(sizeof(NMREBAR) == 28, "NMREBAR 32-bit size");
+_Static_assert(sizeof(RBHITTESTINFO) == 16, "RBHITTESTINFO 32-bit size");
+_Static_assert(sizeof(HDITEM) == 36, "HDITEM 32-bit size");
+_Static_assert(sizeof(HD_LAYOUT) == 8, "HD_LAYOUT 32-bit size");
+_Static_assert(sizeof(HD_HITTESTINFO) == 16, "HD_HITTESTINFO 32-bit size");
+_Static_assert(sizeof(NMHDDISPINFO) == 36, "NMHDDISPINFO 32-bit size");
+_Static_assert(sizeof(NMHEADER) == 24, "NMHEADER 32-bit size");
+_Static_assert(sizeof(TCITEM) == 28, "TCITEM 32-bit size");
+_Static_assert(sizeof(TCITEMHEADER) == 24, "TCITEMHEADER 32-bit size");
+_Static_assert(sizeof(TCHITTESTINFO) == 12, "TCHITTESTINFO 32-bit size");
+_Static_assert(sizeof(NMTCKEYDOWN) == 20, "NMTCKEYDOWN 32-bit size");
+_Static_assert(sizeof(NMDATETIMECHANGE) == 32,
+               "NMDATETIMECHANGE 32-bit size");
+_Static_assert(sizeof(NMDATETIMEFORMAT) == 164,
+               "NMDATETIMEFORMAT 32-bit size");
+_Static_assert(sizeof(NMDATETIMEFORMATQUERY) == 24,
+               "NMDATETIMEFORMATQUERY 32-bit size");
+_Static_assert(sizeof(NMDATETIMESTRING) == 36,
+               "NMDATETIMESTRING 32-bit size");
+_Static_assert(sizeof(NMDATETIMEWMKEYDOWN) == 36,
+               "NMDATETIMEWMKEYDOWN 32-bit size");
+_Static_assert(sizeof(MCHITTESTINFO) == 32, "MCHITTESTINFO 32-bit size");
+_Static_assert(sizeof(NMSELCHANGE) == 44, "NMSELCHANGE 32-bit size");
+_Static_assert(sizeof(NMDAYSTATE) == 36, "NMDAYSTATE 32-bit size");
+_Static_assert(sizeof(TVITEM) == 40, "TVITEM 32-bit size");
+_Static_assert(sizeof(TV_INSERTSTRUCT) == 48,
+               "TV_INSERTSTRUCT 32-bit size");
+_Static_assert(sizeof(TV_HITTESTINFO) == 16,
+               "TV_HITTESTINFO 32-bit size");
+_Static_assert(sizeof(TVSORTCB) == 12, "TVSORTCB 32-bit size");
+_Static_assert(sizeof(NM_TREEVIEW) == 104, "NM_TREEVIEW 32-bit size");
+_Static_assert(sizeof(TV_DISPINFO) == 52, "TV_DISPINFO 32-bit size");
+_Static_assert(sizeof(NMTVCUSTOMDRAW) == 56, "NMTVCUSTOMDRAW 32-bit size");
+_Static_assert(sizeof(NMTVKEYDOWN) == 20, "NMTVKEYDOWN 32-bit size");
+_Static_assert(sizeof(LVITEM) == 40, "LVITEM 32-bit size");
+_Static_assert(sizeof(LVCOLUMN) == 32, "LVCOLUMN 32-bit size");
+_Static_assert(sizeof(LVBKIMAGE) == 24, "LVBKIMAGE 32-bit size");
+_Static_assert(sizeof(LVFINDINFO) == 24, "LVFINDINFO 32-bit size");
+_Static_assert(sizeof(LVHITTESTINFO) == 20, "LVHITTESTINFO 32-bit size");
+_Static_assert(sizeof(NMLISTVIEW) == 44, "NMLISTVIEW 32-bit size");
+_Static_assert(sizeof(NMLVCACHEHINT) == 20, "NMLVCACHEHINT 32-bit size");
+_Static_assert(sizeof(NMLVCUSTOMDRAW) == 80,
+               "NMLVCUSTOMDRAW 32-bit size");
+_Static_assert(sizeof(NMLVFINDITEM) == 40, "NMLVFINDITEM 32-bit size");
+_Static_assert(sizeof(NMLVGETINFOTIP) == 36,
+               "NMLVGETINFOTIP 32-bit size");
+_Static_assert(sizeof(NMLVKEYDOWN) == 20, "NMLVKEYDOWN 32-bit size");
+_Static_assert(sizeof(NMLVODSTATECHANGE) == 28,
+               "NMLVODSTATECHANGE 32-bit size");
+_Static_assert(sizeof(LV_DISPINFO) == 52, "LV_DISPINFO 32-bit size");
+#endif
+
+static int m56_shaped_usage(void)
+{
+    REBARINFO          ri;
+    NMRBAUTOSIZE       nmrba;
+    HDITEM             hdi;
+    HDLAYOUT           hdl;
+    NMHEADER           nmhd;
+    TCITEM             tci;
+    TCHITTESTINFO      tchti;
+    NMDATETIMECHANGE   nmdtc;
+    MCHITTESTINFO      mchti;
+    NMSELCHANGE        nmsc;
+    NMDAYSTATE         nmds;
+    TVITEM             tvi;
+    TV_INSERTSTRUCT    tvis;
+    TVSORTCB           tvscb;
+    NM_TREEVIEW        nmtv;
+    NMTVCUSTOMDRAW     nmtvcd;
+    LVITEM             lvi;
+    LVCOLUMN           lvc;
+    LVBKIMAGE          lvbk;
+    LVFINDINFO         lvfi;
+    LVHITTESTINFO      lvhti;
+    NMLISTVIEW         nmlv;
+    NMLVCUSTOMDRAW     nmlvcd;
+    LV_DISPINFO        lvdi;
+
+    ri.cbSize     = sizeof(REBARINFO);
+    nmrba.hdr.code = 0;
+    hdi.mask      = 0;
+    hdl.prc       = (RECT FAR *)0;
+    nmhd.iItem    = 0;
+    tci.mask      = 0;
+    tchti.pt.x    = 0;
+    nmdtc.st.wYear = 2026;
+    mchti.cbSize  = sizeof(MCHITTESTINFO);
+    nmsc.stSelStart.wMonth = 9;
+    nmds.cDayState = 0;
+    tvi.hItem     = (HTREEITEM)0;
+    tvis.hParent  = (HTREEITEM)0;
+    tvscb.lpfnCompare = (PFNTVCOMPARE)0;
+    nmtv.action   = 0;
+    nmtvcd.clrText = 0;
+    lvi.iItem     = 0;
+    lvc.cx        = 0;
+    lvbk.hbm      = (HBITMAP)0;
+    lvfi.psz      = (LPCTSTR)0;
+    lvhti.iItem   = 0;
+    nmlv.iItem    = 0;
+    nmlvcd.clrTextBk = 0;
+    lvdi.item.mask = 0;
+
+    /* alias bridges (title vs printed spellings) */
+    {
+        HD_ITEM      *p1 = &hdi;
+        HDLAYOUT     *p2 = &hdl;
+        HDHITTESTINFO *p3 = (HDHITTESTINFO *)0;
+        TV_ITEM      *p4 = &tvi;
+        TVHITTESTINFO *p5 = (TV_HITTESTINFO *)0;
+        TV_SORTCB    *p6 = &tvscb;
+        TV_KEYDOWN   *p7 = (TV_KEYDOWN *)0;
+        LV_FINDINFO  *p8 = &lvfi;
+        (void) p1; (void) p2; (void) p3; (void) p4; (void) p5;
+        (void) p6; (void) p7; (void) p8;
+    }
+    (void) ri; (void) nmrba; (void) hdi; (void) hdl; (void) nmhd;
+    (void) tci; (void) tchti; (void) nmdtc; (void) mchti; (void) nmsc;
+    (void) nmds; (void) tvi; (void) tvis; (void) tvscb; (void) nmtv;
+    (void) nmtvcd; (void) lvi; (void) lvc; (void) lvbk; (void) lvfi;
+    (void) lvhti; (void) nmlv; (void) nmlvcd; (void) lvdi;
+    return 0;
+}
+
 static int m53_shaped_usage(void)
 {
     BROWSEINFO        bi;
@@ -5062,6 +5195,8 @@ int host_tu_entry(void)
     if (m54_shaped_usage() != 0)
         return 1;
     if (m55_shaped_usage() != 0)
+        return 1;
+    if (m56_shaped_usage() != 0)
         return 1;
     return 0;
 }
