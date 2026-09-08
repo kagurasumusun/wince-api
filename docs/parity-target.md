@@ -23,20 +23,23 @@ this repository; our headers are written from the official pages
 * These DLLs are the *second-order* target: after the coredll core,
   each DLL's official function pages are processed the same way.
 
-## Coverage status
+## Coverage status (through M44, 2026-09-08)
 
 | Area | Status |
 |---|---|
 | `windows.h` umbrella | shipped (M1) |
 | `windef.h` base types/macros | shipped (M1) |
-| `winbase.h` — process/thread/module/memory/error core | M1–M8 shipped (ExitProcess = documented conflict, declared for source compat; kernel-scope kfuncs intentionally not declared) |
-| Structures (PROCESS_INFORMATION, FILETIME, SYSTEMTIME, WIN32_FIND_DATAW defined; SECURITY_ATTRIBUTES/STARTUPINFOW/OVERLAPPED opaque NULL-only tags) | shipped (M1–M8) |
-| Constants (`winerror.h` rows 0–1078 from official numeric table `aa450919`; file/directory + creation/flag + priority + TLS + load-library values) | shipped (M1–M8) |
-| Remaining winbase families (heap, sync/wait, string, registry) | queued; official page per function |
-| GUI: `winuser.h` (WinMain, windows, messages, controls) | queued (WinMain page `ms914104` already in wince-crt records) |
-| Import-library defs (`def/coredll-doc.def` + more per harvested DLL) | M9: derived from the official documentation pages only — `tools/ce-manifest.py` + `tools/ce-fetch.py` harvest the per-page Link Library rows into `build/rows.json`; `tools/gen-doc-def.py` writes the committed def; `llvm-dlltool` builds the import lib. Grows as more reference books are harvested |
-| Real-toolchain compile matrix (headers + TU, `-Werror`) | passing since M8 (now M9 sync + winnt.h): `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 |
-| End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | shipped (M37): `make e2e` links the tests/e2e consumers (main app / WinMain app / DLL) with the Akari CRT against the doc-derived `llvm-dlltool` import libraries on all six arm/i386-pc-wince{4.2,5.0,6.0} targets; PE machine/CE-subsystem/import names asserted |
+| `winbase.h` — full shipped surface: process/thread/module/memory/error, heap, sync/wait, strings, registry, files, messages, serial (M23 in winbase.h), services, power, system info, CE-specific (LocalAlloc/MsgQueue family) | shipped (M1–M35) |
+| `winuser.h` GUI: windows, messages, controls, menus, dialogs, clipboards, accelerators, shell | shipped (M19–M29, M39 window properties) |
+| `wingdi.h` / `wingdi` GDI | shipped (M10–M16, M27 fonts) |
+| `winreg.h`, `winnls.h`, `psapi.h`, `tlhelp32.h`, `msgqueue.h`, `excpt.h`, `dbgapi.h`, `errorrep.h`, `celog.h`, `natedit.h`, `commctrl.h`, `notify.h`, `shellapi.h`, `tvout.h`, `winerror.h`, `winnt.h` | shipped |
+| Winsock: `winsock2.h` + `ws2tcpip.h` + `ws2spi.h` (WS2_32/Ws2.lib) | shipped (M37–M42) |
+| TAPI/TSPI: `tapi.h` + `tapicomn.h` (91 TAPI client fn pages; TSPI in coredll) | shipped (M43) |
+| COM/OLE/Storage/Automation: `objbase.h` umbrella (635 pages: Objbase/Objidl/Oaidl/Wtypes/Unknwn/Oleauto/Ocidl) | shipped (M44): 307 functions (ole32.dll 84, oleaut32.dll 223), 64 documented structures/enums, 50 opaque interfaces with documented method lists, full STGM/CLSCTX/VT_/FADF_/type-lib constant sets |
+| Import-library defs (`def/*-doc.def`) | doc-derived only — `tools/ce-fetch.py` harvests per-page Link Library rows into `build/rows.json`; `tools/gen-doc-def.py` writes the committed defs; `llvm-dlltool` builds the import libs. Current: coredll **470**, coredll-adjacent (coreloc, commctrl, msgque, ...), ws2 **100**, **ole32 84**, **oleaut32 222** |
+| Real-toolchain compile matrix (headers + TU, `-Werror`) | passing: `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 (26 headers standalone + full TU) |
+| End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | shipped (M37+, extended M39–M44): `make e2e` links the tests/e2e consumers (main app / WinMain app / DLL) on all six arm/i386-pc-wince{4.2,5.0,6.0} targets; PE machine/CE-subsystem/import names asserted for coredll.dll, ws2.dll and ole32.dll/oleaut32.dll |
+| Queued (page-grounded, official pages in corpus) | TAPI client runtime (TAPI32 client functions held from M43), remaining CE books not yet harvested in full (CE 4.2 book pages), crypt32 / aygshell / other second-order DLLs |
 
 ## Ordering principle
 
@@ -44,8 +47,8 @@ this repository; our headers are written from the official pages
    program with wince-crt compile and link);
 2. then per-DLL batches, each function grounded on its official page;
 3. def/import-library production once the header set covers a DLL's
-   surface; cross-verified against the device-dump-audited export
-   surface.
+   surface; the def is exactly the pages' documented Link Library
+   rows (no dump or binary inspection).
 
 Every batch adds only page-grounded declarations; the third-party
 tree is never consulted for content.

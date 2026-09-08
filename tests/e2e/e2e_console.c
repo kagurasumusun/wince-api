@@ -21,6 +21,7 @@
 #include <ws2spi.h>
 #include <tapi.h>
 #include <tapicomn.h>
+#include <objbase.h>
 
 int main(void)
 {
@@ -64,6 +65,29 @@ int main(void)
     /* M43: TAPI/TSPI (Tapicomn.h) import surface -- linked, not run. */
     (void) TSPI_lineOpen(0, NULL, NULL, 0, NULL);
     (void) TSPI_phoneGetDevCaps(0, 0, 0, NULL);
+    /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
+     * not run: the image must import the Ole32.lib/Oleaut32.lib-
+     * documented names from ole32.dll/oleaut32.dll per the doc-derived
+     * defs. */
+    {
+        GUID g;
+        BSTR b;
+        VARIANTARG va;
+        (void) CoCreateGuid(&g);
+        (void) CoInitialize(NULL);
+        (void) CoCreateInstanceEx((REFCLSID)&g, (IUnknown *)0,
+                                  CLSCTX_INPROC_SERVER, (COSERVERINFO *)0,
+                                  0, (MULTI_QI *)0);
+        (void) CLSIDFromString((LPOLESTR)0, (LPCLSID)0);
+        (void) CreateFileMoniker((LPCOLESTR)0, (LPMONIKER *)0);
+        (void) StgCreateDocfile((const WCHAR *)0, STGM_READ, 0, (IStorage **)0);
+        b = SysAllocString((OLECHAR *)0);
+        (void) SysFreeString(b);
+        (void) VariantInit(&va);
+        (void) VariantClear(&va);
+        (void) SafeArrayDestroy((SAFEARRAY *)0);
+        (void) LoadTypeLib((OLECHAR *)0, (ITypeLib **)0);
+    }
     (void)tick;
     (void)si;
     (void)mod;

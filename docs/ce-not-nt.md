@@ -30,7 +30,7 @@ Consequences for this repository (clean-room, official pages only):
   kernel APIs live behind Nk.lib/Kfuncs.h rows that are kept separate
   from the user-mode surface (documented conflict model).
 
-## Official-evidence appendix (checked 2026-09-07)
+## Official-evidence appendix (checked 2026-09-07; re-verified 2026-09-08)
 
 Q: "is Windows CE really not NT-family? prove it from official public
 information, versions 1.0–6.0."  Every CE version (1.0, 2.x, 3.0,
@@ -61,8 +61,9 @@ Official public sources say so structurally:
   named is *CE 3.0 → CE .NET*, never Windows NT; the "hard real-time"
   and "configurable components" claims are not NT properties.
 
-* **Microsoft Research's official "Experiment 19" description
-  (microsoft.com/en-us/research) states the two kernels side by side
+* **Microsoft Research's official "Experiment 19" project page
+  (microsoft.com/en-us/research/project/experiment-19/, re-fetched
+  2026-09-08) states the two kernels side by side
   as different things:** Windows Phone 7 ran "the Windows CE kernel,
   the same OS kernel used in Windows Phone 7", while Windows Phone 8
   ran "the Windows NT kernel, the same OS kernel used in Windows 8";

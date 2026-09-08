@@ -18,7 +18,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/winuser.h include/winerror.h include/winnt.h include/wingdi.h include/tvout.h \
        include/notify.h include/shellapi.h include/commctrl.h \
        include/winsock2.h include/ws2tcpip.h include/ws2spi.h \
-       include/tapi.h include/tapicomn.h
+       include/tapi.h include/tapicomn.h \
+       include/objbase.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -186,6 +187,22 @@ e2e:
 	  | grep -q "Symbol: TSPI_lineOpen" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: TSPI_phoneGetDevCaps" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: ole32.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CoCreateGuid" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CreateFileMoniker" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: StgCreateDocfile" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: oleaut32.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SysAllocString" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: VariantInit" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: LoadTypeLib" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

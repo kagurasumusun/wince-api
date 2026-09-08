@@ -26,6 +26,7 @@
 #include <ws2spi.h>
 #include <tapi.h>
 #include <tapicomn.h>
+#include <objbase.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -2866,6 +2867,353 @@ static void m43_phone_event(HTAPIPHONE htPhone, DWORD dwMsg, DWORD dwParam1,
 static void m43_async_completion(DRV_REQUESTID dwRequestID, LONG lResult)
 { (void) dwRequestID; (void) lResult; }
 
+/* M44: COM/OLE/Storage/Automation (objbase.h).  32-bit sizes of the
+ * documented structures; the CE toolchain is the arbiter. */
+#if __SIZEOF_POINTER__ == 4
+typedef char m44_size_guid[sizeof(GUID) == 16 ? 1 : -1];
+typedef char m44_size_clsid[sizeof(CLSID) == 16 ? 1 : -1];
+typedef char m44_size_iid[sizeof(IID) == 16 ? 1 : -1];
+typedef char m44_size_cy[sizeof(CY) == 8 ? 1 : -1];
+typedef char m44_size_currency[sizeof(CURRENCY) == 8 ? 1 : -1];
+typedef char m44_size_variant[sizeof(VARIANT) == 16 ? 1 : -1];
+typedef char m44_size_variantarg[sizeof(VARIANTARG) == 16 ? 1 : -1];
+typedef char m44_size_safearraybound[sizeof(SAFEARRAYBOUND) == 8 ? 1 : -1];
+typedef char m44_size_safearray[sizeof(SAFEARRAY) == 24 ? 1 : -1];
+typedef char m44_size_dispparams[sizeof(DISPPARAMS) == 16 ? 1 : -1];
+typedef char m44_size_excepinfo[sizeof(EXCEPINFO) == 32 ? 1 : -1];
+typedef char m44_size_paramdata[sizeof(PARAMDATA) == 8 ? 1 : -1];
+typedef char m44_size_methoddata[sizeof(METHODDATA) == 28 ? 1 : -1];
+typedef char m44_size_tlibattr[sizeof(TLIBATTR) == 32 ? 1 : -1];
+typedef char m44_size_typedescl[sizeof(TYPEDESC) == 8 ? 1 : -1];
+typedef char m44_size_arraydesc[sizeof(ARRAYDESC) == 20 ? 1 : -1];
+typedef char m44_size_idldesc[sizeof(IDLDESC) == 8 ? 1 : -1];
+typedef char m44_size_paramdesc[sizeof(PARAMDESC) == 8 ? 1 : -1];
+typedef char m44_size_elemdesc[sizeof(ELEMDESC) == 16 ? 1 : -1];
+typedef char m44_size_funcdesc[sizeof(FUNCDESC) == 52 ? 1 : -1];
+typedef char m44_size_vardesc[sizeof(VARDESC) == 36 ? 1 : -1];
+typedef char m44_size_interfaceinfo[sizeof(INTERFACEINFO) == 24 ? 1 : -1];
+typedef char m44_size_bindptr[sizeof(BINDPTR) == 4 ? 1 : -1];
+typedef char m44_size_typeattr[sizeof(TYPEATTR) == 76 ? 1 : -1];
+typedef char m44_size_custdataitem[sizeof(CUSTDATAITEM) == 32 ? 1 : -1];
+typedef char m44_size_custdata[sizeof(CUSTDATA) == 8 ? 1 : -1];
+typedef char m44_size_coauthidentity[sizeof(COAUTHIDENTITY) == 28 ? 1 : -1];
+typedef char m44_size_coauthinfo[sizeof(COAUTHINFO) == 28 ? 1 : -1];
+typedef char m44_size_coserverinfo[sizeof(COSERVERINFO) == 16 ? 1 : -1];
+typedef char m44_size_sole_auth[sizeof(SOLE_AUTHENTICATION_SERVICE) == 16 ? 1 : -1];
+typedef char m44_size_multi_qi[sizeof(MULTI_QI) == 12 ? 1 : -1];
+typedef char m44_size_dvtargetdevice[sizeof(DVTARGETDEVICE) == 16 ? 1 : -1];
+typedef char m44_size_formatetc[sizeof(FORMATETC) == 20 ? 1 : -1];
+typedef char m44_size_stgmedium[sizeof(STGMEDIUM) == 12 ? 1 : -1];
+typedef char m44_size_statstg[sizeof(STATSTG) == 72 ? 1 : -1];
+typedef char m44_size_bind_opts[sizeof(BIND_OPTS) == 16 ? 1 : -1];
+typedef char m44_size_bind_opts2[sizeof(BIND_OPTS2) == 32 ? 1 : -1];
+typedef char m44_size_bindinfo[sizeof(BINDINFO) == 84 ? 1 : -1];
+typedef char m44_size_licinfo[sizeof(LICINFO) == 12 ? 1 : -1];
+typedef char m44_size_connectdata[sizeof(CONNECTDATA) == 8 ? 1 : -1];
+typedef char m44_size_controlinfo[sizeof(CONTROLINFO) == 16 ? 1 : -1];
+typedef char m44_size_dvaspectinfo[sizeof(DVASPECTINFO) == 8 ? 1 : -1];
+typedef char m44_size_dvextentinfo[sizeof(DVEXTENTINFO) == 16 ? 1 : -1];
+typedef char m44_size_sizel[sizeof(SIZEL) == 8 ? 1 : -1];
+typedef char m44_size_secattr[sizeof(SECURITY_ATTRIBUTES) == 12 ? 1 : -1];
+typedef char m44_size_hresult[(sizeof(HRESULT) == sizeof(LONG)) ? 1 : -1];
+typedef char m44_size_variantbool[(sizeof(VARIANT_BOOL) == 2) ? 1 : -1];
+typedef char m44_size_date[(sizeof(DATE) == sizeof(double)) ? 1 : -1];
+#endif
+
+static int m44_shaped_usage(void)
+{
+    HRESULT    hr;
+    GUID       clsid;
+    GUID       iid;
+    MULTI_QI   mq;
+    BSTR       bstr;
+    OLECHAR    sz[8];
+    (void)sz;
+    OLECHAR   *pwsz;
+    VARIANT    var;
+    VARIANTARG vararg;
+    DISPPARAMS dispparams;
+    EXCEPINFO  excepinfo;
+    SAFEARRAYBOUND bound;
+    SAFEARRAY  sa;
+    SAFEARRAY *psa;
+    CURRENCY   cy;
+    DISPID     dispid;
+    LCID       lcid;
+    VARTYPE    vt;
+    BOOL       b;
+    ULONG      n;
+
+    GUID class_id = {0x000C30C9, 0x0CD2, 0x4D62, {0xA0, 0x85, 0xC3, 0x48, 0xDB, 0x9A, 0x2F, 0xD1}};
+    GUID int_id   = {0x00000001, 0x0000, 0x0000, {0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}};
+
+    /* scalar forms */
+    sz[0] = (OLECHAR)'t';
+    static const WCHAR w_m44[] = { 't', 'e', 's', 't', 0 };
+    pwsz = (LPOLESTR)w_m44;
+    clsid = class_id;
+    iid = int_id;
+    {
+        const OLECHAR *pcsz = (LPCOLESTR)pwsz;
+        BSTR bb = (BSTR)pwsz;
+        CLSID c2 = (CLSID)clsid;
+        IID i2 = (IID)iid;
+        const GUID *g2 = (REFGUID)&clsid;
+        const IID *i3 = (REFIID)&iid;
+        (void)pcsz; (void)bb; (void)c2; (void)i2; (void)g2; (void)i3;
+    }
+    cy.int64 = 123;
+    cy.Lo = 1;
+    {
+        CURRENCY c3 = (CURRENCY)cy;
+        (void)c3;
+    }
+    vt = VT_I4;
+    if (!(vt == (VARTYPE)(VT_I4 | VT_ARRAY))) return 1;
+    if (!(vt == (VARTYPE)(VT_BYREF | VT_R8))) return 1;
+    dispid = 0;
+    lcid = 0;
+    b = 0;
+    n = 0;
+
+    /* VARIANT / VARIANTARG / DISPPARAMS / EXCEPINFO */
+    hr = VariantInit(&vararg);
+    var = vararg;
+    var.vt = VT_BOOL;
+    var.boolVal = 0;
+    vararg.vt = VT_I4;
+    vararg.lVal = 42;
+    hr = VariantCopy(&vararg, &vararg);
+    hr = VariantChangeTypeEx(&vararg, &var, lcid, 0, VT_I4);
+    hr = VariantClear(&vararg);
+    dispparams.rgvarg = &vararg;
+    dispparams.rgdispidNamedArgs = &dispid;
+    dispparams.cArgs = 1;
+    dispparams.cNamedArgs = 0;
+    excepinfo.wCode = 0;
+    excepinfo.bstrSource = (BSTR)0;
+    excepinfo.pvReserved = (void *)0;
+    excepinfo.pfnDeferredFillIn = (HRESULT (STDAPICALLTYPE *)(struct _tagEXCEPINFO *))(0);
+    excepinfo.scode = 0;
+    (void)excepinfo;
+
+    /* SAFEARRAY */
+    bound.cElements = 4;
+    bound.lLbound = 0;
+    sa = (SAFEARRAY){0};
+    sa.rgsabound[0] = bound;
+    psa = &sa;
+    hr = SafeArrayCreate(VT_I4, 1, &bound);
+    hr = SafeArrayCreateVector(VT_UI1, 0, 4);
+    hr = SafeArrayDestroy(psa);
+    hr = SafeArrayAccessData(psa, (void **)0);
+    hr = SafeArrayGetElement(psa, (long *)0, (void *)0);
+    hr = SafeArrayPutElement(psa, (long *)0, (void *)0);
+    hr = SafeArrayGetLBound(psa, 0, (long *)0);
+    hr = SafeArrayGetUBound(psa, 0, (long *)0);
+    hr = SafeArrayLock(psa);
+    hr = SafeArrayUnlock(psa);
+    hr = SafeArrayRedim(psa, &bound);
+    n = SafeArrayGetDim(psa);
+    n = SafeArrayGetElemsize(psa);
+    if (!(n & (FADF_STATIC | FADF_FIXEDSIZE))) return 1;
+
+    /* BSTR / string / date */
+    bstr = SysAllocString(pwsz);
+    hr = SysFreeString(bstr);
+    hr = SysReAllocStringLen(&bstr, pwsz, 2);
+    n = SysStringLen(bstr);
+    n = SysStringByteLen(bstr);
+    {
+        SYSTEMTIME st;
+        double vt2;
+        n = SystemTimeToVariantTime(&st, &vt2);
+        n = VariantTimeToSystemTime(vt2, &st);
+    }
+    hr = VarBoolFromI4(1, &b);
+    hr = VarI4FromBool(b, (long *)0);
+    hr = VarCyFromI4(1, (CURRENCY *)0);
+    hr = VarR8FromI4(1, (double *)0);
+    hr = VarDateFromI4(1, (DATE *)0);
+    hr = VarBstrFromI4(1, lcid, 0, (BSTR)0);
+    hr = VarUI2FromI4(1, (USHORT *)0);
+    hr = VarUI4FromStr((OLECHAR *)0, lcid, 0, (ULONG *)0);
+    hr = VarDecFromI4(1, (DECIMAL *)0);
+    hr = VarR4FromI1(0, (float *)0);
+    hr = VarR8FromDisp((IDispatch *)0, lcid, (double *)0);
+    hr = VarI1FromI4(1, (char *)0);
+    hr = VarUdateFromDate((DATE *)0, 0, (UDATE *)0);
+    hr = VarParseNumFromStr((OLECHAR *)0, lcid, 0, (NUMPARSE *)0, (unsigned char *)0);
+    hr = VarNumFromParseNum((NUMPARSE *)0, (unsigned char *)0, 0, (VARIANT *)0);
+    hr = VectorFromBstr((BSTR)0, &psa);
+    hr = BstrFromVector(psa, &bstr);
+
+    /* type library forms */
+    {
+        TLIBATTR tlib;
+        TYPEATTR typeattr;
+        TYPEDESC td;
+        ELEMDESC ed;
+        FUNCDESC fd;
+        VARDESC vd;
+        ARRAYDESC ad;
+        IDLDESC idl = {0, 0};
+        PARAMDESC pd;
+        INTERFACEINFO ii;
+        CUSTDATA cd;
+        CUSTDATAITEM cdi;
+        METHODDATA md;
+        PARAMDATA pdt;
+        BINDPTR bp;
+        tlib.syskind = SYS_WIN32;
+        if (!(tlib.syskind == (SYSKIND)(SYS_WIN16 + 1))) return 1;
+        typeattr.typekind = TKIND_ENUM;
+        if (!(typeattr.typekind == (TYPEKIND)(TKIND_MAX - 1))) return 1;
+        td.vt = VT_VARIANT;
+        td.u.hreftype = 0;
+        ed.tdesc = td;
+        ed.u.idldesc = idl;
+        (void)ed;
+        fd.funckind = FUNC_STATIC;
+        fd.invkind = INVOKE_FUNC;
+        fd.callconv = CC_CDECL;
+        if (!(fd.callconv == (CALLCONV)(CC_PASCAL))) return 1;
+        vd.varkind = VAR_STATIC;
+        if (!(vd.varkind == (VARKIND)(VAR_CONST))) return 1;
+        ad.tdescElem = td;
+        ad.rgbounds[0] = bound;
+        idl.wIDLFlags = 0;
+        pd.wParamFlags = 0;
+        ii.iid = iid;
+        cd.prgCustData = &cdi;
+        cdi.varValue = vararg;
+        md.cc = CC_STDCALL;
+        md.vtReturn = VT_I4;
+        pdt.vtReturn = VT_R8;
+        bp.lptcomp = (ITypeComp *)0;
+        (void)tlib; (void)typeattr; (void)td; (void)fd; (void)vd; (void)ad;
+        (void)idl; (void)pd; (void)ii; (void)cd; (void)cdi; (void)md; (void)pdt; (void)bp;
+    }
+
+    /* OLE activation / moniker / storage forms */
+    {
+        COSERVERINFO coserver;
+        COAUTHINFO coauth;
+        COAUTHIDENTITY coauthid;
+        SOLE_AUTHENTICATION_SERVICE solesvc;
+        FORMATETC fmt;
+        DVTARGETDEVICE dvt;
+        STGMEDIUM medium;
+        STATSTG statstg;
+        BIND_OPTS bo;
+        BIND_OPTS2 bo2;
+        BINDINFO bi;
+        LICINFO lic;
+        CONNECTDATA cdd;
+        CONTROLINFO cinfo;
+        DVASPECTINFO dvi;
+        DVEXTENTINFO dvi2;
+        SIZEL szl;
+        coserver.pwszName = pwsz;
+        coauth.dwAuthnSvc = 0;
+        coauth.pAuthIdentityData = &coauthid;
+        coauthid.User = (USHORT *)0;
+        solesvc.pPrincipalName = pwsz;
+        solesvc.hr = 0;
+        mq.pIID = &iid;
+        mq.hr = 0;
+        fmt.dwAspect = DVASPECT_CONTENT;
+        fmt.tymed = TYMED_HGLOBAL;
+        if (!(fmt.dwAspect == (DWORD)(DVASPECT_ICON | DVASPECT_DOCPRINT))) return 1;
+        dvt.tdSize = 0;
+        medium.tymed = TYMED_ISTREAM;
+        medium.u.pstm = (IStream *)0;
+        medium.pUnkForRelease = (IUnknown *)0;
+        statstg.clsid = clsid;
+        statstg.grfMode = STGM_READWRITE;
+        if (!(statstg.grfMode == (DWORD)(STGM_CREATE | STGM_PRIORITY))) return 1;
+        bo.grfMode = STGM_READ;
+        bo2.dwClassContext = CLSCTX_INPROC_SERVER;
+        if (!(bo2.dwClassContext == (DWORD)(CLSCTX_SERVER | CLSCTX_ALL))) return 1;
+        bi.stgmedData = medium;
+        bi.iid = iid;
+        lic.cbLicInfo = 0;
+        cdd.pUnk = (IUnknown *)0;
+        cinfo.hAccel = (HACCEL)0;
+        dvi.dwFlags = 0;
+        dvi2.dwExtentMode = DVEXTENT_INTEGRAL;
+        szl.cx = 0;
+        szl.cy = 0;
+        (void)coserver; (void)coauth; (void)coauthid; (void)solesvc; (void)mq;
+        (void)fmt; (void)dvt; (void)medium; (void)statstg; (void)bo; (void)bo2;
+        (void)bi; (void)lic; (void)cdd; (void)cinfo; (void)dvi; (void)dvi2; (void)szl;
+    }
+
+    /* free-function call shapes (Ole32 + Oleaut32) */
+    hr = CoInitialize((LPVOID)0);
+    hr = CoInitializeEx((LPVOID)0, 0);
+    hr = CoCreateGuid(&clsid);
+    hr = CoCreateInstance((REFCLSID)&clsid, (LPUNKNOWN)0, CLSCTX_INPROC_SERVER, (REFIID)&iid, (LPVOID)0);
+    hr = CoCreateInstanceEx((REFCLSID)&clsid, (IUnknown *)0, CLSCTX_INPROC_SERVER, (COSERVERINFO *)0, 1, &mq);
+    hr = CoGetClassObject((REFCLSID)&clsid, 0, (COSERVERINFO *)0, (REFIID)&iid, (LPVOID)0);
+    hr = CoGetMalloc(0, (LPMALLOC *)0);
+    CoTaskMemFree(CoTaskMemAlloc(4));
+    CoUninitialize();
+    hr = CoDisconnectObject((IUnknown *)0, 0);
+    n = CoAddRefServerProcess();
+    n = CoReleaseServerProcess();
+    hr = CoGetCallContext((REFIID)&iid, (void **)0);
+    hr = CoGetMarshalSizeMax(&n, (REFIID)&iid, (IUnknown *)0, 0, (LPVOID)0, 0);
+    hr = CoMarshalInterface((IStream *)0, (REFIID)&iid, (IUnknown *)0, 0, (LPVOID)0, 0);
+    hr = CoUnmarshalInterface((IStream *)0, (REFIID)&iid, (void **)0);
+    hr = CoRevokeClassObject(0);
+    hr = CoRegisterClassObject((REFCLSID)&clsid, (IUnknown *)0, CLSCTX_INPROC_SERVER, 0, (LPDWORD)0);
+    hr = CLSIDFromString((LPOLESTR)0, (LPCLSID)0);
+    hr = CLSIDFromProgID((LPCOLESTR)0, (LPCLSID)0);
+    hr = ProgIDFromCLSID((REFCLSID)&clsid, (LPOLESTR *)0);
+    hr = IIDFromString((LPOLESTR)0, (LPIID)0);
+    n = StringFromGUID2((REFGUID)&clsid, (LPOLESTR)0, 0);
+    hr = StringFromCLSID((REFCLSID)&clsid, (LPOLESTR *)0);
+    hr = StringFromIID((REFIID)&iid, (LPOLESTR *)0);
+    {
+        LPMONIKER pmk = (LPMONIKER)0;
+        LPMONIKER pmk2 = (LPMONIKER)0;
+        LPBC pbc = (LPBC)0;
+        hr = CreateBindCtx(0, &pbc);
+        hr = CreateFileMoniker((LPCOLESTR)0, &pmk);
+        hr = CreateItemMoniker((LPCOLESTR)0, (LPCOLESTR)0, &pmk);
+        hr = CreatePointerMoniker((LPUNKNOWN)0, &pmk);
+        hr = CreateClassMoniker((REFCLSID)&clsid, (IMoniker **)0);
+        hr = CreateAntiMoniker(&pmk);
+        hr = CreateGenericComposite(pmk, pmk2, &pmk);
+        hr = MkParseDisplayName(pbc, (LPCOLESTR)0, &n, &pmk);
+        hr = BindMoniker(pmk, 0, (REFIID)&iid, (LPVOID)0);
+        hr = MonikerCommonPrefixWith(pmk, pmk2, &pmk2);
+        hr = MonikerRelativePathTo(pmk, pmk2, &pmk2, 0);
+        hr = GetRunningObjectTable(0, (LPRUNNINGOBJECTTABLE *)0);
+        (void)(HRESULT (WINOLEAPI *)(const WCHAR *, IStorage *, DWORD, SNB, DWORD, IStorage **))StgOpenStorage;
+        hr = StgCreateDocfile((const WCHAR *)0, STGM_READWRITE, 0, (IStorage **)0);
+        (void)(HRESULT (WINOLEAPI *)(ILockBytes *, IStorage *, DWORD, SNB, DWORD, IStorage **))StgOpenStorageOnILockBytes;
+        hr = StgCreateDocfileOnILockBytes((ILockBytes *)0, STGM_WRITE, 0, (IStorage **)0);
+        hr = GetClassFile((LPCWSTR)0, (CLSID *)0);
+        (void)pmk; (void)pmk2; (void)pbc;
+    }
+    hr = CreateErrorInfo((ICreateErrorInfo **)0);
+    hr = GetErrorInfo(0, (IErrorInfo **)0);
+    hr = SetErrorInfo(0, (IErrorInfo *)0);
+    hr = DispGetIDsOfNames((ITypeInfo *)0, (OLECHAR **)0, 0, (DISPID *)0);
+    hr = DispInvoke((LPVOID)0, (ITypeInfo *)0, dispid, 0, &dispparams, &var, &excepinfo, &n);
+    hr = DispGetParam(&dispparams, 0, vt, &var, &n);
+    hr = LoadTypeLib((OLECHAR *)0, (ITypeLib **)0);
+    hr = LoadRegTypeLib((REFGUID)&clsid, 1, 0, lcid, (ITypeLib **)0);
+    hr = RegisterTypeLib((ITypeLib *)0, (OLECHAR *)0, (OLECHAR *)0);
+    hr = UnRegisterTypeLib((REFGUID)&clsid, 1, 0, lcid, SYS_WIN32);
+    hr = CreateTypeLib2(SYS_WIN32, (LPOLESTR)0, (ICreateTypeLib2 **)0);
+
+    (void)hr;
+    return 0;
+}
+
 static int m43_shaped_usage(void)
 {
     HDRVLINE   hdLine   = (HDRVLINE)0;
@@ -3053,6 +3401,8 @@ int host_tu_entry(void)
     if (m42_shaped_usage() != 0)
         return 1;
     if (m43_shaped_usage() != 0)
+        return 1;
+    if (m44_shaped_usage() != 0)
         return 1;
     return 0;
 }

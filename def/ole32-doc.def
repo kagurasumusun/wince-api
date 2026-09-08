@@ -1,0 +1,100 @@
+; ole32-doc.def -- ole32.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (ole32.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY ole32.dll
+EXPORTS
+  BindMoniker
+  CLSIDFromProgID
+  CLSIDFromString
+  CoAddRefServerProcess
+  CoCopyProxy
+  CoCreateFreeThreadedMarshaler
+  CoCreateGuid
+  CoCreateInstance
+  CoCreateInstanceEx
+  CoDisconnectObject
+  CoFileTimeNow
+  CoFreeAllLibraries
+  CoFreeLibrary
+  CoFreeUnusedLibraries
+  CoGetCallContext
+  CoGetClassObject
+  CoGetCurrentProcess
+  CoGetInstanceFromFile
+  CoGetInstanceFromIStorage
+  CoGetInterfaceAndReleaseStream
+  CoGetMalloc
+  CoGetMarshalSizeMax
+  CoGetObject
+  CoGetPSClsid
+  CoGetStandardMarshal
+  CoGetTreatAsClass
+  CoImpersonateClient
+  CoInitialize
+  CoInitializeEx
+  CoInitializeSecurity
+  CoIsHandlerConnected
+  CoIsOle1Class
+  CoLoadLibrary
+  CoLockObjectExternal
+  CoMarshalHresult
+  CoMarshalInterThreadInterfaceInStream
+  CoMarshalInterface
+  CoQueryAuthenticationServices
+  CoQueryClientBlanket
+  CoQueryProxyBlanket
+  CoRegisterClassObject
+  CoRegisterMallocSpy
+  CoRegisterMessageFilter
+  CoRegisterPSClsid
+  CoRegisterSurrogate
+  CoReleaseMarshalData
+  CoReleaseServerProcess
+  CoResumeClassObjects
+  CoRevertToSelf
+  CoRevokeClassObject
+  CoRevokeMallocSpy
+  CoSetProxyBlanket
+  CoSuspendClassObjects
+  CoSwitchCallContext
+  CoTaskMemAlloc
+  CoTaskMemFree
+  CoTaskMemRealloc
+  CoTreatAsClass
+  CoUninitialize
+  CoUnmarshalHresult
+  CoUnmarshalInterface
+  CreateAntiMoniker
+  CreateBindCtx
+  CreateClassMoniker
+  CreateFileMoniker
+  CreateGenericComposite
+  CreateItemMoniker
+  CreatePointerMoniker
+  DllGetClassObject
+  GetClassFile
+  GetRunningObjectTable
+  IIDFromString
+  MkParseDisplayName
+  MonikerCommonPrefixWith
+  MonikerRelativePathTo
+  ProgIDFromCLSID
+  StgCreateDocfile
+  StgCreateDocfileOnILockBytes
+  StgOpenStorage
+  StgOpenStorageOnILockBytes
+  StringFromCLSID
+  StringFromGUID2
+  StringFromIID
+  UpdateDCOMSettings

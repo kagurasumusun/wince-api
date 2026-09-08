@@ -2262,3 +2262,184 @@ the held TAPI client milestone.
 
 Export surface: `def/coredll-doc.def` 392 -> **470** exports
 (+78 TSPI; name-only, `LIBRARY coredll.dll`).
+
+## M44 -- COM/OLE/Storage/Automation unit (new umbrella header objbase.h; Ole32.lib + Oleaut32.lib)
+
+The 635 corpus pages whose Requirements line names one of the
+COM-family headers (Objbase.h 87, Objidl.h/Objidl.idl 131,
+Oaidl.h/Oaidl.idl 141, Wtypes.h 6, Unknwn.h/Unknwn.idl 3,
+Oleauto.h 227, Ocidl.h/Ocidl.idl 40) are implemented as a single
+umbrella header `include/objbase.h`, mirroring how the CE SDK's
+`<Objbase.h>` itself includes Objidl.h, Oaidl.h, Wtypes.h and
+Unknwn.h (Oleauto.h/Ocidl.h pages resolve here too; every declaration
+notes the header its page names).
+
+### Functions (307 declared)
+
+* **ole32.dll (84)**: the Co* activation/marshaling/API-set surface
+  (CoInitialize[Ex], CoCreateInstance[Ex], CoCreateGuid,
+  CoGetClassObject, CoRegisterClassObject, CoMarshal*/Unmarshal*,
+  CoTaskMem*, CoGetMalloc, ...), the moniker factory/operation set
+  (Create{Anti,Class,File,Item,Pointer}Moniker,
+  CreateGenericComposite, MkParseDisplayName, BindMoniker,
+  MonikerCommonPrefixWith, MonikerRelativePathTo,
+  GetRunningObjectTable), the storage set (StgCreateDocfile[OnILockBytes],
+  StgOpenStorage[OnILockBytes], GetClassFile), the GUID-string set
+  (StringFromCLSID/IID/GUID2, CLSIDFromString/FromProgID,
+  ProgIDFromCLSID, IIDFromString), DllGetClassObject,
+  UpdateDCOMSettings, CoRegisterPSClsid.
+* **oleaut32.dll (223)**: the full Automation runtime --
+  SysAllocString[Llen]/SysReAllocString[Llen]/SysFreeString/
+  SysString(Len|ByteLen), SafeArrayCreate[Vector][Data][Descriptor]/
+  SafeArrayDestroy/SafeArrayAccessData/SafeArrayGet*/Put*/Lock/Unlock/
+  Redim/Copy, the complete Var*From* conversion matrix (bool/cy/date/
+  dec/i1/i2/i4/r4/r8/str/ui1/ui2/ui4 x the corresponding sources,
+  ~180 pages), VariantInit/Copy/CopyInd/Clear/ChangeType[Ex],
+  SystemTimeToVariantTime/VariantTimeToSystemTime, VectorFromBstr/
+  BstrFromVector, VarParseNumFromStr/VarNumFromParseNum,
+  CreateErrorInfo/Set-GetErrorInfo, DispGetIDsOfNames/DispGetParam/
+  DispInvoke, the type-library API (LoadTypeLib/LoadRegTypeLib/
+  RegisterTypeLib/UnRegisterTypeLib/CreateTypeLib2).
+
+Recorded-not-declared: `CoBuildVersion` (ms886213; deprecated, the CE
+page publishes no prototype, CE 5.0+ only). `UnRegisterTypeLib`
+(ms891303) is declared (its prototype is published) but its page's
+Link Library field prints "None" (archive artifact), so it is not in
+`def/oleaut32-doc.def`.
+
+### Types (64 struct/union/enum definitions + scalars)
+
+* Automation: VARTYPE/VARENUM (VT_* through VT_UI1=17 + VT_ARRAY/
+  VT_BYREF/VT_RESERVED), VARIANT/VARIANTARG (anonymous union, 26
+  members), SAFEARRAY/SAFEARRAYBOUND (+ FADF_*), DISPPARAMS, EXCEPINFO,
+  CURRENCY/CY, PARAMDATA/METHODDATA.
+* Type library: TLIBATTR, TYPEDESC, ARRAYDESC, IDLDESC, PARAMDESC,
+  ELEMDESC, FUNCDESC, VARDESC, INTERFACEINFO, BINDPTR, TYPEATTR,
+  CUSTDATA/CUSTDATAITEM + enums TYPEKIND/VARKIND/CALLCONV/FUNCKIND/
+  INVOKEKIND/FUNCFLAGS/ADVF/TYPEFLAGS/DATADIR/DESCKIND.
+* OLE: COSERVERINFO, COAUTHINFO, COAUTHIDENTITY,
+  SOLE_AUTHENTICATION_SERVICE, MULTI_QI, DVTARGETDEVICE, FORMATETC,
+  STGMEDIUM, STATSTG, BIND_OPTS/BIND_OPTS2, BINDINFO, CLSCTX,
+  DVASPECT, TYMED, STGC, STGM (18 values), MKSYS, MKRREDUCE,
+  BIND_FLAGS, SYSKIND.
+* Ocidl.h: LICINFO, CONNECTDATA, CONTROLINFO, DVASPECTINFO,
+  DVEXTENTINFO, DVASPECT2, DVASPECTINFOFLAG, DVEXTENTMODE, HITRESULT,
+  VIEWSTATUS, SIZEL.
+* Scalars: OLECHAR/LPOLESTR/LPCOLESTR/BSTR (ms886145), HRESULT,
+  CLSID/IID/LPIID/LPCLSID + REFGUID/REFCLSID/REFIID (GUID itself is in
+  winnt.h), DISPID (ms886967)/MEMBERID (ms890763)/HREFTYPE (ms886994),
+  VARIANT_BOOL/DATE/SCODE, LCID (windef.h; page ms890741 consistent).
+* Opaque (named by documented prototypes, no corpus page): SNB,
+  PARAMDESCEX, SOLE_AUTHENTICATION_LIST, RPC_AUTHZ_HANDLE,
+  RPC_AUTH_IDENTITY_HANDLE, SECURITY_DESCRIPTOR (declared in its
+  documented Win32 layout -- length/descriptor/inherit -- because
+  BINDINFO embeds it by value and winbase.h only forward-declares),
+  DECIMAL, UDATE, NUMPARSE, HENHMETAFILE, HMETAFILEPICT.
+
+### Interfaces (50 opaque, 258 documented method pages)
+
+IUnknown, IClassFactory(2), IBindCtx, IConnectionPoint(Container),
+ICreateErrorInfo, ICreateTypeInfo(2), ICreateTypeLib(2), IDataObject,
+IDispatch, IErrorInfo, IErrorlog, IExternalConnection,
+IEnum{ConnectionPoints,Connections,FORMATETC,Moniker,STATDATA,STATSTG,
+String,Unknown,VARIANT}, IGlobalInterfaceTable, IAdviseSink,
+IFillLockBytes, ILockBytes, IMalloc, IMallocSpy, IMarshal,
+IMessageFilter, IMoniker, IMultiQI, IOleItemContainer, IPersistFile,
+IPersistPropertyBag, IPropertyBag, IRunningObjectTable, IStorage,
+IStream, ISurrogate, ITypeComp, ITypeInfo(2), ITypeLib(2),
+IViewObjectEx. Vtable layouts are not published by the CE corpus: each
+interface is an opaque pointer type and its documented methods
+(signatures + page ids) are listed in a header comment. Pointer
+aliases: the generic LPX per interface plus the documented short
+spellings (LPUNKNOWN, LPMONIKER, LPBC, LPSTREAM, LPMALLOC, LPMARSHAL,
+LPMALLOCSPY, LPMESSAGEFILTER, LPRUNNINGOBJECTTABLE).
+
+### Documented print artifacts fixed (noted at each site)
+
+* IDLDESC missing closing brace; ELEMDESC alias printed "ELEMDES";
+  VARDESC missing semicolon; TYPEDESC first union member printed twice
+  with garbage prefixes ("ESC"/"tagTYPEDSC"); VARTYPE flag tail
+  printed without separators.
+* LoadRegTypeLib/UnRegisterTypeLib: comma missing between
+  wVerMajor/wVerMinor; SafeArrayCreate "SAFEARRRAYBOUND";
+  CoTaskMemFree "void pv" -> LPVOID pv; SystemTimeToVariantTime /
+  DispInvoke parameters printed by value but documented as pointers.
+* Page-title/prototype mismatches resolved to the documented title:
+  ms891328 (prints VarCyFromUI1/BSTR 4-param form -> VarBstrFromUI1),
+  ms891629 (prints VarDecFromUI1(ULONG) -> VarDecFromUI4), ms891663
+  (prints VarI4FromUI1(short) -> VarI4FromI2), ms891846 (titled
+  VarR8FromI4, prints ULONG -> VarR8FromUI4), CoRegisterPSCLsid ->
+  CoRegisterPSClsid (the export name per the page title).
+* Duplicate page ms891659 (VarI4FromUI1 with a wrong DATE parameter)
+  dropped in favour of ms891668.
+* SafeArrayGetDim/SafeArrayGetElemsize: printed return type HRESULT;
+  each page's own "Return Values" text says the dimension count /
+  element size is returned -> declared ULONG.
+* StringFromGUID2: printed form lacks a return type; "Return Values"
+  says the character count is returned -> int.
+* CURRENTY->CURRENCY, DOUBLE->char/double, Ulong->ULONG,
+  ItypeInfo->ITypeInfo, IerrorInfo->IErrorInfo, VarR8FromDips->
+  VarR8FromDisp, IMoniker_com_Imoniker->IMoniker, HRESUTL->HRESULT,
+  LPOlESTR->LPOLESTR.
+* FAR/FARSTRUCT/HUGEP pointer qualifiers dropped (no effect on the
+  32-bit flat CE address space); UNION_NAME(u) expands to the member
+  u; MIDL attributes on the CE 5.0 STGMEDIUM page stripped; the
+  STGMEDIUM alias "uSTGMEDIUM" (ms891275) is a typo, STGMEDIUM
+  (ms928939 spelling) is used.
+
+### Recorded-not-defined (no values published in the CE corpus)
+
+S_OK/S_FALSE/E_* result constants, COINIT_MULTITHREADED/APARTMENTTHREADED,
+REGCLS_* (referenced by CoRegisterClassObject), the special DISPID_*
+names (DISPID_VALUE et al.), MSHLFLAGS; the REGCLS/COINIT/MSHL name
+sets are referenced by the pages but their values are not published.
+
+### 32-bit structure sizes (asserted in tests/host/tu_compile.c)
+
+| Structure | Size | Structure | Size |
+|---|---|---|---|
+| GUID/CLSID/IID | 16 | SAFEARRAYBOUND | 8 |
+| CY/CURRENCY | 8 | SAFEARRAY | 24 |
+| VARIANT(VARIANTARG) | 16 | DISPPARAMS | 16 |
+| EXCEPINFO | 32 | PARAMDATA | 8 |
+| METHODDATA | 28 | TLIBATTR | 32 |
+| TYPEDESC | 8 | ARRAYDESC | 20 |
+| IDLDESC | 8 | PARAMDESC | 8 |
+| ELEMDESC | 16 | FUNCDESC | 52 |
+| VARDESC | 36 | INTERFACEINFO | 24 |
+| BINDPTR | 4 | TYPEATTR | 76 |
+| CUSTDATAITEM | 32 | CUSTDATA | 8 |
+| COAUTHIDENTITY | 28 | COAUTHINFO | 28 |
+| COSERVERINFO | 16 | SOLE_AUTH_SERVICE | 16 |
+| MULTI_QI | 12 | DVTARGETDEVICE | 16 |
+| FORMATETC | 20 | STGMEDIUM | 12 |
+| STATSTG | 72 | BIND_OPTS | 16 |
+| BIND_OPTS2 | 32 | BINDINFO | 84 |
+| LICINFO | 12 | CONNECTDATA | 8 |
+| CONTROLINFO | 16 | DVASPECTINFO | 8 |
+| DVEXTENTINFO | 16 | SIZEL | 8 |
+| SECURITY_ATTRIBUTES | 12 | | |
+
+### Verification
+
+* `make check` GREEN: hostcheck (headers + TU, warning-free under
+  `_WIN32_WCE` 0x420/0x500/0x600), defcheck with
+  `ole32-doc.def` **84** and `oleaut32-doc.def` **222** exports
+  (coredll-doc.def still **470**).
+* `make crosscheck` GREEN on all six arm/i386 × CE 4.2/5.0/6.0
+  targets; all 48 32-bit COM structure size asserts hold.
+* `make e2e` GREEN: the e2e console app calls CoCreateGuid /
+  CoCreateInstanceEx / CLSIDFromString / CreateFileMoniker /
+  StgCreateDocfile (ole32.dll) and SysAllocString / SysFreeString /
+  VariantInit / VariantClear / SafeArrayDestroy / LoadTypeLib
+  (oleaut32.dll); the recipe asserts `Name: ole32.dll`,
+  `Symbol: CoCreateGuid`, `Symbol: CreateFileMoniker`,
+  `Symbol: StgCreateDocfile`, `Name: oleaut32.dll`,
+  `Symbol: SysAllocString`, `Symbol: VariantInit`, `Symbol: LoadTypeLib`
+  in the import tables of all six target images.
+
+Export surface: new `def/ole32-doc.def` 84 exports (name-only,
+`LIBRARY ole32.dll`) and `def/oleaut32-doc.def` 222 exports
+(`LIBRARY oleaut32.dll`). `tools/gen-doc-def.py` gained a no-sole-link
+rule: co-listed library tokens with no sole-link exports (Uuid.lib,
+co-listed on 238 COM pages) get no def file.

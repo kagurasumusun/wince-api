@@ -291,6 +291,16 @@ def main():
                 entries.append((export, pid, sn))
             else:
                 skipped.append((sn, pid))
+        if not entries:
+            # Co-listed library token (e.g. Uuid.lib next to Ole32.lib)
+            # with no page documenting a sole-link export: no def file
+            # is written for it (remove a stale one if present).
+            stale = os.path.join(DEFDIR, f"{token.replace('.lib', '')}-doc.def")
+            if os.path.exists(stale):
+                os.remove(stale)
+            print(f"{stale}: no sole-link exports documented "
+                  f"({len(skipped)} co-listed pages skipped); no def written")
+            continue
         stem = token.replace(".lib", "").replace(".", "-")
         out = os.path.join(DEFDIR, f"{stem}-doc.def")
         with open(out, "w", encoding="utf-8") as fh:
