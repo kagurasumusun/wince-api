@@ -14,6 +14,14 @@
 ; not published by the CE documentation.
 LIBRARY ws2.dll
 EXPORTS
+  NSPCleanup
+  NSPGetServiceClassInfo
+  NSPInstallServiceClass
+  NSPLookupServiceBegin
+  NSPLookupServiceEnd
+  NSPLookupServiceNext
+  NSPRemoveServiceClass
+  NSPSetService
   WSAAccept
   WSAAddressToString
   WSACleanup
@@ -47,6 +55,35 @@ EXPORTS
   WSAStartup
   WSAStringToAddress
   WSAWaitForMultipleEvents
+  WSPAccept
+  WSPAddressToString
+  WSPAsyncSelect
+  WSPBind
+  WSPCleanup
+  WSPCloseSocket
+  WSPConnect
+  WSPDuplicateSocket
+  WSPEnumNetworkEvents
+  WSPEventSelect
+  WSPGetOverlappedResult
+  WSPGetPeerName
+  WSPGetSockName
+  WSPGetSockOpt
+  WSPIoctl
+  WSPJoinLeaf
+  WSPListen
+  WSPRecv
+  WSPRecvDisconnect
+  WSPRecvFrom
+  WSPSelect
+  WSPSend
+  WSPSendDisconnect
+  WSPSendTo
+  WSPSetSockOpt
+  WSPShutdown
+  WSPSocket
+  WSPStartup
+  WSPStringToAddress
   accept
   bind
   closesocket

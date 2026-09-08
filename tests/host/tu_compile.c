@@ -23,6 +23,7 @@
 #include <commctrl.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include <ws2spi.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -2729,6 +2730,94 @@ static int m41_shaped_usage(void)
     return 0;
 }
 
+/* M42: Winsock SPI (Ws2spi.h) types, per the official CE 5.0
+ * "Winsock SPI Reference" pages (WSPDATA ms900586, WSATHREADID
+ * ms898776, NSP_Routine ms895763). */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(WSPDATA) == 518, "WSPDATA 32-bit size");
+_Static_assert(sizeof(WSATHREADID) == 8, "WSATHREADID 32-bit size");
+_Static_assert(sizeof(NSP_ROUTINE) == 44, "NSP_ROUTINE 32-bit size");
+#endif
+
+static int m42_shaped_usage(void)
+{
+    INT err = 0;
+    DWORD len = 0;
+    WORD ver = WSAVersion(2, 2);
+    WSPDATA wsd = {0};
+    WSATHREADID tid = {0};
+    NSP_ROUTINE nsp = {0};
+    LPWSAPROTOCOL_INFOW pinfo = (LPWSAPROTOCOL_INFOW)0;
+    LPWSAQUERYSETW pqs = (LPWSAQUERYSETW)0;
+    LPWSPDATAW pw = &wsd;
+    LPWSPPROC_TABLE procs = (LPWSPPROC_TABLE)0;
+    const WSPUPCALLTABLE *upcalls = (const WSPUPCALLTABLE *)0;
+    HANDLE hLookup = (HANDLE)0;
+    GUID guid = {0};
+
+    wsd.wVersion = ver;
+    wsd.wHighVersion = ver;
+    (void) WSPStartup(ver, pw, pinfo, upcalls, procs);
+    (void) WSPAccept((SOCKET)0, (struct sockaddr *)0, &err, (LPCONDITIONPROC)0, 0, &err);
+    (void) WSPAddressToString((LPSOCKADDR)0, 0, pinfo, (LPWSTR)0, &len, &err);
+    (void) WSPAsyncSelect((SOCKET)0, (HWND)0, 0, 0, &err);
+    (void) WSPBind((SOCKET)0, (const struct sockaddr *)0, 0, &err);
+    (void) WSPCleanup(&err);
+    (void) WSPCloseSocket((SOCKET)0, &err);
+    (void) WSPConnect((SOCKET)0, (const struct sockaddr *)0, 0, (LPWSABUF)0,
+                      (LPWSABUF)0, (LPQOS)0, (LPQOS)0, &err);
+    (void) WSPDuplicateSocket((SOCKET)0, 0, pinfo, &err);
+    (void) WSPEnumNetworkEvents((SOCKET)0, (WSAEVENT)0, (LPWSANETWORKEVENTS)0, &err);
+    (void) WSPEventSelect((SOCKET)0, (WSAEVENT)0, 0, &err);
+    (void) WSPGetOverlappedResult((SOCKET)0, (LPWSAOVERLAPPED)0, &len, FALSE,
+                                  (LPDWORD)0, &err);
+    (void) WSPGetPeerName((SOCKET)0, (struct sockaddr *)0, &err, &err);
+    (void) WSPGetSockName((SOCKET)0, (struct sockaddr *)0, &err, &err);
+    (void) WSPGetSockOpt((SOCKET)0, 0, 0, (char *)0, &err, &err);
+    (void) WSPIoctl((SOCKET)0, 0, (LPVOID)0, 0, (LPVOID)0, 0, (LPDWORD)0,
+                    (LPWSAOVERLAPPED)0, (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0,
+                    &tid, &err);
+    (void) WSPJoinLeaf((SOCKET)0, (const struct sockaddr *)0, 0, (LPWSABUF)0,
+                       (LPWSABUF)0, (LPQOS)0, (LPQOS)0, 0, &err);
+    (void) WSPListen((SOCKET)0, 0, &err);
+    (void) WSPRecv((SOCKET)0, (LPWSABUF)0, 0, (LPDWORD)0, (LPDWORD)0,
+                   (LPWSAOVERLAPPED)0, (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0,
+                   &tid, &err);
+    (void) WSPRecvDisconnect((SOCKET)0, (LPWSABUF)0, &err);
+    (void) WSPRecvFrom((SOCKET)0, (LPWSABUF)0, 0, (LPDWORD)0, (LPDWORD)0,
+                       (struct sockaddr *)0, &err, (LPWSAOVERLAPPED)0,
+                       (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0, &tid, &err);
+    (void) WSPSelect(0, (fd_set *)0, (fd_set *)0, (fd_set *)0,
+                     (const struct timeval *)0, &err);
+    (void) WSPSend((SOCKET)0, (LPWSABUF)0, 0, (LPDWORD)0, 0,
+                   (LPWSAOVERLAPPED)0, (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0,
+                   &tid, &err);
+    (void) WSPSendDisconnect((SOCKET)0, (LPWSABUF)0, &err);
+    (void) WSPSendTo((SOCKET)0, (LPWSABUF)0, 0, (LPDWORD)0, 0,
+                     (const struct sockaddr *)0, 0, (LPWSAOVERLAPPED)0,
+                     (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0, &tid, &err);
+    (void) WSPSetSockOpt((SOCKET)0, 0, 0, (const char *)0, 0, &err);
+    (void) WSPShutdown((SOCKET)0, 0, &err);
+    (void) WSPSocket(0, 0, 0, pinfo, (GROUP)0, 0, &err);
+    (void) WSPStringToAddress((LPWSTR)0, 0, pinfo, (LPSOCKADDR)0, &err, &err);
+    (void) NSPCleanup(&guid);
+    (void) NSPGetServiceClassInfo(&guid, &len, (LPWSASERVICECLASSINFOW)0);
+    (void) NSPInstallServiceClass(&guid, (LPWSASERVICECLASSINFOW)0);
+    (void) NSPLookupServiceBegin(&guid, pqs, (LPWSASERVICECLASSINFOW)0, 0,
+                                 &hLookup);
+    (void) NSPLookupServiceEnd(hLookup);
+    (void) NSPLookupServiceNext(hLookup, 0, &len, (LPWSAQUERYSET)0);
+    (void) NSPRemoveServiceClass(&guid, &guid);
+    (void) NSPSetService(&guid, (LPWSASERVICECLASSINFOW)0, pqs,
+                         RNRSERVICE_REGISTER, 0);
+    nsp.cbSize = sizeof(nsp);
+    (void) nsp;
+    (void) tid;
+    (void) wsd;
+    (void) err;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -2784,6 +2873,8 @@ int host_tu_entry(void)
     if (m39_shaped_usage() != 0)
         return 1;
     if (m41_shaped_usage() != 0)
+        return 1;
+    if (m42_shaped_usage() != 0)
         return 1;
     return 0;
 }

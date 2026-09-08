@@ -2103,3 +2103,53 @@ of all six target images.
 Export surface: `def/ws2-doc.def` 58 -> **63** exports (name-only,
 `LIBRARY ws2.dll`); the defdoc total is now 34 def files, 717 name-only
 lines.
+
+### M42: Winsock SPI (Service Provider Interface) unit (new header ws2spi.h; Ws2.lib)
+
+The "Winsock SPI Reference" section of the official CE 5.0 Windows
+Sockets Reference book: the 29 WSP* transport-SPI function pages
+(ms898783..ms898915), the 8 NSP* name-space-SPI function pages
+(ms895725..ms895766), and the WSPDATA (ms900586) / WSATHREADID
+(ms898776) / NSP_Routine (ms895763) structure pages, plus the
+"Upcalls Exposed by Ws2.dll" page (ms885421).  Harvest manifests:
+`tools/manifests/wsock-spi-functions.manifest` (33) and
+`wsock-spi-nsp.manifest` (8).
+
+Every one of the 37 function pages carries the Requirements rows
+**Header: Ws2spi.h, Link Library: Ws2.lib, Windows CE .NET 4.0 and
+later** — i.e. the official documentation places the entire SPI
+surface in the Ws2.lib link group, so all 37 names enter
+`def/ws2-doc.def` (the def is documentation-driven; whether an
+on-device ws2.dll re-exports each SPI name is the same on-device
+verification owed to the whole ws2 set).
+
+| Item | Official page | Notes |
+|---|---|---|
+| `WSPStartup` `WSPAccept` `WSPAddressToString` `WSPAsyncSelect` `WSPBind` `WSPCleanup` `WSPCloseSocket` `WSPConnect` `WSPDuplicateSocket` `WSPEnumNetworkEvents` `WSPEventSelect` `WSPGetOverlappedResult` `WSPGetPeerName` `WSPGetSockName` `WSPGetSockOpt` `WSPIoctl` `WSPJoinLeaf` `WSPListen` `WSPRecv` `WSPRecvDisconnect` `WSPRecvFrom` `WSPSelect` `WSPSend` `WSPSendDisconnect` `WSPSendTo` `WSPSetSockOpt` `WSPShutdown` `WSPSocket` `WSPStringToAddress` (29) | ms898783..ms898915 | prototypes verbatim (whitespace restored; `FAR` qualifiers dropped per the M39 documented decision); every WSP function takes the documented trailing `LPINT lpErrno` except WSPStartup |
+| `NSPCleanup` `NSPGetServiceClassInfo` `NSPInstallServiceClass` `NSPLookupServiceBegin` `NSPLookupServiceEnd` `NSPLookupServiceNext` `NSPRemoveServiceClass` `NSPSetService` (8) | ms895725 / ms895733 / ms895740 / ms895748 / ms895751 / ms895756 / ms895758 / ms895766 | the NSP_Routine page: "Ws2spi.h contains complete prototypes for all the NSP functions this structure points to" |
+| `WSPDATA` | ms900586 | 32-bit size 518 (TU-asserted); `WSPDESCRIPTION_LEN` 256 named by the page's own syntax (`szDescription[WSPDESCRIPTION_LEN+1]`, "up to 256 characters in length") |
+| `WSATHREADID` | ms898776 | 32-bit size 8 (TU-asserted) |
+| `NSP_ROUTINE` | ms895763 | 32-bit size 44 (TU-asserted); 3 DWORDs + 8 function pointers, each documented as returning WSAENOTIMPLEMENTED when unimplemented |
+| `WSAPROTOCOL_INFOW` / `LPWSAPROTOCOL_INFOW` / `WSAQUERYSETW` / `LPWSAQUERYSETW` / `LPWSASERVICECLASSINFOW` | named by the SPI prototypes | documented-nominal aliases of the M39/M41 types (Unicode CE: A/W is nominal) |
+| `NSPAPI` | ms895756 prototype | empty, exactly like `WSAAPI` (single CE calling convention) |
+| `WSPUPCALLTABLE` / `WSPPROC_TABLE` | (referenced by ms898913) | no CE archive page (CE 5.0 / CE .NET / CE 6.0) publishes the layouts ⇒ opaque; documented design decision |
+| `WSPStartup` UpcallTable parameter | ms898913 | the page prints a by-value `WSPUPCALLTABLE`; because the layout is unpublished the declaration uses a pointer form — the documented SPI client is Ws2.dll itself, so no user-mode ABI is exposed (flagged design deviation) |
+| WPU upcalls: `WPUCloseEvent` `WPUCloseSocketHandle` `WPUCreateEvent` `WPUCreateSocketHandle` `WPUFDIsSet` `WPUQuerySocketHandleContext` `WPUResetEvent` `WPUSetEvent` | ms885421 | **recorded-not-defined**: names + required/optional status documented, but no CE page prints the prototypes |
+| `NSPLookupServiceNext` prototype | ms895756 | the archive prints the prototype without a "Syntax" heading and with the WSA-prefixed name (an archive typo: `int NSPAPI WSALookupServiceNext(...)`); declared under the page's title name with the printed parameter list (documented in the header comment) |
+
+Constants **recorded-not-defined** (names published without values):
+`LUP_FLUSHPREVIOUS` (the NSPLookupServiceNext page: "Currently only
+LUP_FLUSHPREVIOUS is defined as a means to cope with a result set that
+is too large") — joins the M41 LUP_* held set.
+
+Verification: `make check` GREEN (hostcheck all CE versions; defcheck
+`ws2-doc.def` 100 exports); `make crosscheck` GREEN on all six
+arm/i386 × CE 4.2/5.0/6.0 targets (WSPDATA 518 / WSATHREADID 8 /
+NSP_ROUTINE 44); `make e2e` GREEN — the e2e console app references
+`WSPStartup` / `WSPCleanup` / `NSPSetService` / `NSPLookupServiceNext`
+and the recipe asserts `WSPStartup` / `NSPSetService` in the ws2.dll
+import table of all six target images.
+
+Export surface: `def/ws2-doc.def` 63 -> **100** exports (name-only,
+`LIBRARY ws2.dll`); defdoc total 34 def files, 754 name-only lines,
+703 unique names.

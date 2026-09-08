@@ -18,6 +18,7 @@
 #include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include <ws2spi.h>
 
 int main(void)
 {
@@ -53,6 +54,11 @@ int main(void)
     (void) WSALookupServiceEnd(NULL);
     (void) WSALookupServiceNext(NULL, 0, NULL, NULL);
     (void) WSASetService(NULL, RNRSERVICE_REGISTER, 0);
+    /* M42: Winsock SPI (Ws2spi.h) import surface -- linked, not run. */
+    (void) WSPStartup(WSAVersion(2, 2), NULL, NULL, NULL, NULL);
+    (void) WSPCleanup(NULL);
+    (void) NSPSetService(NULL, NULL, NULL, RNRSERVICE_REGISTER, 0);
+    (void) NSPLookupServiceNext(NULL, 0, NULL, NULL);
     (void)tick;
     (void)si;
     (void)mod;

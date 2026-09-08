@@ -1,0 +1,8 @@
+ms895725	NSPCleanup
+ms895733	NSPGetServiceClassInfo
+ms895740	NSPInstallServiceClass
+ms895748	NSPLookupServiceBegin
+ms895751	NSPLookupServiceEnd
+ms895756	NSPLookupServiceNext
+ms895758	NSPRemoveServiceClass
+ms895766	NSPSetService

@@ -17,7 +17,7 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/msgqueue.h include/excpt.h include/dbgapi.h include/errorrep.h include/celog.h include/natedit.h \
        include/winuser.h include/winerror.h include/winnt.h include/wingdi.h include/tvout.h \
        include/notify.h include/shellapi.h include/commctrl.h \
-       include/winsock2.h include/ws2tcpip.h
+       include/winsock2.h include/ws2tcpip.h include/ws2spi.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -177,6 +177,10 @@ e2e:
 	  | grep -q "Symbol: WSALookupServiceBegin" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WSASetService" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: WSPStartup" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: NSPSetService" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \
