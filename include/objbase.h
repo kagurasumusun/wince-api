@@ -20,7 +20,8 @@
  *   Ocidl.h (+Ocidl.idl)          40 pages  (OLE control interfaces)
  *
  * The link libraries named by those pages are ole32.dll (84 exported
- * functions) and oleaut32.dll (223 exported functions); the import
+ * functions) and oleaut32.dll (223; the import table carries 222 --
+ * UnRegisterTypeLib's page prints "Link Library: None"); the import
  * tables are def/ole32-doc.def and def/oleaut32-doc.def.
  *
  * The CE SDK's <Objbase.h> includes Objidl.h, Oaidl.h, Wtypes.h and
