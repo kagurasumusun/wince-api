@@ -21,6 +21,8 @@
 #include <celog.h>
 #include <natedit.h>
 #include <commctrl.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -2362,6 +2364,302 @@ static int m29_shaped_usage(void)
     return 0;
 }
 
+/* M39: Winsock (Winsock 2.2) 32-bit CE layouts transcribed from the
+ * official CE 5.0 pages (docs/inventory-m39-ws2.md).  sockaddr and
+ * sockaddr_in are both 16 bytes (the page documents sin_zero as
+ * "Padding to make structure the same size as SOCKADDR"); WSADATA
+ * embeds szDescription[257] + szSystemStatus[129] and the trailing
+ * pointer is 4-byte aligned (flagged WSASYS_STATUS_LEN, see
+ * winsock2.h); fd_set is the CE counted-array layout;
+ * WSAPROTOCOL_INFO carries the 32-byte WSAPROTOCOLCHAIN (flagged
+ * MAX_PROTOCOL_CHAIN = 7) and the 256 TCHAR szProtocol member. */
+#if __SIZEOF_POINTER__ == 4
+typedef char assert_sockaddr_size[(sizeof(struct sockaddr) == 16) ? 1 : -1];
+typedef char assert_sockaddr_data[(offsetof(struct sockaddr, sa_data) == 2) ? 1 : -1];
+typedef char assert_in_addr_size[(sizeof(struct in_addr) == 4) ? 1 : -1];
+typedef char assert_sockaddr_in_size[(sizeof(struct sockaddr_in) == 16) ? 1 : -1];
+typedef char assert_sockaddr_in_zero[(offsetof(struct sockaddr_in, sin_zero) == 8) ? 1 : -1];
+typedef char assert_in6_addr_size[(sizeof(struct in6_addr) == 16) ? 1 : -1];
+typedef char assert_sockaddr_in6_size[(sizeof(struct sockaddr_in6) == 28) ? 1 : -1];
+typedef char assert_linger_size[(sizeof(struct linger) == 4) ? 1 : -1];
+typedef char assert_hostent_size[(sizeof(struct hostent) == 16) ? 1 : -1];
+typedef char assert_servent_size[(sizeof(struct servent) == 16) ? 1 : -1];
+typedef char assert_protoent_size[(sizeof(struct protoent) == 12) ? 1 : -1];
+typedef char assert_timeval_size[(sizeof(struct timeval) == 8) ? 1 : -1];
+typedef char assert_fd_set_size[(sizeof(fd_set) == 4 + 4 * FD_SETSIZE) ? 1 : -1];
+typedef char assert_fd_set_array[(offsetof(fd_set, fd_array) == 4) ? 1 : -1];
+typedef char assert_wsadata_size[(sizeof(WSADATA) == 400) ? 1 : -1];
+typedef char assert_wsabuf_size[(sizeof(WSABUF) == 8) ? 1 : -1];
+typedef char assert_wsaoverlapped_size[(sizeof(WSAOVERLAPPED) == 20) ? 1 : -1];
+typedef char assert_afprotocols_size[(sizeof(AFPROTOCOLS) == 8) ? 1 : -1];
+typedef char assert_protocol_info_size[(sizeof(PROTOCOL_INFO) == 32) ? 1 : -1];
+typedef char assert_wsaprotocolchain_size[(sizeof(WSAPROTOCOLCHAIN) == 4 + 4 * MAX_PROTOCOL_CHAIN) ? 1 : -1];
+typedef char assert_wsaprotocol_info_size[(sizeof(WSAPROTOCOL_INFO) == 628) ? 1 : -1];
+typedef char assert_wsaprotocol_chain_at[(offsetof(WSAPROTOCOL_INFO, ProtocolChain) == 40) ? 1 : -1];
+typedef char assert_socket_address_size[(sizeof(SOCKET_ADDRESS) == 8) ? 1 : -1];
+typedef char assert_wsanetworkevents_size[(sizeof(WSANETWORKEVENTS) == 4 + 4 * FD_MAX_EVENTS) ? 1 : -1];
+typedef char assert_transmit_file_size[(sizeof(TRANSMIT_FILE_BUFFERS) == 16) ? 1 : -1];
+typedef char assert_addrinfo_size[(sizeof(struct addrinfo) == 32) ? 1 : -1];
+#endif
+
+/* M39: documented constant values (official sources in winsock2.h). */
+typedef char assert_ws2_constants[
+    (AF_UNSPEC == 0 && AF_INET == 2 && AF_INET6 == 23) ? 1 : -1];
+typedef char assert_ws2_socket[
+    (SOCK_STREAM == 1 && SOCK_DGRAM == 2 && SOCK_RAW == 3) ? 1 : -1];
+typedef char assert_ws2_ipproto[
+    (IPPROTO_IP == 0 && IPPROTO_TCP == 6 && IPPROTO_UDP == 17 &&
+     IPPROTO_IPV6 == 41) ? 1 : -1];
+typedef char assert_ws2_sd[
+    (SD_RECEIVE == 0 && SD_SEND == 1 && SD_BOTH == 2) ? 1 : -1];
+typedef char assert_ws2_ai[
+    (AI_PASSIVE == 0x01 && AI_CANONNAME == 0x02 &&
+     AI_NUMERICHOST == 0x04) ? 1 : -1];
+typedef char assert_ws2_flags[
+    (WSA_FLAG_OVERLAPPED == 0x01 && WSA_FLAG_MULTIPOINT_C_ROOT == 0x02 &&
+     WSA_FLAG_MULTIPOINT_C_LEAF == 0x04 && WSA_FLAG_MULTIPOINT_D_ROOT == 0x08 &&
+     WSA_FLAG_MULTIPOINT_D_LEAF == 0x10 &&
+     WSA_FLAG_ACCESS_SYSTEM_SECURITY == 0x40 &&
+     WSA_FLAG_NO_HANDLE_INHERIT == 0x80 &&
+     SG_UNCONSTRAINED_GROUP == 0x01 && SG_CONSTRAINED_GROUP == 0x02) ? 1 : -1];
+typedef char assert_ws2_so[
+    (SO_KEEPALIVE == 0x0008 && SO_CONDITIONAL_ACCEPT == 0x3002) ? 1 : -1];
+typedef char assert_ws2_len[
+    (WSADESCRIPTION_LEN == 256 && WSAPROTOCOL_LEN == 255 &&
+     FD_SETSIZE == 64 && WSASYS_STATUS_LEN == 128 &&
+     FD_MAX_EVENTS == 16 && MAX_PROTOCOL_CHAIN == 7) ? 1 : -1];
+typedef char assert_ws2_err[
+    (WSABASEERR == 10000 && WSAEWOULDBLOCK == 10035 &&
+     WSAEINPROGRESS == 10036 && WSAEALREADY == 10037 &&
+     WSAENOTSOCK == 10038 && WSAEDESTADDRREQ == 10039 &&
+     WSAEMSGSIZE == 10040 && WSAEPROTOTYPE == 10041 &&
+     WSAENOPROTOOPT == 10042 && WSAEPROTONOSUPPORT == 10043 &&
+     WSAESOCKTNOSUPPORT == 10044 && WSAEOPNOTSUPP == 10045 &&
+     WSAEPFNOSUPPORT == 10046 && WSAEAFNOSUPPORT == 10047 &&
+     WSAEADDRINUSE == 10048 && WSAEADDRNOTAVAIL == 10049 &&
+     WSAENETDOWN == 10050 && WSAENETUNREACH == 10051 &&
+     WSAENETRESET == 10052 && WSAECONNABORTED == 10053 &&
+     WSAECONNRESET == 10054 && WSAENOBUFS == 10055 && WSAEISCONN == 10056 &&
+     WSAENOTCONN == 10057 && WSAESHUTDOWN == 10058 &&
+     WSAETIMEDOUT == 10060 && WSAECONNREFUSED == 10061 &&
+     WSAEHOSTUNREACH == 10065 && WSAEPROCLIM == 10067 &&
+     WSASYSNOTREADY == 10091 && WSAVERNOTSUPPORTED == 10092 &&
+     WSANOTINITIALISED == 10093 && WSAEDISCON == 10101 &&
+     WSAENOMORE == 10102 && WSAECANCELLED == 10103 &&
+     WSAHOST_NOT_FOUND == 11001 && WSATRY_AGAIN == 11002 &&
+     WSANO_RECOVERY == 11003 && WSANO_DATA == 11004) ? 1 : -1];
+typedef char assert_ws2_win32err[
+    (WSA_INVALID_HANDLE == 6 && WSA_NOT_ENOUGH_MEMORY == 8 &&
+     WSA_INVALID_PARAMETER == 87 && WSA_OPERATION_ABORTED == 995 &&
+     WSA_IO_INCOMPLETE == 996 && WSA_IO_PENDING == 997) ? 1 : -1];
+typedef char assert_ws2_invalid[(INVALID_SOCKET == (SOCKET)(~0u)) ? 1 : -1];
+typedef char assert_ws2_version[
+    (WSAVersion(2, 2) == MAKEWORD(2, 2) && WSAVersion(2, 2) == 0x0202) ? 1 : -1];
+
+static int m39_condfunc(LPWSABUF lpCallerId, LPWSABUF lpCallerData,
+                        LPQOS lpSQOS, LPQOS lpGQOS,
+                        LPWSABUF lpCalleeId, LPWSABUF lpCalleeData,
+                        GROUP *g, DWORD dwCallbackData)
+{
+    (void) lpCallerId; (void) lpCallerData; (void) lpSQOS;
+    (void) lpGQOS; (void) lpCalleeId; (void) lpCalleeData;
+    (void) g; (void) dwCallbackData;
+    return 0;
+}
+
+static void m39_completion(DWORD dwError, DWORD cbTransferred,
+                           LPWSAOVERLAPPED lpOverlapped, DWORD dwFlags)
+{
+    (void) dwError; (void) cbTransferred;
+    (void) lpOverlapped; (void) dwFlags;
+}
+
+static int m39_shaped_usage(void)
+{
+    SOCKET s;
+    int v;
+    int err;
+    WORD ver = WSAVersion(2, 2);
+    WSADATA data = {0};
+    struct sockaddr sa = {0};
+    struct sockaddr_in sa4 = {0};
+    struct sockaddr_in6 sa6 = {0};
+    struct in_addr iaddr = {0};
+    struct linger linger;
+    struct hostent *he;
+    struct servent *se;
+    struct protoent *pe;
+    struct timeval tv = {0};
+    fd_set rset, wset;
+    WSABUF buf;
+    WSAOVERLAPPED ov = {0};
+    WSAEVENT ev;
+    LPWSANETWORKEVENTS nev;
+    struct addrinfo *ai;
+    TRANSMIT_FILE_BUFFERS tfb;
+    SOCKET_ADDRESS sad;
+    AFPROTOCOLS afp;
+    PROTOCOL_INFO pi;
+    WSAPROTOCOL_INFO wpi;
+    WSAPROTOCOLCHAIN pc;
+
+    s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (s == INVALID_SOCKET)
+        return 1;
+    (void) closesocket(s);
+    (void) bind(s, (struct sockaddr *)&sa4, sizeof(sa4));
+    (void) connect(s, (struct sockaddr *)&sa4, sizeof(sa4));
+    (void) listen(s, 16);
+    (void) accept(s, &sa, (int *)&v);
+    (void) getsockname(s, &sa, (int *)&v);
+    (void) getpeername(s, &sa, (int *)&v);
+    (void) recv(s, (char *)0, 0, 0);
+    (void) send(s, (const char *)0, 0, 0);
+    (void) recvfrom(s, (char *)0, 0, 0, &sa, (int *)&v);
+    (void) sendto(s, (const char *)0, 0, 0, &sa, 0);
+    FD_ZERO(&rset);
+    FD_ZERO(&wset);
+    FD_SET(s, &rset);
+    (void) FD_ISSET(s, &rset);
+    FD_SET(s, &rset);               /* duplicate: not added */
+    FD_CLR(s, &rset);
+    (void) select(0, &rset, &wset, (fd_set *)0, &tv);
+    v = 1;
+    (void) setsockopt(s, 0, SO_KEEPALIVE, (const char *)&v, sizeof v);
+    (void) getsockopt(s, 0, SO_KEEPALIVE, (char *)&v, (int *)&v);
+    (void) shutdown(s, SD_BOTH);
+    (void) ioctlsocket(s, 0, (u_long *)&v);
+    (void) gethostname((char *)0, 0);
+    (void) sethostname((char *)0, 0);
+    (void) htonl((u_long)0);
+    (void) htons((u_short)0);
+    (void) ntohl((u_long)0);
+    (void) ntohs((u_short)0);
+    (void) inet_addr("0.0.0.0");
+    (void) inet_ntoa(iaddr);
+    he = gethostbyname((const char *)0);
+    if (he)
+        (void) he->h_name;
+    (void) gethostbyaddr((const char *)0, 0, 0);
+    /* in_addr S_un union access (documented layout). */
+    iaddr.S_un.S_addr = htonl((u_long)0x7f000001);
+    (void) iaddr.S_un.S_un_b.s_b4;
+    (void) iaddr.S_un.S_un_w.s_w1;
+    sa4.sin_family = AF_INET;
+    sa4.sin_port = htons((u_short)0);
+    sa4.sin_addr = iaddr;
+    sa6.sin6_family = AF_INET6;
+    sa6.sin6_port = htons((u_short)0);
+    sa6.sin6_flowinfo = 0;
+    sa6.sin6_scope_id = 0;
+    (void) sa6.sin6_addr.u.Word[0];
+    (void) sa6.sin6_addr.u.Byte[0];
+    sa.sa_family = AF_UNSPEC;
+    (void) sa.sa_data[0];
+    linger.l_onoff = 0;
+    linger.l_linger = 0;
+    (void) linger;
+    se = (struct servent *)0;
+    pe = (struct protoent *)0;
+    (void) se; (void) pe;
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+
+    err = WSAStartup(ver, &data);
+    if (err != 0)
+        return 1;
+    (void) WSACleanup();
+    (void) WSAGetLastError();
+    WSASetLastError(WSAEWOULDBLOCK);
+    ev = WSACreateEvent();
+    (void) WSASetEvent(ev);
+    (void) WSAResetEvent(ev);
+    (void) WSACloseEvent(ev);
+    (void) WSAEventSelect(s, ev, 0);
+    (void) WSAWaitForMultipleEvents(0, (const WSAEVENT *)0, FALSE, 0, FALSE);
+    nev = (LPWSANETWORKEVENTS)0;
+    (void) WSAEnumNetworkEvents(s, ev, nev);
+    (void) WSAEnumProtocols((LPINT)0, (LPWSAPROTOCOL_INFO)0, (LPDWORD)0);
+    (void) WSAGetOverlappedResult(s, &ov, (LPDWORD)0, TRUE, (LPDWORD)0);
+    (void) WSAHtonl(s, 0, (u_long *)0);
+    (void) WSAHtons(s, 0, (u_short *)0);
+    (void) WSANtohl(s, 0, (u_long *)0);
+    (void) WSANtohs(s, 0, (u_short *)0);
+    (void) WSAIoctl(s, 0, (LPVOID)0, 0, (LPVOID)0, 0, (LPDWORD)0, &ov,
+                    (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0);
+    (void) WSAAccept(s, &sa, (int *)&v,
+                     (LPCONDITIONPROC)m39_condfunc, 0);
+    (void) WSAConnect(s, (const struct sockaddr *)0, 0, (LPWSABUF)0,
+                      (LPWSABUF)0, (LPQOS)0, (LPQOS)0);
+    (void) WSAJoinLeaf(s, (const struct sockaddr *)0, 0, (LPWSABUF)0,
+                       (LPWSABUF)0, (LPQOS)0, (LPQOS)0, 0);
+    buf.len = 0;
+    buf.buf = (char *)0;
+    (void) WSARecv(s, &buf, 1, (LPDWORD)0, (LPDWORD)0, &ov,
+                   (LPWSAOVERLAPPED_COMPLETION_ROUTINE)m39_completion);
+    (void) WSARecvFrom(s, &buf, 1, (LPDWORD)0, (LPDWORD)0, &sa,
+                       (LPINT)0, &ov, (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0);
+    (void) WSASend(s, &buf, 1, (LPDWORD)0, 0, &ov,
+                   (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0);
+    (void) WSASendTo(s, &buf, 1, (LPDWORD)0, 0, (const struct sockaddr *)0,
+                     0, &ov, (LPWSAOVERLAPPED_COMPLETION_ROUTINE)0);
+    (void) WSASocket(AF_UNSPEC, SOCK_STREAM, 0, (LPWSAPROTOCOL_INFO)0,
+                     (GROUP)0, WSA_FLAG_OVERLAPPED);
+    (void) WSAAddressToString((LPSOCKADDR)&sa4, sizeof(sa4),
+                              (LPWSAPROTOCOL_INFO)0, (LPTSTR)0, (LPDWORD)0);
+    (void) WSAStringToAddress((LPTSTR)0, AF_INET,
+                              (LPWSAPROTOCOL_INFO)0, (LPSOCKADDR)0,
+                              (LPINT)0);
+
+    /* getaddrinfo surface (Ws2tcpip.h, Ws2.lib, CE .NET 4.1+). */
+    (void) getaddrinfo((const char *)0, (const char *)0,
+                       (const struct addrinfo *)0, &ai);
+    if (ai)
+        freeaddrinfo(ai);
+    (void) getnameinfo((const struct sockaddr *)&sa4,
+                       (socklen_t)sizeof(sa4), (char *)0, 0,
+                       (char *)0, 0, 0);
+
+    /* structure members exercised for layout. */
+    tfb.Head = (PVOID)0; tfb.HeadLength = 0;
+    tfb.Tail = (PVOID)0; tfb.TailLength = 0;
+    (void) tfb;
+    sad.lpSockaddr = (LPSOCKADDR)&sa;
+    sad.iSockaddrLength = sizeof(sa);
+    (void) sad;
+    afp.iAddressFamily = AF_INET;
+    afp.iProtocol = IPPROTO_UDP;
+    (void) afp;
+    pi.dwServiceFlags = 0;
+    pi.iAddressFamily = AF_INET;
+    pi.iMaxSockAddr = 0; pi.iMinSockAddr = 0;
+    pi.iSocketType = SOCK_STREAM; pi.iProtocol = IPPROTO_TCP;
+    pi.dwMessageSize = 0;
+    pi.lpProtocol = (LPTSTR)0;
+    (void) pi;
+    pc.ChainLen = 0;
+    pc.ChainEntries[0] = 0;
+    (void) pc;
+    wpi.dwServiceFlags1 = 0; wpi.dwServiceFlags2 = 0;
+    wpi.dwServiceFlags3 = 0; wpi.dwServiceFlags4 = 0;
+    wpi.dwProviderFlags = 0;
+    wpi.dwCatalogEntryId = 0;
+    wpi.ProtocolChain = pc;
+    wpi.iVersion = 0; wpi.iAddressFamily = 0; wpi.iMaxSockAddr = 0;
+    wpi.iMinSockAddr = 0; wpi.iSocketType = 0; wpi.iProtocol = 0;
+    wpi.iProtocolMaxOffset = 0; wpi.iNetworkByteOrder = 0;
+    wpi.iSecurityScheme = 0; wpi.dwMessageSize = 0;
+    wpi.dwProviderReserved = 0;
+    wpi.szProtocol[0] = (TCHAR)0;
+    (void) wpi;
+    data.wVersion = 0; data.wHighVersion = 0;
+    data.iMaxSockets = 0; data.iMaxUdpDg = 0;
+    data.lpVendorInfo = (char *)0;
+    (void) data;
+    (void) v; (void) s;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -2413,6 +2711,8 @@ int host_tu_entry(void)
     if (m28_shaped_usage() != 0)
         return 1;
     if (m29_shaped_usage() != 0)
+        return 1;
+    if (m39_shaped_usage() != 0)
         return 1;
     return 0;
 }

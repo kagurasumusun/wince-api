@@ -1967,3 +1967,70 @@ TU static-asserts the three progress values and the three copy flags
 and assigns a nine-argument callback to `LPPROGRESS_ROUTINE`
 (signature-fit check); the e2e console app links `CopyFileExW` and
 `make e2e` asserts it in the import table of all six target images.
+### M39: Winsock core unit (winsock2.h + ws2tcpip.h; Ws2.lib)
+
+The core Winsock surface of the official CE 5.0 "Windows Sockets
+Reference" book (107 pages, (v=msdn.10); harvest manifests
+`tools/manifests/wsock-socket-functions.manifest` (30),
+`wsock-ext-functions.manifest` (34), `wsock-structures.manifest`
+(35), `wsock-enumerations.manifest` (1), `wsock-socket-options.manifest`
+(7)).  The official `ws2 Module` page (ms924522) documents the
+module as "Windows Sockets (Winsock) 2.2" with `Ws2.lib` as the link
+library; `def/ws2-doc.def` (`LIBRARY ws2.dll`) is generated from the
+harvested Requirement rows and declares exactly the 58 names below.
+
+Prototypes: transcribed from the CE 5.0 pages; the CE 5.0 archive
+strips whitespace inside some code blocks, so the five pages whose
+prototype could not be spaced unambiguously (WSAStartup, WSASocket,
+WSASetEvent, WSASetLastError, WSASetService) use the official CE 6.0
+twin pages (ee495252, ee493507, ee494648, ee493103, ee493906) — the
+documented-twin procedure of M27.  The CE pages print `FAR*` pointer
+qualifiers (a Winsock 1.1 / 16-bit relic); Windows CE has a single
+32-bit flat address model, so the declarations use plain pointers
+(documented design decision).
+
+| Item | Official page (CE 5.0) | OS Versions | Header | Link Library | Notes |
+|---|---|---|---|---|---|
+| Winsock 1.1 functions: `accept` `bind` `closesocket` `connect` `gethostbyaddr` `gethostbyname` `gethostname` `getpeername` `getsockname` `getsockopt` `htonl` `htons` `inet_addr` `inet_ntoa` `ioctlsocket` `listen` `ntohl` `ntohs` `recv` `recvfrom` `select` `send` `sendto` `sethostname` `setsockopt` `shutdown` `socket` | 27 pages of the Socket Functions book (aa450277, aa450301, ms887908, ms887913, aa450403, aa450404, aa450405, aa450420, ms890293, ms890305, ms890324, ms890325, ms890981, ms890984, ms891129, ms894564, ms895778, ms895783, aa450869, aa450870, aa450882, aa450883, aa450885, aa450918, aa450935, aa450939, aa450958) | Windows CE 1.0 and later | Winsock2.h | Ws2.lib | prototypes verbatim (whitespace compressed by the archive, restored); `select` uses the CE counted-array `fd_set` |
+| `getaddrinfo` / `freeaddrinfo` / `getnameinfo` | `aa450395` / `aa450383` / `aa450416` | Windows CE .NET 4.1 and later | **Ws2tcpip.h** (⇒ `include/ws2tcpip.h`) | Ws2.lib | the CE pages name Ws2tcpip.h as the header; the addrinfo structure (aa450282) and AI_* flags live in winsock2.h |
+| WSA core functions: `WSAAccept` `WSAAddressToString` `WSACleanup` `WSACloseEvent` `WSAConnect` `WSACreateEvent` `WSAEnumNetworkEvents` `WSAEnumProtocols` `WSAEventSelect` `WSAGetLastError` `WSAGetOverlappedResult` `WSAHtonl` `WSAHtons` `WSAIoctl` `WSAJoinLeaf` `WSANtohl` `WSANtohs` `WSARecv` `WSARecvFrom` `WSAResetEvent` `WSASend` `WSASendTo` `WSASetEvent` `WSASetLastError` `WSASocket` `WSAStartup` `WSAStringToAddress` `WSAWaitForMultipleEvents` | 28 pages of the Windows-Specific Extension Functions book (ms898727..ms900456) | Windows CE .NET 4.0 and later (WSACleanup / WSAGetLastError / WSASetLastError CE 1.0+; WSAIoctl CE 2.0+) | Winsock2.h | Ws2.lib | CE 6.0 twins for the five no-space prototypes (see above); the CE WSAConnect/WSAJoinLeaf pages mark `lpSQOS`/`lpGQOS` "Reserved" ⇒ `QOS` is declared opaque, callers pass NULL; `LPCONDITIONPROC` and the overlapped-completion-routine typedefs are transcribed from the prototypes the CE WSAAccept (ms898727) and WSAIoctl (ms898745) pages print |
+| Name-service WSA functions: `WSAEnumNameSpaceProviders` `WSALookupServiceBegin` `WSALookupServiceEnd` `WSALookupServiceNext` `WSANSPIoctl` `WSASetService` (+ the WSAQUERYSET / WSANAMESPACE_INFO / NS_SERVICE_INFO / SERVICE_ADDRESS / SERVICE_ADDRESSES / SERVICE_INFO / SERVICE_TYPE_INFO_ABS / SERVICE_TYPE_VALUE_ABS / CSADDR_INFO / BLOB / WSASERVICECLASSINFO / WSACOMPLETION structures and the WSAECOMPARATOR enumeration) | function pages ms898737 / ms898748 / ms898750 / ms898752 / ms898755 / ms898772; structure pages aa450302, ms887919, ms895775, aa450894, aa450895, aa450902, aa450910, aa450912, ms898732, ms898753, ms898762, ms898768; enumeration page ms898736 | .NET 4.0+ | Winsock2.h | Ws2.lib | **deferred (M41)**: not declared in this batch; the rows are in build/rows.json and the six name-service pages are already listed as skipped by gen-doc-def |
+| Structures: `sockaddr` `sockaddr_in` `in_addr` `in6_addr` `sockaddr_in6` `linger` `hostent` `servent` `protoent` `timeval` `fd_set` `WSADATA` `WSABUF` `WSAOVERLAPPED` `AFPROTOCOLS` `PROTOCOL_INFO` `WSAPROTOCOL_INFO` `WSAPROTOCOLCHAIN` `SOCKET_ADDRESS` `WSANETWORKEVENTS` `TRANSMIT_FILE_BUFFERS` `addrinfo` | 22 structure pages (aa450282, aa450284, aa450370, ms890319, ms890973, ms890972, ms894561, ms896340, ms896341, aa450886, aa450942, aa450946, aa450948, aa450954, aa450970, aa450974, ms898729, ms898735, ms898754, ms898758, ms898760, ms898759) | per page (mostly .NET 4.0+; sockaddr / sockaddr_in CE 1.0+; in6_addr / sockaddr_in6 / addrinfo .NET 4.1+) | Winsock2.h | — | member names/order/types verbatim from the CE pages; the TU static-asserts the 32-bit sizes (sockaddr/sockaddr_in 16, in_addr 4, sockaddr_in6 28, linger 4, hostent 16, servent 16, protoent 12, timeval 8, fd_set 4+4×FD_SETSIZE, WSADATA 400, WSABUF 8, WSAOVERLAPPED 20, AFPROTOCOLS 8, PROTOCOL_INFO 32, WSAPROTOCOLCHAIN 4+4×MAX_PROTOCOL_CHAIN, WSAPROTOCOL_INFO 628, SOCKET_ADDRESS 8, WSANETWORKEVENTS 4+4×FD_MAX_EVENTS, TRANSMIT_FILE_BUFFERS 16, addrinfo 32) |
+| `SOCKADDR_STORAGE` | aa450952 | .NET 4.1+ | Winsock2.h | — | **recorded-not-defined**: the page prints `_SS_PAD1SIZE`/`_SS_PAD2SIZE` without values; the 32-bit CE size is not derivable from official pages |
+| `FD_ZERO` / `FD_SET` / `FD_CLR` / `FD_ISSET` macros | select page aa450882 (names) + official FD_ macro reference pages (semantics: FD_SET "adds a file descriptor ... If the file descriptor already exist within the set, a duplicate will not be added") | — | Winsock2.h | — | implemented as header macros over the CE counted-array fd_set (documented design decision from the documented semantics) |
+| `AF_UNSPEC` 0 / `AF_INET` 2 / `AF_INET6` 23 | names: socket page aa450958 (AF_UNSPEC), sockaddr_in aa450946 ("must be AF_INET"), sockaddr_in6 aa450948 ("must be AF_INET6"); values: official Win32 socket() reference table | — | Winsock2.h | — | AF_IPX / AF_APPLETALK / AF_NETBIOS / AF_IRDA / AF_BTH are named by the official desktop table but not by the CE pages ⇒ recorded-not-defined (the CE socket page's "Af_irda" is a page typo for the IrDA family, documented for the separate IrDA sockets book) |
+| `SOCK_STREAM` 1 / `SOCK_DGRAM` 2 / `SOCK_RAW` 3 | names: aa450958; values: official socket() table | — | Winsock2.h | — | SOCK_RDM / SOCK_SEQPACKET (desktop-only, not named on the CE pages) recorded-not-defined |
+| `IPPROTO_IP` 0 / `IPPROTO_TCP` 6 / `IPPROTO_UDP` 17 / `IPPROTO_IPV6` 41 | names: aa450958 + the Socket Options book (aa450063/aa450064/aa450065/aa450066); values: IANA protocol numbers registry (TCP 6 / UDP 17 agree with the official socket() table) | — | Winsock2.h | — | |
+| `SD_RECEIVE` 0 / `SD_SEND` 1 / `SD_BOTH` 2 | official shutdown() reference table (the CE shutdown page aa450939 documents the how parameter without printing the constant names) | — | Winsock2.h | — | |
+| `AI_PASSIVE` 0x01 / `AI_CANONNAME` 0x02 / `AI_NUMERICHOST` 0x04 | names: addrinfo page aa450282; values: official ADDRINFOA reference table | — | Winsock2.h | — | |
+| `WSA_FLAG_OVERLAPPED` 0x01 / `WSA_FLAG_MULTIPOINT_C_ROOT` 0x02 / `WSA_FLAG_MULTIPOINT_C_LEAF` 0x04 / `WSA_FLAG_MULTIPOINT_D_ROOT` 0x08 / `WSA_FLAG_MULTIPOINT_D_LEAF` 0x10 / `WSA_FLAG_ACCESS_SYSTEM_SECURITY` 0x40 / `WSA_FLAG_NO_HANDLE_INHERIT` 0x80; `SG_UNCONSTRAINED_GROUP` 0x01 / `SG_CONSTRAINED_GROUP` 0x02 | official WSASocket() reference table; the CE WSASocket page ms898773 documents dwFlags and g | — | Winsock2.h | — | |
+| `SO_KEEPALIVE` 0x0008 / `SO_CONDITIONAL_ACCEPT` 0x3002 | names: CE SOL_SOCKET page ms884940; values: official SO_KEEPALIVE / SO_CONDITIONAL_ACCEPT pages ("The constant that represents this socket option is ...") | — | Winsock2.h | — | |
+| `WSADESCRIPTION_LEN` 256 | WSADATA page ms898735 ("text (up to 256 characters in length)") | — | Winsock2.h | — | |
+| `WSAPROTOCOL_LEN` 255 | WSAPROTOCOL_INFO page ms898760 ("defined to be 255") | — | Winsock2.h | — | |
+| `FD_SETSIZE` 64 | fd_set page aa450370 ("defaults to 64") | — | Winsock2.h | — | |
+| Winsock 2.2 error codes (all WSAE*/WSA*/WSA_QOS* values, 85 entries) | names referenced by the Return Values tables of the CE pages throughout the book; values: official "Windows Sockets Error Codes" table | — | Winsock2.h | — | the full official table is defined (fixed Winsock 2.2 ABI; the ws2 Module page documents the module as Winsock 2.2) |
+| `INVALID_SOCKET` `(SOCKET)(~0u)` | official Socket Data Type page: "the SOCKET type is unsigned" + a handle "may take any value in the range 0 to INVALID_SOCKET–1" (⇒ INVALID_SOCKET is the largest representable unsigned value) | — | Winsock2.h | — | documented derivation |
+| `WSAVersion(major, minor)` `MAKEWORD(minor, major)` | CE WSAStartup page ms898774: "The high-order byte specifies the minor version (revision) number; the low-order byte specifies the major version number", documented example `MAKEWORD( 2, 2 )` | — | Winsock2.h | — | |
+| `WSASYS_STATUS_LEN` 128 / `FD_MAX_EVENTS` 16 / `MAX_PROTOCOL_CHAIN` 7 | referenced by the CE pages (ms898735 / ms898754 / ms898759) but **no official page prints the values** (verified: CE 5.0, CE .NET, desktop ws2def, MSDN-legacy aa923613) | — | Winsock2.h | — | **(c) flagged design decisions**: the embedding structures (WSADATA, WSANETWORKEVENTS, WSAPROTOCOLCHAIN) must be complete; an on-device Ws2.dll cross-check of these three members is required before relying on them |
+| `SOL_SOCKET` / `SOL_IRLMP`; `SO_DEBUG` `SO_ACCEPTCONN` `SO_REUSEADDR` `SO_DONTROUTE` `SO_BROADCAST` `SO_LINGER` `SO_OOBINLINE` `SO_RCVBUF` `SO_SNDBUF` `SO_TYPE` `SO_ERROR` `SO_DONTLINGER` `SO_MAX_MSG_SIZE` `SO_PROTOCOL_INFO` `SO_PROTOCOL_INFOW` `SO_GROUP_ID` `SO_GROUP_PRIORITY` `PVD_CONFIG`; `FD_READ` `FD_WRITE` `FD_OOB` `FD_ACCEPT` `FD_CONNECT` `FD_CLOSE` `FD_ADDRESS_LIST_CHANGE` `FD_ROUTING_INTERFACE_CHANGE`; `MSG_OOB` `MSG_PEEK` `MSG_DONTROUTE` `MSG_PARTIAL`; `FIONBIO` `FIONREAD` (FIOASYNC: "no command that is equivalent to FIOASYNC" — CE WSAIoctl page); `SIO_FLUSH` `SIO_RFCOMM_COMM_PARAMETERS` `SIO_RFCOMM_WAIT_MODEM_STATUS` `SIO_ADDRESS_LIST_CHANGE` `SIO_ROUTING_INTERFACE_CHANGE`; `CF_ACCEPT` `CF_DEFER` `CF_REJECT`; `SOMAXCONN` | names documented by the CE pages (SOL_SOCKET ms884940; WSAEventSelect ms898740; recv/send/WSARecv/WSASend pages; WSAIoctl ms898745; WSAAccept ms898727; listen ms894564) | — | Winsock2.h | — | **recorded-not-defined**: the CE pages name the constants but print no numeric values, and no official page (CE 5.0 / CE .NET / desktop current / desktop legacy) publishes them; defining them from non-official sources is out of rule.  Follow-up: an on-device Ws2.dll readback (setsockopt(SO_TYPE) / WSAEnumNetworkEvents / ioctlsocket(FIONREAD) round-trips) is the compliant way to verify values before adding them |
+
+Tooling: `tools/ce-fetch.py` — (1) the bare-id archive tag now keeps its `v=` prefix
+(`v=msdn.10`): Learn serves the previous-versions archive only under the full
+`(v=...)` tag, a regression introduced in M22 (`root + "(" + tag + ")"` with
+`tag = "msdn.10"`) silently 404s every bare-id URL and the platform now enforces
+the tag strictly; (2) transient 404s (Learn rate limiting returns 404, not 429)
+are retried with long backoff; (3) error records from a previous run are dropped
+at start so a re-fetch replaces them; (4) the signature search key strips the
+archive's disambiguation suffixes ("socket (Windows Sockets)").
+`tools/gen-doc-def.py` — the declaration matcher additionally parses
+`AKARI_CE_IMPORT` lines whose return type is multi-word or a pointer
+(`struct hostent *gethostbyaddr`, `unsigned long inet_addr`); regeneration
+reproduces all 33 existing defs byte-identically and adds `def/ws2-doc.def`.
+
+Export surface: 33 -> **34** def files; 654 -> **712** name-only lines;
+unique names 603 -> **661**.  The TU static-asserts the 22 structure
+sizes/offsets and the documented constant values and calls all 58
+functions (including the two callback prototypes); the e2e console app
+links `socket` / `WSAStartup` / `getaddrinfo` and `make e2e` asserts
+`Name: ws2.dll` plus the three symbols in the import table of all six
+target images.

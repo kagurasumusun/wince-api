@@ -246,6 +246,14 @@ typedef struct _RECTL {
     ((LONG)(((WORD) ((DWORD_PTR) (a) & 0xffff)) | \
             (((DWORD) ((WORD) ((DWORD_PTR) (b) & 0xffff))) << 16)))
 
+/* MAKEWORD(lowbyte, highbyte): the CE WSAStartup page (ms898774)
+ * documents "the MAKEWORD(lowbyte, highbyte) macro declared in
+ * Windef.h" with the example wVersionRequested = MAKEWORD( 2, 2 );
+ * the fixed Win32-ABI packing of two 8-bit halves into a WORD. */
+#define MAKEWORD(a, b)  \
+    ((WORD)(((BYTE) ((WORD) (a) & 0xff)) | \
+            (((WORD) (b) & 0xff) << 8)))
+
 #define FALSE 0
 #define TRUE  1
 

@@ -16,6 +16,8 @@
  */
 
 #include <windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 
 int main(void)
 {
@@ -38,6 +40,13 @@ int main(void)
      * image must export it per the doc-derived def. */
     (void) CopyFileExW(L"a", L"b", NULL, NULL, NULL,
                        COPY_FILE_FAIL_IF_EXISTS);
+    /* M39: Winsock (Ws2.lib) import surface -- linked, not run: the
+     * image must import the Ws2.lib-documented names from ws2.dll
+     * per the doc-derived def. */
+    (void) socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    (void) WSAStartup(WSAVersion(2, 2), (LPWSADATA)0);
+    (void) getaddrinfo((const char *)0, (const char *)0,
+                       (const struct addrinfo *)0, (struct addrinfo **)0);
     (void)tick;
     (void)si;
     (void)mod;

@@ -1,0 +1,74 @@
+; ws2-doc.def -- ws2.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (ws2.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY ws2.dll
+EXPORTS
+  WSAAccept
+  WSAAddressToString
+  WSACleanup
+  WSACloseEvent
+  WSAConnect
+  WSACreateEvent
+  WSAEnumNetworkEvents
+  WSAEnumProtocols
+  WSAEventSelect
+  WSAGetLastError
+  WSAGetOverlappedResult
+  WSAHtonl
+  WSAHtons
+  WSAIoctl
+  WSAJoinLeaf
+  WSANtohl
+  WSANtohs
+  WSARecv
+  WSARecvFrom
+  WSAResetEvent
+  WSASend
+  WSASendTo
+  WSASetEvent
+  WSASetLastError
+  WSASocket
+  WSAStartup
+  WSAStringToAddress
+  WSAWaitForMultipleEvents
+  accept
+  bind
+  closesocket
+  connect
+  freeaddrinfo
+  getaddrinfo
+  gethostbyaddr
+  gethostbyname
+  gethostname
+  getnameinfo
+  getpeername
+  getsockname
+  getsockopt
+  htonl
+  htons
+  inet_addr
+  inet_ntoa
+  ioctlsocket
+  listen
+  ntohl
+  ntohs
+  recv
+  recvfrom
+  select
+  send
+  sendto
+  sethostname
+  setsockopt
+  shutdown
+  socket

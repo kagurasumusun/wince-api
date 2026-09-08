@@ -16,7 +16,8 @@ CE_VERSIONS = 0x420 0x500 0x600
 HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h include/winreg.h include/psapi.h include/tlhelp32.h \
        include/msgqueue.h include/excpt.h include/dbgapi.h include/errorrep.h include/celog.h include/natedit.h \
        include/winuser.h include/winerror.h include/winnt.h include/wingdi.h include/tvout.h \
-       include/notify.h include/shellapi.h include/commctrl.h
+       include/notify.h include/shellapi.h include/commctrl.h \
+       include/winsock2.h include/ws2tcpip.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -111,6 +112,8 @@ clean:
 #   make e2e WINCECLANG=/path/to/clang CRTDIR=/path/to/wince-crt
 CRTDIR    ?= $(abspath $(CURDIR)/../wince-crt)
 
+# M39 note: the M39 ws2 import assertions below resolve through ws2.dll (Ws2.lib
+# per the official CE pages).
 e2e:
 	@if [ -z "$(WINCECLANG)" ]; then \
 	  echo "[e2e] set WINCECLANG to the WinCE clang binary" >&2; \
@@ -158,10 +161,18 @@ e2e:
 	    | grep -q "IMAGE_SUBSYSTEM_WINDOWS_CE_GUI" || exit 1; \
 	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	    | grep -q "Name: coredll.dll" || exit 1; \
-	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
-	    | grep -q "Symbol: CopyFileExW" || exit 1; \
-	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
-	    | grep -q "Symbol: MessageBoxW" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CopyFileExW" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: ws2.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: WSAStartup" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: socket" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: getaddrinfo" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
+    | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \
 	done; \
 	echo "[e2e] OK -- $(words $(CE_TRIPLES)) WinCE targets linked against the doc-derived import libraries"

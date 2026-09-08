@@ -210,6 +210,23 @@ def declared_exports():
         txt = open(os.path.join(INCLUDE, fn), encoding="utf-8").read()
         for m in _DECL_RE.finditer(txt):
             names.add(m.group(1))
+        # AKARI_CE_IMPORT lines whose return type is multi-word or a
+        # pointer (e.g. "struct hostent *gethostbyaddr",
+        # "unsigned long inet_addr"): _DECL_RE above only matches a
+        # single-token return type, so take the last identifier
+        # before the first '(' of the line as the export name.
+        for line in txt.splitlines():
+            s = line.strip()
+            if not s.startswith("AKARI_CE_IMPORT"):
+                continue
+            body = s[len("AKARI_CE_IMPORT"):].strip()
+            i = body.find("(")
+            if i < 0:
+                continue
+            parts = body[:i].strip().split()
+            if not parts:
+                continue
+            names.add(parts[-1].lstrip("*"))
     # Keep only names that look like exports (function declarations);
     # drop common false positives from type/macro text.
     drop = {"if", "for", "while", "do", "switch", "sizeof", "return",

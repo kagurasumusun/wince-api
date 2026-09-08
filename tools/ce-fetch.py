@@ -38,13 +38,17 @@ CACHE = os.path.join(os.path.dirname(__file__), "..", "build", "pages")
 
 
 def split_id(pid):
-    """'ms891279(v=msdn.10)' -> ('ms891279', 'msdn.10').  A bare id
-    (as in the per-book manifests) defaults to the CE 5.0 archive tag."""
+    """'ms891279(v=msdn.10)' -> ('ms891279', 'v=msdn.10').  A bare id
+    (as in the per-book manifests) defaults to the CE 5.0 archive tag.
+    The tag always carries its 'v=' prefix: Learn serves the archive
+    only under the full '(v=...)' version tag (a bare '(msdn.10)'
+    path 404s -- the platform started enforcing the tag strictly,
+    which is why older no-tag fetches that once resolved now 404)."""
     pid = pid.strip()
     m = re.match(r"^(.*?)\((v=[\w.]+)\)$", pid)
     if m:
         return m.group(1), m.group(2)
-    return pid, "msdn.10"
+    return pid, "v=msdn.10"
 
 
 def fetch(pid):
@@ -54,13 +58,20 @@ def fetch(pid):
         return path
     url = BASE.format(root + "(" + tag + ")")
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    for attempt in range(3):
+    # Transient 404s are observed under Learn rate limiting: retry
+    # them with long backoff before giving up.
+    for attempt in range(4):
         try:
             with urllib.request.urlopen(req, timeout=60) as resp:
                 data = resp.read()
             break
-        except Exception as exc:  # noqa: BLE001
-            if attempt == 2:
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404 and attempt < 3:
+                time.sleep(30 * (attempt + 1))
+                continue
+            raise
+        except Exception:  # noqa: BLE001
+            if attempt == 3:
                 raise
             time.sleep(2 * (attempt + 1))
     os.makedirs(CACHE, exist_ok=True)
@@ -97,7 +108,10 @@ def parse(pid, title):
     # function name and balanced parentheses.
     blocks = re.findall(r"<(?:pre|code)[^>]*>(.*?)</(?:pre|code)>",
                         raw, flags=re.S | re.I)
-    short = re.sub(r"\s*\(Windows CE [^)]*\)\s*$", "", title).strip()
+    # Strip the archive's disambiguation suffixes from the page title
+    # ("socket (Windows Sockets)", "BLOB (Windows Sockets)") so the
+    # prototype search key is the bare function/structure name.
+    short = re.sub(r"\s*\(Windows (?:CE )?[^)]*\)\s*$", "", title).strip()
     for b in blocks:
         clean = re.sub(r"\s+", " ", strip_tags(b)).strip()
         if len(clean) > 320 or "(" not in clean or ")" not in clean:
@@ -183,6 +197,9 @@ def main():
     if os.path.exists(dbpath):
         with open(dbpath, encoding="utf-8") as fh:
             out = json.load(fh)
+    # Error records (transient 404s etc.) are not "have": drop them so
+    # a re-fetch replaces them with the parsed record.
+    out = [r for r in out if "error" not in r]
     have = {split_id(r["id"])[0] for r in out}
     for pid, title in rows:
         root, _tag = split_id(pid)
