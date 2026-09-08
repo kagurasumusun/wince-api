@@ -47,3 +47,4 @@ EXPORTS
   SHSetInputContext
   SHSetNavBarText
   SHSipInfo
+  SHSipPreference

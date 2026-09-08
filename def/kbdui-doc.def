@@ -16,7 +16,9 @@ LIBRARY kbdui.dll
 EXPORTS
   EnableHardwareKeyboard
   GetAsyncKeyState
+  GetAsyncShiftFlags
   GetKeyState
   GetKeyboardLayoutNameW
   GetKeyboardStatus
   MapVirtualKey
+  PostKeybdMessage

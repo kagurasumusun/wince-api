@@ -173,6 +173,26 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M52 (landed):** OEM keyboard layer + derived-value policy (new
+  `include/keybd.h`, `include/pwinuser.h`; Kbdui.lib / Coredll.lib /
+  Aygshell.lib).  Part one: the owner-granted derivation policy
+  (unpublished values implemented only when uniquely derivable from
+  official public information, derivation path recorded) -- a sweep of
+  the Windows Mobile 6.5 official documentation (Download Center CHM),
+  the desktop Win32 references and the CE .NET catalog released three
+  M50 holds: SIPSTATE (full enum with values -> `SHSipPreference` now
+  ships, `aygshell-doc.def` 34), SHIC_FEATURE, and VK_APP1..6
+  (0xC1..0xC6); plus KEYEVENTF_EXTENDEDKEY/KEYUP, INPUT_MOUSE/
+  KEYBOARD/HARDWARE (desktop fixed-ABI values) and VK_KEYLOCK.  Part
+  two: the CE 5.0 Virtual-Key Codes tables (ms927178 + aa452679 --
+  ~140 published constants incl. the OEM, DBE and manufacturer sets;
+  the VK_* set was entirely absent before), the deferred Pwinuser.h /
+  Keybd.h OEM keyboard batch (GET_FOREGROUND_INFO + the five functions;
+  PostKeybdMessage in its documented Winuser.h home -- M26 note
+  corrected), and KEY_STATE_FLAGS.  `kbdui-doc.def` 6 -> 8,
+  `coredll-doc.def` 612.  KEY_STATE_FLAGS flag values, LMDATA_* and the
+  remaining flag/message sets stay held (derivation non-unique or no
+  public value; analysis in docs/inventory.md M52).
 * **M51 (landed):** Software-based Input Panel unit (new
   `include/sipapi.h`, `include/sip.h`; Coredll.lib) -- the CE 5.0
   Software-based Input Panel Reference book (49 leaves): the 9
@@ -546,9 +566,10 @@ values, the M50 AYGShell flag sets) -- those need the documented
 on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
-lockstep (coredll at 611 name-only exports incl. the 42 M47 Crypt*
-functions + the 9 M51 Sip* functions; coreimm 56, M46; crypt32 83 +
-winscard 28, M48/M49; aygshell 33, M50);
+lockstep (coredll at 612 name-only exports incl. the 42 M47 Crypt*
+functions, the 9 M51 Sip* functions and KeybdGetDeviceInfo, M52;
+coreimm 56, M46; crypt32 83 + winscard 28, M48/M49; aygshell 34,
+M50/M52; kbdui 8, M26/M52);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

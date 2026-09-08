@@ -206,7 +206,7 @@ M44 added the COM/OLE/Storage/Automation surface (`objbase.h`, `Ole32.lib`, `Ole
 M45 completed the documented TAPI client surface, including line/phone functions, callbacks,
 client handles and the previously held `TSPI_lineForward` case.
 
-## 15. M46-M51: advanced subsystems
+## 15. M46-M52: advanced subsystems
 
 The latest milestones expanded the API into additional CE subsystems:
 
@@ -227,8 +227,14 @@ The latest milestones expanded the API into additional CE subsystems:
   9 documented `Sip*` functions, the `SipEnumIMProc` callback shape, the `SIPINFO`/
   `IMENUMINFO`/`IMINFO`/`LMDATA` structures and the `IIMCallback`/`IInputMethod`
   interface records.
+- **M52:** OEM keyboard layer (`keybd.h`, `pwinuser.h`; `Kbdui.lib`/`Coredll.lib`) with
+  the full CE 5.0 virtual-key tables, plus the derived-value policy: unpublished
+  constants implemented only when uniquely derivable from official public information,
+  with the derivation path recorded (SIPSTATE/`SHSipPreference`, `SHIC_FEATURE`,
+  `VK_APP1-6`, `KEYEVENTF_*`, `INPUT_*`, `VK_KEYLOCK`; sources: the Windows Mobile 6.5
+  official documentation and the desktop Win32 references).
 
-The M51 state is the latest committed API milestone as of 2026-09-09.
+The M52 state is the latest committed API milestone as of 2026-09-09.
 
 ## 16. Wider WinCE system and device work
 

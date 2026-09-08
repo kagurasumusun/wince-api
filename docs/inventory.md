@@ -3364,3 +3364,158 @@ Export surface: `def/coredll-doc.def` 602 -> **611** exports (+9 Sip*
 functions; no new def file -- the Uuid.lib interface rows produce no
 def, gen-doc-def reports 35 co-listed pages skipped).  Header count
 35 -> 37; def count 39 (unchanged).
+
+## M52 -- OEM keyboard layer + derived-value policy (new headers keybd.h, pwinuser.h; Kbdui.lib / Coredll.lib / Aygshell.lib)
+
+Scope: two parts.  (1) Application of the owner-granted derived-value
+policy (implement an unpublished value ONLY when it is derivable from
+official public information, with the derivation path recorded):
+a systematic sweep of every held value set against the remaining
+official sources.  (2) The deferred OEM keyboard unit the M26 note
+promised (Pwinuser.h / Keybd.h leaves of the Keyboard Reference and
+Keyboard Driver DDI books) plus the never-harvested CE 5.0 Virtual-Key
+Codes tables.
+
+### Derivation sweep -- sources checked (negative results recorded)
+
+* CE 5.0 pages + CE 6.0 twins: names only (the doc generation prints
+  flag tables without value columns) -- known from M50/M51.
+* CE .NET (pages4 catalog): the archived CE .NET product documentation
+  has NO AYGShell / SIP / Keyboard-Reference book (its Shell section is
+  OS-design pages only) -- no older-generation value source exists
+  there.
+* Windows Mobile 6.5 official documentation: retired by Microsoft to
+  the official Download Center CHM
+  (download.microsoft.com/download/d/5/3/d532530a-507f-488e-9747-1f8757071d92/windowsmobile6.5.chm,
+  linked from the learn.microsoft.com archive page dn887939).  All
+  16,642 pages were extracted and every held-set token was grepped for
+  a nearby published value.  Result: the WM 6.5 documentation is the
+  same names-only generation for every flag/message set -- EXCEPT the
+  "Shell Enumerations > (Declaration)" pages, which publish complete
+  enum bodies with values (SIPSTATE, SHIC_FEATURE; the SHNP twin
+  matches the CE page), and the "Keys and Key Codes for Windows
+  Mobile" page, which publishes the VK_APP1..6 assignments and the
+  VK_F22 <-> VK_KEYLOCK cell mapping.  The 31 inspected WM pages are
+  preserved in the corpus pageswm/ tree.
+* Desktop Win32 references (learn.microsoft.com/windows/win32/api):
+  publish values for fixed-ABI identifiers shared with CE
+  (KEYEVENTF_EXTENDEDKEY/KEYUP of keybd_event; the INPUT type values).
+  The two pages read are preserved in the corpus pagesw/ tree.
+
+### Derivation ledger (values implemented this milestone)
+
+| item | CE grounding (name) | derivation source (value) | value(s) |
+|---|---|---|---|
+| SIPSTATE enum + SHSipPreference | aa453741 (signature, aygshell.h/aygshell.lib, CE 3.0+) | WM 6.5 "SIPSTATE" (Declaration) page: full enum body with values; Requirements "Windows Embedded CE 3.0 and later / Header shellapi.h (Aygshell.h on PPC 2000-2002) / Library aygshell.lib" | SIP_UP=0, SIP_DOWN=1, SIP_FORCEDOWN=2, SIP_UNCHANGED=3, SIP_INPUTDIALOG=4; releases the M50 hold |
+| SHIC_FEATURE enum | aa453701/aa453736 ("a value of the SHIC_FEATURE enumeration") | WM 6.5 "SHIC_FEATURE" (Declaration) page: full enum body with values; Requirements "Header aygshell.h / Windows Embedded CE .NET 4.0 and later" | RESTOREDEFAULT=0, AUTOCORRECT=0x1, AUTOSUGGEST=0x2, HAVETRAILER=0x3, CLASS=0x4 |
+| VK_APP1..VK_APP6 | aa453734 remarks (names) | WM 6.5 "Keys and Key Codes for Windows Mobile": "0xC1 VK_APP_FIRST / VK_APP1 .. 0xC6 VK_APP6 / VK_APP_LAST"; keys undefined for CE, overridden as application keys in WM | 0xC1..0xC6 (in aygshell.h; VK_APP_FIRST/LAST alias spellings recorded, not defined) |
+| VK_KEYLOCK | ms927178 (value cell prints "F22" = the VK_F22 row) | WM 6.5 key table maps 0x85 to both VK_F22 (CE constant) and VK_KEYLOCK (WM constant) | 0x85 |
+| KEYEVENTF_EXTENDEDKEY / KEYEVENTF_KEYUP | aa453245 (names) | desktop keybd_event reference (winuser/ns/nf pages, values 0x0001/0x0002); fixed Win32 keyboard-input ABI (same policy family as the M29 WM_* fixed-ABI values) | 0x0001 / 0x0002 |
+| INPUT_MOUSE / INPUT_KEYBOARD / INPUT_HARDWARE | ms909851 / ms932719 (names; INPUT_HARDWARE unsupported on CE) | desktop INPUT structure reference (0/1/2); fixed SendInput ABI | 0 / 1 / 2 |
+
+### Held after derivation analysis (no unique public derivation)
+
+* KEY_STATE_FLAGS values (ms902150): the reserved-entry names carry
+  hex suffixes (Reserved4/8/10/20, Reserved40000/400/200/100) that pin
+  the first six entries contiguously (0x1..0x20) but are mutually
+  inconsistent with any single contiguous assignment of the printed
+  33-entry table order -- multiple assignments fit, so no unique
+  derivation exists.  The TYPE ships (typedef UINT32
+  KEY_STATE_FLAGS, verbatim); all 33 flag names recorded in keybd.h.
+  (WM 6.5 prints the identical names-only table.)
+* LMDATA_* flags (aa453406): the page's memory-dump example prints
+  0x00000102 = LMDATA_SYMBOL_WORD | LMDATA_SCORE_DWORD -- one equation,
+  two unknowns; every split of 0x102 between the two names (and the
+  remaining ten flags) is underdetermined.  Held.
+* No published value anywhere (CE 5.0 / CE 6.0 / WM 6.5 / CE .NET n/a
+  / desktop n/a): SHIDIF_*, SHCMBF_*, SHRG_*, SHFS_*, SHDB_*, SHNF_*,
+  SHNUM_*, SHCMBM_* (message values), NMN_*, SIPF_*, SIP_STATUS_*,
+  IM_POSITION / IM_WIDEIMAGE / IM_NARROWIMAGE, WMSCD_CHAR_RANKED_ALTS,
+  SHCNE_* / SHCNF_*, GN_CONTEXTMENU, SHA_INPUTDIALOG, KEYEVENTF_SILENT,
+  SPI_GETSIPINFO / SPI_SETSIPINFO / SPI_GETCURRENTIM / SPI_SETCURRENTIM,
+  the WM_FILECHANGEINFO / WM_IM_INFO / WM_SYSCOPYDATA message
+  identifiers, KBDI_* identifiers.  (The whole-CHM grep for a hex value
+  near any of these tokens returns only the LMDATA example.)
+
+### OEM keyboard unit (direct CE pages, no derivation)
+
+* ms927178 "Virtual-Key Codes" (CE 5.0): the full CE virtual-key table
+  WITH hexadecimal values -- standard table (VK_LBUTTON 0x01 ..
+  VK_OEM_CLEAR 0xFE), the Microsoft-assigned OEM table (VK_OEM_SCROLL
+  0x91 -- same cell as VK_SCROLL, recorded -- VK_OEM_1 0xBA ..
+  VK_OEM_102 0xE2) and the East-Asian IME DBE table (VK_DBE_* 0xF0..
+  0xFB).  ~100 constants added to winuser.h; the table's range rows
+  (unassigned/OEM-reserved cells) are recorded in the header comment.
+  This is the first direct CE-page grounding for VK_* (the set was
+  entirely absent from the tree).
+* aa452679 "Manufacturer-specific Virtual-Key Codes" (CE 5.0): NEC
+  PC-9800 (VK_OEM_NEC_*), Nokia/Ericsson (VK_OEM_F17..F24 = 0x80..0x87,
+  VK_ERICSSON_BASE 0xE8 and the chorded VK_OEM_RESET..VK_OEM_BACKTAB
+  set published as base-relative expressions -- defined verbatim as
+  published), Fujitsu/OASYS (VK_OEM_FJ_*, VK_OEM_OAS_1..29) and ICO
+  (VK_ICO_*) assignments.  All values as published; numeric collisions
+  with the standard table are per-device range reuse, noted.
+* ms902150 "KEY_STATE_FLAGS" (Keyboard Driver DDI Data Types; Keybd.h;
+  CE 1.0+): typedef UINT32 KEY_STATE_FLAGS (new include/keybd.h; the
+  UINT32 base type is added to windef.h, printed verbatim by the page);
+  flag values held (above).
+* aa453186 "GET_FOREGROUND_INFO" (Keyboard Structures; Pwinuser.h; CE
+  .NET 4.2+; "only available to OEMs"): tagGetForegroundInfo, 9
+  members, 32-bit size 36 TU-asserted; new include/pwinuser.h.
+* ms929241 GetForegroundInfo (Pwinuser.h; "Linked during platform
+  build"), ms929242 GetForegroundKeyboardLayoutHandle and ms929243
+  GetForegroundKeyboardTarget (Pwinuser.h; "Linked during build"):
+  OEM-only, no import-library row -> declared, excluded from defs
+  (documented; the TU exercises them compile-only).
+* aa453955 GetAsyncShiftFlags (Pwinuser.h; Kbdui.lib; CE .NET 4.2+)
+  -> def/kbdui-doc.def.
+* aa453246 KeybdGetDeviceInfo (Pwinuser.h; Coredll.lib; CE 1.0+):
+  iIndex takes the KBDI_* identifiers (names held) -> coredll-doc.def.
+* ms911936 PostKeybdMessage (Header: Winuser.h; Link Library:
+  Kbdui.lib; CE 2.0+): declared in winuser.h.  CORRECTION of the M26
+  inventory note, which had filed it under Pwinuser.h: the page's
+  Requirements row is Winuser.h (the M26 note followed the Keybd.h
+  parameter types instead); the winuser.h comment block is fixed and
+  the correction is recorded here.
+* SendInput (ms932719) / INPUT (ms909851): already shipped since M26;
+  the type constants INPUT_MOUSE/INPUT_KEYBOARD/INPUT_HARDWARE are now
+  defined (derived values, ledger above) and the CE remark "Windows CE
+  does not support the INPUT_HARDWARE value" is recorded.
+
+### WM 6.5 findings recorded, not shipped (this tree is CE)
+
+* NMRGINFO (aygshell.h, CE 3.0+) and NM_RECOGNIZEGESTURE (commctrl.h,
+  CE .NET 4.2+): documented in the WM 6.5 reference with CE
+  availability rows but absent from the CE 5.0 AYGShell book -- queued
+  as candidates for a WM-sourced follow-up batch (see docs/README
+  roadmap note).
+* The WM VK_T* navigation-constant mapping (VK_TBACK 0x08 ..
+  VK_VOICEDIAL 0x87, sharing cells with the CE VK_* constants) and the
+  VK_DONE / VK_MOJI chorded codes: Windows Mobile-only spellings of
+  shared CE cells, recorded in the corpus pageswm/ tree; not defined in
+  this CE tree.
+* The WM SHNOTIFICATIONDATA layout extension confirms the M50 note:
+  the SOFTKEYMENU / SOFTKEYNOTIFY / NOTIF_NUM_SOFTKEYS types stay
+  unpublished.
+
+### Verification
+
+* `make check` GREEN (TU m52: 18 published-value spot asserts + the
+  SIPSTATE / SHIC_FEATURE / VK_APP / KEYEVENTF / INPUT_ derived-value
+  asserts + GET_FOREGROUND_INFO size 36 + PostKeybdMessage /
+  GetAsyncShiftFlags / KeybdGetDeviceInfo / GetForegroundInfo /
+  GetForegroundKeyboardLayoutHandle / GetForegroundKeyboardTarget /
+  SHSipPreference / SHSetAppKeyWndAssoc(VK_APP1) shaped usage).
+* `make crosscheck` GREEN on all six targets (37 headers standalone +
+  full TU, `-Werror`).
+* `make e2e` GREEN: the M52 consumer unit links PostKeybdMessage +
+  GetAsyncShiftFlags (kbdui.dll), KeybdGetDeviceInfo (coredll.dll) and
+  SHSipPreference (aygshell.dll); asserts Name: kbdui.dll + the three
+  symbols + Symbol: SHSipPreference on all six images.
+
+Export surface: `def/kbdui-doc.def` 6 -> **8** (+GetAsyncShiftFlags,
+PostKeybdMessage), `def/coredll-doc.def` 611 -> **612** (+
+KeybdGetDeviceInfo), `def/aygshell-doc.def` 33 -> **34** (+
+SHSipPreference, M50 hold released by derivation).  Header count
+37 -> 39; def count unchanged at 39 (kbdui-doc.def existed since
+M26).

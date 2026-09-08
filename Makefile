@@ -23,7 +23,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/objbase.h \
        include/aygshell.h include/shellsdk.h include/newmenu.h \
        include/shlobj.h include/extfile.h \
-       include/sipapi.h include/sip.h
+       include/sipapi.h include/sip.h \
+       include/keybd.h include/pwinuser.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -257,6 +258,16 @@ e2e:
 	  | grep -q "Symbol: SipGetInfo" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: SipShowIM" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SHSipPreference" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: kbdui.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: PostKeybdMessage" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: GetAsyncShiftFlags" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: KeybdGetDeviceInfo" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

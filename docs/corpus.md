@@ -46,9 +46,28 @@ git -C ../wince-docs-corpus push
 
 Then delete the corpus clone and `build/` from the session.
 
-## Current corpus (2026-09-09, M51)
+## External-official trees (M52 derived-value policy)
 
-* `pages5/`: 2067 CE 5.0 `(v=msdn.10)` pages — the full committed
+* `pagesw/`: desktop Win32 reference pages
+  (learn.microsoft.com/windows/win32/api) read as the fixed-ABI value
+  source for M52 derivations: winuser-nf-keybd_event.html
+  (KEYEVENTF_EXTENDEDKEY 0x0001 / KEYEVENTF_KEYUP 0x0002) and
+  winuser-ns-input.html (INPUT_MOUSE 0 / INPUT_KEYBOARD 1 /
+  INPUT_HARDWARE 2).  Each derivation is recorded per item in
+  docs/inventory.md M52.
+* `pageswm/`: Windows Mobile 6.5 documentation pages, extracted from
+  the official Microsoft Download Center CHM
+  (download.microsoft.com/download/d/5/3/d532530a-507f-488e-9747-1f8757071d92/windowsmobile6.5.chm,
+  linked from the learn.microsoft.com archive page dn887939; CC BY
+  attribution as published).  31 pages: the value-sweep evidence
+  (SIPSTATE / SHIC_FEATURE / SHNP declaration pages, "Keys and Key
+  Codes for Windows Mobile", the AYGShell/SIP/keyboard pages checked
+  for the negative results).  The CHM itself (63 MB) is not committed;
+  the URL above is the durable official source.
+
+## Current corpus (2026-09-09, M52)
+
+* `pages5/`: 2070 CE 5.0 `(v=msdn.10)` pages — the full committed
   manifest set (91 manifests incl. the M43 TAPI/TSPI manifests, the
   M45 `tapi-client-functions.manifest`, the M46
   `imm-reference.manifest`, the M47 `crypt-csp-base.manifest`, the
@@ -59,7 +78,9 @@ Then delete the corpus clone and `build/` from the session.
   dependency pages (ms931479 NMHDR, ms889030 FILECHANGEINFO, ms932860
   SIPINFO, aa453890 WM_NOTIFY, aa453906 WM_SETTINGCHANGE) and the M51
   message dependency page aa453870 WM_IM_INFO (aa453912
-  WM_SYSCOPYDATA was already preserved).
+  WM_SYSCOPYDATA was already preserved) and the three M52 keyboard
+  pages (ms902150 KEY_STATE_FLAGS, ms927178 Virtual-Key Codes,
+  aa452679 Manufacturer-specific Virtual-Key Codes).
 * `pages6/`: 1257 CE 6.0 `(v=winembedded.60)` pages — the twins of the
   CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
   CE 6.0 leaf) plus the M34a twins ee483142 / ee491122, the M44
@@ -80,13 +101,14 @@ Then delete the corpus clone and `build/` from the session.
   cross-linked by the archived TOC: its CE URL is a verified 404 and
   it is excluded; one preserved page (ms938306) is the archive's
   `#message` sign-in-gated stub, kept as published.
-* `rows.json`: 2148 CE 5.0 Requirement-row records (1560 pre-M45 +
+* `rows.json`: 2151 CE 5.0 Requirement-row records (1560 pre-M45 +
   the 89 M45 TAPI client function pages + the 152 M46 IMM reference
   pages + the 51 M47 crypto base-CSP pages + the 181 M48/M49 crypto
   certificate/PFX + smart-card pages, counting 4 struct pages already
   cached in M47 only once + the 66 M50 AYGShell + dependency pages +
   the 48 new M51 SIP book rows and the aa453870 WM_IM_INFO row (the
-  SIPINFO and WM_SYSCOPYDATA pages were already preserved));
+  SIPINFO and WM_SYSCOPYDATA pages were already preserved) + the 3 M52
+  keyboard pages);
   `rows4.json` (in `build/`, regenerable
   via `tools/cenet-rows.py`) holds the CE .NET parsed records.
   The 65 M50 CE 6.0 twin pages are preserved in `pages6/` but keep no

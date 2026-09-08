@@ -298,6 +298,7 @@ EXPORTS
   IsDBCSLeadByteEx
   IsDlgButtonChecked
   IsProcessorFeaturePresent
+  KeybdGetDeviceInfo
   LineTo
   LoadKeyboardLayout
   LoadLibraryW

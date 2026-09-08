@@ -31,6 +31,8 @@
 #include <newmenu.h>
 #include <sipapi.h>
 #include <sip.h>
+#include <keybd.h>
+#include <pwinuser.h>
 
 int main(void)
 {
@@ -222,6 +224,25 @@ int main(void)
             IInputMethod2 *piim2 = (IInputMethod2 *)0;
             (void) piim2;
         }
+    }
+    /* M52: OEM keyboard / derived-value unit -- linked, not run:
+     * PostKeybdMessage + GetAsyncShiftFlags (Winuser.h / Pwinuser.h;
+     * Kbdui.lib) and KeybdGetDeviceInfo (Pwinuser.h; Coredll.lib)
+     * must import from kbdui.dll / coredll.dll per the doc-derived
+     * defs; SHSipPreference (aygshell.lib, SIPSTATE derived) joins
+     * the AYGShell import set.  M44 style: no aggregate
+     * zero-initializers. */
+    {
+        GET_FOREGROUND_INFO gfi;
+        KEY_STATE_FLAGS     ksf;
+        UINT                shift = 0, chars = 0;
+        gfi.hwndActive = (HWND)0;
+        ksf            = (KEY_STATE_FLAGS)0;
+        (void) PostKeybdMessage((HWND)0, VK_RETURN, ksf, 0, &shift, &chars);
+        (void) GetAsyncShiftFlags(VK_RETURN);
+        (void) KeybdGetDeviceInfo(0, (LPVOID)0);
+        (void) SHSipPreference((HWND)0, SIP_UP);
+        (void) gfi;
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-

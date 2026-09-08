@@ -37,6 +37,8 @@
 #include <extfile.h>
 #include <sipapi.h>
 #include <sip.h>
+#include <keybd.h>
+#include <pwinuser.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4410,6 +4412,88 @@ static int m51_shaped_usage(void)
 }
 
 
+/* ------------------------------------------------------------------ */
+/* M52: OEM keyboard / virtual-key / derived-value unit.               */
+/*      winuser.h (VK_* set incl. OEM/DBE/manufacturer tables,        */
+/*      KEYEVENTF_ and INPUT_ derived values, PostKeybdMessage),     */
+/*      keybd.h (KEY_STATE_FLAGS), pwinuser.h (GET_FOREGROUND_INFO +  */
+/*      the five OEM functions), aygshell.h (SIPSTATE +               */
+/*      SHSipPreference, SHIC_FEATURE, VK_APP1-6; all M52             */
+/*      derivations with recorded paths).                             */
+/* ------------------------------------------------------------------ */
+
+/* Published-value spot checks (ms927178 / aa452679 / derivations). */
+_Static_assert(VK_RETURN == 0x0D, "VK_RETURN");
+_Static_assert(VK_ESCAPE == 0x1B, "VK_ESCAPE");
+_Static_assert(VK_LWIN == 0x5B, "VK_LWIN");
+_Static_assert(VK_F22 == 0x85, "VK_F22");
+_Static_assert(VK_NUMLOCK == 0x90, "VK_NUMLOCK");
+_Static_assert(VK_PACKET == 0xE7, "VK_PACKET");
+_Static_assert(VK_OEM_CLEAR == 0xFE, "VK_OEM_CLEAR");
+_Static_assert(VK_KEYLOCK == 0x85, "VK_KEYLOCK (derived)");
+_Static_assert(VK_DBE_ALPHANUMERIC == 0xF0, "VK_DBE_ALPHANUMERIC");
+_Static_assert(VK_DBE_NOCODEINPUT == 0xFB, "VK_DBE_NOCODEINPUT");
+_Static_assert(VK_ERICSSON_BASE == 0xE8, "VK_ERICSSON_BASE");
+_Static_assert(VK_OEM_BACKTAB == (VK_ERICSSON_BASE + 13), "VK_OEM_BACKTAB");
+_Static_assert(VK_APP1 == 0xC1 && VK_APP6 == 0xC6, "VK_APP1-6 (derived)");
+_Static_assert(KEYEVENTF_EXTENDEDKEY == 0x0001, "KEYEVENTF_EXTENDEDKEY (derived)");
+_Static_assert(KEYEVENTF_KEYUP == 0x0002, "KEYEVENTF_KEYUP (derived)");
+_Static_assert(INPUT_MOUSE == 0 && INPUT_KEYBOARD == 1 && INPUT_HARDWARE == 2,
+               "INPUT_* (derived)");
+_Static_assert(SIP_UP == 0 && SIP_DOWN == 1 && SIP_FORCEDOWN == 2 &&
+               SIP_UNCHANGED == 3 && SIP_INPUTDIALOG == 4,
+               "SIPSTATE (derived)");
+_Static_assert(SHIC_FEATURE_RESTOREDEFAULT == 0 &&
+               SHIC_FEATURE_AUTOCORRECT == 0x00000001 &&
+               SHIC_FEATURE_CLASS == 0x00000004,
+               "SHIC_FEATURE (derived)");
+
+/* Pointer-free layouts. */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(GET_FOREGROUND_INFO) == 36,
+               "GET_FOREGROUND_INFO 32-bit size");
+#endif
+
+static int m52_shaped_usage(void)
+{
+    HWND               hwnd = (HWND)0;
+    GET_FOREGROUND_INFO gfi;
+    KEY_STATE_FLAGS    ksf;
+    UINT               shift = 0;
+    UINT               chars = 0;
+
+    gfi.hwndActive = hwnd;
+    ksf = (KEY_STATE_FLAGS)0;
+
+    /* winuser.h keyboard layer (Kbdui.lib) */
+    (void) PostKeybdMessage(hwnd, VK_RETURN, ksf, 0, &shift, &chars);
+    (void) keybd_event(VK_RETURN, 0, KEYEVENTF_KEYUP, 0);
+    {
+        INPUT inp;
+        inp.type = INPUT_KEYBOARD;
+        inp.ki.wVk = VK_RETURN;
+        (void) inp;
+    }
+
+    /* pwinuser.h OEM layer */
+    (void) GetAsyncShiftFlags(VK_RETURN);
+    (void) GetForegroundInfo(&gfi);
+    (void) GetForegroundKeyboardLayoutHandle();
+    (void) GetForegroundKeyboardTarget();
+    (void) KeybdGetDeviceInfo(0, (LPVOID)0);
+
+    /* aygshell.h derived unit */
+    (void) SHSipPreference(hwnd, SIP_UP);
+    (void) SHSipPreference(hwnd, SIP_INPUTDIALOG);
+    (void) SHSetAppKeyWndAssoc((BYTE)VK_APP1, hwnd);
+    {
+        SHIC_FEATURE f = SHIC_FEATURE_AUTOSUGGEST;
+        (void) f;
+    }
+    return 0;
+}
+
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -4485,6 +4569,8 @@ int host_tu_entry(void)
     if (m50_shaped_usage() != 0)
         return 1;
     if (m51_shaped_usage() != 0)
+        return 1;
+    if (m52_shaped_usage() != 0)
         return 1;
     return 0;
 }

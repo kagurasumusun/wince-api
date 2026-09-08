@@ -51,6 +51,12 @@ TREES = [
     ("pages", "pages5"),      # CE 5.0 archive, (v=msdn.10)
     ("pages6", "pages6"),     # Windows Embedded CE 6.0 archive
     ("pages4", "pages4"),     # Windows CE .NET archive (v=msdn.10)
+    ("pagesw", "pagesw"),     # desktop Win32 reference pages (learn.
+                              # microsoft.com/windows/win32/api) read
+                              # for M52 fixed-ABI value derivations
+    ("pageswm", "pageswm"),   # Windows Mobile 6.5 documentation pages
+                              # (official Download Center CHM, see the
+                              # tree's provenance note in README)
 ]
 
 

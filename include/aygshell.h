@@ -37,20 +37,25 @@
  *      import decoration is this tree's AKARI_CE_IMPORT pin instead
  *      (documented design decision, same model as commctrl.h).
  *  (c) The SHCMBM_* menu-bar messages, the SHIDIF_* / SHCMBF_* /
- *      SHDB_* / SHFS_* / SHRG_* / SHNF_* / SHNUM_* / SPI_*SIPINFO /
- *      SHIC_FEATURE flag sets and the GN_CONTEXTMENU notification
- *      value are published as NAMES without numeric values on both the
- *      CE 5.0 pages and their CE 6.0 twins; they are held as gaps in
- *      docs/inventory.md rather than defined here (the M39-M41
- *      held-set policy).  The three AYGShell macros that expand to
- *      SendMessage calls on SHCMBM_* messages (SHGetMenu, SHGetSubMenu,
- *      SHSetSubMenu) are recorded verbatim below but not defined for
- *      the same reason.
- *  (d) SHSipPreference (aa453741) is held entirely: its parameter type
- *      SIPSTATE has no published definition in any official CE tree
- *      (no SIPSTATE page in the CE 5.0 / CE .NET / CE 6.0 catalogs),
- *      so the documented signature cannot be typed in C without
- *      inventing the enum (see docs/inventory.md).
+ *      SHDB_* / SHFS_* / SHRG_* / SHNF_* / SHNUM_* / SPI_*SIPINFO
+ *      flag sets, the SHA_INPUTDIALOG flag and the GN_CONTEXTMENU
+ *      notification value are published as NAMES without numeric
+ *      values on the CE 5.0 pages, their CE 6.0 twins AND the Windows
+ *      Mobile 6.5 official documentation (M52 sweep, docs/inventory.md);
+ *      they are held as gaps in docs/inventory.md rather than defined
+ *      here (the M39-M41 held-set policy).  The three AYGShell macros
+ *      that expand to SendMessage calls on SHCMBM_* messages
+ *      (SHGetMenu, SHGetSubMenu, SHSetSubMenu) are recorded verbatim
+ *      below but not defined for the same reason.  The SHIC_FEATURE
+ *      enumeration and the SIPSTATE type / SHSipPreference function
+ *      were exceptions: their values are published by the WM 6.5
+ *      official documentation and are declared under the M52
+ *      derivation policy (derivation paths recorded per item).
+ *  (d) [released in M52] SHSipPreference (aa453741) was held in M50
+ *      because no CE tree publishes SIPSTATE; the WM 6.5 official
+ *      documentation publishes the complete enum body with values
+ *      (derivation path recorded at the declaration below), so both
+ *      the type and the function are declared here now.
  *  (e) The SHNOTIFICATIONDATA layout below is the CE 5.0 page print
  *      (ends at lParam).  The CE 6.0 twin ee499049 extends the layout
  *      with "union { SOFTKEYMENU skm; SOFTKEYNOTIFY
@@ -105,6 +110,25 @@ typedef enum _SHNP {
     SHNP_INFORM,
     SHNP_ICONIC
 } SHNP;
+
+/* M52 derivation (SHIC_FEATURE).  The CE 5.0 SHGetInputContext /
+ * SHSetInputContext pages (aa453701 / aa453736) type dwFeature as a
+ * value of the SHIC_FEATURE enumeration but publish no enumeration
+ * page in any CE tree.  The Windows Mobile 6.5 official documentation
+ * "SHIC_FEATURE" page (Microsoft Download Center CHM, Shell Reference
+ * > Shell Enumerations; preserved in the corpus pageswm/ tree)
+ * publishes the complete enumerator body below with values, with the
+ * Requirements rows "Header aygshell.h / Windows Embedded CE Windows
+ * CE .NET 4.0 and later" -- matching the CE 5.0 function pages' OS
+ * rows.  The enumerators are sequential as printed (note
+ * SHIC_FEATURE_HAVETRAILER = 0x00000003 is not a bit flag). */
+typedef enum {
+    SHIC_FEATURE_RESTOREDEFAULT = 0,
+    SHIC_FEATURE_AUTOCORRECT    = 0x00000001,
+    SHIC_FEATURE_AUTOSUGGEST    = 0x00000002,
+    SHIC_FEATURE_HAVETRAILER    = 0x00000003,
+    SHIC_FEATURE_CLASS          = 0x00000004
+} SHIC_FEATURE;
 
 /* ------------------------------------------------------------------ */
 /* Structures                                                           */
@@ -348,7 +372,7 @@ AKARI_CE_IMPORT HRESULT SHGetEmergencyCallList(TCHAR *pwszBuffer, UINT uLenBuf) 
 
 /* aa453701 (CE .NET 4.0+): retrieves the state of an input-window
  * context feature; dwFeature takes a value of the SHIC_FEATURE
- * enumeration (no page publishes the enumeration -- name held).  Stub
+ * enumeration (declared below, M52 derivation).  Stub
  * on Windows CE-based devices: always returns E_NOTIMPL.  Signature
  * spacing restored from the CE 6.0 twin ee503391. */
 AKARI_CE_IMPORT HRESULT SHGetInputContext(HWND hwnd, DWORD dwFeature,
@@ -359,7 +383,9 @@ AKARI_CE_IMPORT HRESULT SHGetInputContext(HWND hwnd, DWORD dwFeature,
  * restoration; pass the message's wParam/lParam and the
  * zero-initialized SHACTIVATEINFO also used with
  * SHHandleWMSettingChange.  dwFlags takes SHA_INPUTDIALOG (name held;
- * use with SHSipPreference in large-entry dialog boxes).  Page prints
+ * use with SHSipPreference(hwnd, SIP_INPUTDIALOG) in large-entry
+ * dialog boxes -- the WM 6.5 SHHandleWMActivate page documents the
+ * pairing but publishes no SHA_INPUTDIALOG value either).  Page prints
  * the WINSHELLAPI decoration (header note (b)). */
 AKARI_CE_IMPORT BOOL SHHandleWMActivate(HWND hwnd, WPARAM wParam, LPARAM lParam,
                                         SHACTIVATEINFO *psai,
@@ -435,9 +461,26 @@ AKARI_CE_IMPORT DWORD SHRecognizeGesture(SHRGINFO *shrg) AKARI_CE_NAME(SHRecogni
 
 /* aa453734 (CE 3.0+): assigns the window that receives a hardware
  * button's key-press messages; bVk uses the virtual-key codes of the
- * navigation controls (the page's Remarks reference VK_APP1 through
- * VK_APP6 -- names not published as CE pages, recorded in
- * docs/inventory.md). */
+ * navigation controls.  DERIVATION PATH (M52): the page's Remarks
+ * reference VK_APP1 through VK_APP6 by name; the values are published
+ * by the Windows Mobile 6.5 official documentation "Keys and Key Codes
+ * for Windows Mobile" page (Microsoft Download Center CHM, preserved
+ * in the corpus pageswm/ tree): 0xC1 VK_APP_FIRST / VK_APP1 ..
+ * 0xC6 VK_APP6 / VK_APP_LAST ("the following keys were undefined for
+ * Windows Embedded CE, but are overridden as application keys in
+ * Windows Mobile"; the CE 5.0 Virtual-Key Codes table itself leaves
+ * C1-DA unassigned -- recorded in winuser.h).  The VK_APP_FIRST /
+ * VK_APP_LAST alias spellings are recorded here; the VK_APP keys are
+ * recognized only when wrapped with VK_LWIN (winuser.h). */
+#define VK_APP1   0xC1   /* derived: WM 6.5 Keys and Key Codes */
+#define VK_APP2   0xC2
+#define VK_APP3   0xC3
+#define VK_APP4   0xC4
+#define VK_APP5   0xC5
+#define VK_APP6   0xC6
+/* VK_APP_FIRST = 0xC1, VK_APP_LAST = 0xC6 (WM 6.5 alias spellings,
+ * recorded; not defined to avoid the WM-only duplicate set). */
+
 AKARI_CE_IMPORT BOOL SHSetAppKeyWndAssoc(BYTE bVk, HWND hwnd) AKARI_CE_NAME(SHSetAppKeyWndAssoc);
 
 /* aa453735 (CE 5.0+): not implemented; a stub for application
@@ -445,8 +488,9 @@ AKARI_CE_IMPORT BOOL SHSetAppKeyWndAssoc(BYTE bVk, HWND hwnd) AKARI_CE_NAME(SHSe
 AKARI_CE_IMPORT void SHSetBack(int eOp, HWND hwnd) AKARI_CE_NAME(SHSetBack);
 
 /* aa453736 (CE .NET 4.0+): changes an input-window context feature;
- * dwFeature takes a value of the SHIC_FEATURE enumeration (name held).
- * Stub on Windows CE-based devices: always returns E_NOTIMPL.
+ * dwFeature takes a value of the SHIC_FEATURE enumeration (declared
+ * below, M52 derivation).  Stub on Windows CE-based devices: always
+ * returns E_NOTIMPL.
  * Signature spacing restored from the CE 6.0 twin ee502532. */
 AKARI_CE_IMPORT HRESULT SHSetInputContext(HWND hwnd, DWORD dwFeature,
                                           const LPVOID lpValue) AKARI_CE_NAME(SHSetInputContext);
@@ -467,13 +511,34 @@ AKARI_CE_IMPORT BOOL SHSipInfo(UINT uiAction, UINT uiParam, PVOID pvParam,
                                UINT fWinIni) AKARI_CE_NAME(SHSipInfo);
 
 /* aa453741 "SHSipPreference" (Windows CE 3.0 and later; aygshell.h;
- * aygshell.lib) is HELD: the documented parameter type
- *     BOOL SHSipPreference(HWND hwnd, SIPSTATE st);
- * names SIPSTATE, for which no official CE tree publishes a definition
- * (no SIPSTATE page in the CE 5.0 / CE .NET / CE 6.0 catalogs, and the
- * SIP_UP / SIP_DOWN / SIP_FORCEDOWN / SIP_UNCHANGED parameter values --
- * like the SIP_INPUTDIALOG name quoted by SHHandleWMActivate -- appear
- * only as prose names without values).  See docs/inventory.md. */
+ * aygshell.lib -> def/aygshell-doc.def).  Requests an input-panel
+ * state change for hwnd: SIP_UP raises the panel, SIP_DOWN lowers it
+ * (the system sets a timer; SIP_UNCHANGED before it fires cancels the
+ * pending down request), SIP_FORCEDOWN forces it down regardless of
+ * the last message, SIP_INPUTDIALOG marks a dialog as an input dialog
+ * (subsequent SIP_DOWN requests are ignored; use with the
+ * SHA_INPUTDIALOG flag of SHHandleWMActivate -- name held).  Used by
+ * controls on WM_SETFOCUS / WM_KILLFOCUS.
+ *
+ * The CE 5.0 page publishes the signature but no SIPSTATE definition;
+ * the M50 hold is released in M52 by derivation: the Windows Mobile
+ * 6.5 official documentation "SIPSTATE" page (Microsoft Download
+ * Center CHM, Shell Reference > Shell Enumerations; preserved in the
+ * corpus pageswm/ tree) publishes the complete enumerator body with
+ * values and carries the Requirements rows "Windows Embedded CE
+ * Windows CE 3.0 and later / Header shellapi.h (Note: Aygshell.h on
+ * Pocket PC 2000 and Pocket PC 2002) / Library aygshell.lib".  The
+ * enum is declared here (SHSipPreference's CE 5.0 documented home,
+ * aygshell.h) with the WM page's shellapi.h home noted. */
+typedef enum {
+    SIP_UP = 0,          /* raised input panel */
+    SIP_DOWN,            /* lowered input panel */
+    SIP_FORCEDOWN,       /* forced down regardless of the last message */
+    SIP_UNCHANGED,       /* remain unchanged despite forthcoming messages */
+    SIP_INPUTDIALOG      /* dialog is an input dialog; SIP_DOWN ignored */
+} SIPSTATE;
+
+AKARI_CE_IMPORT BOOL SHSipPreference(HWND hwnd, SIPSTATE st) AKARI_CE_NAME(SHSipPreference);
 
 #ifdef __cplusplus
 }

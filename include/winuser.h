@@ -40,6 +40,7 @@
 #define AKARI_WINUSER_H
 
 #include "windef.h"
+#include "keybd.h"    /* KEY_STATE_FLAGS (PostKeybdMessage parameter, M52) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -461,14 +462,15 @@ AKARI_CE_IMPORT BOOL InSendMessage(VOID) AKARI_CE_NAME(InSendMessage);
 /* ------------------------------------------------------------------ */
 /* Keyboard Reference functions (Header: Winuser.h unless noted).     */
 /*                                                                     */
-/* Six further CE Keyboard-Functions leaves are OEM-layout pages whose */
-/* Header rows name Pwinuser.h (GetAsyncShiftFlags aa453955,           */
-/* GetForegroundInfo ms929241, GetForegroundKeyboardLayoutHandle       */
-/* ms929242, GetForegroundKeyboardTarget ms929243, KeybdGetDeviceInfo  */
-/* aa453246, PostKeybdMessage ms911936) and depend on the OEM keybd     */
-/* types (GET_FOREGROUND_INFO aa453186, KEY_STATE_FLAGS ms902150,      */
-/* Header Keybd.h).  They are deferred to the OEM/input-method batch   */
-/* and recorded in docs/inventory.md.                                  */
+/* The six CE Keyboard-Functions leaves whose Header rows name        */
+/* Pwinuser.h / Keybd.h were shipped in M52: GetAsyncShiftFlags,      */
+/* GetForegroundInfo, GetForegroundKeyboardLayoutHandle,              */
+/* GetForegroundKeyboardTarget and KeybdGetDeviceInfo live in         */
+/* pwinuser.h (with GET_FOREGROUND_INFO and the KEY_STATE_FLAGS type  */
+/* in keybd.h); PostKeybdMessage prints Header: Winuser.h (Link       */
+/* Library: Kbdui.lib) and is declared below -- the M26 note that     */
+/* placed it under Pwinuser.h followed its Keybd.h parameter types,   */
+/* not its Requirements row (corrected in M52, docs/inventory.md).    */
 /* ------------------------------------------------------------------ */
 
 AKARI_CE_IMPORT SHORT GetKeyState(int nVirtKey) AKARI_CE_NAME(GetKeyState);                       /* aa453132 */
@@ -495,6 +497,273 @@ AKARI_CE_IMPORT UINT MapVirtualKey(UINT uCode, UINT uMapType) AKARI_CE_NAME(MapV
 /* keybd_event (aa453245): synthesizes a keystroke; dwFlags is
  * KEYEVENTF_EXTENDEDKEY / KEYEVENTF_KEYUP. */
 AKARI_CE_IMPORT VOID keybd_event(BYTE bVk, BYTE bScan, DWORD dwFlags, DWORD dwExtraInfo) AKARI_CE_NAME(keybd_event);
+
+/* ------------------------------------------------------------------ */
+/* M52: Virtual-key codes (ms927178 "Virtual-Key Codes", CE 5.0; the   */
+/* page publishes the symbolic-constant / hexadecimal-value table of   */
+/* the Windows CE operating system, listed in numeric order; the       */
+/* manufacturer-specific assignments are aa452679).  Values below are  */
+/* the published CE table values -- no derivation needed.  Range      */
+/* rows of the table (05-07, 0A-0B, 0E-0F, 15-19, 1A, 1C-1F, 3A-40,   */
+/* 5E-5F, 88-8F, BA-C0, C1-DA, DB-E2, E3-E4, E5, E6, E8, E9-F5) are   */
+/* recorded here for completeness: C1-DA is unassigned on plain CE    */
+/* (the VK_APP1..VK_APP6 application keys of the AYGShell layer are   */
+/* defined in aygshell.h per their own documentation).                */
+/* ------------------------------------------------------------------ */
+#define VK_LBUTTON       0x01   /* ms927178 */
+#define VK_RBUTTON       0x02
+#define VK_CANCEL        0x03
+#define VK_MBUTTON       0x04
+#define VK_BACK          0x08
+#define VK_TAB           0x09
+#define VK_CLEAR         0x0C
+#define VK_RETURN        0x0D
+#define VK_SHIFT         0x10
+#define VK_CONTROL       0x11
+#define VK_MENU          0x12
+#define VK_PAUSE         0x13
+#define VK_CAPITAL       0x14
+#define VK_ESCAPE        0x1B
+#define VK_SPACE         0x20
+#define VK_PRIOR         0x21
+#define VK_NEXT          0x22
+#define VK_END           0x23
+#define VK_HOME          0x24
+#define VK_LEFT          0x25
+#define VK_UP            0x26
+#define VK_RIGHT         0x27
+#define VK_DOWN          0x28
+#define VK_SELECT        0x29
+#define VK_EXECUTE       0x2B
+#define VK_SNAPSHOT      0x2C
+#define VK_INSERT        0x2D
+#define VK_DELETE        0x2E
+#define VK_HELP          0x2F
+#define VK_LWIN          0x5B
+#define VK_RWIN          0x5C
+#define VK_APPS          0x5D
+#define VK_NUMPAD0       0x60
+#define VK_NUMPAD1       0x61
+#define VK_NUMPAD2       0x62
+#define VK_NUMPAD3       0x63
+#define VK_NUMPAD4       0x64
+#define VK_NUMPAD5       0x65
+#define VK_NUMPAD6       0x66
+#define VK_NUMPAD7       0x67
+#define VK_NUMPAD8       0x68
+#define VK_NUMPAD9       0x69
+#define VK_MULTIPLY      0x6A
+#define VK_ADD           0x6B
+#define VK_SEPARATOR     0x6C
+#define VK_SUBTRACT      0x6D
+#define VK_DECIMAL       0x6E
+#define VK_DIVIDE        0x6F
+#define VK_F1            0x70
+#define VK_F2            0x71
+#define VK_F3            0x72
+#define VK_F4            0x73
+#define VK_F5            0x74
+#define VK_F6            0x75
+#define VK_F7            0x76
+#define VK_F8            0x77
+#define VK_F9            0x78
+#define VK_F10           0x79
+#define VK_F11           0x7A
+#define VK_F12           0x7B
+#define VK_F13           0x7C
+#define VK_F14           0x7D
+#define VK_F15           0x7E
+#define VK_F16           0x7F
+#define VK_F17           0x80
+#define VK_F18           0x81
+#define VK_F19           0x82
+#define VK_F20           0x83
+#define VK_F21           0x84
+#define VK_F22           0x85   /* (PPC only) key used to lock device */
+#define VK_F23           0x86
+#define VK_F24           0x87
+#define VK_NUMLOCK       0x90
+#define VK_SCROLL        0x91
+#define VK_LSHIFT        0xA0
+#define VK_RSHIFT        0xA1
+#define VK_LCONTROL      0xA2
+#define VK_RCONTROL      0xA3
+#define VK_LMENU         0xA4
+#define VK_RMENU         0xA5
+#define VK_PACKET        0xE7   /* Unicode char in the scan code (SendInput) */
+#define VK_ATTN          0xF6
+#define VK_CRSEL         0xF7
+#define VK_EXSEL         0xF8
+#define VK_EREOF         0xF9
+#define VK_PLAY          0xFA
+#define VK_ZOOM          0xFB
+#define VK_NONAME        0xFC
+#define VK_PA1           0xFD
+#define VK_OEM_CLEAR     0xFE
+
+/* VK_KEYLOCK (ms927178): the CE table row prints the value "F22" --
+ * a cross-reference to the VK_F22 row (0x85, "(PPC only) Key used to
+ * lock device"), not a two-digit hex cell.  DERIVATION PATH: the
+ * Windows Mobile 6.5 official documentation "Keys and Key Codes for
+ * Windows Mobile" page (Microsoft Download Center CHM, preserved in
+ * the corpus pageswm/ tree) maps the same 0x85 cell to both VK_F22
+ * (Windows Embedded CE constant) and VK_KEYLOCK (shared Windows
+ * Mobile constant), confirming VK_KEYLOCK = 0x85. */
+#define VK_KEYLOCK       0x85
+
+/* Microsoft-assigned OEM keys (ms927178, second table; values as
+ * published -- note the page prints VK_OEM_SCROLL as 0x91, the same
+ * cell as VK_SCROLL). */
+#define VK_OEM_SCROLL    0x91   /* ms927178 (same value cell as VK_SCROLL) */
+#define VK_OEM_1         0xBA   /* ';:' for US */
+#define VK_OEM_PLUS      0xBB   /* '+' any country/region */
+#define VK_OEM_COMMA     0xBC   /* ',' any country/region */
+#define VK_OEM_MINUS     0xBD   /* '-' any country/region */
+#define VK_OEM_PERIOD    0xBE   /* '.' any country/region */
+#define VK_OEM_2         0xBF   /* '/?' for US */
+#define VK_OEM_3         0xC0   /* '`~' for US */
+#define VK_OEM_4         0xDB   /* '[{' for US */
+#define VK_OEM_5         0xDC   /* '\|' for US */
+#define VK_OEM_6         0xDD   /* ']}' for US */
+#define VK_OEM_7         0xDE   /* '\'' for US */
+#define VK_OEM_8         0xDF
+#define VK_OEM_AX        0xE1   /* AX key on Japanese AX keyboard */
+#define VK_OEM_102       0xE2   /* '<>' or '\|' on RT 102-key keyboard */
+
+/* East-Asian IME virtual-key definitions (ms927178, third table; the
+ * page prints the values as 0x0f0..0x0fb). */
+#define VK_DBE_ALPHANUMERIC          0xF0
+#define VK_DBE_KATAKANA              0xF1
+#define VK_DBE_HIRAGANA              0xF2
+#define VK_DBE_SBCSCHAR              0xF3
+#define VK_DBE_DBCSCHAR              0xF4
+#define VK_DBE_ROMAN                 0xF5
+#define VK_DBE_NOROMAN               0xF6
+#define VK_DBE_ENTERWORDREGISTERMODE 0xF7
+#define VK_DBE_ENTERIMECONFIGMODE    0xF8
+#define VK_DBE_FLUSHSTRING           0xF9
+#define VK_DBE_CODEINPUT             0xFA
+#define VK_DBE_NOCODEINPUT           0xFB
+
+/* Manufacturer-specific virtual-key assignments (aa452679
+ * "Manufacturer-specific Virtual-Key Codes", CE 5.0; all values as
+ * published).  These reuse the OEM-reserved VK ranges per device and
+ * may collide numerically with the standard table above (e.g.
+ * VK_OEM_F17..VK_OEM_F24 occupy the VK_F17..VK_F24 cells on
+ * Nokia/Ericsson devices). */
+#define VK_OEM_NEC_SEPARATE   0x6C   /* NEC PC-9800 */
+#define VK_OEM_NEC_EQUAL      0x92   /* NEC PC-9800: '=' on numeric pad */
+#define VK_OEM_NEC_DP1        0xE0   /* NEC PC-9800 */
+#define VK_OEM_NEC_DP2        0xE1   /* NEC PC-9800 */
+#define VK_OEM_NEC_DP3        0xE2   /* NEC PC-9800 */
+#define VK_OEM_NEC_DP4        0xE3   /* NEC PC-9800 */
+#define VK_OEM_F17            0x80   /* Nokia/Ericsson (ICO keyboards) */
+#define VK_OEM_F18            0x81
+#define VK_OEM_F19            0x82
+#define VK_OEM_F20            0x83
+#define VK_OEM_F21            0x84
+#define VK_OEM_F22            0x85
+#define VK_OEM_F23            0x86
+#define VK_OEM_F24            0x87
+#define VK_ERICSSON_BASE      0xE8   /* Ericsson base for the chorded set */
+#define VK_OEM_RESET          (VK_ERICSSON_BASE + 1)
+#define VK_OEM_JUMP           (VK_ERICSSON_BASE + 2)
+#define VK_OEM_PA1            (VK_ERICSSON_BASE + 3)
+#define VK_OEM_PA2            (VK_ERICSSON_BASE + 4)
+#define VK_OEM_PA3            (VK_ERICSSON_BASE + 5)
+#define VK_OEM_WSCTRL         (VK_ERICSSON_BASE + 6)
+#define VK_OEM_CUSEL          (VK_ERICSSON_BASE + 7)
+#define VK_OEM_ATTN           (VK_ERICSSON_BASE + 8)
+#define VK_OEM_FINISH         (VK_ERICSSON_BASE + 9)
+#define VK_OEM_COPY           (VK_ERICSSON_BASE + 10)
+#define VK_OEM_AUTO           (VK_ERICSSON_BASE + 11)
+#define VK_OEM_ENLW           (VK_ERICSSON_BASE + 12)
+#define VK_OEM_BACKTAB        (VK_ERICSSON_BASE + 13)
+#define VK_OEM_FJ_JISHO       0x92   /* Fujitsu/OASYS: 'Dictionary' */
+#define VK_OEM_FJ_MASSHOU     0x93   /* 'Unregister word' */
+#define VK_OEM_FJ_TOUROKU     0x94   /* 'Register word' */
+#define VK_OEM_FJ_LOYA        0x95   /* 'Left OYAYUBI' */
+#define VK_OEM_FJ_ROYA        0x96   /* 'Right OYAYUBI' */
+#define VK_OEM_FJ_000         0xB0   /* '000' on numeric pad */
+#define VK_OEM_FJ_EQUAL       0xB1   /* '=' on numeric pad */
+#define VK_OEM_FJ_00          0xB3   /* '00' on numeric pad */
+#define VK_OEM_OAS_1          0xB4   /* Fujitsu/OASYS */
+#define VK_OEM_OAS_2          0xB5
+#define VK_OEM_OAS_3          0xB6
+#define VK_OEM_OAS_4          0xB7
+#define VK_OEM_OAS_5          0xB8
+#define VK_OEM_OAS_6          0xB9
+#define VK_OEM_OAS_7          0xC1
+#define VK_OEM_OAS_8          0xC2
+#define VK_OEM_OAS_9          0xC3
+#define VK_OEM_OAS_10         0xC4
+#define VK_OEM_OAS_11         0xC5
+#define VK_OEM_OAS_12         0xC6
+#define VK_OEM_OAS_13         0xC7
+#define VK_OEM_OAS_14         0xC8
+#define VK_OEM_OAS_15         0xC9
+#define VK_OEM_OAS_16         0xCA
+#define VK_OEM_OAS_17         0xCB
+#define VK_OEM_OAS_18         0xCC
+#define VK_OEM_OAS_19         0xCD
+#define VK_OEM_OAS_20         0xCE
+#define VK_OEM_OAS_21         0xCF
+#define VK_OEM_OAS_22         0xD0
+#define VK_OEM_OAS_23         0xD1
+#define VK_OEM_OAS_24         0xD2
+#define VK_OEM_OAS_25         0xD3
+#define VK_OEM_OAS_26         0xD4
+#define VK_OEM_OAS_27         0xD5
+#define VK_OEM_OAS_28         0xD6
+#define VK_OEM_OAS_29         0xD7
+#define VK_OEM_FJ_DUMMY       0xEF
+#define VK_ICO_HELP           0xE3   /* ICO: Help key */
+#define VK_ICO_00             0xE4   /* ICO: 00 key */
+#define VK_ICO_CLEAR          0xE6   /* ICO */
+
+/* ------------------------------------------------------------------ */
+/* M52: keybd_event / SendInput flag and type constants.               */
+/*                                                                     */
+/* DERIVATION PATH (per the strict derivation policy): the CE pages    */
+/* publish the constant NAMES without values; the values below are the */
+/* fixed Win32 keyboard-input ABI values published by Microsoft's      */
+/* official desktop references -- keybd_event                          */
+/* (learn.microsoft.com/windows/win32/api/winuser/nf-winuser-          */
+/* keybd_event: KEYEVENTF_EXTENDEDKEY 0x0001, KEYEVENTF_KEYUP 0x0002)  */
+/* and the INPUT structure                                             */
+/* (learn.microsoft.com/windows/win32/api/winuser/ns-winuser-input:    */
+/* INPUT_MOUSE 0, INPUT_KEYBOARD 1, INPUT_HARDWARE 2).  Both desktop  */
+/* pages are preserved in the corpus pagesw/ tree.  The WM 6.5         */
+/* official documentation (pageswm/) lists the same keybd_event flag   */
+/* names without values; its KEYEVENTF_SILENT (a CE/WM-only flag with */
+/* no desktop counterpart -- the desktop 0x0004 cell is               */
+/* KEYEVENTF_UNICODE) has no published value anywhere and stays HELD.  */
+/* ------------------------------------------------------------------ */
+#define KEYEVENTF_EXTENDEDKEY  0x0001   /* derived: desktop keybd_event */
+#define KEYEVENTF_KEYUP        0x0002   /* derived: desktop keybd_event */
+/* KEYEVENTF_SILENT (aa453245 remarks name it; no published value):
+ * held -- see docs/inventory.md M52. */
+
+/* INPUT.type values (ms909851 "INPUT"; ms932719 "SendInput"): CE
+ * publishes the names; values derived from the desktop INPUT
+ * reference.  The CE SendInput page states Windows CE does not support
+ * INPUT_HARDWARE. */
+#define INPUT_MOUSE       0   /* derived: desktop INPUT reference */
+#define INPUT_KEYBOARD    1   /* derived: desktop INPUT reference */
+#define INPUT_HARDWARE    2   /* derived: desktop INPUT reference (unsupported on CE) */
+
+/* ms911936 "PostKeybdMessage" (Windows CE 2.0 and later; Header:
+ * Winuser.h; Link Library: Kbdui.lib -> def/kbdui-doc.def).  Posts a
+ * keyboard message to hwnd (NULL = the calling thread's active/focus
+ * window; -1 = the system foreground thread's).  KeyStateFlags and the
+ * pShiftStateBuffer entries carry the KEY_STATE_FLAGS layout (keybd.h;
+ * flag values held).  Unlike keybd_event, PostKeybdMessage does not
+ * affect the global key state. */
+AKARI_CE_IMPORT BOOL PostKeybdMessage(HWND hwnd, UINT VKey,
+                                      KEY_STATE_FLAGS KeyStateFlags,
+                                      UINT cCharacters,
+                                      UINT *pShiftStateBuffer,
+                                      UINT *pCharacterBuffer) AKARI_CE_NAME(PostKeybdMessage);
 
 /* LoadKeyboardLayout (aa453414): the page's signature takes LPCSTR
  * pwszKLID (a layout identifier string). */

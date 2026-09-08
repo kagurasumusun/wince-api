@@ -81,6 +81,11 @@ typedef int32_t         LONG;
 typedef uint32_t        ULONG;
 typedef int             INT;
 typedef unsigned int    UINT;
+/* UINT32: printed verbatim by the CE KEY_STATE_FLAGS page (ms902150,
+ * "typedef UINT32 KEY_STATE_FLAGS;"); the fixed 32-bit unsigned base
+ * type of the Win32 basetypes (desktop reference: unsigned int).  Same
+ * width as UINT/ULONG on every CE target. */
+typedef uint32_t        UINT32;
 typedef int             BOOL;
 typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
 typedef BYTE           *LPBYTE; /* byte pointer (registry value data)  */
