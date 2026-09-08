@@ -173,6 +173,25 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M46 (landed):** Input Method Manager unit (new `include/imm.h`;
+  Coreimm.lib) -- the 55 documented IMM functions of the official CE
+  5.0 Input Method Manager reference (56 function pages harvested;
+  ImmGetConversionStatusForeground recorded-not-declared: Pwinuser.h
+  / "Linked during platform build" platform-builder row), the nine
+  complete structures (CANDIDATEFORM/CANDIDATEINFO/CANDIDATELIST/
+  COMPOSITIONFORM/COMPOSITIONSTR/GUIDELINE/RECONVERTSTRING/
+  REGISTERWORD/STYLEBUF, 32-bit sizes TU-asserted), the HIMC/HIMCC
+  handle carriers, LPHKL/LPUINT, REGISTERWORDENUMPROC, and three
+  opaque pointer sets (INPUTCONTEXT / IMEMENUITEMINFO /
+  IMECHARPOSITION: each layout needs an unpublished piece -- the
+  LOGFONTA layout, the IMEMENUITEM_STRING_SIZE value, the width of
+  UNIT -- verified absent from the CE 5.0 / CE .NET / CE 6.0 trees).
+  The 83 IMM constant pages (IME_CMODE_*/GCS_*/IME_CHOTKEY_*/
+  IME_SMODE_*/IME_ESC_*/IMC_*/IMN_*/IMR_*/IPCTRL_*/WM_IME_*) publish
+  names without values in both CE 5.0 and the fetched CE 6.0 twins ->
+  recorded-not-defined (the M39-M41 held-set policy).  coreimm 1 ->
+  56 exports; e2e asserts coreimm.dll + ImmGetContext +
+  ImmSIPanelState imports on all six targets.
 * **M45 (landed):** TAPI client runtime unit (tapi.h; closes the M43
   client hold) -- the 89 documented TAPI client functions (66 line* +
   23 phone*) of the official CE 5.0 Telephony API book
@@ -450,7 +469,8 @@ held constant sets whose official pages publish names without values
 values) -- those need the documented on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
-lockstep (coredll at 560 name-only exports, M45); end-to-end link
+lockstep (coredll at 560 name-only exports, M45; coreimm 56, M46);
+end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.
 

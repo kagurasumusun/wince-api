@@ -2587,3 +2587,121 @@ carry the page-printed `const` qualifiers.
 Export surface: `def/coredll-doc.def` 470 -> **560** exports (+89
 client + TSPI_lineForward; name-only, `LIBRARY coredll.dll`).  rows
 1560 -> 1649.  Corpus pages5 1479 -> 1568.
+
+## M46 -- Input Method Manager (IMM) unit (new header imm.h; Coreimm.lib)
+
+The official CE 5.0 "Input Method Manager" reference set harvested in
+this session: `tools/manifests/imm-reference.manifest` (152 leaves:
+56 function-shaped pages, 12 structure pages, the EnumRegisterWordProc
+callback page, and 84 constant/message pages).  rows 1649 -> 1801;
+corpus pages5 1568 -> 1720 (plus 10 CE 6.0 twins fetched for the
+constant-value cross-check: ee490906 / ee491772 / ee491563 / ee492116
+/ ee491945 / ee491174 / ee491913 / ee491163 / ee491938 / ee491940).
+
+### Functions (55 declared; every page Header: Imm.h, Link Library: Coreimm.lib, OS: Windows CE .NET 4.0 and later)
+
+ImmAssociateContext `ms905984`, ImmAssociateContextEx `ms905985`,
+ImmConfigureIME `ms905986`, ImmCreateContext `ms905987`, ImmCreateIMCC
+`ms905988`, ImmDestroyContext `ms905989`, ImmDestroyIMCC `ms905990`,
+ImmDisableIME `ms905991`, ImmEnumRegisterWord `ms905992`, ImmEscape
+`ms905993`, ImmGenerateMessage `ms905994`, ImmGetCandidateList
+`ms905995`, ImmGetCandidateListCount `ms905996`, ImmGetCandidateWindow
+`ms905997`, ImmGetCompositionFont `ms905998`, ImmGetCompositionString
+`ms906001`, ImmGetCompositionWindow `ms906002`, ImmGetContext
+`ms906003`, ImmGetConversionList `ms906004`, ImmGetConversionStatus
+`ms906005`, ImmGetDefaultIMEWnd `ms906007`, ImmGetDescription
+`ms906008`, ImmGetGuideLine `ms906009`, ImmGetHotKey `ms906010`,
+ImmGetIMCCLockCount `ms906011`, ImmGetIMCCSize `ms906012`,
+ImmGetIMCLockCount `ms906013`, ImmGetIMEFileName `ms906014`,
+ImmGetImeMenuItems `ms906015`, ImmGetOpenStatus `ms906016`,
+ImmGetProperty `ms906017`, ImmGetRegisterWordStyle `ms906018`,
+ImmGetStatusWindowPos `ms906019`, ImmGetVirtualKey `ms906020`,
+ImmIsIME `ms906021`, ImmIsUIMessage `ms906022`, ImmLockIMC `ms906023`,
+ImmLockIMCC `ms906024`, ImmNotifyIME `ms906025`, ImmRegisterWord
+`ms906026`, ImmReleaseContext `ms906027`, ImmReSizeIMCC `ms906028`,
+ImmSetCandidateWindow `ms906029`, ImmSetCompositionFont `ms906030`,
+ImmSetCompositionString `ms906031`, ImmSetCompositionWindow
+`ms906032`, ImmSetConversionStatus `ms906033`, ImmSetHotKey
+`ms906034`, ImmSetOpenStatus `ms906035`, ImmSetStatusWindowPos
+`ms906036`, ImmSimulateHotKey `ms906037`, ImmSIPanelState `ms906038`
+(the CE-specific software input panel helper), ImmUnlockIMC
+`ms906039`, ImmUnlockIMCC `ms906040`, ImmUnregisterWord `ms906041`.
+
+Glued archive prototypes restored mechanically against the documented
+types (the M43/M45 model); the pages that print `WINAPI` do so for
+the IMCC/lock/hotkey/menu set -- WINAPI is empty for CE and the
+declarations follow the repository's single-convention style.
+
+Print artifacts fixed (each noted at the declaration site):
+ImmAssociateContextEx prints `HINC hIMC` (the page's own parameter
+text says "Handle to the input method context" -> HIMC);
+ImmRegisterWord prints `LPCTSR lpszReading` (-> LPCTSTR).
+
+### Types
+
+| Item | Basis | Notes |
+|---|---|---|
+| `HIMC` | parameter text "Handle to the input method context." (ms906003 / ms905985); ImmGetContext returns it | HANDLE carrier (no published carrier type), the documented opaque-handle design |
+| `HIMCC` | ImmCreateIMCC / ImmReSizeIMCC return type (ms905988 / ms906028) | HANDLE carrier |
+| `LPHKL` / `LPUINT` | ImmGetHotKey prototype (ms906010) | added to windef.h next to HKL |
+| `REGISTERWORDENUMPROC` | EnumRegisterWordProc page ms904955 ("application-defined callback function used with the ImmEnumRegisterWord function"): `UINT CALLBACK EnumRegisterWordProc(LPCTSTR, DWORD, LPCTSTR, LPVOID)` | function-pointer typedef |
+| CANDIDATEFORM | ms904636 | 32-bit size 32 (TU-asserted) |
+| CANDIDATEINFO | ms904637 | 32-bit size 144 (dwOffset[32]) |
+| CANDIDATELIST | ms904638 | printed open-ended `dwOffset[]` -> C flexible array member; 32-bit size 24 |
+| COMPOSITIONFORM | ms904714 | 32-bit size 28; archive print "Typedef struct_tag" restored |
+| COMPOSITIONSTR | ms904715 | 25 documented DWORD members; 32-bit size 100 |
+| GUIDELINE | ms905340 | 32-bit size 28 |
+| RECONVERTSTRING | ms906231 | 32-bit size 32; P/NP/LP aliases (NEAR/FAR dropped, M39 decision) |
+| REGISTERWORD | ms906232 | 32-bit size 8; LPTSTR members (CE Unicode-only) |
+| STYLEBUF | ms906434 | 32-bit size 36 (CHAR szDescription[32]) |
+| `LPINPUTCONTEXT` / `PINPUTCONTEXT` / `NPINPUTCONTEXT` | INPUTCONTEXT page ms906185 | **opaque**: the documented lfFont union needs the LOGFONTA layout; the official CE trees document LOGFONT only (CE Unicode-only) -- the layout cannot be completed from official information (LINEFORWARDLIST precedent) |
+| `LPIMEMENUITEMINFO` (+P/NP) | IMEMENUITEMINFO page ms905980 | **opaque**: `szString[IMEMENUITEM_STRING_SIZE]` -- no CE tree (5.0 / .NET / 6.0, verified incl. CE .NET twin ms920945) publishes the constant value |
+| `PIMECHARPOSITION` | IMECHARPOSITION page ms905972 | **opaque**: the `UNIT cLineHeight` member -- no CE tree publishes the width of UNIT (CE .NET twin ms920940 prints UNIT as well) |
+
+### Recorded-not-defined (names published without values, both CE 5.0 and CE 6.0 trees)
+
+The 83 IMM constant pages publish names only (verified: no numeric
+value on any of the CE 5.0 pages or their CE 6.0 twins):
+
+* IME Conversion Mode Values `ms905974` (IME_CMODE_*), IME
+  Composition String Values `ms905973` (GCS_*), IME Hot Key
+  Identifiers `ms905979` (IME_CHOTKEY_*), IME Sentence Mode Values
+  `ms905981` (IME_SMODE_*), IME Escapes `ms905976` (IME_ESC_*)
+* IMC_* message sub-codes: ms905842, ms905949, ms905955, ms905958,
+  ms905959, ms905960, ms905961, ms905962, ms905963, ms905964,
+  ms905966, ms905967, ms905968, ms905969, ms905970, ms905971 (16)
+* IMN_* notifications: ms906042..ms906054 (13)
+* IMR_* request codes: ms906055, ms906056, ms906147, ms906166,
+  ms906175, ms906183, ms906184 (7)
+* IPCTRL_* input-panel control codes (Header: Msime.h):
+  ms906187..ms906217 (30)
+* WM_IME_* messages: ms906445..ms906456 (12)
+
+Same policy as the held Winsock constant sets (M39-M41): an on-device
+readback is the documented compliant way to verify values before they
+can be defined.
+
+### Recorded-not-declared
+
+* ImmGetConversionStatusForeground `ms906006`: Requirements rows
+  Header: Pwinuser.h, Link Library: "Linked during platform build"
+  -- a Platform Builder row, not a user-mode link library (CE .NET
+  4.2+ only).
+
+### Verification
+
+* `make check` GREEN: hostcheck (headers + TU, warning-free under
+  `_WIN32_WCE` 0x420/0x500/0x600; TU exercises all 55 functions, the
+  callback shape and the nine structure sizes), defcheck
+  `coreimm-doc.def` **56** exports (GetKeyboardLayout + the 55 IMM
+  functions).
+* `make crosscheck` GREEN on all six arm/i386 × CE 4.2/5.0/6.0
+  targets (32-bit structure sizes asserted there).
+* `make e2e` GREEN: the e2e console app references ImmGetContext /
+  ImmReleaseContext / ImmGetOpenStatus / ImmNotifyIME /
+  ImmSIPanelState; the recipe asserts `Name: coreimm.dll`,
+  `Symbol: ImmGetContext`, `Symbol: ImmSIPanelState` in the import
+  table of all six target images.
+
+Export surface: `def/coreimm-doc.def` 1 -> **56** exports (name-only,
+`LIBRARY coreimm.dll`).

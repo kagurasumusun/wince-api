@@ -19,6 +19,7 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/notify.h include/shellapi.h include/commctrl.h \
        include/winsock2.h include/ws2tcpip.h include/ws2spi.h \
        include/tapi.h include/tapicomn.h \
+       include/imm.h \
        include/objbase.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
@@ -213,6 +214,12 @@ e2e:
 	  | grep -q "Symbol: phoneOpen" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: TSPI_lineForward" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: coreimm.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: ImmGetContext" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: ImmSIPanelState" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

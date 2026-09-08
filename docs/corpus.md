@@ -46,17 +46,20 @@ git -C ../wince-docs-corpus push
 
 Then delete the corpus clone and `build/` from the session.
 
-## Current corpus (2026-09-08, M45)
+## Current corpus (2026-09-08, M46)
 
-* `pages5/`: 1568 CE 5.0 `(v=msdn.10)` pages — the full committed
-  manifest set (81 manifests incl. the M43 TAPI/TSPI manifests and
-  the M45 `tapi-client-functions.manifest`, 89 pages harvested in
-  M45) plus the M34a type/callback pages (aa450831
-  EXTENDED_NAME_FORMAT, ms904723 EnumCodePagesProc).
-* `pages6/`: 1170 CE 6.0 `(v=winembedded.60)` pages — the twins of the
+* `pages5/`: 1720 CE 5.0 `(v=msdn.10)` pages — the full committed
+  manifest set (82 manifests incl. the M43 TAPI/TSPI manifests, the
+  M45 `tapi-client-functions.manifest` and the M46
+  `imm-reference.manifest`, 152 pages harvested in M46) plus the
+  M34a type/callback pages (aa450831 EXTENDED_NAME_FORMAT, ms904723
+  EnumCodePagesProc).
+* `pages6/`: 1180 CE 6.0 `(v=winembedded.60)` pages — the twins of the
   CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
-  CE 6.0 leaf) plus the M34a twins ee483142 / ee491122 and the M44
-  CE 6.0 twins.
+  CE 6.0 leaf) plus the M34a twins ee483142 / ee491122, the M44
+  CE 6.0 twins and the M46 IMM constant twins (ee490906 / ee491772 /
+  ee491563 / ee492116 / ee491945 / ee491174 / ee491913 / ee491163 /
+  ee491938 / ee491940).
 * `pages4/`: **6468 Windows CE .NET `(v=msdn.10)` pages — the full
   earliest-complete CE tree, read end-to-end in M34**
   (see `docs/cenet-readout.md`).  One catalog leaf,
@@ -64,10 +67,10 @@ Then delete the corpus clone and `build/` from the session.
   cross-linked by the archived TOC: its CE URL is a verified 404 and
   it is excluded; one preserved page (ms938306) is the archive's
   `#message` sign-in-gated stub, kept as published.
-* `rows.json`: 1649 CE 5.0 Requirement-row records (1560 pre-M45 +
-  the 89 M45 TAPI client function pages); `rows4.json` (in
-  `build/`, regenerable via `tools/cenet-rows.py`) holds the CE
-  .NET parsed records.
+* `rows.json`: 1801 CE 5.0 Requirement-row records (1560 pre-M45 +
+  the 89 M45 TAPI client function pages + the 152 M46 IMM reference
+  pages); `rows4.json` (in `build/`, regenerable via
+  `tools/cenet-rows.py`) holds the CE .NET parsed records.
 * Catalog caveats: the CE 6.0 catalog stores ids with the
   `(v=winembedded.60)` suffix (strip it before fetching); the CE .NET
   catalog is `(v=msdn.10)` except the single foreign `(v=vs.100)`

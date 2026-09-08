@@ -36,11 +36,12 @@ this repository; our headers are written from the official pages
 | Winsock: `winsock2.h` + `ws2tcpip.h` + `ws2spi.h` (WS2_32/Ws2.lib) | shipped (M37–M42) |
 | TAPI/TSPI: `tapi.h` + `tapicomn.h` -- TSPI provider surface (79 entry points incl. the M45 TSPI_lineForward closure) + TAPI foundation (26 structures, 643 constants) | shipped (M43) |
 | TAPI client runtime: `tapi.h` -- the 89 documented client functions (66 line* + 23 phone*), LINECALLBACK/PHONECALLBACK, client handles HLINEAPP/HCALL/HPHONE/HPHONEAPP | shipped (M45; closes the M43 hold) |
+| Input Method Manager: `imm.h` -- the 55 documented Coreimm.lib functions, nine structures, HIMC/HIMCC, REGISTERWORDENUMPROC | shipped (M46) |
 | COM/OLE/Storage/Automation: `objbase.h` umbrella (635 pages: Objbase/Objidl/Oaidl/Wtypes/Unknwn/Oleauto/Ocidl) | shipped (M44): 307 functions (ole32.dll 84, oleaut32.dll 223), 64 documented structures/enums, 50 opaque interfaces with documented method lists, full STGM/CLSCTX/VT_/FADF_/type-lib constant sets |
 | Import-library defs (`def/*-doc.def`) | doc-derived only — `tools/ce-fetch.py` harvests per-page Link Library rows into `build/rows.json`; `tools/gen-doc-def.py` writes the committed defs; `llvm-dlltool` builds the import libs. Current: coredll **560** (incl. the 89 M45 TAPI client functions + TSPI_lineForward), coredll-adjacent (coreloc, commctrl, msgque, ...), ws2 **100**, **ole32 84**, **oleaut32 222** |
 | Real-toolchain compile matrix (headers + TU, `-Werror`) | passing: `make crosscheck WINCECLANG=...` for arm/i386 × CE 4.2/5.0/6.0 (26 headers standalone + full TU) |
 | End-to-end links (wince-crt + wince-api consumer, against doc-derived import libraries) | shipped (M37+, extended M39–M44): `make e2e` links the tests/e2e consumers (main app / WinMain app / DLL) on all six arm/i386-pc-wince{4.2,5.0,6.0} targets; PE machine/CE-subsystem/import names asserted for coredll.dll, ws2.dll and ole32.dll/oleaut32.dll |
-| Queued (page-grounded, official pages in corpus) | remaining CE books not yet harvested in full (CE 4.2 book pages), crypt32 / aygshell / other second-order DLLs, the held Winsock/TSPI constant sets (names published without values; documented on-device readback owed) |
+| Queued (page-grounded, official pages in corpus) | remaining CE books not yet harvested in full (CE 4.2 book pages), crypt32 / aygshell / other second-order DLLs, the held Winsock/TSPI/IMM constant sets (names published without values; documented on-device readback owed) |
 
 ## Ordering principle
 

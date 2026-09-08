@@ -26,6 +26,7 @@
 #include <ws2spi.h>
 #include <tapi.h>
 #include <tapicomn.h>
+#include <imm.h>
 #include <objbase.h>
 #include <stddef.h>
 
@@ -3535,6 +3536,139 @@ static int m45_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M46: Input Method Manager (imm.h; Coreimm.lib) -- the 55           */
+/*      documented IMM functions, the nine complete structures, the   */
+/*      three opaque pointer sets and the REGISTERWORDENUMPROC shape. */
+/* ------------------------------------------------------------------ */
+
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(CANDIDATEFORM) == 32, "CANDIDATEFORM 32-bit size");
+_Static_assert(sizeof(CANDIDATEINFO) == 144, "CANDIDATEINFO 32-bit size");
+_Static_assert(sizeof(CANDIDATELIST) == 24, "CANDIDATELIST 32-bit size");
+_Static_assert(sizeof(COMPOSITIONFORM) == 28, "COMPOSITIONFORM 32-bit size");
+_Static_assert(sizeof(COMPOSITIONSTR) == 100, "COMPOSITIONSTR 32-bit size");
+_Static_assert(sizeof(GUIDELINE) == 28, "GUIDELINE 32-bit size");
+_Static_assert(sizeof(RECONVERTSTRING) == 32, "RECONVERTSTRING 32-bit size");
+_Static_assert(sizeof(REGISTERWORD) == 8, "REGISTERWORD 32-bit size");
+_Static_assert(sizeof(STYLEBUF) == 36, "STYLEBUF 32-bit size");
+#endif
+
+static UINT CALLBACK m46_enum_register_word(LPCTSTR lpszReading,
+    DWORD dwStyle, LPCTSTR lpszString, LPVOID lpData)
+{ (void) lpszReading; (void) dwStyle; (void) lpszString;
+  (void) lpData; return 0; }
+
+static int m46_shaped_usage(void)
+{
+    HWND    hwnd    = (HWND)0;
+    HKL     hKL     = (HKL)0;
+    HIMC    hIMC    = (HIMC)0;
+    HIMCC   hIMCC   = (HIMCC)0;
+    DWORD   dw      = 0;
+    DWORD   dw2     = 0;
+    UINT    u       = 0;
+    UINT    u2      = 0;
+
+    CANDIDATEFORM   cform = {0};
+    CANDIDATEINFO   cinfo = {0};
+    COMPOSITIONFORM compform = {0};
+    COMPOSITIONSTR  compstr = {0};
+    GUIDELINE       gl    = {0};
+    RECONVERTSTRING rstr  = {0};
+    REGISTERWORD    rw    = {0};
+    STYLEBUF        sbuf  = {0};
+    LOGFONT         lf    = {0};
+    POINT           pt    = {0};
+
+    /* callback typedef shape (EnumRegisterWordProc ms904955) */
+    REGISTERWORDENUMPROC ewp = m46_enum_register_word;
+    (void) ewp;
+
+    /* input-context management */
+    hIMC = ImmGetContext(hwnd);
+    (void) ImmReleaseContext(hwnd, hIMC);
+    hIMC = ImmCreateContext();
+    (void) ImmDestroyContext(hIMC);
+    hIMC = ImmAssociateContext(hwnd, (HIMC)0);
+    (void) ImmAssociateContextEx(hwnd, hIMC, 0);
+    (void) ImmLockIMC(hIMC);
+    (void) ImmUnlockIMC(hIMC);
+    (void) ImmGetIMCLockCount(hIMC);
+
+    /* IMCC memory blocks */
+    hIMCC = ImmCreateIMCC(0);
+    (void) ImmDestroyIMCC(hIMCC);
+    hIMCC = ImmReSizeIMCC(hIMCC, 0);
+    (void) ImmLockIMCC(hIMCC);
+    (void) ImmUnlockIMCC(hIMCC);
+    (void) ImmGetIMCCSize(hIMCC);
+    (void) ImmGetIMCCLockCount(hIMCC);
+
+    /* candidate list / window */
+    (void) ImmGetCandidateList(hIMC, 0, (LPCANDIDATELIST)0, 0);
+    (void) ImmGetCandidateListCount(hIMC, &dw);
+    (void) ImmGetCandidateWindow(hIMC, 0, &cform);
+    (void) ImmSetCandidateWindow(hIMC, &cform);
+
+    /* composition string / window / font */
+    (void) ImmGetCompositionString(hIMC, 0, (LPVOID)0, 0);
+    (void) ImmSetCompositionString(hIMC, 0, (LPCVOID)0, 0,
+                                   (LPCVOID)0, 0);
+    (void) ImmGetCompositionWindow(hIMC, &compform);
+    (void) ImmSetCompositionWindow(hIMC, &compform);
+    (void) ImmGetCompositionFont(hIMC, &lf);
+    (void) ImmSetCompositionFont(hIMC, &lf);
+
+    /* conversion status / list */
+    (void) ImmGetConversionStatus(hIMC, &dw, &dw2);
+    (void) ImmSetConversionStatus(hIMC, 0, 0);
+    (void) ImmGetConversionList(hKL, hIMC, (LPCTSTR)0,
+                                (LPCANDIDATELIST)0, 0, 0);
+
+    /* status window / open status / properties */
+    (void) ImmGetOpenStatus(hIMC);
+    (void) ImmSetOpenStatus(hIMC, 0);
+    (void) ImmGetStatusWindowPos(hIMC, &pt);
+    (void) ImmSetStatusWindowPos(hIMC, &pt);
+    (void) ImmGetDefaultIMEWnd(hwnd);
+    (void) ImmGetProperty(hKL, 0);
+    (void) ImmGetGuideLine(hIMC, 0, (LPTSTR)0, 0);
+    (void) ImmGetImeMenuItems(hIMC, 0, 0, (LPIMEMENUITEMINFO)0,
+                              (LPIMEMENUITEMINFO)0, 0);
+
+    /* keyboard layout / IME identity */
+    (void) ImmIsIME(hKL);
+    (void) ImmGetDescription(hKL, (LPTSTR)0, 0);
+    (void) ImmGetIMEFileName(hKL, (LPTSTR)0, 0);
+    (void) ImmConfigureIME(hKL, hwnd, 0, (LPVOID)0);
+    (void) ImmEscape(hKL, hIMC, 0, (LPVOID)0);
+    (void) ImmIsUIMessage(hwnd, 0, (WPARAM)0, (LPARAM)0);
+    (void) ImmGenerateMessage(hIMC);
+    (void) ImmGetVirtualKey(hwnd);
+
+    /* hot keys */
+    (void) ImmGetHotKey(0, &u, &u2, (LPHKL)0);
+    (void) ImmSetHotKey(0, 0, 0, hKL);
+    (void) ImmSimulateHotKey(hwnd, 0);
+
+    /* user dictionary (register words) */
+    (void) ImmRegisterWord(hKL, (LPCTSTR)0, 0, (LPCTSTR)0);
+    (void) ImmUnregisterWord(hKL, (LPCTSTR)0, 0, (LPCTSTR)0);
+    (void) ImmEnumRegisterWord(hKL, m46_enum_register_word,
+                               (LPCTSTR)0, 0, (LPCTSTR)0, (LPVOID)0);
+    (void) ImmGetRegisterWordStyle(hKL, 0, &sbuf);
+
+    /* IME control / CE-specific */
+    (void) ImmNotifyIME(hIMC, 0, 0, 0);
+    (void) ImmDisableIME(0);
+    (void) ImmSIPanelState(0, (LPVOID)0);
+
+    /* keep the nine structures referenced */
+    (void) cinfo; (void) compstr; (void) gl; (void) rstr; (void) rw;
+    return 0;
+}
+
 
 int host_tu_entry(void)
 {
@@ -3599,6 +3733,8 @@ int host_tu_entry(void)
     if (m44_shaped_usage() != 0)
         return 1;
     if (m45_shaped_usage() != 0)
+        return 1;
+    if (m46_shaped_usage() != 0)
         return 1;
     return 0;
 }

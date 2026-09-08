@@ -21,6 +21,7 @@
 #include <ws2spi.h>
 #include <tapi.h>
 #include <tapicomn.h>
+#include <imm.h>
 #include <objbase.h>
 
 int main(void)
@@ -90,6 +91,16 @@ int main(void)
         (void) TSPI_lineForward(0, (HDRVLINE)0, 0, 0,
                                 (LPLINEFORWARDLIST)0, 0, (HTAPICALL)0,
                                 NULL, NULL);
+    }
+    /* M46: IMM (Imm.h / Coreimm.lib) import surface -- linked, not
+     * run: the image must import the Coreimm.lib-documented names
+     * from coreimm.dll per the doc-derived def. */
+    {
+        HIMC hIMC = ImmGetContext((HWND)0);
+        (void) ImmReleaseContext((HWND)0, hIMC);
+        (void) ImmGetOpenStatus(hIMC);
+        (void) ImmNotifyIME(hIMC, 0, 0, 0);
+        (void) ImmSIPanelState(0, NULL);
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-

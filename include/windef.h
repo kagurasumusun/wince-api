@@ -182,6 +182,8 @@ typedef void           *HDC;      /* device context handle */
 typedef void           *HRGN;     /* region handle */
 typedef void           *HDWP;     /* deferred-window-position handle */
 typedef HANDLE          HKL;      /* keyboard-layout handle */
+typedef HKL            *LPHKL;    /* ImmGetHotKey lphKL (ms906010) */
+typedef UINT           *LPUINT;   /* ImmGetHotKey lpuModifiers/lpuVKey (ms906010) */
 
 /* GDI object handles (fixed Win32 ABI).  The CE archive has no
  * structure page for these opaque handles; the CE GDI function pages
