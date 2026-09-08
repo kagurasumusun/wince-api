@@ -80,6 +80,48 @@ EXPORTS
   CreateSolidBrush
   CreateThread
   CreateTicket
+  CryptAcquireContext
+  CryptContextAddRef
+  CryptCreateHash
+  CryptDecrypt
+  CryptDeriveKey
+  CryptDestroyHash
+  CryptDestroyKey
+  CryptDuplicateHash
+  CryptDuplicateKey
+  CryptEncrypt
+  CryptEnumProviderTypes
+  CryptEnumProviders
+  CryptExportKey
+  CryptFindLocalizedName
+  CryptGenKey
+  CryptGenRandom
+  CryptGetDefaultProvider
+  CryptGetHashParam
+  CryptGetKeyParam
+  CryptGetProvParam
+  CryptGetUserKey
+  CryptHashData
+  CryptHashSessionKey
+  CryptImportKey
+  CryptMsgCalculateEncodedLength
+  CryptMsgClose
+  CryptMsgControl
+  CryptMsgDuplicate
+  CryptMsgGetParam
+  CryptMsgOpenToDecode
+  CryptMsgOpenToEncode
+  CryptMsgUpdate
+  CryptProtectData
+  CryptReleaseContext
+  CryptSetHashParam
+  CryptSetKeyParam
+  CryptSetProvParam
+  CryptSetProvider
+  CryptSetProviderEx
+  CryptSignHash
+  CryptUnprotectData
+  CryptVerifySignature
   DataHandler
   DebugActiveProcess
   DebugBreak

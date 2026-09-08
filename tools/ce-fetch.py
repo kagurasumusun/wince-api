@@ -131,7 +131,13 @@ def parse(pid, title):
     if seg:
         for key, field in (("OS Versions:", "os"), ("Header:", "header"),
                            ("Link Library:", "lib")):
-            fm = re.search(re.escape(key) + r"\s*(.*?)(?:<br\s*/?>|</p>)",
+            # The archive prints the field label in two shapes:
+            # <strong>OS Versions:</strong> ... (colon inside the
+            # label tag) and <strong>OS Versions</strong>: ... (colon
+            # outside it, sometimes with a leading space); match both.
+            fm = re.search(re.escape(key.rstrip(":")) +
+                           r"(?:\s*</\w+>)?\s*:\s*(.*?)"
+                           r"(?:<br\s*/?>|</p>)",
                            seg, flags=re.S | re.I)
             if fm:
                 rec[field] = re.sub(r"\s+", " ", strip_tags(fm.group(1))).strip()

@@ -2705,3 +2705,121 @@ can be defined.
 
 Export surface: `def/coreimm-doc.def` 1 -> **56** exports (name-only,
 `LIBRARY coreimm.dll`).
+
+## M47 -- Cryptography base CSP unit (new header wincrypt.h; Coredll.lib)
+
+Scope: the base cryptographic-service-provider (CSP) surface of the
+CE 5.0 "Cryptography" book -- the four fundamental crypto data types,
+the BLOB structure, the CSP-authoring types, CPAcquireContext and the
+42 Crypt* functions (including the CryptMsg* family and
+CryptProtectData/CryptUnprotectData), 51 documented leaves harvested
+(`tools/manifests/crypt-csp-base.manifest`, 47 base + BLOB/CERT_INFO/
+CMSG_STREAM_INFO/VTableProvStruc support pages).
+
+### Functions (42 declared, all Coredll.lib imports)
+
+CryptAcquireContext (ms937733, CE 2.10+, BOOLEAN return per page),
+CryptContextAddRef (ms937737), CryptCreateHash (ms937738), CryptDecrypt
+(ms937741), CryptDeriveKey (ms937742), CryptDestroyHash (ms937743),
+CryptDestroyKey (ms937744), CryptDuplicateHash (ms937745),
+CryptDuplicateKey (ms937746), CryptEncrypt (ms937989),
+CryptEnumProviders (ms938012), CryptEnumProviderTypes (ms938017),
+CryptExportKey (ms938025), CryptFindLocalizedName (aa452566, CE 2.10+,
+LPCWSTR only), CryptGenKey (ms938062), CryptGenRandom (ms938069),
+CryptGetDefaultProvider (ms938088), CryptGetHashParam (ms938096),
+CryptGetKeyParam (ms938103), CryptGetProvParam (ms938119),
+CryptGetUserKey (ms938123), CryptHashData (ms938141),
+CryptHashSessionKey (ms938156), CryptImportKey (ms938178),
+CryptMsgCalculateEncodedLength (ms938232, CE 5.0+),
+CryptMsgClose (ms938239), CryptMsgControl (ms938247),
+CryptMsgDuplicate (ms938251), CryptMsgGetParam (ms938257),
+CryptMsgOpenToDecode (ms938264), CryptMsgOpenToEncode (ms938271),
+CryptMsgUpdate (ms938279), CryptProtectData (ms938309, CE .NET 4.0+),
+CryptReleaseContext (ms938317), CryptSetHashParam (ms938326),
+CryptSetKeyParam (ms938335), CryptSetProvider (ms938347),
+CryptSetProviderEx (ms938353), CryptSetProvParam (ms938358),
+CryptSignHash (ms938369), CryptUnprotectData (ms938379, CE .NET 4.0+),
+CryptVerifySignature (ms938383).
+
+### Declared-not-exported
+
+* CPAcquireContext (ms937726): CSP-authoring entry point; its page
+  lists "Link Library: Developer defined." -- provider DLLs export it,
+  so it is declared in wincrypt.h but not added to any doc-derived
+  def.
+
+### Types
+
+* ALG_ID = `unsigned int` (ms937014 verbatim), HCRYPTHASH/HCRYPTKEY/
+  HCRYPTPROV = `unsigned long` (ms906535/ms906545/ms925987 verbatim).
+* HCRYPTMSG: no dedicated data-type page in the CE archive; the
+  CryptMsg* prototypes pass/return it, so it is declared as the
+  handle carrier (repository design, documented in wincrypt.h).
+* _CRYPTOAPI_BLOB (ms937016): {DWORD cbData; BYTE *pbData;} with the
+  13 documented alias typedef names CRYPT_INTEGER_BLOB, CRYPT_UINT_BLOB,
+  CRYPT_OBJID_BLOB, CERT_NAME_BLOB, CERT_RDN_VALUE_BLOB, CERT_BLOB,
+  CRL_BLOB, DATA_BLOB, CRYPT_DATA_BLOB, CRYPT_HASH_BLOB,
+  CRYPT_DIGEST_BLOB, CRYPT_DER_BLOB, CRYPT_ATTR_BLOB (plus pointers).
+  The page prints no self-named CRYPTOAPI_BLOB typedef.
+* CMSG_STREAM_INFO (ms937724) + PFN_CMSG_STREAM_OUTPUT (callback shape
+  documented on the same page).
+* VTableProvStruc (ms926457; the page documents Version = 3 on CE).
+* PCERT_INFO: forward-declared opaque pointer only -- the full
+  CERT_INFO structure (ms937672) chains into CERT_PUBLIC_KEY_INFO,
+  CRYPT_ALGORITHM_IDENTIFIER, CERT_EXTENSION et al. and belongs to the
+  certificate unit.
+* CRYPTPROTECT_PROMPTSTRUCT: opaque tag; the CryptProtectData page
+  documents that the parameter must be NULL on CE ("structure is not
+  used").
+
+### Title/print fix-ups (as always, page title declares the name)
+
+* ms937746 prints the CryptDuplicateHash name on the CryptDuplicateKey
+  row (parameter list is the key-duplicate shape).
+* ms938096 prints lowercase "CryptGethashParam" for CryptGetHashParam.
+* CryptExportKey's last parameter is printed `pdwbDataLen` (kept).
+* The four CryptMsg pages (ms938247/ms938251/ms938271/ms938279) print
+  their Requirements fields with the colon outside the label tag
+  (`<strong>OS Versions</strong>:`); tools/ce-fetch.py was fixed to
+  parse both shapes and the whole cached corpus re-parsed.
+
+### Recorded-not-defined (names documented, values absent from the CE
+archive -- same policy as the M39-M41/M46 held constant sets)
+
+* CryptAcquireContext dwFlags: CRYPT_VERIFYCONTEXT, CRYPT_NEWKEYSET,
+  CRYPT_DELETEKEYSET, CRYPT_MACHINE_KEYSET, CRYPT_SILENT,
+  CRYPT_USER_PROTECTED (ms937733 parameter table).
+* CryptProtectData flags: CRYPTPROTECT_LOCAL_MACHINE,
+  CRYPTPROTECT_UI_FORBIDDEN, CRYPTPROTECT_SYSTEM,
+  CRYPTPROTECT_NO_RECOVERY (ms938309).
+* Provider types (ms937733): PROV_RSA_FULL, PROV_RSA_SIG, PROV_DSS,
+  PROV_DSS_DH, PROV_FORTEZZA, PROV_MS_EXCHANGE, PROV_SSL,
+  PROV_RSA_SCHANNEL, PROV_SPYRUS_LYNKS, PROV_RNG, PROV_INTEL_SEC,
+  PROV_EC_ECDSA_SIG, PROV_EC_ECDSA_FULL, PROV_EC_ECNRA_SIG,
+  PROV_EC_ECNRA_FULL.
+* Algorithm identifiers (ms937014 table): 40 CALG_* names
+  (CALG_AES_128/192/256, CALG_3DES, CALG_DES, CALG_MD5, CALG_SHA1,
+  CALG_RSA_SIGN, CALG_RSA_KEYX, ...).
+* Key specifications AT_KEYEXCHANGE / AT_SIGNATURE (ms937014 body).
+* CryptGenKey documents the key-length encoding in dwFlags (high 16
+  bits: value << 16, e.g. 0x08000000 for 128-bit) inside parameter
+  text; no named constants.
+
+### Verification
+
+* `make check` GREEN: hostcheck (headers + TU warning-free under
+  `_WIN32_WCE` 0x420/0x500/0x600; TU exercises all 42 functions +
+  CPAcquireContext, the PFN_CMSG_STREAM_OUTPUT shape, and the
+  _CRYPTOAPI_BLOB/DATA_BLOB/CMSG_STREAM_INFO/VTableProvStruc sizes),
+  defcheck `coredll-doc.def` **602** exports (+42).
+* `make crosscheck` GREEN on all six arm/i386 x CE 4.2/5.0/6.0
+  targets (32-bit structure sizes asserted there).
+* `make e2e` GREEN: the e2e console app references CryptAcquireContext
+  / CryptCreateHash / CryptGenRandom / CryptMsgOpenToEncode /
+  CryptMsgClose / CryptProtectData; the recipe asserts
+  `Symbol: CryptAcquireContext`, `Symbol: CryptMsgClose`,
+  `Symbol: CryptProtectData` in the import table of all six target
+  images (all from coredll.dll).
+
+Export surface: `def/coredll-doc.def` 560 -> **602** exports.
+rows.json 1801 -> **1852** records.

@@ -27,6 +27,7 @@
 #include <tapi.h>
 #include <tapicomn.h>
 #include <imm.h>
+#include <wincrypt.h>
 #include <objbase.h>
 #include <stddef.h>
 
@@ -3669,6 +3670,140 @@ static int m46_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M47: Cryptography base CSP unit (wincrypt.h; Coredll.lib) -- the   */
+/*      42 documented Crypt* functions, CPAcquireContext (CSP         */
+/*      authoring entry point), the fundamental crypto types and the  */
+/*      documented BLOB alias set, CMSG_STREAM_INFO and               */
+/*      VTableProvStruc.                                              */
+/* ------------------------------------------------------------------ */
+
+#if __SIZEOF_POINTER__ == 4
+/* _CRYPTOAPI_BLOB has no self-typedef name on the page; the alias
+ * list (CRYPT_INTEGER_BLOB .. CRYPT_ATTR_BLOB) is what it defines. */
+_Static_assert(sizeof(struct _CRYPTOAPI_BLOB) == 8, "_CRYPTOAPI_BLOB 32-bit size");
+_Static_assert(sizeof(DATA_BLOB) == 8, "DATA_BLOB 32-bit size");
+_Static_assert(sizeof(CRYPT_INTEGER_BLOB) == 8, "CRYPT_INTEGER_BLOB 32-bit size");
+_Static_assert(sizeof(CMSG_STREAM_INFO) == 12, "CMSG_STREAM_INFO 32-bit size");
+_Static_assert(sizeof(VTableProvStruc) == 28, "VTableProvStruc 32-bit size");
+#endif
+
+static BOOL WINAPI m47_stream_output(const void *pvArg, BYTE *pbData,
+                                     DWORD cbData, BOOL fFinal)
+{ (void) pvArg; (void) pbData; (void) cbData; (void) fFinal;
+  return TRUE; }
+
+static int m47_shaped_usage(void)
+{
+    HCRYPTPROV  hProv  = 0;
+    HCRYPTKEY   hKey   = 0;
+    HCRYPTHASH  hHash  = 0;
+    HCRYPTMSG   hMsg   = 0;
+    ALG_ID      algid  = 0;
+    DWORD       dw     = 0;
+    BYTE        buf[8] = {0};
+    WCHAR       wdesc[] = { 'd', 0 };
+    LPWSTR      pwstr  = (LPWSTR)0;
+
+    DATA_BLOB             blob = {0};
+    DATA_BLOB             din = {0}, dout = {0};
+    CMSG_STREAM_INFO      csi = {0};
+    VTableProvStruc       vts = {0};
+    PCERT_INFO            pcertinfo = (PCERT_INFO)0;
+    PFN_CMSG_STREAM_OUTPUT pfn = m47_stream_output;
+
+    /* callback typedef shape */
+    csi.cbContent = 0;
+    csi.pfnStreamOutput = pfn;
+    csi.pvArg = (void *)0;
+    (void) csi;
+
+    /* provider acquisition / reference / release */
+    (void) CryptAcquireContext(&hProv, (LPCTSTR)0, (LPCTSTR)0, 0, 0);
+    (void) CryptContextAddRef(hProv, &dw, 0);
+
+    /* key management */
+    (void) CryptGenKey(hProv, algid, 0, &hKey);
+    (void) CryptDeriveKey(hProv, algid, hHash, 0, &hKey);
+    (void) CryptGetUserKey(hProv, 0, &hKey);
+    (void) CryptImportKey(hProv, buf, dw, hKey, 0, &hKey);
+    (void) CryptExportKey(hKey, hKey, 0, 0, buf, &dw);
+    (void) CryptDuplicateKey(hKey, &dw, 0, &hKey);
+    (void) CryptGetKeyParam(hKey, 0, buf, &dw, 0);
+    (void) CryptSetKeyParam(hKey, 0, buf, 0);
+    (void) CryptDestroyKey(hKey);
+
+    /* hashing */
+    (void) CryptCreateHash(hProv, algid, hKey, 0, &hHash);
+    (void) CryptHashData(hHash, buf, dw, 0);
+    (void) CryptHashSessionKey(hHash, hKey, 0);
+    (void) CryptDuplicateHash(hHash, &dw, 0, &hHash);
+    (void) CryptGetHashParam(hHash, 0, buf, &dw, 0);
+    (void) CryptSetHashParam(hHash, 0, buf, 0);
+    (void) CryptDestroyHash(hHash);
+
+    /* encrypt / decrypt */
+    (void) CryptEncrypt(hKey, hHash, TRUE, 0, buf, &dw, dw);
+    (void) CryptDecrypt(hKey, hHash, TRUE, 0, buf, &dw);
+
+    /* signing / verification */
+    (void) CryptSignHash(hHash, 0, (LPCTSTR)0, 0, buf, &dw);
+    (void) CryptVerifySignature(hHash, buf, dw, hKey, (LPCTSTR)0, 0);
+
+    /* random */
+    (void) CryptGenRandom(hProv, dw, buf);
+
+    /* provider enumeration / selection */
+    (void) CryptEnumProviders(0, &dw, 0, &dw, (LPTSTR)0, &dw);
+    (void) CryptEnumProviderTypes(0, &dw, 0, &dw, (LPTSTR)0, &dw);
+    (void) CryptGetDefaultProvider(0, &dw, 0, (LPTSTR)0, &dw);
+    (void) CryptSetProvider((LPCTSTR)0, 0);
+    (void) CryptSetProviderEx((LPCTSTR)0, 0, &dw, 0);
+    (void) CryptGetProvParam(hProv, 0, buf, &dw, 0);
+    (void) CryptSetProvParam(hProv, 0, buf, 0);
+    (void) CryptReleaseContext(hProv, 0);
+
+    /* localized name lookup (wide-string only) */
+    (void) CryptFindLocalizedName((LPCWSTR)0);
+
+    /* CryptMsg family */
+    hMsg = CryptMsgOpenToEncode(0, 0, 0, (const void *)0, (LPSTR)0,
+                                (PCMSG_STREAM_INFO)0);
+    (void) CryptMsgUpdate(hMsg, (const BYTE *)0, 0, TRUE);
+    (void) CryptMsgGetParam(hMsg, 0, 0, (void *)0, &dw);
+    (void) CryptMsgControl(hMsg, 0, 0, (const void *)0);
+    hMsg = CryptMsgDuplicate(hMsg);
+    (void) CryptMsgClose(hMsg);
+    hMsg = CryptMsgOpenToDecode(0, 0, 0, hProv, pcertinfo,
+                                (PCMSG_STREAM_INFO)0);
+    dw = CryptMsgCalculateEncodedLength(0, 0, 0, (const void *)0,
+                                        (LPSTR)0, 0);
+    (void) CryptMsgClose(hMsg);
+
+    /* protected data (CE .NET 4.0+) */
+    din.pbData = buf;
+    din.cbData = sizeof(buf);
+    (void) CryptProtectData(&din, wdesc, &blob, (PVOID)0,
+                            (struct CRYPTPROTECT_PROMPTSTRUCT *)0, 0,
+                            &dout);
+    (void) CryptUnprotectData(&dout, &pwstr, &blob, (PVOID)0,
+                              (struct CRYPTPROTECT_PROMPTSTRUCT *)0, 0,
+                              &din);
+
+    /* CPAcquireContext (CSP authoring; Link Library: Developer
+     * defined -- not a coredll import, exercised for shape only). */
+    vts.Version = 3;
+    vts.FuncVerifyImage = (FARPROC)0;
+    vts.FuncReturnhWnd = (FARPROC)0;
+    vts.dwProvType = 0;
+    vts.pbContextInfo = buf;
+    vts.cbContextInfo = sizeof(buf);
+    vts.pszProvName = wdesc;
+    (void) CPAcquireContext(&hProv, wdesc, 0, &vts);
+    (void) vts;
+    return 0;
+}
+
 
 int host_tu_entry(void)
 {
@@ -3735,6 +3870,8 @@ int host_tu_entry(void)
     if (m45_shaped_usage() != 0)
         return 1;
     if (m46_shaped_usage() != 0)
+        return 1;
+    if (m47_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -173,6 +173,25 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M47 (landed):** Cryptography base CSP unit (new
+  `include/wincrypt.h`; Coredll.lib) -- the 42 documented Crypt*
+  functions of the CE 5.0 Cryptography book (CryptAcquireContext ..
+  CryptVerifySignature incl. the CryptMsg* family and
+  CryptProtectData/CryptUnprotectData; every page Header: Wincrypt.h
+  / Link Library: Coredll.lib), the four fundamental types (ALG_ID,
+  HCRYPTHASH, HCRYPTKEY, HCRYPTPROV -- all printed verbatim), the
+  HCRYPTMSG handle carrier, _CRYPTOAPI_BLOB + its 13 documented alias
+  names (DATA_BLOB et al.), CMSG_STREAM_INFO +
+  PFN_CMSG_STREAM_OUTPUT, VTableProvStruc (Version 3 on CE), and
+  CPAcquireContext (declared-not-exported: "Link Library: Developer
+  defined").  PCERT_INFO stays an opaque forward declaration until
+  the certificate unit; CRYPTPROTECT_PROMPTSTRUCT is documented
+  unused (must be NULL) on CE.  The crypto constant sets
+  (CRYPT_VERIFYCONTEXT/..., PROV_*, CALG_* x40, AT_*,
+  CRYPTPROTECT_*) publish names without values in the CE archive ->
+  recorded-not-defined (the M39-M41 held-set policy).  coredll
+  560 -> 602 exports; e2e asserts CryptAcquireContext + CryptMsgClose
+  + CryptProtectData imports on all six targets.
 * **M46 (landed):** Input Method Manager unit (new `include/imm.h`;
   Coreimm.lib) -- the 55 documented IMM functions of the official CE
   5.0 Input Method Manager reference (56 function pages harvested;
@@ -469,7 +488,8 @@ held constant sets whose official pages publish names without values
 values) -- those need the documented on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
-lockstep (coredll at 560 name-only exports, M45; coreimm 56, M46);
+lockstep (coredll at 602 name-only exports incl. the 42 M47 Crypt*
+functions; coreimm 56, M46);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

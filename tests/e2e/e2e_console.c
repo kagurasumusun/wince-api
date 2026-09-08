@@ -22,6 +22,7 @@
 #include <tapi.h>
 #include <tapicomn.h>
 #include <imm.h>
+#include <wincrypt.h>
 #include <objbase.h>
 
 int main(void)
@@ -101,6 +102,23 @@ int main(void)
         (void) ImmGetOpenStatus(hIMC);
         (void) ImmNotifyIME(hIMC, 0, 0, 0);
         (void) ImmSIPanelState(0, NULL);
+    }
+    /* M47: Cryptography base CSP unit (Wincrypt.h / Coredll.lib) --
+     * linked, not run: the image must import the documented Crypt*
+     * names from coredll.dll per the doc-derived def. */
+    {
+        HCRYPTPROV hProv = 0;
+        HCRYPTHASH hHash = 0;
+        HCRYPTMSG  hMsg  = 0;
+        DATA_BLOB  in = {0}, out = {0};
+        (void) CryptAcquireContext(&hProv, NULL, NULL, 0, 0);
+        (void) CryptCreateHash(hProv, 0, 0, 0, &hHash);
+        (void) CryptGenRandom(hProv, 0, NULL);
+        (void) CryptDestroyHash(hHash);
+        (void) CryptReleaseContext(hProv, 0);
+        hMsg = CryptMsgOpenToEncode(0, 0, 0, NULL, NULL, NULL);
+        (void) CryptMsgClose(hMsg);
+        (void) CryptProtectData(&in, NULL, NULL, NULL, NULL, 0, &out);
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-
