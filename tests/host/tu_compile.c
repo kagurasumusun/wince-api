@@ -35,6 +35,8 @@
 #include <newmenu.h>
 #include <shlobj.h>
 #include <extfile.h>
+#include <sipapi.h>
+#include <sip.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4344,6 +4346,70 @@ static int m50_shaped_usage(void)
 }
 
 
+/* ------------------------------------------------------------------ */
+/* M51: Software-based Input Panel unit.                                */
+/*      sipapi.h (SIPINFO, IMENUMINFO, IMENUMPROC, the nine Sip*      */
+/*      Coredll.lib functions + the application-defined               */
+/*      SipEnumIMProc callback shape) and sip.h (IMINFO, LMDATA, the  */
+/*      IIMCallback / IIMCallback2 / IInputMethod / IInputMethod2     */
+/*      interface records; WM_IM_INFO record in winuser.h).           */
+/* ------------------------------------------------------------------ */
+
+/* Pointer-free layouts. */
+_Static_assert(sizeof(LMDATA) == 24, "LMDATA size");
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(SIPINFO) == 48, "SIPINFO 32-bit size");
+_Static_assert(sizeof(IMENUMINFO) == 536, "IMENUMINFO 32-bit size");
+_Static_assert(sizeof(IMINFO) == 40, "IMINFO 32-bit size");
+#endif
+
+static int m51_shaped_usage(void)
+{
+    HWND           hwnd  = (HWND)0;
+    CLSID          clsid = {0};
+    SIPINFO        si    = {0};
+    IMENUMINFO     iei   = {0};
+    IMINFO         imi   = {0};
+    LMDATA         lmd   = {0};
+    RECT           rc    = {0, 0, 0, 0};
+    IMENUMPROC     pEnumIMProc = SipEnumIMProc;
+
+    /* application layer (Sipapi.h / Coredll.lib) */
+    si.cbSize = sizeof(si);
+    iei.clsid = clsid;
+    imi.cbSize = sizeof(imi);
+    lmd.dwVersion = 0x00010000;
+    (void) SipEnumIM(pEnumIMProc);
+    (void) SipEnumIM(NULL);
+    (void) SipEnumIMProc(&iei);
+    (void) SipGetCurrentIM(&clsid);
+    (void) SipGetInfo(&si);
+    (void) SipRegisterNotification(hwnd);
+    (void) SipSetCurrentIM(&clsid);
+    (void) SipSetDefaultRect(&rc);
+    (void) SipSetInfo(&si);
+    (void) SipShowIM(0);
+    (void) SipStatus();
+
+    /* IM/IME layer (Sip.h): the four interfaces are opaque tags with
+     * documented method records (M44 model) -- only pointer use is
+     * compilable here. */
+    {
+        IIMCallback    *piimcb  = (IIMCallback *)0;
+        IIMCallback2   *piimcb2 = (IIMCallback2 *)0;
+        IInputMethod   *piim    = (IInputMethod *)0;
+        IInputMethod2  *piim2   = (IInputMethod2 *)0;
+        (void) piimcb;
+        (void) piimcb2;
+        (void) piim;
+        (void) piim2;
+        (void) imi;
+        (void) lmd;
+    }
+    return 0;
+}
+
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -4417,6 +4483,8 @@ int host_tu_entry(void)
     if (m49_shaped_usage() != 0)
         return 1;
     if (m50_shaped_usage() != 0)
+        return 1;
+    if (m51_shaped_usage() != 0)
         return 1;
     return 0;
 }

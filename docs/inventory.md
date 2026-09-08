@@ -3223,3 +3223,144 @@ name its AddPages method; no interface page in any catalog).
 Export surface: new `def/aygshell-doc.def` **33** exports (31
 aygshell.h functions + SHInitDialog + SHGetAutoRunPath; SHSipPreference
 held).  Header count 30 -> 35; def count 38 -> 39.
+
+## M51 -- Software-based Input Panel unit (new headers sipapi.h, sip.h; Coredll.lib)
+
+Scope: the Software-based Input Panel Reference book of the CE 5.0
+documentation (Shell and User Interface :: User Interface ::
+Software-based Input Panel, book root aa453941; reference aa452750) --
+49 leaves (`tools/manifests/sip.manifest`): 10 function pages (9 Sip*
+imports + the application-defined SipEnumIMProc callback), 4 structure
+pages and 35 interface/method pages (IIMCallback, IIMCallback2,
+IInputMethod, IInputMethod2).  The 14 CE 6.0 twins of the function and
+structure pages were harvested for cross-checking
+(`tools/manifests/sip-ce60.manifest`); the four
+interface roots have no CE 6.0 leaf under those titles.  Two CE 5.0
+message dependency pages were harvested: WM_IM_INFO (aa453870) and
+WM_SYSCOPYDATA (aa453912).
+
+### Functions (9 exports; every page Header: Sipapi.h / Link Library:
+Coredll.lib / Windows CE 2.10 and later; CE 6.0 twins repeat
+sipapi.h + coredll.lib)
+
+SipEnumIM (aa453742; NULL callback returns the IM count; -1 = error on
+CE 3.0+; does not initialize the SIP environment), SipGetCurrentIM
+(aa453744), SipGetInfo (aa453745), SipRegisterNotification (ms932947;
+single registration, survives until boot; posts WM_IM_INFO),
+SipSetCurrentIM (ms940337), SipSetDefaultRect (ms940340; page prints
+"BOOLSipSetDefaultRect" -- spacing restored from twin ee504359),
+SipSetInfo (ms940341), SipShowIM (ms940342; SIPF_ON / SIPF_OFF),
+SipStatus (ms940343; SIP_STATUS_AVAILABLE / SIP_STATUS_UNAVAILABLE).
+
+SipEnumIMProc (aa453743) is the application-defined callback (Header
+and Link Library rows print "Developer defined"; the CE 6.0 twin
+ee505466 prints "Developer Implemented"): declared in sipapi.h without
+the import pin, same model as the M47 CPAcquireContext declaration.
+IMENUMPROC is named by SipEnumIM's parameter but has no page; carried
+as a function-pointer typedef built from the two documented
+signatures (documented design decision, note (b) in sipapi.h).
+
+### Structures
+
+* SIPINFO (ms932860, Sipapi.h, CE 2.01+, no library row; 32-bit size
+  48 TU-asserted; anonymous tag as printed; twin ee499105 prints the
+  identical layout -- no CE 6.0 extension).  This closes the M50
+  SHSipInfo forward note: the SPI_*SIPINFO actions' pvParam now has a
+  declared target (the SHSipInfo comment was updated; the action-name
+  values themselves remain held).
+* IMENUMINFO (ms909841, Sipapi.h, CE 2.10+, no library row; 32-bit
+  size 536 TU-asserted).  Page prints the declaration without the
+  typedef keyword ("struct_IMENUMINFO{...}IMENUMINFO;"); typedef
+  restored, tag _IMENUMINFO as printed (twin ee503605 repeats the
+  print).
+* IMINFO (ms909842, Sip.h, CE 2.01+, no library row; 32-bit size 40
+  TU-asserted; anonymous tag as printed; twin ee503199 identical).
+  Page quirk: the fdwFlags table prints "SIP_OFF" (no F) for the off
+  state while the SIPINFO table prints SIPF_OFF for the same state --
+  recorded verbatim; all four state bits are names-without-values
+  (held).  HIMAGELIST comes from commctrl.h (M29).
+* LMDATA (aa453406, Sip.h, CE 2.12+, no library row; size 24
+  TU-asserted; tag _tagLMDATA as printed; twin ee499697 identical).
+  dwVersion must be 0x00010000 (the one published value); the twelve
+  LMDATA_SYMBOL_* / LMDATA_SKIP_* / LMDATA_SCORE_* flag names are held
+  (no values); offsets are measured from the end of the structure.
+
+### Interfaces (Sip.h / Uuid.lib rows; application/IM-implemented,
+not DLL exports -- M44 opaque-tag + method-record model)
+
+* IIMCallback (ms929942, CE 2.01+): SetImInfo (ms929952), SendVirtualKey
+  (ms929951), SendCharEvents (ms929949), SendString (ms929950) -- page
+  table order.
+* IIMCallback2 (ms929943, CE 2.12+): the four IIMCallback shapes
+  (ms929948 / ms929947 / ms929945 / ms929946) + SendAlternatives2
+  (ms929944, LMDATA* -- delivered as WM_SYSCOPYDATA with wParam
+  WMSCD_CHAR_RANKED_ALTS).
+* IInputMethod (ms929953, CE 2.12+ per the root page -- the method
+  pages print CE 2.01+ (recorded inconsistency)): Select (ms909669),
+  Deselect (ms930093), Showing (ms909766), Hiding (ms930118), GetInfo
+  (ms930107), ReceiveSipInfo (ms930126, SIPINFO*), RegisterCallback
+  (ms930132, IIMCallback*), GetImData (ms930101), SetImData (ms909763),
+  UserOptionsDlg (ms909775; printed "HRESULTUserOptionsDlg" --
+  spacing restored).  Documented initialization call sequence:
+  Select, GetInfo, ReceiveSipInfo, RegisterCallback.
+* IInputMethod2 (ms929954, CE 2.12+): the IInputMethod shapes
+  (ms929962 / ms929955 / ms929965 / ms929958 / ms929957 / ms929959 /
+  ms929960 / ms929956 / ms929963 / ms930035) + SetIMMActiveContext
+  (ms929964; HWND, BOOL, DWORD, DWORD, DWORD hkl -- hkl printed as
+  DWORD although the prose calls it "a handle to the current active
+  keyboard layout"; called when ImmSetActiveContext is called) +
+  RegisterCallback2 (ms929961, IIMCallback2*).  Quirk:
+  IInputMethod2::RegisterCallback (ms929960) prints the parameter
+  IIMCallback* while its prose says IIMCallback2 -- printed signature
+  wins, recorded.
+
+### Messages / dependency records
+
+* WM_IM_INFO (aa453870; Header Winuser.h, CE 2.10+, no library row):
+  shape wParam = flag / lParam = pdata with the IM_POSITION /
+  IM_WIDEIMAGE / IM_NARROWIMAGE change-type names -- recorded in
+  winuser.h (its documented home), values held (message id and flag
+  values unpublished; CE shell message, not a fixed Win32 ABI id).
+* WM_SYSCOPYDATA (aa453912; Header Pwinuser.h, CE 2.12+): shape
+  wParam = data type (WMSCD_CHAR_RANKED_ALTS, the only defined type) /
+  lParam = PCOPYDATASTRUCT (winuser.h, M31); "no counterpart on
+  Windows-based desktop platforms", reserved for system components.
+  The home Pwinuser.h belongs to the deferred OEM layer, so the shape
+  is recorded in sip.h (note (e)) and the name is held.
+* KEY_STATE_FLAGS / KeyStateDownFlag (Keybd.h, page ms902150 exists):
+  referenced by SendCharEvents prose; the printed signature types the
+  parameters UINT / UINT*, so no dependency is needed; the Keybd.h
+  batch stays deferred (winuser.h note unchanged).
+* KEYEVENTF_KEYUP / KEYEVENTF_SILENT: SendVirtualKey dwFlags names,
+  published without values (held set; cf. the keybd_event record in
+  winuser.h, whose dwFlags names KEYEVENTF_EXTENDEDKEY /
+  KEYEVENTF_KEYUP -- also values-held).
+
+### Recorded-not-defined (held sets; names published, values not)
+
+SIPF_ON / SIPF_OFF (SipShowIM), SIPF_DOCKED / SIPF_LOCKED / SIPF_OFF /
+SIPF_ON (SIPINFO.fdwFlags and IMINFO.fdwFlags -- the IMINFO table's
+"SIP_OFF" spelling recorded verbatim), SIP_STATUS_AVAILABLE /
+SIP_STATUS_UNAVAILABLE (SipStatus), IM_POSITION / IM_WIDEIMAGE /
+IM_NARROWIMAGE (WM_IM_INFO), WMSCD_CHAR_RANKED_ALTS (WM_SYSCOPYDATA),
+LMDATA_SYMBOL_* / LMDATA_SKIP_* / LMDATA_SCORE_* (12, LMDATA.flags),
+KEYEVENTF_KEYUP / KEYEVENTF_SILENT (SendVirtualKey).  The message
+identifiers WM_IM_INFO and WM_SYSCOPYDATA are themselves held (no
+published numeric values).
+
+### Verification
+
+* `make check` GREEN (TU m51 exercises all 9 Sip* functions + the
+  SipEnumIMProc callback shape + the IMENUMPROC carrier; 4 size
+  asserts: SIPINFO 48, IMENUMINFO 536, IMINFO 40, LMDATA 24 --
+  pointer-guarded, fired by the CE targets in crosscheck).
+* `make crosscheck` GREEN on all six targets (real LLVM-WinCE clang,
+  `-Werror`; the two new headers standalone + full TU).
+* `make e2e` GREEN: the M51 consumer unit links 9 Sip* calls against
+  def/coredll-doc.def; asserts Symbol: SipGetInfo + SipShowIM imports
+  on all six images (coredll.dll).
+
+Export surface: `def/coredll-doc.def` 602 -> **611** exports (+9 Sip*
+functions; no new def file -- the Uuid.lib interface rows produce no
+def, gen-doc-def reports 35 co-listed pages skipped).  Header count
+35 -> 37; def count 39 (unchanged).

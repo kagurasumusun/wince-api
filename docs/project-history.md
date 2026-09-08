@@ -206,7 +206,7 @@ M44 added the COM/OLE/Storage/Automation surface (`objbase.h`, `Ole32.lib`, `Ole
 M45 completed the documented TAPI client surface, including line/phone functions, callbacks,
 client handles and the previously held `TSPI_lineForward` case.
 
-## 15. M46-M50: advanced subsystems
+## 15. M46-M51: advanced subsystems
 
 The latest milestones expanded the API into additional CE subsystems:
 
@@ -223,8 +223,12 @@ The latest milestones expanded the API into additional CE subsystems:
   enumeration, nine documented structures, `WC_SIPPREF`, the `NMHDR`/`WM_NOTIFY`/
   `WM_SETTINGCHANGE` notification layer, and the held `SHSipPreference`/flag-value sets
   recorded as gaps.
+- **M51:** Software-based Input Panel (`sipapi.h`, `sip.h`; `Coredll.lib`), including the
+  9 documented `Sip*` functions, the `SipEnumIMProc` callback shape, the `SIPINFO`/
+  `IMENUMINFO`/`IMINFO`/`LMDATA` structures and the `IIMCallback`/`IInputMethod`
+  interface records.
 
-The M50 state is the latest committed API milestone as of 2026-09-09.
+The M51 state is the latest committed API milestone as of 2026-09-09.
 
 ## 16. Wider WinCE system and device work
 

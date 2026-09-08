@@ -173,6 +173,21 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M51 (landed):** Software-based Input Panel unit (new
+  `include/sipapi.h`, `include/sip.h`; Coredll.lib) -- the CE 5.0
+  Software-based Input Panel Reference book (49 leaves): the 9
+  documented `Sip*` functions (SipEnumIM .. SipStatus; every page
+  Header: Sipapi.h / Link Library: Coredll.lib), the application-defined
+  SipEnumIMProc callback shape, the IMENUMPROC pointer carrier,
+  SIPINFO (48 bytes -- closes the M50 SHSipInfo forward note), IMENUMINFO
+  (536), IMINFO (40; the HIMAGELIST / RECT layout) and LMDATA (24) with
+  4 TU-asserted 32-bit sizes, the WM_IM_INFO record in winuser.h, and
+  the four IM/IME interfaces (IIMCallback / IIMCallback2 / IInputMethod /
+  IInputMethod2) as opaque tags with documented method records.  The
+  SIPF_* / SIP_STATUS_* / IM_* / WMSCD_* / LMDATA_* / KEYEVENTF_* value
+  sets are names-without-values (held).  `coredll-doc.def` grows to
+  **611** exports; e2e asserts SipGetInfo + SipShowIM imports on all
+  six targets.
 * **M50 (landed):** AYGShell unit (new `include/aygshell.h`,
   `shellsdk.h`, `newmenu.h`, `shlobj.h`, `extfile.h`; Aygshell.lib) --
   the CE 5.0 AYGShell Reference book (62 leaves): 33 exported
@@ -531,9 +546,9 @@ values, the M50 AYGShell flag sets) -- those need the documented
 on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
-lockstep (coredll at 602 name-only exports incl. the 42 M47 Crypt*
-functions; coreimm 56, M46; crypt32 83 + winscard 28, M48/M49;
-aygshell 33, M50);
+lockstep (coredll at 611 name-only exports incl. the 42 M47 Crypt*
+functions + the 9 M51 Sip* functions; coreimm 56, M46; crypt32 83 +
+winscard 28, M48/M49; aygshell 33, M50);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

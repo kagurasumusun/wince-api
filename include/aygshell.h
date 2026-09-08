@@ -460,9 +460,9 @@ AKARI_CE_IMPORT BOOL SHSetNavBarText(HWND hwndRequester, LPCTSTR pszText) AKARI_
  * / SPI_SETCURRENTIM / SPI_GETCURRENTIM action names (values not
  * published -- held set); pvParam points to a SIPINFO structure for the
  * *SIPINFO actions and to a CLSID for the *CURRENTIM actions (the
- * SIPINFO structure belongs to the Software-based Input Panel book --
- * sipapi.h per the CE 6.0 twin ee499105 -- and is not declared by this
- * tree yet).  fWinIni is reserved: set to 0.  Page prints WINAPI. */
+ * SIPINFO structure is declared by sipapi.h, M51 -- the CE 6.0 twin
+ * ee499105 also prints Header: sipapi.h).  fWinIni is reserved: set to
+ * 0.  Page prints WINAPI. */
 AKARI_CE_IMPORT BOOL SHSipInfo(UINT uiAction, UINT uiParam, PVOID pvParam,
                                UINT fWinIni) AKARI_CE_NAME(SHSipInfo);
 

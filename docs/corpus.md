@@ -46,19 +46,21 @@ git -C ../wince-docs-corpus push
 
 Then delete the corpus clone and `build/` from the session.
 
-## Current corpus (2026-09-09, M50)
+## Current corpus (2026-09-09, M51)
 
-* `pages5/`: 2018 CE 5.0 `(v=msdn.10)` pages — the full committed
-  manifest set (89 manifests incl. the M43 TAPI/TSPI manifests, the
+* `pages5/`: 2067 CE 5.0 `(v=msdn.10)` pages — the full committed
+  manifest set (91 manifests incl. the M43 TAPI/TSPI manifests, the
   M45 `tapi-client-functions.manifest`, the M46
   `imm-reference.manifest`, the M47 `crypt-csp-base.manifest`, the
   M48/M49 `crypt-cert` / `crypt-encode-pfx` / `crypt-structs` /
-  `smartcard` manifests and the M50 `aygshell.manifest`) plus the
-  M34a type/callback pages (aa450831 EXTENDED_NAME_FORMAT, ms904723
-  EnumCodePagesProc) and the five M50 dependency pages (ms931479
-  NMHDR, ms889030 FILECHANGEINFO, ms932860 SIPINFO, aa453890
-  WM_NOTIFY, aa453906 WM_SETTINGCHANGE).
-* `pages6/`: 1244 CE 6.0 `(v=winembedded.60)` pages — the twins of the
+  `smartcard` manifests, the M50 `aygshell.manifest` and the M51
+  `sip.manifest`) plus the M34a type/callback pages (aa450831
+  EXTENDED_NAME_FORMAT, ms904723 EnumCodePagesProc) and the five M50
+  dependency pages (ms931479 NMHDR, ms889030 FILECHANGEINFO, ms932860
+  SIPINFO, aa453890 WM_NOTIFY, aa453906 WM_SETTINGCHANGE) and the M51
+  message dependency page aa453870 WM_IM_INFO (aa453912
+  WM_SYSCOPYDATA was already preserved).
+* `pages6/`: 1257 CE 6.0 `(v=winembedded.60)` pages — the twins of the
   CE 5.0 corpus (1133, every resolvable leaf; the index pages have no
   CE 6.0 leaf) plus the M34a twins ee483142 / ee491122, the M44
   CE 6.0 twins, the M46 IMM constant twins (ee490906 / ee491772 /
@@ -66,7 +68,9 @@ Then delete the corpus clone and `build/` from the session.
   ee491938 / ee491940), the 63 M50 AYGShell twins
   (`tools/manifests/aygshell-ce60.manifest`; INewMenuItemServer and
   IShellNotificationCallback have no CE 6.0 leaf) plus the twin
-  dependency pages ee499390 / ee501447, and the two CE 6.0
+  dependency pages ee499390 / ee501447, the 14 M51 SIP twins
+  (`tools/manifests/sip-ce60.manifest`; the four interface roots have
+  no CE 6.0 leaf under those titles), and the two CE 6.0
   architecture/kernel pages read for docs/ce-not-nt.md (ee504804
   Windows CE OS model, ee482762 Kernel Servers: CE 5.0 vs CE 6.0).
 * `pages4/`: **6468 Windows CE .NET `(v=msdn.10)` pages — the full
@@ -76,11 +80,13 @@ Then delete the corpus clone and `build/` from the session.
   cross-linked by the archived TOC: its CE URL is a verified 404 and
   it is excluded; one preserved page (ms938306) is the archive's
   `#message` sign-in-gated stub, kept as published.
-* `rows.json`: 2099 CE 5.0 Requirement-row records (1560 pre-M45 +
+* `rows.json`: 2148 CE 5.0 Requirement-row records (1560 pre-M45 +
   the 89 M45 TAPI client function pages + the 152 M46 IMM reference
   pages + the 51 M47 crypto base-CSP pages + the 181 M48/M49 crypto
   certificate/PFX + smart-card pages, counting 4 struct pages already
-  cached in M47 only once + the 66 M50 AYGShell + dependency pages);
+  cached in M47 only once + the 66 M50 AYGShell + dependency pages +
+  the 48 new M51 SIP book rows and the aa453870 WM_IM_INFO row (the
+  SIPINFO and WM_SYSCOPYDATA pages were already preserved));
   `rows4.json` (in `build/`, regenerable
   via `tools/cenet-rows.py`) holds the CE .NET parsed records.
   The 65 M50 CE 6.0 twin pages are preserved in `pages6/` but keep no

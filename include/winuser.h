@@ -920,6 +920,22 @@ typedef struct tagNMHDR {
 } NMHDR, *LPNMHDR;
 
 /* ------------------------------------------------------------------ */
+/* M51: WM_IM_INFO (aa453870, Windows CE 2.10 and later; Header        */
+/* Winuser.h; no Link Library row): sent by the software-based input   */
+/* panel to the window registered with SipRegisterNotification        */
+/* (sipapi.h) when the current input method's size, position or        */
+/* state changes:                                                     */
+/*     wParam = (WPARAM) flag;  lParam = (LPARAM) pdata;              */
+/* flag is one of the IM_POSITION / IM_WIDEIMAGE / IM_NARROWIMAGE     */
+/* change-type names and pdata carries the related data (unused for   */
+/* IM_POSITION; a wide/narrow image icon handle for the image types)  */
+/* -- names published without numeric values, and the message         */
+/* identifier itself is not published either (a CE shell message,     */
+/* not a fixed Win32 ABI identifier), so both are held in             */
+/* docs/inventory.md rather than defined here.                        */
+/* ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------ */
 /* M29: window/control message identifiers and notification codes.   */
 /*                                                                     */
 /* Names and semantics come from the CE 5.0 GWES message books (each  */

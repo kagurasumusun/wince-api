@@ -1,0 +1,14 @@
+ee502586(v=winembedded.60)	SipEnumIM
+ee505466(v=winembedded.60)	SipEnumIMProc
+ee500445(v=winembedded.60)	SipGetCurrentIM
+ee505935(v=winembedded.60)	SipGetInfo
+ee505491(v=winembedded.60)	SipRegisterNotification
+ee505485(v=winembedded.60)	SipSetCurrentIM
+ee504359(v=winembedded.60)	SipSetDefaultRect
+ee505516(v=winembedded.60)	SipSetInfo
+ee502869(v=winembedded.60)	SipShowIM
+ee499354(v=winembedded.60)	SipStatus
+ee503199(v=winembedded.60)	IMINFO
+ee503605(v=winembedded.60)	IMENUMINFO
+ee499697(v=winembedded.60)	LMDATA
+ee499105(v=winembedded.60)	SIPINFO

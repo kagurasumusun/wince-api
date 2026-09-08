@@ -29,6 +29,8 @@
 #include <shellsdk.h>
 #include <shlobj.h>
 #include <newmenu.h>
+#include <sipapi.h>
+#include <sip.h>
 
 int main(void)
 {
@@ -191,6 +193,35 @@ int main(void)
         (void) SHChangeNotifyFree((LPVOID)0);
         (void) SHRecognizeGesture((SHRGINFO *)0);
         (void) SHGetAutoRunPath((LPTSTR)0);
+    }
+    /* M51: Software-based Input Panel unit (Sipapi.h; Coredll.lib) --
+     * linked, not run: the image must import the documented Sip*
+     * names from coredll.dll per the doc-derived def.  The sip.h
+     * IM/IME layer (IMINFO / LMDATA / the four interfaces) is
+     * interface-record only.  Locals are left uninitialized (M44
+     * style; no aggregate zero-initializers in freestanding links). */
+    {
+        SIPINFO    sipi;
+        IMENUMINFO iei;
+        CLSID      clsid2;
+        RECT       rc2;
+        sipi.cbSize     = sizeof(sipi);
+        iei.clsid.Data1 = 0;
+        clsid2.Data1    = 0;
+        rc2.left        = 0;
+        (void) SipEnumIM((IMENUMPROC)0);
+        (void) SipGetCurrentIM(&clsid2);
+        (void) SipGetInfo(&sipi);
+        (void) SipRegisterNotification((HWND)0);
+        (void) SipSetCurrentIM(&clsid2);
+        (void) SipSetDefaultRect(&rc2);
+        (void) SipSetInfo(&sipi);
+        (void) SipShowIM(0);
+        (void) SipStatus();
+        {
+            IInputMethod2 *piim2 = (IInputMethod2 *)0;
+            (void) piim2;
+        }
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-
