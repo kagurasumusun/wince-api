@@ -190,6 +190,29 @@ AKARI_CE_IMPORT BOOL     ImageList_SetOverlayImage(HIMAGELIST himl, int iImage,
  * (fixed Win32-ABI macro shape; hi is unused on CE). */
 #define ImageList_ExtractIcon(hi, himl, i) ImageList_GetIcon((himl), (i), 0)
 
+/* ------------------------------------------------------------------ */
+/* Shell API Notifications (M53 supplement).                           */
+/* ------------------------------------------------------------------ */
+
+/* NM_RECOGNIZEGESTURE (Windows Mobile 6.5 documentation, "Shell API
+ * Notifications > NM_RECOGNIZEGESTURE" page, preserved in the corpus
+ * pageswm/ tree; Requirements: Header commctrl.h, Windows CE .NET 4.2
+ * and later -- no Link Library row, it is a notification, not a
+ * function).  WM_NOTIFY-carried notification used to let an
+ * application decide whether it wants automatic gesture recognition in
+ * the common controls (list views, tree views):
+ *
+ *     nmrgi = (NMRGINFO*) lParam
+ *
+ * The parent must return TRUE if it does NOT want gesture recognition;
+ * otherwise the gesture is recognized, the animation is shown and the
+ * context menu messages (GN_CONTEXTMENU, WM_CONTEXTMENU) are sent to
+ * the parent.  The notification value is not published on any official
+ * page (no CE 5.0/6.0/Compact 7/Compact 2013 page exists for it --
+ * verified against the embedded TOC and catalogs -- and the WM 6.5
+ * page is names-only): name held (docs/inventory.md M53).  NMRGINFO
+ * is declared in aygshell.h (its documented home). */
+
 #ifdef __cplusplus
 }
 #endif

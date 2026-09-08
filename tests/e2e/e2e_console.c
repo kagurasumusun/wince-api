@@ -33,6 +33,13 @@
 #include <sip.h>
 #include <keybd.h>
 #include <pwinuser.h>
+#include <shtypes.h>
+#include <shobjidl.h>
+#include <shellapi.h>
+#include <cpl.h>
+#include <shelwapi.h>
+#include <windowsx.h>
+#include <commdlg.h>
 
 int main(void)
 {
@@ -243,6 +250,45 @@ int main(void)
         (void) KeybdGetDeviceInfo(0, (LPVOID)0);
         (void) SHSipPreference((HWND)0, SIP_UP);
         (void) gfi;
+    }
+    /* M53: Standard Shell Reference -- linked, not run: the image must
+     * import the Ceshell.lib / Coredll.lib / Shmisc.lib-documented
+     * names from ceshell.dll / coredll.dll / shmisc.dll per the
+     * doc-derived defs.  Shell_NotifyIcon and SHGetFileInfo carry no
+     * Link Library row on their CE 5.0 pages: they stay def-less
+     * (verified by the host TU only, never linked here).
+     * M44 style: no aggregate zero-initializers. */
+    {
+        BROWSEINFO        bi;
+        NOTIFYICONDATA    nid;
+        SHELLEXECUTEINFO  sei;
+        SHFILEOPSTRUCT    fos;
+        SHFILEINFO        sfi;
+        STRRET            sr;
+        LPITEMIDLIST      pidl = (LPITEMIDLIST)0;
+        bi.hwndOwner = (HWND)0;
+        nid.cbSize   = sizeof(nid);
+        sei.cbSize   = sizeof(sei);
+        fos.hwnd     = (HWND)0;
+        sr.uType     = 0;
+        sfi.iIcon    = 0;
+        (void) SHBrowseForFolder(&bi);
+        (void) SHGetSpecialFolderLocation((HWND)0, CSIDL_FAVORITES, &pidl);
+        (void) SHGetPathFromIDList((LPCITEMIDLIST)pidl, (LPSTR)0);
+        (void) SHGetDocumentsFolder((LPCTSTR)0, (LPTSTR)0);
+        (void) SHFileOperation(&fos);
+        (void) StrRetToBuf(&sr, (LPCITEMIDLIST)pidl, (LPTSTR)0, 0u);
+        (void) SHGetMalloc((LPMALLOC *)0);
+        (void) ShellExecuteEx(&sei);
+        (void) SHGetSpecialFolderPath((HWND)0, (LPTSTR)0, CSIDL_PROGRAMS, 0);
+        (void) SHAddToRecentDocs(0u, (LPCVOID)0);
+        (void) SHCreateShortcut((LPTSTR)0, (LPTSTR)0);
+        (void) SHGetShortcutTarget((LPTSTR)0, (LPTSTR)0, 0);
+        (void) SHLoadDIBitmap((LPCTSTR)0);
+        (void) SHShowOutOfMemory((HWND)0, 0u);
+        (void) pidl;
+        (void) nid;
+        (void) sfi;
     }
     /* M44: COM (Ole32.lib / Oleaut32.lib) import surface -- linked,
      * not run: the image must import the Ole32.lib/Oleaut32.lib-

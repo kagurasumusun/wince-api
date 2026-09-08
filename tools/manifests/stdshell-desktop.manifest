@@ -1,0 +1,23 @@
+; stdshell-desktop.manifest -- desktop Win32 reference pages fetched as
+; M53 fixed-ABI derivation sources into build/pagesw/ (the established
+; pagesw/ provenance tree, M52).  Each page publishes the values (or
+; the WM_CHOOSEFONT_GETLOGFONT formula) that ground the derived
+; constants in include/shellapi.h, include/shlobj.h,
+; include/shobjidl.h and include/commdlg.h; every derivation path is
+; recorded in docs/inventory.md M53.  URLs are learn.microsoft.com
+; windows/win32 pages (re-fetchable; preserved copies live in the
+; corpus pagesw/ tree).
+https://learn.microsoft.com/en-us/windows/win32/shell/csidl	CSIDL reference (checked valueless; grounds the held analysis of the 9 CSIDLs without CE-published values)
+https://learn.microsoft.com/en-us/windows/win32/api/shtypes/ns-shtypes-strret	STRRET (checked valueless; grounds the held STRRET_* analysis)
+https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/ne-shobjidl_core-_shgdnf	_SHGDNF (SHGDN_INFOLDER=0x1, FOREDITING=0x1000, FORADDRESSBAR=0x4000, FORPARSING=0x8000; conflicts with the CE bare enum reading -- all four stay held)
+https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-notifyicondataa	NOTIFYICONDATAA (NIF_MESSAGE=1, NIF_ICON=2, NIF_TIP=4 -> derived)
+https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shell_notifyiconw	Shell_NotifyIconW (NIM_ADD=0, NIM_MODIFY=1, NIM_DELETE=2 -> derived)
+https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-shellexecuteinfoa	SHELLEXECUTEINFOA (SEE_MASK_NOCLOSEPROCESS=0x40, SEE_MASK_FLAG_NO_UI=0x400; SE_ERR_FNF=2..SE_ERR_DLLNOTFOUND=32 -> derived)
+https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-shfileopstructa	SHFILEOPSTRUCTA (checked valueless; grounds the held FO_*/FOF_* analysis; prints the FILEOP_FLAGS member)
+https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shgetfileinfow	SHGetFileInfoW (SHGFI_ICON=0x100..SHGFI_SELECTED=0x10000 -> derived; SHGFI_SELECTICON has no desktop counterpart)
+https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/ns-shlobj_core-browseinfoa	BROWSEINFOA (BIF_STATUSTEXT=0x4, BIF_EDITBOX=0x10, BIF_VALIDATE=0x20 -> derived)
+https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shbrowseforfoldera	SHBrowseForFolderA (checked valueless for BFFM_*)
+https://learn.microsoft.com/en-us/windows/win32/api/shlobj_core/nf-shlobj_core-shaddtorecentdocs	SHAddToRecentDocs (checked valueless for SHARD_*)
+https://learn.microsoft.com/en-us/windows/win32/dlgbox/wm-choosefont-getlogfont	WM_CHOOSEFONT_GETLOGFONT (formula "#define WM_CHOOSEFONT_GETLOGFONT (WM_USER + 1)" -> derived 0x0401)
+https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/ne-shobjidl_core-_svsif	_SVSIF (SVSI_DESELECT=0..SVSI_CHECK=0x100 -> derived; SVSI_NOSTATECHANGE is CE-only)
+https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/ne-shobjidl_core-_svgio	_SVGIO (SVGIO_BACKGROUND=0..SVGIO_FLAG_VIEWORDER=0x80000000 -> derived)

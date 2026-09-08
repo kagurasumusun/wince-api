@@ -371,6 +371,12 @@ EXPORTS
   RestoreDC
   ResumeThread
   RoundRect
+  SHAddToRecentDocs
+  SHCreateShortcut
+  SHCreateShortcutEx
+  SHGetShortcutTarget
+  SHGetSpecialFolderPath
+  SHLoadDIBitmap
   SaveDC
   ScreenToClient
   ScrollDC
@@ -410,6 +416,7 @@ EXPORTS
   SetTimeZoneInformation
   SetViewportOrgEx
   SetWindowOrgEx
+  ShellExecuteEx
   SignalStarted
   SipEnumIM
   SipGetCurrentIM

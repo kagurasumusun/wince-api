@@ -22,9 +22,11 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/imm.h include/wincrypt.h include/winscard.h \
        include/objbase.h \
        include/aygshell.h include/shellsdk.h include/newmenu.h \
-       include/shlobj.h include/extfile.h \
+       include/shlobj.h include/shobjidl.h include/shtypes.h \
+       include/extfile.h include/shelwapi.h include/cpl.h \
        include/sipapi.h include/sip.h \
-       include/keybd.h include/pwinuser.h
+       include/keybd.h include/pwinuser.h \
+       include/windowsx.h include/commdlg.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -268,6 +270,22 @@ e2e:
 	  | grep -q "Symbol: GetAsyncShiftFlags" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: KeybdGetDeviceInfo" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Name: ceshell.dll" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: SHBrowseForFolder" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: SHGetSpecialFolderLocation" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: StrRetToBuf" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Name: shmisc.dll" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: SHShowOutOfMemory" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: ShellExecuteEx" || exit 1; \
+	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	    | grep -q "Symbol: SHGetSpecialFolderPath" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

@@ -206,7 +206,7 @@ M44 added the COM/OLE/Storage/Automation surface (`objbase.h`, `Ole32.lib`, `Ole
 M45 completed the documented TAPI client surface, including line/phone functions, callbacks,
 client handles and the previously held `TSPI_lineForward` case.
 
-## 15. M46-M52: advanced subsystems
+## 15. M46-M53: advanced subsystems
 
 The latest milestones expanded the API into additional CE subsystems:
 
@@ -233,8 +233,16 @@ The latest milestones expanded the API into additional CE subsystems:
   with the derivation path recorded (SIPSTATE/`SHSipPreference`, `SHIC_FEATURE`,
   `VK_APP1-6`, `KEYEVENTF_*`, `INPUT_*`, `VK_KEYLOCK`; sources: the Windows Mobile 6.5
   official documentation and the desktop Win32 references).
+- **M53:** Standard Shell Reference book (`shtypes.h`, `shobjidl.h`, `cpl.h`,
+  `shelwapi.h`, `windowsx.h`, `commdlg.h` new; `shellapi.h`/`shlobj.h`/`winuser.h`
+  extended; `Ceshell.lib`/`Coredll.lib`/`Shmisc.lib`): the 82-page CE 5.0 book with the
+  published CSIDL and SFGAO value tables, the M52-policy desktop derivations
+  (NIF/NIM/SEE_MASK/SE_ERR/SHGFI/BIF/SVSI/SVGIO, WM_CHOOSEFONT_GETLOGFONT,
+  WM_KEYFIRST), and the WM 6.5 gesture supplement (`NMRGINFO` + `GN_CONTEXTMENU` in
+  `aygshell.h`, the `NM_RECOGNIZEGESTURE` record in `commctrl.h` -- none of the three
+  has a CE-side page).
 
-The M52 state is the latest committed API milestone as of 2026-09-09.
+The M53 state is the latest committed API milestone as of 2026-09-09.
 
 ## 16. Wider WinCE system and device work
 

@@ -459,6 +459,37 @@ AKARI_CE_IMPORT LRESULT SHNotificationUpdate(DWORD grnumUpdateMask,
  * decoration (header note (b)). */
 AKARI_CE_IMPORT DWORD SHRecognizeGesture(SHRGINFO *shrg) AKARI_CE_NAME(SHRecognizeGesture);
 
+/* NMRGINFO (Windows Mobile 6.5 documentation, "Shell Structures >
+ * NMRGINFO" page, preserved in the corpus pageswm/ tree; Requirements:
+ * Header aygshell.h, Library aygshell.lib, Windows CE 3.0 and later).
+ * The structure sent through WM_NOTIFY when SHRecognizeGesture is
+ * called with SHRG_NOTIFYPARENT, and carried by the GN_CONTEXTMENU and
+ * NM_RECOGNIZEGESTURE notifications.  ptAction carries X and Y
+ * coordinates usable directly in a TrackPopupMenu call (screen
+ * coordinates on the NMRGINFO page; the NM_RECOGNIZEGESTURE page
+ * documents client coordinates there); dwItemSpec is reserved.  No CE
+ * 5.0 / CE 6.0 / Compact 7 / Compact 2013 page documents this
+ * structure (verified against the embedded TOC and catalogs), so the
+ * WM 6.5 page is the sole official source (recorded in
+ * docs/inventory.md M53). */
+typedef struct tagNMRGINFO {
+    NMHDR  hdr;         /* standard notification header (winuser.h) */
+    POINT  ptAction;    /* X/Y coordinates of the gesture */
+    DWORD  dwItemSpec;  /* reserved for GN_CONTEXTMENU / NM_RECOGNIZEGESTURE */
+} NMRGINFO, *PNMRGINFO;
+
+/* GN_CONTEXTMENU (Windows Mobile 6.5 documentation, "Shell API
+ * Notifications > GN_CONTEXTMENU" page; Header aygshell.h, Library
+ * aygshell.lib, Windows CE 3.0 and later).  Sent in the form of a
+ * WM_NOTIFY message:
+ *
+ *     res    = (WPARAM) wParam   (reserved; must be 0)
+ *     pnmrgi = (PNMRGINFO) lParam
+ *
+ * Return TRUE if processed, FALSE otherwise.  The notification value
+ * is not published on any official page (CE 5.0 aa453732, WM 6.5,
+ * desktop) -- name held. */
+
 /* aa453734 (CE 3.0+): assigns the window that receives a hardware
  * button's key-press messages; bVk uses the virtual-key codes of the
  * navigation controls.  DERIVATION PATH (M52): the page's Remarks

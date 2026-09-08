@@ -1244,13 +1244,33 @@ typedef struct tagNMHDR {
 #define WM_STYLECHANGED                0x007D         /* aa453908 */
 #define WM_WINDOWPOSCHANGED            0x0047         /* aa453920 */
 
+/* Standard Shell Messages (M53) whose CE 5.0 pages print Header:
+ * Winuser.h but publish no numeric value -- names held (recorded in
+ * docs/inventory.md M53):
+ *   WM_HELP      (aa453866) user pressed F1; wParam/lParam both 0;
+ *                DefWindowProc passes it to the parent / owner window
+ *   WM_HIBERNATE (aa453867) system resources running low; the
+ *                application should free resources; wParam/lParam 0;
+ *                left via WM_ACTIVATE (regain state) or WM_CLOSE
+ */
+
 /* --- Keyboard Messages --- */
 #define WM_ACTIVATE                    0x0006         /* ms914105 */
 #define WM_CHAR                        0x0102         /* ms914110 */
 #define WM_HOTKEY                      0x0312         /* aa453868 */
 #define WM_INITMENUPOPUP               0x0117         /* aa453872 */
 #define WM_KEYDOWN                     0x0100         /* aa453873 */
+#define WM_KEYFIRST                    0x0100         /* aa453874 (derived:
+                                                        the keyboard-message
+                                                        filter low bound is
+                                                        WM_KEYDOWN; the CE
+                                                        page publishes no
+                                                        value) */
 #define WM_KEYUP                       0x0101         /* aa453876 */
+/* WM_KEYLAST (aa453875): name held -- the CE page publishes no value
+ * and the filter high bound is ambiguous (the CE-published keyboard
+ * block ends at WM_SYSDEADCHAR 0x0107, while a one-past bound of
+ * 0x0108 also fits; no official doc resolves it). */
 #define WM_KILLFOCUS                   0x0008         /* aa453877 */
 #define WM_MENUCHAR                    0x0120         /* aa453884 */
 #define WM_SETFOCUS                    0x0007         /* aa453901 */

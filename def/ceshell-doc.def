@@ -1,0 +1,25 @@
+; ceshell-doc.def -- ceshell.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (ceshell.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY ceshell.dll
+EXPORTS
+  SHBindToParent
+  SHBrowseForFolder
+  SHFileOperation
+  SHGetDesktopFolder
+  SHGetDocumentsFolder
+  SHGetMalloc
+  SHGetPathFromIDList
+  SHGetSpecialFolderLocation
+  StrRetToBuf

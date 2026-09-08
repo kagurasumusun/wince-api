@@ -1,0 +1,3 @@
+ee504556(v=winembedded.60)	SHGNO (CE 6.0 twin: bare enum body, SHGDN_NORMAL=0 remark -- grounds the M53 held analysis)
+ee505480(v=winembedded.60)	SHFILEOPSTRUCT (CE 6.0 twin: FILEOP_FLAGS type name, width unpublished)
+ee503202(v=winembedded.60)	SHRecognizeGesture (already preserved by the M50 twin set; note: the WM 6.5 page's CE 6.0 R3 GUID link now resolves to a Consolidated 2013 revision at (v=winembedded.80) -- same body, observed 2026-09-09, not separately preserved)

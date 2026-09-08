@@ -173,6 +173,36 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M53 (landed):** Standard Shell Reference book + WM gesture
+  supplement (new `include/shtypes.h`, `include/shobjidl.h`,
+  `include/cpl.h`, `include/shelwapi.h`, `include/windowsx.h`,
+  `include/commdlg.h`; `shellapi.h`/`shlobj.h`/`winuser.h`/
+  `aygshell.h`/`commctrl.h` extended; Ceshell.lib / Coredll.lib /
+  Shmisc.lib).  The CE 5.0 Standard Shell Reference (82 pages:
+  SHBrowseForFolder / SHBindToParent / SHGetDesktopFolder /
+  SHGetMalloc / SHGetSpecialFolderLocation / SHGetDocumentsFolder /
+  SHFileOperation / StrRetToBuf / SHGetPathFromIDList and the
+  Shellapi.h shortcut/notify-icon/execute set; BROWSEINFO, ITEMIDLIST,
+  NOTIFYICONDATA, SHELLEXECUTEINFO, SHFILEINFO, SHFILEOPSTRUCT, STRRET,
+  CPLINFO/NEWCPLINFO + CPlApplet; the six Standard Shell interfaces as
+  M44-style records; SHGNO).  New `def/ceshell-doc.def` (9 exports),
+  `def/shmisc-doc.def` (1), `coredll-doc.def` 612 -> 619.  Published
+  values landed: the CSIDL table (15 values from the CE 5.0
+  SHGetSpecialFolderPath page) and the SFGAO_* tables (25 values from
+  IShellFolder::GetAttributesOf); desktop fixed-ABI derivations under
+  the M52 policy: NIF_*/NIM_*/SEE_MASK_*/SE_ERR_*/SHGFI_*/BIF_*/SVSI_*/
+  SVGIO_* and WM_CHOOSEFONT_GETLOGFONT; WM_KEYFIRST derived from the
+  CE-published keyboard block.  Held after analysis (non-unique or
+  valueless everywhere): SHGDN_INFOLDER..FORPARSING (CE bare enum vs
+  desktop bit values), STRRET_*, FO_*/FOF_*, SHARD_*, BFFM_*, CPL_*,
+  WM_HELP/WM_HIBERNATE/WM_KEYLAST, 9 CSIDLs, MK_*/DROPEFFECT_* (OLE
+  book pending), FILEOP_FLAGS width (layout-neutral WORD recorded).
+  The WM 6.5 gesture supplement ships NMRGINFO + GN_CONTEXTMENU
+  (aygshell.h) and the NM_RECOGNIZEGESTURE record (commctrl.h) -- no
+  CE-side page exists for any of them (verified against the embedded
+  TOC and all three catalogs).  Shell_NotifyIcon and SHGetFileInfo
+  carry no Link Library row on their CE 5.0 pages and stay def-less
+  (recorded).  Headers 39 -> 47, defs 39 -> 41.
 * **M52 (landed):** OEM keyboard layer + derived-value policy (new
   `include/keybd.h`, `include/pwinuser.h`; Kbdui.lib / Coredll.lib /
   Aygshell.lib).  Part one: the owner-granted derivation policy
@@ -566,10 +596,11 @@ values, the M50 AYGShell flag sets) -- those need the documented
 on-device readback procedure
 before they can be defined.  Each batch adds only
 official-page-grounded declarations; def harvesting continues in
-lockstep (coredll at 612 name-only exports incl. the 42 M47 Crypt*
-functions, the 9 M51 Sip* functions and KeybdGetDeviceInfo, M52;
-coreimm 56, M46; crypt32 83 + winscard 28, M48/M49; aygshell 34,
-M50/M52; kbdui 8, M26/M52);
+lockstep (coredll at 619 name-only exports incl. the 42 M47 Crypt*
+functions, the 9 M51 Sip* functions, KeybdGetDeviceInfo and the 7
+M53 Standard Shell names; coreimm 56, M46; crypt32 83 + winscard 28,
+M48/M49; aygshell 34, M50/M52; kbdui 8, M26/M52; ceshell 9 + shmisc
+1, M53);
 end-to-end link
 verification with wince-crt on the `LLVM-WinCE` toolchain (host +
 cross) runs for every milestone.

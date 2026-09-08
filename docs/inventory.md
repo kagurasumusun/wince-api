@@ -3519,3 +3519,271 @@ KeybdGetDeviceInfo), `def/aygshell-doc.def` 33 -> **34** (+
 SHSipPreference, M50 hold released by derivation).  Header count
 37 -> 39; def count unchanged at 39 (kbdui-doc.def existed since
 M26).
+
+## M53 -- Standard Shell Reference book + WM gesture supplement (new headers shtypes.h, shobjidl.h, cpl.h, shelwapi.h, windowsx.h, commdlg.h; Ceshell.lib / Coredll.lib / Shmisc.lib)
+
+Source book: CE 5.0 "Shell and User Interface > Shell > Shell
+Reference > **Standard Shell Reference**" (82 pages harvested via
+tools/manifests/stdshell.manifest: 21 functions + 2 callbacks, 10
+structures, 6 interfaces / 33 method pages, 1 enumeration, 2 macros,
+17 messages).  Supplement: the WM 6.5 documentation pages for NMRGINFO,
+GN_CONTEXTMENU and NM_RECOGNIZEGESTURE (the gesture items absent from
+every CE-side tree -- verified against the embedded toc.json and all
+three catalog snapshots; preserved in the corpus pageswm/ tree).
+
+### Pages and header homes (Requirements rows)
+
+* **shtypes.h** (new): SHITEMID aa453718 (CE 1.0+), STRRET ms940377
+  (CE .NET 4.2+).
+* **shlobj.h** (extended): ITEMIDLIST aa453244 (CE 1.0+), BROWSEINFO
+  aa452901 + BrowseCallbackProc aa452900 + SHBrowseForFolder aa453669
+  (CE .NET 4.0+), SHBindToParent aa453668 + SHGetDesktopFolder
+  aa453697 + SHGetSpecialFolderLocation aa453706 (CE .NET 4.2+),
+  SHGetMalloc aa453702 (CE 2.12+), SHGetDocumentsFolder aa453698
+  (CE 3.0+; the row prints the multi-header list "shlobj.h,
+  commctrl.h" with ceshell.lib -- first-listed home used, co-listing
+  recorded).
+* **shobjidl.h** (new): SHGNO aa453709 (CE .NET 4.2+); IDropTarget
+  ms929937..ms929940, IPersistFolder ms909861, IShellFolder
+  ms909868..ms909876 (CE .NET 4.2+), IShellView ms909882..ms909893,
+  ITaskbarList aa453239..aa453243, ITaskbarList2 aa453238 (CE 5.0+).
+  All method pages print "Shobjidl.h, Shobjidl.idl" + "Link Library:
+  Implementation dependent" -- interface records only (M44 objbase.h
+  policy: opaque forward declarations + verbatim method-signature
+  comments; no invented vtables, no def entries).
+* **shellapi.h** (extended): NOTIFYICONDATA ms911889, SHELLEXECUTEINFO
+  aa453685, SHFILEINFO aa453689, SHFILEOPSTRUCT aa453691 (structures);
+  Shell_NotifyIcon aa453686, SHGetFileInfo aa453700 (no Link Library
+  row on either CE 5.0 page -- def-less by the row-driven def policy;
+  the WM 6.5 SHGetFileInfo page prints an aygshell.lib row, a
+  different platform layer, recorded not used), SHGetPathFromIDList
+  aa453704 (Ceshell.lib; the page types the path buffer LPSTR --
+  recorded verbatim), SHGetShortcutTarget aa453705 / SHAddToRecentDocs
+  aa453667 / SHCreateShortcut aa453680 / SHCreateShortcutEx aa453681 /
+  ShellExecuteEx aa453684 / SHGetSpecialFolderPath aa453707 /
+  SHLoadDIBitmap aa453720 (Coredll.lib), SHFileOperation aa453690
+  (Ceshell.lib), SHShowOutOfMemory aa453739 (Shmisc.lib).
+* **cpl.h** (new): CPlApplet ms908154 (Link Library "Developer
+  implemented" -- no def), CPLINFO ms908158, NEWCPLINFO ms931468
+  (CE 1.0+).
+* **shelwapi.h** (new): StrRetToBuf ms940378 (CE .NET 4.2+;
+  Ceshell.lib).
+* **windowsx.h** (new): MapWindowRect ms911791, SetDlgMsgResult
+  ms940022 (CE 1.0+; macros).
+* **commdlg.h** (new): WM_CHOOSEFONT_GETLOGFONT ms914112 (CE .NET
+  4.0+).
+* **winuser.h** (extended): WM_HELP aa453866, WM_HIBERNATE aa453867,
+  WM_KEYFIRST aa453874, WM_KEYLAST aa453875 (CE 1.0+; the four
+  Standard Shell Messages whose Requirements rows print Winuser.h).
+* **aygshell.h** (extended): NMRGINFO + GN_CONTEXTMENU record (WM 6.5
+  pages, aygshell.h / aygshell.lib / CE 3.0+ -- no CE-side page
+  exists).
+* **commctrl.h** (extended): NM_RECOGNIZEGESTURE record (WM 6.5 page,
+  commctrl.h / CE .NET 4.2+ -- no CE-side page exists).
+
+### Derived-value ledger (M52 policy; paths recorded)
+
+CE-page-published (no derivation needed):
+
+* **CSIDL (15)** -- published with values in the aa453707
+  SHGetSpecialFolderPath Windows Mobile Remarks table: CSIDL_DESKTOP
+  0x0000, CSIDL_PROGRAMS 0x0002, CSIDL_PERSONAL 0x0005,
+  CSIDL_FAVORITES 0x0006, CSIDL_STARTUP 0x0007, CSIDL_RECENT 0x0008,
+  CSIDL_DESKTOPDIRECTORY 0x0010, CSIDL_FONTS 0x0014, CSIDL_MYMUSIC
+  0x000D, CSIDL_MYVIDEO 0x000E, CSIDL_APPDATA 0x001A, CSIDL_WINDOWS
+  0x0024, CSIDL_PROGRAM_FILES 0x0026, CSIDL_MYPICTURES 0x0027,
+  CSIDL_PROFILE 0x0028.
+* **SFGAO (25)** -- published with values in the ms909872
+  IShellFolder::GetAttributesOf "Flag (value)" tables: CANCOPY
+  0x00000001, CANMOVE 0x00000002, CANLINK 0x00000004, CANRENAME
+  0x00000010, CANDELETE 0x00000020, HASPROPSHEET 0x00000040,
+  DROPTARGET 0x00000100, CAPABILITYMASK 0x00000177, CANMONIKER
+  0x00400000, LINK 0x00010000, SHARE 0x00020000, READONLY 0x00040000,
+  GHOSTED 0x00080000, DISPLAYATTRMASK 0x000F0000, HASSUBFOLDER
+  0x80000000, CONTENTSMASK 0x80000000, NEWCONTENT 0x00200000,
+  NONENUMERATED 0x00100000, VALIDATE 0x01000000, REMOVABLE 0x02000000,
+  BROWSABLE 0x08000000, COMPRESSED 0x04000000, FILESYSANCESTOR
+  0x10000000, FOLDER 0x20000000, FILESYSTEM 0x40000000.
+* **SHGDN_NORMAL = 0** -- published text on aa453709 (and the CE 6.0
+  twin ee504556): "The numeric value of SHGDN_NORMAL is zero".
+
+Desktop-fixed-ABI derivations (CE publishes the name + semantics, no
+CE value, no conflict; desktop reference page preserved in the corpus
+pagesw/ tree, listed in tools/manifests/stdshell-desktop.manifest):
+
+* **NIF_MESSAGE/NIF_ICON/NIF_TIP = 0x1/0x2/0x4** -- desktop
+  NOTIFYICONDATAA page (ms911889 CE names).
+* **NIM_ADD/NIM_MODIFY/NIM_DELETE = 0x0/0x1/0x2** -- desktop
+  Shell_NotifyIconW page (aa453686 CE names).
+* **SEE_MASK_NOCLOSEPROCESS = 0x40, SEE_MASK_FLAG_NO_UI = 0x400** --
+  desktop SHELLEXECUTEINFOA page (aa453685 CE names; CE 1.0/1.01 do
+  not support fMask flags at all per the CE page).
+* **SE_ERR_FNF 2 / PNF 3 / ACCESSDENIED 5 / OOM 8 / SHARE 26 /
+  ASSOCINCOMPLETE 27 / DDETIMEOUT 28 / DDEFAIL 29 / DDEBUSY 30 /
+  NOASSOC 31 / DLLNOTFOUND 32** -- desktop SHELLEXECUTEINFOA hInstApp
+  table (aa453685 CE names, "less than or equal to 32" per the CE
+  page).
+* **SHGFI_LARGEICON 0 / SMALLICON 0x1 / OPENICON 0x2 /
+  SHELLICONSIZE 0x4 / PIDL 0x8 / USEFILEATTRIBUTES 0x10 / ICON 0x100 /
+  DISPLAYNAME 0x200 / TYPENAME 0x400 / ATTRIBUTES 0x800 /
+  ICONLOCATION 0x1000 / EXETYPE 0x2000 / SYSICONINDEX 0x4000 /
+  LINKOVERLAY 0x8000 / SELECTED 0x10000** -- desktop SHGetFileInfoW
+  page (aa453700 CE names).
+* **BIF_STATUSTEXT 0x4 / BIF_EDITBOX 0x10 / BIF_VALIDATE 0x20** --
+  desktop BROWSEINFOA page (aa452901 CE names).
+* **SVSI_DESELECT 0 / SELECT 0x1 / EDIT 0x3 / DESELECTOTHERS 0x4 /
+  ENSUREVISIBLE 0x8 / FOCUSED 0x10 / TRANSLATEPT 0x20 /
+  SELECTIONMARK 0x40 / POSITIONITEM 0x80 / CHECK 0x100** -- desktop
+  _SVSIF page (ms909891 CE names).
+* **SVGIO_BACKGROUND 0 / SELECTION 0x1 / ALLVIEW 0x2 / CHECKED 0x3 /
+  TYPE_MASK 0xF / FLAG_VIEWORDER 0x80000000** -- desktop _SVGIO page
+  (ms909887 CE names).
+
+CE-internal derivation:
+
+* **WM_KEYFIRST = 0x0100** -- the keyboard-message filter low bound is
+  the first keyboard message; WM_KEYDOWN = 0x0100 is CE-published
+  (aa453873, winuser.h).  WM_KEYLAST stays held (see below).
+
+Formula derivation:
+
+* **WM_CHOOSEFONT_GETLOGFONT = (WM_USER + 1) = 0x0401** -- the desktop
+  dlgbox reference page prints the #define formula; WM_USER = 0x0400
+  is CE-published (winuser.h).  Note both the desktop page and the
+  CE-published DM_SETDEFID (aa452963) land on the same 0x0401 value
+  (both print (WM_USER + 1)); the shared value is the documented ABI
+  and is kept verbatim.
+
+### Held after analysis (no unique public derivation)
+
+* **SHGDN_INFOLDER / SHGDN_FOREDITING / SHGDN_FORADDRESSBAR /
+  SHGDN_FORPARSING** -- the CE pages (aa453709, twin ee504556) publish
+  a five-element enum body WITHOUT initializers (only SHGDN_NORMAL=0
+  is stated); the desktop _SHGDNF page publishes 0x1 / 0x1000 /
+  0x4000 / 0x8000.  The bare sequential enum body and the desktop bit
+  values are both admissible readings (the two-group modifier
+  semantics of the page's remarks argue for the bit values, the
+  syntax block for sequential) -- not uniquely derivable.  Desktop
+  values recorded here for the future on-device readback.
+* **STRRET_CSTR / STRRET_OFFSET / STRRET_WSTR** -- names-only on the
+  CE page ms940377 AND on the desktop STRRET page (checked; preserved
+  in pagesw/).  No official value publication exists.
+* **FO_COPY / FO_DELETE / FO_MOVE / FO_RENAME** and the 14 **FOF_***
+  names (ALLOWUNDO, FILESONLY (ns), MULTIDESTFILES (ns),
+  NO_CONNECTED_ELEMENTS (ns), NOCONFIRMATION, NOCONFIRMMKDIR,
+  NOCOPYSECURITYATTRIBS (ns), NOERRORUI, NORECURSION (ns),
+  RENAMEONCOLLISION, SILENT, SIMPLEPROGRESS, WANTMAPPINGHANDLE (ns),
+  WANTNUKEWARNING (ns)) -- names-only on aa453691 and on the desktop
+  SHFILEOPSTRUCTA page (checked; preserved in pagesw/).
+* **SHARD_PATH / SHARD_PIDL** -- names-only on aa453667 and on the
+  desktop SHAddToRecentDocs page (checked).
+* **BFFM_INITIALIZED / SELCHANGED / SETSTATUSTEXT / ENABLEOK /
+  SETSELECTION / VALIDATEFAILED** -- names-only on aa452872..aa452877
+  and aa452900; the desktop SHBrowseForFolderA page is valueless
+  (checked).
+* **CPL_INIT / GETCOUNT / DBLCLK / NEWINQUIRE / STOP / EXIT** and
+  **CPL_DYNAMIC_RES** -- names-only on ms908154..ms908161, ms908158;
+  no desktop reference page publishes values.
+* **WM_HELP, WM_HIBERNATE** -- names-only on aa453866 / aa453867 (and
+  WM_HIBERNATE has no desktop counterpart).
+* **WM_KEYLAST** -- aa453875 publishes no value; the CE-published
+  keyboard block ends at WM_SYSDEADCHAR 0x0107 (aa453913) but a
+  one-past bound of 0x0108 also fits the "filter for keyboard
+  messages" contract; no official doc resolves the ambiguity.
+* **CSIDL_BITBUCKET / CONTROLS (ns) / DRIVES / NETHOOD (ns) / NETWORK
+  / PRINTERS (ns) / SENDTO (ns) / STARTMENU / TEMPLATES (ns)** -- the
+  nine aa453706 names absent from the aa453707 value table; the
+  desktop CSIDL reference page publishes no values (checked,
+  preserved in pagesw/).
+* **SHGFI_SELECTICON** -- aa453700 Windows Mobile-only selector; no
+  desktop counterpart.
+* **SVSI_NOSTATECHANGE** -- ms909891 CE-only selector; absent from the
+  desktop _SVSIF list.
+* **SVUIA_ACTIVATE_FOCUS / ACTIVATE_NOFOCUS / DEACTIVATE /
+  IN_PLACEACTIVATE** -- ms909893 names-only; no API reference page
+  (CE or desktop) publishes values (a debugger-walkthrough page's
+  inline comment showing SVUIA_DEACTIVATE = 0 is not an API reference
+  and grounds nothing else).
+* **MK_ALT / MK_CONTROL / MK_LBUTTON / MK_MBUTTON / MK_RBUTTON /
+  MK_SHIFT** and **DROPEFFECT_COPY / MOVE / LINK** -- names referenced
+  by the IDropTarget method pages (ms929937..ms929940) without value
+  tables; the DROPEFFECT enumeration belongs to the unharvested OLE
+  drag-drop book (future milestone candidate).
+* **FILEOP_FLAGS type width** -- the type name is printed by the CE
+  5.0 / CE 6.0 (ee505480) / desktop syntax blocks but no doc
+  publishes its width; WORD is adopted because it is layout-neutral
+  at the fFlags offset (16-bit + alignment padding places
+  fAnyOperationsAborted at the same offset and yields the same
+  sizeof as a 32-bit member on ARM and x86 -- TU-asserted
+  sizeof(SHFILEOPSTRUCT) == 32).  Width-held type, recorded.
+* **SetDlgMsgResult macro expansion** -- ms940022 documents the name,
+  the three parameters and "maps to the SetWindowLong function" but
+  publishes no expansion (its parameter text is copied from
+  SetWindowLong and no DWLP_MSGRESULT mechanism is documented for
+  CE); recorded as a held macro, not defined.  MapWindowRect
+  (ms911791, "calls MapWindowPoints") IS implemented: the forced
+  geometry (a RECT is a 2-point array) plus the published parameter
+  list determine the expansion.
+* Dangling type/interface references from the interface method pages
+  (no CE 5.0 pages of their own, recorded in shobjidl.h comments):
+  **SHCONTF** (ms909871 references "the SHCONTF enumerated type";
+  no CE page, no names listed), **IEnumIDList** (printed "IENUMIDLIST**"),
+  **IShellBrowser**, **FOLDERSETTINGS**, **LPFNADDPROPSHEETPAGE**.
+
+### CE-specific findings recorded in the headers
+
+* NOTIFYICONDATA (ms911889): CE-specific short layout -- no szInfo /
+  uTimeout / uVersion members; szTip is an explicit WCHAR[64].
+* SHELLEXECUTEINFO (aa453685): lpDirectory "Not supported. Set to
+  zero."; lpIDList / lpClass / hkeyClass / dwHotKey / hIcon
+  "Ignored"; fMask flags unsupported on CE 1.0/1.01.
+* SHFILEOPSTRUCT (aa453691): fAnyOperationsAborted and hNameMappings
+  "Not supported"; FOF_* "(ns)" rows marked Not supported.
+* NEWCPLINFO (ms931468): dwFlags / dwHelpContext / szHelpFile
+  "Ignored".
+* SHCreateShortcut / SHCreateShortcutEx (aa453680/aa453681): the
+  pages state the functions "are not prototyped correctly in
+  Shellapi.h: they return a BOOL instead of a DWORD" -- prototypes
+  kept verbatim (DWORD) with the note.
+* SHGetSpecialFolderPath (aa453707): with the AYGShell extensions the
+  function returns FALSE even on success (Pocket PC 2002 era) --
+  documented in the header comment.
+* SHGetFileInfo (aa453700): the CE file-attribute additions
+  FILE_ATTRIBUTE_INROM and FILE_ATTRIBUTE_ROMMODULE are documented
+  (names recorded; values not published on this page -- the
+  FILE_ATTRIBUTE_* value set belongs to the file-API book).
+* SHAddToRecentDocs (aa453667): CE caps the recent-documents list at
+  ten entries.
+
+### Verification
+
+* `make check` GREEN (TU m53: 32 published/derived-value spot asserts
+  -- CSIDL/SFGAO/SHGDN_NORMAL tables, NIF/NIM/SEE_MASK/SE_ERR/SHGFI/
+  BIF/SVSI/SVGIO derived sets, WM_KEYFIRST, WM_CHOOSEFONT_GETLOGFONT
+  -- + 11 32-bit struct sizes (CPLINFO 16, NEWCPLINFO 468,
+  SHFILEOPSTRUCT 32, BROWSEINFO 32, SHFILEINFO 692, NOTIFYICONDATA
+  152, SHELLEXECUTEINFO 60, SHITEMID 4, ITEMIDLIST 4, NMRGINFO 24)
+  + shaped usage of the full Ceshell/Coredll/Shmisc import surface +
+  the def-less pair (Shell_NotifyIcon, SHGetFileInfo) host-compiled).
+* `make crosscheck` GREEN on all six targets (47 headers standalone +
+  full TU, `-Werror`).
+* `make e2e` GREEN: the M53 consumer unit links the Ceshell.lib
+  (SHBrowseForFolder, SHGetSpecialFolderLocation, StrRetToBuf,
+  SHGetPathFromIDList, SHGetDocumentsFolder, SHGetMalloc,
+  SHFileOperation, SHBindToParent, SHGetDesktopFolder), Coredll.lib
+  (ShellExecuteEx, SHGetSpecialFolderPath, SHAddToRecentDocs,
+  SHCreateShortcut, SHGetShortcutTarget, SHLoadDIBitmap) and
+  Shmisc.lib (SHShowOutOfMemory) names; asserts Name: ceshell.dll +
+  Name: shmisc.dll + Symbol: SHBrowseForFolder /
+  SHGetSpecialFolderLocation / StrRetToBuf / SHShowOutOfMemory /
+  ShellExecuteEx / SHGetSpecialFolderPath on all six images.
+
+Export surface: `def/ceshell-doc.def` **new, 9 exports**,
+`def/shmisc-doc.def` **new, 1 export**, `def/coredll-doc.def`
+612 -> **619** (+SHAddToRecentDocs, SHCreateShortcut,
+SHCreateShortcutEx, ShellExecuteEx, SHGetShortcutTarget,
+SHGetSpecialFolderPath, SHLoadDIBitmap).  Header count 39 -> **47**;
+def count 39 -> **41**.  aygshell (34) and kbdui (8) unchanged;
+Shell_NotifyIcon / SHGetFileInfo / CPlApplet / BrowseCallbackProc are
+deliberately def-less (no Link Library row / developer-implemented /
+callback).

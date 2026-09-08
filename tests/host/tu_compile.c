@@ -39,6 +39,13 @@
 #include <sip.h>
 #include <keybd.h>
 #include <pwinuser.h>
+#include <shtypes.h>
+#include <shobjidl.h>
+#include <shellapi.h>
+#include <cpl.h>
+#include <shelwapi.h>
+#include <windowsx.h>
+#include <commdlg.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4494,6 +4501,140 @@ static int m52_shaped_usage(void)
 }
 
 
+
+/* ------------------------------------------------------------------ */
+/* M53: Standard Shell Reference book + WM gesture supplement.         */
+/*      shlobj.h (ITEMIDLIST, BROWSEINFO, folder functions, CSIDL),    */
+/*      shobjidl.h (interface records, SHGNO, SFGAO/SVSI/SVGIO),       */
+/*      shtypes.h (SHITEMID, STRRET), shellapi.h (NOTIFYICONDATA,      */
+/*      SHELLEXECUTEINFO, SHFILEINFO, SHFILEOPSTRUCT + functions),     */
+/*      cpl.h (CPlApplet, CPLINFO, NEWCPLINFO), shelwapi.h             */
+/*      (StrRetToBuf), windowsx.h (MapWindowRect), commdlg.h           */
+/*      (WM_CHOOSEFONT_GETLOGFONT), winuser.h (WM_KEYFIRST),           */
+/*      aygshell.h (NMRGINFO + GN_CONTEXTMENU record), commctrl.h      */
+/*      (NM_RECOGNIZEGESTURE record).                                  */
+/* ------------------------------------------------------------------ */
+
+/* Published-value spot checks (aa453707 CSIDL table, ms909872 SFGAO
+ * "Flag (value)" tables, aa453709 SHGDN_NORMAL remark; desktop
+ * fixed-ABI derivations recorded in docs/inventory.md M53). */
+_Static_assert(CSIDL_DESKTOP == 0x0000, "CSIDL_DESKTOP");
+_Static_assert(CSIDL_PROGRAMS == 0x0002, "CSIDL_PROGRAMS");
+_Static_assert(CSIDL_PERSONAL == 0x0005, "CSIDL_PERSONAL");
+_Static_assert(CSIDL_MYMUSIC == 0x000D, "CSIDL_MYMUSIC");
+_Static_assert(CSIDL_APPDATA == 0x001A, "CSIDL_APPDATA");
+_Static_assert(CSIDL_WINDOWS == 0x0024, "CSIDL_WINDOWS");
+_Static_assert(CSIDL_MYPICTURES == 0x0027, "CSIDL_MYPICTURES");
+_Static_assert(SFGAO_CANCOPY == 0x00000001, "SFGAO_CANCOPY");
+_Static_assert(SFGAO_CANDELETE == 0x00000020, "SFGAO_CANDELETE");
+_Static_assert(SFGAO_FOLDER == 0x20000000, "SFGAO_FOLDER");
+_Static_assert(SFGAO_FILESYSTEM == 0x40000000, "SFGAO_FILESYSTEM");
+_Static_assert(SFGAO_CAPABILITYMASK == 0x00000177, "SFGAO_CAPABILITYMASK");
+_Static_assert(SHGDN_NORMAL == 0, "SHGDN_NORMAL (published)");
+_Static_assert(NIF_MESSAGE == 0x1 && NIF_ICON == 0x2 && NIF_TIP == 0x4,
+               "NIF_* (derived)");
+_Static_assert(NIM_ADD == 0x0 && NIM_MODIFY == 0x1 && NIM_DELETE == 0x2,
+               "NIM_* (derived)");
+_Static_assert(SEE_MASK_NOCLOSEPROCESS == 0x40 &&
+               SEE_MASK_FLAG_NO_UI == 0x400, "SEE_MASK_* (derived)");
+_Static_assert(SE_ERR_FNF == 2 && SE_ERR_DLLNOTFOUND == 32,
+               "SE_ERR_* (derived)");
+_Static_assert(SHGFI_ICON == 0x100 && SHGFI_SYSICONINDEX == 0x4000 &&
+               SHGFI_SELECTED == 0x10000, "SHGFI_* (derived)");
+_Static_assert(BIF_STATUSTEXT == 0x4 && BIF_EDITBOX == 0x10 &&
+               BIF_VALIDATE == 0x20, "BIF_* (derived)");
+_Static_assert(SVSI_SELECT == 0x1 && SVSI_CHECK == 0x100,
+               "SVSI_* (derived)");
+_Static_assert(SVGIO_SELECTION == 0x1 && SVGIO_TYPE_MASK == 0xF,
+               "SVGIO_* (derived)");
+_Static_assert(WM_KEYFIRST == 0x0100, "WM_KEYFIRST (derived)");
+_Static_assert(WM_CHOOSEFONT_GETLOGFONT == (WM_USER + 1),
+               "WM_CHOOSEFONT_GETLOGFONT (derived formula)");
+
+/* Pointer-free layouts (32-bit). */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(CPLINFO) == 16, "CPLINFO 32-bit size");
+_Static_assert(sizeof(NEWCPLINFO) == 468, "NEWCPLINFO 32-bit size");
+_Static_assert(sizeof(SHFILEOPSTRUCT) == 32, "SHFILEOPSTRUCT 32-bit size");
+_Static_assert(sizeof(BROWSEINFO) == 32, "BROWSEINFO 32-bit size");
+_Static_assert(sizeof(SHFILEINFO) == 692, "SHFILEINFO 32-bit size");
+_Static_assert(sizeof(NOTIFYICONDATA) == 152, "NOTIFYICONDATA 32-bit size");
+_Static_assert(sizeof(SHELLEXECUTEINFO) == 60, "SHELLEXECUTEINFO 32-bit size");
+_Static_assert(sizeof(SHITEMID) == 4, "SHITEMID 32-bit size");
+_Static_assert(sizeof(ITEMIDLIST) == 4, "ITEMIDLIST 32-bit size");
+_Static_assert(sizeof(NMRGINFO) == 24, "NMRGINFO 32-bit size");
+#endif
+
+static int m53_shaped_usage(void)
+{
+    BROWSEINFO        bi;
+    CPLINFO           ci;
+    NEWCPLINFO        nci;
+    NOTIFYICONDATA    nid;
+    SHELLEXECUTEINFO  sei;
+    SHFILEINFO        sfi;
+    SHFILEOPSTRUCT    fos;
+    STRRET            sr;
+    ITEMIDLIST        idl;
+    NMRGINFO          nmrgi;
+    LPITEMIDLIST      pidl = (LPITEMIDLIST)0;
+    HWND              hwnd = (HWND)0;
+
+    bi.hwndOwner   = hwnd;
+    ci.idIcon      = 0;
+    nci.dwSize     = sizeof(NEWCPLINFO);
+    nid.cbSize     = sizeof(NOTIFYICONDATA);
+    sei.cbSize     = sizeof(SHELLEXECUTEINFO);
+    sfi.iIcon      = 0;
+    fos.hwnd       = hwnd;
+    sr.uType       = 0;
+    idl.mkid.cb    = 0;
+    nmrgi.dwItemSpec = 0;
+
+    /* Ceshell.lib import surface (Standard Shell Reference). */
+    (void) SHBrowseForFolder(&bi);
+    (void) SHBindToParent((LPCITEMIDLIST)pidl, (REFIID)0,
+                          (VOID **)0, (LPCITEMIDLIST *)0);
+    (void) SHGetDesktopFolder((IShellFolder **)0);
+    (void) SHGetMalloc((LPMALLOC *)0);
+    (void) SHGetSpecialFolderLocation(hwnd, CSIDL_FAVORITES, &pidl);
+    (void) SHGetDocumentsFolder((LPCTSTR)0, (LPTSTR)0);
+    (void) SHFileOperation(&fos);
+    (void) StrRetToBuf(&sr, (LPCITEMIDLIST)pidl, (LPTSTR)0, 0u);
+    (void) SHGetPathFromIDList((LPCITEMIDLIST)pidl, (LPSTR)0);
+    /* Coredll.lib additions. */
+    (void) SHAddToRecentDocs(0u, (LPCVOID)0);
+    (void) SHCreateShortcut((LPTSTR)0, (LPTSTR)0);
+    (void) SHCreateShortcutEx((LPTSTR)0, (LPTSTR)0, (LPTSTR)0,
+                              (LPDWORD)0);
+    (void) ShellExecuteEx(&sei);
+    (void) SHGetShortcutTarget((LPTSTR)0, (LPTSTR)0, 0);
+    (void) SHGetSpecialFolderPath(hwnd, (LPTSTR)0, CSIDL_PROGRAMS, 0);
+    (void) SHLoadDIBitmap((LPCTSTR)0);
+    /* Shmisc.lib. */
+    (void) SHShowOutOfMemory(hwnd, 0u);
+    /* Pages without a Link Library row (no def; link-checked via the
+     * host compile only). */
+    (void) Shell_NotifyIcon(NIM_ADD, &nid);
+    (void) SHGetFileInfo((LPCTSTR)0, 0u, &sfi, (UINT)sizeof(sfi),
+                         SHGFI_ICON);
+    /* Macros / callback shapes. */
+    {
+        RECT r;
+        r.left = 0;
+        MapWindowRect((HWND)0, (HWND)0, &r);
+        (void) r;
+    }
+    (void) ((BFFCALLBACK)0);
+    (void) ((SHGNO)SHGDN_NORMAL);
+    (void) CPlApplet(hwnd, 0, 0, 0);
+    (void) idl;
+    (void) nmrgi;
+    (void) ci;
+    (void) nci;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -4571,6 +4712,8 @@ int host_tu_entry(void)
     if (m51_shaped_usage() != 0)
         return 1;
     if (m52_shaped_usage() != 0)
+        return 1;
+    if (m53_shaped_usage() != 0)
         return 1;
     return 0;
 }
