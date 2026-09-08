@@ -1,0 +1,98 @@
+aa451008	TSPI_lineAccept
+aa451010	TSPI_lineAddToConference
+aa451012	TSPI_lineAnswer
+aa451014	TSPI_lineBlindTransfer
+aa451016	TSPI_lineClose
+aa451018	TSPI_lineCloseCall
+aa451020	TSPI_lineCompleteTransfer
+aa451022	TSPI_lineConditionalMediaDetection
+aa451024	TSPI_lineConfigDialogEdit
+aa451025	TSPI_lineDevSpecific
+aa451028	TSPI_lineDial
+aa451030	TSPI_lineDrop
+aa451032	TSPI_lineForward
+aa451034	TSPI_lineGenerateDigits
+aa451036	TSPI_lineGenerateTone
+aa451038	TSPI_lineGetAddressCaps
+aa451040	TSPI_lineGetAddressID
+aa451042	TSPI_lineGetAddressStatus
+aa451044	TSPI_lineGetCallAddressID
+aa451046	TSPI_lineGetCallInfo
+aa451048	TSPI_lineGetCallStatus
+aa451050	TSPI_lineGetDevCaps
+aa451052	TSPI_lineGetDevConfig
+aa451054	TSPI_lineGetExtensionID
+aa451056	TSPI_lineGetIcon
+aa451057	TSPI_lineGetID
+aa451059	TSPI_lineGetLineDevStatus
+aa451061	TSPI_lineGetNumAddressIDs
+aa451063	TSPI_lineHold
+aa451066	TSPI_lineMakeCall
+aa451068	TSPI_lineMonitorDigits
+aa451069	TSPI_lineMonitorMedia
+aa451071	TSPI_lineNegotiateExtVersion
+aa451072	TSPI_lineNegotiateTSPIVersion
+aa451073	TSPI_lineOpen
+aa451074	TSPI_linePickup
+aa451075	TSPI_linePrepareAddToConference
+aa451076	TSPI_lineRedirect
+aa451077	TSPI_lineReleaseUserUserInfo
+aa451078	TSPI_lineRemoveFromConference
+aa451080	TSPI_lineSendUserUserInfo
+aa451082	TSPI_lineSetCallParams
+aa451084	TSPI_lineSetCurrentLocation
+aa451086	TSPI_lineSetDefaultMediaDetection
+aa451088	TSPI_lineSetDevConfig
+aa451089	TSPI_lineSetMediaMode
+aa451090	TSPI_lineSetStatusMessages
+aa451091	TSPI_lineSetTerminal
+aa451092	TSPI_lineSetupConference
+aa451093	TSPI_lineSetupTransfer
+aa451094	TSPI_lineSwapHold
+aa451095	TSPI_lineUnhold
+aa451096	TSPI_phoneClose
+aa451097	TSPI_phoneConfigDialog
+aa451098	TSPI_phoneDevSpecific
+aa451099	TSPI_phoneGetDevCaps
+aa451100	TSPI_phoneGetExtensionID
+aa451101	TSPI_phoneGetGain
+aa451102	TSPI_phoneGetHookSwitch
+aa451103	TSPI_phoneGetIcon
+aa451104	TSPI_phoneGetID
+aa451105	TSPI_phoneGetRing
+aa451106	TSPI_phoneGetStatus
+aa451107	TSPI_phoneGetVolume
+aa451108	TSPI_phoneNegotiateExtVersion
+aa451109	TSPI_phoneNegotiateTSPIVersion
+aa451120	TSPI_phoneOpen
+aa451121	TSPI_phoneSelectExtVersion
+aa451122	TSPI_phoneSetGain
+aa451123	TSPI_phoneSetHookSwitch
+aa451124	TSPI_phoneSetRing
+aa451125	TSPI_phoneSetStatusMessages
+aa451126	TSPI_phoneSetVolume
+aa451127	TSPI_providerCreateLineDevice
+aa451128	TSPI_providerCreatePhoneDevice
+aa451129	TSPI_providerEnumDevices
+aa451130	TSPI_providerInit
+aa451131	TSPI_providerInstall
+aa451132	TSPI_providerRemove
+aa451133	TSPI_providerRemoveDevice
+aa451134	TSPI_providerShutdown
+ms893374	LINE_ADDRESSSTATE (TSPI)
+ms893651	LINE_CALLINFO (TSPI)
+ms894004	LINE_CALLSTATE (TSPI)
+ms894120	LINE_CLOSE (TSPI)
+ms894127	LINE_CREATE (TSPI)
+ms894133	LINE_DEVSPECIFIC (TSPI)
+ms894157	LINE_GENERATE (TSPI)
+ms894381	LINE_LINEDEVSTATE (TSPI)
+ms894393	LINE_MONITORDIGITS (TSPI)
+ms894399	LINE_MONITORMEDIA (TSPI)
+ms894457	LINE_REMOVE (TSPI)
+ms895909	PHONE_BUTTON (TSPI)
+ms895914	PHONE_CLOSE (TSPI)
+ms895917	PHONE_CREATE (TSPI)
+ms895920	PHONE_DEVSPECIFIC (TSPI)
+ms895947	PHONE_REMOVE (TSPI)
+ms896240	PHONE_STATE (TSPI)

@@ -24,6 +24,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <ws2spi.h>
+#include <tapi.h>
+#include <tapicomn.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -2818,6 +2820,180 @@ static int m42_shaped_usage(void)
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* M43: TAPI/TSPI -- tapi.h (types/structs/callbacks/constants) +     */
+/*      tapicomn.h (the 78 TSPI service-provider entry points).       */
+/* ------------------------------------------------------------------ */
+
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(LINEDIALPARAMS) == 16, "LINEDIALPARAMS 32-bit size");
+_Static_assert(sizeof(LINEEXTENSIONID) == 16, "LINEEXTENSIONID 32-bit size");
+_Static_assert(sizeof(PHONEEXTENSIONID) == 16, "PHONEEXTENSIONID 32-bit size");
+_Static_assert(sizeof(LINEGENERATETONE) == 16, "LINEGENERATETONE 32-bit size");
+_Static_assert(sizeof(LINECALLTREATMENTENTRY) == 12, "LINECALLTREATMENTENTRY 32-bit size");
+_Static_assert(sizeof(LINECALLLIST) == 24, "LINECALLLIST 32-bit size");
+_Static_assert(sizeof(LINEPROVIDERENTRY) == 12, "LINEPROVIDERENTRY 32-bit size");
+_Static_assert(sizeof(LINEPROVIDERLIST) == 24, "LINEPROVIDERLIST 32-bit size");
+_Static_assert(sizeof(LINEMESSAGE) == 24, "LINEMESSAGE 32-bit size");
+_Static_assert(sizeof(PHONEMESSAGE) == 24, "PHONEMESSAGE 32-bit size");
+_Static_assert(sizeof(VARSTRING) == 24, "VARSTRING 32-bit size");
+_Static_assert(sizeof(LINEINITIALIZEEXPARAMS) == 24, "LINEINITIALIZEEXPARAMS 32-bit size");
+_Static_assert(sizeof(PHONEINITIALIZEEXPARAMS) == 24, "PHONEINITIALIZEEXPARAMS 32-bit size");
+_Static_assert(sizeof(LINEADDRESSSTATUS) == 64, "LINEADDRESSSTATUS 32-bit size");
+_Static_assert(sizeof(LINECALLSTATUS) == 56, "LINECALLSTATUS 32-bit size");
+_Static_assert(sizeof(LINECALLPARAMS) == 180, "LINECALLPARAMS 32-bit size");
+_Static_assert(sizeof(LINELOCATIONENTRY) == 68, "LINELOCATIONENTRY 32-bit size");
+_Static_assert(sizeof(LINETRANSLATECAPS) == 44, "LINETRANSLATECAPS 32-bit size");
+_Static_assert(sizeof(LINETRANSLATEOUTPUT) == 40, "LINETRANSLATEOUTPUT 32-bit size");
+_Static_assert(sizeof(LINECALLINFO) == 296, "LINECALLINFO 32-bit size");
+_Static_assert(sizeof(LINEADDRESSCAPS) == 228, "LINEADDRESSCAPS 32-bit size");
+_Static_assert(sizeof(LINEDEVSTATUS) == 76, "LINEDEVSTATUS 32-bit size");
+_Static_assert(sizeof(LINEDEVCAPS) == 252, "LINEDEVCAPS 32-bit size");
+_Static_assert(sizeof(PHONECAPS) == 180, "PHONECAPS 32-bit size");
+_Static_assert(sizeof(PHONESTATUS) == 104, "PHONESTATUS 32-bit size");
+#endif
+
+static void m43_line_event(HTAPILINE htLine, HTAPICALL htCall, DWORD dwMsg,
+                           DWORD dwParam1, DWORD dwParam2, DWORD dwParam3)
+{ (void) htLine; (void) htCall; (void) dwMsg; (void) dwParam1;
+  (void) dwParam2; (void) dwParam3; }
+
+static void m43_phone_event(HTAPIPHONE htPhone, DWORD dwMsg, DWORD dwParam1,
+                            DWORD dwParam2, DWORD dwParam3)
+{ (void) htPhone; (void) dwMsg; (void) dwParam1; (void) dwParam2;
+  (void) dwParam3; }
+
+static void m43_async_completion(DRV_REQUESTID dwRequestID, LONG lResult)
+{ (void) dwRequestID; (void) lResult; }
+
+static int m43_shaped_usage(void)
+{
+    HDRVLINE   hdLine   = (HDRVLINE)0;
+    HDRVCALL   hdCall   = (HDRVCALL)0;
+    HDRVPHONE  hdPhone  = (HDRVPHONE)0;
+    HTAPILINE  htLine   = (HTAPILINE)0;
+    HTAPICALL  htCall   = (HTAPICALL)0;
+    HTAPIPHONE htPhone  = (HTAPIPHONE)0;
+    HPROVIDER  hProvider = (HPROVIDER)0;
+    HKEY       hActive  = (HKEY)0;
+    HWND       hwnd     = (HWND)0;
+    HICON      hIcon    = (HICON)0;
+    DWORD      dw       = 0;
+    DWORD      dw2      = 0;
+
+    LINEDIALPARAMS       dial    = {0};
+    LINEEXTENSIONID      lext    = {0};
+    PHONEEXTENSIONID     pext    = {0};
+    LINEGENERATETONE     tone    = {0};
+    LINECALLPARAMS       cparams = {0};
+    LINECALLINFO         cinfo   = {0};
+    LINECALLSTATUS       cstat   = {0};
+    LINEADDRESSCAPS      acaps   = {0};
+    LINEADDRESSSTATUS    astat   = {0};
+    LINEDEVCAPS          dcaps   = {0};
+    LINEDEVSTATUS        dstat   = {0};
+    PHONECAPS            pcaps   = {0};
+    PHONESTATUS          pstat   = {0};
+    VARSTRING            vs      = {0};
+
+    /* the provider entry points (8) */
+    (void) TSPI_providerInit(0, 0, 0, 0, 0, 0,
+                             m43_async_completion, &dw);
+    (void) TSPI_providerEnumDevices(0, &dw, &dw2, hProvider,
+                                    m43_line_event, m43_phone_event);
+    (void) TSPI_providerCreateLineDevice(hActive, (LPCWSTR)0, (LPCWSTR)0);
+    (void) TSPI_providerCreatePhoneDevice(hActive, (LPCWSTR)0, (LPCWSTR)0);
+    (void) TSPI_providerInstall(hwnd, 0);
+    (void) TSPI_providerRemove(hwnd, 0);
+    (void) TSPI_providerRemoveDevice((LPCWSTR)0);
+    (void) TSPI_providerShutdown(0, 0);
+
+    /* line device TSPI (49) */
+    (void) TSPI_lineOpen(0, htLine, &hdLine, 0, m43_line_event);
+    (void) TSPI_lineNegotiateTSPIVersion(0, 0, 0, &dw);
+    (void) TSPI_lineNegotiateExtVersion(0, 0, 0, 0, &dw2);
+    (void) TSPI_lineGetDevCaps(0, 0, 0, &dcaps);
+    (void) TSPI_lineGetAddressCaps(0, 0, 0, 0, &acaps);
+    (void) TSPI_lineGetAddressStatus(hdLine, 0, &astat);
+    (void) TSPI_lineGetAddressID(hdLine, &dw, 0, (LPCWSTR)0, 0);
+    (void) TSPI_lineGetNumAddressIDs(hdLine, &dw);
+    (void) TSPI_lineGetDevConfig(0, &vs, (LPCWSTR)0);
+    (void) TSPI_lineSetDevConfig(0, (LPVOID)0, 0, (LPCWSTR)0);
+    (void) TSPI_lineGetIcon(0, (LPCWSTR)0, &hIcon);
+    (void) TSPI_lineGetExtensionID(0, 0, &lext);
+    (void) TSPI_lineGetLineDevStatus(hdLine, &dstat);
+    (void) TSPI_lineMakeCall(0, hdLine, htCall, &hdCall, (LPCWSTR)0, 0,
+                             (LPLINECALLPARAMS)&cparams);
+    (void) TSPI_lineDial(0, hdCall, (LPCWSTR)0, 0);
+    (void) TSPI_lineAnswer(0, hdCall, (LPCSTR)0, 0);
+    (void) TSPI_lineAccept(0, hdCall, (LPCSTR)0, 0);
+    (void) TSPI_lineDrop(0, hdCall, (LPCSTR)0, 0);
+    (void) TSPI_lineRedirect(0, hdCall, (LPCWSTR)0, 0);
+    (void) TSPI_lineHold(0, hdCall);
+    (void) TSPI_lineUnhold(0, hdCall);
+    (void) TSPI_lineSwapHold(0, hdCall, (HDRVCALL)0);
+    (void) TSPI_lineBlindTransfer(0, hdCall, (LPCWSTR)0, 0);
+    (void) TSPI_lineSetupTransfer(0, hdCall, htCall, &hdCall,
+                                  (LPLINECALLPARAMS)&cparams);
+    (void) TSPI_lineCompleteTransfer(0, hdCall, (HDRVCALL)0, htCall,
+                                     &hdCall, 0);
+    (void) TSPI_lineSetupConference(0, hdCall, hdLine, htCall, &hdCall,
+                                    htCall, &hdCall, 0,
+                                    (LPLINECALLPARAMS)&cparams);
+    (void) TSPI_lineAddToConference(0, hdCall, (HDRVCALL)0);
+    (void) TSPI_lineRemoveFromConference(0, hdCall);
+    (void) TSPI_lineGenerateDigits(hdCall, 0, 0, (LPCWSTR)0, 0);
+    (void) TSPI_lineGenerateTone(hdCall, 0, 0, 0, 0,
+                                 (LPLINEGENERATETONE)&tone);
+    (void) TSPI_lineMonitorDigits(hdCall, 0);
+    (void) TSPI_lineMonitorMedia(hdCall, 0);
+    (void) TSPI_lineSetMediaMode(hdCall, 0);
+    (void) TSPI_lineSetDefaultMediaDetection(hdLine, 0);
+    (void) TSPI_lineSetStatusMessages(hdLine, 0, 0);
+    (void) TSPI_lineSetCallParams(0, hdCall, 0, 0, 0,
+                                  (LPLINEDIALPARAMS)&dial);
+    (void) TSPI_lineGetCallInfo(hdCall, &cinfo);
+    (void) TSPI_lineGetCallStatus(hdCall, &cstat);
+    (void) TSPI_lineGetCallAddressID(hdCall, &dw);
+    (void) TSPI_lineGetID(hdLine, 0, hdCall, 0, &vs, (LPCWSTR)0, (HANDLE)0);
+    (void) TSPI_lineSendUserUserInfo(0, hdCall, (LPCSTR)0, 0);
+    (void) TSPI_lineReleaseUserUserInfo(0, hdCall);
+    (void) TSPI_lineDevSpecific(0, hdLine, 0, hdCall, (LPVOID)0, 0);
+    (void) TSPI_lineClose(hdLine);
+    (void) TSPI_lineCloseCall(hdCall);
+
+    /* phone device TSPI (21) */
+    (void) TSPI_phoneOpen(0, htPhone, &hdPhone, 0, m43_phone_event);
+    (void) TSPI_phoneNegotiateTSPIVersion(0, 0, 0, &dw);
+    (void) TSPI_phoneNegotiateExtVersion(0, 0, 0, 0, &dw2);
+    (void) TSPI_phoneGetDevCaps(0, 0, 0, &pcaps);
+    (void) TSPI_phoneGetStatus(hdPhone, &pstat);
+    (void) TSPI_phoneGetGain(hdPhone, 0, &dw);
+    (void) TSPI_phoneSetGain(0, hdPhone, 0, 0);
+    (void) TSPI_phoneGetVolume(hdPhone, 0, &dw);
+    (void) TSPI_phoneSetVolume(0, hdPhone, 0, 0);
+    (void) TSPI_phoneGetHookSwitch(hdPhone, &dw);
+    (void) TSPI_phoneSetHookSwitch(0, hdPhone, 0, 0);
+    (void) TSPI_phoneGetRing(hdPhone, &dw, &dw2);
+    (void) TSPI_phoneSetRing(0, hdPhone, 0, 0);
+    (void) TSPI_phoneSetStatusMessages(hdPhone, 0, 0, 0);
+    (void) TSPI_phoneGetIcon(0, (LPCWSTR)0, &hIcon);
+    (void) TSPI_phoneGetID(hdPhone, &vs, (LPCWSTR)0, (HANDLE)0);
+    (void) TSPI_phoneGetExtensionID(0, 0, &pext);
+    (void) TSPI_phoneSelectExtVersion(hdPhone, 0);
+    (void) TSPI_phoneConfigDialog(0, hwnd, (LPCWSTR)0);
+    (void) TSPI_phoneDevSpecific(0, hdPhone, (LPVOID)0, 0);
+    (void) TSPI_phoneClose(hdPhone);
+
+    /* callback typedef shapes */
+    LINEEVENT      le = m43_line_event;
+    PHONEEVENT     pe = m43_phone_event;
+    ASYNC_COMPLETION ac = m43_async_completion;
+    (void) le; (void) pe; (void) ac;
+    return 0;
+}
+
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -2875,6 +3051,8 @@ int host_tu_entry(void)
     if (m41_shaped_usage() != 0)
         return 1;
     if (m42_shaped_usage() != 0)
+        return 1;
+    if (m43_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -19,6 +19,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <ws2spi.h>
+#include <tapi.h>
+#include <tapicomn.h>
 
 int main(void)
 {
@@ -59,6 +61,9 @@ int main(void)
     (void) WSPCleanup(NULL);
     (void) NSPSetService(NULL, NULL, NULL, RNRSERVICE_REGISTER, 0);
     (void) NSPLookupServiceNext(NULL, 0, NULL, NULL);
+    /* M43: TAPI/TSPI (Tapicomn.h) import surface -- linked, not run. */
+    (void) TSPI_lineOpen(0, NULL, NULL, 0, NULL);
+    (void) TSPI_phoneGetDevCaps(0, 0, 0, NULL);
     (void)tick;
     (void)si;
     (void)mod;

@@ -2153,3 +2153,112 @@ import table of all six target images.
 Export surface: `def/ws2-doc.def` 63 -> **100** exports (name-only,
 `LIBRARY ws2.dll`); defdoc total 34 def files, 754 name-only lines,
 703 unique names.
+
+## M43 -- TAPI/TSPI (Telephony API, Service Provider Interface) unit
+
+New: `include/tapi.h` (foundation: handle types, the three TSPI callback
+prototypes, 26 TAPI structures, 643 constants) and `include/tapicomn.h`
+(78 TSPI service-provider entry points).  The TAPI **client** surface
+(`lineOpen`, `phoneOpen`, the client functions, ~232 pages) is
+deliberately held for a later milestone: this milestone covers the
+provider side (TSPI) plus the types/constants the TSPI prototypes
+consume, because the TSPI pages are self-contained in the CE 5.0
+archive.
+
+Harvest: `tspi-all.manifest` (98 = 81 TSPI function pages + 17 TSPI
+message pages) and `tapi-structures-constants.manifest` (98 = 26
+structure pages + 66 constant pages incl. one reference page + 3
+callback/type pages + LINE_NEWCALL).  All 196 pages fetched from the
+official CE 5.0 archive; 1364 pre-existing rows + 196 new rows =
+1560 rows in `build/rows.json`.
+
+Every TSPI function page carries the Requirements rows **Header:
+Tapicomn.h, Link Library: Coredll.lib, Windows CE 3.0 and later** — so
+all 78 declared names enter `def/coredll-doc.def`.
+
+### tapicomn.h -- the 78 declared TSPI entry points
+
+| Item | Official pages | Notes |
+|---|---|---|
+| TSPI_line* (49 declared) | aa451008 aa451010 aa451012 aa451014 aa451016 aa451018 aa451020 aa451024 aa451025 aa451028 aa451030 aa451034 aa451036 aa451038 aa451040 aa451042 aa451044 aa451046 aa451048 aa451050 aa451052 aa451054 aa451057 aa451056 aa451059 aa451061 aa451063 aa451066 aa451068 aa451069 aa451071 aa451072 aa451073 aa451074 aa451075 aa451076 aa451077 aa451078 aa451080 aa451082 aa451086 aa451088 aa451089 aa451090 aa451091 aa451092 aa451093 aa451094 aa451095 | prototypes transcribed; whitespace restored mechanically; `FAR` dropped; the two glued `const` parameter forms on the archive (`LPLINECALLPARAMSconstlpCallParams` et al.) restored to `LPLINECALLPARAMS const lpCallParams` |
+| TSPI_phone* (21) | aa451096 aa451097 aa451098 aa451099 aa451100 aa451101 aa451102 aa451104 aa451103 aa451105 aa451106 aa451107 aa451108 aa451109 aa451120 aa451121 aa451122 aa451123 aa451124 aa451125 aa451126 | same; `TSPI_phoneClose` prints a `long` return |
+| TSPI_provider* (8) | aa451127 aa451128 aa451129 aa451130 aa451131 aa451132 aa451133 aa451134 | `TSPI_providerInit` takes the `ASYNC_COMPLETION` completion callback + `LPDWORD lpdwTSPIOptions`; `TSPI_providerEnumDevices` takes the `LINEEVENT`/`PHONEEVENT` create callbacks; install/remove take `HWND` + `DWORD dwPermanentProviderID` |
+| `TSPI_lineForward` | aa451032 | **recorded-not-defined**: the prototype's element type `LINEFORWARD` (the array element of LINEFORWARDLIST) has no CE page publishing its layout |
+| `TSPI_lineConditionalMediaDetection` | aa451022 | **recorded-not-defined**: the archive page prints a corrupted prototype (member names mangled); not transcribed |
+| `TSPI_lineSetCurrentLocation` | aa451084 | **recorded-not-defined**: the page says "This function is obsolete" and prints no prototype |
+| 17 TSPI message pages (LINE_ADDRESSSTATE ... PHONE_STATE, "(TSPI)") | ms893374, ms893651, ms894004, ms894120, ms894127, ms894133, ms894157, ms894381, ms894393, ms894399, ms894457, ms895909, ms895914, ms895917, ms895920, ms895947, ms896240 | the dwMsg callback-message **values** are published without numbers (only names + parameter meanings): recorded-not-defined; joins the held set |
+
+### tapi.h -- foundation
+
+| Item | Official pages | Notes |
+|---|---|---|
+| Handles: `HTAPILINE` `HTAPICALL` `HTAPIPHONE` `HDRVLINE` `HDRVCALL` `HDRVPHONE` `HLINE` `HPROVIDER` `DRV_REQUESTID` | named by the TSPI/callback pages | documented as HANDLE/DWORD carriers (note (d) in the header) |
+| `LINEEVENT` | ms894144 | `void (CALLBACK*)(HTAPILINE, HTAPICALL, DWORD, DWORD, DWORD, DWORD)` — "supplied to the service provider as a parameter to the TSPI_lineOpen function" |
+| `PHONEEVENT` | ms895922 | `void (CALLBACK*)(HTAPIPHONE, DWORD, DWORD, DWORD, DWORD)` — same for TSPI_phoneOpen |
+| `ASYNC_COMPLETION` | aa450289 | `void (CALLBACK*)(DRV_REQUESTID, LONG)` — same for TSPI_providerInit |
+| 26 structures | see below | sizes TU-asserted (32-bit) |
+| 643 constants (63 pages) | see below | no cross-page conflicts; per-page comment in the header |
+| `LPHICON` | the GetIcon pairs | `typedef HICON *LPHICON` (windef.h HICON) |
+| `TAPIAPI` / `TSPIAPI` | all pages | empty, exactly like WINAPI |
+
+Structures (page, 32-bit size, TU-asserted):
+
+| Structure | Page | Size | Structure | Page | Size |
+|---|---|---|---|---|---|
+| LINEDIALPARAMS | ms894138 | 16 | LINECALLINFO | ms893611 | 296 |
+| LINEEXTENSIONID | ms894145 | 16 | LINEADDRESSCAPS | ms893350 | 228 |
+| PHONEEXTENSIONID | ms895923 | 16 | LINEDEVCAPS | ms894130 | 252 |
+| LINEGENERATETONE | ms894155 | 16 | LINEDEVSTATUS | ms894135 | 76 |
+| LINECALLTREATMENTENTRY | ms894117 | 12 | LINEINITIALIZEEXPARAMS | ms894378 | 24 |
+| LINECALLLIST | ms893660 | 24 | PHONEINITIALIZEEXPARAMS | ms895939 | 24 |
+| LINEPROVIDERENTRY | ms894431 | 12 | PHONECAPS | ms895911 | 180 |
+| LINEPROVIDERLIST | ms894433 | 24 | PHONESTATUS | ms896250 | 104 |
+| LINEMESSAGE | ms894390 | 24 | LINELOCATIONENTRY | ms894383 | 68 |
+| PHONEMESSAGE | ms895941 | 24 | LINETRANSLATECAPS | ms894541 | 44 |
+| VARSTRING | ms898569 | 24 | LINETRANSLATEOUTPUT | ms894550 | 40 |
+| LINECALLPARAMS | ms893776 | 180 | LINECALLSTATUS | ms894104 | 56 |
+| LINEADDRESSSTATUS | ms893382 | 64 | | | |
+
+Documented restorations: the LINEDEVCAPS page prints
+`dwDevSpecificOffset` and `dwLineFeatures` with no separator (semicolon
+restored); the PHONECAPS page declares the structure without a pointer
+alias (LPPHONECAPS added, named by TSPI_phoneGetDevCaps); the
+LINEDEVCAPS / LINECALLPARAMS / LINECALLINFO pages embed
+`LINEDIALPARAMS` by value; the two INITIALIZEEXPARAMS structs carry the
+documented `union { HANDLE hEvent; HANDLE hCompletionPort; } Handles`
+member + `dwCompletionKey`; LINEMESSAGE uses `DWORD_PTR` for the four
+callback/parameter words while PHONEMESSAGE is all-DWORD (as printed).
+
+Recorded-not-defined structure: `LINEFORWARDLIST` (ms894148) — its
+element type `LINEFORWARD` is named but never laid out (drives the
+TSPI_lineForward exclusion above).
+
+Constants: 63 of the 65 constant pages publish values (643
+name/value pairs, zero cross-page conflicts): LINEADDRCAPFLAGS (29),
+LINECALLINFOSTATE (31), LINEDEVSTAT, LINEDISCONNECTMODE (20),
+LINEFORWARDMODE (18), LINESTATE (24), LINETERMINALMODE, LINEERR
+(85, e.g. `LINEERR_ADDRESSBLOCKED` 0x80000053), PHONEBUTTONFUNCTION
+(47), PHONEERR (34, e.g. `PHONEERR_ALLOCATED` 0x90000001), PHONESTATE
+and the rest.  No-value pages: `LINECONFIGDATA`, `LINELOCATIONOPTION`
+(names + meanings only) and the `The LINECALLINFO Data Structure`
+reference page (ms885284, prose description of the LINECALLINFO members
+already declared from ms893611).
+
+`lineCallbackFunc` (ms893424) / `phoneCallbackFunc` (ms895910) are the
+**client**-side TAPI callbacks: recorded, not declared — they belong to
+the held TAPI client milestone.
+
+### Verification
+
+* `make check` GREEN: hostcheck (headers + TU, warning-free under
+  `_WIN32_WCE` 0x420/0x500/0x600), defcheck `coredll-doc.def` **470**
+  exports.
+* `make crosscheck` GREEN on all six arm/i386 × CE 4.2/5.0/6.0 targets;
+  all 25 32-bit structure size asserts hold.
+* `make e2e` GREEN: the e2e console app references `TSPI_lineOpen` /
+  `TSPI_phoneGetDevCaps`; the recipe asserts `Symbol: TSPI_lineOpen`
+  and `Symbol: TSPI_phoneGetDevCaps` in the coredll.dll import table of
+  all six target images.
+
+Export surface: `def/coredll-doc.def` 392 -> **470** exports
+(+78 TSPI; name-only, `LIBRARY coredll.dll`).
