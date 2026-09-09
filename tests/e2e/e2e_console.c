@@ -44,6 +44,16 @@
 #include <winldap.h>
 #include <winber.h>
 #include <cchannel.h>
+#include <bt_api.h>
+#include <bthsdpdef.h>
+#include <ws2bth.h>
+#include <btagpub.h>
+#include <btagnetwork.h>
+#include <snmp.h>
+#include <snmpapi.h>
+#include <snmpexts.h>
+#include <pm.h>
+#include <ceddk.h>
 
 int main(void)
 {
@@ -352,6 +362,47 @@ int main(void)
         (void) LdapGetLastError();
         (void) ber_alloc_t(LBER_USE_DER);
         (void) ber_free((BerElement *)0, 0);
+    }
+    {
+        BT_ADDR ba = 0;
+        BASEBAND_CONNECTION bbc;
+        BthInquiryResult inq;
+        SOCKADDR_BTH sabth;
+        AsnAny aa;
+        AsnObjectIdentifier aoi;
+        SnmpVarBindList vbl;
+        DMA_ADAPTER_OBJECT dao;
+        PHYSICAL_ADDRESS pa;
+        bbc.hConnection = 0;
+        inq.cod = 0;
+        sabth.port = 0;
+        aa.asnType = 0;
+        aoi.idLength = 0;
+        vbl.len = 0;
+        dao.ObjectSize = 0;
+        pa.QuadPart = 0;
+        (void) BthReadLocalAddr(&ba);
+        (void) BthPerformInquiry(0, 0, 0, 0, (unsigned int *)0, &inq);
+        (void) BthGetBasebandConnections(1, &bbc, (int *)0);
+        (void) BthNsLookupServiceBegin((LPWSAQUERYSET)0, 0,
+                                       (LPHANDLE)0);
+        (void) BthAGPhoneExtInit();
+        (void) BthAGNetworkDropCall(NETWORK_FLAGS_DROP_ALL);
+        (void) BthAGOnNetworkEvent(0, (LPSTR)0);
+        (void) SnmpUtilOctetsCmp((AsnOctetString *)0,
+                                 (AsnOctetString *)0);
+        (void) SnmpUtilOidCmp(&aoi, &aoi);
+        (void) SnmpUtilAsnAnyCpy(&aa, &aa);
+        (void) SnmpUtilMemAlloc(0);
+        (void) SnmpExtensionQuery(0, &vbl, (AsnInteger32 *)0,
+                                  (AsnInteger32 *)0);
+        (void) SnmpTfxOpen(1, (SnmpMibView *)0);
+        (void) HalAllocateCommonBuffer(&dao, 0,
+                                       (PPHYSICAL_ADDRESS)0, 0);
+        (void) HalTranslateBusAddress(PCIBus, 0, pa, (PULONG)0,
+                                      (PPHYSICAL_ADDRESS)0);
+        (void) READ_PORT_ULONG((PULONG)0);
+        (void) MmMapIoSpace(pa, 0, 0);
     }
     (void)tick;
     (void)si;

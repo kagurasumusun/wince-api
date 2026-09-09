@@ -51,6 +51,17 @@
 #include <cchannel.h>
 #include <discodlg.h>
 #include <prsht.h>
+#include <bthsdpdef.h>
+#include <bt_api.h>
+#include <ws2bth.h>
+#include <bthapi.h>
+#include <btagpub.h>
+#include <btagnetwork.h>
+#include <snmp.h>
+#include <snmpapi.h>
+#include <snmpexts.h>
+#include <pm.h>
+#include <ceddk.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -4969,6 +4980,85 @@ _Static_assert(sizeof(NMLVODSTATECHANGE) == 28,
 _Static_assert(sizeof(LV_DISPINFO) == 52, "LV_DISPINFO 32-bit size");
 #endif
 
+/* ------------------------------------------------------------------ */
+/* M57: Bluetooth / SNMP / CEDDK wave (32-bit layout asserts).         */
+/* ------------------------------------------------------------------ */
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(BASEBAND_CONNECTION) == 24,
+               "BASEBAND_CONNECTION 32-bit size");
+_Static_assert(sizeof(PORTEMUPortParams) == 56,
+               "PORTEMUPortParams 32-bit size");
+_Static_assert(sizeof(SOCKADDR_BTH) == 40, "SOCKADDR_BTH 32-bit size");
+_Static_assert(sizeof(BTH_LOCAL_VERSION) == 18,
+               "BTH_LOCAL_VERSION 32-bit size");
+_Static_assert(sizeof(BTH_REMOTE_VERSION) == 14,
+               "BTH_REMOTE_VERSION 32-bit size");
+_Static_assert(sizeof(BTH_REMOTE_NAME) == 504,
+               "BTH_REMOTE_NAME 32-bit size");
+_Static_assert(sizeof(BTH_SOCKOPT_SECURITY) == 32,
+               "BTH_SOCKOPT_SECURITY 32-bit size");
+_Static_assert(sizeof(BTH_HOLD_MODE) == 6, "BTH_HOLD_MODE 32-bit size");
+_Static_assert(sizeof(BTH_PARK_MODE) == 6, "BTH_PARK_MODE 32-bit size");
+_Static_assert(sizeof(BTH_SNIFF_MODE) == 10, "BTH_SNIFF_MODE 32-bit size");
+_Static_assert(sizeof(BthInquiryResult) == 24,
+               "BthInquiryResult 32-bit size");
+_Static_assert(sizeof(SdpQueryUuidUnion) == 16,
+               "SdpQueryUuidUnion 32-bit size");
+_Static_assert(sizeof(SdpQueryUuid) == 20, "SdpQueryUuid 32-bit size");
+_Static_assert(sizeof(struct _SdpAttributeRange) == 4,
+               "SdpAttributeRange 32-bit size");
+_Static_assert(sizeof(BTHNS_RESTRICTIONBLOB) == 256,
+               "BTHNS_RESTRICTIONBLOB 32-bit size");
+_Static_assert(sizeof(BTHNS_INQUIRYBLOB) == 8,
+               "BTHNS_INQUIRYBLOB 32-bit size");
+_Static_assert(sizeof(BTHNS_SETBLOB) == 20, "BTHNS_SETBLOB 32-bit size");
+_Static_assert(MAX_UUIDS_IN_QUERY == 12, "MAX_UUIDS_IN_QUERY derived 12");
+_Static_assert(sizeof(AsnObjectIdentifier) == 8,
+               "AsnObjectIdentifier 32-bit size");
+_Static_assert(sizeof(AsnOctetString) == 12, "AsnOctetString 32-bit size");
+_Static_assert(sizeof(AsnCounter64) == 8, "AsnCounter64 32-bit size");
+_Static_assert(sizeof(AsnAny) == 16, "AsnAny 32-bit size");
+_Static_assert(sizeof(SnmpVarBind) == 24, "SnmpVarBind 32-bit size");
+_Static_assert(sizeof(SnmpVarBindList) == 8, "SnmpVarBindList 32-bit size");
+_Static_assert(sizeof(SNMPAPI) == 4 && sizeof(AsnInteger32) == 4 &&
+               sizeof(AsnGauge32) == 4 && sizeof(AsnTimeTicks) == 4,
+               "SNMP scalar typedefs are 32-bit");
+_Static_assert(sizeof(SnmpTfxHandle) == sizeof(HANDLE),
+               "SnmpTfxHandle is a HANDLE (ms896029)");
+_Static_assert(sizeof(CEDEVICE_POWER_STATE) == 4,
+               "CEDEVICE_POWER_STATE enum size");
+_Static_assert(sizeof(PHYSICAL_ADDRESS) == 8 &&
+               sizeof(PPHYSICAL_ADDRESS) == 4,
+               "PHYSICAL_ADDRESS = LARGE_INTEGER basis");
+_Static_assert(sizeof(DMA_ADAPTER_OBJECT) == 12,
+               "DMA_ADAPTER_OBJECT 32-bit size");
+_Static_assert(sizeof(NetworkCallFailedInfo) == 8,
+               "NetworkCallFailedInfo 32-bit size");
+_Static_assert(sizeof(DEVMGR_DEVICE_INFORMATION) == 1584,
+               "DEVMGR_DEVICE_INFORMATION 32-bit size");
+_Static_assert(SDP_TYPE_NIL == 0x00 && SDP_TYPE_CONTAINER == 0x20,
+               "SDP_TYPE values (aa450880)");
+_Static_assert(SDP_ST_NONE == 0x0000 && SDP_ST_UINT128 == 0x0410 &&
+               SDP_ST_UUID32 == 0x0220 && SDP_ST_INT32 == 0x0220,
+               "SDP_SPECIFICTYPE values incl. [sic] 0x0220 (aa450879)");
+_Static_assert(NODECONTAINERTYPESEQUENCE == 0 &&
+               NODECONTAINERTYPEALTERNATIVE == 1,
+               "NODECONTAINERTYPE values (ms895690)");
+_Static_assert(NETWORK_FLAGS_DROP_ACTIVE == 0x01 &&
+               NETWORK_FLAGS_DROP_ALL == 0x0f &&
+               NETWORK_FLAGS_STATE_OUTGOING == 0x08,
+               "NETWORK_FLAGS values (aa450315/aa450316)");
+_Static_assert((int)ConfigurationSpaceUndefined == -1 &&
+               PCIConfiguration == 4 && MaximumBusDataType == 11,
+               "BUS_DATA_TYPE values (ms896151)");
+_Static_assert((int)InterfaceTypeUndefined == -1 && PCIBus == 5 &&
+               MaximumInterfaceType == 16,
+               "INTERFACE_TYPE values (ms901367)");
+_Static_assert((int)PwrDeviceUnspecified == -1 && D0 == 0 && D4 == 4 &&
+               PwrDeviceMaximum == 5,
+               "CEDEVICE_POWER_STATE values (aa447663)");
+#endif
+
 static int m56_shaped_usage(void)
 {
     REBARINFO          ri;
@@ -5039,6 +5129,111 @@ static int m56_shaped_usage(void)
     (void) nmds; (void) tvi; (void) tvis; (void) tvscb; (void) nmtv;
     (void) nmtvcd; (void) lvi; (void) lvc; (void) lvbk; (void) lvfi;
     (void) lvhti; (void) nmlv; (void) nmlvcd; (void) lvdi;
+    return 0;
+}
+
+/* M57: Bluetooth / SNMP / CEDDK shaped usage (declarations + calls). */
+static int m57_shaped_usage(void)
+{
+    BASEBAND_CONNECTION   bbcon;
+    PORTEMUPortParams     pep;
+    SOCKADDR_BTH          sabth;
+    BTH_LOCAL_VERSION     blv;
+    BTH_REMOTE_VERSION    brv;
+    BTH_REMOTE_NAME       brn;
+    BTH_SOCKOPT_SECURITY  bsec;
+    BTH_SNIFF_MODE        bsm;
+    BthInquiryResult      inq;
+    SdpQueryUuid          squ;
+    SdpQueryUuidUnion     squu;
+    BTHNS_RESTRICTIONBLOB rbl;
+    BTHNS_INQUIRYBLOB     ibl;
+    BTHNS_SETBLOB         sbl;
+    ISdpNodeContainer    *pc = (ISdpNodeContainer *)0;
+    ISdpRecord           *pr = (ISdpRecord *)0;
+    ISdpStream           *ps = (ISdpStream *)0;
+    ISdpWalk             *pw = (ISdpWalk *)0;
+    NodeData             *pnd = (NodeData *)0;
+    NodeDataUnion        *pndu = (NodeDataUnion *)0;
+    SDP_TYPE              sdt = SDP_TYPE_NIL;
+    SDP_SPECIFICTYPE      sst = SDP_ST_NONE;
+    NODECONTAINERTYPE     nct = NODECONTAINERTYPESEQUENCE;
+    PFN_SendATCommand     pfnAT = (PFN_SendATCommand)0;
+    PFN_PhoneExtServiceCallback pfnSvc = (PFN_PhoneExtServiceCallback)0;
+    NetworkCallFailedInfo ncfi;
+    AsnAny                aa;
+    AsnObjectIdentifier   aoi;
+    AsnOctetString        aos;
+    AsnCounter64          ac64;
+    SnmpVarBind           svb;
+    SnmpVarBindList       svbl;
+    SnmpMibView          *pmv = (SnmpMibView *)0;
+    SnmpTfxHandle         tfx = (SnmpTfxHandle)0;
+    CEDEVICE_POWER_STATE  dps = D0;
+    PHYSICAL_ADDRESS      pa;
+    DMA_ADAPTER_OBJECT    dao;
+    DEVMGR_DEVICE_INFORMATION ddi;
+    BUS_DATA_TYPE         bdt = PCIConfiguration;
+    INTERFACE_TYPE        ift = PCIBus;
+
+    bbcon.hConnection = 0;
+    pep.channel = 0;
+    sabth.port = 0;
+    blv.hci_version = 0;
+    brv.lmp_version = 0;
+    brn.szNameBuffer[0] = 0;
+    bsec.iLength = 0;
+    bsm.interval = 0;
+    inq.cod = 0;
+    squ.uuidType = 0;
+    squu.uuid16 = 0;
+    rbl.type = 0;
+    ibl.LAP = 0;
+    sbl.ulRecordLength = 0;
+    ncfi.usCallType = 0;
+    aa.asnType = 0;
+    aoi.idLength = 0;
+    aos.length = 0;
+    ac64.LowPart = 0;
+    svb.name.idLength = 0;
+    svbl.len = 0;
+    pa.QuadPart = 0;
+    dao.ObjectSize = 0;
+    ddi.dwSize = 0;
+    tfx = SnmpTfxOpen(1, pmv);
+    (void) SnmpTfxQuery(tfx, 0, (RFC1157VarBindList *)0,
+                        (AsnInteger *)0, (AsnInteger *)0);
+    (void) SnmpTfxClose(tfx);
+    (void) BthReadLocalAddr((BT_ADDR *)0);
+    (void) BthPerformInquiry(0, 0, 0, 0, (unsigned int *)0, &inq);
+    (void) BthNsSetService((LPWSAQUERYSET)0, RNRSERVICE_REGISTER, 0);
+    (void) BthAGPhoneExtInit();
+    (void) BthAGNetworkDropCall(NETWORK_FLAGS_DROP_ALL);
+    (void) BthAGOnNetworkEvent(0, (LPSTR)0);
+    (void) BthAGATHandler((LPSTR)0, 0);
+    BthAGATSetCallback(pfnAT);
+    BthAGSetServiceCallback(pfnSvc);
+    (void) SnmpUtilOctetsCmp(&aos, &aos);
+    (void) SnmpUtilOidCmp(&aoi, &aoi);
+    (void) SnmpUtilAsnAnyCpy(&aa, &aa);
+    (void) SnmpUtilMemAlloc(0);
+    (void) SnmpExtensionQuery(0, &svbl, (AsnInteger32 *)0,
+                              (AsnInteger32 *)0);
+    (void) HalTranslateBusAddress(ift, 0, pa, (PULONG)0,
+                                  (PPHYSICAL_ADDRESS)0);
+    (void) READ_PORT_ULONG((PULONG)0);
+    (void) GetDevicePowerState((HANDLE)0, &dps, (PVOID)0);
+    (void) GetParentDeviceInfo((HANDLE)0, &ddi);
+    (void) StallExecution(1);
+    (void) CalibrateStallCounter();
+
+    (void) pc; (void) pr; (void) ps; (void) pw; (void) pnd; (void) pndu;
+    (void) sdt; (void) sst; (void) nct; (void) bdt; (void) ift; (void) dps;
+    (void) bbcon; (void) pep; (void) sabth; (void) blv; (void) brv;
+    (void) brn; (void) bsec; (void) bsm; (void) inq; (void) squ;
+    (void) squu; (void) rbl; (void) ibl; (void) sbl; (void) ncfi;
+    (void) aa; (void) aoi; (void) aos; (void) ac64; (void) svb;
+    (void) svbl; (void) pa; (void) dao; (void) ddi; (void) tfx;
     return 0;
 }
 
@@ -5197,6 +5392,8 @@ int host_tu_entry(void)
     if (m55_shaped_usage() != 0)
         return 1;
     if (m56_shaped_usage() != 0)
+        return 1;
+    if (m57_shaped_usage() != 0)
         return 1;
     return 0;
 }

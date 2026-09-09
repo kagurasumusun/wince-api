@@ -1,0 +1,5 @@
+ms894807	CEDDK Dynamic-Link Library Address Mapping Functions
+aa447863	MmMapIoSpace
+aa447865	MmUnmapIoSpace
+aa448211	TransBusAddrToStatic
+aa448212	TransBusAddrToVirtual

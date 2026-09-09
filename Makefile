@@ -29,7 +29,11 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/windowsx.h include/commdlg.h \
        include/winldap.h include/winber.h \
        include/cchannel.h include/discodlg.h \
-       include/prsht.h
+       include/prsht.h \
+       include/bthsdpdef.h include/bt_api.h include/ws2bth.h include/bthapi.h \
+       include/btagpub.h include/btagnetwork.h \
+       include/snmp.h include/snmpapi.h include/snmpexts.h \
+       include/pm.h include/ceddk.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -299,6 +303,46 @@ e2e:
 	    | grep -q "Symbol: ShellExecuteEx" || exit 1; \
 	  "$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	    | grep -q "Symbol: SHGetSpecialFolderPath" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: btdrt.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthReadLocalAddr" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthPerformInquiry" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthNsLookupServiceBegin" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: snmpapi.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SnmpUtilOidCmp" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SnmpUtilMemAlloc" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SnmpTfxOpen" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: snmp.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SnmpExtensionQuery" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: ceddk.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: HalAllocateCommonBuffer" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: READ_PORT_ULONG" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: MmMapIoSpace" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: btagsvc_phoneext.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthAGPhoneExtInit" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: btagsvc_network.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthAGNetworkDropCall" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: btagsvc.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: BthAGOnNetworkEvent" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

@@ -2546,6 +2546,25 @@ AKARI_CE_IMPORT BOOLEAN GetUserNameExW(EXTENDED_NAME_FORMAT NameFormat,
                        LPWSTR lpNameBuffer, PULONG nSize) AKARI_CE_NAME(GetUserNameExW);
 #define GetUserNameEx GetUserNameExW
 
+/* ms898294 "DEVMGR_DEVICE_INFORMATION (Windows CE 5.0)":
+ * "typedef struct _DevmgrDeviceInformation_tag { DWORD dwSize;
+ *  HANDLE hDevice; HANDLE hParentDevice; WCHAR szLegacyName[6];
+ *  WCHAR szDeviceKey[MAX_PATH]; WCHAR szDeviceName[MAX_PATH];
+ *  WCHAR szBusName[MAX_PATH];} DEVMGR_DEVICE_INFORMATION,
+ *  *PDEVMGR_DEVICE_INFORMATION;".  OS CE 5.0+; Winbase.h; no Link
+ * Library row (no def).  CE 6.0 twin ee481699 identical.  Consumed by
+ * the CEDDK GetParentDeviceInfo page (ms899309, CEDDK.h), which
+ * documents the same structure type. */
+typedef struct _DevmgrDeviceInformation_tag {
+    DWORD  dwSize;
+    HANDLE hDevice;
+    HANDLE hParentDevice;
+    WCHAR  szLegacyName[6];
+    WCHAR  szDeviceKey[MAX_PATH];
+    WCHAR  szDeviceName[MAX_PATH];
+    WCHAR  szBusName[MAX_PATH];
+} DEVMGR_DEVICE_INFORMATION, *PDEVMGR_DEVICE_INFORMATION;
+
 #ifdef __cplusplus
 }
 #endif

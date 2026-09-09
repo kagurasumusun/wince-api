@@ -1,0 +1,6 @@
+aa447662	CEDDK Dynamic-Link Library DMA Functions
+ms899352	HalAllocateCommonBuffer
+ms899355	HalFreeCommonBuffer
+ms899362	HalTranslateSystemAddress
+ms894823	CEDDK Dynamic-Link Library DMA Structures
+ms898303	DMA_ADAPTER_OBJECT

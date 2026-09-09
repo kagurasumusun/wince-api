@@ -1,0 +1,26 @@
+ms894826	CEDDK Dynamic-Link Library Bus Access Enumerations
+ms896151	BUS_DATA_TYPE
+ms901367	INTERFACE_TYPE
+aa447661	CEDDK Dynamic-Link Library Bus Access Functions
+ms896152	BusIoControl
+ms896153	BusTransBusAddrToStatic
+ms896154	BusTransBusAddrToVirtual
+aa448302	CalibrateStallCounter
+aa447670	CloseBusAccessHandle
+aa447690	CreateBusAccessHandle
+aa447824	GetBusNamePrefix
+aa447825	GetChildDeviceRemoveState
+aa447827	GetDeviceConfigurationData
+aa447832	GetDevicePowerState
+ms899309	GetParentDeviceInfo
+ms899356	HalGetBusData
+ms899357	HalGetBusDataByOffset
+ms899359	HalSetBusData
+ms899360	HalSetBusDataByOffset
+ms899361	HalTranslateBusAddress
+ms920576	SetDeviceConfigurationData
+ms920590	SetDevicePowerState
+aa448325	StallExecution
+aa448213	TranslateBusAddr
+aa448215	TranslateSystemAddr
+ms894814	CEDDK Dynamic-Link Library Bus Access IOCTLs

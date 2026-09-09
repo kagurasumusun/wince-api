@@ -173,6 +173,24 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M57 (landed):** Bluetooth + SNMP + CEDDK wave (new
+  `include/bt_api.h`, `include/bthsdpdef.h`, `include/ws2bth.h`,
+  `include/bthapi.h`, `include/btagpub.h`, `include/btagnetwork.h`,
+  `include/snmp.h`, `include/snmpapi.h`, `include/snmpexts.h`,
+  `include/pm.h`, `include/ceddk.h`; `winbase.h` gains
+  DEVMGR_DEVICE_INFORMATION).  Btdrt.lib (50 Bth* C functions -- the
+  ISdp* interface/method pages are def-less records), CEDDK.lib (36),
+  Snmpapi.lib (29 + SnmpTfx*), Snmp.lib (7),
+  Btagsvc_phoneext/Btagsvc_network/Btagsvc.lib (9/11/1).  Derived
+  values with recorded paths: MAX_UUIDS_IN_QUERY=12 (bthioctl.h DDI
+  page), PHYSICAL_ADDRESS=LARGE_INTEGER (wudfddi.h MapIoSpace page),
+  SnmpTfxHandle=HANDLE, the Asn scalar/alias typedefs (documented
+  member semantics + RFC 1155/1442/2578).  Held: NodeData/
+  NodeDataUnion layouts, SnmpMibView/SnmpMibEntry/SnmpMibTable
+  layouts, all SNMP constant families, IOCTL_BLUETOOTH_*/IOCTL_AG_*/,
+  OID_PAN_*, BTHHID_IOCTL_*, WODM_BT_SCO_AUDIO_CONTROL,
+  NETWORK_EVENT_*/AG_PHONE_EVENT_* names.  Headers 52 -> 63, defs 44 ->
+  51.
 * **M56 (landed):** Common Controls batch 2 structures (commctrl.h
   extended with the Rebar, Header, Tab, Date/Time Picker, Month
   Calendar, Tree View and List View structure layers: 43 structures +

@@ -4090,3 +4090,171 @@ batch carries a Link Library row, so no defs and no import pins.
 Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m56: 43 struct-size asserts + shaped usage + alias-bridge
 checks).  Export surface unchanged; headers 52; defs 44.
+
+## M57 -- Bluetooth + SNMP + CEDDK wave (new headers bt_api.h, bthsdpdef.h, ws2bth.h, bthapi.h, btagpub.h, btagnetwork.h, snmp.h, snmpapi.h, snmpexts.h, pm.h, ceddk.h; Btdrt.lib / CEDDK.lib / Snmpapi.lib / Snmp.lib / Btagsvc*.lib)
+
+Source books (CE 5.0 Product Documentation, tools/manifests/): bt-os
+(96 leaves), bt-appdev (78), snmp (36), snmp-structs (6), snmp-tfx (8),
+ceddk-bus (26), ceddk-io (25), ceddk-addr (5), ceddk-dma (6), ceddk-dep
+(2: ms898294/aa447663).  338 CE 5.0 pages fetched + 311 CE 6.0 twins
+(m57-ce60.manifest, build/pages6) + 8 SnmpTfx CE 6.0 twins
+(snmp-tfx-ce60.manifest).  Desktop snmp.h pages preserved as
+build/pagesw/snmp-nf-*.html (20 pages, print-corruption cross-reads);
+bthioctl/wudfddi derivation pages preserved as
+build/pagesw/bthioctl-*.html / wudfddi-*.html.
+
+* bt_api.h (Bt_api.h; Btdrt.lib): 50 Bth* C functions, each with its
+  page id in the header; bt_addr/BT_ADDR typedef (ms896282),
+  BASEBAND_CONNECTION (aa450296, 24), PORTEMUPortParams (ms896282,
+  56, tag _portemu_port_params).  BthNsSetService (ms887870) prints
+  no signature -- the CE 6.0 twin ee495417 supplies it.  HELD:
+  IOCTL_BLUETOOTH_GET_PEER_DEVICE (ms891157) / GET_RFCOMM_CHANNEL
+  (ms891159) names-only; GET_NAP/GET_SAP/SET_NAP_SAP (aa450944)
+  comment-only.
+* bthsdpdef.h (Bthsdpdef.h; no lib rows): SDP_TYPE (aa450880),
+  SDP_SPECIFICTYPE (aa450879, the SDP_ST_UUID32 = 0x0220 duplicate
+  reproduced [sic]), NODECONTAINERTYPE (ms895690, the
+  "NodeContainerTypeSequence + 1" case typo recorded),
+  SdpQueryUuidUnion (aa450878, 16), SdpQueryUuid (aa450877, 20),
+  struct _SdpAttributeRange (aa450876, 4 -- printed without the
+  typedef keyword), BTHNS_RESTRICTIONBLOB (ms887868, 256),
+  BTHNS_INQUIRYBLOB (ms887864, 8, "ULONGLAP"/"unsigned charlength"
+  artifacts), BTHNS_SETBLOB (ms887869, 20).
+  DERIVED: MAX_UUIDS_IN_QUERY = 12 -- the CE pages use the macro
+  without a value; the official bthioctl.h DDI page
+  BTH_SDP_SERVICE_ATTRIBUTE_SEARCH_REQUEST documents the same
+  SdpQueryUuid uuids[MAX_UUIDS_IN_QUERY] array as "a maximum of 12
+  entries" (preserved page pagesw/bthioctl-ns-...html).
+* ws2bth.h (Ws2bth.h; no lib rows): SOCKADDR_BTH (aa450944, 40),
+  BthInquiryResult (ms887862, 24, tag __bth_inquiry_result --
+  forward-declared in bt_api.h, completed here),
+  BTH_LOCAL_VERSION (ms887863, 18), BTH_REMOTE_VERSION (ms887884,
+  14), BTH_REMOTE_NAME (ms887882, 504), BTH_SOCKOPT_SECURITY
+  (ms887893, 32), BTH_HOLD_MODE (ms887904, 6), BTH_PARK_MODE
+  (ms887905, 6), BTH_SNIFF_MODE (ms887906, 10).
+* bthapi.h (Bthapi.h/.idl; Btdrt.lib rows but interface methods, not
+  exports -- def-less opaque records, M44/M53/M54 model): ISdpWalk
+  (aa450617 + WalkNode aa450619 / WalkStream aa450622), ISdpRecord
+  (aa450590 + 9 methods aa450579..aa450597), ISdpNodeContainer
+  (aa450551 + 13 methods aa450534..aa450562), ISdpStream (aa450601 +
+  the ByteSwap family aa450599 (10 instances) / Retrieve family
+  aa450605 (9 instances) / NormalizeUuid aa450603 /
+  RetrieveElementInfo aa450607 / RetrieveRecords aa450609 / Validate
+  aa450611 / VerifySequenceOf aa450613 / Walk aa450615).  HELD:
+  NodeData (ms895699) / NodeDataUnion (ms895706) layouts -- the
+  int128/uint128/str/url members are typed DP_LARGE_INTEGER_16 /
+  SDP_ULARGE_INTEGER_16 / SdpString and no official page of any CE
+  generation or desktop/driver tree publishes those layouts (toc
+  search + page grep recorded); forward-declared, pointer-only use.
+* btagpub.h (Btagpub.h): PFN_SendATCommand / PFN_PhoneExtServiceCallback
+  (verbatim header excerpts, aa450305/aa450310);
+  NETWORK_FLAGS_DROP_* / NETWORK_FLAGS_STATE_* values (aa450316 /
+  aa450315 pages).  Btagsvc_phoneext.lib (9): BthAGPhoneExtInit
+  (aa450311 -- the "BthAGInitPhoneExt" print artifact recorded;
+  parameters/rv from the page + twin ee495665), BthAGPhoneExtDeinit
+  (aa450306, twin ee495979), BthAGPhoneExtEvent (ms880975),
+  BthAGGetLastDialed (aa450307), BthAGGetNameByPhoneNumber (aa450308),
+  BthAGGetSpeedDial (aa450309), BthAGSetServiceCallback (aa450310),
+  BthAGOverrideCallIn (aa450324), BthAGOverrideCallOut (ms887483).
+  Btagsvc_network.lib (11): BthAGNetworkInit (aa450318), Deinit
+  (aa450313, twin ee495426), AnswerCall (aa450312), DropCall
+  (aa450316, "HangupCall" artifact), DialNumber (aa450314),
+  GetCallState (aa450315), HoldCall (aa450317, case artifact),
+  RejectCall (aa450319), SwapCall (aa450320), TransmitDTMF (aa450321),
+  UnholdCall (aa450322).  Developer-defined (no def): BthAGATHandler
+  (aa450304), BthAGATSetCallback (aa450305, twin ee495634 supplies
+  the prototype).  HELD: AG_PHONE_EVENT_* (ms880975), IOCTL_AG_*
+  (ms891134..ms891153) names-only.
+* btagnetwork.h (Btagnetwork.h; Btagsvc.lib): BthAGOnNetworkEvent
+  (aa450323), NetworkCallFailedInfo (ms895682, 8).  HELD:
+  NETWORK_EVENT_* names-only (aa450323).
+* snmp.h (Snmp.h; Snmp.lib + Snmpapi.lib): AsnObjectIdentifier
+  (ms894991, 8), AsnOctetString (ms894993, 12), AsnCounter64
+  (ms894989, 8, LowPart-first), AsnAny (ms894988, 16, the CE spelling
+  AsnIPAdress [sic] kept), SnmpVarBind (ms896055, 24), SnmpVarBindList
+  (ms896056, 8).  Snmp.lib (7): SnmpExtensionClose (ms896018), Init
+  (ms896019 -- the mangled second parameter resolved via the twin
+  ee489093 parameter text + the desktop page: HANDLE*
+  phSubagentTrapEvent), InitEx (ms896020), Query (ms896021), QueryEx
+  (ms896022), Trap (ms896023 -- "AsnTimeticks" case artifact), and
+  SnmpUtilMemAlloc (ms896036, declared in snmpapi.h: "Header:
+  Snmpapi.h. Link Library: Snmp.lib.").  Snmpapi.lib (29): SnmpSvc*
+  (ms896024/25/26 -- the DWORD return prints of SetLogLevel/SetLogType
+  are artifacts, the pages' own "no return values" + desktop VOID
+  win), SnmpUtil* (ms896031..ms896054) with every corrupted print
+  (OctetsComp name, dropped pointer stars, VOID-vs-nonzero returns,
+  the SnmpUtilOidFree/ OctetsFree body swaps) resolved via the
+  parameter text + twins + the preserved desktop pages.
+  DERIVED typedefs (paths in the header): SNMPAPI=LONG (signed
+  comparison semantics documented on ms896039/ms896044);
+  AsnInteger32/AsnUnsigned32/AsnCounter32/AsnGauge32/AsnTimeTicks =
+  the documented 32-bit signed/unsigned scalars;
+  AsnBits/AsnSequence/AsnIPAdress/AsnOpaque = AsnOctetString (RFC
+  1155/2578 octet-string natures; the API's documented octet-string
+  container); AsnObjectName=AsnObjectIdentifier and
+  AsnObjectSyntax=AsnAny (desktop member text + RFC 1155);
+  AsnInteger=LONG; RFC1157VarBindList=SnmpVarBindList (RFC 1157).
+  HELD: ASN_*, SNMP_EXCEPTION_* (ms894988), SNMP_PDU_* /
+  SNMP_EXTENSION_* / SNMP_ERRORSTATUS_* (ms896021/22/30),
+  SNMP_GENERICTRAP_* (ms896023), SNMP_LOG_* / SNMP_OUTPUT_*
+  (ms896025/26/33) -- all names-only.
+* snmpapi.h (Snmpapi.h): SnmpUtilMemAlloc (ms896036; Snmp.lib def
+  entry).
+* snmpexts.h (Snmpexts.h; Snmpapi.lib): SnmpTfxOpen (ms896029),
+  SnmpTfxQuery (ms896030), SnmpTfxClose (ms896028; twin ee489435).
+  DERIVED: SnmpTfxHandle=HANDLE ("returns a HANDLE value",
+  ms896029).  HELD: SnmpMibView / SnmpMibEntry / SnmpMibTable layouts
+  (ms894645 documents that Snmpexts.h defines them but no page prints
+  the members; the framework pages ms894613/ms894614/ms894616/
+  ms894647 + CE 6.0 twins ee489447/ee489262/ee489056/ee489432 record
+  the MIB_* macro conventions only) -- SnmpMibView is
+  forward-declared for the documented SnmpTfxOpen prototype.
+* pm.h (Pm.h; no lib row): CEDEVICE_POWER_STATE (aa447663, values
+  printed; twin ee497766).
+* ceddk.h (CEDDK.h): BUS_DATA_TYPE (ms896151), INTERFACE_TYPE
+  (ms901367), DMA_ADAPTER_OBJECT (ms898303, 12, tag
+  _DMA_ADAPTER_OBJECT_ [trailing underscore as printed]), PPVOID
+  (printed by the Trans*/BusTrans* prototypes).  CEDDK.lib (36):
+  HalGetBusData/ByOffset (ms899356/57), HalSetBusData/ByOffset
+  (ms899359/60), HalTranslateBusAddress (ms899361),
+  HalTranslateSystemAddress (ms899362), the 24 READ/WRITE_PORT /
+  READ/WRITE_REGISTER / *_BUFFER functions (ms919746..ms923683 --
+  WRITE_PORT_BUFFER_USHORT ms923673 prints the ULONG body in both CE
+  generations [artifact]; the PUSHORT shape derived from the page's
+  own description + the family), MmMapIoSpace (aa447863),
+  MmUnmapIoSpace (aa447865), TransBusAddrToVirtual (aa448212),
+  TransBusAddrToStatic (aa448211), HalAllocateCommonBuffer (ms899352),
+  HalFreeCommonBuffer (ms899355).  Bus-access functions (no Link
+  Library row, no pins/def): BusIoControl (ms896152),
+  BusTransBusAddrToStatic/Virtual (ms896153/154), CreateBusAccessHandle
+  (aa447690), CloseBusAccessHandle (aa447670), GetBusNamePrefix
+  (aa447824), GetChildDeviceRemoveState (aa447825),
+  GetDeviceConfigurationData (aa447827), SetDeviceConfigurationData
+  (ms920576), GetDevicePowerState (aa447832), SetDevicePowerState
+  (ms920590), GetParentDeviceInfo (ms899309), TranslateBusAddr
+  (aa448213), TranslateSystemAddr (aa448215), StallExecution
+  (aa448325), CalibrateStallCounter (aa448302 -- the CE 5.0 page
+  prints the StallExecution body; twin ee481529 prints the real one).
+  DERIVED: PHYSICAL_ADDRESS/PPHYSICAL_ADDRESS = LARGE_INTEGER (no CE
+  page defines the type anywhere in the CE 5.0 catalog or the CE 6.0
+  tree; the official wudfddi.h IWDFDevice3::MapIoSpace page prints
+  "typedef LARGE_INTEGER PHYSICAL_ADDRESS;" -- preserved page
+  pagesw/wudfddi-...html).
+* winbase.h: DEVMGR_DEVICE_INFORMATION (ms898294, 1584, Winbase.h
+  per the page; CE 5.0+; twin ee481699 identical; consumed by
+  ceddk.h GetParentDeviceInfo).
+* DVD (Dvddrvr.idl 43 + Dvdcss.idl 13 + macros ms892143) harvested
+  for M58 (dvd.manifest, 60 pages).
+* Not grounded in CE 5.0 books: Nk (no "Network Kernel" book);
+  BASEBAND_CONNECTION_DATA (bt_ddi.h) held (BD_ADDR type layout not
+  published); OID_PAN_* (bt_ddi.h), BTHHID_IOCTL_* (Bthid.h),
+  WODM_BT_SCO_AUDIO_CONTROL (Bt_ddi.h) names-only.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m57: 34 size asserts incl. the crosscheck-corrected
+SdpQueryUuid 20 / BTHNS_RESTRICTIONBLOB 256 / BTHNS_INQUIRYBLOB 8,
+enum-value asserts, and shaped usage covering every family; e2e adds
+btdrt.dll / snmpapi.dll / snmp.dll / ceddk.dll / btagsvc_phoneext.dll
+/ btagsvc_network.dll / btagsvc.dll import asserts).  Headers 52 ->
+63; defs 44 -> 51 (btdrt 50, ceddk 36, snmpapi 29, snmp 7,
+btagsvc_phoneext 9, btagsvc_network 11, btagsvc 1).

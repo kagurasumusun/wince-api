@@ -1,0 +1,6 @@
+ms894988	AsnAny
+ms894989	AsnCounter64
+ms894991	AsnObjectIdentifier
+ms894993	AsnOctetString
+ms896055	SnmpVarBind
+ms896056	SnmpVarBindList

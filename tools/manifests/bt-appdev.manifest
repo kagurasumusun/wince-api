@@ -1,0 +1,78 @@
+ms886634	Bluetooth Application Development Enumerations
+ms895690	NODECONTAINERTYPE
+aa450879	SDP_SPECIFICTYPE
+aa450880	SDP_TYPE
+ms886635	Bluetooth Application Development Functions
+aa450276	accept (Bluetooth)
+aa450300	bind (Bluetooth)
+ms887909	connect (Bluetooth)
+aa450419	getpeername (Bluetooth)
+ms890233	getsockname (Bluetooth)
+ms890301	getsockopt (Bluetooth)
+aa450933	setsockopt (Bluetooth)
+aa450956	socket (Bluetooth)
+ms898747	WSALookupServiceBegin (Bluetooth)
+ms898749	WSALookupServiceEnd (Bluetooth)
+ms898751	WSALookupServiceNext (Bluetooth)
+ms898771	WSASetService (Bluetooth)
+ms886637	Bluetooth Application Development IOCTLs
+ms891157	IOCTL_BLUETOOTH_GET_PEER_DEVICE
+ms891159	IOCTL_BLUETOOTH_GET_RFCOMM_CHANNEL
+ms886636	Bluetooth Application Development Interfaces
+aa450551	ISdpNodeContainer
+aa450534	ISdpNodeContainer::AppendNode
+aa450536	ISdpNodeContainer::CreateFromStream
+aa450539	ISdpNodeContainer::CreateStream
+aa450540	ISdpNodeContainer::GetNode
+aa450543	ISdpNodeContainer::GetNodeCount
+aa450545	ISdpNodeContainer::GetNodeStringData
+aa450547	ISdpNodeContainer::GetStreamSize
+aa450549	ISdpNodeContainer::GetType
+aa450553	ISdpNodeContainer::LockContainer
+aa450556	ISdpNodeContainer::SetNode
+aa450557	ISdpNodeContainer::SetType
+aa450560	ISdpNodeContainer::Walk
+aa450562	ISdpNodeContainer::WriteStream
+aa450590	ISdpRecord
+aa450579	ISdpRecord::CreateFromStream
+aa450582	ISdpRecord::GetAttribute
+aa450583	ISdpRecord::GetAttributeAsStream
+aa450586	ISdpRecord::GetAttributeList
+aa450588	ISdpRecord::GetServiceClass
+aa450591	ISdpRecord::SetAttribute
+aa450593	ISdpRecord::SetAttributeFromStream
+aa450595	ISdpRecord::Walk
+aa450597	ISdpRecord::WriteToStream
+aa450601	ISdpStream
+aa450599	ISdpStream::ByteSwap*
+aa450603	ISdpStream::NormalizeUuid
+aa450605	ISdpStream::Retrieve*
+aa450607	ISdpStream::RetrieveElementInfo
+aa450609	ISdpStream::RetrieveRecords
+aa450611	ISdpStream::Validate
+aa450613	ISdpStream::VerifySequenceOf
+aa450615	ISdpStream::Walk
+aa450617	ISdpWalk
+aa450619	ISdpWalk::WalkNode
+aa450622	ISdpWalk::WalkStream
+ms886647	Bluetooth Application Development Structures
+ms887904	BTH_HOLD_MODE
+ms887905	BTH_PARK_MODE
+ms887906	BTH_SNIFF_MODE
+aa450296	BASEBAND_CONNECTION
+ms887863	BTH_LOCAL_VERSION
+ms887882	BTH_REMOTE_NAME
+ms887884	BTH_REMOTE_VERSION
+ms887893	BTH_SOCKOPT_SECURITY
+ms887862	BthInquiryResult
+ms887864	BTHNS_INQUIRYBLOB
+ms887868	BTHNS_RESTRICTIONBLOB
+ms887869	BTHNS_SETBLOB
+ms895699	NodeData
+ms895706	NodeDataUnion
+aa450876	SdpAttributeRange
+aa450877	SdpQueryUuid
+aa450878	SdpQueryUuidUnion
+aa450944	SOCKADDR_BTH
+ms898761	WSAQUERYSET (Bluetooth)
+ms896282	PORTEMUPortParams
