@@ -22,6 +22,16 @@ EXPORTS
   NSPLookupServiceNext
   NSPRemoveServiceClass
   NSPSetService
+  NSPStartup
+  WPUCloseEvent
+  WPUCloseSocketHandle
+  WPUCreateEvent
+  WPUCreateSocketHandle
+  WPUFDIsSet
+  WPUGetProviderPath
+  WPUQuerySocketHandleContext
+  WPUResetEvent
+  WPUSetEvent
   WSAAccept
   WSAAddressToString
   WSACleanup
@@ -55,6 +65,10 @@ EXPORTS
   WSAStartup
   WSAStringToAddress
   WSAWaitForMultipleEvents
+  WSCEnumProtocols
+  WSCInstallNameSpace
+  WSCInstallProvider
+  WSCUnInstallNameSpace
   WSPAccept
   WSPAddressToString
   WSPAsyncSelect

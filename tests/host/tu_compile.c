@@ -48,6 +48,11 @@
 #include <Windns.h>
 #include <Dsgetdc.h>
 #include <Autodial.h>
+#include <Fwapi.h>
+#include <Rules.h>
+#include <Ipsec_api.h>
+#include <Raseapif.h>
+#include <Routprot.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6811,6 +6816,27 @@ static int m77b_shaped_usage(void)
            + rf.Section + (dci.Flags != 0u);
 }
 
+static int m77c_shaped_usage(void)
+{
+    FW_IP_ADDRESS     fa;
+    FW_ACTIONS        act = FWA_BLOCK;
+    FW_RULE_MASKS     fm  = FWM_PORT;
+    IPSEC_API_PARAM   ip;
+    RAS_AUTH_ATTRIBUTE raa;
+    PPP_EAP_PACKET    ep;
+    MIB_BEST_IF       bi;
+    DWORD             d;
+
+    fa.Family = 0u; ip.id = 0u; raa.dwLength = 0u; ep.Code = 0u;
+    bi.dwIfIndex = 0u;
+    d = FirewallEnable(0u, 0, 0);
+    d = IsIPSecRunning();
+    d = SetIPSecConfig(ip, 0u);
+    (void)d;
+    return (int)act + fm + fa.Family + raa.dwLength + ep.Code
+           + bi.dwIfIndex + (ip.valSize != 0u);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6950,6 +6976,8 @@ int host_tu_entry(void)
     if (m77a_shaped_usage() != 0)
         return 1;
     if (m77b_shaped_usage() != 0)
+        return 1;
+    if (m77c_shaped_usage() != 0)
         return 1;
     return 0;
 }

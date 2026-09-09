@@ -5747,3 +5747,44 @@ M77 prep, rows.json 12457):
   AutoDialGetConnectionStatus recorded (RASCONNSTATUS unpublished).
 - TU m77b block; Makefile HDRS 133 -> 138.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M77c -- Winsock SPI upcalls + Firewall/IPsec/EAP/RemoteUI/Routprot
+
+- include/Ws2spi.h: +14 declarations (Ws2.lib): NSPStartup, WPUCloseEvent,
+  WPUCloseSocketHandle, WPUCreateEvent, WPUCreateSocketHandle, WPUFDIsSet,
+  WPUGetProviderPath, WPUQuerySocketHandleContext, WPUResetEvent,
+  WPUSetEvent, WSCEnumProtocols, WSCInstallNameSpace,
+  WSCInstallProvider, WSCUnInstallNameSpace.  Recorded: 
+  WPUCompleteOverlappedRequest (WSPAPI macro unpublished),
+  WPUQueryBlockingCallback (BLOCKINGCALLBACK unpublished).
+  def/ws2-doc.def 100 -> 114.
+- include/Fwapi.h (NEW): FW_IP_ADDRESS, FW_ACTIONS, FW_DAYS,
+  FW_DIRECTIONS, FW_RULE_FLAGS, FW_LOG_ENTRY compiled (ushort/uchar/
+  ulong member tokens read as USHORT/UCHAR/ULONG, Natedit.h ms885685
+  precedent; IN6_ADDR tag closure); 8 declarations (FirewallCreateRule
+  with pointer-only FW_RULE, FirewallEnable, FirewallLogInit/Uninit/
+  Packet, FirewallRefresh, FirewallSetInterface, IsFirewallEnabled,
+  IsInterfaceFirewalled).  Recorded: FW_RULE verbatim (HRULE
+  unpublished; print pointer name *PFW__RULE noted),
+  FirewallDeleteRule/FirewallEnableRule (HRULE), FirewallGetRules
+  (broken "PFW RULE" print).  def/fwapi-doc.def 2 exports.
+- include/Rules.h (NEW): FW_RULE_MASKS compiled (one missing comma in
+  the print repaired, noted).
+- include/Ipsec_api.h (NEW): IPSEC_API_PARAM, IPSEC_API_MODE_INFO
+  compiled; all 6 functions declared (ResetIPSecMode missing-comma
+  print repaired, noted).  def/ipsec_api-doc.def 6 exports.
+- include/Raseapif.h (NEW): RAS_AUTH_ATTRIBUTE_TYPE (full print with
+  value anchors), RAS_AUTH_ATTRIBUTE, PPP_EAP_PACKET, PPP_EAP_ACTION,
+  PPP_EAP_INPUT, PPP_EAP_OUTPUT, PPP_EAP_INFO compiled (pointer
+  typedefs PPPP_EAP_* as printed -- 4 P, genuine).  No import surface
+  (EAP DLL entry points are PPP_EAP_INFO members).
+- include/Remoteui.h (NEW): IRemoteUIModule, IRemoteUI_Array,
+  IVariableContainer forwards + 20 verbatim method records (Uuid.lib
+  rows; Header "Remoteui.h, Remoteui.idl").
+- include/Routprot.h (NEW): MIB_BEST_IF compiled (typedef-name
+  placement typo noted).
+- TU m77c block; Makefile HDRS 138 -> 144.
+- Gates: check / crosscheck / e2e GREEN x6.
+- NetGen C-API surface complete except the NDIS driver reference
+  (NDIS Library Functions 248 + Structures 83 + Data Types 17 etc. --
+  the NDIS DDI is its own future queue).

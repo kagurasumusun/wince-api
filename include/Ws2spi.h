@@ -305,4 +305,107 @@ AKARI_CE_IMPORT int NSPSetService(LPGUID lpProviderId,
                                   DWORD dwControlFlags)
     AKARI_CE_NAME(NSPSetService);
 
+
+/* ================================================================
+ * M77c: Winsock service-provider upcall / installation functions
+ * (Ws2.lib rows; pages from the Networking - General harvest).
+ * ================================================================ */
+
+/* NSPStartup: print `int NSPStartup(LPGUID lpProviderId,
+ * LPNSP_ROUTINE lpnspRoutines);` */
+AKARI_CE_IMPORT int NSPStartup(LPGUID lpProviderId,
+                    LPNSP_ROUTINE lpnspRoutines) AKARI_CE_NAME(NSPStartup);
+
+/* WPUCloseEvent: print `BOOL WPUCloseEvent(WSAEVENT hEvent,
+ * LPINT lpErrno);` */
+AKARI_CE_IMPORT BOOL WPUCloseEvent(WSAEVENT hEvent, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUCloseEvent);
+
+/* WPUCloseSocketHandle: print `int WPUCloseSocketHandle(SOCKET s,
+ * LPINT lpErrno );` */
+AKARI_CE_IMPORT int WPUCloseSocketHandle(SOCKET s, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUCloseSocketHandle);
+
+/* WPUCreateEvent: print `WSAEVENT WPUCreateEvent(LPINT lpErrno );` */
+AKARI_CE_IMPORT WSAEVENT WPUCreateEvent(LPINT lpErrno)
+                    AKARI_CE_NAME(WPUCreateEvent);
+
+/* WPUCreateSocketHandle: print `SOCKET WPUCreateSocketHandle(
+ * DWORD dwCatalogEntryId,DWORD_PTR dwContext,LPINT lpErrno);` */
+AKARI_CE_IMPORT SOCKET WPUCreateSocketHandle(DWORD dwCatalogEntryId,
+                    DWORD_PTR dwContext, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUCreateSocketHandle);
+
+/* WPUFDIsSet: print `int WPUFDIsSet(SOCKET s,fd_set FAR* set );`
+ * (FAR is empty on CE). */
+AKARI_CE_IMPORT int WPUFDIsSet(SOCKET s, fd_set *set)
+                    AKARI_CE_NAME(WPUFDIsSet);
+
+/* WPUGetProviderPath: print `int WPUGetProviderPath(LPGUID
+ * lpProviderId,LPWSTR lpszProviderDllPath,LPINT
+ * lpProviderDllPathLen,LPINT lpErrno );` */
+AKARI_CE_IMPORT int WPUGetProviderPath(LPGUID lpProviderId,
+                    LPWSTR lpszProviderDllPath,
+                    LPINT lpProviderDllPathLen, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUGetProviderPath);
+
+/* WPUQuerySocketHandleContext: print `int
+ * WPUQuerySocketHandleContext(SOCKET s,PDWORD_PTR lpContext,
+ * LPINT lpErrno);` */
+AKARI_CE_IMPORT int WPUQuerySocketHandleContext(SOCKET s,
+                    PDWORD_PTR lpContext, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUQuerySocketHandleContext);
+
+/* WPUResetEvent: print `BOOL WPUResetEvent(WSAEVENT hEvent,
+ * LPINT lpErrno);` */
+AKARI_CE_IMPORT BOOL WPUResetEvent(WSAEVENT hEvent, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUResetEvent);
+
+/* WPUSetEvent: print `BOOL WPUSetEvent(WSAEVENT hEvent,
+ * LPINT lpErrno);` */
+AKARI_CE_IMPORT BOOL WPUSetEvent(WSAEVENT hEvent, LPINT lpErrno)
+                    AKARI_CE_NAME(WPUSetEvent);
+
+/* WSCEnumProtocols: print `int WSCEnumProtocols(LPINT lpiProtocols,
+ * LPWSAPROTOCOL_INFOW lpProtocolBuffer,LPDWORD lpdwBufferLength,
+ * LPINT lpErrno);` */
+AKARI_CE_IMPORT int WSCEnumProtocols(LPINT lpiProtocols,
+                    LPWSAPROTOCOL_INFOW lpProtocolBuffer,
+                    LPDWORD lpdwBufferLength, LPINT lpErrno)
+                    AKARI_CE_NAME(WSCEnumProtocols);
+
+/* WSCInstallNameSpace: print `int WSCInstallNameSpace(LPWSTR
+ * lpszIdentifier,LPWSTR lpszPathName,DWORD dwNameSpace,
+ * DWORD dwVersion,LPGUID lpProviderId );` */
+AKARI_CE_IMPORT int WSCInstallNameSpace(LPWSTR lpszIdentifier,
+                    LPWSTR lpszPathName, DWORD dwNameSpace,
+                    DWORD dwVersion, LPGUID lpProviderId)
+                    AKARI_CE_NAME(WSCInstallNameSpace);
+
+/* WSCInstallProvider: print `int WSCInstallProvider(const LPGUID
+ * lpProviderId,const LPWSTR lpszProviderDllPath,
+ * const LPWSAPROTOCOL_INFOW lpProtocolInfoList,
+ * DWORD dwNumberOfEntries,LPINT lpErrno);` */
+AKARI_CE_IMPORT int WSCInstallProvider(const LPGUID lpProviderId,
+                    const LPWSTR lpszProviderDllPath,
+                    const LPWSAPROTOCOL_INFOW lpProtocolInfoList,
+                    DWORD dwNumberOfEntries, LPINT lpErrno)
+                    AKARI_CE_NAME(WSCInstallProvider);
+
+/* WSCUnInstallNameSpace: print `int WSCUninstallNameSpace(
+ * LPGUID lpProviderId);` (title spelling WSCUnInstallNameSpace). */
+AKARI_CE_IMPORT int WSCUnInstallNameSpace(LPGUID lpProviderId)
+                    AKARI_CE_NAME(WSCUnInstallNameSpace);
+
+/* --- Recorded only. ----------------------------------------------
+ * WPUCompleteOverlappedRequest: `int WSPAPI
+ * WPUCompleteOverlappedRequest(SOCKETs, LPWSAOVERLAPPEDlpOverlapped,
+ * DWORDdwError, DWORDcbTransferred, LPINTlpErrno);` -- the WSPAPI
+ * calling-convention macro is not published on any CE page.
+ * WPUQueryBlockingCallback: `int WPUQueryBlockingCallback(DWORD
+ * dwCatalogEntryId,LPBLOCKINGCALLBACK FAR* lplpfnCallback,
+ * PDWORD_PTR lpdwContext,LPINT lpErrno);` -- the BLOCKINGCALLBACK
+ * callback type is not published on any CE page. */
+
 #endif  /* _WS2SPI_H */
+

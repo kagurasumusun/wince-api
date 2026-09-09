@@ -45,6 +45,7 @@ include/Dvp.h \
 include/ErrorRep.h \
 include/Excpt.h \
 include/Extfile.h \
+include/Fwapi.h \
 include/Httpext.h \
 include/Httpfilt.h \
 include/IAccess.h \
@@ -54,6 +55,7 @@ include/Imm.h \
 include/Ipexport.h \
 include/Iphlpapi.h \
 include/Iprtrmib.h \
+include/Ipsec_api.h \
 include/Iptypes.h \
 include/Keybd.h \
 include/Kfuncs.h \
@@ -87,8 +89,12 @@ include/Psapi.h \
 include/Pwindbas.h \
 include/Pwinuser.h \
 include/Ras.h \
+include/Raseapif.h \
+include/Remoteui.h \
+include/Routprot.h \
 include/Rtccore.h \
 include/Rtcerr.h \
+include/Rules.h \
 include/Sapi.h \
 include/Sapiddk.h \
 include/Service.h \
