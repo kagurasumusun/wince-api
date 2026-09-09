@@ -35,6 +35,7 @@
 #include <Upnp.h>
 #include <Upnphost.h>
 #include <Obex.h>
+#include <p2p.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6695,6 +6696,25 @@ static int m75c_shaped_usage(void)
     return (int)ied.dwRequest + (req.dwFlags != 0u);
 }
 
+static int m75d_shaped_usage(void)
+{
+    HPEERENUM      he  = (HPEERENUM)0;
+    PEER_ADDRESS   pa;
+    PEER_DATA      pd;
+    PEER_NAME_PAIR np;
+    PWSTR          wz  = (PWSTR)0;
+    HRESULT        hr;
+
+    pa.dwSize = sizeof(PEER_ADDRESS);
+    np.dwSize = sizeof(PEER_NAME_PAIR);
+    pd.cbData = pa.dwSize + np.dwSize;
+    hr = PeerCreatePeerName((PCWSTR)0, (PCWSTR)0, &wz);
+    hr = PeerEndEnumeration(he);
+    (void)PeerFreeData((PVOID)0);
+    (void)hr;
+    return (int)pd.cbData;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6824,6 +6844,8 @@ int host_tu_entry(void)
     if (m75b_shaped_usage() != 0)
         return 1;
     if (m75c_shaped_usage() != 0)
+        return 1;
+    if (m75d_shaped_usage() != 0)
         return 1;
     return 0;
 }

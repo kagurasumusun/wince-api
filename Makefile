@@ -164,8 +164,11 @@ include/notify.h \
 include/objbase.h \
 include/ocidl.h \
 include/oleidl.h \
+include/p2p.h \
 include/pimstore.h \
 include/pm.h \
+include/pnrpdef.h \
+include/pnrpns.h \
 include/prsht.h \
 include/psapi.h \
 include/pwinuser.h \

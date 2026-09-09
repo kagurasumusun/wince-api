@@ -5543,3 +5543,28 @@ M75 prep, 0 errors; rows.json 10499):
 - include/Obexserver.h (NEW): alias -> Obex.h (4 rows).
 - TU m75c block; Makefile HDRS 192 -> 194.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M75d -- Peer-to-Peer / PNRP (p2p.h, pnrpdef.h, pnrpns.h, def/p2p-doc.def)
+
+- include/p2p.h (NEW, real; only documented spelling is lowercase):
+  15 function declarations (p2p.lib): PeerCreatePeerName,
+  PeerEndEnumeration, PeerEnumGroups, PeerEnumIdentities, PeerFreeData,
+  PeerGetItemCount, PeerGetNextItem, PeerIdentityCreate,
+  PeerIdentityDelete, PeerIdentityExport, PeerIdentityGetCryptKey,
+  PeerIdentityGetFriendlyName, PeerIdentityGetXML,
+  PeerIdentityImport, PeerIdentitySetFriendlyName.  Closures noted
+  in-header: HPEERENUM=HANDLE (used-only), SOCKADDR_IN6 = struct
+  sockaddr_in6 tag typedef (aa450948 struct; PEER_ADDRESS print
+  spelling).  Full types: PEER_ADDRESS ms895901, PEER_DATA ms895902,
+  PEER_NAME_PAIR ms895903, PEER_RECORD_CHANGE_TYPE ms895904,
+  PEER_CONNECTION_FLAGS ms886712.
+- include/pnrpdef.h (NEW): PNRP_CLOUD_FLAGS ms896278,
+  PNRP_CLOUD_STATE ms896280, PNRP_RESOLVE_CRITERIA ms896281.
+- include/pnrpns.h (NEW): PNRP_CLOUD_ID ms896279, PNRPCLOUDINFO
+  ms896270, PNRPINFO ms896275 -- pointer-only: they embed PNRP_SCOPE
+  and PNRP_REGISTERED_ID_STATE, each named only on its using page
+  (unpublished) -- verbatim records.
+- def/p2p-doc.def (NEW): 15 exports (11 skipped: the tag-titled
+  struct/enum pages).
+- TU m75d block; Makefile HDRS 194 -> 197.
+- Gates: check / crosscheck / e2e GREEN x6.
