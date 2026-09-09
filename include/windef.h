@@ -207,6 +207,7 @@ typedef void           *HRGN;     /* region handle */
 typedef void           *HDWP;     /* deferred-window-position handle */
 typedef HANDLE          HKL;      /* keyboard-layout handle */
 typedef HKL            *LPHKL;    /* ImmGetHotKey lphKL (ms906010) */
+typedef UINT           *PUINT;    /* waveInGetID puDeviceID (aa452426) */
 typedef UINT           *LPUINT;   /* ImmGetHotKey lpuModifiers/lpuVKey (ms906010) */
 
 /* GDI object handles (fixed Win32 ABI).  The CE archive has no

@@ -4614,3 +4614,56 @@ were already declared except four, now added:
 Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m61 shaped usage extended).  Headers 67 (unchanged count);
 coredll def 619 -> 620; total defs 54 (unchanged count).
+
+### M63 -- Waveform Audio + Timer Driver (mmsystem.h; coredll +51, mmtimer +9)
+
+Waveform Audio book (124 leaves, sub-book of Graphics and Multimedia
+Technologies > Audio) and Timer Driver Reference (13 leaves), harvested
+under the M63 manifest (tools/manifests/waveaudio.manifest +
+timerdriver.manifest).  New header include/mmsystem.h (68th; self-
+contained, no windows.h dependency).
+
+* Header-name compat: Win32 software expects mmsystem.h -- the file name
+  itself is the compat surface (the msgqueue.h pattern).
+* Transcribed CE 5.0 prints: WAVEFORMATEX, WAVEHDR (self-referential
+  LPWAVEHDR wavehdr_tag), WAVEINCAPS/WAVEOUTCAPS (MMVERSION), MMTIME
+  (union ms/sample/cb/ticks/smpte/midi), TIMECAPS, STREAMPROPS,
+  AUDIOGAINCLASS, MIXERCAPS (TCHAR szPname[MAXPNAMELEN]), MIXERCONTROL
+  (anonymous Bounds/Metrics unions), MIXERCONTROLDETAILS (+ union
+  hwndOwner/cMultipleItems; LISTTEXT/BOOLEAN/SIGNED/UNSIGNED detail
+  structs), MIXERLINE (+ Target sub-struct), MIXERLINECONTROLS.
+* Handles: HWAVEIN/HWAVEOUT/HMIXER/HMIXEROBJ (void*), LPHWAVEIN/
+  LPHWAVEOUT/LPHMIXER.  LPTIMECALLBACK with DWORD_PTR params
+  (aa448195).
+* Functions (53 Coredll.lib rows): PlaySound, sndPlaySound, waveIn x17
+  (incl. CE-specific waveInGetProperty/waveInSetProperty GUID propsets),
+  waveOut x24, mixer x10.  waveInProc/waveOutProc are user callbacks
+  (their lib rows are callback registration, not imports) -- excluded
+  from the def, declared as types only.
+* New def mmtimer-doc.def (9 Mmtimer.lib rows): timeBeginPeriod,
+  timeEndPeriod, timeGetDevCaps, timeGetHardwareFrequency (CE-specific),
+  timeGetSystemTime, timeGetTime, timeGetTimeSinceInterrupt
+  (CE-specific), timeKillEvent, timeSetEvent.  LIBRARY mmtimer.dll per
+  the documented Link Library row (mmtimer.lib).
+* Derived values (derivation path recorded in the header): MMRESULT =
+  UINT (aa452425 prints MMRESULT mmrError, aa452446 prints UINT
+  mmrError for the twin GetErrorText -- the pages interchange them);
+  MMVERSION = UINT (WAVEINCAPS/WAVEOUTCAPS print, no width given);
+  MAXPNAMELEN = 32 (printed value, aa452442).  Own-design closures
+  (name-only in docs, no value pages anywhere incl. desktop mmeapi):
+  MIXER_SHORT_NAME_CHARS = 16, MIXER_LONG_NAME_CHARS = 64,
+  MAXERRORLENGTH = 256.
+* Held (name-only, zero-gap policy): the full flag families -- SND_*,
+  CALLBACK_*, WAVE_FORMAT_*, WAVECAPS_*, WHDR_*, WIM_/WOM_/MM_W*_
+  (incl. CE-specific MM_WOM_ATTENUATED), MMSYSERR_ / WAVERR_ /
+  MIXERR_ codes, TIME_* incl. TIME_CALLBACK_*, WAGC_CLASS_ /
+  WAGC_PRIORITY_, MIXER_OBJECTF_ / GETLINEINFOF_ / GETLINECONTROLSF_ /
+  GETCONTROLDETAILSF_ / SETCONTROLDETAILSF_, LINE_COMPONENTTYPE_ /
+  LINE_LINEF_ / LINE_TARGETTYPE_, CONTROL_CT_CLASS_ / CONTROLTYPE_ /
+  CONTROLF_, MXDM_USER, WAVE_MAPPER.  (Desktop WAVE_FORMAT_96* and
+  WAVECAPS_SYNC are desktop-only -- confirmed absent from CE prints.)
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m63: 23 size/offset asserts + shaped usage of all 53+9 entry
+points).  windef.h +PUINT (waveInGetID print).  Headers 67 -> 68;
+coredll def 620 -> 671; defs 54 -> 55 (mmtimer 9).

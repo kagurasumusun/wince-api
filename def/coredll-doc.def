@@ -328,6 +328,7 @@ EXPORTS
   OpenProcess
   PatBlt
   PeekMessage
+  PlaySound
   Polygon
   Polyline
   PostMessage
@@ -609,6 +610,16 @@ EXPORTS
   lineTranslateAddress
   lineTranslateDialog
   lineUnhold
+  mixerClose
+  mixerGetControlDetails
+  mixerGetDevCaps
+  mixerGetID
+  mixerGetLineControls
+  mixerGetLineInfo
+  mixerGetNumDevs
+  mixerMessage
+  mixerOpen
+  mixerSetControlDetails
   phoneClose
   phoneConfigDialog
   phoneDevSpecific
@@ -632,3 +643,43 @@ EXPORTS
   phoneSetStatusMessages
   phoneSetVolume
   phoneShutdown
+  sndPlaySound
+  waveInAddBuffer
+  waveInClose
+  waveInGetDevCaps
+  waveInGetErrorText
+  waveInGetID
+  waveInGetNumDevs
+  waveInGetPosition
+  waveInGetProperty
+  waveInMessage
+  waveInOpen
+  waveInPrepareHeader
+  waveInReset
+  waveInSetProperty
+  waveInStart
+  waveInStop
+  waveInUnprepareHeader
+  waveOutBreakLoop
+  waveOutClose
+  waveOutGetDevCaps
+  waveOutGetErrorText
+  waveOutGetID
+  waveOutGetNumDevs
+  waveOutGetPitch
+  waveOutGetPlaybackRate
+  waveOutGetPosition
+  waveOutGetProperty
+  waveOutGetVolume
+  waveOutMessage
+  waveOutOpen
+  waveOutPause
+  waveOutPrepareHeader
+  waveOutReset
+  waveOutRestart
+  waveOutSetPitch
+  waveOutSetPlaybackRate
+  waveOutSetProperty
+  waveOutSetVolume
+  waveOutUnprepareHeader
+  waveOutWrite

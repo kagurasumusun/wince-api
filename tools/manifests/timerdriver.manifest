@@ -1,0 +1,13 @@
+ms895462	Timer Driver Functions
+aa448188	timeBeginPeriod
+aa448190	timeEndPeriod
+aa448191	timeGetDevCaps
+aa448326	timeGetHardwareFrequency
+aa448192	timeGetSystemTime
+aa448193	timeGetTime
+aa448327	timeGetTimeSinceInterrupt
+aa448194	timeKillEvent
+aa448195	timeSetEvent
+ms895465	Timer Driver Structures
+aa447864	MMTIME
+aa448189	TIMECAPS

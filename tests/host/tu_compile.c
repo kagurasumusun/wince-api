@@ -68,6 +68,7 @@
 #include <dvp.h>
 #include <urlmon.h>
 #include <mlang.h>
+#include <mmsystem.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5747,6 +5748,129 @@ static int m60_shaped_usage(void)
     return 0;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M63: Waveform Audio / Mixer / Timer 32-bit CE sizes (transcribed CE
+ * 5.0 prints; MMVERSION=UINT and the MIXER_*_NAME_CHARS /
+ * MAXERRORLENGTH lengths are recorded own-design closures). */
+_Static_assert(sizeof(WAVEFORMATEX) == 20, "WAVEFORMATEX size (aa452419)");
+_Static_assert(sizeof(WAVEHDR) == 32, "WAVEHDR size (aa452420)");
+_Static_assert(sizeof(WAVEINCAPS) == 48, "WAVEINCAPS size (aa452422)");
+_Static_assert(sizeof(WAVEOUTCAPS) == 52, "WAVEOUTCAPS size (aa452442)");
+_Static_assert(sizeof(STREAMPROPS) == 8, "STREAMPROPS size (aa452383)");
+_Static_assert(sizeof(AUDIOGAINCLASS) == 8, "AUDIOGAINCLASS size (ms925607)");
+_Static_assert(sizeof(MMTIME) == 12, "MMTIME size (aa447864)");
+_Static_assert(offsetof(MMTIME, u) == 4, "MMTIME union offset (aa447864)");
+_Static_assert(sizeof(TIMECAPS) == 8, "TIMECAPS size (aa448189)");
+_Static_assert(sizeof(MIXERCAPS) == 80, "MIXERCAPS size (ms932036)");
+_Static_assert(sizeof(MIXERCONTROL) == 148, "MIXERCONTROL size (ms932038)");
+_Static_assert(offsetof(MIXERCONTROL, Bounds) == 100,
+               "MIXERCONTROL name arrays (ms932038)");
+_Static_assert(sizeof(MIXERCONTROLDETAILS) == 24, "MIXERCONTROLDETAILS size (ms932039)");
+_Static_assert(sizeof(MIXERCONTROLDETAILS_LISTTEXT) == 72,
+               "MIXERCONTROLDETAILS_LISTTEXT size (ms932041)");
+_Static_assert(sizeof(MIXERCONTROLDETAILS_BOOLEAN) == 4, "ms932040");
+_Static_assert(sizeof(MIXERCONTROLDETAILS_SIGNED) == 4, "ms932042");
+_Static_assert(sizeof(MIXERCONTROLDETAILS_UNSIGNED) == 4, "ms932043");
+_Static_assert(sizeof(MIXERLINE) == 168, "MIXERLINE size (ms932050)");
+_Static_assert(offsetof(MIXERLINE, Target) == 120, "MIXERLINE Target offset (ms932050)");
+_Static_assert(sizeof(MIXERLINECONTROLS) == 24, "MIXERLINECONTROLS size (ms932051)");
+_Static_assert(MAXPNAMELEN == 32, "MAXPNAMELEN printed value (aa452442)");
+#endif
+
+/* M63: Waveform Audio / Mixer / Timer shaped usage. */
+static int m63_shaped_usage(void)
+{
+    WAVEFORMATEX   wfx;
+    WAVEHDR        wh;
+    WAVEINCAPS     wic;
+    WAVEOUTCAPS    woc;
+    MMTIME         mmt;
+    TIMECAPS       tc;
+    MIXERCAPS      mxc;
+    MIXERCONTROL   mxctl;
+    MIXERCONTROLDETAILS mxcd;
+    MIXERLINE      mxl;
+    MIXERLINECONTROLS mxlc;
+    STREAMPROPS    sp;
+    AUDIOGAINCLASS agc;
+    HWAVEIN        hwi = (HWAVEIN)0;
+    HWAVEOUT       hwo = (HWAVEOUT)0;
+    HMIXER         hmx = (HMIXER)0;
+    HMIXEROBJ      hmxo = (HMIXEROBJ)0;
+    LPTIMECALLBACK tcb = (LPTIMECALLBACK)0;
+    DWORD          dw = 0;
+
+    wfx.wFormatTag = 1; wfx.nChannels = 1; wfx.nSamplesPerSec = 8000;
+    wfx.nAvgBytesPerSec = 8000; wfx.nBlockAlign = 1;
+    wfx.wBitsPerSample = 8; wfx.cbSize = 0;
+    wh.lpData = (LPSTR)0; wh.dwBufferLength = 0; wh.dwFlags = 0;
+    wic.wMid = 0; woc.wMid = 0;
+    mmt.wType = 0; mmt.u.ms = 0;
+    tc.wPeriodMin = 0;
+    mxc.cDestinations = 0;
+    mxctl.cbStruct = sizeof(MIXERCONTROL);
+    mxcd.cbStruct = sizeof(MIXERCONTROLDETAILS); mxcd.cbDetails = 0;
+    mxl.cbStruct = sizeof(MIXERLINE);
+    mxlc.cbStruct = sizeof(MIXERLINECONTROLS);
+    sp.dwClassID = 0; agc.dwPriority = 0;
+
+    (void) PlaySound((LPCSTR)0, (HMODULE)0, 0u);
+    (void) sndPlaySound((LPCTSTR)0, 0u);
+    (void) waveInOpen(&hwi, 0u, &wfx, 0u, 0u, 0u);
+    (void) waveInAddBuffer(hwi, &wh, sizeof(WAVEHDR));
+    (void) waveInPrepareHeader(hwi, &wh, sizeof(WAVEHDR));
+    (void) waveInUnprepareHeader(hwi, &wh, sizeof(WAVEHDR));
+    (void) waveInGetDevCaps(0u, &wic, sizeof(WAVEINCAPS));
+    (void) waveInGetErrorText(0u, (LPTSTR)0, 0u);
+    (void) waveInGetID(hwi, (PUINT)0);
+    (void) waveInGetPosition(hwi, &mmt, sizeof(MMTIME));
+    (void) waveInGetProperty(0u, (const GUID *)0, 0u, (LPVOID)0, 0u,
+                             (LPVOID)0, 0u, (PULONG)0);
+    (void) waveInMessage(hwi, 0u, 0u, 0u);
+    (void) waveInReset(hwi);
+    (void) waveInSetProperty(0u, (const GUID *)0, 0u, (LPVOID)0, 0u,
+                             (LPVOID)0, 0u);
+    (void) waveInStart(hwi);
+    (void) waveInStop(hwi);
+    (void) waveInClose(hwi);
+    (void) waveOutOpen(&hwo, 0u, &wfx, 0u, 0u, 0u);
+    (void) waveOutWrite(hwo, &wh, sizeof(WAVEHDR));
+    (void) waveOutGetDevCaps(0u, &woc, sizeof(WAVEOUTCAPS));
+    (void) waveOutGetPitch(hwo, &dw);
+    (void) waveOutGetPlaybackRate(hwo, &dw);
+    (void) waveOutGetVolume(hwo, &dw);
+    (void) waveOutSetVolume(hwo, dw);
+    (void) waveOutPause(hwo);
+    (void) waveOutRestart(hwo);
+    (void) waveOutReset(hwo);
+    (void) waveOutBreakLoop(hwo);
+    (void) waveOutClose(hwo);
+    (void) mixerOpen(&hmx, 0u, 0u, 0u, 0u);
+    (void) mixerGetDevCaps(0u, &mxc, sizeof(MIXERCAPS));
+    (void) mixerGetLineInfo(hmxo, &mxl, 0u);
+    (void) mixerGetLineControls(hmxo, &mxlc, 0u);
+    (void) mixerGetControlDetails(hmxo, &mxcd, 0u);
+    (void) mixerSetControlDetails(hmxo, &mxcd, 0u);
+    (void) mixerGetID(hmxo, (UINT *)0, 0u);
+    (void) mixerMessage(hmx, 0u, 0u, 0u);
+    (void) mixerClose(hmx);
+    (void) timeBeginPeriod(1u);
+    (void) timeEndPeriod(1u);
+    (void) timeGetDevCaps(&tc, sizeof(TIMECAPS));
+    (void) timeSetEvent(1u, 0u, tcb, 0u, 0u);
+    (void) timeKillEvent(0u);
+    (void) timeGetSystemTime(&mmt, sizeof(MMTIME));
+    dw = timeGetTime();
+    dw = timeGetHardwareFrequency();
+    dw = timeGetTimeSinceInterrupt();
+
+    (void) wfx; (void) wh; (void) wic; (void) woc; (void) mmt;
+    (void) tc; (void) mxc; (void) mxctl; (void) mxcd; (void) mxl;
+    (void) mxlc; (void) sp; (void) agc; (void) hwi; (void) hwo;
+    (void) hmx; (void) hmxo; (void) tcb; (void) dw;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -5842,6 +5966,8 @@ int host_tu_entry(void)
     if (m60_shaped_usage() != 0)
         return 1;
     if (m61_shaped_usage() != 0)
+        return 1;
+    if (m63_shaped_usage() != 0)
         return 1;
     return 0;
 }
