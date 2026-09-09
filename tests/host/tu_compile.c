@@ -69,6 +69,7 @@
 #include <urlmon.h>
 #include <mlang.h>
 #include <mmsystem.h>
+#include <imaging.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5871,6 +5872,88 @@ static int m63_shaped_usage(void)
     return 0;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M64: Imaging API 32-bit CE sizes (transcribed CE 5.0 prints; the CE
+ * 6.0 twins print identical bodies -- ee491598/ee490848/ee490096/
+ * ee490079/ee491100/ee491044/ee490672). */
+_Static_assert(sizeof(BitmapData) == 24, "BitmapData size (ms925969)");
+_Static_assert(offsetof(BitmapData, Scan0) == 16, "BitmapData print (ms925969)");
+_Static_assert(sizeof(ImageCodecInfo) == 76, "ImageCodecInfo size (aa452241)");
+_Static_assert(offsetof(ImageCodecInfo, MimeType) == 48, "aa452241");
+_Static_assert(sizeof(ImageInfo) == 64, "ImageInfo size incl. double align (aa452243)");
+_Static_assert(offsetof(ImageInfo, Xdpi) == 40, "ImageInfo double offset (aa452243)");
+_Static_assert(sizeof(ColorPalette) == 12, "ColorPalette size (ms926775)");
+_Static_assert(sizeof(PropertyItem) == 16, "PropertyItem size (ms932269)");
+_Static_assert(sizeof(EncoderParameter) == 28, "EncoderParameter size (aa451679)");
+_Static_assert(sizeof(EncoderParameters) == 32, "EncoderParameters size (aa451680)");
+/* M64 enum values (printed) + sequential readings (recorded). */
+_Static_assert(DecoderInitFlagNoBlock == 0x0001 && DecoderInitFlagBuiltIn1st == 0x0002, "aa451570");
+_Static_assert(EncoderParameterValueTypeRationalRange == 8, "aa451681");
+_Static_assert(ImageCodecFlagsUser == 0x00040000, "aa452239");
+_Static_assert(ImageFlagsValid == 0x00030000, "aa452242");
+_Static_assert(ImageLockModeUserInputBuf == 0x0004, "aa452244");
+_Static_assert(SinkFlagsWantProps == 0x00200000, "ms932307");
+_Static_assert((int)SinkFlagsScalable == (int)ImageFlagsScalable, "ms932307 alias");
+_Static_assert(BufferDisposalFlagUnmapView == 3, "ms936849 sequential");
+_Static_assert(InterpolationHintBicubic == 4, "ms912048 sequential");
+_Static_assert(EncoderValueFrameDimensionPage == 23, "aa451682 sequential");
+/* M64: PropertyTag Values -- printed tags (ms932271), spot checks. */
+_Static_assert(PropertyTagArtist == 0x013B, "ms932271");
+_Static_assert(PropertyTagCompression == 0x0103, "ms932271");
+_Static_assert(PropertyTagExifPixXDim == 0xA002, "ms932271");
+_Static_assert(PropertyTagExifPixYDim == 0xA003, "ms932271");
+_Static_assert(PropertyTagThumbnailResolutionY == 0x502E, "ms932271");
+_Static_assert(PropertyTagLuminanceTable == 0x5090, "ms932271");
+#endif
+
+/* M64: Imaging API shaped usage (COM types only; no import surface). */
+static int m64_shaped_usage(void)
+{
+    BitmapData       bd;
+    ImageCodecInfo   ici;
+    ImageInfo        ii;
+    ColorPalette     cp;
+    PropertyItem     pi;
+    EncoderParameter ep;
+    EncoderParameters eps;
+    ARGB             argb;
+    PixelFormat      pf;
+    PixelFormatID    pfid;
+    IImagingFactory *pif = (IImagingFactory *)0;
+    IImage          *pimg = (IImage *)0;
+    IBitmapImage    *pbmp = (IBitmapImage *)0;
+    IBasicBitmapOps *pbbo = (IBasicBitmapOps *)0;
+    IImageDecoder   *pdec = (IImageDecoder *)0;
+    IImageEncoder   *penc = (IImageEncoder *)0;
+    IImageSink      *psink = (IImageSink *)0;
+    IStream         *pstm = (IStream *)0;
+
+    bd.Width = 1; bd.Height = 1; bd.Stride = 1;
+    bd.PixelFormat = 1; bd.Scan0 = 0; bd.Reserved = 0;
+    ici.Clsid = ici.FormatID; ici.CodecName = ici.MimeType;
+    ici.Flags = ImageCodecFlagsDecoder; ici.SigCount = 0;
+    ii.RawDataFormat = ici.FormatID; ii.PixelFormat = 0;
+    ii.Width = ii.Height = ii.TileWidth = ii.TileHeight = 0;
+    ii.Xdpi = 96.0; ii.Ydpi = 96.0; ii.Flags = ImageFlagsNone;
+    cp.Flags = 0; cp.Count = 1; cp.Entries[0] = MAKEARGB(0xff, 0x12, 0x34, 0x56);
+    pi.id = PropertyTagArtist; pi.length = 6;
+    pi.type = 0; pi.value = (VOID *)0;
+    ep.Guid = ii.RawDataFormat; ep.NumberOfValues = 1;
+    ep.Type = EncoderParameterValueTypeLong; ep.Value = (VOID *)0;
+    eps.Count = 1; eps.Parameter[0] = ep;
+    argb = MAKEARGB(0x0a, 0xbc, 0xde, 0xf0);
+    pf = (PixelFormat)ImageFlagsNone;
+    pfid = (PixelFormatID)0;
+    (void) pif; (void) pimg; (void) pbmp; (void) pbbo; (void) pdec;
+    (void) penc; (void) psink; (void) pstm; (void) pf; (void) argb;
+    (void) BufferDisposalFlagGlobalFree; (void) InterpolationHintBilinear;
+    (void) EncoderValueTransformRotate90; (void) SinkFlagsTopDown;
+    (void) ImageLockModeRead; (void) DecoderInitFlagNoBlock;
+    (void) bd; (void) ici; (void) ii; (void) cp; (void) pi; (void) ep;
+    (void) eps;
+    return (int)(argb & ALPHA_MASK) + (int)pfid;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -5968,6 +6051,8 @@ int host_tu_entry(void)
     if (m61_shaped_usage() != 0)
         return 1;
     if (m63_shaped_usage() != 0)
+        return 1;
+    if (m64_shaped_usage() != 0)
         return 1;
     return 0;
 }

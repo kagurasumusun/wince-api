@@ -4667,3 +4667,56 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m63: 23 size/offset asserts + shaped usage of all 53+9 entry
 points).  windef.h +PUINT (waveInGetID print).  Headers 67 -> 68;
 coredll def 620 -> 671; defs 54 -> 55 (mmtimer 9).
+
+### M64 -- Imaging API (imaging.h; no import def)
+
+Imaging book (120 leaves, Graphics and Multimedia Technologies >
+Graphics > Imaging), harvested under tools/manifests/imaging.manifest.
+New header include/imaging.h (69th; self-contained).  The CE 5.0
+Imaging API is a C++ COM API (CLSID_ImagingFactory /
+CoCreateInstance, Imaging.h, Imaging.lib).
+
+* Header-name compat: Win32 software expects imaging.h.
+* Transcribed CE 5.0 class/struct prints (CE 6.0 twins compared
+  token-for-token, identical: ee491598/ee490848/ee490096/ee490079/
+  ee491100/ee491044/ee490672): BitmapData, ImageCodecInfo, ImageInfo,
+  ColorPalette, PropertyItem, EncoderParameter, EncoderParameters.
+* Types: ARGB = DWORD, PixelFormat = INT, PixelFormatID = PixelFormat
+  (verbatim prints).  PROPID = ULONG is a recorded own-design closure
+  (used by ms932269 PropertyItem and four IImageDecoder pages; no CE
+  or Learn page prints its typedef; printed tag values reach 0x509B).
+  UNALIGNED carried as a no-op spelling carrier (ms932269 print).
+* Enums with printed values: DecoderInitFlag, EncoderParameterValueType
+  (1..8), ImageCodecFlags, ImageFlags, ImageLockMode, SinkFlags (first
+  three alias ImageFlags).
+* Bare enum bodies, unique sequential C reading recorded in the header
+  (CE 6.0 twins print the same bare bodies): BufferDisposalFlag (0..3),
+  InterpolationHint (0..4), EncoderValue (0..23; the desktop GDI+
+  "Using the EncoderValue Enumeration" concept page prints the same
+  members in the same order with explicit 0..23 -- recorded
+  corroboration; desktop-only ColorTypeGray/ColorTypeRGB excluded).
+* MAKEARGB + ALPHA/RED/GREEN/BLUE_SHIFT + ALPHA_MASK: fully printed
+  (ms932026), transcribed verbatim.
+* PropertyTag Values (ms932271): all 217 property tags defined from the
+  printed Tag column (archive line-join traps re-parsed entry-by-entry:
+  ExifPixXDim 0xA002 vs ExifPixYDim 0xA003, ThumbnailResolutionX/Y
+  0x502D/0x502E, Gamma 0x0301, DotRange 0x0150).
+* Interfaces (7): opaque forward declarations + 72 verbatim
+  method-signature records (M44 objbase.h policy; no vtable layouts
+  are published anywhere).  Dangling names recorded: IPropertySetStorage
+  (BeginDecode), IID_IBasicBitmapOps (ms939536), CodecIImageBytes.
+* No import def: the 58 "Link Library: Imaging.lib" rows sit on METHOD
+  pages (virtual calls, not import-library symbols) -- gen-doc-def.py
+  confirms no sole-link export surface (shobjidl.h precedent).
+* Held (name-only, zero-gap): PropertyTagType* (8; desktop page also
+  values-less), IMGERR_* (11) + standard E_INVALIDARG/E_OUTOFMEMORY/
+  E_NOTIMPL/E_ACCESSDENIED/E_PENDING (names only), every Imaging GUID
+  (ImageFormat* x11 incl. "Not supported" EMF/WMF, FrameDimension* x3,
+  FormatID* x2, DECODER_* x5, Encoder* x10 + CodecIImageBytes,
+  CLSID_ImagingFactory), PixelFormat flag names (9) + composites (16,
+  printed as expressions of the held flags) + PixelFormatMax.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m64: 10 size/offset asserts + 8 enum-value asserts + 6 PropertyTag
+spot checks + shaped usage).  Headers 68 -> 69; defs 55 (unchanged
+count; no Imaging import surface is documentable).

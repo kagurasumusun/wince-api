@@ -1,0 +1,120 @@
+ms923415	Imaging OS Design Development
+ms923413	Imaging Application Development
+ms923412	Image File Format Specifications
+ms940062	Implementing an Image Decoder Object
+ms940063	Implementing an Image Encoder Object
+ms923416	Imaging Registry Settings
+ms923417	Imaging Security
+ms923414	Imaging Migration
+ms932698	Imaging Samples
+ms925314	Imaging Reference
+aa452247	Imaging Classes
+ms925969	BitmapData
+aa451679	EncoderParameter
+aa451680	EncoderParameters
+aa452241	ImageCodecInfo
+ms932269	PropertyItem
+aa452248	Imaging Enumerations
+ms936849	BufferDisposalFlag
+aa451570	DecoderInitFlag
+aa451682	EncoderValue
+aa451681	EncoderParameterValueType
+aa452239	ImageCodecFlags
+aa452242	ImageFlags
+aa452244	ImageLockMode
+ms912048	InterpolationHint
+ms932307	SinkFlags
+aa452249	Imaging GUIDs
+aa452250	Imaging Interfaces
+ms939536	IBasicBitmapOps
+ms939542	IBasicBitmapOps::AdjustBrightness
+ms939545	IBasicBitmapOps::AdjustContrast
+ms939546	IBasicBitmapOps::AdjustGamma
+ms939547	IBasicBitmapOps::Clone
+ms939548	IBasicBitmapOps::Flip
+ms939549	IBasicBitmapOps::Resize
+ms939550	IBasicBitmapOps::Rotate
+ms908972	IBitmapImage
+ms909009	IBitmapImage::GetPalette
+ms909061	IBitmapImage::GetPixelFormatID
+ms909070	IBitmapImage::GetSize
+ms909078	IBitmapImage::LockBits
+ms909089	IBitmapImage::SetPalette
+ms909098	IBitmapImage::UnlockBits
+ms910587	IImage
+aa452147	IImage::Draw
+aa452166	IImage::GetImageInfo
+aa452168	IImage::GetPhysicalDimension
+aa452169	IImage::GetThumbnail
+aa452171	IImage::PushIntoSink
+aa452173	IImage::SetImageFlags
+ms910588	IImageDecoder
+ms910589	IImageDecoder::BeginDecode
+ms910590	IImageDecoder::Decode
+ms910591	IImageDecoder::EndDecode
+ms910592	IImageDecoder::GetAllPropertyItems
+aa452112	IImageDecoder::GetFrameCount
+aa452115	IImageDecoder::GetFrameDimensionsCount
+aa452116	IImageDecoder::GetFrameDimensionsList
+aa452119	IImageDecoder::GetImageInfo
+aa452120	IImageDecoder::GetPropertyCount
+aa452122	IImageDecoder::GetPropertyIdList
+aa452125	IImageDecoder::GetPropertyItem
+aa452126	IImageDecoder::GetPropertyItemSize
+aa452128	IImageDecoder::GetPropertySize
+aa452130	IImageDecoder::GetThumbnail
+aa452133	IImageDecoder::InitDecoder
+aa452135	IImageDecoder::QueryDecoderParam
+aa452137	IImageDecoder::RemovePropertyItem
+aa452139	IImageDecoder::SelectActiveFrame
+aa452141	IImageDecoder::SetDecoderParam
+aa452143	IImageDecoder::SetPropertyItem
+aa452145	IImageDecoder::TerminateDecoder
+aa452149	IImageEncoder
+aa452151	IImageEncoder::GetEncoderParameterList
+aa452153	IImageEncoder::GetEncoderParameterListSize
+aa452155	IImageEncoder::GetEncodeSink
+aa452158	IImageEncoder::InitEncoder
+aa452160	IImageEncoder::SetEncoderParameters
+aa452162	IImageEncoder::SetFrameDimension
+aa452164	IImageEncoder::TerminateEncoder
+aa452175	IImageSink
+aa452177	IImageSink::BeginSink
+aa452180	IImageSink::EndSink
+aa452182	IImageSink::GetPixelDataBuffer
+aa452184	IImageSink::GetPropertyBuffer
+aa452186	IImageSink::NeedRawProperty
+aa452188	IImageSink::NeedTransform
+aa452190	IImageSink::PushPixelData
+aa452192	IImageSink::PushPropertyItems
+aa452194	IImageSink::PushRawData
+aa452196	IImageSink::PushRawInfo
+aa452198	IImageSink::ReleasePixelDataBuffer
+aa452200	IImageSink::SetPalette
+aa452202	IImagingFactory
+aa452203	IImagingFactory::CreateBitmapFromBuffer
+aa452205	IImagingFactory::CreateBitmapFromImage
+aa452207	IImagingFactory::CreateImageDecoder
+aa452209	IImagingFactory::CreateImageEncoderToFile
+aa452211	IImagingFactory::CreateImageEncoderToStream
+aa452213	IImagingFactory::CreateImageFromBuffer
+aa452215	IImagingFactory::CreateImageFromFile
+aa452217	IImagingFactory::CreateImageFromStream
+aa452219	IImagingFactory::CreateNewBitmap
+aa452231	IImagingFactory::GetInstalledDecoders
+aa452233	IImagingFactory::GetInstalledEncoders
+aa452235	IImagingFactory::InstallImageCodec
+aa452237	IImagingFactory::UninstallImageCodec
+aa452251	Imaging Macros
+aa451701	Error Codes for the Imaging API
+ms932026	MAKEARGB
+ms932259	PixelFormat Values
+ms932271	PropertyTag Values
+ms932270	PropertyTagType Values
+aa452252	Imaging Structures
+ms926775	ColorPalette
+aa452243	ImageInfo (Imaging API)
+aa452253	Imaging Types
+ms925572	ARGB
+ms932257	PixelFormat
+ms932258	PixelFormatID
