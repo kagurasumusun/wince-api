@@ -5394,3 +5394,49 @@ Verification: make check / crosscheck / e2e GREEN on all six
 targets.  Headers 79 real + 92 aliases = 171 files; defs 59
 (ole32-doc.def 84, oleaut32-doc.def 227; msdmo-doc.def regenerated
 comments normalized by the generator).
+## M73b -- COM/OLE/Storage books (c186899)
+
+Second half of the DCOM harvest (manifests dcom-com 404, dcom-ole 162,
+dcom-storage 74 pages), all carried by Objbase.h:
+
+- 32 opaque interface forwards (IAccessControl, ICatInformation,
+  ICatRegister, IContinueCallback, IDccMan, IDccManSink, IEnumOLEVERB,
+  IObjectSafety, IOleAdviseHolder, IOleClientSite, IOleContainer,
+  IOleControlSite, IOleInPlaceSite, IOleLink, IOleObject, IOleWindow,
+  IParseDisplayName, IPersist, IPersistStorage, IPersistStream,
+  IPersistStreamInit, IProgressNotify, IProvideClassInfo(2), IROTData,
+  IRootStorage, IRunnableObject, ISequentialStream, IServerSecurity,
+  IStdMarshalInfo, IViewObject(2)); 127 verbatim method records for 30
+  of them (grep-verified each name absent before adding).
+- 20 declarations: IsEqualGUID, CoFreeUnusedLibrariesEx (ms897004-class
+  pages), CreateStreamOnHGlobal, GetHGlobalFromStream,
+  CreateOleAdviseHolder, OleRun, OleIsRunning, OleLoadFromStream,
+  OleSaveToStream, OleSave, OleSetContainedObject, OleCreate, OleDraw,
+  ReadClassStg, ReadClassStm, WriteClassStg, WriteClassStm,
+  ReleaseStgMedium.  Pointer-form closures LPOLEOBJECT/LPCRECT
+  (mechanical, noted).  DllRegisterServer/DllUnregisterServer
+  (ms864429/ms864430, Olectl.h rows) recorded only -- self-exported by
+  control DLLs.  OleSetMenuDescriptor HELD: print takes
+  HOLEMENU/LPOLEINPLACEFRAME/LPOLEINPLACEACTIVEOBJECT whose typedefs no
+  CE page publishes.
+- Types added after full struct/enum sweep of the three books
+  (80 typedef/close-brace names checked against real declarations --
+  everything else incl. STATSTG, DVASPECT*, BIND_OPTS*, CLSCTX, STGC
+  already real in Objbase.h): OLEGETMONIKER ms892592, OLELINKBIND
+  ms892594, OLEUPDATE ms892601, OLEVERB ms892602, OLEVERBATTRIB
+  ms892603, OLEWHICHMK ms892604, STATDATA (print inside ms882883
+  IOleAdviseHolder::EnumAdvise), STOREINFO (COM) ms896271 (Header row
+  Cesync.h).
+- COINIT_MULTITHREADED/COINIT_APARTMENTTHREADED: named on ms863914/
+  ms863915 but no CE page prints values -- still held.
+- DirectInputCreate ms864419 (Dinput.h/Dinput.lib) rides in the COM
+  book; deferred to the DirectInput queue.
+- Aliases -> Objbase.h: Objidl.h (224 rows), Oleidl.h (72)+oleidl.h
+  (17), Ocidl.h (59)+ocidl.h (8), Ole2.h (17), Comcat.h (14),
+  Dccole.h (13), IAccess.h (7), Unknwn.h (4), Docobj.h (3),
+  Objsafe.h (3), Olectl.h (2), Wtypes.h (6).  include/ 185 files
+  (79 real + 106 aliases); Makefile HDRS regenerated.
+- def/ole32-doc.def 84 -> 102 exports (oleaut32-doc.def unchanged at
+  227; Dll{,Un}RegisterServer remain in the skipped set by policy).
+- Gates: check / crosscheck / e2e GREEN x6 (i386/arm thumb2/arm
+  4/5/6).
