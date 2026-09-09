@@ -1,0 +1,503 @@
+ms931949	RTC Client API OS Design Development
+ms931947	RTC Client API Application Development
+aa525675	Real-time Communications Concepts
+aa525677	Real-time Communications Architecture
+aa525676	Real-time Communications Definitions
+ms909242	SIP
+ms929829	RTP/RTCP
+aa525668	PINT
+aa525604	Codecs
+ms909244	SIP Servers
+ms909274	Using the RTC Client API
+aa525796	RTC Client API Objects and Interfaces
+aa525798	RTC Client Object
+ms929498	RTC Session Object
+aa525807	RTC Participant Object
+aa525787	RTC Buddy Object
+ms929720	RTC Watcher Object
+aa525786	RTC Buddy Group Object
+aa525811	RTC Presence Device Object
+aa525815	RTC Profile Object
+ms929512	RTC User Search Query Object
+aa525802	RTC Events
+ms909228	Session Information
+aa525673	Provisioning and XML Profiles
+aa525671	RTC Client API Provisioning
+ms909243	SIP and TEL URIs
+aa525669	Profile Requirements
+ms909245	SIP Server Requirements
+ms909275	Using XML Profiles
+ms909291	XML Profile Samples
+ms909290	Windows CE-SIP client, Windows CE-phone, or Messaging Sessions
+aa525667	Phone-phone Sessions
+aa525631	Firewalls and NATs
+ms909253	Traversal of UPnP-Enabled NATs
+aa525652	NAT Address Mapping
+aa525602	Client Application Behind a NAT
+aa525679	Receive an Incoming PC-PC Session
+aa525793	Authentication
+aa525600	Basic Authentication and RTC
+aa525626	Digest Authentication and RTC
+aa525653	NTLM Authentication and RTC
+aa525644	Kerberos Authentication and RTC
+ms909252	Transport Protocols and RTC
+ms909289	Voice Performance
+aa525607	Comparing Windows CE and Desktop RTC Implementations
+aa525800	RTC Client API Code Examples
+aa525678	Fundamental RTC Code Examples
+aa525637	Initialize RTC
+aa525610	Create and Enable a Profile
+aa525623	Deregister and Disable a Profile
+aa525612	Create a Text Messaging Session
+aa525680	Register to Receive Events
+aa525633	Handle Events
+aa525629	Enable Presence Functionality
+aa525611	Create a Session and Make a Call
+aa525598	Answer a Call
+ms909251	Terminate a Call
+ms909238	Shut Down RTC
+aa525784	RTC 1.2 Code Examples
+aa525605	RTC Client API Registry Settings
+aa525795	RTC Client API General Registry Settings
+aa525790	RTC Client API ACM Registry Settings
+aa525792	RTC Client API ACM Sample Registry Configuration
+aa525606	RTC Client API Security
+ms931948	RTC Client API Migration
+aa525632	General RTC Client API Migration Guidelines
+ms929620	RTC Client API Version Comparison
+aa525803	RTC Client API External API Additions
+aa525788	RTC Client API 1.2 Functionality
+ms931950	RTC Client API Samples
+ms909295	RTC Client API Reference
+ms909292	RTC Client API Constants
+ms912349	OAHWND
+ms931795	RTC_E_
+ms912578	RTC_S_
+ms931697	RTCAU_
+ms931725	RTCCS_
+ms931840	RTCEF_
+ms912432	RTCIF_
+ms912554	RTCMT_
+ms912574	RTCRF_
+ms912576	RTCRMF_
+ms912584	RTCSI_
+ms912587	RTCTR_
+ms909293	RTC Client API Enumerations
+ms931685	RTC_ACE_SCOPE
+ms931691	RTC_ANSWER_MODE
+ms931705	RTC_AUDIO_DEVICE
+ms931709	RTC_BUDDY_EVENT_TYPE
+ms931714	RTC_BUDDY_SUBSCRIPTION_TYPE
+ms931720	RTC_CLIENT_EVENT_TYPE
+ms931788	RTC_DTMF
+ms912360	RTC_EVENT
+ms912420	RTC_GROUP_EVENT_TYPE
+ms912438	RTC_LISTEN_MODE
+ms912439	RTC_MEDIA_EVENT_REASON
+ms912440	RTC_MEDIA_EVENT_TYPE
+ms912441	RTC_MESSAGING_EVENT_TYPE
+ms912453	RTC_MESSAGING_USER_STATUS
+ms912564	RTC_OFFER_WATCHER_MODE
+ms912565	RTC_PARTICIPANT_STATE
+ms912566	RTC_PORT_TYPE
+ms912567	RTC_PRESENCE_PROPERTY
+ms912568	RTC_PRESENCE_STATUS
+ms912569	RTC_PRIVACY_MODE
+ms912570	RTC_PROFILE_EVENT_TYPE
+ms912571	RTC_PROVIDER_URI
+ms912572	RTC_REGISTRATION_STATE
+ms912573	RTC_REINVITE_STATE
+ms912575	RTC_RING_TYPE
+ms912577	RTC_ROAMING_EVENT_TYPE
+ms912579	RTC_SECURITY_LEVEL
+ms912580	RTC_SECURITY_TYPE
+ms912581	RTC_SESSION_REFER_STATUS
+ms912582	RTC_SESSION_STATE
+ms912583	RTC_SESSION_TYPE
+ms912585	RTC_T120_APPLET
+ms912586	RTC_TERMINATE_REASON
+ms912588	RTC_USER_SEARCH_COLUMN
+ms912589	RTC_USER_SEARCH_PREFERENCE
+ms912590	RTC_VIDEO_DEVICE
+ms912591	RTC_WATCHER_EVENT_TYPE
+ms912592	RTC_WATCHER_MATCH_MODE
+ms912593	RTC_WATCHER_STATE
+ms909294	RTC Client API Interfaces
+ms930117	IRTCBuddy
+ms930128	IRTCBuddy::Notes
+ms930134	IRTCBuddy::Status
+ms909311	IRTCBuddy2
+ms909308	IRTCBuddy2::EnumerateGroups
+ms909309	IRTCBuddy2::EnumeratePresenceDevices
+ms909310	IRTCBuddy2::Groups
+ms909312	IRTCBuddy2::PresenceDevices
+ms909313	IRTCBuddy2::PresenceProperty
+ms909314	IRTCBuddy2::Profile
+ms909315	IRTCBuddy2::Refresh
+ms909316	IRTCBuddy2::SubscriptionType
+ms909322	IRTCBuddyEvent
+ms909321	IRTCBuddyEvent::Buddy
+ms909318	IRTCBuddyEvent2
+ms909317	IRTCBuddyEvent2::EventType
+ms909319	IRTCBuddyEvent2::StatusCode
+ms909320	IRTCBuddyEvent2::StatusText
+ms909657	IRTCBuddyGroup
+ms909323	IRTCBuddyGroup::AddBuddy
+ms909324	IRTCBuddyGroup::Buddies
+ms909325	IRTCBuddyGroup::Data
+ms909326	IRTCBuddyGroup::EnumerateBuddies
+ms929968	IRTCBuddyGroup::Name
+ms930098	IRTCBuddyGroup::Profile
+ms930105	IRTCBuddyGroup::RemoveBuddy
+ms909457	IRTCBuddyGroupEvent
+ms909327	IRTCBuddyGroupEvent::Buddy
+ms909328	IRTCBuddyGroupEvent::EventType
+ms909329	IRTCBuddyGroupEvent::Group
+ms909548	IRTCBuddyGroupEvent::StatusCode
+ms910065	IRTCClient
+ms910041	IRTCClient::ActiveMedia
+ms910051	IRTCClient::AudioMuted
+ms910054	IRTCClient::CreateSession
+ms910058	IRTCClient::EventFilter
+ms910061	IRTCClient::Initialize
+ms910062	IRTCClient::InvokeTuningWizard
+ms910063	IRTCClient::IsT120AppletRunning
+ms910064	IRTCClient::IsTuned
+ms910066	IRTCClient::IVideoWindow
+ms910067	IRTCClient::ListenForIncomingSessions
+ms910068	IRTCClient::LocalUserName
+ms910069	IRTCClient::LocalUserURI
+ms910071	IRTCClient::MaxBitrate
+ms910072	IRTCClient::MediaCapabilities
+ms910073	IRTCClient::NetworkAddresses
+ms910074	IRTCClient::NetworkQuality
+ms910075	IRTCClient::PlayRing
+ms910080	IRTCClient::PreferredAEC
+ms910081	IRTCClient::PreferredAudioDevice
+ms910082	IRTCClient::PreferredMediaTypes
+ms910083	IRTCClient::PreferredVideoDevice
+ms910084	IRTCClient::PreferredVolume
+ms910085	IRTCClient::PrepareForShutdown
+ms910129	IRTCClient::SendDTMF
+ms910130	IRTCClient::SetPreferredMediaTypes
+ms910131	IRTCClient::Shutdown
+ms910132	IRTCClient::StartT120Applet
+ms910133	IRTCClient::StopT120Applets
+ms910134	IRTCClient::TemporalSpatialTradeOff
+ms910135	IRTCClient::Volume
+ms930238	IRTCClient2
+ms909665	IRTCClient2::AllowedPorts
+ms909769	IRTCClient2::AnswerMode
+ms909780	IRTCClient2::ClientCurVer
+ms909789	IRTCClient2::ClientName
+ms909800	IRTCClient2::CreateSessionWithDescription
+ms909809	IRTCClient2::InitializeEx
+ms909899	IRTCClient2::InvokeTuningWizardEx
+ms930346	IRTCClient2::PreferredSecurityLevel
+ms930435	IRTCClient2::SetSessionDescriptionManager
+ms930643	IRTCClient2::Version
+ms910059	IRTCClientEvent
+ms910055	IRTCClientEvent::Client
+ms910056	IRTCClientEvent::EventType
+ms910077	IRTCClientPortManagement
+ms910076	IRTCClientPortManagement::GetPortRange
+ms910078	IRTCClientPortManagement::StartListenAddressAndPort
+ms910079	IRTCClientPortManagement::StopListenAddressAndPort
+ms910110	IRTCClientPresence
+ms910101	IRTCClientPresence::AddBuddy
+ms910102	IRTCClientPresence::AddWatcher
+ms910103	IRTCClientPresence::Buddies
+ms910104	IRTCClientPresence::Buddy
+ms910105	IRTCClientPresence::EnablePresence
+ms910106	IRTCClientPresence::EnumerateBuddies
+ms910107	IRTCClientPresence::EnumerateWatchers
+ms910108	IRTCClientPresence::Export
+ms910109	IRTCClientPresence::Import
+ms910112	IRTCClientPresence::OfferWatcherMode
+ms910113	IRTCClientPresence::PrivacyMode
+ms910114	IRTCClientPresence::RemoveBuddy
+ms910115	IRTCClientPresence::RemoveWatcher
+ms910116	IRTCClientPresence::SetLocalPresenceInfo
+ms910117	IRTCClientPresence::Watcher
+ms910118	IRTCClientPresence::Watchers
+ms910096	IRTCClientPresence2
+ms910086	IRTCClientPresence2::AddBuddyEx
+ms910087	IRTCClientPresence2::AddGroup
+ms910088	IRTCClientPresence2::AddWatcherEx
+ms910089	IRTCClientPresence2::DisablePresence
+ms910090	IRTCClientPresence2::EnablePresenceEx
+ms910091	IRTCClientPresence2::EnumerateGroups
+ms910092	IRTCClientPresence2::GetLocalPresenceInfo
+ms910093	IRTCClientPresence2::GetPresenceData
+ms910094	IRTCClientPresence2::Group
+ms910095	IRTCClientPresence2::Groups
+ms910097	IRTCClientPresence2::PresenceProperty
+ms910098	IRTCClientPresence2::RemoveGroup
+ms910099	IRTCClientPresence2::SetPresenceData
+ms910100	IRTCClientPresence2::WatcherEx
+ms910126	IRTCClientProvisioning
+ms910121	IRTCClientProvisioning::CreateProfile
+ms910122	IRTCClientProvisioning::DisableProfile
+ms910123	IRTCClientProvisioning::EnableProfile
+ms910124	IRTCClientProvisioning::EnumerateProfiles
+ms910125	IRTCClientProvisioning::GetProfile
+ms910127	IRTCClientProvisioning::Profiles
+ms910128	IRTCClientProvisioning::SessionCapabilities
+ms910120	IRTCClientProvisioning2
+ms910119	IRTCClientProvisioning2::EnableProfileEx
+ms930821	IRTCCollection
+ms930842	IRTCCollection::_NewEnum
+ms930755	IRTCCollection::Count
+ms930835	IRTCCollection::Item
+ms930859	IRTCEnumBuddies
+ms930851	IRTCEnumBuddies::Clone
+ms930867	IRTCEnumBuddies::Next
+ms930877	IRTCEnumBuddies::Reset
+ms930885	IRTCEnumBuddies::Skip
+ms930900	IRTCEnumGroups
+ms930893	IRTCEnumGroups::Clone
+ms910271	IRTCEnumGroups::Next
+ms910302	IRTCEnumGroups::Reset
+ms910310	IRTCEnumGroups::Skip
+ms910330	IRTCEnumParticipants
+ms910323	IRTCEnumParticipants::Clone
+ms910340	IRTCEnumParticipants::Next
+ms910350	IRTCEnumParticipants::Reset
+ms910356	IRTCEnumParticipants::Skip
+ms910372	IRTCEnumPresenceDevices
+ms910365	IRTCEnumPresenceDevices::Clone
+ms910377	IRTCEnumPresenceDevices::Next
+ms910387	IRTCEnumPresenceDevices::Reset
+ms910391	IRTCEnumPresenceDevices::Skip
+ms910402	IRTCEnumProfiles
+ms910397	IRTCEnumProfiles::Clone
+ms910408	IRTCEnumProfiles::Next
+ms910413	IRTCEnumProfiles::Reset
+ms910417	IRTCEnumProfiles::Skip
+ms910432	IRTCEnumUserSearchResults
+ms910426	IRTCEnumUserSearchResults::Clone
+ms910437	IRTCEnumUserSearchResults::Next
+ms910443	IRTCEnumUserSearchResults::Reset
+ms910452	IRTCEnumUserSearchResults::Skip
+ms910454	IRTCEnumWatchers
+ms910453	IRTCEnumWatchers::Clone
+ms910455	IRTCEnumWatchers::Next
+ms910456	IRTCEnumWatchers::Reset
+ms910457	IRTCEnumWatchers::Skip
+ms910459	IRTCEventNotification
+ms910458	IRTCEventNotification::Event
+ms910460	IRTCInfoEvent
+ms910461	IRTCInfoEvent::Info
+ms910462	IRTCInfoEvent::InfoHeader
+ms910463	IRTCInfoEvent::Participant
+ms910464	IRTCInfoEvent::Session
+ms910466	IRTCIntensityEvent
+ms910465	IRTCIntensityEvent::Direction
+ms910467	IRTCIntensityEvent::Level
+ms910468	IRTCIntensityEvent::Max
+ms910469	IRTCIntensityEvent::Min
+ms910472	IRTCMediaEvent:IDispatch
+ms910470	IRTCMediaEvent::EventReason
+ms910471	IRTCMediaEvent::EventType
+ms910473	IRTCMediaEvent::MediaType
+ms910476	IRTCMediaRequestEvent
+ms910474	IRTCMediaRequestEvent::Accept
+ms910475	IRTCMediaRequestEvent::CurrentMedia
+ms910477	IRTCMediaRequestEvent::ProposedMedia
+ms910478	IRTCMediaRequestEvent::Reject
+ms910479	IRTCMediaRequestEvent::RemotePreferredSecurityLevel
+ms910480	IRTCMediaRequestEvent::Session
+ms910481	IRTCMediaRequestEvent::State
+ms910483	IRTCMessagingEvent
+ms910482	IRTCMessagingEvent::EventType
+ms910484	IRTCMessagingEvent::Message
+ms910485	IRTCMessagingEvent::MessageHeader
+ms910486	IRTCMessagingEvent::Participant
+ms910487	IRTCMessagingEvent::Session
+ms910488	IRTCMessagingEvent::UserStatus
+ms910489	IRTCParticipant
+ms910490	IRTCParticipant::Name
+ms910491	IRTCParticipant::Removable
+ms910492	IRTCParticipant::Session
+ms910493	IRTCParticipant::State
+ms910498	IRTCParticipant::UserURI
+ms910494	IRTCParticipantStateChangeEvent
+ms910495	IRTCParticipantStateChangeEvent::Participant
+ms910496	IRTCParticipantStateChangeEvent::State
+ms910497	IRTCParticipantStateChangeEvent::StatusCode
+ms910500	IRTCPortManager
+ms910499	IRTCPortManager::GetMapping
+ms910501	IRTCPortManager::ReleaseMapping
+ms910502	IRTCPortManager::UpdateRemoteAddress
+ms910504	IRTCPresenceContact
+ms910503	IRTCPresenceContact::Data
+ms910505	IRTCPresenceContact::Name
+ms910506	IRTCPresenceContact::Persistent
+ms910507	IRTCPresenceContact::PresentityURI
+ms910509	IRTCPresenceDataEvent
+ms910508	IRTCPresenceDataEvent::GetPresenceData
+ms910510	IRTCPresenceDataEvent::StatusCode
+ms910511	IRTCPresenceDataEvent::StatusText
+ms910513	IRTCPresenceDevice
+ms910512	IRTCPresenceDevice::GetPresenceData
+ms910514	IRTCPresenceDevice::Notes
+ms910515	IRTCPresenceDevice::PresenceProperty
+ms910516	IRTCPresenceDevice::Status
+ms910517	IRTCPresencePropertyEvent
+ms910518	IRTCPresencePropertyEvent::PresenceProperty
+ms910647	IRTCPresencePropertyEvent::StatusCode
+ms910714	IRTCPresencePropertyEvent::StatusText
+ms910716	IRTCPresencePropertyEvent::Value
+ms910727	IRTCPresenceStatusEvent
+ms910723	IRTCPresenceStatusEvent::GetLocalPresenceInfo
+ms910732	IRTCPresenceStatusEvent::StatusCode
+ms910739	IRTCPresenceStatusEvent::StatusText
+ms910818	IRTCProfile
+ms910755	IRTCProfile::ClientBanner
+ms910763	IRTCProfile::ClientCurVer
+ms910765	IRTCProfile::ClientData
+ms910773	IRTCProfile::ClientMinVer
+ms910779	IRTCProfile::ClientName
+ms910783	IRTCProfile::ClientUpdateURI
+ms910822	IRTCProfile::Key
+ms910829	IRTCProfile::Name
+ms910834	IRTCProfile::ProviderData
+ms910840	IRTCProfile::ProviderName
+ms910842	IRTCProfile::ProviderURI
+ms910847	IRTCProfile::SessionCapabilities
+ms910854	IRTCProfile::SetCredentials
+ms910856	IRTCProfile::State
+ms910861	IRTCProfile::UserAccount
+ms910869	IRTCProfile::UserName
+ms910874	IRTCProfile::UserURI
+ms910875	IRTCProfile::XML
+ms910746	IRTCProfile2
+ms910743	IRTCProfile2::AllowedAuth
+ms910751	IRTCProfile2::Realm
+ms910804	IRTCProfileEvent
+ms910798	IRTCProfileEvent::Cookie
+ms910808	IRTCProfileEvent::Profile
+ms910813	IRTCProfileEvent::StatusCode
+ms910794	IRTCProfileEvent2
+ms910785	IRTCProfileEvent2::EventType
+ms910876	IRTCRegistrationStateChangeEvent
+ms910877	IRTCRegistrationStateChangeEvent::Profile
+ms910878	IRTCRegistrationStateChangeEvent::State
+ms910879	IRTCRegistrationStateChangeEvent::StatusCode
+ms910880	IRTCRegistrationStateChangeEvent::StatusText
+ms910883	IRTCReInviteEvent
+ms910881	IRTCReInviteEvent::Accept
+ms910882	IRTCReInviteEvent::GetRemoteSessionDescription
+ms910884	IRTCReInviteEvent::Reject
+ms910885	IRTCReInviteEvent::Session
+ms910886	IRTCReInviteEvent::State
+ms910889	IRTCRoamingEvent
+ms910887	IRTCRoamingEvent::EventType
+ms910890	IRTCRoamingEvent::Profile
+ms910891	IRTCRoamingEvent::StatusCode
+ms910892	IRTCRoamingEvent::StatusText
+ms910916	IRTCSession
+ms910899	IRTCSession::AddParticipant
+ms910900	IRTCSession::AddStream
+ms910901	IRTCSession::Answer
+ms910910	IRTCSession::CanAddParticipants
+ms910911	IRTCSession::Client
+ms910914	IRTCSession::EncryptionKey
+ms910915	IRTCSession::EnumerateParticipants
+ms910917	IRTCSession::NextRedirectedUser
+ms910926	IRTCSession::Participants
+ms910929	IRTCSession::Profile
+ms910930	IRTCSession::Redirect
+ms910931	IRTCSession::RedirectedUserName
+ms910932	IRTCSession::RedirectedUserURI
+ms930927	IRTCSession::RemoveParticipant
+ms930933	IRTCSession::RemoveStream
+ms930939	IRTCSession::SendMessage
+ms930943	IRTCSession::SendMessageStatus
+ms930950	IRTCSession::State
+ms931149	IRTCSession::Terminate
+ms931166	IRTCSession::Type
+ms910894	IRTCSession2
+ms910893	IRTCSession2::AnswerWithSessionDescription
+ms910895	IRTCSession2::IsSecurityEnabled
+ms910896	IRTCSession2::PreferredSecurityLevel
+ms910897	IRTCSession2::ReInviteWithSessionDescription
+ms910898	IRTCSession2::SendInfo
+ms910905	IRTCSessionCallControl
+ms910902	IRTCSessionCallControl::Forward
+ms910903	IRTCSessionCallControl::Hold
+ms910904	IRTCSessionCallControl::IsReferred
+ms910906	IRTCSessionCallControl::Refer
+ms910907	IRTCSessionCallControl::ReferCookie
+ms910908	IRTCSessionCallControl::ReferredByURI
+ms910909	IRTCSessionCallControl::UnHold
+ms910913	IRTCSessionDescriptionManager
+ms910912	IRTCSessionDescriptionManager::EvaluateSessionDescription
+ms910922	IRTCSessionOperationCompleteEvent
+ms910921	IRTCSessionOperationCompleteEvent::Cookie
+ms910923	IRTCSessionOperationCompleteEvent::Session
+ms910924	IRTCSessionOperationCompleteEvent::StatusCode
+ms910925	IRTCSessionOperationCompleteEvent::StatusText
+ms910919	IRTCSessionOperationCompleteEvent2
+ms910918	IRTCSessionOperationCompleteEvent2::GetRemoteSessionDescription
+ms910920	IRTCSessionOperationCompleteEvent2::Participant
+ms910927	IRTCSessionPortManagement
+ms910928	IRTCSessionPortManagement::SetPortManager
+ms910934	IRTCSessionReferredEvent
+ms910933	IRTCSessionReferredEvent::Accept
+ms910935	IRTCSessionReferredEvent::ReferCookie
+ms910936	IRTCSessionReferredEvent::ReferredByURI
+ms910937	IRTCSessionReferredEvent::ReferToURI
+ms910938	IRTCSessionReferredEvent::Reject
+ms910939	IRTCSessionReferredEvent::Session
+ms910940	IRTCSessionReferredEvent::SetReferredSessionState
+ms910941	IRTCSessionReferStatusEvent
+ms911220	IRTCSessionReferStatusEvent::ReferStatus
+ms911312	IRTCSessionReferStatusEvent::Session
+ms930910	IRTCSessionReferStatusEvent::StatusCode
+ms930918	IRTCSessionReferStatusEvent::StatusText
+ms931002	IRTCSessionStateChangeEvent
+ms931011	IRTCSessionStateChangeEvent::Session
+ms931017	IRTCSessionStateChangeEvent::State
+ms931031	IRTCSessionStateChangeEvent::StatusCode
+ms931043	IRTCSessionStateChangeEvent::StatusText
+ms930967	IRTCSessionStateChangeEvent2
+ms930958	IRTCSessionStateChangeEvent2::GetRemoteSessionDescription
+ms930976	IRTCSessionStateChangeEvent2::IsForked
+ms930984	IRTCSessionStateChangeEvent2::MediaTypes
+ms930993	IRTCSessionStateChangeEvent2::RemotePreferredSecurityLevel
+ms911336	IRTCUserSearch
+ms911320	IRTCUserSearch::CreateQuery
+ms911326	IRTCUserSearch::ExecuteSearch
+ms911340	IRTCUserSearchQuery
+ms911348	IRTCUserSearchQuery::SearchDomain
+ms911359	IRTCUserSearchQuery::SearchPreference
+ms911365	IRTCUserSearchQuery::SearchTerm
+ms911377	IRTCUserSearchQuery::SearchTerms
+ms911385	IRTCUserSearchResult
+ms911458	IRTCUserSearchResult::Value
+ms911408	IRTCUserSearchResultsEvent:IDispatch
+ms911392	IRTCUserSearchResultsEvent::Cookie
+ms911400	IRTCUserSearchResultsEvent::EnumerateResults
+ms911421	IRTCUserSearchResultsEvent::MoreAvailable
+ms911430	IRTCUserSearchResultsEvent::Profile
+ms911437	IRTCUserSearchResultsEvent::Query
+ms911445	IRTCUserSearchResultsEvent::Results
+ms911449	IRTCUserSearchResultsEvent::StatusCode
+ms911518	IRTCWatcher
+ms911524	IRTCWatcher::State
+ms911467	IRTCWatcher2
+ms911477	IRTCWatcher2::Profile
+ms911481	IRTCWatcher2::Scope
+ms911502	IRTCWatcherEvent
+ms911509	IRTCWatcherEvent::Watcher
+ms911492	IRTCWatcherEvent2
+ms911489	IRTCWatcherEvent2::EventType
+ms911496	IRTCWatcherEvent2::StatusCode
+ms909296	RTC Client API XML Schema
+aa525603	Client Settings
+aa525670	Provider Settings
+aa525674	Provision Settings
+ms909234	Session Settings
+ms909246	SIP Server Settings
+ms909270	User Settings

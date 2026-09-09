@@ -43,7 +43,85 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/pimstore.h \
        include/msxml2.h \
        include/d3dm.h \
-       include/sapi.h
+       include/sapi.h \
+       include/Aygshell.h \
+       include/Bt_api.h \
+       include/Btagnetwork.h \
+       include/Btagpub.h \
+       include/Bthapi.h \
+       include/Bthsdpdef.h \
+       include/CEDDK.h \
+       include/Cchannel.h \
+       include/Celog.h \
+       include/Commctrl.h \
+       include/Commdlg.h \
+       include/Cpl.h \
+       include/D3dm.h \
+       include/D3dmcaps.h \
+       include/D3dmtypes.h \
+       include/Dbgapi.h \
+       include/Ddraw.h \
+       include/Discodlg.h \
+       include/Dvp.h \
+       include/ErrorRep.h \
+       include/Excpt.h \
+       include/Extfile.h \
+       include/Imaging.h \
+       include/Imm.h \
+       include/Keybd.h \
+       include/Kfuncs.h \
+       include/Mlang.h \
+       include/Mmsystem.h \
+       include/Msgqueue.h \
+       include/Msxml2.h \
+       include/Natedit.h \
+       include/Netui.h \
+       include/Notify.h \
+       include/Pchannel.h \
+       include/Pcommctrl.h \
+       include/Pimstore.h \
+       include/Prsht.h \
+       include/Psapi.h \
+       include/Pwinuser.h \
+       include/Sapi.h \
+       include/Sapiddk.h \
+       include/Shellapi.h \
+       include/Shelwapi.h \
+       include/Shlguid.h \
+       include/Shlobj.h \
+       include/Shobjidl.h \
+       include/Shtypes.h \
+       include/Sip.h \
+       include/Sipapi.h \
+       include/Snmp.h \
+       include/Snmpapi.h \
+       include/Snmpexts.h \
+       include/Sphelper.h \
+       include/Tapi.h \
+       include/Tapicomn.h \
+       include/Tlhelp.h \
+       include/Tlhelp32.h \
+       include/Tvout.h \
+       include/Unimodem.h \
+       include/Urlmon.h \
+       include/Winbase.h \
+       include/Winber.h \
+       include/Wincrypt.h \
+       include/Windef.h \
+       include/Windows.h \
+       include/Windowsx.h \
+       include/Wingdi.h \
+       include/Winldap.h \
+       include/Winnls.h \
+       include/Winnt.h \
+       include/Winreg.h \
+       include/Winscard.h \
+       include/Winsock2.h \
+       include/Winuser.h \
+       include/Ws2bth.h \
+       include/Ws2spi.h \
+       include/Ws2tcpip.h \
+       include/sapiddk.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 

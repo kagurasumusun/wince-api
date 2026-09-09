@@ -4923,3 +4923,40 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m68: 3 size asserts + 10 enum-value asserts + shaped usage of 23
 opaque interface pointers).  Headers 72 -> 73; defs 56 (unchanged
 count).
+
+### M69a -- documented-case header aliases (78 alias headers)
+
+The CE Requirements rows print mixed-case header names ("Header:
+Commctrl.h", "Header: Sapi.h, Sapi.idl", ...).  On the case-sensitive
+filesystems the LLVM-WinCE cross toolchain runs on, sample code that
+follows the documented spelling (#include <Commctrl.h>) failed to
+find our lowercase files.  78 one-line alias headers now cover every
+documented spelling that differs in case from the carrying header:
+
+* 65 documented-case aliases (Commctrl.h, Windows.h, Winbase.h,
+  Winuser.h, Mmsystem.h, Imaging.h, Pimstore.h, Msxml2.h, D3dm.h,
+  Sapi.h, ... -- page-count provenance in each alias comment).
+* Merged-content aliases: Sapiddk.h/sapiddk.h + Sphelper.h -> sapi.h
+  (M68), D3dmtypes.h + D3dmcaps.h -> d3dm.h (M67).
+* Content-verified aliases: Tlhelp.h -> tlhelp32.h (the Heap32*
+  pages' print), Pcommctrl.h -> commctrl.h (ListView_*WorkAreas
+  macros), Pchannel.h -> cchannel.h (CHANNEL_DEF/PDU_HEADER),
+  Kfuncs.h -> winbase.h (DebugBreak/GetCurrentProcess*/SetEvent/
+  ResetEvent kernel helpers), Unimodem.h/Netui.h -> tapi.h (PHONECAPS
+  / LINECONFIGDATA), Shlguid.h -> aygshell.h (FILECHANGENOTIFY).
+* Not aliasable yet (no carrying header; recorded as gaps):
+  Msime.h (30 IPCTRL_* constant pages -- International/Japanese IME
+  queue), Bthid.h (2 BTHHID_IOCTL pages, driver-side),
+  bt_ddi.h/Bt_ddi.h (6 pages, driver DDI), Windbase.h (2 CEDB pages
+  -- lands with the M70 CEDB remainder unit).
+
+WARNING recorded in every alias: a case-insensitive checkout
+(Windows host) collides the alias with the real header; the alias
+set targets cross toolchains on case-sensitive filesystems.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU now includes the documented-case spellings
+<Commctrl.h> <Windows.h> <Mmsystem.h> <Imaging.h> <Pimstore.h>
+<Msxml2.h> <D3dm.h> <D3dmtypes.h> <Sapi.h> <Sapiddk.h> <Sphelper.h>
+<Tlhelp32.h> <Aygshell.h> <Kfuncs.h>).  Headers 73 -> 151 (73 real +
+78 aliases); defs unchanged.

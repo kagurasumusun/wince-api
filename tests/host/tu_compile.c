@@ -75,6 +75,22 @@
 #include <d3dm.h>
 #include <sapi.h>
 #include <stddef.h>
+/* M69a: documented-case include aliases (docs print these spellings). */
+#include <Commctrl.h>
+#include <Windows.h>
+#include <Winbase.h>
+#include <Mmsystem.h>
+#include <Imaging.h>
+#include <Pimstore.h>
+#include <Msxml2.h>
+#include <D3dm.h>
+#include <D3dmtypes.h>
+#include <Sapi.h>
+#include <Sapiddk.h>
+#include <Sphelper.h>
+#include <Tlhelp32.h>
+#include <Aygshell.h>
+#include <Kfuncs.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
 typedef char assert_wchar_size[(sizeof(WCHAR) == 2) ? 1 : -1];
