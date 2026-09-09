@@ -5154,3 +5154,37 @@ REFERENCE_TIME members pin 8-byte alignment -- MPEG1VIDEOINFO pads
 with MinFrameInterval at offset 104), 8 enum value asserts, shaped
 usage of the full data surface incl. all incomplete-type pointers.
 Headers 76 real + 83 aliases = 159 files; defs 56 (unchanged).
+
+## M71a: Database Reference twin check (CE 6.0 / CE .NET) -- definitive hold + cross-version records
+
+tools/ce-twins.py mapped the dbref.manifest pages to their CE 6.0
+((v=winembedded.60)) and Windows CE .NET twins; 35 constant-bearing
+twin pages fetched (29 CE 6.0 + the 6 CE .NET DB_CEOID_* message
+twins; manifest tools/manifests/dbref-ce6-twins.manifest, pages in
+build/pages6 / build/pages4 per tree, no rows.json/def impact).
+
+* DEFINITIVE HOLD: CEDB_MAXDBASENAMELEN, CEDB_MAXSORTORDER,
+  CEDB_MAXSORTPROP, CCH_MAX_PASSWORD, every CEVT_* / CEDB_* flag
+  family member, WM_DBNOTIFICATION and the six DB_CEOID_* message
+  values are printed by NONE of the three official trees (CE 5.0
+  6422-page harvest, CE 6.0 twins, CE .NET message twins).  The
+  eight held structures stay incomplete types; the 59 flag names
+  and 7 message names stay comment records.  Zero-gap policy
+  satisfied at the highest available confidence.
+* Cross-version records added to windbase.h (comments only, no
+  declaration changes):
+  - CEDBASEINFOEX: CE 6.0 twins ee490380 (CEDB) / ee490234 (EDB)
+    print ONE body for both -- the CE 5.0 EDB member order
+    (wVersion, wNumSortOrder, dwFlags, ...); the CE 5.0 CEDB print
+    aa516992 is the outlier.  (CE 5.0/CE 6.0 print difference
+    recorded; layout still unpublished.)
+  - SORTORDERSPECEX (EDB): the CE 5.0 print's DWROD typo is
+    repaired to DWORD in the CE 6.0 twin ee490012.
+  - BY_HANDLE_DB_INFORMATION: corrected the M70 note -- the EDB
+    prints (aa516974 CE 5.0, ee490409 CE 6.0) add `WORD wReserved;`
+    after wVersion; the CEDB prints (aa516972, ee490788) do not.
+  - CEOIDINFOEX / CEOIDINFO / CEVOLUMEOPTIONS / SORTORDERSPEC:
+    CE 6.0 twins print the CE 5.0 bodies unchanged (verified).
+
+Verification: windbase.h standalone compile warning-free; make
+check GREEN (comments only; no TU/def changes).

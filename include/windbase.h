@@ -30,8 +30,13 @@
  *  - No numeric value for any CEVT_ or CEDB_ flag family member,
  *    nor for CEDB_MAXDBASENAMELEN / CEDB_MAXSORTORDER /
  *    CEDB_MAXSORTPROP / CCH_MAX_PASSWORD, is published on any CE
- *    page (the whole 6422-page harvest was scanned); those names
- *    are recorded below as comments only -- nothing is invented.
+ *    page: the CE 5.0 harvest (6422 pages at M70, 6605 at M70b) was
+ *    scanned, and the M71a twin check additionally fetched the CE
+ *    6.0 twins (29 pages, (v=winembedded.60)) and the Windows CE
+ *    .NET twins of the six DB_CEOID_* message pages -- values are
+ *    absent from all three official trees (manifest:
+ *    tools/manifests/dbref-ce6-twins.manifest).  Those names are
+ *    recorded below as comments only -- nothing is invented.
  *  - Structures whose layout depends on those unpublished array
  *    sizes are therefore recorded verbatim but declared as
  *    INCOMPLETE types (pointer-only), which is exactly how the
@@ -232,8 +237,12 @@ typedef struct _CEDBASEINFO CEDBASEINFO;
  *   } CEDBASEINFOEX;
  * TWIN CONFLICT: the EDB twin page aa516993 (CE 5.0+) prints a
  * DIFFERENT member order (wVersion, wNumSortOrder, dwFlags, ...) and
- * no struct tag, so the two pages cannot both be the layout; the
- * body stays unpublished here and both prints are recorded. */
+ * no struct tag, so the two CE 5.0 pages cannot both be the layout.
+ * TWIN CHECK (M71a): the CE 6.0 twins ee490380 (CEDB) and ee490234
+ * (EDB) print the SAME body for both -- the CE 5.0 EDB order
+ * (wVersion, wNumSortOrder, dwFlags, ...) -- making the CE 5.0 CEDB
+ * print aa516992 the outlier.  Recorded; body still unpublished
+ * (array sizes), both CE 5.0 prints kept above. */
 typedef struct _CEDBASEINFOEX CEDBASEINFOEX;
 
 /* ms892001 "SORTORDERSPECEX (CEDB) (Windows CE 5.0)" -- CE .NET 4.0+;
@@ -269,8 +278,14 @@ typedef struct _CEOIDINFOEX CEOIDINFOEX;
  *   typedef struct _BY_HANDLE_DB_INFORMATION { WORD wVersion;
  *     CEGUID guidVol; CEOID oidDbase; CEDBASEINFOEX infDatabase;
  *   } BY_HANDLE_DB_INFORMATION;
- * (EDB twin aa516974, CE 5.0+, prints the identical members.)
- * Held incomplete: CEDBASEINFOEX layout unpublished (see above). */
+ * Held incomplete: CEDBASEINFOEX layout unpublished (see above).
+ * TWIN NOTE (M71a): the EDB prints are NOT identical -- aa516974
+ * (CE 5.0) and ee490409 (CE 6.0) both add `WORD wReserved;` after
+ * wVersion, while the CEDB prints (aa516972, ee490788) do not; the
+ * CE 5.0 EDB print:
+ *   typedef struct BY_HANDLE_DB_INFORMATION { WORD wVersion;
+ *     WORD wReserved; CEGUID guidVol; CEOID oidDbase;
+ *     CEDBASEINFOEX infDatabase; } BY_HANDLE_DB_INFORMATION; */
 typedef struct _BY_HANDLE_DB_INFORMATION BY_HANDLE_DB_INFORMATION;
 typedef BY_HANDLE_DB_INFORMATION *LPBY_HANDLE_DB_INFORMATION;
 
@@ -502,7 +517,8 @@ typedef struct CEPROPSPEC {
 /* ms892010 "SORTORDERSPECEX (EDB) (Windows CE 5.0)": CE 5.0+.  The
  * EDB print names the type CESORTORDERSPECEX (distinct from the
  * CEDB SORTORDERSPECEX) and prints `DWROD rgdwFlags[...]` -- the
- * page's own typo for DWORD, recorded verbatim; the layout is held
+ * page's own typo for DWORD; the CE 6.0 twin ee490012 prints DWORD
+ * there (typo repaired upstream).  The layout is held
  * (CEDB_MAXSORTPROP unpublished), tag from the print:
  *   typedef struct CESORTORDERSPECEX { WORD wVersion; WORD
  *     wNumProps; WORD wKeyFlags; WORD wReserved;
