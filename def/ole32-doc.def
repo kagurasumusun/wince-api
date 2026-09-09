@@ -28,6 +28,7 @@ EXPORTS
   CoFreeAllLibraries
   CoFreeLibrary
   CoFreeUnusedLibraries
+  CoFreeUnusedLibrariesEx
   CoGetCallContext
   CoGetClassObject
   CoGetCurrentProcess
@@ -81,15 +82,30 @@ EXPORTS
   CreateFileMoniker
   CreateGenericComposite
   CreateItemMoniker
+  CreateOleAdviseHolder
   CreatePointerMoniker
+  CreateStreamOnHGlobal
   DllGetClassObject
   GetClassFile
+  GetHGlobalFromStream
   GetRunningObjectTable
   IIDFromString
+  IsEqualGUID
   MkParseDisplayName
   MonikerCommonPrefixWith
   MonikerRelativePathTo
+  OleCreate
+  OleDraw
+  OleIsRunning
+  OleLoadFromStream
+  OleRun
+  OleSave
+  OleSaveToStream
+  OleSetContainedObject
   ProgIDFromCLSID
+  ReadClassStg
+  ReadClassStm
+  ReleaseStgMedium
   StgCreateDocfile
   StgCreateDocfileOnILockBytes
   StgOpenStorage
@@ -98,3 +114,5 @@ EXPORTS
   StringFromGUID2
   StringFromIID
   UpdateDCOMSettings
+  WriteClassStg
+  WriteClassStm

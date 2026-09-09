@@ -6613,6 +6613,34 @@ static int m73a_shaped_usage(void)
     return (int)l;
 }
 
+static int m73b_shaped_usage(void)
+{
+    OLEVERB        verb;
+    STATDATA       sd;
+    OLEGETMONIKER  gm   = OLEGETMONIKER_ONLYIFTHERE;
+    OLEUPDATE      ou   = OLEUPDATE_ONCALL;
+    OLEWHICHMK     wm   = OLEWHICHMK_OBJFULL;
+    OLELINKBIND    lb   = OLELINKBIND_EVENIFCLASSDIFF;
+    STOREINFO      si;
+    LPOLEOBJECT    po  = (LPOLEOBJECT)0;
+    GUID           g1  = { 0 }, g2 = { 0 };
+    LPSTREAM       pstm = (LPSTREAM)0;
+    HRESULT        hr;
+
+    si.cbStruct = sizeof(STOREINFO);
+    verb.lVerb = 0; verb.grfAttribs = (DWORD)gm; verb.fuFlags = 0u;
+    sd.Formatetc.dwAspect = (DWORD)gm; sd.dwConnection = (DWORD)ou;
+    (void)verb; (void)sd; (void)wm; (void)lb; (void)po;
+    hr = IsEqualGUID(&g1, &g2);
+    hr = CreateStreamOnHGlobal((HGLOBAL)0, 0, &pstm);
+    hr = OleRun((LPUNKNOWN)0);
+    (void)OleIsRunning(po);
+    (void)ReadClassStg((IStorage *)0, (CLSID *)0);
+    (void)ReleaseStgMedium((STGMEDIUM *)0);
+    (void)hr;
+    return (int)si.cbStruct;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6732,6 +6760,8 @@ int host_tu_entry(void)
     if (m71c_shaped_usage() != 0)
         return 1;
     if (m73a_shaped_usage() != 0)
+        return 1;
+    if (m73b_shaped_usage() != 0)
         return 1;
     return 0;
 }

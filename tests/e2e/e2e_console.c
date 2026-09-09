@@ -101,6 +101,13 @@ int main(void)
         SysFreeString(bs);
         (void) CoInitializeEx((LPVOID)0, 0u);
     }
+    /* M73b: Ole2.h rows (def/ole32-doc.def, now 102 exports). */
+    {
+        GUID g = { 0 };
+        (void) IsEqualGUID(&g, &g);
+        (void) OleRun((LPUNKNOWN)0);
+        (void) CoFreeUnusedLibrariesEx(0u, 0u);
+    }
     /* M71c: DMO import surface (Msdmo.lib rows, def/msdmo-doc.def). */
     {
         GUID guid = { 0 };

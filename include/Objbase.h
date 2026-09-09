@@ -2677,6 +2677,453 @@ AKARI_CE_IMPORT HRESULT FreePropVariantArray(ULONG cVariants,
 AKARI_CE_IMPORT HRESULT VectorFromBstr(BSTR bstr, SAFEARRAY ** ppsa) AKARI_CE_NAME(VectorFromBstr);
 
 
+
+/* ================================================================
+ * M73b: COM and DCOM Reference -- remaining interface surface
+ * (COM/OLE/Storage books, manifests dcom-{com,ole,storage}).
+ * ================================================================ */
+
+/* Opaque interface forwards (32; the COM and DCOM Reference pages
+ * print Header rows Objidl.h / Oleidl.h / Ocidl.h / Comcat.h /
+ * IAccess.h / Dccole.h / Unknwn.h with Link Library rows
+ * "Ole32.lib, Uuid.lib" (GUID linkage -- no export surface; the
+ * documented-case aliases for those headers point here). */
+typedef struct IAccessControl IAccessControl;
+typedef struct ICatInformation ICatInformation;
+typedef struct ICatRegister ICatRegister;
+typedef struct IContinueCallback IContinueCallback;
+typedef struct IDccMan IDccMan;
+typedef struct IDccManSink IDccManSink;
+typedef struct IEnumOLEVERB IEnumOLEVERB;
+typedef struct IObjectSafety IObjectSafety;
+typedef struct IOleAdviseHolder IOleAdviseHolder;
+typedef struct IOleClientSite IOleClientSite;
+typedef struct IOleContainer IOleContainer;
+typedef struct IOleControlSite IOleControlSite;
+typedef struct IOleInPlaceSite IOleInPlaceSite;
+typedef struct IOleLink IOleLink;
+typedef struct IOleObject IOleObject;
+typedef struct IOleWindow IOleWindow;
+typedef struct IParseDisplayName IParseDisplayName;
+typedef struct IPersist IPersist;
+typedef struct IPersistStorage IPersistStorage;
+typedef struct IPersistStream IPersistStream;
+typedef struct IPersistStreamInit IPersistStreamInit;
+typedef struct IProgressNotify IProgressNotify;
+typedef struct IProvideClassInfo IProvideClassInfo;
+typedef struct IProvideClassInfo2 IProvideClassInfo2;
+typedef struct IROTData IROTData;
+typedef struct IRootStorage IRootStorage;
+typedef struct IRunnableObject IRunnableObject;
+typedef struct ISequentialStream ISequentialStream;
+typedef struct IServerSecurity IServerSecurity;
+typedef struct IStdMarshalInfo IStdMarshalInfo;
+typedef struct IViewObject IViewObject;
+typedef struct IViewObject2 IViewObject2;
+
+/* Pointer-form closures printed by the function signatures below
+ * (mechanical pointer typedefs over the documented interface
+ * names; replace on an official print). */
+typedef IOleObject *LPOLEOBJECT;
+typedef const RECT   *LPCRECT;
+
+/* --- Functions (Ole32.lib rows -> def/ole32-doc.def; Olectl.h
+ * rows recorded). ------------------------------------------------ */
+
+/* ms863900 "CoFreeUnusedLibrariesEx": print `void CoFreeUnusedLibrariesEx( DWORD dwUnloadDelay, DWORD dwReserved);` */
+AKARI_CE_IMPORT void CoFreeUnusedLibrariesEx(DWORD dwUnloadDelay,
+                    DWORD dwReserved) AKARI_CE_NAME(CoFreeUnusedLibrariesEx);
+
+/* ms886018 "IsEqualGUID": print `BOOL IsEqualGUID(REFGUID rguid1,REFGUID rguid2);` */
+AKARI_CE_IMPORT BOOL IsEqualGUID(REFGUID rguid1,
+                    REFGUID rguid2) AKARI_CE_NAME(IsEqualGUID);
+
+/* ms864401 "CreateStreamOnHGlobal": print `WINOLEAPI CreateStreamOnHGlobal(HGLOBAL hGlobal,BOOL fDeleteOnRelease,LPSTREAM* ppstm);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT CreateStreamOnHGlobal(HGLOBAL hGlobal,
+                    BOOL fDeleteOnRelease,
+                    LPSTREAM *ppstm) AKARI_CE_NAME(CreateStreamOnHGlobal);
+
+/* aa515040 "GetHGlobalFromStream": print `WINOLEAPI GetHGlobalFromStream(IStream* pstm,HGLOBAL* phglobal);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT GetHGlobalFromStream(IStream *pstm,
+                    HGLOBAL *phglobal) AKARI_CE_NAME(GetHGlobalFromStream);
+
+/* ms864397 "CreateOleAdviseHolder": print `WINOLEAPICreateOleAdviseHolder(IOleAdviseHolder FAR* FAR* ppOAHolder);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT CreateOleAdviseHolder(
+                    IOleAdviseHolder **ppOAHolder) AKARI_CE_NAME(CreateOleAdviseHolder);
+
+/* ms892596 "OleRun": print `WINOLEAPIOleRun(LPUNKNOWNpUnknown);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleRun(LPUNKNOWN pUnknown) AKARI_CE_NAME(OleRun);
+
+/* ms892593 "OleIsRunning": print `BOOLOleIsRunning(LPOLEOBJECTpObject);` */
+AKARI_CE_IMPORT BOOL OleIsRunning(
+                    LPOLEOBJECT pObject) AKARI_CE_NAME(OleIsRunning);
+
+/* ms892595 "OleLoadFromStream": print `WINOLEAPI OleLoadFromStream(IStream* pStm,REFIID iidInterface,void** ppvObj);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleLoadFromStream(IStream *pStm,
+                    REFIID iidInterface, void **ppvObj) AKARI_CE_NAME(OleLoadFromStream);
+
+/* ms892598 "OleSaveToStream": print `WINOLEAPI OleSaveToStream(IPersistStream* pPStm,IStream* pStm);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleSaveToStream(IPersistStream *pPStm,
+                    IStream *pStm) AKARI_CE_NAME(OleSaveToStream);
+
+/* ms892597 "OleSave": print `WINOLEAPI OleSave(IPersistStorage* pPS,IStorage* pStg,BOOLfSameAsLoad);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleSave(IPersistStorage *pPS,
+                    IStorage *pStg, BOOL fSameAsLoad) AKARI_CE_NAME(OleSave);
+
+/* ms892599 "OleSetContainedObject": print `WINOLEAPIOleSetContainedObject(LPUNKNOWNpUnk,BOOLfContained);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleSetContainedObject(LPUNKNOWN pUnk,
+                    BOOL fContained) AKARI_CE_NAME(OleSetContainedObject);
+
+/* ms892590 "OleCreate": print `WINOLEAPI OleCreate( REFCLSIDrclsid,REFIIDriid,DWORDrenderopt,FORMATETC* pFormatEtc,IOleClientSite* pClientSite,IStorage* pStg,void** ppvObject);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleCreate(REFCLSID rclsid, REFIID riid,
+                    DWORD renderopt, FORMATETC *pFormatEtc,
+                    IOleClientSite *pClientSite, IStorage *pStg,
+                    void **ppvObj) AKARI_CE_NAME(OleCreate);
+
+/* ms892591 "OleDraw": print `WINOLEAPIOleDraw(IUnknown* pUnk,DWORDdwAspect,HDChdcDraw,LPCRECTlprcBounds);` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT OleDraw(IUnknown *pUnk, DWORD dwAspect,
+                    HDC hdcDraw, LPCRECT lprcBounds) AKARI_CE_NAME(OleDraw);
+
+/* ms892641 "ReadClassStg": print `WINOLEAPI ReadClassStg( IStorage* pStg,CLSID* pclsid );` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT ReadClassStg(IStorage *pStg, CLSID *pclsid) AKARI_CE_NAME(ReadClassStg);
+
+/* ms892642 "ReadClassStm": print `WINOLEAPI ReadClassStm(IStream* pStm,CLSID* pclsid );` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT ReadClassStm(IStream *pSm, CLSID *pclsid) AKARI_CE_NAME(ReadClassStm);
+
+/* ms897190 "WriteClassStg": print `WINOLEAPIWriteClassStg(IStorage* pStg,REFCLSIDrclsid );` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT WriteClassStg(IStorage *pStg, REFCLSID rclsid) AKARI_CE_NAME(WriteClassStg);
+
+/* ms897191 "WriteClassStm": print `WINOLEAPIWriteClassStm(IStream* pStm,REFCLSIDrclsid );` -- WINOLEAPI/STDAPI are empty convention macros here (HRESULT) */
+AKARI_CE_IMPORT HRESULT WriteClassStm(IStream *pSm, REFCLSID rclsid) AKARI_CE_NAME(WriteClassStm);
+
+/* ms892649 "ReleaseStgMedium": print `void ReleaseStgMedium( STGMEDIUM* pmedium);` */
+AKARI_CE_IMPORT void ReleaseStgMedium(
+                    STGMEDIUM *pmedium) AKARI_CE_NAME(ReleaseStgMedium);
+
+/* ms864429 "DllRegisterServer" / ms864430 "DllUnregisterServer"
+ * (Olectl.h rows): prints `STDAPI DllRegisterServer(void);` /
+ * `STDAPI DllUnregisterServer(void);` (STDAPI is an empty convention
+ * macro here).  Link Library rows say Oleaut32.lib, but these are
+ * implemented and self-exported by each control DLL -- recorded;
+ * no import declaration. */
+
+/* OleSetMenuDescriptor (Ole2.h row): HELD -- the print takes
+ * HOLEMENU / LPOLEINPLACEFRAME / LPOLEINPLACEACTIVEOBJECT
+ * parameters whose typedefs no CE page publishes.  Verbatim:
+ *   WINOLEAPI OleSetMenuDescriptor( HOLEMENUholemenu,HWND hwndFrame,
+ *     HWND hwndActiveObject,LPOLEINPLACEFRAME lpFrame,
+ *     LPOLEINPLACEACTIVEOBJECT lpActiveObj, HWND hwndBackup);
+ */
+
+
+/* --- Types: OLE enums and structures (Oleidl.h rows). -------------- */
+
+/* ms892592 "OLEGETMONIKER" (CE 3.0+): print
+ * `typedef enum tagOLEGETMONIKER { OLEGETMONIKER_ONLYIFTHERE = 1,
+ * OLEGETMONIKER_FORCEASSIGN = 2, OLEGETMONIKER_UNASSIGN = 3,
+ * OLEGETMONIKER_TEMPFORUSER = 4} OLEGETMONIKER;` */
+typedef enum tagOLEGETMONIKER {
+    OLEGETMONIKER_ONLYIFTHERE = 1,
+    OLEGETMONIKER_FORCEASSIGN = 2,
+    OLEGETMONIKER_UNASSIGN = 3,
+    OLEGETMONIKER_TEMPFORUSER = 4
+} OLEGETMONIKER;
+
+/* ms892594 "OLELINKBIND" (CE 3.0+): print
+ * `typedef enum tagOLELINKBIND { OLELINKBIND_EVENIFCLASSDIFF = 1, } OLELINKBIND;` */
+typedef enum tagOLELINKBIND {
+    OLELINKBIND_EVENIFCLASSDIFF = 1
+} OLELINKBIND;
+
+/* ms892601 "OLEUPDATE" (CE 3.0+): print
+ * `typedef enum tagOLEUPDATE { OLEUPDATE_ALWAYS = 1, OLEUPDATE_ONCALL = 3 } OLEUPDATE;` */
+typedef enum tagOLEUPDATE {
+    OLEUPDATE_ALWAYS = 1,
+    OLEUPDATE_ONCALL = 3
+} OLEUPDATE;
+
+/* ms892603 "OLEVERBATTRIB" (CE 2.0+): print
+ * `typedef enum tagOLEVERBATTRIB {OLEVERBATTRIB_NEVERDIRTIES= 1,
+ * OLEVERBATTRIB_ONCONTAINERMENU= 2 } OLEVERBATTRIB;` */
+typedef enum tagOLEVERBATTRIB {
+    OLEVERBATTRIB_NEVERDIRTIES = 1,
+    OLEVERBATTRIB_ONCONTAINERMENU = 2
+} OLEVERBATTRIB;
+
+/* ms892604 "OLEWHICHMK" (CE 3.0+): print
+ * `typedef enum tagOLEWHICHMK { OLEWHICHMK_CONTAINER = 1,
+ * OLEWHICHMK_OBJREL = 2, OLEWHICHMK_OBJFULL = 3 } OLEWHICHMK;` */
+typedef enum tagOLEWHICHMK {
+    OLEWHICHMK_CONTAINER = 1,
+    OLEWHICHMK_OBJREL = 2,
+    OLEWHICHMK_OBJFULL = 3
+} OLEWHICHMK;
+
+/* ms892602 "OLEVERB" (CE 2.0+): print
+ * `typedef struct tagOLEVERB { LONGlVerb;LPWSTRlpszVerbName;DWORDfuFlags;
+ * DWORDgrfAttribs;} OLEVERB, *LPOLEVERB;` */
+typedef struct tagOLEVERB {
+    LONG   lVerb;
+    LPWSTR lpszVerbName;
+    DWORD  fuFlags;
+    DWORD  grfAttribs;
+} OLEVERB, *LPOLEVERB;
+
+/* ms882883 "IOleAdviseHolder::EnumAdvise" (CE 3.0+): print
+ * `typedef struct tagSTATDATA { FORMATETC Formatetc; DWORD grfAdvf;
+ * IAdviseSink * pAdvise; DWORD dwConnection; }STATDATA;` */
+typedef struct tagSTATDATA {
+    FORMATETC   Formatetc;
+    DWORD       grfAdvf;
+    IAdviseSink *pAdvise;
+    DWORD       dwConnection;
+} STATDATA;
+
+/* ms896271 "STOREINFO (COM)" (CE 2.0+, Header row Cesync.h -- the CE
+ * COM reference carries this sync-store struct here): print
+ * `typedef struct tagStoreInfo {UINT cbStruct;UINT uFlags;
+ * TCHAR szProgId[256];TCHAR szStoreDesc[200];UINT uTimerRes;
+ * UINT cbMaxStoreId;UINT cbStoreId;LPBYTE lpbStoreId;} STOREINFO,*PSTOREINFO;` */
+typedef struct tagStoreInfo {
+    UINT  cbStruct;
+    UINT  uFlags;
+    TCHAR szProgId[256];
+    TCHAR szStoreDesc[200];
+    UINT  uTimerRes;
+    UINT  cbMaxStoreId;
+    UINT  cbStoreId;
+    LPBYTE lpbStoreId;
+} STOREINFO, *PSTOREINFO;
+
+
+/* --- Held names (no CE page prints values or signatures). ---------- */
+/* COINIT_MULTITHREADED / COINIT_APARTMENTTHREADED: named as dwCoInit
+ * values on the CoInitializeEx pages (ms863915 CE 5.0; ms863914 says
+ * "call CoInitializeEx using the COINIT_MULTITHREADED constant") but
+ * NO CE page prints their numeric values -- held (users pass 0). */
+/* DirectInputCreate (ms864419, Dinput.h / Dinput.lib): appears in the
+ * COM book harvest but belongs to the DirectInput surface -- deferred
+ * to the DirectInput queue. */
+
+/* --- Interface method records (verbatim; M44 comment policy). --- */
+
+/* IAccessControl: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   aa515095 GetAllAccessRights: HRESULT GetAllAccessRights(LPWSTRlpProperty,PACTRL_ACCESSW* ppAccessList,PTRUSTEEW* ppOwner,PTRUSTEEW* ppGroup);
+ *   aa515097 GrantAccessRights: HRESULT GrantAccessRights(PACTRL_ACCESSWpAccessList);
+ *   aa515099 IsAccessAllowed: HRESULT IsAccessAllowed(PTRUSTEEWpTrustee,LPWSTRlpProperty,ACCESS_RIGHTSAccessRights,BOOL* pfAccessAllowed);
+ *   aa515102 RevokeAccessRights: HRESULT RevokeAccessRights(LPWSTRlpProperty,ULONGcTrustees,TRUSTEEWprgTrustees[]);
+ *   aa515103 SetAccessRights: HRESULT SetAccessRights(PACTRL_ACCESSWpAccessList);
+ *   aa515104 SetOwner: HRESULT SetOwner(PTRUSTEEWpOwner,PTRUSTEEWpGroup);
+ */
+
+/* ICatInformation: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   ms879987 EnumCategories: HRESULT EnumCategories(LCIDlcid,IEnumCATEGORYINFO** ppenumCatInfo );
+ *   ms880012 EnumClassesOfCategories: HRESULT EnumClassesOfCategories(ULONGcImplemented,CATIDrgcatidImpl,ULONGcRequired,CATIDrgcatidReq,IEnumCLSID** ppenumCLSID);
+ *   ms880020 EnumImplCategoriesOfClass: HRESULT EnumImplCategoriesOfClass(REFCLSIDrclsid,IEnumCATID** ppenumCATD);
+ *   ms880024 EnumReqCategoriesOfClass: HRESULT EnumReqCategoriesOfClass(REFCLSIDrclsid,IEnumCATID** ppenumCATD);
+ *   ms880029 GetCategoryDesc: HRESULT GetCategoryDesc(REFCATIDrcatid,LCIDlcid,PWCHAR* ppszDesc);
+ *   ms880032 IsClassOfCategories: HRESULT IsClassOfCategories(REFCLSIDrclsid,ULONGcImplemented,CATIDrgcatidImpl[],ULONGcRequired,CATIDrgcatidReq[]);
+ */
+
+/* ICatRegister: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   ms880045 RegisterCategories: HRESULT RegisterCategories(ULONGcCategories,CATEGORYINFOrgCategoryInfo[]);
+ *   ms880052 RegisterClassImplCategories: HRESULT RegisterClassImplCategories(REFCLSIDrclsid,ULONGcCategories,CATIDrgcatid[]);
+ *   ms880057 RegisterClassReqCategories: HRESULT RegisterClassReqCategories(REFCLSIDrclsid,ULONGcCategories,CATIDrgcatid[]);
+ *   ms880063 UnRegisterCategories: HRESULT UnRegisterCategories(ULONGcCategories,CATIDrgcatid[]);
+ *   ms880068 UnRegisterClassImplCategories: HRESULT UnRegisterClassImplCategories(REFCLSIDrclsid,ULONGcCategories,CATIDrgcatid[]);
+ *   ms880073 UnRegisterClassReqCategories: HRESULT UnRegisterClassReqCategories(REFCLSIDrclsid,ULONGcCategories,CATIDrgcatid[]);
+ */
+
+/* IContinueCallback: documented methods (2 pages).  Signatures recorded verbatim (do not compile):
+ *   ms880185 FContinue: HRESULT FContinue(void);
+ *   ms880191 FContinuePrinting: HRESULT FContinuePrinting(LONGcPagesPrinted,LONGnCurrentPage,LPOLESTRpszPrintStatus);
+ */
+
+/* IEnumOLEVERB: documented methods (4 pages).  Signatures recorded verbatim (do not compile):
+ *   aa515631 Clone: HRESULT Clone( IEnumOLEVERB ** ppenum);
+ *   aa515635 Next: HRESULT Next( ULONG celt, LPOLEVERB rgelt, ULONG * pceltFetched);
+ *   aa515636 Reset: HRESULT Reset(void);
+ *   aa515638 Skip: HRESULT Skip( ULONG celt);
+ */
+
+/* IObjectSafety: documented methods (2 pages).  Signatures recorded verbatim (do not compile):
+ *   ms882879 GetInterfaceSafetyOptions: HRESULT GetInterfaceSafetyOptions(REFIIDriid,DWORD*pdwSupportedOptions,DWORD*pdwEnabledOptions);
+ *   ms882881 SetInterfaceSafetyOptions: HRESULT SetInterfaceSafetyOptions(REFIIDriid,DWORDdwOptionSetMask,DWORDdwEnabledOptions);
+ */
+
+/* IOleAdviseHolder: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   ms882882 Advise: HRESULT Advise( IAdviseSink* pAdvise,DWORD* pdwConnection);
+ *   ms882883 EnumAdvise: HRESULT EnumAdvise( IENumSTATDATA* ppEnumAdvise);
+ *   ms882885 SendOnClose: 
+ *   ms882886 SendOnRename: HRESULT SendOnRename( IMoniker* pmk);
+ *   ms882887 SendOnSave: 
+ *   ms882889 Unadvise: HRESULT Unadvise(DWORDdwConnection);
+ */
+
+/* IOleClientSite: documented methods (5 pages).  Signatures recorded verbatim (do not compile):
+ *   ms882891 GetMoniker: HRESULT GetMoniker( DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk);
+ *   ms882893 OnShowWindow: HRESULT OnShowWindow( BOOL fShow);
+ *   ms882894 RequestNewObjectLayout: HRESULT RequestNewObjectLayout();
+ *   ms882895 SaveObject: HRESULT SaveObject(void);
+ *   ms882896 ShowObject: HRESULT ShowObject();
+ */
+
+/* IOleContainer: documented methods (2 pages).  Signatures recorded verbatim (do not compile):
+ *   aa519256 EnumObjects: HRESULT EnumObjects( DWORDgrfFlags, //Value specifying what is to be enumerated IEnumUnknown**ppenum //Address of output variable that receives the );
+ *   aa519258 LockContainer: HRESULT LockContainer( BOOLfLock //Value indicating lock or unlock );
+ */
+
+/* IOleControlSite: documented methods (7 pages).  Signatures recorded verbatim (do not compile):
+ *   aa519259 GetExtendedControl: HRESULT GetExtendedControl( IDispatch** ppDisp);
+ *   aa519261 LockInPlaceActive: HRESULT LockInPlaceActive( BOOL fLock);
+ *   aa519262 OnControlInfoChanged: HRESULT OnControlInfoChanged(void);
+ *   aa519263 OnFocus: HRESULT OnFocus( BOOL fGotFocus);
+ *   aa519264 ShowPropertyFrame: HRESULT ShowPropertyFrame(void);
+ *   aa519265 TransformCoords: HRESULT TransformCoords( POINTL* pPtlHimetric , POINTF* pPtfContainer , DWORD dwFlags);
+ *   aa519266 TranslateAccelerator: HRESULT TranslateAccelerator( LPMSG pMsg , DWORD grfModifiers);
+ */
+
+/* IOleInPlaceSite: documented methods (7 pages).  Signatures recorded verbatim (do not compile):
+ *   aa519268 CanInPlaceActivate: HRESULT CanInPlaceActivate();
+ *   aa519271 GetWindowContext: HRESULT GetWindowContext( IOleInPlaceFrame **ppFrame, IOleInPlaceUIWindow **ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo);
+ *   aa519273 OnInPlaceActivate: HRESULT OnInPlaceActivate();
+ *   aa519274 OnInPlaceDeactivate: HRESULT OnInPlaceDeactivate();
+ *   aa519275 OnPosRectChange: HRESULT OnPosRectChange( LPCRECT lprcPosRect);
+ *   aa519277 OnUIDeactivate: HRESULT OnUIDeactivate( BOOL fUndoable);
+ *   aa519278 Scroll: HRESULT Scroll( SIZE scrollExtent);
+ */
+
+/* IOleLink: documented methods (11 pages).  Signatures recorded verbatim (do not compile):
+ *   ms882901 BindIfRunning: HRESULT BindIfRunning(void);
+ *   ms882902 BindToSource: HRESULT BindToSource(DWORDbindflags,IBindCtx* pbc);
+ *   ms882903 GetBoundSource: HRESULT GetBoundSource(IUnknown** ppunk);
+ *   ms882904 GetSourceDisplayName: HRESULT GetSourceDisplayName(LPOLESTR* ppszDisplayName);
+ *   ms882905 GetSourceMoniker: HRESULT GetSourceMoniker(IMoniker** ppmk);
+ *   ms882906 GetUpdateOptions: HRESULT GetUpdateOptions(DWORD* pdwUpdateOpt);
+ *   ms882908 SetSourceDisplayName: HRESULT SetSourceDisplayName(LPCOLESTRpszStatusText);
+ *   ms882909 SetSourceMoniker: HRESULT SetSourceMoniker(IMoniker* pmk,REFCLSIDrclsid);
+ *   ms882910 SetUpdateOptions: HRESULT SetUpdateOptions(DWORDdwUpdateOpt);
+ *   ms882911 UnbindSource: HRESULT UnbindSource(void);
+ *   ms882912 Update: HRESULT Update(IBindCtx* pbc);
+ */
+
+/* IOleObject: documented methods (20 pages).  Signatures recorded verbatim (do not compile):
+ *   ms882913 Advise: HRESULT Advise( IAdviseSink* pAdvSink, DWORD* pdwConnection);
+ *   ms882914 Close: HRESULT Close( DWORD dwSaveOption);
+ *   ms882915 DoVerb: HRESULT DoVerb( LONG iVerb, LPMSG lpmsg, IOleClientSite* pActiveSite, LONG lindex, HWND hwndParent, LPCRECT lprcPosRect );
+ *   ms882916 EnumAdvise: HRESULT IEnumSTATDATA( IEnumSTATDATA** ppenumAdvise);
+ *   ms882917 EnumVerbs: HRESULT EnumVerbs( IEnumOleVerb** ppEnumOleVerb);
+ *   ms882918 GetClientSite: HRESULT GetClientSite( IOleClientSite** ppClientSite);
+ *   ms882919 GetClipboardData: HRESULT GetClipboardData( DWORD dwReserved, IDataObject** ppDataObject);
+ *   ms882920 GetExtent: HRESULT GetExtent( DWORD dwDrawAspect, SIZEL* psizel);
+ *   ms882921 GetMiscStatus: HRESULT GetMiscStatus( DWORD dwAspect, DWORD* pdwStatus);
+ *   ms882922 GetMoniker: HRESULT GetMoinker( DWORD dwAssign, DWORDdwWhichMoniker, IMoniker** ppmk );
+ *   ms882923 GetUserClassID: HRESULT GetUserClassID( CLSID* pClsid);
+ *   ms882924 GetUserType: HRESULT GetUserType( DWORD dwFormOfType, LPOLESTR* pszUserType);
+ *   ms882925 InitFromData: HRESULT InitFromData( IDataObject* pDataObject, BOOL fCreation, DWORD dwReserved);
+ *   ms882926 IsUpToDate: HRESULT IsUpToDate();
+ *   ms882928 SetClientSite: HRESULT SetClientSite( IOleClientSite* pClientSite);
+ *   ms882929 SetColorScheme: HRESULT SetColorScheme( LOGPALETTE* pLogpal);
+ *   ms882930 SetExtent: HRESULT SetExtent( DWORD dwDrawAspect, SIZEL* psizel);
+ *   ms882931 SetHostNames: HRESULT SetHostNames( LPCOLESTR szContainerApp, LPCOLESTR szContainerObj);
+ *   ms882933 Unadvise: HRESULT Unadvise( DWORD dwConnection);
+ *   ms882934 Update: HRESULT Update();
+ */
+
+/* IOleWindow: documented methods (2 pages).  Signatures recorded verbatim (do not compile):
+ *   aa519279 ContextSensitiveHelp: HRESULT ContextSensitiveHelp( BOOL fEnterMode);
+ *   aa519280 GetWindow: HRESULT GetWindow( HWND * phwnd);
+ */
+
+/* IParseDisplayName: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms882936 ParseDisplayName: HRESULT ParseDisplayName(IBindCtx* pbc,LPOLESTR pszDisplayName, ULONG* pchEaten,IMoniker** ppmkOut);
+ */
+
+/* IPersist: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms883501 GetClassID: HRESULT GetClassID( CLSID* pClassID);
+ */
+
+/* IPersistStorage: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   ms883673 HandsOffStorage: HRESULT HandsOfStorage(void);
+ *   ms883686 InitNew: HRESULT InitNew( IStorage* pStg);
+ *   ms883704 IsDirty: HRESULT IsDirty(void);
+ *   ms883717 Load: HRESULT Load( IStorage* pStg);
+ *   ms883726 Save: HRESULT Save( IStorage* pStgSave, BOOL fSameAsLoad);
+ *   ms883737 SaveCompleted: HRESULT SaveCompleted( IStorage* pStgNew);
+ */
+
+/* IPersistStream: documented methods (4 pages).  Signatures recorded verbatim (do not compile):
+ *   ms883746 GetSizeMax: HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize);
+ *   ms883830 IsDirty: HRESULT IsDirty(void);
+ *   ms883840 Load: HRESULT Load(IStream* pStm);
+ *   ms883850 Save: HRESULT Save(IStream* pStm,BOOLfClearDirty);
+ */
+
+/* IPersistStreamInit: documented methods (5 pages).  Signatures recorded verbatim (do not compile):
+ *   ms883758 GetSizeMax: HRESULT GetSizeMax(ULARGE_INTEGER* pcbSize);
+ *   ms883767 InitNew: HRESULT InitNew(void);
+ *   ms883784 IsDirty: HRESULT IsDirty(void);
+ *   ms883792 Load: HRESULT Load(LPSTREAM pStm);
+ *   ms883806 Save: HRESULT Save(LPSTREAM pStm,BOOL fClearDirty);
+ */
+
+/* IProgressNotify: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms884240 OnProgress: HRESULT OnProgress(DWORDdwProgressCurrent,DWORDdwProgressMaximum,BOOLfAccurate,BOOLfOwner);
+ */
+
+/* IProvideClassInfo: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms884308 GetClassInfo: HRESULT GetClassInfo(ITypeInfo** ppTI);
+ */
+
+/* IProvideClassInfo2: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms884278 GetGUID: HRESULT GetGUID(DWORDdwGuidKind,GUID* pGUID);
+ */
+
+/* IROTData: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms884587 GetComparisonData: HRESULT GetComparisonData(byte* pbData,ULONG cbMax,ULONG* pcbData);
+ */
+
+/* IRootStorage: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms884586 SwitchToFile: HRESULT SwitchTofFile( LPOLESTR pszFile);
+ */
+
+/* IRunnableObject: documented methods (5 pages).  Signatures recorded verbatim (do not compile):
+ *   ms884589 GetRunningClass: HRESULT GetRunningClass(LPCLSID lpClsid);
+ *   ms884590 IsRunning: BOOL IsRunning();
+ *   ms884593 LockRunning: HRESULT LockRunning(BOOL fLock,BOOL fLastUnlockCloses);
+ *   ms884594 Run: HRESULT Run(LPBC lpbc);
+ *   ms884595 SetContainedObject: HRESULT SetContainedObject(BOOL fContained);
+ */
+
+/* ISequentialStream: documented methods (2 pages).  Signatures recorded verbatim (do not compile):
+ *   ms886039 Read: HRESULT Read(void* pv,ULONG cb,ULONG* pcbRead);
+ *   ms886049 Write: HRESULT Write(void const* pv,ULONG cb,ULONG* pcbWritten);
+ */
+
+/* IServerSecurity: documented methods (4 pages).  Signatures recorded verbatim (do not compile):
+ *   ms886057 ImpersonateClient: 
+ *   ms886067 IsImpersonating: 
+ *   ms886085 QueryBlanket: HRESULT QueryBlanket(DWORD* pAuthnSvc,DWORD* pAuthzSvc,OLECHAR** pServerPrincName,DWORD* pAuthnLevel,DWORD* pImpLevel,RPC_AUTHZ_HANDLE* pPrivs,DWORD* pCapabilities);
+ *   ms886097 RevertToSelf: 
+ */
+
+/* IStdMarshalInfo: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms890547 GetClassForHandler: HRESULT GetClassForHandler(DWORD dwDestContext,void* pvDestContext,CLSID* pClsid);
+ */
+
+/* IViewObject: documented methods (6 pages).  Signatures recorded verbatim (do not compile):
+ *   ms891568 Draw: HRESULT Draw( DWORD dwAspect, LONG lindex, void* pvAspect, DVTARGETDEVICE* ptd, HDC hicTargetDev, HDC hdcDraw, const LPRECTL lprcBounds, const LPRECTL lprcWBounds, BOOL (*) (DWORD) pfnContinue, DWORD 
+ *   ms891597 Freeze: HRESULT Freeze( DWORD dwAspect, LONG lindex, void* pvAspect, DWORD* pdwFreeze);
+ *   ms891602 GetAdvise: HRESULT GetAdvise( DWORD* pdwAspect, DWORD* padvf, IAdviseSink** ppAdvSink);
+ *   ms891695 GetColorSet: HRESULT GetColorSet( DWORD dwAspect, LONG lindex, void* pvAspect, DVTARGETDEVICE* ptd, HDChicTargetDev, LOGPALETTE** ppColorSet );
+ *   ms891709 SetAdvise: HRESULT SetAdvise( DWORD dwAspect, DWORD advf, IAdviseSink* pAdvSink);
+ *   ms891710 Unfreeze: HRESULT Unfreeze( DWORD dwFreeze);
+ */
+
+/* IViewObject2: documented methods (1 page).  Signatures recorded verbatim (do not compile):
+ *   ms891559 GetExtent: HRESULT GetExtent(DWORDdwAspect,LONGlindex,DVTARGETDEVICEptd,LPSIZELlpsizel);
+ */
+
 #ifdef __cplusplus
 }
 #endif
