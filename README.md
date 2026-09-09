@@ -173,6 +173,17 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M58 (landed):** DVD-Video renderer (new `include/dvddrvr.h`,
+  `include/dvdcss.h`, both def-less IDL layers): the seven EDVD* /
+  EHighlightAction enumerations and the DVD_AUDIOCAP_* / DVD_SCANCAP_*
+  capability macros (all values printed by the official pages), plus
+  opaque interface records for IDMAChannel (8 methods),
+  IBitstreamProcessor (5) and IDVDRenderer (21) in dvddrvr.h and
+  IDVDDecoderCSS (12) in dvdcss.h, with every documented method
+  signature recorded per interface.  Held: the IID_* interface
+  identifiers (names only), CSS_CHALLENGE/CSS_KEY/CSS_SDKS layouts,
+  NOTIFICATION_CALLBACK, E_DVD_FAKE_ENCRYPTION.  No new defs (no Link
+  Library rows).  Headers 63 -> 65, defs 51.
 * **M57 (landed):** Bluetooth + SNMP + CEDDK wave (new
   `include/bt_api.h`, `include/bthsdpdef.h`, `include/ws2bth.h`,
   `include/bthapi.h`, `include/btagpub.h`, `include/btagnetwork.h`,

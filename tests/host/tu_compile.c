@@ -62,6 +62,8 @@
 #include <snmpexts.h>
 #include <pm.h>
 #include <ceddk.h>
+#include <dvddrvr.h>
+#include <dvdcss.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5057,6 +5059,43 @@ _Static_assert((int)InterfaceTypeUndefined == -1 && PCIBus == 5 &&
 _Static_assert((int)PwrDeviceUnspecified == -1 && D0 == 0 && D4 == 4 &&
                PwrDeviceMaximum == 5,
                "CEDEVICE_POWER_STATE values (aa447663)");
+
+/* M58: DVD-Video renderer enum/macro values. */
+_Static_assert(DVD_ASPECT_RATIO_MODE_LETTERBOX == 0 &&
+               DVD_ASPECT_RATIO_MODE_PANSCAN == 1,
+               "EDVDAspectRatioMode values (aa447766)");
+_Static_assert(DVD_AUDIO_FREQ_48KHZ == 0 && DVD_AUDIO_FREQ_96KHZ == 1,
+               "EDVDAudioFreq values (aa447767)");
+_Static_assert(DVD_AUDIO_TYPE_AC3 == 2 && DVD_AUDIO_TYPE_MPEG == 3 &&
+               DVD_AUDIO_TYPE_LPCM == 4 && DVD_AUDIO_TYPE_DTS == 5 &&
+               DVD_AUDIO_TYPE_SDDS == 6,
+               "EDVDAudioStreamType values (aa447768)");
+_Static_assert(DVD_DISPLAY_ASPECT_4x3 == 0 && DVD_DISPLAY_ASPECT_16x9 == 3,
+               "EDVDDisplayAspectRatio values (aa447769)");
+_Static_assert(DVD_LPCM_16 == 0 && DVD_LPCM_20 == 1 && DVD_LPCM_24 == 2,
+               "EDVDLpcmQuantization values (aa447780)");
+_Static_assert(DVD_NAV_PACK_EVENT == 0 && DVD_HIGHLIGHT_EVENT == 1 &&
+               DVD_PLAYBACK_EVENT == 2 && DVD_CC_DATA_EVENT == 3,
+               "EDVDSyncEventType values (aa447781)");
+_Static_assert(HIGHLIGHT_SELECT == 1 && UNHIGHLIGHT == 2 &&
+               ACTIVATE_BUTTON == 3 && ACTIVATE_SELECTED == 4 &&
+               SELECT_AUTO_ACTIVATED == 5,
+               "EHighlightAction values (aa447783)");
+_Static_assert(DVD_AUDIOCAP_AC3 == 0x4000 && DVD_AUDIOCAP_MPEG == 0x1000 &&
+               DVD_AUDIOCAP_DTS == 0x0800 && DVD_AUDIOCAP_SDDS == 0x0400 &&
+               DVD_AUDIOCAP_LPCM_KARAOKE == 0x0080 &&
+               DVD_AUDIOCAP_AC3_KARAOKE == 0x0040 &&
+               DVD_AUDIOCAP_MPEG_KARAOKE == 0x0010 &&
+               DVD_AUDIOCAP_DTS_KARAOKE == 0x0008 &&
+               DVD_AUDIOCAP_SDDS_KARAOKE == 0x0004,
+               "DVD_AUDIOCAP_* values (ms892143)");
+_Static_assert(DVD_SCANCAP_FORWARD_SCAN == 0x1 &&
+               DVD_SCANCAP_FORWARD_SLOW == 0x2 &&
+               DVD_SCANCAP_FORWARD_SINGLE == 0x4 &&
+               DVD_SCANCAP_BACKWARD_SCAN == 0x8 &&
+               DVD_SCANCAP_BACKWARD_SLOW == 0x10 &&
+               DVD_SCANCAP_BACKWARD_SINGLE == 0x20,
+               "DVD_SCANCAP_* values (ms892143)");
 #endif
 
 static int m56_shaped_usage(void)
@@ -5237,6 +5276,28 @@ static int m57_shaped_usage(void)
     return 0;
 }
 
+/* M58: DVD-Video renderer shaped usage. */
+static int m58_shaped_usage(void)
+{
+    EDVDAspectRatioMode     arm = DVD_ASPECT_RATIO_MODE_LETTERBOX;
+    EDVDAudioFreq           aaf = DVD_AUDIO_FREQ_96KHZ;
+    EDVDAudioStreamType     ast = DVD_AUDIO_TYPE_LPCM;
+    EDVDDisplayAspectRatio  dar = DVD_DISPLAY_ASPECT_16x9;
+    EDVDLpcmQuantization    lpq = DVD_LPCM_24;
+    EDVDSyncEventType       set = DVD_NAV_PACK_EVENT;
+    EHighlightAction        hla = HIGHLIGHT_SELECT;
+    DWORD                   caps = DVD_AUDIOCAP_AC3 | DVD_SCANCAP_FORWARD_SCAN;
+    IDMAChannel            *pchan = (IDMAChannel *)0;
+    IBitstreamProcessor    *pbps = (IBitstreamProcessor *)0;
+    IDVDRenderer           *prend = (IDVDRenderer *)0;
+    IDVDDecoderCSS         *pcss = (IDVDDecoderCSS *)0;
+
+    (void) arm; (void) aaf; (void) ast; (void) dar; (void) lpq;
+    (void) set; (void) hla; (void) caps;
+    (void) pchan; (void) pbps; (void) prend; (void) pcss;
+    return 0;
+}
+
 static int m53_shaped_usage(void)
 {
     BROWSEINFO        bi;
@@ -5394,6 +5455,8 @@ int host_tu_entry(void)
     if (m56_shaped_usage() != 0)
         return 1;
     if (m57_shaped_usage() != 0)
+        return 1;
+    if (m58_shaped_usage() != 0)
         return 1;
     return 0;
 }

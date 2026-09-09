@@ -33,7 +33,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/bthsdpdef.h include/bt_api.h include/ws2bth.h include/bthapi.h \
        include/btagpub.h include/btagnetwork.h \
        include/snmp.h include/snmpapi.h include/snmpexts.h \
-       include/pm.h include/ceddk.h
+       include/pm.h include/ceddk.h \
+       include/dvddrvr.h include/dvdcss.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 

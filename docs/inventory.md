@@ -4258,3 +4258,44 @@ btdrt.dll / snmpapi.dll / snmp.dll / ceddk.dll / btagsvc_phoneext.dll
 / btagsvc_network.dll / btagsvc.dll import asserts).  Headers 52 ->
 63; defs 44 -> 51 (btdrt 50, ceddk 36, snmpapi 29, snmp 7,
 btagsvc_phoneext 9, btagsvc_network 11, btagsvc 1).
+
+## M58 -- DVD-Video renderer (new headers dvddrvr.h, dvdcss.h; def-less Dvddrvr.idl / Dvdcss.idl layers)
+
+Source book: CE 5.0 "DVD-Video Renderer Reference"
+(tools/manifests/dvd.manifest, 60 pages, fetched M57; pages preserved in
+the corpus with the M57 export).  Every page prints "Header:
+Dvddrvr.idl" or "Header: Dvdcss.idl" with no Link Library row, so the
+milestone is def-less (the M44/M53/M54/M57 interface-record model).
+
+* dvddrvr.h enumerations (values printed; implicit successors where not
+  explicit): EDVDAspectRatioMode (aa447766), EDVDAudioFreq (aa447767),
+  EDVDAudioStreamType (aa447768, AC3 = 2), EDVDDisplayAspectRatio
+  (aa447769, 4x3 = 0, 16x9 = 0x3 -- the SetContentAspectRatio
+  ms901312 / SetDisplayAspectRatio ms901323 pages list the same values
+  under the alternate spellings DISPLAY_ASPECT_4_3 /
+  DISPLAY_ASPECT_16_9_DOWNSAMPLE_4_3, recorded in the header),
+  EDVDLpcmQuantization (aa447780), EDVDSyncEventType (aa447781),
+  EHighlightAction (aa447783, HIGHLIGHT_SELECT = 1).
+* dvddrvr.h capability macros (ms892143 prints every value):
+  DVD_AUDIOCAP_* (0x4000/0x1000/0x0800/0x0400/0x0080/0x0040/0x0010/
+  0x0008/0x0004) and DVD_SCANCAP_* (0x1..0x20).
+* dvddrvr.h opaque interface records: IDMAChannel (ms900175; methods
+  ms900171-ms900179 -- GetPendingTransferCount ms900174 prints
+  "GetPendingTransfersCount" in the signature block [artifact
+  recorded]; RequestTransfer ms900177 takes the CEDDK.h
+  PHYSICAL_ADDRESS; SetThresholdCallback ms900179 names
+  PNOTIFICATION_CALLBACK, whose type is unpublished [held]),
+  IBitstreamProcessor (ms900169; methods ms900165-ms900170),
+  IDVDRenderer (ms900198; 21 methods ms900193-ms901363 -- the Step page
+  ms901358 prints the Slow prototype [artifact recorded]).
+* dvdcss.h opaque interface record: IDVDDecoderCSS (ms900185; 12
+  methods ms900180-ms900192).  HELD: CSS_CHALLENGE / CSS_KEY / CSS_SDKS
+  layouts (parameter types only; the 2048-byte disk-key size is
+  documented but not the layouts), E_DVD_FAKE_ENCRYPTION (name-only).
+* HELD across both headers: IID_IDMAChannel / IID_IBitstreamProcessor /
+  IID_IDVDRenderer / IID_IDVDDecoderCSS (ms892115 names them with no
+  GUID values).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m58: 9 value-assert groups + shaped usage).  Headers 63 -> 65;
+defs 51 (unchanged).
