@@ -1,0 +1,48 @@
+ms905670	Asynchronous Pluggable Protocols Enumerations
+aa452103	BINDSTRING
+ms918832	PARSEACTION
+ms918833	PI_FLAGS
+ms905671	Asynchronous Pluggable Protocols Functions
+aa452110	CoInternetGetProtocolFlags
+aa452114	CoInternetGetSession
+aa452117	CoInternetParseUrl
+ms905672	Asynchronous Pluggable Protocols Interfaces
+aa452292	IInternet
+aa452293	IInternetBindInfo
+aa452294	IInternetBindInfo::GetBindInfo
+aa452295	IInternetBindInfo::GetBindString
+aa452300	IInternetPriority
+aa452301	IInternetPriority::GetPriority
+aa452302	IInternetPriority::SetPriority
+aa452303	IInternetProtocol
+aa452309	IInternetProtocol::LockRequest
+aa452310	IInternetProtocol::Read
+aa452316	IInternetProtocol::Seek
+aa452326	IInternetProtocol::UnlockRequest
+aa452304	IInternetProtocolInfo
+aa452305	IInternetProtocolInfo::CombineUrl
+aa452306	IInternetProtocolInfo::CompareUrl
+aa452307	IInternetProtocolInfo::ParseUrl
+aa452308	IInternetProtocolInfo::QueryInfo
+aa452311	IInternetProtocolRoot
+aa452312	IInternetProtocolRoot::Abort
+aa452313	IInternetProtocolRoot::Continue
+aa452314	IInternetProtocolRoot::Start
+aa452315	IInternetProtocolRoot::Terminate
+aa452317	IInternetProtocolSink
+aa452318	IInternetProtocolSink::ReportData
+aa452319	IInternetProtocolSink::ReportProgress
+aa452320	IInternetProtocolSink::ReportResult
+aa452325	IInternetProtocolSink::Switch
+aa452321	IInternetProtocolSinkStackable
+aa452322	IInternetProtocolSinkStackable::CommitSwitch
+aa452323	IInternetProtocolSinkStackable::RollbackSwitch
+aa452324	IInternetProtocolSinkStackable::SwitchSink
+aa452340	IInternetSession
+aa452341	IInternetSession::RegisterMimeFilter
+aa452342	IInternetSession::RegisterNameSpace
+aa452343	IInternetSession::UnregisterMimeFilter
+aa452344	IInternetSession::UnregisterNameSpace
+ms905674	Asynchronous Pluggable Protocols Structures
+ms918838	PROTOCOLDATA
+ms918839	PROTOCOLFILTERDATA

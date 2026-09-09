@@ -1,0 +1,50 @@
+ms919149	URL Security Zones Settings
+aa452027	Internet Zone Settings
+aa452033	Local Intranet Zone Settings
+ms905325	Restricted Sites Zone Settings
+ms905634	Trusted Sites Zone Settings
+aa452082	URL Security Zones Constants
+ms918863	URL Action Flags
+ms918874	URL Policy Flags
+aa452083	URL Security Zones Enumerations
+ms918840	PSUACTION
+ms918841	PUAF
+ms918860	SZM_FLAGS
+ms918875	URLTEMPLATE
+ms918876	URLZONE
+ms918877	URLZONEREG
+ms918890	ZAFLAGS
+aa452084	URL Security Zones Functions
+aa452113	CoInternetGetSecurityUrl
+aa452085	URL Security Zones Interfaces
+aa452296	IInternetHostSecurityManager
+aa452297	IInternetHostSecurityManager::GetSecurityId
+aa452298	IInternetHostSecurityManager::ProcessUrlAction
+aa452299	IInternetHostSecurityManager::QueryCustomPolicy
+aa452327	IInternetSecurityManager
+aa452328	IInternetSecurityManager::GetSecurityId
+aa452329	IInternetSecurityManager::GetSecuritySite
+aa452330	IInternetSecurityManager::GetZoneMappings
+aa452331	IInternetSecurityManager::MapUrlToZone
+aa452332	IInternetSecurityManager::ProcessUrlAction
+aa452334	IInternetSecurityManager::QueryCustomPolicy
+aa452335	IInternetSecurityManager::SetSecuritySite
+aa452336	IInternetSecurityManager::SetZoneMapping
+aa452337	IInternetSecurityMgrSite
+aa452338	IInternetSecurityMgrSite::EnableModeless
+aa452339	IInternetSecurityMgrSite::GetWindow
+aa452345	IInternetZoneManager
+aa452346	IInternetZoneManager::CreateZoneEnumerator
+aa452347	IInternetZoneManager::DestroyZoneEnumerator
+aa452348	IInternetZoneManager::GetZoneActionPolicy
+aa452349	IInternetZoneManager::GetZoneAt
+aa452350	IInternetZoneManager::GetZoneAttributes
+aa452351	IInternetZoneManager::GetZoneCustomPolicy
+aa452352	IInternetZoneManager::SetZoneActionPolicy
+aa452353	IInternetZoneManager::SetZoneAttributes
+aa452354	IInternetZoneManager::SetZoneCustomPolicy
+aa452086	URL Security Zones Objects
+aa452025	Internet Security Manager
+aa452026	Internet Zone Manager
+aa452088	URL Security Zones Structures
+ms918891	ZONEATTRIBUTES
