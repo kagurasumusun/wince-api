@@ -1,0 +1,3 @@
+# "Unsupported DirectShow Items" node under the CE 5.0 DirectShow
+# Reference is an empty TOC node (no leaf hrefs; verified with
+# ce-manifest.py at M71).  Kept as the record of that check.
