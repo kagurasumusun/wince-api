@@ -44,6 +44,9 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/msxml2.h \
        include/d3dm.h \
        include/sapi.h \
+       include/rtccore.h \
+       include/Rtccore.h \
+       include/Rtcerr.h \
        include/Aygshell.h \
        include/Bt_api.h \
        include/Btagnetwork.h \

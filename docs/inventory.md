@@ -4960,3 +4960,41 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 <Msxml2.h> <D3dm.h> <D3dmtypes.h> <Sapi.h> <Sapiddk.h> <Sphelper.h>
 <Tlhelp32.h> <Aygshell.h> <Kfuncs.h>).  Headers 73 -> 151 (73 real +
 78 aliases); defs unchanged.
+
+### M69 -- RTC Client API (rtccore.h; no import def)
+
+Real-time Communications (RTC) Client API book (503 leaves, Voice over
+IP Phone Services > Real-time Communications (RTC) Client API),
+harvested under tools/manifests/rtc.manifest.  New header
+include/rtccore.h (74th; self-contained) + Rtccore.h/Rtcerr.h case
+aliases.  Requirements rows: "Rtccore.h, Rtccore.idl" (349 pages),
+"Rtcerr.h" (RTC_E_/RTC_S_ pages).
+
+* OAHWND = LONG_PTR (printed constants-table row, ms912349).
+* Constants: all 10 families with every value printed -- RTCAU_ (5),
+  RTCCS_ (2), RTCEF_ (25), RTCIF_ (3), RTCMT_ (7), RTCRF_ (4),
+  RTCRMF_ (4), RTCSI_ (6), RTCTR_ (3), RTC_S_ (1) and the RTC_E_
+  table (173 codes, facility 0x80EE....L, HRESULT layout Sev|C|R|
+  Facility|Code printed on the page).
+* Enumerations: all 39 verbatim prints (values printed where shown;
+  sequential bodies recorded where bare).  RTC_EVENT print is missing
+  the comma between RTCE_PROFILE and RTCE_USERSEARCH (archive
+  artifact; repaired, recorded in the header).
+* Interfaces: 60 overview pages -> 62 opaque forward declarations
+  (IRTCClientEvent2 and the ::-qualified spellings come from method
+  pages) + 309 verbatim method-signature records (M44 policy).
+  Eaten-space traps preserved in the records
+  (RTC_SESSION_TYPEenType, BSTRbstrLocalPhoneURI, longlFlags).
+* No free functions anywhere in the book.  Import surface: none
+  documentable -- Uuid.lib rows are GUID linkage on COM pages (uuid
+  co-listed skip count 201 -> 554); the 18 "Rtcdll.dll" module-form
+  rows sit on interface overview pages (no free functions; the
+  Mlang.dll module-form precedent).
+* Held: every IID_/CLSID_ GUID value; the RTC Client API XML Schema
+  book (6 pages, XML-level); the ACM/General Registry Settings pages
+  (registry data, not API).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m69: 7 value asserts + shaped usage of 30 opaque interface
+pointers; TU also includes the Rtccore.h case alias).  Headers 73 real
+-> 74 real (+2 aliases = 153 files); defs 56 (unchanged count).

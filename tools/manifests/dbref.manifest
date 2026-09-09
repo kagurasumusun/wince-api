@@ -1,0 +1,106 @@
+ms892384	CEDB Reference
+aa516925	CEDB Functions
+aa516982	CeChangeDatabaseLCID (CEDB)
+aa516985	CeCreateDatabase (CEDB)
+aa516986	CeCreateDatabaseEx (CEDB)
+aa516987	CeCreateDatabaseEx2 (CEDB)
+aa516994	CeDeleteDatabase (CEDB)
+aa516996	CeDeleteDatabaseEx (CEDB)
+aa516997	CeDeleteRecord (CEDB)
+aa517003	CeEnumDBVolumes (CEDB)
+aa517106	CeFindFirstDatabase (CEDB)
+aa517109	CeFindFirstDatabaseEx (CEDB)
+aa517118	CeFindNextDatabase (CEDB)
+aa517120	CeFindNextDatabaseEx (CEDB)
+aa517128	CeFlushDBVol (CEDB)
+aa517132	CeFreeNotification (CEDB)
+aa517152	CeGetDBInformationByHandle (CEDB)
+aa517177	CeMountDBVol (CEDB)
+aa517194	CeOidGetInfo (CEDB)
+aa517197	CeOidGetInfoEx (CEDB)
+aa517198	CeOidGetInfoEx2 (CEDB)
+aa517213	CeOpenDatabase (CEDB)
+aa517216	CeOpenDatabaseEx (CEDB)
+aa517218	CeOpenDatabaseEx2 (CEDB)
+aa517229	CeReadRecordProps (CEDB)
+aa517235	CeReadRecordPropsEx (CEDB)
+aa517246	CeSeekDatabase (CEDB)
+aa517251	CeSeekDatabaseEx (CEDB)
+aa517254	CeSetDatabaseInfo (CEDB)
+aa517258	CeSetDatabaseInfoEx (CEDB)
+aa517259	CeSetDatabaseInfoEx2 (CEDB)
+aa517280	CeUnmountDBVol (CEDB)
+aa517285	CeWriteRecordProps (CEDB)
+aa516931	CEDB Structures
+aa516972	BY_HANDLE_DB_INFORMATION (CEDB)
+aa516981	CEBLOB (CEDB)
+aa516991	CEDBASEINFO (CEDB)
+aa516992	CEDBASEINFOEX (CEDB)
+aa517186	CENOTIFICATION (CEDB)
+aa517189	CENOTIFYREQUEST (CEDB)
+aa517207	CEOIDINFO (CEDB)
+aa517208	CEOIDINFOEX (CEDB)
+aa517227	CEPROPVAL (CEDB)
+aa517237	CERECORDINFO (CEDB)
+aa517283	CEVALUNION (CEDB)
+ms891997	SORTORDERSPEC (CEDB)
+ms892001	SORTORDERSPECEX (CEDB)
+aa516933	EDB Reference
+aa516932	EDB Functions
+aa516979	CeAddDatabaseProps (EDB)
+aa516980	CeBeginTransaction (EDB)
+aa516983	CeChangeDatabaseLCID (EDB)
+aa516988	CeCreateDatabaseEx2 (EDB)
+aa516989	CeCreateDatabaseWithProps (EDB)
+aa516990	CeCreateSession (EDB)
+aa516995	CeDeleteDatabase (EDB)
+aa516998	CeDeleteRecord (EDB)
+aa517002	CeEndTransaction (EDB)
+aa517004	CeEnumDBVolumes (EDB)
+aa517114	CeFindFirstDatabaseEx (EDB)
+aa517122	CeFindNextDatabaseEx (EDB)
+aa517130	CeFlushDBVol (EDB)
+aa517135	CeFreeNotification (EDB)
+aa517146	CeGetDatabaseProps (EDB)
+aa517147	CeGetDatabaseSession (EDB)
+aa517155	CeGetDBInformationByHandle (EDB)
+aa517180	CeMountDBVol (EDB)
+aa517182	CeMountDBVolEx (EDB)
+aa517204	CeOidGetInfoEx2 (EDB)
+aa517220	CeOpenDatabaseInSession (EDB)
+aa517223	CeOpenStream (EDB)
+aa517232	CeReadRecordProps (EDB)
+aa517236	CeReadRecordPropsEx (EDB)
+aa517242	CeRemoveDatabaseProps (EDB)
+aa517250	CeSeekDatabase (EDB)
+aa517253	CeSeekDatabaseEx (EDB)
+aa517256	CeSetDatabaseInfo (EDB)
+aa517268	CeSetSessionOption (EDB)
+aa517270	CeStreamRead (EDB)
+aa517272	CeStreamSaveChanges (EDB)
+aa517274	CeStreamSeek (EDB)
+aa517275	CeStreamSetSize (EDB)
+aa517278	CeStreamWrite (EDB)
+aa517282	CeUnmountDBVol (EDB)
+aa517288	CeWriteRecordProps (EDB)
+aa516934	EDB Structures
+aa516974	BY_HANDLE_DB_INFORMATION (EDB)
+aa516993	CEDBASEINFOEX (EDB)
+aa517210	CEOIDINFOEX (EDB)
+aa517225	CEPROPSPEC (EDB)
+aa516924	CEVOLUMEOPTIONS (EDB)
+ms892010	SORTORDERSPECEX (EDB)
+aa516926	Database Macros
+aa517295	CHECK_INVALIDGUID
+aa517298	CHECK_SYSTEMGUID
+aa517332	CREATE_INVALIDGUID
+aa517336	CREATE_SYSTEMGUID
+ms892256	TypeFromPropID
+aa516927	Database Messages
+aa517338	DB_CEOID_CHANGED
+aa517339	DB_CEOID_CREATED
+aa517340	DB_CEOID_DATABASE_DELETED
+aa517341	DB_CEOID_DIRECTORY_DELETED
+ms887719	DB_CEOID_FILE_DELETED
+ms887825	DB_CEOID_RECORD_DELETED
+ms892379	WM_DBNOTIFICATION

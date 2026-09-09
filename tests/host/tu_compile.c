@@ -74,6 +74,8 @@
 #include <msxml2.h>
 #include <d3dm.h>
 #include <sapi.h>
+#include <rtccore.h>
+#include <Rtccore.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
@@ -6178,6 +6180,62 @@ static int m68_shaped_usage(void)
     return (int)ev.eEventId + (int)abi.ulMsBufferSize + (int)alt.cElementsInAlternate;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M69: RTC constants -- printed values (Rtccore.h/Rtcerr.h pages). */
+_Static_assert(RTCEF_CLIENT == 0x00000001, "ms931693");
+_Static_assert(RTCEF_ALL == 0x01FFFFFF, "ms931693");
+_Static_assert(RTCMT_T120_SENDRECV == 0x00000010, "RTCMT_ page");
+_Static_assert(RTCSI_PHONE_TO_PHONE == 0x00000004, "RTCSI_ page");
+_Static_assert(RTCTR_TLS == 0x00000004, "ms912587");
+_Static_assert(RTC_E_CLIENT_NOT_INITIALIZED == 0x80EE0025L, "ms931795");
+_Static_assert(RTC_S_ROAMING_NOT_SUPPORTED == 0x80EE0041L, "ms912578");
+#endif
+
+/* M69: RTC shaped usage (COM surface only; no import surface). */
+static int m69_shaped_usage(void)
+{
+    RTC_EVENT          ev = RTCE_CLIENT;
+    RTC_SESSION_TYPE   st = RTCST_IM;
+    RTC_SESSION_STATE  ss = RTCSS_IDLE;
+    RTC_ANSWER_MODE    am = RTCAM_AUTOMATICALLY_ACCEPT;
+    RTC_DTMF           dt = RTC_DTMF_STAR;
+    OAHWND             hwnd = (OAHWND)0;
+    IRTCClient              *cli = (IRTCClient *)0;
+    IRTCClient2             *cli2 = (IRTCClient2 *)0;
+    IRTCClientPresence      *cp = (IRTCClientPresence *)0;
+    IRTCClientPresence2     *cp2 = (IRTCClientPresence2 *)0;
+    IRTCClientProvisioning  *cprov = (IRTCClientProvisioning *)0;
+    IRTCProfile             *prof = (IRTCProfile *)0;
+    IRTCProfile2            *prof2 = (IRTCProfile2 *)0;
+    IRTCSession             *sess = (IRTCSession *)0;
+    IRTCSession2            *sess2 = (IRTCSession2 *)0;
+    IRTCParticipant         *part = (IRTCParticipant *)0;
+    IRTCBuddy               *bud = (IRTCBuddy *)0;
+    IRTCBuddyGroup          *grp = (IRTCBuddyGroup *)0;
+    IRTCWatcher             *wat = (IRTCWatcher *)0;
+    IRTCEventNotification   *en = (IRTCEventNotification *)0;
+    IRTCMediaEvent          *mev = (IRTCMediaEvent *)0;
+    IRTCMessagingEvent      *msev = (IRTCMessagingEvent *)0;
+    IRTCRegistrationStateChangeEvent *rsce = (IRTCRegistrationStateChangeEvent *)0;
+    IRTCSessionStateChangeEvent *ssce = (IRTCSessionStateChangeEvent *)0;
+    IRTCIntensityEvent      *iev = (IRTCIntensityEvent *)0;
+    IRTCPortManager         *pm = (IRTCPortManager *)0;
+    IRTCUserSearch          *us = (IRTCUserSearch *)0;
+    IRTCUserSearchQuery     *usq = (IRTCUserSearchQuery *)0;
+    IRTCCollection          *col = (IRTCCollection *)0;
+
+    ev = RTCE_SESSION_STATE_CHANGE; st = RTCST_PC_TO_PC;
+    ss = RTCSS_CONNECTED; am = RTCAM_AUTOMATICALLY_REJECT; dt = RTC_DTMF_POUND;
+    (void) hwnd; (void) cli; (void) cli2; (void) cp; (void) cp2;
+    (void) cprov; (void) prof; (void) prof2; (void) sess; (void) sess2;
+    (void) part; (void) bud; (void) grp; (void) wat; (void) en;
+    (void) mev; (void) msev; (void) rsce; (void) ssce; (void) iev;
+    (void) pm; (void) us; (void) usq; (void) col;
+    return (int)ev + (int)st + (int)ss + (int)am + (int)dt +
+           RTCEF_MESSAGING + RTCIF_DISABLE_UPNP + RTCRF_REGISTER_NOTIFY +
+           RTCRMF_WATCHER_ROAMING + RTCAU_NTLM + RTCCS_FORCE_PROFILE;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6285,6 +6343,8 @@ int host_tu_entry(void)
     if (m67_shaped_usage() != 0)
         return 1;
     if (m68_shaped_usage() != 0)
+        return 1;
+    if (m69_shaped_usage() != 0)
         return 1;
     return 0;
 }
