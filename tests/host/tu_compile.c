@@ -70,6 +70,7 @@
 #include <mlang.h>
 #include <mmsystem.h>
 #include <imaging.h>
+#include <pimstore.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5954,6 +5955,46 @@ static int m64_shaped_usage(void)
     return (int)(argb & ALPHA_MASK) + (int)pfid;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M65: POOM constants -- printed values (aa513746). */
+_Static_assert(olFolderInfrared == 102, "aa513746");
+_Static_assert(olRecursYearNth == 6, "aa513746");
+_Static_assert(olSaturday == 64, "aa513746");
+_Static_assert(olOutOfOffice == 3, "aa513746");
+_Static_assert(PT_CONTACT == 2, "ms863874 PIMTYPE print");
+#endif
+
+/* M65: POOM shaped usage (COM surface + add-in entry point). */
+static int m65_shaped_usage(void)
+{
+    HWND        hwnd = (HWND)0;
+    HANDLE      h = (HANDLE)0;
+    PIMTYPE     pt = PT_CALENDAR;
+    PFNCEPIMCOMMAND pfn = (PFNCEPIMCOMMAND)0;
+    IPOutlookApp         *app = (IPOutlookApp *)0;
+    IAppointment         *appt = (IAppointment *)0;
+    IContact             *ct = (IContact *)0;
+    ITask                *tk = (ITask *)0;
+    IRecurrencePattern   *rp = (IRecurrencePattern *)0;
+    IException           *ex = (IException *)0;
+    IExceptions          *exs = (IExceptions *)0;
+    IFolder              *fld = (IFolder *)0;
+    IPOutlookItemCollection *ic = (IPOutlookItemCollection *)0;
+    IPOlRecipient        *polr = (IPOlRecipient *)0;
+    IRecipient           *rc = (IRecipient *)0;
+    IRecipients          *rcs = (IRecipients *)0;
+    ITimeZone            *tz = (ITimeZone *)0;
+
+    CePimCommand(hwnd, pt, 1u, &h, (void *)0);
+    pt = (PIMTYPE)(olAppointmentItem | olContactItem | olTaskItem);
+    (void) pfn; (void) app; (void) appt; (void) ct; (void) tk;
+    (void) rp; (void) ex; (void) exs; (void) fld; (void) ic;
+    (void) polr; (void) rc; (void) rcs; (void) tz;
+    return (int)olFolderTasks + olRecursMonthly + olWednesday +
+           olSound + olBusy + olPrivate + olMeeting + olImportanceHigh +
+           (int)PT_TASKS + (int)PT_CONTACT;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6053,6 +6094,8 @@ int host_tu_entry(void)
     if (m63_shaped_usage() != 0)
         return 1;
     if (m64_shaped_usage() != 0)
+        return 1;
+    if (m65_shaped_usage() != 0)
         return 1;
     return 0;
 }

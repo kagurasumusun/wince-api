@@ -4720,3 +4720,54 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m64: 10 size/offset asserts + 8 enum-value asserts + 6 PropertyTag
 spot checks + shaped usage).  Headers 68 -> 69; defs 55 (unchanged
 count; no Imaging import surface is documentable).
+
+### M65 -- Pocket Outlook Object Model (pimstore.h; no import def)
+
+POOM book (90 leaves, Applications and Services Development > Pocket
+Outlook Object Model (POOM)), harvested under
+tools/manifests/poom.manifest.  New header include/pimstore.h (70th;
+self-contained).  The CE POOM is a C++ COM API (CLSID_Application /
+CoCreateInstance, Pimstore.h, Pimstore.lib, CE 2.0+).
+
+* CePimCommand (ms863874): the one free function -- a menu add-in
+  entry point the add-in DLL must define and expose; prototype +
+  PFNCEPIMCOMMAND typedef declared, and the name added to gen-doc-def.py
+  NOT_EXPORTS (user-side export, not an import; the M63 waveInProc /
+  waveOutProc callback decision).  PIMTYPE printed verbatim with values
+  (PT_CALENDAR=0, PT_TASKS, PT_CONTACT; the page also notes the
+  Palm-sized PC 1.2 alternative ordering PT_CONTACT=0, recorded).
+* Constants (aa513746): all 36 ol* values printed -- Task Priorities
+  (olImportanceLow/Normal/High), Folder types (olFolderCalendar 9,
+  olFolderContacts 10, olFolderTasks 13, olFolderInfrared 102), Item
+  types (olAppointmentItem/olContactItem/olTaskItem 1/2/3), Recurrence
+  Types (olRecursDaily..olRecursYearNth 0,1,2,3,5,6), Days of Week
+  (olSunday..olSaturday 1,2,4,8,16,32,64), Reminder Options (olLED,
+  olVibrate, olDialog, olSound, olRepeat 1,2,4,8,16), Busy Status
+  (olFree/olTentative/olBusy/olOutOfOffice), Sensitivity (olNormal 0,
+  olPrivate 2), Meeting Status (olNonMeeting/olMeeting).
+* Interfaces (13, aa513748): opaque forward declarations + verbatim
+  records: 41 method signatures (method pages) and 233 property
+  accessors (the "Properties in Vtable Order" tables; accessor order
+  preserved, but the properties/methods interleaving in the vtable is
+  not published -- no vtable invented, M44 policy).
+* Archive-print traps recorded verbatim: eaten type spaces
+  (BSTRpwszName, DATEdate, intiIndex, VARIANT_BOOLfDisplayUI,
+  VARIANT_BOOLfDescending), the eaten asterisk in "void pReserved"
+  (CePimCommand), the doc's own misspellings (ITask
+  ClearReccurencePattern; GetRecurrence printed under the
+  GetRecurrencePattern title; Irecipients / Iexceptions / Iappointment
+  in accessor prints), and the SAL annotations /*[out]*//*[in]*/
+  stripped from the recorded accessor lines.
+* Dangling names recorded (no CE 5.0 page): IDispatch, CEOID
+  (GetItemFromOid -- to be landed with the CEDB remainder milestone),
+  CEBLOB (BodyInk), IAppointmentItem (GetOccurrence print),
+  CLSID_Application / IID_IPOutlookApp (Logon example; GUID values not
+  published).  IPOlRecipient documented as derived from IRecipient.
+* No import def: the 67 Pimstore.lib rows sit on method/property/
+  interface pages (virtual calls) plus the user-side CePimCommand --
+  gen-doc-def.py confirms no sole-link export surface.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m65: 5 value asserts + shaped usage incl. the CePimCommand call
+and all 13 opaque interface pointers).  Headers 69 -> 70; defs 55
+(unchanged count; no POOM import surface is documentable).

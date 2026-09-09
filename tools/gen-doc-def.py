@@ -202,7 +202,12 @@ _DECL_RE = re.compile(
 # constructs and are provided by the CE compiler, not imported from
 # Coredll.dll -- so they must not appear in the export def.
 NOT_EXPORTS = {"GetExceptionCode", "GetExceptionInformation",
-               "AbnormalTermination"}
+               "AbnormalTermination",
+               # CePimCommand: menu add-in entry point that the add-in
+               # DLL must define and expose (ms863874) -- a user-side
+               # export, not an import (M63 waveInProc/waveOutProc
+               # callback decision).
+               "CePimCommand"}
 
 
 def declared_exports():

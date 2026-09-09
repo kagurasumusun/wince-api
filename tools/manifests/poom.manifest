@@ -1,0 +1,90 @@
+ms897377	Pocket Outlook Object Model OS Design Development
+ms897376	Pocket Outlook Object Model Application Development
+ms862135	Design Goals
+ms862095	Basic Object Model
+ms862141	Differences Between the Windows CE and Desktop Models
+ms862103	Cancel Method
+ms862169	Infrared Support
+ms862660	No Inspector or Explorer Object
+ms862659	No Events
+ms862661	No NameSpace Object
+ms862663	OID Instead of EntryID
+ms862668	Outlook Compatibility
+ms862683	Reminder Methods
+ms862681	Recipients Define Meeting Requests
+ms862673	Pocket Outlook Object Model Code Examples
+ms862137	Determining the Version
+ms862129	Creating a Recurring Appointment
+aa513751	Pocket Outlook Object Model Security
+aa513750	POOM Sample Code
+aa513749	Pocket Outlook Object Model Reference
+aa513746	Pocket Outlook Object Model Constants
+aa513747	Pocket Outlook Object Model Functions
+ms863874	CePimCommand
+aa513748	Pocket Outlook Object Model Interfaces
+aa515358	IAppointment
+aa515361	IAppointment Properties
+aa515363	IAppointment::Save
+aa515355	IAppointment::Delete
+aa515351	IAppointment::Copy
+aa515365	IAppointment::Send
+aa515347	IAppointment::Cancel
+aa515357	IAppointment::GetRecurrencePattern
+aa515349	IAppointment::ClearRecurrencePattern
+ms880172	IContact
+ms880177	IContact Properties
+ms880181	IContact::Save
+ms880170	IContact::Delete
+ms880165	IContact::Copy
+aa515716	IException
+aa515719	IException Properties
+aa516108	IExceptions
+aa516109	IExceptions Properties
+aa515721	IExceptions::Item
+aa516162	IFolder
+aa516163	IFolder Properties
+aa516164	IFolder::ReceiveFromInfrared
+aa516161	IFolder::AddItemToInfraredFolder
+aa516165	IFolder::SendToInfrared
+ms883874	IPOlRecipient
+ms883882	IPOlRecipient::Resolve
+ms883943	IPOutlookApp
+ms883975	IPOutlookApp Properties
+ms883962	IPOutlookApp::Logon
+ms883952	IPOutlookApp::Logoff
+ms883903	IPOutlookApp::GetDefaultFolder
+ms883892	IPOutlookApp::CreateItem
+ms883983	IPOutlookApp::ReceiveFromInfrared
+ms883922	IPOutlookApp::GetTimeZoneFromIndex
+ms883930	IPOutlookApp::GetTimeZoneInformationFromIndex
+ms883912	IPOutlookApp::GetItemFromOid
+ms884055	IPOutlookApp::SysFreeString
+ms884177	IPOutlookItemCollection
+ms884192	IPOutlookItemCollection Properties
+ms884078	IPOutlookItemCollection::Add
+ms884165	IPOutlookItemCollection::Item
+ms884201	IPOutlookItemCollection::Remove
+ms884223	IPOutlookItemCollection::Sort
+ms884141	IPOutlookItemCollection::Find
+ms884152	IPOutlookItemCollection::FindNext
+ms884210	IPOutlookItemCollection::Restrict
+ms884331	IRecipient
+ms884338	IRecipient Properties
+ms884470	IRecipients
+ms884569	IRecipients Properties
+ms884349	IRecipients::Add
+ms884359	IRecipients::Item
+ms884577	IRecipients::Remove
+ms884583	IRecurrencePattern
+ms884584	IRecurrencePattern Properties
+ms884582	IRecurrencePattern::GetOccurrence
+ms890834	ITask
+ms890839	ITask Properties
+ms890846	ITask::Save
+ms890821	ITask::Delete
+ms890817	ITask::Copy
+ms890827	ITask::GetRecurrencePattern
+ms890811	ITask::ClearRecurrencePattern
+ms890851	ITask::SkipRecurrence
+ms890875	ITimeZone
+ms890879	ITimeZone Properties
