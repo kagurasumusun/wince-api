@@ -64,6 +64,8 @@
 #include <ceddk.h>
 #include <dvddrvr.h>
 #include <dvdcss.h>
+#include <ddraw.h>
+#include <dvp.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5298,6 +5300,128 @@ static int m58_shaped_usage(void)
     return 0;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M59: DirectDraw 32-bit CE layout as printed by the CE 5.0 pages
+ * (Ddraw.h / Dvp.h; member-by-member counts of the transcribed
+ * definitions, all-DWORD/pointer/GUID members with natural 4-byte
+ * alignment, DD_ROP_SPACE = 8 derived from the DDK DDCORECAPS
+ * array description + the 256-code SDK raster-operation space). */
+_Static_assert(DD_ROP_SPACE == 8, "DD_ROP_SPACE derivation (ms907789)");
+_Static_assert(sizeof(DDCOLORKEY) == 8, "DDCOLORKEY 32-bit size (ms907791)");
+_Static_assert(sizeof(DDSCAPS) == 4, "DDSCAPS 32-bit size (ms907796)");
+_Static_assert(sizeof(DDSCAPS2) == 16, "DDSCAPS2 32-bit size (ms907797)");
+_Static_assert(sizeof(DDSCAPSEX) == 12, "DDSCAPSEX 32-bit size (ms907798)");
+_Static_assert(sizeof(DDPIXELFORMAT) == 32, "DDPIXELFORMAT 32-bit size (ms907795)");
+_Static_assert(offsetof(DDPIXELFORMAT, dwRGBBitCount) == 12,
+               "DDPIXELFORMAT first union (ms907795)");
+_Static_assert(offsetof(DDPIXELFORMAT, dwRBitMask) == 16,
+               "DDPIXELFORMAT second union (ms907795)");
+_Static_assert(sizeof(DDSURFACEDESC) == 108, "DDSURFACEDESC 32-bit size (ms907799)");
+_Static_assert(sizeof(DDSURFACEDESC2) == 124, "DDSURFACEDESC2 32-bit size (ms907800)");
+_Static_assert(offsetof(DDSURFACEDESC2, dwTextureStage) == 120,
+               "DDSURFACEDESC2 tail member (ms907800)");
+_Static_assert(sizeof(DDBLTFX) == 100, "DDBLTFX 32-bit size (ms907788)");
+_Static_assert(offsetof(DDBLTFX, ddckDestColorkey) == 84,
+               "DDBLTFX union block size (ms907788)");
+_Static_assert(sizeof(DDOVERLAYFX) == 56, "DDOVERLAYFX 32-bit size (ms907794)");
+_Static_assert(sizeof(DDCOLORCONTROL) == 40, "DDCOLORCONTROL 32-bit size (ms907790)");
+_Static_assert(sizeof(DDCAPS) == 380, "DDCAPS 32-bit size (ms907789)");
+_Static_assert(offsetof(DDCAPS, dwRops) == 100, "DDCAPS dwRops offset (ms907789)");
+_Static_assert(offsetof(DDCAPS, ddsCaps) == 364, "DDCAPS ddsCaps tail (ms907789)");
+_Static_assert(sizeof(DDVIDEOPORTBANDWIDTH) == 32, "DDVIDEOPORTBANDWIDTH size (ms907801)");
+_Static_assert(sizeof(DDVIDEOPORTCAPS) == 72, "DDVIDEOPORTCAPS size (ms907802)");
+_Static_assert(sizeof(DDVIDEOPORTCONNECT) == 32, "DDVIDEOPORTCONNECT size (ms907803)");
+_Static_assert(offsetof(DDVIDEOPORTCONNECT, guidTypeID) == 8,
+               "DDVIDEOPORTCONNECT GUID member (ms907803)");
+_Static_assert(sizeof(DDVIDEOPORTDESC) == 72, "DDVIDEOPORTDESC size (ms907804)");
+_Static_assert(sizeof(DDVIDEOPORTINFO) == 64, "DDVIDEOPORTINFO size (ms907805)");
+_Static_assert(offsetof(DDVIDEOPORTINFO, rCrop) == 16, "DDVIDEOPORTINFO RECT (ms907805)");
+_Static_assert(sizeof(DDVIDEOPORTSTATUS) == 56, "DDVIDEOPORTSTATUS size (ms907806)");
+#endif
+
+/* M59: DirectDraw shaped usage (structures + opaque interfaces +
+ * callback typedefs + the four Ddraw.lib functions). */
+static int m59_shaped_usage(void)
+{
+    DDCOLORKEY          ddk;
+    DDSCAPS             dsc;
+    DDSCAPS2            dsc2;
+    DDPIXELFORMAT       dpf;
+    DDSURFACEDESC       dsd;
+    DDSURFACEDESC2      dsd2;
+    DDBLTFX             dbfx;
+    DDOVERLAYFX         dof;
+    DDCOLORCONTROL      dcc;
+    DDCAPS              dcap;
+    LPDIRECTDRAW        pdd = (LPDIRECTDRAW)0;
+    LPDIRECTDRAW4       pdd4 = (LPDIRECTDRAW4)0;
+    LPDIRECTDRAWSURFACE4 pds4 = (LPDIRECTDRAWSURFACE4)0;
+    LPDIRECTDRAWSURFACE5 pds5 = (LPDIRECTDRAWSURFACE5)0;
+    LPDIRECTDRAWCLIPPER pddc = (LPDIRECTDRAWCLIPPER)0;
+    LPDIRECTDRAWPALETTE pddp = (LPDIRECTDRAWPALETTE)0;
+    LPDIRECTDRAWCOLORCONTROL pddcc = (LPDIRECTDRAWCOLORCONTROL)0;
+    LPDDENUMCALLBACK    pecb = (LPDDENUMCALLBACK)0;
+    LPDDENUMCALLBACKEX  pecbx = (LPDDENUMCALLBACKEX)0;
+    LPDDENUMMODESCALLBACK  pemcb = (LPDDENUMMODESCALLBACK)0;
+    LPDDENUMMODESCALLBACK2 pemcb2 = (LPDDENUMMODESCALLBACK2)0;
+    LPDDENUMSURFACESCALLBACK  pescb = (LPDDENUMSURFACESCALLBACK)0;
+    LPDDENUMSURFACESCALLBACK2 pescb2 = (LPDDENUMSURFACESCALLBACK2)0;
+    DDVIDEOPORTBANDWIDTH dvpb;
+    DDVIDEOPORTCAPS     dvpc;
+    DDVIDEOPORTCONNECT  dvpcn;
+    DDVIDEOPORTDESC     dvpd;
+    DDVIDEOPORTINFO     dvpi;
+    DDVIDEOPORTSTATUS   dvps;
+    LPDDVIDEOPORTCONTAINER pdvpc = (LPDDVIDEOPORTCONTAINER)0;
+    LPDIRECTDRAWVIDEOPORT pdvp = (LPDIRECTDRAWVIDEOPORT)0;
+    LPDDENUMVIDEOCALLBACK pevb = (LPDDENUMVIDEOCALLBACK)0;
+
+    ddk.dwColorSpaceLowValue  = 0;
+    dsc.dwCaps  = 0;
+    dsc2.dwCaps = 0;
+    dpf.dwSize  = sizeof(DDPIXELFORMAT);
+    dpf.dwRGBBitCount = 16;
+    dsd.dwSize  = sizeof(DDSURFACEDESC);
+    dsd.lPitch  = 0;
+    dsd2.dwSize = sizeof(DDSURFACEDESC2);
+    dsd2.dwTextureStage = 0;
+    dbfx.dwSize = sizeof(DDBLTFX);
+    dbfx.dwFillColor = 0;
+    dof.dwSize  = sizeof(DDOVERLAYFX);
+    dof.dckDestColorkey.dwColorSpaceLowValue = 0;
+    dcc.dwSize  = sizeof(DDCOLORCONTROL);
+    dcc.lBrightness = 0;
+    dcap.dwSize = sizeof(DDCAPS);
+    dcap.dwRops[0] = 0;
+    dcap.ddsCaps.dwCaps = 0;
+    dvpb.dwSize = sizeof(DDVIDEOPORTBANDWIDTH);
+    dvpc.dwSize = sizeof(DDVIDEOPORTCAPS);
+    dvpc.wNumFilterTapsX = 0;
+    dvpcn.dwSize = sizeof(DDVIDEOPORTCONNECT);
+    dvpcn.guidTypeID.Data1 = 0;
+    dvpd.dwSize = sizeof(DDVIDEOPORTDESC);
+    dvpd.VideoPortType.dwPortWidth = 0;
+    dvpi.dwSize = sizeof(DDVIDEOPORTINFO);
+    dvpi.rCrop.left = 0;
+    dvps.dwSize = sizeof(DDVIDEOPORTSTATUS);
+    dvps.bInUse = FALSE;
+
+    /* Ddraw.lib import surface (aa451583/aa451584/aa451585/aa451586). */
+    (void) DirectDrawCreate((GUID FAR *)0, &pdd, (IUnknown FAR *)0);
+    (void) DirectDrawCreateClipper(0u, &pddc, (IUnknown FAR *)0);
+    (void) DirectDrawEnumerate(pecb, (LPVOID)0);
+    (void) DirectDrawEnumerateEx(pecbx, (LPVOID)0, 0u);
+
+    (void) pdd4; (void) pds4; (void) pds5; (void) pddp; (void) pddcc;
+    (void) pemcb; (void) pemcb2; (void) pescb; (void) pescb2;
+    (void) pdvpc; (void) pdvp; (void) pevb;
+    (void) ddk; (void) dsc; (void) dsc2; (void) dpf; (void) dsd;
+    (void) dsd2; (void) dbfx; (void) dof; (void) dcc; (void) dcap;
+    (void) dvpb; (void) dvpc; (void) dvpcn; (void) dvpd; (void) dvpi;
+    (void) dvps;
+    return 0;
+}
+
 static int m53_shaped_usage(void)
 {
     BROWSEINFO        bi;
@@ -5457,6 +5581,8 @@ int host_tu_entry(void)
     if (m57_shaped_usage() != 0)
         return 1;
     if (m58_shaped_usage() != 0)
+        return 1;
+    if (m59_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -34,7 +34,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/btagpub.h include/btagnetwork.h \
        include/snmp.h include/snmpapi.h include/snmpexts.h \
        include/pm.h include/ceddk.h \
-       include/dvddrvr.h include/dvdcss.h
+       include/dvddrvr.h include/dvdcss.h \
+       include/ddraw.h include/dvp.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -344,6 +345,16 @@ e2e:
 	  | grep -q "Name: btagsvc.dll" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: BthAGOnNetworkEvent" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: ddraw.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: DirectDrawCreate" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: DirectDrawCreateClipper" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: DirectDrawEnumerate" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: DirectDrawEnumerateEx" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

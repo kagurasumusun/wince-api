@@ -54,6 +54,7 @@
 #include <snmpexts.h>
 #include <pm.h>
 #include <ceddk.h>
+#include <ddraw.h>
 
 int main(void)
 {
@@ -403,6 +404,32 @@ int main(void)
                                       (PPHYSICAL_ADDRESS)0);
         (void) READ_PORT_ULONG((PULONG)0);
         (void) MmMapIoSpace(pa, 0, 0);
+
+        /* M59: DirectDraw (Ddraw.lib, aa451583..aa451586). */
+        {
+            LPDIRECTDRAW           pdd = (LPDIRECTDRAW)0;
+            LPDIRECTDRAWCLIPPER    pddc = (LPDIRECTDRAWCLIPPER)0;
+            DDCAPS                 dcap;
+            DDSURFACEDESC2         dsd2;
+            DDPIXELFORMAT          dpf;
+
+            dcap.dwSize = sizeof(DDCAPS);
+            dcap.ddsCaps.dwCaps = 0;
+            dsd2.dwSize = sizeof(DDSURFACEDESC2);
+            dsd2.dwTextureStage = 0;
+            dpf.dwSize = sizeof(DDPIXELFORMAT);
+            dpf.dwRGBBitCount = 16;
+            (void) DirectDrawCreate((GUID FAR *)0, &pdd,
+                                    (IUnknown FAR *)0);
+            (void) DirectDrawCreateClipper(0u, &pddc,
+                                           (IUnknown FAR *)0);
+            (void) DirectDrawEnumerate((LPDDENUMCALLBACK)0,
+                                       (LPVOID)0);
+            (void) DirectDrawEnumerateEx((LPDDENUMCALLBACKEX)0,
+                                         (LPVOID)0, 0u);
+            (void) pdd; (void) pddc; (void) dcap; (void) dsd2;
+            (void) dpf;
+        }
     }
     (void)tick;
     (void)si;

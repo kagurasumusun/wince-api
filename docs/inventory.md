@@ -4299,3 +4299,125 @@ milestone is def-less (the M44/M53/M54/M57 interface-record model).
 Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m58: 9 value-assert groups + shaped usage).  Headers 63 -> 65;
 defs 51 (unchanged).
+
+## M59 -- DirectDraw (new headers ddraw.h, dvp.h; def ddraw-doc.def)
+
+Sources: CE 5.0 "DirectDraw Reference" book -- 134 pages harvested
+(tools/manifests/ddraw.manifest; includes 3 TOC nodes, 4 global
+functions, 7 callbacks, 18 structure pages, 7 interface records with
+93 method pages, 1 return-values page) + 23 CE 6.0 twins
+(tools/manifests/ddraw-ce60.manifest).  All pages: OS "Windows CE 2.12
+and later. Version 2.12 requires DXPAK 1.0 or later" (DDPIXELFORMAT
+ms907795: "Windows CE .NET 4.0 and later"); headers Ddraw.h (90 pages)
+and Dvp.h (26 pages); link library Ddraw.lib for the 4 global
+functions and the interface records, "User-defined" for callbacks, no
+lib row for structures.
+
+* ddraw.h structures transcribed verbatim from the CE 5.0 prints:
+  DDCOLORKEY (ms907791, 8 bytes), DDSCAPS (ms907796, 4),
+  DDSCAPS2 (ms907797, 16), DDSCAPSEX (ms907798, 12), DDPIXELFORMAT
+  (ms907795, 32; five anonymous unions incl. the MultiSampleCaps
+  WORD/WORD struct), DDSURFACEDESC (ms907799, 108; anonymous unions
+  exactly as printed), DDSURFACEDESC2 (ms907800, 124;
+  DUMMYUNIONNAMEN(1..2) markers kept with the macro defined empty --
+  the nameless-union convention stated by the desktop DDBLTFX docs),
+  DDBLTFX (ms907788, 100; DUMMYUNIONNAMEN(1..5)), DDOVERLAYFX
+  (ms907794, 56; member spellings dckDestColorkey/dckSrcColorkey as
+  printed), DDCOLORCONTROL (ms907790, 40), DDCAPS (ms907789, 380 =
+  91 DWORDs + DDSCAPS2; six dw*Rops[DD_ROP_SPACE] arrays).
+* dvp.h structures: DDVIDEOPORTBANDWIDTH (ms907801, 32),
+  DDVIDEOPORTCAPS (ms907802, 72; WORD wNumFilterTapsX/Y tail),
+  DDVIDEOPORTCONNECT (ms907803, 32; GUID guidTypeID + ULONG_PTR),
+  DDVIDEOPORTDESC (ms907804, 72), DDVIDEOPORTINFO (ms907805, 64;
+  RECT rCrop + three LPDDPIXELFORMAT), DDVIDEOPORTSTATUS (ms907806,
+  56).  TU m59 asserts all sizes + key offsets (dwRops@100,
+  ddsCaps@364, dwTextureStage@120, ddckDestColorkey@84, dwRGBBitCount
+  @12 / dwRBitMask@16, rCrop@16, guidTypeID@8); crosscheck-corrected:
+  DDCAPS 428->380 / ddsCaps 412->364 (initial miscount of the Rops
+  arrays) and DDPIXELFORMAT dwRBitMask 12->16 (second union).
+* DD_ROP_SPACE = 8: derived-value permission applied.  Path: DDCAPS
+  prints "DWORD dwRops[DD_ROP_SPACE]" (ms907789, same in CE 4.2 twin
+  ms893881); the DirectDraw driver docs (DDCORECAPS, ddrawi.h, Learn
+  win32/ddrawi/ns-ddrawi-ddcorecaps) state the array is "an array of
+  DD_ROP_SPACE DWORDs that together can hold flags to indicate the
+  ROPs that the driver supports" and defer ROP information to "the
+  Microsoft Windows SDK documentation"; the Win32 SDK Ternary Raster
+  Operations reference enumerates the ROP space by an 8-bit operation
+  index (Boolean functions 00-FF = 256 codes); 32 bits per DWORD
+  -> 256/32 = 8.  Pages preserved in corpus pagesw/.
+* Interfaces are opaque exactly as their pages print them (ms929639
+  "typedef struct IDirectDraw FAR *LPDIRECTDRAW" + generations
+  IDirectDraw2/4, Surface/2/3/4/5, Clipper, Palette, ColorControl;
+  ms909107 / aa451780 for the Dvp.h pair).  No page prints a vtable
+  layout, so no interface is laid out (M58 pattern); all 93 method
+  signatures are recorded in the header comment blocks with per-page
+  ids.  CE specifics recorded: IDirectDraw4::GetDeviceIdentifier and
+  ::Initialize not supported in Windows CE (ms929639),
+  IDirectDrawClipper::Initialize (ms929663) and
+  IDirectDrawPalette::Initialize (ms929673) not supported,
+  IDirectDrawSurface5::UpdateOverlayDisplay not implemented and
+  prints no signature (ms929718), ::Compact (ms929640) and
+  ::AddOverlayDirtyRect (ms929679) "not currently implemented",
+  ::Lock hEvent "not used and must be set to NULL" + DDLOCK_NOSYSLOCK
+  not supported in CE (ms929705).
+* Callback pointer typedefs (composition of each page's printed
+  prototype + its "You can use the LP... data type to declare a
+  variable that can contain a pointer to this callback function"
+  remark, path recorded per item in the header): LPDDENUMCALLBACK
+  (ms907792), LPDDENUMCALLBACKEX (ms907793, HMONITOR tail),
+  LPDDENUMMODESCALLBACK (aa451690), LPDDENUMMODESCALLBACK2 (aa451691;
+  page prints the prototype name "EnumModesCallback" -- title wins,
+  artifact recorded), LPDDENUMSURFACESCALLBACK (aa451692),
+  LPDDENUMSURFACESCALLBACK2 (aa451693), LPDDENUMVIDEOCALLBACK
+  (aa451694; page names Ddraw.h but its parameter type DDVIDEOPORTCAPS
+  is a Dvp.h structure per ms907802, so the typedef is placed in
+  dvp.h next to its only consumer IDDVideoPortContainer::
+  EnumVideoPorts ms909119 -- placement decision recorded here).
+* def/ddraw-doc.def: 4 exports (DirectDrawCreate aa451583,
+  DirectDrawCreateClipper aa451584, DirectDrawEnumerate aa451585,
+  DirectDrawEnumerateEx aa451586) -- exactly the Ddraw.lib function
+  surface; interface-method pages carry Ddraw.lib rows but are
+  def-less records (no dlltool-able symbols).  e2e asserts ddraw.dll +
+  all 4 symbols.
+* HELD (names documented, values/layouts not published):
+  - DDARGB layout and therefore DDALPHABLTFX (ms907787; checked CE
+    4.2 ms893879, CE 5.0 ms907787, CE 6.0 ee490481, desktop Learn
+    ddraw.h header index + Learn search API -- no DDARGB definition
+    anywhere official; only third-party SDK copies publish a layout).
+  - All DD* constant families (values name-only everywhere): DD_OK /
+    DDERR_* (aa451337, 130+ codes), DDBLT_*/DDBLTFX_* (ms907788,
+    ms929681), DDCAPS_*/DDCAPS2_*/DDCKEYCAPS_*/DDFXCAPS_*/
+    DDFXALPHACAPS_*/DDPCAPS_*/DDSVCAPS_*/DDBD_* (ms907789),
+    DDCOLOR_* (ms907790), DDOVERFX_* (ms907794), DDPF_* (ms907795),
+    DDSCAPS_*/DDSCAPS2_*/DDSCAPS4_* (ms907796/797/798),
+    DDSD_* (ms907799/800), DDENUM_* (aa451586), DDENUMRET_*
+    (aa451690..694), DDSCL_* (ms929659), DDEDM_* (ms929645),
+    DDENUMSURFACES_* (ms929646), DDENUMOVERLAYZ_* (ms929686),
+    DDWAITVB_* (ms929662), DDSDM_* (ms929660), DDCREATE_* (aa451583
+    note text), DDGFS_*/DDGBS_* (ms929696/690), DDCKEY_* (ms929711),
+    DDBLTFAST_* (ms929682), DDFLIP_* (ms929687), DDLOCK_* (ms929705),
+    DDSPD_* (ms929714), DDOVER_*/DDOVERZ_* (ms929717/aa451768),
+    DDABLT_* (ms929680), DDPSETPAL_* (ms929642), and the Dvp.h
+    families DDVPCAPS_*/DDVPD_*/DDVPFX_* (ms907802),
+    DDVPCONNECT_*/DDVPTYPE_* GUID names (ms907803), DDVP_* (ms907805),
+    DDVPCREATE_* (ms909118), DDVPFLIP_* (aa451781), DDVPB_*
+    (aa451782), DDVPFORMAT_* (aa451785/786), DDVPTARGET_* (aa451790),
+    DDVPWAIT_* (aa451794), DDVPSQ_* (aa451788), DDVPSTATUS_*
+    (ms907806), DDVPBCAPS_* (ms907801).
+* CE 6.0 twin divergences recorded (condensed/variant member lists;
+  CE 5.0 prints implemented): DDBLTFX ee491245, DDCAPS ee490705,
+  DDCOLORCONTROL ee490304, DDOVERLAYFX ee491509, DDPIXELFORMAT
+  ee491068, DDSURFACEDESC ee490816, DDALPHABLTFX ee490481 (adds a
+  dwSize member).  Identical twins: DDCOLORKEY ee490463, DDSCAPS
+  ee490733, RGNDATAHEADER/RGNDATA ee490821/ee490736 (already in
+  wingdi.h from the GDI milestones).  The CE 5.0 prints are
+  additionally corroborated member-by-member by the desktop ddraw.h
+  documentation set on Learn (DDBLTFX, DDCAPS_DX7, DDSURFACEDESC(2),
+  DDOVERLAYFX, DDPIXELFORMAT, DDCOLORCONTROL, DDCOLORKEY, DDSCAPS(2)
+  pages), which also states the DUMMYUNIONNAMEN nameless-union
+  convention (pages preserved in corpus pagesw/).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m59: DD_ROP_SPACE value assert + 24 size/offset asserts + shaped
+usage incl. the four Ddraw.lib calls).  Headers 63 -> 65; defs 51 ->
+52 (ddraw 4).

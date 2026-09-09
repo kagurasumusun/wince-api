@@ -173,6 +173,23 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M59 (landed):** DirectDraw (new `include/ddraw.h`,
+  `include/dvp.h`; def `def/ddraw-doc.def`, 4 exports = the Ddraw.lib
+  function surface).  The 11 Ddraw.h structures + 6 Dvp.h video-port
+  structures transcribed verbatim from the CE 5.0 prints (TU asserts
+  every 32-bit size and key offsets; DDCAPS = 380 bytes with six
+  dw*Rops[DD_ROP_SPACE] arrays), the seven enumeration-callback
+  pointer typedefs composed from each page's prototype + "You can use
+  the LP... data type" remark, and the opaque interface records
+  (IDirectDraw4 23 methods, IDirectDrawSurface5 42,
+  IDirectDrawClipper 5, IDirectDrawPalette 3, IDirectDrawColorControl
+  2, IDDVideoPortContainer 4, IDirectDrawVideoPort 14) with every
+  documented signature recorded.  Derived value with recorded path:
+  DD_ROP_SPACE = 8 (DDK DDCORECAPS array description + the 256-code
+  SDK raster-operation space / 32 bits).  Held: DDARGB layout and
+  therefore DDALPHABLTFX, every DD* constant family (names only,
+  catalogued in the inventory), the CE 6.0 twin struct divergences
+  (recorded).  Headers 63 -> 65, defs 51 -> 52.
 * **M58 (landed):** DVD-Video renderer (new `include/dvddrvr.h`,
   `include/dvdcss.h`, both def-less IDL layers): the seven EDVD* /
   EHighlightAction enumerations and the DVD_AUDIOCAP_* / DVD_SCANCAP_*
