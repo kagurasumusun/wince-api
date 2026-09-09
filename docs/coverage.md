@@ -73,3 +73,46 @@ leaves not yet triaged.
   ddraw/cc/m57 batches; extend to new units), compat-macro sweep,
   and the common-HRESULT constant closure (official desktop
   "Common HRESULT Values" page, M52 fixed-ABI reference permission).
+
+## M71 refresh (post M69/M70/M70b/M71a/M71b/M71c)
+
+Same methodology as the M62 audit (Features leaves of the official
+CE 5.0 toc.json vs pages preserved in build/pages, the corpus
+pages5 tree; twin pages in pages6/pages4 are verification material
+and are not counted).  Harvests since M62: MSXML (M67 area),
+SAPI (M68), RTC (M69), CEDB/EDB Database Reference (M70),
+DirectShow data surface (M70b), DirectShow Interfaces (M71b),
+DMO Reference (M71c), plus the earlier D3DM/mmsystem/imaging
+batches.
+
+| Features book | leaves | have | % |
+|---|---|---|---|
+| Graphics and Multimedia Technologies | 2935 | 1352 | 46% |
+| Shell and User Interface | 2407 | 1687 | 70% |
+| Communication Services and Networking | 2331 | 443 | 19% |
+| Applications and Services Development | 2160 | 1052 | 48% |
+| Voice over IP Phone Services | 639 | 421 | 65% |
+| Internet Client Services | 607 | 246 | 40% |
+| International | 547 | 194 | 35% |
+| Core OS Services | 522 | 359 | 68% |
+| File Systems and Data Store | 500 | 166 | 33% |
+| Security | 444 | 232 | 52% |
+| Applications - End User | 377 | 92 | 24% |
+| Device Management | 237 | 49 | 20% |
+| Fonts | 67 | 29 | 43% |
+| SideShow | 48 | 0 | 0% |
+| Windows CE Error Reporting | 38 | 0 | 0% |
+| **Total (Features)** | **13859** | **6322** | **45%** |
+
+Movement since M62: total 26% -> 45% (+2679 pages).  Remaining
+largest gaps: Graphics 1583 uncovered (DirectShow Classes 855 +
+Attributes 167-era books are Compact-2013-tree titles; the CE 5.0
+DirectShow remainder is Classes/Unsupported-Items), Communication
+1892 uncovered (Servers 810, NetGen 790, DCOM-era books), Apps &
+Services 1108 uncovered (DCOM 896), VoIP 218 (phone UI), File
+Systems 334 (FAT/registry internals and DDI-heavy books).
+
+Next queues by value: DCOM (Applications and Services >
+Component Services, 896 leaves, COM/DCOM interfaces), Servers
+(810), NetGen (790), DirectShow Classes (855, C++ strmbase --
+record-only surface), remaining Core OS DDI books.
