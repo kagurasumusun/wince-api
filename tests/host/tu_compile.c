@@ -30,6 +30,7 @@
 #include <wincrypt.h>
 #include <winscard.h>
 #include <objbase.h>
+#include <Mq.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6647,6 +6648,20 @@ static int m74_shaped_usage(void)
     return (int)n;
 }
 
+static int m75a_shaped_usage(void)
+{
+    MQQUEUEPROPS *qp = (MQQUEUEPROPS *)0;
+    QUEUEHANDLE   qh  = (QUEUEHANDLE)0;
+    HRESULT       hr;
+
+    hr = MQOpenQueue((LPCWSTR)0, 0u, 0u, &qh);
+    hr = MQCloseQueue(qh);
+    hr = MQGetQueueProperties((LPCWSTR)0, qp);
+    (void)MQFreeMemory((PVOID)0);
+    (void)hr;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6770,6 +6785,8 @@ int host_tu_entry(void)
     if (m73b_shaped_usage() != 0)
         return 1;
     if (m74_shaped_usage() != 0)
+        return 1;
+    if (m75a_shaped_usage() != 0)
         return 1;
     return 0;
 }

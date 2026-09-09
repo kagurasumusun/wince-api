@@ -5466,3 +5466,39 @@ dcom-storage 74 pages), all carried by Objbase.h:
 - Gates: check / crosscheck / e2e GREEN x6.
 - Coverage (Features): Graphics 46% -> 75% (+852 attributed pages);
   total 45% -> 52%.
+
+## M75a -- Message Queuing (Mq.h / Mqmgmt.h / Mqoai.h, def/msmqrt-doc.def)
+
+Servers book (tools/manifests/servers.manifest, 1002 pages fetched in
+M75 prep, 0 errors; rows.json 10499):
+
+- include/Mq.h (NEW, real header): 15 function declarations
+  (Msmqrt.lib rows) -- MQCloseCursor, MQCloseQueue, MQCreateCursor,
+  MQCreateQueue, MQDeleteQueue, MQFreeMemory,
+  MQGetMachineProperties, MQGetQueueProperties,
+  MQHandleToFormatName, MQOpenQueue, MQPathNameToFormatName,
+  MQSendMessage, MQSetQueueProperties, MQMgmtAction,
+  MQMgmtGetInfo.  APIENTRY prints kept (Windef macro).
+- Print-grounded closures (noted in-header): PHANDLE (MQCreateCursor
+  print; LPHANDLE sibling), QUEUEHANDLE=HANDLE (used-only;
+  MQCreateCursor pairs it with PHANDLE), opaque ITransaction forward
+  (MQSendMessage print).  REFERENCE_TIME-style closure policy.
+- Pointer-only incomplete structs (members depend on unpublished
+  types; verbatim prints recorded): MQMSGPROPS ms895125,
+  MQQUEUEPROPS ms895140, MQQMPROPS ms895138, MQPROPVARIANT ms895134
+  (CA-family/BLOB union members = the PROPVARIANT hold, M73a),
+  MQMGMTPROPS (used-only).
+- HELD: PROPID typedef (aa450286 prints `typedef PROPID MSGPROPID` /
+  QUEUEPROPID / QMPROPID but PROPID itself is unpublished) and all 49
+  PROPID_M_* / PROPID_Q_* / PROPID_QM_* numeric values -- names
+  recorded with page ids.  MQReceiveMessage held as declaration:
+  print passes MQMSGPROPS by value and names PMQRECEIVECALLBACK /
+  Transaction (unpublished); verbatim record only.
+- MSMQ COM object model: 7 objects (MSMQApplication, MSMQEvent,
+  MSMQMessage, MSMQQuery, MSMQQueue, MSMQQueueInfo, MSMQQueueInfos)
+  with 79 property/method records -- recorded, not compiled
+  (Mqoa.lib is a COM object library).
+- Aliases: Mqoai.h -> Mq.h (72 rows), Mqmgmt.h -> Mq.h (2 rows).
+- def/msmqrt-doc.def (NEW): 15 exports (1 skipped: MQReceiveMessage).
+- TU m75a block; Makefile HDRS 186 -> 189.
+- Gates: check / crosscheck / e2e GREEN x6.

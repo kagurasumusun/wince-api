@@ -50,6 +50,9 @@ include/Keybd.h \
 include/Kfuncs.h \
 include/Mlang.h \
 include/Mmsystem.h \
+include/Mq.h \
+include/Mqmgmt.h \
+include/Mqoai.h \
 include/Msgqueue.h \
 include/Msxml2.h \
 include/Natedit.h \

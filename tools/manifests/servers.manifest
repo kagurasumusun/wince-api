@@ -1,0 +1,1002 @@
+ms898959	File Server
+ms881859	File Server OS Design Development
+ms899615	Configuring the File Server through the Registry
+ms899609	Configuring FATFS Cache Parameters for the File Server
+ms881857	File Server Application Development
+aa450272	How to Configure a File Server
+ms899624	Creating an OS Design for a File Server Device
+ms899610	Configuring the File Server Registry
+aa451153	Sharing Folders Using the File Server
+ms899859	Using the Remote Configuration Tool to Configure the File Server
+ms899601	Accessing Shares on the File Server
+ms881861	File Server Security
+ms884924	File Server Registry Settings
+ms881858	File Server Migration
+ms881860	File Server Samples
+ms886671	File Server Reference
+ms886670	File Server Functions
+aa450283	Add_Share
+ms887907	Change_ACL
+aa450328	Del_Share
+ms894568	List_Connected_Users
+ms896350	QueryAmountTransfered
+ms898962	FTP Server
+ms881874	FTP Server OS Design Development
+ms881869	FTP Server Application Development
+ms881872	FTP Server Implementation
+ms881871	FTP Server Data Types
+ms884955	Supported FTP Commands
+ms885414	Unsupported FTP Commands
+ms881870	FTP Server Authentication
+ms881878	FTP Server User List
+ms880915	Accessing the FTP Protocol
+ms881879	FTP WinInet Functions
+ms899744	Creating Virtual FTP Directories
+ms899603	Assigning User-Specific Permissions
+ms881875	FTP Server Registry Settings
+ms881877	FTP Server Security
+ms881873	FTP Server Migration
+ms881876	FTP Server Samples
+ms898982	Message Queuing
+ms882768	MSMQ OS Design Development
+ms898983	MSMQ Application Development
+ms882835	MSMQ Programming Model
+ms884949	Summary of Supported MSMQ Functions
+ms881668	Creating Queues
+aa450210	Sending Messages to a Queue
+aa450128	Receiving Messages from a Queue
+ms881358	Connecting to Another Device
+ms882822	Application Installation of MSMQ
+ms882831	MSMQ Modules and Descriptions
+aa450027	Installation Options
+aa450028	Installing MSMQ Using MSMQADM.EXE
+aa450030	Installing MSMQ Using Visadm
+aa450029	Installing MSMQ Using the Registry
+ms880929	Administration
+aa450025	Installable File Systems
+ms885786	Using the MSMQAdm Utility
+ms880953	Backup
+ms885389	Uninstallation
+ms881676	Debugging MSMQ Installations
+ms882757	MSMQ COM Support
+ms885785	Using the COM Components
+ms885780	Using Message Queuing COM Components in eMbedded Visual C++
+ms881656	Creating a Queue (COM)
+ms881655	Creating a Private Queue (COM)
+ms880978	C++ COM Code Example: Creating a Private Queue
+ms883347	Opening a Queue (COM)
+ms883374	Opening a Queue to Send Messages (COM)
+ms880980	C++ COM Code Example: Opening a Queue to Send Messages
+ms883361	Opening a Queue to Read Messages (COM)
+ms880979	C++ COM Code Example: Opening a Queue to Read Messages
+ms881682	Deleting a Queue (COM)
+aa450211	Sending Messages to a Queue (COM)
+aa450209	Sending a String in a Message (COM)
+ms880983	C++ COM Code Example: Sending a String
+aa450201	Sending a Date in a Message (COM)
+aa450198	Sending a Currency in a Message (COM)
+aa450206	Sending a Number in a Message (COM)
+aa450203	Sending an Array of Bytes in a Message (COM)
+aa450207	Sending a Persistent Object (COM)
+aa450200	Sending a Data Recordset in a Message (COM)
+aa450151	Requesting Acknowledgment Messages (COM)
+aa450155	Requesting Response Messages (COM)
+aa450212	Sending Response Messages (COM)
+aa450154	Requesting Report Messages (COM)
+aa450202	Sending a File as a Message (COM)
+ms883474	Reading Messages in a Queue (COM)
+ms883475	Reading Messages Synchronously (COM)
+ms880982	C++ COM Code Example: Reading Messages Synchronously
+ms883470	Reading Messages Asynchronously (COM)
+ms883476	Reading Messages Using a Cursor (COM)
+ms883456	Purging Messages in a Queue (COM)
+ms883455	Purging a Queue Synchronously (COM)
+ms880981	C++ COM Code Example: Purging a Queue Synchronously
+ms883454	Purging a Queue Asynchronously (COM)
+aa450153	Requesting Journaling (COM)
+aa450157	Requesting Target Journaling (COM)
+aa450156	Requesting Source Journaling (COM)
+ms883473	Reading Messages from a Queue Journal (COM)
+ms883471	Reading Messages from a Computer Journal (COM)
+ms883472	Reading Messages from a Dead-Letter Queue (COM)
+ms881862	Filtering Messages (COM)
+ms880935	Application-Specific Filter (COM)
+ms882728	Message Class Filter (COM)
+aa450183	Retrieving Queue Properties (COM)
+aa450167	Retrieving MSMQQueueInfo.Authenticate
+aa450168	Retrieving MSMQQueueInfo.BasePriority
+aa450169	Retrieving MSMQQueueInfo.CreateTime
+aa450170	Retrieving MSMQQueueInfo.FormatName
+aa450171	Retrieving MSMQQueueInfo.IsTransactional
+aa450172	Retrieving MSMQQueueInfo.Journal
+aa450173	Retrieving MSMQQueueInfo.JournalQuota
+aa450174	Retrieving MSMQQueueInfo.Label
+aa450175	Retrieving MSMQQueueInfo.ModifyTime
+aa450176	Retrieving MSMQQueueInfo.PathName
+aa450177	Retrieving MSMQQueueInfo.PrivLevel
+aa450178	Retrieving MSMQQueueInfo.QueueGuid
+aa450179	Retrieving MSMQQueueInfo.Quota
+aa450180	Retrieving MSMQQueueInfo.ServiceTypeGuid
+ms884906	Setting Queue Properties (COM)
+ms884897	Setting MSMQQueueInfo.Authenticate
+ms884898	Setting MSMQQueueInfo.BasePriority
+ms884900	Setting MSMQQueueInfo.Journal
+ms884901	Setting MSMQQueueInfo.JournalQuota
+ms884902	Setting MSMQQueueInfo.Label
+ms884903	Setting MSMQQueueInfo.PrivLevel
+ms884904	Setting MSMQQueueInfo.Quota
+ms884905	Setting MSMQQueueInfo.ServiceTypeGuid
+ms885788	Using Transactions (COM)
+ms883446	Programming Considerations when Using Transactions (COM)
+aa450208	Sending a Single-Message Transaction (COM)
+aa450039	Internet Messaging
+ms881917	HTTP Transport
+ms884929	SOAP Reliable Messaging Protocol
+ms882779	Message Routing
+ms882745	Message Conversion
+ms882845	MSMQ Registry Settings
+ms882852	MSMQ Security
+ms898984	MSMQ Migration
+ms898985	MSMQ Samples
+ms886699	MSMQ Reference
+ms886696	MSMQ COM Objects
+ms895149	MSMQApplication
+ms895150	MSMQEvent
+ms895153	MSMQEvent.Arrived
+ms895154	MSMQEvent.ArrivedError
+ms895156	MSMQMessage
+ms895158	MSMQMessage.Ack
+ms895160	MSMQMessage.AdminQueueInfo
+ms895163	MSMQMessage.AppSpecific
+ms895164	MSMQMessage.ArrivedTime
+ms895166	MSMQMessage.AuthLevel
+ms895169	MSMQMessage.Body
+ms895170	MSMQMessage.BodyLength
+ms895173	MSMQMessage.Class
+ms895174	MSMQMessage.CorrelationId
+ms895176	MSMQMessage.Delivery
+ms895178	MSMQMessage.DestinationQueueInfo
+ms895181	MSMQMessage.EncryptAlgorithm
+ms895182	MSMQMessage.Extension
+ms895185	MSMQMessage.HashAlgorithm
+ms895186	MSMQMessage.Id
+ms895189	MSMQMessage.IsAuthenticated
+ms895190	MSMQMessage.Journal
+ms895193	MSMQMessage.Label
+ms895194	MSMQMessage.MaxTimeToReachQueue
+ms895196	MSMQMessage.MaxTimeToReceive
+ms895199	MSMQMessage.Priority
+ms895200	MSMQMessage.PrivLevel
+ms895203	MSMQMessage.ResponseQueueInfo
+ms895204	MSMQMessage.Send
+ms895207	MSMQMessage.SenderCertificate
+ms895208	MSMQMessage.SenderId
+ms895211	MSMQMessage.SenderIdType
+ms895212	MSMQMessage.SentTime
+ms895215	MSMQMessage.SourceMachineGuid
+ms895217	MSMQMessage.Trace
+ms895219	MSMQQuery
+ms895221	MSMQQueue
+ms895224	MSMQQueue.Access
+ms895225	MSMQQueue.Close
+ms895228	MSMQQueue.EnableNotification
+ms895231	MSMQQueue.Handle
+ms895276	MSMQQueue.IsOpen
+ms895279	MSMQQueue.Peek
+ms895281	MSMQQueue.PeekCurrent
+ms895284	MSMQQueue.PeekNext
+ms895286	MSMQQueue.QueueInfo
+ms895287	MSMQQueue.Receive
+ms895289	MSMQQueue.ReceiveCurrent
+ms895614	MSMQQueue.Reset
+ms895653	MSMQQueue.ShareMode
+ms895232	MSMQQueueInfo
+ms895234	MSMQQueueInfo.Authenticate
+ms895236	MSMQQueueInfo.BasePriority
+ms895238	MSMQQueueInfo.Create
+ms895240	MSMQQueueInfo.CreateTime
+ms895241	MSMQQueueInfo.Delete
+ms895244	MSMQQueueInfo.FormatName
+ms895245	MSMQQueueInfo.IsTransactional
+ms895248	MSMQQueueInfo.IsWorldReadable
+ms895249	MSMQQueueInfo.Journal
+ms895252	MSMQQueueInfo.JournalQuota
+ms895253	MSMQQueueInfo.Label
+ms895256	MSMQQueueInfo.ModifyTime
+ms895257	MSMQQueueInfo.Open
+ms895260	MSMQQueueInfo.PathName
+ms895261	MSMQQueueInfo.PrivLevel
+ms895264	MSMQQueueInfo.QueueGuid
+ms895266	MSMQQueueInfo.Quota
+ms895268	MSMQQueueInfo.Refresh
+ms895272	MSMQQueueInfo.ServiceTypeGuid
+ms895275	MSMQQueueInfo.Update
+ms895270	MSMQQueueInfos
+ms886697	MSMQ Functions
+ms895103	MQCloseCursor
+ms895104	MQCloseQueue
+ms895106	MQCreateCursor
+ms895108	MQCreateQueue
+ms895110	MQDeleteQueue
+ms895113	MQFreeMemory
+ms895115	MQGetMachineProperties
+ms895117	MQGetQueueProperties
+ms895119	MQHandleToFormatName
+ms895121	MQMgmtAction
+ms895123	MQMgmtGetInfo
+ms895127	MQOpenQueue
+ms895130	MQPathNameToFormatName
+ms895143	MQReceiveMessage
+ms895144	MQSendMessage
+ms895147	MQSetQueueProperties
+ms886698	MSMQ Properties
+ms896290	PROPID_M_ACKNOWLEDGE
+ms896291	PROPID_M_ADMIN_QUEUE
+ms896292	PROPID_M_ADMIN_QUEUE_LEN
+ms896293	PROPID_M_APPSPECIFIC
+ms896294	PROPID_M_ARRIVEDTIME
+ms896295	PROPID_M_AUTH_LEVEL
+ms896296	PROPID_M_BODY
+ms896297	PROPID_M_BODY_SIZE
+ms896298	PROPID_M_BODY_TYPE
+ms896299	PROPID_M_CLASS
+ms896300	PROPID_M_COMPOUND_MESSAGE
+ms896301	PROPID_M_COMPOUND_MESSAGE_SIZE
+ms896302	PROPID_M_CORRELATIONID
+ms896303	PROPID_M_DELIVERY
+ms896304	PROPID_M_DEST_QUEUE
+ms896305	PROPID_M_DEST_QUEUE_LEN
+ms896306	PROPID_M_EXTENSION
+ms896307	PROPID_M_EXTENSION_LEN
+ms896308	PROPID_M_FIRST_IN_XACT
+ms896309	PROPID_M_JOURNAL
+ms896310	PROPID_M_LABEL
+ms896311	PROPID_M_LABEL_LEN
+ms896312	PROPID_M_LAST_IN_XACT
+ms896313	PROPID_M_MSGID
+ms896314	PROPID_M_PRIORITY
+ms896315	PROPID_M_RESP_QUEUE
+ms896316	PROPID_M_RESP_QUEUE_LEN
+ms896317	PROPID_M_SENTTIME
+ms896318	PROPID_M_SOAP_BODY
+ms896319	PROPID_M_SOAP_ENVELOPE
+ms896320	PROPID_M_SOAP_ENVELOPE_LEN
+ms896321	PROPID_M_SOAP_HEADER
+ms896322	PROPID_M_SRC_MACHINE_ID
+ms896323	PROPID_M_TIME_TO_BE_RECEIVED
+ms896324	PROPID_M_TIME_TO_REACH_QUEUE
+ms896325	PROPID_M_TRACE
+ms896326	PROPID_M_VERSION
+ms896327	PROPID_M_XACTID
+ms896328	PROPID_Q_AUTHENTICATE
+ms896329	PROPID_Q_CREATE_TIME
+ms896330	PROPID_Q_JOURNAL
+ms896331	PROPID_Q_JOURNAL_QUOTA
+ms896332	PROPID_Q_LABEL
+ms896335	PROPID_Q_MODIFY_TIME
+ms896336	PROPID_Q_PATHNAME
+ms896337	PROPID_Q_PRIV_LEVEL
+ms896338	PROPID_Q_QUOTA
+ms896339	PROPID_Q_TRANSACTION
+ms896334	PROPID_QM_MACHINE_ID
+ms886700	MSMQ Structures
+aa450286	aPropID
+aa450287	aPropVar
+aa450288	aStatus
+ms895125	MQMSGPROPS
+ms895134	MQPROPVARIANT
+ms895138	MQQMPROPS
+ms895140	MQQUEUEPROPS
+ms899516	Object Exchange Protocol
+ms883307	OBEX OS Design Development
+ms899303	OBEX Application Development
+aa450216	Server Support
+ms883155	OBEX Server Architecture
+ms883156	OBEX Server Services
+ms881930	Inbox Service
+ms881867	Folder Browsing Service
+ms881672	Custom Service Extensions
+ms880992	Client Support
+ms881696	Discovering OBEX Devices
+ms881692	Device Capability
+ms883300	Object Exchange Interfaces
+ms881389	Connection Points
+ms885770	Use of Streams
+ms881352	Connecting to an OBEX Server
+ms881712	Disconnecting from an OBEX Server
+aa450152	How to Request a Data Object from the OBEX Server
+ms881903	Headers to Use with Get Operations
+aa450199	How to Send a Data Object to the OBEX Server
+ms881904	Headers to Use with Put Operations
+ms880913	Aborting a Request
+ms884908	Setting the Target Folder Path on the OBEX Server
+ms883153	OBEX Registry Settings
+ms883154	OBEX Security
+ms899412	OBEX Migration
+ms899590	OBEX Samples
+ms883152	OBEXFTP
+ms883213	OBEXTool
+ms881927	Implementing the Put Operation
+ms881926	Implementing the Get Operation
+ms886705	OBEX Reference
+ms886703	OBEX Enumerations
+ms895790	OBEX_EVENT
+ms900556	OBEX Functions
+ms900565	ServerCallback
+ms900568	ServiceCallback
+ms886704	OBEX Interfaces
+ms890397	IDeviceEnum:IUnknown
+ms900495	IDeviceEnum::Clone
+ms890398	IDeviceEnum::Next
+ms890400	IDeviceEnum::Skip
+ms890399	IDeviceEnum::Reset
+ms890953	IHeaderCollection:IUnknown
+ms890891	IHeaderCollection::AddAppParams
+ms890893	IHeaderCollection::AddBody
+ms890897	IHeaderCollection::AddByte
+ms890900	IHeaderCollection::AddByteArray
+ms890902	IHeaderCollection::AddConnectionId
+ms890906	IHeaderCollection::AddCount
+ms890910	IHeaderCollection::AddDescription
+ms890914	IHeaderCollection::AddEndOfBody
+ms890916	IHeaderCollection::AddHTTP
+ms890920	IHeaderCollection::AddLength
+ms890922	IHeaderCollection::AddLong
+ms890925	IHeaderCollection::AddName
+ms890927	IHeaderCollection::AddObjectClass
+ms890931	IHeaderCollection::AddTarget
+ms890933	IHeaderCollection::AddTime
+ms890938	IHeaderCollection::AddTimeOld
+ms890942	IHeaderCollection::AddType
+ms890944	IHeaderCollection::AddUnicodeString
+ms890947	IHeaderCollection::AddWho
+ms890950	IHeaderCollection::EnumHeaders
+ms890955	IHeaderCollection::Remove
+ms890957	IHeaderCollection::RemoveAll
+ms890964	IHeaderEnum:IUnknown
+ms890966	IHeaderEnum::Next
+ms890969	IHeaderEnum::Reset
+ms890961	IHeaderEnum::Clone
+ms891039	IObex:IUnknown
+ms890990	IObex::BindToDevice
+ms891030	IObex::EnumDevices
+ms891033	IObex::EnumTransports
+ms891037	IObex::Initialize
+ms891044	IObex::Shutdown
+ms891054	IObex::StartDeviceEnum
+ms891057	IObex::StopDeviceEnum
+ms891011	IObexDevice:IUnknown
+ms890995	IObexDevice::Abort
+ms890998	IObexDevice::Connect
+ms891002	IObexDevice::Disconnect
+ms891005	IObexDevice::EnumProperties
+ms891008	IObexDevice::Get
+ms891015	IObexDevice::Put
+ms891017	IObexDevice::SetPassword
+ms891020	IObexDevice::SetPath
+ms891046	IObexSink:IUnknown
+ms891050	IObexSink::Notify
+ms900498	IPropertyBagEnum
+ms900502	IPropertyBagEnum::Clone
+ms900507	IPropertyBagEnum::Next
+ms900511	IPropertyBagEnum::Reset
+ms900514	IPropertyBagEnum::Skip
+ms886706	OBEX Structures
+ms900557	OBEXCOMMAND
+ms900561	OBEXTRANSACTION
+ms890978	INBOX_EVENT_DATA
+ms895794	OBEX_HEADER
+ms895798	OBEX_REQUEST
+ms899524	Parental Controls
+ms883394	Parental Controls OS Design Development
+ms883396	Parental Controls Security
+ms883393	Parental Controls Migration
+ms883395	Parental Controls Samples
+ms899527	Peer-to-Peer Networking
+ms883405	Peer-to-Peer OS Design Development
+ms883403	Peer-to-Peer Application Development
+ms883408	Peer Names and Clouds
+ms883448	Programming Requirements
+ms881661	Creating and Deleting a Peer Identity
+aa450142	Registering a Peer Name
+ms885406	Unregistering a Peer Name
+aa450159	Resolving a Peer Name
+ms886627	WSALookupServiceBegin Parameter Values for Resolving Peer Names
+ms886630	WSALookupServiceNext Parameter Values for Resolving Peer Names
+ms881840	Enumerating Clouds
+ms886628	WSALookupServiceBegin Parameter Values for Enumerating Clouds
+ms886629	WSALookupServiceNext Parameter Values for Enumerating Clouds
+ms881929	Importing and Exporting a Peer Identity
+aa450130	Receiving Notifications by Using WSANSPIoctl
+ms883406	Peer-to-Peer Registry Settings
+ms883407	Peer-to-Peer Security
+ms886711	Peer-to-Peer Samples
+ms899528	Peer-to-Peer Reference
+ms883404	Peer-to-Peer Common Reference
+ms886709	Peer-to-Peer Common Functions
+ms895848	PeerEndEnumeration
+ms895857	PeerFreeData
+ms895860	PeerGetItemCount
+ms895866	PeerGetNextItem
+ms886710	Peer-to-Peer Common Structures
+ms895901	PEER_ADDRESS
+ms895902	PEER_DATA
+ms886708	Peer-to-Peer Common Enumerations
+ms886712	PEER_CONNECTION_FLAGS_TAG
+ms895904	PEER_RECORD_CHANGE_TYPE_TAG
+ms886682	Identity Manager Reference
+ms886681	Identity Manager Functions
+ms895846	PeerCreatePeerName
+ms895849	PeerEnumGroups
+ms895853	PeerEnumIdentities
+ms895870	PeerIdentityCreate
+ms895875	PeerIdentityDelete
+ms895877	PeerIdentityExport
+ms895881	PeerIdentityGetCryptKey
+ms895884	PeerIdentityGetFriendlyName
+ms895889	PeerIdentityGetXML
+ms895893	PeerIdentityImport
+ms895898	PeerIdentitySetFriendlyName
+ms886683	Identity Manager Structures
+ms895903	PEER_NAME_PAIR_TAG
+ms896277	PNRP Reference
+ms886715	PNRP Functions
+ms886717	PNRP Structures
+ms896279	PNRP_CLOUD_ID
+ms896270	PNRPCLOUDINFO
+ms896275	PNRPINFO
+ms886714	PNRP Enumerations
+ms896278	PNRP_CLOUD_FLAGS
+ms896280	PNRP_CLOUD_STATE
+ms896281	PNRP_RESOLVE_CRITERIA
+ms886716	PNRP NSP Error Codes
+ms899532	Print Server
+ms883440	Print Server OS Design Development
+ms899533	Print Server Application Development
+ms881010	Configuring the Print Server through the Registry
+ms883441	Print Server Registry Settings
+ms883443	Print Server Security
+ms883439	Print Server Migration
+ms883442	Print Server Samples
+ms899535	RAS Server/PPTP Server (Incoming)
+ms883467	RAS Server/PPTP Server (Incoming) OS Design Development
+ms899536	RAS Server/PPTP Server (Incoming) Application Development
+ms883464	RAS Server Architecture
+ms899616	Configuring the RAS Server
+ms883465	RAS Server Authentication
+ms883468	RAS Server/PPTP Server (Incoming) Registry Settings
+ms881890	Global Server Settings
+ms883409	Per-Line Settings
+ms885772	User Credential Information
+ms883469	RAS Server/PPTP Server (Incoming) Security
+ms883466	RAS Server/PPTP Server (Incoming) Migration
+ms899592	RAS Server/PPTP Server (Incoming) Samples
+aa450226	RAS Server/PPTP Server (Incoming) Reference
+ms886722	RAS Server/PPTP Server (Incoming) Enumerations
+ms896353	RasCntlEnum
+aa450225	RAS Server/PPTP Server (Incoming) Functions
+aa450852	RasIOControl
+aa450227	RAS Server/PPTP Server (Incoming) Structures
+ms896358	RASCNTL_SERVER_IPV6_NET_PREFIX
+ms896357	RASCNTL_SERVERCONNECTION
+ms896355	RASCNTL_SERVERSTATUS
+ms896354	RASCNTL_SERVERLINE
+ms896356	RASCNTL_SERVERUSERCREDENTIALS
+aa450223	Services.exe
+aa450224	Services.exe OS Design Development
+ms899544	Services.exe Application Development
+ms880918	Activating a Service Programmatically
+aa450138	Registering a Service Programmatically
+ms881520	Controlling a Running Service
+aa450048	IOCTLs that are Sent by Applications
+aa450049	IOCTLs that are Sent by Services.exe
+ms884948	Stopping a Running Service
+ms899614	Configuring Services.exe to Load a Standalone Service
+ms884914	Shutting down a Standalone Service
+aa450112	Limitations to Standalone Services
+ms885782	Using Services.exe from the Command Line
+ms899776	Handling Command Line Parameters
+ms884953	Super Services
+aa450139	Registering a Super Service Automatically
+ms884765	Services.exe Request Handling
+ms884674	Services.exe Registry Settings
+ms884879	Services.exe Security
+ms899545	Services.exe Migration
+ms899546	Services.exe Samples
+aa450234	Services.exe Reference
+aa450232	Services.exe Functions
+aa450278	ActivateService
+aa450329	DeregisterService
+aa450368	EnumServices
+aa450425	GetServiceHandle
+aa450871	RegisterService
+aa450892	ServiceAddPort
+aa450897	ServiceClosePort
+aa450904	ServiceIoControl
+aa450914	ServiceUnbindPorts
+ms898932	xxx_Close (Services.exe)
+ms898933	xxx_Deinit (Services.exe)
+ms898934	xxx_Init (Services.exe)
+ms898935	xxx_IOControl (Services.exe)
+ms898936	xxx_Open (Services.exe)
+ms898937	xxx_Read (Services.exe)
+ms898938	xxx_Seek (Services.exe)
+ms898939	xxx_Write (Services.exe)
+aa450233	Services.exe IOCTLS
+ms891060	IOCTL_SERVICE_CALLBACK_FUNCTIONS
+ms891162	IOCTL_SERVICE_COMMAND_LINE_PARAMS
+ms891064	IOCTL_SERVICE_CONNECTION
+ms891073	IOCTL_SERVICE_CONSOLE
+ms891077	IOCTL_SERVICE_CONTROL
+ms891078	IOCTL_SERVICE_DEBUG
+ms891083	IOCTL_SERVICE_DEREGISTER_SOCKADDR
+ms891086	IOCTL_SERVICE_INSTALL
+ms891090	IOCTL_SERVICE_NOTIFY_ADDR_CHANGE
+ms891093	IOCTL_SERVICE_QUERY_CAN_DEINIT
+ms891097	IOCTL_SERVICE_REFRESH
+ms891099	IOCTL_SERVICE_REGISTER_SOCKADDR
+ms891102	IOCTL_SERVICE_START
+ms891105	IOCTL_SERVICE_STARTED
+ms891107	IOCTL_SERVICE_STATUS
+ms891120	IOCTL_SERVICE_STOP
+ms891124	IOCTL_SERVICE_UNINSTALL
+ms891127	IOCTL_SERVICE_UNLOAD
+aa450235	Services.exe Structures
+aa450908	ServicesExeCommandLineParams
+aa450899	ServiceEnumInfo
+aa450906	ServicesexeCallbackFunctions
+ms899547	Simple Network Time Protocol (SNTP)
+ms884917	Simple Network Time Protocol (SNTP) OS Design Development
+ms881011	Configuring the SNTP Service
+ms899593	SNTP Service Configuration Code Sample
+ms884926	SNTP Registry Settings
+ms884928	SNTP Security
+ms884925	SNTP Migration
+ms884927	SNTP Samples
+ms899559	Telnet Server
+ms885110	Telnet Server OS Design Development
+ms899560	Telnet Server Application Development
+ms885250	Telnet Server User Lists
+ms884992	Telnet Server Input Options
+ms885231	Telnet Server Registry Settings
+ms885237	Telnet Server Security
+ms899561	Telnet Server Migration
+ms899595	Telnet Server Samples
+ms899563	Universal Plug and Play (UPnP)
+ms885398	UPnP OS Design Development
+ms899562	UPnP Application Development
+ms885767	Supported UPnP Functionality
+ms899570	UPnP Concepts
+ms885502	UPnP Device and Control Point Architecture
+ms885424	UPnP Addressing
+ms885488	UPnP Discovery
+ms885474	UPnP Device Description
+ms885467	UPnP Control
+ms885495	UPnP Eventing
+ms885587	UPnP Presentation
+ms885482	UPnP Device Control Protocols
+ms898948	Using the UPnP Control Point API
+ms881613	Control Point Actions
+ms881699	Device Location
+ms881698	Device Finder Creation
+ms880941	Asynchronous Searching
+ms884958	Synchronous Searching
+ms881693	Device Collections Returned by Synchronous Searches
+ms881695	Device Description
+ms881694	Device Control
+aa450218	Service Objects
+ms880977	Callback Registration
+ms885787	Using the UPnP Device Host API
+ms881922	Implementing a Hosted Device Using COM
+ms881662	Creating a Device Description Document
+ms881669	Creating Service Description Documents
+ms881665	Creating an IUPnPDeviceControl Implementation
+ms881925	Implementing an IDispatch Interface for Each Service
+aa450137	Registering a Hosted Device
+ms899575	Using the UPnP AV Framework
+ms885445	UPnP AV DCP Overview
+ms885436	UPnP AV DCP Documentation
+ms885455	UPnP AV Framework Overview
+ms885430	UPnP AV Framework Class Organization
+ms881689	Developing UPnP AV Framework Devices and Control Points
+ms881690	Developing UPnP AV Framework Control Points
+ms881691	Developing UPnP AV Framework Devices
+ms881928	Implementing Device Classes
+aa450143	Registering Device Implementations
+ms883105	C++ Namespaces in the UPnP AV Framework
+ms885451	UPnP AV Framework Debug Zones
+ms881924	Implementing and Calling Custom Actions
+ms881848	Eventing in the UPnP AV Framework
+ms881847	Eventing ContainerUpdateIDs
+ms885765	UPnP Registry Settings
+ms885695	UPnP Registry Device Creation
+ms885763	UPnP Registry Device Creation Sample
+ms885766	UPnP Security
+ms899571	UPnP Migration
+ms899574	UPnP Samples
+ms885509	UPnP Generic Control Point and Device Samples
+aa451142	UPnP AV Renderer Sample
+aa451139	UPnP AV Control Point Sample
+aa451147	UPnP Internet Gateway Device Schema Sample
+ms899573	UPnP Reference
+ms886650	UPnP Control Point API Reference
+ms886649	UPnP Control Point API Interfaces
+aa450637	IUPnPDescriptionDocument
+aa450629	IUPnPDescriptionDocument::Abort
+aa450635	IUPnPDescriptionDocument::DeviceByUDN
+aa450639	IUPnPDescriptionDocument::Load
+aa450641	IUPnPDescriptionDocument::LoadAsync
+aa450643	IUPnPDescriptionDocument::LoadResult
+aa450645	IUPnPDescriptionDocument::ReadyState
+aa450647	IUPnPDescriptionDocument::RootDevice
+aa450631	IUPnPDescriptionDocumentCallback
+aa450633	IUPnPDescriptionDocumentCallback::LoadComplete
+aa450685	IUPnPDevice
+aa450649	IUPnPDevice::Children
+aa450657	IUPnPDevice::Description
+aa450682	IUPnPDevice::FriendlyName
+aa450683	IUPnPDevice::HasChildren
+aa450684	IUPnPDevice::IconURL
+aa450686	IUPnPDevice::IsRootDevice
+aa450687	IUPnPDevice::ManufacturerName
+aa450688	IUPnPDevice::ManufacturerURL
+aa450689	IUPnPDevice::ModelName
+aa450690	IUPnPDevice::ModelNumber
+aa450691	IUPnPDevice::ModelURL
+aa450692	IUPnPDevice::ParentDevice
+aa450693	IUPnPDevice::PresentationURL
+aa450694	IUPnPDevice::RootDevice
+aa450697	IUPnPDevice::SerialNumber
+aa450699	IUPnPDevice::Services
+aa450707	IUPnPDevice::Type
+aa450710	IUPnPDevice::UniqueDeviceName
+aa450711	IUPnPDevice::UPC
+aa450661	IUPnPDeviceDocumentAccess
+aa450659	IUPnPDeviceDocumentAccess::GetDocumentURL
+aa450680	IUPnPDeviceFinder
+aa450672	IUPnPDeviceFinder::CancelAsyncFind
+aa450674	IUPnPDeviceFinder::CreateAsyncFind
+aa450676	IUPnPDeviceFinder::FindByType
+aa450678	IUPnPDeviceFinder::FindByUDN
+aa450681	IUPnPDeviceFinder::StartAsyncFind
+aa450668	IUPnPDeviceFinderCallback
+aa450663	IUPnPDeviceFinderCallback::DeviceAdded
+aa450665	IUPnPDeviceFinderCallback::DeviceRemoved
+aa450670	IUPnPDeviceFinderCallback::SearchComplete
+aa450701	IUPnPDevices
+aa450705	IUPnPDevices::_NewEnum
+aa450695	IUPnPDevices::Count
+aa450703	IUPnPDevices::Item
+aa450731	IUPnPService
+aa450726	IUPnPService::AddCallback
+aa450730	IUPnPService::Id
+aa450732	IUPnPService::InvokeAction
+aa450733	IUPnPService::LastTransportStatus
+aa450734	IUPnPService::QueryStateVariable
+aa450736	IUPnPService::ServiceTypeIdentifier
+aa450727	IUPnPServiceCallback
+aa450728	IUPnPServiceCallback::ServiceInstanceDied
+aa450729	IUPnPServiceCallback::StateVariableChanged
+aa450737	IUPnPServices
+ms893153	IUPnPServices::_NewEnum
+aa450735	IUPnPServices::Count
+ms893062	IUPnPServices::Item
+aa450251	UPnP C Device Host Reference
+aa450249	UPnP C Device Host Enumerations
+aa451143	UPNPCB_ID
+aa450250	UPnP C Device Host Functions
+ms896349	PUPNPCALLBACK
+aa451138	UpnpAddDevice
+aa451145	UpnpGetSCPDPath
+aa451146	UpnpGetUDN
+aa451149	UpnpPublishDevice
+aa451150	UpnpRemoveDevice
+ms898523	UpnpSetControlResponse
+ms898533	UpnpSetErrorResponse
+ms898542	UpnpSetRawControlResponse
+ms898553	UpnpSubmitPropertyEvent
+ms898561	UpnpUnpublishDevice
+aa450252	UPnP C Device Host Structures
+aa451144	UPNPDEVICEINFO
+aa451148	UPNPPARAM
+ms898418	UPNPSERVICECONTROL
+ms898558	UPNPSUBSCRIPTION
+aa450254	UPnP Device Host Reference
+aa450253	UPnP Device Host Interfaces
+aa450655	IUPnPDeviceControl
+aa450653	IUPnPDeviceControl::Initialize
+aa450651	IUPnPDeviceControl::GetServiceObject
+aa450712	IUPnPEventSink
+aa450713	IUPnPEventSink::OnStateChanged
+aa450714	IUPnPEventSink::OnStateChangedSafe
+aa450716	IUPnPEventSource
+aa450715	IUPnPEventSource::Advise
+aa450717	IUPnPEventSource::Unadvise
+aa450719	IUPnPRegistrar
+aa450718	IUPnPRegistrar::GetUniqueDeviceName
+aa450720	IUPnPRegistrar::RegisterDevice
+aa450721	IUPnPRegistrar::RegisterRunningDevice
+aa450722	IUPnPRegistrar::UnregisterDevice
+aa450723	IUPnPReregistrar
+aa450724	IUPnPReregistrar::ReregisterDevice
+aa450725	IUPnPReregistrar::ReregisterRunningDevice
+ms899568	UPnP AV Reference
+ms899564	UPnP AV Classes
+aa451141	UPnP AV Interface and Implementation Classes
+ms890334	IAVTransport
+ms890335	IAVTransport::GetCurrentTransportActions
+ms890336	IAVTransport::GetDeviceCapabilities
+ms890337	IAVTransport::GetMediaInfo
+ms890338	IAVTransport::GetPositionInfo
+ms890339	IAVTransport::GetTransportInfo
+ms890340	IAVTransport::GetTransportSettings
+ms890342	IAVTransport::InvokeVendorAction
+ms890343	IAVTransport::Next
+ms890344	IAVTransport::Pause
+ms890345	IAVTransport::Play
+ms890346	IAVTransport::Previous
+ms890347	IAVTransport::Record
+ms890348	IAVTransport::Seek
+ms890349	IAVTransport::SetAVTransportURI
+ms890350	IAVTransport::SetNextAVTransportURI
+ms890351	IAVTransport::SetPlayMode
+ms890353	IAVTransport::SetRecordQualityMode
+ms890354	IAVTransport::Stop
+ms890341	IAVTransportImpl
+ms890364	IConnectionManager
+ms890365	IConnectionManager::ConnectionComplete
+ms890366	IConnectionManager::GetCurrentConnectionInfo
+ms890367	IConnectionManager::GetFirstConnectionID
+ms890368	IConnectionManager::GetNextConnectionID
+ms890369	IConnectionManager::GetProtocolInfo
+ms890377	IConnectionManager::InvokeVendorAction
+ms890378	IConnectionManager::PrepareForConnection
+ms890370	IConnectionManagerImpl
+ms890371	IConnectionManagerImpl::AddSinkProtocol
+ms890372	IConnectionManagerImpl::AddSourceProtocol
+ms890373	IConnectionManagerImpl::CreateConnection
+ms890374	IConnectionManagerImpl::EndConnection
+ms890375	IConnectionManagerImpl::RemoveSinkProtocol
+ms890376	IConnectionManagerImpl::RemoveSourceProtocol
+ms890379	IContentDirectory
+ms890380	IContentDirectory::BrowseChildren
+ms890381	IContentDirectory::BrowseMetadata
+ms890382	IContentDirectory::CreateObject
+ms890383	IContentDirectory::CreateReference
+ms890384	IContentDirectory::DeleteResource
+ms890385	IContentDirectory::DestroyObject
+ms890386	IContentDirectory::ExportResource
+ms890387	IContentDirectory::GetSearchCapabilities
+ms890388	IContentDirectory::GetSortCapabilities
+ms890389	IContentDirectory::GetSystemUpdateID
+ms890390	IContentDirectory::GetTransferProgress
+ms890392	IContentDirectory::ImportResource
+ms890393	IContentDirectory::InvokeVendorAction
+ms890394	IContentDirectory::Search
+ms890395	IContentDirectory::StopTransferResource
+ms890396	IContentDirectory::UpdateObject
+ms890391	IContentDirectoryImpl
+ms890401	IEventSink
+ms890402	IEventSink::OnStateChanged
+ms890403	IEventSource
+ms890404	IEventSource::Advise
+ms890881	IEventSource::Unadvise
+aa450476	IRenderingControl
+aa450477	IRenderingControl::GetBlueVideoBlackLevel
+aa450478	IRenderingControl::GetBlueVideoGain
+aa450479	IRenderingControl::GetBrightness
+aa450480	IRenderingControl::GetColorTemperature
+aa450481	IRenderingControl::GetContrast
+aa450482	IRenderingControl::GetGreenVideoBlackLevel
+aa450483	IRenderingControl::GetGreenVideoGain
+aa450484	IRenderingControl::GetHorizontalKeystone
+aa450485	IRenderingControl::GetLoudness
+aa450486	IRenderingControl::GetMute
+aa450487	IRenderingControl::GetRedVideoBlackLevel
+aa450488	IRenderingControl::GetRedVideoGain
+aa450489	IRenderingControl::GetSharpness
+ms890314	IRenderingControl::GetVerticalKeystone
+aa450490	IRenderingControl::GetVolume
+aa450492	IRenderingControl::GetVolumeDB
+aa450493	IRenderingControl::GetVolumeDBRange
+aa450497	IRenderingControl::InvokeVendorAction
+aa450499	IRenderingControl::ListPresets
+aa450502	IRenderingControl::SelectPreset
+aa450504	IRenderingControl::SetBlueVideoBlackLevel
+aa450506	IRenderingControl::SetBlueVideoGain
+aa450507	IRenderingControl::SetBrightness
+aa450509	IRenderingControl::SetColorTemperature
+aa450511	IRenderingControl::SetContrast
+aa450513	IRenderingControl::SetGreenVideoBlackLevel
+aa450515	IRenderingControl::SetGreenVideoGain
+aa450517	IRenderingControl::SetHorizontalKeystone
+aa450519	IRenderingControl::SetLoudness
+aa450521	IRenderingControl::SetMute
+aa450523	IRenderingControl::SetRedVideoBlackLevel
+aa450525	IRenderingControl::SetRedVideoGain
+aa450526	IRenderingControl::SetSharpness
+aa450528	IRenderingControl::SetVerticalKeystone
+aa450530	IRenderingControl::SetVolume
+aa450532	IRenderingControl::SetVolumeDB
+aa450495	IRenderingControlImpl
+ms893309	IVirtualService
+ms893316	IVirtualService::Release
+aa451140	UPnP AV Control Point Utility Classes
+ms894574	MediaRendererDevice
+ms894576	MediaRendererDevice Constructor
+ms894578	MediaRendererDevice::GetConnectionManager
+ms894581	MediaServerDevice
+ms894584	MediaServerDevice Constructor
+ms894587	MediaServerDevice::GetConnectionManager
+ms894589	MediaServerDevice::GetContentDirectory
+ms895841	parser (UPnP AV)
+ms895830	parser::AddNamespaceMapping
+ms895834	parser::GetFirstObject
+ms895840	parser::GetNextObject
+ms899572	UPnP Other Utility Classes
+ms899588	wstring class (UPnP AV)
+ms898916	wstring::append
+ms898917	wstring::assign
+ms898918	wstring::capacity
+ms898919	wstring::clear
+ms898920	wstring::compare
+ms898921	wstring::empty
+ms898922	wstring::length
+ms898928	wstring::reserve
+ms898929	wstring::resize
+ms898930	wstring::size
+ms898931	wstring::wstring
+ms898925	wstring::operator const wchar_t*
+ms898924	wstring::operator!=
+ms898923	wstring::operator+=
+ms898927	wstring::operator=
+ms898926	wstring::operator==
+ms899565	UPnP AV Constants
+ms898943	BIT_AV_
+ms899589	ZONE_AV_
+ms898942	AV String Constants
+aa450391	General String Constants
+aa450295	AVTransportState
+ms887912	ConnectionManagerState
+ms887914	ContentDirectoryState
+ms894592	Medium
+ms896263	PlayMode
+aa450873	RenderingControlState
+aa450881	SeekMode
+aa450976	TransportAction
+aa451006	TransportState
+ms899566	UPnP AV Enumerations
+aa450332	DIRECTION
+ms899567	UPnPAVError
+ms899569	UPnP AV Structures
+ms887911	ConnectionInfo
+aa450330	DeviceCapabilities
+ms894570	MediaInfo
+ms895804	object (UPnP AV)
+ms895802	object::GetProperty
+ms896283	PositionInfo
+aa450978	TransportActions
+aa451002	TransportInfo
+aa451004	TransportSettings
+ms899577	Web Proxy
+ms899580	Web Proxy OS Design Development
+ms885798	Web Proxy Filtering
+aa450255	Web Proxy Registry Settings
+ms885801	Web Proxy Security
+ms885799	Web Proxy Migration
+ms885800	Web Proxy Samples
+ms899581	Web Proxy Reference
+ms899578	Web Proxy Functions
+ms896342	ProxyFilterHttpRequest
+ms896343	ProxyInitializeFilter
+ms896344	ProxyNotifyAddrChange
+ms896345	ProxySignalFilter
+ms896346	ProxyUninitializeFilter
+ms899582	Web Proxy Structures
+ms896347	PROXY_HTTP_INFORMATION
+ms896348	PROXY_HTTP_REQUEST
+ms899579	Web Proxy IOCTLs
+ms891164	IOCTL_SERVICE_PRX_SIGNAL_FILTER
+ms899583	Web Server (HTTPD)
+ms900321	How to Setup a Server Certificate for a Windows CE Web Server
+ms900404	Retrieving an Advanced Certificate
+ms900349	Installing the Certificate on a Windows CE-based Web Server
+ms900401	Registering an Advanced Certificate on the Windows CE-based Web Server
+ms900426	Web Server (HTTPD) OS Design Development
+ms900432	Web Server Overview
+ms900460	How to Configure the Web Server
+ms899621	Creating an OS Design for a Web Server Device
+ms899617	Configuring the Web Server Registry
+ms899618	Configuring User Permissions for the Web Server
+ms899875	Testing the Web Server
+ms900424	Web Server (HTTPD) Application Development
+ms885805	Web Server Implementation Details
+ms885808	Web Server Requirements
+ms884945	Starting and Stopping the Web Server
+ms885806	Using Web Server Logging
+ms885793	Setting Virtual Paths
+ms883003	Supporting Multiple Web Sites
+ms885804	Web Server Authentication and Permissions
+ms885803	Web Server Authentication
+ms885802	Web Server Access Rights
+ms885807	Web Server Permissions
+ms885810	Web Server User Lists
+ms884943	SSL Support
+ms899619	Configuring a Web Server to use SSL
+ms884942	SSL Client Authentication
+ms881915	HTTP Implementation
+ms881916	HTTP Functionality
+ms882693	Mapping a File Extension to Content-Type
+aa450097	ISAPI Extensions, Filters, and Script Mapping
+aa450101	ISAPI Script Mapping
+aa450096	ISAPI Extensions
+aa450095	ISAPI Extension Functions
+aa450099	ISAPI Filters
+aa450098	ISAPI Filter Functions
+aa450100	ISAPI Filters and HTTP Headers
+ms885795	WebDAV
+ms881375	Connecting to WebDAV
+ms881008	Configuring a WebDAV Server
+ms885796	WebDAV Interoperability Issues
+ms900438	Web Server Registry Settings
+ms880955	Base Registry Settings
+ms900420	Virtual Path Registry Settings
+ms900390	Multiple Web Site Registry Settings
+ms900411	SSL Support Registry Settings
+ms885809	Web Server Security
+ms885797	WebDAV Security
+ms900429	Web Server Migration
+ms900598	Web Server Samples
+aa450257	Web Server Reference
+aa450256	Web Server Functions
+aa450279	AddHeader
+aa450281	AddResponseHeaders
+aa450285	AllocMem
+aa450399	GetExtensionVersion
+aa450400	GetFilterVersion
+aa450402	GetHeader
+aa450423	GetServerVariable (ISAPI Extensions)
+aa450424	GetServerVariable (ISAPI Filters)
+ms890326	HttpExtensionProc
+ms890328	HttpFilterProc
+aa450868	ReadClient
+aa450887	ServerSupportFunction (ISAPI Extensions)
+aa450890	ServerSupportFunction (ISAPI Filters)
+aa450916	SetHeader
+aa450965	TerminateExtension
+aa450967	TerminateFilter
+ms898725	WriteClient (ISAPI Extensions)
+ms898726	WriteClient (ISAPI Filters)
+aa450258	Web Server Structures
+aa450369	EXTENSION_CONTROL_BLOCK
+ms890323	HSE_SEND_HEADER_EX_INFO
+ms890321	HSE_URL_MAPEX_INFO
+ms890322	HSE_VERSION_INFO
+ms900474	HTTP_FILTER_ACCESS_DENIED
+ms900477	HTTP_FILTER_AUTHENT
+ms890327	HTTP_FILTER_CONTEXT
+ms900480	HTTP_FILTER_LOG
+ms900484	HTTP_FILTER_PREPROC_HEADERS
+ms900487	HTTP_FILTER_RAW_DATA
+ms890329	HTTP_FILTER_SEND_RESPONSE
+ms900491	HTTP_FILTER_URL_MAP
+ms890330	HTTP_FILTER_VERSION
+ms900582	Web Server Enumerations
+ms900577	SF_REQ_TYPE
+ms899543	ServerSupportFunction (ISAPI Extensions) Request Types
+ms898940	Active Server Pages
+ms880919	Active Server Pages Application Development
+aa450023	Initial Settings
+ms880957	Basic Scripting
+ms880937	ASP Functionality in Windows CE
+ms883445	Processing Directives
+ms881902	Header File Differences
+aa450213	Server and Collection Objects
+aa450215	Server Objects
+aa450158	Request Object Implementation
+aa450161	Response Object Implementation
+aa450214	Server Object Implementation
+ms880995	Collection Objects
+ms880922	Active Server Pages Security
+ms880920	Active Server Pages Migration
+ms880921	Active Server Pages Samples
