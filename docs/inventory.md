@@ -5440,3 +5440,29 @@ dcom-storage 74 pages), all carried by Objbase.h:
   227; Dll{,Un}RegisterServer remain in the skipped set by policy).
 - Gates: check / crosscheck / e2e GREEN x6 (i386/arm thumb2/arm
   4/5/6).
+ 
+
+## M74 -- DirectShow Classes book (Streams.h, record-only)
+
+- Manifest tools/manifests/dshow-classes.manifest: 922 leaf pages
+  (ms9368xx/ms937xx/ms938xx/ms926xxx/aa451xxx...), all fetched into
+  build/pages (0 cached, 0 errors); rows.json now 10499 rows.
+- Header home documented on aa451221 "Building DirectShow Filters":
+  "Include the header file Streams.h", Strmbase.lib = source-built
+  static base class library, plus Strmiids.lib (CLSIDs/IIDs) and
+  Ole32.lib/Ole32auth.lib/Uuid.lib.  aa451220 "Building DirectShow
+  Applications": "All DirectShow applications use the Dshow.h header
+  file"; Quartz.lib exports AMGetErrorText.
+- include/Streams.h (NEW, real header): #include "Dshow.h" + verbatim
+  records for all 67 classes and 847 member-function pages (page id +
+  printed C++ signature; 29 data-member pages have no signature
+  print).  C++ surface -- recorded, not compiled; no def file
+  (Strmbase.lib is not an import library).
+- include/Dshow.h: first import declaration added -- AMGetErrorText
+  ms925335 (CE 2.12+, DXPAK 1.0), DWORD(HRESULT, TCHAR*, DWORD);
+  Quartz.lib cited from aa451220 (function page prints no Link
+  Library row, so gen-doc-def emits no quartz def).
+- TU m74 block (AMGetErrorText call); Makefile HDRS 185 -> 186.
+- Gates: check / crosscheck / e2e GREEN x6.
+- Coverage (Features): Graphics 46% -> 75% (+852 attributed pages);
+  total 45% -> 52%.

@@ -89,6 +89,7 @@ include/Snmp.h \
 include/Snmpapi.h \
 include/Snmpexts.h \
 include/Sphelper.h \
+include/Streams.h \
 include/Tapi.h \
 include/Tapicomn.h \
 include/Tlhelp.h \

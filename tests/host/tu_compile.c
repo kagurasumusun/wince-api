@@ -6641,6 +6641,12 @@ static int m73b_shaped_usage(void)
     return (int)si.cbStruct;
 }
 
+static int m74_shaped_usage(void)
+{
+    DWORD n = AMGetErrorText((HRESULT)0, (TCHAR *)0, 0u);
+    return (int)n;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6762,6 +6768,8 @@ int host_tu_entry(void)
     if (m73a_shaped_usage() != 0)
         return 1;
     if (m73b_shaped_usage() != 0)
+        return 1;
+    if (m74_shaped_usage() != 0)
         return 1;
     return 0;
 }

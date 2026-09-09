@@ -1297,6 +1297,20 @@ typedef struct IVideoWindow IVideoWindow;
  *   ms931991 SetWindowPosition: HRESULT SetWindowPosition(longLeft,longTop,longWidth,longHeight);
  */
 
+/* ------------------------------------------------------------------
+ * M74: DirectShow error message function (Quartz.lib row).
+ * ------------------------------------------------------------------ */
+
+/* ms925335 "AMGetErrorText" (CE 2.12+, DXPAK 1.0 for 2.12): print
+ * `DWORD AMGetErrorText(HRESULT hr,TCHAR* pBuffer,DWORD MaxLen);`
+ * Include file: "All DirectShow applications use the Dshow.h header
+ * file" (aa451220, Building DirectShow Applications).  Link library:
+ * Quartz.lib -- "Exports the AMGetErrorText function" (aa451220); the
+ * function page itself prints no Link Library row, so the def
+ * generator (which keys on Requirements rows) emits no quartz def. */
+AKARI_CE_IMPORT DWORD AMGetErrorText(HRESULT hr, TCHAR *pBuffer,
+                    DWORD MaxLen) AKARI_CE_NAME(AMGetErrorText);
+
 #ifdef __cplusplus
 }
 #endif

@@ -87,7 +87,7 @@ batches.
 
 | Features book | leaves | have | % |
 |---|---|---|---|
-| Graphics and Multimedia Technologies | 2935 | 1352 | 46% |
+| Graphics and Multimedia Technologies | 2935 | 2204 | 75% |
 | Shell and User Interface | 2407 | 1687 | 70% |
 | Communication Services and Networking | 2331 | 443 | 19% |
 | Applications and Services Development | 2160 | 1052 | 48% |
@@ -102,15 +102,18 @@ batches.
 | Fonts | 67 | 29 | 43% |
 | SideShow | 48 | 0 | 0% |
 | Windows CE Error Reporting | 38 | 0 | 0% |
-| **Total (Features)** | **13859** | **6322** | **45%** |
+| **Total (Features)** | **13859** | **7174** | **52%** |
 
 Movement since M62: total 26% -> 45% (+2679 pages).  Remaining
-largest gaps: Graphics 1583 uncovered (DirectShow Classes 855 +
-Attributes 167-era books are Compact-2013-tree titles; the CE 5.0
-DirectShow remainder is Classes/Unsupported-Items), Communication
-1892 uncovered (Servers 810, NetGen 790, DCOM-era books), Apps &
-Services 1108 uncovered (DCOM 896), VoIP 218 (phone UI), File
-Systems 334 (FAT/registry internals and DDI-heavy books).
+largest gaps after M73/M74 (DCOM books + DirectShow Classes 922
+harvested): Communication 1892 uncovered (Servers 810, NetGen 790),
+Graphics 731 remaining (Attributes-era books are Compact-2013-tree
+titles; CE 5.0 DirectShow remainder is Unsupported-Items), VoIP 218
+(phone UI), File Systems 334 (FAT/registry internals and DDI-heavy
+books).
+
+Next queues by value: Servers (810), NetGen (790), remaining Core OS
+DDI books.
 
 Next queues by value: DCOM (Applications and Services >
 Component Services, 896 leaves, COM/DCOM interfaces), Servers
