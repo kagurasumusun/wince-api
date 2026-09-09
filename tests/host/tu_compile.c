@@ -43,6 +43,11 @@
 #include <Httpext.h>
 #include <Ras.h>
 #include <Iphlpapi.h>
+#include <Icmpapi.h>
+#include <Winnetwk.h>
+#include <Windns.h>
+#include <Dsgetdc.h>
+#include <Autodial.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6783,6 +6788,29 @@ static int m77a_shaped_usage(void)
     return (int)ap.PrefixLength + ts.dwNumConns + (as.Context != 0u);
 }
 
+static int m77b_shaped_usage(void)
+{
+    NETRESOURCE           nr;
+    CONNECTDLGSTRUCT      cs;
+    DISCDLGSTRUCT         ds;
+    DNS_RECORD_FLAGS      rf;
+    IP_OPTION_INFORMATION io;
+    DOMAIN_CONTROLLER_INFO dci;
+    HANDLE                hh;
+    DWORD                 d;
+
+    nr.dwType = 0u; cs.cbStructure = sizeof(CONNECTDLGSTRUCT);
+    ds.cbStructure = 0u; rf.Section = 0; io.Ttl = 128;
+    dci.Flags = 0u;
+    d = WNetOpenEnum(0u, 0u, 0u, &nr, &hh);
+    d = WNetCloseEnum(hh);
+    d = DsGetDcName((LPCTSTR)0, (LPCTSTR)0, (GUID *)0,
+                    (LPCTSTR)0, 0u, (PDOMAIN_CONTROLLER_INFO *)0);
+    (void)d;
+    return (int)io.Ttl + cs.cbStructure + (ds.dwFlags != 0u)
+           + rf.Section + (dci.Flags != 0u);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6920,6 +6948,8 @@ int host_tu_entry(void)
     if (m75f_shaped_usage() != 0)
         return 1;
     if (m77a_shaped_usage() != 0)
+        return 1;
+    if (m77b_shaped_usage() != 0)
         return 1;
     return 0;
 }

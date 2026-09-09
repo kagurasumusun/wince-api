@@ -5717,3 +5717,33 @@ M77 prep, rows.json 12457):
   functions).
 - TU m77a block; Makefile HDRS 129 -> 133.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M77b -- ICMP / WNet / DNS / DsGetDc / Autodial (Icmpapi.h, Winnetwk.h, Windns.h, Dsgetdc.h, Autodial.h)
+
+- include/Winnetwk.h (NEW, real): NETRESOURCE, CONNECTDLGSTRUCT,
+  DISCDLGSTRUCT (wcesdk tag kept), REMOTE_NAME_INFO,
+  UNIVERSAL_NAME_INFO + 11 WNet* declarations (Coredll.lib;
+  coredll-doc.def 728 -> 739).
+- include/Icmpapi.h (NEW, real): IP_OPTION_INFORMATION compiled;
+  IcmpCreateFile, IcmpCloseHandle, IcmpParseReplies, Icmp6CreateFile,
+  Icmp6ParseReplies declared (def/icmplib-doc.def 5 exports).
+  Held: IcmpSendEcho (IPAddr), Icmp6SendEcho2 (#ifdef print),
+  ICMP_ECHO_REPLY (no print; prose members only).
+- include/Windns.h (NEW, real): 21 compiled types (DNS_HEADER,
+  DNS_MESSAGE_BUFFER, DNS_WIRE_QUESTION/RECORD, DNS_RECORD_FLAGS,
+  DNS_{MINFO,MX,PTR,SOA,SRV,TXT,NULL,KEY,LOC,SIG,NXT,TKEY,TSIG,WINSR}_DATA,
+  IP6_ADDRESS, DNS_RRSET); DNS_RECORD pointer-only (Data union embeds
+  record-only members) with the full verbatim print; record-only:
+  DNS_A_DATA/DNS_WKS_DATA/DNS_WINS_DATA/IP4_ARRAY (IP4_ADDRESS),
+  DNS_AAAA_DATA (DNS_IP6_ADDRESS), DNS_ATMA_DATA
+  (DNS_ATMA_MAX_ADDR_LENGTH).  All 4 Dnsapi.lib functions recorded
+  (DNS_STATUS / DNS_FREE_TYPE unpublished).
+- include/Dsgetdc.h (NEW, real): DOMAIN_CONTROLLER_INFO compiled;
+  DsGetDcName declared (Netapi32.lib).  NetApiBufferFree recorded
+  (NET_API_STATUS unpublished).
+- include/Autodial.h (NEW, real): AutoDialCleanupModule,
+  AutoDialEndConnection, AutoDialInitializeModule,
+  AutoDialStartConnection declared (Autodial.lib).
+  AutoDialGetConnectionStatus recorded (RASCONNSTATUS unpublished).
+- TU m77b block; Makefile HDRS 133 -> 138.
+- Gates: check / crosscheck / e2e GREEN x6.

@@ -14,6 +14,7 @@ INCLUDES = -Iinclude
 CE_VERSIONS = 0x420 0x500 0x600
 
 HDRS = \
+include/Autodial.h \
 include/Av_upnp.h \
 include/Bt_api.h \
 include/Btagnetwork.h \
@@ -38,6 +39,7 @@ include/Dmo.h \
 include/Dmodshow.h \
 include/Dmoreg.h \
 include/Docobj.h \
+include/Dsgetdc.h \
 include/Dshow.h \
 include/Dvp.h \
 include/ErrorRep.h \
@@ -46,6 +48,7 @@ include/Extfile.h \
 include/Httpext.h \
 include/Httpfilt.h \
 include/IAccess.h \
+include/Icmpapi.h \
 include/Imaging.h \
 include/Imm.h \
 include/Ipexport.h \
@@ -121,10 +124,12 @@ include/Winber.h \
 include/Wincrypt.h \
 include/Windbase.h \
 include/Windef.h \
+include/Windns.h \
 include/Windows.h \
 include/Windowsx.h \
 include/Wingdi.h \
 include/Winldap.h \
+include/Winnetwk.h \
 include/Winnls.h \
 include/Winnt.h \
 include/Winreg.h \

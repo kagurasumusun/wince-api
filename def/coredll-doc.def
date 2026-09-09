@@ -595,6 +595,17 @@ EXPORTS
   VirtualFree
   VirtualProtect
   VirtualQuery
+  WNetAddConnection3
+  WNetCancelConnection2
+  WNetCloseEnum
+  WNetConnectionDialog1
+  WNetDisconnectDialog
+  WNetDisconnectDialog1
+  WNetEnumResource
+  WNetGetConnection
+  WNetGetUniversalName
+  WNetGetUser
+  WNetOpenEnum
   WaitForDebugEvent
   WaitForSingleObject
   WideCharToMultiByte
