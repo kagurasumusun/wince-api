@@ -12,7 +12,7 @@ tree).  "have" = pages preserved in the harvested corpus
 |---|---|---|---|
 | Graphics and Multimedia Technologies | 2935 | 130 | 4% |
 | Shell and User Interface | 2407 | 1687 | 70% |
-| Communication Services and Networking | 2331 | 443 | 19% |
+| Communication Services and Networking | 2331 | 2299 | 99% |
 | Applications and Services Development | 2160 | 114 | 5% |
 | Voice over IP Phone Services | 639 | 0 | 0% |
 | Internet Client Services | 607 | 246 | 40% |
@@ -89,7 +89,7 @@ batches.
 |---|---|---|---|
 | Graphics and Multimedia Technologies | 2935 | 2204 | 75% |
 | Shell and User Interface | 2407 | 1687 | 70% |
-| Communication Services and Networking | 2331 | 443 | 19% |
+| Communication Services and Networking | 2331 | 2299 | 99% |
 | Applications and Services Development | 2160 | 1052 | 48% |
 | Voice over IP Phone Services | 639 | 421 | 65% |
 | Internet Client Services | 607 | 246 | 40% |
@@ -102,15 +102,15 @@ batches.
 | Fonts | 67 | 29 | 43% |
 | SideShow | 48 | 0 | 0% |
 | Windows CE Error Reporting | 38 | 0 | 0% |
-| **Total (Features)** | **13859** | **7174** | **52%** |
+| **Total (Features)** | **13859** | **9030** | **65%** |
 
 Movement since M62: total 26% -> 45% (+2679 pages).  Remaining
-largest gaps after M73/M74 (DCOM books + DirectShow Classes 922
-harvested): Communication 1892 uncovered (Servers 810, NetGen 790),
-Graphics 731 remaining (Attributes-era books are Compact-2013-tree
-titles; CE 5.0 DirectShow remainder is Unsupported-Items), VoIP 218
-(phone UI), File Systems 334 (FAT/registry internals and DDI-heavy
-books).
+largest gaps after M75/M76/M77 (Servers 1002 + NetGen 956 harvested
+and implemented; Communication now ~99% -- the Servers/NetGen manifest
+counts exceed the M62 leaf estimate): NDIS driver reference (248
+functions + 83 structures + data types -- future queue), VoIP 218
+(phone UI), File Systems 334 (FAT/registry internals), Graphics 731
+(Compact-2013-tree titles + Unsupported-Items).
 
 Next queues by value: Servers (810), NetGen (790), remaining Core OS
 DDI books.
