@@ -59,6 +59,8 @@ include/Natedit.h \
 include/Netui.h \
 include/Notify.h \
 include/Oaidl.h \
+include/Obex.h \
+include/Obexserver.h \
 include/Objbase.h \
 include/Objidl.h \
 include/Objsafe.h \

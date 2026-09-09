@@ -5526,3 +5526,20 @@ M75 prep, 0 errors; rows.json 10499):
 - def/upnpcapi-doc.def (NEW): 10 exports (1 skipped: PUPNPCALLBACK).
 - TU m75b block; Makefile HDRS 189 -> 192.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M75c -- OBEX (Obex.h, Obexserver.h)
+
+- include/Obex.h (NEW, real): compilable types OBEX_EVENT ms895790
+  (explicit value chain), OBEX_REQUEST ms895798, INBOX_EVENT_DATA
+  ms890978, ServerCallback ms900565 / ServiceCallback ms900568 with
+  incomplete _obex_command/_obex_transaction tags; 7 interface
+  forwards (IDeviceEnum, IHeaderCollection, IHeaderEnum, IObex,
+  IObexDevice, IObexSink, IPropertyBagEnum) + 55 method records
+  (Uuid.lib rows; Header prints "Obex.h, Obex.idl").
+- Record-only: OBEX_HEADER ms895794 (MIDL [switch_is]/[case] print;
+  OBEX_HEADER_* case constants unpublished), OBEXCOMMAND ms900557
+  (ObexPacketData/ObexVariant unpublished), OBEXTRANSACTION ms900561
+  (MemAlloc/MemFree unpublished).
+- include/Obexserver.h (NEW): alias -> Obex.h (4 rows).
+- TU m75c block; Makefile HDRS 192 -> 194.
+- Gates: check / crosscheck / e2e GREEN x6.

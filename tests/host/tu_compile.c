@@ -34,6 +34,7 @@
 #include <Upnpdevapi.h>
 #include <Upnp.h>
 #include <Upnphost.h>
+#include <Obex.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6681,6 +6682,19 @@ static int m75b_shaped_usage(void)
     return (int)ok;
 }
 
+static int m75c_shaped_usage(void)
+{
+    OBEX_REQUEST     req;
+    OBEX_EVENT       ev  = OE_DEVICE_ARRIVAL;
+    INBOX_EVENT_DATA ied;
+    ServerCallback   scb = (ServerCallback)0;
+
+    req.pHeaderCol = (IHeaderCollection *)0;
+    ied.pStream = req.pStream;
+    (void)ev; (void)scb;
+    return (int)ied.dwRequest + (req.dwFlags != 0u);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6808,6 +6822,8 @@ int host_tu_entry(void)
     if (m75a_shaped_usage() != 0)
         return 1;
     if (m75b_shaped_usage() != 0)
+        return 1;
+    if (m75c_shaped_usage() != 0)
         return 1;
     return 0;
 }
