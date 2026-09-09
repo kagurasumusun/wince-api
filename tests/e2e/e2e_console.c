@@ -56,6 +56,7 @@
 #include <ceddk.h>
 #include <ddraw.h>
 #include <urlmon.h>
+#include <mlang.h>
 
 int main(void)
 {
@@ -457,6 +458,25 @@ int main(void)
                                       (LPBINDSTATUSCALLBACK)0);
             (void) WriteHitLogging(&hli);
             (void) pd; (void) hli; (void) bi; (void) pses;
+        }
+
+        /* M61: MLang (Mlang.dll). */
+        {
+            DetectEncodingInfo   dei;
+            UNICODERANGE         ur;
+            LCID                 lcid = 0;
+            DWORD                mode = 0;
+            INT                  n = 0;
+
+            dei.nLangID = 0; dei.nCodePage = 0;
+            dei.nDocPercent = 0; dei.nConfidence = 0;
+            ur.wcFrom = 0; ur.wcTo = 0;
+            (void) ConvertINetString(&mode, 0u, 0u, (LPCSTR)0, &n,
+                                     (LPBYTE)0, &n);
+            (void) IsConvertINetStringAvailable(0u, 0u);
+            (void) LcidToRfc1766(lcid, (LPTSTR)0, 0);
+            (void) Rfc1766ToLcid(&lcid, (LPTSTR)0);
+            (void) dei; (void) ur; (void) lcid; (void) mode; (void) n;
         }
     }
     (void)tick;

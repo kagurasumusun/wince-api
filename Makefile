@@ -36,7 +36,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/pm.h include/ceddk.h \
        include/dvddrvr.h include/dvdcss.h \
        include/ddraw.h include/dvp.h \
-       include/urlmon.h
+       include/urlmon.h \
+       include/mlang.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -372,6 +373,14 @@ e2e:
 	  | grep -q "Symbol: URLDownloadToFileW" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WriteHitLogging" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: mlang.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: ConvertINetString" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: LcidToRfc1766" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: Rfc1766ToLcid" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \

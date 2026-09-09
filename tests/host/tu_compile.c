@@ -67,6 +67,7 @@
 #include <ddraw.h>
 #include <dvp.h>
 #include <urlmon.h>
+#include <mlang.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5494,6 +5495,82 @@ static int m53_shaped_usage(void)
 }
 
 #if __SIZEOF_POINTER__ == 4
+/* M61: MLang 32-bit CE sizes + the published enum values. */
+_Static_assert(sizeof(UNICODERANGE) == 4, "UNICODERANGE size (ms918861)");
+_Static_assert(sizeof(DetectEncodingInfo) == 16,
+               "DetectEncodingInfo size (aa452152)");
+_Static_assert(MIMECONTF_MAILNEWS == 0x1 &&
+               MIMECONTF_MIME_REGISTRY == 0x40000000,
+               "MIMECONTF values (ms918819)");
+_Static_assert(MLCONVCHARF_NONE == 0 && MLCONVCHARF_NOBESTFITCHARS == 16,
+               "MLCONVCHAR values (ms918823)");
+_Static_assert(MLDETECTF_MAILNEWS == 0x0001 &&
+               MLDETECTF_FILTER_SPECIALCHAR == 0x0040,
+               "MLCP values (ms918824)");
+_Static_assert(MLDETECTCP_NONE == 0 && MLDETECTCP_HTML == 8,
+               "MLDETECTCP values (ms918825)");
+_Static_assert(SCRIPTCONTF_FIXED_FONT == 0x00000001 &&
+               SCRIPTCONTF_SCRIPT_SYSTEM == 0x00040000,
+               "SCRIPTFONTCONTF values (ms918856)");
+_Static_assert(sidDefault == 0 && sidHangul == 23 && sidHan == 26 &&
+               sidLim == 40 && sidFEFirst == sidHangul &&
+               sidFELast == sidHan,
+               "SCRIPTCONTF implicit values + aliases (ms918854)");
+#endif
+
+/* M61: MLang shaped usage (enums, structures, opaque interfaces +
+ * the six Mlang.dll functions). */
+static int m61_shaped_usage(void)
+{
+    MIMECONTF         mc = MIMECONTF_MAILNEWS;
+    MLCONVCHAR        mcc = MLCONVCHARF_NONE;
+    MLCP              mlcp = MLDETECTF_VALID;
+    MLDETECTCP        mdc = MLDETECTCP_8BIT;
+    SCRIPTCONTF       sc = sidHangul;
+    SCRIPTFONTCONTF   sfc = SCRIPTCONTF_FIXED_FONT;
+    SCRIPT_ID         sid = sidDefault;
+    UNICODERANGE      ur;
+    DetectEncodingInfo dei;
+    pDetectEncodingInfo pdei = (pDetectEncodingInfo)0;
+    IEnumCodePage    *pecp = (IEnumCodePage *)0;
+    IEnumRfc1766     *pecr = (IEnumRfc1766 *)0;
+    IEnumScript      *pecs = (IEnumScript *)0;
+    IMLangCodePages   *pmcp = (IMLangCodePages *)0;
+    IMLangConvertCharset *pmcc = (IMLangConvertCharset *)0;
+    IMLangFontLink   *pmfl = (IMLangFontLink *)0;
+    IMLangFontLink2  *pmfl2 = (IMLangFontLink2 *)0;
+    IMLangLineBreakConsole *pmlb = (IMLangLineBreakConsole *)0;
+    IMultiLanguage   *pml = (IMultiLanguage *)0;
+    IMultiLanguage2  *pml2 = (IMultiLanguage2 *)0;
+    IMultiLanguage3  *pml3 = (IMultiLanguage3 *)0;
+    LCID              lcid = 0;
+    DWORD             mode = 0;
+    INT               n = 0;
+
+    ur.wcFrom = 0; ur.wcTo = 0;
+    dei.nLangID = 0; dei.nCodePage = 0; dei.nDocPercent = 0;
+    dei.nConfidence = 0;
+
+    /* Mlang.dll import surface (aa452124..ms918853). */
+    (void) ConvertINetMultiByteToUnicode(&mode, 0u, (LPCSTR)0, &n,
+                                         (LPWSTR)0, &n);
+    (void) ConvertINetString(&mode, 0u, 0u, (LPCSTR)0, &n,
+                             (LPBYTE)0, &n);
+    (void) ConvertINetUnicodeToMultiByte(&mode, 0u, (LPCWSTR)0, &n,
+                                         (LPSTR)0, &n);
+    (void) IsConvertINetStringAvailable(0u, 0u);
+    (void) LcidToRfc1766(lcid, (LPTSTR)0, 0);
+    (void) Rfc1766ToLcid(&lcid, (LPTSTR)0);
+
+    (void) mc; (void) mcc; (void) mlcp; (void) mdc; (void) sc;
+    (void) sfc; (void) sid; (void) ur; (void) dei; (void) pdei;
+    (void) pecp; (void) pecr; (void) pecs; (void) pmcp; (void) pmcc;
+    (void) pmfl; (void) pmfl2; (void) pmlb; (void) pml; (void) pml2;
+    (void) pml3; (void) lcid; (void) mode; (void) n;
+    return 0;
+}
+
+#if __SIZEOF_POINTER__ == 4
 /* M60: URL Moniker Services 32-bit CE sizes + the published enum
  * values (value tables and starter values transcribed from the
  * official pages; successors follow the printed C enums). */
@@ -5756,6 +5833,8 @@ int host_tu_entry(void)
     if (m59_shaped_usage() != 0)
         return 1;
     if (m60_shaped_usage() != 0)
+        return 1;
+    if (m61_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -277,11 +277,14 @@ def main():
             continue
         sn = short_title(r.get("title", ""))
         tokens = re.findall(r"[a-z0-9_]+\.lib", lib)
-        # Some CE3-era pages print "Link Library: Coredll.dll." (module
-        # form).  Map that documented module token onto the coredll.lib
-        # export group (module Coredll.dll).
+        # Some CE-era pages print "Link Library: Coredll.dll." or
+        # "Link Library: Mlang.dll." (module form).  Map those
+        # documented module tokens onto the matching export groups
+        # (module Coredll.dll / Mlang.dll).
         if not tokens and re.search(r"coredll\.dll", lib):
             tokens = ["coredll.lib"]
+        if not tokens and re.search(r"mlang\.dll", lib):
+            tokens = ["mlang.lib"]
         for token in tokens:
             bylib.setdefault(token, {})[sn] = r["id"]
 
@@ -333,6 +336,9 @@ def main():
             fh.write("; Ordinals are not published; entries are name-only.\n")
             if token == "coredll.lib":
                 fh.write("LIBRARY coredll.dll\nEXPORTS\n")
+            elif token == "mlang.lib":
+                # Module form documented by the pages (Mlang.dll row).
+                fh.write("LIBRARY mlang.dll\nEXPORTS\n")
             else:
                 # Only the import-library name (the page's Link
                 # Library row) is documented for the auxiliary

@@ -173,6 +173,19 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M61 (landed):** Internet Explorer Multiple-Language API (new
+  `include/mlang.h`; def `def/mlang-doc.def`, 6 exports = the complete
+  documented Mlang.dll function surface, LIBRARY mlang.dll via the
+  coredll module-form precedent).  All 6 enumerations with their
+  printed values (MIMECONTF, MLCONVCHAR, MLCP, MLDETECTCP,
+  SCRIPTCONTF with the sidFEFirst/sidFELast aliases, SCRIPTFONTCONTF),
+  UNICODERANGE + DetectEncodingInfo structures, the derived SCRIPT_ID
+  typedef (path recorded), and 11 opaque interface records with all
+  75 method signatures and the printed inheritance chains.  Held: the
+  four array-carrying structures (MIMECPINFO/MIMECSETINFO/
+  RFC1766INFO/SCRIPTINFO -- the MAX_* array lengths are unpublished
+  anywhere official), SCRIPTFONTINFO, the MultiLanguage CLSID.
+  Headers 66 -> 67, defs 53 -> 54.
 * **M60 (landed):** URL Moniker Services (new `include/urlmon.h`;
   def `def/urlmon-doc.def`, 38 exports = the complete documented
   Urlmon.lib function surface).  19 enumerations (10 with fully

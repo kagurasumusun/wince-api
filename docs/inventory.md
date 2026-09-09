@@ -4523,3 +4523,71 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m60: 3 size + 2 offset asserts + 21 enum-value assert groups +
 shaped usage of all 38 functions).  Headers 65 -> 66; defs 52 -> 53
 (urlmon 38).
+
+## M61 -- Internet Explorer Multiple-Language API (new header mlang.h; def mlang-doc.def)
+
+Sources: the "Internet Explorer Multiple-Language API Reference"
+book, 112 leaves (tools/manifests/mlang.manifest): 11 interfaces with
+75 method pages, 6 functions, 6 structures, 6 enumerations, 5
+object/concept pages.  All pages: "Header: Mlang.h, Mlang.idl." +
+"Link Library: Mlang.dll." (module form; mapped to the Mlang.lib
+export group with LIBRARY mlang.dll, the coredll.dll precedent) or no
+lib row; OS "Windows CE .NET 4.0 and later".
+
+* Enumerations, all with printed values: MIMECONTF 13 hex values
+  (ms918819), MLCONVCHAR (tag tagMLCONVCHARF) 6 decimal values
+  (ms918823), MLCP (tag tagMLCPF, MLDETECTF_* names) 7 values
+  (ms918824), MLDETECTCP 5 values (ms918825), SCRIPTCONTF implicit
+  from 0 with the printed Far-East aliases sidFEFirst=sidHangul /
+  sidFELast=sidHan (ms918854; 41 enumerators + 2 aliases, TU asserts
+  sidHangul==23, sidHan==26, sidLim==40), SCRIPTFONTCONTF 5 values
+  (ms918856).
+* SCRIPT_ID derived (recorded path): the type name is printed by
+  SCRIPTINFO (ms918857) and the IMLangFontLink2 signatures
+  (aa452370/aa452373); GetScriptFontInfo states a SCRIPT_ID value
+  "can be one of the SCRIPTCONTF values" and SCRIPTCONTF is the
+  published script-identifier list -> typedef SCRIPTCONTF SCRIPT_ID.
+* Structures: UNICODERANGE (ms918861, 4 bytes) and DetectEncodingInfo
+  (aa452152, 16 bytes; pointer typedef "pDetectEncodingInfo" exactly
+  as printed) transcribed verbatim.  HELD: MIMECPINFO (ms918820),
+  MIMECSETINFO (ms918821), RFC1766INFO (ms918852), SCRIPTINFO
+  (ms918857, tag printed "tagSCRIPINFO" -- artifact recorded) -- all
+  four carry MAX_MIMECP_NAME / MAX_MIMECSET_NAME / MAX_MIMEFACE_NAME /
+  MAX_RFC1766_NAME / MAX_LOCALE_NAME / MAX_SCRIPT_NAME array lengths
+  that are not published by the CE pages, the desktop Mlang docs set
+  (removed from Learn) or the Learn search index (0 results).
+  SCRIPTFONTINFO referenced by aa452373 with no page (held; the
+  parameter text there even calls it "SCRIPTINFO str..." -- print
+  artifact recorded).
+* def/mlang-doc.def: 6 exports = the complete documented Mlang.dll
+  function surface (ConvertINetMultiByteToUnicode aa452124,
+  ConvertINetString aa452127, ConvertINetUnicodeToMultiByte aa452129,
+  IsConvertINetStringAvailable ms918805, LcidToRfc1766 ms918817,
+  Rfc1766ToLcid ms918853).  LcidToRfc1766 / Rfc1766ToLcid take LPTSTR
+  but the pages publish only the plain names (no A/W pair anywhere in
+  the docs), so the plain names are the exports.  e2e asserts
+  mlang.dll + ConvertINetString / LcidToRfc1766 / Rfc1766ToLcid.
+* Interfaces: 11 opaque typedefs (IEnumCodePage ms906426, IEnumRfc1766
+  ms906430, IEnumScript aa452258, IMLangCodePages aa452355,
+  IMLangConvertCharset aa452360, IMLangFontLink aa452368,
+  IMLangFontLink2 aa452369, IMLangLineBreakConsole aa452389,
+  IMultiLanguage ms918295, IMultiLanguage2 ms918297, IMultiLanguage3
+  ms918323) with all 75 method signatures recorded per interface;
+  inheritance as printed: IMLangFontLink/2 inherit IMLangCodePages,
+  IMLangFontLink2 subsumes IMLangFontLink, IMultiLanguage3 inherits
+  IMultiLanguage2.  IEnumCodePage / IEnumRfc1766 have no Clone method
+  pages on CE (recorded).  IsConvertible "not currently implemented"
+  on both IMultiLanguage (ms918338) and IMultiLanguage2 (ms918319).
+  CE caveat recorded per interface: "not supported on all Windows
+  CE-based operating systems" (all except IMultiLanguage, which is
+  "supported on all Windows CE-based operating systems that include
+  Mlang functionality").
+* Objects: MultiLanguage object (ms918827) + Code Page Enumeration /
+  Locale Enumeration / Script Enumeration / Conversion concept pages
+  -- no CLSID values published (held); no API surface beyond the
+  interfaces above.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m61: 2 size asserts + 6 enum-value assert groups incl. the
+SCRIPTCONTF alias identities + shaped usage of all 6 functions).
+Headers 66 -> 67; defs 53 -> 54 (mlang 6).
