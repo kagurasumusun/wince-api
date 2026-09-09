@@ -5280,3 +5280,67 @@ asserts + 2 error-code asserts, shaped usage of all 13 functions +
 6 interface pointers.  e2e gains msdmo.dll + DMOEnum import
 assertions (6 targets).  Headers 78 real + 83 aliases = 161 files;
 defs 57 (msdmo-doc.def +12).
+
+## M72: documented-case primary headers (filename capitalization fix)
+
+User-directed: the PRIMARY header files now carry the documented
+Header-row casing (Windows.h, Winbase.h, Windef.h, Dshow.h, Dmo.h,
+Windbase.h, Tapi.h, Commctrl.h, ...); the lowercase spellings remain
+as one-line aliases for case-sensitive toolchains (source compat),
+and the case-insensitive-checkout collision warning from M69a
+applies to every pair.
+
+Method (tools-driven, evidence = rows.json Header rows including
+the "X.h, X.idl" form the idl-carrying books print):
+* 103 documented header tokens extracted; the DOMINANT spelling per
+  case-insensitive name wins (e.g. Windows.h 222 rows vs windows.h
+  1; aygshell.h 46 rows vs Aygshell.h 6 -> aygshell.h STAYS the
+  real name and Aygshell.h remains its case alias; newmenu.h,
+  shellsdk.h, dvdmedia.h, winerror.h(?), objbase.h, pm.h,
+  dvddrvr.h, dvdcss.h, tapicomn->renamed, ... stay lowercase where
+  lowercase is the only/dominant documented spelling or no token
+  exists).
+* 70 real headers renamed via git mv (windef.h -> Windef.h,
+  windows.h -> Windows.h, winbase.h -> Winbase.h, winnt.h ->
+  Winnt.h, winuser.h -> Winuser.h, wingdi.h -> Wingdi.h,
+  winreg.h -> Winreg.h, winnls.h -> Winnls.h, winsock2.h ->
+  Winsock2.h, ws2*.h, wincrypt.h -> Wincrypt.h, winscard.h ->
+  Winscard.h, winldap.h -> Winldap.h, winber.h -> Winber.h,
+  commdlg.h -> Commdlg.h, commctrl.h -> Commctrl.h, prsht.h ->
+  Prsht.h, imm.h -> Imm.h, tapi.h -> Tapi.h, tapicomn.h ->
+  Tapicomn.h, sip.h/sipapi.h -> Sip.h/Sipapi.h, shellapi.h ->
+  Shellapi.h, shlobj.h -> Shlobj.h, shobjidl.h -> Shobjidl.h,
+  shtypes.h -> Shtypes.h, shelwapi.h -> Shelwapi.h, cpl.h -> Cpl.h,
+  aygshell (unchanged), notify.h -> Notify.h, msgqueue.h ->
+  Msgqueue.h, excpt.h -> Excpt.h, dbgapi.h -> Dbgapi.h, celog.h ->
+  Celog.h, natedit.h -> Natedit.h, errorrep.h -> ErrorRep.h,
+  extfile.h -> Extfile.h, psapi.h -> Psapi.h, tlhelp32.h ->
+  Tlhelp32.h, tvout.h -> Tvout.h, keybd.h -> Keybd.h, pwinuser.h ->
+  Pwinuser.h, windowsx.h -> Windowsx.h, mmsystem.h -> Mmsystem.h,
+  imaging.h -> Imaging.h, pimstore.h -> Pimstore.h, msxml2.h ->
+  Msxml2.h, d3dm.h -> D3dm.h, ddraw.h -> Ddraw.h, dvp.h -> Dvp.h,
+  sapi.h -> Sapi.h, rtccore.h -> Rtccore.h, snmp*.h -> Snmp*.h,
+  bth-family, bt*-family, cchannel.h -> Cchannel.h, ceddk.h ->
+  CEDDK.h, dshow.h -> Dshow.h, dmo.h -> Dmo.h, dmoreg.h ->
+  Dmoreg.h, windbase.h -> Windbase.h, mlang.h -> Mlang.h,
+  urlmon.h -> Urlmon.h, discodlg.h -> Discodlg.h, bthapi.h ->
+  Bthapi.h).
+* 70 lowercase aliases created (provenance: dominant documented
+  spelling + row count); all pre-existing aliases re-pointed to the
+  renamed targets (157 #include rewrites across include/); real
+  headers' internal includes updated; banner first-lines updated
+  (68 fixed, 2 already documented-case).
+* NEW aliases from previously-unmatched documented tokens:
+  strmif.h -> Dshow.h (IAMTuner book, 29 rows -- the IAMTuner
+  surface is carried by dshow.h M71b), Playlist.h -> Dshow.h
+  (IAMPlayList/IAMPlayListItem, 18 rows), Dmodshow.h -> Dshow.h
+  (IDMOWrapperFilter, 2 rows), Shobjvidl.h -> Shobjidl.h (ms909876
+  IShellFolder::SetNameOf prints "Shobjvidl.h, Shobjidl.idl" -- the
+  page's own typo, recorded).
+* Makefile HDRS regenerated (168 files, sorted); TU includes the 4
+  new aliases; hostcheck standalone-compiles all 168 files under
+  _WIN32_WCE 0x420/0x500/0x600.
+
+Verification: make check / crosscheck / e2e GREEN on all six
+targets (clang 22.1.8 re-downloaded to .cache/llvm-dl this
+session).  79 real + 89 aliases = 168 files; defs 57 (unchanged).

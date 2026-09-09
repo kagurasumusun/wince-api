@@ -12,4 +12,4 @@
  * docs/inventory.md (header-name compatibility unit).
  */
 
-#include "tlhelp32.h"
+#include "Tlhelp32.h"

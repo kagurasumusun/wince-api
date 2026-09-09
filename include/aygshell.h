@@ -70,9 +70,9 @@
 #ifndef AKARI_AYGSHELL_H
 #define AKARI_AYGSHELL_H
 
-#include "windows.h"   /* base + GWES types, HKEY, COLORREF, HICON, ... */
+#include "Windows.h"   /* base + GWES types, HKEY, COLORREF, HICON, ... */
 #include "objbase.h"   /* CLSID, REFCLSID, IUnknown, IPropertyBag */
-#include "shlobj.h"    /* FILECHANGENOTIFY (SHChangeNotifyFree) */
+#include "Shlobj.h"    /* FILECHANGENOTIFY (SHChangeNotifyFree) */
 
 #ifdef __cplusplus
 extern "C" {

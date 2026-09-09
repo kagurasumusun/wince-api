@@ -18,7 +18,7 @@
 #ifndef AKARI_PM_H
 #define AKARI_PM_H
 
-#include "windef.h"
+#include "Windef.h"
 
 #ifdef __cplusplus
 extern "C" {

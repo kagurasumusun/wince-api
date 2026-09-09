@@ -33,7 +33,7 @@
 #ifndef AKARI_DVDDRVRR_H
 #define AKARI_DVDDRVRR_H
 
-#include "windef.h"
+#include "Windef.h"
 
 #ifdef __cplusplus
 extern "C" {

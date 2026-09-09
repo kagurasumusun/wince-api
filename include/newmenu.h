@@ -24,8 +24,8 @@
 #ifndef AKARI_NEWMENU_H
 #define AKARI_NEWMENU_H
 
-#include "windef.h"
-#include "winuser.h"    /* NMHDR (hdr member), HMENU */
+#include "Windef.h"
+#include "Winuser.h"    /* NMHDR (hdr member), HMENU */
 #include "objbase.h"    /* CLSID, IPropertyBag (pppropbag member) */
 
 #ifdef __cplusplus

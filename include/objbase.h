@@ -74,8 +74,8 @@
 #ifndef AKARI_OBJBASE_H
 #define AKARI_OBJBASE_H
 
-#include "windef.h"
-#include "winbase.h"  /* FILETIME, HGLOBAL, SYSTEMTIME, SECURITY_ATTRIBUTES */
+#include "Windef.h"
+#include "Winbase.h"  /* FILETIME, HGLOBAL, SYSTEMTIME, SECURITY_ATTRIBUTES */
 
 #ifdef __cplusplus
 extern "C" {

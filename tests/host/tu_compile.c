@@ -84,6 +84,10 @@
 #include <dvdmedia.h>
 #include <dmo.h>
 #include <dmoreg.h>
+#include <strmif.h>
+#include <Playlist.h>
+#include <Dmodshow.h>
+#include <Shobjvidl.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
