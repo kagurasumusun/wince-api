@@ -5090,3 +5090,67 @@ pointer parameter, EDB block double-gated with the header.  e2e gains
 CeWriteRecordProps + CeOidGetInfo import assertions (6 targets).
 Headers 74 real + 82 aliases = 156 files; defs 56 (coredll-doc.def
 +48 -> 719).
+
+## M70b: DirectShow data surface -- dshow.h, dvdmedia.h
+
+First DirectShow slice (the book is sliced per coverage.md): the
+data surface from *Graphics and Multimedia Technologies -> Media ->
+DirectShow -> DirectShow Reference* sub-books Enumerations (15
+leaves), Functions (68), Macros (72), Structures (28); manifests
+tools/manifests/dshow-{enum,func,macro,struct}.manifest, 183 leaves
+fetched (build/pages 6422 -> 6605).
+
+Headers: the 27 structure pages print **Dshow.h**; one enumeration
+page prints **dvdmedia.h** (aa452528); the enumeration pages print
+an EMPTY Header row (the Requirements block defers to "Setting Up
+the Build Environment").  New files: include/dshow.h (+ Dshow.h
+documented-case alias, M69a policy) and include/dvdmedia.h
+(documented case is lowercase, no alias needed).
+
+* No import surface is documentable from this book: every function
+  and macro page (53 helper/debug/utility functions, 60 macros of
+  the strmbase base-class library, plus index pages) prints an
+  EMPTY Header row and no Link Library row -- def/*.def requires a
+  per-page Link Library row, so the functions/macros are deferred
+  to the DirectShow Classes milestone (recorded gap).
+* Carrier closure: REFERENCE_TIME = LONGLONG (no page prints the
+  typedef; the structure prints describe 100-ns reference times and
+  TIMECODE_SAMPLE aa452392 prints its tick member as LONGLONG;
+  derivation recorded in the header, replaceable).
+* Opaque interface forwards (rtccore.h M69 pattern): IBaseFilter,
+  IFilterGraph (named by the PIN_INFO/FILTER_INFO prints; the
+  interface overview pages are the pending Interfaces book).
+* Enums compiled (15/15 fully valued prints): FILTER_STATE,
+  PIN_DIRECTION, QualityMessageType, AM_STREAM_INFO_FLAGS, AMVP_MODE,
+  AnalogVideoStandard, MPEG2Level + MPEG2Profile (tag-form prints),
+  Merit and STREAMBUFFER_EC (nameless `typedef enum` prints repaired
+  to anonymous enums -- invalid C as printed, recorded), AM_SAMPLE_
+  PROPERTY_FLAGS (bare enum tag print incl. the AM_STREAM_* members),
+  StreamControlState, STRMBUF_CAPTURE_MODE, STRMBUF_PLAYBACK_TUNE_
+  POLICY (Stream Buffer Engine, CE 5.0 NMD Feature Pack era), and
+  KS_AM_PROPERTY_TS_RATE_CHANGE (dvdmedia.h).
+* Structures compiled (23): ALLOCATOR_PROPERTIES, AM_MEDIA_TYPE
+  (__RPC_FAR repaired, IDL [size_is] comment kept), AM_SAMPLE2_
+  PROPERTIES, AM_STREAM_INFO, AMOVIESETUP_MEDIATYPE/PIN/FILTER (+LP
+  aliases as printed/used), AMVPSIZE (+LP), AUDIO_STREAM_CONFIG_
+  CAPS, COLORKEY, DIBDATA, FILTER_INFO, VIDEOINFOHEADER, VIDEOINFO_
+  HEADER2, MPEG1VIDEOINFO, MPEG2VIDEOINFO, PIN_INFO, POSITION
+  (struct __POSITION), Quality, REGFILTER, REGPINTYPES, REGFILTER_
+  PINS, TIMECODE (dwFrames printed WORD -- kept verbatim),
+  TIMECODE_SAMPLE, VIDEO_STREAM_CONFIG_CAPS.
+* Held INCOMPLETE (pointer-only; verbatim prints recorded):
+  TRUECOLORINFO and VIDEOINFO (array members sized by iMASK_COLORS /
+  iPALETTE_COLORS -- values appear nowhere in the archive), and
+  AMVPDATAINFO + AMVPDIMINFO (the embedded AMVPDIMINFO has no page
+  in the CE 5.0 archive TOC; LPAMVPDATAINFO printed on the page).
+* Held names: the 28 EC_* event notification codes (pages point to
+  Evcode.h; no page prints a value -- zero-gap policy; recorded in
+  the header with page ids).
+
+Verification: make check / crosscheck / e2e GREEN on all six
+targets.  TU m70b: 24 structure size asserts (32-bit model; the
+REFERENCE_TIME members pin 8-byte alignment -- MPEG1VIDEOINFO pads
+97 -> 104, AM_STREAM_INFO 28 -> 32, VIDEO_STREAM_CONFIG_CAPS = 128
+with MinFrameInterval at offset 104), 8 enum value asserts, shaped
+usage of the full data surface incl. all incomplete-type pointers.
+Headers 76 real + 83 aliases = 159 files; defs 56 (unchanged).

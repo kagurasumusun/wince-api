@@ -79,6 +79,9 @@
 #include <windbase.h>
 #include <Windbase.h>
 #include <Pwindbas.h>
+#include <dshow.h>
+#include <Dshow.h>
+#include <dvdmedia.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
@@ -6358,6 +6361,101 @@ static int m70_shaped_usage(void)
     return 0;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M70b: DirectShow structure sizes (verbatim prints; 32-bit CE ABI;
+ * REFERENCE_TIME/LONGLONG members pin the 8-byte alignment rows). */
+_Static_assert(sizeof(ALLOCATOR_PROPERTIES) == 16, "ms925330 print");
+_Static_assert(sizeof(AM_MEDIA_TYPE) == 72, "ms925337 print");
+_Static_assert(sizeof(AM_SAMPLE2_PROPERTIES) == 48, "ms925343 print");
+_Static_assert(sizeof(AM_STREAM_INFO) == 32, "ms925345 print");
+_Static_assert(sizeof(AMOVIESETUP_MEDIATYPE) == 8, "ms925341 print");
+_Static_assert(sizeof(AMOVIESETUP_PIN) == 36, "ms925342 print");
+_Static_assert(sizeof(AMOVIESETUP_FILTER) == 20, "ms925340 print");
+_Static_assert(sizeof(AMVPSIZE) == 8, "ms925349 print");
+_Static_assert(sizeof(AUDIO_STREAM_CONFIG_CAPS) == 52, "ms925720 print (GUID + 9 ULONG)");
+_Static_assert(sizeof(COLORKEY) == 16, "ms926774 print");
+_Static_assert(sizeof(DIBDATA) == 100, "aa451578 print");
+_Static_assert(sizeof(FILTER_INFO) == 260, "aa451713 print");
+_Static_assert(sizeof(VIDEOINFOHEADER) == 88, "aa452412 print");
+_Static_assert(sizeof(VIDEOINFOHEADER2) == 112, "aa452413 print");
+_Static_assert(sizeof(MPEG1VIDEOINFO) == 104, "ms932232 print (align 8 via REFERENCE_TIME)");
+_Static_assert(sizeof(MPEG2VIDEOINFO) == 136, "ms932235 print");
+_Static_assert(sizeof(PIN_INFO) == 264, "ms932256 print");
+_Static_assert(sizeof(Quality) == 24, "ms932272 print");
+_Static_assert(sizeof(REGFILTER) == 20, "ms932283 print");
+_Static_assert(sizeof(REGPINTYPES) == 8, "ms932285 print");
+_Static_assert(sizeof(REGFILTERPINS) == 36, "ms932284 print");
+_Static_assert(sizeof(TIMECODE) == 6, "aa452390 print");
+_Static_assert(sizeof(TIMECODE_SAMPLE) == 24, "aa452392 print");
+_Static_assert(sizeof(VIDEO_STREAM_CONFIG_CAPS) == 128, "aa452415 print");
+#endif
+/* M70b: DirectShow enum values (printed). */
+_Static_assert(State_Running == 2 && State_Stopped == 0, "FILTER_STATE");
+_Static_assert(PINDIR_OUTPUT == 1 && PINDIR_INPUT == 0, "PIN_DIRECTION");
+_Static_assert(AnalogVideo_NTSC_M == 0x00000001, "AnalogVideoStandard");
+_Static_assert(MERIT_PREFERRED == 0x800000 && MERIT_HW_COMPRESSOR == 0x100050, "Merit");
+_Static_assert(AM_SAMPLE_SPLICEPOINT == 0x01 && AM_STREAM_CONTROL == 1, "AM_SAMPLE_PROPERTY_FLAGS");
+_Static_assert(AM_STREAM_INFO_DISCARDING == 0x00000004, "AM_STREAM_INFO_FLAGS");
+_Static_assert(STREAMBUFFER_EC_TIMEHOLE == 0x326 && STREAMBUFFER_EC_RATE_CHANGED == 0x32c, "STREAMBUFFER_EC");
+_Static_assert(KS_AM_RATE_Step == 4, "KS_AM_PROPERTY_TS_RATE_CHANGE");
+
+/* M70b: dshow/dvdmedia shaped usage (data surface; no import calls --
+   the book's function pages carry no Link Library rows). */
+static int m70b_shaped_usage(void)
+{
+    FILTER_STATE         fst = State_Stopped;
+    PIN_DIRECTION        pdir = PINDIR_INPUT;
+    QualityMessageType   qmt = Famine;
+    AM_MEDIA_TYPE        mt;
+    AM_SAMPLE2_PROPERTIES sp2;
+    AM_STREAM_INFO       si;
+    AMOVIESETUP_FILTER   asf;
+    ALLOCATOR_PROPERTIES ap;
+    FILTER_INFO          fi;
+    PIN_INFO             pi;
+    VIDEOINFOHEADER      vih;
+    VIDEOINFOHEADER2     vih2;
+    MPEG2VIDEOINFO       mp2v;
+    VIDEO_STREAM_CONFIG_CAPS vscc;
+    Quality              q;
+    TIMECODE_SAMPLE      tcs;
+    struct __POSITION    pos;
+    IBaseFilter          *bf = (IBaseFilter *)0;
+    IFilterGraph         *fg = (IFilterGraph *)0;
+    TRUECOLORINFO        *ptci = (TRUECOLORINFO *)0;
+    VIDEOINFO            *pvi = (VIDEOINFO *)0;
+    AMVPDATAINFO         *pavp = (AMVPDATAINFO *)0;
+    LPAMVPDATAINFO       lpavp = (LPAMVPDATAINFO)0;
+    STRMBUF_CAPTURE_MODE scm = STRMBUF_TEMPORARY_RECORDING;
+    KS_AM_PROPERTY_TS_RATE_CHANGE rc = KS_AM_RATE_Step;
+
+    memset(&mt, 0, sizeof(mt));
+    mt.bFixedSizeSamples = 1; mt.lSampleSize = 0; mt.cbFormat = 0;
+    mt.pUnk = (IUnknown *)0; mt.pbFormat = (BYTE *)0;
+    sp2.cbData = sizeof(sp2); sp2.dwSampleFlags = AM_SAMPLE_TIMEVALID;
+    sp2.tStart = 0; sp2.tStop = 1; sp2.pMediaType = &mt;
+    si.tStart = 0; si.tStop = 0; si.dwFlags = AM_STREAM_INFO_DISCARDING;
+    asf.clsID = (const CLSID *)0; asf.strName = (LPWSTR)0;
+    asf.dwMerit = MERIT_NORMAL; asf.nPins = 0; asf.lpPin = (LPAMOVIESETUP_PIN)0;
+    ap.cBuffers = 1; ap.cbBuffer = 2; ap.cbAlign = 4; ap.cbPrefix = 0;
+    fi.achName[0] = 0; fi.pGraph = fg;
+    pi.pFilter = bf; pi.dir = pdir; pi.achName[0] = 0;
+    vih.rcSource.left = 0; vih.dwBitRate = 0; vih.AvgTimePerFrame = 0;
+    vih2.dwInterlaceFlags = 0; vih2.dwPictAspectRatioX = 4; vih2.dwPictAspectRatioY = 3;
+    mp2v.hdr = vih2; mp2v.dwProfile = MPEG2Profile_Main; mp2v.dwLevel = MPEG2Level_Main;
+    memset(&vscc, 0, sizeof(vscc));
+    vscc.VideoStandard = AnalogVideo_NTSC_M; vscc.MinFrameInterval = 1;
+    q.Type = qmt; q.Proportion = 1000; q.Late = 0; q.TimeStamp = 0;
+    tcs.qwTick = 0; tcs.timecode.wFrameRate = 30; tcs.timecode.dwFrames = 0;
+    tcs.dwUser = 0; tcs.dwFlags = 0;
+    pos.unused = 0;
+    (void)fst; (void)scm; (void)rc; (void)ptci; (void)pvi; (void)pavp;
+    (void)lpavp; (void)mt; (void)sp2; (void)si; (void)asf; (void)ap;
+    (void)fi; (void)pi; (void)vih; (void)vih2; (void)mp2v; (void)vscc;
+    (void)q; (void)tcs; (void)pos; (void)bf; (void)fg;
+    return (int)fst + (int)pdir + (int)q.Type + (int)scm + (int)rc;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6469,6 +6567,8 @@ int host_tu_entry(void)
     if (m69_shaped_usage() != 0)
         return 1;
     if (m70_shaped_usage() != 0)
+        return 1;
+    if (m70b_shaped_usage() != 0)
         return 1;
     return 0;
 }

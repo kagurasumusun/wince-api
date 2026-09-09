@@ -50,6 +50,9 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/windbase.h \
        include/Windbase.h \
        include/Pwindbas.h \
+       include/dshow.h \
+       include/Dshow.h \
+       include/dvdmedia.h \
        include/Aygshell.h \
        include/Bt_api.h \
        include/Btagnetwork.h \

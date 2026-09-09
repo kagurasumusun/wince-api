@@ -1,0 +1,68 @@
+aa452400	Utility Functions
+aa451206	Bitmap Functions
+ms926782	ContainsPalette
+aa451723	GetBitCount
+aa451724	GetBitmapFormatSize
+aa451725	GetBitmapPalette
+aa451726	GetBitmapSize
+aa451727	GetBitmapSubtype
+aa451740	GetSubtypeName
+aa451741	GetTrueColorType
+ms936848	BSTR Functions
+aa451719	FreeBSTR
+aa452474	WriteBSTR
+aa451480	CCritSec Debug Functions
+ms938830	CritCheckIn
+ms938831	CritCheckOut
+ms907781	DbgLockTrace
+ms926783	Conversion Functions
+ms925597	atoi
+ms926785	ConvertVideoInfoToVideoInfo2
+ms912061	IntToWstr
+aa452476	WstrToInt
+ms927260	CPosPassThru Helper Function
+ms907278	CreatePosPassThru
+aa451591	DLL and Setup Functions
+ms925338	AMovieDllRegisterServer
+ms925339	AMovieDllUnregisterServer
+ms932024	LoadOLEAut32
+aa451704	Error Message Functions
+ms925335	AMGetErrorText
+ms932030	Math Helper Functions
+ms932023	llMulDiv
+ms912016	Int64x32Div32
+ms932032	Media Type Functions
+ms925565	AreEqualVideoTypes
+ms926786	CopyMediaType
+ms907274	CreateAudioMediaType
+ms907276	CreateMediaType
+aa451572	DeleteMediaType
+aa451720	FreeMediaType
+ms932035	Message Function
+aa452418	WaitDispatchingMessages
+ms932243	Object and Pin Functions
+aa451697	EqualPins
+aa451732	GetInterface (DirectShow)
+ms931812	IsEqualObject
+ms932282	Reference Time Function
+ms926784	ConvertToMilliseconds
+aa452381	Stream Integer Functions
+ms932275	ReadInt
+aa452475	WriteInt
+aa452385	String Functions (DirectShow)
+ms925336	AMGetWideString
+aa451346	DirectShow Debugging Functions
+ms925582	Assert Functions
+ms907766	DbgAssert
+ms907780	DbgKernelAssert
+ms936845	Breakpoint Function
+ms907768	DbgBreakPoint
+aa451568	Debug Output
+ms907782	DbgOutString
+aa451614	DumpGraph
+ms932244	Object Register Debugging
+ms907769	DbgDumpObjectRegister
+aa452417	Wait Debugging
+ms907783	DbgSetWaitTimeout
+ms907784	DbgWaitForMultipleObjects
+ms907785	DbgWaitForSingleObject
