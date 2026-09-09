@@ -5188,3 +5188,42 @@ build/pages6 / build/pages4 per tree, no rows.json/def impact).
 
 Verification: windbase.h standalone compile warning-free; make
 check GREEN (comments only; no TU/def changes).
+
+## M71b: DirectShow Interfaces book -- dshow.h interface surface
+
+476-leaf harvest (tools/manifests/dshow-iface.manifest, build/pages
+7080): 63 interface overview pages (62 distinct names after the
+IAMTVTuner TOC duplicate) + 413 ::-qualified method pages, plus
+ms911601 whose TOC title lost the IMediaSeeking:: qualifier
+(recorded as IMediaSeeking::CheckCapabilities).
+
+Carried per the M44/rtccore policy: 61 opaque `typedef struct I*
+I*;` forwards (IBaseFilter/IFilterGraph already forwarded by M70b)
++ 414 verbatim method-signature records (413 + CheckCapabilities +
+IAMPlayListItem::GetSourceURL).  Vtable layouts are not published;
+no interface struct is invented.
+
+* No import surface: every page's Requirements block defers to
+  "Setting Up the Build Environment" -- no Header row, no Link
+  Library row on any of the 476 pages (def files unchanged).
+* No constants: the book prints no enum bodies beyond the
+  QualityMessageType duplicate of M70b (deduped) and no #define
+  values.
+* Archive artifacts recorded: IVideoWIndow title spelling (methods)
+  vs IVideoWindow (overview); ms908797's RESULT return-type typo
+  (repaired to HRESULT, print recorded); IDL " [size_is] "
+  annotations inside prints neutralized to bracket form
+  (comment-safety); space-glued tokens preserved
+  (HRESULTAlloc, DWORDdwSourceIndex, ppUnkInnner [sic]).
+* OS rows: "Windows CE 2.12 and later. Version 2.12 requires DXPAK
+  1.0 or later." on 415 pages; per-interface exceptions quoted in
+  the records (IAMovieSetup/IReferenceClock CE 3.0+, IDMOWrapper-
+  Filter CE .NET 4.1+, IAMDroppedFrames CE 5.0+, IAMTVTuner/IAMTuner
+  CE 5.0 NMD Feature Pack, IKsPropertySet/IDVREngineHelpers/
+  IStreamBufferCapture/IStreamBufferPlayback CE 5.0 with NMD).
+
+Verification: make check / crosscheck / e2e GREEN on all six
+targets.  TU m71: 61 opaque interface pointers (compile proves every
+forward).  Headers 76 real + 83 aliases = 159+1 files? -- dshow.h
+grew in place (159 files unchanged: 76 real + 83 aliases); defs 56
+(unchanged).  dshow.h is now 1304 lines.

@@ -6456,6 +6456,76 @@ static int m70b_shaped_usage(void)
     return (int)fst + (int)pdir + (int)q.Type + (int)scm + (int)rc;
 }
 
+/* M71b: DirectShow interface forwards (61 opaque COM interfaces,
+   M44/rtccore policy; method records are comment-only). */
+static int m71_shaped_usage(void)
+{
+    IBaseFilter           *p_IBaseFilter = (IBaseFilter *)0;
+    IFilterGraph          *p_IFilterGraph = (IFilterGraph *)0;
+    IAMDevMemoryAllocator *p_IAMDevMemoryAllocator = (IAMDevMemoryAllocator *)0;
+    IAMDevMemoryControl   *p_IAMDevMemoryControl = (IAMDevMemoryControl *)0;
+    IAMDroppedFrames      *p_IAMDroppedFrames = (IAMDroppedFrames *)0;
+    IAMMediaContent       *p_IAMMediaContent = (IAMMediaContent *)0;
+    IAMMediaContentEx     *p_IAMMediaContentEx = (IAMMediaContentEx *)0;
+    IAMPlayList           *p_IAMPlayList = (IAMPlayList *)0;
+    IAMPlayListItem       *p_IAMPlayListItem = (IAMPlayListItem *)0;
+    IAMStreamConfig       *p_IAMStreamConfig = (IAMStreamConfig *)0;
+    IAMStreamControl      *p_IAMStreamControl = (IAMStreamControl *)0;
+    IAMStreamSelect       *p_IAMStreamSelect = (IAMStreamSelect *)0;
+    IAMTVTuner            *p_IAMTVTuner = (IAMTVTuner *)0;
+    IAMTuner              *p_IAMTuner = (IAMTuner *)0;
+    IAMovieSetup          *p_IAMovieSetup = (IAMovieSetup *)0;
+    IAsyncReader          *p_IAsyncReader = (IAsyncReader *)0;
+    IBasicAudio           *p_IBasicAudio = (IBasicAudio *)0;
+    IBasicVideo           *p_IBasicVideo = (IBasicVideo *)0;
+    IDMOWrapperFilter     *p_IDMOWrapperFilter = (IDMOWrapperFilter *)0;
+    IDVREngineHelpers     *p_IDVREngineHelpers = (IDVREngineHelpers *)0;
+    IDirectDrawVideo      *p_IDirectDrawVideo = (IDirectDrawVideo *)0;
+    IDistributorNotify    *p_IDistributorNotify = (IDistributorNotify *)0;
+    IEnumFilters          *p_IEnumFilters = (IEnumFilters *)0;
+    IEnumMediaTypes       *p_IEnumMediaTypes = (IEnumMediaTypes *)0;
+    IEnumPins             *p_IEnumPins = (IEnumPins *)0;
+    IEnumRegFilters       *p_IEnumRegFilters = (IEnumRegFilters *)0;
+    IFileSourceFilter     *p_IFileSourceFilter = (IFileSourceFilter *)0;
+    IFilterGraph2         *p_IFilterGraph2 = (IFilterGraph2 *)0;
+    IFilterMapper         *p_IFilterMapper = (IFilterMapper *)0;
+    IGraphBuilder         *p_IGraphBuilder = (IGraphBuilder *)0;
+    IGraphVersion         *p_IGraphVersion = (IGraphVersion *)0;
+    IKsPropertySet        *p_IKsPropertySet = (IKsPropertySet *)0;
+    IMediaControl         *p_IMediaControl = (IMediaControl *)0;
+    IMediaEvent           *p_IMediaEvent = (IMediaEvent *)0;
+    IMediaEventEx         *p_IMediaEventEx = (IMediaEventEx *)0;
+    IMediaEventSink       *p_IMediaEventSink = (IMediaEventSink *)0;
+    IMediaFilter          *p_IMediaFilter = (IMediaFilter *)0;
+    IMediaPosition        *p_IMediaPosition = (IMediaPosition *)0;
+    IMediaSample          *p_IMediaSample = (IMediaSample *)0;
+    IMediaSample2         *p_IMediaSample2 = (IMediaSample2 *)0;
+    IMediaSeeking         *p_IMediaSeeking = (IMediaSeeking *)0;
+    IMediaStream          *p_IMediaStream = (IMediaStream *)0;
+    IMemAllocator         *p_IMemAllocator = (IMemAllocator *)0;
+    IMemInputPin          *p_IMemInputPin = (IMemInputPin *)0;
+    IMultiMediaStream     *p_IMultiMediaStream = (IMultiMediaStream *)0;
+    INonDelegatingUnknown *p_INonDelegatingUnknown = (INonDelegatingUnknown *)0;
+    IOverlay              *p_IOverlay = (IOverlay *)0;
+    IOverlayNotify        *p_IOverlayNotify = (IOverlayNotify *)0;
+    IPin                  *p_IPin = (IPin *)0;
+    IQualProp             *p_IQualProp = (IQualProp *)0;
+    IQualityControl       *p_IQualityControl = (IQualityControl *)0;
+    IReferenceClock       *p_IReferenceClock = (IReferenceClock *)0;
+    ISeekingPassThru      *p_ISeekingPassThru = (ISeekingPassThru *)0;
+    IStreamBufferCapture  *p_IStreamBufferCapture = (IStreamBufferCapture *)0;
+    IStreamBufferPlayback *p_IStreamBufferPlayback = (IStreamBufferPlayback *)0;
+    IStreamSample         *p_IStreamSample = (IStreamSample *)0;
+    IVPBaseConfig         *p_IVPBaseConfig = (IVPBaseConfig *)0;
+    IVPBaseNotify         *p_IVPBaseNotify = (IVPBaseNotify *)0;
+    IVPConfig             *p_IVPConfig = (IVPConfig *)0;
+    IVPNotify             *p_IVPNotify = (IVPNotify *)0;
+    IVideoWindow          *p_IVideoWindow = (IVideoWindow *)0;
+
+    (void)p_IBaseFilter; (void)p_IFilterGraph; (void)p_IAMDevMemoryAllocator; (void)p_IAMDevMemoryControl; (void)p_IAMDroppedFrames; (void)p_IAMMediaContent; (void)p_IAMMediaContentEx; (void)p_IAMPlayList; (void)p_IAMPlayListItem; (void)p_IAMStreamConfig; (void)p_IAMStreamControl; (void)p_IAMStreamSelect; (void)p_IAMTVTuner; (void)p_IAMTuner; (void)p_IAMovieSetup; (void)p_IAsyncReader; (void)p_IBasicAudio; (void)p_IBasicVideo; (void)p_IDMOWrapperFilter; (void)p_IDVREngineHelpers; (void)p_IDirectDrawVideo; (void)p_IDistributorNotify; (void)p_IEnumFilters; (void)p_IEnumMediaTypes; (void)p_IEnumPins; (void)p_IEnumRegFilters; (void)p_IFileSourceFilter; (void)p_IFilterGraph2; (void)p_IFilterMapper; (void)p_IGraphBuilder; (void)p_IGraphVersion; (void)p_IKsPropertySet; (void)p_IMediaControl; (void)p_IMediaEvent; (void)p_IMediaEventEx; (void)p_IMediaEventSink; (void)p_IMediaFilter; (void)p_IMediaPosition; (void)p_IMediaSample; (void)p_IMediaSample2; (void)p_IMediaSeeking; (void)p_IMediaStream; (void)p_IMemAllocator; (void)p_IMemInputPin; (void)p_IMultiMediaStream; (void)p_INonDelegatingUnknown; (void)p_IOverlay; (void)p_IOverlayNotify; (void)p_IPin; (void)p_IQualProp; (void)p_IQualityControl; (void)p_IReferenceClock; (void)p_ISeekingPassThru; (void)p_IStreamBufferCapture; (void)p_IStreamBufferPlayback; (void)p_IStreamSample; (void)p_IVPBaseConfig; (void)p_IVPBaseNotify; (void)p_IVPConfig; (void)p_IVPNotify; (void)p_IVideoWindow;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6569,6 +6639,8 @@ int host_tu_entry(void)
     if (m70_shaped_usage() != 0)
         return 1;
     if (m70b_shaped_usage() != 0)
+        return 1;
+    if (m71_shaped_usage() != 0)
         return 1;
     return 0;
 }
