@@ -4771,3 +4771,52 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m65: 5 value asserts + shaped usage incl. the CePimCommand call
 and all 13 opaque interface pointers).  Headers 69 -> 70; defs 55
 (unchanged count; no POOM import surface is documentable).
+
+### M66 -- MSXML / XML Core Services (msxml2.h; no import def)
+
+XML book (501 leaves, Applications and Services Development > XML),
+harvested under tools/manifests/msxml.manifest.  New header
+include/msxml2.h (71st; self-contained; the Requirements rows print
+"Header: Msxml2.h, Msxml2.idl" -- the file name is the compat surface).
+
+* DOMNodeType (ms897200): verbatim enum print + printed element values
+  NODE_ELEMENT (1) .. NODE_NOTATION (12); NODE_INVALID = 0 by position
+  (zeroth element, no description printed -- recorded sequential
+  reading).  The nodeType property page (ms892577) re-prints the same
+  values.
+* Interfaces (35 overview pages): opaque forward declarations --
+  21 XML DOM interfaces + IXMLDOMSelection +
+  XMLSchemaCache/IXMLDOMSchemaCollection + IXMLHTTPRequest +
+  IXTLRuntime + 10 ISAX_/IMX_ interfaces.  The XML Minimal Parser
+  (ms897202) is a subset view of the SAX set (ISAXAttributes,
+  ISAXContentHandler, ISAXXMLReader + "two co-classes that implement
+  the XML Reader interface", unnamed).
+* Verbatim method/accessor records for all 243 pages carrying C/C++
+  Syntax prints: 153 shared XML DOM method/property pages, 8 XSLT
+  (IXTLRuntime) methods, 14 XML HTTP pages, 68 SAX pages (per
+  interface).  IMXWriter/IMXReaderControl properties print the
+  attribute style "[propget]HRESULTxxx(...)" / "[propput]" forms --
+  recorded as printed.
+* Archive-print traps preserved: eaten type spaces (BSTRbstrNodeName,
+  VARIANTvarDate, intnIndex, Idispatch*), SAL-less parameter lists,
+  "abort( )" vs "abort( void )" variants.
+* Events: ondataavailable (ms892606) / onreadystatechange (ms892608)
+  print "HRESULT onXxx( void );" C/C++ event signatures;
+  ontransformnode (ms892611) is script-only (no C/C++ section).
+* No import def: all 174 "Link Library: Uuid.lib" rows sit on
+  interface/method/property pages (GUID linkage, not import-library
+  export symbols) -- gen-doc-def.py uuid-doc.def co-listed skip count
+  35 -> 201; no sole-link export surface exists.
+* Held/catalogued (not C API): every IID_/CLSID_ GUID value (Uuid.lib
+  implies linkage; values not published), DOMDocument coclass progID
+  "Msxml2.DOMDocument" (CLSID value held), the four error-message
+  pages (IXMLParseError ms891734 / XML DOM ms897201 / XQL ms897210 /
+  XSLT ms897361 -- message text tables, no error constants), the
+  XPath/XQL function pages and XSLT element pages (scripting-level),
+  msxsl:script.  IXMLDOMDocument (base interface) and IXMLDSOControl
+  appear nowhere in the CE 5.0 book (recorded absent).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m66: 12 DOMNodeType value asserts + shaped usage of all 35 opaque
+interface pointers).  Headers 70 -> 71; defs 55 (unchanged count; the
+Uuid.lib rows yield no import surface).

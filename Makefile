@@ -40,7 +40,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/mlang.h \
        include/mmsystem.h \
        include/imaging.h \
-       include/pimstore.h
+       include/pimstore.h \
+       include/msxml2.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 

@@ -71,6 +71,7 @@
 #include <mmsystem.h>
 #include <imaging.h>
 #include <pimstore.h>
+#include <msxml2.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5995,6 +5996,51 @@ static int m65_shaped_usage(void)
            (int)PT_TASKS + (int)PT_CONTACT;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M66: MSXML DOMNodeType -- printed values (ms897200; NODE_INVALID=0 by
+ * position, no description printed). */
+_Static_assert(NODE_ELEMENT == 1 && NODE_ATTRIBUTE == 2, "ms897200");
+_Static_assert(NODE_TEXT == 3 && NODE_CDATA_SECTION == 4, "ms897200");
+_Static_assert(NODE_ENTITY_REFERENCE == 5 && NODE_ENTITY == 6, "ms897200");
+_Static_assert(NODE_PROCESSING_INSTRUCTION == 7 && NODE_COMMENT == 8, "ms897200");
+_Static_assert(NODE_DOCUMENT == 9 && NODE_DOCUMENT_TYPE == 10, "ms897200");
+_Static_assert(NODE_DOCUMENT_FRAGMENT == 11 && NODE_NOTATION == 12, "ms897200");
+#endif
+
+/* M66: MSXML shaped usage (COM surface only; no import surface). */
+static int m66_shaped_usage(void)
+{
+    DOMNodeType nt = NODE_ELEMENT;
+    IXMLDOMNode             *node = (IXMLDOMNode *)0;
+    IXMLDOMDocument2        *doc = (IXMLDOMDocument2 *)0;
+    IXMLDOMElement          *el = (IXMLDOMElement *)0;
+    IXMLDOMSelection        *sel = (IXMLDOMSelection *)0;
+    IXMLDOMSchemaCollection *sc = (IXMLDOMSchemaCollection *)0;
+    IXMLDOMParseError       *pe = (IXMLDOMParseError *)0;
+    IXMLHTTPRequest         *hr = (IXMLHTTPRequest *)0;
+    IXTLRuntime             *xt = (IXTLRuntime *)0;
+    ISAXXMLReader           *saxr = (ISAXXMLReader *)0;
+    ISAXContentHandler      *saxc = (ISAXContentHandler *)0;
+    ISAXAttributes          *saxa = (ISAXAttributes *)0;
+    ISAXErrorHandler        *saxe = (ISAXErrorHandler *)0;
+    IMXWriter               *mw = (IMXWriter *)0;
+    IMXAttributes           *ma = (IMXAttributes *)0;
+    IMXReaderControl        *mrc = (IMXReaderControl *)0;
+    ISAXXMLFilter           *sf = (ISAXXMLFilter *)0;
+    ISAXLocator             *sl = (ISAXLocator *)0;
+    ISAXLexicalHandler      *slh = (ISAXLexicalHandler *)0;
+    ISAXDeclHandler         *sdh = (ISAXDeclHandler *)0;
+    ISAXDTDHandler          *sdtd = (ISAXDTDHandler *)0;
+    ISAXEntityResolver      *ser = (ISAXEntityResolver *)0;
+
+    nt = NODE_DOCUMENT;
+    (void) node; (void) doc; (void) el; (void) sel; (void) sc; (void) pe;
+    (void) hr; (void) xt; (void) saxr; (void) saxc; (void) saxa;
+    (void) saxe; (void) mw; (void) ma; (void) mrc; (void) sf; (void) sl;
+    (void) slh; (void) sdh; (void) sdtd; (void) ser;
+    return (int)nt;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6096,6 +6142,8 @@ int host_tu_entry(void)
     if (m64_shaped_usage() != 0)
         return 1;
     if (m65_shaped_usage() != 0)
+        return 1;
+    if (m66_shaped_usage() != 0)
         return 1;
     return 0;
 }
