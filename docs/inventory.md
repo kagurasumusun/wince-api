@@ -5677,7 +5677,7 @@ include spelling still resolves to the documented-case file anyway.
 ## M77a -- IP Helper API (Iphlpapi.h, Iptypes.h, Iprtrmib.h, Ipexport.h, def/iphlpapi-doc.def)
 
 NetGen book (tools/manifests/netgen.manifest, 956 pages fetched in
-M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier books)):
+M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier books):
 
 - include/Iphlpapi.h (NEW, real): 43 declarations (Iphlpapi.lib):
   the Create/Delete/Set IpForward/IpNet/ProxyArp family, GetIfTable/
