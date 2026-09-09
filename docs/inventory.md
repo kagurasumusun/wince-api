@@ -5224,6 +5224,5 @@ no interface struct is invented.
 
 Verification: make check / crosscheck / e2e GREEN on all six
 targets.  TU m71: 61 opaque interface pointers (compile proves every
-forward).  Headers 76 real + 83 aliases = 159+1 files? -- dshow.h
-grew in place (159 files unchanged: 76 real + 83 aliases); defs 56
-(unchanged).  dshow.h is now 1304 lines.
+forward).  Headers unchanged in count (76 real + 83 aliases = 159
+files; dshow.h grew in place to 1304 lines); defs 56 (unchanged).
