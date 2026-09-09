@@ -185,7 +185,10 @@ declarations, recorded in `docs/inventory.md`):
   four array-carrying structures (MIMECPINFO/MIMECSETINFO/
   RFC1766INFO/SCRIPTINFO -- the MAX_* array lengths are unpublished
   anywhere official), SCRIPTFONTINFO, the MultiLanguage CLSID.
-  Headers 66 -> 67, defs 53 -> 54.
+  Headers 66 -> 67, defs 53 -> 54.  M61b closes the Nk queue:
+  CeGetThreadPriority (Coredll, def 619 -> 620) plus the three
+  Nk.lib-only declarations CeSetThreadPriority / SetThreadContext /
+  WriteProcessMemory (kernel-scope, no user-mode def).
 * **M60 (landed):** URL Moniker Services (new `include/urlmon.h`;
   def `def/urlmon-doc.def`, 38 exports = the complete documented
   Urlmon.lib function surface).  19 enumerations (10 with fully

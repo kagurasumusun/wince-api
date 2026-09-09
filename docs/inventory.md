@@ -4591,3 +4591,26 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m61: 2 size asserts + 6 enum-value assert groups incl. the
 SCRIPTCONTF alias identities + shaped usage of all 6 functions).
 Headers 66 -> 67; defs 53 -> 54 (mlang 6).
+
+### M61b -- Nk-scope closure (winbase.h additions; coredll def +1)
+
+The "Nk" queue is resolved: rows.json carries 18 Winbase.h pages with
+Nk.lib link rows (7 Nk.lib-only, 11 co-listed with Coredll.lib).  All
+were already declared except four, now added:
+
+* aa450795 "CeGetThreadPriority" (CE 2.11+; Coredll.lib):
+  AKARI_CE_IMPORT int CeGetThreadPriority(HANDLE) -- coredll-doc.def
+  619 -> 620 exports.
+* ms885155 "CeSetThreadPriority" (CE 2.11+; Nk.lib-only): plain
+  declaration, no user-mode doc def (the OutputDebugStringW pattern;
+  kernel-side export).
+* aa450889 "SetThreadContext" (CE 2.0+; Nk.lib-only): plain
+  declaration; BOOL SetThreadContext(HANDLE, CONST CONTEXT*).
+* aa450992 "WriteProcessMemory" (CE 2.0+; Nk.lib-only): plain
+  declaration; BOOL WriteProcessMemory(HANDLE, LPVOID, LPVOID, DWORD,
+  LPDWORD).  (GetThreadContext ms885642 / ReadProcessMemory ms886794
+  were already declared via their Coredll.lib co-listing.)
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m61 shaped usage extended).  Headers 67 (unchanged count);
+coredll def 619 -> 620; total defs 54 (unchanged count).

@@ -2452,6 +2452,32 @@ AKARI_CE_IMPORT DWORD CeGetThreadQuantum(HANDLE hThread) AKARI_CE_NAME(CeGetThre
  * dwTime 0 runs the thread to completion; OEM default 100 ms. */
 AKARI_CE_IMPORT BOOL CeSetThreadQuantum(HANDLE hThread, DWORD dwTime) AKARI_CE_NAME(CeSetThreadQuantum);
 
+/* aa450795 "CeGetThreadPriority" (CE 2.11+; Coredll.lib): gets the
+ * real-time priority of hThread, 0 (highest) through 255;
+ * THREAD_PRIORITY_ERROR_RETURN on failure. */
+AKARI_CE_IMPORT int CeGetThreadPriority(HANDLE hThread) AKARI_CE_NAME(CeGetThreadPriority);
+
+/* ms885155 "CeSetThreadPriority" (CE 2.11+; Winbase.h).  The page's
+ * Link Library row is Nk.lib (kernel-side export, not Coredll), so
+ * this name is *not* added to any user-mode doc def (the
+ * OutputDebugStringW pattern).  Sets the real-time priority,
+ * 0 (highest) through 255. */
+BOOL CeSetThreadPriority(HANDLE hThread, int nPriority);
+
+/* aa450889 "SetThreadContext" (CE 2.0+; Winbase.h).  Nk.lib-only row
+ * (kernel-side export, not Coredll): plain declaration, no user-mode
+ * doc def.  Sets the thread context selected by lpContext->
+ * ContextFlags; some CONTEXT values cannot be set. */
+BOOL SetThreadContext(HANDLE hThread, CONST CONTEXT* lpContext);
+
+/* aa450992 "WriteProcessMemory" (CE 2.0+; Winbase.h).  Nk.lib-only
+ * row (kernel-side export, not Coredll): plain declaration, no
+ * user-mode doc def.  hProcess from OpenProcess with full access;
+ * the whole area must be accessible or the operation fails. */
+BOOL WriteProcessMemory(HANDLE hProcess, LPVOID lpBaseAddress,
+                        LPVOID lpBuffer, DWORD nSize,
+                        LPDWORD lpNumberOfBytesWritten);
+
 /* aa450973 "VerQueryValue" (CE 3.0+; Coredll.lib): resolves a backslash-
  * separated sub-block ("\", "\VarFileInfo\Translation", ...) inside a
  * version-information block returned by GetFileVersionInfoW.  The

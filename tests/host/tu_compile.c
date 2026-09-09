@@ -5562,6 +5562,13 @@ static int m61_shaped_usage(void)
     (void) LcidToRfc1766(lcid, (LPTSTR)0, 0);
     (void) Rfc1766ToLcid(&lcid, (LPTSTR)0);
 
+    /* M61b: Nk-scope closure (winbase.h additions). */
+    (void) CeGetThreadPriority((HANDLE)0);
+    (void) CeSetThreadPriority((HANDLE)0, 248);
+    (void) SetThreadContext((HANDLE)0, (CONST CONTEXT *)0);
+    (void) WriteProcessMemory((HANDLE)0, (LPVOID)0, (LPVOID)0, 0u,
+                              (LPDWORD)0);
+
     (void) mc; (void) mcc; (void) mlcp; (void) mdc; (void) sc;
     (void) sfc; (void) sid; (void) ur; (void) dei; (void) pdei;
     (void) pecp; (void) pecr; (void) pecs; (void) pmcp; (void) pmcc;
