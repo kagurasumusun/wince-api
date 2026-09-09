@@ -33,7 +33,7 @@
 
 #include "Windef.h"    /* UINT, UINT_PTR, VOID, WCHAR, DWORD, BYTE */
 #include "Winnt.h"     /* GUID, FLOAT */
-#include "objbase.h"   /* CLSID, IStream, HRESULT */
+#include "Objbase.h"   /* CLSID, IStream, HRESULT */
 
 #ifdef __cplusplus
 extern "C" {

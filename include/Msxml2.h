@@ -32,7 +32,7 @@
 #define AKARI_MSXML2_H
 
 #include "Windef.h"
-#include "objbase.h"   /* VARIANT, BSTR, VARIANT_BOOL, IDispatch,
+#include "Objbase.h"   /* VARIANT, BSTR, VARIANT_BOOL, IDispatch,
                           IStream carriers (M44) */
 
 #ifdef __cplusplus

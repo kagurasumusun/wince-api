@@ -20,28 +20,29 @@ HDRS = \
        include/Dmo.h include/Dmodshow.h include/Dmoreg.h include/Dshow.h include/Dvp.h include/ErrorRep.h \
        include/Excpt.h include/Extfile.h include/Imaging.h include/Imm.h include/Keybd.h include/Kfuncs.h \
        include/Mlang.h include/Mmsystem.h include/Msgqueue.h include/Msxml2.h include/Natedit.h include/Netui.h \
-       include/Notify.h include/Pchannel.h include/Pcommctrl.h include/Pimstore.h include/Playlist.h include/Prsht.h \
-       include/Psapi.h include/Pwindbas.h include/Pwinuser.h include/Rtccore.h include/Rtcerr.h include/Sapi.h \
-       include/Sapiddk.h include/Shellapi.h include/Shelwapi.h include/Shlguid.h include/Shlobj.h include/Shobjidl.h \
-       include/Shobjvidl.h include/Shtypes.h include/Sip.h include/Sipapi.h include/Snmp.h include/Snmpapi.h \
-       include/Snmpexts.h include/Sphelper.h include/Tapi.h include/Tapicomn.h include/Tlhelp.h include/Tlhelp32.h \
-       include/Tvout.h include/Unimodem.h include/Urlmon.h include/Winbase.h include/Winber.h include/Wincrypt.h \
-       include/Windbase.h include/Windef.h include/Windows.h include/Windowsx.h include/Wingdi.h include/Winldap.h \
-       include/Winnls.h include/Winnt.h include/Winreg.h include/Winscard.h include/Winsock2.h include/Winuser.h \
-       include/Ws2bth.h include/Ws2spi.h include/Ws2tcpip.h include/aygshell.h include/bt_api.h include/btagnetwork.h \
-       include/btagpub.h include/bthapi.h include/bthsdpdef.h include/cchannel.h include/ceddk.h include/celog.h \
-       include/commctrl.h include/commdlg.h include/cpl.h include/d3dm.h include/dbgapi.h include/ddraw.h \
-       include/discodlg.h include/dmo.h include/dmoreg.h include/dshow.h include/dvdcss.h include/dvddrvr.h \
-       include/dvdmedia.h include/dvp.h include/errorrep.h include/excpt.h include/extfile.h include/imaging.h \
-       include/imm.h include/keybd.h include/mlang.h include/mmsystem.h include/msgqueue.h include/msxml2.h \
-       include/natedit.h include/newmenu.h include/notify.h include/objbase.h include/pimstore.h include/pm.h \
-       include/prsht.h include/psapi.h include/pwinuser.h include/rtccore.h include/sapi.h include/sapiddk.h \
-       include/shellapi.h include/shellsdk.h include/shelwapi.h include/shlobj.h include/shobjidl.h include/shtypes.h \
-       include/sip.h include/sipapi.h include/snmp.h include/snmpapi.h include/snmpexts.h include/strmif.h \
-       include/tapi.h include/tapicomn.h include/tlhelp32.h include/tvout.h include/urlmon.h include/winbase.h \
-       include/winber.h include/wincrypt.h include/windbase.h include/windef.h include/windows.h include/windowsx.h \
-       include/winerror.h include/wingdi.h include/winldap.h include/winnls.h include/winnt.h include/winreg.h \
-       include/winscard.h include/winsock2.h include/winuser.h include/ws2bth.h include/ws2spi.h include/ws2tcpip.h
+       include/Notify.h include/Oaidl.h include/Objbase.h include/Oleauto.h include/Pchannel.h include/Pcommctrl.h \
+       include/Pimstore.h include/Playlist.h include/Prsht.h include/Psapi.h include/Pwindbas.h include/Pwinuser.h \
+       include/Rtccore.h include/Rtcerr.h include/Sapi.h include/Sapiddk.h include/Shellapi.h include/Shelwapi.h \
+       include/Shlguid.h include/Shlobj.h include/Shobjidl.h include/Shobjvidl.h include/Shtypes.h include/Sip.h \
+       include/Sipapi.h include/Snmp.h include/Snmpapi.h include/Snmpexts.h include/Sphelper.h include/Tapi.h \
+       include/Tapicomn.h include/Tlhelp.h include/Tlhelp32.h include/Tvout.h include/Unimodem.h include/Urlmon.h \
+       include/Winbase.h include/Winber.h include/Wincrypt.h include/Windbase.h include/Windef.h include/Windows.h \
+       include/Windowsx.h include/Wingdi.h include/Winldap.h include/Winnls.h include/Winnt.h include/Winreg.h \
+       include/Winscard.h include/Winsock2.h include/Winuser.h include/Ws2bth.h include/Ws2spi.h include/Ws2tcpip.h \
+       include/aygshell.h include/bt_api.h include/btagnetwork.h include/btagpub.h include/bthapi.h include/bthsdpdef.h \
+       include/cchannel.h include/ceddk.h include/celog.h include/commctrl.h include/commdlg.h include/cpl.h \
+       include/d3dm.h include/dbgapi.h include/ddraw.h include/discodlg.h include/dmo.h include/dmoreg.h \
+       include/dshow.h include/dvdcss.h include/dvddrvr.h include/dvdmedia.h include/dvp.h include/errorrep.h \
+       include/excpt.h include/extfile.h include/imaging.h include/imm.h include/keybd.h include/mlang.h \
+       include/mmsystem.h include/msgqueue.h include/msxml2.h include/natedit.h include/newmenu.h include/notify.h \
+       include/objbase.h include/pimstore.h include/pm.h include/prsht.h include/psapi.h include/pwinuser.h \
+       include/rtccore.h include/sapi.h include/sapiddk.h include/shellapi.h include/shellsdk.h include/shelwapi.h \
+       include/shlobj.h include/shobjidl.h include/shtypes.h include/sip.h include/sipapi.h include/snmp.h \
+       include/snmpapi.h include/snmpexts.h include/strmif.h include/tapi.h include/tapicomn.h include/tlhelp32.h \
+       include/tvout.h include/urlmon.h include/winbase.h include/winber.h include/wincrypt.h include/windbase.h \
+       include/windef.h include/windows.h include/windowsx.h include/winerror.h include/wingdi.h include/winldap.h \
+       include/winnls.h include/winnt.h include/winreg.h include/winscard.h include/winsock2.h include/winuser.h \
+       include/ws2bth.h include/ws2spi.h include/ws2tcpip.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -203,6 +204,10 @@ e2e:
 	  | grep -q "Name: msdmo.dll" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: DMOEnum" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: oleaut32.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: SysAllocString" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WSAEnumNameSpaceProviders" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \

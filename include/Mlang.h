@@ -37,7 +37,7 @@
 
 #include "Windef.h"    /* DWORD, UINT, INT, BYTE, WCHAR, LANGID, LCID, LPINT, LPSTR, LPWSTR */
 #include "Winnt.h"     /* WCHAR array bases */
-#include "objbase.h"   /* HRESULT, BSTR, IStream */
+#include "Objbase.h"   /* HRESULT, BSTR, IStream */
 
 #ifdef __cplusplus
 extern "C" {

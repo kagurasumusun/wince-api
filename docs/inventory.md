@@ -5344,3 +5344,53 @@ the "X.h, X.idl" form the idl-carrying books print):
 Verification: make check / crosscheck / e2e GREEN on all six
 targets (clang 22.1.8 re-downloaded to .cache/llvm-dl this
 session).  79 real + 89 aliases = 168 files; defs 57 (unchanged).
+
+## M73a: COM and DCOM Reference harvest + Automation completion
+
+962-leaf harvest of the *Component Services (COM and DCOM) ->
+COM and DCOM Reference* books (manifests dcom-aut 322, dcom-com
+404, dcom-ole 162, dcom-storage 74; build/pages 8135).  Header
+rows across the books: Oleauto.h 227, Objidl.h 219, Oaidl.h 164,
+Objbase.h 87, Oleidl.h 82, Ocidl.h 59, Ole2.h 17, Comcat.h 14,
+Dccole.h 13.  Link Library rows: Ole32.lib (417 sole), Oleaut32.lib
+(229 sole, 181 uuid-co-listed), Uuid.lib co-lists skipped.
+
+Findings vs the existing tree (objbase.h already carried the M44-era
+COM/automation surface):
+* Automation book: 153/157 function pages, all type pages (VARIANT,
+  TYPEDESC..VARDESC, CALLCONV..TYPEKIND, DISPID, MEMBERID, CURRENCY)
+  were ALREADY carried by objbase.h.  Genuinely missing, added to
+  Objbase.h this unit: VarI4FromDate (aa519078 -- the page's syntax
+  print is a copy-paste artifact naming VarI4FromUI1; repaired with
+  the print recorded), PropVariantClear aa519285, PropVariantCopy
+  aa519286, FreePropVariantArray aa519255 (WINOLEAPI prints ->
+  HRESULT, empty-convention-macro precedent), and PROPVARIANT
+  aa519284 as an INCOMPLETE type (its print embeds by value the
+  CAC..CAPROPVARIANT counted-array unions and BSTRBLOB/BLOB/
+  CLIPDATA/VERSIONEDSTREAM helpers that no CE page defines; the
+  functions take pointers, zero-gap hold with the verbatim print
+  recorded).
+* objbase.h renamed to **Objbase.h** (87 documented rows) per the
+  M72 policy; lowercase alias retained; 15 internal includes
+  re-pointed.
+* New documented-case aliases: **Oleauto.h -> Objbase.h** (154 fn
+  rows + DISPPARAMS/METHODDATA/PARAMDATA) and **Oaidl.h ->
+  Objbase.h** (164 rows: the automation/COM type surface) --
+  content-verified category, row counts recorded.
+* def/oleaut32-doc.def regenerated +4 (227 exports); def/ole32-doc.def
+  regenerated (84): the rows.json rebuild had lost the ms886303
+  CoInitialize row (Link Library: Ole32.lib) -- the page was
+  re-fetched and parsed, the row restored with provenance, and the
+  CE 5 twin conflict recorded in Objbase.h (ms863914 prints "This
+  function is not supported... call CoInitializeEx" with no
+  Requirements block; the CE 3.0 page ms886303 documents the
+  export, so declaration + def entry stand on it).
+* e2e gains oleaut32.dll + SysAllocString import assertions and a
+  CoInitializeEx call; TU m73a exercises the 4 new functions and
+  the PROPVARIANT pointer surface; TU includes <Oleauto.h> and
+  <Oaidl.h>.
+
+Verification: make check / crosscheck / e2e GREEN on all six
+targets.  Headers 79 real + 92 aliases = 171 files; defs 59
+(ole32-doc.def 84, oleaut32-doc.def 227; msdmo-doc.def regenerated
+comments normalized by the generator).

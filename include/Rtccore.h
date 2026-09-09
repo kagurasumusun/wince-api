@@ -38,7 +38,7 @@
 #define AKARI_RTCCORE_H
 
 #include "Windef.h"
-#include "objbase.h"    /* BSTR, VARIANT, VARIANT_BOOL, IDispatch carriers */
+#include "Objbase.h"    /* BSTR, VARIANT, VARIANT_BOOL, IDispatch carriers */
 
 #ifdef __cplusplus
 extern "C" {

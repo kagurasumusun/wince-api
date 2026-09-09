@@ -51,7 +51,7 @@
 #include "Windef.h"    /* DWORD, BOOL, ULONG, UINT, VOID, LPVOID, LPSTR, LPCSTR, HWND */
 #include "Winnt.h"     /* LARGE_INTEGER, ULARGE_INTEGER, GUID/IID/CLSID bases */
 #include "Winbase.h"   /* SYSTEMTIME (HIT_LOGGING_INFO) */
-#include "objbase.h"   /* HRESULT, IUnknown, IMoniker, IBindCtx/LPBC, IStream,
+#include "Objbase.h"   /* HRESULT, IUnknown, IMoniker, IBindCtx/LPBC, IStream,
                           IEnumFORMATETC, FORMATETC, STGMEDIUM, BINDINFO,
                           LPOLESTR, LPMONIKER, LPSTREAM, LPUNKNOWN, REFIID,
                           REFCLSID, REFGUID, CLSID, IID, BSTR */

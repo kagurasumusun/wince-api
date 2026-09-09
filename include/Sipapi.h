@@ -47,7 +47,7 @@
 #define AKARI_SIPAPI_H
 
 #include "Windows.h"   /* RECT, HWND, BOOL, DWORD, TCHAR, MAX_PATH */
-#include "objbase.h"   /* CLSID */
+#include "Objbase.h"   /* CLSID */
 
 #ifdef __cplusplus
 extern "C" {

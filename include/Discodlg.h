@@ -27,7 +27,7 @@
 #define AKARI_DISCODLG_H
 
 #include "Windef.h"
-#include "objbase.h"   /* HRESULT, BSTR, VARIANT_BOOL (M44) */
+#include "Objbase.h"   /* HRESULT, BSTR, VARIANT_BOOL (M44) */
 
 #ifdef __cplusplus
 extern "C" {

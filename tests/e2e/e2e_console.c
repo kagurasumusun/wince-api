@@ -94,6 +94,13 @@ int main(void)
         oid = CeSeekDatabase((HANDLE)0, 0u, 0u, (LPDWORD)0);
         (void) oid;
     }
+    /* M73a: Oleaut32.lib / Ole32.lib rows (def/oleaut32-doc.def,
+     * def/ole32-doc.def -- COM and DCOM Reference books). */
+    {
+        BSTR bs = SysAllocString((OLECHAR *)0);
+        SysFreeString(bs);
+        (void) CoInitializeEx((LPVOID)0, 0u);
+    }
     /* M71c: DMO import surface (Msdmo.lib rows, def/msdmo-doc.def). */
     {
         GUID guid = { 0 };

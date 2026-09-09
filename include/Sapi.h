@@ -35,7 +35,7 @@
 
 #include "Windef.h"
 #include "Winnt.h"
-#include "objbase.h"    /* VARIANT, BSTR, IDispatch carriers */
+#include "Objbase.h"    /* VARIANT, BSTR, IDispatch carriers */
 #include "Mmsystem.h"   /* WAVEFORMATEX (SAPI page re-print) */
 
 #ifdef __cplusplus

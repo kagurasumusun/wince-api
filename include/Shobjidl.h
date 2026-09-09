@@ -23,7 +23,7 @@
 #define AKARI_SHOBJIDL_H
 
 #include "Windef.h"
-#include "objbase.h"   /* HRESULT, REFIID, IBindCtx/LPBC, IDataObject,
+#include "Objbase.h"   /* HRESULT, REFIID, IBindCtx/LPBC, IDataObject,
                           POINTL (OLE carriers, M44); the interface
                           method records below reference HWND / POINT /
                           LPMSG textually only */

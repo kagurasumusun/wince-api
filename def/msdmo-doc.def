@@ -10,15 +10,8 @@
 ; harvest; docs/inventory.md records every page).  No
 ; shared-source/device-dump/VS/PB-derived name is used.
 ; Ordinals are not published; entries are name-only.
-; LIBRARY tag = documented Link Library row (Msdmo.lib); the on-device module name is
+; LIBRARY tag = documented Link Library row (msdmo.lib); the on-device module name is
 ; not published by the CE documentation.
-; Pages: DMOEnum aa451593, DMOGetName aa451596, DMOGetTypes
-;   aa451597, DMOUnregister aa451611, DMOUnregisterFilter aa452530,
-;   DMORegisterFilter aa452529 (Dmoreg.h), MoCopyMediaType ms932064,
-;   MoCreateMediaType ms932065, MoDeleteMediaType ms932066,
-;   MoDuplicateMediaType ms932067, MoFreeMediaType ms932068,
-;   MoInitMediaType ms932077.  DMORegister aa451608 prints no
-;   Requirements block (no Link Library row) -- excluded.
 LIBRARY msdmo.dll
 EXPORTS
   DMOEnum

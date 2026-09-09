@@ -26,7 +26,7 @@
 
 #include "Windef.h"
 #include "Winuser.h"    /* NMHDR (hdr member), HMENU */
-#include "objbase.h"    /* CLSID, IPropertyBag (pppropbag member) */
+#include "Objbase.h"    /* CLSID, IPropertyBag (pppropbag member) */
 
 #ifdef __cplusplus
 extern "C" {

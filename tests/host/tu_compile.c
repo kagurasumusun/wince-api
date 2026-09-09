@@ -88,6 +88,8 @@
 #include <Playlist.h>
 #include <Dmodshow.h>
 #include <Shobjvidl.h>
+#include <Oleauto.h>
+#include <Oaidl.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
@@ -6595,6 +6597,22 @@ static int m71c_shaped_usage(void)
     return 0;
 }
 
+/* M73a: automation completion (Oleauto.h/Oaidl.h alias surface). */
+static int m73a_shaped_usage(void)
+{
+    PROPVARIANT *pv = (PROPVARIANT *)0;
+    DATE         d = 0.0;
+    long         l = 0;
+    HRESULT      hr;
+
+    hr = VarI4FromDate(d, &l);
+    hr = PropVariantClear(pv);
+    hr = PropVariantCopy(pv, (const PROPVARIANT *)0);
+    hr = FreePropVariantArray(0u, pv);
+    (void)hr;
+    return (int)l;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6712,6 +6730,8 @@ int host_tu_entry(void)
     if (m71_shaped_usage() != 0)
         return 1;
     if (m71c_shaped_usage() != 0)
+        return 1;
+    if (m73a_shaped_usage() != 0)
         return 1;
     return 0;
 }

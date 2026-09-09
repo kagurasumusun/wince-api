@@ -58,7 +58,7 @@
 
 #include "Windef.h"    /* DWORD, BOOL, LONG, WORD, FAR, LPSTR, LPVOID, HMONITOR, WINAPI */
 #include "Winnt.h"     /* GUID, ULONG_PTR (DDVIDEOPORTCONNECT &c. in dvp.h), HRESULT base LONG */
-#include "objbase.h"   /* HRESULT, IUnknown, REFGUID (referenced by method records) */
+#include "Objbase.h"   /* HRESULT, IUnknown, REFGUID (referenced by method records) */
 
 #ifdef __cplusplus
 extern "C" {

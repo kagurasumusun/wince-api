@@ -21,9 +21,12 @@ EXPORTS
   DispGetParam
   DispInvoke
   DllCanUnloadNow
+  FreePropVariantArray
   GetErrorInfo
   LoadRegTypeLib
   LoadTypeLib
+  PropVariantClear
+  PropVariantCopy
   RegisterTypeLib
   SafeArrayAccessData
   SafeArrayAllocData
@@ -56,6 +59,7 @@ EXPORTS
   SysStringByteLen
   SysStringLen
   SystemTimeToVariantTime
+  UnRegisterTypeLib
   VarBoolFromCy
   VarBoolFromDate
   VarBoolFromDec
@@ -150,6 +154,7 @@ EXPORTS
   VarI2FromUI4
   VarI4FromBool
   VarI4FromCy
+  VarI4FromDate
   VarI4FromDec
   VarI4FromDisp
   VarI4FromI1

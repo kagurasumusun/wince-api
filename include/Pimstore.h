@@ -39,7 +39,7 @@
 #define AKARI_PIMSTORE_H
 
 #include "Windef.h"    /* HWND, HANDLE, UINT, void */
-#include "objbase.h"   /* BSTR, VARIANT_BOOL, DATE, IDispatch record use */
+#include "Objbase.h"   /* BSTR, VARIANT_BOOL, DATE, IDispatch record use */
 
 #ifdef __cplusplus
 extern "C" {

@@ -43,7 +43,7 @@
 
 #include "Windef.h"    /* DWORD, BOOL, ULONG, WCHAR, LPCWSTR */
 #include "Winnt.h"     /* GUID, CLSID, BYTE */
-#include "objbase.h"   /* IUnknown, REFGUID, REFCLSID */
+#include "Objbase.h"   /* IUnknown, REFGUID, REFCLSID */
 #include "Dshow.h"     /* REFERENCE_TIME carrier (M70b closure) */
 
 #ifdef __cplusplus

@@ -54,7 +54,7 @@
 #include "Winnt.h"     /* GUID, CLSID, LONGLONG, BYTE */
 #include "Wingdi.h"    /* COLORREF, RGBQUAD, BITMAPINFOHEADER, DIBSECTION,
                           HBITMAP */
-#include "objbase.h"   /* IUnknown (opaque forward) */
+#include "Objbase.h"   /* IUnknown (opaque forward) */
 
 #ifdef __cplusplus
 extern "C" {
