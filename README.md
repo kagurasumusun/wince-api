@@ -173,6 +173,19 @@ x86 headers are pinned to the undecorated CE export names
 Landing history (each batch adds only official-page-grounded
 declarations, recorded in `docs/inventory.md`):
 
+* **M60 (landed):** URL Moniker Services (new `include/urlmon.h`;
+  def `def/urlmon-doc.def`, 38 exports = the complete documented
+  Urlmon.lib function surface).  19 enumerations (10 with fully
+  printed hex values, 9 with printed starter values + C implicit
+  successors; BINDSTATUS's duplicated COOKIE_STATE_PROMPT enumerator
+  dropped and recorded), PROTOCOLDATA / PROTOCOLFILTERDATA /
+  HIT_LOGGING_INFO structures, the derived CLIPFORMAT typedef (path
+  recorded), the 21 CFSTR_MIME_* media-type names with their printed
+  string values, and 25 opaque interface records with all 77 method
+  signatures.  BINDINFO reused from objbase.h (ms928761, corroborated
+  by aa452099).  Held: INET_E_*/URLACTION_*/URLPOLICY_* values, the
+  two zone-manager CLSIDs, ZONEATTRIBUTES (MAX_ZONE_DESCRIPTION
+  unpublished), method-less table rows.  Headers 65 -> 66, defs 52 -> 53.
 * **M59 (landed):** DirectDraw (new `include/ddraw.h`,
   `include/dvp.h`; def `def/ddraw-doc.def`, 4 exports = the Ddraw.lib
   function surface).  The 11 Ddraw.h structures + 6 Dvp.h video-port

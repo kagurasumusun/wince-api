@@ -66,6 +66,7 @@
 #include <dvdcss.h>
 #include <ddraw.h>
 #include <dvp.h>
+#include <urlmon.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -5492,6 +5493,176 @@ static int m53_shaped_usage(void)
     return 0;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M60: URL Moniker Services 32-bit CE sizes + the published enum
+ * values (value tables and starter values transcribed from the
+ * official pages; successors follow the printed C enums). */
+_Static_assert(sizeof(PROTOCOLDATA) == 16, "PROTOCOLDATA size (ms918838)");
+_Static_assert(sizeof(PROTOCOLFILTERDATA) == 20, "PROTOCOLFILTERDATA size (ms918839)");
+_Static_assert(sizeof(HIT_LOGGING_INFO) == 44, "HIT_LOGGING_INFO size (ms906339)");
+_Static_assert(offsetof(HIT_LOGGING_INFO, EndTime) == 24,
+               "HIT_LOGGING_INFO SYSTEMTIME members (ms906339)");
+_Static_assert(offsetof(PROTOCOLFILTERDATA, pProtocol) == 8,
+               "PROTOCOLFILTERDATA member order (ms918839)");
+_Static_assert(BINDF_ASYNCHRONOUS == 0x1 && BINDF_RESERVED_3 == 0x00800000,
+               "BINDF values (aa452098)");
+_Static_assert(PI_PARSE_URL == 0x1 && PD_FORCE_SWITCH == 0x00010000,
+               "PI_FLAGS values (ms918833)");
+_Static_assert(BINDINFO_OPTIONS_BINDTOOBJECT == 0x00100000,
+               "BINDINFO_OPTIONS values (aa452101)");
+_Static_assert(MIMETYPEPROP == 0x00000000, "MONIKERPROPERTY (ms918826)");
+_Static_assert(URL_ENCODING_ENABLE_UTF8 == 0x10000000,
+               "URL_ENCODING values (ms918867)");
+_Static_assert(PUAF_DEFAULT == 0x0 && PUAF_ACCEPT_WILDCARD_SCHEME == 0x80,
+               "PUAF values (ms918841)");
+_Static_assert(SZM_CREATE == 0x0 && SZM_DELETE == 0x1,
+               "SZM_FLAGS values (ms918860)");
+_Static_assert(URLTEMPLATE_CUSTOM == 0x0 && URLTEMPLATE_MEDLOW == 0x10500 &&
+               URLTEMPLATE_PREDEFINED_MAX == 0x20000,
+               "URLTEMPLATE values (ms918875)");
+_Static_assert(ZAFLAGS_CUSTOM_EDIT == 0x1 && ZAFLAGS_UNC_AS_INTRANET == 0x80,
+               "ZAFLAGS values (ms918890)");
+_Static_assert(PSU_DEFAULT == 1 && PSU_SECURITY_URL_ONLY == 2,
+               "PSUACTION values (ms918840)");
+_Static_assert(BINDSTRING_HEADERS == 1 && BINDSTRING_PTR_BIND_CONTEXT == 17,
+               "BINDSTRING values (aa452103)");
+_Static_assert(PARSE_CANONICALIZE == 1 && PARSE_UNESCAPE == 19,
+               "PARSEACTION values (ms918832)");
+_Static_assert(QUERY_EXPIRATION_DATE == 1 && QUERY_IS_SAFE == 14,
+               "QUERYOPTION values (ms918843)");
+_Static_assert(URLZONE_LOCAL_MACHINE == 0 && URLZONE_INTERNET == 3 &&
+               URLZONE_UNTRUSTED == 4 && URLZONE_USER_MIN == 1000 &&
+               URLZONE_USER_MAX == 10000, "URLZONE values (ms918876)");
+_Static_assert(URLZONEREG_DEFAULT == 0 && URLZONEREG_HKCU == 2,
+               "URLZONEREG values (ms918877)");
+_Static_assert(BINDINFOF_URLENCODESTGMEDDATA == 0 &&
+               BINDINFOF_URLENCODEDEXTRAINFO == 1,
+               "BINDINFOF values (aa452100)");
+_Static_assert(BINDVERB_GET == 0 && BINDVERB_CUSTOM == 3,
+               "BINDVERB values (aa452104)");
+_Static_assert(BSCF_FIRSTDATANOTIFICATION == 0 &&
+               BSCF_AVAILABLEDATASIZEUNKNOWN == 4, "BSCF values (aa452105)");
+_Static_assert(BINDSTATUS_FINDINGRESOURCE == 0 && BINDSTATUS_SIZEAVAILABLE == 48,
+               "BINDSTATUS implicit values, duplicate dropped (aa452102)");
+_Static_assert(CF_NULL == 0, "CF_NULL (ms918847)");
+#endif
+
+/* M60: URL Moniker Services shaped usage (enums, structures, opaque
+ * interfaces + the 38 Urlmon.lib functions). */
+static int m60_shaped_usage(void)
+{
+    BINDF             bf = BINDF_ASYNCHRONOUS;
+    PI_FLAGS          pif = PI_PARSE_URL;
+    BINDINFO_OPTIONS  bio = BINDINFO_OPTIONS_BINDTOOBJECT;
+    MONIKERPROPERTY   mkp = MIMETYPEPROP;
+    URL_ENCODING      ue = URL_ENCODING_NONE;
+    PUAF              puaf = PUAF_DEFAULT;
+    SZM_FLAGS         szm = SZM_CREATE;
+    URLTEMPLATE       ut = URLTEMPLATE_MEDIUM;
+    ZAFLAGS           zaf = ZAFLAGS_NO_UI;
+    PSUACTION         psu = PSU_DEFAULT;
+    BINDSTRING        bs = BINDSTRING_HEADERS;
+    PARSEACTION       pa = PARSE_CANONICALIZE;
+    QUERYOPTION       qo = QUERY_EXPIRATION_DATE;
+    URLZONE           uz = URLZONE_INTERNET;
+    URLZONEREG        uzr = URLZONEREG_HKLM;
+    BINDINFOF         bif = BINDINFOF_URLENCODESTGMEDDATA;
+    BINDVERB          bv = BINDVERB_GET;
+    BSCF              bscf = BSCF_FIRSTDATANOTIFICATION;
+    BINDSTATUS        bst = BINDSTATUS_FINDINGRESOURCE;
+    PROTOCOLDATA      pd;
+    PROTOCOLFILTERDATA pfd;
+    HIT_LOGGING_INFO  hli;
+    CLIPFORMAT        cf = CF_NULL;
+    BINDINFO          bi;      /* objbase.h definition (ms928761) */
+    IInternetSession *pses = (IInternetSession *)0;
+    IMoniker         *pmk = (IMoniker *)0;
+    IBindCtx         *pbc = (IBindCtx *)0;
+    LPBINDSTATUSCALLBACK pbsc = (LPBINDSTATUSCALLBACK)0;
+    LPBINDCTX         pbcx = (LPBINDCTX)0;
+
+    pd.grfFlags = 0; pd.dwState = 0; pd.pData = 0; pd.cbData = 0;
+    pfd.cbSize = sizeof(PROTOCOLFILTERDATA); pfd.pProtocolSink = 0;
+    pfd.pProtocol = 0; pfd.pUnk = 0; pfd.dwFilterFlags = 0;
+    hli.dwStructSize = sizeof(HIT_LOGGING_INFO);
+    hli.lpszLoggedUrlName = (LPSTR)0;
+    hli.StartTime.wYear = 2026; hli.EndTime.wYear = 2026;
+    hli.lpszExtendedInfo = (LPSTR)0;
+    bi.cbSize = sizeof(BINDINFO);
+    bi.dwBindVerb = (DWORD)bv;
+    bi.grfBindInfoF = (DWORD)bif;
+
+    /* Urlmon.lib import surface (aa452108..ms918878). */
+    (void) CoGetClassObjectFromURL((REFCLSID)0, (LPCWSTR)0, 0u, 0u,
+                                   (LPCWSTR)0, pbcx, 0u, (LPVOID)0,
+                                   (REFIID)0, (VOID **)0);
+    (void) CoInternetCombineUrl((LPCWSTR)0, (LPCWSTR)0, 0u, (LPWSTR)0,
+                                0u, (DWORD *)0, 0u);
+    (void) CoInternetGetProtocolFlags((LPCWSTR)0, (DWORD *)0, 0u);
+    (void) CoInternetGetSecurityUrl((LPCWSTR)0, (LPWSTR *)0, psu, 0u);
+    (void) CoInternetGetSession(0u, &pses, 0u);
+    (void) CoInternetParseUrl((LPCWSTR)0, pa, 0u, (LPWSTR)0, 0u,
+                              (DWORD *)0, 0u);
+    (void) CoInternetQueryInfo((LPCWSTR)0, qo, 0u, (LPVOID)0, 0u,
+                               (DWORD *)0, 0u);
+    (void) CopyBindInfo((const BINDINFO *)&bi, &bi);
+    (void) CopyStgMedium((const STGMEDIUM *)0, (STGMEDIUM *)0);
+    (void) CreateAsyncBindCtx(0u, (IBindStatusCallback *)0,
+                              (IEnumFORMATETC *)0, &pbc);
+    (void) CreateAsyncBindCtxEx((IBindCtx *)0, 0u,
+                                (IBindStatusCallback *)0,
+                                (IEnumFORMATETC *)0, &pbc, 0u);
+    (void) CreateFormatEnumerator(0u, (FORMATETC *)0,
+                                  (IEnumFORMATETC **)0);
+    (void) CreateURLMoniker((IMoniker *)0, (LPWSTR)0, &pmk);
+    (void) CreateURLMonikerEx((LPMONIKER)0, (LPCWSTR)0,
+                              (LPMONIKER *)0, 0u);
+    (void) FindMediaType((LPCSTR)0, &cf);
+    (void) FindMediaTypeClass((LPBC)0, (LPCSTR)0, (CLSID *)0, 0u);
+    (void) FindMimeFromData((LPBC)0, (LPCWSTR)0, (LPVOID)0, 0u,
+                            (LPCWSTR)0, 0u, (LPWSTR *)0, 0u);
+    (void) GetClassFileOrMime((LPBC)0, (LPCWSTR)0, (LPVOID)0, 0u,
+                              (LPCWSTR)0, 0u, (CLSID *)0);
+    (void) IsAsyncMoniker((IMoniker *)0);
+    (void) IsLoggingEnabledW((LPCTSTR)0);
+    (void) IsValidURL((LPBC)0, (LPCWSTR)0, 0u);
+    (void) MkParseDisplayNameEx((IBindCtx *)0, (LPWSTR)0,
+                                (ULONG *)0, &pmk);
+    (void) ObtainUserAgentString(0u, (LPCSTR)0, (DWORD *)0);
+    (void) RegisterBindStatusCallback((IBindCtx *)0,
+                                      (IBindStatusCallback *)0,
+                                      (IBindStatusCallback **)0, 0u);
+    (void) RegisterFormatEnumerator((LPBC)0,
+                                    (IEnumFORMATETC *)0, 0u);
+    (void) RegisterMediaTypeClass((LPBC)0, 0u, (LPCSTR *)0,
+                                  (CLSID *)0, 0u);
+    (void) RegisterMediaTypes(0u, (LPCSTR *)0, &cf);
+    (void) ReleaseBindInfo(&bi);
+    (void) RevokeBindStatusCallback((IBindCtx *)0,
+                                    (IBindStatusCallback *)0);
+    (void) RevokeFormatEnumerator((LPBC)0, (IEnumFORMATETC *)0);
+    (void) URLDownloadToCacheFileW((LPUNKNOWN)0, (LPCSTR)0,
+                                   (LPTSTR)0, 0u, 0u,
+                                   (IBindStatusCallback *)0);
+    (void) URLDownloadToFileW((LPUNKNOWN)0, (LPCTSTR)0, (LPCTSTR)0,
+                              0u, pbsc);
+    (void) URLOpenBlockingStream((LPUNKNOWN)0, (LPCSTR)0,
+                                 (LPSTREAM *)0, 0u, pbsc);
+    (void) URLOpenPullStream((LPUNKNOWN)0, (LPCSTR)0, 0u, pbsc);
+    (void) URLOpenStream((LPUNKNOWN)0, (LPCSTR)0, 0u, pbsc);
+    (void) UrlMkGetSessionOption(0u, (LPVOID)0, 0u, (DWORD *)0, 0u);
+    (void) UrlMkSetSessionOption(0u, (LPVOID)0, 0u, 0u);
+    (void) WriteHitLogging(&hli);
+
+    (void) bf; (void) pif; (void) bio; (void) mkp; (void) ue;
+    (void) puaf; (void) szm; (void) ut; (void) zaf; (void) psu;
+    (void) bs; (void) pa; (void) qo; (void) uz; (void) uzr;
+    (void) bif; (void) bv; (void) bscf; (void) bst; (void) cf;
+    (void) pd; (void) pfd; (void) hli; (void) bi; (void) pses;
+    (void) pmk; (void) pbc; (void) pbsc; (void) pbcx;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -5583,6 +5754,8 @@ int host_tu_entry(void)
     if (m58_shaped_usage() != 0)
         return 1;
     if (m59_shaped_usage() != 0)
+        return 1;
+    if (m60_shaped_usage() != 0)
         return 1;
     return 0;
 }

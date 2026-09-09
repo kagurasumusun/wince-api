@@ -4421,3 +4421,105 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m59: DD_ROP_SPACE value assert + 24 size/offset asserts + shaped
 usage incl. the four Ddraw.lib calls).  Headers 63 -> 65; defs 51 ->
 52 (ddraw 4).
+
+## M60 -- URL Moniker Services (new header urlmon.h; def urlmon-doc.def)
+
+Sources: the four URL Moniker Services books, 191 leaves harvested
+(tools/manifests/urlmon.manifest 88, urlmon-app.manifest 48,
+urlmon-zones.manifest 50, urlmon-hitlog.manifest 5).  All pages:
+"Header: Urlmon.h, Urlmon.idl." + "Link Library: Urlmon.lib."
+(functions/interfaces) or no lib row (enums/structures); OS "Windows
+CE .NET 4.0 and later".
+
+* Enumerations: 19 defined.  Ten print explicit hex/decimal values
+  (transcribed verbatim): BINDF 24 values (aa452098), PI_FLAGS 14 incl.
+  the printed name PD_FORCE_SWITCH (ms918833), BINDINFO_OPTIONS 5
+  (aa452101), MONIKERPROPERTY 1 (ms918826), URL_ENCODING 3 (ms918867),
+  PUAF 9 (ms918841), SZM_FLAGS 2 (ms918860), URLTEMPLATE 7 incl.
+  URLTEMPLATE_LOW sharing PREDEFINED_MIN's 0x10000 (ms918875), ZAFLAGS
+  8 (ms918890), URLZONE's mixed explicit set (ms918876: LOCAL_MACHINE=0,
+  PREDEFINED_MAX=999, USER_MIN=1000, USER_MAX=10000).  Nine print
+  starter values with C implicit successors (transcribed as printed):
+  PSUACTION PSU_DEFAULT=1 (ms918840), BINDSTRING BINDSTRING_HEADERS=1
+  (aa452103), PARSEACTION PARSE_CANONICALIZE=1 (ms918832), QUERYOPTION
+  QUERY_EXPIRATION_DATE=1 (ms918843), URLZONEREG DEFAULT=0 (ms918877),
+  and the value-less prints BINDINFOF / BINDVERB / BSCF (implicit 0..n,
+  aa452100/aa452104/aa452105) and BINDSTATUS (aa452102).
+* BINDSTATUS print artifacts recorded: the enumerator
+  BINDSTATUS_COOKIE_STATE_PROMPT is printed TWICE (after COOKIE_STATE_REJECT
+  and after COOKIE_STATE_LEASH); a C enum cannot repeat a name so the
+  second occurrence is dropped -- 49 enumerators, BINDSTATUS_SIZEAVAILABLE
+  = 48, and entries after the dropped slot number one less than a
+  "count the duplicate" reading (both readings noted; no values are
+  printed anywhere).  "VERFIEDMIMETYPEAVAILABLE" spelling kept as
+  printed; the missing comma between BINDSTATUS_ACCEPTRANGES and
+  BINDSTATUS_COOKIE_SENT is a spacing artifact.
+* Structures: PROTOCOLDATA (ms918838, 16 bytes), PROTOCOLFILTERDATA
+  (ms918839, 20), HIT_LOGGING_INFO (ms906339, 44, with LPHIT_LOGGING_INFO)
+  transcribed verbatim.  BINDINFO NOT redefined: objbase.h already
+  defines it (ms928761, Objidl.h book of the COM docs) and the URL
+  Moniker Services BINDINFO page (aa452099) prints the identical
+  member list (corroboration recorded).  ZONEATTRIBUTES (ms918891)
+  HELD: the szDescription array length MAX_ZONE_DESCRIPTION is not
+  published in the CE docs, the desktop docs set (no urlmon.h
+  ZONEATTRIBUTES page on Learn, 404), or the Learn search index
+  (0 results) -- only third-party header copies publish it.
+* CLIPFORMAT derived (unsigned long): CE FORMATETC page ms886985
+  prints cfFormat as unsigned long (the basis objbase.h used); the
+  desktop FORMATETC documentation (objidl.h, saved to corpus pagesw/)
+  prints the same member as CLIPFORMAT cfFormat; RegisterMediaTypes
+  (ms918847) describes rgcfTypes as "an array of the 32-bit values".
+* Registered media-type name constants (ms918847) defined with their
+  printed string values: CF_NULL 0, SZ_URLCONTEXT L"URL Context", 21
+  CFSTR_MIME_* TEXT() macros.  Print artifact recorded: the page lists
+  CFSTR_MIME_X_MSVIDEO twice ("video/x-msvideo" and "video/x-sgi-movie");
+  the first is defined, the second row is recorded as an artifact (the
+  corrected spelling is not invented).
+* Interfaces: 25 opaque typedefs exactly as the pages/function
+  signatures name them (IInternet aa452292 no methods, IAsyncMoniker
+  ms906353 IUnknown-only, IAuthenticate, IBindHost, IBinding,
+  IBindStatusCallback, IHttpNegotiate, IHttpSecurity, IMonikerProp,
+  IPersistMoniker, IWindowForBindingUI, IWinInetHttpInfo, IWinInetInfo,
+  IInternetSession, IInternetProtocol, IInternetProtocolInfo,
+  IInternetProtocolRoot, IInternetProtocolSink,
+  IInternetProtocolSinkStackable, IInternetBindInfo, IInternetPriority,
+  IInternetHostSecurityManager, IInternetSecurityManager,
+  IInternetSecurityMgrSite, IInternetZoneManager).  77 method
+  signatures recorded in the interface comments (page ids per method);
+  archive print artifacts normalized and recorded: "ockRequest" for
+  LockRequest (aa452309), "HRESULTGetBindResult"-style missing spaces
+  (14 pages), "OueryOption" parameter name (aa452308),
+  CoInternetGetSecurityURL capitalization (aa452113, title spelling
+  implemented).  Interface-table rows without method pages (signatures
+  unpublished, held): IBinding::SetPriority + Suspend (ms906360),
+  IBindStatusCallback::OnLowResource "Not currently implemented"
+  (ms906365), IInternetProtocolRoot::Resume + Suspend "Not implemented"
+  (aa452311), IInternetZoneManager::LogAction + PromptAction "Not
+  currently implemented" (aa452345).
+* LPBINDSTATUSCALLBACK / LPBINDCTX pointer typedefs: composed from the
+  names printed by the function signatures themselves (ms918866/871/
+  872/873 print LPBINDSTATUSCALLBACK; aa452108 prints LPBINDCTX) with
+  the opaque interface typedefs (derivation recorded in the header).
+* def/urlmon-doc.def: 38 exports = the complete documented Urlmon.lib
+  function surface.  Three TCHAR-generic prints are mapped to the W
+  symbols (UNICODE_ONLY entries, the CreateFileW precedent):
+  IsLoggingEnabled -> IsLoggingEnabledW (ms918808),
+  URLDownloadToCacheFile -> URLDownloadToCacheFileW (ms918865),
+  URLDownloadToFile -> URLDownloadToFileW (ms918866); the header
+  declares the W names (winbase.h CreateDirectoryW pattern) so the
+  ARM (plain C name) and x86 (__asm label) symbol spellings agree.
+  e2e asserts urlmon.dll + CoInternetGetSession,
+  CoInternetGetSecurityUrl, CreateURLMoniker, RegisterMediaTypes,
+  IsLoggingEnabledW, URLDownloadToFileW, WriteHitLogging.
+* HELD (names documented, values not published): INET_E_* (ms918870,
+  26 codes), URLACTION_* (ms918863), URLPOLICY_* (ms918874),
+  CLSID_InternetSecurityManager / CLSID_InternetZoneManager (aa452025 /
+  aa452026; created via CoCreateInstance, no GUID values),
+  ZONEATTRIBUTES / MAX_ZONE_DESCRIPTION (ms918891).  The four "Zone
+  Settings" concept pages (ms919149 etc.) are registry-settings docs
+  with no API surface.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m60: 3 size + 2 offset asserts + 21 enum-value assert groups +
+shaped usage of all 38 functions).  Headers 65 -> 66; defs 52 -> 53
+(urlmon 38).

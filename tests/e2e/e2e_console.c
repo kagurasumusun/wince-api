@@ -55,6 +55,7 @@
 #include <pm.h>
 #include <ceddk.h>
 #include <ddraw.h>
+#include <urlmon.h>
 
 int main(void)
 {
@@ -429,6 +430,33 @@ int main(void)
                                          (LPVOID)0, 0u);
             (void) pdd; (void) pddc; (void) dcap; (void) dsd2;
             (void) dpf;
+        }
+
+        /* M60: URL Moniker Services (Urlmon.lib). */
+        {
+            PROTOCOLDATA       pd;
+            HIT_LOGGING_INFO   hli;
+            BINDINFO           bi;
+            IInternetSession  *pses = (IInternetSession *)0;
+
+            pd.grfFlags = 0; pd.cbData = 0;
+            hli.dwStructSize = sizeof(HIT_LOGGING_INFO);
+            bi.cbSize = sizeof(BINDINFO);
+            bi.dwBindVerb = (DWORD)BINDVERB_GET;
+            (void) CoInternetGetSession(0u, &pses, 0u);
+            (void) CoInternetGetSecurityUrl((LPCWSTR)0, (LPWSTR *)0,
+                                            PSU_DEFAULT, 0u);
+            (void) CreateURLMoniker((IMoniker *)0, (LPWSTR)0,
+                                    (IMoniker **)0);
+            (void) RegisterMediaTypes(0u, (LPCSTR *)0,
+                                      (CLIPFORMAT *)0);
+            (void) ReleaseBindInfo(&bi);
+            (void) IsLoggingEnabledW((LPCTSTR)0);
+            (void) URLDownloadToFileW((LPUNKNOWN)0, (LPCTSTR)0,
+                                      (LPCTSTR)0, 0u,
+                                      (LPBINDSTATUSCALLBACK)0);
+            (void) WriteHitLogging(&hli);
+            (void) pd; (void) hli; (void) bi; (void) pses;
         }
     }
     (void)tick;

@@ -32,6 +32,9 @@ import sys
 # Page title (short name) -> actual coredll export spelling, for
 # functions whose pages document a Unicode-only export.
 UNICODE_ONLY = {
+    "IsLoggingEnabled": "IsLoggingEnabledW",
+    "URLDownloadToCacheFile": "URLDownloadToCacheFileW",
+    "URLDownloadToFile": "URLDownloadToFileW",
     "CreateEvent": "CreateEventW",
     "OpenEvent": "OpenEventW",
     "CreateMutex": "CreateMutexW",

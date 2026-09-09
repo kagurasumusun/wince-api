@@ -35,7 +35,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/snmp.h include/snmpapi.h include/snmpexts.h \
        include/pm.h include/ceddk.h \
        include/dvddrvr.h include/dvdcss.h \
-       include/ddraw.h include/dvp.h
+       include/ddraw.h include/dvp.h \
+       include/urlmon.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -355,6 +356,22 @@ e2e:
 	  | grep -q "Symbol: DirectDrawEnumerate" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: DirectDrawEnumerateEx" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: urlmon.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CoInternetGetSession" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CoInternetGetSecurityUrl" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: CreateURLMoniker" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: RegisterMediaTypes" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: IsLoggingEnabledW" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: URLDownloadToFileW" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: WriteHitLogging" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_winmain.exe \
     | grep -q "Symbol: MessageBoxW" || exit 1; \
 	  echo "[e2e] $$t OK (machine/subsystem/imports)"; \
