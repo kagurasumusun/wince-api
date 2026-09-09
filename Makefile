@@ -81,6 +81,7 @@ include/Rtccore.h \
 include/Rtcerr.h \
 include/Sapi.h \
 include/Sapiddk.h \
+include/Service.h \
 include/Shellapi.h \
 include/Shelwapi.h \
 include/Shlguid.h \
@@ -90,6 +91,7 @@ include/Shobjvidl.h \
 include/Shtypes.h \
 include/Sip.h \
 include/Sipapi.h \
+include/Smbconfig.h \
 include/Snmp.h \
 include/Snmpapi.h \
 include/Snmpexts.h \
@@ -106,6 +108,7 @@ include/Upnp.h \
 include/Upnpdevapi.h \
 include/Upnphost.h \
 include/Urlmon.h \
+include/Webproxy.h \
 include/Winbase.h \
 include/Winber.h \
 include/Wincrypt.h \

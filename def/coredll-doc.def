@@ -13,6 +13,7 @@
 LIBRARY coredll.dll
 EXPORTS
   ActivateKeyboardLayout
+  ActivateService
   AddFontResourceW
   AlphaBlend
   BeginPaint
@@ -180,6 +181,7 @@ EXPORTS
   DeleteHandler
   DeleteObject
   DeleteTicket
+  DeregisterService
   DisableThreadLibraryCalls
   DisassociateSession
   DispatchMessage
@@ -198,6 +200,7 @@ EXPORTS
   EnumFontFamiliesExW
   EnumFontsW
   EnumPropsExW
+  EnumServices
   EqualRgn
   ExcludeClipRect
   ExitProcess
@@ -279,6 +282,7 @@ EXPORTS
   GetROP2
   GetRegionData
   GetRgnBox
+  GetServiceHandle
   GetStockObject
   GetStoreInformation
   GetStretchBltMode
@@ -410,6 +414,7 @@ EXPORTS
   RegQueryValueExW
   RegSetValueExW
   RegisterEditor
+  RegisterService
   RegisterWindowMessageW
   ReleaseDC
   ReleaseSemaphore
@@ -437,6 +442,10 @@ EXPORTS
   SendMessage
   SendMessageTimeout
   SendNotifyMessage
+  ServiceAddPort
+  ServiceClosePort
+  ServiceIoControl
+  ServiceUnbindPorts
   SetBitmapBits
   SetBkColor
   SetBkMode

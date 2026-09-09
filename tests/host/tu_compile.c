@@ -36,6 +36,9 @@
 #include <Upnphost.h>
 #include <Obex.h>
 #include <p2p.h>
+#include <Service.h>
+#include <Smbconfig.h>
+#include <Webproxy.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6715,6 +6718,20 @@ static int m75d_shaped_usage(void)
     return (int)pd.cbData;
 }
 
+static int m75e_shaped_usage(void)
+{
+    ServiceEnumInfo sei;
+    PPROXY_HTTP_INFORMATION pi = (PPROXY_HTTP_INFORMATION)0;
+    HANDLE h;
+
+    sei.dwServiceState = 0u;
+    h = RegisterService((LPCWSTR)0, sei.dwServiceState, (LPCWSTR)0, 0u);
+    (void)DeregisterService(h);
+    (void)Add_Share((const WCHAR *)0, 0u, (const WCHAR *)0);
+    (void)ProxySignalFilter(0u);
+    return (int)pi->dwProxyVersion;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6846,6 +6863,8 @@ int host_tu_entry(void)
     if (m75c_shaped_usage() != 0)
         return 1;
     if (m75d_shaped_usage() != 0)
+        return 1;
+    if (m75e_shaped_usage() != 0)
         return 1;
     return 0;
 }

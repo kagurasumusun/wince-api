@@ -5568,3 +5568,32 @@ M75 prep, 0 errors; rows.json 10499):
   struct/enum pages).
 - TU m75d block; Makefile HDRS 194 -> 197.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M75e -- Services.exe / SMB config / Web Proxy (Service.h, Smbconfig.h, Webproxy.h, def/smbconfig-doc.def)
+
+- include/Service.h (NEW, real): 8 declarations (Coredll.lib rows):
+  RegisterService, DeregisterService, EnumServices, GetServiceHandle,
+  ActivateService, ServiceIoControl, ServiceAddPort, ServiceClosePort,
+  ServiceUnbindPorts.  ServiceEnumInfo aa450899 compiled verbatim
+  (print carries scalar `WCHAR szDllName;` -- noted).  Pointer-only:
+  ServicesexeCallbackFunctions aa450906 (PFN_SERVICE_SHUTDOWN
+  unpublished), ServicesExeCommandLineParams aa450908
+  (SERVICES_EXE_MAX_CMD_LINE_OPTIONS value unpublished).  The 18
+  IOCTL_SERVICE_* names recorded only (no CTL_CODE values printed).
+  RasIOControl (aa450852) recorded only (IMPLICIT_DECL unpublished;
+  RAS server RASCNTL_* deferred with it).
+- include/Smbconfig.h (NEW, real): Add_Share, Change_ACL, Del_Share,
+  List_Connected_Users, QueryAmountTransfered (Smbconfig.lib).
+- include/Webproxy.h (NEW, real): ProxyInitializeFilter,
+  ProxyUninitializeFilter, ProxyNotifyAddrChange, ProxySignalFilter
+  ("Not applicable" lib rows -- filter entry points, no def);
+  PROXY_HTTP_INFORMATION ms896347 compiled.  PROXY_HTTP_REQUEST
+  ms896348 + ProxyFilterHttpRequest ms896345 HELD (members point at
+  the unpublished SOCKADDR_STORAGE).
+- def/smbconfig-doc.def (NEW): 5 exports.  coredll-doc.def picks up
+  the 9 Service.h Coredll rows (728 exports now).
+- TU m75e block; Makefile HDRS 197 -> 200.
+- Gates: check / crosscheck / e2e GREEN x6.
+- Servers book remainder for M75f/M76: ISAPI Httpfilt.h/Httpext.h
+  (~40 rows, function-table structs), RAS server RASCNTL_* (6), the
+  admin/registry pages, Av_upnp.h 148 (UPnP AV), and book overviews.
