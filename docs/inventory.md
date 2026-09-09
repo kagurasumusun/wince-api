@@ -5597,3 +5597,31 @@ M75 prep, 0 errors; rows.json 10499):
 - Servers book remainder for M75f/M76: ISAPI Httpfilt.h/Httpext.h
   (~40 rows, function-table structs), RAS server RASCNTL_* (6), the
   admin/registry pages, Av_upnp.h 148 (UPnP AV), and book overviews.
+
+## M76a -- remove old-filename compat aliases (policy: single spelling per header)
+
+User direction (M76 session): the lowercase case-duplicate alias files
+are unnecessary.  Agreed and applied -- the decisive reason: shipping
+both spellings (e.g. windows.h + Windows.h) collides on every
+case-INSENSITIVE checkout (the M69a warning), so the tree was unusable
+on Windows/macOS working copies; on such filesystems the lowercase
+include spelling still resolves to the documented-case file anyway.
+
+- Removed 75 case-duplicate alias files (one per renamed header pair):
+  windows.h, windef.h, winbase.h, winnt.h, objbase.h, oleidl.h,
+  ocidl.h, commctrl.h, winsock2.h, ws2tcpip.h, bt_api.h, ... and the
+  Aygshell.h twin (aygshell.h is the real file there, per the
+  dominant-documented-spelling rule).
+- KEPT: semantic aliases (documented header HOME, not old-name
+  compat): Objidl.h/Oleauto.h/Oaidl.h/Ole2.h/Olectl.h/Comcat.h/
+  IAccess.h/Dccole.h/Unknwn.h/Docobj.h/Objsafe.h/Wtypes.h -> Objbase.h;
+  Mqoai.h/Mqmgmt.h -> Mq.h; Obexserver.h -> Obex.h.
+- KEPT: lowercase real headers where lowercase is the dominant
+  documented spelling (aygshell.h, p2p.h, pnrpdef.h, pnrpns.h,
+  shellsdk.h, newmenu.h, ...).
+- Rewrote 107 include references (TU 63, e2e 40+2, Wincrypt.h,
+  Winscard.h) to the kept spellings; Makefile HDRS regenerated
+  (200 -> 125 files: 91 real + 34 semantic aliases).
+- New policy going forward: exactly one file per header name; no new
+  case-duplicate aliases (also fixes case-insensitive checkouts).
+- Gates: check / crosscheck / e2e GREEN x6.

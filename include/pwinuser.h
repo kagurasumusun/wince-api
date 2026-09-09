@@ -1,5 +1,0 @@
-/* pwinuser.h -- lowercase alias for Pwinuser.h.
- * The documented Header rows print "Pwinuser.h" (8 rows in the harvest);
- * this alias keeps the lowercase spelling source-compatible for
- * case-sensitive toolchains.  See docs/inventory.md M72. */
-#include "Pwinuser.h"

@@ -11,7 +11,7 @@
  * from the official WinMain page (ms914104).
  */
 
-#include <windows.h>
+#include <Windows.h>
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                    LPWSTR lpCmdLine, int nCmdShow)

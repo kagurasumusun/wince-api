@@ -47,7 +47,7 @@
 #ifndef _WINCRYPT_H
 #define _WINCRYPT_H
 
-#include <windows.h>
+#include <Windows.h>
 
 #ifdef __cplusplus
 extern "C" {

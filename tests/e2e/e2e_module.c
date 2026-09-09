@@ -11,7 +11,7 @@
  * first parameter, process/thread reasons).
  */
 
-#include <windows.h>
+#include <Windows.h>
 
 BOOL WINAPI DllMain(HANDLE hinstDLL, DWORD dwReason, LPVOID lpvReserved)
 {

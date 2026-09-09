@@ -14,7 +14,6 @@ INCLUDES = -Iinclude
 CE_VERSIONS = 0x420 0x500 0x600
 
 HDRS = \
-include/Aygshell.h \
 include/Bt_api.h \
 include/Btagnetwork.h \
 include/Btagpub.h \
@@ -129,91 +128,17 @@ include/Ws2spi.h \
 include/Ws2tcpip.h \
 include/Wtypes.h \
 include/aygshell.h \
-include/bt_api.h \
-include/btagnetwork.h \
-include/btagpub.h \
-include/bthapi.h \
-include/bthsdpdef.h \
-include/cchannel.h \
-include/ceddk.h \
-include/celog.h \
-include/commctrl.h \
-include/commdlg.h \
-include/cpl.h \
-include/d3dm.h \
-include/dbgapi.h \
-include/ddraw.h \
-include/discodlg.h \
-include/dmo.h \
-include/dmoreg.h \
-include/dshow.h \
 include/dvdcss.h \
 include/dvddrvr.h \
 include/dvdmedia.h \
-include/dvp.h \
-include/errorrep.h \
-include/excpt.h \
-include/extfile.h \
-include/imaging.h \
-include/imm.h \
-include/keybd.h \
-include/mlang.h \
-include/mmsystem.h \
-include/msgqueue.h \
-include/msxml2.h \
-include/natedit.h \
 include/newmenu.h \
-include/notify.h \
-include/objbase.h \
-include/ocidl.h \
-include/oleidl.h \
 include/p2p.h \
-include/pimstore.h \
 include/pm.h \
 include/pnrpdef.h \
 include/pnrpns.h \
-include/prsht.h \
-include/psapi.h \
-include/pwinuser.h \
-include/rtccore.h \
-include/sapi.h \
-include/sapiddk.h \
-include/shellapi.h \
 include/shellsdk.h \
-include/shelwapi.h \
-include/shlobj.h \
-include/shobjidl.h \
-include/shtypes.h \
-include/sip.h \
-include/sipapi.h \
-include/snmp.h \
-include/snmpapi.h \
-include/snmpexts.h \
 include/strmif.h \
-include/tapi.h \
-include/tapicomn.h \
-include/tlhelp32.h \
-include/tvout.h \
-include/urlmon.h \
-include/winbase.h \
-include/winber.h \
-include/wincrypt.h \
-include/windbase.h \
-include/windef.h \
-include/windows.h \
-include/windowsx.h \
-include/winerror.h \
-include/wingdi.h \
-include/winldap.h \
-include/winnls.h \
-include/winnt.h \
-include/winreg.h \
-include/winscard.h \
-include/winsock2.h \
-include/winuser.h \
-include/ws2bth.h \
-include/ws2spi.h \
-include/ws2tcpip.h
+include/winerror.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 

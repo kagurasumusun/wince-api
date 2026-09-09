@@ -33,7 +33,7 @@
 #ifndef _WINSCARD_H
 #define _WINSCARD_H
 
-#include <windows.h>
+#include <Windows.h>
 
 #ifdef __cplusplus
 extern "C" {
