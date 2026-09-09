@@ -4876,3 +4876,50 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m67: 7 size asserts + 8 value asserts incl. the MAKE_D3DMHRESULT
 identity + shaped usage with the Direct3DMobileCreate call).  Headers
 71 -> 72; defs 55 -> 56 (d3dm 1).
+
+### M68 -- Speech API (SAPI 5.0) (sapi.h; no import def)
+
+Speech API (SAPI) 5.0 book (491 leaves, Applications and Services
+Development > Speech API (SAPI) 5.0), harvested under
+tools/manifests/sapi.manifest.  New header include/sapi.h (73rd;
+self-contained; includes mmsystem.h for WAVEFORMATEX -- the SAPI
+Structures book re-prints it identically).  Requirements rows:
+Sapi.h/Sapi.idl (app interfaces), Sapiddk.h/Sapiddk.idl (engine DDI
+interfaces), Sphelper.h (helpers).
+
+* 79 enums/structures transcribed verbatim (printed values where
+  printed; sequential bodies recorded where bare): SPEVENT
+  ([restricted] print), SPEVENTENUM, SPEAKFLAGS, SPSTREAMFORMAT,
+  SPPARTOFSPEECH, SPVSTATE, SPPHRASE (+RULE/PROPERTY/ELEMENT/
+  REPLACEMENT/ALT/ALTREQUEST linked-list family -- self-references
+  carried in the C struct-keyword form), SPVOICESTATUS, SPWORD /
+  SPWORDPRONUNCIATION / lists, SPRECO* family, SPAUDIO* family, and
+  the rest of the 40-structure + 41-enumeration books.
+* Eaten-space archive prints repaired mechanically with a recorded
+  type dictionary (ULONGulSize -> ULONG ulSize etc.); the doc's own
+  missing comma in SPRECOEVENTFLAGS and the SPRECOECOEVENTFLAGS /
+  SPSTREAMFORMATTYPE closing-name typos are recorded in the header.
+* Handle/id carrier closures (recorded own-design closures, no CE
+  page prints their typedefs): SPSTATEHANDLE / SPGRAMMARHANDLE /
+  SPRULEHANDLE / SPTRANSITIONID = void*, SPPHONEID = WCHAR.
+* Interfaces: 49 overview pages + dangling ISpPhraseBuilder (print-
+  referenced) -- opaque forward declarations + 298 verbatim
+  method-signature records (M44 policy).
+* Sphelper.h helpers (25 pages: SPBindToFile, SpCreateObjectFromToken,
+  ... -- printed as C++ inline functions/templates): recorded verbatim,
+  not compiled, no import entries (header-side code; the MSXML
+  Uuid.lib precedent).  SPFEI macro recorded.
+* Held: SPRECOGNIZERSTATUS (ms895729 -- sizes aLangID with
+  SP_MAX_LANGIDS whose value is not published anywhere; verbatim
+  record only, the M67 D3DMADAPTER_IDENTIFIER decision), SAPI Class
+  IDs (ms893442) / Token Category IDs (aa513788) / Global Variables
+  (aa513761) name lists (GUID values held), SPNOTIFYCALLBACK
+  (callback name only).
+* No import def: all 373 Sapilib.lib rows sit on interface/method/
+  helper pages (virtual calls / header-side code) -- gen-doc-def.py
+  confirms no sole-link export surface.
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m68: 3 size asserts + 10 enum-value asserts + shaped usage of 23
+opaque interface pointers).  Headers 72 -> 73; defs 56 (unchanged
+count).

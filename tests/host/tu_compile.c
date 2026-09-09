@@ -73,6 +73,7 @@
 #include <pimstore.h>
 #include <msxml2.h>
 #include <d3dm.h>
+#include <sapi.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -6097,6 +6098,70 @@ static int m67_shaped_usage(void)
     return (int)c;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M68: SAPI sizes (verbatim prints; WPARAM/LPARAM are 4-byte on CE). */
+_Static_assert(sizeof(SPEVENT) == 24, "ms895371 print");
+_Static_assert(sizeof(SPAUDIOBUFFERINFO) == 12, "ms893505 print");
+_Static_assert(sizeof(SPPHRASEALT) == 24, "ms895681 print");
+/* M68: SAPI enum values (printed). */
+_Static_assert(SPEI_UNDEFINED == 0 && SPEI_TTS_BOOKMARK == 4, "SPEVENTENUM");
+_Static_assert(SPAS_RUN == 3, "SPAUDIOSTATE sequential");
+_Static_assert(SPF_ASYNC == (1L << 0) && SPF_PERSIST_XML == (1L << 5), "SPEAKFLAGS");
+_Static_assert(SPFM_CREATE == 2, "SPFILEMODE sequential");
+_Static_assert(SPSF_Default == -1 && SPSF_8kHz16BitMono != 0, "SPSTREAMFORMAT");
+_Static_assert(SPPS_Noun == 0x1000 && SPPS_Interjection == 0x5000, "SPPARTOFSPEECH");
+_Static_assert(eWORDTYPE_DELETED == (1L << 1), "SPWORDTYPE");
+_Static_assert(SPVFEATURE_STRESSED == (1L << 0), "SPVFEATURE");
+_Static_assert(SPMAX_RATE == 10 && SPMIN_RATE == -10, "SPVLIMITS");
+_Static_assert(SPRAF_AutoPause == (1L << 16), "SPCFGRULEATTRIBUTES");
+#endif
+
+/* M68: SAPI shaped usage (COM surface only; no import surface). */
+static int m68_shaped_usage(void)
+{
+    SPEVENT              ev;
+    SPAUDIOBUFFERINFO    abi;
+    SPPHRASEALT          alt;
+    SPVSTATE             vst;
+    SPPHONEID            ph;
+    ISpVoice            *voice = (ISpVoice *)0;
+    ISpRecognizer       *rec = (ISpRecognizer *)0;
+    ISpRecoContext      *rctx = (ISpRecoContext *)0;
+    ISpRecoGrammar      *rgrm = (ISpRecoGrammar *)0;
+    ISpPhrase           *phr = (ISpPhrase *)0;
+    ISpPhraseBuilder    *phb = (ISpPhraseBuilder *)0;
+    ISpDataKey          *dk = (ISpDataKey *)0;
+    ISpObjectToken      *tok = (ISpObjectToken *)0;
+    ISpObjectTokenCategory *cat = (ISpObjectTokenCategory *)0;
+    ISpEventSource      *es = (ISpEventSource *)0;
+    ISpNotifySource     *ns = (ISpNotifySource *)0;
+    ISpStream           *stm = (ISpStream *)0;
+    ISpAudio            *aud = (ISpAudio *)0;
+    ISpLexicon          *lex = (ISpLexicon *)0;
+    ISpContainerLexicon *clex = (ISpContainerLexicon *)0;
+    ISpTTSEngine        *tts = (ISpTTSEngine *)0;
+    ISpSREngine         *sre = (ISpSREngine *)0;
+    ISpMMSysAudio       *mma = (ISpMMSysAudio *)0;
+    ISpStreamFormat     *sf = (ISpStreamFormat *)0;
+    ISpGrammarBuilder   *gb = (ISpGrammarBuilder *)0;
+
+    ev.eEventId = SPEI_TTS_BOOKMARK; ev.elParamType = SPET_LPARAM_IS_STRING;
+    ev.ulStreamNum = 0; ev.ullAudioStreamOffset = 0; ev.wParam = 0;
+    ev.lParam = 0;
+    abi.ulMsMinNotification = 10; abi.ulMsBufferSize = 1000;
+    abi.ulMsEventBias = 0;
+    alt.pPhrase = phb; alt.ulStartElementInParent = 0; alt.cElementsInParent = 1;
+    alt.cElementsInAlternate = 1; alt.pvAltExtra = 0; alt.cbAltExtra = 0;
+    vst.eAction = SPVA_Speak; ph = (SPPHONEID)L'x';
+
+    (void) voice; (void) rec; (void) rctx; (void) rgrm; (void) phr;
+    (void) phb; (void) dk; (void) tok; (void) cat; (void) es;
+    (void) ns; (void) stm; (void) aud; (void) lex; (void) clex;
+    (void) tts; (void) sre; (void) mma; (void) sf;
+    (void) gb; (void) vst; (void) ph;
+    return (int)ev.eEventId + (int)abi.ulMsBufferSize + (int)alt.cElementsInAlternate;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6202,6 +6267,8 @@ int host_tu_entry(void)
     if (m66_shaped_usage() != 0)
         return 1;
     if (m67_shaped_usage() != 0)
+        return 1;
+    if (m68_shaped_usage() != 0)
         return 1;
     return 0;
 }
