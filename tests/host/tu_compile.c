@@ -72,6 +72,7 @@
 #include <imaging.h>
 #include <pimstore.h>
 #include <msxml2.h>
+#include <d3dm.h>
 #include <stddef.h>
 
 /* Type-width invariants of the CE ABI (32-bit, 16-bit wchar). */
@@ -6041,6 +6042,61 @@ static int m66_shaped_usage(void)
     return (int)nt;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M67: D3DM sizes (verbatim CE 5.0 prints; D3DMVALUE = signed int). */
+_Static_assert(sizeof(D3DMDISPLAYMODE) == 16, "ms907703");
+_Static_assert(sizeof(D3DMCOLORVALUE) == 16, "ms939143");
+_Static_assert(sizeof(D3DMVECTOR) == 12, "ms907757");
+_Static_assert(sizeof(D3DMMATRIX) == 64, "ms907720 union print");
+_Static_assert(sizeof(D3DMCLIPSTATUS) == 8, "ms939140");
+_Static_assert(sizeof(D3DMLOCKED_RECT) == 8, "ms907718");
+_Static_assert(sizeof(D3DMVIEWPORT) == 24, "ms907759");
+/* M67: D3DM enum values (printed). */
+_Static_assert(D3DMPOOL_MANAGED == 2, "ms907725");
+_Static_assert(D3DMFMT_D24S8 == 23 && D3DMFMT_INDEX32 == 28, "ms907707");
+_Static_assert(D3DMBLEND_SRCALPHASAT == 11, "ms939135");
+_Static_assert(D3DMRENDERSTATE_WRAPBIAS == 32, "ms907738");
+_Static_assert(D3DMPV_VALID == D3DMPV_DONOTCOPYDATA, "ms907762 print");
+_Static_assert(D3DMERR_DEVICELOST == MAKE_D3DMHRESULT(2152), "aa451582");
+_Static_assert(D3DMERR_ALREADYLOCKED == MAKE_D3DMHRESULT(2158), "aa451582");
+_Static_assert(MAKE_D3DMHRESULT(0) ==
+               MAKE_HRESULT(1, 0x877, 0), "ms932027");
+#endif
+
+/* M67: D3DM shaped usage. */
+static int m67_shaped_usage(void)
+{
+    D3DMDISPLAYMODE dm;
+    D3DMMATRIX       mx;
+    D3DMVIEWPORT     vp;
+    D3DMLIGHT        lt;
+    IDirect3DMobile           *d3d = (IDirect3DMobile *)0;
+    IDirect3DMobileDevice     *dev = (IDirect3DMobileDevice *)0;
+    IDirect3DMobileResource   *res = (IDirect3DMobileResource *)0;
+    IDirect3DMobileBaseTexture *btex = (IDirect3DMobileBaseTexture *)0;
+    IDirect3DMobileSurface    *surf = (IDirect3DMobileSurface *)0;
+    IDirect3DMobileTexture    *tex = (IDirect3DMobileTexture *)0;
+    IDirect3DMobileVertexBuffer *vb = (IDirect3DMobileVertexBuffer *)0;
+    IDirect3DMobileIndexBuffer *ib = (IDirect3DMobileIndexBuffer *)0;
+    IDirect3DMobileSwapChain   *sc = (IDirect3DMobileSwapChain *)0;
+    D3DMCOLOR c;
+
+    dm.Width = 240; dm.Height = 320; dm.RefreshRate = 0;
+    dm.Format = D3DMFMT_R5G6B5;
+    mx.m[0][0] = 1; mx._11 = 1;
+    vp.X = 0; vp.Y = 0; vp.Width = 240; vp.Height = 320;
+    vp.MinZ = 0.0f; vp.MaxZ = 1.0f;
+    lt.Type = D3DMLIGHT_POINT;
+    c = D3DMCOLOR_ARGB(0xff, 0x80, 0x40, 0x20);
+    c = D3DMCOLOR_XRGB(1, 2, 3);
+    d3d = Direct3DMobileCreate(0u);
+
+    (void) dm; (void) vp; (void) lt; (void) c; (void) mx;
+    (void) d3d; (void) dev; (void) res; (void) btex; (void) surf;
+    (void) tex; (void) vb; (void) ib; (void) sc;
+    return (int)c;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6144,6 +6200,8 @@ int host_tu_entry(void)
     if (m65_shaped_usage() != 0)
         return 1;
     if (m66_shaped_usage() != 0)
+        return 1;
+    if (m67_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -1,0 +1,416 @@
+ms913324	Direct3D Mobile OS Design Development
+aa452479	Direct3D Mobile Application Development
+ms923431	Introduction to Direct3D Mobile
+aa451315	Differences Between Direct3D Mobile and Other Versions of Direct3D
+aa451321	Direct3D Mobile Architecture
+aa451328	Direct3D Mobile Rendering Pipeline
+aa451396	Transformation
+ms924577	Primitive Types
+ms923425	Indexed Primitives
+aa451454	Vertex Data Description
+aa451199	Back-Face Culling
+aa451261	Coordinate Transformation Matrices
+ms925282	World Transformation
+aa451464	View Transformation
+ms924585	Projection Transformations
+aa451238	Clipping
+aa451463	Viewport Transformation
+aa451369	Texture Coordinate Transformation
+aa451456	Vertex Normals
+ms924583	Processing Vertex Transformations
+ms924173	Other Vertex Data
+ms923982	Lighting
+ms924016	Lighting Support
+ms923997	Lighting and Materials
+ms923988	Lighting Equations
+aa451225	Camera Space Transformation
+aa451203	Basic Lighting Formula
+ms924592	Rasterization
+ms924593	Rasterization Rules
+ms923429	Interpolation
+ms924200	Perspective-Correct Texture Mapping
+aa451371	Texture Coordinate Wrapping
+aa451375	Texture Mapping
+aa451379	Texture Stage Inputs
+aa451380	Texture Stage Operation
+aa451376	Texture Read
+ms923377	Fog
+ms924199	Per Pixel Operations
+aa451299	Depth Buffering
+aa451173	Alpha Test
+ms924645	Stencil Operations
+aa451170	Alpha Blending
+aa451359	Dithering
+ms925290	Writing Pixels
+aa451308	Direct3D Mobile Device Capabilities
+ms924619	Screen Operations
+ms924618	Scene Presentation
+aa451179	Antialiasing
+ms923383	GDI Interoperation
+aa451211	Blitting in Direct3D Mobile
+ms924597	Registration of a Software Device
+aa451364	Driver Load Order
+aa451327	Direct3D Mobile Programming
+aa451326	Direct3DMobile Object
+aa451324	Direct3D Mobile Devices
+aa451312	Device Types
+aa451307	Device-Supported Primitive Types
+ms924210	Point Lists
+ms924124	Line Lists
+ms924125	Line Strips
+aa451403	Triangle Lists
+aa451404	Triangle Strips
+aa451402	Triangle Fans
+aa451423	Using Devices
+aa451323	Direct3D Mobile Cooperative Levels
+aa451304	Determining Hardware Support
+ms924621	Selecting a Device
+aa451274	Creating a Direct3D Mobile Device
+ms924631	Setting Transformations
+ms924582	Processing Vertex Data
+ms924599	Rendering
+aa451236	Clearing Surfaces
+aa451205	Beginning and Ending a Scene
+ms924575	Presenting a Scene
+ms924601	Rendering Primitives
+aa451311	Device States
+ms924602	Render States
+aa451158	About Render States
+aa451171	Alpha Blending State
+aa451174	Alpha Testing State
+aa451177	Ambient Lighting State
+aa451289	Culling State
+aa451300	Depth Buffering State
+ms923378	Fog State
+ms924006	Lighting State
+ms924174	Outline and Fill State
+ms924198	Per-Vertex Color State
+ms924576	Primitive Clipping State
+ms924634	Shading State
+ms924644	Stencil Buffer State
+aa451384	Texture Wrapping State
+aa451381	Texture Stage States
+ms924132	Lost Devices
+aa451329	Direct3D Mobile Resources
+aa451436	Common Details for Direct3D Mobile Resources
+ms924603	Resource Properties
+ms924604	Resource Relationships
+ms924134	Managing Resources
+aa451180	Application-Managed Resources and Allocation Strategies
+ms924135	Manipulating Resources
+ms924128	Locking Resources
+ms924660	Surfaces
+ms924658	Surface Interfaces
+ms925261	Width vs. Pitch
+ms924657	Surface Formats
+ms923375	Flipping Surfaces
+aa451262	Copying To Surfaces
+ms924121	Lights
+ms923434	Introduction to Lighting and Materials
+aa451325	Direct3D Mobile Light Model vs. Nature
+aa451246	Color Values for Lights and Materials
+aa451340	Direct Light vs. Ambient Light
+ms924117	Light Objects
+ms924120	Light Properties
+ms924122	Light Type
+ms923438	Light Color
+ms924119	Light Position, Range, and Attenuation
+ms923904	Light Direction
+aa451430	Using Lights
+ms924624	Setting Light Properties
+ms923219	Enabling and Disabling Lights
+ms924609	Retrieving Light Properties
+ms924138	Materials
+ms924137	Material Properties
+ms924625	Setting Material Properties
+ms924610	Retrieving Material Properties
+aa451455	Vertex Formats
+aa451411	Untransformed and Unlit Vertices
+aa451410	Untransformed and Lit Vertices
+aa451398	Transformed and Lit Vertices
+aa451397	Transformed and Lit Vertex Functionality
+aa451378	Textures
+aa451204	Basic Texturing Concepts
+ms924668	Texture Addressing Modes
+ms925283	Wrap Texture Address Mode
+ms924147	Mirror Texture Address Mode
+aa451234	Clamp Texture Address Mode
+aa451217	Border Color Texture Address Mode
+ms924628	Setting and Retrieving Texture Addressing Modes
+ms924669	Texture Addressing Modes and Texture Wrapping
+aa451310	Device Limitations for Texture Addressing
+aa451372	Texture Dirty Regions
+aa451368	Texture Coordinates
+aa451341	Directly Mapping Texels to Pixels
+aa451366	Texture Coordinate Formats
+aa451367	Texture Coordinate Processing
+aa451370	Texture Coordinate Transformations
+aa451377	Texture Resources
+aa451373	Texture Filtering
+ms924167	Nearest-Point Sampling
+ms924123	Linear Texture Filtering
+aa451178	Anisotropic Texture Filtering
+aa451374	Texture Filtering with Mipmaps
+aa451383	Texture Wrapping
+aa451365	Texture Blending
+aa451175	Alpha Texture Blending
+ms924159	Multipass Texture Blending
+ms924165	Multiple Texture Blending
+ms924108	Light Mapping with Textures
+aa451249	Compressed Texture Resources
+aa451248	Compressed Texture Formats
+ms924170	Opaque and One-Bit Alpha Textures
+aa451382	Textures with Alpha Channels
+aa451408	Storage Efficiency and Texture Compression
+ms924151	Mixing Formats Within a Single Texture
+aa451421	Using Compressed Textures
+aa451193	Automatic Texture Management
+ms923404	Hardware Considerations for Texturing
+aa451301	Depth Buffers
+ms924590	Querying for Depth Buffer Support
+aa451273	Creating a Depth Buffer
+ms923211	Enabling Depth Buffering
+ms924607	Retrieving a Depth Buffer
+aa451235	Clearing Depth Buffers
+aa451229	Changing Depth Buffer Write Access
+aa451228	Changing Depth Buffer Comparison Functions
+aa451449	Using Z-Bias
+ms924643	Stencil Buffers
+aa451453	Vertex Buffers
+aa451452	Vertex Buffer Descriptions
+ms924562	Pool and Usage for Vertex Buffers
+ms923382	FVF Vertex Buffers
+aa451314	Device Types and Vertex Processing Requirements
+aa451447	Using Vertex Buffers
+aa451287	Creating a Vertex Buffer
+aa451161	Accessing the Contents of a Vertex Buffer
+ms924584	Processing Vertices
+ms924600	Rendering from a Vertex Buffer
+ms924614	Retrieving Vertex Buffer Descriptions
+ms923424	Index Buffers
+ms923423	Index Buffer Descriptions
+ms924474	Pool and Usage for Index Buffers
+aa451313	Device Types and Index Processing Requirements
+aa451429	Using Index Buffers
+aa451424	Using Direct3D Mobile Resources
+aa451275	Creating Direct3D Mobile Resources
+ms924127	Locking Direct3D Mobile Resources
+ms924145	Memory Pools in Direct3D Mobile
+aa451278	Creating Texture Maps in Direct3D Mobile
+aa451322	Direct3D Mobile and COM
+aa451318	Direct3D Mobile Application Initialization
+aa451319	Direct3D Mobile Application Operation
+aa451320	Direct3D Mobile Application Shutdown
+ms923237	Error Conditions in Direct3D Mobile
+ms932521	Direct3D Mobile Registry Settings
+ms932540	Direct3D Mobile Security
+aa452485	Direct3D Mobile Migration
+ms932530	Direct3D Mobile Samples
+ms913343	Direct3D Mobile Reference
+aa452480	Direct3D Mobile Data Types
+ms939142	D3DMCOLOR
+ms907756	D3DMVALUE
+aa452481	Direct3D Mobile Enumerations
+ms939134	D3DMBACKBUFFER_TYPE
+ms939135	D3DMBLEND
+ms939136	D3DMBLENDOP
+ms939141	D3DMCMPFUNC
+ms907687	D3DMCULL
+ms907702	D3DMDEVTYPE
+ms907704	D3DMFILLMODE
+ms907705	D3DMFOGMODE
+ms907707	D3DMFORMAT
+ms907714	D3DMLIGHTTYPE
+ms907719	D3DMMATERIALCOLORSOURCE
+ms907721	D3DMMULTISAMPLE_TYPE
+ms907725	D3DMPOOL
+ms907730	D3DMPRIMITIVETYPE
+ms907731	D3DMPROFILE
+ms907737	D3DMRENDERSTATETYPE
+ms907739	D3DMRESOURCETYPE
+ms907740	D3DMSHADEMODE
+ms907742	D3DMSTENCILOP
+ms907745	D3DMSWAPEFFECT
+ms907748	D3DMTEXTUREADDRESS
+ms907749	D3DMTEXTUREFILTERTYPE
+ms907750	D3DMTEXTUREOP
+ms907751	D3DMTEXTURESTAGESTATETYPE
+ms907752	D3DMTEXTURETRANSFORMFLAGS
+ms907753	D3DMTRANSFORMSTATETYPE
+ms907762	D3DMZBUFFERTYPE
+aa452482	Direct3D Mobile Functions
+ms907763	D3DM_MAKE_D3DMVALUE
+aa451581	Direct3DMobileCreate
+aa452483	Direct3D Mobile Interfaces
+ms909122	IDirect3DMobile
+ms909127	IDirect3DMobile::CheckDepthStencilMatch
+ms909128	IDirect3DMobile::CheckDeviceFormat
+ms923411	IDirect3DMobile::CheckDeviceFormatConversion
+ms909129	IDirect3DMobile::CheckDeviceMultiSampleType
+ms909130	IDirect3DMobile::CheckDeviceType
+ms909131	IDirect3DMobile::CheckProfile
+ms909132	IDirect3DMobile::CreateDevice
+ms929139	IDirect3DMobile::EnumAdapterModes
+ms929140	IDirect3DMobile::GetAdapterCount
+ms929141	IDirect3DMobile::GetAdapterDisplayMode
+ms929142	IDirect3DMobile::GetAdapterIdentifier
+ms929143	IDirect3DMobile::GetAdapterModeCount
+ms929144	IDirect3DMobile::GetDeviceCaps
+ms929149	IDirect3DMobile::RegisterSoftwareDevice
+ms909123	IDirect3DMobileBaseTexture
+ms909124	IDirect3DMobileBaseTexture::GetLevelCount
+ms909125	IDirect3DMobileBaseTexture::GetLOD
+ms909126	IDirect3DMobileBaseTexture::SetLOD
+ms909133	IDirect3DMobileDevice
+ms909134	IDirect3DMobileDevice::BeginScene
+ms909135	IDirect3DMobileDevice::Clear
+ms909136	IDirect3DMobileDevice::ColorFill
+ms909137	IDirect3DMobileDevice::CopyRects
+ms909138	IDirect3DMobileDevice::CreateAdditionalSwapChain
+ms909139	IDirect3DMobileDevice::CreateDepthStencilSurface
+ms909140	IDirect3DMobileDevice::CreateImageSurface
+ms909141	IDirect3DMobileDevice::CreateIndexBuffer
+ms909142	IDirect3DMobileDevice::CreateRenderTarget
+ms909143	IDirect3DMobileDevice::CreateTexture
+ms909144	IDirect3DMobileDevice::CreateVertexBuffer
+ms909145	IDirect3DMobileDevice::DrawIndexedPrimitive
+ms909146	IDirect3DMobileDevice::DrawPrimitive
+ms929092	IDirect3DMobileDevice::EndScene
+ms929093	IDirect3DMobileDevice::GetAvailableTextureMem
+ms929094	IDirect3DMobileDevice::GetBackBuffer
+ms929095	IDirect3DMobileDevice::GetClipStatus
+ms929096	IDirect3DMobileDevice::GetCreationParameters
+ms929097	IDirect3DMobileDevice::GetCurrentTexturePalette
+ms929098	IDirect3DMobileDevice::GetDepthStencilSurface
+ms929099	IDirect3DMobileDevice::GetDeviceCaps
+ms929100	IDirect3DMobileDevice::GetDirect3D
+ms929101	IDirect3DMobileDevice::GetDisplayMode
+ms929102	IDirect3DMobileDevice::GetFrontBuffer
+ms929103	IDirect3DMobileDevice::GetIndices
+ms929104	IDirect3DMobileDevice::GetInfo
+ms929105	IDirect3DMobileDevice::GetLight
+ms929106	IDirect3DMobileDevice::GetLightEnable
+ms929107	IDirect3DMobileDevice::GetMaterial
+ms929108	IDirect3DMobileDevice::GetPaletteEntries
+ms929109	IDirect3DMobileDevice::GetRenderState
+ms929110	IDirect3DMobileDevice::GetRenderTarget
+ms929112	IDirect3DMobileDevice::GetStreamSource
+ms929113	IDirect3DMobileDevice::GetTexture
+ms929114	IDirect3DMobileDevice::GetTextureStageState
+ms929115	IDirect3DMobileDevice::GetTransform
+ms929116	IDirect3DMobileDevice::GetViewport
+ms929117	IDirect3DMobileDevice::LightEnable
+ms929118	IDirect3DMobileDevice::Present
+ms929119	IDirect3DMobileDevice::ProcessVertices
+ms929120	IDirect3DMobileDevice::Reset
+ms929121	IDirect3DMobileDevice::ResourceManagerDiscardBytes
+ms929122	IDirect3DMobileDevice::SetClipStatus
+ms929123	IDirect3DMobileDevice::SetCurrentTexturePalette
+ms929124	IDirect3DMobileDevice::SetIndices
+ms929125	IDirect3DMobileDevice::SetLight
+ms929126	IDirect3DMobileDevice::SetMaterial
+ms929127	IDirect3DMobileDevice::SetPaletteEntries
+ms929128	IDirect3DMobileDevice::SetRenderState
+ms929129	IDirect3DMobileDevice::SetRenderTarget
+ms929130	IDirect3DMobileDevice::SetStreamSource
+ms929131	IDirect3DMobileDevice::SetTexture
+ms929132	IDirect3DMobileDevice::SetTextureStageState
+ms929133	IDirect3DMobileDevice::SetTransform
+ms929134	IDirect3DMobileDevice::SetViewport
+ms929135	IDirect3DMobileDevice::StretchRect
+ms929136	IDirect3DMobileDevice::TestCooperativeLevel
+ms929137	IDirect3DMobileDevice::UpdateTexture
+ms929138	IDirect3DMobileDevice::ValidateDevice
+ms929145	IDirect3DMobileIndexBuffer
+ms929146	IDirect3DMobileIndexBuffer::GetDesc
+ms929147	IDirect3DMobileIndexBuffer::Lock
+ms929148	IDirect3DMobileIndexBuffer::Unlock
+ms929150	IDirect3DMobileResource
+ms929151	IDirect3DMobileResource::GetDevice
+ms929152	IDirect3DMobileResource::GetPriority
+ms929153	IDirect3DMobileResource::GetType
+ms929154	IDirect3DMobileResource::PreLoad
+ms929155	IDirect3DMobileResource::SetPriority
+ms929424	IDirect3DMobileSurface
+ms929511	IDirect3DMobileSurface::GetContainer
+ms929619	IDirect3DMobileSurface::GetDC
+ms929621	IDirect3DMobileSurface::GetDesc
+ms929622	IDirect3DMobileSurface::GetDevice
+ms929623	IDirect3DMobileSurface::LockRect
+ms929624	IDirect3DMobileSurface::ReleaseDC
+ms929625	IDirect3DMobileSurface::UnlockRect
+ms929626	IDirect3DMobileSwapChain
+ms929627	IDirect3DMobileSwapChain::GetBackBuffer
+ms929628	IDirect3DMobileSwapChain::Present
+ms929629	IDirect3DMobileTexture
+ms929630	IDirect3DMobileTexture::AddDirtyRect
+ms929631	IDirect3DMobileTexture::GetLevelDesc
+ms929632	IDirect3DMobileTexture::GetSurfaceLevel
+ms929633	IDirect3DMobileTexture::LockRect
+ms929634	IDirect3DMobileTexture::UnlockRect
+ms929635	IDirect3DMobileVertexBuffer
+ms929636	IDirect3DMobileVertexBuffer::GetDesc
+ms929637	IDirect3DMobileVertexBuffer::Lock
+ms929638	IDirect3DMobileVertexBuffer::Unlock
+aa452484	Direct3D Mobile Macros
+ms907764	D3DM_MAKE_RSVALUE
+ms907765	D3DM Values
+ms939132	D3DMADAPTER Values
+ms939139	D3DMCLEAR Values
+ms939145	D3DMCOLOR_ARGB
+ms939146	D3DMCOLOR_RGBA
+ms939147	D3DMCOLOR_XRGB
+ms939144	D3DMCOLORWRITEENABLE Values
+ms928109	D3DMCREATE_MULTITHREADED
+ms928308	D3DMCS Values
+ms907695	D3DMCURRENT_DISPLAY_MODE
+aa451582	D3DMERR Values
+ms907708	D3DMFVF Values
+ms907709	D3DMFVF_TEXCOORDFIXED
+ms907710	D3DMFVF_TEXCOORDFLOAT
+ms907711	D3DMFVF_TEXCOORDSIZE Macros
+ms907717	D3DMLOCK Values
+ms907727	D3DMPRESENTFLAG_LOCKABLE_BACKBUFFER
+ms907736	D3DMPV Values
+ms907738	D3DMRENDERSTATE_WRAPBIAS
+ms907746	D3DMTA Values
+ms907754	D3DMTSS_TCI Values
+ms907755	D3DMUSAGE Values
+ms907761	D3DMWRAPCOORD Values
+aa451580	Direct3D Mobile Capability Bits
+ms939137	D3DMBLENDOPCAPS Values
+ms907700	D3DMDEVCAPS Values
+ms907715	D3DMLINECAPS Values
+ms907722	D3DMPBLENDCAPS Values
+ms907723	D3DMPCMPCAPS Values
+ms907724	D3DMPMISCCAPS Values
+ms907726	D3DMPRASTERCAPS Values
+ms907728	D3DMPRESENT Values
+ms907732	D3DMPSHADECAPS Values
+ms907733	D3DMPTADDRESSCAPS Values
+ms907734	D3DMPTEXTURECAPS Values
+ms907735	D3DMPTFILTERCAPS Values
+ms907741	D3DMSTENCILCAPS Values
+ms907744	D3DMSURFCAPS Values
+ms907747	D3DMTEXOPCAPS Values
+ms907760	D3DMVTXPCAPS Values
+ms912040	Interface Identifiers for Direct3D Mobile
+ms932027	MAKE_D3DMHRESULT
+ms932031	MAX_DEVICE_IDENTIFIER_STRING
+ms932554	Direct3D Mobile Structures
+ms939133	D3DMADAPTER_IDENTIFIER
+ms939138	D3DMCAPS
+ms939140	D3DMCLIPSTATUS
+ms939143	D3DMCOLORVALUE
+ms907701	D3DMDEVICE_CREATION_PARAMETERS
+ms907703	D3DMDISPLAYMODE
+ms907712	D3DMINDEXBUFFER_DESC
+ms907713	D3DMLIGHT
+ms907716	D3DMLOCKED_RECT
+ms907718	D3DMMATERIAL
+ms907720	D3DMMATRIX
+ms907729	D3DMPRESENT_PARAMETERS
+ms907743	D3DMSURFACE_DESC
+ms907757	D3DMVECTOR
+ms907758	D3DMVERTEXBUFFER_DESC
+ms907759	D3DMVIEWPORT

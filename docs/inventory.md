@@ -4820,3 +4820,59 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m66: 12 DOMNodeType value asserts + shaped usage of all 35 opaque
 interface pointers).  Headers 70 -> 71; defs 55 (unchanged count; the
 Uuid.lib rows yield no import surface).
+
+### M67 -- Direct3D Mobile (d3dm.h; d3dm def +1)
+
+Direct3D Mobile book (416 leaves, Graphics and Multimedia Technologies
+> Graphics > Direct3D Mobile), harvested under
+tools/manifests/d3dm.manifest.  New header include/d3dm.h (72nd;
+self-contained).  Requirements rows: D3dm.h (API/functions/D3DMERR),
+D3dmtypes.h (types/enums/structs/macros), D3dmcaps.h (D3DMCAPS).
+
+* Entry point: Direct3DMobileCreate (aa451581, verbatim print
+  "IDirect3DMobile* WINAPI Direct3DMobileCreate( UINT SDKVersion)";
+  D3dm.lib row) -- def/d3dm-doc.def, 1 export (the only free-function
+  import surface; d3dmguid.lib co-listed rows are GUID linkage, no
+  def).
+* Types: D3DMVALUE = signed int (ms907756), D3DMCOLOR = ULONG
+  (ms939142) -- verbatim prints.
+* 27 enums with fully printed values (D3DMFORMAT 32 values, D3DMPOOL,
+  D3DMBLEND, ... D3DMZBUFFERTYPE; every enum body carries its values
+  plus the trailing FORCE_ULONG/FORCE_DWORD member).
+* 15 structures transcribed verbatim: D3DMMATRIX (anonymous union
+  with the m[4][4]/_11.._44 print), D3DMDISPLAYMODE, D3DMCAPS
+  (D3dmcaps.h), D3DMLIGHT, D3DMMATERIAL, D3DMVIEWPORT, D3DMCLIPSTATUS,
+  D3DMLOCKED_RECT, D3DMSURFACE_DESC, D3DMPRESENT_PARAMETERS,
+  D3DMDEVICE_CREATION_PARAMETERS, D3DMINDEXBUFFER_DESC,
+  D3DMVERTEXBUFFER_DESC, D3DMCOLORVALUE, D3DMVECTOR.
+* Macros (verbatim): D3DMCOLOR_ARGB/RGBA/XRGB, D3DMFVF_TEXCOORDSIZE1/2/3
+  (recorded exactly as printed -- SIZE2/SIZE3 prints drop the shift
+  factor), D3DMFVF_TEXCOORDFIXED/FLOAT, D3DM_MAKE_RSVALUE,
+  D3DMRENDERSTATE_WRAPBIAS = 32, D3DMPV_DONOTCOPYDATA/D3DMPV_VALID.
+* D3DMERR: _FACD3DM = 0x877, MAKE_D3DMHRESULT (ms932027 verbatim) and
+  23 D3DMERR_* codes (aa451582 printed code numbers 2078..2158).
+  MAKE_HRESULT is referenced by the CE print but defined on no CE
+  page; its expansion is published by the official desktop winerror.h
+  page (nf-winerror-make_hresult) -- added to include/winerror.h under
+  that grounding with the derivation recorded (M52 precedent).
+* D3DM_MAKE_D3DMVALUE (ms907763): C++ inline overloads; recorded
+  verbatim, not compiled (not expressible in C).
+* Interfaces (8 overview pages + dangling IDirect3DMobileBaseTexture,
+  method pages only): opaque forward declarations + 101 verbatim
+  method-signature records (M44 policy).
+* Held (name-only Values pages / absent values): D3DMCLEAR, D3DMLOCK,
+  D3DMUSAGE, D3DMFVF (incl. TEXCOORDCOUNTn / TEXCOORDFORMAT_*), the 16
+  capability-bit families (D3DMDEVCAPS .. D3DMVTXPCAPS), D3DMPRESENT,
+  D3DMCREATE, D3DMTA, D3DMTSS_TCI, D3DMWRAPCOORD, D3DMCS,
+  D3DMCURRENT_DISPLAY_MODE, D3DMADAPTER, remaining D3DMERR beyond the
+  23 printed, driver-side DDI value pages (D3DM_DRIVER, D3DM_GETINFO,
+  D3DMRTYPEFLAG, D3DMTSS_TEXTUREOP); IID_ GUID names (ms912040),
+  D3D_SDK_VERSION (value not published),
+  MAX_DEVICE_IDENTIFIER_STRING (holds D3DMADAPTER_IDENTIFIER -- its
+  verbatim print is recorded in the header, not compiled);
+  CustomVertexFormat example (aa451366, not API).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets
+(TU m67: 7 size asserts + 8 value asserts incl. the MAKE_D3DMHRESULT
+identity + shaped usage with the Direct3DMobileCreate call).  Headers
+71 -> 72; defs 55 -> 56 (d3dm 1).

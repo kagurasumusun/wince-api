@@ -845,3 +845,18 @@ extern "C" {
 #endif
 
 #endif /* AKARI_WINERROR_H */
+
+/* MAKE_HRESULT: not defined by any CE page, but the CE D3dm.h print
+ * (ms932027 MAKE_D3DMHRESULT, M67) references it inside its verbatim
+ * macro body.  The expansion is published by the official desktop
+ * winerror.h page (learn.microsoft.com
+ * windows/win32/api/winerror/nf-winerror-make_hresult):
+ *   #define MAKE_HRESULT(sev,fac,code) \
+ *     ((HRESULT) (((unsigned long)(sev)<<31) | \
+ *      ((unsigned long)(fac)<<16) | ((unsigned long)(code))) )
+ * Added under that grounding (M52 derived-value precedent). */
+#ifndef MAKE_HRESULT
+#define MAKE_HRESULT(sev,fac,code) \
+    ((HRESULT) (((unsigned long)(sev)<<31) | \
+    ((unsigned long)(fac)<<16) | ((unsigned long)(code))))
+#endif
