@@ -76,6 +76,9 @@
 #include <sapi.h>
 #include <rtccore.h>
 #include <Rtccore.h>
+#include <windbase.h>
+#include <Windbase.h>
+#include <Pwindbas.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
@@ -6236,6 +6239,125 @@ static int m69_shaped_usage(void)
            RTCRMF_WATCHER_ROAMING + RTCAU_NTLM + RTCCS_FORCE_PROFILE;
 }
 
+#if __SIZEOF_POINTER__ == 4
+/* M70: CEDB structure sizes (verbatim prints; 32-bit pointer model).
+ * CEVALUNION/CEPROPVAL embed 8-byte double + pointers, CEBLOB and
+ * CEPROPSPEC embed pointers, so these only hold on the CE ABI. */
+_Static_assert(sizeof(CEGUID) == 16, "closure: Data1..Data4 DWORDs");
+_Static_assert(sizeof(CEOID) == 4 && sizeof(CEPROPID) == 4, "carrier closures");
+_Static_assert(sizeof(CEBLOB) == 8, "aa516981 print");
+_Static_assert(sizeof(CEVALUNION) == 8, "aa517283 print");
+_Static_assert(sizeof(SORTORDERSPEC) == 8, "ms891997 print");
+_Static_assert(sizeof(CEPROPVAL) == 16, "aa517227 print");
+_Static_assert(sizeof(CERECORDINFO) == 4, "aa517237 print");
+_Static_assert(sizeof(CEFILEINFO) == 540, "aa517101 print, MAX_PATH 260");
+_Static_assert(sizeof(CEDIRINFO) == 528, "aa517001 print, MAX_PATH 260");
+_Static_assert(sizeof(CENOTIFICATION) == 36, "aa517186 print");
+_Static_assert(sizeof(CENOTIFYREQUEST) == 20, "aa517189 print");
+#if !defined(_WIN32_WCE) || (_WIN32_WCE) >= 0x500
+_Static_assert(sizeof(CEPROPSPEC) == 20, "aa517225 print (EDB)");
+#endif
+#endif
+
+/* M70: the CREATE_ and CHECK_ macro families expand to memset and
+   bitwise tests; the TU is freestanding (no <string.h>), so memset is
+   declared here with the exact builtin prototype (size_t via the
+   already-included stddef.h). */
+void *memset(void *s, int c, size_t n);
+
+/* M70: windbase shaped usage (CEDB unguarded + EDB under the CE5
+   guard; calls are never executed, TU is compile-only). */
+static int m70_shaped_usage(void)
+{
+    CEGUID          guid;
+    HANDLE          hdb;
+    CEBLOB          blob;
+    CEPROPVAL       propval;
+    CEFILEINFO      fileinfo;
+    CEDIRINFO       dirinfo;
+    CENOTIFYREQUEST notifyreq;
+    SORTORDERSPEC   sortspec;
+    CEOID           oid;
+    PCEOID          poid = (PCEOID)0;
+
+    CREATE_SYSTEMGUID(&guid);
+    if (!CHECK_SYSTEMGUID(&guid))
+        return 1;
+    if (CHECK_INVALIDGUID(&guid))   /* all-zero GUID is not "invalid" */
+        return 2;
+    CREATE_INVALIDGUID(&guid);
+    if (!CHECK_INVALIDGUID(&guid))
+        return 3;
+    if (CHECK_SYSTEMGUID(&guid))
+        return 4;
+    if (TypeFromPropID(0x00140005u) != 5)   /* ms892256: LOWORD */
+        return 5;
+
+    blob.dwCount = 0; blob.lpb = (LPBYTE)0;
+    propval.propid = 0x00140005u; propval.wLenData = 0;
+    propval.wFlags = 0; propval.val.ulVal = 7u;
+    fileinfo.dwAttributes = 0; fileinfo.oidParent = 0;
+    fileinfo.szFileName[0] = 0;
+    fileinfo.ftLastChanged.dwLowDateTime = 0;
+    fileinfo.ftLastChanged.dwHighDateTime = 0;
+    fileinfo.dwLength = 0;
+    dirinfo.dwAttributes = 0; dirinfo.oidParent = 0;
+    dirinfo.szDirName[0] = 0;
+    notifyreq.dwSize = sizeof(notifyreq); notifyreq.hwnd = (HWND)0;
+    notifyreq.dwFlags = 0; notifyreq.hHeap = (HANDLE)0;
+    notifyreq.dwParam = 0;
+    sortspec.propid = 0x00140005u; sortspec.dwFlags = 0;
+
+    oid = CeCreateDatabase((LPWSTR)0, 0u, 0u, &sortspec);
+    oid = CeCreateDatabaseEx(&guid, (CEDBASEINFO *)0);
+    oid = CeCreateDatabaseEx2(&guid, (CEDBASEINFOEX *)0);
+    CeChangeDatabaseLCID(&guid, 0u);
+    oid = CeFindNextDatabase((HANDLE)0);
+    oid = CeFindNextDatabaseEx((HANDLE)0, &guid);
+    hdb = CeOpenDatabase(poid, (LPWSTR)0, 0x00140005u, 0u, (HWND)0);
+    hdb = CeOpenDatabaseEx2(&guid, poid, (LPWSTR)0,
+                            (SORTORDERSPECEX *)0, 0u, &notifyreq);
+    oid = CeReadRecordPropsEx((HANDLE)0, 0u, (LPWORD)0, (CEPROPID *)0,
+                              (LPBYTE *)0, (LPDWORD)0, (HANDLE)0);
+    oid = CeSeekDatabaseEx((HANDLE)0, 0u, 0u, 0u, (LPDWORD)0);
+    oid = CeWriteRecordProps((HANDLE)0, (CEOID)0, 1u, &propval);
+    (void)CeMountDBVol(&guid, (LPWSTR)0, 0u);
+    (void)CeOidGetInfoEx2(&guid, (CEOID)0, (CEOIDINFOEX *)0);
+    (void)CeGetDBInformationByHandle((HANDLE)0,
+                                     (LPBY_HANDLE_DB_INFORMATION)0);
+    (void)CeFreeNotification(&notifyreq, (PCENOTIFICATION)0);
+    (void)blob; (void)fileinfo; (void)dirinfo; (void)propval;
+
+#if !defined(_WIN32_WCE) || (_WIN32_WCE) >= 0x500
+    {
+        CEPROPSPEC         propspec;
+        CEDBISOLATIONLEVEL isolevel = 0;
+        CESORTORDERSPECEX *psoex = (CESORTORDERSPECEX *)0;
+
+        propspec.wVersion = 0; propspec.propid = 0x00140005u;
+        propspec.dwFlags = 0; propspec.pwszPropName = (LPWSTR)0;
+        propspec.cchPropName = 0;
+        hdb = CeCreateSession(&guid);
+        (void)CeBeginTransaction((HANDLE)0, isolevel);
+        (void)CeEndTransaction((HANDLE)0, 0);
+        oid = CeCreateDatabaseWithProps(&guid, (CEDBASEINFOEX *)0, 1u,
+                                        &propspec);
+        hdb = CeOpenDatabaseInSession((HANDLE)0, &guid, poid, (LPWSTR)0,
+                                       (SORTORDERSPECEX *)0, 0u,
+                                       &notifyreq);
+        hdb = CeOpenStream((HANDLE)0, 0x00140005u, 0u);
+        (void)CeMountDBVolEx(&guid, (LPWSTR)0, (CEVOLUMEOPTIONS *)0, 0u);
+        (void)CeStreamRead((HANDLE)0, (LPBYTE)0, 0u, (LPDWORD)0);
+        (void)CeStreamSeek((HANDLE)0, 0u, 0u, (LPDWORD)0);
+        (void)CeSetSessionOption((HANDLE)0, 0u, 0u);
+        (void)CeRemoveDatabaseProps(&guid, (CEOID)0, 0u, (CEPROPID *)0);
+        (void)psoex; (void)propspec;
+    }
+#endif
+    (void)oid; (void)hdb;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6345,6 +6467,8 @@ int host_tu_entry(void)
     if (m68_shaped_usage() != 0)
         return 1;
     if (m69_shaped_usage() != 0)
+        return 1;
+    if (m70_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -4998,3 +4998,95 @@ Verification: make check / crosscheck / e2e GREEN on all six targets
 (TU m69: 7 value asserts + shaped usage of 30 opaque interface
 pointers; TU also includes the Rtccore.h case alias).  Headers 73 real
 -> 74 real (+2 aliases = 153 files); defs 56 (unchanged count).
+
+## M70: Database Reference (CEDB + EDB) -- windbase.h
+
+Harvested from *File Systems and Data Store -> Data Store -> Database
+Reference* (CE 5.0 Learn archive, `(v=msdn.10)` IDs): CEDB Reference
+(2 index + 34 functions + 14 structures + 5 macros + 7 messages) and
+EDB Reference (2 index + 33 functions + 6 structures), 106 leaves in
+tools/manifests/dbref.manifest.
+
+Headers: 99 Requirement rows print **Windbase.h**, one page prints
+**Pwindbas.h** (aa516982 CeChangeDatabaseLCID (CEDB) -- the only
+Pwindbas.h row in the whole 6422-page harvest).  New files:
+include/windbase.h + aliases include/Windbase.h, include/Pwindbas.h
+(M69a policy; both documented spellings now carried; resolves the
+Windbase.h gap recorded in M69a).  Link Library row: Coredll.lib for
+every function -> def/coredll-doc.def +48 (671 -> 719; the six EDB
+structure pages whose Requirements rows also name Coredll.lib are
+correctly skipped -- types, not exports).
+
+Version policy: CEDB items (CE 1.0/1.01/2.10/.NET 4.0 rows) are
+declared unguarded with each OS Versions row recorded per item; every
+EDB item (CE 5.0 row) is inside `#if !defined(_WIN32_WCE) ||
+(_WIN32_WCE) >= 0x500` (default-visible so freestanding/cross checks
+compile it; exactly hidden at 0x420 -- exercised by hostcheck's
+CE_VERSIONS 0x420/0x500/0x600).
+
+* Carrier closures (no CE page prints these typedefs; derivations
+  recorded in the header, replace on an official print):
+  CEOID = ULONG (POOM prints the same object-store identifier both as
+  CEOID, ms883912, and as `[out] long *plOid`, ITask/IContact/
+  IAppointment::get_Oid -- 32 bits); CEPROPID = ULONG (aa517227:
+  high-order word application-defined, low-order word type constant;
+  ms892256 TypeFromPropID is the low-order word); CEGUID = 4 DWORD
+  Data members (member names/count printed by the CHECK_INVALIDGUID/
+  CHECK_SYSTEMGUID macro bodies aa517295/aa517298; CREATE_INVALIDGUID
+  memsets the whole struct to -1); CEDBISOLATIONLEVEL = int (by-value
+  parameter of aa516980; enumerators named but not valued there).
+* Macros: CHECK_INVALIDGUID, CHECK_SYSTEMGUID, CREATE_INVALIDGUID,
+  CREATE_SYSTEMGUID (verbatim; CREATE_* need the caller's memset) and
+  TypeFromPropID (print is LOWORD(propid); no CE page defines LOWORD,
+  so a private AKARI_WINDBASE_LOWORD helper with the recorded
+  derivation replaces the desktop macro import).
+* Compiled structures (verbatim prints): CEBLOB, CEVALUNION, CEPROPVAL,
+  CERECORDINFO, SORTORDERSPEC, CEFILEINFO, CEDIRINFO, CENOTIFICATION,
+  CENOTIFYREQUEST (CEDB, CE 1.01-2.10 rows) and CEPROPSPEC (EDB,
+  inside the CE 5 guard; print has no tag -- self-named form kept).
+* Held as INCOMPLETE types (pointer-only, tags from the prints, full
+  verbatim bodies recorded in comments): CEDBASEINFO, CEDBASEINFOEX,
+  SORTORDERSPECEX, CEOIDINFO, CEOIDINFOEX, BY_HANDLE_DB_INFORMATION
+  (CEDB) and CESORTORDERSPECEX, CEVOLUMEOPTIONS (EDB).  Reason: their
+  array members are sized by CEDB_MAXDBASENAMELEN / CEDB_MAXSORTORDER
+  / CEDB_MAXSORTPROP / CCH_MAX_PASSWORD, and no CE page in the whole
+  6422-page harvest prints a value for any of them (zero-gap policy;
+  no layout is invented).  The documented signatures only use these
+  types through pointers, so every function compiles verbatim.
+* Twin conflicts recorded (CEDB page vs EDB page, kept distinct per
+  the CE-generations rule): CEDBASEINFOEX member order differs
+  (aa516992 wVersion,dwFlags,... vs aa516993 wVersion,wNumSortOrder,
+  dwFlags,..., no tag); CEOIDINFOEX union member CEDBASEINFOEX
+  (aa517208) vs CEDBASEINFO (aa517210); CeOidGetInfoEx2 third
+  parameter CEOIDINFOEX* (aa517198, CE .NET 4.0) vs CEOIDINFO*
+  (aa517204, CE 5.0) -- declared per the CEDB origin page, both
+  recorded.  EDB SORTORDERSPECEX print (ms892010) names the type
+  CESORTORDERSPECEX, adds wReserved, and carries the page's own DWROD
+  typo -- recorded verbatim.
+* Functions: 34 CEDB + 33 EDB signatures (archive space-gluing
+  repaired with spacing only, e.g. CEOIDCeCreateDatabase,
+  PCEGUIDpceguid; the one stray `CeGetDatabaseProps (` space
+  normalized; the CEDB CeChangeDatabaseLCID print's capitalised
+  DWORDLCID parameter recorded against the EDB twin's DWORDlcid).
+  Same-name EDB twins of identical shape are recorded by page id on
+  the CEDB declaration; no duplicate declarations.
+* Held constants (names recorded in the header, values not printed
+  anywhere; nothing defined): CEVT_* (10 + CEVT_STREAM), CEDB_VALID*
+  /CEDB_SYSTEMDB/CEDB_NOCOMPRESS, CEDB_AUTOINCREMENT/ALLOWREALLOC/
+  PROPDELETE/PROPNOTFOUND/EXNOTIFICATION, CEDB_SEEK_* (11), CEDB_SORT_*
+  (11), CEVOLUMEOPTIONS flags (6), CEDB_MAXDBASENAMELEN/
+  CEDB_MAXSORTORDER/CEDB_MAXSORTPROP/CCH_MAX_PASSWORD; messages
+  WM_DBNOTIFICATION + DB_CEOID_CHANGED/CREATED/DATABASE_DELETED/
+  DIRECTORY_DELETED/FILE_DELETED/RECORD_DELETED (7 pages, no values).
+
+Verification: make check / crosscheck / e2e GREEN on all six targets.
+TU m70: closure + print size asserts (CEGUID 16, CEOID/CEPROPID 4,
+CEBLOB 8, CEVALUNION 8, SORTORDERSPEC 8, CEPROPVAL 16, CERECORDINFO 4,
+CEFILEINFO 540, CEDIRINFO 528, CENOTIFICATION 36, CENOTIFYREQUEST 20,
+CEPROPSPEC 20; under __SIZEOF_POINTER__ == 4), all five macros
+exercised (memset declared with the exact builtin prototype), shaped
+usage of 15 CEDB + 10 EDB calls including every incomplete-type
+pointer parameter, EDB block double-gated with the header.  e2e gains
+CeWriteRecordProps + CeOidGetInfo import assertions (6 targets).
+Headers 74 real + 82 aliases = 156 files; defs 56 (coredll-doc.def
++48 -> 719).

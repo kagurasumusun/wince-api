@@ -57,6 +57,7 @@
 #include <ddraw.h>
 #include <urlmon.h>
 #include <mlang.h>
+#include <windbase.h>
 
 int main(void)
 {
@@ -83,6 +84,15 @@ int main(void)
      * image must import the Ws2.lib-documented names from ws2.dll
      * per the doc-derived def. */
     (void) socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    /* M70: CEDB import surface (Coredll.lib rows, def/coredll-doc.def). */
+    {
+        CEOID oid = CeWriteRecordProps((HANDLE)0, (CEOID)0, 0,
+                                       (CEPROPVAL *)0);
+        (void) CeOidGetInfo((CEOID)0, (CEOIDINFO *)0);
+        (void) CeFindFirstDatabase(0u);
+        oid = CeSeekDatabase((HANDLE)0, 0u, 0u, (LPDWORD)0);
+        (void) oid;
+    }
     (void) WSAStartup(WSAVersion(2, 2), (LPWSADATA)0);
     (void) getaddrinfo((const char *)0, (const char *)0,
                        (const struct addrinfo *)0, (struct addrinfo **)0);

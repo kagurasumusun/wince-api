@@ -17,12 +17,34 @@ EXPORTS
   AlphaBlend
   BeginPaint
   BitBlt
+  CeAddDatabaseProps
+  CeBeginTransaction
+  CeChangeDatabaseLCID
   CeClearUserNotification
+  CeCreateDatabase
+  CeCreateDatabaseEx
+  CeCreateDatabaseEx2
+  CeCreateDatabaseWithProps
+  CeCreateSession
+  CeDeleteDatabase
+  CeDeleteDatabaseEx
+  CeDeleteRecord
+  CeEndTransaction
+  CeEnumDBVolumes
   CeFindCloseRegChange
+  CeFindFirstDatabase
+  CeFindFirstDatabaseEx
   CeFindFirstRegChange
+  CeFindNextDatabase
+  CeFindNextDatabaseEx
   CeFindNextRegChange
+  CeFlushDBVol
+  CeFreeNotification
   CeGenRandom
   CeGetCanonicalPathName
+  CeGetDBInformationByHandle
+  CeGetDatabaseProps
+  CeGetDatabaseSession
   CeGetFileNotificationInfo
   CeGetThreadPriority
   CeGetThreadQuantum
@@ -37,11 +59,37 @@ EXPORTS
   CeLogQueryZones
   CeLogReSync
   CeLogSetZones
+  CeMountDBVol
+  CeMountDBVolEx
+  CeOidGetInfo
+  CeOidGetInfoEx
+  CeOidGetInfoEx2
+  CeOpenDatabase
+  CeOpenDatabaseEx
+  CeOpenDatabaseEx2
+  CeOpenDatabaseInSession
+  CeOpenStream
+  CeReadRecordProps
+  CeReadRecordPropsEx
+  CeRemoveDatabaseProps
   CeRunAppAtEvent
   CeRunAppAtTime
+  CeSeekDatabase
+  CeSeekDatabaseEx
+  CeSetDatabaseInfo
+  CeSetDatabaseInfoEx
+  CeSetDatabaseInfoEx2
+  CeSetSessionOption
   CeSetThreadQuantum
   CeSetUserNotification
   CeSetUserNotificationEx
+  CeStreamRead
+  CeStreamSaveChanges
+  CeStreamSeek
+  CeStreamSetSize
+  CeStreamWrite
+  CeUnmountDBVol
+  CeWriteRecordProps
   CeZeroPointer
   ChangeDisplaySettingsEx
   CharNextW
