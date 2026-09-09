@@ -14,6 +14,7 @@ INCLUDES = -Iinclude
 CE_VERSIONS = 0x420 0x500 0x600
 
 HDRS = \
+include/Av_upnp.h \
 include/Bt_api.h \
 include/Btagnetwork.h \
 include/Btagpub.h \

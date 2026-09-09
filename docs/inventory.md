@@ -5655,3 +5655,21 @@ include spelling still resolves to the documented-case file anyway.
   RASCONNSTATE / UNLEN / DNLEN / PWLEN unpublished in the harvest).
 - TU m75f block; Makefile HDRS 125 -> 128.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M76 -- UPnP AV framework (Av_upnp.h, record-only)
+
+- include/Av_upnp.h (NEW, real): all 148 Av_upnp.lib rows recorded
+  verbatim (37 groups: IRenderingControl 37 methods, IAVTransport 19,
+  IContentDirectory 17, IConnectionManager 8 + Impl variants,
+  IEventSource/IEventSink/IVirtualService, MediaServerDevice /
+  MediaRendererDevice (+ constructors), wstring, parser, object, and
+  the state/type pages AVTransportState, RenderingControlState,
+  TransportInfo/Settings/Actions/State, SeekMode, PlayMode, MediaInfo,
+  PositionInfo, ConnectionInfo, DeviceCapabilities, DIRECTION,
+  Medium, UPnPAVError, BIT_AV_/ZONE_AV_/General String Constants).
+  41 pages print no signature (constants/type descriptions).
+  C++ class library -- recorded, not compiled; no def file.
+- Makefile HDRS 128 -> 129.
+- Gates: check / crosscheck / e2e GREEN x6.
+- Servers book C-API surface now complete (M75a-f + M76); remaining
+  Servers rows are admin/registry/how-to pages.
