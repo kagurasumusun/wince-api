@@ -5625,3 +5625,33 @@ include spelling still resolves to the documented-case file anyway.
 - New policy going forward: exactly one file per header name; no new
   case-duplicate aliases (also fixes case-insensitive checkouts).
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M75f -- ISAPI Filters/Extensions + RAS server structs (Httpfilt.h, Httpext.h, Ras.h)
+
+- include/Httpfilt.h (NEW, real): SF_REQ_TYPE ms900577 (9 elements,
+  sequential; CE supports 3 -- noted); 7 callback member typedefs
+  (PFN_SF_* -- GetServerVariable aa450424, AddResponseHeaders aa450281,
+  WriteClient ms898726, AllocMem aa450285, ServerSupportFunction
+  aa450890, GetHeader aa450402 / SetHeader aa450916 / AddHeader
+  aa450279); 8 compiled structs: HTTP_FILTER_CONTEXT ms890327,
+  HTTP_FILTER_PREPROC_HEADERS ms900484, HTTP_FILTER_SEND_RESPONSE
+  ms890329 (member sigs closed from the callback pages, noted),
+  HTTP_FILTER_ACCESS_DENIED ms900474, HTTP_FILTER_AUTHENT ms900477,
+  HTTP_FILTER_LOG ms900480, HTTP_FILTER_RAW_DATA ms900487,
+  HTTP_FILTER_URL_MAP ms900491.  Record-only: HTTP_FILTER_VERSION
+  ms890330 (SF_MAX_FILTER_DESC_LEN unpublished) + the 3 filter DLL
+  entry points (developer-implemented).
+- include/Httpext.h (NEW, real): HSE_SEND_HEADER_EX_INFO ms890323 and
+  HSE_URL_MAPEX_INFO ms890321 (MAX_PATH via Windef.h) compiled;
+  EXTENSION_CONTROL_BLOCK aa450369 (HCONN, HSE_LOG_BUFFER_LEN
+  unpublished), HSE_VERSION_INFO ms890322 (HSE_MAX_EXT_DLL_NAME_LEN
+  unpublished), 4 extension callback sigs and 3 extension DLL entry
+  points recorded.
+- include/Ras.h (NEW, real): RASCNTL_SERVERSTATUS ms896355 and
+  RASCNTL_SERVER_IPV6_NET_PREFIX ms896358 compiled; RasCntlEnum
+  ms896353 (truncated print, values absent), RASCNTL_SERVERLINE
+  ms896354, RASCNTL_SERVERUSERCREDENTIALS ms896356,
+  RASCNTL_SERVERCONNECTION ms896357 recorded (RASDEVINFO / HRASCONN /
+  RASCONNSTATE / UNLEN / DNLEN / PWLEN unpublished in the harvest).
+- TU m75f block; Makefile HDRS 125 -> 128.
+- Gates: check / crosscheck / e2e GREEN x6.

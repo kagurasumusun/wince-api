@@ -39,6 +39,9 @@
 #include <Service.h>
 #include <Smbconfig.h>
 #include <Webproxy.h>
+#include <Httpfilt.h>
+#include <Httpext.h>
+#include <Ras.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6732,6 +6735,26 @@ static int m75e_shaped_usage(void)
     return (int)pi->dwProxyVersion;
 }
 
+static int m75f_shaped_usage(void)
+{
+    HTTP_FILTER_CONTEXT      fc;
+    HTTP_FILTER_PREPROC_HEADERS ph;
+    HTTP_FILTER_SEND_RESPONSE sr;
+    RASCNTL_SERVERSTATUS     st;
+    RASCNTL_SERVER_IPV6_NET_PREFIX v6;
+    HSE_SEND_HEADER_EX_INFO  hi = { (LPCSTR)0, (LPCSTR)0, 0u, 0u, 0 };
+    enum SF_REQ_TYPE         rq = SF_REQ_SEND_RESPONSE_HEADER;
+
+    fc.cbSize = sizeof(HTTP_FILTER_CONTEXT);
+    ph.dwReserved = 0u;
+    sr.HttpStatus = (DWORD)rq;
+    st.dwNumLines = 0u;
+    v6.IPV6NetPrefixBitLength = 0u;
+    return (int)hi.cchStatus + fc.cbSize + (ph.HttpStatus != 0u)
+           + (sr.dwReserved != 0u) + st.dwNumLines
+           + (v6.IPV6NetPrefixCount != 0u);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6865,6 +6888,8 @@ int host_tu_entry(void)
     if (m75d_shaped_usage() != 0)
         return 1;
     if (m75e_shaped_usage() != 0)
+        return 1;
+    if (m75f_shaped_usage() != 0)
         return 1;
     return 0;
 }

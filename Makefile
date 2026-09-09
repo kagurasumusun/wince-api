@@ -42,6 +42,8 @@ include/Dvp.h \
 include/ErrorRep.h \
 include/Excpt.h \
 include/Extfile.h \
+include/Httpext.h \
+include/Httpfilt.h \
 include/IAccess.h \
 include/Imaging.h \
 include/Imm.h \
@@ -76,6 +78,7 @@ include/Prsht.h \
 include/Psapi.h \
 include/Pwindbas.h \
 include/Pwinuser.h \
+include/Ras.h \
 include/Rtccore.h \
 include/Rtcerr.h \
 include/Sapi.h \
