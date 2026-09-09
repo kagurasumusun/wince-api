@@ -1,0 +1,93 @@
+ms923428	DMO Interfaces
+aa451808	IDMOQualityControl
+aa451810	IDMOQualityControl::SetNow
+aa451811	IDMOQualityControl::SetStatus
+aa451809	IDMOQualityControl::GetStatus
+aa451812	IDMOVideoOutputOptimizations
+aa451815	IDMOVideoOutputOptimizations::QueryOperationModePreferences
+aa451816	IDMOVideoOutputOptimizations::SetOperationMode
+aa451813	IDMOVideoOutputOptimizations::GetCurrentOperationMode
+aa451814	IDMOVideoOutputOptimizations::GetCurrentSampleRequirements
+ms910382	IEnumDMO
+ms910392	IEnumDMO::Next
+ms910405	IEnumDMO::Skip
+ms910398	IEnumDMO::Reset
+ms910385	IEnumDMO::Clone
+aa452254	IMediaBuffer
+aa452257	IMediaBuffer::SetLength
+aa452256	IMediaBuffer::GetMaxLength
+aa452255	IMediaBuffer::GetBufferAndLength
+ms931390	IMediaObject
+ms931405	IMediaObject::GetStreamCount
+ms931399	IMediaObject::GetInputStreamInfo
+ms931403	IMediaObject::GetOutputStreamInfo
+ms931400	IMediaObject::GetInputType
+ms931404	IMediaObject::GetOutputType
+ms931421	IMediaObject::SetInputType
+ms931422	IMediaObject::SetOutputType
+ms931395	IMediaObject::GetInputCurrentType
+ms931401	IMediaObject::GetOutputCurrentType
+ms931397	IMediaObject::GetInputSizeInfo
+ms931402	IMediaObject::GetOutputSizeInfo
+ms931396	IMediaObject::GetInputMaxLatency
+ms931420	IMediaObject::SetInputMaxLatency
+ms931393	IMediaObject::Flush
+ms931392	IMediaObject::Discontinuity
+ms931391	IMediaObject::AllocateStreamingResources
+ms931394	IMediaObject::FreeStreamingResources
+ms931398	IMediaObject::GetInputStatus
+ms931418	IMediaObject::ProcessInput
+ms931419	IMediaObject::ProcessOutput
+ms931416	IMediaObject::Lock
+ms931412	IMediaObjectInPlace
+ms931415	IMediaObjectInPlace::Process
+ms931413	IMediaObjectInPlace::Clone
+ms931414	IMediaObjectInPlace::GetLatency
+aa452388	DMO Structures
+aa451601	DMO_MEDIA_TYPE
+aa451602	DMO_OUTPUT_DATA_BUFFER
+aa451605	DMO_PARTIAL_MEDIATYPE
+aa451689	DMO Enumerated Types
+aa451594	DMO_ENUM_FLAGS
+aa451599	DMO_INPUT_DATA_BUFFER_FLAGS
+aa451600	DMO_INPUT_STREAM_INFO_FLAGS
+aa451603	DMO_OUTPUT_DATA_BUFFER_FLAGS
+aa451604	DMO_OUTPUT_STREAM_INFO_FLAGS
+aa451606	DMO_PROCESS_OUTPUT_FLAGS
+aa451609	DMO_REGISTER_FLAGS
+aa451610	DMO_SET_TYPE_FLAGS
+aa451612	DMO_VIDEO_OUTPUT_STREAM_FLAGS
+aa451722	DMO Functions
+aa451608	DMORegister
+aa452529	DMORegisterFilter
+aa451611	DMOUnregister
+aa452530	DMOUnregisterFilter
+aa451593	DMOEnum
+aa451597	DMOGetTypes
+aa451596	DMOGetName
+ms932077	MoInitMediaType
+ms932068	MoFreeMediaType
+ms932064	MoCopyMediaType
+ms932065	MoCreateMediaType
+ms932066	MoDeleteMediaType
+ms932067	MoDuplicateMediaType
+aa451595	DMO Error Codes
+aa451598	DMO GUIDs
+aa451592	DMO Base Class Reference
+aa451438	Using the DMO Base Class
+ms924190	Overview of IMediaObjectImpl
+aa451296	Declaring the Derived Class
+ms923420	Implementing the DMO Methods
+ms931407	IMediaObjectImpl Class Template
+ms924129	LockIt Internal Class
+ms931406	IMediaObjectImpl::CheckTypesSet
+ms931408	IMediaObjectImpl::InputType
+ms931409	IMediaObjectImpl::InputTypeSet
+ms931410	IMediaObjectImpl::OutputType
+ms931411	IMediaObjectImpl::OutputTypeSet
+aa451573	_DERIVED_::InternalAcceptingInput
+aa451574	_DERIVED_::InternalCheckInputType
+aa451575	_DERIVED_::InternalCheckOutputType
+aa451576	_DERIVED_::Lock
+aa451577	_DERIVED_::Unlock
+ms931417	IMediaObject Methods

@@ -82,6 +82,8 @@
 #include <dshow.h>
 #include <Dshow.h>
 #include <dvdmedia.h>
+#include <dmo.h>
+#include <dmoreg.h>
 #include <stddef.h>
 /* M69a: documented-case include aliases (docs print these spellings). */
 #include <Commctrl.h>
@@ -6526,6 +6528,69 @@ static int m71_shaped_usage(void)
     return 0;
 }
 
+/* M71c: DMO values (printed tables/enums). */
+_Static_assert(DMO_E_INVALIDSTREAMINDEX == 0x80040201L, "aa451595 table");
+_Static_assert(DMO_E_NO_MORE_ITEMS == 0x80040206L, "aa451595 table");
+#if __SIZEOF_POINTER__ == 4
+_Static_assert(sizeof(DMO_MEDIA_TYPE) == 72, "aa451601 print");
+_Static_assert(sizeof(DMO_OUTPUT_DATA_BUFFER) == 24, "aa451602 print");
+_Static_assert(sizeof(DMO_PARTIAL_MEDIATYPE) == 32, "aa451605 print (GUID + GUID)");
+#endif
+_Static_assert(DMO_ENUMF_INCLUDE_KEYED == 0x00000001, "DMO_ENUM_FLAGS");
+_Static_assert(DMO_INPUT_STREAMF_HOLDS_BUFFERS == 0x00000008, "DMO_INPUT_STREAM_INFO_FLAGS");
+_Static_assert(DMO_OUTPUT_DATA_BUFFERF_INCOMPLETE == 0x01000000, "DMO_OUTPUT_DATA_BUFFER_FLAGS");
+_Static_assert(DMO_OUTPUT_STREAMF_OPTIONAL == 0x00000010, "DMO_OUTPUT_STREAM_INFO_FLAGS");
+_Static_assert(DMO_REGISTERF_IS_KEYED == 0x00000001, "DMO_REGISTER_FLAGS");
+_Static_assert(DMO_SET_TYPEF_CLEAR == 0x00000002, "DMO_SET_TYPE_FLAGS");
+_Static_assert(DMO_VOSF_NEEDS_PREVIOUS_SAMPLE == 0x00000001, "DMO_VIDEO_OUTPUT_STREAM_FLAGS");
+
+/* M71c: DMO shaped usage (Msdmo.lib import surface + records). */
+static int m71c_shaped_usage(void)
+{
+    DMO_MEDIA_TYPE         mt;
+    DMO_OUTPUT_DATA_BUFFER ob;
+    DMO_PARTIAL_MEDIATYPE  pmt;
+    GUID                   guid = { 0 };
+    CLSID                  clsid = { 0 };
+    IEnumDMO               *pe = (IEnumDMO *)0;
+    IMediaBuffer           *mb = (IMediaBuffer *)0;
+    IMediaObject           *mo = (IMediaObject *)0;
+    IMediaObjectInPlace    *mip = (IMediaObjectInPlace *)0;
+    IDMOQualityControl     *qc = (IDMOQualityControl *)0;
+    IDMOVideoOutputOptimizations *vo = (IDMOVideoOutputOptimizations *)0;
+    HRESULT                hr;
+
+    memset(&mt, 0, sizeof(mt));
+    mt.majortype = mt.subtype = mt.formattype = guid;
+    mt.bFixedSizeSamples = 1; mt.lSampleSize = 0; mt.cbFormat = 0;
+    mt.pUnk = (IUnknown *)0; mt.pbFormat = (BYTE *)0;
+    ob.pBuffer = mb; ob.dwStatus = DMO_OUTPUT_DATA_BUFFERF_SYNCPOINT;
+    ob.rtTimestamp = 0; ob.rtTimelength = 1;
+    pmt.type = guid; pmt.subtype = guid;
+
+    hr = DMOEnum(&guid, DMO_ENUMF_INCLUDE_KEYED, 0, &pmt, 0, &pmt, &pe);
+    hr = DMOGetTypes(&clsid, 0, (unsigned long *)0, (DMO_PARTIAL_MEDIATYPE *)0,
+                     0, (unsigned long *)0, (DMO_PARTIAL_MEDIATYPE *)0);
+    hr = DMOGetName(&clsid, (WCHAR *)0);
+    hr = DMOUnregister(&clsid, &guid);
+    hr = DMOUnregisterFilter(&clsid);
+    hr = DMORegisterFilter((LPCWSTR)0, &clsid, &guid, &clsid,
+                           DMO_REGISTERF_IS_KEYED, 0, &pmt, 0, &pmt);
+    hr = DMORegister((LPCWSTR)0, &clsid, &guid, &clsid, 0, 0, &pmt, 0, &pmt);
+    hr = MoInitMediaType(&mt, 0);
+    hr = MoFreeMediaType(&mt);
+    hr = MoCopyMediaType(&mt, (const DMO_MEDIA_TYPE *)0);
+    {
+        DMO_MEDIA_TYPE *pmtOut = (DMO_MEDIA_TYPE *)0;
+        hr = MoCreateMediaType(&pmtOut, 0);
+        hr = MoDeleteMediaType(&mt);
+        hr = MoDuplicateMediaType(&pmtOut, (const DMO_MEDIA_TYPE *)0);
+        (void)pmtOut;
+    }
+    (void)ob; (void)mo; (void)mip; (void)qc; (void)vo; (void)hr; (void)pe;
+    return 0;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6641,6 +6706,8 @@ int host_tu_entry(void)
     if (m70b_shaped_usage() != 0)
         return 1;
     if (m71_shaped_usage() != 0)
+        return 1;
+    if (m71c_shaped_usage() != 0)
         return 1;
     return 0;
 }

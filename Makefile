@@ -53,6 +53,8 @@ HDRS = include/windef.h include/winbase.h include/windows.h include/winnls.h inc
        include/dshow.h \
        include/Dshow.h \
        include/dvdmedia.h \
+       include/dmo.h \
+       include/dmoreg.h \
        include/Aygshell.h \
        include/Bt_api.h \
        include/Btagnetwork.h \
@@ -288,6 +290,10 @@ e2e:
 	  | grep -q "Symbol: CeWriteRecordProps" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: CeOidGetInfo" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Name: msdmo.dll" || exit 1; \
+	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
+	  | grep -q "Symbol: DMOEnum" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \
 	  | grep -q "Symbol: WSAEnumNameSpaceProviders" || exit 1; \
 	"$$bin/llvm-readobj" --coff-imports $$d/e2e_console.exe \

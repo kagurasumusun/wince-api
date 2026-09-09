@@ -58,6 +58,7 @@
 #include <urlmon.h>
 #include <mlang.h>
 #include <windbase.h>
+#include <dmo.h>
 
 int main(void)
 {
@@ -92,6 +93,13 @@ int main(void)
         (void) CeFindFirstDatabase(0u);
         oid = CeSeekDatabase((HANDLE)0, 0u, 0u, (LPDWORD)0);
         (void) oid;
+    }
+    /* M71c: DMO import surface (Msdmo.lib rows, def/msdmo-doc.def). */
+    {
+        GUID guid = { 0 };
+        (void) DMOEnum(&guid, 0u, 0, (const DMO_PARTIAL_MEDIATYPE *)0,
+                       0, (const DMO_PARTIAL_MEDIATYPE *)0, (IEnumDMO **)0);
+        (void) MoFreeMediaType((DMO_MEDIA_TYPE *)0);
     }
     (void) WSAStartup(WSAVersion(2, 2), (LPWSADATA)0);
     (void) getaddrinfo((const char *)0, (const char *)0,

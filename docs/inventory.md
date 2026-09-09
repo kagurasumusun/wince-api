@@ -5226,3 +5226,57 @@ Verification: make check / crosscheck / e2e GREEN on all six
 targets.  TU m71: 61 opaque interface pointers (compile proves every
 forward).  Headers unchanged in count (76 real + 83 aliases = 159
 files; dshow.h grew in place to 1304 lines); defs 56 (unchanged).
+
+## M71c: DirectX Media Objects (DMO Reference) -- dmo.h, dmoreg.h, msdmo-doc.def
+
+93-leaf harvest (tools/manifests/dmo.manifest, build/pages 7173;
+the CE 5.0 book lives under *Graphics and Multimedia Technologies
+-> Media -> DirectShow -> DMO Reference* -- the "DirectX Media
+Objects Reference" title belongs to the Compact 2013/7 trees and
+the "DMO Reference" node required the DirectShow anchor).
+
+Headers: 65 Requirement rows print **Dmo.h**, one prints
+**Dmoreg.h** (aa452529 DMORegisterFilter), twelve print
+**Dmoimpl.h** (the _DERIVED_ C++ base-class helpers -- deferred to
+a C++-class milestone, recorded gap; their 5 method pages
+aa451573-aa451577 recorded).  New files: include/dmo.h,
+include/dmoreg.h.  Link Library rows: Dmoguid.lib on interface and
+structure pages (GUID linkage, no export -- Uuid.lib precedent) and
+**Msdmo.lib** on 12 function pages -> def/msdmo-doc.def (12
+name-only exports, first Msdmo def; DMORegister aa451608 prints NO
+Requirements block at all and is excluded from the def, declared
+with the gap recorded).
+
+* Structures (3, verbatim prints): DMO_MEDIA_TYPE (glued tokens +
+  bare [size_is] annotation neutralized; 72 bytes), DMO_OUTPUT_
+  DATA_BUFFER (+PDMO alias; 24 bytes), DMO_PARTIAL_MEDIATYPE
+  (+PDMO alias; 32 bytes).  REFERENCE_TIME rides the dshow.h M70b
+  closure (dmo.h includes dshow.h; recorded).
+* Enumerated types (9, all values printed, tag-form prints kept):
+  DMO_ENUM_FLAGS, DMO_INPUT_DATA_BUFFER_FLAGS, DMO_INPUT_STREAM_
+  INFO_FLAGS, DMO_OUTPUT_DATA_BUFFER_FLAGS, DMO_OUTPUT_STREAM_INFO_
+  FLAGS, DMO_PROCESS_OUTPUT_FLAGS, DMO_REGISTER_FLAGS,
+  DMO_SET_TYPE_FLAGS, DMO_VIDEO_OUTPUT_STREAM_FLAGS.
+* Error codes (aa451595 value table): DMO_E_INVALIDSTREAMINDEX
+  0x80040201L .. DMO_E_NO_MORE_ITEMS 0x80040206L (6 macros).
+* Held: the 7 DMOCATEGORY_* GUID names (aa451598 prints no values).
+* Interfaces (6, M44 policy): opaque forwards IDMOQualityControl,
+  IDMOVideoOutputOptimizations, IEnumDMO, IMediaBuffer,
+  IMediaObject, IMediaObjectInPlace + 43 verbatim method records
+  (space-glued tokens preserved: REFERENCE_TIMErtNow,
+  DWORDcItemsToFetch).
+* Functions (13): 12 declared from Msdmo.lib rows + DMORegister
+  (no Requirements block; declared, not in def).  Prints: unsigned
+  long parameters kept (DMOGetTypes, DMORegisterFilter), STDAPI
+  return on DMORegisterFilter (empty convention macro in objbase.h
+  -> HRESULT declared, CoInitialize ms886303 precedent), the print
+  `WCHARszName[]` unsized-array parameter kept, DMOUnregisterFilter's
+  trailing parameter comma dropped (print recorded).
+
+Verification: make check / crosscheck / e2e GREEN on all six
+targets.  TU m71c: 3 size asserts (32-bit model; crosscheck caught
+a hand-arithmetic slip on DMO_PARTIAL_MEDIATYPE 32 not 16), 9 enum
+asserts + 2 error-code asserts, shaped usage of all 13 functions +
+6 interface pointers.  e2e gains msdmo.dll + DMOEnum import
+assertions (6 targets).  Headers 78 real + 83 aliases = 161 files;
+defs 57 (msdmo-doc.def +12).
