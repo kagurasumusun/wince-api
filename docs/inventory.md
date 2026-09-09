@@ -5673,3 +5673,47 @@ include spelling still resolves to the documented-case file anyway.
 - Gates: check / crosscheck / e2e GREEN x6.
 - Servers book C-API surface now complete (M75a-f + M76); remaining
   Servers rows are admin/registry/how-to pages.
+
+## M77a -- IP Helper API (Iphlpapi.h, Iptypes.h, Iprtrmib.h, Ipexport.h, def/iphlpapi-doc.def)
+
+NetGen book (tools/manifests/netgen.manifest, 956 pages fetched in
+M77 prep, rows.json 12457):
+
+- include/Iphlpapi.h (NEW, real): 43 declarations (Iphlpapi.lib):
+  the Create/Delete/Set IpForward/IpNet/ProxyArp family, GetIfTable/
+  GetIfEntry, GetIpAddrTable/GetIpForwardTable/GetIpNetTable,
+  GetTcpTable/GetUdpTable, Get{Ip,Icmp,Tcp,Udp}Statistics(+Ex),
+  GetAdaptersInfo, GetAdaptersAddresses, GetNetworkParams,
+  GetPerAdapterInfo, GetInterfaceInfo, GetAdapterIndex,
+  GetBestInterfaceEx (page spells GetBestInterfaceEX), GetBestRoute,
+  GetFriendlyIfIndex, GetNumberOfInterfaces,
+  GetUniDirectionalAdapterInfo, IpReleaseAddress/IpRenewAddress,
+  NotifyAddrChange/NotifyRouteChange, FlushIpNetTable, SetIfEntry,
+  SetIpStatistics, SetIpTTL, SetTcpEntry.
+- HELD (IPAddr/IPMask scalar typedefs unpublished): AddIPAddress,
+  SendARP, GetBestInterface (GetBestInterfaceEx is the sockaddr*
+  alternative), GetRTTAndHopCount -- verbatim records.
+- include/Iprtrmib.h (NEW): 11 MIB structs compiled (MIBICMPSTATS,
+  MIBICMPINFO, MIB_ICMP, MIB_IPADDRROW, MIB_IPFORWARDROW, MIB_IPSTATS,
+  MIB_PROXYARP, MIB_TCPROW, MIB_TCPSTATS, MIB_UDPROW, MIB_UDPSTATS --
+  all-DWORD); MIB_IFROW + the 6 ANY_SIZE tables pointer-only with
+  verbatim records (MAX_INTERFACE_NAME_LEN / MAXLEN_PHYSADDR /
+  ANY_SIZE unpublished).
+- include/Iptypes.h (NEW): IP_ADDRESS_STRING/IP_MASK_STRING,
+  IP_ADDR_STRING, IP_PER_ADAPTER_INFO, IF_OPER_STATUS, IP_DAD_STATE,
+  IP_PREFIX_ORIGIN, IP_SUFFIX_ORIGIN, SCOPE_LEVEL, and the
+  IP_ADAPTER_{UNICAST,ANYCAST,MULTICAST}_ADDRESS + IP_ADAPTER_PREFIX
+  structs compiled (SOCKET_ADDRESS via Winsock2.h;
+  IP_ADAPTER_UNICAST_ADDRESS print has a typedef-name-placement doc
+  typo, noted); IP_ADAPTER_INFO, FIXED_INFO, IP_ADAPTER_ADDRESSES
+  pointer-only (MAX_ADAPTER_* / MAX_HOSTNAME_LEN family and the
+  IP_ADAPTER_DNS_SERVER_ADDRESS type unpublished).
+- include/Ipexport.h (NEW): IP_ADAPTER_INDEX_MAP,
+  IP_INTERFACE_INFO, IP_UNIDIRECTIONAL_ADAPTER_ADDRESS -- pointer-only
+  records (MAX_ADAPTER_NAME / IPAddr unpublished).
+- Windef.h: PHANDLE closure moved here from Mq.h (print-grounded by
+  MQCreateCursor + NotifyAddrChange).
+- def/iphlpapi-doc.def (NEW): 43 exports (5 skipped: held IPAddr
+  functions).
+- TU m77a block; Makefile HDRS 129 -> 133.
+- Gates: check / crosscheck / e2e GREEN x6.

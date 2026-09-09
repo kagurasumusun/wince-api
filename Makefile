@@ -48,6 +48,10 @@ include/Httpfilt.h \
 include/IAccess.h \
 include/Imaging.h \
 include/Imm.h \
+include/Ipexport.h \
+include/Iphlpapi.h \
+include/Iprtrmib.h \
+include/Iptypes.h \
 include/Keybd.h \
 include/Kfuncs.h \
 include/Mlang.h \

@@ -1,0 +1,59 @@
+; iphlpapi-doc.def -- iphlpapi.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (iphlpapi.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY iphlpapi.dll
+EXPORTS
+  CreateIpForwardEntry
+  CreateIpNetEntry
+  CreateProxyArpEntry
+  DeleteIpForwardEntry
+  DeleteIpNetEntry
+  DeleteProxyArpEntry
+  FlushIpNetTable
+  GetAdapterIndex
+  GetAdaptersAddresses
+  GetAdaptersInfo
+  GetBestInterfaceEx
+  GetBestRoute
+  GetFriendlyIfIndex
+  GetIcmpStatistics
+  GetIcmpStatisticsEx
+  GetIfEntry
+  GetIfTable
+  GetInterfaceInfo
+  GetIpAddrTable
+  GetIpForwardTable
+  GetIpNetTable
+  GetIpStatistics
+  GetIpStatisticsEx
+  GetNetworkParams
+  GetNumberOfInterfaces
+  GetPerAdapterInfo
+  GetTcpStatistics
+  GetTcpStatisticsEx
+  GetTcpTable
+  GetUdpStatistics
+  GetUdpStatisticsEx
+  GetUdpTable
+  GetUniDirectionalAdapterInfo
+  IpReleaseAddress
+  IpRenewAddress
+  NotifyAddrChange
+  NotifyRouteChange
+  SetIfEntry
+  SetIpForwardEntry
+  SetIpNetEntry
+  SetIpStatistics
+  SetIpTTL
+  SetTcpEntry

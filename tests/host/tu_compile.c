@@ -42,6 +42,7 @@
 #include <Httpfilt.h>
 #include <Httpext.h>
 #include <Ras.h>
+#include <Iphlpapi.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6755,6 +6756,33 @@ static int m75f_shaped_usage(void)
            + (v6.IPV6NetPrefixCount != 0u);
 }
 
+static int m77a_shaped_usage(void)
+{
+    MIB_TCPSTATS      ts;
+    MIB_TCPROW        tr;
+    MIB_IPFORWARDROW  fr;
+    IP_ADDR_STRING    as;
+    IP_PER_ADAPTER_INFO pai;
+    IP_ADAPTER_PREFIX ap;
+    DWORD             d;
+
+    ts.dwNumConns = 0u;
+    tr.dwState = 0u;
+    fr.dwForwardMetric1 = 0u;
+    as.Context = 0u;
+    pai.AutoconfigEnabled = 0u;
+    ap.PrefixLength = 0u;
+    d = GetTcpStatistics(&ts);
+    d = GetTcpStatisticsEx(&ts, 0u);
+    d = SetTcpEntry(&tr);
+    d = GetBestRoute(0u, 0u, &fr);
+    d = GetPerAdapterInfo(0u, &pai, (PULONG)0);
+    d = GetNumberOfInterfaces((PDWORD)0);
+    d = NotifyAddrChange((PHANDLE)0, (LPOVERLAPPED)0);
+    (void)d;
+    return (int)ap.PrefixLength + ts.dwNumConns + (as.Context != 0u);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6890,6 +6918,8 @@ int host_tu_entry(void)
     if (m75e_shaped_usage() != 0)
         return 1;
     if (m75f_shaped_usage() != 0)
+        return 1;
+    if (m77a_shaped_usage() != 0)
         return 1;
     return 0;
 }

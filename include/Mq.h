@@ -16,14 +16,11 @@
 #include "Objbase.h"   /* HRESULT, PSECURITY_DESCRIPTOR, PROPVARIANT */
 
 /* --- Print-grounded closures. ------------------------------------
- * PHANDLE: printed by MQCreateCursor, unpublished as a typedef --
- * mechanical HANDLE pointer (LPHANDLE sibling).
  * QUEUEHANDLE: no CE page prints the typedef; used by the MQ*
  * signatures and paired with PHANDLE out-params in MQCreateCursor --
  * closed as HANDLE.  ITransaction: no interface page; the name is
  * printed by the MQSendMessage signature -- opaque forward.
  * Replace each on an official print. */
-typedef HANDLE *PHANDLE;
 typedef HANDLE QUEUEHANDLE;
 typedef QUEUEHANDLE *LPQUEUEHANDLE;
 typedef struct ITransaction ITransaction;

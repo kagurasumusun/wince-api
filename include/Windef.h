@@ -177,6 +177,10 @@ typedef HANDLE          HRSRC;     /* resource handle (FindResource aa453069 /
                                     * SizeofResource ms940346: Header Winbase.h;
                                     * desktop Win32 also types HRSRC as HANDLE) */
 typedef HANDLE         *LPHANDLE;  /* HANDLE pointer (DuplicateHandle ms885208) */
+typedef HANDLE         *PHANDLE;   /* HANDLE pointer closure: printed by
+                                    * MQCreateCursor (Mq.h rows) and
+                                    * NotifyAddrChange (Networking -
+                                    * General harvest); LPHANDLE sibling. */
 
 typedef UINT_PTR (WINAPI *FARPROC)(void);
 
