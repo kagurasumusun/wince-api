@@ -100,6 +100,9 @@ include/Tlhelp32.h \
 include/Tvout.h \
 include/Unimodem.h \
 include/Unknwn.h \
+include/Upnp.h \
+include/Upnpdevapi.h \
+include/Upnphost.h \
 include/Urlmon.h \
 include/Winbase.h \
 include/Winber.h \

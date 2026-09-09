@@ -31,6 +31,9 @@
 #include <winscard.h>
 #include <objbase.h>
 #include <Mq.h>
+#include <Upnpdevapi.h>
+#include <Upnp.h>
+#include <Upnphost.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6662,6 +6665,22 @@ static int m75a_shaped_usage(void)
     return 0;
 }
 
+static int m75b_shaped_usage(void)
+{
+    UPNPDEVICEINFO di;
+    UPNPPARAM       prm = { (PCWSTR)0, (PCWSTR)0 };
+    UPNPCB_ID       cb  = UPNPCB_CONTROL;
+    BOOL            ok;
+
+    di.cbStruct = sizeof(UPNPDEVICEINFO);
+    di.pfCallback = (PUPNPCALLBACK)0;
+    ok = UpnpAddDevice(&di);
+    ok = UpnpPublishDevice((PCWSTR)0);
+    (void)UpnpSetControlResponse((UPNPSERVICECONTROL *)0, 0u, &prm);
+    (void)cb;
+    return (int)ok;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6787,6 +6806,8 @@ int host_tu_entry(void)
     if (m74_shaped_usage() != 0)
         return 1;
     if (m75a_shaped_usage() != 0)
+        return 1;
+    if (m75b_shaped_usage() != 0)
         return 1;
     return 0;
 }

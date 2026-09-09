@@ -134,6 +134,8 @@ typedef CHAR           *PSTR;    /* char pointer (OUTLINETEXTMETRICW) */
 typedef WCHAR          *LPWSTR;
 typedef const WCHAR    *LPCWSTR;
 typedef WCHAR          *PWSTR;   /* WCHAR pointer (CE doc spellings) */
+typedef const WCHAR    *PCWSTR;  /* const WCHAR pointer (Upnpdevapi.h
+                                   * print spellings, M75b; LPCWSTR twin) */
 typedef DWORD *LPDWORD;
 typedef DWORD *PDWORD;  /* DWORD pointer (VirtualProtect aa450980) */
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */

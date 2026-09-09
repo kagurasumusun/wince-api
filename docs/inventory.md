@@ -5502,3 +5502,27 @@ M75 prep, 0 errors; rows.json 10499):
 - def/msmqrt-doc.def (NEW): 15 exports (1 skipped: MQReceiveMessage).
 - TU m75a block; Makefile HDRS 186 -> 189.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M75b -- UPnP C Device Host + COM interfaces (Upnpdevapi.h, Upnp.h, Upnphost.h, def/upnpcapi-doc.def)
+
+- include/Upnpdevapi.h (NEW, real): 9 function declarations
+  (Upnpcapi.lib: UpnpAddDevice, UpnpPublishDevice, UpnpUnpublishDevice,
+  UpnpRemoveDevice, UpnpGetSCPDPath, UpnpGetUDN,
+  UpnpSetControlResponse, UpnpSetErrorResponse,
+  UpnpSetRawControlResponse, UpnpSubmitPropertyEvent) + full structs
+  UPNPDEVICEINFO aa451144, UPNPPARAM aa451148, UPNPSERVICECONTROL
+  ms898418, UPNPSUBSCRIPTION ms898558 (pointer spelling as printed:
+  *PUNPNSUBSCRIPTION, doc typo kept), PUPNPCALLBACK ms896349,
+  UPNPCB_ID aa451143 (sequential values per C semantics, noted).
+  The three UpnpSet*Response prints omit the return type and their
+  pages have no Return Values section (BOOL siblings all do) --
+  closed as void, noted.
+- Windef.h: PCWSTR closure added (const WCHAR*; print-grounded by the
+  Upnpdevapi signatures; LPCWSTR twin).
+- include/Upnp.h (NEW): opaque forwards + records for 10 IUPnP*
+  interfaces (Uuid.lib rows; 70 method/property records).
+- include/Upnphost.h (NEW): opaque forwards + records for 5 IUPnP*
+  host interfaces (16 method records).
+- def/upnpcapi-doc.def (NEW): 10 exports (1 skipped: PUPNPCALLBACK).
+- TU m75b block; Makefile HDRS 189 -> 192.
+- Gates: check / crosscheck / e2e GREEN x6.
