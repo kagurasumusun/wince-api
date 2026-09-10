@@ -575,4 +575,49 @@ AKARI_CE_IMPORT BOOL SHSipPreference(HWND hwnd, SIPSTATE st) AKARI_CE_NAME(SHSip
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- NMN_ family (1 names; R1) ---- */
+#define NMN_INVOKECOMMAND                            0x044F
+
+/* ---- SHCMBF_ family (2 names; R1) ---- */
+#define SHCMBF_COLORBK                               0x0008
+#define SHCMBF_HMENU                                 0x0010
+
+/* ---- SHCMBM_ family (3 names; R1) ---- */
+#define SHCMBM_SETSUBMENU                            0x0590
+#define SHCMBM_GETSUBMENU                            0x0591
+#define SHCMBM_GETMENU                               0x0592
+
+/* ---- SHDB_ family (2 names; R1) ---- */
+#define SHDB_SHOW                                    0x0001
+#define SHDB_HIDE                                    0x0002
+
+/* ---- SHFS_ family (6 names; R1) ---- */
+#define SHFS_SHOWTASKBAR                             0x0001
+#define SHFS_HIDETASKBAR                             0x0002
+#define SHFS_SHOWSIPBUTTON                           0x0004
+#define SHFS_HIDESIPBUTTON                           0x0008
+#define SHFS_SHOWSTARTICON                           0x0010
+#define SHFS_HIDESTARTICON                           0x0020
+
+/* ---- SHRG_ family (1 names; R1) ---- */
+#define SHRG_RETURNCMD                               0x0001
+
+/* ---- SPI_ family (4 names; R1) ---- */
+#define SPI_SETSIPINFO                               0x00E0
+#define SPI_GETSIPINFO                               0x00E1
+#define SPI_SETCURRENTIM                             0x00E2
+#define SPI_GETCURRENTIM                             0x00E3
+
 #endif /* AKARI_AYGSHELL_H */

@@ -6798,3 +6798,11 @@ guard close, grouped by family, every value provenance-tagged R1.
   SIPF_LOCKED 4, R1).  Unresolved 3 (SIP_DOWN / SIP_STATUS_* are
   aygshell-enum-adjacent names our aygshell.h already carries as enum
   members -- code-identifier guard).  Gates GREEN x6.
+- include/aygshell.h: 19 defines, 7 families (NMN_INVOKECOMMAND 1103,
+  SHCMBF_ 2, SHCMBM_ 3 menu messages, SHDB_SHOW/HIDE, SHFS_ 6
+  fullscreen states, SHRG_RETURNCMD, SPI_ 4 = the SHSipInfo action
+  codes SPI_GET/SETCURRENTIM + SPI_GET/SETSIPINFO -- R1 carries them
+  in sipapi.h, allowed by the aygshell FORK_HOME since the CE pages
+  document them as SHSipInfo parameters).  Unresolved 6 incl. the
+  SHNP_*/SIP_* names already declared as enum members.  Gates GREEN
+  x6.
