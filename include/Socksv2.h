@@ -44,20 +44,73 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: drivers-pccard (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* aa447694 CS_SocketCallback: documented name-only (no value published; held) */
-/* ms921840 SS_GetPowerEntry: documented name-only (no value published; held) */
-/* ms921851 SS_GetSocket: documented name-only (no value published; held) */
-/* ms921864 SS_GetWindow: documented name-only (no value published; held) */
-/* ms921870 SS_InquireSocket: documented name-only (no value published; held) */
-/* ms921879 SS_InquireWindow: documented name-only (no value published; held) */
-/* ms921896 SS_ResetSocket: documented name-only (no value published; held) */
-/* ms921903 SS_SetSocket: documented name-only (no value published; held) */
-/* ms921913 SS_SetWindow: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * M99 chained types -- forward declarations (the full page-print
+ * definitions sit at the end of this header; the pages are the
+ * cited CE reference pages).
+ * ------------------------------------------------------------------ */
+typedef struct SS_POWER_ENTRY SS_POWER_ENTRY;   /* forward (full definition below) */
+typedef struct SS_SOCKETSTATE SS_SOCKET_STATE;   /* forward (full definition below) */
+
+/* aa447694 CS_SocketCallback: the page prints the prototype under the name PF_SS_CALLBACK (title/print difference); derived at the M99 sweep. */
+typedef void (*PF_SS_CALLBACK)(HANDLE hSocket, UINT16 uSocket, PSS_SOCKET_STATE pSocketState);
+
+/* ms921840 SS_GetPowerEntry: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_GetPowerEntry)(HANDLE hSocket, PDWORD pdwNumOfEntry, PSS_POWER_ENTRY pPowerEntry);
+
+/* ms921851 SS_GetSocket: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_GetSocket)(HANDLE hSocket, PSS_SOCKET_STATEpSocketState);
+
+/* ms921864 SS_GetWindow: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_GetWindow)(UINT32 uWindow, PSS_WINDOW_STATEpWindowState);
+
+/* ms921870 SS_InquireSocket: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_InquireSocket)(HANDLE hSocket, PSS_SOCKET_INFOpSocketInfo);
+
+/* ms921879 SS_InquireWindow: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_InquireWindow)(UINT32 uWindow, PSS_WINDOW_INFOpWindowInfo);
+
+/* ms921896 SS_ResetSocket: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_ResetSocket)(HANDLE hSocket);
+
+/* ms921903 SS_SetSocket: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_SetSocket)(HANDLE hSocket, PSS_SOCKET_STATEpSocketState);
+
+/* ms921913 SS_SetWindow: prototype printed by the page; derived at the M99 sweep. */
+typedef STATUS (*SS_SetWindow)(UINT32 uWindow, PSS_WINDOW_STATEpWindowState);
+
 /* ms921955 SS_TranslateBusAddr: documented name-only (no value published; held) */
 /* aa448144 SS_TranslateSystemAddr: documented name-only (no value published; held) */
 
 #ifdef __cplusplus
 }
 #endif
+
+
+/* ------------------------------------------------------------------
+ * M99 chained structures -- full page prints (completing the forward
+ * declarations above; source: the cited CE reference pages).
+ * ------------------------------------------------------------------ */
+/* ms921890(v=msdn.10) SS_POWER_ENTRY: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct SS_POWER_ENTRY{
+    UINT8 uPowerLevel;
+    UINT8 fSupply;
+};
+typedef SS_POWER_ENTRY *PSS_POWER_ENTRY;   /* printed alias */
+
+/* ms921944(v=msdn.10) SS_SOCKET_STATE: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct SS_SOCKETSTATE{
+    DWORD dwEventMask;
+    DWORD dwEventChanged;
+    DWORD dwEventStatus;
+    DWORD dwInterfaceType;
+    DWORD dwInterruptStatus;
+    UINT8 flREQRouting;
+    UINT8 fVcc;
+    UINT8 uVpp1;
+    UINT8 uVpp2;
+};
+typedef SS_SOCKET_STATE *PSS_SOCKET_STATE;   /* printed alias */
 
 #endif /* AKARI_SOCKSV2_H */

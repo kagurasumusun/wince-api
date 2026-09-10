@@ -1274,7 +1274,15 @@ AKARI_CE_IMPORT IDirect3DMobile* WINAPI Direct3DMobileCreate(UINT SDKVersion)
 /* ------------------------------------------------------------------
  * Book surface: d3dm (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms928109 D3DMCREATE_MULTITHREADED: documented name-only (no value published; held) */
+/* ms932031 MAX_DEVICE_IDENTIFIER_STRING: value printed by the CE 5.0
+ * page itself (`#define MAX_DEVICE_IDENTIFIER_STRING 512`; the page's
+ * Requirements row names D3dmtypes.h, whose declarations this file
+ * carries per the M67 alias note); adopted at the M99 sweep.  Note
+ * the CE value is 512, not the desktop 128. */
+#define MAX_DEVICE_IDENTIFIER_STRING 512
+
+/* ms928109 D3DMCREATE_MULTITHREADED: value adopted at the M99 three-generation sweep -- ms928109: the D3DMCreate Constants table prints the value directly (CE 6.0 twin ee491075 prints the same 0x00000004). */
+#define D3DMCREATE_MULTITHREADED            0x00000004
 /* ms907765 D3DM Values (Header: D3dm.h.) */
 /* ms939132 D3DMADAPTER Values (Header: D3dm.h.) */
 /* aa451582 D3DMERR Values (Header: D3dm.h.) */

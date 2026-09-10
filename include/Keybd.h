@@ -82,8 +82,19 @@ typedef UINT32 KEY_STATE_FLAGS;
 /* ------------------------------------------------------------------
  * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms902134 KBDI_AUTOREPEAT_INFO: documented name-only (no value published; held) */
-/* ms902135 KBDI_VKEY_TO_UNICODE_INFO: documented name-only (no value published; held) */
+/* ms902134 KBDI_AUTOREPEAT_INFO: prototype printed by the page; derived at the M99 sweep. */
+typedef struct KBDI_AUTOREPEAT_INFO {
+    INT32 CurrentInitialDelay;
+    INT32 CurrentRepeatRate;
+    INT32 cInitialDelaysSelectable;
+    INT32 cRepeatRatesSelectable;
+} KBDI_AUTOREPEAT_INFO;
+
+/* ms902135 KBDI_VKEY_TO_UNICODE_INFO: prototype printed by the page; derived at the M99 sweep. */
+typedef struct KBDI_VKEY_TO_UNICODE_INFO {
+    UINT32 cbToUnicodeState;
+    UINT32 cMaxToUnicodeCharacters;
+} KBDI_VKEY_TO_UNICODE_INFO;
 
 #ifdef __cplusplus
 }

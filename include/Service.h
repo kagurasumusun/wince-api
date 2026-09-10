@@ -49,14 +49,14 @@ typedef struct _ServicesExeCommandLineParams ServicesExeCommandLineParams;
  * IOCTL_SERVICE_STOP, IOCTL_SERVICE_UNINSTALL,
  * IOCTL_SERVICE_UNLOAD. */
 
-/* aa450897 "RegisterService": print
+/* aa450871 "RegisterService": print
  * `HANDLE RegisterService(LPCWSTRlpszType,DWORD dwIndex,
  * LPCWSTR lpszLib,DWORD dwInfo);` */
 AKARI_CE_IMPORT HANDLE RegisterService(LPCWSTR lpszType,
                     DWORD dwIndex, LPCWSTR lpszLib, DWORD dwInfo)
                     AKARI_CE_NAME(RegisterService);
 
-/* aa450886 "DeregisterService": print
+/* aa450329 "DeregisterService": print
  * `BOOL DeregisterService(HANDLEhDevice);` */
 AKARI_CE_IMPORT BOOL DeregisterService(HANDLE hDevice)
                     AKARI_CE_NAME(DeregisterService);
@@ -69,7 +69,7 @@ AKARI_CE_IMPORT BOOL EnumServices(PBYTE pBuffer,
                     DWORD pdwServiceEntries, DWORD pdwBufferLen)
                     AKARI_CE_NAME(EnumServices);
 
-/* aa450369 "GetServiceHandle": print
+/* aa450425 "GetServiceHandle": print
  * `HANDLE GetServiceHandle(LPWSTRszPrefix,LPWSTR szDllName,
  * DWORD pdwDllBufLen);` -- third parameter printed as DWORD;
  * kept verbatim. */
@@ -77,12 +77,12 @@ AKARI_CE_IMPORT HANDLE GetServiceHandle(LPWSTR szPrefix,
                     LPWSTR szDllName, DWORD pdwDllBufLen)
                     AKARI_CE_NAME(GetServiceHandle);
 
-/* aa450898 "ActivateService": print
+/* aa450278 "ActivateService": print
  * `HANDLE ActivateService(LPCWSTRlpszDevKey,DWORD dwClientInfo);` */
 AKARI_CE_IMPORT HANDLE ActivateService(LPCWSTR lpszDevKey,
                     DWORD dwClientInfo) AKARI_CE_NAME(ActivateService);
 
-/* aa450392 "ServiceIoControl": print
+/* aa450904 "ServiceIoControl": print
  * `BOOL ServiceIoControl(HANDLEhService,DWORD dwIoControlCode,
  * LPVOID lpInBuf,DWORD dwInBufLen,LPVOID lpOutBuf,
  * DWORD dwOutBufLen,PDWORD pdwBytesTransferred);` */
@@ -103,14 +103,14 @@ AKARI_CE_IMPORT BOOL ServiceAddPort(HANDLE hService,
                     INT iProtocol, WCHAR szRegWritePath)
                     AKARI_CE_NAME(ServiceAddPort);
 
-/* aa450393 "ServiceClosePort": print
+/* aa450897 "ServiceClosePort": print
  * `BOOL ServiceClosePort(HANDLE hService, SOCKADDR* pSockAddr,
  * int cbSockAddr,INT iProtocol);` */
 AKARI_CE_IMPORT BOOL ServiceClosePort(HANDLE hService,
                     SOCKADDR *pSockAddr, int cbSockAddr,
                     INT iProtocol) AKARI_CE_NAME(ServiceClosePort);
 
-/* aa450394 "ServiceUnbindPorts": print
+/* aa450914 "ServiceUnbindPorts": print
  * `BOOL ServiceUnbindPorts(HANDLEhService);` */
 AKARI_CE_IMPORT BOOL ServiceUnbindPorts(HANDLE hService)
                     AKARI_CE_NAME(ServiceUnbindPorts);

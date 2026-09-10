@@ -26,7 +26,7 @@ extern "C" {
  * on the host to the peer Bluetooth HID device (input buffer =
  * BT_ADDR of the device).  Name recorded only. */
 
-/* ee496034 "BTHHID_IOCTL_HIDDisconnect": disconnect the HID class
+/* ee495827 "BTHHID_IOCTL_HIDDisconnect": disconnect the HID class
  * driver from the peer device.  Name recorded only. */
 
 #ifdef __cplusplus

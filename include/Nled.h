@@ -32,9 +32,32 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms905297 NLED_COUNT_INFO: documented name-only (no value published; held) */
-/* ms905326 NLED_SETTINGS_INFO: documented name-only (no value published; held) */
-/* ms905332 NLED_SUPPORTS_INFO: documented name-only (no value published; held) */
+/* ms905297 NLED_COUNT_INFO: prototype printed by the page; derived at the M99 sweep. */
+typedef struct NLED_COUNT_INFO {
+    UINT cLeds;
+} NLED_COUNT_INFO;
+
+/* ms905326 NLED_SETTINGS_INFO: prototype printed by the page; derived at the M99 sweep. */
+typedef struct NLED_SETTINGS_INFO {
+    UINT LedNum;
+    INT OffOnBlink;
+    LONG TotalCycleTime;
+    LONG OnTime;
+    LONG OffTime;
+    INT MetaCycleOn;
+    INT MetaCycleOff;
+} NLED_SETTINGS_INFO;
+
+/* ms905332 NLED_SUPPORTS_INFO: prototype printed by the page; derived at the M99 sweep. */
+typedef struct NLED_SUPPORTS_INFO {
+    UINT LedNum;
+    LONG lCycleAdjust;
+    BOOL fAdjustTotalCycleTime;
+    BOOL fAdjustOnTime;
+    BOOL fAdjustOffTime;
+    BOOL fMetaCycleOn;
+    BOOL fMetaCycleOff;
+} NLED_SUPPORTS_INFO;
 
 #ifdef __cplusplus
 }

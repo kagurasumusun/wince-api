@@ -409,9 +409,11 @@ e2e:
 	    b=$$(basename $$f .def); \
 	    "$$bin/llvm-dlltool" $$dtf -d $$f -l $$d/$$b.lib >/dev/null || exit 1; \
 	  done; \
-	  (cd "$(CRTDIR)" && make clean >/dev/null 2>&1 \
-	     && make TARGET=$$t CC=$$bin/clang AR=$$bin/llvm-ar >/dev/null 2>&1) || { \
-	    echo "[e2e] wince-crt build failed for $$t" >&2; exit 1; }; \
+  case $$t in arm*) crtarch="ARCHFLAGS=-march=armv5tej";; \
+                   *)    crtarch="";; esac; \
+  (cd "$(CRTDIR)" && make clean >/dev/null 2>&1 \
+     && make TARGET=$$t CC=$$bin/clang AR=$$bin/llvm-ar $$crtarch >/dev/null 2>&1) || { \
+    echo "[e2e] wince-crt build failed for $$t" >&2; exit 1; }; \
 	  for s in e2e_console e2e_winmain e2e_module; do \
 	    echo "[e2e] $$t compile: $$s"; \
 	    "$(WINCECLANG)" -target $$t -std=c11 -ffreestanding \

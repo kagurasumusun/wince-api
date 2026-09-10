@@ -84,13 +84,19 @@ extern "C" {
 /* ms901376 IOCTL_CDROM_EJECT_MEDIA: documented name-only (no value published; held) */
 /* ms901377 IOCTL_CDROM_GET_SENSE_DATA: documented name-only (no value published; held) */
 /* ms901378 IOCTL_CDROM_ISSUE_INQUIRY: documented name-only (no value published; held) */
-/* ms901379 IOCTL_CDROM_PAUSE_AUDIO: documented name-only (no value published; held) */
-/* ms901380 IOCTL_CDROM_PLAY_AUDIO_MSF: documented name-only (no value published; held) */
+/* ms901379 IOCTL_CDROM_PAUSE_AUDIO: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0003, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x0002400C (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_PAUSE_AUDIO             0x0002400C
+/* ms901380 IOCTL_CDROM_PLAY_AUDIO_MSF: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0006, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00024018 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_PLAY_AUDIO_MSF          0x00024018
 /* ms901381 IOCTL_CDROM_READ_SG: documented name-only (no value published; held) */
-/* ms901382 IOCTL_CDROM_READ_TOC: documented name-only (no value published; held) */
-/* ms901383 IOCTL_CDROM_RESUME_AUDIO: documented name-only (no value published; held) */
-/* ms901384 IOCTL_CDROM_SEEK_AUDIO_MSF: documented name-only (no value published; held) */
-/* ms901385 IOCTL_CDROM_STOP_AUDIO: documented name-only (no value published; held) */
+/* ms901382 IOCTL_CDROM_READ_TOC: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0000, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00024000 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_READ_TOC                0x00024000
+/* ms901383 IOCTL_CDROM_RESUME_AUDIO: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0004, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00024010 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_RESUME_AUDIO            0x00024010
+/* ms901384 IOCTL_CDROM_SEEK_AUDIO_MSF: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0001, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00024004 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_SEEK_AUDIO_MSF          0x00024004
+/* ms901385 IOCTL_CDROM_STOP_AUDIO: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdrm.h: CTL_CODE(IOCTL_CDROM_BASE, 0x0002, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00024008 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_CDROM_STOP_AUDIO              0x00024008
 /* ms901386 IOCTL_CDROM_TEST_UNIT_READY: documented name-only (no value published; held) */
 
 /* ------------------------------------------------------------------

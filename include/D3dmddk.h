@@ -332,30 +332,86 @@ typedef struct _D3DMTEXTURE_DESC {
 /* ------------------------------------------------------------------
  * Book surface: drivers-d3dmdisp (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* aa447695 D3DM_CreateContext: documented name-only (no value published; held) */
-/* aa447716 D3DM_CREATECONTEXT_PTR: documented name-only (no value published; held) */
-/* aa447696 D3DM_CreateSurface: documented name-only (no value published; held) */
-/* aa447720 D3DM_CREATESURFACE_PTR: documented name-only (no value published; held) */
-/* aa447697 D3DM_DestroyContext: documented name-only (no value published; held) */
-/* aa447722 D3DM_DESTROYCONTEXT_PTR: documented name-only (no value published; held) */
-/* aa447698 D3DM_DestroySurface: documented name-only (no value published; held) */
-/* aa447724 D3DM_DESTROYSURFACE_PTR: documented name-only (no value published; held) */
+/* aa447695 D3DM_CreateContext: this page prints the same D3DM_CREATECONTEXT_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ------------------------------------------------------------------
+ * M99 chained types -- forward declarations (the full page-print
+ * definitions sit at the end of this header; the pages are the
+ * cited CE reference pages).
+ * ------------------------------------------------------------------ */
+typedef struct _D3DM_CREATESURFACE_DATA D3DM_CREATESURFACE_DATA;   /* forward (full definition below) */
+typedef struct _D3DM_GETADAPTERINFO_DATA D3DM_GETADAPTERINFO_DATA;   /* forward (full definition below) */
+typedef struct _D3DM_INITIALIZE_DATA D3DM_INITIALIZE_DATA;   /* forward (full definition below) */
+typedef struct _D3DM_RESOURCEMANAGER_DATA D3DM_RESOURCEMANAGER_DATA;   /* forward (full definition below) */
+typedef struct _D3DMADAPTER_IDENTIFIER D3DMADAPTER_IDENTIFIER;   /* forward (full definition below) */
+typedef struct _D3DMDEVICEFORMAT D3DMDEVICEFORMAT;   /* forward (full definition below) */
+
+/* M99 chained definitions (needed before the derived declarations). */
+/* ms896745(v=msdn.10) D3DM_RESOURCEMANAGER_ACTION: enum print on the page; derived at the M99 sweep. */
+typedef enum _D3DM_RESOURCEMANAGER_ACTION {
+    D3DM_RESACTION_DISCARD_BYTES = 0,
+    D3DM_RESACTION_SET_PRIORITY = 1,
+    D3DM_RESACTION_PRELOAD = 2,
+    D3DM_RESACTION_FORCE_ULONG = 0xFFFFFFFF,
+} D3DM_RESOURCEMANAGER_ACTION;
+
+/* aa447716 D3DM_CREATECONTEXT_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_CREATECONTEXT_PTR)(D3DM_CREATECONTEXT_DATA *);
+
+/* aa447696 D3DM_CreateSurface: this page prints the same D3DM_CREATESURFACE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* aa447720 D3DM_CREATESURFACE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_CREATESURFACE_PTR)(D3DM_CREATESURFACE_DATA *);
+
+/* aa447697 D3DM_DestroyContext: this page prints the same D3DM_DESTROYCONTEXT_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* aa447722 D3DM_DESTROYCONTEXT_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_DESTROYCONTEXT_PTR)(D3DM_DESTROYCONTEXT_DATA *);
+
+/* aa447698 D3DM_DestroySurface: this page prints the same D3DM_DESTROYSURFACE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* aa447724 D3DM_DESTROYSURFACE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_DESTROYSURFACE_PTR)(D3DM_DESTROYSURFACE_DATA *);
+
 /* aa447725 D3DM_DLL_ENTRY: documented name-only (no value published; held) */
-/* aa447700 D3DM_DrawPrimitive: documented name-only (no value published; held) */
-/* aa447729 D3DM_DRAWPRIMITIVE_PTR: documented name-only (no value published; held) */
-/* aa447701 D3DM_GetAdapterInfo: documented name-only (no value published; held) */
-/* ms896730 D3DM_GETADAPTERINFO_PTR: documented name-only (no value published; held) */
-/* aa447702 D3DM_GetInfo: documented name-only (no value published; held) */
-/* ms896733 D3DM_GETINFO_PTR: documented name-only (no value published; held) */
-/* aa447703 D3DM_Initialize: documented name-only (no value published; held) */
-/* aa447704 D3DM_LockSurface: documented name-only (no value published; held) */
-/* ms896738 D3DM_LOCKSURFACE_PTR: documented name-only (no value published; held) */
-/* aa447705 D3DM_ResourceManager: documented name-only (no value published; held) */
-/* ms896747 D3DM_RESOURCEMANAGER_PTR: documented name-only (no value published; held) */
-/* aa447709 D3DM_UnlockSurface: documented name-only (no value published; held) */
-/* ms896758 D3DM_UNLOCKSURFACE_PTR: documented name-only (no value published; held) */
-/* aa447710 D3DM_ValidateDevice: documented name-only (no value published; held) */
-/* ms896760 D3DM_VALIDATEDEVICE_PTR: documented name-only (no value published; held) */
+/* aa447700 D3DM_DrawPrimitive: this page prints the same D3DM_DRAWPRIMITIVE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* aa447729 D3DM_DRAWPRIMITIVE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_DRAWPRIMITIVE_PTR)(D3DM_DRAWPRIMITIVE_DATA *);
+
+/* aa447701 D3DM_GetAdapterInfo: this page prints the same D3DM_GETADAPTERINFO_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896730 D3DM_GETADAPTERINFO_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_GETADAPTERINFO_PTR)(D3DM_GETADAPTERINFO_DATA *);
+
+/* aa447702 D3DM_GetInfo: this page prints the same D3DM_GETINFO_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896733 D3DM_GETINFO_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_GETINFO_PTR)(D3DM_GETINFO_DATA *);
+
+/* aa447703 D3DM_Initialize: the page prints the prototype under the name D3DM_INITIALIZE_PTR (title/print difference); derived at the M99 sweep. */
+typedef DWORD (*D3DM_INITIALIZE_PTR)(D3DM_INITIALIZE_DATA *);
+
+/* aa447704 D3DM_LockSurface: this page prints the same D3DM_LOCKSURFACE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896738 D3DM_LOCKSURFACE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_LOCKSURFACE_PTR)(D3DM_LOCKSURFACE_DATA *);
+
+/* aa447705 D3DM_ResourceManager: this page prints the same D3DM_RESOURCEMANAGER_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896747 D3DM_RESOURCEMANAGER_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_RESOURCEMANAGER_PTR)(D3DM_RESOURCEMANAGER_DATA *);
+
+/* aa447709 D3DM_UnlockSurface: this page prints the same D3DM_UNLOCKSURFACE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896758 D3DM_UNLOCKSURFACE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_UNLOCKSURFACE_PTR)(D3DM_UNLOCKSURFACE_DATA *);
+
+/* aa447710 D3DM_ValidateDevice: this page prints the same D3DM_VALIDATEDEVICE_PTR prototype (the declaration is carried at its own page record; M99 sweep). */
+
+/* ms896760 D3DM_VALIDATEDEVICE_PTR: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*D3DM_VALIDATEDEVICE_PTR)(D3DM_VALIDATEDEVICE_DATA *);
+
 /* aa447708 D3DMTSS_TEXTURE: documented name-only (no value published; held) */
 /* ms896720 D3DM_DRIVER Values (Header: D3dmddk.h.) */
 /* ms896731 D3DM_GETINFO Values (Header: D3dmddk.h.) */
@@ -387,5 +443,91 @@ typedef struct _D3DMTEXTURE_DESC {
 #ifdef __cplusplus
 }
 #endif
+
+
+/* ------------------------------------------------------------------
+ * M99 chained structures -- full page prints (completing the forward
+ * declarations above; source: the cited CE reference pages).
+ * ------------------------------------------------------------------ */
+/* aa447719(v=msdn.10) D3DM_CREATESURFACE_DATA: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DM_CREATESURFACE_DATA{
+    D3DMRESOURCETYPE SurfaceType;
+    union { D3DMSURFACE_DESC SurfaceDesc;
+    D3DMVERTEXBUFFER_DESC VertexDesc;
+    D3DMINDEXBUFFER_DESC IndexDesc;
+    D3DMTEXTURE_DESC TextureDesc;
+    };
+    ULONG nContextId;
+    ULONG nSurfaceId;
+    HRESULT rval;
+};
+
+/* ms896729(v=msdn.10) D3DM_GETADAPTERINFO_DATA: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DM_GETADAPTERINFO_DATA{
+    D3DMADAPTER_IDENTIFIER* pIdentifier;
+    D3DMCAPS* pCaps;
+    ULONG cDisplayMode;
+    D3DMDISPLAYMODE* pDisplayMode;
+    ULONG nCurrentMode;
+    ULONG nFormat;
+    D3DMDEVICEFORMAT* pFormat;
+    ULONG nMultisample;
+    D3DMMULTISAMPLE_TYPE* pMultisample;
+    ULONG nProfile;
+    D3DMPROFILE* pProfile;
+    ULONG cTotalVRam;
+    ULONG cCurrentVRam;
+    HRESULT rval;
+};
+typedef D3DM_GETADAPTERINFO_DATA *pIdentifier;   /* printed alias */
+typedef D3DM_GETADAPTERINFO_DATA *pCaps;   /* printed alias */
+typedef D3DM_GETADAPTERINFO_DATA *pDisplayMode;   /* printed alias */
+typedef D3DM_GETADAPTERINFO_DATA *pFormat;   /* printed alias */
+typedef D3DM_GETADAPTERINFO_DATA *pMultisample;   /* printed alias */
+typedef D3DM_GETADAPTERINFO_DATA *pProfile;   /* printed alias */
+
+/* ms896735(v=msdn.10) D3DM_INITIALIZE_DATA: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DM_INITIALIZE_DATA{
+    D3DM_GETADAPTERINFO_PTR pGetAdapterInfo;
+    D3DM_CREATECONTEXT_PTR pCreateContext;
+    D3DM_DESTROYCONTEXT_PTR pDestroyContext;
+    D3DM_CREATESURFACE_PTR pCreateSurface;
+    D3DM_DESTROYSURFACE_PTR pDestroySurface;
+    D3DM_LOCKSURFACE_PTR pLockSurface;
+    D3DM_UNLOCKSURFACE_PTR pUnlockSurface;
+    D3DM_DRAWPRIMITIVE_PTR pDrawPrimitive;
+    D3DM_VALIDATEDEVICE_PTR pValidateDevice;
+    D3DM_GETINFO_PTR pGetInfo;
+    D3DM_RESOURCEMANAGER_PTR pResourceManager;
+};
+
+/* ms896746(v=msdn.10) D3DM_RESOURCEMANAGER_DATA: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DM_RESOURCEMANAGER_DATA{
+    D3DM_RESOURCEMANAGER_ACTION Action;
+    ULONG nContextId;
+    ULONG nDiscardBytes;
+    ULONG nSurfaceId;
+    ULONG nNewPriority;
+    HRESULT rval;
+};
+
+/* ms939133 D3DMADAPTER_IDENTIFIER: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DMADAPTER_IDENTIFIER{
+    TCHAR Driver[MAX_DEVICE_IDENTIFIER_STRING];
+    TCHAR Description[MAX_DEVICE_IDENTIFIER_STRING];
+    LARGE_INTEGER DriverVersion;
+    ULONG VendorId;
+    ULONG DeviceId;
+    ULONG SubSysId;
+    ULONG Revision;
+    GUID DeviceIdentifier;
+};
+
+/* aa447699(v=msdn.10) D3DMDEVICEFORMAT: structure print on the page; derived at the M99 sweep (forward-declared above). */
+struct _D3DMDEVICEFORMAT{
+    D3DMFORMAT Format;
+    ULONG TypeFlags;
+    ULONG Usage;
+};
 
 #endif /* AKARI_D3DMDDK_H */

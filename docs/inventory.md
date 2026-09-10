@@ -7206,3 +7206,87 @@ residue interned.h -- "Interned.h .h" archive-typo rows
 aa451906/aa452134/aa452193, records carried in webvw.h), corpus
 INDEX 25905 pages (1.1G, pushed).  make check / crosscheck / e2e
 GREEN x6.  THE DOCUMENTED API SURFACE IS COMPLETE.
+
+## M99 -- unpublished values + prototypes: official-source derivation sweep
+
+Goal: fill the held ledger from official + trustworthy public
+sources only -- Microsoft official value tables (learn.microsoft.com,
+WDK), R1 (CeGCC-lineage w32api, public domain), and mechanical
+calculation.  mingw-w64/Wine/ReactOS REMAIN BANNED by user policy
+(R2 removed M98).  Ambiguity policy: adopt only uniquely-determined
+values; where a strongest candidate is adopted, the other candidate
+values are recorded in the on-site comment.
+
+Three-generation sweep (CE 4.2/5.0/6.0): tools/twin-fetch.py pulled
+13,638 CE 6 book pages (build/pages6); tools/ce-sweep.py diffed
+struct/enum/req tables (build/sweep/struct-diff.tsv, req-diff.tsv,
+req-semantic.md); tools/mine-values.py mined printable values
+(mine-values.tsv).  Citation audit: tools/fix-citations.py, 34
+repairs across headers.
+
+Value adoptions (tools/adopt-sweep-values.py, 80 defines in 8
+headers, each with on-site M99 comment citing the CE page + value
+source): Pegdser.h 19 IOCTL_SERIAL_* (CTL_CODE alias-chain resolved
+through R1 ntddser + winioctl constants; e.g. IOCTL_SERIAL_CLR_DTR
+0x001B0028), Cdioctl.h 6 IOCTL_CDROM_*, Dvdioctl.h
+IOCTL_DVD_GET_REGION, Ntddndis.h 38 OIDs (15 OID_802_3_* + 23
+OID_GEN_*; e.g. OID_GEN_HARDWARE_STATUS 0x00010102), Tapi.h 12
+LINE_* (LINE_ADDRESSSTATE 0 ... LINE_NEWCALL pinned 500, the TSPI
+base the page table implies), Commctrl.h RB_HITTEST 0x0408 /
+TB_GETBUTTON 0x0417, D3dm.h D3DMCREATE_MULTITHREADED 0x4,
+D3dmtypes.h D3DMPRESENTFLAG_LOCKABLE_BACKBUFFER 0x1.  Manual
+adoptions: Shobjidl.h SHGNO full 5-member enum (desktop _SHGDNF
+page; rejected bare-sequential reading recorded on-site), D3dm.h
+MAX_DEVICE_IDENTIFIER_STRING 512 (ms932031 prints it verbatim; CE
+512, NOT desktop 128).
+
+CE6-only enum-member decisions (twin-cited on-site): Wininet.h
+INTERNET_SCHEME extended with SOCKS/JAVASCRIPT/VBSCRIPT (implicit
+10..12) + FIRST/LAST aliases (ee492774); Sdcardddk.h
+SD_RESPONSE_TYPE += ResponseR7 (ee483384); dvddrvr.h
+EDVDAudioStreamType += DVD_AUDIO_TYPE_SDDS (ee483651),
+EDVDLpcmQuantization += DVD_LPCM_24 (ee483388), EDVDSyncEventType
++= DVD_CC_DATA_EVENT (ee483225), EDVDAudioFreq twin-confirmed
+(ee485411), EDVDAspectRatioMode twin no-decl noted (ee481106).
+BINDSTATUS twin truncation: no action (desktop upstream artifact).
+
+Prototype/typedef materialization (tools/derive-typedefs.py): the
+CE reference pages print full prototypes for the held name-only
+records; the tool extracts the printed declarations (fnptr typedefs,
+renamed prints, struct/enum prints), glue-splits page-flattened
+parameters/members, carries printed pointer aliases (", *PNAME;"),
+chains to types that have their own printed pages (forward typedef +
+end-of-header full struct + alias typedefs, D3DM_*_DATA family), and
+guards -- as a fixpoint -- any declaration still referencing
+unpublished types (those stay held, e.g. Hiddi LPGET_*: HID_HANDLE
+is documented nowhere; Usbdi LP* transfer family: USB_HANDLE /
+USB_PIPE / USB_TRANSFER; Ddrawi LPDDHAL_*: the *DATA structs; GPE/
+DDGPE C++-member-pointer prints).  Same-symbol prints de-duplicate
+(D3DM_Xxx function pages vs D3DM_X_PTR typedef pages -> xref
+notes).  Emitted (idempotent -- re-runs converge): 52 fnptr + 2
+renamed (D3DM_INITIALIZE_PTR, PF_SS_CALLBACK) + 16 struct (8
+in-place, 8 chained with forward declarations) + 1 enum + 11 xref
+notes across Avc_unit/Battimpl/D3dmddk/IExchangeClient/Keybd/
+Keybddr/Keybdpdd/Nled/Pwingdi/Rndismini/Socksv2/Tchddi/Usbdi
+(Avc_unit UNIT_*CB with the undocumented UNIT_MediaType kept as
+recorded holds).  Supporting base types: Windef.h INT32 (typedef
+int32_t, the signed partner of the M98 UINT32; Keybd KBDI pages
+print it verbatim), Tchddi.h INT32 opaque carrier dropped in its
+favor.  C++-member-pointer prints (GPE::* DDI structs GPEBltParms/
+GPELineParms/GPEModeEx, DDRAWI_DDRAWSURFACE_LCL with internal-only
+member types) stay recorded-verbatim -- not compilable C.
+
+Held ledger: 569 -> 489 (value adoptions) -> 422 name-only held
+(this pass resolved 52 fnptr + 2 renamed + 16 struct + 1 enum + 11
+xref + 2 recorded-verbatim Avc holds); 252 member-types-held and
+104 recorded-verbatim rows remain (those cite prints, not name-only
+rows).  build/sweep/inventory.json predates the pass (pre-adoption
+569); the authoritative recount is the on-site comment census.
+
+Toolchain: LLVM-WinCE artifact 10134447081 (clang 22.1.8) smoke
+test DONE (arm-pc-wince6.0 -fsyntax-only + tu_compile.c codegen);
+e2e recipe now pins the wince-crt ARM builds to -march=armv5tej
+(the artifact driver defaults bare *-pc-wince ARM to arm7tdmi /
+ARMv4T and crashes in ISel; the fresh wince-crt clone carries no
+default march).  Gates: make check (hostcheck 0x420/0x500/0x600 +
+defcheck), crosscheck x6, e2e x6 -- ALL GREEN.

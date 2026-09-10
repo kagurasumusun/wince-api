@@ -45,7 +45,14 @@ typedef enum _SD_RESPONSE_TYPE {
     ResponseR3,
     ResponseR4,
     ResponseR5,
-    ResponseR6
+    ResponseR6,
+    ResponseR7                         /* CE 6 only: the twin page
+                                        * ee483384(v=winembedded.60)
+                                        * prints ResponseR7 as the
+                                        * ninth member (implicit 8);
+                                        * the CE 5 page ms920454 stops
+                                        * at ResponseR6 -- M99 cross-
+                                        * generation adoption. */
 } SD_RESPONSE_TYPE, *PSD_RESPONSE_TYPE;
 /* ms920459 SD_TRANSFER_CLASS (page print, compiled) */
 typedef enum  {

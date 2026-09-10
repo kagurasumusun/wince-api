@@ -4072,7 +4072,8 @@ typedef struct LVSETINFOTIP {
 /* ------------------------------------------------------------------
  * Book surface: cc-rebar (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* aa453619 RB_HITTEST: documented name-only (no value published; held) */
+/* aa453619 RB_HITTEST: value adopted at the M99 three-generation sweep -- R1 commctrl.h: #define RB_HITTEST (WM_USER+8) = 0x0408. */
+#define RB_HITTEST                          0x0408
 /* ------------------------------------------------------------------
  * Book surface: cc-rebar (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
@@ -4099,7 +4100,8 @@ typedef struct LVSETINFOTIP {
 /* ------------------------------------------------------------------
  * Book surface: cc-toolbar (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms940429 TB_GETBUTTON: documented name-only (no value published; held) */
+/* ms940429 TB_GETBUTTON: value adopted at the M99 three-generation sweep -- R1 commctrl.h: #define TB_GETBUTTON (WM_USER+23) = 0x0417. */
+#define TB_GETBUTTON                        0x0417
 /* ------------------------------------------------------------------
  * Book surface: cc-toolbar (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */

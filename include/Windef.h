@@ -92,6 +92,10 @@ typedef unsigned int    UINT;
  * type of the Win32 basetypes (desktop reference: unsigned int).  Same
  * width as UINT/ULONG on every CE target. */
 typedef uint32_t        UINT32;
+/* INT32: printed verbatim by the CE KBDI_AUTOREPEAT_INFO page
+ * (ms902134, "INT32 CurrentInitialDelay;" et al.); the signed
+ * 32-bit counterpart of UINT32 above. */
+typedef int32_t         INT32;
 /* UINT8/UINT16: printed as member/base types by the DVD-Video API
  * pages (Dvdata.h/Dvdnav.h structures, M87: UINT8 cmd[8], UINT16
  * attr, ...) and the RAS/PPP pages; fixed-width base types in the

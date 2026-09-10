@@ -38,7 +38,11 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: drivers-display (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* aa447689 ContrastCmdInputParm: documented name-only (no value published; held) */
+/* aa447689 ContrastCmdInputParm: prototype printed by the page; derived at the M99 sweep. */
+typedef struct ContrastCmdInputParm {
+    int command;
+    int parm;
+} ContrastCmdInputParm;
 
 #ifdef __cplusplus
 }

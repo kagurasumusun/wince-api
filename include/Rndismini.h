@@ -111,5 +111,7 @@ AKARI_CE_IMPORT BOOL PDDInit(RNDIS_PDD_CHARACTERISTICS *pRndisPddCharacteristics
 /* ms901364 IndicateRndisPacketCompleteHandler: documented name-only (no value published; held) */
 /* ms902185 MddSendRndisPacketComplete: documented name-only (no value published; held) */
 /* ms919397 PDDDeinit: documented name-only (no value published; held) */
-/* ms902127 PFN_PDD_ISR: documented name-only (no value published; held) */
+/* ms902127 PFN_PDD_ISR: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*PFN_PDD_ISR)(PDWORD pdwWaitTime);
+
 #endif /* AKARI_RNDISMINI_H */

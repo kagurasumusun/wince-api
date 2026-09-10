@@ -122,11 +122,27 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: exchange (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms863932 ContactsSearchCriteria: documented name-only (no value published; held) */
+/* ms863932 ContactsSearchCriteria: prototype printed by the page; derived at the M99 sweep. */
+typedef struct ContactsSearchCriteria {
+    WCHAR* wszFirstName;
+    WCHAR* wszLastName;
+} ContactsSearchCriteria;
+
 /* aa514944 ExchangeClientRequestStatus: documented name-only (no value published; held) */
 /* aa514947 ExchangeClientRequestType: documented name-only (no value published; held) */
-/* aa515003 FreeBusyCriteria: documented name-only (no value published; held) */
-/* aa515013 GALSearchCriteria: documented name-only (no value published; held) */
+/* aa515003 FreeBusyCriteria: prototype printed by the page; derived at the M99 sweep. */
+typedef struct FreeBusyCriteria {
+    WCHAR* wszAlias;
+    SYSTEMTIME* pstStart;
+} FreeBusyCriteria;
+
+/* aa515013 GALSearchCriteria: prototype printed by the page; derived at the M99 sweep. */
+typedef struct GALSearchCriteria {
+    WCHAR* wszAlias;
+    WCHAR* wszFirstName;
+    WCHAR* wszLastName;
+} GALSearchCriteria;
+
 /* aa513745 OWAEC_E_: documented name-only (no value published; held) */
 /* aa516110 IExchangeClient::CancelPendingRequests (Header: IExchangeClient.h, IExchangeClient.idl.) */
 /* aa516134 IExchangeClient::GetServer (Header: IExchangeClient.h, IExchangeClient.idl.) */

@@ -40,7 +40,8 @@ typedef struct _DVD_REGIONCE {
 /* ------------------------------------------------------------------
  * Book surface: drivers-block (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms902120 IOCTL_DVD_GET_REGION: documented name-only (no value published; held) */
+/* ms902120 IOCTL_DVD_GET_REGION: value adopted at the M99 three-generation sweep -- R1 ddk/ntddcdvd.h: CTL_CODE(IOCTL_DVD_BASE, 0x0405, METHOD_BUFFERED, FILE_READ_ACCESS) = 0x00335014 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_DVD_GET_REGION                0x00335014
 
 #ifdef __cplusplus
 }

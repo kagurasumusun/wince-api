@@ -24,7 +24,7 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-typedef struct INT32 INT32;   /* opaque carrier (layout unpublished) */
+/* INT32: defined in Windef.h (the signed 32-bit base, M99). */
 /* aa448197 TouchPanelCalibrateAPoint: print `VOID TouchPanelCalibrateAPoint(INT32 UncalX,INT32 UncalY,INT32* pCalX,INT32* pCalY);` */
 AKARI_CE_IMPORT VOID TouchPanelCalibrateAPoint(INT32 UncalX, INT32 UncalY, INT32* pCalX, INT32* pCalY)
     AKARI_CE_NAME(TouchPanelCalibrateAPoint);
@@ -80,9 +80,23 @@ AKARI_CE_IMPORT BOOL ErrorAnalysis(INT32 cCalibrationPoints, INT32* pScreenXBuff
  * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 /* aa448205 TOUCH_PANEL_SAMPLE_FLAGS: documented name-only (no value published; held) */
-/* aa448208 TPDC_CALIBRATION_POINT: documented name-only (no value published; held) */
+/* aa448208 TPDC_CALIBRATION_POINT: prototype printed by the page; derived at the M99 sweep. */
+typedef struct TPDC_CALIBRATION_POINT {
+    INT PointNumber;
+    INT cDisplayWidth;
+    INT cDisplayHeight;
+    INT CalibrationX;
+    INT CalibrationY;
+} TPDC_CALIBRATION_POINT;
+
 /* aa448209 TPDC_CALIBRATION_POINT_COUNT: documented name-only (no value published; held) */
-/* aa448210 TPDC_SAMPLE_RATE: documented name-only (no value published; held) */
+/* aa448210 TPDC_SAMPLE_RATE: prototype printed by the page; derived at the M99 sweep. */
+typedef struct TPDC_SAMPLE_RATE {
+    INT SamplesPerSecondLow;
+    INT SamplesPerSecondHigh;
+    INT CurrentSampleRateSetting;
+} TPDC_SAMPLE_RATE;
+
 /* aa447794 enumTouchPanelSampleFlags (Header: Tchddi.h.) */
 
 /* ------------------------------------------------------------------

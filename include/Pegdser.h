@@ -42,29 +42,48 @@ typedef struct _SERIAL_QUEUE_SIZES {
 /* ------------------------------------------------------------------
  * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms901420 IOCTL_SERIAL_CLR_DTR: documented name-only (no value published; held) */
-/* ms901421 IOCTL_SERIAL_CLR_RTS: documented name-only (no value published; held) */
+/* ms901420 IOCTL_SERIAL_CLR_DTR: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 10, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0028 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_CLR_DTR                0x001B0028
+/* ms901421 IOCTL_SERIAL_CLR_RTS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 13, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0034 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_CLR_RTS                0x001B0034
 /* ms901422 IOCTL_SERIAL_DISABLE_IR: documented name-only (no value published; held) */
 /* ms901423 IOCTL_SERIAL_ENABLE_IR: documented name-only (no value published; held) */
-/* ms901424 IOCTL_SERIAL_GET_COMMSTATUS: documented name-only (no value published; held) */
+/* ms901424 IOCTL_SERIAL_GET_COMMSTATUS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 27, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B006C (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_GET_COMMSTATUS         0x001B006C
 /* ms901425 IOCTL_SERIAL_GET_DCB: documented name-only (no value published; held) */
-/* ms901426 IOCTL_SERIAL_GET_MODEMSTATUS: documented name-only (no value published; held) */
-/* ms901427 IOCTL_SERIAL_GET_PROPERTIES: documented name-only (no value published; held) */
-/* ms901428 IOCTL_SERIAL_GET_TIMEOUTS: documented name-only (no value published; held) */
-/* ms901429 IOCTL_SERIAL_GET_WAIT_MASK: documented name-only (no value published; held) */
-/* ms901430 IOCTL_SERIAL_IMMEDIATE_CHAR: documented name-only (no value published; held) */
-/* ms901431 IOCTL_SERIAL_PURGE: documented name-only (no value published; held) */
-/* ms901432 IOCTL_SERIAL_SET_BREAK_OFF: documented name-only (no value published; held) */
-/* ms901433 IOCTL_SERIAL_SET_BREAK_ON: documented name-only (no value published; held) */
+/* ms901426 IOCTL_SERIAL_GET_MODEMSTATUS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 26, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0068 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_GET_MODEMSTATUS        0x001B0068
+/* ms901427 IOCTL_SERIAL_GET_PROPERTIES: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 29, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0074 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_GET_PROPERTIES         0x001B0074
+/* ms901428 IOCTL_SERIAL_GET_TIMEOUTS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 8, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0020 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_GET_TIMEOUTS           0x001B0020
+/* ms901429 IOCTL_SERIAL_GET_WAIT_MASK: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 16, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0040 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_GET_WAIT_MASK          0x001B0040
+/* ms901430 IOCTL_SERIAL_IMMEDIATE_CHAR: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 6, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0018 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_IMMEDIATE_CHAR         0x001B0018
+/* ms901431 IOCTL_SERIAL_PURGE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 19, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B004C (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_PURGE                  0x001B004C
+/* ms901432 IOCTL_SERIAL_SET_BREAK_OFF: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 5, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0014 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_BREAK_OFF          0x001B0014
+/* ms901433 IOCTL_SERIAL_SET_BREAK_ON: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 4, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0010 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_BREAK_ON           0x001B0010
 /* ms901434 IOCTL_SERIAL_SET_DCB: documented name-only (no value published; held) */
-/* ms901435 IOCTL_SERIAL_SET_DTR: documented name-only (no value published; held) */
-/* ms901436 IOCTL_SERIAL_SET_QUEUE_SIZE: documented name-only (no value published; held) */
-/* ms901437 IOCTL_SERIAL_SET_RTS: documented name-only (no value published; held) */
-/* ms901438 IOCTL_SERIAL_SET_TIMEOUTS: documented name-only (no value published; held) */
-/* ms901439 IOCTL_SERIAL_SET_WAIT_MASK: documented name-only (no value published; held) */
-/* ms901440 IOCTL_SERIAL_SET_XOFF: documented name-only (no value published; held) */
-/* ms901441 IOCTL_SERIAL_SET_XON: documented name-only (no value published; held) */
-/* ms901442 IOCTL_SERIAL_WAIT_ON_MASK: documented name-only (no value published; held) */
+/* ms901435 IOCTL_SERIAL_SET_DTR: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 9, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0024 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_DTR                0x001B0024
+/* ms901436 IOCTL_SERIAL_SET_QUEUE_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 2, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0008 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_QUEUE_SIZE         0x001B0008
+/* ms901437 IOCTL_SERIAL_SET_RTS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 12, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0030 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_RTS                0x001B0030
+/* ms901438 IOCTL_SERIAL_SET_TIMEOUTS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 7, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B001C (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_TIMEOUTS           0x001B001C
+/* ms901439 IOCTL_SERIAL_SET_WAIT_MASK: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 17, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0044 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_WAIT_MASK          0x001B0044
+/* ms901440 IOCTL_SERIAL_SET_XOFF: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 14, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0038 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_XOFF               0x001B0038
+/* ms901441 IOCTL_SERIAL_SET_XON: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 15, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B003C (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_SET_XON                0x001B003C
+/* ms901442 IOCTL_SERIAL_WAIT_ON_MASK: value adopted at the M99 three-generation sweep -- R1 ddk/ntddser.h: CTL_CODE (FILE_DEVICE_SERIAL_PORT, 18, METHOD_BUFFERED, FILE_ANY_ACCESS) = 0x001B0048 (the CE page prints the name only; the desktop serial/optical DDI value, CE inherited the interface). */
+#define IOCTL_SERIAL_WAIT_ON_MASK           0x001B0048
 
 #ifdef __cplusplus
 }

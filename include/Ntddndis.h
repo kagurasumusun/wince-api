@@ -447,21 +447,36 @@ typedef struct _NDIS_PNP_CAPABILITIES NDIS_PNP_CAPABILITIES,
 /* ms905731 OID_802_11_SUPPORTED_RATES: documented name-only (no value published; held) */
 /* ms905733 OID_802_11_TX_POWER_LEVEL: documented name-only (no value published; held) */
 /* ms905734 OID_802_11_WEP_STATUS: documented name-only (no value published; held) */
-/* ms905735 OID_802_3_CURRENT_ADDRESS: documented name-only (no value published; held) */
-/* ms905736 OID_802_3_MAC_OPTIONS: documented name-only (no value published; held) */
-/* ms905737 OID_802_3_MAXIMUM_LIST_SIZE: documented name-only (no value published; held) */
-/* ms905738 OID_802_3_MULTICAST_LIST: documented name-only (no value published; held) */
-/* ms905739 OID_802_3_PERMANENT_ADDRESS: documented name-only (no value published; held) */
-/* ms905740 OID_802_3_RCV_ERROR_ALIGNMENT: documented name-only (no value published; held) */
-/* ms905741 OID_802_3_RCV_OVERRUN: documented name-only (no value published; held) */
-/* ms905742 OID_802_3_XMIT_DEFERRED: documented name-only (no value published; held) */
-/* ms905743 OID_802_3_XMIT_HEARTBEAT_FAILURE: documented name-only (no value published; held) */
-/* ms905744 OID_802_3_XMIT_LATE_COLLISIONS: documented name-only (no value published; held) */
-/* ms905745 OID_802_3_XMIT_MAX_COLLISIONS: documented name-only (no value published; held) */
-/* ms905746 OID_802_3_XMIT_MORE_COLLISIONS: documented name-only (no value published; held) */
-/* ms905747 OID_802_3_XMIT_ONE_COLLISION: documented name-only (no value published; held) */
-/* ms905748 OID_802_3_XMIT_TIMES_CRS_LOST: documented name-only (no value published; held) */
-/* ms905749 OID_802_3_XMIT_UNDERRUN: documented name-only (no value published; held) */
+/* ms905735 OID_802_3_CURRENT_ADDRESS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_CURRENT_ADDRESS 0x01010102 (the CE pages print the OID name only). */
+#define OID_802_3_CURRENT_ADDRESS           0x01010102
+/* ms905736 OID_802_3_MAC_OPTIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_MAC_OPTIONS 0x01010105 (the CE pages print the OID name only). */
+#define OID_802_3_MAC_OPTIONS               0x01010105
+/* ms905737 OID_802_3_MAXIMUM_LIST_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_MAXIMUM_LIST_SIZE 0x01010104 (the CE pages print the OID name only). */
+#define OID_802_3_MAXIMUM_LIST_SIZE         0x01010104
+/* ms905738 OID_802_3_MULTICAST_LIST: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_MULTICAST_LIST 0x01010103 (the CE pages print the OID name only). */
+#define OID_802_3_MULTICAST_LIST            0x01010103
+/* ms905739 OID_802_3_PERMANENT_ADDRESS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_PERMANENT_ADDRESS 0x01010101 (the CE pages print the OID name only). */
+#define OID_802_3_PERMANENT_ADDRESS         0x01010101
+/* ms905740 OID_802_3_RCV_ERROR_ALIGNMENT: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_RCV_ERROR_ALIGNMENT 0x01020101 (the CE pages print the OID name only). */
+#define OID_802_3_RCV_ERROR_ALIGNMENT       0x01020101
+/* ms905741 OID_802_3_RCV_OVERRUN: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_RCV_OVERRUN 0x01020203 (the CE pages print the OID name only). */
+#define OID_802_3_RCV_OVERRUN               0x01020203
+/* ms905742 OID_802_3_XMIT_DEFERRED: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_DEFERRED 0x01020201 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_DEFERRED             0x01020201
+/* ms905743 OID_802_3_XMIT_HEARTBEAT_FAILURE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_HEARTBEAT_FAILURE 0x01020205 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_HEARTBEAT_FAILURE    0x01020205
+/* ms905744 OID_802_3_XMIT_LATE_COLLISIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_LATE_COLLISIONS 0x01020207 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_LATE_COLLISIONS      0x01020207
+/* ms905745 OID_802_3_XMIT_MAX_COLLISIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_MAX_COLLISIONS 0x01020202 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_MAX_COLLISIONS       0x01020202
+/* ms905746 OID_802_3_XMIT_MORE_COLLISIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_MORE_COLLISIONS 0x01020103 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_MORE_COLLISIONS      0x01020103
+/* ms905747 OID_802_3_XMIT_ONE_COLLISION: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_ONE_COLLISION 0x01020102 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_ONE_COLLISION        0x01020102
+/* ms905748 OID_802_3_XMIT_TIMES_CRS_LOST: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_TIMES_CRS_LOST 0x01020206 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_TIMES_CRS_LOST       0x01020206
+/* ms905749 OID_802_3_XMIT_UNDERRUN: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_802_3_XMIT_UNDERRUN 0x01020204 (the CE pages print the OID name only). */
+#define OID_802_3_XMIT_UNDERRUN             0x01020204
 /* ms905750 OID_802_5_CURRENT_ADDRESS: documented name-only (no value published; held) */
 /* ms905751 OID_802_5_CURRENT_FUNCTIONAL: documented name-only (no value published; held) */
 /* ms905752 OID_802_5_CURRENT_GROUP: documented name-only (no value published; held) */
@@ -469,29 +484,52 @@ typedef struct _NDIS_PNP_CAPABILITIES NDIS_PNP_CAPABILITIES,
 /* ms905754 OID_802_5_CURRENT_RING_STATUS: documented name-only (no value published; held) */
 /* ms905755 OID_802_5_LAST_OPEN_STATUS: documented name-only (no value published; held) */
 /* ms905756 OID_802_5_PERMANENT_ADDRESS: documented name-only (no value published; held) */
-/* aa448105 OID_GEN_CURRENT_LOOKAHEAD: documented name-only (no value published; held) */
-/* aa448106 OID_GEN_CURRENT_PACKET_FILTER: documented name-only (no value published; held) */
-/* aa448107 OID_GEN_DRIVER_VERSION: documented name-only (no value published; held) */
-/* aa448108 OID_GEN_HARDWARE_STATUS: documented name-only (no value published; held) */
-/* aa448109 OID_GEN_LINK_SPEED: documented name-only (no value published; held) */
-/* aa448110 OID_GEN_MAC_OPTIONS: documented name-only (no value published; held) */
-/* aa448112 OID_GEN_MAXIMUM_FRAME_SIZE: documented name-only (no value published; held) */
-/* aa448113 OID_GEN_MAXIMUM_LOOKAHEAD: documented name-only (no value published; held) */
-/* aa448114 OID_GEN_MAXIMUM_SEND_PACKETS: documented name-only (no value published; held) */
-/* aa448115 OID_GEN_MAXIMUM_TOTAL_SIZE: documented name-only (no value published; held) */
-/* aa448116 OID_GEN_MEDIA_CONNECT_STATUS: documented name-only (no value published; held) */
-/* aa448117 OID_GEN_MEDIA_IN_USE: documented name-only (no value published; held) */
-/* aa448118 OID_GEN_MEDIA_SUPPORTED: documented name-only (no value published; held) */
-/* aa448119 OID_GEN_NETWORK_LAYER_ADDRESSES: documented name-only (no value published; held) */
-/* aa448120 OID_GEN_PHYSICAL_MEDIUM: documented name-only (no value published; held) */
-/* aa448121 OID_GEN_PROTOCOL_OPTIONS: documented name-only (no value published; held) */
-/* aa448122 OID_GEN_RECEIVE_BLOCK_SIZE: documented name-only (no value published; held) */
-/* aa448123 OID_GEN_RECEIVE_BUFFER_SPACE: documented name-only (no value published; held) */
-/* aa448125 OID_GEN_TRANSMIT_BLOCK_SIZE: documented name-only (no value published; held) */
-/* aa448126 OID_GEN_TRANSMIT_BUFFER_SPACE: documented name-only (no value published; held) */
-/* aa448127 OID_GEN_TRANSPORT_HEADER_OFFSET: documented name-only (no value published; held) */
-/* aa448128 OID_GEN_VENDOR_DESCRIPTION: documented name-only (no value published; held) */
-/* aa448129 OID_GEN_VENDOR_ID: documented name-only (no value published; held) */
+/* aa448105 OID_GEN_CURRENT_LOOKAHEAD: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_CURRENT_LOOKAHEAD 0x0001010F (the CE pages print the OID name only). */
+#define OID_GEN_CURRENT_LOOKAHEAD           0x0001010F
+/* aa448106 OID_GEN_CURRENT_PACKET_FILTER: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_CURRENT_PACKET_FILTER 0x0001010E (the CE pages print the OID name only). */
+#define OID_GEN_CURRENT_PACKET_FILTER       0x0001010E
+/* aa448107 OID_GEN_DRIVER_VERSION: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_DRIVER_VERSION 0x00010110 (the CE pages print the OID name only). */
+#define OID_GEN_DRIVER_VERSION              0x00010110
+/* aa448108 OID_GEN_HARDWARE_STATUS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_HARDWARE_STATUS 0x00010102 (the CE pages print the OID name only). */
+#define OID_GEN_HARDWARE_STATUS             0x00010102
+/* aa448109 OID_GEN_LINK_SPEED: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_LINK_SPEED 0x00010107 (the CE pages print the OID name only). */
+#define OID_GEN_LINK_SPEED                  0x00010107
+/* aa448110 OID_GEN_MAC_OPTIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MAC_OPTIONS 0x00010113 (the CE pages print the OID name only). */
+#define OID_GEN_MAC_OPTIONS                 0x00010113
+/* aa448112 OID_GEN_MAXIMUM_FRAME_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MAXIMUM_FRAME_SIZE 0x00010106 (the CE pages print the OID name only). */
+#define OID_GEN_MAXIMUM_FRAME_SIZE          0x00010106
+/* aa448113 OID_GEN_MAXIMUM_LOOKAHEAD: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MAXIMUM_LOOKAHEAD 0x00010105 (the CE pages print the OID name only). */
+#define OID_GEN_MAXIMUM_LOOKAHEAD           0x00010105
+/* aa448114 OID_GEN_MAXIMUM_SEND_PACKETS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MAXIMUM_SEND_PACKETS 0x00010115 (the CE pages print the OID name only). */
+#define OID_GEN_MAXIMUM_SEND_PACKETS        0x00010115
+/* aa448115 OID_GEN_MAXIMUM_TOTAL_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MAXIMUM_TOTAL_SIZE 0x00010111 (the CE pages print the OID name only). */
+#define OID_GEN_MAXIMUM_TOTAL_SIZE          0x00010111
+/* aa448116 OID_GEN_MEDIA_CONNECT_STATUS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MEDIA_CONNECT_STATUS 0x00010114 (the CE pages print the OID name only). */
+#define OID_GEN_MEDIA_CONNECT_STATUS        0x00010114
+/* aa448117 OID_GEN_MEDIA_IN_USE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MEDIA_IN_USE 0x00010104 (the CE pages print the OID name only). */
+#define OID_GEN_MEDIA_IN_USE                0x00010104
+/* aa448118 OID_GEN_MEDIA_SUPPORTED: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_MEDIA_SUPPORTED 0x00010103 (the CE pages print the OID name only). */
+#define OID_GEN_MEDIA_SUPPORTED             0x00010103
+/* aa448119 OID_GEN_NETWORK_LAYER_ADDRESSES: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_NETWORK_LAYER_ADDRESSES 0x00010118 (the CE pages print the OID name only). */
+#define OID_GEN_NETWORK_LAYER_ADDRESSES     0x00010118
+/* aa448120 OID_GEN_PHYSICAL_MEDIUM: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_PHYSICAL_MEDIUM 0x00010202 (the CE pages print the OID name only). */
+#define OID_GEN_PHYSICAL_MEDIUM             0x00010202
+/* aa448121 OID_GEN_PROTOCOL_OPTIONS: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_PROTOCOL_OPTIONS 0x00010112 (the CE pages print the OID name only). */
+#define OID_GEN_PROTOCOL_OPTIONS            0x00010112
+/* aa448122 OID_GEN_RECEIVE_BLOCK_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_RECEIVE_BLOCK_SIZE 0x0001010B (the CE pages print the OID name only). */
+#define OID_GEN_RECEIVE_BLOCK_SIZE          0x0001010B
+/* aa448123 OID_GEN_RECEIVE_BUFFER_SPACE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_RECEIVE_BUFFER_SPACE 0x00010109 (the CE pages print the OID name only). */
+#define OID_GEN_RECEIVE_BUFFER_SPACE        0x00010109
+/* aa448125 OID_GEN_TRANSMIT_BLOCK_SIZE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_TRANSMIT_BLOCK_SIZE 0x0001010A (the CE pages print the OID name only). */
+#define OID_GEN_TRANSMIT_BLOCK_SIZE         0x0001010A
+/* aa448126 OID_GEN_TRANSMIT_BUFFER_SPACE: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_TRANSMIT_BUFFER_SPACE 0x00010108 (the CE pages print the OID name only). */
+#define OID_GEN_TRANSMIT_BUFFER_SPACE       0x00010108
+/* aa448127 OID_GEN_TRANSPORT_HEADER_OFFSET: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_TRANSPORT_HEADER_OFFSET 0x00010119 (the CE pages print the OID name only). */
+#define OID_GEN_TRANSPORT_HEADER_OFFSET     0x00010119
+/* aa448128 OID_GEN_VENDOR_DESCRIPTION: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_VENDOR_DESCRIPTION 0x0001010D (the CE pages print the OID name only). */
+#define OID_GEN_VENDOR_DESCRIPTION          0x0001010D
+/* aa448129 OID_GEN_VENDOR_ID: value adopted at the M99 three-generation sweep -- R1 ddk/ntddndis.h: #define OID_GEN_VENDOR_ID 0x0001010C (the CE pages print the OID name only). */
+#define OID_GEN_VENDOR_ID                   0x0001010C
 /* aa448130 OID_IRDA_EXTRA_RCV_BOFS: documented name-only (no value published; held) */
 /* aa448131 OID_IRDA_LINK_SPEED: documented name-only (no value published; held) */
 /* aa448132 OID_IRDA_MAX_RECEIVE_WINDOW_SIZE: documented name-only (no value published; held) */

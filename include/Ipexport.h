@@ -10,19 +10,19 @@
 
 #include "Windef.h"    /* ULONG, LONG, WCHAR */
 
-/* ms891164 "IP_ADAPTER_INDEX_MAP": print `typedef struct
+/* ms891169 "IP_ADAPTER_INDEX_MAP": print `typedef struct
  * _IP_ADAPTER_INDEX_MAP{ULONGIndex; WCHARName[MAX_ADAPTER_NAME];}
  * IP_ADAPTER_INDEX_MAP, *PIP_ADAPTER_INDEX_MAP;` -- MAX_ADAPTER_NAME
  * is not published on any CE page. */
 typedef struct _IP_ADAPTER_INDEX_MAP IP_ADAPTER_INDEX_MAP, *PIP_ADAPTER_INDEX_MAP;
 
-/* ms891166 "IP_INTERFACE_INFO": print `typedef struct
+/* ms891177 "IP_INTERFACE_INFO": print `typedef struct
  * _IP_INTERFACE_INFO{LONG NumAdapters;IP_ADAPTER_INDEX_MAP Adapter[1];}
  * IP_INTERFACE_INFO, *PIP_INTERFACE_INFO;` -- embeds the
  * pointer-only IP_ADAPTER_INDEX_MAP. */
 typedef struct _IP_INTERFACE_INFO IP_INTERFACE_INFO, *PIP_INTERFACE_INFO;
 
-/* ms891170 "IP_UNIDIRECTIONAL_ADAPTER_ADDRESS": print `typedef
+/* aa450431 "IP_UNIDIRECTIONAL_ADAPTER_ADDRESS": print `typedef
  * struct _IP_UNIDIRECTIONAL_ADAPTER_ADDRESS{ULONG NumAdapters;
  * IPAddr Address[1];} IP_UNIDIRECTIONAL_ADAPTER_ADDRESS*,
  * PIP_UNIDIRECTIONAL_ADAPTER_ADDRESS;` -- the IPAddr typedef is not

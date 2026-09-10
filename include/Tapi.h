@@ -1866,7 +1866,8 @@ AKARI_CE_IMPORT LONG phoneDevSpecific(HPHONE hPhone,
 /* ------------------------------------------------------------------
  * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms894406 LINE_NEWCALL: documented name-only (no value published; held) */
+/* ms894406 LINE_NEWCALL: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_NEWCALL TSPI_MESSAGE_BASE -- the TAPI line-event message numbering (the TSPI-side new-call notification, value TSPI_MESSAGE_BASE = 500; the CE page ms894406 describes the service-provider-to-TAPI direction; the application-side counterpart is LINE_APPNEWCALL). */
+#define LINE_NEWCALL                        500
 /* ms894385 LINELOCATIONOPTION: documented name-only (no value published; held) */
 /* ------------------------------------------------------------------
  * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
@@ -1875,17 +1876,28 @@ AKARI_CE_IMPORT LONG phoneDevSpecific(HPHONE hPhone,
 /* ------------------------------------------------------------------
  * Book surface: tspi-all (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms893374 LINE_ADDRESSSTATE: documented name-only (no value published; held) */
-/* ms893651 LINE_CALLINFO: documented name-only (no value published; held) */
-/* ms894004 LINE_CALLSTATE: documented name-only (no value published; held) */
-/* ms894120 LINE_CLOSE: documented name-only (no value published; held) */
-/* ms894127 LINE_CREATE: documented name-only (no value published; held) */
-/* ms894133 LINE_DEVSPECIFIC: documented name-only (no value published; held) */
-/* ms894157 LINE_GENERATE: documented name-only (no value published; held) */
-/* ms894381 LINE_LINEDEVSTATE: documented name-only (no value published; held) */
-/* ms894393 LINE_MONITORDIGITS: documented name-only (no value published; held) */
-/* ms894399 LINE_MONITORMEDIA: documented name-only (no value published; held) */
-/* ms894457 LINE_REMOVE: documented name-only (no value published; held) */
+/* ms893374 LINE_ADDRESSSTATE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_ADDRESSSTATE 0L -- the TAPI line-event message numbering. */
+#define LINE_ADDRESSSTATE                   0
+/* ms893651 LINE_CALLINFO: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_CALLINFO 1L -- the TAPI line-event message numbering. */
+#define LINE_CALLINFO                       1
+/* ms894004 LINE_CALLSTATE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_CALLSTATE 2L -- the TAPI line-event message numbering. */
+#define LINE_CALLSTATE                      2
+/* ms894120 LINE_CLOSE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_CLOSE 3L -- the TAPI line-event message numbering. */
+#define LINE_CLOSE                          3
+/* ms894127 LINE_CREATE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_CREATE 19L -- the TAPI line-event message numbering. */
+#define LINE_CREATE                         19
+/* ms894133 LINE_DEVSPECIFIC: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_DEVSPECIFIC 4L -- the TAPI line-event message numbering. */
+#define LINE_DEVSPECIFIC                    4
+/* ms894157 LINE_GENERATE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_GENERATE 7L -- the TAPI line-event message numbering. */
+#define LINE_GENERATE                       7
+/* ms894381 LINE_LINEDEVSTATE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_LINEDEVSTATE 8L -- the TAPI line-event message numbering. */
+#define LINE_LINEDEVSTATE                   8
+/* ms894393 LINE_MONITORDIGITS: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_MONITORDIGITS 9L -- the TAPI line-event message numbering. */
+#define LINE_MONITORDIGITS                  9
+/* ms894399 LINE_MONITORMEDIA: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_MONITORMEDIA 10L -- the TAPI line-event message numbering. */
+#define LINE_MONITORMEDIA                   10
+/* ms894457 LINE_REMOVE: value adopted at the M99 three-generation sweep -- R1 ddk/ndistapi.h: #define LINE_REMOVE 25L -- the TAPI line-event message numbering. */
+#define LINE_REMOVE                         25
 /* ms895909 PHONE_BUTTON: documented name-only (no value published; held) */
 /* ms895914 PHONE_CLOSE: documented name-only (no value published; held) */
 /* ms895917 PHONE_CREATE: documented name-only (no value published; held) */

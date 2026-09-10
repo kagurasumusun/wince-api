@@ -34,10 +34,15 @@ extern "C" {
 /* ------------------------------------------------------------------
  * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms919401 PFN_KEYBD_EVENT: documented name-only (no value published; held) */
+/* ms919401 PFN_KEYBD_EVENT: prototype printed by the page; derived at the M99 sweep. */
+typedef void (*PFN_KEYBD_EVENT)(UINT uiPddId, UINT32 uiScanCode, BOOL fKeyDown);
+
 /* ms919402 PFN_KEYBD_PDD_ENTRY: documented name-only (no value published; held) */
-/* ms919403 PFN_KEYBD_PDD_POWER_HANDLER: documented name-only (no value published; held) */
-/* ms919404 PFN_KEYBD_PDD_TOGGLE_LIGHTS: documented name-only (no value published; held) */
+/* ms919403 PFN_KEYBD_PDD_POWER_HANDLER: prototype printed by the page; derived at the M99 sweep. */
+typedef void (*PFN_KEYBD_PDD_POWER_HANDLER)(UINT uiPddId, BOOL fTurnOff);
+
+/* ms919404 PFN_KEYBD_PDD_TOGGLE_LIGHTS: prototype printed by the page; derived at the M99 sweep. */
+typedef void (*PFN_KEYBD_PDD_TOGGLE_LIGHTS)(UINT uiPddId, KEY_STATE_FLAGS KeyStateFlags);
 
 #ifdef __cplusplus
 }

@@ -43,19 +43,26 @@ extern "C" {
 /* Enumerations (DVD-Video Renderer Enumerations).                     */
 /* ------------------------------------------------------------------ */
 
-/* aa447766 "EDVDAspectRatioMode". */
+/* aa447766 "EDVDAspectRatioMode".  CE 6 twin ee481106(v=
+ * winembedded.60) prints no declaration (enum absent from the CE 6
+ * book); the CE 5 page is the sole print -- M99 twin check. */
 typedef enum {
     DVD_ASPECT_RATIO_MODE_LETTERBOX,   /* 0 (implicit) */
     DVD_ASPECT_RATIO_MODE_PANSCAN      /* 1 */
 } EDVDAspectRatioMode;
 
-/* aa447767 "EDVDAudioFreq". */
+/* aa447767 "EDVDAudioFreq".  CE 6 twin ee485411(v=
+ * winembedded.60) confirms the two members and adds none; both
+ * generations print name-only (implicit 0/1) -- M99 twin check. */
 typedef enum {
     DVD_AUDIO_FREQ_48KHZ,              /* 0 (implicit) */
     DVD_AUDIO_FREQ_96KHZ               /* 1 */
 } EDVDAudioFreq;
 
-/* aa447768 "EDVDAudioStreamType": AC3 = 2, then implicit successors. */
+/* aa447768 "EDVDAudioStreamType": AC3 = 2, then implicit
+ * successors.  DVD_AUDIO_TYPE_SDDS is CE 6 only: the twin page
+ * ee483651(v=winembedded.60) prints the five-member list; the CE 5
+ * page stops at DTS -- M99 cross-generation adoption. */
 typedef enum {
     DVD_AUDIO_TYPE_AC3  = 2,
     DVD_AUDIO_TYPE_MPEG,               /* 3 */
@@ -74,14 +81,20 @@ typedef enum {
     DVD_DISPLAY_ASPECT_16x9 = 0x3
 } EDVDDisplayAspectRatio;
 
-/* aa447780 "EDVDLpcmQuantization". */
+/* aa447780 "EDVDLpcmQuantization".  DVD_LPCM_24 is CE 6 only: the
+ * twin page ee483388(v=winembedded.60) prints the three-member list;
+ * the CE 5 page stops at DVD_LPCM_20 -- M99 cross-generation
+ * adoption (implicit 2 by the twin's printed order). */
 typedef enum {
     DVD_LPCM_16,                       /* 0 (implicit) */
     DVD_LPCM_20,                       /* 1 */
     DVD_LPCM_24                        /* 2 */
 } EDVDLpcmQuantization;
 
-/* aa447781 "EDVDSyncEventType". */
+/* aa447781 "EDVDSyncEventType".  DVD_CC_DATA_EVENT is CE 6 only:
+ * the twin page ee483225(v=winembedded.60) prints the four-member
+ * list; the CE 5 page stops at DVD_PLAYBACK_EVENT -- M99
+ * cross-generation adoption (implicit 3 by the twin's order). */
 typedef enum {
     DVD_NAV_PACK_EVENT,                /* 0 (implicit) */
     DVD_HIGHLIGHT_EVENT,               /* 1 */

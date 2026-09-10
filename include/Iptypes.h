@@ -19,7 +19,7 @@ typedef struct {
     char String[4 * 4];
 } IP_ADDRESS_STRING, *PIP_ADDRESS_STRING, IP_MASK_STRING, *PIP_MASK_STRING;
 
-/* ms895037 "IP_ADDR_STRING": print. */
+/* ms891175 "IP_ADDR_STRING": print. */
 typedef struct _IP_ADDR_STRING {
     struct _IP_ADDR_STRING *Next;
     IP_ADDRESS_STRING       IpAddress;
@@ -35,7 +35,7 @@ typedef struct _IP_PER_ADAPTER_INFO {
     IP_ADDR_STRING  DnsServerList;
 } IP_PER_ADAPTER_INFO, *PIP_PER_ADAPTER_INFO;
 
-/* ms895033 "IF_OPER_STATUS": print (explicit values). */
+/* ms890886 "IF_OPER_STATUS": print (explicit values). */
 typedef enum {
     IfOperStatusUp = 1,
     IfOperStatusDown,
@@ -46,7 +46,7 @@ typedef enum {
     IfOperStatusLowerLayerDown
 } IF_OPER_STATUS;
 
-/* ms895041 "IP_DAD_STATE": print (explicit values). */
+/* ms891176 "IP_DAD_STATE": print (explicit values). */
 typedef enum {
     IpDadStateInvalid = 0,
     IpDadStateTentative,

@@ -46,7 +46,8 @@ BOOL BatteryPDDSupportsChangeNotification(void);
 /* ------------------------------------------------------------------
  * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms919400 PFN_BATTERY_PDD_IOCONTROL: documented name-only (no value published; held) */
+/* ms919400 PFN_BATTERY_PDD_IOCONTROL: prototype printed by the page; derived at the M99 sweep. */
+typedef DWORD (*PFN_BATTERY_PDD_IOCONTROL)(DWORD dwContext, DWORD Ioctl, PUCHAR pInBuf, DWORD InBufLen, PUCHAR pOutBuf, DWORD OutBufLen, PDWORD pdwBytesTransferred);
 
 #ifdef __cplusplus
 }

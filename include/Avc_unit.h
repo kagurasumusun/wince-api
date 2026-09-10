@@ -96,10 +96,19 @@ AKARI_CE_IMPORT NTSTATUS UNIT_OpenUnitDeviceObject(PDEVICE_OBJECT SubunitParentD
 /* ms902108 IOCTL_UNIT_PROCESS_REGISTRY_PLUGS: documented name-only (no value published; held) */
 /* ms902109 IOCTL_UNIT_QUERY_LOCAL_PLUGS: documented name-only (no value published; held) */
 /* ms902110 IOCTL_UNIT_REGISTER_SUBUNIT: documented name-only (no value published; held) */
-/* aa448227 UNIT_AllocateLocalPlugCB: documented name-only (no value published; held) */
-/* aa448232 UNIT_ConnectToRemotePlugCB: documented name-only (no value published; held) */
-/* aa448234 UNIT_DisconnectFromRemotePlugCB: documented name-only (no value published; held) */
-/* aa448235 UNIT_FreeLocalPlugCB: documented name-only (no value published; held) */
+/* aa448227 UNIT_AllocateLocalPlugCB: recorded (page print; UNIT_MediaType is not
+ * documented by any CE page of any generation -- the
+ * prototype is kept verbatim, M99 sweep): typedef NTSTATUS (*UNIT_AllocateLocalPlugCB)(PVOID Context, ULONG SubunitPlugID, ULONG Direction, UNIT_MediaType MediaType, ULONG MaximumThroughput, ULONG* PlugNumber, HANDLE* Plug); */
+
+/* aa448232 UNIT_ConnectToRemotePlugCB: recorded (page print; UNIT_MediaType is not
+ * documented by any CE page of any generation -- the
+ * prototype is kept verbatim, M99 sweep): typedef NTSTATUS (*UNIT_ConnectToRemotePlugCB)(PVOID Context, HANDLE Plug, ULONG Direction, UNIT_MediaType MediaType, PVOID Request); */
+
+/* aa448234 UNIT_DisconnectFromRemotePlugCB: prototype printed by the page; derived at the M99 sweep. */
+typedef NTSTATUS (*UNIT_DisconnectFromRemotePlugCB)(PVOID Context, HANDLE Plug, PVOID Request);
+
+/* aa448235 UNIT_FreeLocalPlugCB: prototype printed by the page; derived at the M99 sweep. */
+typedef NTSTATUS (*UNIT_FreeLocalPlugCB)(PVOID Context, HANDLE Plug);
 
 #ifdef __cplusplus
 }

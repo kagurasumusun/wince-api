@@ -179,8 +179,15 @@ typedef struct {
  * INTERNET_SCHEME_PARTIAL = -2, INTERNET_SCHEME_UNKNOWN = -1,
  * INTERNET_SCHEME_DEFAULT = 0, INTERNET_SCHEME_FTP,
  * INTERNET_SCHEME_GOPHER, INTERNET_SCHEME_HTTP, INTERNET_SCHEME_HTTPS,
- * INTERNET_SCHEME_FILE, INTERNET_SCHEME_NEWS, INTERNET_SCHEME_MAILTO,
- * INTERNE...` (implicit values 1.. follow the printed order). */
+ * INTERNET_SCHEME_FILE, INTERNET_SCHEME_NEWS, INTERNET_SCHEME_MAILTO`
+ * (implicit values 1.. follow the printed order).  M99 cross-
+ * generation decision: the CE 6.0 twin page ee492774(v=winembedded.60)
+ * prints the same enum extended with INTERNET_SCHEME_SOCKS,
+ * INTERNET_SCHEME_JAVASCRIPT, INTERNET_SCHEME_VBSCRIPT and the two
+ * aliases INTERNET_SCHEME_FIRST = INTERNET_SCHEME_FTP /
+ * INTERNET_SCHEME_LAST = INTERNET_SCHEME_VBSCRIPT -- adopted here with
+ * the twin citation (CE 5 page stops at MAILTO; SOCKS..VBSCRIPT are
+ * CE 6-only members, implicit 10..12 by the twin's printed order). */
 typedef enum {
     INTERNET_SCHEME_PARTIAL = -2,
     INTERNET_SCHEME_UNKNOWN = -1,
@@ -191,7 +198,12 @@ typedef enum {
     INTERNET_SCHEME_HTTPS,
     INTERNET_SCHEME_FILE,
     INTERNET_SCHEME_NEWS,
-    INTERNET_SCHEME_MAILTO
+    INTERNET_SCHEME_MAILTO,
+    INTERNET_SCHEME_SOCKS,               /* CE 6 twin; implicit 10 */
+    INTERNET_SCHEME_JAVASCRIPT,          /* CE 6 twin; implicit 11 */
+    INTERNET_SCHEME_VBSCRIPT,            /* CE 6 twin; implicit 12 */
+    INTERNET_SCHEME_FIRST = INTERNET_SCHEME_FTP,
+    INTERNET_SCHEME_LAST = INTERNET_SCHEME_VBSCRIPT
 } INTERNET_SCHEME;
 
 /* ------------------------------------------------------------------ */

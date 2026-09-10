@@ -39,27 +39,30 @@ extern "C" {
 /* ------------------------------------------------------------------ */
 /* aa453709 "SHGNO" (Windows CE .NET 4.2 and later; Shobjidl.h).       */
 /* Selector values for IShellFolder::GetDisplayNameOf / SetNameOf.     */
-/* The page publishes the five-element enum body without initializers  */
-/* and states "The numeric value of SHGDN_NORMAL is zero" -- only that */
-/* one value is published.  The desktop Win32 _SHGDNF reference page   */
-/* (shobjidl_core.h) publishes SHGDN_INFOLDER = 0x1,                   */
-/* SHGDN_FOREDITING = 0x1000, SHGDN_FORADDRESSBAR = 0x4000 and         */
-/* SHGDN_FORPARSING = 0x8000, but the CE page's bare sequential enum   */
-/* body is an equally admissible reading, so the four unpublished      */
-/* values are not uniquely derivable and stay held (M53 derivation     */
-/* analysis in docs/inventory.md).                                     */
+/* The CE pages (CE .NET 4.2 through 6.0 alike) publish the five-name  */
+/* enum body without initializers and state only "the numeric value   */
+/* of SHGDN_NORMAL is zero".  At the M99 three-generation sweep the   */
+/* four unpublished members were adopted from the official desktop    */
+/* Win32 _SHGDNF reference page (shobjidl_core.h; pagesw copy fetched  */
+/* for M53 -- a Microsoft page, the fixed desktop ABI of the same     */
+/* selector enum used by the same IShellFolder methods):              */
+/*   SHGDN_INFOLDER      0x0001                                        */
+/*   SHGDN_FOREDITING    0x1000                                        */
+/*   SHGDN_FORADDRESSBAR 0x4000                                        */
+/*   SHGDN_FORPARSING    0x8000                                        */
+/* Alternative reading considered and rejected: a bare sequential     */
+/* enum (1, 2, 3, 4) -- no Microsoft source publishes that form, and   */
+/* the desktop value set is the only published numbering of these     */
+/* names (per the M99 ambiguity policy: strongest candidate adopted,  */
+/* the rejected candidates recorded).                                  */
 /* ------------------------------------------------------------------ */
 typedef enum tagSHGDN {
-    SHGDN_NORMAL = 0    /* value published: "the numeric value of
-                           SHGDN_NORMAL is zero" (aa453709) */
+    SHGDN_NORMAL = 0,
+    SHGDN_INFOLDER = 0x0001,
+    SHGDN_FOREDITING = 0x1000,
+    SHGDN_FORADDRESSBAR = 0x4000,
+    SHGDN_FORPARSING = 0x8000
 } SHGNO;
-
-/* SHGDN names whose values are held (aa453709 enum order):
- *   SHGDN_INFOLDER      relative name (relative to the folder)
- *   SHGDN_FOREDITING   (modifier) name for in-place renaming
- *   SHGDN_FORADDRESSBAR (modifier) name for an address-bar combo box
- *   SHGDN_FORPARSING   (modifier) name for ParseDisplayName
- */
 
 /* ------------------------------------------------------------------ */
 /* IShellFolder::GetAttributesOf (ms909872) publishes the SFGAO_*      */

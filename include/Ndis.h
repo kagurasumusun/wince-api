@@ -167,7 +167,7 @@ typedef enum {
 
 /* --- Structures whose print is fully grounded. ----------------- */
 
-/* ms904415 "NDIS_PACKET_OOB_DATA": print `typedef struct
+/* ms904087 "NDIS_PACKET_OOB_DATA": print `typedef struct
  * _NDIS_PACKET_OOB_DATA {union { ULONGLONG TimeToSend; ULONGLONG
  * TimeSent;};ULONGLONG TimeReceived;UINT HeaderSize;UINT
  * SizeMediaSpecificInfo;PVOID MediaSpecificInformation;
@@ -184,7 +184,7 @@ typedef struct _NDIS_PACKET_OOB_DATA {
     NDIS_STATUS Status;
 } NDIS_PACKET_OOB_DATA, *PNDIS_PACKET_OOB_DATA;
 
-/* ms904078 "NDIS_PACKET_STACK": print (glued tokens split). */
+/* ms904089 "NDIS_PACKET_STACK": print (glued tokens split). */
 typedef struct _NDIS_PACKET_STACK {
     ULONG_PTR IMReserved[2];
     ULONG_PTR NdisReserved[4];
@@ -196,24 +196,24 @@ typedef struct _TRANSPORT_HEADER_OFFSET {
     USHORT HeaderOffset;
 } TRANSPORT_HEADER_OFFSET, *PTRANSPORT_HEADER_OFFSET;
 
-/* ms905047 "NDIS_MAC_LINE_DOWN": print. */
+/* aa448020 "NDIS_MAC_LINE_DOWN": print. */
 typedef struct _NDIS_MAC_LINE_DOWN {
     NDIS_HANDLE NdisLinkContext;
 } NDIS_MAC_LINE_DOWN, *PNDIS_MAC_LINE_DOWN;
 
-/* ms905046 "NDIS_MAC_FRAGMENT": print (`ULONGErrors` glued). */
+/* aa448019 "NDIS_MAC_FRAGMENT": print (`ULONGErrors` glued). */
 typedef struct _NDIS_MAC_FRAGMENT {
     NDIS_HANDLE NdisLinkContext;
     ULONG       Errors;
 } NDIS_MAC_FRAGMENT, *PNDIS_MAC_FRAGMENT;
 
-/* ms905049 "NDIS_WAN_LINE_DOWN": print. */
+/* ms905047 "NDIS_WAN_LINE_DOWN": print. */
 typedef struct _NDIS_WAN_LINE_DOWN {
     UCHAR RemoteAddress[6];
     UCHAR LocalAddress[6];
 } NDIS_WAN_LINE_DOWN, *PNDIS_WAN_LINE_DOWN;
 
-/* ms905051 "NDIS_WAN_INFO": print (glued tokens split). */
+/* ms905046 "NDIS_WAN_INFO": print (glued tokens split). */
 typedef struct _NDIS_WAN_INFO {
     ULONG               MaxFrameSize;
     ULONG               MaxTransmit;
@@ -226,7 +226,7 @@ typedef struct _NDIS_WAN_INFO {
     ULONG               DesiredACCM;
 } NDIS_WAN_INFO, *PNDIS_WAN_INFO;
 
-/* ms905052 "NDIS_WAN_COMPRESS_INFO": print (glued tokens split). */
+/* ms905042 "NDIS_WAN_COMPRESS_INFO": print (glued tokens split). */
 typedef struct _NDIS_WAN_COMPRESS_INFO {
     UCHAR  SessionKey[8];
     ULONG  MSCompType;
@@ -426,7 +426,7 @@ typedef struct _NDIS_WAN_PACKET NDIS_WAN_PACKET, *PNDIS_WAN_PACKET;
 typedef struct _NDIS_PROTOCOL_CHARACTERISTICS NDIS_PROTOCOL_CHARACTERISTICS,
     *PNDIS_PROTOCOL_CHARACTERISTICS;
 
-/* ms904083 "NDIS_MINIPORT_CHARACTERISTICS": print `typedef struct
+/* aa448041 "NDIS_MINIPORT_CHARACTERISTICS": print `typedef struct
  * _NDIS_MINIPORT_CHARACTERISTICS { UCHARMajorNdisVersion;UCHAR
  * MinorNdisVersion; UINTReserved; W_CHECK_FOR_HANG_HANDLER
  * CheckForHangHandler;W_DISABLE_INTERRUPT_HANDLER

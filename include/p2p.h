@@ -79,18 +79,18 @@ AKARI_CE_IMPORT HRESULT WINAPI PeerCreatePeerName(PCWSTR pwzIdentity, PCWSTR pwz
 AKARI_CE_IMPORT HRESULT WINAPI PeerEndEnumeration(HPEERENUM hPeerEnum)
                     AKARI_CE_NAME(PeerEndEnumeration);
 
-/* ms895848 "PeerEnumGroups" */
+/* ms895849 "PeerEnumGroups" */
 AKARI_CE_IMPORT HRESULT WINAPI PeerEnumGroups(PCWSTR pwzIdentity, HPEERENUM *phPeerEnum)
                     AKARI_CE_NAME(PeerEnumGroups);
 
-/* ms895849 "PeerEnumIdentities" */
+/* ms895853 "PeerEnumIdentities" */
 AKARI_CE_IMPORT HRESULT WINAPI PeerEnumIdentities(HPEERENUM *phPeerEnum)
                     AKARI_CE_NAME(PeerEnumIdentities);
 
-/* ms895850 "PeerFreeData" */
+/* ms895857 "PeerFreeData" */
 AKARI_CE_IMPORT VOID WINAPI PeerFreeData(PVOID pvData) AKARI_CE_NAME(PeerFreeData);
 
-/* ms895865 "PeerGetItemCount" */
+/* ms895860 "PeerGetItemCount" */
 AKARI_CE_IMPORT HRESULT WINAPI PeerGetItemCount(HPEERENUM hPeerEnum, PULONG pCount)
                     AKARI_CE_NAME(PeerGetItemCount);
 
@@ -123,7 +123,7 @@ AKARI_CE_IMPORT HRESULT WINAPI PeerIdentityGetFriendlyName(PCWSTR pwzIdentity,
                     PWSTR *ppwzFriendlyName)
                     AKARI_CE_NAME(PeerIdentityGetFriendlyName);
 
-/* ms895885 "PeerIdentityGetXML" */
+/* ms895889 "PeerIdentityGetXML" */
 AKARI_CE_IMPORT HRESULT WINAPI PeerIdentityGetXML(PCWSTR pwzIdentity,
                     PWSTR *ppwzIdentityXML)
                     AKARI_CE_NAME(PeerIdentityGetXML);

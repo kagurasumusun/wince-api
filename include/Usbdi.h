@@ -118,7 +118,9 @@ BOOL USBUnInstallDriver(void);
 /* ms899307 LPGET_ISOCH_RESULTS: documented name-only (no value published; held) */
 /* ms902166 LPGET_STATUS: documented name-only (no value published; held) */
 /* ms902168 LPGET_TRANSFER_STATUS: documented name-only (no value published; held) */
-/* ms899322 LPGET_USBD_VERSION: documented name-only (no value published; held) */
+/* ms899322 LPGET_USBD_VERSION: prototype printed by the page; derived at the M99 sweep. */
+typedef VOID (*LPGET_USBD_VERSION)(LPDWORD lpdwMajorVersion, LPDWORD lpdwMinorVersion);
+
 /* ms902125 LPIS_DEFAULT_PIPE_HALTED: documented name-only (no value published; held) */
 /* ms902126 LPIS_PIPE_HALTED: documented name-only (no value published; held) */
 /* ms902133 LPIS_TRANSFER_COMPLETE: documented name-only (no value published; held) */
@@ -128,9 +130,13 @@ BOOL USBUnInstallDriver(void);
 /* ms902131 LPISSUE_ISOCH_TRANSFER: documented name-only (no value published; held) */
 /* ms902171 LPISSUE_VENDOR_TRANSFER: documented name-only (no value published; held) */
 /* ms902158 LPLOAD_GENERIC_INTERFACE_DRIVER: documented name-only (no value published; held) */
-/* ms919304 LPOPEN_CLIENT_REGISTRY_KEY: documented name-only (no value published; held) */
+/* ms919304 LPOPEN_CLIENT_REGISTRY_KEY: prototype printed by the page; derived at the M99 sweep. */
+typedef HKEY (*LPOPEN_CLIENT_REGISTRY_KEY)(LPCWSTR szUniqueDriverId);
+
 /* ms919318 LPOPEN_PIPE: documented name-only (no value published; held) */
-/* ms919790 LPREGISTER_CLIENT_DRIVER_ID: documented name-only (no value published; held) */
+/* ms919790 LPREGISTER_CLIENT_DRIVER_ID: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*LPREGISTER_CLIENT_DRIVER_ID)(LPCWSTR szUniqueDriverId);
+
 /* ms919792 LPREGISTER_CLIENT_SETTINGS: documented name-only (no value published; held) */
 /* ms919796 LPREGISTER_NOTIFICATION_ROUTINE: documented name-only (no value published; held) */
 /* ms919800 LPRELEASE_FRAME_LENGTH_CONTROL: documented name-only (no value published; held) */
@@ -145,7 +151,9 @@ BOOL USBUnInstallDriver(void);
 /* aa448185 LPSYNC_FRAME: documented name-only (no value published; held) */
 /* aa448187 LPTAKE_FRAME_LENGTH_CONTROL: documented name-only (no value published; held) */
 /* aa448214 LPTRANSLATE_STRING_DESCR: documented name-only (no value published; held) */
-/* ms902176 LPUN_REGISTER_CLIENT_DRIVER_ID: documented name-only (no value published; held) */
+/* ms902176 LPUN_REGISTER_CLIENT_DRIVER_ID: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*LPUN_REGISTER_CLIENT_DRIVER_ID)(LPCWSTR szUniqueDriverId);
+
 /* aa448244 LPUN_REGISTER_CLIENT_SETTINGS: documented name-only (no value published; held) */
 /* ms923105 LPUN_REGISTER_NOTIFICATION_ROUTINE: documented name-only (no value published; held) */
 /* ms923262 USB_FUNCS: documented name-only (no value published; held) */

@@ -29,7 +29,8 @@
 /* ------------------------------------------------------------------
  * Book surface: d3dm (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
-/* ms907727 D3DMPRESENTFLAG_LOCKABLE_BACKBUFFER: documented name-only (no value published; held) */
+/* ms907727 D3DMPRESENTFLAG_LOCKABLE_BACKBUFFER: value adopted at the M99 three-generation sweep -- ms907727: the Remarks of the D3DMPRESENTFLAG page print the value (CE 6.0 twin ee490892 prints the same 0x00000001). */
+#define D3DMPRESENTFLAG_LOCKABLE_BACKBUFFER 0x00000001
 /* ms939139 D3DMCLEAR Values (Header: D3dmtypes.h.) */
 /* ms939144 D3DMCOLORWRITEENABLE Values (Header: D3dmtypes.h.) */
 /* ms928308 D3DMCS Values (Header: D3dmtypes.h.) */

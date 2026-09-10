@@ -28,7 +28,7 @@ typedef struct _PROXY_HTTP_INFORMATION {
  * const SOCKADDR_STORAGE* psaProxy; int cbsaProxy;}
  * PROXY_HTTP_REQUEST, *PPROXY_HTTP_REQUEST;` */
 
-/* ms896346 "ProxyInitializeFilter": print
+/* ms896343 "ProxyInitializeFilter": print
  * `DWORD WINAPI ProxyInitializeFilter( PPROXY_HTTP_INFORMATION
  * pInfo);` */
 AKARI_CE_IMPORT DWORD WINAPI ProxyInitializeFilter(

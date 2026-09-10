@@ -81,7 +81,7 @@ typedef struct {
 
 /* --- Functions (Upnpcapi.lib -> def/upnpcapi-doc.def). ---------- */
 
-/* aa451147 "UpnpAddDevice": print
+/* aa451138 "UpnpAddDevice": print
  * `BOOL WINAPI UpnpAddDevice(UPNPDEVICEINFO* pDevInfo);` */
 AKARI_CE_IMPORT BOOL WINAPI UpnpAddDevice(UPNPDEVICEINFO *pDevInfo)
                     AKARI_CE_NAME(UpnpAddDevice);
@@ -91,12 +91,12 @@ AKARI_CE_IMPORT BOOL WINAPI UpnpAddDevice(UPNPDEVICEINFO *pDevInfo)
 AKARI_CE_IMPORT BOOL WINAPI UpnpPublishDevice(PCWSTR pszDeviceName)
                     AKARI_CE_NAME(UpnpPublishDevice);
 
-/* aa451150 "UpnpUnpublishDevice": print
+/* ms898561 "UpnpUnpublishDevice": print
  * `BOOL WINAPI UpnpUnpublishDevice(PCWSTRpszDeviceName);` */
 AKARI_CE_IMPORT BOOL WINAPI UpnpUnpublishDevice(PCWSTR pszDeviceName)
                     AKARI_CE_NAME(UpnpUnpublishDevice);
 
-/* aa451151 "UpnpRemoveDevice": print
+/* aa451150 "UpnpRemoveDevice": print
  * `BOOL WINAPI UpnpRemoveDevice(PCWSTRpszDeviceName);` */
 AKARI_CE_IMPORT BOOL WINAPI UpnpRemoveDevice(PCWSTR pszDeviceName)
                     AKARI_CE_NAME(UpnpRemoveDevice);

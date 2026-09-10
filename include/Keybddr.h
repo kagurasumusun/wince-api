@@ -113,18 +113,39 @@ extern "C" {
 /* ms902139 PFN_KEYBD_DRIVER_INIT_STATES: documented name-only (no value published; held) */
 /* ms902137 PFN_KEYBD_DRIVER_INITIALIZE: documented name-only (no value published; held) */
 /* ms902138 PFN_KEYBD_DRIVER_INITIALIZE_EX: documented name-only (no value published; held) */
-/* ms902140 PFN_KEYBD_DRIVER_MAP_VIRTUAL_KEY: documented name-only (no value published; held) */
-/* ms902141 PFN_KEYBD_DRIVER_POWER_HANDLER: documented name-only (no value published; held) */
-/* ms902142 PFN_KEYBD_DRIVER_SET_MODE: documented name-only (no value published; held) */
+/* ms902140 PFN_KEYBD_DRIVER_MAP_VIRTUAL_KEY: prototype printed by the page; derived at the M99 sweep. */
+typedef UINT32 (*PFN_KEYBD_DRIVER_MAP_VIRTUAL_KEY)(UINT32 uCode, UINT32 uMapType);
+
+/* ms902141 PFN_KEYBD_DRIVER_POWER_HANDLER: prototype printed by the page; derived at the M99 sweep. */
+typedef void (*PFN_KEYBD_DRIVER_POWER_HANDLER)(BOOL bOff);
+
+/* ms902142 PFN_KEYBD_DRIVER_SET_MODE: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*PFN_KEYBD_DRIVER_SET_MODE)(INT iKeybdId, INT iIndex, LPVOID lpInput);
+
 /* ms902143 PFN_KEYBD_DRIVER_VKEY_TO_UNICODE: documented name-only (no value published; held) */
-/* ms902144 PFN_KEYBD_EVENT_CALLBACK: documented name-only (no value published; held) */
-/* ms902145 PFN_KEYBD_EVENT_CALLBACK_EX: documented name-only (no value published; held) */
-/* ms902151 PFN_LAYOUT_MGR_ACTIVATE_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
-/* ms902153 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
-/* ms902154 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_LIST: documented name-only (no value published; held) */
-/* ms902155 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_NAME: documented name-only (no value published; held) */
-/* ms902156 PFN_LAYOUT_MGR_GET_KEYBOARD_TYPE: documented name-only (no value published; held) */
-/* ms902157 PFN_LAYOUT_MGR_LOAD_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
+/* ms902144 PFN_KEYBD_EVENT_CALLBACK: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*PFN_KEYBD_EVENT_CALLBACK)(UINT32 VirtualKey, KEY_STATE_FLAGS KeyEvent);
+
+/* ms902145 PFN_KEYBD_EVENT_CALLBACK_EX: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*PFN_KEYBD_EVENT_CALLBACK_EX)(UINT32 VirtualKey, UINT32 ScanCode, KEY_STATE_FLAGS KeyEvent);
+
+/* ms902151 PFN_LAYOUT_MGR_ACTIVATE_KEYBOARD_LAYOUT: prototype printed by the page; derived at the M99 sweep. */
+typedef HKL (*PFN_LAYOUT_MGR_ACTIVATE_KEYBOARD_LAYOUT)(HKL hkl, UINT Flags);
+
+/* ms902153 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT: prototype printed by the page; derived at the M99 sweep. */
+typedef HKL (*PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT)(DWORD idThread);
+
+/* ms902154 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_LIST: prototype printed by the page; derived at the M99 sweep. */
+typedef UINT (*PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_LIST)(int nBuf, HKL FAR *lpList);
+
+/* ms902155 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_NAME: prototype printed by the page; derived at the M99 sweep. */
+typedef BOOL (*PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_NAME)(WCHAR *pNameBuf);
+
+/* ms902156 PFN_LAYOUT_MGR_GET_KEYBOARD_TYPE: prototype printed by the page; derived at the M99 sweep. */
+typedef int (*PFN_LAYOUT_MGR_GET_KEYBOARD_TYPE)(int nTypeFlag);
+
+/* ms902157 PFN_LAYOUT_MGR_LOAD_KEYBOARD_LAYOUT: prototype printed by the page; derived at the M99 sweep. */
+typedef HKL (*PFN_LAYOUT_MGR_LOAD_KEYBOARD_LAYOUT)(LPCWSTR pwszKLID, UINT Flags);
 
 /* ------------------------------------------------------------------
  * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)

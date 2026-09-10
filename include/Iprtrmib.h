@@ -12,7 +12,7 @@
 
 #include "Windef.h"    /* DWORD, BYTE, WCHAR, ULONG */
 
-/* ms895078 "MIBICMPSTATS" / ms895077 "MIBICMPINFO" / ms895075
+/* ms894605 "MIBICMPSTATS" / ms895077 "MIBICMPINFO" / ms895075
  * "MIB_ICMP" (print `typedef struct_MIB_ICMP {MIBICMPINFOstats;}`)
  * -- all-DWORD, compiled as printed. */
 typedef struct _MIBICMPSTATS {
@@ -40,7 +40,7 @@ typedef struct _MIB_ICMP {
     MIBICMPINFO stats;   /* print spells `MIBICMPINFOstats;` */
 } MIB_ICMP, *PMIB_ICMP;
 
-/* ms895069 "MIB_IPADDRROW": all-DWORD (+unsigned short), compiled. */
+/* ms894617 "MIB_IPADDRROW": all-DWORD (+unsigned short), compiled. */
 typedef struct _MIB_IPADDRROW {
     DWORD          dwAddr;
     DWORD          dwIndex;
@@ -103,7 +103,7 @@ typedef struct _MIB_PROXYARP {
     DWORD dwIfIndex;
 } MIB_PROXYARP, *PMIB_PROXYARP;
 
-/* ms895082 "MIB_TCPROW" / ms895084 "MIB_TCPSTATS": compiled. */
+/* ms895081 "MIB_TCPROW" / ms895084 "MIB_TCPSTATS": compiled. */
 typedef struct _MIB_TCPROW {
     DWORD dwState;
     DWORD dwLocalAddr;
@@ -130,7 +130,7 @@ typedef struct _MIB_TCPSTATS {
     DWORD dwNumConns;
 } MIB_TCPSTATS, *PMIB_TCPSTATS;
 
-/* ms895092 "MIB_UDPROW" / ms895093 "MIB_UDPSTATS": compiled. */
+/* ms895094 "MIB_UDPROW" / ms895093 "MIB_UDPSTATS": compiled. */
 typedef struct _MIB_UDPROW {
     DWORD dwLocalAddr;
     DWORD dwLocalPort;
