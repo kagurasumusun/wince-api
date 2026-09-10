@@ -663,4 +663,230 @@ AKARI_CE_IMPORT BOOL UnlockUrlCacheEntryStream(HANDLE hUrlCacheStream, DWORD dwR
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- CACHE_ family (7 names; R1) ---- */
+#define CACHE_ENTRY_ATTRIBUTE_FC                     0x0004
+#define CACHE_ENTRY_HITRATE_FC                       0x0010
+#define CACHE_ENTRY_MODTIME_FC                       0x0040
+#define CACHE_ENTRY_EXPTIME_FC                       0x0080
+#define CACHE_ENTRY_ACCTIME_FC                       0x0100
+#define CACHE_ENTRY_SYNCTIME_FC                      0x0200
+#define CACHE_ENTRY_HEADERINFO_FC                    0x0400
+
+/* ---- COOKIE_ family (1 names; R1) ---- */
+#define COOKIE_CACHE_ENTRY                           0x100000
+
+/* ---- ERROR_ family (14 names; R1) ---- */
+#define ERROR_INTERNET_EXTENDED_ERROR                0x2EE3
+#define ERROR_INTERNET_INVALID_URL                   0x2EE5
+#define ERROR_INTERNET_INCORRECT_PASSWORD            0x2EEE
+#define ERROR_INTERNET_CANNOT_CONNECT                0x2EFD
+#define ERROR_INTERNET_CONNECTION_RESET              0x2EFF
+#define ERROR_INTERNET_FORCE_RETRY                   0x2F00
+#define ERROR_INTERNET_SEC_CERT_DATE_INVALID         0x2F05
+#define ERROR_INTERNET_SEC_CERT_CN_INVALID           0x2F06
+#define ERROR_INTERNET_HTTP_TO_HTTPS_ON_REDIR        0x2F07
+#define ERROR_INTERNET_HTTPS_TO_HTTP_ON_REDIR        0x2F08
+#define ERROR_INTERNET_POST_IS_NON_SECURE            0x2F0B
+#define ERROR_INTERNET_CLIENT_AUTH_CERT_NEEDED       0x2F0C
+#define ERROR_INTERNET_INVALID_CA                    0x2F0D
+#define ERROR_HTTP_HEADER_NOT_FOUND                  0x2F76
+
+/* ---- FLAGS_ family (3 names; R1) ---- */
+#define FLAGS_ERROR_UI_FILTER_FOR_ERRORS             0x0001
+#define FLAGS_ERROR_UI_FLAGS_CHANGE_OPTIONS          0x0002
+#define FLAGS_ERROR_UI_FLAGS_GENERATE_DATA           0x0004
+
+/* ---- HTTP_ family (19 names; R1) ---- */
+#define HTTP_QUERY_CONTENT_TRANSFER_ENCODING         0x0002
+#define HTTP_QUERY_CONTENT_DESCRIPTION               0x0004
+#define HTTP_QUERY_CONTENT_LENGTH                    0x0005
+#define HTTP_QUERY_MESSAGE_ID                        0x000C
+#define HTTP_QUERY_DERIVED_FROM                      0x000E
+#define HTTP_QUERY_COST                              0x000F
+#define HTTP_QUERY_LINK                              0x0010
+#define HTTP_QUERY_FORWARDED                         0x001E
+#define HTTP_QUERY_ORIG_URI                          0x0022
+#define HTTP_QUERY_CUSTOM                            0xFFFF
+#define HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON     0x1000000
+#define HTTP_ADDREQ_FLAG_ADD_IF_NEW                  0x10000000
+#define HTTP_ADDREQ_FLAG_ADD                         0x20000000
+#define HTTP_QUERY_FLAG_NUMBER                       0x20000000
+#define HTTP_ADDREQ_FLAG_COALESCE                    0x40000000
+#define HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA         0x40000000
+#define HTTP_QUERY_FLAG_SYSTEMTIME                   0x40000000
+#define HTTP_ADDREQ_FLAG_REPLACE                     0x80000000
+#define HTTP_QUERY_FLAG_REQUEST_HEADERS              0x80000000
+
+/* ---- ICU_ family (6 names; R1) ---- */
+#define ICU_ENCODE_SPACES_ONLY                       0x4000000
+#define ICU_NO_META                                  0x8000000
+#define ICU_DECODE                                   0x10000000
+#define ICU_NO_ENCODE                                0x20000000
+#define ICU_USERNAME                                 0x40000000
+#define ICU_ESCAPE                                   0x80000000
+
+/* ---- INTERNET_ family (112 names; R1) ---- */
+#define INTERNET_INVALID_PORT_NUMBER                 0x0000
+#define INTERNET_OPEN_TYPE_PRECONFIG                 0x0000
+#define INTERNET_RFC1123_FORMAT                      0x0000
+#define INTERNET_CONNECTION_MODEM                    0x0001
+#define INTERNET_FIRST_OPTION                        0x0001
+#define INTERNET_FLAG_TRANSFER_ASCII                 0x0001
+#define INTERNET_HANDLE_TYPE_INTERNET                0x0001
+#define INTERNET_OPEN_TYPE_DIRECT                    0x0001
+#define INTERNET_OPTION_CALLBACK                     0x0001
+#define INTERNET_REQFLAG_FROM_CACHE                  0x0001
+#define INTERNET_SERVICE_FTP                         0x0001
+#define INTERNET_STATE_CONNECTED                     0x0001
+#define INTERNET_CONNECTION_LAN                      0x0002
+#define INTERNET_FLAG_TRANSFER_BINARY                0x0002
+#define INTERNET_HANDLE_TYPE_CONNECT_FTP             0x0002
+#define INTERNET_OPTION_CONNECT_TIMEOUT              0x0002
+#define INTERNET_SERVICE_GOPHER                      0x0002
+#define INTERNET_STATE_DISCONNECTED                  0x0002
+#define INTERNET_OPEN_TYPE_PROXY                     0x0003
+#define INTERNET_OPTION_CONNECT_RETRIES              0x0003
+#define INTERNET_SERVICE_HTTP                        0x0003
+#define INTERNET_CONNECTION_PROXY                    0x0004
+#define INTERNET_HANDLE_TYPE_CONNECT_HTTP            0x0004
+#define INTERNET_OPTION_CONNECT_BACKOFF              0x0004
+#define INTERNET_HANDLE_TYPE_FTP_FIND                0x0005
+#define INTERNET_OPTION_CONTROL_SEND_TIMEOUT         0x0005
+#define INTERNET_OPTION_SEND_TIMEOUT                 0x0005
+#define INTERNET_HANDLE_TYPE_FTP_FIND_HTML           0x0006
+#define INTERNET_OPTION_CONTROL_RECEIVE_TIMEOUT      0x0006
+#define INTERNET_OPTION_RECEIVE_TIMEOUT              0x0006
+#define INTERNET_HANDLE_TYPE_FTP_FILE                0x0007
+#define INTERNET_OPTION_DATA_SEND_TIMEOUT            0x0007
+#define INTERNET_CONNECTION_MODEM_BUSY               0x0008
+#define INTERNET_HANDLE_TYPE_FTP_FILE_HTML           0x0008
+#define INTERNET_OPTION_DATA_RECEIVE_TIMEOUT         0x0008
+#define INTERNET_SCHEME_SOCKS                        0x0008
+#define INTERNET_OPTION_HANDLE_TYPE                  0x0009
+#define INTERNET_OPTION_CONTEXT_VALUE                0x000A
+#define INTERNET_STATUS_RESOLVING_NAME               0x000A
+#define INTERNET_STATUS_NAME_RESOLVED                0x000B
+#define INTERNET_OPTION_READ_BUFFER_SIZE             0x000C
+#define INTERNET_HANDLE_TYPE_HTTP_REQUEST            0x000D
+#define INTERNET_OPTION_WRITE_BUFFER_SIZE            0x000D
+#define INTERNET_FLAG_MUST_CACHE_REQUEST             0x0010
+#define INTERNET_RAS_INSTALLED                       0x0010
+#define INTERNET_STATE_DISCONNECTED_BY_USER          0x0010
+#define INTERNET_STATUS_CONNECTING_TO_SERVER         0x0014
+#define INTERNET_DEFAULT_FTP_PORT                    0x0015
+#define INTERNET_OPTION_PARENT_HANDLE                0x0015
+#define INTERNET_STATUS_CONNECTED_TO_SERVER          0x0015
+#define INTERNET_OPTION_REQUEST_FLAGS                0x0017
+#define INTERNET_OPTION_EXTENDED_ERROR               0x0018
+#define INTERNET_OPTION_USERNAME                     0x001C
+#define INTERNET_OPTION_PASSWORD                     0x001D
+#define INTERNET_RFC1123_BUFSIZE                     0x001E
+#define INTERNET_STATUS_SENDING_REQUEST              0x001E
+#define INTERNET_OPTION_SECURITY_FLAGS               0x001F
+#define INTERNET_STATUS_REQUEST_SENT                 0x001F
+#define INTERNET_CONNECTION_OFFLINE                  0x0020
+#define INTERNET_OPTION_SECURITY_CERTIFICATE_STRUCT  0x0020
+#define INTERNET_OPTION_DATAFILE_NAME                0x0021
+#define INTERNET_OPTION_URL                          0x0022
+#define INTERNET_OPTION_SECURITY_CERTIFICATE         0x0023
+#define INTERNET_OPTION_SECURITY_KEY_BITNESS         0x0024
+#define INTERNET_OPTION_REFRESH                      0x0025
+#define INTERNET_OPTION_PROXY                        0x0026
+#define INTERNET_OPTION_SETTINGS_CHANGED             0x0027
+#define INTERNET_OPTION_VERSION                      0x0028
+#define INTERNET_STATUS_RECEIVING_RESPONSE           0x0028
+#define INTERNET_OPTION_USER_AGENT                   0x0029
+#define INTERNET_STATUS_RESPONSE_RECEIVED            0x0029
+#define INTERNET_OPTION_END_BROWSER_SESSION          0x002A
+#define INTERNET_STATUS_CTL_RESPONSE_RECEIVED        0x002A
+#define INTERNET_OPTION_PROXY_USERNAME               0x002B
+#define INTERNET_STATUS_PREFETCH                     0x002B
+#define INTERNET_OPTION_PROXY_PASSWORD               0x002C
+#define INTERNET_LAST_OPTION                         0x0032
+#define INTERNET_OPTION_CONNECTED_STATE              0x0032
+#define INTERNET_STATUS_CLOSING_CONNECTION           0x0032
+#define INTERNET_STATUS_CONNECTION_CLOSED            0x0033
+#define INTERNET_STATUS_HANDLE_CREATED               0x003C
+#define INTERNET_CONNECTION_CONFIGURED               0x0040
+#define INTERNET_STATUS_HANDLE_CLOSING               0x0046
+#define INTERNET_DEFAULT_HTTP_PORT                   0x0050
+#define INTERNET_STATUS_REQUEST_COMPLETE             0x0064
+#define INTERNET_STATUS_REDIRECT                     0x006E
+#define INTERNET_FLAG_PRAGMA_NOCACHE                 0x0100
+#define INTERNET_STATE_IDLE                          0x0100
+#define INTERNET_DEFAULT_HTTPS_PORT                  0x01BB
+#define INTERNET_FLAG_NO_UI                          0x0200
+#define INTERNET_STATE_BUSY                          0x0200
+#define INTERNET_FLAG_HYPERLINK                      0x0400
+#define INTERNET_DEFAULT_SOCKS_PORT                  0x0438
+#define INTERNET_FLAG_RESYNCHRONIZE                  0x0800
+#define INTERNET_FLAG_IGNORE_CERT_CN_INVALID         0x1000
+#define INTERNET_FLAG_IGNORE_CERT_DATE_INVALID       0x2000
+#define INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTPS       0x4000
+#define INTERNET_FLAG_IGNORE_REDIRECT_TO_HTTP        0x8000
+#define INTERNET_FLAG_NO_AUTH                        0x40000
+#define INTERNET_FLAG_NO_COOKIES                     0x80000
+#define INTERNET_FLAG_READ_PREFETCH                  0x100000
+#define INTERNET_FLAG_NO_AUTO_REDIRECT               0x200000
+#define INTERNET_FLAG_KEEP_CONNECTION                0x400000
+#define INTERNET_FLAG_SECURE                         0x800000
+#define INTERNET_FLAG_OFFLINE                        0x1000000
+#define INTERNET_FLAG_DONT_CACHE                     0x4000000
+#define INTERNET_FLAG_NO_CACHE_WRITE                 0x4000000
+#define INTERNET_FLAG_PASSIVE                        0x8000000
+#define INTERNET_FLAG_ASYNC                          0x10000000
+#define INTERNET_FLAG_EXISTING_CONNECT               0x20000000
+#define INTERNET_FLAG_RAW_DATA                       0x40000000
+#define INTERNET_FLAG_RELOAD                         0x80000000
+
+/* ---- IRF_ family (4 names; R1) ---- */
+#define IRF_ASYNC                                    0x0001
+#define IRF_SYNC                                     0x0004
+#define IRF_NO_WAIT                                  0x0008
+#define IRF_USE_CONTEXT                              0x0008
+
+/* ---- NORMAL_ family (1 names; R1) ---- */
+#define NORMAL_CACHE_ENTRY                           0x0001
+
+/* ---- SECURITY_ family (13 names; R1) ---- */
+#define SECURITY_FLAG_SECURE                         0x0001
+#define SECURITY_FLAG_IGNORE_REVOCATION              0x0080
+#define SECURITY_FLAG_IGNORE_UNKNOWN_CA              0x0100
+#define SECURITY_FLAG_IGNORE_WRONG_USAGE             0x0200
+#define SECURITY_FLAG_IGNORE_CERT_CN_INVALID         0x1000
+#define SECURITY_FLAG_IGNORE_CERT_DATE_INVALID       0x2000
+#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTPS       0x4000
+#define SECURITY_FLAG_IGNORE_REDIRECT_TO_HTTP        0x8000
+#define SECURITY_FLAG_40BIT                          0x10000000
+#define SECURITY_FLAG_NORMALBITNESS                  0x10000000
+#define SECURITY_FLAG_128BIT                         0x20000000
+#define SECURITY_FLAG_56BIT                          0x40000000
+#define SECURITY_FLAG_UNKNOWNBIT                     0x80000000
+
+/* ---- SPARSE_ family (1 names; R1) ---- */
+#define SPARSE_CACHE_ENTRY                           0x10000
+
+/* ---- STICKY_ family (1 names; R1) ---- */
+#define STICKY_CACHE_ENTRY                           0x0004
+
+/* ---- URLHISTORY_ family (1 names; R1) ---- */
+#define URLHISTORY_CACHE_ENTRY                       0x200000
+
+/* ---- WININET_ family (3 names; R1) ---- */
+#define WININET_API_FLAG_ASYNC                       0x0001
+#define WININET_API_FLAG_SYNC                        0x0004
+#define WININET_API_FLAG_USE_CONTEXT                 0x0008
+
 #endif /* AKARI_WININET_H */

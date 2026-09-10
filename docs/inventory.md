@@ -6851,3 +6851,18 @@ guard close, grouped by family, every value provenance-tagged R1.
   ID_PSREBOOTSYSTEM 3, PSCB_ 3 (GETVERSION/PRECREATE/INITIALIZED),
   PSN_ 6 notifications, PSPCB_ 2 (CREATE/RELEASE).  PSM_* stayed in
   Commctrl.h (their Requirements home).  Gates GREEN x6.
+- include/Wininet.h: 186 defines, 14 families (CACHE_ENTRY_* 7,
+  COOKIE_CACHE_ENTRY, ERROR_INTERNET_* 14, FLAGS_ 3 (the
+  InternetQueryOption/InternetSetOption result flags), HTTP_ 19
+  (HTTP_QUERY_* info levels + HTTP_ADDREQ_FLAG_*), ICU_ 6
+  (InternetCanonicalizeUrl), INTERNET_ 112 (the INTERNET_FLAG_*
+  modifiers, INTERNET_OPTION_* action codes incl. the CE-lineage
+  INTERNET_OPTION_CONTEXT_VALUE 10 and INTERNET_LAST_OPTION 50 --
+  the exact values that disqualified desktop mingw-w64 as a source,
+  INTERNET_OPEN_TYPE_*, INTERNET_SERVICE_*, INTERNET_STATE_*),
+  IRF_ 4 (InternetReadFileEx), SECURITY_ 13 (cache/security flags),
+  singles NORMAL_CACHE_ENTRY / SPARSE_CACHE_ENTRY /
+  STICKY_CACHE_ENTRY / URLHISTORY_CACHE_ENTRY, WININET_ 3
+  (async-info levels)).  HTTP_QUERY_FLAG_COALESCE and
+  INTERNET_FLAG_MAKE_PERSISTENT excluded (Not-supported rows).
+  Gates GREEN x6.
