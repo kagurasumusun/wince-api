@@ -71,6 +71,12 @@ include/Ndis.h \
 include/Ndistapi.h \
 include/Ntddndis.h \
 include/Netui.h \
+include/Externs.h \
+include/Nuiouser.h \
+include/Rndis.h \
+include/Rndismini.h \
+include/Windot11.h \
+include/Wzcsapi.h \
 include/Notify.h \
 include/Oaidl.h \
 include/Obex.h \

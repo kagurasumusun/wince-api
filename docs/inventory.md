@@ -5893,3 +5893,56 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
   unpublished PSTRING; NDIS_MEDIUM alone would not unhold it).
 - TU m78b block; Makefile HDRS 145 -> 147.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M78c -- RNDIS, RNDIS miniport, NDISUIO, WZC, Externs, Windot11
+
+- include/Rndis.h (NEW): five UINT32 scalar typedefs (RNDIS_CLASS_ID,
+  RNDIS_MEDIUM, RNDIS_OID, RNDIS_REQUEST_ID, RNDIS_STATUS),
+  RNDIS_DIAGNOSTIC_INFO, RNDIS_OOBD, RNDIS_PER_PACKET_INFO; eight
+  REMOTE_NDIS_* messages compiled from the flattened
+  "NAME(Type)Member;" page layouts (HALT/INITIALIZE/KEEPALIVE
+  MSG+CMPLT/QUERY_CMPLT/RESET MSG+CMPLT/SET_CMPLT; format note at
+  each site; no P typedefs invented).  Repair: REMOTE_NDIS_SET_CMPLT
+  print spells the RequestId type `RNDIS_REQUEST` (siblings print
+  RNDIS_REQUEST_ID) -- repaired, noted.  Held: QUERY_MSG/SET_MSG
+  (RNDIS_HANDLE unpublished), INDICATE_STATUS_MSG (RNDIS_MESSAGE
+  unpublished), RNDIS_PACKET (RNDIS_HANDLE);
+  INITIALIZE_CMPLT/PACKET_MSG print no layout (names recorded).
+- include/Rndismini.h (NEW): PFN_PDD_SEND_RNDIS_MESSAGE /
+  PFN_PDD_SEND_RNDIS_PACKET / PFN_PDD_SET / PFN_PDD_GET typedefs
+  (printed); REQ_ID_VENDOR_ID 0x80000001 / REQ_ID_VENDOR_DESCRIPTION
+  0x80000002 / REQ_ID_DEVICE_MAX_RX 0x80000003 /
+  REQ_ID_DEVICE_MACADDR 0x80000004 (values printed on the GetHandler
+  page aa447838, Header "RndisMini.h" as printed -- capital-M page
+  merged into this file, noted).  8 MDD/PDD functions declared (no
+  Link Library rows; FirewallLog* precedent).  Held: DATA_WRAPPER
+  (LIST_ENTRY), RNDIS_PDD_CHARACTERISTICS (no print; opaque).
+- include/Wzcsapi.h (NEW): INTF_KEY_ENTRY, INTFS_KEY_TABLE,
+  WZC_CONTEXT (tag _wzc_context_t as printed), WZC_EAPOL_PARAMS
+  compiled; 8 WZC functions declared (Wzcsapi.lib) ->
+  def/wzcsapi-doc.def 8 exports.  Held: INTF_ENTRY (RAW_DATA
+  unpublished), WZC_WLAN_CONFIG (RAW_DATA +
+  WZCCTL_MAX_WEPK_MATERIAL unpublished), WZC_802_11_CONFIG_LIST
+  (embeds held WZC_WLAN_CONFIG) -- all pointer-typed in every
+  function, so the import surface is complete.
+- include/Nuiouser.h (NEW): NDISUIO_DEVICE_NOTIFICATION,
+  NDISUIO_QUERY_BINDING, NDISUIO_QUERY_OID, NDISUIO_SET_OID (the
+  #ifdef UNDER_CE PTCHAR blocks are genuine prints, reproduced),
+  NDISUIO_REQUEST_NOTIFICATION, NIC_STATISTICS compiled.  Held:
+  NDISUIO_OPEN_CONTEXT (LIST_ENTRY/NUIO_LOCK/PFILE_OBJECT internal).
+  10 IOCTL_* names recorded (prose pages, no values).
+- include/Externs.h (NEW, record-only): 20 Miniport* driver-supplied
+  callback prototypes (10 printed, 10 prose-only names).
+- include/Windot11.h (NEW, record-only): all 101 OID_DOT11_* names
+  (no page prints values or layouts).
+- CONTAINING_RECORD (aa447688, page Requirements "Header: Wdm.h or
+  Ntddk.h" -- the only Wdm/Ntddk row in the CE docs corpus):
+  `PCHAR CONTAINING_RECORD(PCHAR Address,TYPE Type,PCHAR Field);`
+  recorded in the inventory here; macro form (TYPE is the macro
+  parameter), no Wdm.h file is created.
+- TU m78c block; Makefile HDRS 147 -> 153.
+- Gates: check / crosscheck / e2e GREEN x6.
+- M78 complete: all 779 Network Driver Reference pages triaged
+  (354 Ndis.h + 126 Ntddndis.h + 69 Ntddndis/Ndistapi + 101
+  Windot11.h + 23 Rndis.h + 20 Externs.h + 17 Nuiouser.h + 17
+  Rndismini.h + 15 Wzcsapi.h + 35 book-index rows + 1 Wdm row).

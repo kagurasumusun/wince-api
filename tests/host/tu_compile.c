@@ -56,6 +56,12 @@
 #include <Ndis.h>
 #include <Ntddndis.h>
 #include <Ndistapi.h>
+#include <Rndis.h>
+#include <Rndismini.h>
+#include <Nuiouser.h>
+#include <Wzcsapi.h>
+#include <Externs.h>
+#include <Windot11.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6960,6 +6966,71 @@ static int m78b_shaped_usage(void)
            + (int)sdc.ulDeviceID + (int)mac[0] + (int)rates[0];
 }
 
+static int m78c_shaped_usage(void)
+{
+    RNDIS_CLASS_ID             rcid = 0;
+    RNDIS_MEDIUM              rmed = 0;
+    RNDIS_OID                  roid = 0;
+    RNDIS_REQUEST_ID           rrid = 0;
+    RNDIS_STATUS               rsts = 0;
+    RNDIS_DIAGNOSTIC_INFO      rdi;
+    RNDIS_OOBD                 roo;
+    RNDIS_PER_PACKET_INFO      rppi;
+    REMOTE_NDIS_HALT_MSG       rhm;
+    REMOTE_NDIS_INITIALIZE_MSG rim;
+    REMOTE_NDIS_KEEPALIVE_CMPLT rkc;
+    REMOTE_NDIS_QUERY_CMPLT    rqc;
+    REMOTE_NDIS_RESET_CMPLT    rrc;
+    REMOTE_NDIS_SET_CMPLT      rsc;
+    RNDIS_PACKET              *prp;
+    REMOTE_NDIS_QUERY_MSG     *prq;
+    DATA_WRAPPER              *pdw;
+    RNDIS_PDD_CHARACTERISTICS *prpc;
+    PFN_PDD_GET                pget = NULL;
+    INTF_KEY_ENTRY             ike;
+    INTFS_KEY_TABLE            ikt;
+    WZC_CONTEXT                wctx;
+    WZC_EAPOL_PARAMS           wep;
+    INTF_ENTRY                *pie;
+    WZC_WLAN_CONFIG           *pwwc;
+    WZC_802_11_CONFIG_LIST    *pwcl;
+    NDISUIO_DEVICE_NOTIFICATION ndn;
+    NDISUIO_QUERY_BINDING      nqb;
+    NDISUIO_QUERY_OID          nqo;
+    NDISUIO_SET_OID           *pnso;
+    NDISUIO_REQUEST_NOTIFICATION nrn;
+    NIC_STATISTICS             nst;
+    DWORD                      dwd;
+
+    rdi.ErrorOffset = 0u; roo.Size = 0u; rppi.Type = 0u;
+    rhm.RequestId = 0u; rim.MaxTransferSize = 0u; rkc.Status = 0u;
+    rqc.InformationBufferOffset = 0u; rrc.AddressingReset = 0u;
+    rsc.RequestId = 0u;
+    prp = NULL; prq = NULL; pdw = NULL; prpc = NULL; pget = NULL;
+    ike.wszGuid = NULL; ikt.dwNumIntfs = 0u; wctx.dwFlags = 0u;
+    wep.dwEapType = 0u; pie = NULL; pwwc = NULL; pwcl = NULL;
+    ndn.dwNotificationType = 0u; nqb.BindingIndex = 0u;
+    nqo.Oid = 0u; pnso = NULL; nrn.hMsgQueue = NULL;
+    nst.LinkSpeed = 0u; dwd = 0u;
+    dwd = WZCEnumInterfaces(NULL, &ikt);
+    dwd += WZCQueryContext(NULL, 0u, &wctx, NULL);
+    WZCDeleteIntfObj(pie);
+    pdw = MDDAllocDataWrapper();
+    MDDFreeMem(NULL);
+    dwd += (DWORD)PDDInit(prpc, NULL);
+    return (int)rcid + (int)rmed + (int)roid + (int)rrid + (int)rsts
+           + (int)rdi.ErrorOffset + (int)roo.Size + (int)rppi.Type
+           + (int)rhm.RequestId + (int)rim.MaxTransferSize
+           + (int)rkc.Status + (int)rqc.InformationBufferOffset
+           + (int)rrc.AddressingReset + (int)rsc.RequestId
+           + (ike.wszGuid != NULL) + (int)ikt.dwNumIntfs + (int)wctx.dwFlags
+           + (int)wep.dwEapType + (int)ndn.dwNotificationType
+           + (int)nqb.BindingIndex + (int)nqo.Oid + (int)nst.LinkSpeed
+           + (nrn.hMsgQueue != NULL)
+           + (int)dwd + (prp || prq || pie || pwwc || pwcl || pnso ? 1 : 0)
+           + (pdw != NULL) + (pget != NULL);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7105,6 +7176,8 @@ int host_tu_entry(void)
     if (m78a_shaped_usage() != 0)
         return 1;
     if (m78b_shaped_usage() != 0)
+        return 1;
+    if (m78c_shaped_usage() != 0)
         return 1;
     return 0;
 }
