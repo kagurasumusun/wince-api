@@ -284,7 +284,7 @@ clean:
 	rm -rf build
 
 # End-to-end link checks: the doc-derived def files are turned into
-# import libraries with llvm-dlltool (armce for ARM, i386
+# import libraries with llvm-dlltool (armwince for ARM, i386
 # --no-leading-underscore for x86 -- the CE coredll x86 export
 # surface is undecorated, the headers are pinned to it, see
 # windef.h), and the tests/e2e consumers are linked with lld-link
@@ -293,6 +293,16 @@ clean:
 # CE subsystem and coredll import names are asserted with
 # llvm-readobj.
 #   make e2e WINCECLANG=/path/to/clang CRTDIR=/path/to/wince-crt
+#
+# Toolchain adaptation (2026-09-10 LLVM-WinCE artifact, wince-llvm-
+# 01c51ef / 10134447081): llvm-dlltool spells the CE ARM machine
+# "armwince" now ("arm" means ARMNT; the CE machine is named after the
+# OS that requires it, commit 556b2ba5), and the clang driver answers a
+# bare *-pc-wince ARM triple with the generic default CPU arm7tdmi
+# (ARMv4T) -- the core is asked for by option (71f4db8c/0583ffe45).
+# The ARM e2e objects are therefore pinned to -march=armv5tej to match
+# the wince-crt build (its WCE_ARCHFLAGS) and keep the pipeline on the
+# link-verified ARMv5TE codegen.
 CRTDIR    ?= $(abspath $(CURDIR)/../wince-crt)
 
 # M39 note: the M39 ws2 import assertions below resolve through ws2.dll (Ws2.lib
@@ -309,8 +319,8 @@ e2e:
 	bin=$$(dirname "$(WINCECLANG)"); \
 	tmp=$$(mktemp -d); trap 'rm -rf "$$tmp"' EXIT; \
 	for t in $(CE_TRIPLES); do \
-	  case $$t in arm*) dtf="-m armce"; mchk="IMAGE_FILE_MACHINE_ARM";; \
-	             *)    dtf="-m i386 --no-leading-underscore"; mchk="IMAGE_FILE_MACHINE_I386";; \
+	  case $$t in arm*) dtf="-m armwince"; march="-march=armv5tej"; mchk="IMAGE_FILE_MACHINE_ARM";; \
+	             *)    dtf="-m i386 --no-leading-underscore"; march=""; mchk="IMAGE_FILE_MACHINE_I386";; \
 	  esac; \
 	  d=build/e2e/$$t; mkdir -p $$d; \
 	  for f in def/*-doc.def; do \
@@ -323,7 +333,7 @@ e2e:
 	  for s in e2e_console e2e_winmain e2e_module; do \
 	    echo "[e2e] $$t compile: $$s"; \
 	    "$(WINCECLANG)" -target $$t -std=c11 -ffreestanding \
-	      --sysroot=$$tmp -Wno-wince-sysroot-missing \
+	      --sysroot=$$tmp -Wno-wince-sysroot-missing $$march \
 	      $(CFLAGS) -Werror -I include -c tests/e2e/$$s.c -o $$d/$$s.o || exit 1; \
 	  done; \
 	  echo "[e2e] $$t link: main app / WinMain app / DLL"; \

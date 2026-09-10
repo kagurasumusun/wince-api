@@ -65,7 +65,7 @@ python3 tools/ce-fetch.py tools/manifests/core-synchronization-reference.manifes
 make defdoc                       # writes def/*-doc.def from build/rows.json
 
 # build an import library with the LLVM-WinCE dlltool
-llvm-dlltool -m armce -d def/coredll-doc.def -l coredll.lib       # ARM CE
+llvm-dlltool -m armwince -d def/coredll-doc.def -l coredll.lib  # ARM CE
 llvm-dlltool -m i386 --no-leading-underscore -d def/coredll-doc.def \
     -l coredll-x86.lib                                            # x86 CE
 ```
@@ -456,7 +456,7 @@ declarations, recorded in `docs/inventory.md`):
   referenced by a bare asm label (MC local-label rule; verified
   toolchain diagnostic).  New `tests/e2e` consumers + `make e2e`:
   all 33 doc-derived defs -> llvm-dlltool import libraries
-  (armce / i386 `--no-leading-underscore`), Akari CRT per triple,
+  (armwince / i386 `--no-leading-underscore`), Akari CRT per triple,
   `lld-link -wince` PE images (mainACRTStartup / WinMainCRTStartup /
   DllMainCRTStartup) with machine/subsystem-9/undecorated-import
   assertions — passing on all six arm/i386-pc-wince{4.2,5.0,6.0}

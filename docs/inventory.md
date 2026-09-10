@@ -6580,3 +6580,45 @@ M94 plan: Commctrl.h completion is the bulk and will ship in parts
 (messages/notifications with printed values first, then the ListView_/
 TreeView_/TabCtrl_/MonthCal_/DateTime_/Header_ macro wrappers), then
 Prsht.h macros, Shobjidl.h method records, and the small tails.
+
+## M94b -- Toolchain adaptation: 2026-09-10 LLVM-WinCE artifact
+
+Per user direction the toolchain moved to the newest artifact
+10134447081 (wince-llvm-01c51ef), superseding the M93 fallback to the
+10002884514 pin.  The fork's 54 commits in between re-spell the CE
+conventions "by upstream's rules, not by invented flags"; the wince-api
+and wince-crt builds were adapted (not the headers -- the C surface is
+unaffected; crosscheck passed unchanged):
+
+- llvm-dlltool: the CE ARM COFF machine is now spelled **-m armwince**
+  (556b2ba5 "Spell the COFF machine by upstream's rules, not by an
+  invented flag"): "-m arm" means ARMNT, and the plain
+  IMAGE_FILE_MACHINE_ARM machine "is only used by Windows CE, so it is
+  spelled after the OS that requires it".  Makefile e2e dtf and
+  README.md updated (historical "armce-verified" milestone mentions
+  left as history).
+- clang driver: a bare *-pc-wince ARM triple now takes the GENERIC ARM
+  default CPU arm7tdmi (ARMv4T) -- 71f4db8c "Pin the CE CPU answer
+  against the generic rules" ("Windows CE ran on more than one kind of
+  core and never named one of its own"); ARMv5TEJ is asked for BY
+  OPTION, -march=armv5tej (0583ffe45 "Reach v5TEJ by option in the CE
+  CPU pin"; writing armv5tej into the triple is rewritten to v5E by
+  the driver before the CPU lookup).
+- On ARMv4T the fork's ARM COFF codegen cannot yet lower a
+  __attribute__((dllimport)) call (isel "Cannot select ... load from
+  got" on the __imp_ call operand; reproduced minimal).  wince-crt's
+  runtime.c (AKARI_DLLIMPORT imports) therefore crashed under the old
+  flags; the headers' AKARI_CE_IMPORT is empty under the GNU-style
+  wince driver, so wince-api compiles were unaffected.
+- wince-crt adapted first (commit bd61be4, pushed): WCE_ARCHFLAGS =
+  -march=armv5tej for every *-pc-wince arm/thumb build, README Toolchain
+  section rewritten; verified: all six arm/i386-pc-wince{4.2,5.0,6.0}
+  builds + hostcheck + hosttest pass with the new artifact.
+- wince-api Makefile e2e: ARM case now also pins -march=armv5tej so the
+  e2e objects, the CRT objects and the (unchanged) historical ARMv5TE
+  verification story stay coherent; explanatory comment added above
+  CRTDIR.
+
+Gates with the new artifact + adjusted CRT: check 0, crosscheck 0
+(6 targets), e2e 0 (6 targets linked, machine/subsystem/imports
+asserted; dlltool -m armwince import libraries).
