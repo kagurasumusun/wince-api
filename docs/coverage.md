@@ -121,3 +121,46 @@ Remaining largest gaps: Graphics 731 (Compact-2013-tree titles +
 Unsupported-Items), File Systems DDI remainder (FSD/Partition
 Manager/Storage Manager function pages -- harvested, M79 queue),
 DCOM book triage (896 leaves), Core OS DDI books.
+
+## Surface-completion measures (M83; script tools/surface-metrics.py)
+
+The user-visible completion problem ("only 30%") is measured here
+along three axes from build/rows.json (14088 harvested rows of the
+official CE documentation) against the shipped include/ headers.
+Method is fixed in tools/surface-metrics.py (checked in, rerunnable).
+
+| Measure | Value |
+|---|---|
+| Documentation rows harvested | 14088 |
+| Function rows (sig parses `ret title(...)`) | 2666 |
+| ... declared via AKARI_CE_NAME | 1970 (74%) |
+| Other symbol rows (types/constants/messages) | 4635 |
+| ... name present verbatim in include/ | 3068 (66%) |
+| Documented header tokens | 158 |
+| ... shipped in include/ | 149 (94%) |
+| Corpus pages preserved | 21346 |
+
+Unshipped header tokens (9): bt_ddi.h, bthid.h, cesync.h, dinput.h,
+dmoimpl.h, imjpskin.h, koreanimeui.h, msime.h, msimeui.h -- of
+these, msime/msimeui/imjpskin/koreanimeui are deferred
+record-only IME-internal UI surfaces (74+2+73+19 rows), dinput/
+dmoimpl are COM-interface headers partially covered by shipped
+interfaces, bt_ddi/bthid/cesync are driver-side books not yet
+harvested.
+
+Book-level table above refreshed counts: after M83 the Fonts (77
+manifest pages), International (660), SideShow (51) and Error
+Reporting (51) books are fully harvested and triaged; the
+Features-leaf percentages for those rows should now read ~99%+ on
+the next book-level recount (pages5 tree contains all manifest
+targets).
+
+Priority gaps for M84+ (per the standing priority list):
+1. Header-name compat gaps: 9 tokens above.
+2. Missing ordinals: none published by CE docs for the new libs
+   (def files are name-only by policy).
+3. CE4/5/6 struct differences: sweep queued (M84+).
+4. Undefined constants / compat macros / Clang-needed types:
+   standing held list (HRC, ALC, RVA, ULONG32/64, OAHWND &c.) is
+   the recorded backlog of unpublished-but-needed types.
+5. Graphics 731 remainder, DCOM 896 triage, Core OS DDI books.
