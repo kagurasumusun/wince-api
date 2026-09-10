@@ -1378,4 +1378,142 @@ AKARI_CE_IMPORT BOOL WINAPI PFXVerifyPassword(CRYPT_DATA_BLOB *pPFX, LPCWSTR szP
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- AT_ family (2 names; R1) ---- */
+#define AT_KEYEXCHANGE                               0x0001
+#define AT_SIGNATURE                                 0x0002
+
+/* ---- CALG_ family (23 names; R1) ---- */
+#define CALG_DSS_SIGN                                0x2200
+#define CALG_RSA_SIGN                                0x2400
+#define CALG_DES                                     0x6601
+#define CALG_RC2                                     0x6602
+#define CALG_3DES                                    0x6603
+#define CALG_DESX                                    0x6604
+#define CALG_SKIPJACK                                0x660A
+#define CALG_CYLINK_MEK                              0x660C
+#define CALG_AES_128                                 0x660E
+#define CALG_AES_192                                 0x660F
+#define CALG_AES_256                                 0x6610
+#define CALG_RC4                                     0x6801
+#define CALG_SEAL                                    0x6802
+#define CALG_MD2                                     0x8001
+#define CALG_MD4                                     0x8002
+#define CALG_MD5                                     0x8003
+#define CALG_SHA                                     0x8004
+#define CALG_SHA1                                    0x8004
+#define CALG_MAC                                     0x8005
+#define CALG_SSL3_SHAMD5                             0x8008
+#define CALG_RSA_KEYX                                0xA400
+#define CALG_DH_EPHEM                                0xAA02
+#define CALG_KEA_KEYX                                0xAA04
+
+/* ---- CERT_ family (38 names; R1) ---- */
+#define CERT_TRUST_NO_ERROR                          0x0000
+#define CERT_V1                                      0x0000
+#define CERT_KEY_PROV_HANDLE_PROP_ID                 0x0001
+#define CERT_SET_KEY_CONTEXT_PROP_ID                 0x0001
+#define CERT_SET_KEY_PROV_HANDLE_PROP_ID             0x0001
+#define CERT_STORE_ADD_NEW                           0x0001
+#define CERT_TRUST_HAS_EXACT_MATCH_ISSUER            0x0001
+#define CERT_TRUST_IS_NOT_TIME_VALID                 0x0001
+#define CERT_V2                                      0x0001
+#define CERT_KEY_PROV_INFO_PROP_ID                   0x0002
+#define CERT_STORE_ADD_USE_EXISTING                  0x0002
+#define CERT_TRUST_HAS_KEY_MATCH_ISSUER              0x0002
+#define CERT_TRUST_IS_NOT_TIME_NESTED                0x0002
+#define CERT_V3                                      0x0002
+#define CERT_STORE_ADD_REPLACE_EXISTING              0x0003
+#define CERT_STORE_ADD_ALWAYS                        0x0004
+#define CERT_TRUST_HAS_NAME_MATCH_ISSUER             0x0004
+#define CERT_TRUST_IS_REVOKED                        0x0004
+#define CERT_KEY_CONTEXT_PROP_ID                     0x0005
+#define CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES 0x0005
+#define CERT_NAME_DNS_TYPE                           0x0006
+#define CERT_STORE_ADD_NEWER                         0x0006
+#define CERT_STORE_ADD_NEWER_INHERIT_PROPERTIES      0x0007
+#define CERT_TRUST_IS_NOT_SIGNATURE_VALID            0x0008
+#define CERT_TRUST_IS_SELF_SIGNED                    0x0008
+#define CERT_STORE_PROV_SYSTEM                       0x000A
+#define CERT_TRUST_IS_NOT_VALID_FOR_USAGE            0x0010
+#define CERT_ARCHIVED_PROP_ID                        0x0013
+#define CERT_KEY_IDENTIFIER_PROP_ID                  0x0014
+#define CERT_TRUST_IS_UNTRUSTED_ROOT                 0x0020
+#define CERT_TRUST_REVOCATION_STATUS_UNKNOWN         0x0040
+#define CERT_TRUST_IS_CYCLIC                         0x0080
+#define CERT_TRUST_IS_COMPLEX_CHAIN                  0x10000
+#define CERT_TRUST_IS_PARTIAL_CHAIN                  0x10000
+#define CERT_SYSTEM_STORE_LOCAL_MACHINE              0x20000
+#define CERT_TRUST_CTL_IS_NOT_TIME_VALID             0x20000
+#define CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID        0x40000
+#define CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE        0x80000
+
+/* ---- CRYPT_ family (10 names; R1) ---- */
+#define CRYPT_FAILED                                 0x0000
+#define CRYPT_EXPORTABLE                             0x0001
+#define CRYPT_USER_PROTECTED                         0x0002
+#define CRYPT_NEWKEYSET                              0x0008
+#define CRYPT_DELETEKEYSET                           0x0010
+#define CRYPT_NO_SALT                                0x0010
+#define CRYPT_MACHINE_KEYSET                         0x0020
+#define CRYPT_SILENT                                 0x0040
+#define CRYPT_ENCODE_ALLOC_FLAG                      0x8000
+#define CRYPT_VERIFYCONTEXT                          0xF0000000
+
+/* ---- CRYPTPROTECT_ family (2 names; R1) ---- */
+#define CRYPTPROTECT_UI_FORBIDDEN                    0x0001
+#define CRYPTPROTECT_LOCAL_MACHINE                   0x0004
+
+/* ---- HP_ family (3 names; R1) ---- */
+#define HP_ALGID                                     0x0001
+#define HP_HASHVAL                                   0x0002
+#define HP_HASHSIZE                                  0x0004
+
+/* ---- KP_ family (1 names; R1) ---- */
+#define KP_EFFECTIVE_KEYLEN                          0x0013
+
+/* ---- PKCS_ family (1 names; R1) ---- */
+#define PKCS_7_ASN_ENCODING                          0x10000
+
+/* ---- PP_ family (3 names; R1) ---- */
+#define PP_NAME                                      0x0004
+#define PP_CONTAINER                                 0x0006
+#define PP_KEYSET_SEC_DESCR                          0x0008
+
+/* ---- PROV_ family (16 names; R1) ---- */
+#define PROV_RSA_FULL                                0x0001
+#define PROV_RSA_SIG                                 0x0002
+#define PROV_DSS                                     0x0003
+#define PROV_FORTEZZA                                0x0004
+#define PROV_MS_EXCHANGE                             0x0005
+#define PROV_SSL                                     0x0006
+#define PROV_RSA_SCHANNEL                            0x000C
+#define PROV_DSS_DH                                  0x000D
+#define PROV_EC_ECDSA_SIG                            0x000E
+#define PROV_EC_ECNRA_SIG                            0x000F
+#define PROV_EC_ECDSA_FULL                           0x0010
+#define PROV_EC_ECNRA_FULL                           0x0011
+#define PROV_DH_SCHANNEL                             0x0012
+#define PROV_SPYRUS_LYNKS                            0x0014
+#define PROV_RNG                                     0x0015
+#define PROV_INTEL_SEC                               0x0016
+
+/* ---- USAGE_ family (2 names; R1) ---- */
+#define USAGE_MATCH_TYPE_AND                         0x0000
+#define USAGE_MATCH_TYPE_OR                          0x0001
+
+/* ---- X509_ family (1 names; R1) ---- */
+#define X509_ASN_ENCODING                            0x0001
+
 #endif /* _WINCRYPT_H */

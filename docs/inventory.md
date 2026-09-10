@@ -6866,3 +6866,11 @@ guard close, grouped by family, every value provenance-tagged R1.
   (async-info levels)).  HTTP_QUERY_FLAG_COALESCE and
   INTERNET_FLAG_MAKE_PERSISTENT excluded (Not-supported rows).
   Gates GREEN x6.
+- include/Wincrypt.h: 102 defines, 12 families (AT_KEYEXCHANGE /
+  AT_SIGNATURE, CALG_ 23 algorithm ids, CERT_ 38 (store-add +
+  cert-name + property-id constants), CRYPT_ 10 (CryptAcquireContext
+  flags, CRYPT_ENCODE_ALLOC_FLAG etc.), CRYPTPROTECT_ 2, HP_ 3 hash
+  parameter ids, KP_EFFECTIVE_KEYLEN, PKCS_7_ASN_ENCODING, PP_ 3
+  provider parameter ids, PROV_ 16 provider types, USAGE_MATCH_ 2,
+  X509_ASN_ENCODING).  CERT_SIMPLE_NAME_STR excluded
+  (Not-supported row, ms937703).  Gates GREEN x6.
