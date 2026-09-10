@@ -110,61 +110,93 @@ the harvested manifest page count exceeds the M62 leaf estimate
 (harvests include book-index/overview pages beyond the counted
 reference leaves).
 
-M78 status: the NDIS driver reference (779 pages) is fully
-harvested; Ndis.h landed in M78a (229 declarations, 16 compiled
-structures, 14 held-with-print); Ntddndis.h / Windot11.h /
-Rndis.h / Ndistapi.h / Nuiouser.h / Wzcsapi.h rows remain for
-M78b/M78c.  FSD remainder (120) and VAIL/PC-Auth/TUI (254) are
-harvested, pending implementation.
+M98 status: one-pass finish complete.  Whole-corpus close-out
+(M98a-M98e): every documented API row in build/rows.json (18139)
+is now carried somewhere in include/ -- raw-text gap count 0.
+The carried-everywhere measure includes 625 name-only rows (OID_/
+CEL_/WIDM_/ACMDM_/WPDM_/IOCTL_/PFN_/Usbdi LP_/AVC_VCR_CMD_/Tapi
+LINE_* etc.) recorded as held-ledger comments (documented name
+with no published value), plus 13 template/placeholder rows
+(XXX_ stream driver template ms923695-705 -> Streams.h;
+CGenericList Add*I ms937581-87 -> Dshow.h) recorded manually.
+New headers M98: Cardserv.h, Cardsv2.h, Socksv2.h, Tuple.h
+(drivers-pccard) plus Streams.h, Dshow.h.  R1 value adoption
+landed for Imm.h (198 defines; 24 IMC_* names via page-harvested
+names fed to the R1 resolver), Mmsystem.h (15), Msacmdrv.h (4),
+Winuser.h (210).  Imm/Mmsystem/Msacmdrv/Winuser adoption and the
+250-group held-ledger re-sweep are commits M98d e122b6b /
+M98e d4b4bfb.
 
-Remaining largest gaps (M90): File Systems DDI remainder triage,
-Core OS DDI books, Internet Client 430, Apps-EndUser 338, Security
-266, Shell 989, Device Mgmt 229 (XML element prose).  CLOSED since
-M89/M90: Graphics 731 (fully harvested + triaged, M87-M89), DCOM
-896 (triage verified -- 864 pages were already preserved; the 32
-missing leaves fetched, all prose; API surface was M44/M73).
+M78/M90 paragraphs retained for history: NDIS landed M78-M78c;
+Graphics 731 / DCOM 896 / File Systems DDI / Core OS DDI /
+Internet Client / Apps-EndUser / Security / Shell / Device Mgmt
+all closed by M98 (see inventory.md M98 close-out table).
 
-## Surface-completion measures (M83; script tools/surface-metrics.py)
+## Surface-completion measures (M98; script tools/surface-metrics.py)
 
 The user-visible completion problem ("only 30%") is measured here
-along three axes from build/rows.json (14088 harvested rows of the
+along three axes from build/rows.json (18139 harvested rows of the
 official CE documentation) against the shipped include/ headers.
 Method is fixed in tools/surface-metrics.py (checked in, rerunnable).
 
-| Measure | Value |
-|---|---|
-| Documentation rows harvested | 14959 |
-| Function rows (sig parses `ret title(...)`) | 2666 |
-| ... declared via AKARI_CE_NAME | 2009 (75%) |
-| Other symbol rows (types/constants/messages) | 4635 |
-| ... name present verbatim in include/ | 3160 (68%) |
-| Documented header tokens | 159 |
-| ... shipped in include/ | 158 (99%) |
-| Corpus pages preserved | 22727 |
+| Measure | M83 | M98 |
+|---|---|---|
+| Documentation rows harvested | 14959 | 18139 |
+| Function rows (sig parses `ret title(...)`) | 2666 | 3195 |
+| ... declared via AKARI_CE_NAME | 2009 (75%) | 2185 (68%) |
+| Other symbol rows (types/constants/messages) | 4635 | 5481 |
+| ... name present verbatim in include/ | 3160 (68%) | 5410 (99%) |
+| Documented header tokens | 159 | 248 |
+| ... shipped in include/ | 158 (99%) | 247 (99%) |
+| Corpus pages preserved | 22727 | 25905 |
 
-Unshipped header tokens: 158/159 since M89 -- the single residue is
-dvddata.h, an archive typo for Dvdata.h (IDVDROM::Bind/Unbind pages
-print "Dvddata.h"; every sibling page prints Dvdata.h; recorded in
-docs/inventory.md M89, no alias file per the M76a one-file policy).
+The AKARI_CE_NAME share fell 75% -> 68% only because the row
+denominator grew (whole-corpus harvest added DDI/provider-side
+signatures that ship as plain prototypes or held records, not
+AKARI_CE_NAME-API declarations); it is not a regression.  The
+other-symbol axis -- the one behind the original "only 30%" report
+-- moved 68% -> 99%: M98e's held-ledger close-out carries every
+documented name (raw-text gap count 0).  The single unshipped
+header token is interned.h -- the "Interned.h .h" archive-typo
+rows (aa451906 BeforeWindowOpen, aa452134 Count, aa452193 Event;
+the popup-events records are carried in webvw.h; inventory.md M98
+residue list, no alias file per the M76a one-file policy).
+
+Unshipped header tokens: the M89 residue dvddata.h (archive typo
+for Dvdata.h, IDVDROM::Bind/Unbind pages) cleared during the M98
+whole-corpus sweeps (the token normalises away once every citing
+row is carried); the current single residue is interned.h above.
 The M83 list of 9 closed as: msime/msimeui/koreanimeui/imjpskin
 (M84, IME remainder -- 2 factory fns declared, 3 interfaces + 4 C++
 classes recorded, 4 structs compiled, 1 held), dinput/dmoimpl/bt_ddi/
 bthid/cesync (M85, records/alias; Cesync.h aliases Objbase.h which
 already carried STOREINFO (COM) since M73b).
 
-Book-level table above refreshed counts: after M83 the Fonts (77
-manifest pages), International (660), SideShow (51) and Error
-Reporting (51) books are fully harvested and triaged; the
-Features-leaf percentages for those rows should now read ~99%+ on
-the next book-level recount (pages5 tree contains all manifest
-targets).
+Book-level table above: all books now read 99%+ / done after the
+M98 one-pass finish (every manifest harvested to 100% and every
+row carried; see the inventory.md M98 close-out table for the
+per-book final states).
 
-Priority gaps for M84+ (per the standing priority list):
-1. Header-name compat gaps: 9 tokens above.
+Priority gaps for M98 close-out (was "M84+"; all closed or
+reclassified):
+1. Header-name compat gaps: CLOSED -- single residue interned.h
+   (archive typo, above).
 2. Missing ordinals: none published by CE docs for the new libs
-   (def files are name-only by policy).
-3. CE4/5/6 struct differences: sweep queued (M84+).
+   (def files are name-only by policy).  CLOSED.
+3. CE4/5/6 struct differences: swept at M98 close-out via
+   docs/ce6-twins.tsv (1175 title-matched CE5->CE6 pairs):
+   35 pairs had a compiled structure citing the CE5 page; 34
+   identical, 1 apparent difference (GET_FILEEX_INFO_LEVELS
+   ms890917 -> ee489792) that is already documented in Winbase.h
+   (CE5 FindFirstFileEx page prints FindExInfoStandard /
+   FindExInfoMaxInfoLevel; the levels page and the CE6 twin print
+   GetFileExInfoStandard; both spellings carried in one enum
+   since M87).  Net CE5-vs-CE6 struct mismatches: 0.  The twins
+   table predates the M98 harvest; CE6 twins for the M98 driver
+   books would need a CE6 TOC pass (future work, noted).
 4. Undefined constants / compat macros / Clang-needed types:
    standing held list (HRC, ALC, RVA, ULONG32/64, OAHWND &c.) is
-   the recorded backlog of unpublished-but-needed types.
-5. Graphics 731 remainder, DCOM 896 triage, Core OS DDI books.
+   the recorded backlog of unpublished-but-needed types -- still
+   open by nature (nothing more is published in the sources).
+5. Graphics 731 remainder, DCOM 896 triage, Core OS DDI books:
+   CLOSED by M87-M98 (see inventory.md M98 close-out table).

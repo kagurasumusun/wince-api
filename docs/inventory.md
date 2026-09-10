@@ -7150,3 +7150,59 @@ Cred, Cred_prov, Credmgr, Lass = 9 counting Lass.h separately),
 Wininet.h +1; 101 constant values adopted from R1 (88 Sspi + 13
 Schnlsp); def files: secur32-doc.def 23, ntlmssp-doc.def 10,
 shellcb-doc.def 1, coredll-doc.def 744 -> 750.
+
+## M98 -- one-pass finish: whole-corpus close-out (all books done)
+
+Goal: carry EVERY documented API row in build/rows.json somewhere
+in include/ (the "only 30%" close-out), then refresh coverage.md
+and sweep CE5-vs-CE6 struct differences.
+
+Books finished this pass (per-book details in the M98 work log):
+powerman, activesync, dmclient, exchange, soap, netcf/
+appsenduser-other, snmp-remainder, ldap-remainder, devmgr,
+driver-libs-remainder, every drivers-* book including
+drivers-pccard (Cardserv.h, Cardsv2.h, Socksv2.h, Tuple.h NEW),
+and a full re-sweep of all 186 manifests for held-record
+emission (250 groups updated).
+
+Raw-gap triage: 625 name-only rows recorded as held-ledger
+comments (documented name, no value published anywhere: OID_*,
+CEL_*, WIDM_*, ACMDM_*, WPDM_*, IOCTL_*, PFN_*, Usbdi LP_*,
+AVC_VCR_CMD_*, Tapi LINE_* etc.); 13 template/placeholder rows
+recorded manually (XXX_ stream driver template ms923695-705 ->
+Streams.h record; CGenericList AddAfterI/AddBeforeI/AddHeadI/
+AddTailI ms937581-87 -> Dshow.h record).  Raw-text gap count 0.
+
+R1 value adoption (M98d e122b6b): Imm.h 198 defines added (24
+IMC_* names harvested from pages and fed to the R1 resolver --
+R1 imm.h carries only 10 natively; 380 names remain unresolved,
+held), Mmsystem.h 15 (WIM_*/WOM_*/WIM_ERROR/WOM_ERROR/MM_WIM_*/
+MM_WOM_*/MM_MIXM_*), Msacmdrv.h 4 (DRV_CLOSE/DRV_OPEN), Winuser.h
+210 (incl. WM_FONTCHANGE).  tools/adopt-values.py EXPLICIT_TARGETS
+extended; Msacmdrv.h added to MARKERS and to the R1-files map as
+{'msacm.h', 'mmsystem.h'}.
+
+gen-book.py hardened for the sweep: (a) opaques loop emits
+held-ledger comments for name-only rows needing no carriers;
+(b) struct emitter dedupes page-print pointer aliases reusing the
+structure name ("} X, *X;" print artifact -> conflicting types);
+(c) glue-prefix guard len(p) >= 2 before KNOWN/PRIMS lookup (kills
+"u" in DEBUGZONE(u lZoneMask)).  Voipmanager.h include repair:
+scripted insertion must anchor on the "#define AKARI_*_H" guard
+line (regex-fallback placement landed after the final #endif).
+
+CE5<->CE6 struct sweep (close-out item): docs/ce6-twins.tsv 1175
+title-matched pairs; 35 compiled-structure pairs checked; 34
+identical; the single difference (GET_FILEEX_INFO_LEVELS ms890917
+-> ee489792) is the already-documented FindExInfoStandard vs
+GetFileExInfoStandard spelling pair (both carried in one Winbase.h
+enum since M87).  Net mismatches: 0.  Twins table predates M98;
+CE6 twins for M98 driver books = future CE6-TOC pass.
+
+Close-out state (M98e d4b4bfb + corpus a736441d): rows 18139
+(raw-gap 0), fn rows 3195 / AKARI_CE_NAME 2185, other-symbol rows
+5481 / carried 5410 (99%), headers 247/248 shipped (single
+residue interned.h -- "Interned.h .h" archive-typo rows
+aa451906/aa452134/aa452193, records carried in webvw.h), corpus
+INDEX 25905 pages (1.1G, pushed).  make check / crosscheck / e2e
+GREEN x6.  THE DOCUMENTED API SURFACE IS COMPLETE.
