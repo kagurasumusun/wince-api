@@ -7087,3 +7087,9 @@ provenance.
   (SCHANNEL_CRED_VERSION 4, SP_PROT_SSL2/SSL3/TLS1 CLIENT/SERVER 6,
   SCH_CRED_* 6); CALG_EXCH_KEA named by ms926436 stays held (R1
   wincrypt.h carries no such name).  Gates GREEN x6.
+- include/Rpcdce.h NEW (1 row): SEC_WINNT_AUTH_IDENTITY (ms926452;
+  the AcquireCredentialsHandle pAuthData carrier; _RPC_FAR declared
+  empty as printed).  The RPC DCE function surface belongs to a
+  future book; this file carries the Security book's single
+  Rpcdce.h-homed row.  M96: SEC_WINNT_AUTH_IDENTITY_ANSI 1 /
+  UNICODE 2 adopted from R1 rpcdce.h.  Gates GREEN x6.
