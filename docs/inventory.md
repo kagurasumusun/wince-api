@@ -6763,3 +6763,34 @@ Schnlsp structures + Sspi.h structure rows print no lib.  M95 will
 create Sspi.h (+ the Security.h dual-home decision), Lap.h,
 Ntlmssp.h, Schnlsp.h, Cred.h, Cred_prov.h, Credmgr.h, Lass.h and
 add InternetCanonicalizeUrl to Wininet.h.
+
+## M96 -- value adoption for held constants (R1-only policy)
+
+Policy (docs/clean-room.md par.4, revisions of 2026-09-10): the held
+value-less constant families documented by the CE pages get their
+numeric values ADOPTED from R1 (the CeGCC-lineage w32api fork,
+public domain -- the CE lineage itself).  mingw-w64 (R2) was briefly
+permitted and then REMOVED the same day by user direction before
+anything was adopted from it: it is a desktop-era ABI and spot-checks
+showed desktop values where the CE lineage differs
+(INTERNET_OPTION_CONTEXT_VALUE 45 vs CE 10, INTERNET_LAST_OPTION
+0x60 vs CE 0x32, MCN_GETDAYSTATE -743 vs CE -747).  R1's README
+license-exception files (winsock.h / winsock2.h / ws2tcpip.h BSD,
+gl.h Mesa, glext.h / glu.h SGI) are not read at all, so no Winsock
+family value is adopted.  tools/adopt-values.py implements the
+adoption: targets = constant-like names named in the header's
+records/ledgers or on any official page the header cites (page-id
+harvest), minus names include/ already defines, minus code
+identifiers (enum members etc.), minus ledger "(not published)"
+names; page-harvested names are adopted only when R1 carries them in
+a same-family fork file (cross-family leakage guard).  Adoptions
+land as a marked "M96 value adoption" section before the include
+guard close, grouped by family, every value provenance-tagged R1.
+
+- include/Imm.h: 105 defines, 21 families (ATTR 5, CFS 3, CPS 4,
+  GCL 3, GCS 3, GGL 4, IACE 3, IGIMIF 1, IGIMII 7, IGP 6, IME 25,
+  IMEMENUITEM 1, IMEVER 2, IMFS 8, IMFT 3, IMM 2, IMN 11, IMR 1,
+  MOD 7, SCS 5, SELECT 1).  Unresolved 29: type names named by the
+  pages (CANDIDATEFORM etc. -- not constants) and CE-page names R1
+  does not carry; they stay held.  Gates: check / crosscheck / e2e
+  GREEN x6 (i386 / arm thumb2 / arm 4.2 / 5.0 / 6.0).

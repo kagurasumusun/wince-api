@@ -390,4 +390,163 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
     AKARI_CE_NAME(ImmSIPanelState);                     /* ms906038: the
     CE-specific software input panel state helper */
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- ATTR_ family (5 names; R1) ---- */
+#define ATTR_INPUT                                   0x0000
+#define ATTR_TARGET_CONVERTED                        0x0001
+#define ATTR_CONVERTED                               0x0002
+#define ATTR_TARGET_NOTCONVERTED                     0x0003
+#define ATTR_INPUT_ERROR                             0x0004
+
+/* ---- CFS_ family (3 names; R1) ---- */
+#define CFS_DEFAULT                                  0x0000
+#define CFS_CANDIDATEPOS                             0x0040
+#define CFS_EXCLUDE                                  0x0080
+
+/* ---- CPS_ family (4 names; R1) ---- */
+#define CPS_COMPLETE                                 0x0001
+#define CPS_CONVERT                                  0x0002
+#define CPS_REVERT                                   0x0003
+#define CPS_CANCEL                                   0x0004
+
+/* ---- GCL_ family (3 names; R1) ---- */
+#define GCL_CONVERSION                               0x0001
+#define GCL_REVERSECONVERSION                        0x0002
+#define GCL_REVERSE_LENGTH                           0x0003
+
+/* ---- GCS_ family (3 names; R1) ---- */
+#define GCS_COMPSTR                                  0x0008
+#define GCS_CURSORPOS                                0x0080
+#define GCS_DELTASTART                               0x0100
+
+/* ---- GGL_ family (4 names; R1) ---- */
+#define GGL_LEVEL                                    0x0001
+#define GGL_INDEX                                    0x0002
+#define GGL_STRING                                   0x0003
+#define GGL_PRIVATE                                  0x0004
+
+/* ---- IACE_ family (3 names; R1) ---- */
+#define IACE_CHILDREN                                0x0001
+#define IACE_DEFAULT                                 0x0010
+#define IACE_IGNORENOCONTEXT                         0x0020
+
+/* ---- IGIMIF_ family (1 names; R1) ---- */
+#define IGIMIF_RIGHTMENU                             0x0001
+
+/* ---- IGIMII_ family (7 names; R1) ---- */
+#define IGIMII_CMODE                                 0x0001
+#define IGIMII_SMODE                                 0x0002
+#define IGIMII_CONFIGURE                             0x0004
+#define IGIMII_TOOLS                                 0x0008
+#define IGIMII_HELP                                  0x0010
+#define IGIMII_OTHER                                 0x0020
+#define IGIMII_INPUTTOOLS                            0x0040
+
+/* ---- IGP_ family (6 names; R1) ---- */
+#define IGP_PROPERTY                                 0x0004
+#define IGP_CONVERSION                               0x0008
+#define IGP_SENTENCE                                 0x000C
+#define IGP_UI                                       0x0010
+#define IGP_SETCOMPSTR                               0x0014
+#define IGP_SELECT                                   0x0018
+
+/* ---- IME_ family (25 names; R1) ---- */
+#define IME_CAND_UNKNOWN                             0x0000
+#define IME_CAND_READ                                0x0001
+#define IME_CONFIG_GENERAL                           0x0001
+#define IME_REGWORD_STYLE_EUDC                       0x0001
+#define IME_CAND_CODE                                0x0002
+#define IME_CONFIG_REGISTERWORD                      0x0002
+#define IME_CAND_MEANING                             0x0003
+#define IME_CONFIG_SELECTDICTIONARY                  0x0003
+#define IME_CAND_RADICAL                             0x0004
+#define IME_CHOTKEY_SHAPE_TOGGLE                     0x0011
+#define IME_CHOTKEY_SYMBOL_TOGGLE                    0x0012
+#define IME_JHOTKEY_CLOSE_OPEN                       0x0030
+#define IME_KHOTKEY_SHAPE_TOGGLE                     0x0050
+#define IME_KHOTKEY_HANJACONVERT                     0x0051
+#define IME_KHOTKEY_ENGLISH                          0x0052
+#define IME_THOTKEY_SHAPE_TOGGLE                     0x0071
+#define IME_THOTKEY_SYMBOL_TOGGLE                    0x0072
+#define IME_HOTKEY_DSWITCH_FIRST                     0x0100
+#define IME_HOTKEY_DSWITCH_LAST                      0x011F
+#define IME_PROP_AT_CARET                            0x10000
+#define IME_PROP_SPECIAL_UI                          0x20000
+#define IME_PROP_CANDLIST_START_FROM_1               0x40000
+#define IME_PROP_UNICODE                             0x80000
+#define IME_REGWORD_STYLE_USER_FIRST                 0x80000000
+#define IME_REGWORD_STYLE_USER_LAST                  0xFFFFFFFF
+
+/* ---- IMEMENUITEM_ family (1 names; R1) ---- */
+#define IMEMENUITEM_STRING_SIZE                      0x0050
+
+/* ---- IMEVER_ family (2 names; R1) ---- */
+#define IMEVER_0310                                  0x3000A
+#define IMEVER_0400                                  0x40000
+
+/* ---- IMFS_ family (8 names; R1) ---- */
+#define IMFS_ENABLED                                 0x0000
+#define IMFS_UNCHECKED                               0x0000
+#define IMFS_UNHILITE                                0x0000
+#define IMFS_DISABLED                                0x0003
+#define IMFS_GRAYED                                  0x0003
+#define IMFS_CHECKED                                 0x0008
+#define IMFS_HILITE                                  0x0080
+#define IMFS_DEFAULT                                 0x1000
+
+/* ---- IMFT_ family (3 names; R1) ---- */
+#define IMFT_RADIOCHECK                              0x0001
+#define IMFT_SEPARATOR                               0x0002
+#define IMFT_SUBMENU                                 0x0004
+
+/* ---- IMM_ family (2 names; R1) ---- */
+#define IMM_ERROR_GENERAL                            (-2)
+#define IMM_ERROR_NODATA                             (-1)
+
+/* ---- IMN_ family (11 names; R1) ---- */
+#define IMN_CHANGECANDIDATE                          0x0003
+#define IMN_CLOSECANDIDATE                           0x0004
+#define IMN_OPENCANDIDATE                            0x0005
+#define IMN_SETCONVERSIONMODE                        0x0006
+#define IMN_SETSENTENCEMODE                          0x0007
+#define IMN_SETOPENSTATUS                            0x0008
+#define IMN_SETCANDIDATEPOS                          0x0009
+#define IMN_SETCOMPOSITIONFONT                       0x000A
+#define IMN_SETCOMPOSITIONWINDOW                     0x000B
+#define IMN_SETSTATUSWINDOWPOS                       0x000C
+#define IMN_GUIDELINE                                0x000D
+
+/* ---- IMR_ family (1 names; R1) ---- */
+#define IMR_QUERYCHARPOSITION                        0x0006
+
+/* ---- MOD_ family (7 names; R1) ---- */
+#define MOD_ALT                                      0x0001
+#define MOD_CONTROL                                  0x0002
+#define MOD_SHIFT                                    0x0004
+#define MOD_IGNORE_ALL_MODIFIER                      0x0400
+#define MOD_ON_KEYUP                                 0x0800
+#define MOD_RIGHT                                    0x4000
+#define MOD_LEFT                                     0x8000
+
+/* ---- SCS_ family (5 names; R1) ---- */
+#define SCS_CAP_COMPSTR                              0x0001
+#define SCS_CAP_MAKEREAD                             0x0002
+#define SCS_SETSTR                                   0x0009
+#define SCS_CHANGEATTR                               0x0012
+#define SCS_CHANGECLAUSE                             0x0024
+
+/* ---- SELECT_ family (1 names; R1) ---- */
+#define SELECT_CAP_SENTENCE                          0x0002
+
 #endif /* _IMM_H */
