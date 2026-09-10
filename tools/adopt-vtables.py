@@ -149,6 +149,13 @@ def flatten(r1, name):
 
 BANNER_RE = re.compile(r'/\*\s*(\w+):\s*documented methods\b')
 
+# Format-2 banners (the Mlang/M58 style): " * IName (ms906426[; ...]):"
+# -- the parenthetical may wrap to the next line.
+BANNER2_RE = re.compile(r'^\s*\*\s+(I\w+)\s+\((?:ms|aa)\d{6}')
+METHOD2_RE = re.compile(r'^\s*\*\s+((?:ms|aa)\d{6})\s{2,}(.*)$')
+CONT2_RE = re.compile(r'^\s*\*\s+(.*)$')
+LABEL_RE = re.compile(r'^\w+:\s')
+
 # Type words the pages glue directly onto parameter names (longWidth,
 # HRESULTNext, unsigned longfoo ...).  Longest first.
 GLUE_TYPES = [
@@ -205,10 +212,75 @@ def split_params(params):
     return plist
 
 
+def parse_records2(text, out):
+    """Format-2 (the Mlang/M58 style) -- merges into `out`:
+    ` * IName (pageid[; notes...]):` banners (parenthetical may wrap),
+    ` *   <pageid>  RET Name(params,` method lines that wrap until the
+    terminating `);` (trailing [...] annotations are dropped)."""
+    cur = None
+    banner_open = False
+    pend = None
+
+    def finalize():
+        nonlocal pend
+        if pend is None:
+            return
+        page, sig = pend
+        pend = None
+        cut = sig.find(');')
+        if cut == -1:
+            return                      # mangled -- record stays only
+        sig = sig[:cut + 1].rstrip()    # keep the closing paren
+        if not sig.endswith(')'):
+            return
+        lp = sig.find('(')
+        if lp == -1:
+            return
+        head = sig[:lp].strip()
+        mm = re.match(r'^(.*?[\s*])([A-Za-z_]\w*)$', head)
+        if not mm or not mm.group(1).strip():
+            return
+        ret, name = mm.group(1).strip(), mm.group(2)
+        out.setdefault(cur, {'pages': 0, 'methods': []})
+        out[cur]['pages'] += 1
+        out[cur]['methods'].append(
+            (page, name, ret, split_params(sig[lp + 1:-1])))
+
+    for line in text.split('\n'):
+        bm = BANNER2_RE.match(line)
+        if bm and not banner_open:
+            finalize()
+            cur = bm.group(1)
+            out.setdefault(cur, {'pages': 0, 'methods': []})
+            banner_open = '):' not in line
+            continue
+        if banner_open:
+            if '):' in line:
+                banner_open = False
+            continue
+        mm = METHOD2_RE.match(line)
+        if mm and cur and not LABEL_RE.match(mm.group(2)):
+            finalize()
+            pend = [mm.group(1), mm.group(2)]
+            if ');' in mm.group(2):
+                finalize()
+            continue
+        if pend is not None:
+            cm = CONT2_RE.match(line)
+            if cm:
+                pend[1] += ' ' + cm.group(1).strip()
+                if ');' in pend[1]:
+                    finalize()
+                continue
+            finalize()
+    finalize()
+
+
 def parse_records(header):
     """interface -> {'pages': n, 'methods': [(page, name, ret,
     [(type, pname), ...])]} from the `/* IName: documented methods`
-    record banners (the M53/M94 format)."""
+    record banners (the M53/M94 format) and the format-2 Mlang-style
+    `* IName (pageid):` blocks."""
     text = open(os.path.join(ROOT, 'include', header),
                 encoding='utf-8').read()
     out = {}
@@ -249,6 +321,7 @@ def parse_records(header):
             plist = split_params(sig[lp + 1:rp])
             out[cur]['pages'] += 1
             out[cur]['methods'].append((page, name, ret, plist))
+    parse_records2(text, out)
     return out
 
 
@@ -258,6 +331,7 @@ def parse_records(header):
 # name is the documented CE ABI name.
 SLOT_ALIASES = {
     'Dshow.h': {'AdvisePeriodic': 'AdvisePeriodicTime'},
+    'Mlang.h': {'GetFontUnicodeRanges': 'GetFontUnicodeRange'},
 }
 
 # ------------------------------------------------------------- compose
@@ -313,15 +387,21 @@ def compose(header):
             mname = ownname
             if mname in own:
                 page, name, pret, plist = own[mname]
-                if len(plist) != len(types):
+                if len(plist) >= len(types):
+                    # page signature wins: it is the CE ABI (a page with
+                    # MORE params than the desktop-shaped R1 record
+                    # means CE adds parameters; equal counts agree)
+                    rows.append((seg, mname, pret, 'page', page, plist))
+                else:
+                    # fewer page params than the slot = truncated page
+                    # record (e.g. IViewObject::Draw) -- ABI-safe R1
+                    # signature, page record kept verbatim above
                     problems.append(
                         f'{iface}::{mname}: page has {len(plist)} params,'
                         f' R1 has {len(types)} -- ABI-safe R1 signature'
                         f' emitted, page record kept above')
                     rows.append((seg, mname, ret, 'R1', None,
                                  [(r1_type(t), '') for t in types]))
-                else:
-                    rows.append((seg, mname, pret, 'page', page, plist))
                 used.add(mname)
             else:
                 rows.append((seg, mname, ret, 'R1', None,

@@ -7014,3 +7014,21 @@ CE page spelling).
   emitted pointer uses the page-title name SwitchToFile, the verbatim
   record above keeps the misprint).  Total Objbase M97: 59.  Gates
   GREEN x6.
+- include/Mlang.h: 10 interfaces made callable -- IEnumCodePage,
+  IEnumRfc1766, IEnumScript, IMLangCodePages, IMLangConvertCharset,
+  IMLangFontLink (11 slots incl. the IMLangCodePages base),
+  IMLangFontLink2 (14, incl. GetFontUnicodeRanges -- R1 spells the
+  slot GetFontUnicodeRange, SLOT_ALIASES maps it and the CE page
+  name is emitted; CodePageToScriptID uses the CE page's 2-parameter
+  signature, R1 carries a 0-parameter stub), IMLangLineBreakConsole,
+  IMultiLanguage (18), IMultiLanguage2 (29).  IMultiLanguage3 stays
+  record-only (R1 carries no mlang.h entry for it).  Parser: the
+  format-2 Mlang/M58-style record blocks (label-less wrapped
+  signatures, [...] annotations dropped) now feed the same compose
+  path.  MISMATCH POLICY REFINED (applies retroactively): when a
+  page signature carries FEWER params than the R1 slot it is a
+  truncated page record and the R1 signature is emitted
+  (IViewObject::Draw); when it carries the same or MORE, the page
+  signature wins (it is the CE ABI; e.g. IMultiLanguage2::
+  GetCodePageInfo 3 params vs the desktop-shaped R1 2).  Gates
+  GREEN x6.

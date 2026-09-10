@@ -521,6 +521,322 @@ typedef struct IMultiLanguage3 IMultiLanguage3;
  *              WCHAR* lpSpecialChar);
  */
 
+/* ================================================================== */
+/* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
+ * ORDER adopted from R1 (CeGCC-lineage w32api, public
+ * domain; docs/clean-room.md par.4 revision 2026-09-10);
+ * method names/types are the CE pages' own printed
+ * signatures (the records above).  Methods the CE pages do
+ * not document but R1 carries are INCLUDED and tagged
+ * "(R1)" -- dropping a middle slot would shift the layout.
+ * Calling convention: plain function pointers (WINAPI is
+ * empty here: CE-wide cdecl; R1's __stdcall NOT adopted). */
+/* ================================================================== */
+
+/* ---- IEnumCodePage: 3 documented method pages; order R1 ---- */
+typedef struct IEnumCodePageVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumCodePage*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumCodePage*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumCodePage*);  /* (R1) */
+    /* IEnumCodePage */
+    HRESULT (WINAPI *Clone)(IEnumCodePage*, IEnumCodePage**);  /* (R1) */
+    HRESULT (WINAPI *Next)(IEnumCodePage*, ULONG celt, PMIMECPINFO rgelt, ULONG* pceltFetched);  /* ms906427 */
+    HRESULT (WINAPI *Reset)(IEnumCodePage*);  /* ms906428 */
+    HRESULT (WINAPI *Skip)(IEnumCodePage*, ULONG celt);  /* ms906429 */
+} IEnumCodePageVtbl;
+struct IEnumCodePage { const IEnumCodePageVtbl *lpVtbl; };
+#define IEnumCodePage_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumCodePage_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumCodePage_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumCodePage_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+#define IEnumCodePage_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumCodePage_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumCodePage_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+
+/* ---- IEnumRfc1766: 3 documented method pages; order R1 ---- */
+typedef struct IEnumRfc1766Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumRfc1766*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumRfc1766*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumRfc1766*);  /* (R1) */
+    /* IEnumRfc1766 */
+    HRESULT (WINAPI *Clone)(IEnumRfc1766*, IEnumRfc1766**);  /* (R1) */
+    HRESULT (WINAPI *Next)(IEnumRfc1766*, ULONG celt, PRFC1766INFO rgelt, ULONG* pceltFetched);  /* ms906431 */
+    HRESULT (WINAPI *Reset)(IEnumRfc1766*);  /* ms906432 */
+    HRESULT (WINAPI *Skip)(IEnumRfc1766*, ULONG celt);  /* ms906433 */
+} IEnumRfc1766Vtbl;
+struct IEnumRfc1766 { const IEnumRfc1766Vtbl *lpVtbl; };
+#define IEnumRfc1766_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumRfc1766_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumRfc1766_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumRfc1766_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+#define IEnumRfc1766_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumRfc1766_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumRfc1766_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+
+/* ---- IEnumScript: 4 documented method pages; order R1 ---- */
+typedef struct IEnumScriptVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumScript*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumScript*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumScript*);  /* (R1) */
+    /* IEnumScript */
+    HRESULT (WINAPI *Clone)(IEnumScript*, IEnumScript** ppEnum);  /* aa452277 */
+    HRESULT (WINAPI *Next)(IEnumScript*, ULONG celt, PSCRIPTINFO rgelt, ULONG* pceltFetched);  /* aa452279 */
+    HRESULT (WINAPI *Reset)(IEnumScript*);  /* aa452281 */
+    HRESULT (WINAPI *Skip)(IEnumScript*, ULONG celt);  /* aa452283 */
+} IEnumScriptVtbl;
+struct IEnumScript { const IEnumScriptVtbl *lpVtbl; };
+#define IEnumScript_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumScript_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumScript_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumScript_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+#define IEnumScript_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumScript_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumScript_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+
+/* ---- IMLangCodePages: 4 documented method pages; order R1 ---- */
+typedef struct IMLangCodePagesVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMLangCodePages*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMLangCodePages*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMLangCodePages*);  /* (R1) */
+    /* IMLangCodePages */
+    HRESULT (WINAPI *GetCharCodePages)(IMLangCodePages*, WCHAR chSrc, DWORD* pdwCodePages);  /* aa452358 */
+    HRESULT (WINAPI *GetStrCodePages)(IMLangCodePages*, const WCHAR* pszSrc, long cchSrc, DWORD dwPriorityCodePages, DWORD* pdwCodePages, long* pcchCodePages);  /* aa452359 */
+    HRESULT (WINAPI *CodePageToCodePages)(IMLangCodePages*, UINT uCodePage, DWORD* pdwCodePages);  /* aa452357 */
+    HRESULT (WINAPI *CodePagesToCodePage)(IMLangCodePages*, DWORD dwCodePages, UINT uDefaultCodePage, UINT* puCodePage);  /* aa452356 */
+} IMLangCodePagesVtbl;
+struct IMLangCodePages { const IMLangCodePagesVtbl *lpVtbl; };
+#define IMLangCodePages_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMLangCodePages_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMLangCodePages_Release(T) ((T)->lpVtbl->Release(T))
+#define IMLangCodePages_GetCharCodePages(T,a,b) ((T)->lpVtbl->GetCharCodePages(T,a,b))
+#define IMLangCodePages_GetStrCodePages(T,a,b,c,d,e) ((T)->lpVtbl->GetStrCodePages(T,a,b,c,d,e))
+#define IMLangCodePages_CodePageToCodePages(T,a,b) ((T)->lpVtbl->CodePageToCodePages(T,a,b))
+#define IMLangCodePages_CodePagesToCodePage(T,a,b,c) ((T)->lpVtbl->CodePagesToCodePage(T,a,b,c))
+
+/* ---- IMLangConvertCharset: 7 documented method pages; order R1 ---- */
+typedef struct IMLangConvertCharsetVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMLangConvertCharset*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMLangConvertCharset*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMLangConvertCharset*);  /* (R1) */
+    /* IMLangConvertCharset */
+    HRESULT (WINAPI *Initialize)(IMLangConvertCharset*, UINT uiSrcCodePage, UINT uiDstCodePage, DWORD dwProperty);  /* aa452367 */
+    HRESULT (WINAPI *GetSourceCodePage)(IMLangConvertCharset*, UINT* puiSrcCodePage);  /* aa452366 */
+    HRESULT (WINAPI *GetDestinationCodePage)(IMLangConvertCharset*, UINT* puiDstCodePage);  /* aa452364 */
+    HRESULT (WINAPI *GetProperty)(IMLangConvertCharset*, DWORD* pdwProperty);  /* aa452365 */
+    HRESULT (WINAPI *DoConversion)(IMLangConvertCharset*, BYTE* pSrcStr, UINT* pcSrcSize, BYTE* pDstStr, UINT* pcDstSize);  /* aa452361 */
+    HRESULT (WINAPI *DoConversionToUnicode)(IMLangConvertCharset*, CHAR* pSrcStr, UINT* pcSrcSize, WCHAR* pDstStr, UINT* pcDstSize);  /* aa452363 */
+    HRESULT (WINAPI *DoConversionFromUnicode)(IMLangConvertCharset*, WCHAR* pSrcStr, UINT* pcSrcSize, CHAR* pDstStr, UINT* pcDstSize);  /* aa452362 */
+} IMLangConvertCharsetVtbl;
+struct IMLangConvertCharset { const IMLangConvertCharsetVtbl *lpVtbl; };
+#define IMLangConvertCharset_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMLangConvertCharset_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMLangConvertCharset_Release(T) ((T)->lpVtbl->Release(T))
+#define IMLangConvertCharset_Initialize(T,a,b,c) ((T)->lpVtbl->Initialize(T,a,b,c))
+#define IMLangConvertCharset_GetSourceCodePage(T,a) ((T)->lpVtbl->GetSourceCodePage(T,a))
+#define IMLangConvertCharset_GetDestinationCodePage(T,a) ((T)->lpVtbl->GetDestinationCodePage(T,a))
+#define IMLangConvertCharset_GetProperty(T,a) ((T)->lpVtbl->GetProperty(T,a))
+#define IMLangConvertCharset_DoConversion(T,a,b,c,d) ((T)->lpVtbl->DoConversion(T,a,b,c,d))
+#define IMLangConvertCharset_DoConversionToUnicode(T,a,b,c,d) ((T)->lpVtbl->DoConversionToUnicode(T,a,b,c,d))
+#define IMLangConvertCharset_DoConversionFromUnicode(T,a,b,c,d) ((T)->lpVtbl->DoConversionFromUnicode(T,a,b,c,d))
+
+/* ---- IMLangFontLink: 4 documented method pages; order R1 ---- */
+typedef struct IMLangFontLinkVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMLangFontLink*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMLangFontLink*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMLangFontLink*);  /* (R1) */
+    /* IMLangCodePages */
+    HRESULT (WINAPI *GetCharCodePages)(IMLangFontLink*, WCHAR, DWORD*);  /* (R1) */
+    HRESULT (WINAPI *GetStrCodePages)(IMLangFontLink*, const WCHAR*, long, DWORD, DWORD*, long*);  /* (R1) */
+    HRESULT (WINAPI *CodePageToCodePages)(IMLangFontLink*, UINT, DWORD*);  /* (R1) */
+    HRESULT (WINAPI *CodePagesToCodePage)(IMLangFontLink*, DWORD, UINT, UINT*);  /* (R1) */
+    /* IMLangFontLink */
+    HRESULT (WINAPI *GetFontCodePages)(IMLangFontLink*, HDC hDC, HFONT hFont, DWORD* pdwCodePages);  /* aa452382 */
+    HRESULT (WINAPI *MapFont)(IMLangFontLink*, HDC hDC, DWORD dwCodePages, HFONT hSrcFont, HFONT* phDestFont);  /* aa452384 */
+    HRESULT (WINAPI *ReleaseFont)(IMLangFontLink*, HFONT hFont);  /* aa452386 */
+    HRESULT (WINAPI *ResetFontMapping)(IMLangFontLink*);  /* aa452387 */
+} IMLangFontLinkVtbl;
+struct IMLangFontLink { const IMLangFontLinkVtbl *lpVtbl; };
+#define IMLangFontLink_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMLangFontLink_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMLangFontLink_Release(T) ((T)->lpVtbl->Release(T))
+#define IMLangFontLink_GetCharCodePages(T,a,b) ((T)->lpVtbl->GetCharCodePages(T,a,b))
+#define IMLangFontLink_GetStrCodePages(T,a,b,c,d,e) ((T)->lpVtbl->GetStrCodePages(T,a,b,c,d,e))
+#define IMLangFontLink_CodePageToCodePages(T,a,b) ((T)->lpVtbl->CodePageToCodePages(T,a,b))
+#define IMLangFontLink_CodePagesToCodePage(T,a,b,c) ((T)->lpVtbl->CodePagesToCodePage(T,a,b,c))
+#define IMLangFontLink_GetFontCodePages(T,a,b,c) ((T)->lpVtbl->GetFontCodePages(T,a,b,c))
+#define IMLangFontLink_MapFont(T,a,b,c,d) ((T)->lpVtbl->MapFont(T,a,b,c,d))
+#define IMLangFontLink_ReleaseFont(T,a) ((T)->lpVtbl->ReleaseFont(T,a))
+#define IMLangFontLink_ResetFontMapping(T) ((T)->lpVtbl->ResetFontMapping(T))
+
+/* ---- IMLangFontLink2: 7 documented method pages; order R1 ---- */
+typedef struct IMLangFontLink2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMLangFontLink2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMLangFontLink2*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMLangFontLink2*);  /* (R1) */
+    /* IMLangCodePages */
+    HRESULT (WINAPI *GetCharCodePages)(IMLangFontLink2*, WCHAR, DWORD*);  /* (R1) */
+    HRESULT (WINAPI *GetStrCodePages)(IMLangFontLink2*, const WCHAR*, long, DWORD, DWORD*, long*);  /* (R1) */
+    HRESULT (WINAPI *CodePageToCodePages)(IMLangFontLink2*, UINT, DWORD*);  /* (R1) */
+    HRESULT (WINAPI *CodePagesToCodePage)(IMLangFontLink2*, DWORD, UINT, UINT*);  /* (R1) */
+    /* IMLangFontLink2 */
+    HRESULT (WINAPI *GetFontCodePages)(IMLangFontLink2*, HDC hDC, HFONT hFont, DWORD* pdwCodePages);  /* aa452371 */
+    HRESULT (WINAPI *ReleaseFont)(IMLangFontLink2*, HFONT hFont);  /* aa452377 */
+    HRESULT (WINAPI *ResetFontMapping)(IMLangFontLink2*);  /* aa452379 */
+    HRESULT (WINAPI *MapFont)(IMLangFontLink2*, HDC hDC, DWORD dwCodePages, WCHAR chSrc, HFONT* pFont);  /* aa452375 */
+    HRESULT (WINAPI *GetFontUnicodeRanges)(IMLangFontLink2*, HDC hDC, UINT* puiRanges, UNICODERANGE* pUranges);  /* aa452372 */
+    HRESULT (WINAPI *GetScriptFontInfo)(IMLangFontLink2*, SCRIPT_ID sid, DWORD dwFlags, UINT* puiFonts, SCRIPTFONTINFO* pScriptFont);  /* aa452373 */
+    HRESULT (WINAPI *CodePageToScriptID)(IMLangFontLink2*, UINT uiCodePage, SCRIPT_ID* pSid);  /* aa452370 */
+} IMLangFontLink2Vtbl;
+struct IMLangFontLink2 { const IMLangFontLink2Vtbl *lpVtbl; };
+#define IMLangFontLink2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMLangFontLink2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMLangFontLink2_Release(T) ((T)->lpVtbl->Release(T))
+#define IMLangFontLink2_GetCharCodePages(T,a,b) ((T)->lpVtbl->GetCharCodePages(T,a,b))
+#define IMLangFontLink2_GetStrCodePages(T,a,b,c,d,e) ((T)->lpVtbl->GetStrCodePages(T,a,b,c,d,e))
+#define IMLangFontLink2_CodePageToCodePages(T,a,b) ((T)->lpVtbl->CodePageToCodePages(T,a,b))
+#define IMLangFontLink2_CodePagesToCodePage(T,a,b,c) ((T)->lpVtbl->CodePagesToCodePage(T,a,b,c))
+#define IMLangFontLink2_GetFontCodePages(T,a,b,c) ((T)->lpVtbl->GetFontCodePages(T,a,b,c))
+#define IMLangFontLink2_ReleaseFont(T,a) ((T)->lpVtbl->ReleaseFont(T,a))
+#define IMLangFontLink2_ResetFontMapping(T) ((T)->lpVtbl->ResetFontMapping(T))
+#define IMLangFontLink2_MapFont(T,a,b,c,d) ((T)->lpVtbl->MapFont(T,a,b,c,d))
+#define IMLangFontLink2_GetFontUnicodeRanges(T,a,b,c) ((T)->lpVtbl->GetFontUnicodeRanges(T,a,b,c))
+#define IMLangFontLink2_GetScriptFontInfo(T,a,b,c,d) ((T)->lpVtbl->GetScriptFontInfo(T,a,b,c,d))
+#define IMLangFontLink2_CodePageToScriptID(T,a,b) ((T)->lpVtbl->CodePageToScriptID(T,a,b))
+
+/* ---- IMLangLineBreakConsole: 2 documented method pages; order R1 ---- */
+typedef struct IMLangLineBreakConsoleVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMLangLineBreakConsole*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMLangLineBreakConsole*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMLangLineBreakConsole*);  /* (R1) */
+    /* IMLangLineBreakConsole */
+    HRESULT (WINAPI *BreakLineML)(IMLangLineBreakConsole*);  /* (R1) */
+    HRESULT (WINAPI *BreakLineW)(IMLangLineBreakConsole*, LCID locale, const WCHAR* pszSrc, long cchSrc, long cMaxColumns, long* pcchLine, long* pcchSkip);  /* ms918284 */
+    HRESULT (WINAPI *BreakLineA)(IMLangLineBreakConsole*, LCID locale, UINT uCodePage, const CHAR* pszSrc, long cchSrc, long cMaxColumns, long* pcchLine, long* pcchSkip);  /* aa452391 */
+} IMLangLineBreakConsoleVtbl;
+struct IMLangLineBreakConsole { const IMLangLineBreakConsoleVtbl *lpVtbl; };
+#define IMLangLineBreakConsole_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMLangLineBreakConsole_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMLangLineBreakConsole_Release(T) ((T)->lpVtbl->Release(T))
+#define IMLangLineBreakConsole_BreakLineML(T) ((T)->lpVtbl->BreakLineML(T))
+#define IMLangLineBreakConsole_BreakLineW(T,a,b,c,d,e,f) ((T)->lpVtbl->BreakLineW(T,a,b,c,d,e,f))
+#define IMLangLineBreakConsole_BreakLineA(T,a,b,c,d,e,f,g) ((T)->lpVtbl->BreakLineA(T,a,b,c,d,e,f,g))
+
+/* ---- IMultiLanguage: 14 documented method pages; order R1 ---- */
+typedef struct IMultiLanguageVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMultiLanguage*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMultiLanguage*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMultiLanguage*);  /* (R1) */
+    /* IMultiLanguage */
+    HRESULT (WINAPI *GetNumberOfCodePageInfo)(IMultiLanguage*, UINT* pcCodePage);  /* ms918335 */
+    HRESULT (WINAPI *GetCodePageInfo)(IMultiLanguage*, UINT uiCodePage, PMIMECPINFO pCodePageInfo);  /* ms918331 */
+    HRESULT (WINAPI *GetFamilyCodePage)(IMultiLanguage*, UINT uiCodePage, UINT* puiFamilyCodePage);  /* ms918332 */
+    HRESULT (WINAPI *EnumCodePages)(IMultiLanguage*, DWORD grfFlags, IEnumCodePage** ppEnumCodePage);  /* ms918328 */
+    HRESULT (WINAPI *GetCharsetInfo)(IMultiLanguage*, BSTR Charset, PMIMECSETINFO pCharsetInfo);  /* ms918330 */
+    HRESULT (WINAPI *IsConvertible)(IMultiLanguage*, DWORD dwSrcEncoding, DWORD dwDstEncoding);  /* ms918338 */
+    HRESULT (WINAPI *ConvertString)(IMultiLanguage*, DWORD* pdwMode, DWORD dwSrcEncoding, DWORD dwDstEncoding, BYTE* pSrcStr, UINT* pcSrcSize, BYTE* pDstStr, UINT* pcDstSize);  /* ms918324 */
+    HRESULT (WINAPI *ConvertStringToUnicode)(IMultiLanguage*, DWORD* pdwMode, DWORD dwEncoding, CHAR* pSrcStr, UINT* pcSrcSize, WCHAR* pDstStr, UINT* pcDstSize);  /* ms918326 */
+    HRESULT (WINAPI *ConvertStringFromUnicode)(IMultiLanguage*, DWORD* pdwMode, DWORD dwEncoding, WCHAR* pSrcStr, UINT* pcSrcSize, CHAR* pDstStr, UINT* pcDstSize);  /* ms918325 */
+    HRESULT (WINAPI *ConvertStringReset)(IMultiLanguage*);  /* (R1) */
+    HRESULT (WINAPI *GetRfc1766FromLcid)(IMultiLanguage*, LCID Locale, BSTR* pbstrRfc1766);  /* ms918336 */
+    HRESULT (WINAPI *GetLcidFromRfc1766)(IMultiLanguage*, LCID* pLocale, BSTR bstrRfc1766);  /* ms918334 */
+    HRESULT (WINAPI *EnumRfc1766)(IMultiLanguage*, IEnumRfc1766** ppEnumRfc1766);  /* ms918329 */
+    HRESULT (WINAPI *GetRfc1766Info)(IMultiLanguage*, LCID Locale, PRFC1766INFO pRfc1766Info);  /* ms918337 */
+    HRESULT (WINAPI *CreateConvertCharset)(IMultiLanguage*, UINT uiSrcCodePage, UINT uiDstCodePage, DWORD dwProperty, IMLangConvertCharset** ppMLangConvertCharset);  /* ms918327 */
+} IMultiLanguageVtbl;
+struct IMultiLanguage { const IMultiLanguageVtbl *lpVtbl; };
+#define IMultiLanguage_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMultiLanguage_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMultiLanguage_Release(T) ((T)->lpVtbl->Release(T))
+#define IMultiLanguage_GetNumberOfCodePageInfo(T,a) ((T)->lpVtbl->GetNumberOfCodePageInfo(T,a))
+#define IMultiLanguage_GetCodePageInfo(T,a,b) ((T)->lpVtbl->GetCodePageInfo(T,a,b))
+#define IMultiLanguage_GetFamilyCodePage(T,a,b) ((T)->lpVtbl->GetFamilyCodePage(T,a,b))
+#define IMultiLanguage_EnumCodePages(T,a,b) ((T)->lpVtbl->EnumCodePages(T,a,b))
+#define IMultiLanguage_GetCharsetInfo(T,a,b) ((T)->lpVtbl->GetCharsetInfo(T,a,b))
+#define IMultiLanguage_IsConvertible(T,a,b) ((T)->lpVtbl->IsConvertible(T,a,b))
+#define IMultiLanguage_ConvertString(T,a,b,c,d,e,f,g) ((T)->lpVtbl->ConvertString(T,a,b,c,d,e,f,g))
+#define IMultiLanguage_ConvertStringToUnicode(T,a,b,c,d,e,f) ((T)->lpVtbl->ConvertStringToUnicode(T,a,b,c,d,e,f))
+#define IMultiLanguage_ConvertStringFromUnicode(T,a,b,c,d,e,f) ((T)->lpVtbl->ConvertStringFromUnicode(T,a,b,c,d,e,f))
+#define IMultiLanguage_ConvertStringReset(T) ((T)->lpVtbl->ConvertStringReset(T))
+#define IMultiLanguage_GetRfc1766FromLcid(T,a,b) ((T)->lpVtbl->GetRfc1766FromLcid(T,a,b))
+#define IMultiLanguage_GetLcidFromRfc1766(T,a,b) ((T)->lpVtbl->GetLcidFromRfc1766(T,a,b))
+#define IMultiLanguage_EnumRfc1766(T,a) ((T)->lpVtbl->EnumRfc1766(T,a))
+#define IMultiLanguage_GetRfc1766Info(T,a,b) ((T)->lpVtbl->GetRfc1766Info(T,a,b))
+#define IMultiLanguage_CreateConvertCharset(T,a,b,c,d) ((T)->lpVtbl->CreateConvertCharset(T,a,b,c,d))
+
+/* ---- IMultiLanguage2: 23 documented method pages; order R1 ---- */
+typedef struct IMultiLanguage2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMultiLanguage2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMultiLanguage2*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMultiLanguage2*);  /* (R1) */
+    /* IMultiLanguage2 */
+    HRESULT (WINAPI *GetNumberOfCodePageInfo)(IMultiLanguage2*, UINT* pcCodePage);  /* ms918315 */
+    HRESULT (WINAPI *GetCodePageInfo)(IMultiLanguage2*, UINT uiCodePage, LANGID LangId, PMIMECPINFO pCodePageInfo);  /* ms918312 */
+    HRESULT (WINAPI *GetFamilyCodePage)(IMultiLanguage2*, UINT uiCodePage, UINT* puiFamilyCodePage);  /* ms918313 */
+    HRESULT (WINAPI *EnumCodePages)(IMultiLanguage2*, DWORD grfFlags, LANGID LangId, IEnumCodePage** ppEnumCodePage);  /* ms918307 */
+    HRESULT (WINAPI *GetCharsetInfo)(IMultiLanguage2*, BSTR Charset, PMIMECSETINFO pCharsetInfo);  /* ms918310 */
+    HRESULT (WINAPI *IsConvertible)(IMultiLanguage2*, DWORD dwSrcEncoding, DWORD dwDstEncoding);  /* ms918319 */
+    HRESULT (WINAPI *ConvertString)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwSrcEncoding, DWORD dwDstEncoding, BYTE* pSrcStr, UINT* pcSrcSize, BYTE* pDstStr, UINT* pcDstSize);  /* ms918298 */
+    HRESULT (WINAPI *ConvertStringToUnicode)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwEncoding, CHAR* pSrcStr, UINT* pcSrcSize, WCHAR* pDstStr, UINT* pcDstSize);  /* ms918302 */
+    HRESULT (WINAPI *ConvertStringFromUnicode)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwEncoding, WCHAR* pSrcStr, UINT* pcSrcSize, CHAR* pDstStr, UINT* pcDstSize);  /* ms918299 */
+    HRESULT (WINAPI *ConvertStringReset)(IMultiLanguage2*);  /* (R1) */
+    HRESULT (WINAPI *GetRfc1766FromLcid)(IMultiLanguage2*, LCID Locale, BSTR* pbstrRfc1766);  /* ms918317 */
+    HRESULT (WINAPI *GetLcidFromRfc1766)(IMultiLanguage2*, LCID* pLocale, BSTR bstrRfc1766);  /* ms918314 */
+    HRESULT (WINAPI *EnumRfc1766)(IMultiLanguage2*, LANGID LangId, IEnumRfc1766** ppEnumRfc1766);  /* ms918308 */
+    HRESULT (WINAPI *GetRfc1766Info)(IMultiLanguage2*, LCID Locale, LANGID LangId, PRFC1766INFO pRfc1766Info);  /* ms918318 */
+    HRESULT (WINAPI *CreateConvertCharset)(IMultiLanguage2*, UINT uiSrcCodePage, UINT uiDstCodePage, DWORD dwProperty, IMLangConvertCharset** ppMLangConvertCharset);  /* ms918304 */
+    HRESULT (WINAPI *ConvertStringInIStream)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwFlag, WCHAR* lpFallBack, DWORD dwSrcEncoding, DWORD dwDstEncoding, IStream* pstmIn, IStream* pstmOut);  /* ms918301 */
+    HRESULT (WINAPI *ConvertStringToUnicodeEx)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwEncoding, CHAR* pSrcStr, UINT* pcSrcSize, WCHAR* pDstStr, UINT* pcDstSize, DWORD dwFlag, WCHAR* lpFallBack);  /* ms918303 */
+    HRESULT (WINAPI *ConvertStringFromUnicodeEx)(IMultiLanguage2*, DWORD* pdwMode, DWORD dwEncoding, WCHAR* pSrcStr, UINT* pcSrcSize, CHAR* pDstStr, UINT* pcDstSize, DWORD dwFlag, WCHAR* lpFallBack);  /* ms918300 */
+    HRESULT (WINAPI *DetectCodepageInIStream)(IMultiLanguage2*, DWORD dwFlag, DWORD dwPrefWinCodePage, IStream* pstmIn, DetectEncodingInfo* lpEncoding, INT* pnScores);  /* ms918305 */
+    HRESULT (WINAPI *DetectInputCodepage)(IMultiLanguage2*, DWORD dwFlag, DWORD dwPrefWinCodePage, CHAR* pSrcStr, INT* pcSrcSize, DetectEncodingInfo* lpEncoding, INT* pnScores);  /* ms918306 */
+    HRESULT (WINAPI *ValidateCodePage)(IMultiLanguage2*);  /* (R1) */
+    HRESULT (WINAPI *GetCodePageDescription)(IMultiLanguage2*, UINT uiCodePage, LCID lcid, LPWSTR lpWideCharStr, int cchWideChar);  /* ms918311 */
+    HRESULT (WINAPI *IsCodePageInstallable)(IMultiLanguage2*);  /* (R1) */
+    HRESULT (WINAPI *SetMimeDBSource)(IMultiLanguage2*, MIMECONTF dwSource);  /* ms918320 */
+    HRESULT (WINAPI *GetNumberOfScripts)(IMultiLanguage2*, UINT* pnScripts);  /* ms918316 */
+    HRESULT (WINAPI *EnumScripts)(IMultiLanguage2*, DWORD dwFlags, LANGID LangId, IEnumScript** ppEnumScript);  /* ms918309 */
+} IMultiLanguage2Vtbl;
+struct IMultiLanguage2 { const IMultiLanguage2Vtbl *lpVtbl; };
+#define IMultiLanguage2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMultiLanguage2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMultiLanguage2_Release(T) ((T)->lpVtbl->Release(T))
+#define IMultiLanguage2_GetNumberOfCodePageInfo(T,a) ((T)->lpVtbl->GetNumberOfCodePageInfo(T,a))
+#define IMultiLanguage2_GetCodePageInfo(T,a,b,c) ((T)->lpVtbl->GetCodePageInfo(T,a,b,c))
+#define IMultiLanguage2_GetFamilyCodePage(T,a,b) ((T)->lpVtbl->GetFamilyCodePage(T,a,b))
+#define IMultiLanguage2_EnumCodePages(T,a,b,c) ((T)->lpVtbl->EnumCodePages(T,a,b,c))
+#define IMultiLanguage2_GetCharsetInfo(T,a,b) ((T)->lpVtbl->GetCharsetInfo(T,a,b))
+#define IMultiLanguage2_IsConvertible(T,a,b) ((T)->lpVtbl->IsConvertible(T,a,b))
+#define IMultiLanguage2_ConvertString(T,a,b,c,d,e,f,g) ((T)->lpVtbl->ConvertString(T,a,b,c,d,e,f,g))
+#define IMultiLanguage2_ConvertStringToUnicode(T,a,b,c,d,e,f) ((T)->lpVtbl->ConvertStringToUnicode(T,a,b,c,d,e,f))
+#define IMultiLanguage2_ConvertStringFromUnicode(T,a,b,c,d,e,f) ((T)->lpVtbl->ConvertStringFromUnicode(T,a,b,c,d,e,f))
+#define IMultiLanguage2_ConvertStringReset(T) ((T)->lpVtbl->ConvertStringReset(T))
+#define IMultiLanguage2_GetRfc1766FromLcid(T,a,b) ((T)->lpVtbl->GetRfc1766FromLcid(T,a,b))
+#define IMultiLanguage2_GetLcidFromRfc1766(T,a,b) ((T)->lpVtbl->GetLcidFromRfc1766(T,a,b))
+#define IMultiLanguage2_EnumRfc1766(T,a,b) ((T)->lpVtbl->EnumRfc1766(T,a,b))
+#define IMultiLanguage2_GetRfc1766Info(T,a,b,c) ((T)->lpVtbl->GetRfc1766Info(T,a,b,c))
+#define IMultiLanguage2_CreateConvertCharset(T,a,b,c,d) ((T)->lpVtbl->CreateConvertCharset(T,a,b,c,d))
+#define IMultiLanguage2_ConvertStringInIStream(T,a,b,c,d,e,f,g) ((T)->lpVtbl->ConvertStringInIStream(T,a,b,c,d,e,f,g))
+#define IMultiLanguage2_ConvertStringToUnicodeEx(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->ConvertStringToUnicodeEx(T,a,b,c,d,e,f,g,h))
+#define IMultiLanguage2_ConvertStringFromUnicodeEx(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->ConvertStringFromUnicodeEx(T,a,b,c,d,e,f,g,h))
+#define IMultiLanguage2_DetectCodepageInIStream(T,a,b,c,d,e) ((T)->lpVtbl->DetectCodepageInIStream(T,a,b,c,d,e))
+#define IMultiLanguage2_DetectInputCodepage(T,a,b,c,d,e,f) ((T)->lpVtbl->DetectInputCodepage(T,a,b,c,d,e,f))
+#define IMultiLanguage2_ValidateCodePage(T) ((T)->lpVtbl->ValidateCodePage(T))
+#define IMultiLanguage2_GetCodePageDescription(T,a,b,c,d) ((T)->lpVtbl->GetCodePageDescription(T,a,b,c,d))
+#define IMultiLanguage2_IsCodePageInstallable(T) ((T)->lpVtbl->IsCodePageInstallable(T))
+#define IMultiLanguage2_SetMimeDBSource(T,a) ((T)->lpVtbl->SetMimeDBSource(T,a))
+#define IMultiLanguage2_GetNumberOfScripts(T,a) ((T)->lpVtbl->GetNumberOfScripts(T,a))
+#define IMultiLanguage2_EnumScripts(T,a,b,c) ((T)->lpVtbl->EnumScripts(T,a,b,c))
+
 #ifdef __cplusplus
 }
 #endif
