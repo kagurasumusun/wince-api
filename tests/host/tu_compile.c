@@ -63,6 +63,7 @@
 #include <Externs.h>
 #include <Windot11.h>
 #include <Usp10.h>
+#include <Cesync.h>
 #include <Msime.h>
 #include <Msimeui.h>
 #include <Imjpskin.h>
@@ -7199,6 +7200,16 @@ static int m84_shaped_usage(void)
            + marg.cxLeftWidth + (int)hr + (pifed != NULL);
 }
 
+static int m85_alias_usage(void)
+{
+    /* Cesync.h alias resolves to the Objbase.h STOREINFO (COM) M73b
+     * definition; Dinput/Bthid/bt_ddi/Dmoimpl are record-only. */
+    STOREINFO   csi;
+
+    csi.cbStruct = 0;
+    return (int)csi.cbStruct;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7356,6 +7367,8 @@ int host_tu_entry(void)
     if (m83_shaped_usage() != 0)
         return 1;
     if (m84_shaped_usage() != 0)
+        return 1;
+    if (m85_alias_usage() != 0)
         return 1;
     return 0;
 }

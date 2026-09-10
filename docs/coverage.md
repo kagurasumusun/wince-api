@@ -140,13 +140,12 @@ Method is fixed in tools/surface-metrics.py (checked in, rerunnable).
 | ... shipped in include/ | 149 (94%) |
 | Corpus pages preserved | 21346 |
 
-Unshipped header tokens (9): bt_ddi.h, bthid.h, cesync.h, dinput.h,
-dmoimpl.h, imjpskin.h, koreanimeui.h, msime.h, msimeui.h -- of
-these, msime/msimeui/imjpskin/koreanimeui are deferred
-record-only IME-internal UI surfaces (74+2+73+19 rows), dinput/
-dmoimpl are COM-interface headers partially covered by shipped
-interfaces, bt_ddi/bthid/cesync are driver-side books not yet
-harvested.
+Unshipped header tokens: NONE since M85 (158/158 shipped).
+The M83 list of 9 closed as: msime/msimeui/koreanimeui/imjpskin
+(M84, IME remainder -- 2 factory fns declared, 3 interfaces + 4 C++
+classes recorded, 4 structs compiled, 1 held), dinput/dmoimpl/bt_ddi/
+bthid/cesync (M85, records/alias; Cesync.h aliases Objbase.h which
+already carried STOREINFO (COM) since M73b).
 
 Book-level table above refreshed counts: after M83 the Fonts (77
 manifest pages), International (660), SideShow (51) and Error

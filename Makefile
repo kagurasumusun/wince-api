@@ -21,10 +21,13 @@ include/Btagnetwork.h \
 include/Btagpub.h \
 include/Bthapi.h \
 include/Bthsdpdef.h \
+include/Bthid.h \
+include/bt_ddi.h \
 include/CEDDK.h \
 include/Cchannel.h \
 include/Celog.h \
 include/Comcat.h \
+include/Cesync.h \
 include/Commctrl.h \
 include/Commdlg.h \
 include/Cpl.h \
@@ -35,7 +38,9 @@ include/Dbgapi.h \
 include/Dccole.h \
 include/Ddraw.h \
 include/Discodlg.h \
+include/Dinput.h \
 include/Dmo.h \
+include/Dmoimpl.h \
 include/Dmodshow.h \
 include/Dmoreg.h \
 include/Docobj.h \

@@ -6142,3 +6142,45 @@ already-harvested International book rows.
   MARGINS field touches + both factory calls + ImeGetUIClassName.
 - Makefile HDRS 167 -> 171.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M85 -- remaining header-name compat tokens: 158/158
+
+Closes the LAST 5 unshipped documented header tokens (153 -> 158/158;
+surface-metrics.py: "headers shipped 158/158, unshipped tokens 0").
+
+- include/Cesync.h (NEW): documented-case alias -> Objbase.h
+  (Objidl.h precedent).  The one harvested Cesync.h row, STOREINFO
+  (COM) ms896271, was already carried by Objbase.h (M73b, owns the
+  STOREINFO/PSTOREINFO typedef per the Storemgr.h collision note) --
+  M81 lesson applied: grep include/ first, found the existing
+  implementation, alias instead of duplicate.
+- include/bt_ddi.h (NEW, lowercase = dominant documented spelling):
+  BASEBAND_CONNECTION_DATA aa450297 HELD (member `BD_ADDR baAddress`;
+  BD_ADDR has no page -- Bt_api.h carries the BT_ADDR spelling only);
+  WODM_BT_SCO_AUDIO_CONTROL ee495648 (WAV_IOControl/MMDRV_MESSAGE_PARAMS
+  routing) + OID_PAN_AUTHENTICATE/CONNECT/DISCONNECT/ENCRYPT recorded
+  name-only (CE 6.0 pages print no values).  NOTE: these rows carry
+  suffixed ids "ee495648(v=winembedded.60)" -- page files are the
+  bare id under build/pages6/.
+- include/Bthid.h (NEW): BTHHID_IOCTL_HIDConnect ee496033 /
+  HIDDisconnect ee496034 recorded name-only (no CTL_CODE values
+  printed; input buffer = BT_ADDR from Bt_api.h).
+- include/Dinput.h (NEW): DirectInputCreate ms864419 recorded
+  (LPDIRECTINPUT has no page -- no IDirectInput interface pages in
+  the corpus; page states the function is not supported as of
+  Windows CE .NET 4.2 / Windows Mobile 2003; LPUNKNOWN is in
+  Objbase.h).
+- include/Dmoimpl.h (NEW): IMediaObjectImpl C++ template
+  (aa451296: `template <class _DERIVED_, int NUMBEROFINPUTS, int
+  NUMBEROFOUTPUTS> class IMediaObjectImpl : public IMediaObject`)
+  recorded only, with the 5 _DERIVED_ overrides (InternalAcceptingInput/
+  InternalCheckInputType/InternalCheckOutputType/Lock/Unlock), the
+  LockIt internal class (ms924129), and the 5 public helpers
+  (CheckTypesSet/InputType/InputTypeSet/OutputType/OutputTypeSet --
+  prints use C++ `bool`).  IMediaObject + DMO_MEDIA_TYPE carried by
+  Dmo.h.
+- TU m85: Cesync.h alias -> STOREINFO field touch (proves the alias
+  resolves); record-only headers compile standalone.
+- Makefile HDRS 171 -> 178 (with M83/M84's Usp10/Mspyime/Recog/
+  Msime/Msimeui/Koreanimeui/Imjpskin).
+- Gates: check / crosscheck / e2e GREEN x6.
