@@ -6988,3 +6988,12 @@ CE page spelling).
   additions: glued return+name heads (HRESULTNext), OAHWND/known-type
   glue splitting; aux typedef OAHWND (32-bit long, IDL spelling);
   include +Ddraw.h (DDCAPS, LPDIRECTDRAW).  Gates GREEN x6.
+- include/Mlang.h M96: +6 array-length constants adopted from R1
+  mlang.h (MAX_MIMECP_NAME 64, MAX_MIMECSET_NAME 50, MAX_SCRIPT_NAME
+  48, MAX_MIMEFACE_NAME 32, MAX_RFC1766_NAME 6, MAX_LOCALE_NAME 32)
+  -- the pages name them without values (the HELD reason).  With the
+  values in place the four carrier structures are UNHELD from their
+  own recorded page prints: MIMECPINFO (ms918820), MIMECSETINFO
+  (ms918821), RFC1766INFO (ms918852), SCRIPTINFO (ms918857, tag
+  misprint "tagSCRIPINFO" kept); SCRIPTFONTINFO stays opaque (no
+  page).  Gates GREEN x6.

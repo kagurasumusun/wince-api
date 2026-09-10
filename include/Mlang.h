@@ -183,32 +183,44 @@ typedef struct tagDetectEncodingInfo {
     INT  nConfidence;
 } DetectEncodingInfo, *pDetectEncodingInfo;
 
-/*
- * HELD structures (prints recorded; array-length constants not
- * published anywhere official -- see the header note):
- *   ms918820 MIMECPINFO: typedef struct tagMIMECPINFO { DWORD
- *     dwFlags; UINT uiCodePage; UINT uiFamilyCodePage; WCHAR
- *     wszDescription[MAX_MIMECP_NAME]; WCHAR
- *     wszWebCharset[MAX_MIMECSET_NAME]; WCHAR
- *     wszHeaderCharset[MAX_MIMECSET_NAME]; WCHAR
- *     wszBodyCharset[MAX_MIMECSET_NAME]; WCHAR
- *     wszFixedWidthFont[MAX_MIMEFACE_NAME]; WCHAR
- *     wszProportionalFont[MAX_MIMEFACE_NAME]; BYTE bGDICharset; }
- *     MIMECPINFO;
- *   ms918821 MIMECSETINFO: typedef struct tagMIMECSETINFO { UINT
- *     uiCodePage; UINT uiInternetEncoding; WCHAR
- *     wszCharset[MAX_MIMECSET_NAME]; } MIMECSETINFO, *PMIMECSETINFO;
- *   ms918852 RFC1766INFO: typedef struct tagRFC1766INFO { LCID lcid;
- *     WCHAR wszRfc1766[MAX_RFC1766_NAME]; WCHAR
- *     wszLocaleName[MAX_LOCALE_NAME]; } RFC1766INFO, *PRFC1766INFO;
- *   ms918857 SCRIPTINFO (page tag prints "tagSCRIPINFO"): typedef
- *     struct tagSCRIPINFO { SCRIPT_ID ScriptId; UINT uiCodePage;
- *     WCHAR wszDescription[MAX_SCRIPT_NAME]; WCHAR
- *     wszFixedWidthFont[MAX_MIMEFACE_NAME]; WCHAR
- *     wszProportionalFont[MAX_MIMEFACE_NAME]; } SCRIPTINFO,
- *     *PSCRIPTINFO;
- *   aa452373 references SCRIPTFONTINFO* (no page).
- */
+/* ------------------------------------------------------------------ */
+/* Carrier structures.  Member lists are the CE pages' own printed      */
+/* declarations (ms918820 MIMECPINFO, ms918821 MIMECSETINFO,            */
+/* ms918852 RFC1766INFO, ms918857 SCRIPTINFO -- the page tag prints     */
+/* "tagSCRIPINFO"); the array-length constants the pages name without   */
+/* values were ADOPTED from R1 (M96 section at the end of this header). */
+/* SCRIPTFONTINFO has no CE page (referenced by aa452373) -- opaque.    */
+/* ------------------------------------------------------------------ */
+typedef struct tagMIMECPINFO {
+    DWORD dwFlags;
+    UINT uiCodePage;
+    UINT uiFamilyCodePage;
+    WCHAR wszDescription[MAX_MIMECP_NAME];
+    WCHAR wszWebCharset[MAX_MIMECSET_NAME];
+    WCHAR wszHeaderCharset[MAX_MIMECSET_NAME];
+    WCHAR wszBodyCharset[MAX_MIMECSET_NAME];
+    WCHAR wszFixedWidthFont[MAX_MIMEFACE_NAME];
+    WCHAR wszProportionalFont[MAX_MIMEFACE_NAME];
+    BYTE bGDICharset;
+} MIMECPINFO, *PMIMECPINFO;
+typedef struct tagMIMECSETINFO {
+    UINT uiCodePage;
+    UINT uiInternetEncoding;
+    WCHAR wszCharset[MAX_MIMECSET_NAME];
+} MIMECSETINFO, *PMIMECSETINFO;
+typedef struct tagRFC1766INFO {
+    LCID lcid;
+    WCHAR wszRfc1766[MAX_RFC1766_NAME];
+    WCHAR wszLocaleName[MAX_LOCALE_NAME];
+} RFC1766INFO, *PRFC1766INFO;
+typedef struct tagSCRIPINFO {      /* page tag misprint kept in the tag */
+    SCRIPT_ID ScriptId;
+    UINT uiCodePage;
+    WCHAR wszDescription[MAX_SCRIPT_NAME];
+    WCHAR wszFixedWidthFont[MAX_MIMEFACE_NAME];
+    WCHAR wszProportionalFont[MAX_MIMEFACE_NAME];
+} SCRIPTINFO, *PSCRIPTINFO;
+typedef struct SCRIPTFONTINFO SCRIPTFONTINFO;   /* no page; opaque */
 
 /* ------------------------------------------------------------------ */
 /*  MLang functions (Mlang.dll)                                        */
@@ -491,5 +503,25 @@ typedef struct IMultiLanguage3 IMultiLanguage3;
 #ifdef __cplusplus
 }
 #endif
+
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- MAX_ family (6 names; R1) ---- */
+#define MAX_RFC1766_NAME                             0x0006
+#define MAX_LOCALE_NAME                              0x0020
+#define MAX_MIMEFACE_NAME                            0x0020
+#define MAX_SCRIPT_NAME                              0x0030
+#define MAX_MIMECSET_NAME                            0x0032
+#define MAX_MIMECP_NAME                              0x0040
 
 #endif /* AKARI_MLANG_H */
