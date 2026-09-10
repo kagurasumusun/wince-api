@@ -141,6 +141,7 @@ include/Shobjvidl.h \
 include/Shtypes.h \
 include/Sip.h \
 include/Rpcdce.h \
+include/Ntlmssp.h \
 include/Schnlsp.h \
 include/Sipapi.h \
 include/Sspi.h \

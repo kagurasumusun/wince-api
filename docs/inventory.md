@@ -7093,3 +7093,15 @@ provenance.
   future book; this file carries the Security book's single
   Rpcdce.h-homed row.  M96: SEC_WINNT_AUTH_IDENTITY_ANSI 1 /
   UNICODE 2 adopted from R1 rpcdce.h.  Gates GREEN x6.
+- include/Ntlmssp.h NEW (10 rows): the NTLM SSP user/group
+  management functions (Ntlmssp.lib).  Pages mix WCHAR* and LPTSTR
+  parameter spellings (kept as printed; same type on Unicode-only
+  CE); glued prints split (NTLMEnumUser, NTLMSetUserInfo).  No
+  structures or constants published.  def/ntlmspp-doc.def ->
+  generated as def/ntlmssp-doc.def (10 exports, the generator's
+  token spelling).  def/secur32-doc.def NEW: the 19 Sspi.h SSPI
+  functions (4 Secur32.lib rows skipped pending their families:
+  CeCredFree/Read/Write, InternetCanonicalizeUrl).  def/
+  shellcb-doc.def NEW (bonus catch): aa453687 ShellRegisterCallbacks
+  (Shellcb.lib, Shell book row whose header declaration landed in
+  M94 after the last defdoc run).  Gates GREEN x6.
