@@ -3186,6 +3186,7 @@ typedef BOOL (WINAPI *LPFNCONTINUE)(DWORD);  /* IViewObject::Draw
 /* ================================================================== */
 /* ================================================================== */
 /* ================================================================== */
+/* ================================================================== */
 /* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
  * ORDER adopted from R1 (CeGCC-lineage w32api, public
  * domain; docs/clean-room.md par.4 revision 2026-09-10);
@@ -3985,7 +3986,7 @@ struct ITypeInfo2 { const ITypeInfo2Vtbl *lpVtbl; };
 #define ITypeInfo2_GetAllVarCustData(T,a,b) ((T)->lpVtbl->GetAllVarCustData(T,a,b))
 #define ITypeInfo2_GetAllImplTypeCustData(T,a,b) ((T)->lpVtbl->GetAllImplTypeCustData(T,a,b))
 
-/* ---- ITypeLib: 7 documented method pages; order R1 ---- */
+/* ---- ITypeLib: 8 documented method pages; order R1 ---- */
 typedef struct ITypeLibVtbl {
     /* IUnknown */
     HRESULT (WINAPI *QueryInterface)(ITypeLib*, REFIID, PVOID*);  /* (R1) */
@@ -3997,7 +3998,7 @@ typedef struct ITypeLibVtbl {
     HRESULT (WINAPI *GetTypeInfoType)(ITypeLib*, unsigned int index, TYPEKIND* pTKind);  /* 890632 */
     HRESULT (WINAPI *GetTypeInfoOfGuid)(ITypeLib*, REFGUID guid, ITypeInfo** ppTinfo);  /* 890629 */
     HRESULT (WINAPI *GetLibAttr)(ITypeLib*, TLIBATTR** ppTLibAttrr);  /* 890605 */
-    HRESULT (WINAPI *GetTypeComp)(ITypeLib*, ITypeComp**);  /* (R1) */
+    HRESULT (WINAPI *GetTypeComp)(ITypeLib*, ITypeComp** ppTComp);  /* 890610 */
     HRESULT (WINAPI *GetDocumentation)(ITypeLib*, INT, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
     HRESULT (WINAPI *IsName)(ITypeLib*, OLECHAR* szNameBuf, unsigned long lHashVal, BOOL pfName);  /* 890638 */
     HRESULT (WINAPI *FindName)(ITypeLib*, LPOLESTR, ULONG, ITypeInfo**, MEMBERID*, USHORT*);  /* (R1) */
@@ -4267,7 +4268,7 @@ struct IOleInPlaceSite { const IOleInPlaceSiteVtbl *lpVtbl; };
 #define IOleInPlaceSite_DeactivateAndUndo(T) ((T)->lpVtbl->DeactivateAndUndo(T))
 #define IOleInPlaceSite_OnPosRectChange(T,a) ((T)->lpVtbl->OnPosRectChange(T,a))
 
-/* ---- IOleObject: 18 documented method pages; order R1 ---- */
+/* ---- IOleObject: 20 documented method pages; order R1 ---- */
 typedef struct IOleObjectVtbl {
     /* IUnknown */
     HRESULT (WINAPI *QueryInterface)(IOleObject*, REFIID, PVOID*);  /* (R1) */
@@ -4279,7 +4280,7 @@ typedef struct IOleObjectVtbl {
     HRESULT (WINAPI *SetHostNames)(IOleObject*, LPCOLESTR szContainerApp, LPCOLESTR szContainerObj);  /* 882931 */
     HRESULT (WINAPI *Close)(IOleObject*, DWORD dwSaveOption);  /* 882914 */
     HRESULT (WINAPI *SetMoniker)(IOleObject*, DWORD, LPMONIKER);  /* (R1) */
-    HRESULT (WINAPI *GetMoniker)(IOleObject*, DWORD, DWORD, LPMONIKER*);  /* (R1) */
+    HRESULT (WINAPI *GetMoniker)(IOleObject*, DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk);  /* 882922 */
     HRESULT (WINAPI *InitFromData)(IOleObject*, IDataObject* pDataObject, BOOL fCreation, DWORD dwReserved);  /* 882925 */
     HRESULT (WINAPI *GetClipboardData)(IOleObject*, DWORD dwReserved, IDataObject** ppDataObject);  /* 882919 */
     HRESULT (WINAPI *DoVerb)(IOleObject*, LONG iVerb, LPMSG lpmsg, IOleClientSite* pActiveSite, LONG lindex, HWND hwndParent, LPCRECT lprcPosRect);  /* 882915 */
@@ -4292,7 +4293,7 @@ typedef struct IOleObjectVtbl {
     HRESULT (WINAPI *GetExtent)(IOleObject*, DWORD dwDrawAspect, SIZEL* psizel);  /* 882920 */
     HRESULT (WINAPI *Advise)(IOleObject*, IAdviseSink* pAdvSink, DWORD* pdwConnection);  /* 882913 */
     HRESULT (WINAPI *Unadvise)(IOleObject*, DWORD dwConnection);  /* 882933 */
-    HRESULT (WINAPI *EnumAdvise)(IOleObject*, IEnumSTATDATA**);  /* (R1) */
+    HRESULT (WINAPI *EnumAdvise)(IOleObject*, IEnumSTATDATA** ppenumAdvise);  /* 882916 */
     HRESULT (WINAPI *GetMiscStatus)(IOleObject*, DWORD dwAspect, DWORD* pdwStatus);  /* 882921 */
     HRESULT (WINAPI *SetColorScheme)(IOleObject*, LOGPALETTE* pLogpal);  /* 882929 */
 } IOleObjectVtbl;
@@ -4369,7 +4370,7 @@ struct IPersist { const IPersistVtbl *lpVtbl; };
 #define IPersist_Release(T) ((T)->lpVtbl->Release(T))
 #define IPersist_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
 
-/* ---- IPersistStorage: 5 documented method pages; order R1 ---- */
+/* ---- IPersistStorage: 6 documented method pages; order R1 ---- */
 typedef struct IPersistStorageVtbl {
     /* IUnknown */
     HRESULT (WINAPI *QueryInterface)(IPersistStorage*, REFIID, PVOID*);  /* (R1) */
@@ -4383,7 +4384,7 @@ typedef struct IPersistStorageVtbl {
     HRESULT (WINAPI *Load)(IPersistStorage*, IStorage* pStg);  /* 883717 */
     HRESULT (WINAPI *Save)(IPersistStorage*, IStorage* pStgSave, BOOL fSameAsLoad);  /* 883726 */
     HRESULT (WINAPI *SaveCompleted)(IPersistStorage*, IStorage* pStgNew);  /* 883737 */
-    HRESULT (WINAPI *HandsOffStorage)(IPersistStorage*);  /* (R1) */
+    HRESULT (WINAPI *HandsOffStorage)(IPersistStorage*);  /* 883673 */
 } IPersistStorageVtbl;
 struct IPersistStorage { const IPersistStorageVtbl *lpVtbl; };
 #define IPersistStorage_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
@@ -4509,6 +4510,21 @@ struct IROTData { const IROTDataVtbl *lpVtbl; };
 #define IROTData_AddRef(T) ((T)->lpVtbl->AddRef(T))
 #define IROTData_Release(T) ((T)->lpVtbl->Release(T))
 #define IROTData_GetComparisonData(T,a,b,c) ((T)->lpVtbl->GetComparisonData(T,a,b,c))
+
+/* ---- IRootStorage: 1 documented method pages; order R1 ---- */
+typedef struct IRootStorageVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IRootStorage*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IRootStorage*);  /* (R1) */
+    ULONG (WINAPI *Release)(IRootStorage*);  /* (R1) */
+    /* IRootStorage */
+    HRESULT (WINAPI *SwitchToFile)(IRootStorage*, LPOLESTR pszFile);  /* 884586 */
+} IRootStorageVtbl;
+struct IRootStorage { const IRootStorageVtbl *lpVtbl; };
+#define IRootStorage_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IRootStorage_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IRootStorage_Release(T) ((T)->lpVtbl->Release(T))
+#define IRootStorage_SwitchToFile(T,a) ((T)->lpVtbl->SwitchToFile(T,a))
 
 /* ---- IRunnableObject: 5 documented method pages; order R1 ---- */
 typedef struct IRunnableObjectVtbl {

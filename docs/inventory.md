@@ -7009,3 +7009,8 @@ CE page spelling).
   OAFilterState, HEVENT, HSEMAPHORE, LPDISPATCH, AMTunerModeType (5
   values), TunerInputType (2 members).  Total Dshow M97: 15.
   Gates GREEN x6.
+- include/Objbase.h TOP-UP +1: IRootStorage (4 slots; the CE page
+  prints the callee "SwitchTofFile" -- a recorded misprint; the
+  emitted pointer uses the page-title name SwitchToFile, the verbatim
+  record above keeps the misprint).  Total Objbase M97: 59.  Gates
+  GREEN x6.
