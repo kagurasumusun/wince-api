@@ -52,6 +52,7 @@
 #include "Windef.h"    /* BOOL, DWORD, LONG, WORD, UINT, ULONG, WCHAR,
                           LPWSTR, RECT, SIZE, HANDLE */
 #include "Winnt.h"     /* GUID, CLSID, LONGLONG, BYTE */
+#include "Mmsystem.h"   /* WAVEFORMATEX (CreateAudioMediaType, M88) */
 #include "Wingdi.h"    /* COLORREF, RGBQUAD, BITMAPINFOHEADER, DIBSECTION,
                           HBITMAP */
 #include "Objbase.h"   /* IUnknown (opaque forward) */
@@ -1311,6 +1312,319 @@ typedef struct IVideoWindow IVideoWindow;
 AKARI_CE_IMPORT DWORD AMGetErrorText(HRESULT hr, TCHAR *pBuffer,
                     DWORD MaxLen) AKARI_CE_NAME(AMGetErrorText);
 
+/* ------------------------------------------------------------------
+ * M88: DirectShow Base Classes reference -- utility functions,
+ * macros and event notification codes (dshow-func.manifest 68
+ * rows / dshow-macro.manifest 72 rows, group-header rows excluded;
+ * Windows Media Event Notification Codes group, graphics-book
+ * harvest).  Every page's Requirements block prints the "different
+ * include file and link library requirements" pointer (see Setting
+ * Up the Build Environment), OS "Windows CE 2.12 and later.
+ * Version 2.12 requires DXPAK 1.0 or later", and an EMPTY Header
+ * row; the documented include home is this header (aa451220
+ * "Building DirectShow Applications": "All DirectShow applications
+ * use the Dshow.h header file").  No page prints a Link Library
+ * row, so the def generator emits nothing new (the Quartz.lib
+ * AMGetErrorText note above is unchanged).
+ *
+ * C++-only signatures are recorded, not declared: AreEqualVideoTypes
+ * and the CCritSec helpers name C++ classes with no CE pages;
+ * FreeMediaType/ReadInt/ConvertToMilliseconds print C++ reference
+ * parameters; WaitDispatchingMessages prints C++ default arguments
+ * (declared here in C form, four required parameters).  STDAPI
+ * prints are carried as HRESULT (Objbase.h STDAPI policy).
+ * ------------------------------------------------------------------ */
+
+/* --- Functions (declared; page prints verbatim in each note). --- */
+
+/* aa451723 "GetBitCount":
+ * `WORD GetBitCount(const GUID *pSubtype);`. */
+AKARI_CE_IMPORT WORD GetBitCount(const GUID *pSubtype)
+                     AKARI_CE_NAME(GetBitCount);
+
+/* ms926782 "ContainsPalette":
+ * `BOOL ContainsPalette(const VIDEOINFOHEADER *pVideoInfo);`. */
+AKARI_CE_IMPORT BOOL ContainsPalette(const VIDEOINFOHEADER *pVideoInfo)
+                     AKARI_CE_NAME(ContainsPalette);
+
+/* aa451726 "GetBitmapSize":
+ * `DWORD GetBitmapSize(const BITMAPINFOHEADER *pHeader);`. */
+AKARI_CE_IMPORT DWORD GetBitmapSize(const BITMAPINFOHEADER *pHeader)
+                      AKARI_CE_NAME(GetBitmapSize);
+
+/* aa451724 "GetBitmapFormatSize":
+ * `LONG GetBitmapFormatSize(const BITMAPINFOHEADER *pHeader);`. */
+AKARI_CE_IMPORT LONG GetBitmapFormatSize(const BITMAPINFOHEADER *pHeader)
+                     AKARI_CE_NAME(GetBitmapFormatSize);
+
+/* aa451727 "GetBitmapSubtype":
+ * `const GUID GetBitmapSubtype(const BITMAPINFOHEADER *pHeader);`
+ * (top-level const on the return type has no effect in C; dropped). */
+AKARI_CE_IMPORT GUID GetBitmapSubtype(const BITMAPINFOHEADER *pHeader)
+                           AKARI_CE_NAME(GetBitmapSubtype);
+
+/* aa451741 "GetTrueColorType":
+ * `const GUID GetTrueColorType(const BITMAPINFOHEADER *pHeader);`
+ * (top-level const on the return type has no effect in C; dropped). */
+AKARI_CE_IMPORT GUID GetTrueColorType(const BITMAPINFOHEADER *pHeader)
+                           AKARI_CE_NAME(GetTrueColorType);
+
+/* aa451740 "GetSubtypeName":
+ * `TCHAR * GetSubtypeName(const GUID *pSubtype);`. */
+AKARI_CE_IMPORT TCHAR * GetSubtypeName(const GUID *pSubtype)
+                        AKARI_CE_NAME(GetSubtypeName);
+
+/* aa451725 "GetBitmapPalette":
+ * `const RGBQUAD * GetBitmapPalette(const VIDEOINFOHEADER *pVideoInfo);`. */
+AKARI_CE_IMPORT const RGBQUAD * GetBitmapPalette(const VIDEOINFOHEADER *pVideoInfo)
+                                AKARI_CE_NAME(GetBitmapPalette);
+
+/* aa452474 "WriteBSTR" (print `STDAPI WriteBSTR(...)`):
+ * `HRESULT WriteBSTR(BSTR *pstrDest, LPCWSTR szSrc);`. */
+AKARI_CE_IMPORT HRESULT WriteBSTR(BSTR *pstrDest, LPCWSTR szSrc)
+                        AKARI_CE_NAME(WriteBSTR);
+
+/* aa451719 "FreeBSTR" (print `STDAPI FreeBSTR(...)`):
+ * `HRESULT FreeBSTR(BSTR *pstr);`. */
+AKARI_CE_IMPORT HRESULT FreeBSTR(BSTR *pstr)
+                        AKARI_CE_NAME(FreeBSTR);
+
+/* ms912061 "IntToWstr":
+ * `void IntToWstr(int i, LPWSTR wstrDest);`. */
+AKARI_CE_IMPORT void IntToWstr(int i, LPWSTR wstrDest)
+                     AKARI_CE_NAME(IntToWstr);
+
+/* aa452476 "WstrToInt":
+ * `int WstrToInt(LPCWSTR wstrSrc);`. */
+AKARI_CE_IMPORT int WstrToInt(LPCWSTR wstrSrc)
+                    AKARI_CE_NAME(WstrToInt);
+
+/* ms926785 "ConvertVideoInfoToVideoInfo2" (print `STDAPI ...`):
+ * `HRESULT ConvertVideoInfoToVideoInfo2(AM_MEDIA_TYPE *pmt);`. */
+AKARI_CE_IMPORT HRESULT ConvertVideoInfoToVideoInfo2(AM_MEDIA_TYPE *pmt)
+                        AKARI_CE_NAME(ConvertVideoInfoToVideoInfo2);
+
+/* ms907274 "CreateAudioMediaType" (print `STDAPI ...`):
+ * `HRESULT CreateAudioMediaType(const WAVEFORMATEX *pwfx, AM_MEDIA_TYPE *pmt, BOOL bSetFormat);`. */
+AKARI_CE_IMPORT HRESULT CreateAudioMediaType(const WAVEFORMATEX *pwfx, AM_MEDIA_TYPE *pmt, BOOL bSetFormat)
+                        AKARI_CE_NAME(CreateAudioMediaType);
+
+/* ms907276 "CreateMediaType":
+ * `AM_MEDIA_TYPE * WINAPI CreateMediaType(AM_MEDIA_TYPE const *pSrc);`. */
+AKARI_CE_IMPORT AM_MEDIA_TYPE * WINAPI CreateMediaType(AM_MEDIA_TYPE const *pSrc)
+                                       AKARI_CE_NAME(CreateMediaType);
+
+/* ms926786 "CopyMediaType":
+ * `void WINAPI CopyMediaType(AM_MEDIA_TYPE *pmtTarget, const AM_MEDIA_TYPE *pmtSource);`. */
+AKARI_CE_IMPORT void WINAPI CopyMediaType(AM_MEDIA_TYPE *pmtTarget, const AM_MEDIA_TYPE *pmtSource)
+                            AKARI_CE_NAME(CopyMediaType);
+
+/* aa451572 "DeleteMediaType":
+ * `void WINAPI DeleteMediaType(AM_MEDIA_TYPE *pmt);`. */
+AKARI_CE_IMPORT void WINAPI DeleteMediaType(AM_MEDIA_TYPE *pmt)
+                            AKARI_CE_NAME(DeleteMediaType);
+
+/* aa451697 "EqualPins":
+ * `BOOL EqualPins(IUnknown *pPin1, IUnknown *pPin2);`. */
+AKARI_CE_IMPORT BOOL EqualPins(IUnknown *pPin1, IUnknown *pPin2)
+                     AKARI_CE_NAME(EqualPins);
+
+/* aa451732 "GetInterface" (page title "GetInterface (DirectShow)"):
+ * `HRESULT GetInterface(LPUNKNOWN pUnk, void **ppv);`. */
+AKARI_CE_IMPORT HRESULT GetInterface(LPUNKNOWN pUnk, void **ppv)
+                        AKARI_CE_NAME(GetInterface);
+
+/* ms925336 "AMGetWideString" (print `STDAPI ...`):
+ * `HRESULT AMGetWideString(LPCWSTR pszString, LPWSTR *ppszReturn);`. */
+AKARI_CE_IMPORT HRESULT AMGetWideString(LPCWSTR pszString, LPWSTR *ppszReturn)
+                        AKARI_CE_NAME(AMGetWideString);
+
+/* ms925338 "AMovieDllRegisterServer":
+ * `HRESULT AMovieDllRegisterServer(void);`. */
+AKARI_CE_IMPORT HRESULT AMovieDllRegisterServer(void)
+                        AKARI_CE_NAME(AMovieDllRegisterServer);
+
+/* ms925339 "AMovieDllUnregisterServer":
+ * `HRESULT AMovieDllUnregisterServer(void);`. */
+AKARI_CE_IMPORT HRESULT AMovieDllUnregisterServer(void)
+                        AKARI_CE_NAME(AMovieDllUnregisterServer);
+
+/* ms932024 "LoadOLEAut32" (print `LoadOLEAut32( );`):
+ * `HINSTANCE LoadOLEAut32(void);`. */
+AKARI_CE_IMPORT HINSTANCE LoadOLEAut32(void)
+                          AKARI_CE_NAME(LoadOLEAut32);
+
+/* ms932023 "llMulDiv":
+ * `LONGLONG WINAPI llMulDiv(LONGLONG a, LONGLONG b, LONGLONG c, LONGLONG rnd);`. */
+AKARI_CE_IMPORT LONGLONG WINAPI llMulDiv(LONGLONG a, LONGLONG b, LONGLONG c, LONGLONG rnd)
+                                AKARI_CE_NAME(llMulDiv);
+
+/* ms912016 "Int64x32Div32":
+ * `LONGLONG WINAPI Int64x32Div32(LONGLONG a, LONG b, LONG c, LONG rnd);`. */
+AKARI_CE_IMPORT LONGLONG WINAPI Int64x32Div32(LONGLONG a, LONG b, LONG c, LONG rnd)
+                                AKARI_CE_NAME(Int64x32Div32);
+
+/* ms931812 "IsEqualObject":
+ * `BOOL WINAPI IsEqualObject(IUnknown *pFirst, IUnknown *pSecond);`. */
+AKARI_CE_IMPORT BOOL WINAPI IsEqualObject(IUnknown *pFirst, IUnknown *pSecond)
+                            AKARI_CE_NAME(IsEqualObject);
+
+/* ms925597 "atoi" (DirectShow decimal-only variant):
+ * `int WINAPI atoi(const TCHAR *sz);`. */
+AKARI_CE_IMPORT int WINAPI atoi(const TCHAR *sz)
+                           AKARI_CE_NAME(atoi);
+
+/* aa452418 "WaitDispatchingMessages" (print carries C++ default arguments `hwnd = NULL, uMsg = 0` -- declared here without defaults (C)):
+ * `DWORD WINAPI WaitDispatchingMessages(HANDLE hObject, DWORD dwWait, HWND hwnd, UINT uMsg);`. */
+AKARI_CE_IMPORT DWORD WINAPI WaitDispatchingMessages(HANDLE hObject, DWORD dwWait, HWND hwnd, UINT uMsg)
+                             AKARI_CE_NAME(WaitDispatchingMessages);
+
+/* aa452475 "WriteInt" (print `STDAPI WriteInt(...)`):
+ * `HRESULT WriteInt(IStream *pIStream, int n);`. */
+AKARI_CE_IMPORT HRESULT WriteInt(IStream *pIStream, int n)
+                        AKARI_CE_NAME(WriteInt);
+
+/* ms907278 "CreatePosPassThru" (print `STDAPI ...`; creates the CPosPassThru COM object):
+ * `HRESULT CreatePosPassThru(LPUNKNOWN pAgg, BOOL bRenderer, IPin *pPin, IUnknown **ppPassThru);`. */
+AKARI_CE_IMPORT HRESULT CreatePosPassThru(LPUNKNOWN pAgg, BOOL bRenderer, IPin *pPin, IUnknown **ppPassThru)
+                        AKARI_CE_NAME(CreatePosPassThru);
+
+/* ms907766 "DbgAssert":
+ * `void WINAPI DbgAssert(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine);`. */
+AKARI_CE_IMPORT void WINAPI DbgAssert(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine)
+                            AKARI_CE_NAME(DbgAssert);
+
+/* ms907780 "DbgKernelAssert":
+ * `void WINAPI DbgKernelAssert(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine);`. */
+AKARI_CE_IMPORT void WINAPI DbgKernelAssert(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine)
+                            AKARI_CE_NAME(DbgKernelAssert);
+
+/* ms907768 "DbgBreakPoint":
+ * `void WINAPI DbgBreakPoint(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine);`. */
+AKARI_CE_IMPORT void WINAPI DbgBreakPoint(const TCHAR *pCondition, const TCHAR *pFileName, INT iLine)
+                            AKARI_CE_NAME(DbgBreakPoint);
+
+/* ms907782 "DbgOutString":
+ * `void WINAPI DbgOutString(LPCTSTR psz);`. */
+AKARI_CE_IMPORT void WINAPI DbgOutString(LPCTSTR psz)
+                            AKARI_CE_NAME(DbgOutString);
+
+/* ms907769 "DbgDumpObjectRegister" (print `DbgDumpObjectRegister( );`):
+ * `void WINAPI DbgDumpObjectRegister(void);`. */
+AKARI_CE_IMPORT void WINAPI DbgDumpObjectRegister(void)
+                            AKARI_CE_NAME(DbgDumpObjectRegister);
+
+/* ms907783 "DbgSetWaitTimeout":
+ * `void WINAPI DbgSetWaitTimeout(DWORD dwTimeout);`. */
+AKARI_CE_IMPORT void WINAPI DbgSetWaitTimeout(DWORD dwTimeout)
+                            AKARI_CE_NAME(DbgSetWaitTimeout);
+
+/* ms907784 "DbgWaitForMultipleObjects":
+ * `DWORD WINAPI DbgWaitForMultipleObjects(DWORD nCount, CONST HANDLE *lpHandles, BOOL bWaitAll);`. */
+AKARI_CE_IMPORT DWORD WINAPI DbgWaitForMultipleObjects(DWORD nCount, CONST HANDLE *lpHandles, BOOL bWaitAll)
+                             AKARI_CE_NAME(DbgWaitForMultipleObjects);
+
+/* ms907785 "DbgWaitForSingleObject":
+ * `DWORD WINAPI DbgWaitForSingleObject(HANDLE h);`. */
+AKARI_CE_IMPORT DWORD WINAPI DbgWaitForSingleObject(HANDLE h)
+                             AKARI_CE_NAME(DbgWaitForSingleObject);
+
+/* --- Functions (recorded; C++ classes / reference parameters). --- */
+
+/* ms925565 "AreEqualVideoTypes": `BOOL WINAPI AreEqualVideoTypes (CMediaType* pmt1,CMediaType* pmt2);` -- CMediaType (C++ class) has no CE page. */
+/* aa451720 "FreeMediaType": `void WINAPI FreeMediaType(AM_MEDIA_TYPE& mt);` -- C++ reference parameter. */
+/* ms932275 "ReadInt": `STDAPI_(int)ReadInt(IStream* pIStream,HRESULT &hr);` -- C++ reference parameter (print `STDAPI_(int)`); returns the integer value, or zero on error. */
+/* ms926784 "ConvertToMilliseconds": `LONGLONG WINAPI ConvertToMilliseconds(const REFERENCE_TIME& RT);` -- C++ const-reference parameter. */
+/* aa451614 "DumpGraph": `void WINAPI (IfilterGraph* pGraph,DWORD dwLevel)` -- print DROPS the function name and misspells the interface (`IfilterGraph`; IFilterGraph) -- archive print artifact; body describes DumpGraph, debug output of a filter graph. */
+/* ms938830 "CritCheckIn": `BOOL WINAPI CritCheckIn(CCritSec* pcCrit);` -- CCritSec (C++ class) has no CE page. */
+/* ms938831 "CritCheckOut": `BOOL WINAPI CritCheckOut(CCritSec* pcCrit);` -- CCritSec (C++ class) has no CE page. */
+/* ms907781 "DbgLockTrace": `void WINAPI DbgLockTrace(CCritSec* pcCrit,BOOL fTrace);` -- CCritSec (C++ class) has no CE page. */
+
+/* --- Macros (usage prints only; no #define bodies are published,
+ * so all are recorded -- the WM_SIDESHOW_* M82 precedent). --- */
+
+/* aa451579 "DIBSIZE": usage `DIBSIZE(bi)` -- byte size of the specified DIB (BITMAPINFOHEADER bi). */
+/* aa451744 "HEADER": usage `HEADER(pVideoInfo)` -- pointer to the BITMAPINFOHEADER of a VIDEOINFOHEADER. */
+/* ms926776 "COLORS": usage `COLORS(pbmi)` -- pointer to the RGBQUAD palette array of a VIDEOINFOHEADER. */
+/* ms936830 "BITMASKS": usage `BITMASKS(pbmi)` -- pointer to the bitmask array of a VIDEOINFOHEADER. */
+/* ms936839 "BIT_MASKS_MATCH": usage `BIT_MASKS_MATCH(pbmi1,pbmi2)` -- TRUE if the two VIDEOINFOHEADER bitmasks match. */
+/* ms932251 "PALETTISED": usage `PALETTISED(pbmi)` -- nonzero if the image's palette is 8-bit or less. */
+/* aa452395 "TRUECOLOR": usage `TRUECOLOR (pbmi)` -- pointer to the TRUECOLORINFO (palette + bitmasks) of a VIDEOINFOHEADER. */
+/* ms932250 "PALETTE_ENTRIES": usage `PALETTE_ENTRIES(pbmi)` -- number of palette entries of a VIDEOINFOHEADER. */
+/* ms932288 "RESET_HEADER": usage `RESET_HEADER(pbmi)` -- clears the BITMAPINFOHEADER of the video image. */
+/* ms932289 "RESET_MASKS": usage `RESET_MASKS(pbmi)` -- clears the bitmask array of the video image. */
+/* ms932290 "RESET_PALETTE": usage `RESET_PALETTE(pbmi)` -- clears the palette array of the video image. */
+/* ms932308 "SIZE_EGA_PALETTE": usage `SIZE_EGA_PALETTE` -- size, in bytes, of an EGA palette. */
+/* ms932309 "SIZE_MASKS": usage `SIZE_MASKS` -- size, in bytes, of a bitmask's color palette (three colors). */
+/* ms932311 "SIZE_PALETTE": usage `SIZE_PALETTE` -- size, in bytes, of a bitmap's color palette. */
+/* ms932312 "SIZE_PREHEADER": usage `SIZE_PREHEADER` -- size of the BITMAPINFOHEADER prefix of a VIDEOINFOHEADER. */
+/* ms932313 "SIZE_VIDEOHEADER": usage `SIZE_VIDEOHEADER` -- combined size of all VIDEOINFOHEADER data members. */
+/* ms932310 "SIZE_MPEG1VIDEOINFO": usage `SIZE_MPEG1VIDEOINFO` -- size of an MPEG1VIDEOINFO, including the sequence header. */
+/* ms932231 "MPEG1_SEQUENCE_INFO": usage `MPEG1_SEQUENCE_INFO(pv)` -- bSequenceHeader member of an MPEG1VIDEOINFO. */
+/* aa451569 "DECLARE_IUNKNOWN": usage `#define DECLARE_IUNKNOWN` -- declares the three IUnknown methods for a new interface; the page prints the #define with NO body -- recorded only. */
+/* ms932236 "MSR_START": usage `#define MSR_START(int Id)` -- records the start time of a performance event; print shows the #define with parameter list -- body not printed. */
+/* ms932237 "MSR_STOP": usage `#define MSR_STOP(int Id)` -- records the stop time of a performance event; body not printed. */
+/* ms907767 "DbgBreak": usage `DbgBreak(strLiteral)` -- breakpoint macro; displays the string if executed. */
+/* ms932018 "KDbgBreak": usage `KDbgBreak(strLiteral)` -- kernel breakpoint macro (does not display the string). */
+/* ms932239 "NAME": usage `NAME(strLiteral)` -- generates a debug-only string. */
+/* ms932286 "REMIND": usage `REMIND(strLiteral)` -- generates a compile-time string (source file + line). */
+/* ms932242 "NOTE through NOTE5 Macros": usage `NOTE(pFormat);NOTEx(pFormat,[a-e]);` -- printf-style debugger output macros, NOTE through NOTE5. */
+/* aa451530 "CheckPointer": usage `CheckPointer(p,ret)` -- returns ret if p is NULL; page prints no #define body. */
+/* aa452402 "ValidateReadPtr": usage `ValidateReadPtr(const void *p,UINT cb);` -- read-pointer check (calls DbgBreak); active only when DEBUG/VFWROBUST is defined. */
+/* aa452403 "ValidateReadWritePtr": usage `ValidateReadWritePtr(p,cb)` -- read-write pointer check. */
+/* aa452404 "ValidateStringPtr": usage `ValidateStringPtr(p)` -- string pointer check. */
+/* aa452405 "ValidateStringPtrA": usage `ValidateStringPtrA(p)` -- ANSI string pointer check. */
+/* aa452406 "ValidateStringPtrW": usage `ValidateStringPtrW(p)` -- wide string pointer check. */
+/* aa452407 "ValidateWritePtr": usage `ValidateWritePtr(p,cb)` -- write pointer check. */
+
+/* --- Event notification codes (DirectShow Macros sub-book; the
+ * pages print lParam1/lParam2 semantics but NO numeric values --
+ * names recorded only). --- */
+
+/* aa451631 "EC_ACTIVATE": An audio or video renderer is losing or gaining activation. The audio or video renderer sends this event notification -- no value printed; name recorded only. */
+/* aa451633 "EC_BUFFERING_DATA": The buffering status is changing -- no value printed; name recorded only. */
+/* aa451634 "EC_CLOCK_CHANGED": The filter graph has changed from one reference clock to another -- no value printed; name recorded only. */
+/* aa451635 "EC_COMPLETE": All data has been rendered. Renderers send this event notification -- no value printed; name recorded only. */
+/* aa451670 "EC_DRM_LEVEL": This event code notifies when content protected by digital rights management (DRM) requests some form of analog content protection. This event is not supported in Windows Media DRM 7.1 -- no value printed; name recorded only. */
+/* aa451638 "EC_END_OF_SEGMENT": This macro notifies that a segment end has been reached -- no value printed; name recorded only. */
+/* aa451642 "EC_ERROR_STILLPLAYING": A playback error has occurred, but the graph is still playing -- no value printed; name recorded only. */
+/* aa451640 "EC_ERRORABORT": An error forced the termination of a requested operation -- no value printed; name recorded only. */
+/* aa451644 "EC_FULLSCREEN_LOST": The video renderer is switching out of full-screen mode -- no value printed; name recorded only. */
+/* aa451647 "EC_NEED_RESTART": The current graph must be stopped and restarted -- no value printed; name recorded only. */
+/* aa451648 "EC_NOTIFY_WINDOW": Pass the window handle around during pin connection -- no value printed; name recorded only. */
+/* aa451649 "EC_OLE_EVENT": A filter is passing a text string to the application -- no value printed; name recorded only. */
+/* aa451650 "EC_OPENING_FILE": The open file status is changing -- no value printed; name recorded only. */
+/* aa451651 "EC_PALETTE_CHANGED": The video palette has changed -- no value printed; name recorded only. */
+/* aa451653 "EC_QUALITY_CHANGE": The playback quality has changed -- no value printed; name recorded only. */
+/* aa451654 "EC_REPAINT": A repaint is required. Paused or stopped video renderers send this message when they receive a WM_PAINT message and there is no data to display -- no value printed; name recorded only. */
+/* aa451655 "EC_SEGMENT_STARTED": This macro notifies that a new segment has been started -- no value printed; name recorded only. */
+/* aa451656 "EC_SHUTTING_DOWN": The shutdown of the filter graph is starting -- no value printed; name recorded only. */
+/* aa451657 "EC_STARVATION": A filter has detected starvation -- no value printed; name recorded only. */
+/* aa451659 "EC_STREAM_CONTROL_STARTED": A previous call to the IAMStreamControl::StartAt method has taken effect -- no value printed; name recorded only. */
+/* aa451660 "EC_STREAM_CONTROL_STOPPED": A previous call to the IAMStreamControl::StopAt method has taken effect -- no value printed; name recorded only. */
+/* aa451661 "EC_STREAM_ERROR_STILLPLAYING": The stream is still playing, but should not be playing -- no value printed; name recorded only. */
+/* aa451662 "EC_STREAM_ERROR_STOPPED": The stream has stopped, but should not have stopped -- no value printed; name recorded only. */
+/* aa451663 "EC_TIME": The requested reference time occurred -- no value printed; name recorded only. */
+/* aa451664 "EC_USERABORT": A user has forced the termination of a requested operation -- no value printed; name recorded only. */
+/* aa451668 "EC_VIDEO_SIZE_CHANGED": The size of the native video has changed -- no value printed; name recorded only. */
+/* aa451667 "EC_VIDEO_SIZE_AR_CHANGED": The size or aspect ratio of the native video has changed -- no value printed; name recorded only. */
+/* aa451669 "EC_WINDOW_DESTROYED": The video renderer's filter is being removed or destroyed. Video renderers send this event notification so that resources that depend on window focus can be passed to other filters -- no value printed; name recorded only. */
+
+/* --- Windows Media event notification codes (graphics-book
+ * harvest; these pages print NO Requirements rows at all -- no
+ * header, no library; lParam semantics only, no values). --- */
+
+/* aa451632 "EC_BANDWIDTHCHANGE": This event code is sent when the bandwidth level of the streaming data has changed -- no value printed; no Requirements row; name recorded only. */
+/* aa451636 "EC_CONTENTPROPERTY_CHANGED": This event code is sent when a streaming media filter receives a change in the stream's description information -- no value printed; no Requirements row; name recorded only. */
+/* aa451637 "EC_DRMSTATUS": This event code is sent when various points during the digital rights management (DRM) process are reached -- no value printed; no Requirements row; name recorded only. */
+/* aa451639 "EC_EOS_SOON": This event code indicates that the source filter is about to deliver an end-of-stream (EOS) message downstream -- no value printed; no Requirements row; name recorded only. */
+/* aa451641 "EC_ERRORABORTEX": This event code indicates that the operation aborted because of an error -- no value printed; no Requirements row; name recorded only. */
+/* aa451643 "EC_FILE_CLOSED": This event code is sent when the file is involuntarily closed -- no value printed; no Requirements row; name recorded only. */
+/* aa451645 "EC_LOADSTATUS": This event code is sent when various points are reached while a network file is being loaded -- no value printed; no Requirements row; name recorded only. */
+/* aa451646 "EC_MARKER_HIT": This event code indicates that a marker has just been passed -- no value printed; no Requirements row; name recorded only. */
+/* aa451652 "EC_PLEASE_REOPEN": This event code indicates that the graph should be re-rendered -- no value printed; no Requirements row; name recorded only. */
+/* aa451658 "EC_STATUS": This event code allows arbitrary status messages to be passed to the application -- no value printed; no Requirements row; name recorded only. */
+/* aa451665 "EC_VIDEOFRAMEREADY": This event code is sent to notify the application that the first video frame is about to be drawn -- no value printed; no Requirements row; name recorded only. */
 #ifdef __cplusplus
 }
 #endif

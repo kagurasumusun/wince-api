@@ -133,7 +133,6 @@
 #include <Windbase.h>
 #include <Pwindbas.h>
 #include <Dshow.h>
-#include <Dshow.h>
 #include <dvdmedia.h>
 #include <Dmo.h>
 #include <Dmoreg.h>
@@ -7251,6 +7250,42 @@ static int m87_shaped_usage(void)
            + (int)sizeof(UNICODE_PATH);
 }
 
+static int m88_shaped_usage(void)
+{
+    VIDEOINFOHEADER  vih;
+    BITMAPINFOHEADER bmih;
+    AM_MEDIA_TYPE     amt;
+    GUID              guid = {0};
+    RGBQUAD           rgb;
+    BSTR              bstr = NULL;
+    IStream          *pstm = NULL;
+    IUnknown         *punk = NULL;
+    TCHAR             tc[4];
+    WCHAR             wbuf[16];
+    LONG              l;
+    WORD              w;
+    DWORD             dw;
+    int               i;
+
+    vih.bmiHeader.biSize = 0; bmih.biSize = 0;
+    amt.majortype = guid; rgb.rgbBlue = 0;
+    l = GetBitmapFormatSize(&bmih);
+    w = GetBitCount(&guid);
+    dw = GetBitmapSize(&bmih);
+    guid = GetBitmapSubtype(&bmih);
+    guid = GetTrueColorType(&bmih);
+    wbuf[0] = 0; i = WstrToInt(wbuf);
+    tc[0] = 0; wbuf[0] = 0;
+    l = ContainsPalette(&vih); dw = (DWORD)l;
+    i = (int)WaitDispatchingMessages(NULL, 0u, NULL, 0u);
+    i = (int)IsEqualObject(punk, punk);
+    dw = (DWORD)llMulDiv(1, 2, 3, 4);
+    i = (int)Int64x32Div32(1, 2, 3, 4);
+    return (int)bmih.biSize + (int)w + (int)dw + i + (bstr != NULL)
+           + (pstm != NULL) + (punk != NULL) + tc[0] + wbuf[0]
+           + (int)rgb.rgbBlue + (int)sizeof(amt);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7412,6 +7447,8 @@ int host_tu_entry(void)
     if (m85_alias_usage() != 0)
         return 1;
     if (m87_shaped_usage() != 0)
+        return 1;
+    if (m88_shaped_usage() != 0)
         return 1;
     return 0;
 }

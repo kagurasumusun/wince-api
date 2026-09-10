@@ -6285,3 +6285,56 @@ grouping by page-id order).
 - Metrics note: the graphics rows carry empty sig fields, so the
   fn-rows measure in tools/surface-metrics.py does not see them;
   DVD method records are counted by the symbol measure only.
+
+## M88 -- DirectShow Base Classes reference (functions/macros/EC codes)
+
+Closes the unimplemented remainder of the M70b-era harvests
+(dshow-func.manifest 68 / dshow-macro.manifest 72 rows) plus the
+Windows Media Event Notification Codes group (11, graphics-book
+harvest).  All in include/Dshow.h (documented home: aa451220 "All
+DirectShow applications use the Dshow.h header file"; the pages'
+Requirements blocks print the "Setting Up the Build Environment"
+pointer, OS "Windows CE 2.12 and later; 2.12 requires DXPAK 1.0+"
+and an EMPTY Header row).  No Link Library rows -> no def changes.
+
+- 38 functions DECLARED (AKARI_CE_NAME now 39 in Dshow.h w/
+  AMGetErrorText): bitmap helpers (GetBitCount WORD,
+  ContainsPalette BOOL, GetBitmapSize DWORD, GetBitmapFormatSize
+  LONG, GetBitmapSubtype/GetTrueColorType GUID -- top-level const
+  on return dropped, BSTR pair WriteBSTR/FreeBSTR STDAPI prints),
+  media-type group (CopyMediaType, DeleteMediaType, CreateMediaType
+  AM_MEDIA_TYPE* WINAPI, CreateAudioMediaType -- + Mmsystem.h
+  include for WAVEFORMATEX, ConvertVideoInfoToVideoInfo2),
+  llMulDiv/Int64x32Div32 (LONGLONG), atoi (DirectShow decimal-only
+  variant, `const TCHAR*`), WstrToInt/IntToWstr, AMGetWideString,
+  AMovieDllRegisterServer/UnregisterServer, LoadOLEAut32 (HINSTANCE),
+  EqualPins/IsEqualObject/GetInterface (page title "GetInterface
+  (DirectShow)"), CreatePosPassThru (IPin, M70b forward),
+  WaitDispatchingMessages (C++ default args in print; declared in C
+  form), WriteInt, Dbg* debug family (7).
+- 8 functions RECORDED: AreEqualVideoTypes (CMediaType unpublished),
+  FreeMediaType (`AM_MEDIA_TYPE&` C++ ref), ReadInt (`HRESULT &`
+  C++ ref, `STDAPI_(int)` print), ConvertToMilliseconds
+  (`const REFERENCE_TIME&`), DumpGraph (print DROPS the function
+  name and misspells `IfilterGraph`), CritCheckIn/CritCheckOut/
+  DbgLockTrace (CCritSec unpublished).
+- 33 macros RECORDED (usage-only prints, no #define bodies; the
+  WM_SIDESHOW_* precedent): DIBSIZE, HEADER, COLORS, BITMASKS,
+  BIT_MASKS_MATCH, PALETTISED, TRUECOLOR, PALETTE_ENTRIES, RESET_
+  {HEADER,MASKS,PALETTE}, SIZE_{EGA_PALETTE,MASKS,PALETTE,
+  PREHEADER,VIDEOHEADER,MPEG1VIDEOINFO}, MPEG1_SEQUENCE_INFO,
+  DECLARE_IUNKNOWN, MSR_START/MSR_STOP, DbgBreak, KDbgBreak, NAME,
+  REMIND, NOTE-NOTE5, CheckPointer, Validate{Read,ReadWrite,Write}
+  Ptr, ValidateStringPtr{,A,W}.
+- 28 + 11 EC_ event codes RECORDED name-only (no values printed):
+  28 DirectShow codes (EC_ACTIVATE..EC_WINDOW_DESTROYED; lParam
+  semantics recorded) + 11 Windows Media codes (EC_BANDWIDTHCHANGE,
+  EC_CONTENTPROPERTY_CHANGED, EC_DRMSTATUS, EC_EOS_SOON,
+  EC_ERRORABORTEX, EC_FILE_CLOSED, EC_LOADSTATUS, EC_MARKER_HIT,
+  EC_PLEASE_REOPEN, EC_STATUS, EC_VIDEOFRAMEREADY -- these pages
+  print NO Requirements rows at all).
+- TU m88: bitmap/media-type calls (GetBitmapFormatSize, GetBitCount,
+  GetBitmapSize, GetBitmapSubtype, GetTrueColorType, WstrToInt,
+  ContainsPalette, WaitDispatchingMessages, IsEqualObject, llMulDiv,
+  Int64x32Div32) + struct field touches.
+- Gates: check / crosscheck / e2e GREEN x6.
