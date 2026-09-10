@@ -1650,4 +1650,163 @@ typedef struct tagNMHDR {
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- BST_ family (3 names; R1) ---- */
+#define BST_UNCHECKED                                0x0000
+#define BST_CHECKED                                  0x0001
+#define BST_INDETERMINATE                            0x0002
+
+/* ---- CBS_ family (3 names; R1) ---- */
+#define CBS_SIMPLE                                   0x0001
+#define CBS_OWNERDRAWFIXED                           0x0010
+#define CBS_OWNERDRAWVARIABLE                        0x0020
+
+/* ---- DCX_ family (10 names; R1) ---- */
+#define DCX_WINDOW                                   0x0001
+#define DCX_CACHE                                    0x0002
+#define DCX_NORESETATTRS                             0x0004
+#define DCX_CLIPCHILDREN                             0x0008
+#define DCX_CLIPSIBLINGS                             0x0010
+#define DCX_PARENTCLIP                               0x0020
+#define DCX_EXCLUDERGN                               0x0040
+#define DCX_INTERSECTRGN                             0x0080
+#define DCX_INTERSECTUPDATE                          0x0200
+#define DCX_VALIDATE                                 0x200000
+
+/* ---- DWL_ family (1 names; R1) ---- */
+#define DWL_MSGRESULT                                0x0000
+
+/* ---- GCL_ family (10 names; R1) ---- */
+#define GCL_HICONSM                                  (-34)
+#define GCL_STYLE                                    (-26)
+#define GCL_WNDPROC                                  (-24)
+#define GCL_CBCLSEXTRA                               (-20)
+#define GCL_CBWNDEXTRA                               (-18)
+#define GCL_HMODULE                                  (-16)
+#define GCL_HICON                                    (-14)
+#define GCL_HCURSOR                                  (-12)
+#define GCL_HBRBACKGROUND                            (-10)
+#define GCL_MENUNAME                                 (-8)
+
+/* ---- GCW_ family (1 names; R1) ---- */
+#define GCW_ATOM                                     (-32)
+
+/* ---- GWL_ family (1 names; R1) ---- */
+#define GWL_ID                                       (-12)
+
+/* ---- KEYEVENTF_ family (1 names; R1) ---- */
+#define KEYEVENTF_SILENT                             0x0004
+
+/* ---- LBS_ family (1 names; R1) ---- */
+#define LBS_NODATA                                   0x2000
+
+/* ---- MFS_ family (5 names; R1) ---- */
+#define MFS_ENABLED                                  0x0000
+#define MFS_UNCHECKED                                0x0000
+#define MFS_UNHILITE                                 0x0000
+#define MFS_CHECKED                                  0x0008
+#define MFS_HILITE                                   0x0080
+
+/* ---- MFT_ family (6 names; R1) ---- */
+#define MFT_STRING                                   0x0000
+#define MFT_MENUBARBREAK                             0x0020
+#define MFT_MENUBREAK                                0x0040
+#define MFT_OWNERDRAW                                0x0100
+#define MFT_RADIOCHECK                               0x0200
+#define MFT_SEPARATOR                                0x0800
+
+/* ---- MIIM_ family (6 names; R1) ---- */
+#define MIIM_STATE                                   0x0001
+#define MIIM_ID                                      0x0002
+#define MIIM_SUBMENU                                 0x0004
+#define MIIM_CHECKMARKS                              0x0008
+#define MIIM_TYPE                                    0x0010
+#define MIIM_DATA                                    0x0020
+
+/* ---- MOUSEEVENTF_ family (9 names; R1) ---- */
+#define MOUSEEVENTF_MOVE                             0x0001
+#define MOUSEEVENTF_LEFTDOWN                         0x0002
+#define MOUSEEVENTF_LEFTUP                           0x0004
+#define MOUSEEVENTF_RIGHTDOWN                        0x0008
+#define MOUSEEVENTF_RIGHTUP                          0x0010
+#define MOUSEEVENTF_MIDDLEDOWN                       0x0020
+#define MOUSEEVENTF_MIDDLEUP                         0x0040
+#define MOUSEEVENTF_WHEEL                            0x0800
+#define MOUSEEVENTF_ABSOLUTE                         0x8000
+
+/* ---- ODT_ family (4 names; R1) ---- */
+#define ODT_MENU                                     0x0001
+#define ODT_LISTBOX                                  0x0002
+#define ODT_COMBOBOX                                 0x0003
+#define ODT_BUTTON                                   0x0004
+
+/* ---- SBS_ family (4 names; R1) ---- */
+#define SBS_BOTTOMALIGN                              0x0004
+#define SBS_RIGHTALIGN                               0x0004
+#define SBS_SIZEBOXBOTTOMRIGHTALIGN                  0x0004
+#define SBS_SIZEGRIP                                 0x0010
+
+/* ---- SPI_ family (28 names; R1) ---- */
+#define SPI_GETMOUSE                                 0x0003
+#define SPI_SETMOUSE                                 0x0004
+#define SPI_GETSCREENSAVETIMEOUT                     0x000E
+#define SPI_SETSCREENSAVETIMEOUT                     0x000F
+#define SPI_SETWORKAREA                              0x002F
+#define SPI_GETWORKAREA                              0x0030
+#define SPI_GETTOGGLEKEYS                            0x0034
+#define SPI_SETTOGGLEKEYS                            0x0035
+#define SPI_GETMOUSEKEYS                             0x0036
+#define SPI_SETMOUSEKEYS                             0x0037
+#define SPI_GETSHOWSOUNDS                            0x0038
+#define SPI_SETSHOWSOUNDS                            0x0039
+#define SPI_GETSTICKYKEYS                            0x003A
+#define SPI_SETSTICKYKEYS                            0x003B
+#define SPI_GETACCESSTIMEOUT                         0x003C
+#define SPI_SETACCESSTIMEOUT                         0x003D
+#define SPI_GETSOUNDSENTRY                           0x0040
+#define SPI_SETSOUNDSENTRY                           0x0041
+#define SPI_GETHIGHCONTRAST                          0x0042
+#define SPI_SETHIGHCONTRAST                          0x0043
+#define SPI_GETFONTSMOOTHING                         0x004A
+#define SPI_SETFONTSMOOTHING                         0x004B
+#define SPI_GETWHEELSCROLLLINES                      0x0068
+#define SPI_SETWHEELSCROLLLINES                      0x0069
+#define SPI_GETPLATFORMTYPE                          0x0101
+#define SPI_GETOEMINFO                               0x0102
+#define SPI_GETFONTSMOOTHINGCONTRAST                 0x200C
+#define SPI_SETFONTSMOOTHINGCONTRAST                 0x200D
+
+/* ---- SPIF_ family (2 names; R1) ---- */
+#define SPIF_UPDATEINIFILE                           0x0001
+#define SPIF_SENDCHANGE                              0x0002
+
+/* ---- SWP_ family (13 names; R1) ---- */
+#define SWP_NOSIZE                                   0x0001
+#define SWP_NOMOVE                                   0x0002
+#define SWP_NOZORDER                                 0x0004
+#define SWP_NOREDRAW                                 0x0008
+#define SWP_NOACTIVATE                               0x0010
+#define SWP_DRAWFRAME                                0x0020
+#define SWP_FRAMECHANGED                             0x0020
+#define SWP_SHOWWINDOW                               0x0040
+#define SWP_HIDEWINDOW                               0x0080
+#define SWP_NOCOPYBITS                               0x0100
+#define SWP_NOOWNERZORDER                            0x0200
+#define SWP_NOREPOSITION                             0x0200
+#define SWP_NOSENDCHANGING                           0x0400
+
+/* ---- WHEEL_ family (1 names; R1) ---- */
+#define WHEEL_DELTA                                  0x0078
+
 #endif /* AKARI_WINUSER_H */

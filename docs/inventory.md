@@ -6806,3 +6806,16 @@ guard close, grouped by family, every value provenance-tagged R1.
   document them as SHSipInfo parameters).  Unresolved 6 incl. the
   SHNP_*/SIP_* names already declared as enum members.  Gates GREEN
   x6.
+- include/Winuser.h: 109 defines, 19 families (BST 3, CBS 3, DCX 10,
+  DWL 1, GCL 10, GCW 1, GWL 1, KEYEVENTF_SILENT alone, LBS 1, MFS 5,
+  MFT 6, MIIM 6, MOUSEEVENTF 8, ODT 4, SBS 4, SPI 28 SystemParameters
+  action codes, SPIF 2, SWP 13, WHEEL 1).  NEW GUARD (applies to all
+  later M96 families): names the CE pages mark "Not supported" in
+  flag-table rows are never adopted -- build/not-supported-names.txt
+  (108 names, strict name-adjacency scan of the corpus; prose
+  false-positives like "INTERNET_FLAG_SECURE is not supported [for
+  FTP sessions]" are deliberately NOT matched).  Excluded thereby:
+  MOUSEEVENTF_XDOWN/XUP/VIRTUALDESK, KEYEVENTF_UNICODE/SCANCODE (the
+  aa453247 parameters prose describes KEYEVENTF_UNICODE but the flags
+  table marks it Not supported -- the table wins), HTTP_QUERY_FLAG_
+  COALESCE, INTERNET_FLAG_MAKE_PERSISTENT.  Gates GREEN x6.
