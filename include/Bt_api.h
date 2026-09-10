@@ -76,6 +76,11 @@ typedef struct _portemu_port_params {
     GUID     uuidService;
     unsigned int uiportflags;
 } PORTEMUPortParams;
+/* CROSS-GENERATION (M86 sweep): the CE 4.0 twin ms920295 prints the
+ * device member as `BD_ADDR device` (the CE 5.0 print above carries
+ * BT_ADDR -- the same ULONGLONG address typedef family, different
+ * spelling); the CE 6.0 twin ee495940 matches the CE 5.0 BT_ADDR
+ * form. */
 
 /* ms887862 "BthInquiryResult" is a Ws2bth.h structure; the tag
  * __bth_inquiry_result is forward-declared here because

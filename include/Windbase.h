@@ -253,6 +253,12 @@ typedef struct _CEDBASEINFOEX CEDBASEINFOEX;
  *   } SORTORDERSPECEX;
  */
 typedef struct _SORTORDERSPECEX SORTORDERSPECEX;
+/* CROSS-GENERATION (M86 sweep): CE 5.0 twin ms892010 prints the tag
+ * `CESORTORDERSPECEX` with `WORD wReserved;` between wKeyFlags and
+ * rgPropID and the archive typo `DWROD rgdwFlags[...]` (DWORD); the
+ * CE 6.0 twin ee490012 corroborates that shape (wReserved present,
+ * DWORD rgdwFlags, tag CESORTORDERSPECEX).  The ms892001 print above
+ * lacks wReserved -- intra-CE 5.0 twin conflict, recorded. */
 
 /* aa517207 "CEOIDINFO (Windows CE 5.0)" -- CE 1.01+; verbatim:
  *   typedef struct _CEOIDINFO { WORD wObjType; WORD wPad;
@@ -273,6 +279,10 @@ typedef struct _CEOIDINFO CEOIDINFO;
  * body unpublished. */
 typedef struct _CEOIDINFOEX CEOIDINFOEX;
 
+/* CROSS-GENERATION (M86 sweep): the CE 6.0 twin ee490409 inserts
+ * `WORD wReserved;` after wVersion and prints no pointer typedef;
+ * the CE 4.0 twin ms923774 matches the CE 5.0 form above.  Recorded
+ * (CE generations kept distinct). */
 /* aa516972 "BY_HANDLE_DB_INFORMATION (CEDB) (Windows CE 5.0)" --
  * CE .NET 4.0+; verbatim:
  *   typedef struct _BY_HANDLE_DB_INFORMATION { WORD wVersion;

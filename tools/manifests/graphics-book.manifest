@@ -1,0 +1,871 @@
+aa451154	Video Ports/About DirectDraw Video-Port Extensions
+aa451155	Display Modes/About Display Modes
+aa451156	Taking Advantage of DMA Support/About DMA Device Support
+aa451157	Transform Filters/About Effect Filters
+aa451159	DVD-Video API Application Development/About the DVD-Video API Documentation
+aa451160	Write a Transform Filter in C/C++/Access Additional Interfaces
+aa451162	Working with DirectDraw Surfaces/Accessing Surface Memory Directly
+aa451163	Graph Building with Intelligent Connect/Adding Filters to the Graph
+aa451164	Using the DVD-Video API/Adding More Player Capabilities
+aa451165	DirectDraw Application Development/Advanced DirectDraw Information
+aa451166	Using the DVD-Video API/Advanced DVD Player Application Topics
+aa451168	Elements of the Filter Graph/Allocators
+aa451169	Graphics/AlphaBlend API
+aa451172	Advanced DirectDraw Information/Alpha Blitting
+aa451176	Video Renderers/Alternative Video Renderers
+aa451181	Understanding the DVD-Video API/Architectural Overview of the DVD-Video API
+aa451182	DirectDraw Middleware Architecture/Architectural Overview for DirectDraw
+aa451183	Examining the DVDSample Sample Application/Architectural Overview of DVDSample
+aa451184	Using the CTransformFilter and CTransInPlaceFilter Transform Base Classes/A Sample Transform Filter Declaration
+aa451185	DirectShow Application Development/Audio and Video Capture Support
+aa451186	Media/Audio Codecs and Renderers
+aa451187	Audio/Audio Compression Manager
+aa451190	Graphics and Multimedia Technologies/Audio
+aa451191	The DVD Standard/Audio, Video, and Subpicture Data
+aa451192	Video Ports/Auto-Flipping
+aa451194	File Formats/AVI 2.0 File Format Extensions
+aa451195	AVI RIFF File Reference/AVI Main Header
+aa451196	File Formats/AVI RIFF File Reference
+aa451197	AVI RIFF File Reference/AVI RIFF Form
+aa451198	AVI RIFF File Reference/AVI Stream Headers
+aa451200	DirectShow C++ Class Library/Base Classes
+aa451201	Base Classes/Base Classes that Implement Interfaces
+aa451202	Working with DirectDraw Surfaces/Basic Concepts of Surfaces
+aa451208	Blitting to Surfaces/Blit Timing
+aa451209	Exploring Graphics Concepts/Blitting
+aa451210	Blitting to Surfaces/Blitting Basics
+aa451212	Blitting to Surfaces/Blitting to Multiple Windows
+aa451213	Working with DirectDraw Surfaces/Blitting to Surfaces
+aa451214	Blitting to Surfaces/Blitting with Blt
+aa451215	Blitting to Surfaces/Blitting with BltFast
+aa451216	Transparent Blitting/Blitting with Color Keys
+aa451218	Overlay Surfaces/Boundary and Size Alignment
+aa451219	Exploring Graphics Concepts/Bounding Rectangles
+aa451223	Adding More Player Capabilities/Callbacks
+aa451224	Examining the DVDSample Sample Application/Callbacks in DVDSample
+aa451226	Windows Media Player Control Application Development/Capturing Keyboard and Mouse Events
+aa451227	Base Classes/CBaseObject and CUnknown Classes
+aa451230	Adding More Player Capabilities/Changing Discs
+aa451233	Adding More Player Capabilities/Checking Region Codes
+aa451237	Working with DirectDraw Clippers/Clip Lists
+aa451239	Base Classes that Implement Interfaces/Clock Base Classes
+aa451240	Elements of the Filter Graph/Clocks
+aa451242	Working with DirectDraw Surfaces/Color Controls
+aa451243	Blitting to Surfaces/Color Fills
+aa451244	Transparent Blitting/Color Key Format
+aa451245	Basic Concepts of Surfaces/Color Keying
+aa451247	Windows Media Player Control Application Development/Compatibility Modes
+aa451250	Working with DirectDraw Surfaces/COM Reference Count Semantics for Surfaces
+aa451251	Utility Classes/COM Utility Classes
+aa451252	Connecting Transform Filters/Connecting Filter Graphs: An Example
+aa451253	Transform Filters/Connecting Transform Filters
+aa451254	Windows Media Player Control Application Development/Codecs and Formats
+aa451255	Advanced DVD Player Application Topics/Content Protection
+aa451256	Video Renderers/Control Distributors
+aa451258	Advanced DirectDraw Information/Converting Between YUV and RGB
+aa451259	Working with DirectDraw Surfaces/Converting Color and Format
+aa451260	Getting Started with DirectDraw/Cooperative Levels
+aa451265	Write a Transform Filter in C/C++/Create Registry Information
+aa451266	DirectShow and COM/Creating a DLL in DirectShow
+aa451267	Creating Surfaces/Creating an Off-Screen Surface
+aa451268	Using DirectDraw Palettes in Windowed Mode/Creating a Palette in Windowed Mode
+aa451269	Using the DVD-Video API/Creating a Simple DVD Player
+aa451270	Transform Filters/Creating a Transform Filter
+aa451271	Creating Surfaces/Creating Client Memory Surfaces
+aa451272	Creating Surfaces/Creating Complex Surfaces and Flipping Chains
+aa451276	Overlay Surfaces/Creating Overlay Surfaces
+aa451277	Working with DirectDraw Surfaces/Creating Surfaces
+aa451285	Creating Surfaces/Creating the Primary Surface
+aa451288	Creating Surfaces/Creating Wide Surfaces
+aa451290	Windows Media Player Control Application Development/Customizing the Windows Media Player Control User Interface
+aa451291	Using DirectX Media Objects/Data Flow
+aa451292	DirectShow Architecture for Filter Developers/Data Flow in the Filter Graph
+aa451293	The DVD Standard/Data Organization and Navigation
+aa451295	Utility Classes/Debugging Classes
+aa451297	DMOs and Media Types/Decoders and Compressors
+aa451298	Write a Transform Filter in C/C++/Define and Instantiate Your Filter Class
+aa451302	Creating a Transform Filter/Determine if the Filter Must Copy Media Samples
+aa451303	Creating a Transform Filter/Determine Which Base Classes to Use
+aa451305	Display Modes/Determining Supported Display Modes
+aa451306	Advanced DirectDraw Information/Determining the Capabilities of the Display Hardware
+aa451309	Exploring Graphics Concepts/Device-Independent Bitmaps
+aa451316	Digital Rights Management/DRM OS Design Development
+aa451317	Digital Rights Management/DRM Security
+aa451330	Advanced DirectDraw Information/DirectDraw Applications and Window Styles
+aa451331	Getting Started with DirectDraw/DirectDraw Middleware Architecture
+aa451332	DirectDraw/DirectDraw Migration
+aa451334	DirectDraw Middleware Architecture/DirectDraw Object Types
+aa451335	DirectDraw/DirectDraw OS Design Development
+aa451336	DirectDraw/DirectDraw Registry Settings
+aa451338	DirectDraw/DirectDraw Samples
+aa451339	DirectDraw/DirectDraw Security
+aa451342	Writing DirectShow Filters/DirectShow and COM
+aa451343	DirectShow Application Development/DirectShow Architecture
+aa451344	Writing DirectShow Filters/DirectShow Architecture for Filter Developers
+aa451345	DirectShow Application Development/DirectShow C++ Class Library
+aa451348	File Formats/DirectShow Graph File Format
+aa451349	DirectShow/DirectShow Migration
+aa451350	DirectShow/DirectShow OS Design Development
+aa451351	DirectShow/DirectShow Registry Settings
+aa451352	Responding to Events/DirectShow Sample Code
+aa451353	DirectShow/DirectShow Security
+aa451354	DirectShow Architecture/DirectShow System Overview
+aa451355	DirectShow/DirectX Media Objects
+aa451356	Using DirectX Media Objects/Discardable and Optional Streams
+aa451357	Advanced DirectDraw Information/Displaying a Window in Full-Screen Mode
+aa451358	Getting Started with DirectDraw/Display Modes
+aa451360	DirectX Media Objects/DMOs and Media Types
+aa451361	Using DMOs in a DirectShow Application/DMOs in DirectShow
+aa451362	The DVD Standard/Domains
+aa451363	Exploring Graphics Concepts/Drawing Surfaces
+aa451385	Connecting Transform Filters/The Connection Process: A Summary
+aa451386	Examining the DVDSample Sample Application/The DVDSample Control Panel
+aa451387	Examining the DVDSample Sample Application/The DVDSample Startup Sequence
+aa451388	Understanding the DVD-Video API/The DVD Standard
+aa451389	Elements of the Filter Graph/The Filter Graph
+aa451390	DirectShow Architecture/Elements of the Filter Graph
+aa451391	Setting the Video Window/The Video Window
+aa451392	Multiple Screens Application Development/The Virtual Screen
+aa451393	Data Flow in the Filter Graph/Thread Usage
+aa451394	DirectShow Architecture for Filter Developers/Time and Clocks in DirectShow
+aa451395	Advanced DVD Player Application Topics/Time Calculation
+aa451399	Writing DirectShow Filters/Transform Filters
+aa451400	Blitting to Surfaces/Transparent Blitting
+aa451401	Base Classes that Implement Interfaces/Transport Base Classes
+aa451405	Advanced DirectDraw Information/Triple Buffering
+aa451406	Using DirectDraw Palettes in Windowed Mode/Types of Palette Entries in Windowed Mode
+aa451407	Taking Advantage of DMA Support/Typical Scenarios for DMA
+aa451409	DVD-Video API Application Development/Understanding the DVD-Video API
+aa451412	Working with DirectDraw Surfaces/Updating Surface Characteristics
+aa451413	Adding More Player Capabilities/User Navigation
+aa451414	The DVD Standard/User Operation Controls
+aa451415	Working with DirectDraw Clippers/Using a Clipper with Multiple Windows
+aa451416	Working with DirectDraw Clippers/Using a Clipper with the System Cursor
+aa451417	Working with Graphics Devices/Using Bitmaps
+aa451418	Color Controls/Using Color Controls
+aa451419	Working with Graphics Devices/Using Colors
+aa451420	Multiple Screens Application Development/Using Colors on Multiple Displays
+aa451422	Implementing IUnknown in DirectShow/Using CUnknown
+aa451425	Advanced DirectDraw Information/Using DirectDraw Palettes in Windowed Mode
+aa451426	DirectX Media Objects/Using DirectX Media Objects
+aa451427	DirectX Media Objects/Using DMOs in a DirectShow Application
+aa451428	Responding to Events/Using Event Notification
+aa451431	Multiple Screens Application Development/Using Multiple Screen Applications on Different Systems
+aa451432	Multiple Screens Application Development/Using Older Programs on Multiple Screen Systems
+aa451433	Windows Media Player Control Application Development/Using Playlists
+aa451437	Transform Filters/Using the CTransformFilter and CTransInPlaceFilter Transform Base Classes
+aa451439	Using DMOs in a DirectShow Application/Using the DMO Wrapper Filter
+aa451440	DVD-Video API Application Development/Using the DVD-Video API
+aa451441	Setting the Video Window/Using the IVideoWindow Interface
+aa451442	Full-Screen Video Renderer/Using the IVideoWindow PID to Implement Full-Screen Support
+aa451450	DirectShow C++ Class Library/Utility Classes
+aa451451	Graphics/V1 Font Compatibility
+aa451457	Video Ports/Vertical Blanking Interval Data
+aa451458	Media/Video Codecs and Renderers
+aa451459	Video Ports/Video Frames and Fields
+aa451460	Advanced DirectDraw Information/Video Ports
+aa451461	Video Ports/Video-Port Technology Overview
+aa451462	Writing DirectShow Filters/Video Renderers
+aa451527	Windows Media Player Properties/ChannelDescription
+aa451528	Windows Media Player Properties/ChannelName
+aa451529	Windows Media Player Properties/ChannelURL
+aa451531	Windows Media Player Events/Click
+aa451532	Windows Media Player Properties/ClickToPlay
+aa451571	Windows Media Player Properties/DefaultFrame
+aa451587	Windows Media Player Events/Disconnect
+aa451588	Windows Media Player Properties/DisplayBackColor
+aa451589	Windows Media Player Properties/DisplayForeColor
+aa451590	Windows Media Player Properties/DisplaySize
+aa451607	DirectShow/DMO Reference
+aa451613	Supported DirectShow Filters/DMO Wrapper Filter
+aa451615	Windows Media Player Properties/Duration (Windows Media Player)
+aa451616	ASX Elements Reference/DURATION (ASX Element)
+aa451617	DVD-Video API Structures/DVD_AUDIO_MU_ATTR
+aa451618	DVD-Video API Structures/DVD_AUDIO_STREAM_ATTR
+aa451619	DVD-Video API Structures/DVD_CELL_PIECE
+aa451620	DVD-Video API Structures/DVD_CELL_PLAYBACK
+aa451621	DVD-Video API Structures/DVD_ISRC
+aa451622	DVD-Video API Structures/DVD_NAV_CMD
+aa451623	DVD-Video API Structures/DVD_POS_CODE
+aa451624	DVD-Video API Structures/DVD_PROVIDER_ID
+aa451625	DVD-Video API Structures/DVD_RECT
+aa451626	DVD-Video API Structures/DVD_SUBPICTURE_STREAM_ATTR
+aa451627	DVD-Video API Structures/DVD_TEXT_ITEM
+aa451628	DVD-Video API Structures/DVD_TEXT_LANGUAGE_UNIT
+aa451629	DVD-Video API Structures/DVD_TITLE_SET_INFO
+aa451630	DVD-Video API Structures/DVDUserGOPData
+aa451632	Windows Media Event Notification Codes/EC_BANDWIDTHCHANGE
+aa451636	Windows Media Event Notification Codes/EC_CONTENTPROPERTY_CHANGED
+aa451637	Windows Media Event Notification Codes/EC_DRMSTATUS
+aa451639	Windows Media Event Notification Codes/EC_EOS_SOON
+aa451641	Windows Media Event Notification Codes/EC_ERRORABORTEX
+aa451643	Windows Media Event Notification Codes/EC_FILE_CLOSED
+aa451645	Windows Media Event Notification Codes/EC_LOADSTATUS
+aa451646	Windows Media Event Notification Codes/EC_MARKER_HIT
+aa451652	Windows Media Event Notification Codes/EC_PLEASE_REOPEN
+aa451658	Windows Media Event Notification Codes/EC_STATUS
+aa451665	Windows Media Event Notification Codes/EC_VIDEOFRAMEREADY
+aa451671	DVD-Video API Enumerated Types/EDDVDPlaybackState
+aa451672	DVD-Video API Enumerated Types/EDVDDomainType
+aa451673	DVD-Video API Enumerated Types/EDVDNavException
+aa451674	DVD-Video API Enumerated Types/EDVDSParamEvent
+aa451675	Windows Media Player Properties/Enabled
+aa451676	Windows Media Player Properties/EnablePositionControls
+aa451677	Windows Media Player Properties/EnableTracker
+aa451678	DVD-Video API Enumerated Types/ENavCmdArea
+aa451683	ASX Elements Reference/ENDMARKER
+aa451684	Windows Media Player Events/EndOfStream
+aa451685	ASX Elements Reference/ENTRY
+aa451686	Windows Media Player Properties/EntryCount
+aa451687	ASX Elements Reference/ENTRYREF
+aa451695	DVD-Video API Enumerated Types/EPGCLinkType
+aa451696	DVD-Video API Enumerated Types/EPGCPlaybackMode
+aa451698	Windows Media Player Events/Error
+aa451700	Windows Media Player Properties/ErrorCode
+aa451702	Windows Media Player Properties/ErrorCorrection
+aa451703	Windows Media Player Properties/ErrorDescription
+aa451705	ASX Elements Reference/EVENT
+aa451707	Windows Media Player Methods/FastForward
+aa451708	Windows Media Player Methods/FastReverse
+aa451709	Windows Media Player Properties/FileName
+aa451710	Supported DirectShow Filters/File Source (Async) Filter
+aa451711	Supported DirectShow Filters/File Source (URL) Filter
+aa451712	Supported DirectShow Filters/Filter Categories
+aa451721	Windows Media Player Properties/FullScreenMode
+aa451728	Windows Media Player Methods/GetCodecDescription
+aa451729	Windows Media Player Methods/GetCodecInstalled
+aa451730	Windows Media Player Methods/GetCodecURL
+aa451731	Windows Media Player Methods/GetCurrentEntry
+aa451733	Windows Media Player Methods/GetMarkerName
+aa451734	Windows Media Player Methods/GetMarkerTime
+aa451735	Windows Media Player Methods/GetMediaInfoString
+aa451736	Windows Media Player Methods/GetMediaParameter
+aa451737	Windows Media Player Methods/GetMediaParameterName
+aa451739	Windows Media Player Properties/GetMoreInfoURL
+aa451742	Windows Media Player Properties/HasError
+aa451743	Windows Media Player Properties/HasMultipleItems
+aa451819	DVD-Video API Interfaces/IDVDDataSearchInfo
+aa451820	IDVDDataSearchInfo/IDVDDataSearchInfo::GetAudioGapInfo
+aa451821	IDVDDataSearchInfo/IDVDDataSearchInfo::GetC_IDN
+aa451822	IDVDDataSearchInfo/IDVDDataSearchInfo::GetControlInfo
+aa451823	IDVDDataSearchInfo/IDVDDataSearchInfo::GetInterleavedUnitEndAddress
+aa451824	IDVDDataSearchInfo/IDVDDataSearchInfo::GetNextInterleavedUnit
+aa451825	IDVDDataSearchInfo/IDVDDataSearchInfo::GetRefPictureAddress
+aa451826	IDVDDataSearchInfo/IDVDDataSearchInfo::GetSCRBase
+aa451827	IDVDDataSearchInfo/IDVDDataSearchInfo::GetSeamlessAngleChangeAddress
+aa451828	IDVDDataSearchInfo/IDVDDataSearchInfo::GetSeamlessCategory
+aa451829	IDVDDataSearchInfo/IDVDDataSearchInfo::GetSyncAudioAddress
+aa451830	IDVDDataSearchInfo/IDVDDataSearchInfo::GetSyncSPAddress
+aa451831	IDVDDataSearchInfo/IDVDDataSearchInfo::GetUnitEndAddress
+aa451832	IDVDDataSearchInfo/IDVDDataSearchInfo::GetUnitStepAddress
+aa451833	IDVDDataSearchInfo/IDVDDataSearchInfo::GetVOB_ID
+aa451834	DVD-Video API Interfaces/IDVDDomain
+aa451835	IDVDDomain/IDVDDomain::GetCellPieceEnumerator
+aa451836	IDVDDomain/IDVDDomain::GetPGC
+aa451837	IDVDDomain/IDVDDomain::GetPGCCount
+aa451838	IDVDDomain/IDVDDomain::GetSpace
+aa451839	IDVDDomain/IDVDDomain::GetStreamAttributes
+aa451840	IDVDDomain/IDVDDomain::GetTimeMap
+aa451841	IDVDDomain/IDVDDomain::GetTitleSet
+aa451842	IDVDDomain/IDVDDomain::GetTotalVideoObjects
+aa451843	IDVDDomain/IDVDDomain::GetTotalVOBUnits
+aa451844	IDVDDomain/IDVDDomain::GetType
+aa451845	IDVDDomain/IDVDDomain::GetVOBFileID
+aa451846	IDVDDomain/IDVDDomain::GetVOBUTablePtr
+aa451847	IDVDDomain/IDVDDomain::GetVolume
+aa451848	DVD-Video API Interfaces/IDVDHighlightInfo
+aa451849	IDVDHighlightInfo/IDVDHighlightInfo::GetAdjacentButton
+aa451850	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonColorInfo
+aa451851	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonCommand
+aa451852	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonCount
+aa451853	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonMode
+aa451854	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonOffset
+aa451855	IDVDHighlightInfo/IDVDHighlightInfo::GetButtonPositionInfo
+aa451856	IDVDHighlightInfo/IDVDHighlightInfo::GetDefaultActionButton
+aa451857	IDVDHighlightInfo/IDVDHighlightInfo::GetHLIStatus
+aa451858	IDVDHighlightInfo/IDVDHighlightInfo::GetInitialSelectionButton
+aa451859	IDVDHighlightInfo/IDVDHighlightInfo::GetNumberedButtonCount
+aa451860	IDVDHighlightInfo/IDVDHighlightInfo::GetPTMs
+aa451861	IDVDHighlightInfo/IDVDHighlightInfo::GetStreamingInfo
+aa451862	DVD-Video API Interfaces/IDVDMenu
+aa451863	IDVDMenu/IDVDMenu::GetDomain
+aa451864	IDVDMenu/IDVDMenu::GetMenuLanguageInfo
+aa451865	DVD-Video API Interfaces/IDVDNavDataStatusSink
+aa451866	IDVDNavDataStatusSink/IDVDNavDataStatusSink::NotifyNewPCI
+aa451867	DVD-Video API Interfaces/IDVDNavigationManager
+aa451868	IDVDNavigationManager/IDVDNavigationManager::ButtonSelectDirect
+aa451869	IDVDNavigationManager/IDVDNavigationManager::GetGParameter
+aa451870	IDVDNavigationManager/IDVDNavigationManager::GetPlaybackState
+aa451871	IDVDNavigationManager/IDVDNavigationManager::GetScanCaps
+aa451872	IDVDNavigationManager/IDVDNavigationManager::GetSParameter
+aa451873	IDVDNavigationManager/IDVDNavigationManager::SetSParameter
+aa451875	IDVDNavigationManager/IDVDNavigationManager::SetVolume
+aa451876	IDVDNavigationManager/IDVDNavigationManger::UseRenderer
+aa451878	DVD-Video API Interfaces/IDVDNavigatorSink
+aa451880	IDVDNavigatorSink/IDVDNavigatorSink::ConfirmTemporaryParentalLevel
+aa451882	IDVDNavigatorSink/IDVDNavigatorSink::InitializeSystemParameters
+aa451884	IDVDNavigatorSink/IDVDNavigatorSink::OnDiskReadError
+aa451886	IDVDNavigatorSink/IDVDNavigatorSink::OnGOPUserData
+aa451889	IDVDNavigatorSink/IDVDNavigatorSink::OnGPRMChange
+aa451891	IDVDNavigatorSink/IDVDNavigatorSink::OnNavigationException
+aa451893	IDVDNavigatorSink/IDVDNavigatorSink::OnNewCell
+aa451895	IDVDNavigatorSink/IDVDNavigatorSink::OnNewProgram
+aa451897	IDVDNavigatorSink/IDVDNavigatorSink::OnNewProgramChain
+aa451899	IDVDNavigatorSink/IDVDNavigatorSink::OnPlaybackStateChange
+aa451901	IDVDNavigatorSink/IDVDNavigatorSink::OnSPRMChange
+aa451903	IDVDNavigatorSink/IDVDNavigatorSink::OnUOPChange
+aa451905	DVD-Video API Interfaces/IDVDParentalManagementTable
+aa451907	IDVDParentalManagementTable/IDVDParentalManagementTable::ConvertParentalLevelToID
+aa451909	DVD-Video API Interfaces/IDVDProgramChain
+aa451911	IDVDProgramChain/IDVDProgramChain::GetAudioStreamSelector
+aa451913	IDVDProgramChain/IDVDProgramChain::GetCellPlaybackInfo
+aa451915	IDVDProgramChain/IDVDProgramChain::GetCellPosition
+aa451917	IDVDProgramChain/IDVDProgramChain::GetContents
+aa451919	IDVDProgramChain/IDVDProgramChain::GetDomain
+aa451921	IDVDProgramChain/IDVDProgramChain::GetLink
+aa451923	IDVDProgramChain/IDVDProgramChain::GetNavCommand
+aa451925	IDVDProgramChain/IDVDProgramChain::GetNavCommandsCount
+aa451927	IDVDProgramChain/IDVDProgramChain::GetPGCN
+aa451929	IDVDProgramChain/IDVDProgramChain::GetPlaybackMode
+aa451931	IDVDProgramChain/IDVDProgramChain::GetPlaybackTime
+aa451933	IDVDProgramChain/IDVDProgramChain::GetProgramEntryCell
+aa451934	IDVDProgramChain/IDVDProgramChain::GetSubpicturePalette
+aa451936	IDVDProgramChain/IDVDProgramChain::GetSubpictureStreamSelector
+aa451939	IDVDProgramChain/IDVDProgramChain::GetUserOperationControlMask
+aa451941	DVD-Video API Interfaces/IDVDROM
+aa451943	IDVDROM/IDVDROM::Bind
+aa451945	IDVDROM/IDVDROM::CloseVOB
+aa451947	IDVDROM/IDVDROM::OpenVOB
+aa451949	IDVDROM/IDVDROM::ReadVMGI
+aa451951	IDVDROM/IDVDROM::ReadVOB
+aa451953	IDVDROM/IDVDROM::ReadVTSI
+aa451955	IDVDROM/IDVDROM::ReleaseMem
+aa451957	IDVDROM/IDVDROM::Unbind
+aa451959	DVD-Video API Interfaces/IDVDStreamAttributes
+aa451961	IDVDStreamAttributes/IDVDStreamAttributes::GetAudioAttr
+aa451962	IDVDStreamAttributes/IDVDStreamAttributes::GetAudioCount
+aa451964	IDVDStreamAttributes/IDVDStreamAttributes::GetAudioMultichannelUseAttr
+aa451966	IDVDStreamAttributes/IDVDStreamAttributes::GetSubpictureAttr
+aa451968	IDVDStreamAttributes/IDVDStreamAttributes::GetSubpictureCount
+aa451970	IDVDStreamAttributes/IDVDStreamAttributes::GetVideoAttr
+aa451972	DVD-Video API Interfaces/IDVDStreamControlInfo
+aa451974	IDVDStreamControlInfo/IDVDStreamControlInfo::GetBlockAddress
+aa451976	IDVDStreamControlInfo/IDVDStreamControlInfo::GetCategory
+aa451978	IDVDStreamControlInfo/IDVDStreamControlInfo::GetCellRelativeStartTime
+aa451980	IDVDStreamControlInfo/IDVDStreamControlInfo::GetDataSearchInfo
+aa451982	IDVDStreamControlInfo/IDVDStreamControlInfo::GetEndSequencePTM
+aa451984	IDVDStreamControlInfo/IDVDStreamControlInfo::GetHighlightInfo
+aa451986	IDVDStreamControlInfo/IDVDStreamControlInfo::GetNonSeamlessAngleChangeAddress
+aa451987	IDVDStreamControlInfo/IDVDStreamControlInfo::GetPresentationTimes
+aa452034	IDVDStreamControlInfo/IDVDStreamControlInfo::GetRecordingAudioInfo
+aa452035	IDVDStreamControlInfo/IDVDStreamControlInfo::GetRecordingSubpictureGroup
+aa452036	IDVDStreamControlInfo/IDVDStreamControlInfo::GetRecordingSubpictureInfo
+aa452037	IDVDStreamControlInfo/IDVDStreamControlInfo::GetRecordingVideoInfo
+aa452038	IDVDStreamControlInfo/IDVDStreamControlInfo::GetUserOperationControlMask
+aa452039	IDVDStreamControlInfo/IDVDStreamControlInfo::ReaderLock
+aa452040	IDVDStreamControlInfo/IDVDStreamControlInfo::ReaderUnlock
+aa452041	IDVDStreamControlInfo/IDVDStreamControlInfo::SetNavigationPack
+aa452042	DVD-Video API Interfaces/IDVDTextManager
+aa452043	IDVDTextManager/IDVDTextManager::EnumerateTextLanguageUnits
+aa452044	IDVDTextManager/IDVDTextManager::EnumerateTitleTextItems
+aa452045	IDVDTextManager/IDVDTextManager::GetTextItemsCount
+aa452046	DVD-Video API Interfaces/IDVDTimeMap
+aa452048	IDVDTimeMap/IDVDTimeMap::GetTableHeader
+aa452049	IDVDTimeMap/IDVDTimeMap::GetVOBUAddress
+aa452050	DVD-Video API Interfaces/IDVDTitleSet
+aa452051	IDVDTitleSet/IDVDTitleSet::GetCategory
+aa452052	IDVDTitleSet/IDVDTitleSet::GetDomain
+aa452053	IDVDTitleSet/IDVDTitleSet::GetMenu
+aa452054	IDVDTitleSet/IDVDTitleSet::GetSpecVersion
+aa452055	IDVDTitleSet/IDVDTitleSet::GetTitlePart
+aa452056	IDVDTitleSet/IDVDTitleSet::GetTotalTitleUnitCount
+aa452057	IDVDTitleSet/IDVDTitleSet::GetVolume
+aa452058	IDVDTitleSet/IDVDTitleSet::GetVTSN
+aa452059	DVD-Video API Interfaces/IDVDUserOperation
+aa452060	IDVDUserOperation/IDVDUserOperation::BackwardScan
+aa452061	IDVDUserOperation/IDVDUserOperation::ButtonActivate
+aa452062	IDVDUserOperation/IDVDUserOperation::ButtonSelect
+aa452063	IDVDUserOperation/IDVDUserOperation::ButtonSelectAndActivate
+aa452064	IDVDUserOperation/IDVDUserOperation::ChangeAngle
+aa452065	IDVDUserOperation/IDVDUserOperation::ChangeAudioStream
+aa452067	IDVDUserOperation/IDVDUserOperation::ChangeSubPictureStream
+aa452069	IDVDUserOperation/IDVDUserOperation::ForwardScan
+aa452071	IDVDUserOperation/IDVDUserOperation::GoUp
+aa452073	IDVDUserOperation/IDVDUserOperation::MenuCall
+aa452075	IDVDUserOperation/IDVDUserOperation::MenuLanguageSelect
+aa452077	IDVDUserOperation/IDVDUserOperation::ParentalCountrySelect
+aa452245	Windows Media Player Properties/ImageSourceHeight
+aa452246	Windows Media Player Properties/ImageSourceWidth
+aa452374	Windows Media Player Events/StateChange
+aa452376	Windows Media Player Methods/Stop (Windows Media Player)
+aa452380	Windows Media Player Properties/StreamCount
+aa452393	ASX Elements Reference/TITLE (ASX Element)
+aa452394	Windows Media Player Properties/TransparentAtStart
+aa452397	DVD-Video API Data Types/UNICODE_PATH
+aa452398	DirectShow Reference/Unsupported DirectShow Items
+aa452399	Windows Media Player Control Application Development/Windows Media Player Control Unsupported Items
+aa452408	Windows Media Player Properties/VideoBorder3D
+aa452409	Windows Media Player Properties/VideoBorderColor
+aa452410	Windows Media Player Properties/VideoBorderWidth
+aa452414	Supported DirectShow Filters/DirectShow Video Renderer Filter
+aa452416	Windows Media Player Properties/Volume
+aa452467	Supported DirectShow Filters/WAVE/AIFF/au/snd File Parser
+aa452477	Digital Rights Management/DRM Application Development
+aa452478	Graphics/Direct3D Mobile
+aa452494	Supported DirectShow Filters/Audio Lip Sync Filter
+aa452495	Video Capture/Camera Rotation
+aa452496	Video Capture/Capture Performance
+aa452497	Supported DirectShow Filters/Generic Streamer Filter
+aa452498	Supported DirectShow Filters/MPEG-2 Program Stream Multiplexer Filter
+aa452531	Supported DirectShow Filters/MPEG-2 Program Stream DeMultiplexer Filter
+aa452532	Supported DirectShow Filters/DVR Sink Filter
+aa452533	Supported DirectShow Filters/DVR Source Filter
+aa452563	Supported DirectShow Filters/VBI Renderer Filter
+ms907280	Windows Media Player Properties/CreationDate
+ms907786	Windows Media Player Events/DblClick
+ms910052	IDVDUserOperation/IDVDUserOperation::ParentalLevelSelect
+ms910143	IDVDUserOperation/IDVDUserOperation::PartPlay
+ms910154	IDVDUserOperation/IDVDUserOperation::Pause
+ms910161	IDVDUserOperation/IDVDUserOperation::ProgramSearch
+ms910167	IDVDUserOperation/IDVDUserOperation::PTTSearch
+ms910269	IDVDVideoVolume/IDVDVideoVolume::GetSpecVersion
+ms910295	IDVDVideoVolume/IDVDVideoVolume::GetTextDataManager
+ms910303	IDVDVideoVolume/IDVDVideoVolume::GetTitleSet
+ms910315	IDVDVideoVolume/IDVDVideoVolume::GetTitleSetAttributes
+ms910321	IDVDVideoVolume/IDVDVideoVolume::GetTitleUnitInfo
+ms910332	IDVDVideoVolume/IDVDVideoVolume::GetTotalTitleUnitCount
+ms910343	IDVDVideoVolume/IDVDVideoVolume::GetVideoTitleSetsCount
+ms910354	IDVDVideoVolume/IDVDVideoVolume::GetVolumeSetInfo
+ms910361	IDVDVideoVolume/IDVDVideoVolume::InitData
+ms910367	IDVDVideoVolume/IDVDVideoVolume::Lock
+ms910374	IDVDVideoVolume/IDVDVideoVolume::UnLock
+ms910411	IEnumDVD_XXXX/IEnumDVD_CELL_PIECE
+ms910419	IEnumDVD_XXXX/IEnumDVD_TEXT_ITEM
+ms910425	IEnumDVD_XXXX/IEnumDVD_TEXT_LANGUAGE_UNIT
+ms910434	DVD-Video API Interfaces/IEnumDVD_XXXX
+ms910442	IEnumDVD_XXXX/IEnumDVD_XXXX::Clone
+ms910451	IEnumDVD_XXXX/IEnumDVD_XXXX::Next
+ms910520	IEnumDVD_XXXX/IEnumDVD_XXXX::Reset
+ms910529	IEnumDVD_XXXX/IEnumDVD_XXXX::Skip
+ms912026	DVD-Video API Macros/DVD-Video API Interface Identifiers
+ms912073	Windows Media Player Properties/InvokeURLs
+ms923104	DRM Application Development/DRM for Portable Devices
+ms923147	DRM Application Development/DRM in DirectShow and Windows Media Player
+ms923153	Digital Rights Management/DRM Migration
+ms923157	DVD-Video API/DVD-Video API Migration
+ms923161	DVD-Video API/DVD-Video API Application Development
+ms923168	DVD-Video API Reference/DVD-Video API Common Terms
+ms923173	Architectural Overview of the DVD-Video API/DVD-Video API Interface Map
+ms923178	Architectural Overview of the DVD-Video API/DVD-Video API Object Architecture
+ms923183	Creating a Simple DVD Player/DVD-Video API Objects
+ms923190	DVD-Video API/DVD-Video API OS Design Development
+ms923193	Architectural Overview of the DVD-Video API/DVD-Video API Rendering
+ms923200	DVD-Video API/DVD-Video API Security
+ms923202	Advanced DVD Player Application Topics/DVD-Video in a Window
+ms923209	The DVD Standard/DVD-Video Menus
+ms923224	Multiple Screens Application Development/Enumerating Screens
+ms923228	Working with DirectDraw Surfaces/Enumerating Surfaces
+ms923232	Base Classes that Implement Interfaces/Enumerator Base Classes
+ms923240	Windows Media Player Control Application Development/Windows Media Player Control Error Handling
+ms923245	Connecting Transform Filters/Establishing Media Type Connections
+ms923350	DirectShow Architecture/Event Notification in DirectShow
+ms923357	Advanced DVD Player Application Topics/Examining the DVDSample Sample Application
+ms923362	Video Ports/Exploiting Hardware Capabilities
+ms923363	DirectDraw Application Development/Exploring Graphics Concepts
+ms923364	Writing DirectShow Filters/File Formats
+ms923365	Base Classes that Implement Interfaces/Filter Base Classes
+ms923367	Introduction to DirectShow Application Programming/Filter Graphs
+ms923368	Elements of the Filter Graph/Filters
+ms923369	Full-Screen Video Renderer/Finding a Filter That Can Be Stretched Full-Screen at No Cost
+ms923370	Full-Screen Video Renderer/Finding a Filter That Supports Full-Screen Mode
+ms923371	Surfaces and Device Contexts/Finding a Surface with a Device Context
+ms923372	Graph Building with Intelligent Connect/Finding the Filters
+ms923373	The DVDSample Startup Sequence/First Play in DVDSample
+ms923374	Overlay Surfaces/Flipping Overlay Surfaces
+ms923376	Creating Surfaces/Flipping Surfaces
+ms923379	Media/Four-Character Codes (FOURCC)
+ms923380	Video Renderers/Full-Screen Video Renderer
+ms923381	Creating a Simple DVD Player/Fundamental DVD-Video API Interfaces
+ms923384	Data Flow in the Filter Graph/Generating New Samples
+ms923385	Porting Older DirectDraw Code/Getting an IDirectDraw4 Interface
+ms923386	DirectDraw Application Development/Getting Started with DirectDraw
+ms923387	Advanced DirectDraw Information/Getting the Flip and Blit Status
+ms923388	Graphics/Gradient Fill Support
+ms923389	DirectShow Architecture/Graph Building with Intelligent Connect
+ms923390	Working with Graphics Devices/Graphic Objects and Modes
+ms923391	Graphics and Multimedia Technologies/Graphics and Multimedia Technologies Catalog Items
+ms923392	Graphics and Multimedia Technologies/Graphics
+ms923393	Alternative Video Renderers/Handling Dynamic Format Changes
+ms923394	Alternative Video Renderers/Handling EC_REPAINT Notifications
+ms923395	Alternative Video Renderers/Handling End-of-stream and Flushing Notifications
+ms923397	Alternative Video Renderers/Handling Notifications in Full-Screen Mode
+ms923398	Windows Media Player Control Unsupported Items/Handling of Unsupported Items
+ms923399	Alternative Video Renderers/Handling Persistent Properties
+ms923400	Alternative Video Renderers/Handling State Changes and Pause Completion
+ms923401	Alternative Video Renderers/Handling Termination
+ms923402	DirectDraw Middleware Architecture/Hardware Abstraction Layer
+ms923405	Multiple Screens Application Development/HMONITOR and the Device Context
+ms923406	Connecting Transform Filters/Allocator Negotiation
+ms923407	Introduction to DirectX Media Objects/Differences Between DMOs and DirectShow Filters
+ms923408	Responding to Events/Event Notification for Filters
+ms923409	DirectShow Architecture for Filter Developers/Connection Implementation in the Base Classes
+ms923410	Video Ports/HREF, VREF, and Connections
+ms923418	Creating a Simple DVD Player/Implementing First Play
+ms923419	DirectShow and COM/Implementing IUnknown in DirectShow
+ms923421	Full-Screen Video Renderer/Implications of Full-Screen Support for the Application
+ms923422	Working with DirectDraw Clippers/Independent DirectDrawClipper Objects
+ms923426	Using DirectX Media Objects/In-Place DMOs
+ms923427	Creating a Transform Filter/Instantiate the Filter
+ms923430	Using the CTransformFilter and CTransInPlaceFilter Transform Base Classes/Introducing the CTransformFilter and CTransInPlaceFilter Classes
+ms923432	Getting Started with DirectShow/Introduction to DirectShow Application Programming
+ms923433	DirectX Media Objects/Introduction to DirectX Media Objects
+ms923435	Implementing IUnknown in DirectShow/IUnknown Basics
+ms923436	Event Notification in DirectShow/Learning When an Event Occurs
+ms923437	DRM Application Development/License Acquisition
+ms924126	Utility Classes/List and Queue Classes
+ms924131	Working with DirectDraw Surfaces/Losing and Restoring Surfaces
+ms924133	Creating a Transform Filter/Make Added Interfaces Available Through NonDelegatingQueryInterface
+ms924136	Advanced DirectDraw Information/Matching True RGB Colors to the Frame Buffer's Color Space
+ms924139	Transport Base Classes/Media Control and Positioning Classes
+ms924140	Media/Media Formats
+ms924141	Elements of the Filter Graph/Media Samples
+ms924142	Graphics and Multimedia Technologies/Media
+ms924143	DMOs and Media Types/Media Types in the Registry
+ms924144	Working with Graphics Devices/Memory Device Contexts
+ms924146	Overlay Surfaces/Minimum and Maximum Stretch Factors
+ms924152	Windows Media Player Control Application Development/Monitoring Stream Status and Network Reception
+ms924153	Advanced DVD Player Application Topics/Mouse Navigation
+ms924154	DirectShow Architecture/Movement of Data Through the Filter Graph
+ms924155	Supported DirectShow Filters/MPEG-1 Parser/Splitter
+ms924156	Supported Audio Codecs and Renderers/MPEG-1 Layer 1 and 2 Audio Codec
+ms924157	Supported Video Codecs/MPEG-1 Video Codec
+ms924158	Utility Classes/Multimedia Data Type Classes
+ms924160	Working with DirectDraw Objects/Multiple DirectDraw Objects per Process
+ms924161	Multiple Screens/Multiple Screens Migration
+ms924162	Multiple Screens/Multiple Screens OS Design Development
+ms924163	Multiple Screens/Multiple Screens Registry Settings
+ms924164	Multiple Screens/Multiple Screens Security
+ms924166	The DVD Standard/Navigation Control Data
+ms924168	Porting Older DirectDraw Code/New Functionality in IDirectDraw4
+ms924169	Multiple Screens Application Development/Obtaining System Metrics for Multiple Screens
+ms924175	Overlay Surfaces/Overlay Color Keys
+ms924176	Overlay Surfaces/Overlay Surface Overview
+ms924177	Working with DirectDraw Surfaces/Overlay Surfaces
+ms924178	Overlay Surfaces/Overlay Z-Orders
+ms924179	Write a Transform Filter in C/C++/Override CheckInputType
+ms924180	Override the Base Class Member Functions/Override Pin Member Functions
+ms924181	Creating a Transform Filter/Override the Base Class Member Functions
+ms924182	Override the Base Class Member Functions/Override the CBaseOutput::DecideAllocator Member Function
+ms924183	Override the Base Class Member Functions/Override the CheckInputType Member Function
+ms924184	Override the Base Class Member Functions/Override the CheckTransform Member Function
+ms924185	Override the Base Class Member Functions/Override the DecideBufferSize Member Function
+ms924186	Override the Base Class Member Functions/Override the GetMediaType Member Function
+ms924187	Write a Transform Filter in C/C++/Override the Transform Function
+ms924188	Override the Base Class Member Functions/Override the Transform Member Function
+ms924189	Event Notification in DirectShow/Overview of Event Notification
+ms924191	DMOs and Media Types/Overview of Media Types
+ms924192	DirectShow Architecture for Filter Developers/Overview of the Filter Connection Process
+ms924193	Exploring Graphics Concepts/Page Flipping and Back Buffering
+ms924194	Working with DirectDraw Palettes/Palette Animation
+ms924195	Working with DirectDraw Palettes/Palette Types
+ms924196	The DVD Standard/Parental Management Levels
+ms924197	Working with DirectDraw Objects/Parent and Child Object Lifetimes
+ms924201	Base Classes that Implement Interfaces/Pin Base Classes
+ms924202	Elements of the Filter Graph/Pins
+ms924203	Basic Concepts of Surfaces/Pixel Formats
+ms924204	The DVDSample Control Panel/Playback in DVDSample
+ms924205	Windows Media Player Control Application Development/Playback Methods and Properties
+ms924206	Getting Started with DirectShow/Playing a Media File
+ms924207	Playing a Media File/Playing the File
+ms924209	Video Renderers/Plug-in Distributors and Extensibility
+ms924571	Advanced DirectDraw Information/Porting Older DirectDraw Code
+ms924572	Multiple Screens Application Development/Positioning Objects on Multiple Screens
+ms924573	Overlay Surfaces/Positioning Overlay Surfaces
+ms924574	DMOs and Media Types/Preferred Media Types
+ms924578	Working with DirectDraw Surfaces/Private Surface Data
+ms924579	Data Flow in the Filter Graph/Processing a Sample
+ms924580	Using DirectX Media Objects/Processing Data with DMOs
+ms924581	Windows Media Player Control Application Development/Processing Embedded Script Commands
+ms924586	Data Flow in the Filter Graph/Push versus Pull
+ms924587	DirectShow Architecture for Filter Developers/Quality-Control Management
+ms924591	Graphics/Raster Fonts Support
+ms924594	COM Reference Count Semantics for Surfaces/Reference Counts for Complex Surfaces
+ms924595	File Formats/Registering a Custom File Type
+ms924596	DirectShow and COM/Registering DirectShow Filters
+ms924598	COM Reference Count Semantics for Surfaces/Releasing Surfaces
+ms924605	Getting Started with DirectShow/Responding to Events
+ms924606	Creating a Simple DVD Player/Responding to User Commands
+ms924608	Event Notification in DirectShow/Retrieving Events
+ms924611	Windows Media Player Control Application Development/Retrieving Presentation Information
+ms924613	Surfaces and Device Contexts/Retrieving the Device Context for a Surface
+ms924615	Playing a Media File/Sample Playback Program
+ms924616	Setting the Video Window/Sample Video Window Program
+ms924617	Adding More Player Capabilities/Scan Modes and Capabilities
+ms924620	Graphics and Multimedia Technologies/Security with Multimedia
+ms924622	Transparent Blitting/Setting Color Keys
+ms924623	Display Modes/Setting Display Modes
+ms924626	Using DirectDraw Palettes in Windowed Mode/Setting Palette Entries in Windowed Mode
+ms924627	Working with DirectDraw Palettes/Setting Palettes on Nonprimary Surfaces
+ms924629	DMOs and Media Types/Setting the Media Types
+ms924630	Getting Started with DirectShow/Setting the Video Window
+ms924632	Examining the DVDSample Sample Application/Setting up DirectDraw in DVDSample
+ms924635	Working with DirectDraw Clippers/Sharing DirectDrawClipper Objects
+ms924636	Working with DirectDraw Palettes/Sharing Palettes
+ms924637	Overlay Surfaces/Significant DDCAPS Members and Flags
+ms924638	DirectDraw Middleware Architecture/Software Emulation
+ms924639	Video Ports/Solutions to Common Video Artifacts
+ms924640	Video Ports/Solving Problems Caused by Half-Lines
+ms924641	Overlay Surfaces/Source and Destination Rectangles
+ms924642	Video Renderers/Source and Target Rectangles in Video Renderers
+ms924647	Advanced DirectDraw Information/Storing Bitmaps in Display Memory
+ms924648	AVI RIFF File Reference/Stream Data (LIST 'movi' Chunk)
+ms924649	Media/Streaming Media Playback
+ms924650	Using DirectX Media Objects/Streams and Buffers
+ms924651	Full-Screen Video Renderer/Stretching the Output of a Renderer Full-Screen
+ms924652	Alternative Video Renderers/Summary of Notifications
+ms924653	Full-Screen Video Renderer/Supplying a Full-Screen Renderer Filter
+ms924654	DirectShow/Supported Audio Codecs and Renderers
+ms924655	DirectShow/Supported DirectShow Filters
+ms924656	DirectShow/Supported Video Codecs
+ms924659	Basic Concepts of Surfaces/Surface Interfaces
+ms924661	Working with DirectDraw Surfaces/Surfaces and Device Contexts
+ms924662	Working with DirectDraw Surfaces/Surface Uniqueness Values
+ms924663	DirectDraw Middleware Architecture/System Integration
+ms924664	Advanced DirectDraw Information/Taking Advantage of DMA Support
+ms924665	Cooperative Levels/Testing Cooperative Levels
+ms924667	Taking Advantage of DMA Support/Testing for DMA Support
+ms925240	Working with DirectDraw Clippers/What Are Clippers?
+ms925249	Color Controls/What Are Color Controls?
+ms925251	Working with DirectDraw Objects/What Are DirectDraw Objects?
+ms925252	Working with DirectDraw Palettes/What Are Palettes?
+ms925253	Basic Concepts of Surfaces/What Are Surfaces?
+ms925254	Video Ports/What Are Video Ports?
+ms925255	Using the CTransformFilter and CTransInPlaceFilter Transform Base Classes/What the Derived Class Must Provide
+ms925256	Connecting Transform Filters/When Reconnections Occur
+ms925258	COM Reference Count Semantics for Surfaces/When Reference Counts will Change
+ms925259	Getting Started with DirectDraw/Why Use DirectDraw?
+ms925260	Introduction to DirectX Media Objects/Why Use DMOs?
+ms925262	Basic Concepts of Surfaces/Width vs. Pitch
+ms925264	Utility Classes/Win32 Classes
+ms925266	Windows Media/Windows Media Player
+ms925267	Windows Media Player Control/Windows Media Player Control Migration
+ms925268	Windows Media Player Control/Windows Media Player Control OS Design Development
+ms925269	Windows Media Player Control/Windows Media Player Control Registry Settings
+ms925270	Windows Media Player Control/Windows Media Player Control Security
+ms925271	Windows Media Technologies/Windows Media Technologies Migration
+ms925272	Windows Media Technologies/Windows Media Technologies OS Design Development
+ms925273	Windows Media Technologies/Windows Media Technologies Registry Settings
+ms925274	Windows Media Technologies/Windows Media Technologies Security
+ms925275	Media/WMA and MP3 Local Playback
+ms925276	Media/WMA and MP3 Streaming
+ms925277	DirectDraw Application Development/Working with DirectDraw Clippers
+ms925278	DirectDraw Application Development/Working with DirectDraw Objects
+ms925279	DirectDraw Application Development/Working with DirectDraw Palettes
+ms925280	DirectDraw Application Development/Working with DirectDraw Surfaces
+ms925281	DirectDraw Application Development/Working with Graphics Devices
+ms925284	Creating a Transform Filter/Write a Transform Filter
+ms925285	Transform Filters/Write a Transform Filter in C/C++
+ms925286	Introduction to DirectShow Application Programming/Writing a DirectShow Application
+ms925287	Alternative Video Renderers/Writing an Alternative Renderer
+ms925288	DRM Application Development/Developing Applications on DRM-Enabled Platforms
+ms925289	DirectShow Application Development/Writing DirectShow Filters
+ms925291	Windows Media Technologies/ASX Elements Reference
+ms925295	DirectDraw/DirectDraw Reference
+ms925297	DirectShow Reference/DirectShow Classes
+ms925298	DirectShow Reference/DirectShow Enumerations
+ms925299	DirectShow Reference/DirectShow Functions
+ms925300	DirectShow Reference/DirectShow Interfaces
+ms925301	DirectShow Reference/DirectShow Macros
+ms925302	DirectShow/DirectShow Reference
+ms925303	DirectShow Reference/DirectShow Structures
+ms925304	DVD-Video API Reference/DVD-Video API Data Types
+ms925305	DVD-Video API Reference/DVD-Video API Enumerated Types
+ms925306	DVD-Video API Reference/DVD-Video API Interfaces
+ms925307	DVD-Video API Reference/DVD-Video API Macros
+ms925308	DVD-Video API/DVD-Video API Reference
+ms925309	DVD-Video API Reference/DVD-Video API Structures
+ms925315	Multiple Screens Reference/Multiple Screens Functions
+ms925316	Multiple Screens/Multiple Screens Reference
+ms925317	Multiple Screens Reference/Multiple Screens Structures
+ms925322	Windows Media Technologies/Windows Media Event Notification Codes
+ms925323	Windows Media Player Control/Windows Media Player Control Reference
+ms925324	Windows Media Player Control Reference/Windows Media Player Events
+ms925325	Windows Media Player Control Reference/Windows Media Player Methods
+ms925326	Windows Media Player Control Reference/Windows Media Player Properties
+ms925327	Multiple Screens How-to Topics/How to Support Multiple Screens on a Device
+ms925328	ASX Elements Reference/ABSTRACT
+ms925329	Supported DirectShow Filters/ACM Wrapper Filter
+ms925331	Windows Media Player Properties/AllowChangeDisplaySize
+ms925332	Windows Media Player Properties/AllowHideControls
+ms925334	Windows Media Player Properties/AllowScan
+ms925546	Windows Media Player Control Application Development/Windows Media Player Control Architecture
+ms925588	ASX Elements Reference/ASX
+ms925704	Supported Audio Codecs and Renderers/Waveform Audio Renderer
+ms925711	Windows Media Player Properties/AudioStream
+ms925730	ASX Elements Reference/AUTHOR
+ms925734	Windows Media Player Properties/AutoRewind
+ms925740	Windows Media Player Properties/AutoSize (Windows Media Player)
+ms925744	Windows Media Player Properties/AutoStart
+ms925754	Supported DirectShow Filters/Video/Image Compression Manager
+ms925761	Supported DirectShow Filters/AVI Filter
+ms925771	Windows Media Player Properties/Balance
+ms925778	Windows Media Player Properties/Bandwidth
+ms925786	ASX Elements Reference/BASE
+ms925879	Windows Media Player Properties/BaseURL
+ms926773	Windows Media Player Properties/CodecCount
+ms926779	Windows Media Player Properties/ContactAddress
+ms926780	Windows Media Player Properties/ContactEmail
+ms926781	Windows Media Player Properties/ContactPhone
+ms926787	ASX Elements Reference/COPYRIGHT
+ms930706	IDVDUserOperation/IDVDUserOperation::Resume
+ms930718	IDVDUserOperation/IDVDUserOperation::StillOff
+ms930814	IDVDUserOperation/IDVDUserOperation::Stop
+ms930822	IDVDUserOperation/IDVDUserOperation::TimePlay
+ms930827	IDVDUserOperation/IDVDUserOperation::TimeSearch
+ms930832	IDVDUserOperation/IDVDUserOperation::TitlePlay
+ms930840	IDVDUserOperation/IDVDUserOperation::VideoPresentationModeChange
+ms930853	DVD-Video API Interfaces/IDVDVideoVolume
+ms930862	IDVDVideoVolume/IDVDVideoVolume::GetCategory
+ms930869	IDVDVideoVolume/IDVDVideoVolume::GetFirstPlay
+ms930874	IDVDVideoVolume/IDVDVideoVolume::GetMenu
+ms930879	IDVDVideoVolume/IDVDVideoVolume::GetParentalManagementTable
+ms930889	IDVDVideoVolume/IDVDVideoVolume::GetPOSCode
+ms930895	IDVDVideoVolume/IDVDVideoVolume::GetProviderID
+ms931808	Windows Media Player Properties/IsBroadcast
+ms931809	Windows Media Player Properties/IsDurationValid
+ms932019	Windows Media Player Events/KeyDown
+ms932020	Windows Media Player Events/KeyPress
+ms932021	Windows Media Player Events/KeyUp
+ms932022	Windows Media Player Properties/Language
+ms932025	Windows Media Player Properties/LostPackets
+ms932028	Windows Media Player Properties/MarkerCount
+ms932029	Windows Media Player Events/MarkerHit
+ms932033	DirectShow/Media Types
+ms932214	Multiple Screens Structures/MONITORINFOEX
+ms932215	ASX Elements Reference/MOREINFO
+ms932217	Windows Media Player Events/MouseDown
+ms932218	Windows Media Player Events/MouseMove
+ms932219	Windows Media Player Events/MouseUp
+ms932230	Windows Media Player Properties/MovieWindowSize
+ms932238	Windows Media Player Properties/Mute
+ms932240	Windows Media Player Events/NewStream
+ms932241	Windows Media Player Methods/Next
+ms932245	Windows Media Player Methods/Open
+ms932246	Windows Media Player Events/OpenComplete
+ms932247	Windows Media Player Properties/OpenState
+ms932248	Windows Media Player Events/OpenStateChange
+ms932249	Supported DirectShow Filters/Overlay Mixer
+ms932252	ASX Elements Reference/PARAM
+ms932253	Windows Media Player Methods/Pause (Windows Media Player)
+ms932260	Windows Media Player Methods/Play (Windows Media Player)
+ms932261	Windows Media Player Properties/PlayCount
+ms932263	Windows Media Player Properties/PlayState
+ms932264	Windows Media Player Events/PlayStateChange
+ms932267	Windows Media Player Events/PositionChange
+ms932268	Windows Media Player Methods/Previous
+ms932274	Windows Media Player Properties/Rate
+ms932276	Windows Media Player Properties/ReadyState
+ms932277	Windows Media Player Events/ReadyStateChange
+ms932278	Windows Media Player Properties/ReceivedPackets
+ms932279	Windows Media Player Properties/ReceptionQuality
+ms932280	Windows Media Player Properties/RecoveredPackets
+ms932281	ASX Elements Reference/REF
+ms932287	ASX Elements Reference/REPEAT
+ms932291	Windows Media Player Methods/Run (Windows Media Player)
+ms932292	Windows Media Player Events/ScriptCommand
+ms932293	Windows Media Player Properties/SelectionEnd
+ms932294	Windows Media Player Properties/SelectionStart
+ms932295	Windows Media Player Properties/SendErrorEvents
+ms932296	Windows Media Player Properties/SendKeyboardEvents
+ms932297	Windows Media Player Properties/SendMouseClickEvents
+ms932298	Windows Media Player Properties/SendMouseMoveEvents
+ms932299	Windows Media Player Properties/SendOpenStateChangeEvents
+ms932300	Windows Media Player Properties/SendPlayStateChangeEvents
+ms932301	Windows Media Player Methods/SetCurrentEntry
+ms932302	Windows Media Player Properties/ShowAudioControls
+ms932303	Windows Media Player Properties/ShowControls
+ms932304	Windows Media Player Properties/ShowPositionControls
+ms932305	Windows Media Player Properties/ShowStatusBar
+ms932306	Windows Media Player Properties/ShowTracker
+ms932315	Windows Media Player Properties/SourceLink
+ms932316	Windows Media Player Properties/SourceProtocol
+ms932317	ASX Elements Reference/STARTMARKER
+ms932318	ASX Elements Reference/STARTTIME
+ms932564	Graphics/DirectDraw
+ms932573	DirectDraw/DirectDraw Application Development
+ms932581	DirectShow/DirectShow Application Development
+ms932590	Media/DVD-Video API
+ms932597	DirectShow Application Development/Getting Started with DirectShow
+ms932606	Graphics/Imaging
+ms932614	Multiple Screens/Multiple Screens Application Development
+ms932620	Multiple Screens/Multiple Screens How-to Topics
+ms932641	Media/Windows Media
+ms932653	Windows Media Player Control/Windows Media Player Control Application Development
+ms932664	Windows Media Technologies/Windows Media Technologies Application Development
+ms932673	DirectShow/DirectShow Samples
+ms932679	Digital Rights Management/DRM Samples
+ms932690	DVD-Video API/DVD-Video API Samples
+ms932708	Multiple Screens/Multiple Screens Samples
+ms936850	Windows Media Player Events/Buffering
+ms936851	Windows Media Player Properties/BufferingCount
+ms936852	Windows Media Player Properties/BufferingProgress
+ms936853	Windows Media Player Properties/BufferingTime
+ms936895	Windows Media Player Methods/Cancel
+ms936896	Windows Media Player Properties/CanScan
+ms936897	Windows Media Player Properties/CanSeek
+ms936898	Windows Media Player Properties/CanSeekToMarkers
+ms939121	Windows Media Player Properties/CurrentMarker
+ms939122	Windows Media Player Properties/CurrentPosition
+ms939123	Windows Media Player Properties/CurrentState
+ms940038	Windows Media Player Control/Windows Media Player Control Samples
+ms940041	Windows Media Technologies/Windows Media Technologies Samples
+ms940042	Video Capture/Advanced Capture Topics
+ms940043	Exposing Capture and Compression Formats/Audio Capabilities
+ms940044	Creating ASF Files in DirectShow/Building a Filter Graph for ASF Output
+ms940045	Video Capture/Building Graphs with the Capture Graph Builder
+ms940046	Video Capture/Capture Device Selection
+ms940047	Video Capture/Capture Graph Builder
+ms940048	Video Capture Tasks/Capturing an Image From a Still Image Pin
+ms940049	Capturing Video to a File/Capturing to Multiple Files
+ms940050	Video Capture/Capturing Video to a File
+ms940051	Capturing Video to a File/Capturing Video to a Windows Media File
+ms940052	Capturing Video to a File/Combining Video Capture and Preview
+ms940053	Video Capture Tasks/Configure the Video Output Format
+ms940054	Video Capture Tasks/Configure the Video Quality
+ms940055	Creating ASF Files in DirectShow/Configuring the ASF Writer
+ms940056	Video Capture/Controlling a Capture Graph
+ms940057	Windows Media Applications/Creating ASF Files in DirectShow
+ms940058	Capturing Video to a File/Custom File Formats
+ms940059	Writing Capture Filters/Exposing Capture and Compression Formats
+ms940060	Data Flow in the Filter Graph/Filter States
+ms940061	Advanced Capture Topics/Handling Repaint Events in Video Capture
+ms940064	Writing Capture Filters/Implementing a Preview Pin
+ms940065	Graph Building with Intelligent Connect/Intelligent Connect
+ms940066	Video Capture/Interfaces for Capture Applications
+ms940067	Audio and Video Capture Support/Pin Property Set
+ms940068	Writing Capture Filters/Pin Requirements for Capture Filters
+ms940069	Writing Capture Filters/Producing Data in a Capture Filter
+ms940070	Exposing Capture and Compression Formats/Reconnecting Your Input to Ensure Specific Output Types
+ms940071	Video Capture Tasks/Setting the Capture Frame Rate
+ms940072	Video Capture Tasks/Setting the Color Format for Video Capture
+ms940073	Supported DirectShow Filters/Smart Tee Filter
+ms940075	Advanced Capture Topics/Using the Smart Tee Filter
+ms940076	Exposing Capture and Compression Formats/Video Capabilities
+ms940077	Audio and Video Capture Support/Video Capture
+ms940078	Video Capture/Video Capture Filters
+ms940079	Video Capture/Video Capture Tasks
+ms940080	Video Capture/Video Previews
+ms940082	Audio and Video Capture Support/Windows Media Applications
+ms940083	Advanced Capture Topics/Working with Pin Categories
+ms940084	Writing DirectShow Filters/Writing Capture Filters
+ms940087	Supported DirectShow Filters/Audio Renderer (WaveOut) Filter
+ms940088	Supported DirectShow Filters/Color Space Converter Filter
+ms940095	Supported DirectShow Filters/Image Sink Filter
+ms940096	Supported DirectShow Filters/WM ASF Writer Filter
+ms940097	Media/Digital Rights Management
+ms940098	Media/DirectShow
+ms940099	Graphics and Multimedia Technologies
+ms940100	Graphics/Multiple Screens
+ms940101	Audio/Waveform Audio
+ms940102	Windows Media/Windows Media Player Control
+ms940103	Windows Media/Windows Media Technologies

@@ -256,6 +256,11 @@ typedef struct tagRECT {
     LONG right;
     LONG bottom;
 } RECT, *PRECT, *LPRECT;
+/* CROSS-GENERATION (M86 sweep): the CE 4.0 twin ms893070 prints the
+ * tag `tagRECT` and the typedef list `RECT, *PRECT, NEAR *NPRECT,
+ * FAR *LPRECT;` with inline // member comments; the CE 5.0 page
+ * ms912843 prints tag `_RECT` with `RECT;` only.  NPRECT is the
+ * CE 4.0-only NEAR spelling (recorded, not defined). */
 typedef const RECT *LPCRECT;
 
 typedef struct tagSIZE {

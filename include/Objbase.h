@@ -2861,7 +2861,11 @@ typedef enum tagOLEWHICHMK {
 
 /* ms892602 "OLEVERB" (CE 2.0+): print
  * `typedef struct tagOLEVERB { LONGlVerb;LPWSTRlpszVerbName;DWORDfuFlags;
- * DWORDgrfAttribs;} OLEVERB, *LPOLEVERB;` */
+ * DWORDgrfAttribs;} OLEVERB, *LPOLEVERB;`
+ * CROSS-GENERATION (M86 sweep): the CE 4.0 twin ms889374 prints the
+ * first member as `LONG iVerb;` (CE 5.0: lVerb), `LPOLESTR
+ * lpszVerbName;` (CE 5.0: LPWSTR) and no *LPOLEVERB typedef.
+ * Same member sizes/order; source-spelling difference recorded. */
 typedef struct tagOLEVERB {
     LONG   lVerb;
     LPWSTR lpszVerbName;

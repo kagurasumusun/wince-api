@@ -137,7 +137,18 @@ typedef struct _PPP_EAP_INPUT {
     PBYTE               pUserData;
     DWORD               dwSizeOfUserData;
     HANDLE              hReserved;
-} PPP_EAP_INPUT, *PPPP_EAP_INPUT;   /* pointer spelling as printed (4 P) */
+} PPP_EAP_INPUT, *PPPP_EAP_INPUT;
+/* CROSS-GENERATION (M86 sweep): the CE 4.0 twin ms899205 prints a
+ * DIFFERENT layout -- it leads with `DWORD dwSizeInBytes; DWORD
+ * fFlags; HANDLE hPort; BOOL fAuthenticator; ...` and carries a
+ * `DWORD (*RasAuthenticateClient)(HANDLE hPort, RAS_AUTH_ATTRIBUTE*
+ * pInAttributes);` callback member plus `DWORD dwAuthError;`
+ * `RAS_AUTH_ATTRIBUTE* pAttributesFromAuthenticator;` and
+ * DWORD-typed fSuccessPacketReceived/fDataReceivedFromInteractiveUI;
+ * the CE 5.0 print above drops hPort, the callback, dwAuthError and
+ * pAttributesFromAuthenticator and prints those two flags as BOOL.
+ * ABI-relevant for CE 4.x targets; recorded (CE generations kept
+ * distinct). */   /* pointer spelling as printed (4 P) */
 
 /* "PPP_EAP_OUTPUT": print (pointer typedef really is *PPPP_EAP_OUTPUT). */
 typedef struct _PPP_EAP_OUTPUT {

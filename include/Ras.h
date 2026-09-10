@@ -51,6 +51,9 @@ typedef struct tagRasCntlServerIPV6NetPrefix {
  * {RASDEVINFOrasDevInfo;BOOLbEnable;DWORDbmFlags;
  * UINTDisconnectIdleSeconds;DWORDdwDevConfigSize;BYTEDevConfig[1];}
  * RASCNTL_SERVERLINE, *PRASCNTL_SERVERLINE;` (RASDEVINFO unpublished)
+ * CROSS-GENERATION (M86 sweep): the CE 4.0 twin ms924959 prints the
+ * same members but drops the semicolon after `BYTE DevConfig[1]`
+ * (archive print artifact; members identical).
  * ms896356 "RASCNTL_SERVERUSERCREDENTIALS": `typedef struct
  * tagRasCntlServerUser{TCHAR tszUserName[UNLEN + 1];
  * TCHARtszDomainName[DNLEN + 1];BYTEpassword[PWLEN];DWORDcbPassword;}

@@ -17,6 +17,14 @@
  * (consumed through the CeLog driver stream); they carry no function
  * declarations and no Header/Link rows, and are recorded in
  * docs/inventory.md rather than transcribed here.
+ *
+ * CROSS-GENERATION (M86 sweep, recorded for the payload structures
+ * kept in docs/inventory.md): the CE 4.0 twins print the critical-
+ * section event tags as __CEL_CS_ENTER / __CEL_CS_LEAVE (ms905291;
+ * CE 5.0: __CEL_CRITSEC_ENTER / __CEL_CRITSEC_LEAVE, members
+ * identical), and the CE 6.0 MAPHEADER twin ee488608 appends a
+ * VERSION 2 DATA tail (DWORD dwVersion; DWORD dwBufferStart; DWORD
+ * dwWriteOffset; DWORD dwReadOffset;) after dwLostBytes.
  */
 
 #ifndef AKARI_CELOG_H

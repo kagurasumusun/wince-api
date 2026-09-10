@@ -6184,3 +6184,53 @@ surface-metrics.py: "headers shipped 158/158, unshipped tokens 0").
 - Makefile HDRS 171 -> 178 (with M83/M84's Usp10/Mspyime/Recog/
   Msime/Msimeui/Koreanimeui/Imjpskin).
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M86 -- CE4/5/6 struct-difference sweep (first pass) + Graphics harvest
+
+Sweep method (recorded in build/ce46-struct-diff.txt, workspace-only
+per .gitignore but findings transcribed into headers/inventory):
+extract every `typedef struct` print from build/pages (CE 5.0, 796
+names), build/pages4 (CE .NET 4.x, 412) and build/pages6 (CE 6.0,
+323); match by typedef name; whitespace-normalized member compare.
+19 raw differences; 5 were page-pairing noise (SAFEARRAY/
+SAFEARRAYBOUND SAME when correctly paired ms893344/ms892133 and
+ms893364/ms892134; WSAOVERLAPPED shipped form == CE4; WSANETWORKEVENTS
+formatting-only; "u" mispair).  DDCAPS/DDCOLORCONTROL/DDSURFACEDESC
+(5v6) re-confirmed the M59 Ddraw.h twin notes; CEDBASEINFOEX (5v6)
+re-confirmed the M71a Windbase.h note.
+
+Cross-generation notes added (verbatim other-generation prints quoted
+at each site):
+- include/Bt_api.h PORTEMUPortParams: CE4 ms920295 prints the device
+  member `BD_ADDR` (CE5/CE6: BT_ADDR; same ULONGLONG family).
+- include/Raseapif.h PPP_EAP_INPUT: CE4 ms899205 layout carries
+  HANDLE hPort + DWORD (*RasAuthenticateClient)(HANDLE,
+  RAS_AUTH_ATTRIBUTE*) + dwAuthError + pAttributesFromAuthenticator
+  and DWORD-typed flag pair; CE5 (compiled) drops them and prints
+  BOOL.  ABI-relevant, recorded (generations distinct).
+- include/Windbase.h SORTORDERSPECEX: intra-CE5 twin ms892010 prints
+  tag CESORTORDERSPECEX w/ wReserved + archive typo `DWROD rgdwFlags`;
+  CE6 ee490012 corroborates that shape.  BY_HANDLE_DB_INFORMATION:
+  CE6 ee490409 inserts `WORD wReserved` after wVersion (CE4 matches
+  CE5).
+- include/Objbase.h OLEVERB: CE4 ms889374 prints iVerb/LPOLESTR and
+  no *LPOLEVERB (same sizes/order).
+- include/Windef.h RECT: CE4 ms893070 prints tagRECT + NEAR *NPRECT/
+  FAR *LPRECT with inline comments (NPRECT = CE4-only spelling).
+- include/Ras.h RASCNTL_SERVERLINE record: CE4 ms924959 same members
+  (print drops a semicolon).
+- include/Celog.h header note: CE4 tags __CEL_CS_ENTER/__CEL_CS_LEAVE
+  (ms905291; members identical); CE6 MAPHEADER ee488608 appends
+  VERSION 2 DATA (dwVersion/dwBufferStart/dwWriteOffset/dwReadOffset).
+
+Graphics book harvest: tools/manifests/graphics-book.manifest (871
+missing leaves of 3349; 2478 were already preserved); all 871 fetched
+into build/pages (12650 -> 13521); rows.json 14088 -> 14959.  NOTE:
+the aa45xxxx DVD-Video/DirectShow pages print prototypes in the page
+body but ce-rows-local's sig extraction does not fire on that layout
+(all 871 rows carry empty sig) -- the M87 implementation must extract
+from page text directly.  New header tokens in the harvest:
+Dvdata.h (157 rows + variants), Dvdnav.h (50), Dvddata.h (2) --
+DVD-Video API interfaces/structures; one Windows.h row.
+
+Gates: check / crosscheck / e2e GREEN x6.
