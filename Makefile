@@ -139,6 +139,10 @@ include/Upnp.h \
 include/Upnpdevapi.h \
 include/Upnphost.h \
 include/Urlmon.h \
+include/Voiplap.h \
+include/Voipconfigurationdatastore.h \
+include/Voiperrorcodes.h \
+include/Voipmanager.h \
 include/Webproxy.h \
 include/Winbase.h \
 include/Winber.h \

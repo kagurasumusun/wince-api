@@ -62,6 +62,8 @@
 #include <Wzcsapi.h>
 #include <Externs.h>
 #include <Windot11.h>
+#include <Voiplap.h>
+#include <Voiperrorcodes.h>
 #include <Storemgr.h>
 #include <Extfile.h>
 #include <Fsdmgr.h>
@@ -7079,6 +7081,25 @@ static int m79_shaped_usage(void)
            + (int)fci.cbSize + (int)fci.nFileSize;
 }
 
+static int m80_shaped_usage(void)
+{
+    DWORD d;
+    HRESULT hr;
+    WCHAR wbuf[8] = {0};
+    INT  ci;
+    LONG l;
+
+    d = AttemptConnection();
+    hr = GetPCSyncName(wbuf, 8);
+    hr = SetPCSyncName(wbuf);
+    l = VOIPLAP_E_NOSERVER;
+    l += VOIPLAP_S_PCLOCKED;
+    l += VOIP_E_ENUMOUTOFDATE;
+    l += VOIP_S_DONT_TERMINATE;
+    ci = 0;
+    return (int)d + (hr != 0) + (int)l + ci + wbuf[0];
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7228,6 +7249,8 @@ int host_tu_entry(void)
     if (m78c_shaped_usage() != 0)
         return 1;
     if (m79_shaped_usage() != 0)
+        return 1;
+    if (m80_shaped_usage() != 0)
         return 1;
     return 0;
 }

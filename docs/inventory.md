@@ -5998,3 +5998,29 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
   compiled), all per their printed header homes.
 - TU m79 block; Makefile HDRS 153 -> 160.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M80 -- PC Authentication LAP + VAIL record surface
+
+- include/Voiplap.h (NEW): VOIPLAP_E_ constants (8, decimal values as
+  printed on ms912601), VOIPLAP_S_PCUNLOCKED/PCLOCKED (ms912602);
+  3 declarations (no Link Library rows): AttemptConnection,
+  GetPCSyncName, SetPCSyncName (HRESULT via Objbase.h closure).
+- include/Voiperrorcodes.h (NEW): VOIP_E_ (13, 0x80cc0000 series,
+  ms912600) + VOIP_S_DONT_TERMINATE (0x00040000, ms912605).
+- include/Voipmanager.h (NEW, record-only): all 15 VAIL COM
+  interfaces / 119 method pages (IVoIPMgr 23, IVoIPMediaMgr 21,
+  IVoIPCurrentCall 16, IVoIPCallRecord 9, IVoIPCallerInfoRecord 9,
+  IVoIPCallerInfoDB 7, IVoIPCallLogDB 6, IVoIPCurrentCall2 5,
+  IVoIPCurrentCallEnumerator 3, IVoIPCallLogDBEnum 3,
+  IVoIPCallerInfoDBEnum 3, IVoIPDirectoryClient 3, IVoIPMgr2 2,
+  IVoIPUI 2, provisioning rows) -- names + page ids, IDL homes noted
+  (Av_upnp.h M76 / Remoteui.h M77c precedent; no printable C
+  signatures or vtable orders).
+- include/Voipconfigurationdatastore.h (NEW, record-only):
+  IVoIPConfigurationDataStore 7 method pages (dual .idl/.h home).
+- TUI book (48 pages): pure book pages, no Requirements rows, no
+  header homes -- nothing implementable; noted here.
+- TU m80 block; Makefile HDRS 160 -> 164.
+- Gates: check / crosscheck / e2e GREEN x6.
+- VoIP Phone Services book now fully triaged (VAIL 183 + PC Auth 23
+  + TUI 48 + RTC 503 cached = M80/M81 boundary).
