@@ -6934,3 +6934,21 @@ CE page spelling).
   identical-typedef redeclaration); new includes Winuser.h (LPMSG),
   Prsht.h (LPFNADDPROPSHEETPAGE), Shtypes.h (LPSTRRET).  Gates
   GREEN x6.
+- include/Objbase.h: 33 interfaces made callable (the OLE/COM core):
+  IUnknown (3 slots, all page-documented), IMalloc, IMallocSpy,
+  IBindCtx, IClassFactory, IClassFactory2, IExternalConnection,
+  IMarshal, IMessageFilter, IMoniker (23 slots incl. the
+  IPersistStream base chain), IPersistFile, IOleItemContainer,
+  IDataObject, IAdviseSink, IDispatch, IErrorInfo,
+  ICreateErrorInfo, IEnumVARIANT, IEnumConnections,
+  IEnumConnectionPoints, IConnectionPoint,
+  IConnectionPointContainer, IPropertyBag, IPersistPropertyBag,
+  IClassActivator, IClientSecurity, IGlobalInterfaceTable,
+  IFillLockBytes, ILockBytes, ITypeInfo (22), ITypeInfo2 (37, the
+  R1 re-listed base slots tagged), ITypeLib (13), ITypeLib2 (17).
+  12 stay record-only (R1 carries neither): ICreateTypeInfo(2),
+  ICreateTypeLib(2), IEnumFORMATETC, IEnumMoniker, IEnumSTATDATA,
+  IEnumSTATSTG, IEnumString, IErrorlog, IMultiQI, IViewObjectEx.
+  Auxiliary spellings added (LPFUNCDESC / LPTYPEINFO / LPTYPELIB /
+  LPTYPECOMP, opaque IEnumUnknown) and Windef.h gained HTASK
+  (page-printed in the IMessageFilter signatures).  Gates GREEN x6.

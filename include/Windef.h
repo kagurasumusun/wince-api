@@ -216,6 +216,9 @@ typedef DWORD_PTR      *PDWORD_PTR;   /* SendMessageTimeout ms939981 */
 typedef DWORD_PTR      *LPDWORD_PTR;
 typedef WORD            ATOM;     /* atom table handle (Global*Atom) */
 typedef void           *HWND;     /* window handle */
+typedef void           *HTASK;    /* task handle (IMessageFilter pages
+                                    print it in signatures; M97 vtable
+                                    fill-ins reference it) */
 typedef void           *HMENU;    /* menu handle */
 typedef void           *HACCEL;   /* accelerator-table handle */
 typedef void           *HBITMAP;  /* bitmap handle (CreateCaret) */

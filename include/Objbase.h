@@ -3128,6 +3128,904 @@ typedef struct tagStoreInfo {
  *   ms891559 GetExtent: HRESULT GetExtent(DWORDdwAspect,LONGlindex,DVTARGETDEVICEptd,LPSIZELlpsizel);
  */
 
+/* ================================================================== */
+/* ------------------------------------------------------------------ */
+/* Auxiliary spellings the M97 vtable fill-in signatures reference:     */
+/* LP aliases of recorded structs / interface-pointer spellings R1      */
+/* uses, plus opaque forward carriers for pointer-only parameters.      */
+/* ------------------------------------------------------------------ */
+typedef FUNCDESC *LPFUNCDESC;
+typedef ITypeInfo *LPTYPEINFO;
+typedef ITypeLib *LPTYPELIB;
+typedef ITypeComp *LPTYPECOMP;
+typedef struct IEnumUnknown IEnumUnknown;  /* opaque; pointer-only use */
+
+/* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
+ * ORDER adopted from R1 (CeGCC-lineage w32api, public
+ * domain; docs/clean-room.md par.4 revision 2026-09-10);
+ * method names/types are the CE pages' own printed
+ * signatures (the records above).  Methods the CE pages do
+ * not document but R1 carries are INCLUDED and tagged
+ * "(R1)" -- dropping a middle slot would shift the layout.
+ * Calling convention: plain function pointers (WINAPI is
+ * empty here: CE-wide cdecl; R1's __stdcall NOT adopted). */
+/* ================================================================== */
+
+/* ---- IAdviseSink: 5 documented method pages; order R1 ---- */
+typedef struct IAdviseSinkVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IAdviseSink*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IAdviseSink*);  /* (R1) */
+    ULONG (WINAPI *Release)(IAdviseSink*);  /* (R1) */
+    /* IAdviseSink */
+    void (WINAPI *OnDataChange)(IAdviseSink*, FORMATETC* pFormatetc, STGMEDIUM* pStgmed);  /* 887006 */
+    void (WINAPI *OnViewChange)(IAdviseSink*, DWORD dwAspect, LONG lindex);  /* 887009 */
+    void (WINAPI *OnRename)(IAdviseSink*, IMoniker* pmk);  /* 887007 */
+    void (WINAPI *OnSave)(IAdviseSink*);  /* 887008 */
+    void (WINAPI *OnClose)(IAdviseSink*);  /* 887005 */
+} IAdviseSinkVtbl;
+struct IAdviseSink { const IAdviseSinkVtbl *lpVtbl; };
+#define IAdviseSink_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IAdviseSink_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IAdviseSink_Release(T) ((T)->lpVtbl->Release(T))
+#define IAdviseSink_OnDataChange(T,a,b) ((T)->lpVtbl->OnDataChange(T,a,b))
+#define IAdviseSink_OnViewChange(T,a,b) ((T)->lpVtbl->OnViewChange(T,a,b))
+#define IAdviseSink_OnRename(T,a) ((T)->lpVtbl->OnRename(T,a))
+#define IAdviseSink_OnSave(T) ((T)->lpVtbl->OnSave(T))
+#define IAdviseSink_OnClose(T) ((T)->lpVtbl->OnClose(T))
+
+/* ---- IBindCtx: 10 documented method pages; order R1 ---- */
+typedef struct IBindCtxVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IBindCtx*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IBindCtx*);  /* (R1) */
+    ULONG (WINAPI *Release)(IBindCtx*);  /* (R1) */
+    /* IBindCtx */
+    HRESULT (WINAPI *RegisterObjectBound)(IBindCtx*, IUnknown* punk);  /* 887015 */
+    HRESULT (WINAPI *RevokeObjectBound)(IBindCtx*, IUnknown* punk);  /* 887018 */
+    HRESULT (WINAPI *ReleaseBoundObjects)(IBindCtx*);  /* 887017 */
+    HRESULT (WINAPI *SetBindOptions)(IBindCtx*, BIND_OPTS* pbindopts);  /* 887020 */
+    HRESULT (WINAPI *GetBindOptions)(IBindCtx*, BIND_OPTS* pbindopts);  /* 887011 */
+    HRESULT (WINAPI *GetRunningObjectTable)(IBindCtx*, IRunningObjectTable** pprot);  /* 887013 */
+    HRESULT (WINAPI *RegisterObjectParam)(IBindCtx*, LPOLESTR pszKey, IUnknown* punk);  /* 887016 */
+    HRESULT (WINAPI *GetObjectParam)(IBindCtx*, LPOLESTR pszKey, IUnknown** ppunk);  /* 887012 */
+    HRESULT (WINAPI *EnumObjectParam)(IBindCtx*, IEnumString** ppenum);  /* 887010 */
+    HRESULT (WINAPI *RevokeObjectParam)(IBindCtx*, LPOLESTR pszKey);  /* 887019 */
+} IBindCtxVtbl;
+struct IBindCtx { const IBindCtxVtbl *lpVtbl; };
+#define IBindCtx_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IBindCtx_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IBindCtx_Release(T) ((T)->lpVtbl->Release(T))
+#define IBindCtx_RegisterObjectBound(T,a) ((T)->lpVtbl->RegisterObjectBound(T,a))
+#define IBindCtx_RevokeObjectBound(T,a) ((T)->lpVtbl->RevokeObjectBound(T,a))
+#define IBindCtx_ReleaseBoundObjects(T) ((T)->lpVtbl->ReleaseBoundObjects(T))
+#define IBindCtx_SetBindOptions(T,a) ((T)->lpVtbl->SetBindOptions(T,a))
+#define IBindCtx_GetBindOptions(T,a) ((T)->lpVtbl->GetBindOptions(T,a))
+#define IBindCtx_GetRunningObjectTable(T,a) ((T)->lpVtbl->GetRunningObjectTable(T,a))
+#define IBindCtx_RegisterObjectParam(T,a,b) ((T)->lpVtbl->RegisterObjectParam(T,a,b))
+#define IBindCtx_GetObjectParam(T,a,b) ((T)->lpVtbl->GetObjectParam(T,a,b))
+#define IBindCtx_EnumObjectParam(T,a) ((T)->lpVtbl->EnumObjectParam(T,a))
+#define IBindCtx_RevokeObjectParam(T,a) ((T)->lpVtbl->RevokeObjectParam(T,a))
+
+/* ---- IClassActivator: 1 documented method pages; order R1 ---- */
+typedef struct IClassActivatorVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IClassActivator*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IClassActivator*);  /* (R1) */
+    ULONG (WINAPI *Release)(IClassActivator*);  /* (R1) */
+    /* IClassActivator */
+    HRESULT (WINAPI *GetClassObject)(IClassActivator*, REFCLSID* pClassID, DWORD dwClsContext, LCID locale, REFIID riid, void** ppv);  /* 887268 */
+} IClassActivatorVtbl;
+struct IClassActivator { const IClassActivatorVtbl *lpVtbl; };
+#define IClassActivator_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IClassActivator_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IClassActivator_Release(T) ((T)->lpVtbl->Release(T))
+#define IClassActivator_GetClassObject(T,a,b,c,d,e) ((T)->lpVtbl->GetClassObject(T,a,b,c,d,e))
+
+/* ---- IClassFactory: 2 documented method pages; order R1 ---- */
+typedef struct IClassFactoryVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IClassFactory*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IClassFactory*);  /* (R1) */
+    ULONG (WINAPI *Release)(IClassFactory*);  /* (R1) */
+    /* IClassFactory */
+    HRESULT (WINAPI *CreateInstance)(IClassFactory*, IUnknown* pUnkOuter, REFIID riid, void** ppvObject);  /* 887274 */
+    HRESULT (WINAPI *LockServer)(IClassFactory*, BOOL fLock);  /* 887276 */
+} IClassFactoryVtbl;
+struct IClassFactory { const IClassFactoryVtbl *lpVtbl; };
+#define IClassFactory_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IClassFactory_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IClassFactory_Release(T) ((T)->lpVtbl->Release(T))
+#define IClassFactory_CreateInstance(T,a,b,c) ((T)->lpVtbl->CreateInstance(T,a,b,c))
+#define IClassFactory_LockServer(T,a) ((T)->lpVtbl->LockServer(T,a))
+
+/* ---- IClassFactory2: 2 documented method pages; order R1 ---- */
+typedef struct IClassFactory2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IClassFactory2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IClassFactory2*);  /* (R1) */
+    ULONG (WINAPI *Release)(IClassFactory2*);  /* (R1) */
+    /* IClassFactory */
+    HRESULT (WINAPI *CreateInstance)(IClassFactory2*, LPUNKNOWN, REFIID, PVOID*);  /* (R1) */
+    HRESULT (WINAPI *LockServer)(IClassFactory2*, BOOL);  /* (R1) */
+    /* IClassFactory2 */
+    HRESULT (WINAPI *GetLicInfo)(IClassFactory2*, LICINFO* pLicInfo);  /* 887271 */
+    HRESULT (WINAPI *RequestLicKey)(IClassFactory2*, DWORD dwReserved, BSTR* pbstrKey);  /* 887273 */
+    HRESULT (WINAPI *CreateInstanceLic)(IClassFactory2*, LPUNKNOWN, LPUNKNOWN, REFIID, BSTR, PVOID*);  /* (R1) */
+} IClassFactory2Vtbl;
+struct IClassFactory2 { const IClassFactory2Vtbl *lpVtbl; };
+#define IClassFactory2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IClassFactory2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IClassFactory2_Release(T) ((T)->lpVtbl->Release(T))
+#define IClassFactory2_CreateInstance(T,a,b,c) ((T)->lpVtbl->CreateInstance(T,a,b,c))
+#define IClassFactory2_LockServer(T,a) ((T)->lpVtbl->LockServer(T,a))
+#define IClassFactory2_GetLicInfo(T,a) ((T)->lpVtbl->GetLicInfo(T,a))
+#define IClassFactory2_RequestLicKey(T,a,b) ((T)->lpVtbl->RequestLicKey(T,a,b))
+#define IClassFactory2_CreateInstanceLic(T,a,b,c,d,e) ((T)->lpVtbl->CreateInstanceLic(T,a,b,c,d,e))
+
+/* ---- IClientSecurity: 1 documented method pages; order R1 ---- */
+typedef struct IClientSecurityVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IClientSecurity*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IClientSecurity*);  /* (R1) */
+    ULONG (WINAPI *Release)(IClientSecurity*);  /* (R1) */
+    /* IClientSecurity */
+    HRESULT (WINAPI *QueryBlanket)(IClientSecurity*, VOID*, PDWORD, PDWORD, OLECHAR**, PDWORD, PDWORD, RPC_AUTH_IDENTITY_HANDLE**, PDWORD*);  /* (R1) */
+    HRESULT (WINAPI *SetBlanket)(IClientSecurity*, VOID*, DWORD, DWORD, LPWSTR, DWORD, DWORD, RPC_AUTH_IDENTITY_HANDLE*, DWORD);  /* (R1) */
+    HRESULT (WINAPI *CopyProxy)(IClientSecurity*, IUnknown* pProxy, IUnknown** ppCopy);  /* 887277 */
+} IClientSecurityVtbl;
+struct IClientSecurity { const IClientSecurityVtbl *lpVtbl; };
+#define IClientSecurity_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IClientSecurity_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IClientSecurity_Release(T) ((T)->lpVtbl->Release(T))
+#define IClientSecurity_QueryBlanket(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->QueryBlanket(T,a,b,c,d,e,f,g,h))
+#define IClientSecurity_SetBlanket(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->SetBlanket(T,a,b,c,d,e,f,g,h))
+#define IClientSecurity_CopyProxy(T,a,b) ((T)->lpVtbl->CopyProxy(T,a,b))
+
+/* ---- IConnectionPoint: 5 documented method pages; order R1 ---- */
+typedef struct IConnectionPointVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IConnectionPoint*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IConnectionPoint*);  /* (R1) */
+    ULONG (WINAPI *Release)(IConnectionPoint*);  /* (R1) */
+    /* IConnectionPoint */
+    HRESULT (WINAPI *GetConnectionInterface)(IConnectionPoint*, IID* pIID);  /* 887287 */
+    HRESULT (WINAPI *GetConnectionPointContainer)(IConnectionPoint*, IConnectionPointContainer** ppCPC);  /* 887288 */
+    HRESULT (WINAPI *Advise)(IConnectionPoint*, IUnknown* pUnk, DWORD* pdwCookie);  /* 887281 */
+    HRESULT (WINAPI *Unadvise)(IConnectionPoint*, DWORD dwCookie);  /* 887290 */
+    HRESULT (WINAPI *EnumConnections)(IConnectionPoint*, IEnumConnections** ppEnum);  /* 887286 */
+} IConnectionPointVtbl;
+struct IConnectionPoint { const IConnectionPointVtbl *lpVtbl; };
+#define IConnectionPoint_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IConnectionPoint_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IConnectionPoint_Release(T) ((T)->lpVtbl->Release(T))
+#define IConnectionPoint_GetConnectionInterface(T,a) ((T)->lpVtbl->GetConnectionInterface(T,a))
+#define IConnectionPoint_GetConnectionPointContainer(T,a) ((T)->lpVtbl->GetConnectionPointContainer(T,a))
+#define IConnectionPoint_Advise(T,a,b) ((T)->lpVtbl->Advise(T,a,b))
+#define IConnectionPoint_Unadvise(T,a) ((T)->lpVtbl->Unadvise(T,a))
+#define IConnectionPoint_EnumConnections(T,a) ((T)->lpVtbl->EnumConnections(T,a))
+
+/* ---- IConnectionPointContainer: 2 documented method pages; order R1 ---- */
+typedef struct IConnectionPointContainerVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IConnectionPointContainer*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IConnectionPointContainer*);  /* (R1) */
+    ULONG (WINAPI *Release)(IConnectionPointContainer*);  /* (R1) */
+    /* IConnectionPointContainer */
+    HRESULT (WINAPI *EnumConnectionPoints)(IConnectionPointContainer*, IEnumConnectionPoints** ppEnum);  /* 887283 */
+    HRESULT (WINAPI *FindConnectionPoint)(IConnectionPointContainer*, REFIID riid, IConnectionPoint** ppCP);  /* 887284 */
+} IConnectionPointContainerVtbl;
+struct IConnectionPointContainer { const IConnectionPointContainerVtbl *lpVtbl; };
+#define IConnectionPointContainer_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IConnectionPointContainer_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IConnectionPointContainer_Release(T) ((T)->lpVtbl->Release(T))
+#define IConnectionPointContainer_EnumConnectionPoints(T,a) ((T)->lpVtbl->EnumConnectionPoints(T,a))
+#define IConnectionPointContainer_FindConnectionPoint(T,a,b) ((T)->lpVtbl->FindConnectionPoint(T,a,b))
+
+/* ---- ICreateErrorInfo: 5 documented method pages; order R1 ---- */
+typedef struct ICreateErrorInfoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ICreateErrorInfo*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ICreateErrorInfo*);  /* (R1) */
+    ULONG (WINAPI *Release)(ICreateErrorInfo*);  /* (R1) */
+    /* ICreateErrorInfo */
+    HRESULT (WINAPI *SetGUID)(ICreateErrorInfo*, REFGUID rguid);  /* 887296 */
+    HRESULT (WINAPI *SetSource)(ICreateErrorInfo*, LPCOLESTR szSource);  /* 887299 */
+    HRESULT (WINAPI *SetDescription)(ICreateErrorInfo*, LPCOLESTR* szDescription);  /* 887295 */
+    HRESULT (WINAPI *SetHelpFile)(ICreateErrorInfo*, LPCOLESTR szHelpFile);  /* 887298 */
+    HRESULT (WINAPI *SetHelpContext)(ICreateErrorInfo*, DWORD dwHelpContext);  /* 887297 */
+} ICreateErrorInfoVtbl;
+struct ICreateErrorInfo { const ICreateErrorInfoVtbl *lpVtbl; };
+#define ICreateErrorInfo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ICreateErrorInfo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ICreateErrorInfo_Release(T) ((T)->lpVtbl->Release(T))
+#define ICreateErrorInfo_SetGUID(T,a) ((T)->lpVtbl->SetGUID(T,a))
+#define ICreateErrorInfo_SetSource(T,a) ((T)->lpVtbl->SetSource(T,a))
+#define ICreateErrorInfo_SetDescription(T,a) ((T)->lpVtbl->SetDescription(T,a))
+#define ICreateErrorInfo_SetHelpFile(T,a) ((T)->lpVtbl->SetHelpFile(T,a))
+#define ICreateErrorInfo_SetHelpContext(T,a) ((T)->lpVtbl->SetHelpContext(T,a))
+
+/* ---- IDataObject: 9 documented method pages; order R1 ---- */
+typedef struct IDataObjectVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IDataObject*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IDataObject*);  /* (R1) */
+    ULONG (WINAPI *Release)(IDataObject*);  /* (R1) */
+    /* IDataObject */
+    HRESULT (WINAPI *GetData)(IDataObject*, FORMATETC* pFormatetc, STGMEDIUM* pmedium);  /* 887358 */
+    HRESULT (WINAPI *GetDataHere)(IDataObject*, FORMATETC* pFormatetc, STGMEDIUM* pmedium);  /* 887359 */
+    HRESULT (WINAPI *QueryGetData)(IDataObject*, FORMATETC* pFormatetc);  /* 887360 */
+    HRESULT (WINAPI *GetCanonicalFormatEtc)(IDataObject*, FORMATETC* pFormatetcIn, FORMATETC* pFormatetcOut);  /* 887357 */
+    HRESULT (WINAPI *SetData)(IDataObject*, FORMATETC* pFormatetc, STGMEDIUM* pmedium, BOOL fRelease);  /* 887361 */
+    HRESULT (WINAPI *EnumFormatEtc)(IDataObject*, DWORD dwDirection, IEnumFORMATETC** ppenumFormatetc);  /* 887356 */
+    HRESULT (WINAPI *DAdvise)(IDataObject*, FORMATETC* pFormatetc, DWORD advf, IAdviseSink* pAdvSink, DWORD* pdwConnection);  /* 887353 */
+    HRESULT (WINAPI *DUnadvise)(IDataObject*, DWORD dwConnection);  /* 887354 */
+    HRESULT (WINAPI *EnumDAdvise)(IDataObject*, IEnumSTATDATA** ppenumAdvise);  /* 887355 */
+} IDataObjectVtbl;
+struct IDataObject { const IDataObjectVtbl *lpVtbl; };
+#define IDataObject_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IDataObject_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IDataObject_Release(T) ((T)->lpVtbl->Release(T))
+#define IDataObject_GetData(T,a,b) ((T)->lpVtbl->GetData(T,a,b))
+#define IDataObject_GetDataHere(T,a,b) ((T)->lpVtbl->GetDataHere(T,a,b))
+#define IDataObject_QueryGetData(T,a) ((T)->lpVtbl->QueryGetData(T,a))
+#define IDataObject_GetCanonicalFormatEtc(T,a,b) ((T)->lpVtbl->GetCanonicalFormatEtc(T,a,b))
+#define IDataObject_SetData(T,a,b,c) ((T)->lpVtbl->SetData(T,a,b,c))
+#define IDataObject_EnumFormatEtc(T,a,b) ((T)->lpVtbl->EnumFormatEtc(T,a,b))
+#define IDataObject_DAdvise(T,a,b,c,d) ((T)->lpVtbl->DAdvise(T,a,b,c,d))
+#define IDataObject_DUnadvise(T,a) ((T)->lpVtbl->DUnadvise(T,a))
+#define IDataObject_EnumDAdvise(T,a) ((T)->lpVtbl->EnumDAdvise(T,a))
+
+/* ---- IDispatch: 3 documented method pages; order R1 ---- */
+typedef struct IDispatchVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IDispatch*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IDispatch*);  /* (R1) */
+    ULONG (WINAPI *Release)(IDispatch*);  /* (R1) */
+    /* IDispatch */
+    HRESULT (WINAPI *GetTypeInfoCount)(IDispatch*, unsigned int* pctinfo);  /* 887723 */
+    HRESULT (WINAPI *GetTypeInfo)(IDispatch*, unsigned int iTInfo, LCID lcid, ITypeInfo** ppTInfo);  /* 887722 */
+    HRESULT (WINAPI *GetIDsOfNames)(IDispatch*, REFIID riid, OLECHAR** rgszNames, unsigned int cNames, LCID lcid, DISPID* rgDispId);  /* 887721 */
+    HRESULT (WINAPI *Invoke)(IDispatch*, DISPID, REFIID, LCID, WORD, DISPPARAMS*, VARIANT*, EXCEPINFO*, UINT*);  /* (R1) */
+} IDispatchVtbl;
+struct IDispatch { const IDispatchVtbl *lpVtbl; };
+#define IDispatch_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IDispatch_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IDispatch_Release(T) ((T)->lpVtbl->Release(T))
+#define IDispatch_GetTypeInfoCount(T,a) ((T)->lpVtbl->GetTypeInfoCount(T,a))
+#define IDispatch_GetTypeInfo(T,a,b,c) ((T)->lpVtbl->GetTypeInfo(T,a,b,c))
+#define IDispatch_GetIDsOfNames(T,a,b,c,d,e) ((T)->lpVtbl->GetIDsOfNames(T,a,b,c,d,e))
+#define IDispatch_Invoke(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->Invoke(T,a,b,c,d,e,f,g,h))
+
+/* ---- IEnumConnectionPoints: 4 documented method pages; order R1 ---- */
+typedef struct IEnumConnectionPointsVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumConnectionPoints*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumConnectionPoints*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumConnectionPoints*);  /* (R1) */
+    /* IEnumConnectionPoints */
+    HRESULT (WINAPI *Next)(IEnumConnectionPoints*, ULONG cConnections, IConnectionPoint** rgpcn, ULONG* pcFetched);  /* 887729 */
+    HRESULT (WINAPI *Skip)(IEnumConnectionPoints*, ULONG cConnections);  /* 887731 */
+    HRESULT (WINAPI *Reset)(IEnumConnectionPoints*);  /* 887730 */
+    HRESULT (WINAPI *Clone)(IEnumConnectionPoints*, IEnumConnectionPoints** ppEnum);  /* 887727 */
+} IEnumConnectionPointsVtbl;
+struct IEnumConnectionPoints { const IEnumConnectionPointsVtbl *lpVtbl; };
+#define IEnumConnectionPoints_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumConnectionPoints_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumConnectionPoints_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumConnectionPoints_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumConnectionPoints_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+#define IEnumConnectionPoints_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumConnectionPoints_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+
+/* ---- IEnumConnections: 4 documented method pages; order R1 ---- */
+typedef struct IEnumConnectionsVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumConnections*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumConnections*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumConnections*);  /* (R1) */
+    /* IEnumConnections */
+    HRESULT (WINAPI *Next)(IEnumConnections*, ULONG cConnections, CONNECTDATA** rgpcd, ULONG* pcFetched);  /* 887734 */
+    HRESULT (WINAPI *Skip)(IEnumConnections*, ULONG cConnections);  /* 887736 */
+    HRESULT (WINAPI *Reset)(IEnumConnections*);  /* 887735 */
+    HRESULT (WINAPI *Clone)(IEnumConnections*, IEnumConnectionPoints** ppEnum);  /* 887732 */
+} IEnumConnectionsVtbl;
+struct IEnumConnections { const IEnumConnectionsVtbl *lpVtbl; };
+#define IEnumConnections_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumConnections_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumConnections_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumConnections_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumConnections_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+#define IEnumConnections_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumConnections_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+
+/* ---- IEnumVARIANT: 4 documented method pages; order R1 ---- */
+typedef struct IEnumVARIANTVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumVARIANT*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumVARIANT*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumVARIANT*);  /* (R1) */
+    /* IEnumVARIANT */
+    HRESULT (WINAPI *Next)(IEnumVARIANT*, unsigned long celt, VARIANT* rgVar, unsigned long* pCeltFetched);  /* 887765 */
+    HRESULT (WINAPI *Skip)(IEnumVARIANT*, unsigned long celt);  /* 887767 */
+    HRESULT (WINAPI *Reset)(IEnumVARIANT*);  /* 887766 */
+    HRESULT (WINAPI *Clone)(IEnumVARIANT*, IEnumVARIANT** ppEnum);  /* 887763 */
+} IEnumVARIANTVtbl;
+struct IEnumVARIANT { const IEnumVARIANTVtbl *lpVtbl; };
+#define IEnumVARIANT_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumVARIANT_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumVARIANT_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumVARIANT_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumVARIANT_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+#define IEnumVARIANT_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumVARIANT_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+
+/* ---- IErrorInfo: 5 documented method pages; order R1 ---- */
+typedef struct IErrorInfoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IErrorInfo*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IErrorInfo*);  /* (R1) */
+    ULONG (WINAPI *Release)(IErrorInfo*);  /* (R1) */
+    /* IErrorInfo */
+    HRESULT (WINAPI *GetGUID)(IErrorInfo*, GUID* pGUID);  /* 887769 */
+    HRESULT (WINAPI *GetSource)(IErrorInfo*, BSTR* pBstrSource);  /* 887782 */
+    HRESULT (WINAPI *GetDescription)(IErrorInfo*, BSTR* pBstrDescription);  /* 887768 */
+    HRESULT (WINAPI *GetHelpFile)(IErrorInfo*, BSTR* pBstrHelpFile);  /* 887781 */
+    HRESULT (WINAPI *GetHelpContext)(IErrorInfo*, DWORD* pdwHelpContext);  /* 887780 */
+} IErrorInfoVtbl;
+struct IErrorInfo { const IErrorInfoVtbl *lpVtbl; };
+#define IErrorInfo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IErrorInfo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IErrorInfo_Release(T) ((T)->lpVtbl->Release(T))
+#define IErrorInfo_GetGUID(T,a) ((T)->lpVtbl->GetGUID(T,a))
+#define IErrorInfo_GetSource(T,a) ((T)->lpVtbl->GetSource(T,a))
+#define IErrorInfo_GetDescription(T,a) ((T)->lpVtbl->GetDescription(T,a))
+#define IErrorInfo_GetHelpFile(T,a) ((T)->lpVtbl->GetHelpFile(T,a))
+#define IErrorInfo_GetHelpContext(T,a) ((T)->lpVtbl->GetHelpContext(T,a))
+
+/* ---- IExternalConnection: 2 documented method pages; order R1 ---- */
+typedef struct IExternalConnectionVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IExternalConnection*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IExternalConnection*);  /* (R1) */
+    ULONG (WINAPI *Release)(IExternalConnection*);  /* (R1) */
+    /* IExternalConnection */
+    HRESULT (WINAPI *AddConnection)(IExternalConnection*, DWORD exconn, DWORD dwreserved);  /* 887785 */
+    HRESULT (WINAPI *ReleaseConnection)(IExternalConnection*, DWORD extconn, DWORD dwreserved, BOOL fLastReleaseCloses);  /* 887786 */
+} IExternalConnectionVtbl;
+struct IExternalConnection { const IExternalConnectionVtbl *lpVtbl; };
+#define IExternalConnection_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IExternalConnection_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IExternalConnection_Release(T) ((T)->lpVtbl->Release(T))
+#define IExternalConnection_AddConnection(T,a,b) ((T)->lpVtbl->AddConnection(T,a,b))
+#define IExternalConnection_ReleaseConnection(T,a,b,c) ((T)->lpVtbl->ReleaseConnection(T,a,b,c))
+
+/* ---- IFillLockBytes: 4 documented method pages; order R1 ---- */
+typedef struct IFillLockBytesVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IFillLockBytes*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IFillLockBytes*);  /* (R1) */
+    ULONG (WINAPI *Release)(IFillLockBytes*);  /* (R1) */
+    /* IFillLockBytes */
+    HRESULT (WINAPI *FillAppend)(IFillLockBytes*, void const* pv, ULONG cb, ULONG* pcbWritten);  /* 887788 */
+    HRESULT (WINAPI *FillAt)(IFillLockBytes*, ULARGE_INTEGER uIOffset, void const* pv, ULONG cb, ULONG* pcbWritten);  /* 887789 */
+    HRESULT (WINAPI *SetFillSize)(IFillLockBytes*, ULARGE_INTEGER uISize);  /* 887791 */
+    HRESULT (WINAPI *Terminate)(IFillLockBytes*, BOOL bCanceled);  /* 887792 */
+} IFillLockBytesVtbl;
+struct IFillLockBytes { const IFillLockBytesVtbl *lpVtbl; };
+#define IFillLockBytes_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IFillLockBytes_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IFillLockBytes_Release(T) ((T)->lpVtbl->Release(T))
+#define IFillLockBytes_FillAppend(T,a,b,c) ((T)->lpVtbl->FillAppend(T,a,b,c))
+#define IFillLockBytes_FillAt(T,a,b,c,d) ((T)->lpVtbl->FillAt(T,a,b,c,d))
+#define IFillLockBytes_SetFillSize(T,a) ((T)->lpVtbl->SetFillSize(T,a))
+#define IFillLockBytes_Terminate(T,a) ((T)->lpVtbl->Terminate(T,a))
+
+/* ---- IGlobalInterfaceTable: 3 documented method pages; order R1 ---- */
+typedef struct IGlobalInterfaceTableVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IGlobalInterfaceTable*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IGlobalInterfaceTable*);  /* (R1) */
+    ULONG (WINAPI *Release)(IGlobalInterfaceTable*);  /* (R1) */
+    /* IGlobalInterfaceTable */
+    HRESULT (WINAPI *RegisterInterfaceInGlobal)(IGlobalInterfaceTable*, IUnknown* pUnk, REFIID riid, DWORD* pdwCookie);  /* 887795 */
+    HRESULT (WINAPI *RevokeInterfaceFromGlobal)(IGlobalInterfaceTable*, DWORD dwCookie);  /* 887796 */
+    HRESULT (WINAPI *GetInterfaceFromGlobal)(IGlobalInterfaceTable*, DWORD dwCookie, REFIID riid, void** ppv);  /* 887794 */
+} IGlobalInterfaceTableVtbl;
+struct IGlobalInterfaceTable { const IGlobalInterfaceTableVtbl *lpVtbl; };
+#define IGlobalInterfaceTable_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IGlobalInterfaceTable_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IGlobalInterfaceTable_Release(T) ((T)->lpVtbl->Release(T))
+#define IGlobalInterfaceTable_RegisterInterfaceInGlobal(T,a,b,c) ((T)->lpVtbl->RegisterInterfaceInGlobal(T,a,b,c))
+#define IGlobalInterfaceTable_RevokeInterfaceFromGlobal(T,a) ((T)->lpVtbl->RevokeInterfaceFromGlobal(T,a))
+#define IGlobalInterfaceTable_GetInterfaceFromGlobal(T,a,b,c) ((T)->lpVtbl->GetInterfaceFromGlobal(T,a,b,c))
+
+/* ---- ILockBytes: 7 documented method pages; order R1 ---- */
+typedef struct ILockBytesVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ILockBytes*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ILockBytes*);  /* (R1) */
+    ULONG (WINAPI *Release)(ILockBytes*);  /* (R1) */
+    /* ILockBytes */
+    HRESULT (WINAPI *ReadAt)(ILockBytes*, ULARGE_INTEGER ulOffset, void* pv, ULONG cb, ULONG* pcbRead);  /* 887801 */
+    HRESULT (WINAPI *WriteAt)(ILockBytes*, ULARGE_INTEGER ulOffset, void const* pv, ULONG cb, ULONG* pcbWritten);  /* 887805 */
+    HRESULT (WINAPI *Flush)(ILockBytes*);  /* 887798 */
+    HRESULT (WINAPI *SetSize)(ILockBytes*, ULARGE_INTEGER cb);  /* 887802 */
+    HRESULT (WINAPI *LockRegion)(ILockBytes*, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, DWORD dwLockType);  /* 887800 */
+    HRESULT (WINAPI *UnlockRegion)(ILockBytes*, ULARGE_INTEGER libOffset, ULARGE_INTEGER cb, DWORD dwLockType);  /* 887804 */
+    HRESULT (WINAPI *Stat)(ILockBytes*, STATSTG* pstatstg, DWORD grfStatFlag);  /* 887803 */
+} ILockBytesVtbl;
+struct ILockBytes { const ILockBytesVtbl *lpVtbl; };
+#define ILockBytes_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ILockBytes_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ILockBytes_Release(T) ((T)->lpVtbl->Release(T))
+#define ILockBytes_ReadAt(T,a,b,c,d) ((T)->lpVtbl->ReadAt(T,a,b,c,d))
+#define ILockBytes_WriteAt(T,a,b,c,d) ((T)->lpVtbl->WriteAt(T,a,b,c,d))
+#define ILockBytes_Flush(T) ((T)->lpVtbl->Flush(T))
+#define ILockBytes_SetSize(T,a) ((T)->lpVtbl->SetSize(T,a))
+#define ILockBytes_LockRegion(T,a,b,c) ((T)->lpVtbl->LockRegion(T,a,b,c))
+#define ILockBytes_UnlockRegion(T,a,b,c) ((T)->lpVtbl->UnlockRegion(T,a,b,c))
+#define ILockBytes_Stat(T,a,b) ((T)->lpVtbl->Stat(T,a,b))
+
+/* ---- IMalloc: 4 documented method pages; order R1 ---- */
+typedef struct IMallocVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMalloc*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMalloc*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMalloc*);  /* (R1) */
+    /* IMalloc */
+    void (WINAPI *Free)(IMalloc*, void* pv);  /* 887809 */
+    ULONG (WINAPI *GetSize)(IMalloc*, void* pv);  /* 887810 */
+    int (WINAPI *DidAlloc)(IMalloc*, void* pv);  /* 887808 */
+    void (WINAPI *HeapMinimize)(IMalloc*);  /* 887811 */
+} IMallocVtbl;
+struct IMalloc { const IMallocVtbl *lpVtbl; };
+#define IMalloc_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMalloc_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMalloc_Release(T) ((T)->lpVtbl->Release(T))
+#define IMalloc_Free(T,a) ((T)->lpVtbl->Free(T,a))
+#define IMalloc_GetSize(T,a) ((T)->lpVtbl->GetSize(T,a))
+#define IMalloc_DidAlloc(T,a) ((T)->lpVtbl->DidAlloc(T,a))
+#define IMalloc_HeapMinimize(T) ((T)->lpVtbl->HeapMinimize(T))
+
+/* ---- IMallocSpy: 7 documented method pages; order R1 ---- */
+typedef struct IMallocSpyVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMallocSpy*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMallocSpy*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMallocSpy*);  /* (R1) */
+    /* IMallocSpy */
+    ULONG (WINAPI *PreAlloc)(IMallocSpy*, ULONG cbRequest);  /* 887820 */
+    void (WINAPI *PostFree)(IMallocSpy*, BOOL fSpyed);  /* 887816 */
+    ULONG (WINAPI *PreRealloc)(IMallocSpy*, void* pRequest, ULONG cbRequest, void** ppNewRequest, BOOL fSpyed);  /* 887950 */
+    ULONG (WINAPI *PostGetSize)(IMallocSpy*, ULONG cbActual, BOOL fSpyed);  /* 887817 */
+    int (WINAPI *PostDidAlloc)(IMallocSpy*, void* pRequest, BOOL fSpyed, int fActual);  /* 887815 */
+    void (WINAPI *PreHeapMinimize)(IMallocSpy*);  /* 887943 */
+    void (WINAPI *PostHeapMinimize)(IMallocSpy*);  /* 887818 */
+} IMallocSpyVtbl;
+struct IMallocSpy { const IMallocSpyVtbl *lpVtbl; };
+#define IMallocSpy_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMallocSpy_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMallocSpy_Release(T) ((T)->lpVtbl->Release(T))
+#define IMallocSpy_PreAlloc(T,a) ((T)->lpVtbl->PreAlloc(T,a))
+#define IMallocSpy_PostFree(T,a) ((T)->lpVtbl->PostFree(T,a))
+#define IMallocSpy_PreRealloc(T,a,b,c,d) ((T)->lpVtbl->PreRealloc(T,a,b,c,d))
+#define IMallocSpy_PostGetSize(T,a,b) ((T)->lpVtbl->PostGetSize(T,a,b))
+#define IMallocSpy_PostDidAlloc(T,a,b,c) ((T)->lpVtbl->PostDidAlloc(T,a,b,c))
+#define IMallocSpy_PreHeapMinimize(T) ((T)->lpVtbl->PreHeapMinimize(T))
+#define IMallocSpy_PostHeapMinimize(T) ((T)->lpVtbl->PostHeapMinimize(T))
+
+/* ---- IMarshal: 3 documented method pages; order R1 ---- */
+typedef struct IMarshalVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMarshal*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMarshal*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMarshal*);  /* (R1) */
+    /* IMarshal */
+    HRESULT (WINAPI *GetUnmarshalClass)(IMarshal*, REFIID, VOID*, DWORD, VOID*, DWORD, CLSID*);  /* (R1) */
+    HRESULT (WINAPI *GetMarshalSizeMax)(IMarshal*, REFIID, VOID*, DWORD, VOID*, PDWORD, ULONG*);  /* (R1) */
+    HRESULT (WINAPI *MarshalInterface)(IMarshal*, IStream*, REFIID, VOID*, DWORD, VOID*, DWORD);  /* (R1) */
+    HRESULT (WINAPI *UnmarshalInterface)(IMarshal*, IStream* pStm, REFIID riid, void** ppv);  /* 889306 */
+    HRESULT (WINAPI *ReleaseMarshalData)(IMarshal*, IStream* pStm);  /* 889299 */
+    HRESULT (WINAPI *DisconnectObject)(IMarshal*, DWORD dwReserved);  /* 887969 */
+} IMarshalVtbl;
+struct IMarshal { const IMarshalVtbl *lpVtbl; };
+#define IMarshal_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMarshal_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMarshal_Release(T) ((T)->lpVtbl->Release(T))
+#define IMarshal_GetUnmarshalClass(T,a,b,c,d,e,f) ((T)->lpVtbl->GetUnmarshalClass(T,a,b,c,d,e,f))
+#define IMarshal_GetMarshalSizeMax(T,a,b,c,d,e,f) ((T)->lpVtbl->GetMarshalSizeMax(T,a,b,c,d,e,f))
+#define IMarshal_MarshalInterface(T,a,b,c,d,e,f) ((T)->lpVtbl->MarshalInterface(T,a,b,c,d,e,f))
+#define IMarshal_UnmarshalInterface(T,a,b,c) ((T)->lpVtbl->UnmarshalInterface(T,a,b,c))
+#define IMarshal_ReleaseMarshalData(T,a) ((T)->lpVtbl->ReleaseMarshalData(T,a))
+#define IMarshal_DisconnectObject(T,a) ((T)->lpVtbl->DisconnectObject(T,a))
+
+/* ---- IMessageFilter: 2 documented method pages; order R1 ---- */
+typedef struct IMessageFilterVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMessageFilter*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMessageFilter*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMessageFilter*);  /* (R1) */
+    /* IMessageFilter */
+    DWORD (WINAPI *HandleInComingCall)(IMessageFilter*, DWORD, HTASK, DWORD, LPINTERFACEINFO);  /* (R1) */
+    DWORD (WINAPI *RetryRejectedCall)(IMessageFilter*, HTASK threadIDCallee, DWORD dwTickCount, DWORD dwRejectType);  /* 889311 */
+    DWORD (WINAPI *MessagePending)(IMessageFilter*, HTASK threadIDCallee, DWORD dwTickCount, DWORD dwPendingType);  /* 889310 */
+} IMessageFilterVtbl;
+struct IMessageFilter { const IMessageFilterVtbl *lpVtbl; };
+#define IMessageFilter_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMessageFilter_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMessageFilter_Release(T) ((T)->lpVtbl->Release(T))
+#define IMessageFilter_HandleInComingCall(T,a,b,c,d) ((T)->lpVtbl->HandleInComingCall(T,a,b,c,d))
+#define IMessageFilter_RetryRejectedCall(T,a,b,c) ((T)->lpVtbl->RetryRejectedCall(T,a,b,c))
+#define IMessageFilter_MessagePending(T,a,b,c) ((T)->lpVtbl->MessagePending(T,a,b,c))
+
+/* ---- IMoniker: 14 documented method pages; order R1 ---- */
+typedef struct IMonikerVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMoniker*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMoniker*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMoniker*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IMoniker*, LPCLSID);  /* (R1) */
+    /* IPersistStream */
+    HRESULT (WINAPI *IsDirty)(IMoniker*);  /* (R1) */
+    HRESULT (WINAPI *Load)(IMoniker*, IStream*);  /* (R1) */
+    HRESULT (WINAPI *Save)(IMoniker*, IStream*, BOOL);  /* (R1) */
+    HRESULT (WINAPI *GetSizeMax)(IMoniker*, PULARGE_INTEGER);  /* (R1) */
+    /* IMoniker */
+    HRESULT (WINAPI *BindToObject)(IMoniker*, IBindCtx* pbc, IMoniker* pmkToLeft, REFIID riidResult, void** ppvResult);  /* 889312 */
+    HRESULT (WINAPI *BindToStorage)(IMoniker*, IBindCtx* pbc, IMoniker* pmkToLeft, REFIID riid, void** ppvObj);  /* 889313 */
+    HRESULT (WINAPI *Reduce)(IMoniker*, IBindCtx* pbc, DWORD dwReduceHowFar, IMoniker** ppmkToLeft, IMoniker** ppmkReduced);  /* 889327 */
+    HRESULT (WINAPI *ComposeWith)(IMoniker*, IMoniker* pmkRight, BOOL fOnlyIfNotGeneric, IMoniker** ppmkComposite);  /* 889316 */
+    HRESULT (WINAPI *Enum)(IMoniker*, BOOL fForward, IEnumMoniker** ppenumMoniker);  /* 889317 */
+    HRESULT (WINAPI *IsEqual)(IMoniker*, IMoniker* pmkOtherMoniker);  /* 889322 */
+    HRESULT (WINAPI *Hash)(IMoniker*, DWORD* pdwHash);  /* 889320 */
+    HRESULT (WINAPI *IsRunning)(IMoniker*, IBindCtx* pbc, IMoniker* pmkToLeft, IMoniker* pmkNewlyRunning);  /* 889323 */
+    HRESULT (WINAPI *GetTimeOfLastChange)(IMoniker*, IBindCtx* pbc, IMoniker* pmkToLeft, FILETIME* pFileTime);  /* 889319 */
+    HRESULT (WINAPI *Inverse)(IMoniker*, IMoniker** ppmk);  /* 889321 */
+    HRESULT (WINAPI *CommonPrefixWith)(IMoniker*, IMoniker* pmkOther, IMoniker** ppmkPrefix);  /* 889314 */
+    HRESULT (WINAPI *RelativePathTo)(IMoniker*, IMoniker* pmkOther, IMoniker** ppmkRelPath);  /* 889328 */
+    HRESULT (WINAPI *GetDisplayName)(IMoniker*, IBindCtx* pbc, IMoniker* pmkToLeft, LPOLESTR* ppszDisplayName);  /* 889318 */
+    HRESULT (WINAPI *ParseDisplayName)(IMoniker*, IBindCtx*, IMoniker*, LPOLESTR, ULONG*, IMoniker**);  /* (R1) */
+    HRESULT (WINAPI *IsSystemMoniker)(IMoniker*, DWORD* pdwMksys);  /* 889324 */
+} IMonikerVtbl;
+struct IMoniker { const IMonikerVtbl *lpVtbl; };
+#define IMoniker_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMoniker_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMoniker_Release(T) ((T)->lpVtbl->Release(T))
+#define IMoniker_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IMoniker_IsDirty(T) ((T)->lpVtbl->IsDirty(T))
+#define IMoniker_Load(T,a) ((T)->lpVtbl->Load(T,a))
+#define IMoniker_Save(T,a,b) ((T)->lpVtbl->Save(T,a,b))
+#define IMoniker_GetSizeMax(T,a) ((T)->lpVtbl->GetSizeMax(T,a))
+#define IMoniker_BindToObject(T,a,b,c,d) ((T)->lpVtbl->BindToObject(T,a,b,c,d))
+#define IMoniker_BindToStorage(T,a,b,c,d) ((T)->lpVtbl->BindToStorage(T,a,b,c,d))
+#define IMoniker_Reduce(T,a,b,c,d) ((T)->lpVtbl->Reduce(T,a,b,c,d))
+#define IMoniker_ComposeWith(T,a,b,c) ((T)->lpVtbl->ComposeWith(T,a,b,c))
+#define IMoniker_Enum(T,a,b) ((T)->lpVtbl->Enum(T,a,b))
+#define IMoniker_IsEqual(T,a) ((T)->lpVtbl->IsEqual(T,a))
+#define IMoniker_Hash(T,a) ((T)->lpVtbl->Hash(T,a))
+#define IMoniker_IsRunning(T,a,b,c) ((T)->lpVtbl->IsRunning(T,a,b,c))
+#define IMoniker_GetTimeOfLastChange(T,a,b,c) ((T)->lpVtbl->GetTimeOfLastChange(T,a,b,c))
+#define IMoniker_Inverse(T,a) ((T)->lpVtbl->Inverse(T,a))
+#define IMoniker_CommonPrefixWith(T,a,b) ((T)->lpVtbl->CommonPrefixWith(T,a,b))
+#define IMoniker_RelativePathTo(T,a,b) ((T)->lpVtbl->RelativePathTo(T,a,b))
+#define IMoniker_GetDisplayName(T,a,b,c) ((T)->lpVtbl->GetDisplayName(T,a,b,c))
+#define IMoniker_ParseDisplayName(T,a,b,c,d,e) ((T)->lpVtbl->ParseDisplayName(T,a,b,c,d,e))
+#define IMoniker_IsSystemMoniker(T,a) ((T)->lpVtbl->IsSystemMoniker(T,a))
+
+/* ---- IOleItemContainer: 3 documented method pages; order R1 ---- */
+typedef struct IOleItemContainerVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleItemContainer*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleItemContainer*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleItemContainer*);  /* (R1) */
+    /* IParseDisplayName */
+    HRESULT (WINAPI *ParseDisplayName)(IOleItemContainer*, IBindCtx*, LPOLESTR, ULONG*, IMoniker**);  /* (R1) */
+    /* IOleContainer */
+    HRESULT (WINAPI *EnumObjects)(IOleItemContainer*, DWORD, IEnumUnknown**);  /* (R1) */
+    HRESULT (WINAPI *LockContainer)(IOleItemContainer*, BOOL);  /* (R1) */
+    /* IOleItemContainer */
+    HRESULT (WINAPI *GetObject)(IOleItemContainer*, LPOLESTR pszItem, DWORD dwSpeedNeeded, IBindCtx* pbc, REFIID riid, void** ppvObject);  /* 889355 */
+    HRESULT (WINAPI *GetObjectStorage)(IOleItemContainer*, LPOLESTR pszItem, IBindCtx* pbc, REFIID riid, void** ppvStorage);  /* 889356 */
+    HRESULT (WINAPI *IsRunning)(IOleItemContainer*, LPOLESTR pszItem);  /* 889357 */
+} IOleItemContainerVtbl;
+struct IOleItemContainer { const IOleItemContainerVtbl *lpVtbl; };
+#define IOleItemContainer_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleItemContainer_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleItemContainer_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleItemContainer_ParseDisplayName(T,a,b,c,d) ((T)->lpVtbl->ParseDisplayName(T,a,b,c,d))
+#define IOleItemContainer_EnumObjects(T,a,b) ((T)->lpVtbl->EnumObjects(T,a,b))
+#define IOleItemContainer_LockContainer(T,a) ((T)->lpVtbl->LockContainer(T,a))
+#define IOleItemContainer_GetObject(T,a,b,c,d,e) ((T)->lpVtbl->GetObject(T,a,b,c,d,e))
+#define IOleItemContainer_GetObjectStorage(T,a,b,c,d) ((T)->lpVtbl->GetObjectStorage(T,a,b,c,d))
+#define IOleItemContainer_IsRunning(T,a) ((T)->lpVtbl->IsRunning(T,a))
+
+/* ---- IPersistFile: 2 documented method pages; order R1 ---- */
+typedef struct IPersistFileVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistFile*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistFile*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistFile*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistFile*, CLSID*);  /* (R1) */
+    /* IPersistFile */
+    HRESULT (WINAPI *IsDirty)(IPersistFile*);  /* 889395 */
+    HRESULT (WINAPI *Load)(IPersistFile*, LPCOLESTR, DWORD);  /* (R1) */
+    HRESULT (WINAPI *Save)(IPersistFile*, LPCOLESTR, BOOL);  /* (R1) */
+    HRESULT (WINAPI *SaveCompleted)(IPersistFile*, LPCOLESTR);  /* (R1) */
+    HRESULT (WINAPI *GetCurFile)(IPersistFile*, LPOLESTR* ppszFileName);  /* 889394 */
+} IPersistFileVtbl;
+struct IPersistFile { const IPersistFileVtbl *lpVtbl; };
+#define IPersistFile_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistFile_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistFile_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistFile_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistFile_IsDirty(T) ((T)->lpVtbl->IsDirty(T))
+#define IPersistFile_Load(T,a,b) ((T)->lpVtbl->Load(T,a,b))
+#define IPersistFile_Save(T,a,b) ((T)->lpVtbl->Save(T,a,b))
+#define IPersistFile_SaveCompleted(T,a) ((T)->lpVtbl->SaveCompleted(T,a))
+#define IPersistFile_GetCurFile(T,a) ((T)->lpVtbl->GetCurFile(T,a))
+
+/* ---- IPersistPropertyBag: 3 documented method pages; order R1 ---- */
+typedef struct IPersistPropertyBagVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistPropertyBag*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistPropertyBag*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistPropertyBag*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistPropertyBag*, LPCLSID);  /* (R1) */
+    /* IPersistPropertyBag */
+    HRESULT (WINAPI *InitNew)(IPersistPropertyBag*);  /* 886021 */
+    HRESULT (WINAPI *Load)(IPersistPropertyBag*, IPropertyBag* pPropBag, IErrorlog* pErrorLog);  /* 886038 */
+    HRESULT (WINAPI *Save)(IPersistPropertyBag*, IPropertyBag* pPropBag, BOOL fClearDirty, BOOL fSaveAllProperties);  /* 886047 */
+} IPersistPropertyBagVtbl;
+struct IPersistPropertyBag { const IPersistPropertyBagVtbl *lpVtbl; };
+#define IPersistPropertyBag_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistPropertyBag_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistPropertyBag_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistPropertyBag_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistPropertyBag_InitNew(T) ((T)->lpVtbl->InitNew(T))
+#define IPersistPropertyBag_Load(T,a,b) ((T)->lpVtbl->Load(T,a,b))
+#define IPersistPropertyBag_Save(T,a,b,c) ((T)->lpVtbl->Save(T,a,b,c))
+
+/* ---- IPropertyBag: 2 documented method pages; order R1 ---- */
+typedef struct IPropertyBagVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPropertyBag*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPropertyBag*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPropertyBag*);  /* (R1) */
+    /* IPropertyBag */
+    HRESULT (WINAPI *Read)(IPropertyBag*, LPCOLESTR pszPropName, VARIANT* pVar, IErrorlog* pErrorLog);  /* 886063 */
+    HRESULT (WINAPI *Write)(IPropertyBag*, LPCOLESTR pszPropName, VARIANT* pVar);  /* 886069 */
+} IPropertyBagVtbl;
+struct IPropertyBag { const IPropertyBagVtbl *lpVtbl; };
+#define IPropertyBag_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPropertyBag_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPropertyBag_Release(T) ((T)->lpVtbl->Release(T))
+#define IPropertyBag_Read(T,a,b,c) ((T)->lpVtbl->Read(T,a,b,c))
+#define IPropertyBag_Write(T,a,b) ((T)->lpVtbl->Write(T,a,b))
+
+/* ---- ITypeInfo: 16 documented method pages; order R1 ---- */
+typedef struct ITypeInfoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ITypeInfo*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ITypeInfo*);  /* (R1) */
+    ULONG (WINAPI *Release)(ITypeInfo*);  /* (R1) */
+    /* ITypeInfo */
+    HRESULT (WINAPI *GetTypeAttr)(ITypeInfo*, TYPEATTR** ppTypeAttr);  /* 890537 */
+    HRESULT (WINAPI *GetTypeComp)(ITypeInfo*, ITypeComp** ppTComp);  /* 890541 */
+    HRESULT (WINAPI *GetFuncDesc)(ITypeInfo*, unsigned int index, FUNCDESC** ppFuncDesc);  /* 890506 */
+    HRESULT (WINAPI *GetVarDesc)(ITypeInfo*, unsigned int index, VARDESC** ppVarDesc);  /* 890548 */
+    HRESULT (WINAPI *GetNames)(ITypeInfo*, MEMBERID memid, BSTR* rgBstrNames, unsigned int cMaxNames, unsigned int* pcNames);  /* 890524 */
+    HRESULT (WINAPI *GetRefTypeOfImplType)(ITypeInfo*, unsigned int index, HREFTYPE* pRefType);  /* 890533 */
+    HRESULT (WINAPI *GetImplTypeFlags)(ITypeInfo*, unsigned int index, int* pImplTypeFlags);  /* 890517 */
+    HRESULT (WINAPI *GetIDsOfNames)(ITypeInfo*, OLECHAR** rgszNames, unsigned int cNames, MEMBERID* pMemId);  /* 890510 */
+    HRESULT (WINAPI *Invoke)(ITypeInfo*, VOID*, MEMBERID, WORD, DISPPARAMS*, VARIANT*, EXCEPINFO*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *GetDocumentation)(ITypeInfo*, MEMBERID, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *GetDllEntry)(ITypeInfo*, MEMBERID, INVOKEKIND, BSTR*, BSTR*, WORD*);  /* (R1) */
+    HRESULT (WINAPI *GetRefTypeInfo)(ITypeInfo*, HREFTYPE hRefType, ITypeInfo** ppTInfo);  /* 890529 */
+    HRESULT (WINAPI *AddressOfMember)(ITypeInfo*, MEMBERID memid, INVOKEKIND invKind, VOID** ppv);  /* 890484 */
+    HRESULT (WINAPI *CreateInstance)(ITypeInfo*, IUnknown* pUnkOuter, REFIID riid, VOID** ppvObj);  /* 890488 */
+    HRESULT (WINAPI *GetMops)(ITypeInfo*, MEMBERID memid, BSTR* pBstrMops);  /* 890520 */
+    HRESULT (WINAPI *GetContainingTypeLib)(ITypeInfo*, ITypeLib** ppTLib, unsigned int* pIndex);  /* 890493 */
+    HRESULT (WINAPI *ReleaseTypeAttr)(ITypeInfo*, TYPEATTR* pTypeAttr);  /* 890570 */
+    HRESULT (WINAPI *ReleaseFuncDesc)(ITypeInfo*, FUNCDESC* pFuncDesc);  /* 890564 */
+    HRESULT (WINAPI *ReleaseVarDesc)(ITypeInfo*, VARDESC* pVarDesc);  /* 890575 */
+} ITypeInfoVtbl;
+struct ITypeInfo { const ITypeInfoVtbl *lpVtbl; };
+#define ITypeInfo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ITypeInfo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ITypeInfo_Release(T) ((T)->lpVtbl->Release(T))
+#define ITypeInfo_GetTypeAttr(T,a) ((T)->lpVtbl->GetTypeAttr(T,a))
+#define ITypeInfo_GetTypeComp(T,a) ((T)->lpVtbl->GetTypeComp(T,a))
+#define ITypeInfo_GetFuncDesc(T,a,b) ((T)->lpVtbl->GetFuncDesc(T,a,b))
+#define ITypeInfo_GetVarDesc(T,a,b) ((T)->lpVtbl->GetVarDesc(T,a,b))
+#define ITypeInfo_GetNames(T,a,b,c,d) ((T)->lpVtbl->GetNames(T,a,b,c,d))
+#define ITypeInfo_GetRefTypeOfImplType(T,a,b) ((T)->lpVtbl->GetRefTypeOfImplType(T,a,b))
+#define ITypeInfo_GetImplTypeFlags(T,a,b) ((T)->lpVtbl->GetImplTypeFlags(T,a,b))
+#define ITypeInfo_GetIDsOfNames(T,a,b,c) ((T)->lpVtbl->GetIDsOfNames(T,a,b,c))
+#define ITypeInfo_Invoke(T,a,b,c,d,e,f,g) ((T)->lpVtbl->Invoke(T,a,b,c,d,e,f,g))
+#define ITypeInfo_GetDocumentation(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation(T,a,b,c,d,e))
+#define ITypeInfo_GetDllEntry(T,a,b,c,d,e) ((T)->lpVtbl->GetDllEntry(T,a,b,c,d,e))
+#define ITypeInfo_GetRefTypeInfo(T,a,b) ((T)->lpVtbl->GetRefTypeInfo(T,a,b))
+#define ITypeInfo_AddressOfMember(T,a,b,c) ((T)->lpVtbl->AddressOfMember(T,a,b,c))
+#define ITypeInfo_CreateInstance(T,a,b,c) ((T)->lpVtbl->CreateInstance(T,a,b,c))
+#define ITypeInfo_GetMops(T,a,b) ((T)->lpVtbl->GetMops(T,a,b))
+#define ITypeInfo_GetContainingTypeLib(T,a,b) ((T)->lpVtbl->GetContainingTypeLib(T,a,b))
+#define ITypeInfo_ReleaseTypeAttr(T,a) ((T)->lpVtbl->ReleaseTypeAttr(T,a))
+#define ITypeInfo_ReleaseFuncDesc(T,a) ((T)->lpVtbl->ReleaseFuncDesc(T,a))
+#define ITypeInfo_ReleaseVarDesc(T,a) ((T)->lpVtbl->ReleaseVarDesc(T,a))
+
+/* ---- ITypeInfo2: 13 documented method pages; order R1 ---- */
+typedef struct ITypeInfo2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ITypeInfo2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ITypeInfo2*);  /* (R1) */
+    ULONG (WINAPI *Release)(ITypeInfo2*);  /* (R1) */
+    /* ITypeInfo */
+    HRESULT (WINAPI *GetTypeAttr)(ITypeInfo2*, LPTYPEATTR*);  /* (R1) */
+    HRESULT (WINAPI *GetTypeComp)(ITypeInfo2*, LPTYPECOMP*);  /* (R1) */
+    HRESULT (WINAPI *GetFuncDesc)(ITypeInfo2*, UINT, LPFUNCDESC*);  /* (R1) */
+    HRESULT (WINAPI *GetVarDesc)(ITypeInfo2*, UINT, LPVARDESC*);  /* (R1) */
+    HRESULT (WINAPI *GetNames)(ITypeInfo2*, MEMBERID, BSTR*, UINT, UINT*);  /* (R1) */
+    HRESULT (WINAPI *GetRefTypeOfImplType)(ITypeInfo2*, UINT, HREFTYPE*);  /* (R1) */
+    HRESULT (WINAPI *GetImplTypeFlags)(ITypeInfo2*, UINT, INT*);  /* (R1) */
+    HRESULT (WINAPI *GetIDsOfNames)(ITypeInfo2*, LPOLESTR*, UINT, MEMBERID*);  /* (R1) */
+    HRESULT (WINAPI *Invoke)(ITypeInfo2*, VOID*, MEMBERID, WORD, DISPPARAMS*, VARIANT*, EXCEPINFO*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *GetDocumentation)(ITypeInfo2*, MEMBERID, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *GetDllEntry)(ITypeInfo2*, MEMBERID, INVOKEKIND, BSTR*, BSTR*, WORD*);  /* (R1) */
+    HRESULT (WINAPI *GetRefTypeInfo)(ITypeInfo2*, HREFTYPE, LPTYPEINFO*);  /* (R1) */
+    HRESULT (WINAPI *AddressOfMember)(ITypeInfo2*, MEMBERID, INVOKEKIND, PVOID*);  /* (R1) */
+    HRESULT (WINAPI *CreateInstance)(ITypeInfo2*, LPUNKNOWN, REFIID, PVOID*);  /* (R1) */
+    HRESULT (WINAPI *GetMops)(ITypeInfo2*, MEMBERID, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *GetContainingTypeLib)(ITypeInfo2*, LPTYPELIB*, UINT*);  /* (R1) */
+    void (WINAPI *ReleaseTypeAttr)(ITypeInfo2*, LPTYPEATTR);  /* (R1) */
+    void (WINAPI *ReleaseFuncDesc)(ITypeInfo2*, LPFUNCDESC);  /* (R1) */
+    void (WINAPI *ReleaseVarDesc)(ITypeInfo2*, LPVARDESC);  /* (R1) */
+    /* ITypeInfo2 */
+    HRESULT (WINAPI *GetTypeKind)(ITypeInfo2*, TYPEKIND* pTypeKind);  /* 890468 */
+    HRESULT (WINAPI *GetTypeFlags)(ITypeInfo2*, unsigned long* pTypeFlags);  /* 890464 */
+    HRESULT (WINAPI *GetFuncIndexOfMemId)(ITypeInfo2*, MEMBERID memid, INVOKEKIND invKind, unsigned int* pFuncIndex);  /* 890451 */
+    HRESULT (WINAPI *GetVarIndexOfMemId)(ITypeInfo2*, MEMBERID memid, unsigned int* pVarIndex);  /* 890476 */
+    HRESULT (WINAPI *GetCustData)(ITypeInfo2*, REFGUID guid, VARIANT* pVarVal);  /* 890431 */
+    HRESULT (WINAPI *GetFuncCustData)(ITypeInfo2*, unsigned int index, REFGUID guid, VARIANT* pVarVal);  /* 890446 */
+    HRESULT (WINAPI *GetParamCustData)(ITypeInfo2*, unsigned int indexFunc, unsigned int indexParam, REFGUID guid, VARIANT* pVarVal);  /* 890459 */
+    HRESULT (WINAPI *GetVarCustData)(ITypeInfo2*, unsigned int index, REFGUID guid, VARIANT* pVarVal);  /* 890473 */
+    HRESULT (WINAPI *GetImplTypeCustData)(ITypeInfo2*, unsigned int index, REFGUID guid, VARIANT* pVarVal);  /* 890455 */
+    HRESULT (WINAPI *GetDocumentation2)(ITypeInfo2*, MEMBERID, LCID, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *GetAllCustData)(ITypeInfo2*, CUSTDATA*);  /* (R1) */
+    HRESULT (WINAPI *GetAllFuncCustData)(ITypeInfo2*, unsigned int index, CUSTDATA* pCustData);  /* 890300 */
+    HRESULT (WINAPI *GetAllParamCustData)(ITypeInfo2*, unsigned int indexFunc, unsigned int indexParam, CUSTDATA* pCustData);  /* 890417 */
+    HRESULT (WINAPI *GetAllVarCustData)(ITypeInfo2*, unsigned int index, CUSTDATA* pCustData);  /* 890424 */
+    HRESULT (WINAPI *GetAllImplTypeCustData)(ITypeInfo2*, unsigned int index, CUSTDATA* pCustData);  /* 890409 */
+} ITypeInfo2Vtbl;
+struct ITypeInfo2 { const ITypeInfo2Vtbl *lpVtbl; };
+#define ITypeInfo2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ITypeInfo2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ITypeInfo2_Release(T) ((T)->lpVtbl->Release(T))
+#define ITypeInfo2_GetTypeAttr(T,a) ((T)->lpVtbl->GetTypeAttr(T,a))
+#define ITypeInfo2_GetTypeComp(T,a) ((T)->lpVtbl->GetTypeComp(T,a))
+#define ITypeInfo2_GetFuncDesc(T,a,b) ((T)->lpVtbl->GetFuncDesc(T,a,b))
+#define ITypeInfo2_GetVarDesc(T,a,b) ((T)->lpVtbl->GetVarDesc(T,a,b))
+#define ITypeInfo2_GetNames(T,a,b,c,d) ((T)->lpVtbl->GetNames(T,a,b,c,d))
+#define ITypeInfo2_GetRefTypeOfImplType(T,a,b) ((T)->lpVtbl->GetRefTypeOfImplType(T,a,b))
+#define ITypeInfo2_GetImplTypeFlags(T,a,b) ((T)->lpVtbl->GetImplTypeFlags(T,a,b))
+#define ITypeInfo2_GetIDsOfNames(T,a,b,c) ((T)->lpVtbl->GetIDsOfNames(T,a,b,c))
+#define ITypeInfo2_Invoke(T,a,b,c,d,e,f,g) ((T)->lpVtbl->Invoke(T,a,b,c,d,e,f,g))
+#define ITypeInfo2_GetDocumentation(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation(T,a,b,c,d,e))
+#define ITypeInfo2_GetDllEntry(T,a,b,c,d,e) ((T)->lpVtbl->GetDllEntry(T,a,b,c,d,e))
+#define ITypeInfo2_GetRefTypeInfo(T,a,b) ((T)->lpVtbl->GetRefTypeInfo(T,a,b))
+#define ITypeInfo2_AddressOfMember(T,a,b,c) ((T)->lpVtbl->AddressOfMember(T,a,b,c))
+#define ITypeInfo2_CreateInstance(T,a,b,c) ((T)->lpVtbl->CreateInstance(T,a,b,c))
+#define ITypeInfo2_GetMops(T,a,b) ((T)->lpVtbl->GetMops(T,a,b))
+#define ITypeInfo2_GetContainingTypeLib(T,a,b) ((T)->lpVtbl->GetContainingTypeLib(T,a,b))
+#define ITypeInfo2_ReleaseTypeAttr(T,a) ((T)->lpVtbl->ReleaseTypeAttr(T,a))
+#define ITypeInfo2_ReleaseFuncDesc(T,a) ((T)->lpVtbl->ReleaseFuncDesc(T,a))
+#define ITypeInfo2_ReleaseVarDesc(T,a) ((T)->lpVtbl->ReleaseVarDesc(T,a))
+#define ITypeInfo2_GetTypeKind(T,a) ((T)->lpVtbl->GetTypeKind(T,a))
+#define ITypeInfo2_GetTypeFlags(T,a) ((T)->lpVtbl->GetTypeFlags(T,a))
+#define ITypeInfo2_GetFuncIndexOfMemId(T,a,b,c) ((T)->lpVtbl->GetFuncIndexOfMemId(T,a,b,c))
+#define ITypeInfo2_GetVarIndexOfMemId(T,a,b) ((T)->lpVtbl->GetVarIndexOfMemId(T,a,b))
+#define ITypeInfo2_GetCustData(T,a,b) ((T)->lpVtbl->GetCustData(T,a,b))
+#define ITypeInfo2_GetFuncCustData(T,a,b,c) ((T)->lpVtbl->GetFuncCustData(T,a,b,c))
+#define ITypeInfo2_GetParamCustData(T,a,b,c,d) ((T)->lpVtbl->GetParamCustData(T,a,b,c,d))
+#define ITypeInfo2_GetVarCustData(T,a,b,c) ((T)->lpVtbl->GetVarCustData(T,a,b,c))
+#define ITypeInfo2_GetImplTypeCustData(T,a,b,c) ((T)->lpVtbl->GetImplTypeCustData(T,a,b,c))
+#define ITypeInfo2_GetDocumentation2(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation2(T,a,b,c,d,e))
+#define ITypeInfo2_GetAllCustData(T,a) ((T)->lpVtbl->GetAllCustData(T,a))
+#define ITypeInfo2_GetAllFuncCustData(T,a,b) ((T)->lpVtbl->GetAllFuncCustData(T,a,b))
+#define ITypeInfo2_GetAllParamCustData(T,a,b,c) ((T)->lpVtbl->GetAllParamCustData(T,a,b,c))
+#define ITypeInfo2_GetAllVarCustData(T,a,b) ((T)->lpVtbl->GetAllVarCustData(T,a,b))
+#define ITypeInfo2_GetAllImplTypeCustData(T,a,b) ((T)->lpVtbl->GetAllImplTypeCustData(T,a,b))
+
+/* ---- ITypeLib: 8 documented method pages; order R1 ---- */
+typedef struct ITypeLibVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ITypeLib*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ITypeLib*);  /* (R1) */
+    ULONG (WINAPI *Release)(ITypeLib*);  /* (R1) */
+    /* ITypeLib */
+    HRESULT (WINAPI *GetTypeInfoCount)(ITypeLib*);  /* 890620 */
+    HRESULT (WINAPI *GetTypeInfo)(ITypeLib*, unsigned int index, ITypeInfo** ppTInfo);  /* 890614 */
+    HRESULT (WINAPI *GetTypeInfoType)(ITypeLib*, unsigned int index, TYPEKIND* pTKind);  /* 890632 */
+    HRESULT (WINAPI *GetTypeInfoOfGuid)(ITypeLib*, REFGUID guid, ITypeInfo** ppTinfo);  /* 890629 */
+    HRESULT (WINAPI *GetLibAttr)(ITypeLib*, TLIBATTR** ppTLibAttrr);  /* 890605 */
+    HRESULT (WINAPI *GetTypeComp)(ITypeLib*, ITypeComp** ppTComp);  /* 890610 */
+    HRESULT (WINAPI *GetDocumentation)(ITypeLib*, INT, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *IsName)(ITypeLib*, OLECHAR* szNameBuf, unsigned long lHashVal, BOOL pfName);  /* 890638 */
+    HRESULT (WINAPI *FindName)(ITypeLib*, LPOLESTR, ULONG, ITypeInfo**, MEMBERID*, USHORT*);  /* (R1) */
+    HRESULT (WINAPI *ReleaseTLibAttr)(ITypeLib*, TLIBATTR* pTLibAttr);  /* 890649 */
+} ITypeLibVtbl;
+struct ITypeLib { const ITypeLibVtbl *lpVtbl; };
+#define ITypeLib_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ITypeLib_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ITypeLib_Release(T) ((T)->lpVtbl->Release(T))
+#define ITypeLib_GetTypeInfoCount(T) ((T)->lpVtbl->GetTypeInfoCount(T))
+#define ITypeLib_GetTypeInfo(T,a,b) ((T)->lpVtbl->GetTypeInfo(T,a,b))
+#define ITypeLib_GetTypeInfoType(T,a,b) ((T)->lpVtbl->GetTypeInfoType(T,a,b))
+#define ITypeLib_GetTypeInfoOfGuid(T,a,b) ((T)->lpVtbl->GetTypeInfoOfGuid(T,a,b))
+#define ITypeLib_GetLibAttr(T,a) ((T)->lpVtbl->GetLibAttr(T,a))
+#define ITypeLib_GetTypeComp(T,a) ((T)->lpVtbl->GetTypeComp(T,a))
+#define ITypeLib_GetDocumentation(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation(T,a,b,c,d,e))
+#define ITypeLib_IsName(T,a,b,c) ((T)->lpVtbl->IsName(T,a,b,c))
+#define ITypeLib_FindName(T,a,b,c,d,e) ((T)->lpVtbl->FindName(T,a,b,c,d,e))
+#define ITypeLib_ReleaseTLibAttr(T,a) ((T)->lpVtbl->ReleaseTLibAttr(T,a))
+
+/* ---- ITypeLib2: 3 documented method pages; order R1 ---- */
+typedef struct ITypeLib2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ITypeLib2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ITypeLib2*);  /* (R1) */
+    ULONG (WINAPI *Release)(ITypeLib2*);  /* (R1) */
+    /* ITypeLib */
+    UINT (WINAPI *GetTypeInfoCount)(ITypeLib2*);  /* (R1) */
+    HRESULT (WINAPI *GetTypeInfo)(ITypeLib2*, UINT, ITypeInfo**);  /* (R1) */
+    HRESULT (WINAPI *GetTypeInfoType)(ITypeLib2*, UINT, TYPEKIND*);  /* (R1) */
+    HRESULT (WINAPI *GetTypeInfoOfGuid)(ITypeLib2*, REFGUID, ITypeInfo**);  /* (R1) */
+    HRESULT (WINAPI *GetLibAttr)(ITypeLib2*, TLIBATTR**);  /* (R1) */
+    HRESULT (WINAPI *GetTypeComp)(ITypeLib2*, ITypeComp**);  /* (R1) */
+    HRESULT (WINAPI *GetDocumentation)(ITypeLib2*, INT, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *IsName)(ITypeLib2*, LPOLESTR, ULONG, BOOL*);  /* (R1) */
+    HRESULT (WINAPI *FindName)(ITypeLib2*, LPOLESTR, ULONG, ITypeInfo**, MEMBERID*, USHORT*);  /* (R1) */
+    void (WINAPI *ReleaseTLibAttr)(ITypeLib2*, TLIBATTR*);  /* (R1) */
+    /* ITypeLib2 */
+    HRESULT (WINAPI *GetCustData)(ITypeLib2*, REFGUID guid, VARIANT* pVarVal);  /* 890582 */
+    HRESULT (WINAPI *GetLibStatistics)(ITypeLib2*, unsigned long* pcUniqueNames, unsigned long* pcchUniqueNames);  /* 890591 */
+    HRESULT (WINAPI *GetDocumentation2)(ITypeLib2*, INT, LCID, BSTR*, DWORD*, BSTR*);  /* (R1) */
+    HRESULT (WINAPI *GetAllCustData)(ITypeLib2*, CUSTDATA* pCustData);  /* 890578 */
+} ITypeLib2Vtbl;
+struct ITypeLib2 { const ITypeLib2Vtbl *lpVtbl; };
+#define ITypeLib2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ITypeLib2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ITypeLib2_Release(T) ((T)->lpVtbl->Release(T))
+#define ITypeLib2_GetTypeInfoCount(T) ((T)->lpVtbl->GetTypeInfoCount(T))
+#define ITypeLib2_GetTypeInfo(T,a,b) ((T)->lpVtbl->GetTypeInfo(T,a,b))
+#define ITypeLib2_GetTypeInfoType(T,a,b) ((T)->lpVtbl->GetTypeInfoType(T,a,b))
+#define ITypeLib2_GetTypeInfoOfGuid(T,a,b) ((T)->lpVtbl->GetTypeInfoOfGuid(T,a,b))
+#define ITypeLib2_GetLibAttr(T,a) ((T)->lpVtbl->GetLibAttr(T,a))
+#define ITypeLib2_GetTypeComp(T,a) ((T)->lpVtbl->GetTypeComp(T,a))
+#define ITypeLib2_GetDocumentation(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation(T,a,b,c,d,e))
+#define ITypeLib2_IsName(T,a,b,c) ((T)->lpVtbl->IsName(T,a,b,c))
+#define ITypeLib2_FindName(T,a,b,c,d,e) ((T)->lpVtbl->FindName(T,a,b,c,d,e))
+#define ITypeLib2_ReleaseTLibAttr(T,a) ((T)->lpVtbl->ReleaseTLibAttr(T,a))
+#define ITypeLib2_GetCustData(T,a,b) ((T)->lpVtbl->GetCustData(T,a,b))
+#define ITypeLib2_GetLibStatistics(T,a,b) ((T)->lpVtbl->GetLibStatistics(T,a,b))
+#define ITypeLib2_GetDocumentation2(T,a,b,c,d,e) ((T)->lpVtbl->GetDocumentation2(T,a,b,c,d,e))
+#define ITypeLib2_GetAllCustData(T,a) ((T)->lpVtbl->GetAllCustData(T,a))
+
+/* ---- IUnknown: 3 documented method pages; order R1 ---- */
+typedef struct IUnknownVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IUnknown*, REFIID iid, void** ppvObject);  /* 890661 */
+    ULONG (WINAPI *AddRef)(IUnknown*);  /* 890658 */
+    ULONG (WINAPI *Release)(IUnknown*);  /* 890669 */
+} IUnknownVtbl;
+struct IUnknown { const IUnknownVtbl *lpVtbl; };
+#define IUnknown_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IUnknown_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IUnknown_Release(T) ((T)->lpVtbl->Release(T))
+
 #ifdef __cplusplus
 }
 #endif
