@@ -2727,6 +2727,7 @@ typedef struct LVSETINFOTIP {
 #endif
 
 /* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -3092,6 +3093,19 @@ typedef struct LVSETINFOTIP {
 #define MCSC_MONTHBK                                 0x0004
 #define MCSC_TRAILINGTEXT                            0x0005
 
+/* ---- NM_ family (11 names; R1) ---- */
+#define NM_KEYDOWN                                   (-15)
+#define NM_HOVER                                     (-13)
+#define NM_CUSTOMDRAW                                (-12)
+#define NM_KILLFOCUS                                 (-8)
+#define NM_SETFOCUS                                  (-7)
+#define NM_RDBLCLK                                   (-6)
+#define NM_RCLICK                                    (-5)
+#define NM_RETURN                                    (-4)
+#define NM_DBLCLK                                    (-3)
+#define NM_CLICK                                     (-2)
+#define NM_OUTOFMEMORY                               (-1)
+
 /* ---- PBM_ family (8 names; R1) ---- */
 #define PBM_SETRANGE                                 0x0401
 #define PBM_SETPOS                                   0x0402
@@ -3122,6 +3136,30 @@ typedef struct LVSETINFOTIP {
 #define PSM_SETTITLE                                 0x0478
 #define PSM_SETFINISHTEXT                            0x0479
 
+/* ---- RB_ family (22 names; R1) ---- */
+#define RB_DELETEBAND                                0x0402
+#define RB_GETBARINFO                                0x0403
+#define RB_SETBARINFO                                0x0404
+#define RB_SETPARENT                                 0x0407
+#define RB_GETRECT                                   0x0409
+#define RB_INSERTBAND                                0x040A
+#define RB_SETBANDINFO                               0x040B
+#define RB_GETBANDCOUNT                              0x040C
+#define RB_GETROWCOUNT                               0x040D
+#define RB_GETROWHEIGHT                              0x040E
+#define RB_IDTOINDEX                                 0x0410
+#define RB_SETBKCOLOR                                0x0413
+#define RB_GETBKCOLOR                                0x0414
+#define RB_SETTEXTCOLOR                              0x0415
+#define RB_GETTEXTCOLOR                              0x0416
+#define RB_SIZETORECT                                0x0417
+#define RB_GETBARHEIGHT                              0x041B
+#define RB_GETBANDINFO                               0x041C
+#define RB_MINIMIZEBAND                              0x041E
+#define RB_MAXIMIZEBAND                              0x041F
+#define RB_GETBANDBORDERS                            0x0422
+#define RB_SHOWBAND                                  0x0423
+
 /* ---- RBBIM_ family (1 names; R1) ---- */
 #define RBBIM_CHILD                                  0x0010
 
@@ -3145,6 +3183,21 @@ typedef struct LVSETINFOTIP {
 #define RBN_LAYOUTCHANGED                            (-833)
 #define RBN_HEIGHTCHANGE                             (-831)
 
+/* ---- SB_ family (13 names; R1) ---- */
+#define SB_SETPARTS                                  0x0404
+#define SB_GETPARTS                                  0x0406
+#define SB_GETBORDERS                                0x0407
+#define SB_SETMINHEIGHT                              0x0408
+#define SB_SIMPLE                                    0x0409
+#define SB_GETRECT                                   0x040A
+#define SB_SETTEXT                                   0x040B
+#define SB_GETTEXTLENGTH                             0x040C
+#define SB_GETTEXT                                   0x040D
+#define SB_ISSIMPLE                                  0x040E
+#define SB_SETICON                                   0x040F
+#define SB_GETICON                                   0x0414
+#define SB_SETBKCOLOR                                0x2001
+
 /* ---- SBT_ family (4 names; R1) ---- */
 #define SBT_NOBORDERS                                0x0100
 #define SBT_POPOUT                                   0x0200
@@ -3167,6 +3220,64 @@ typedef struct LVSETINFOTIP {
 #define STD_FIND                                     0x000C
 #define STD_REPLACE                                  0x000D
 #define STD_PRINT                                    0x000E
+
+/* ---- TB_ family (56 names; R1) ---- */
+#define TB_LINEUP                                    0x0000
+#define TB_LINEDOWN                                  0x0001
+#define TB_PAGEUP                                    0x0002
+#define TB_PAGEDOWN                                  0x0003
+#define TB_ENABLEBUTTON                              0x0401
+#define TB_CHECKBUTTON                               0x0402
+#define TB_PRESSBUTTON                               0x0403
+#define TB_HIDEBUTTON                                0x0404
+#define TB_INDETERMINATE                             0x0405
+#define TB_ISBUTTONENABLED                           0x0409
+#define TB_ISBUTTONCHECKED                           0x040A
+#define TB_ISBUTTONPRESSED                           0x040B
+#define TB_ISBUTTONHIDDEN                            0x040C
+#define TB_ISBUTTONINDETERMINATE                     0x040D
+#define TB_ISBUTTONHIGHLIGHTED                       0x040E
+#define TB_SETSTATE                                  0x0411
+#define TB_GETSTATE                                  0x0412
+#define TB_ADDBITMAP                                 0x0413
+#define TB_ADDBUTTONS                                0x0414
+#define TB_INSERTBUTTON                              0x0415
+#define TB_DELETEBUTTON                              0x0416
+#define TB_BUTTONCOUNT                               0x0418
+#define TB_COMMANDTOINDEX                            0x0419
+#define TB_GETITEMRECT                               0x041D
+#define TB_BUTTONSTRUCTSIZE                          0x041E
+#define TB_SETBUTTONSIZE                             0x041F
+#define TB_SETBITMAPSIZE                             0x0420
+#define TB_AUTOSIZE                                  0x0421
+#define TB_GETTOOLTIPS                               0x0423
+#define TB_SETTOOLTIPS                               0x0424
+#define TB_SETPARENT                                 0x0425
+#define TB_SETROWS                                   0x0427
+#define TB_GETROWS                                   0x0428
+#define TB_GETBITMAPFLAGS                            0x0429
+#define TB_SETCMDID                                  0x042A
+#define TB_CHANGEBITMAP                              0x042B
+#define TB_GETBITMAP                                 0x042C
+#define TB_REPLACEBITMAP                             0x042E
+#define TB_SETINDENT                                 0x042F
+#define TB_SETIMAGELIST                              0x0430
+#define TB_GETIMAGELIST                              0x0431
+#define TB_LOADIMAGES                                0x0432
+#define TB_GETRECT                                   0x0433
+#define TB_SETDISABLEDIMAGELIST                      0x0436
+#define TB_GETDISABLEDIMAGELIST                      0x0437
+#define TB_SETSTYLE                                  0x0438
+#define TB_GETSTYLE                                  0x0439
+#define TB_GETBUTTONSIZE                             0x043A
+#define TB_SETBUTTONWIDTH                            0x043B
+#define TB_SETMAXTEXTROWS                            0x043C
+#define TB_GETTEXTROWS                               0x043D
+#define TB_GETBUTTONINFO                             0x043F
+#define TB_SETBUTTONINFO                             0x0440
+#define TB_SETDRAWTEXTFLAGS                          0x0446
+#define TB_GETBUTTONTEXT                             0x044B
+#define TB_ADDSTRING                                 0x044D
 
 /* ---- TBBF_ family (1 names; R1) ---- */
 #define TBBF_LARGE                                   0x0001
@@ -3436,6 +3547,10 @@ typedef struct LVSETINFOTIP {
 /* ---- TVSIL_ family (2 names; R1) ---- */
 #define TVSIL_NORMAL                                 0x0000
 #define TVSIL_STATE                                  0x0002
+
+/* ---- UD_ family (2 names; R1) ---- */
+#define UD_MINVAL                                    (-32767)
+#define UD_MAXVAL                                    0x7FFF
 
 /* ---- UDM_ family (12 names; R1) ---- */
 #define UDM_SETRANGE                                 0x0465

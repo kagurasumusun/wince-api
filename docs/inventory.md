@@ -6839,3 +6839,11 @@ guard close, grouped by family, every value provenance-tagged R1.
   discusses -- GN_ home is aygshell.h, where NMRGINFO lives).
   WM_LBUTTONDOWN is REHOMED to Winuser.h.  Total aygshell M96: 20.
   Gates GREEN x6.
+- include/Commctrl.h TOP-UP: +104 (2-char families): TB_ 56 toolbar
+  messages (TB_ADDBITMAP .. TB_LOADIMAGES; the ledger's abbreviated
+  range endpoints only were visible to the first pass), RB_ 22
+  rebar messages, SB_ 13 status messages, NM_ 11 common
+  notifications (incl. NM_RCLICK rehomed here), UD_MAXVAL/UD_MINVAL.
+  GN_CONTEXTMENU rehomed to aygshell.h.  Total Commctrl M96: 688
+  (incl. the PSM_* 18 message twins whose Requirements home is
+  Commctrl.h per M94 part 1).  Gates GREEN x6.
