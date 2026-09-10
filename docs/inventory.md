@@ -6952,3 +6952,27 @@ CE page spelling).
   Auxiliary spellings added (LPFUNCDESC / LPTYPEINFO / LPTYPELIB /
   LPTYPECOMP, opaque IEnumUnknown) and Windef.h gained HTASK
   (page-printed in the IMessageFilter signatures).  Gates GREEN x6.
+- include/Objbase.h TOP-UP: +25 interfaces (the embedding / document /
+  category families whose glued-signature records the first parser
+  round could not read -- HRESULTAlloc-style page misprints, inline
+  page comments, truncated lines): ICatInformation, ICatRegister,
+  IObjectSafety, IOleAdviseHolder, IOleClientSite, IOleContainer,
+  IOleControlSite, IOleInPlaceSite (15 slots incl. the IOleWindow
+  base), IOleObject (24), IOleWindow, IParseDisplayName, IPersist,
+  IPersistStorage, IPersistStream, IPersistStreamInit,
+  IProgressNotify, IProvideClassInfo(2), IROTData, IRunnableObject,
+  ISequentialStream, IServerSecurity, IStdMarshalInfo, IViewObject,
+  IViewObject2.  ABI-mismatch rule: when a page's parameter count
+  differs from R1's (IViewObject::Draw -- the page record is
+  truncated mid-signature), the R1 signature is emitted (tagged)
+  and the page record stays verbatim above.  Parser now handles
+  glued misprints (DWORDdwFlags), array params (decay to pointers),
+  inline // comments, empty mangled pieces, and the R1 embedded-name
+  token __IView_pfncont -> LPFNCONTINUE typedef.  New carriers:
+  POINTL/POINTF (tagged _POINTL/_POINTF), SIZEL/RECTL LP aliases,
+  CATID/REFCATID, opaque IEnumCLSID/IEnumCATID/IEnumCATEGORYINFO/
+  IEnumSTATDATA/IEnumUnknown/CATEGORYINFO/IOleInPlaceFrame/
+  IOleInPlaceUIWindow/IEnumOLEVERB, LPOLECONTAINER, LPFNCONTINUE;
+  includes +Wingdi.h (LOGPALETTE) +Winuser.h (LPMSG/LPCRECT);
+  Shobjidl.h's pilot-era untagged POINTL moved to Objbase.h.
+  Total Objbase M97: 58 interfaces.  Gates GREEN x6.

@@ -234,7 +234,8 @@ typedef struct ITaskbarList2    ITaskbarList2;
 /*                    notes above as CE-page dangling references;      */
 /*                    opaque here (pointer-only use in the vtables).   */
 /* ------------------------------------------------------------------ */
-typedef struct { LONG x; LONG y; } POINTL, *LPPOINTL;
+/* POINTL/SHCONTF and the other carriers: declared in Objbase.h
+ * (M97 OLE carrier block) since Objbase.h's own vtables use them. */
 typedef DWORD SHCONTF;
 /* ITEMIDLIST carrier: completed in Shlobj.h (aa453244); the vtables
  * here use it through pointers only.  C11 permits the identical

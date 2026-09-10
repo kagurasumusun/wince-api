@@ -76,6 +76,10 @@
 
 #include "Windef.h"
 #include "Winbase.h"  /* FILETIME, HGLOBAL, SYSTEMTIME, SECURITY_ATTRIBUTES */
+#include "Wingdi.h"   /* LOGPALETTE/LPLOGPALETTE (IViewObject::GetColorSet --
+                         a real vtable parameter since M97) */
+#include "Winuser.h"  /* LPMSG, LPCRECT (IOleControlSite::TranslateAccelerator,
+                         IOleObject::DoVerb -- real vtable parameters) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -3139,7 +3143,49 @@ typedef ITypeInfo *LPTYPEINFO;
 typedef ITypeLib *LPTYPELIB;
 typedef ITypeComp *LPTYPECOMP;
 typedef struct IEnumUnknown IEnumUnknown;  /* opaque; pointer-only use */
+/* Category / ole-container spellings the Comcat-family records use
+ * (ICatInformation / ICatRegister, recorded here per their pages):
+ * CATID is the category-GUID twin of IID/CLSID; the IEnum* carriers
+ * and LPOLECONTAINER are pointer-only forward declarations. */
+typedef GUID CATID;
+#define REFCATID            const CATID *
+typedef struct IEnumCLSID       IEnumCLSID;        /* opaque */
+typedef struct IEnumCATID       IEnumCATID;        /* opaque */
+typedef struct IEnumCATEGORYINFO IEnumCATEGORYINFO; /* opaque */
+typedef struct IEnumSTATDATA    IEnumSTATDATA;     /* opaque (page
+    misprint spells it IENumSTATDATA -- normalized in the vtables) */
+typedef IOleContainer *LPOLECONTAINER;
+typedef struct CATEGORYINFO CATEGORYINFO;   /* opaque; RegisterCategories
+    takes it as an array (pointer-only use here) */
+/* OLE carrier types the embedding-family vtables reference (same
+ * shapes as their GDI twins; the M44 "OLE carriers" note).  RECTL /
+ * POINTL / POINTF / SIZEL are pointer-only here apart from their
+ * trivial layouts. */
+typedef struct _POINTL { LONG x; LONG y; } POINTL, *LPPOINTL;
+typedef struct _POINTF { FLOAT x; FLOAT y; } POINTF, *LPPOINTF;
+/* SIZEL / RECTL are already declared (Windef); only the OLE pointer
+ * spellings are added. */
+typedef SIZEL *LPSIZEL;
+typedef const RECTL *LPCRECTL;
+typedef struct OLEINPLACEFRAMEINFO OLEINPLACEFRAMEINFO,
+    *LPOLEINPLACEFRAMEINFO;      /* opaque; pointer-only use */
+typedef LOGPALETTE *LPLOGPALETTE;   /* GetColorSet out-parameter */
+typedef struct IOleInPlaceFrame     IOleInPlaceFrame;      /* opaque */
+typedef struct IOleInPlaceUIWindow  IOleInPlaceUIWindow;   /* opaque */
+typedef struct IEnumOLEVERB         IEnumOLEVERB;          /* opaque
+    (R1 spells it IEnumOleVerb in a fill-in -- normalized) */
+typedef BOOL (WINAPI *LPFNCONTINUE)(DWORD);  /* IViewObject::Draw
+    continuation callback (R1 spells it __IView_pfncont) */
 
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
 /* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
  * ORDER adopted from R1 (CeGCC-lineage w32api, public
  * domain; docs/clean-room.md par.4 revision 2026-09-10);
@@ -3939,7 +3985,7 @@ struct ITypeInfo2 { const ITypeInfo2Vtbl *lpVtbl; };
 #define ITypeInfo2_GetAllVarCustData(T,a,b) ((T)->lpVtbl->GetAllVarCustData(T,a,b))
 #define ITypeInfo2_GetAllImplTypeCustData(T,a,b) ((T)->lpVtbl->GetAllImplTypeCustData(T,a,b))
 
-/* ---- ITypeLib: 8 documented method pages; order R1 ---- */
+/* ---- ITypeLib: 7 documented method pages; order R1 ---- */
 typedef struct ITypeLibVtbl {
     /* IUnknown */
     HRESULT (WINAPI *QueryInterface)(ITypeLib*, REFIID, PVOID*);  /* (R1) */
@@ -3951,7 +3997,7 @@ typedef struct ITypeLibVtbl {
     HRESULT (WINAPI *GetTypeInfoType)(ITypeLib*, unsigned int index, TYPEKIND* pTKind);  /* 890632 */
     HRESULT (WINAPI *GetTypeInfoOfGuid)(ITypeLib*, REFGUID guid, ITypeInfo** ppTinfo);  /* 890629 */
     HRESULT (WINAPI *GetLibAttr)(ITypeLib*, TLIBATTR** ppTLibAttrr);  /* 890605 */
-    HRESULT (WINAPI *GetTypeComp)(ITypeLib*, ITypeComp** ppTComp);  /* 890610 */
+    HRESULT (WINAPI *GetTypeComp)(ITypeLib*, ITypeComp**);  /* (R1) */
     HRESULT (WINAPI *GetDocumentation)(ITypeLib*, INT, BSTR*, BSTR*, DWORD*, BSTR*);  /* (R1) */
     HRESULT (WINAPI *IsName)(ITypeLib*, OLECHAR* szNameBuf, unsigned long lHashVal, BOOL pfName);  /* 890638 */
     HRESULT (WINAPI *FindName)(ITypeLib*, LPOLESTR, ULONG, ITypeInfo**, MEMBERID*, USHORT*);  /* (R1) */
@@ -4025,6 +4071,573 @@ struct IUnknown { const IUnknownVtbl *lpVtbl; };
 #define IUnknown_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
 #define IUnknown_AddRef(T) ((T)->lpVtbl->AddRef(T))
 #define IUnknown_Release(T) ((T)->lpVtbl->Release(T))
+
+/* ---- ICatInformation: 6 documented method pages; order R1 ---- */
+typedef struct ICatInformationVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ICatInformation*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ICatInformation*);  /* (R1) */
+    ULONG (WINAPI *Release)(ICatInformation*);  /* (R1) */
+    /* ICatInformation */
+    HRESULT (WINAPI *EnumCategories)(ICatInformation*, LCID lcid, IEnumCATEGORYINFO** ppenumCatInfo);  /* 879987 */
+    HRESULT (WINAPI *GetCategoryDesc)(ICatInformation*, REFCATID rcatid, LCID lcid, PWCHAR* ppszDesc);  /* 880029 */
+    HRESULT (WINAPI *EnumClassesOfCategories)(ICatInformation*, ULONG cImplemented, CATID rgcatidImpl, ULONG cRequired, CATID rgcatidReq, IEnumCLSID** ppenumCLSID);  /* 880012 */
+    HRESULT (WINAPI *IsClassOfCategories)(ICatInformation*, REFCLSID rclsid, ULONG cImplemented, CATID* rgcatidImpl, ULONG cRequired, CATID* rgcatidReq);  /* 880032 */
+    HRESULT (WINAPI *EnumImplCategoriesOfClass)(ICatInformation*, REFCLSID rclsid, IEnumCATID** ppenumCATD);  /* 880020 */
+    HRESULT (WINAPI *EnumReqCategoriesOfClass)(ICatInformation*, REFCLSID rclsid, IEnumCATID** ppenumCATD);  /* 880024 */
+} ICatInformationVtbl;
+struct ICatInformation { const ICatInformationVtbl *lpVtbl; };
+#define ICatInformation_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ICatInformation_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ICatInformation_Release(T) ((T)->lpVtbl->Release(T))
+#define ICatInformation_EnumCategories(T,a,b) ((T)->lpVtbl->EnumCategories(T,a,b))
+#define ICatInformation_GetCategoryDesc(T,a,b,c) ((T)->lpVtbl->GetCategoryDesc(T,a,b,c))
+#define ICatInformation_EnumClassesOfCategories(T,a,b,c,d,e) ((T)->lpVtbl->EnumClassesOfCategories(T,a,b,c,d,e))
+#define ICatInformation_IsClassOfCategories(T,a,b,c,d,e) ((T)->lpVtbl->IsClassOfCategories(T,a,b,c,d,e))
+#define ICatInformation_EnumImplCategoriesOfClass(T,a,b) ((T)->lpVtbl->EnumImplCategoriesOfClass(T,a,b))
+#define ICatInformation_EnumReqCategoriesOfClass(T,a,b) ((T)->lpVtbl->EnumReqCategoriesOfClass(T,a,b))
+
+/* ---- ICatRegister: 6 documented method pages; order R1 ---- */
+typedef struct ICatRegisterVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ICatRegister*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ICatRegister*);  /* (R1) */
+    ULONG (WINAPI *Release)(ICatRegister*);  /* (R1) */
+    /* ICatRegister */
+    HRESULT (WINAPI *RegisterCategories)(ICatRegister*, ULONG cCategories, CATEGORYINFO* rgCategoryInfo);  /* 880045 */
+    HRESULT (WINAPI *UnRegisterCategories)(ICatRegister*, ULONG cCategories, CATID* rgcatid);  /* 880063 */
+    HRESULT (WINAPI *RegisterClassImplCategories)(ICatRegister*, REFCLSID rclsid, ULONG cCategories, CATID* rgcatid);  /* 880052 */
+    HRESULT (WINAPI *UnRegisterClassImplCategories)(ICatRegister*, REFCLSID rclsid, ULONG cCategories, CATID* rgcatid);  /* 880068 */
+    HRESULT (WINAPI *RegisterClassReqCategories)(ICatRegister*, REFCLSID rclsid, ULONG cCategories, CATID* rgcatid);  /* 880057 */
+    HRESULT (WINAPI *UnRegisterClassReqCategories)(ICatRegister*, REFCLSID rclsid, ULONG cCategories, CATID* rgcatid);  /* 880073 */
+} ICatRegisterVtbl;
+struct ICatRegister { const ICatRegisterVtbl *lpVtbl; };
+#define ICatRegister_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ICatRegister_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ICatRegister_Release(T) ((T)->lpVtbl->Release(T))
+#define ICatRegister_RegisterCategories(T,a,b) ((T)->lpVtbl->RegisterCategories(T,a,b))
+#define ICatRegister_UnRegisterCategories(T,a,b) ((T)->lpVtbl->UnRegisterCategories(T,a,b))
+#define ICatRegister_RegisterClassImplCategories(T,a,b,c) ((T)->lpVtbl->RegisterClassImplCategories(T,a,b,c))
+#define ICatRegister_UnRegisterClassImplCategories(T,a,b,c) ((T)->lpVtbl->UnRegisterClassImplCategories(T,a,b,c))
+#define ICatRegister_RegisterClassReqCategories(T,a,b,c) ((T)->lpVtbl->RegisterClassReqCategories(T,a,b,c))
+#define ICatRegister_UnRegisterClassReqCategories(T,a,b,c) ((T)->lpVtbl->UnRegisterClassReqCategories(T,a,b,c))
+
+/* ---- IObjectSafety: 2 documented method pages; order R1 ---- */
+typedef struct IObjectSafetyVtbl {
+    /* IObjectSafety */
+    HRESULT (WINAPI *GetInterfaceSafetyOptions)(IObjectSafety*, REFIID riid, DWORD* pdwSupportedOptions, DWORD* pdwEnabledOptions);  /* 882879 */
+    HRESULT (WINAPI *SetInterfaceSafetyOptions)(IObjectSafety*, REFIID riid, DWORD dwOptionSetMask, DWORD dwEnabledOptions);  /* 882881 */
+} IObjectSafetyVtbl;
+struct IObjectSafety { const IObjectSafetyVtbl *lpVtbl; };
+#define IObjectSafety_GetInterfaceSafetyOptions(T,a,b,c) ((T)->lpVtbl->GetInterfaceSafetyOptions(T,a,b,c))
+#define IObjectSafety_SetInterfaceSafetyOptions(T,a,b,c) ((T)->lpVtbl->SetInterfaceSafetyOptions(T,a,b,c))
+
+/* ---- IOleAdviseHolder: 4 documented method pages; order R1 ---- */
+typedef struct IOleAdviseHolderVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleAdviseHolder*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleAdviseHolder*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleAdviseHolder*);  /* (R1) */
+    /* IOleAdviseHolder */
+    HRESULT (WINAPI *Advise)(IOleAdviseHolder*, IAdviseSink* pAdvise, DWORD* pdwConnection);  /* 882882 */
+    HRESULT (WINAPI *Unadvise)(IOleAdviseHolder*, DWORD dwConnection);  /* 882889 */
+    HRESULT (WINAPI *EnumAdvise)(IOleAdviseHolder*, IEnumSTATDATA* ppEnumAdvise);  /* 882883 */
+    HRESULT (WINAPI *SendOnRename)(IOleAdviseHolder*, IMoniker* pmk);  /* 882886 */
+    HRESULT (WINAPI *SendOnSave)(IOleAdviseHolder*);  /* (R1) */
+    HRESULT (WINAPI *SendOnClose)(IOleAdviseHolder*);  /* (R1) */
+} IOleAdviseHolderVtbl;
+struct IOleAdviseHolder { const IOleAdviseHolderVtbl *lpVtbl; };
+#define IOleAdviseHolder_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleAdviseHolder_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleAdviseHolder_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleAdviseHolder_Advise(T,a,b) ((T)->lpVtbl->Advise(T,a,b))
+#define IOleAdviseHolder_Unadvise(T,a) ((T)->lpVtbl->Unadvise(T,a))
+#define IOleAdviseHolder_EnumAdvise(T,a) ((T)->lpVtbl->EnumAdvise(T,a))
+#define IOleAdviseHolder_SendOnRename(T,a) ((T)->lpVtbl->SendOnRename(T,a))
+#define IOleAdviseHolder_SendOnSave(T) ((T)->lpVtbl->SendOnSave(T))
+#define IOleAdviseHolder_SendOnClose(T) ((T)->lpVtbl->SendOnClose(T))
+
+/* ---- IOleClientSite: 5 documented method pages; order R1 ---- */
+typedef struct IOleClientSiteVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleClientSite*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleClientSite*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleClientSite*);  /* (R1) */
+    /* IOleClientSite */
+    HRESULT (WINAPI *SaveObject)(IOleClientSite*);  /* 882895 */
+    HRESULT (WINAPI *GetMoniker)(IOleClientSite*, DWORD dwAssign, DWORD dwWhichMoniker, IMoniker** ppmk);  /* 882891 */
+    HRESULT (WINAPI *GetContainer)(IOleClientSite*, LPOLECONTAINER*);  /* (R1) */
+    HRESULT (WINAPI *ShowObject)(IOleClientSite*);  /* 882896 */
+    HRESULT (WINAPI *OnShowWindow)(IOleClientSite*, BOOL fShow);  /* 882893 */
+    HRESULT (WINAPI *RequestNewObjectLayout)(IOleClientSite*);  /* 882894 */
+} IOleClientSiteVtbl;
+struct IOleClientSite { const IOleClientSiteVtbl *lpVtbl; };
+#define IOleClientSite_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleClientSite_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleClientSite_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleClientSite_SaveObject(T) ((T)->lpVtbl->SaveObject(T))
+#define IOleClientSite_GetMoniker(T,a,b,c) ((T)->lpVtbl->GetMoniker(T,a,b,c))
+#define IOleClientSite_GetContainer(T,a) ((T)->lpVtbl->GetContainer(T,a))
+#define IOleClientSite_ShowObject(T) ((T)->lpVtbl->ShowObject(T))
+#define IOleClientSite_OnShowWindow(T,a) ((T)->lpVtbl->OnShowWindow(T,a))
+#define IOleClientSite_RequestNewObjectLayout(T) ((T)->lpVtbl->RequestNewObjectLayout(T))
+
+/* ---- IOleContainer: 2 documented method pages; order R1 ---- */
+typedef struct IOleContainerVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleContainer*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleContainer*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleContainer*);  /* (R1) */
+    /* IParseDisplayName */
+    HRESULT (WINAPI *ParseDisplayName)(IOleContainer*, IBindCtx*, LPOLESTR, ULONG*, IMoniker**);  /* (R1) */
+    /* IOleContainer */
+    HRESULT (WINAPI *EnumObjects)(IOleContainer*, DWORD, IEnumUnknown**);  /* (R1) */
+    HRESULT (WINAPI *LockContainer)(IOleContainer*, BOOL fLock);  /* 519258 */
+} IOleContainerVtbl;
+struct IOleContainer { const IOleContainerVtbl *lpVtbl; };
+#define IOleContainer_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleContainer_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleContainer_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleContainer_ParseDisplayName(T,a,b,c,d) ((T)->lpVtbl->ParseDisplayName(T,a,b,c,d))
+#define IOleContainer_EnumObjects(T,a,b) ((T)->lpVtbl->EnumObjects(T,a,b))
+#define IOleContainer_LockContainer(T,a) ((T)->lpVtbl->LockContainer(T,a))
+
+/* ---- IOleControlSite: 7 documented method pages; order R1 ---- */
+typedef struct IOleControlSiteVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleControlSite*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleControlSite*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleControlSite*);  /* (R1) */
+    /* IOleControlSite */
+    HRESULT (WINAPI *OnControlInfoChanged)(IOleControlSite*);  /* 519262 */
+    HRESULT (WINAPI *LockInPlaceActive)(IOleControlSite*, BOOL fLock);  /* 519261 */
+    HRESULT (WINAPI *GetExtendedControl)(IOleControlSite*, IDispatch** ppDisp);  /* 519259 */
+    HRESULT (WINAPI *TransformCoords)(IOleControlSite*, POINTL* pPtlHimetric, POINTF* pPtfContainer, DWORD dwFlags);  /* 519265 */
+    HRESULT (WINAPI *TranslateAccelerator)(IOleControlSite*, LPMSG pMsg, DWORD grfModifiers);  /* 519266 */
+    HRESULT (WINAPI *OnFocus)(IOleControlSite*, BOOL fGotFocus);  /* 519263 */
+    HRESULT (WINAPI *ShowPropertyFrame)(IOleControlSite*);  /* 519264 */
+} IOleControlSiteVtbl;
+struct IOleControlSite { const IOleControlSiteVtbl *lpVtbl; };
+#define IOleControlSite_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleControlSite_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleControlSite_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleControlSite_OnControlInfoChanged(T) ((T)->lpVtbl->OnControlInfoChanged(T))
+#define IOleControlSite_LockInPlaceActive(T,a) ((T)->lpVtbl->LockInPlaceActive(T,a))
+#define IOleControlSite_GetExtendedControl(T,a) ((T)->lpVtbl->GetExtendedControl(T,a))
+#define IOleControlSite_TransformCoords(T,a,b,c) ((T)->lpVtbl->TransformCoords(T,a,b,c))
+#define IOleControlSite_TranslateAccelerator(T,a,b) ((T)->lpVtbl->TranslateAccelerator(T,a,b))
+#define IOleControlSite_OnFocus(T,a) ((T)->lpVtbl->OnFocus(T,a))
+#define IOleControlSite_ShowPropertyFrame(T) ((T)->lpVtbl->ShowPropertyFrame(T))
+
+/* ---- IOleInPlaceSite: 7 documented method pages; order R1 ---- */
+typedef struct IOleInPlaceSiteVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleInPlaceSite*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleInPlaceSite*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleInPlaceSite*);  /* (R1) */
+    /* IOleWindow */
+    HRESULT (WINAPI *GetWindow)(IOleInPlaceSite*, HWND*);  /* (R1) */
+    HRESULT (WINAPI *ContextSensitiveHelp)(IOleInPlaceSite*, BOOL);  /* (R1) */
+    /* IOleInPlaceSite */
+    HRESULT (WINAPI *CanInPlaceActivate)(IOleInPlaceSite*);  /* 519268 */
+    HRESULT (WINAPI *OnInPlaceActivate)(IOleInPlaceSite*);  /* 519273 */
+    HRESULT (WINAPI *OnUIActivate)(IOleInPlaceSite*);  /* (R1) */
+    HRESULT (WINAPI *GetWindowContext)(IOleInPlaceSite*, IOleInPlaceFrame** ppFrame, IOleInPlaceUIWindow** ppDoc, LPRECT lprcPosRect, LPRECT lprcClipRect, LPOLEINPLACEFRAMEINFO lpFrameInfo);  /* 519271 */
+    HRESULT (WINAPI *Scroll)(IOleInPlaceSite*, SIZE scrollExtent);  /* 519278 */
+    HRESULT (WINAPI *OnUIDeactivate)(IOleInPlaceSite*, BOOL fUndoable);  /* 519277 */
+    HRESULT (WINAPI *OnInPlaceDeactivate)(IOleInPlaceSite*);  /* 519274 */
+    HRESULT (WINAPI *DiscardUndoState)(IOleInPlaceSite*);  /* (R1) */
+    HRESULT (WINAPI *DeactivateAndUndo)(IOleInPlaceSite*);  /* (R1) */
+    HRESULT (WINAPI *OnPosRectChange)(IOleInPlaceSite*, LPCRECT lprcPosRect);  /* 519275 */
+} IOleInPlaceSiteVtbl;
+struct IOleInPlaceSite { const IOleInPlaceSiteVtbl *lpVtbl; };
+#define IOleInPlaceSite_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleInPlaceSite_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleInPlaceSite_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleInPlaceSite_GetWindow(T,a) ((T)->lpVtbl->GetWindow(T,a))
+#define IOleInPlaceSite_ContextSensitiveHelp(T,a) ((T)->lpVtbl->ContextSensitiveHelp(T,a))
+#define IOleInPlaceSite_CanInPlaceActivate(T) ((T)->lpVtbl->CanInPlaceActivate(T))
+#define IOleInPlaceSite_OnInPlaceActivate(T) ((T)->lpVtbl->OnInPlaceActivate(T))
+#define IOleInPlaceSite_OnUIActivate(T) ((T)->lpVtbl->OnUIActivate(T))
+#define IOleInPlaceSite_GetWindowContext(T,a,b,c,d,e) ((T)->lpVtbl->GetWindowContext(T,a,b,c,d,e))
+#define IOleInPlaceSite_Scroll(T,a) ((T)->lpVtbl->Scroll(T,a))
+#define IOleInPlaceSite_OnUIDeactivate(T,a) ((T)->lpVtbl->OnUIDeactivate(T,a))
+#define IOleInPlaceSite_OnInPlaceDeactivate(T) ((T)->lpVtbl->OnInPlaceDeactivate(T))
+#define IOleInPlaceSite_DiscardUndoState(T) ((T)->lpVtbl->DiscardUndoState(T))
+#define IOleInPlaceSite_DeactivateAndUndo(T) ((T)->lpVtbl->DeactivateAndUndo(T))
+#define IOleInPlaceSite_OnPosRectChange(T,a) ((T)->lpVtbl->OnPosRectChange(T,a))
+
+/* ---- IOleObject: 18 documented method pages; order R1 ---- */
+typedef struct IOleObjectVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleObject*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleObject*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleObject*);  /* (R1) */
+    /* IOleObject */
+    HRESULT (WINAPI *SetClientSite)(IOleObject*, IOleClientSite* pClientSite);  /* 882928 */
+    HRESULT (WINAPI *GetClientSite)(IOleObject*, IOleClientSite** ppClientSite);  /* 882918 */
+    HRESULT (WINAPI *SetHostNames)(IOleObject*, LPCOLESTR szContainerApp, LPCOLESTR szContainerObj);  /* 882931 */
+    HRESULT (WINAPI *Close)(IOleObject*, DWORD dwSaveOption);  /* 882914 */
+    HRESULT (WINAPI *SetMoniker)(IOleObject*, DWORD, LPMONIKER);  /* (R1) */
+    HRESULT (WINAPI *GetMoniker)(IOleObject*, DWORD, DWORD, LPMONIKER*);  /* (R1) */
+    HRESULT (WINAPI *InitFromData)(IOleObject*, IDataObject* pDataObject, BOOL fCreation, DWORD dwReserved);  /* 882925 */
+    HRESULT (WINAPI *GetClipboardData)(IOleObject*, DWORD dwReserved, IDataObject** ppDataObject);  /* 882919 */
+    HRESULT (WINAPI *DoVerb)(IOleObject*, LONG iVerb, LPMSG lpmsg, IOleClientSite* pActiveSite, LONG lindex, HWND hwndParent, LPCRECT lprcPosRect);  /* 882915 */
+    HRESULT (WINAPI *EnumVerbs)(IOleObject*, IEnumOLEVERB** ppEnumOleVerb);  /* 882917 */
+    HRESULT (WINAPI *Update)(IOleObject*);  /* 882934 */
+    HRESULT (WINAPI *IsUpToDate)(IOleObject*);  /* 882926 */
+    HRESULT (WINAPI *GetUserClassID)(IOleObject*, CLSID* pClsid);  /* 882923 */
+    HRESULT (WINAPI *GetUserType)(IOleObject*, DWORD dwFormOfType, LPOLESTR* pszUserType);  /* 882924 */
+    HRESULT (WINAPI *SetExtent)(IOleObject*, DWORD dwDrawAspect, SIZEL* psizel);  /* 882930 */
+    HRESULT (WINAPI *GetExtent)(IOleObject*, DWORD dwDrawAspect, SIZEL* psizel);  /* 882920 */
+    HRESULT (WINAPI *Advise)(IOleObject*, IAdviseSink* pAdvSink, DWORD* pdwConnection);  /* 882913 */
+    HRESULT (WINAPI *Unadvise)(IOleObject*, DWORD dwConnection);  /* 882933 */
+    HRESULT (WINAPI *EnumAdvise)(IOleObject*, IEnumSTATDATA**);  /* (R1) */
+    HRESULT (WINAPI *GetMiscStatus)(IOleObject*, DWORD dwAspect, DWORD* pdwStatus);  /* 882921 */
+    HRESULT (WINAPI *SetColorScheme)(IOleObject*, LOGPALETTE* pLogpal);  /* 882929 */
+} IOleObjectVtbl;
+struct IOleObject { const IOleObjectVtbl *lpVtbl; };
+#define IOleObject_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleObject_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleObject_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleObject_SetClientSite(T,a) ((T)->lpVtbl->SetClientSite(T,a))
+#define IOleObject_GetClientSite(T,a) ((T)->lpVtbl->GetClientSite(T,a))
+#define IOleObject_SetHostNames(T,a,b) ((T)->lpVtbl->SetHostNames(T,a,b))
+#define IOleObject_Close(T,a) ((T)->lpVtbl->Close(T,a))
+#define IOleObject_SetMoniker(T,a,b) ((T)->lpVtbl->SetMoniker(T,a,b))
+#define IOleObject_GetMoniker(T,a,b,c) ((T)->lpVtbl->GetMoniker(T,a,b,c))
+#define IOleObject_InitFromData(T,a,b,c) ((T)->lpVtbl->InitFromData(T,a,b,c))
+#define IOleObject_GetClipboardData(T,a,b) ((T)->lpVtbl->GetClipboardData(T,a,b))
+#define IOleObject_DoVerb(T,a,b,c,d,e,f) ((T)->lpVtbl->DoVerb(T,a,b,c,d,e,f))
+#define IOleObject_EnumVerbs(T,a) ((T)->lpVtbl->EnumVerbs(T,a))
+#define IOleObject_Update(T) ((T)->lpVtbl->Update(T))
+#define IOleObject_IsUpToDate(T) ((T)->lpVtbl->IsUpToDate(T))
+#define IOleObject_GetUserClassID(T,a) ((T)->lpVtbl->GetUserClassID(T,a))
+#define IOleObject_GetUserType(T,a,b) ((T)->lpVtbl->GetUserType(T,a,b))
+#define IOleObject_SetExtent(T,a,b) ((T)->lpVtbl->SetExtent(T,a,b))
+#define IOleObject_GetExtent(T,a,b) ((T)->lpVtbl->GetExtent(T,a,b))
+#define IOleObject_Advise(T,a,b) ((T)->lpVtbl->Advise(T,a,b))
+#define IOleObject_Unadvise(T,a) ((T)->lpVtbl->Unadvise(T,a))
+#define IOleObject_EnumAdvise(T,a) ((T)->lpVtbl->EnumAdvise(T,a))
+#define IOleObject_GetMiscStatus(T,a,b) ((T)->lpVtbl->GetMiscStatus(T,a,b))
+#define IOleObject_SetColorScheme(T,a) ((T)->lpVtbl->SetColorScheme(T,a))
+
+/* ---- IOleWindow: 2 documented method pages; order R1 ---- */
+typedef struct IOleWindowVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IOleWindow*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IOleWindow*);  /* (R1) */
+    ULONG (WINAPI *Release)(IOleWindow*);  /* (R1) */
+    /* IOleWindow */
+    HRESULT (WINAPI *GetWindow)(IOleWindow*, HWND* phwnd);  /* 519280 */
+    HRESULT (WINAPI *ContextSensitiveHelp)(IOleWindow*, BOOL fEnterMode);  /* 519279 */
+} IOleWindowVtbl;
+struct IOleWindow { const IOleWindowVtbl *lpVtbl; };
+#define IOleWindow_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IOleWindow_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IOleWindow_Release(T) ((T)->lpVtbl->Release(T))
+#define IOleWindow_GetWindow(T,a) ((T)->lpVtbl->GetWindow(T,a))
+#define IOleWindow_ContextSensitiveHelp(T,a) ((T)->lpVtbl->ContextSensitiveHelp(T,a))
+
+/* ---- IParseDisplayName: 1 documented method pages; order R1 ---- */
+typedef struct IParseDisplayNameVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IParseDisplayName*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IParseDisplayName*);  /* (R1) */
+    ULONG (WINAPI *Release)(IParseDisplayName*);  /* (R1) */
+    /* IParseDisplayName */
+    HRESULT (WINAPI *ParseDisplayName)(IParseDisplayName*, IBindCtx* pbc, LPOLESTR pszDisplayName, ULONG* pchEaten, IMoniker** ppmkOut);  /* 882936 */
+} IParseDisplayNameVtbl;
+struct IParseDisplayName { const IParseDisplayNameVtbl *lpVtbl; };
+#define IParseDisplayName_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IParseDisplayName_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IParseDisplayName_Release(T) ((T)->lpVtbl->Release(T))
+#define IParseDisplayName_ParseDisplayName(T,a,b,c,d) ((T)->lpVtbl->ParseDisplayName(T,a,b,c,d))
+
+/* ---- IPersist: 1 documented method pages; order R1 ---- */
+typedef struct IPersistVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersist*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersist*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersist*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersist*, CLSID* pClassID);  /* 883501 */
+} IPersistVtbl;
+struct IPersist { const IPersistVtbl *lpVtbl; };
+#define IPersist_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersist_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersist_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersist_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+
+/* ---- IPersistStorage: 5 documented method pages; order R1 ---- */
+typedef struct IPersistStorageVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistStorage*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistStorage*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistStorage*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistStorage*, CLSID*);  /* (R1) */
+    /* IPersistStorage */
+    HRESULT (WINAPI *IsDirty)(IPersistStorage*);  /* 883704 */
+    HRESULT (WINAPI *InitNew)(IPersistStorage*, IStorage* pStg);  /* 883686 */
+    HRESULT (WINAPI *Load)(IPersistStorage*, IStorage* pStg);  /* 883717 */
+    HRESULT (WINAPI *Save)(IPersistStorage*, IStorage* pStgSave, BOOL fSameAsLoad);  /* 883726 */
+    HRESULT (WINAPI *SaveCompleted)(IPersistStorage*, IStorage* pStgNew);  /* 883737 */
+    HRESULT (WINAPI *HandsOffStorage)(IPersistStorage*);  /* (R1) */
+} IPersistStorageVtbl;
+struct IPersistStorage { const IPersistStorageVtbl *lpVtbl; };
+#define IPersistStorage_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistStorage_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistStorage_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistStorage_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistStorage_IsDirty(T) ((T)->lpVtbl->IsDirty(T))
+#define IPersistStorage_InitNew(T,a) ((T)->lpVtbl->InitNew(T,a))
+#define IPersistStorage_Load(T,a) ((T)->lpVtbl->Load(T,a))
+#define IPersistStorage_Save(T,a,b) ((T)->lpVtbl->Save(T,a,b))
+#define IPersistStorage_SaveCompleted(T,a) ((T)->lpVtbl->SaveCompleted(T,a))
+#define IPersistStorage_HandsOffStorage(T) ((T)->lpVtbl->HandsOffStorage(T))
+
+/* ---- IPersistStream: 4 documented method pages; order R1 ---- */
+typedef struct IPersistStreamVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistStream*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistStream*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistStream*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistStream*, LPCLSID);  /* (R1) */
+    /* IPersistStream */
+    HRESULT (WINAPI *IsDirty)(IPersistStream*);  /* 883830 */
+    HRESULT (WINAPI *Load)(IPersistStream*, IStream* pStm);  /* 883840 */
+    HRESULT (WINAPI *Save)(IPersistStream*, IStream* pStm, BOOL fClearDirty);  /* 883850 */
+    HRESULT (WINAPI *GetSizeMax)(IPersistStream*, ULARGE_INTEGER* pcbSize);  /* 883746 */
+} IPersistStreamVtbl;
+struct IPersistStream { const IPersistStreamVtbl *lpVtbl; };
+#define IPersistStream_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistStream_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistStream_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistStream_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistStream_IsDirty(T) ((T)->lpVtbl->IsDirty(T))
+#define IPersistStream_Load(T,a) ((T)->lpVtbl->Load(T,a))
+#define IPersistStream_Save(T,a,b) ((T)->lpVtbl->Save(T,a,b))
+#define IPersistStream_GetSizeMax(T,a) ((T)->lpVtbl->GetSizeMax(T,a))
+
+/* ---- IPersistStreamInit: 5 documented method pages; order R1 ---- */
+typedef struct IPersistStreamInitVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistStreamInit*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistStreamInit*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistStreamInit*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistStreamInit*, LPCLSID);  /* (R1) */
+    /* IPersistStreamInit */
+    HRESULT (WINAPI *IsDirty)(IPersistStreamInit*);  /* 883784 */
+    HRESULT (WINAPI *Load)(IPersistStreamInit*, LPSTREAM pStm);  /* 883792 */
+    HRESULT (WINAPI *Save)(IPersistStreamInit*, LPSTREAM pStm, BOOL fClearDirty);  /* 883806 */
+    HRESULT (WINAPI *GetSizeMax)(IPersistStreamInit*, ULARGE_INTEGER* pcbSize);  /* 883758 */
+    HRESULT (WINAPI *InitNew)(IPersistStreamInit*);  /* 883767 */
+} IPersistStreamInitVtbl;
+struct IPersistStreamInit { const IPersistStreamInitVtbl *lpVtbl; };
+#define IPersistStreamInit_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistStreamInit_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistStreamInit_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistStreamInit_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistStreamInit_IsDirty(T) ((T)->lpVtbl->IsDirty(T))
+#define IPersistStreamInit_Load(T,a) ((T)->lpVtbl->Load(T,a))
+#define IPersistStreamInit_Save(T,a,b) ((T)->lpVtbl->Save(T,a,b))
+#define IPersistStreamInit_GetSizeMax(T,a) ((T)->lpVtbl->GetSizeMax(T,a))
+#define IPersistStreamInit_InitNew(T) ((T)->lpVtbl->InitNew(T))
+
+/* ---- IProgressNotify: 1 documented method pages; order R1 ---- */
+typedef struct IProgressNotifyVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IProgressNotify*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IProgressNotify*);  /* (R1) */
+    ULONG (WINAPI *Release)(IProgressNotify*);  /* (R1) */
+    /* IProgressNotify */
+    HRESULT (WINAPI *OnProgress)(IProgressNotify*, DWORD dwProgressCurrent, DWORD dwProgressMaximum, BOOL fAccurate, BOOL fOwner);  /* 884240 */
+} IProgressNotifyVtbl;
+struct IProgressNotify { const IProgressNotifyVtbl *lpVtbl; };
+#define IProgressNotify_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IProgressNotify_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IProgressNotify_Release(T) ((T)->lpVtbl->Release(T))
+#define IProgressNotify_OnProgress(T,a,b,c,d) ((T)->lpVtbl->OnProgress(T,a,b,c,d))
+
+/* ---- IProvideClassInfo: 1 documented method pages; order R1 ---- */
+typedef struct IProvideClassInfoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IProvideClassInfo*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IProvideClassInfo*);  /* (R1) */
+    ULONG (WINAPI *Release)(IProvideClassInfo*);  /* (R1) */
+    /* IProvideClassInfo */
+    HRESULT (WINAPI *GetClassInfo)(IProvideClassInfo*, ITypeInfo** ppTI);  /* 884308 */
+} IProvideClassInfoVtbl;
+struct IProvideClassInfo { const IProvideClassInfoVtbl *lpVtbl; };
+#define IProvideClassInfo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IProvideClassInfo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IProvideClassInfo_Release(T) ((T)->lpVtbl->Release(T))
+#define IProvideClassInfo_GetClassInfo(T,a) ((T)->lpVtbl->GetClassInfo(T,a))
+
+/* ---- IProvideClassInfo2: 1 documented method pages; order R1 ---- */
+typedef struct IProvideClassInfo2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IProvideClassInfo2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IProvideClassInfo2*);  /* (R1) */
+    ULONG (WINAPI *Release)(IProvideClassInfo2*);  /* (R1) */
+    /* IProvideClassInfo */
+    HRESULT (WINAPI *GetClassInfo)(IProvideClassInfo2*, LPTYPEINFO*);  /* (R1) */
+    /* IProvideClassInfo2 */
+    HRESULT (WINAPI *GetGUID)(IProvideClassInfo2*, DWORD dwGuidKind, GUID* pGUID);  /* 884278 */
+} IProvideClassInfo2Vtbl;
+struct IProvideClassInfo2 { const IProvideClassInfo2Vtbl *lpVtbl; };
+#define IProvideClassInfo2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IProvideClassInfo2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IProvideClassInfo2_Release(T) ((T)->lpVtbl->Release(T))
+#define IProvideClassInfo2_GetClassInfo(T,a) ((T)->lpVtbl->GetClassInfo(T,a))
+#define IProvideClassInfo2_GetGUID(T,a,b) ((T)->lpVtbl->GetGUID(T,a,b))
+
+/* ---- IROTData: 1 documented method pages; order R1 ---- */
+typedef struct IROTDataVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IROTData*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IROTData*);  /* (R1) */
+    ULONG (WINAPI *Release)(IROTData*);  /* (R1) */
+    /* IROTData */
+    HRESULT (WINAPI *GetComparisonData)(IROTData*, BYTE* pbData, ULONG cbMax, ULONG* pcbData);  /* 884587 */
+} IROTDataVtbl;
+struct IROTData { const IROTDataVtbl *lpVtbl; };
+#define IROTData_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IROTData_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IROTData_Release(T) ((T)->lpVtbl->Release(T))
+#define IROTData_GetComparisonData(T,a,b,c) ((T)->lpVtbl->GetComparisonData(T,a,b,c))
+
+/* ---- IRunnableObject: 5 documented method pages; order R1 ---- */
+typedef struct IRunnableObjectVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IRunnableObject*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IRunnableObject*);  /* (R1) */
+    ULONG (WINAPI *Release)(IRunnableObject*);  /* (R1) */
+    /* IRunnableObject */
+    HRESULT (WINAPI *GetRunningClass)(IRunnableObject*, LPCLSID lpClsid);  /* 884589 */
+    HRESULT (WINAPI *Run)(IRunnableObject*, LPBC lpbc);  /* 884594 */
+    BOOL (WINAPI *IsRunning)(IRunnableObject*);  /* 884590 */
+    HRESULT (WINAPI *LockRunning)(IRunnableObject*, BOOL fLock, BOOL fLastUnlockCloses);  /* 884593 */
+    HRESULT (WINAPI *SetContainedObject)(IRunnableObject*, BOOL fContained);  /* 884595 */
+} IRunnableObjectVtbl;
+struct IRunnableObject { const IRunnableObjectVtbl *lpVtbl; };
+#define IRunnableObject_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IRunnableObject_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IRunnableObject_Release(T) ((T)->lpVtbl->Release(T))
+#define IRunnableObject_GetRunningClass(T,a) ((T)->lpVtbl->GetRunningClass(T,a))
+#define IRunnableObject_Run(T,a) ((T)->lpVtbl->Run(T,a))
+#define IRunnableObject_IsRunning(T) ((T)->lpVtbl->IsRunning(T))
+#define IRunnableObject_LockRunning(T,a,b) ((T)->lpVtbl->LockRunning(T,a,b))
+#define IRunnableObject_SetContainedObject(T,a) ((T)->lpVtbl->SetContainedObject(T,a))
+
+/* ---- ISequentialStream: 2 documented method pages; order R1 ---- */
+typedef struct ISequentialStreamVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(ISequentialStream*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(ISequentialStream*);  /* (R1) */
+    ULONG (WINAPI *Release)(ISequentialStream*);  /* (R1) */
+    /* ISequentialStream */
+    HRESULT (WINAPI *Read)(ISequentialStream*, void* pv, ULONG cb, ULONG* pcbRead);  /* 886039 */
+    HRESULT (WINAPI *Write)(ISequentialStream*, void const* pv, ULONG cb, ULONG* pcbWritten);  /* 886049 */
+} ISequentialStreamVtbl;
+struct ISequentialStream { const ISequentialStreamVtbl *lpVtbl; };
+#define ISequentialStream_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define ISequentialStream_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define ISequentialStream_Release(T) ((T)->lpVtbl->Release(T))
+#define ISequentialStream_Read(T,a,b,c) ((T)->lpVtbl->Read(T,a,b,c))
+#define ISequentialStream_Write(T,a,b,c) ((T)->lpVtbl->Write(T,a,b,c))
+
+/* ---- IServerSecurity: 1 documented method pages; order R1 ---- */
+typedef struct IServerSecurityVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IServerSecurity*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IServerSecurity*);  /* (R1) */
+    ULONG (WINAPI *Release)(IServerSecurity*);  /* (R1) */
+    /* IServerSecurity */
+    HRESULT (WINAPI *QueryBlanket)(IServerSecurity*, DWORD* pAuthnSvc, DWORD* pAuthzSvc, OLECHAR** pServerPrincName, DWORD* pAuthnLevel, DWORD* pImpLevel, RPC_AUTHZ_HANDLE* pPrivs, DWORD* pCapabilities);  /* 886085 */
+    HRESULT (WINAPI *ImpersonateClient)(IServerSecurity*);  /* (R1) */
+    HRESULT (WINAPI *RevertToSelf)(IServerSecurity*);  /* (R1) */
+    HRESULT (WINAPI *IsImpersonating)(IServerSecurity*);  /* (R1) */
+} IServerSecurityVtbl;
+struct IServerSecurity { const IServerSecurityVtbl *lpVtbl; };
+#define IServerSecurity_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IServerSecurity_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IServerSecurity_Release(T) ((T)->lpVtbl->Release(T))
+#define IServerSecurity_QueryBlanket(T,a,b,c,d,e,f,g) ((T)->lpVtbl->QueryBlanket(T,a,b,c,d,e,f,g))
+#define IServerSecurity_ImpersonateClient(T) ((T)->lpVtbl->ImpersonateClient(T))
+#define IServerSecurity_RevertToSelf(T) ((T)->lpVtbl->RevertToSelf(T))
+#define IServerSecurity_IsImpersonating(T) ((T)->lpVtbl->IsImpersonating(T))
+
+/* ---- IStdMarshalInfo: 1 documented method pages; order R1 ---- */
+typedef struct IStdMarshalInfoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IStdMarshalInfo*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IStdMarshalInfo*);  /* (R1) */
+    ULONG (WINAPI *Release)(IStdMarshalInfo*);  /* (R1) */
+    /* IStdMarshalInfo */
+    HRESULT (WINAPI *GetClassForHandler)(IStdMarshalInfo*, DWORD dwDestContext, void* pvDestContext, CLSID* pClsid);  /* 890547 */
+} IStdMarshalInfoVtbl;
+struct IStdMarshalInfo { const IStdMarshalInfoVtbl *lpVtbl; };
+#define IStdMarshalInfo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IStdMarshalInfo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IStdMarshalInfo_Release(T) ((T)->lpVtbl->Release(T))
+#define IStdMarshalInfo_GetClassForHandler(T,a,b,c) ((T)->lpVtbl->GetClassForHandler(T,a,b,c))
+
+/* ---- IViewObject: 6 documented method pages; order R1 ---- */
+typedef struct IViewObjectVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IViewObject*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IViewObject*);  /* (R1) */
+    ULONG (WINAPI *Release)(IViewObject*);  /* (R1) */
+    /* IViewObject */
+    HRESULT (WINAPI *Draw)(IViewObject*, DWORD, LONG, VOID*, DVTARGETDEVICE*, HDC, HDC, LPCRECTL, LPCRECTL, LPFNCONTINUE pfnContinue, DWORD);  /* (R1) */
+    HRESULT (WINAPI *GetColorSet)(IViewObject*, DWORD dwAspect, LONG lindex, void* pvAspect, DVTARGETDEVICE* ptd, HDC hicTargetDev, LOGPALETTE** ppColorSet);  /* 891695 */
+    HRESULT (WINAPI *Freeze)(IViewObject*, DWORD dwAspect, LONG lindex, void* pvAspect, DWORD* pdwFreeze);  /* 891597 */
+    HRESULT (WINAPI *Unfreeze)(IViewObject*, DWORD dwFreeze);  /* 891710 */
+    HRESULT (WINAPI *SetAdvise)(IViewObject*, DWORD dwAspect, DWORD advf, IAdviseSink* pAdvSink);  /* 891709 */
+    HRESULT (WINAPI *GetAdvise)(IViewObject*, DWORD* pdwAspect, DWORD* padvf, IAdviseSink** ppAdvSink);  /* 891602 */
+} IViewObjectVtbl;
+struct IViewObject { const IViewObjectVtbl *lpVtbl; };
+#define IViewObject_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IViewObject_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IViewObject_Release(T) ((T)->lpVtbl->Release(T))
+#define IViewObject_Draw(T,a,b,c,d,e,f,g,h,i,j) ((T)->lpVtbl->Draw(T,a,b,c,d,e,f,g,h,i,j))
+#define IViewObject_GetColorSet(T,a,b,c,d,e,f) ((T)->lpVtbl->GetColorSet(T,a,b,c,d,e,f))
+#define IViewObject_Freeze(T,a,b,c,d) ((T)->lpVtbl->Freeze(T,a,b,c,d))
+#define IViewObject_Unfreeze(T,a) ((T)->lpVtbl->Unfreeze(T,a))
+#define IViewObject_SetAdvise(T,a,b,c) ((T)->lpVtbl->SetAdvise(T,a,b,c))
+#define IViewObject_GetAdvise(T,a,b,c) ((T)->lpVtbl->GetAdvise(T,a,b,c))
+
+/* ---- IViewObject2: 1 documented method pages; order R1 ---- */
+typedef struct IViewObject2Vtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IViewObject2*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IViewObject2*);  /* (R1) */
+    ULONG (WINAPI *Release)(IViewObject2*);  /* (R1) */
+    /* IViewObject */
+    HRESULT (WINAPI *Draw)(IViewObject2*, DWORD, LONG, VOID*, DVTARGETDEVICE*, HDC, HDC, LPCRECTL, LPCRECTL, LPFNCONTINUE pfnContinue, DWORD);  /* (R1) */
+    HRESULT (WINAPI *GetColorSet)(IViewObject2*, DWORD, LONG, VOID*, DVTARGETDEVICE*, HDC, LPLOGPALETTE*);  /* (R1) */
+    HRESULT (WINAPI *Freeze)(IViewObject2*, DWORD, LONG, VOID*, PDWORD);  /* (R1) */
+    HRESULT (WINAPI *Unfreeze)(IViewObject2*, DWORD);  /* (R1) */
+    HRESULT (WINAPI *SetAdvise)(IViewObject2*, DWORD, DWORD, IAdviseSink*);  /* (R1) */
+    HRESULT (WINAPI *GetAdvise)(IViewObject2*, PDWORD, PDWORD, IAdviseSink**);  /* (R1) */
+    /* IViewObject2 */
+    HRESULT (WINAPI *GetExtent)(IViewObject2*, DWORD dwAspect, LONG lindex, DVTARGETDEVICE ptd, LPSIZEL lpsizel);  /* 891559 */
+} IViewObject2Vtbl;
+struct IViewObject2 { const IViewObject2Vtbl *lpVtbl; };
+#define IViewObject2_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IViewObject2_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IViewObject2_Release(T) ((T)->lpVtbl->Release(T))
+#define IViewObject2_Draw(T,a,b,c,d,e,f,g,h,i,j) ((T)->lpVtbl->Draw(T,a,b,c,d,e,f,g,h,i,j))
+#define IViewObject2_GetColorSet(T,a,b,c,d,e,f) ((T)->lpVtbl->GetColorSet(T,a,b,c,d,e,f))
+#define IViewObject2_Freeze(T,a,b,c,d) ((T)->lpVtbl->Freeze(T,a,b,c,d))
+#define IViewObject2_Unfreeze(T,a) ((T)->lpVtbl->Unfreeze(T,a))
+#define IViewObject2_SetAdvise(T,a,b,c) ((T)->lpVtbl->SetAdvise(T,a,b,c))
+#define IViewObject2_GetAdvise(T,a,b,c) ((T)->lpVtbl->GetAdvise(T,a,b,c))
+#define IViewObject2_GetExtent(T,a,b,c,d) ((T)->lpVtbl->GetExtent(T,a,b,c,d))
 
 #ifdef __cplusplus
 }

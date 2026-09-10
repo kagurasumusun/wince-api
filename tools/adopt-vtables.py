@@ -141,8 +141,36 @@ def flatten(r1, name):
 
 BANNER_RE = re.compile(r'/\*\s*(\w+):\s*documented methods\b')
 RECORD_RE = re.compile(
-    r'\s*\*\s+(?:ms|aa)(\d{6})\s+(\w+):\s+'
-    r'([A-Za-z_]\w*)\s+\w+\s*\((.*)\)\s*$')
+    r'\s*\*\s+(?:ms|aa)(\d{6})\s+(\w+):\s+(.+)$')
+
+
+def split_params(params):
+    """Parameter list -> [(type, name)].  Handles the pages' glued
+    misprints (HRESULTAlloc, DWORDdwFlags, REFERENCE_TIMErtNow) and
+    trailing [] array parameters."""
+    plist = []
+    if params.strip() not in ('', 'void', 'VOID'):
+        for p in params.split(','):
+            p = p.split('//')[0].strip()   # strip inline page comments
+            if not p:
+                continue                    # empty piece (mangled record)
+            is_array = p.endswith('[]')
+            if is_array:
+                p = p[:-2].strip()
+            # array parameters decay to pointers (also permits opaque
+            # element types, e.g. CATEGORYINFO)
+            mm = re.match(r'^(.*?[\s*])\s*([A-Za-z_]\w*)$', p)
+            if mm and mm.group(1).strip():
+                plist.append((mm.group(1).strip() + ('*' if is_array else ''),
+                              mm.group(2)))
+                continue
+            mm = re.match(r'^([A-Z][A-Z0-9_]*[A-Z_])([a-z]\w*)$', p)
+            if mm:
+                plist.append((mm.group(1) + ('*' if is_array else ''),
+                              mm.group(2)))
+                continue
+            plist.append((p + ('*' if is_array else ''), ''))
+    return plist
 
 
 def parse_records(header):
@@ -163,16 +191,18 @@ def parse_records(header):
             continue
         rm = RECORD_RE.match(line)
         if rm and cur in out:
-            page, name, ret, params = rm.groups()
-            plist = []
-            if params.strip() not in ('', 'void', 'VOID'):
-                for p in params.split(','):
-                    p = p.strip()
-                    mm = re.match(r'^(.*?[\s*])\s*(\w+)$', p)
-                    if mm and mm.group(1).strip():
-                        plist.append((mm.group(1).strip(), mm.group(2)))
-                    else:
-                        plist.append((p, ''))
+            page, name, sig = rm.groups()
+            sig = sig.rstrip().rstrip(';').strip()
+            lp = sig.find('(')
+            rp = sig.rfind(')')
+            if lp == -1 or rp < lp:
+                continue
+            head = sig[:lp]
+            hm = re.match(r'^([A-Za-z_]\w*)[\s]?([A-Za-z_]\w*)?$', head.strip())
+            if not hm or (hm.group(2) and hm.group(2) != name):
+                continue          # not a plain signature line
+            ret = hm.group(1)
+            plist = split_params(sig[lp + 1:rp])
             out[cur]['pages'] += 1
             out[cur]['methods'].append((page, name, ret, plist))
     return out
@@ -180,17 +210,25 @@ def parse_records(header):
 
 # ------------------------------------------------------------- compose
 
-PTR_STYLE = [('PVOID', 'VOID*'), ('PULONG', 'ULONG*'), ('PUINT', 'UINT*'),
+PTR_STYLE = [('__IView_pfncont', 'LPFNCONTINUE'), ('PVOID', 'VOID*'), ('PULONG', 'ULONG*'), ('PUINT', 'UINT*'),
              ('PUSHORT', 'USHORT*'), ('PUCHAR', 'UCHAR*')]
 
 # Page-printed ALL-CAPS spellings -> the project's canonical typedefs.
-TYPE_MAP = {'IENUMIDLIST': 'IEnumIDList'}
+TYPE_MAP = {'IENUMIDLIST': 'IEnumIDList',
+            'LPENUMSTATDATA': 'IEnumSTATDATA*'}
+# Page-printed case-misprint spellings (exact match).
+EXACT_TYPE_MAP = {'IENumSTATDATA': 'IEnumSTATDATA',
+                  'byte': 'BYTE',
+                  '__IView_pfncont': 'LPFNCONTINUE',
+                  'IEnumOleVerb': 'IEnumOLEVERB'}
 
 
 def r1_type(t):
     for a, b in PTR_STYLE:
         if t == a:
             return b
+        if t.startswith(a + ' '):     # R1 token with an embedded name
+            return b + t[len(a):]
     return t
 
 
@@ -221,8 +259,12 @@ def compose(header):
                 if len(plist) != len(types):
                     problems.append(
                         f'{iface}::{mname}: page has {len(plist)} params,'
-                        f' R1 has {len(types)} -- kept page signature')
-                rows.append((seg, mname, pret, 'page', page, plist))
+                        f' R1 has {len(types)} -- ABI-safe R1 signature'
+                        f' emitted, page record kept above')
+                    rows.append((seg, mname, ret, 'R1', None,
+                                 [(r1_type(t), '') for t in types]))
+                else:
+                    rows.append((seg, mname, pret, 'page', page, plist))
                 used.add(mname)
             else:
                 rows.append((seg, mname, ret, 'R1', None,
@@ -241,6 +283,9 @@ def compose(header):
 
 def cptr_type(t):
     t = re.sub(r'\s*\*\s*', '*', t)
+    core = t.rstrip('*')
+    if core in EXACT_TYPE_MAP:
+        return EXACT_TYPE_MAP[core] + t[len(core):]
     m = re.match(r'^([A-Z][A-Z0-9_]*)(\**)$', t)
     if m and m.group(1) in TYPE_MAP:
         return TYPE_MAP[m.group(1)] + m.group(2)
@@ -285,6 +330,18 @@ def emit(header):
     return L, result, problems
 
 
+M97_ANCHOR = '#ifdef __cplusplus\n}\n#endif'
+
+
+def strip_m97(text):
+    i = text.find('/* ' + MARK)
+    if i == -1:
+        return text
+    j = text.rfind(M97_ANCHOR)
+    assert j >= i, 'anchor before section'
+    return text[:i] + text[j:]
+
+
 def main():
     if len(sys.argv) < 3 or sys.argv[1] not in ('map', 'write'):
         sys.exit(__doc__)
@@ -303,11 +360,8 @@ def main():
         return 0
     path = os.path.join(ROOT, 'include', header)
     text = open(path, encoding='utf-8').read()
-    if MARK in text:
-        print(f'{header}: already has the {MARK} section')
-        return 0
-    anchor = '#ifdef __cplusplus\n}\n#endif'
-    i = text.rfind(anchor)
+    text = strip_m96 = strip_m97(text)
+    i = text.rfind(M97_ANCHOR)
     assert i != -1, 'extern-C close not found'
     block = '\n'.join(L) + '\n\n'
     text = text[:i] + block + text[i:]
