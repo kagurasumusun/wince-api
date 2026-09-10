@@ -62,6 +62,7 @@ include/IAccess.h \
 include/Icmpapi.h \
 include/Imaging.h \
 include/Imm.h \
+include/Lap.h \
 include/Imjpskin.h \
 include/Ipexport.h \
 include/Iphlpapi.h \

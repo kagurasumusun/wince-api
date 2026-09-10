@@ -207,7 +207,18 @@ NOT_EXPORTS = {"GetExceptionCode", "GetExceptionInformation",
                # DLL must define and expose (ms863874) -- a user-side
                # export, not an import (M63 waveInProc/waveOutProc
                # callback decision).
-               "CePimCommand"}
+               "CePimCommand",
+               # LAP-exported functions (M95 Lap.h): implemented by the
+               # LAP DLL and resolved by the LASS ("This is a
+               # LAP-exported function" on every page below) -- user-
+               # side exports, not coredll imports, even though the
+               # pages' Requirements boilerplate prints Coredll.lib.
+               "InitLAP",                # ms926083
+               "LAPCreateEnrollmentConfigDialog",  # ms926118
+               "VerifyUserStart",        # ms926488
+               "VerifyUserStop",         # ms926489
+               "VerifyUserToTop",        # ms926490
+               "DeinitLAP"}              # ms938427
 
 
 def declared_exports():

@@ -112,6 +112,7 @@ EXPORTS
   CreateDIBPatternBrushPt
   CreateDIBSection
   CreateDirectoryW
+  CreateEnrollmentConfigDialog
   CreateEventW
   CreateFiber
   CreateFileW
@@ -594,6 +595,7 @@ EXPORTS
   ValidateRect
   ValidateRgn
   VerQueryValueW
+  VerifyUser
   VirtualAlloc
   VirtualFree
   VirtualProtect

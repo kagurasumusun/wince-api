@@ -7105,3 +7105,17 @@ provenance.
   shellcb-doc.def NEW (bonus catch): aa453687 ShellRegisterCallbacks
   (Shellcb.lib, Shell book row whose header declaration landed in
   M94 after the last defdoc run).  Gates GREEN x6.
+- include/Lap.h NEW (10 rows): the Local Authentication Provider.
+  Investigation resolutions: (1) InitLAP/InitLap is a REAL spelling
+  pair (function InitLAP ms926083 takes InitLap* -- structure
+  ms926088 {DWORD size; DWORD capabilities}); both spellings kept as
+  printed.  (2) VerifyUser (app-called, ms926456) and "VerifyUser
+  (LAP)" (LAP-exported, ms926487) are type-identical -- one
+  declaration carries both records; the app page grounds the
+  coredll import.  App-called: VerifyUser, CreateEnrollmentConfig
+  Dialog (coredll-doc.def +2 = 744).  LAP-exported (plain
+  prototypes, user-side exports -- NOT_EXPORTS in gen-doc-def with
+  the page citations): InitLAP, LAPCreateEnrollmentConfigDialog,
+  VerifyUserStart/Stop/ToTop, DeinitLAP.  HELD: VU_HANDLE_MASTER_
+  KEY, VU_UNTIL_SUCCESS (no legal source carries values).  Gates
+  GREEN x6.
