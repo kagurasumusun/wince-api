@@ -1,0 +1,1251 @@
+aa453938	Shell OS Design Development
+aa453939	Shell Overview
+aa452830	How to Customize the Appearance of Common Controls
+ms914382	Creating an Application that Demonstrates the Progress Bar
+aa452828	Cloning the Commctrl Module
+aa453947	Changing the Skin Code for the Progress Bar
+aa452831	How to Customize the Shell
+ms914412	Setting Up the Source Files for a Custom Shell
+ms914387	Creating an Empty Display-Based OS
+ms914408	Setting up Platform Builder to Build Modified Code in a Public Directory
+ms914399	Creating Excluded Projects to Host Shell Source Code in the IDE
+ms933849	Simple Shell Modifications
+aa452716	Selecting Shell Components
+aa452670	Including a Command Processor
+aa452671	Including the Standard Shell
+aa452672	Including the Taskman Shell
+ms926615	Shell Components
+ms926144	Common Controls
+ms926146	Common Dialog Boxes (Shell)
+ms906525	Adding an Advanced Print Dialog Box
+aa452644	Enabling Slide Animation for the Taskbar
+ms906608	Customizing Folders with Desktop.ini
+aa452665	Hiding System Sound Events
+ms906564	Creating a Welcome Application
+aa452675	Installing a Custom Shell
+aa452642	Enabling Shell Callback Functions
+aa452740	Shell OS Reference
+aa452738	Shell OS Functions
+aa452867	BacklightAdvApplet
+aa452636	DrvAdvPageSetupDlg
+aa453687	ShellRegisterCallbacks
+aa452744	Shell OS Structures
+aa453683	SHELLCALLBACKS
+ms926152	Control Panel
+aa452832	How to Implement a Control Panel Application
+ms914378	Creating a Hello World Application
+ms914264	Creating a Control Panel Application
+aa453945	Adding Resources to a Control Panel Application
+aa453946	Building a Control Panel Application
+ms926154	Control Panel Applications
+aa452720	Setting Regional Preferences
+aa452639	Enabling a Backlight
+ms906521	Adding an Advanced Backlight Dialog Box
+aa453937	Shell Application Development
+ms906849	Using Atoms
+ms926099	Atom Tables
+ms926983	Types of Atoms
+ms906578	Creating, Finding, and Deleting Atoms
+ms926103	AYGShell API Extensions
+aa452692	Pocket PC-style Menu Bars
+aa452693	Pocket PC-style New Button
+ms906513	Adding a Global New Button Menu Item
+ms906538	Adding a Temporary New Button Menu Item
+aa452628	Displaying and Handling Items in the New Button Menu
+ms926882	Supporting Full-Screen Dialog Boxes
+ms926909	Supporting the Input Panel
+aa452650	Extending Shortcut Menus for a File Class
+ms906575	Creating Controls
+ms927205	Working with Common Controls
+ms926086	Animation Controls
+ms938413	About Animation Controls
+ms906829	Using Animation Controls
+ms926170	Creating a Command Bar
+ms926168	Creating a Command Bands Control
+ms926213	Creating a Rebar Control
+ms926235	Creating a Toolbar
+ms926840	Specifying Toolbar Size, Position, and Appearance
+ms927173	Using ToolTips
+ms926239	Creating a ToolTip Control
+ms926084	Adding Tool Types
+ms926078	Adding Tool Text
+aa452708	Relaying Mouse Messages to a ToolTip
+aa452660	Handling Miscellaneous Messages
+ms906597	Creating Tracking ToolTips
+ms906591	Creating Multiline ToolTips
+ms926179	Creating a Header Control
+aa452724	Setting the Size and Position of the Header Control
+ms925985	Adding Header Control Items
+ms927196	Working with Advanced Header Control Functionality
+ms926202	Creating an Image List
+ms906859	Using Images in Image Lists
+ms906897	Using Overlays in Image Lists
+ms926185	Creating a List View Control
+ms906585	Creating Image Lists
+ms925989	Adding Items and Subitems
+ms906546	Adding Callback Items and Callback Masks
+ms906548	Adding Columns
+ms926093	Arranging, Sorting, and Finding List Views
+aa452722	Setting the Position and Scroll Position of a List View Item
+aa452638	Editing Labels
+ms927020	Using Advanced List View Functionality
+ms906553	Creating a Trackbar
+ms906558	Creating a Tree View
+ms906530	Adding and Editing Item Labels
+aa452683	Modifying Tree-View Item Appearance
+ms906562	Creating a Tree-View Image List
+aa452664	Handling Tree-View Messages
+aa452658	Handling Drag-and-Drop Messages
+ms926205	Creating an Up-Down Control
+aa452681	Modifying Control Position and Acceleration
+ms926176	Creating a Date and Time Picker Control
+aa452635	Displaying Information
+ms906612	Customizing Output with Callback Fields
+ms926188	Creating a Month Calendar Control
+aa452725	Setting the Time
+ms926227	Creating a Status Bar
+ms926191	Creating a Multiple-Part Status Bar
+ms926077	Adding Text to the Status Bar
+ms926208	Creating a Progress Bar
+aa452723	Setting the Range and Current Position
+ms926211	Creating a Property Sheet
+ms927193	Working with Active and Inactive Pages in a Property Sheet
+ms926233	Creating a Tab Control
+aa452659	Handling Messages for Tab Controls
+ms906532	Adding an Image List to a Tab Control
+aa452721	Setting Tab Size and Position
+ms927169	Using the Custom Draw Service
+aa452662	Handling Paint Cycles, Drawing Stages, and Messages
+aa452710	Responding to the Prepaint Notification
+ms926120	Changing Fonts and Colors
+aa452714	Sample Custom Draw Function
+aa453925	Command Processor Shell
+ms907227	Command Processor Commands
+aa452863	ATTRIB
+aa452918	CALL
+ms908110	CHDIR, CD
+ms928588	CLS
+ms908150	COPY (Command Processor)
+ms908196	DATE
+aa452954	DIR
+aa452994	ECHO (Command Processor)
+aa453059	EXIT
+aa453057	ERASE, DEL
+aa453191	GOTO (Command Processor)
+ms929929	HELP
+ms929941	IF (Command Processor)
+ms931429	MKDIR, MD
+ms931456	MOVE
+ms931463	net
+ms911917	PATH
+aa453550	PROMPT
+aa453605	PWD
+ms911918	PAUSE (Command Processor)
+ms939769	REM (Command Processor)
+ms939790	RENAME, REN
+ms939859	RMDIR, RD
+ms939984	SET (Command Processor)
+aa453712	SHIFT
+ms940348	START
+ms933416	TIME
+aa453747	TITLE (Command Processor)
+ms914066	TYPE
+aa452742	Shell Registry Settings
+ms929202	General Shell Registry Settings
+ms908148	Console Registry Settings
+ms926137	Command Processor Registry Settings
+ms926140	Common Control Registry Settings
+aa452934	Desktop Registry Settings
+aa452945	Dialing Characters Registry Settings
+aa452946	Dialing Locations Registry Settings
+ms914103	Windows CE Explorer Registry Settings
+ms926685	Shell Security
+aa452739	Shell Migration
+aa452743	Shell Samples
+aa452741	Shell Reference
+ms907090	AYGShell Reference
+ms927269	AYGShell Controls
+ms914097	WC_SIPPREF
+ms927272	AYGShell Enumerations
+aa453728	SHNP
+ms927275	AYGShell Functions
+aa453670	SHChangeNotifyDeregister
+aa453672	SHChangeNotifyFree
+aa453673	SHChangeNotifyRegister
+aa453674	SHCloseApps
+aa453678	SHCreateMenuBar
+aa453679	SHCreateNewItem
+aa453682	SHDoneButton
+aa453688	SHEnumPropSheetHandlers
+aa453692	SHFindMenuBar
+aa453693	SHFreeContextMenuExtensions
+aa453694	SHFullScreen
+aa453695	SHGetAppKeyAssoc
+aa453696	SHGetAutoRunPath
+aa453699	SHGetEmergencyCallList
+aa453701	SHGetInputContext
+aa453710	SHHandleWMActivate
+aa453711	SHHandleWMSettingChange
+aa453713	SHInitDialog
+aa453715	SHInitExtraControls
+aa453716	SHInputDialog
+aa453717	SHInvokeContextMenuCommand
+aa453719	SHLoadContextMenuExtensions
+aa453722	SHNavigateBack
+aa453723	SHNotificationAdd
+aa453725	SHNotificationGetData
+aa453726	SHNotificationRemove
+aa453727	SHNotificationUpdate
+aa453732	SHRecognizeGesture
+aa453734	SHSetAppKeyWndAssoc
+aa453735	SHSetBack
+aa453736	SHSetInputContext
+aa453737	SHSetNavBarText
+aa453740	SHSipInfo
+aa453741	SHSipPreference
+ms907077	AYGShell Interfaces
+ms909845	INewMenuItemServer
+ms909846	INewMenuItemServer::CreateNewItem
+ms909877	IShellNotificationCallback
+ms909878	IShellNotificationCallback::OnCommandSelected
+ms909879	IShellNotificationCallback::OnDismiss
+ms909880	IShellNotificationCallback::OnLinkSelected
+ms907080	AYGShell Macros
+aa453703	SHGetMenu
+aa453708	SHGetSubMenu
+aa453738	SHSetSubMenu
+ms907085	AYGShell Messages
+ms931663	NMN_GETAPPREGKEY
+ms931668	NMN_GETPROPERTYBAG
+ms931673	NMN_INVOKECOMMAND
+ms931677	NMN_NEWBUTTONUPDATED
+ms931683	NMN_NEWMENUDESTROY
+aa453675	SHCMBM_GETMENU
+aa453676	SHCMBM_GETSUBMENU
+aa453677	SHCMBM_SETSUBMENU
+aa453860	WM_FILECHANGEINFO
+ms907095	AYGShell Structures
+aa453066	FILECHANGENOTIFY
+ms931659	NMNEWMENU
+aa453665	SHACTIVATEINFO
+aa453671	SHCHANGENOTIFYENTRY
+aa453714	SHINITDLGINFO
+aa453721	SHMENUBARINFO
+aa453724	SHNOTIFICATIONDATA
+aa453733	SHRGINFO
+aa452757	Standard Shell Reference
+aa452752	Standard Shell Enumerations
+aa453709	SHGNO
+aa452753	Standard Shell Functions
+aa452900	BrowseCallbackProc
+ms908154	CPlApplet
+aa453667	SHAddToRecentDocs
+aa453668	SHBindToParent
+aa453669	SHBrowseForFolder
+aa453680	SHCreateShortcut
+aa453681	SHCreateShortcutEx
+aa453686	Shell_NotifyIcon
+aa453684	ShellExecuteEx
+aa453690	SHFileOperation
+aa453697	SHGetDesktopFolder
+aa453698	SHGetDocumentsFolder
+aa453700	SHGetFileInfo
+aa453702	SHGetMalloc
+aa453704	SHGetPathFromIDList
+aa453705	SHGetShortcutTarget
+aa453706	SHGetSpecialFolderLocation
+aa453707	SHGetSpecialFolderPath
+aa453720	SHLoadDIBitmap
+aa453739	SHShowOutOfMemory
+ms940378	StrRetToBuf
+aa452754	Standard Shell Interfaces
+ms929936	IDropTarget
+ms929937	IDropTarget::DragEnter
+ms929938	IDropTarget::DragLeave
+ms929939	IDropTarget::DragOver
+ms929940	IDropTarget::Drop
+ms909860	IPersistFolder
+ms909861	IPersistFolder::Initialize
+ms909867	IShellFolder
+ms909868	IShellFolder::BindToObject
+ms909869	IShellFolder::CompareIDs
+ms909870	IShellFolder::CreateViewObject
+ms909871	IShellFolder::EnumObjects
+ms909872	IShellFolder::GetAttributesOf
+ms909873	IShellFolder::GetDisplayNameOf
+ms909874	IShellFolder::GetUIObjectOf
+ms909875	IShellFolder::ParseDisplayName
+ms909876	IShellFolder::SetNameOf
+ms909881	IShellView
+ms909882	IShellView::AddPropertySheetPages
+ms909883	IShellView::CreateViewWindow
+ms909884	IShellView::DestroyViewWindow
+ms909885	IShellView::EnableModeless
+ms909886	IShellView::GetCurrentInfo
+ms909887	IShellView::GetItemObject
+ms909889	IShellView::Refresh
+ms909890	IShellView::SaveViewState
+ms909891	IShellView::SelectItem
+ms909892	IShellView::TranslateAccelerator
+ms909893	IShellView::UIActivate
+aa453236	ITaskbarList
+aa453239	ITaskbarList::ActivateTab
+aa453240	ITaskbarList::AddTab
+aa453241	ITaskbarList::DeleteTab
+aa453242	ITaskbarList::HrInit
+aa453243	ITaskbarList::SetActiveAlt
+aa453237	ITaskbarList2
+aa453238	ITaskbarList2::MarkFullscreenWindow
+aa452755	Standard Shell Macros
+ms911791	MapWindowRect
+ms940022	SetDlgMsgResult
+aa452756	Standard Shell Messages
+aa452872	BFFM_ENABLEOK
+aa452873	BFFM_INITIALIZED
+aa452874	BFFM_SELCHANGED
+aa452875	BFFM_SETSELECTION
+aa452876	BFFM_SETSTATUSTEXT
+aa452877	BFFM_VALIDATEFAILED
+ms908155	CPL_DBLCLK
+ms908156	CPL_EXIT
+ms908157	CPL_GETCOUNT
+ms908159	CPL_INIT
+ms908160	CPL_NEWINQUIRE
+ms908161	CPL_STOP
+ms914112	WM_CHOOSEFONT_GETLOGFONT
+aa453866	WM_HELP
+aa453867	WM_HIBERNATE
+aa453870	WM_IM_INFO
+aa453874	WM_KEYFIRST
+aa453875	WM_KEYLAST
+aa452758	Standard Shell Structures
+aa452901	BROWSEINFO
+ms908158	CPLINFO
+aa453244	ITEMIDLIST
+ms931468	NEWCPLINFO
+ms911889	NOTIFYICONDATA
+aa453685	SHELLEXECUTEINFO
+aa453689	SHFILEINFO
+aa453691	SHFILEOPSTRUCT
+aa453718	SHITEMID
+ms940377	STRRET
+ms908145	Common Controls Reference
+ms927251	Animation Controls Reference
+aa452859	Animation Controls Messages
+aa452840	ACM_OPEN (Shell and User Interface)
+aa452841	ACM_PLAY
+aa452842	ACM_STOP
+aa452858	Animation Controls Macros
+aa452851	Animate_Close
+aa452852	Animate_Create
+aa452853	Animate_Open
+aa452854	Animate_OpenEx
+aa452855	Animate_Play
+aa452856	Animate_Seek
+aa452857	Animate_Stop
+aa452860	Animation Controls Notifications
+aa452843	ACN_START
+aa452844	ACN_STOP
+aa452861	Animation Controls Styles
+aa452922	CapEdit Controls Reference
+aa452921	CapEdit Controls Messages
+ms908080	CEM_ENABLEUPCASE
+ms908081	CEM_UPCASEALLWORDS
+aa452920	CAPEDIT Control
+ms907195	Command Bands Reference
+ms907179	Command Bands Functions
+ms908118	CommandBands_AddAdornments
+ms908120	CommandBands_AddBands
+ms908121	CommandBands_Create
+ms908122	CommandBands_GetCommandBar
+ms908123	CommandBands_GetRestoreInformation
+ms908126	CommandBands_Show
+ms907189	Command Bands Macros
+ms908124	CommandBands_Height
+ms907205	Command Bands Structures
+ms908125	COMMANDBANDSRESTOREINFO
+ms907221	Command Bars Reference
+ms907210	Command Bars Functions
+ms908127	CommandBar_AddAdornments
+ms908128	CommandBar_AddBitmap
+aa453948	CommandBar_AlignAdornments
+ms908131	CommandBar_Create
+ms908133	CommandBar_DrawMenuBar
+ms908134	CommandBar_GetMenu
+ms908135	CommandBar_Height
+ms908137	CommandBar_InsertComboBox
+ms908138	CommandBar_InsertMenubar
+ms908139	CommandBar_InsertMenubarEx
+ms908141	CommandBar_Show
+ms907216	Command Bars Macros
+ms908129	CommandBar_AddButtons
+ms908130	CommandBar_AddToolTips
+ms908132	CommandBar_Destroy
+ms908136	CommandBar_InsertButton
+ms908140	CommandBar_IsVisible
+ms907532	Common Control Reference
+ms907234	Common Control Functions
+ms909848	InitCommonControls
+ms909849	InitCommonControlsEx (function)
+ms907242	Common Control Macros
+aa453073	FORWARD_WM_NOTIFY
+ms929879	HANDLE_WM_NOTIFY
+ms909844	INDEXTOSTATEIMAGEMASK
+ms907254	Common Control Notifications
+ms931469	NM_CLICK
+ms931477	NM_DBLCLK
+ms931481	NM_HOVER
+ms931483	NM_KEYDOWN
+ms931492	NM_KILLFOCUS
+ms911834	NM_OUTOFMEMORY
+ms911841	NM_RCLICK
+ms911846	NM_RDBLCLK
+ms911856	NM_RETURN
+ms911861	NM_SETFOCUS
+ms907247	Common Control Messages
+aa453890	WM_NOTIFY
+ms907537	Common Control Structures
+ms909850	INITCOMMONCONTROLSEX (structure)
+ms931479	NMHDR
+ms931482	NMKEY
+ms931655	NMMOUSE
+ms907551	Common Dialog Boxes Reference
+ms907541	Common Dialog Boxes Functions
+ms908071	CCHookProc
+ms908107	CFHookProc
+ms928579	ChooseColor (function)
+ms928581	ChooseFont (function)
+ms908144	CommDlgExtendedError
+aa453150	GetOpenFileName
+aa453162	GetSaveFileName
+ms911908	PagePaintHook
+ms911909	PageSetupDlg (function)
+ms911911	PageSetupHook
+ms911940	PrintDlg (function)
+aa453545	PrintHookProc
+ms907548	Common Dialog Boxes Messages
+ms908072	CDM_SETDEFEXT
+ms908073	CDN_TYPECHANGE
+ms907558	Common Dialog Boxes Structures
+ms928580	CHOOSECOLOR (structure)
+ms928582	CHOOSEFONT (structure)
+aa452944	DEVNAMES
+ms911893	OFNOTIFY
+ms911906	OPENFILENAME
+ms911910	PAGESETUPDLG (structure)
+aa453544	PRINTDLG (structure)
+ms907569	Controls Reference
+ms907564	Controls Messages
+aa453862	WM_GETFONT
+aa453902	WM_SETFONT
+ms907578	Custom Draw Reference
+ms907580	Custom Draw Structures
+ms931470	NMCUSTOMDRAW
+ms907573	Custom Draw Messages
+ms911871	NM_CUSTOMDRAW
+ms927550	Date and Time Picker Controls Reference
+ms927538	Date and Time Picker Controls Messages
+aa452977	DTM_GETMCCOLOR
+aa452978	DTM_GETMCFONT
+aa452979	DTM_GETMONTHCAL
+aa452980	DTM_GETRANGE
+aa452981	DTM_GETSYSTEMTIME
+aa452982	DTM_SETFORMAT
+aa452983	DTM_SETMCCOLOR
+aa452984	DTM_SETMCFONT
+aa452985	DTM_SETRANGE
+aa452986	DTM_SETSYSTEMTIME
+ms907588	Date and Time Picker Controls Macros
+ms908198	DateTime_GetMonthCal
+ms908199	DateTime_GetMonthCalColor
+ms908200	DateTime_GetMonthCalFont
+ms908202	DateTime_GetRange
+ms908203	DateTime_GetSystemtime
+ms908204	DateTime_SetFormat
+ms908205	DateTime_SetMonthCalColor
+ms908206	DateTime_SetMonthCalFont
+ms908207	DateTime_SetRange
+ms908208	DateTime_SetSystemtime
+ms927544	Date and Time Picker Controls Notifications
+aa452987	DTN_CLOSEUP
+aa452988	DTN_DATETIMECHANGE
+aa452989	DTN_DROPDOWN
+aa452990	DTN_FORMAT
+aa452991	DTN_FORMATQUERY
+aa452992	DTN_USERSTRING
+aa452993	DTN_WMKEYDOWN
+ms927557	Date and Time Picker Controls Structures
+ms931471	NMDATETIMECHANGE
+ms931472	NMDATETIMEFORMAT
+ms931473	NMDATETIMEFORMATQUERY
+ms931474	NMDATETIMESTRING
+ms931475	NMDATETIMEWMKEYDOWN
+ms927676	Header Controls Reference
+ms927659	Header Controls Macros
+ms929911	Header_CreateDragImage
+ms929912	Header_DeleteItem
+ms929913	Header_GetImageList
+ms929914	Header_GetItem
+ms929915	Header_GetItemCount
+ms929916	Header_GetItemRect
+ms929917	Header_GetOrderArray
+ms929918	Header_InsertItem
+ms929919	Header_Layout
+ms929920	Header_OrderToIndex
+ms929921	Header_SetHotDivider
+ms929922	Header_SetImageList
+ms929923	Header_SetItem
+ms929924	Header_SetOrderArray
+ms927663	Header Controls Messages
+ms929883	HDM_CREATEDRAGIMAGE
+ms929884	HDM_DELETEITEM
+ms929885	HDM_GETIMAGELIST
+ms929886	HDM_GETITEM
+ms929887	HDM_GETITEMCOUNT
+ms929889	HDM_GETITEMRECT
+ms929890	HDM_GETORDERARRAY
+ms929891	HDM_HITTEST
+ms929892	HDM_INSERTITEM
+ms929893	HDM_LAYOUT
+ms929894	HDM_ORDERTOINDEX
+ms929895	HDM_SETHOTDIVIDER
+ms929896	HDM_SETIMAGELIST
+ms929897	HDM_SETITEM
+ms929898	HDM_SETORDERARRAY
+ms927670	Header Controls Notifications
+ms929899	HDN_BEGINDRAG
+ms929900	HDN_BEGINTRACK
+ms929901	HDN_DIVIDERDBLCLICK
+ms929902	HDN_ENDDRAG
+ms929903	HDN_ENDTRACK
+ms929904	HDN_GETDISPINFO
+ms929905	HDN_ITEMCHANGED
+ms929906	HDN_ITEMCHANGING
+ms929907	HDN_ITEMCLICK
+ms929908	HDN_ITEMDBLCLICK
+ms929909	HDN_TRACK
+ms927682	Header Controls Structures
+ms929880	HDHITTESTINFO
+ms929881	HDITEM
+ms929882	HDLAYOUT
+ms931478	NMHDDISPINFO
+ms931480	NMHEADER
+ms927764	List-View Controls Reference
+ms927751	List-View Controls Macros
+aa453304	ListView_ApproximateViewRect
+aa453305	ListView_Arrange
+aa453306	ListView_CreateDragImage
+aa453307	ListView_DeleteAllItems
+aa453308	ListView_DeleteColumn
+aa453309	ListView_DeleteItem
+aa453310	ListView_EditLabel
+aa453382	ListView_EnableGroupView
+aa453311	ListView_EnsureVisible
+aa453312	ListView_FindItem
+aa453313	ListView_GetBkColor
+aa453383	ListView_GetBkImage
+aa453314	ListView_GetCallbackMask
+aa453315	ListView_GetCheckState
+aa453316	ListView_GetColumn
+aa453317	ListView_GetColumnOrderArray
+aa453318	ListView_GetColumnWidth
+aa453319	ListView_GetCountPerPage
+aa453320	ListView_GetEditControl
+aa453321	ListView_GetExtendedListViewStyle
+aa453385	ListView_GetGroupCount
+aa453386	ListView_GetGroupInfo
+aa453387	ListView_GetGroupInfoByIndex
+aa453388	ListView_GetGroupMetrics
+aa453322	ListView_GetHeader
+aa453323	ListView_GetImageList
+aa453324	ListView_GetISearchString
+aa453325	ListView_GetItem
+aa453326	ListView_GetItemCount
+aa453327	ListView_GetItemPosition
+aa453328	ListView_GetItemRect
+aa453329	ListView_GetItemSpacing
+aa453340	ListView_GetItemState
+aa453341	ListView_GetItemText
+aa453342	ListView_GetNextItem
+aa453343	ListView_GetNumberOfWorkAreas
+aa453344	ListView_GetOrigin
+aa453345	ListView_GetSelectedCount
+aa453346	ListView_GetSelectionMark
+aa453347	ListView_GetStringWidth
+aa453348	ListView_GetSubItemRect
+aa453349	ListView_GetTextBkColor
+aa453350	ListView_GetTextColor
+aa453389	ListView_GetToolTips
+aa453351	ListView_GetTopIndex
+aa453352	ListView_GetViewRect
+aa453353	ListView_GetWorkAreas
+aa453390	ListView_HasGroup
+aa453354	ListView_HitTest
+aa453355	ListView_InsertColumn
+aa453391	ListView_InsertGroup
+aa453392	ListView_InsertGroupSorted
+aa453356	ListView_InsertItem
+aa453393	ListView_IsGroupViewEnabled
+aa453394	ListView_MapIDToIndex
+aa453395	ListView_MapIndexToID
+aa453396	ListView_MoveGroup
+aa453397	ListView_MoveItemToGroup
+aa453357	ListView_RedrawItems
+aa453398	ListView_RemoveAllGroups
+aa453399	ListView_RemoveGroup
+aa453358	ListView_Scroll
+aa453359	ListView_SetBkColor
+aa453400	ListView_SetBkImage
+aa453360	ListView_SetCallbackMask
+aa453361	ListView_SetColumn
+aa453362	ListView_SetColumnOrderArray
+aa453363	ListView_SetColumnWidth
+aa453364	ListView_SetExtendedListViewStyle
+aa453384	ListView_SetExtendedListViewStyleEx
+aa453401	ListView_SetGroupInfo
+aa453402	ListView_SetGroupMetrics
+aa453365	ListView_SetIconSpacing
+aa453366	ListView_SetImageList
+aa453403	ListView_SetInfoTip
+aa453367	ListView_SetItem
+aa453368	ListView_SetItemCount
+aa453369	ListView_SetItemCountEx
+aa453370	ListView_SetItemPosition
+aa453371	ListView_SetItemPosition32
+aa453372	ListView_SetItemState
+aa453373	ListView_SetItemText
+aa453374	ListView_SetSelectionMark
+aa453375	ListView_SetTextBkColor
+aa453376	ListView_SetTextColor
+aa453404	ListView_SetToolTips
+aa453377	ListView_SetWorkAreas
+aa453405	ListView_SortGroups
+aa453378	ListView_SortItems
+aa453380	ListView_SubItemHitTest
+aa453381	ListView_Update
+ms927755	List-View Controls Messages
+aa453431	LVM_APPROXIMATEVIEWRECT
+aa453432	LVM_ARRANGE
+aa453433	LVM_CREATEDRAGIMAGE
+aa453434	LVM_DELETEALLITEMS
+aa453435	LVM_DELETECOLUMN
+aa453436	LVM_DELETEITEM
+aa453437	LVM_EDITLABEL
+aa453497	LVM_ENABLEGROUPVIEW
+aa453438	LVM_ENSUREVISIBLE
+aa453439	LVM_FINDITEM
+aa453440	LVM_GETBKCOLOR
+aa453498	LVM_GETBKIMAGE
+aa453441	LVM_GETCALLBACKMASK
+aa453442	LVM_GETCOLUMN
+aa453443	LVM_GETCOLUMNORDERARRAY
+aa453445	LVM_GETCOLUMNWIDTH
+aa453446	LVM_GETCOUNTPERPAGE
+aa453447	LVM_GETEDITCONTROL
+aa453448	LVM_GETEXTENDEDLISTVIEWSTYLE
+aa453499	LVM_GETGROUPCOUNT
+aa453500	LVM_GETGROUPINFO
+aa453501	LVM_GETGROUPINFOBYINDEX
+aa453502	LVM_GETGROUPMETRICS
+aa453449	LVM_GETHEADER
+aa453450	LVM_GETIMAGELIST
+aa453451	LVM_GETISEARCHSTRING
+aa453452	LVM_GETITEM
+aa453453	LVM_GETITEMCOUNT
+aa453454	LVM_GETITEMPOSITION
+aa453455	LVM_GETITEMRECT
+aa453456	LVM_GETITEMSPACING
+aa453457	LVM_GETITEMSTATE
+aa453458	LVM_GETITEMTEXT
+aa453459	LVM_GETNEXTITEM
+aa453460	LVM_GETNUMBEROFWORKAREAS
+aa453461	LVM_GETORIGIN
+aa453462	LVM_GETSELECTEDCOUNT
+aa453463	LVM_GETSELECTIONMARK
+aa453464	LVM_GETSTRINGWIDTH
+aa453465	LVM_GETSUBITEMRECT
+aa453466	LVM_GETTEXTBKCOLOR
+aa453467	LVM_GETTEXTCOLOR
+aa453503	LVM_GETTOOLTIPS
+aa453468	LVM_GETTOPINDEX
+aa453469	LVM_GETVIEWRECT
+aa453470	LVM_GETWORKAREAS
+aa453504	LVM_HASGROUP
+aa453471	LVM_HITTEST
+aa453472	LVM_INSERTCOLUMN
+aa453505	LVM_INSERTGROUP
+aa453506	LVM_INSERTGROUPSORTED
+aa453473	LVM_INSERTITEM
+aa453507	LVM_ISGROUPVIEWENABLED
+aa453508	LVM_MAPIDTOINDEX
+aa453509	LVM_MAPINDEXTOID
+aa453510	LVM_MOVEGROUP
+aa453511	LVM_MOVEITEMTOGROUP
+aa453474	LVM_REDRAWITEMS
+aa453512	LVM_REMOVEALLGROUPS
+aa453513	LVM_REMOVEGROUP
+aa453475	LVM_SCROLL
+aa453476	LVM_SETBKCOLOR
+aa453514	LVM_SETBKIMAGE
+aa453477	LVM_SETCALLBACKMASK
+aa453478	LVM_SETCOLUMN
+aa453479	LVM_SETCOLUMNORDERARRAY
+aa453480	LVM_SETCOLUMNWIDTH
+aa453481	LVM_SETEXTENDEDLISTVIEWSTYLE
+aa453515	LVM_SETGROUPINFO
+aa453516	LVM_SETGROUPMETRICS
+aa453482	LVM_SETICONSPACING
+aa453483	LVM_SETIMAGELIST
+aa453517	LVM_SETINFOTIP
+aa453484	LVM_SETITEM
+aa453485	LVM_SETITEMCOUNT
+aa453486	LVM_SETITEMPOSITION
+aa453487	LVM_SETITEMPOSITION32
+aa453488	LVM_SETITEMSTATE
+aa453489	LVM_SETITEMTEXT
+aa453490	LVM_SETSELECTIONMARK
+aa453519	LVM_SORTGROUPS
+aa453491	LVM_SETTEXTBKCOLOR
+aa453492	LVM_SETTEXTCOLOR
+aa453518	LVM_SETTOOLTIPS
+aa453493	LVM_SETWORKAREAS
+aa453494	LVM_SORTITEMS
+aa453495	LVM_SUBITEMHITTEST
+aa453496	LVM_UPDATE
+ms927760	List-View Controls Notifications
+aa453520	LVN_BEGINDRAG
+aa453521	LVN_BEGINLABELEDIT
+aa453522	LVN_COLUMNCLICK
+aa453523	LVN_DELETEALLITEMS
+aa453524	LVN_DELETEITEM
+aa453525	LVN_ENDDRAG
+aa453526	LVN_ENDLABELEDIT
+aa453527	LVN_GETDISPINFO
+aa453538	LVN_GETINFOTIP
+aa453528	LVN_INSERTITEM
+aa453529	LVN_ITEMACTIVATE
+aa453530	LVN_ITEMCHANGED
+aa453531	LVN_ITEMCHANGING
+aa453532	LVN_KEYDOWN
+aa453533	LVN_MARQUEEBEGIN
+aa453534	LVN_ODCACHEHINT
+aa453535	LVN_ODFINDITEM
+aa453536	LVN_ODSTATECHANGED
+aa453537	LVN_SETDISPINFO
+ms927769	List-View Controls Structures
+aa453424	LV_DISPINFO
+aa453540	LV_FINDINFO
+aa453422	LVBKIMAGE
+aa453423	LVCOLUMN
+aa453425	LVFINDINFO
+aa453426	LVGROUP
+aa453427	LVGROUPMETRICS
+aa453428	LVHITTESTINFO
+aa453429	LVINSERTGROUPSORTED
+aa453430	LVITEM
+aa453539	LVSETINFOTIP
+ms931605	NMLISTVIEW
+ms931617	NMLVCACHEHINT
+ms931627	NMLVCUSTOMDRAW
+ms931633	NMLVFINDITEM
+ms931639	NMLVGETINFOTIP
+ms931645	NMLVKEYDOWN
+ms931653	NMLVODSTATECHANGE
+ms927850	Month Calendar Controls Reference
+ms927836	Month Calendar Controls Macros
+ms931431	MonthCal_GetColor
+ms931432	MonthCal_GetCurSel
+ms931433	MonthCal_GetFirstDayOfWeek
+ms931434	MonthCal_GetMaxSelCount
+ms931435	MonthCal_GetMaxTodayWidth
+ms931436	MonthCal_GetMinReqRect
+ms931437	MonthCal_GetMonthDelta
+ms931438	MonthCal_GetMonthRange
+ms931439	MonthCal_GetRange
+ms931440	MonthCal_GetSelRange
+ms931441	MonthCal_GetToday
+ms931442	MonthCal_HitTest
+ms931443	MonthCal_SetColor
+ms931445	MonthCal_SetCurSel
+ms931446	MonthCal_SetDayState
+ms931447	MonthCal_SetFirstDayOfWeek
+ms931448	MonthCal_SetMaxSelCount
+ms931449	MonthCal_SetMonthDelta
+ms931450	MonthCal_SetRange
+ms931451	MonthCal_SetSelRange
+ms931452	MonthCal_SetToday
+ms927842	Month Calendar Controls Messages
+ms911794	MCM_GETCOLOR
+ms911795	MCM_GETCURSEL
+ms911796	MCM_GETFIRSTDAYOFWEEK
+ms911797	MCM_GETMAXNONEWIDTH
+ms911798	MCM_GETMAXSELCOUNT
+ms911799	MCM_GETMAXTODAYWIDTH
+ms911800	MCM_GETMINREQRECT
+ms911801	MCM_GETMONTHDELTA
+ms911802	MCM_GETMONTHRANGE
+ms911803	MCM_GETRANGE
+ms911804	MCM_GETSELRANGE
+ms911805	MCM_GETTODAY
+ms911806	MCM_HITTEST
+ms911807	MCM_SETCOLOR
+ms911808	MCM_SETCURSEL
+ms911809	MCM_SETDAYSTATE
+ms911810	MCM_SETFIRSTDAYOFWEEK
+ms911811	MCM_SETMAXSELCOUNT
+ms911812	MCM_SETMONTHDELTA
+ms911813	MCM_SETRANGE
+ms911814	MCM_SETSELRANGE
+ms911815	MCM_SETTODAY
+ms927846	Month Calendar Controls Notifications
+ms911816	MCN_GETDAYSTATE
+ms911817	MCN_SELCHANGE
+ms911818	MCN_SELECT
+ms911819	MCN_SELECTNONE
+ms927853	Month Calendar Controls Structures
+ms911859	NMSELCHANGE
+ms931476	NMDAYSTATE
+ms911793	MCHITTESTINFO
+ms938702	Progress Bar Controls Reference
+ms938700	Progress Bar Controls Messages
+ms911919	PBM_DELTAPOS
+ms911920	PBM_GETPOS
+ms911921	PBM_GETRANGE
+ms911922	PBM_SETPOS
+ms911923	PBM_SETRANGE
+ms911924	PBM_SETRANGE32
+ms911925	PBM_SETSTEP
+ms911926	PBM_STEPIT
+ms938703	Progress Bar Controls Structures
+ms911927	PBRANGE
+ms938708	Property Sheets Reference
+ms938704	Property Sheets Functions
+aa452848	AddPropSheetPageProc
+ms908183	CreatePropertySheetPage
+aa452941	DestroyPropertySheetPage
+aa453062	ExtensionPropSheetPageProc
+aa453552	PropertySheet
+aa453563	PropSheetPageProc
+aa453565	PropSheetProc
+ms938705	Property Sheets Macros
+aa453553	PropSheet_AddPage
+aa453554	PropSheet_Apply
+aa453556	PropSheet_CancelToClose
+aa453557	PropSheet_Changed
+aa453558	PropSheet_GetCurrentPageHwnd
+aa453559	PropSheet_GetTabControl
+aa453561	PropSheet_IsDialogMessage
+aa453564	PropSheet_PressButton
+aa453566	PropSheet_QuerySiblings
+aa453567	PropSheet_RebootSystem
+aa453568	PropSheet_RemovePage
+aa453569	PropSheet_RestartWindows
+aa453570	PropSheet_SetCurSel
+aa453571	PropSheet_SetCurSelByID
+aa453572	PropSheet_SetFinishText
+aa453573	PropSheet_SetTitle
+aa453574	PropSheet_SetWizButtons
+aa453575	PropSheet_UnChanged
+ms938706	Property Sheets Messages
+aa453577	PSM_ADDPAGE
+aa453578	PSM_APPLY
+aa453579	PSM_CANCELTOCLOSE
+aa453580	PSM_CHANGED
+aa453581	PSM_GETCURRENTPAGEHWND
+aa453582	PSM_GETTABCONTROL
+aa453583	PSM_ISDIALOGMESSAGE
+aa453584	PSM_PRESSBUTTON
+aa453585	PSM_QUERYSIBLINGS
+aa453586	PSM_REBOOTSYSTEM
+aa453587	PSM_REMOVEPAGE
+aa453588	PSM_RESTARTWINDOWS
+aa453589	PSM_SETCURSEL
+aa453590	PSM_SETCURSELID
+aa453591	PSM_SETFINISHTEXT
+aa453592	PSM_SETTITLE
+aa453593	PSM_SETWIZBUTTONS
+aa453594	PSM_UNCHANGED
+ms938707	Property Sheets Notifications
+aa453595	PSN_APPLY
+aa453596	PSN_HELP
+aa453597	PSN_KILLACTIVE
+aa453598	PSN_QUERYCANCEL
+aa453599	PSN_RESET
+aa453600	PSN_SETACTIVE
+ms938709	Property Sheets Structures
+aa453560	PROPSHEETHEADER
+aa453562	PROPSHEETPAGE
+aa453576	PSHNOTIFY
+aa452728	Rebar Controls Reference
+ms938711	Rebar Controls Messages
+aa453608	RB_DELETEBAND
+aa453609	RB_GETBANDBORDERS
+aa453610	RB_GETBANDCOUNT
+aa453611	RB_GETBANDINFO
+aa453612	RB_GETBARHEIGHT
+aa453613	RB_GETBARINFO
+aa453614	RB_GETBKCOLOR
+aa453615	RB_GETRECT
+aa453616	RB_GETROWCOUNT
+aa453617	RB_GETROWHEIGHT
+aa453618	RB_GETTEXTCOLOR
+aa453619	RB_HITTEST
+aa453621	RB_IDTOINDEX
+aa453622	RB_INSERTBAND
+aa453623	RB_MAXIMIZEBAND
+aa453624	RB_MINIMIZEBAND
+aa453630	RB_SETBANDINFO
+aa453631	RB_SETBARINFO
+aa453632	RB_SETBKCOLOR
+aa453633	RB_SETPARENT
+aa453634	RB_SETTEXTCOLOR
+aa453635	RB_SHOWBAND
+aa453636	RB_SIZETORECT
+aa452727	Rebar Controls Notifications
+aa453625	RBN_AUTOSIZE
+aa453626	RBN_BEGINDRAG
+aa453627	RBN_ENDDRAG
+aa453628	RBN_HEIGHTCHANGE
+aa453629	RBN_LAYOUTCHANGED
+aa452729	Rebar Controls Structures
+ms911836	NMRBAUTOSIZE
+ms911851	NMREBAR
+aa453620	RBHITTESTINFO
+aa453639	REBARBANDINFO
+aa453640	REBARINFO
+aa452733	SbEdit Controls Reference
+ms939903	SBEDIT Control
+aa452766	Status Bars Reference
+aa452763	Status Bars Functions
+ms908188	CreateStatusWindow
+aa452976	DrawStatusText
+aa452764	Status Bars Messages
+ms939915	SB_GETBORDERS
+ms932550	SB_GETICON
+ms939925	SB_GETPARTS
+ms913125	SB_GETRECT
+ms913198	SB_GETTEXT
+ms913203	SB_GETTEXTLENGTH
+ms913210	SB_ISSIMPLE
+ms932561	SB_SETBKCOLOR
+ms932570	SB_SETICON
+ms913344	SB_SETMINHEIGHT
+ms932515	SB_SETPARTS
+ms932525	SB_SETTEXT
+ms932534	SB_SIMPLE
+aa452765	Status Bars Notifications
+ms913282	SBN_SIMPLEMODECHANGE
+aa452781	Tab Controls Reference
+aa452778	Tab Controls Macros
+ms940387	TabCtrl_AdjustRect
+ms940388	TabCtrl_DeleteAllItems
+ms940389	TabCtrl_DeleteItem
+ms940390	TabCtrl_DeselectAll
+ms940391	TabCtrl_GetCurFocus
+ms940392	TabCtrl_GetCurSel
+ms940393	TabCtrl_GetExtendedStyle
+ms940394	TabCtrl_GetImageList
+ms940395	TabCtrl_GetItem
+ms940396	TabCtrl_GetItemCount
+ms940397	TabCtrl_GetItemRect
+ms940398	TabCtrl_GetRowCount
+ms940399	TabCtrl_HighlightItem
+ms940400	TabCtrl_HitTest
+ms940401	TabCtrl_InsertItem
+ms940402	TabCtrl_RemoveImage
+ms940403	TabCtrl_SetCurFocus
+ms940404	TabCtrl_SetCurSel
+ms940405	TabCtrl_SetExtendedStyle
+ms940406	TabCtrl_SetImageList
+ms940407	TabCtrl_SetItem
+ms940408	TabCtrl_SetItemExtra
+ms940409	TabCtrl_SetItemSize
+ms940410	TabCtrl_SetMinTabWidth
+ms940411	TabCtrl_SetPadding
+aa452779	Tab Controls Messages
+ms913864	TCM_ADJUSTRECT
+ms913867	TCM_DELETEALLITEMS
+ms913870	TCM_DELETEITEM
+ms913872	TCM_DESELECTALL
+ms913876	TCM_GETCURFOCUS
+ms913879	TCM_GETCURSEL
+ms913882	TCM_GETEXTENDEDSTYLE
+ms913885	TCM_GETIMAGELIST
+ms913894	TCM_GETITEM
+ms913898	TCM_GETITEMCOUNT
+ms933234	TCM_GETITEMRECT
+ms933237	TCM_GETROWCOUNT
+ms933240	TCM_HIGHLIGHTITEM
+ms933245	TCM_HITTEST
+ms933248	TCM_INSERTITEM
+ms933255	TCM_REMOVEIMAGE
+ms933258	TCM_SETCURFOCUS
+ms933261	TCM_SETCURSEL
+ms933265	TCM_SETEXTENDEDSTYLE
+ms933267	TCM_SETIMAGELIST
+ms933270	TCM_SETITEM
+ms933276	TCM_SETITEMEXTRA
+ms933283	TCM_SETITEMSIZE
+ms933286	TCM_SETMINTABWIDTH
+ms933294	TCM_SETPADDING
+aa452780	Tab Controls Notifications
+ms933299	TCN_KEYDOWN
+ms933405	TCN_SELCHANGE
+ms933410	TCN_SELCHANGING
+aa452782	Tab Controls Structures
+ms911862	NMTCKEYDOWN
+ms913854	TCHITTESTINFO
+ms913857	TCITEM
+ms913860	TCITEMHEADER
+aa452787	Toolbar Controls Reference
+aa452784	Toolbar Controls Functions
+ms908190	CreateToolbarEx
+aa452785	Toolbar Controls Messages
+ms913849	TB_ADDBITMAP
+ms940415	TB_ADDBUTTONS
+ms940416	TB_ADDSTRING
+ms940417	TB_AUTOSIZE
+ms940419	TB_BUTTONCOUNT
+ms940421	TB_BUTTONSTRUCTSIZE
+ms940422	TB_CHANGEBITMAP
+ms940423	TB_CHECKBUTTON
+ms940424	TB_COMMANDTOINDEX
+ms940425	TB_DELETEBUTTON
+ms940426	TB_ENABLEBUTTON
+ms940427	TB_GETBITMAP
+ms940428	TB_GETBITMAPFLAGS
+ms940429	TB_GETBUTTON
+ms940430	TB_GETBUTTONINFO
+ms940431	TB_GETBUTTONSIZE
+ms940432	TB_GETBUTTONTEXT
+ms940433	TB_GETDISABLEDIMAGELIST
+ms940434	TB_GETIMAGELIST
+ms940435	TB_GETITEMRECT
+ms940436	TB_GETRECT
+ms940437	TB_GETROWS
+ms940438	TB_GETSTATE
+ms913710	TB_GETSTYLE
+ms913711	TB_GETTEXTROWS
+ms913712	TB_GETTOOLTIPS
+ms913713	TB_HIDEBUTTON
+ms913714	TB_HIGHLIGHTBUTTON
+ms913715	TB_INDETERMINATE
+ms913716	TB_INSERTBUTTON
+ms913717	TB_ISBUTTONCHECKED
+ms913718	TB_ISBUTTONENABLED
+ms913719	TB_ISBUTTONHIDDEN
+ms913720	TB_ISBUTTONHIGHLIGHTED
+ms913721	TB_ISBUTTONINDETERMINATE
+ms913722	TB_ISBUTTONPRESSED
+ms913724	TB_LOADIMAGES
+ms913815	TB_PRESSBUTTON
+ms913851	TB_REPLACEBITMAP
+ms913819	TB_SETBITMAPSIZE
+ms913821	TB_SETBUTTONINFO
+ms913823	TB_SETBUTTONSIZE
+ms913825	TB_SETBUTTONWIDTH
+ms913827	TB_SETCMDID
+ms913829	TB_SETDISABLEDIMAGELIST
+ms913831	TB_SETDRAWTEXTFLAGS
+ms913833	TB_SETIMAGELIST
+ms913835	TB_SETINDENT
+ms913837	TB_SETMAXTEXTROWS
+ms913839	TB_SETPARENT
+ms913841	TB_SETROWS
+ms913843	TB_SETSTATE
+ms913845	TB_SETSTYLE
+ms913847	TB_SETTOOLTIPS
+aa452786	Toolbar Controls Notifications
+ms913804	TBN_BEGINDRAG
+ms913807	TBN_DRAGOUT
+ms913809	TBN_DROPDOWN
+ms913811	TBN_ENDDRAG
+ms913813	TBN_GETBUTTONINFO
+aa452788	Toolbar Controls Structures
+ms911863	NMTOOLBAR
+ms940414	TBADDBITMAP
+ms940418	TBBUTTON
+ms940420	TBBUTTONINFO
+ms913817	TBREPLACEBITMAP
+aa452790	ToolTips Reference
+aa452789	ToolTips Messages
+aa453820	TTM_ACTIVATE
+aa453821	TTM_ADDTOOL
+aa453822	TTM_DELTOOL
+aa453823	TTM_ENUMTOOLS
+aa453824	TTM_GETCURRENTTOOL
+aa453825	TTM_GETDELAYTIME
+aa453826	TTM_GETMARGIN
+aa453827	TTM_GETMAXTIPWIDTH
+aa453828	TTM_GETTEXT
+aa453829	TTM_GETTIPBKCOLOR
+aa453830	TTM_GETTIPTEXTCOLOR
+aa453831	TTM_GETTOOLCOUNT
+aa453832	TTM_GETTOOLINFO
+aa453833	TTM_HITTEST
+aa453834	TTM_NEWTOOLRECT
+aa453835	TTM_POP
+aa453836	TTM_RELAYEVENT
+aa453837	TTM_SETDELAYTIME
+aa453838	TTM_SETMARGIN
+aa453839	TTM_SETMAXTIPWIDTH
+aa453840	TTM_SETTIPBKCOLOR
+aa453841	TTM_SETTIPTEXTCOLOR
+aa453842	TTM_SETTOOLINFO
+aa453843	TTM_TRACKACTIVATE
+aa453844	TTM_TRACKPOSITION
+aa453845	TTM_UPDATETIPTEXT
+aa453846	TTM_WINDOWFROMPOINT
+aa453758	ToolTips Notifications
+ms940914	TTN_GETDISPINFO
+ms913971	TTN_NEEDTEXT
+ms941011	TTN_POP
+ms941015	TTN_SHOW
+aa452791	ToolTips Structures
+ms911865	NMTTCUSTOMDRAW
+ms911866	NMTTDISPINFO
+aa453757	TOOLINFO
+aa453819	TTHITTESTINFO
+aa452797	Trackbar Controls Reference
+aa452796	Trackbar Controls Messages
+ms913727	TBM_CLEARSEL
+ms913729	TBM_CLEARTICS
+ms913731	TBM_GETBUDDY
+ms913733	TBM_GETCHANNELRECT
+ms913735	TBM_GETLINESIZE
+ms913736	TBM_GETNUMTICS
+ms913739	TBM_GETPAGESIZE
+ms913741	TBM_GETPOS
+ms913743	TBM_GETPTICS
+ms913747	TBM_GETRANGEMAX
+ms913749	TBM_GETRANGEMIN
+ms913751	TBM_GETSELEND
+ms913754	TBM_GETSELSTART
+ms913756	TBM_GETTHUMBLENGTH
+ms913758	TBM_GETTHUMBRECT
+ms913761	TBM_GETTIC
+ms913765	TBM_GETTICPOS
+ms913769	TBM_SETBUDDY
+ms913773	TBM_SETLINESIZE
+ms913779	TBM_SETPAGESIZE
+ms913783	TBM_SETPOS
+ms913785	TBM_SETRANGE
+ms913787	TBM_SETRANGEMAX
+ms913789	TBM_SETRANGEMIN
+ms913791	TBM_SETSEL
+ms913793	TBM_SETSELEND
+ms913795	TBM_SETSELSTART
+ms913797	TBM_SETTHUMBLENGTH
+ms913799	TBM_SETTIC
+ms913802	TBM_SETTICFREQ
+aa452801	Tree View Controls Reference
+aa452798	Tree View Controls Macros
+aa453780	TreeView_CreateDragImage
+aa453781	TreeView_DeleteAllItems
+aa453782	TreeView_DeleteItem
+aa453783	TreeView_EditLabel
+aa453784	TreeView_EndEditLabelNow
+aa453785	TreeView_EnsureVisible
+aa453786	TreeView_Expand
+aa453787	TreeView_GetChild
+aa453788	TreeView_GetCount
+aa453789	TreeView_GetDropHilight
+aa453790	TreeView_GetEditControl
+aa453791	TreeView_GetFirstVisible
+aa453792	TreeView_GetImageList
+aa453793	TreeView_GetIndent
+aa453794	TreeView_GetISearchString
+aa453795	TreeView_GetItem
+aa453796	TreeView_GetItemRect
+aa453797	TreeView_GetNextItem
+aa453798	TreeView_GetNextSibling
+aa453799	TreeView_GetNextVisible
+aa453800	TreeView_GetParent
+aa453801	TreeView_GetPrevSibling
+aa453802	TreeView_GetPrevVisible
+aa453803	TreeView_GetRoot
+aa453804	TreeView_GetSelection
+aa453805	TreeView_GetVisibleCount
+aa453806	TreeView_HitTest
+aa453807	TreeView_InsertItem
+aa453808	TreeView_Select
+aa453809	TreeView_SelectDropTarget
+aa453810	TreeView_SelectItem
+aa453811	TreeView_SelectSetFirstVisible
+aa453812	TreeView_SetImageList
+aa453813	TreeView_SetIndent
+aa453814	TreeView_SetItem
+aa453815	TreeView_SortChildren
+aa453816	TreeView_SortChildrenCB
+aa452799	Tree View Controls Messages
+ms914008	TVM_CREATEDRAGIMAGE
+ms914019	TVM_DELETEITEM
+ms914024	TVM_EDITLABEL
+ms914028	TVM_ENDEDITLABELNOW
+ms914029	TVM_ENSUREVISIBLE
+ms914030	TVM_EXPAND
+ms914031	TVM_GETCOUNT
+ms914032	TVM_GETEDITCONTROL
+ms914033	TVM_GETIMAGELIST
+ms914034	TVM_GETINDENT
+ms914035	TVM_GETISEARCHSTRING
+ms914036	TVM_GETITEM
+ms914037	TVM_GETITEMRECT
+ms914038	TVM_GETNEXTITEM
+ms914039	TVM_GETVISIBLECOUNT
+ms914040	TVM_HITTEST
+ms914041	TVM_INSERTITEM
+ms914042	TVM_SELECTITEM
+ms914043	TVM_SETIMAGELIST
+ms914044	TVM_SETINDENT
+ms914045	TVM_SETITEM
+ms914046	TVM_SETITEMSPACING
+ms914047	TVM_SORTCHILDREN
+ms914048	TVM_SORTCHILDRENCB
+aa452800	Tree View Controls Notifications
+ms914050	TVN_BEGINDRAG
+ms914051	TVN_BEGINLABELEDIT
+ms914052	TVN_DELETEITEM
+ms914053	TVN_ENDLABELEDIT
+ms914054	TVN_GETDISPINFO
+ms914055	TVN_ITEMEXPANDED
+ms914056	TVN_ITEMEXPANDING
+ms914057	TVN_KEYDOWN
+ms914058	TVN_SELCHANGED
+ms914059	TVN_SELCHANGING
+ms914060	TVN_SETDISPINFO
+aa452802	Tree View Controls Structures
+ms911864	NM_TREEVIEW
+ms911867	NMTVCUSTOMDRAW
+ms911869	NMTVKEYDOWN
+ms913978	TV_DISPINFO
+ms914062	TV_HITTESTINFO
+ms914063	TV_INSERTSTRUCT
+ms914064	TV_ITEM
+ms913996	TV_KEYDOWN
+ms914065	TV_SORTCB
+ms913985	TVHITTESTINFO
+ms913992	TVITEM
+ms914061	TVSORTCB
+aa452805	Up-Down Controls Reference
+aa452803	Up-Down Controls Functions
+ms908191	CreateUpDownControl
+aa452804	Up-Down Controls Messages
+ms914068	UDM_GETACCEL
+ms914069	UDM_GETBASE
+ms914070	UDM_GETBUDDY
+ms914071	UDM_GETPOS
+ms914072	UDM_GETRANGE
+ms914073	UDM_GETRANGE32
+ms914074	UDM_SETACCEL
+ms914075	UDM_SETBASE
+ms914076	UDM_SETBUDDY
+ms914077	UDM_SETPOS
+ms914078	UDM_SETRANGE
+ms914079	UDM_SETRANGE32
+ms914080	UDN_DELTAPOS
+aa452806	Up-Down Controls Structures
+ms911870	NMUPDOWN
+ms914067	UDACCEL
+aa453924	Command Processor
+ms926133	Command Processor OS Design Development

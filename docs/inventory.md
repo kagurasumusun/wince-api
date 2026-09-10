@@ -6550,3 +6550,33 @@ The Internet Client book CLOSES here.  Remaining queue: Shell 989,
 Security 266, Apps-EndUser 338, Device Mgmt 229, LDAP 136, SOAP
 Toolkit 138, SAPI 431, XML 436, POOM 71, Exchange Client 47, .NET CF
 2, Core OS DDI books.
+
+## M94a -- Shell book harvest + gap survey (book opened)
+
+Internet Client closed at M93; the Shell book (the queue's largest
+remaining unit) opens.  tools/ce-manifest.py over the official toc.json
+("Shell" under Shell and User Interface) -> tools/manifests/
+shell-book.manifest: 1251 leaves, all (v=msdn.10).  1039 were already
+preserved (the gwes-*/cc-*/stdshell/aygshell-era harvests); the 212
+missing leaves fetched (build/pages 13914 -> 14126; rows.json
+15352 -> 15564 via tools/ce-rows-local.py; 1250 of 1251 leaves have
+rows -- aa453870 WM_IM_INFO serves an empty stub page with no
+Requirements rows).
+
+Gap survey (row name in NO shipped header, /tmp/shell-gaps-final.tsv
+methodology): 883 rows --
+  Commctrl.h 618 (LVM_ 88 + ListView_ 91 macros, TB* 50, TreeView_ 37 +
+  TVM_ 24, TTM_ 27, TBM_ 27, TCM_ 25 + TabCtrl_ 25, RB_ 22, MCM_ 22 +
+  MonthCal_ 21, LVN_ 19, HDM_ 14 + Header_ 14, UDM_ 12, SB_ 11, TVN_ 11,
+  HDN_ 11, DTM_ 10 + DateTime_ 10, DTN_ 7, ...),
+  prose (no header) 201, Shobjidl.h method records 27 (ITaskbarList,
+  IShellFolder, IShellView, IPersistFolder...), Prsht.h 24
+  (PropSheet_* macros + PSN_*), aygshell.h 3+1 (INewMenuItemServer,
+  IShellNotificationCallback), Pcommctrl.h 3 (work-area ListView
+  macros), Shellcb.h 2, Advbacklight.h 1, Commdlg.h 1 (CDM_SETDEFEXT),
+  Commctrl.h.Se 1, Windows.h 1 (TTM_GETTIPTEXTCOLOR).
+
+M94 plan: Commctrl.h completion is the bulk and will ship in parts
+(messages/notifications with printed values first, then the ListView_/
+TreeView_/TabCtrl_/MonthCal_/DateTime_/Header_ macro wrappers), then
+Prsht.h macros, Shobjidl.h method records, and the small tails.
