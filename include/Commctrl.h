@@ -1289,6 +1289,1409 @@ typedef struct tagLV_DISPINFO {
  *             macro bodies (not printed)
  * ------------------------------------------------------------------ */
 
+/* ================================================================== */
+/* M94 (Shell book completion) message/macro records.
+ *
+ * The Shell-book gap survey (M94a) showed these Requirements rows
+ * homed in Commctrl.h were never shipped.  Their pages print no
+ * numeric message values (full-corpus grep; the desktop Win32
+ * reference does not print them either -- checked 2026-09-10),
+ * so per the hold policy every row below is RECORDED with its
+ * printed wParam/lParam packing or prototype; none can #define
+ * without inventing values (the M82/M92 name-list precedent).
+ * Bodies/prototypes that reference the constants symbolically
+ * are kept verbatim.  Print oddities noted inline.
+ * ================================================================== */
+
+/* aa453482 "LVM_SETICONSPACING": the page prints the name
+ * "LVS_SETICONSPACING" (archive misprint).  Recorded there. */
+/* ms911819 "MCN_SELECTNONE": the page prints "MCN_SELECT;"
+ * (archive oddity).  Recorded there. */
+/* ms933410 "TCN_SELCHANGING": the page prints "TCN_SELCHANGE
+ * lpnmhdr = (LPNMHDR) lParam;" (archive oddity). */
+
+/* aa453426 "LVGROUP": `typedef struct LVGROUP { UINT cbSize; UINT mask; LPWSTR pszHeader; int cchHeader; LPWSTR pszFooter; int cchFooter; int iGroupId; UINT stateMask; UINT state; UINT uAlign;} LVGROUP, *PLVGROUP;` -- all member
+ * types resolve, so the structure compiles (32-bit size
+ * TU-asserted by the M94 block in tests/host/tu_compile.c). */
+typedef struct LVGROUP {
+    UINT    cbSize;
+    UINT    mask;
+    LPWSTR  pszHeader;
+    int     cchHeader;
+    LPWSTR  pszFooter;
+    int     cchFooter;
+    int     iGroupId;
+    UINT    stateMask;
+    UINT    state;
+    UINT    uAlign;
+} LVGROUP, *PLVGROUP;
+
+/* aa453427 "LVGROUPMETRICS": `typedef struct LVGROUPMETRICS { UINT cbSize; UINT mask; UINT Left; UINT Top; UINT Right; UINT Bottom; COLORREF crLeft; COLORREF crTop; COLORREF crRight; COLORREF crBottom; COLORREF crRightHeader; COLORREF crFooter;} LVGROUPMETRICS, *PLVGROUPMETRICS;` -- all member
+ * types resolve, so the structure compiles (32-bit size
+ * TU-asserted by the M94 block in tests/host/tu_compile.c). */
+typedef struct LVGROUPMETRICS {
+    UINT      cbSize;
+    UINT      mask;
+    UINT      Left;
+    UINT      Top;
+    UINT      Right;
+    UINT      Bottom;
+    COLORREF  crLeft;
+    COLORREF  crTop;
+    COLORREF  crRight;
+    COLORREF  crBottom;
+    COLORREF  crRightHeader;
+    COLORREF  crFooter;
+} LVGROUPMETRICS, *PLVGROUPMETRICS;
+
+/* aa453539 "LVSETINFOTIP": `typedef struct LVSETINFOTIP { UINT cbSize; DWORD dwFlags; LPWSTR pszText; int iItem; int iSubItem;} LVSETINFOTIP, *PLVSETINFOTIP;` -- all member
+ * types resolve, so the structure compiles (32-bit size
+ * TU-asserted by the M94 block in tests/host/tu_compile.c). */
+typedef struct LVSETINFOTIP {
+    UINT    cbSize;
+    DWORD   dwFlags;
+    LPWSTR  pszText;
+    int     iItem;
+    int     iSubItem;
+} LVSETINFOTIP, *PLVSETINFOTIP;
+
+/* ------------------------------------------------------------------ */
+/* Date and Time Picker control (DTM_/DTN_/DateTime_) */
+/* ------------------------------------------------------------------ */
+
+/* aa452977 "DTM_GETMCCOLOR": `DTM_GETMCCOLOR wParam = (WPARAM)(INT)iColor;lParam = 0;` */
+
+/* aa452978 "DTM_GETMCFONT": `DTM_GETMCFONT wParam = 0;lParam = 0;` */
+
+/* aa452979 "DTM_GETMONTHCAL": `DTM_GETMONTHCAL wParam = 0;lParam = 0;` */
+
+/* aa452980 "DTM_GETRANGE": `DTM_GETRANGE wParam = 0;lParam = (LPARAM) lpSysTimeArray;` */
+
+/* aa452981 "DTM_GETSYSTEMTIME": `DTM_GETSYSTEMTIME wParam = 0;lParam = (LPARAM)lpSysTime;` */
+
+/* aa452982 "DTM_SETFORMAT": `DTM_SETFORMAT wParam = 0;lParam = (LPARAM)lpszFormat;` */
+
+/* aa452983 "DTM_SETMCCOLOR": `DTM_SETMCCOLOR wParam = (WPARAM)(INT)iColor;lParam = (LPARAM)(COLORREF)clr;` */
+
+/* aa452984 "DTM_SETMCFONT": `DTM_SETMCFONT wParam = (WPARAM)(HFONT)hFont;lParam = (LPARAM) MAKELONG(fRedraw, 0);` */
+
+/* aa452985 "DTM_SETRANGE": `DTM_SETRANGE wParam = (WPARAM)flags;lParam = (LPARAM)lpSysTimeArray;` */
+
+/* aa452986 "DTM_SETSYSTEMTIME": `DTM_SETSYSTEMTIME wParam = (WPARAM)flag;lParam = (LPARAM)lpSysTime;` */
+
+/* aa452987 "DTN_CLOSEUP": `DTN_CLOSEUP lpNmhdr = (LPNMHDR)lParam;` */
+
+/* aa452988 "DTN_DATETIMECHANGE": `DTN_DATETIMECHANGE lpChange = (LPNMDATETIMECHANGE)lParam;` */
+
+/* aa452989 "DTN_DROPDOWN": `DTN_DROPDOWN lpNmhdr = (LPNMHDR)lParam;` */
+
+/* aa452990 "DTN_FORMAT": `DTN_FORMAT lpNMFormat = (LPNMDATETIMEFORMAT)lParam;` */
+
+/* aa452991 "DTN_FORMATQUERY": `DTN_FORMATQUERY lpDTFormatQuery = (LPNMDATETIMEFORMATQUERY)lParam;` */
+
+/* aa452992 "DTN_USERSTRING": `DTN_USERSTRING lpDTstring = (LPNMDATETIMESTRING)lParam;` */
+
+/* aa452993 "DTN_WMKEYDOWN": `DTN_WMKEYDOWNlpDTKeystroke = (LPNMDATETIMEWMKEYDOWN)lParam;` */
+
+/* ms908198 "DateTime_GetMonthCal": `HWND DateTime_GetMonthCal( HWNDhwndDP);` */
+
+/* ms908199 "DateTime_GetMonthCalColor": `COLORREF DateTime_GetMonthCalColor(HWNDhwndDP, int iColor);` */
+
+/* ms908200 "DateTime_GetMonthCalFont": `HFONT DateTime_GetMonthCalFont(HWNDhwndDP);` */
+
+/* ms908202 "DateTime_GetRange": `DWORD DateTime_GetRange(HWNDhwndDT, LPSYSTEMTIMElpSysTimeArray);` */
+
+/* ms908203 "DateTime_GetSystemtime": `DWORD DateTime_GetSystemtime(HWNDhwndDP, LPSYSTEMTIMElpSysTime);` */
+
+/* ms908204 "DateTime_SetFormat": `BOOL DateTime_SetFormat(HWNDhwndDT, LPCTSTRlpszFormat);` */
+
+/* ms908205 "DateTime_SetMonthCalColor": `COLORREF DateTime_SetMonthCalColor(HWNDhwndDP, intiColor, COLORREFclr);` */
+
+/* ms908206 "DateTime_SetMonthCalFont": `void DateTime_SetMonthCalFont(HWND hwndDP,HFONThFont,LPARAM MAKELONG(fRedraw, 0));` */
+
+/* ms908207 "DateTime_SetRange": `BOOL DateTime_SetRange(HWNDhwndDT,DWORDflags,LPSYSTEMTIMElpSysTimeArray);` */
+
+/* ms908208 "DateTime_SetSystemtime": `BOOL DateTime_SetSystemtime(HWND hwndDT,DWORDflag,LPSYSTEMTIMElpSysTime);` */
+
+/* ------------------------------------------------------------------ */
+/* Header control (HDM_/HDN_/Header_) */
+/* ------------------------------------------------------------------ */
+
+/* ms929883 "HDM_CREATEDRAGIMAGE": `HDM_CREATEDRAGIMAGEwParam = (WPARAM)(int)iIndex;lParam= 0;` */
+
+/* ms929884 "HDM_DELETEITEM": `HDM_DELETEITEMwParam = (WPARAM)(int)index;lParam= 0;` */
+
+/* ms929885 "HDM_GETIMAGELIST": `HDM_GETIMAGELISTwParam= 0;lParam= 0;` */
+
+/* ms929887 "HDM_GETITEMCOUNT": `HDM_GETITEMCOUNTwParam= 0;lParam= 0;` */
+
+/* ms929889 "HDM_GETITEMRECT": `HDM_GETITEMRECTwParam = (WPARAM)(int)iIndex;lParam = (LPARAM)lpItemRect;` */
+
+/* ms929890 "HDM_GETORDERARRAY": `HDM_GETORDERARRAYwParam = (WPARAM)(int)iSize;lParam = (LPARAM)lpiArray;` */
+
+/* ms929891 "HDM_HITTEST": `HDM_HITTESTwParam= 0;lParam = (LPARAM)(HD_HITTESTINFOFAR*)phdhti;` */
+
+/* ms929892 "HDM_INSERTITEM": `HDM_INSERTITEMwParam = (WPARAM)(int)index;lParam = (LPARAM)(constHD_ITEMFAR*)phdi;` */
+
+/* ms929893 "HDM_LAYOUT": `HDM_LAYOUTwParam= 0;lParam = (LPARAM)(HD_LAYOUTFAR*)playout;` */
+
+/* ms929894 "HDM_ORDERTOINDEX": `HDM_ORDERTOINDEXwParam = (WPARAM)iOrder;lParam= 0;` */
+
+/* ms929895 "HDM_SETHOTDIVIDER": `HDM_SETHOTDIVIDERwParam = (WPARAM)flag;lParam = (LPARAM)dwInputValue;` */
+
+/* ms929896 "HDM_SETIMAGELIST": `HDM_SETIMAGELISTwParam= 0;lParam = (LPARAM)himl;` */
+
+/* ms929897 "HDM_SETITEM": `HDM_SETITEMwParam = (WPARAM)(int)iIndex;lParam = (LPARAM)(constHD_ITEMFAR*)phdItem;` */
+
+/* ms929898 "HDM_SETORDERARRAY": `HDM_SETORDERARRAYwParam = (WPARAM)(int)iSize;lParam = (LPARAM)lpiArray;` */
+
+/* ms929899 "HDN_BEGINDRAG": `HDN_BEGINDRAGpNMHeader = (LPNMHEADER)lParam;` */
+
+/* ms929900 "HDN_BEGINTRACK": `HDN_BEGINTRACKphdn=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929901 "HDN_DIVIDERDBLCLICK": `HDN_DIVIDERDBLCLICKphdn=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929902 "HDN_ENDDRAG": `HDN_ENDDRAGpNMHeader = (LPNMHEADER)lParam;` */
+
+/* ms929903 "HDN_ENDTRACK": `HDN_ENDTRACKphdn=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929904 "HDN_GETDISPINFO": `HDN_GETDISPINFOpDispInfo = (LPNMHDDISPINFO)lParam;` */
+
+/* ms929905 "HDN_ITEMCHANGED": `HDN_ITEMCHANGEDphdr=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929906 "HDN_ITEMCHANGING": `HDN_ITEMCHANGINGphdr=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929907 "HDN_ITEMCLICK": `HDN_ITEMCLICKphdr=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929908 "HDN_ITEMDBLCLICK": `HDN_ITEMDBLCLICKpnmhdr=(NMHDRFAR*)lParam;` */
+
+/* ms929909 "HDN_TRACK": `HDN_TRACKphdr=(HD_NOTIFYFAR*)lParam;` */
+
+/* ms929911 "Header_CreateDragImage" (printed verbatim; references held value-less constants):
+ *   #define Header_CreateDragImage(hwnd, i) \ (HIMAGELIST)SNDMSG((hwnd), HDM_CREATEDRAGIMAGE, (WPARAM)i )
+ */
+
+/* ms929912 "Header_DeleteItem" (printed verbatim; references held value-less constants):
+ *   #define Header_DeleteItem(hwndHD, i) \ (BOOL)SNDMSG((hwndHD), HDM_DELETEITEM, (WPARAM)(int)(i), 0L)
+ */
+
+/* ms929913 "Header_GetImageList" (printed verbatim; references held value-less constants):
+ *   #define Header_GetImageList(hwnd) \ (HIMAGELIST)SNDMSG((hwnd), HDM_GETIMAGELIST, 0, 0)
+ */
+
+/* ms929914 "Header_GetItem" (printed verbatim; references held value-less constants):
+ *   #define Header_GetItem(hwndHD, i, phdi) \ (BOOL)SNDMSG((hwndHD), HDM_GETITEM, (WPARAM)(int)(i), \ (LPARAM)(HD_ITEM FAR*)(phdi))
+ */
+
+/* ms929915 "Header_GetItemCount" (printed verbatim; references held value-less constants):
+ *   #define Header_GetItemCount(hwndHD) \ (int)SNDMSG((hwndHD), HDM_GETITEMCOUNT, 0, 0L)
+ */
+
+/* ms929916 "Header_GetItemRect" (printed verbatim; references held value-less constants):
+ *   #define Header_GetItemRect(hwnd, iItem, lprc) \ (BOOL)SNDMSG((hwnd), HDM_GETITEMRECT, (WPARAM)iItem, (LPARAM)lprc)
+ */
+
+/* ms929917 "Header_GetOrderArray" (printed verbatim; references held value-less constants):
+ *   #define Header_GetOrderArray(hwnd, iCount, lpi) \ (BOOL)SNDMSG((hwnd), HDM_GETORDERARRAY, (WPARAM)iCount, (LPARAM)lpi)
+ */
+
+/* ms929918 "Header_InsertItem" (printed verbatim; references held value-less constants):
+ *   #define Header_InsertItem(hwndHD, i, phdi) \ (int)SNDMSG((hwndHD), HDM_INSERTITEM, (WPARAM)(int)(i), \ (LPARAM)(const HD_ITEM FAR*)(phdi))
+ */
+
+/* ms929919 "Header_Layout" (printed verbatim; references held value-less constants):
+ *   #define Header_Layout(hwndHD, playout) \ (BOOL)SNDMSG((hwndHD), HDM_LAYOUT, 0, \ (LPARAM)(HD_LAYOUT FAR*)(playout))
+ */
+
+/* ms929920 "Header_OrderToIndex" (printed verbatim; references held value-less constants):
+ *   #define Header_OrderToIndex(hwnd, i) \ (int)SNDMSG((hwnd), HDM_ORDERTOINDEX, (WPARAM)i, 0)
+ */
+
+/* ms929921 "Header_SetHotDivider" (printed verbatim; references held value-less constants):
+ *   #define Header_SetHotDivider(hwnd, fPos, dw) \ (int)SNDMSG((hwnd), HDM_SETHOTDIVIDER, (WPARAM)fPos, (LPARAM)dw)
+ */
+
+/* ms929922 "Header_SetImageList" (printed verbatim; references held value-less constants):
+ *   #define Header_SetImageList(hwnd, himl) \ (HIMAGELIST)SNDMSG((hwnd), HDM_SETIMAGELIST, 0, (LPARAM)himl)
+ */
+
+/* ms929923 "Header_SetItem" (printed verbatim; references held value-less constants):
+ *   #define Header_SetItem(hwndHD, i, phdi) \ (BOOL)SNDMSG((hwndHD), HDM_SETITEM, (WPARAM)(int)(i), \ (LPARAM)(const HD_ITEM FAR*)(phdi))
+ */
+
+/* ms929924 "Header_SetOrderArray" (printed verbatim; references held value-less constants):
+ *   #define Header_SetOrderArray(hwnd, iCount, lpi) \ (BOOL)SNDMSG((hwnd), HDM_SETORDERARRAY, \ (WPARAM)iCount, (LPARAM)lpi)
+ */
+
+/* ------------------------------------------------------------------ */
+/* List-View control (LVM_/LVN_/ListView_) */
+/* ------------------------------------------------------------------ */
+
+/* aa453431 "LVM_APPROXIMATEVIEWRECT": `LVM_APPROXIMATEVIEWRECT wParam= (WPARAM)(INT)iCount;lParam=(LPARAM) MAKELPARAM(cx,cy);` */
+
+/* aa453432 "LVM_ARRANGE": `LVM_ARRANGE wParam=(WPARAM)(int)code;lParam= 0;` */
+
+/* aa453433 "LVM_CREATEDRAGIMAGE": `LVM_CREATEDRAGIMAGE wParam=(WPARAM)(int)iItem;lParam=(LPARAM)(LPPOINT)lpptUpLeft;` */
+
+/* aa453434 "LVM_DELETEALLITEMS": `LVM_DELETEALLITEMS wParam= 0;lParam= 0;` */
+
+/* aa453435 "LVM_DELETECOLUMN": `LVM_DELETECOLUMN wParam=(WPARAM)(int)iCol;lParam= 0;` */
+
+/* aa453436 "LVM_DELETEITEM": `LVM_DELETEITEM wParam= (WPARAM)(int)iItem;lParam= 0;` */
+
+/* aa453437 "LVM_EDITLABEL": `LVM_EDITLABEL wParam=(WPARAM)(int)iItem;lParam= 0;` */
+
+/* aa453497 "LVM_ENABLEGROUPVIEW": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_ENABLEGROUPVIEW, (WPARAM) wParam, // = (WPARAM) (BOOL) fEnable; (LPARAM) lParam // = (LPARAM) (LPARAM) lParam;)` */
+
+/* aa453438 "LVM_ENSUREVISIBLE": `LVM_ENSUREVISIBLE wParam= (WPARAM)(int)i;lParam=(LPARAM)(BOOL)fPartialOK;` */
+
+/* aa453439 "LVM_FINDITEM": `LVM_FINDITEM wParam= (WPARAM)(int)iStart;lParam=(LPARAM)(const LV_FINDINFO FAR *)plvfi;` */
+
+/* aa453440 "LVM_GETBKCOLOR": `LVM_GETBKCOLOR wParam= 0;lParam= 0;` */
+
+/* aa453498 "LVM_GETBKIMAGE": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_GETBKIMAGE, (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = (LPARAM) (LPLVBKIMAGE) plvbki;)` */
+
+/* aa453441 "LVM_GETCALLBACKMASK": `LVM_GETCALLBACKMASK wParam= 0;lParam= 0;` */
+
+/* aa453442 "LVM_GETCOLUMN": `LVM_GETCOLUMN wParam=(WPARAM)(int)iCol;lParam= (LPARAM)(LV_COLUMN FAR *)pcol;` */
+
+/* aa453443 "LVM_GETCOLUMNORDERARRAY": `LVM_GETCOLUMNORDERARRAY wParam=(WPARAM) (int)iCount;lParam=(LPARAM)lpiArray;` */
+
+/* aa453445 "LVM_GETCOLUMNWIDTH": `LVM_GETCOLUMNWIDTH wParam= (WPARAM)(int)iCol;lParam= 0;` */
+
+/* aa453446 "LVM_GETCOUNTPERPAGE": `LVM_GETCOUNTPERPAGE wParam= 0;lParam= 0;` */
+
+/* aa453447 "LVM_GETEDITCONTROL": `LVM_GETEDITCONTROL wParam= 0;lParam= 0;` */
+
+/* aa453448 "LVM_GETEXTENDEDLISTVIEWSTYLE": `LVM_GETEXTENDEDLISTVIEWSTYLE wParam= 0;lParam= 0;` */
+
+/* aa453499 "LVM_GETGROUPCOUNT": `lResult = SendMessage( (hwnd) hwndControl, LVM_GETGROUPCOUNT, (WPARAM) wparam, (LPARAM) lparam)` */
+
+/* aa453500 "LVM_GETGROUPINFO": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_GETGROUPINFO, (WPARAM) wParam, // = (WPARAM) (int) iGroupId; (LPARAM) lParam // = (LPARAM) (PLVGROUP) pgrp;)` */
+
+/* aa453501 "LVM_GETGROUPINFOBYINDEX": `lResult = SendMessage( (hwnd) hwndControl, LVM_GETGROUPINFOBYINDEX, (WPARAM) iIndex, (LPARAM) pgrp)` */
+
+/* aa453502 "LVM_GETGROUPMETRICS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_GETGROUPMETRICS, (WPARAM) wParam, // = (WPARAM) (WPARAM) wParam; (LPARAM) lParam // = (LPARAM) (PLVGROUPMETRICS) pGroupMetrics;)` */
+
+/* aa453449 "LVM_GETHEADER": `LVM_GETHEADER wParam= 0;lParam= 0;` */
+
+/* aa453450 "LVM_GETIMAGELIST": `LVM_GETIMAGELIST wParam=(WPARAM)(int)iImageList;lParam= 0;` */
+
+/* aa453451 "LVM_GETISEARCHSTRING": `LVM_GETISEARCHSTRING wParam= 0;lParam= (LPARAM)(LPSTR) lpsz;` */
+
+/* aa453452 "LVM_GETITEM": `LVM_GETITEM wParam= 0;lParam=(LPARAM)(LVITEM FAR*)pitem;` */
+
+/* aa453453 "LVM_GETITEMCOUNT": `LVM_GETITEMCOUNT wParam= 0;lParam= 0;` */
+
+/* aa453454 "LVM_GETITEMPOSITION": `LVM_GETITEMPOSITION wParam=(WPARAM)(int)i;lParam=(LPARAM)(POINT FAR *)ppt;` */
+
+/* aa453455 "LVM_GETITEMRECT": `LVM_GETITEMRECT wParam= (WPARAM)(int)i;lParam= (LPARAM)(LPRECT)prc;` */
+
+/* aa453456 "LVM_GETITEMSPACING": `LVM_GETITEMSPACING wParam= (WPARAM)(BOOL)fSmall;lParam= 0;` */
+
+/* aa453457 "LVM_GETITEMSTATE": `LVM_GETITEMSTATE wParam= (WPARAM)(int)i;lParam= (LPARAM)(UINT)mask;` */
+
+/* aa453458 "LVM_GETITEMTEXT": `LVM_GETITEMTEXT wParam = (WPARAM)(int)iItem;lParam= (LPARAM)(LVITEM FAR *)pitem;` */
+
+/* aa453459 "LVM_GETNEXTITEM": `LVM_GETNEXTITEM wParam = (WPARAM)(int)iStart;lParam = MAKELPARAM((UINT)flags,0);` */
+
+/* aa453460 "LVM_GETNUMBEROFWORKAREAS": `LVM_GETNUMBEROFWORKAREAS wParam = 0; lParam = (LPARAM) (LPUINT) lpuWorkAreas;` */
+
+/* aa453461 "LVM_GETORIGIN": `LVM_GETORIGIN wParam = 0; lParam= (LPARAM)(LPPOINT)lpptOrg;` */
+
+/* aa453462 "LVM_GETSELECTEDCOUNT": `LVM_GETSELECTEDCOUNT wParam= 0;lParam= 0;` */
+
+/* aa453463 "LVM_GETSELECTIONMARK": `LVM_GETSELECTIONMARK Param= 0;lParam= 0;` */
+
+/* aa453464 "LVM_GETSTRINGWIDTH": `LVM_GETSTRINGWIDTH wParam= 0;lParam=(LPARAM)(LPCSTR)psz;` */
+
+/* aa453465 "LVM_GETSUBITEMRECT": `LVM_GETSUBITEMRECT wParam= (WPARAM)(int)iItem;lParam=(LPARAM)(LPRECT)lpRect;` */
+
+/* aa453466 "LVM_GETTEXTBKCOLOR": `LVM_GETTEXTBKCOLOR wParam = 0;lParam = 0;` */
+
+/* aa453467 "LVM_GETTEXTCOLOR": `LVM_GETTEXTCOLOR wParam= 0;lParam= 0;` */
+
+/* aa453503 "LVM_GETTOOLTIPS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_GETTOOLTIPS, (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = 0; not used, must be zero)` */
+
+/* aa453468 "LVM_GETTOPINDEX": `LVM_GETTOPINDEX wParam= 0;lParam= 0;` */
+
+/* aa453469 "LVM_GETVIEWRECT": `LVM_GETVIEWRECT wParam= 0;lParam= (LPARAM)(RECT FAR *)prc;` */
+
+/* aa453470 "LVM_GETWORKAREAS": `LVM_GETWORKAREAS wParam = (WPARAM) (int) nWorkAreas; lParam = (LPARAM) (LPRECT) lprc;` */
+
+/* aa453504 "LVM_HASGROUP": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_HASGROUP, (WPARAM) wParam, // = (WPARAM) (int) dwGroupId; (LPARAM) lParam // = (LPARAM) (LPARAM) lParam;)` */
+
+/* aa453471 "LVM_HITTEST": `LVM_HITTEST wParam = 0;` */
+
+/* aa453472 "LVM_INSERTCOLUMN": `LVM_INSERTCOLUMN wParam = (WPARAM)(int)iCol;lParam = (LPARAM)(const LV_COLUMN FAR *)pcol;` */
+
+/* aa453505 "LVM_INSERTGROUP": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_INSERTGROUP, (WPARAM) wParam, // = (WPARAM) (int) index; (LPARAM) lParam // = (LPARAM) (PLVGROUP) pgrp;)` */
+
+/* aa453506 "LVM_INSERTGROUPSORTED": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_INSERTGROUPSORTED, (WPARAM) wParam, // = (WPARAM) (PLVINSERTGROUPSORTED) structInsert; (LPARAM) lParam // = (LPARAM) (LPARAM) lParam;)` */
+
+/* aa453473 "LVM_INSERTITEM": `LVM_INSERTITEM wParam = 0;lParam = (LPARAM)(const LVITEM FAR *)pitem;` */
+
+/* aa453507 "LVM_ISGROUPVIEWENABLED": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_ISGROUPVIEWENABLED, (WPARAM) wParam, (LPARAM) lParam)` */
+
+/* aa453508 "LVM_MAPIDTOINDEX": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_MAPIDTOINDEX, (WPARAM) wParam, // = (WPARAM) (UINT) id; (LPARAM) lParam // = 0; not used, must be zero)` */
+
+/* aa453509 "LVM_MAPINDEXTOID": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_MAPINDEXTOID, (WPARAM) wParam, // = (WPARAM) (UINT) index; (LPARAM) lParam // = 0; not used, must be zero)` */
+
+/* aa453510 "LVM_MOVEGROUP": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_MOVEGROUP, (WPARAM) wParam, // = (WPARAM) (int) iGroupId; (LPARAM) lParam // = (LPARAM) (int) toIndex;)` */
+
+/* aa453511 "LVM_MOVEITEMTOGROUP": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_MOVEITEMTOGROUP, (WPARAM) wParam, // = (WPARAM) (int) idItemFrom; (LPARAM) lParam // = (LPARAM) (int) idGroupTo;)` */
+
+/* aa453474 "LVM_REDRAWITEMS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_REDRAWITEMS, (WPARAM) wParam, // = (WPARAM) (int) iFirst; (LPARAM) lParam // = (LPARAM) (int) iLast; );)` */
+
+/* aa453512 "LVM_REMOVEALLGROUPS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_REMOVEALLGROUPS, (WPARAM) wParam, // = (WPARAM) (WPARAM) wParam; (LPARAM) lParam // = (LPARAM) (LPARAM) lParam;)` */
+
+/* aa453513 "LVM_REMOVEGROUP": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_REMOVEGROUP, (WPARAM) wParam, // = (WPARAM) (int) iGroupId; (LPARAM) lParam // = (LPARAM) (LPARAM) lParam;)` */
+
+/* aa453475 "LVM_SCROLL": `LVM_SCROLL wParam = (WPARAM)(int)dx;lParam = (LPARAM)(int) dy;` */
+
+/* aa453476 "LVM_SETBKCOLOR": `LVM_SETBKCOLOR wParam = 0;lParam = (LPARAM)(COLORREF)clrBk;` */
+
+/* aa453514 "LVM_SETBKIMAGE": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_SETBKIMAGE, (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = (LPARAM) (LPLVBKIMAGE) plvbki;)` */
+
+/* aa453477 "LVM_SETCALLBACKMASK": `LVM_SETCALLBACKMASK wParam = (WPARAM)(UINT) mask;lParam = 0;` */
+
+/* aa453478 "LVM_SETCOLUMN": `LVM_SETCOLUMN wParam = (WPARAM)(int)iCol;lParam = (LPARAM)(const LV_COLUMN FAR *)pcol;` */
+
+/* aa453479 "LVM_SETCOLUMNORDERARRAY": `LVM_SETCOLUMNORDERARRAY wParam = (WPARAM) (int)iCount;lParam = (LPARAM) (LPINT)lpiArray;` */
+
+/* aa453480 "LVM_SETCOLUMNWIDTH": `LVM_SETCOLUMNWIDTH wParam = (WPARAM)(int)iCol;lParam = MAKELPARAM((int)cx, 0);` */
+
+/* aa453481 "LVM_SETEXTENDEDLISTVIEWSTYLE": `LVM_SETEXTENDEDLISTVIEWSTYLE wParam = (WPARAM)dwExMask;lParam = (LPARAM)dwExStyle;` */
+
+/* aa453515 "LVM_SETGROUPINFO": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_SETGROUPINFO, (WPARAM) wParam, // = (WPARAM) (int) iGroupId; (LPARAM) lParam // = (LPARAM) (PLVGROUP) pgrp;)` */
+
+/* aa453516 "LVM_SETGROUPMETRICS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_SETGROUPMETRICS, (WPARAM) wParam, // = (WPARAM) (WPARAM) wParam; (LPARAM) lParam // = (LPARAM) (PLVGROUPMETRICS) pGroupMetrics;)` */
+
+/* aa453482 "LVM_SETICONSPACING": `LVS_SETICONSPACING wParam = 0;lParam = (LPARAM) MAKELONG(cx,cy);` */
+
+/* aa453483 "LVM_SETIMAGELIST": `LVM_SETIMAGELIST wParam = (WPARAM)(int) iImageList;lParam = (LPARAM)(HIMAGELIST)himl;` */
+
+/* aa453517 "LVM_SETINFOTIP": `lResult = SendMessage( (HWND) hWndControl, // handle to destination control (UINT) LVM_SETINFOTIP, // message ID (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = (LPARAM) (PLVSETINFOTIP) plvSetInfoTip;)` */
+
+/* aa453484 "LVM_SETITEM": `LVM_SETITEM wParam = 0;lParam = (LPARAM)(const LVITEM FAR *)pitem;` */
+
+/* aa453485 "LVM_SETITEMCOUNT": `LVM_SETITEMCOUNT wParam = (WPARAM) (int)cItems;lParam = (LPARAM)dwFlags;` */
+
+/* aa453486 "LVM_SETITEMPOSITION": `LVM_SETITEMPOSITION wParam = (LPARAM)(int)i;lParam = MAKELPARAM((int)x,(int)y );` */
+
+/* aa453487 "LVM_SETITEMPOSITION32": `LVM_SETITEMPOSITION32 wParam = (WPARAM)(int)iItem;lParam = (LPARAM)(LPPOINT)lpptNewPos;` */
+
+/* aa453488 "LVM_SETITEMSTATE": `LVM_SETITEMSTATE wParam = (WPARAM)(int)i;lParam = (LPARAM)(LVITEM FAR *)pitem;` */
+
+/* aa453489 "LVM_SETITEMTEXT": `LVM_SETITEMTEXT wParam = (WPARAM)(int)i;lParam = (LPARAM)(LVITEM FAR *)pitem;` */
+
+/* aa453490 "LVM_SETSELECTIONMARK": `LVM_SETSELECTIONMARK wParam = 0;lParam = (LPARAM)(INT)iIndex;` */
+
+/* aa453491 "LVM_SETTEXTBKCOLOR": `LVM_SETTEXTBKCOLOR wParam = 0;lParam = (LPARAM)(COLORREF)clrText;` */
+
+/* aa453492 "LVM_SETTEXTCOLOR": `LVM_SETTEXTCOLOR wParam = 0;lParam = (LPARAM)(COLORREF)clrText;` */
+
+/* aa453518 "LVM_SETTOOLTIPS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_SETTOOLTIPS, (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = (LPARAM) (HWND) hwndToolTip;)` */
+
+/* aa453493 "LVM_SETWORKAREAS": `LVM_SETWORKAREAS wParam = (WPARAM) (INT) nWorkAreas; lParam = (LPARAM) (LPRECT) lprc;` */
+
+/* aa453519 "LVM_SORTGROUPS": `lResult = SendMessage( (HWND) hWndControl, (UINT) LVM_SORTGROUPS, (WPARAM) wParam, // = (WPARAM) (PFNLVGROUPCOMPARE) pfnGroupCompare; (LPARAM) lParam // = (LPARAM) (LPVOID) plv;)` */
+
+/* aa453494 "LVM_SORTITEMS": `LVM_SORTITEMS wParam = (WPARAM)(LPARAM)lParamSort;lParam = (LPARAM)(PFNLVCOMPARE)pfnCompare;` */
+
+/* aa453495 "LVM_SUBITEMHITTEST": `LVM_SUBITEMHITTEST wParam = 0;lParam = (LPARAM)(LVHITTESTINFO FAR *)pInfo;` */
+
+/* aa453496 "LVM_UPDATE": `LVM_UPDATE wParam = (WPARAM)iItem;lParam = 0;` */
+
+/* aa453520 "LVN_BEGINDRAG": `LVN_BEGINDRAG pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453521 "LVN_BEGINLABELEDIT": `LVN_BEGINLABELEDIT pdi= (LV_DISPINFO FAR *)lParam;` */
+
+/* aa453522 "LVN_COLUMNCLICK": `LVN_COLUMNCLICK pnmv = (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453523 "LVN_DELETEALLITEMS": `LVN_DELETEALLITEMS pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453524 "LVN_DELETEITEM": `LVN_DELETEITEM pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453525 "LVN_ENDDRAG": `LVN_ENDDRAG pnmv = (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453526 "LVN_ENDLABELEDIT": `LVN_ENDLABELEDIT pdi= (LV_DISPINFO FAR *)lParam;` */
+
+/* aa453527 "LVN_GETDISPINFO": `LVN_GETDISPINFO pnmv= (LV_DISPINFO FAR *)lParam;` */
+
+/* aa453538 "LVN_GETINFOTIP": `LVN_GETINFOTIP pGetInfoTip = (LPNMLVGETINFOTIP)lParam;` */
+
+/* aa453528 "LVN_INSERTITEM": `LVN_INSERTITEM pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453529 "LVN_ITEMACTIVATE": `LVN_ITEMACTIVATE lpnmlv = (LPNMLISTVIEW)lParam;` */
+
+/* aa453530 "LVN_ITEMCHANGED": `LVN_ITEMCHANGED pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453531 "LVN_ITEMCHANGING": `LVN_ITEMCHANGING pnmv= (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453532 "LVN_KEYDOWN": `LVN_KEYDOWN pnkd = (LV_KEYDOWN FAR *)lParam;` */
+
+/* aa453533 "LVN_MARQUEEBEGIN": `LVN_MARQUEEBEGIN pnmv = (NM_LISTVIEW FAR *)lParam;` */
+
+/* aa453534 "LVN_ODCACHEHINT": `LVN_ODCACHEHINT pCachehint = (NMLVCACHEHINT *)lParam;` */
+
+/* aa453535 "LVN_ODFINDITEM": `LVN_ODFINDITEM pFindInfo = (PNMLVFINDITEM)lParam;` */
+
+/* aa453536 "LVN_ODSTATECHANGED": `LVN_ODSTATECHANGED lpStateChange = (LPNMLVODSTATECHANGE)lParam;` */
+
+/* aa453537 "LVN_SETDISPINFO": `LVN_SETDISPINFO pnmv= (LV_DISPINFO FAR *)lParam;` */
+
+/* aa453304 "ListView_ApproximateViewRect": `DWORD ListView_ApproximateViewRect(HWNDhwndLV,int cx,int cy,int iCount );` */
+
+/* aa453305 "ListView_Arrange": `BOOLListView_Arrange( HWNDhwnd, UINTcode );` */
+
+/* aa453306 "ListView_CreateDragImage": `HIMAGELISTListView_CreateDragImage( HWNDhwnd, intiItem,LPPOINTlpptUpLeft );` */
+
+/* aa453307 "ListView_DeleteAllItems": `BOOLListView_DeleteAllItems( HWNDhwnd );` */
+
+/* aa453308 "ListView_DeleteColumn": `BOOLListView_DeleteColumn( HWNDhwnd, intiCol );` */
+
+/* aa453309 "ListView_DeleteItem": `BOOLListView_DeleteItem( HWNDhwnd, intiItem );` */
+
+/* aa453310 "ListView_EditLabel": `HWNDListView_EditLabel( HWNDhwnd, intiItem );` */
+
+/* aa453382 "ListView_EnableGroupView": `int ListView_EnableGroupView( HWND hwnd, BOOL fEnable);` */
+
+/* aa453311 "ListView_EnsureVisible": `BOOLListView_EnsureVisible( HWNDhwnd, inti, BOOLfPartialOK );` */
+
+/* aa453312 "ListView_FindItem": `intListView_FindItem( HWNDhwnd, intiStart, constLV_FINDINFOFAR* plvfi );` */
+
+/* aa453313 "ListView_GetBkColor": `COLORREFListView_GetBkColor( HWNDhwnd );` */
+
+/* aa453383 "ListView_GetBkImage": `BOOL ListView_GetBkImage( HWND hwndLV, LPLVBKIMAGE plvbki);` */
+
+/* aa453314 "ListView_GetCallbackMask": `UINTListView_GetCallbackMask( HWNDhwnd );` */
+
+/* aa453315 "ListView_GetCheckState": `BOOL ListView_GetCheckState(HWND hwndLV, UINT iIndex );` */
+
+/* aa453316 "ListView_GetColumn": `BOOLListView_GetColumn( HWNDhwnd, intiCol, LV_COLUMNFAR*pcol );` */
+
+/* aa453317 "ListView_GetColumnOrderArray": `BOOL ListView_GetColumnOrderArray(HWND hwndLV, int iCount, int* lpiArray );` */
+
+/* aa453318 "ListView_GetColumnWidth": `intListView_GetColumnWidth( HWNDhwnd, intiCol );` */
+
+/* aa453319 "ListView_GetCountPerPage": `intListView_GetCountPerPage( HWNDhwnd );` */
+
+/* aa453320 "ListView_GetEditControl": `HWNDListView_GetEditControl( HWNDhwnd );` */
+
+/* aa453321 "ListView_GetExtendedListViewStyle": `DWORD ListView_GetExtendedListViewStyle(HWND hwndLV );` */
+
+/* aa453385 "ListView_GetGroupCount": `int ListView_GetGroupCount( HWND hwnd);` */
+
+/* aa453386 "ListView_GetGroupInfo": `int ListView_GetGroupInfo( HWND hwnd, int iGroupId, PLVGROUP pgrp);` */
+
+/* aa453387 "ListView_GetGroupInfoByIndex": `BOOL ListView_GetGroupInfoByIndex( HWND hwnd, int iIndex, PLVGROUP pgrp)` */
+
+/* aa453388 "ListView_GetGroupMetrics": `ListView_GetGroupMetrics( HWND hwnd, PLVGROUPMETRICS pGroupMetrics);` */
+
+/* aa453322 "ListView_GetHeader": `HWND ListView_GetHeader(hwndLV );` */
+
+/* aa453324 "ListView_GetISearchString": `BOOLListView_GetISearchString( HWNDhwnd, LPSTRlpsz );` */
+
+/* aa453323 "ListView_GetImageList": `HIMAGELISTListView_GetImageList( HWNDhwnd, intiImageList );` */
+
+/* aa453325 "ListView_GetItem": `BOOLListView_GetItem( HWNDhwnd, LVITEMFAR* pitem );` */
+
+/* aa453326 "ListView_GetItemCount": `intListView_GetItemCount( HWNDhwnd );` */
+
+/* aa453327 "ListView_GetItemPosition": `BOOLListView_GetItemPosition( HWNDhwnd, inti, POINTFAR* ppt );` */
+
+/* aa453328 "ListView_GetItemRect": `BOOLListView_GetItemRect( HWNDhwnd, inti, RECTFAR* prc, intcode );` */
+
+/* aa453329 "ListView_GetItemSpacing": `DWORDListView_GetItemSpacing( HWNDhwnd, BOOLfSmall );` */
+
+/* aa453340 "ListView_GetItemState": `UINTWINAPIListView_GetItemState( HWNDhwnd, inti, UINTmask );` */
+
+/* aa453341 "ListView_GetItemText": `voidWINAPIListView_GetItemText( HWNDhwnd, intiItem, intiSubItem,LPSTRpszText, intcchTextMax );` */
+
+/* aa453342 "ListView_GetNextItem": `intListView_GetNextItem( HWNDhwnd, intiStart, UINTflags );` */
+
+/* aa453344 "ListView_GetOrigin": `BOOLListView_GetOrigin( HWNDhwnd, LPPOINTlpptOrg );` */
+
+/* aa453345 "ListView_GetSelectedCount": `UINTListView_GetSelectedCount( HWNDhwnd );` */
+
+/* aa453346 "ListView_GetSelectionMark": `INT ListView_GetSelectionMark(HWND hwndLV);` */
+
+/* aa453347 "ListView_GetStringWidth": `intListView_GetStringWidth( HWNDhwnd, LPCSTRpsz );` */
+
+/* aa453348 "ListView_GetSubItemRect": `BOOL ListView_GetSubItemRect( HWND hwndLV, int iItem, int iSubItem, int code, LPRECT lpRect );` */
+
+/* aa453349 "ListView_GetTextBkColor": `COLORREFListView_GetTextBkColor( HWNDhwnd );` */
+
+/* aa453350 "ListView_GetTextColor": `COLORREFListView_GetTextColor( HWNDhwnd );` */
+
+/* aa453389 "ListView_GetToolTips": `HWND ListView_GetToolTips( HWND hwnd);` */
+
+/* aa453351 "ListView_GetTopIndex": `intListView_GetTopIndex( HWNDhwnd );` */
+
+/* aa453352 "ListView_GetViewRect": `BOOLListView_GetViewRect( HWNDhwnd, RECTFAR* prc );` */
+
+/* aa453390 "ListView_HasGroup": `BOOL ListView_HasGroup( HWND hwnd, int dwGroupId);` */
+
+/* aa453354 "ListView_HitTest": `intListView_HitTest( HWNDhwnd, LV_HITTESTINFOFAR* pinfo );` */
+
+/* aa453355 "ListView_InsertColumn": `intListView_InsertColumn( HWNDhwnd, intiCol, constLV_COLUMNFAR* pcol );` */
+
+/* aa453391 "ListView_InsertGroup": `int ListView_InsertGroup( HWND hwnd, int index, PLVGROUP pgrp);` */
+
+/* aa453392 "ListView_InsertGroupSorted": `ListView_InsertGroupSorted( HWND hwnd, PLVINSERTGROUPSORTED structInsert, int index);` */
+
+/* aa453356 "ListView_InsertItem": `intListView_InsertItem( HWNDhwnd, const LVITEMFAR* pitem );` */
+
+/* aa453393 "ListView_IsGroupViewEnabled": `BOOL ListView_IsGroupViewEnabled( HWND hwnd);` */
+
+/* aa453394 "ListView_MapIDToIndex": `UINT ListView_MapIDToIndex( HWND hwnd, UINT id);` */
+
+/* aa453395 "ListView_MapIndexToID": `UINT ListView_MapIndexToID( HWND hwnd, UINT index);` */
+
+/* aa453396 "ListView_MoveGroup": `ListView_MoveGroup( HWND hwnd, int iGroupId, int toIndex);` */
+
+/* aa453397 "ListView_MoveItemToGroup": `ListView_MoveItemToGroup( HWND hwnd, int idItemFrom, int idGroupTo);` */
+
+/* aa453357 "ListView_RedrawItems": `BOOLListView_RedrawItems( HWNDhwnd, intiFirst, intiLast );` */
+
+/* aa453398 "ListView_RemoveAllGroups": `ListView_RemoveAllGroups( HWND hwnd);` */
+
+/* aa453399 "ListView_RemoveGroup": `int ListView_RemoveGroup( HWND hwnd, int iGroupId);` */
+
+/* aa453358 "ListView_Scroll": `BOOLListView_Scroll( HWNDhwnd, intdx, intdy );` */
+
+/* aa453359 "ListView_SetBkColor": `BOOLListView_SetBkColor( HWNDhwnd, COLORREFclrBk );` */
+
+/* aa453400 "ListView_SetBkImage": `BOOL ListView_SetBkImage( HWND hwndLV, LPLVBKIMAGE plvbki);` */
+
+/* aa453360 "ListView_SetCallbackMask": `BOOLListView_SetCallbackMask( HWNDhwnd, UINTmask );` */
+
+/* aa453361 "ListView_SetColumn": `BOOLListView_SetColumn( HWNDhwnd, intiCol, LV_COLUMNFAR* pcol );` */
+
+/* aa453362 "ListView_SetColumnOrderArray": `BOOL ListView_SetColumnOrderArray(HWND hwndLV, int iCount, int* lpiArray);` */
+
+/* aa453363 "ListView_SetColumnWidth": `BOOLListView_SetColumnWidth( HWNDhwnd, intiCol, intcx);` */
+
+/* aa453364 "ListView_SetExtendedListViewStyle": `void ListView_SetExtendedListViewStyle(HWND hwndLV, DWORD dwExStyle);` */
+
+/* aa453384 "ListView_SetExtendedListViewStyleEx": `void ListView_SetExtendedListViewStyleEx( HWND hwndLV, DWORD dwExMask, DWORD dwExStyle);` */
+
+/* aa453401 "ListView_SetGroupInfo": `int ListView_SetGroupInfo( HWND hwnd, int iGroupId, PLVGROUP pgrp);` */
+
+/* aa453402 "ListView_SetGroupMetrics": `ListView_SetGroupMetrics( HWND hwnd, PLVGROUPMETRICS pGroupMetrics);` */
+
+/* aa453365 "ListView_SetIconSpacing": `DWORD ListView_SetIconSpacing(HWND hwndLV, int cx, int cy);` */
+
+/* aa453366 "ListView_SetImageList": `HIMAGELISTListView_SetImageList( HWNDhwnd, HIMAGELISThiml,intiImageList);` */
+
+/* aa453403 "ListView_SetInfoTip": `BOOL ListView_SetInfoTip( HWND hwnd, PLVSETINFOTIP plvSetInfoTip);` */
+
+/* aa453367 "ListView_SetItem": `BOOLListView_SetItem( HWNDhwnd, const LVITEMFAR* pitem);` */
+
+/* aa453368 "ListView_SetItemCount": `voidListView_SetItemCount( HWNDhwndLV, intcItems);` */
+
+/* aa453369 "ListView_SetItemCountEx": `void ListView_SetItemCountEx(HWND hwndLV, int cItems, DWORD dwFlags );` */
+
+/* aa453370 "ListView_SetItemPosition": `BOOLListView_SetItemPosition( HWNDhwnd, inti, intx, inty );` */
+
+/* aa453371 "ListView_SetItemPosition32": `voidListView_SetItemPosition32( HWNDhwnd, intiItem, intx, inty );` */
+
+/* aa453372 "ListView_SetItemState": `voidWINAPIListView_SetItemState( HWNDhwnd, inti, UINTstate, UINTmask );` */
+
+/* aa453373 "ListView_SetItemText": `voidWINAPIListView_SetItemText( HWNDhwnd, inti, intiSubItem, LPCSTRpszText );` */
+
+/* aa453374 "ListView_SetSelectionMark": `INT ListView_SetSelectionMark(HWND hwndLV, INT iIndex );` */
+
+/* aa453375 "ListView_SetTextBkColor": `BOOLListView_SetTextBkColor( HWNDhwnd, COLORREFclrText );` */
+
+/* aa453376 "ListView_SetTextColor": `BOOLListView_SetTextColor( HWNDhwnd, COLORREFclrText );` */
+
+/* aa453404 "ListView_SetToolTips": `HWND ListView_SetToolTips( HWND hwnd, HWND hwndToolTip);` */
+
+/* aa453405 "ListView_SortGroups": `int ListView_SortGroups( HWND hwnd, PFNLVGROUPCOMPARE pfnGroupCompare, LPVOID plv);` */
+
+/* aa453378 "ListView_SortItems": `BOOLListView_SortItems( HWNDhwnd, PFNLVCOMPAREpfnCompare,LPARAMlParamSort );` */
+
+/* aa453380 "ListView_SubItemHitTest": `INT ListView_SubItemHitTest(HWND hwndLV, LPLVHITTESTINFO pInfo );` */
+
+/* aa453381 "ListView_Update": `BOOLListView_Update( HWNDhwnd, intiItem );` */
+
+/* ------------------------------------------------------------------ */
+/* Month Calendar control (MCM_/MCN_/MonthCal_) */
+/* ------------------------------------------------------------------ */
+
+/* ms911794 "MCM_GETCOLOR": `MCM_GETCOLOR wParam = (WPARAM)(INT)iColor;lParam= 0;` */
+
+/* ms911795 "MCM_GETCURSEL": `MCM_GETCURSEL wParam= 0;lParam = (LPARAM) (LPSYSTEMTIME)lpSysTime;` */
+
+/* ms911796 "MCM_GETFIRSTDAYOFWEEK": `MCM_GETFIRSTDAYOFWEEK wParam= 0;lParam= 0;` */
+
+/* ms911797 "MCM_GETMAXNONEWIDTH": `MCM_GETMAXNONEWIDTH wParam= void;lParam= LPDWORD;` */
+
+/* ms911798 "MCM_GETMAXSELCOUNT": `MCM_GETMAXSELCOUNT wParam= 0;lParam= 0;` */
+
+/* ms911799 "MCM_GETMAXTODAYWIDTH": `MCM_GETMAXTODAYWIDTH wParam= 0;lParam= 0;` */
+
+/* ms911800 "MCM_GETMINREQRECT": `MCM_GETMINREQRECT wParam= 0;lParam = (LPARAM) (LPRECT)lpRectInfo;` */
+
+/* ms911801 "MCM_GETMONTHDELTA": `MCM_GETMONTHDELTA wParam= 0;lParam= 0;` */
+
+/* ms911802 "MCM_GETMONTHRANGE": `MCM_GETMONTHRANGE wParam = (WPARAM)(DWORD) dwFlag;lParam = (LPARAM)(LPSYSTEMTIME)lprgSysTimeArray;` */
+
+/* ms911803 "MCM_GETRANGE": `MCM_GETRANGE wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME) lprgSysTimeArray;` */
+
+/* ms911804 "MCM_GETSELRANGE": `MCM_GETSELRANGE wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME)lprgSysTimeArray;` */
+
+/* ms911805 "MCM_GETTODAY": `MCM_GETTODAY wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME) lpToday;` */
+
+/* ms911806 "MCM_HITTEST": `MCM_HITTEST wParam= 0;lParam = (LPARAM)(PMCHITTESTINFO)pMCHitTest;` */
+
+/* ms911807 "MCM_SETCOLOR": `MCM_SETCOLOR wParam = (WPARAM)(INT)iColor;lParam = (LPARAM)(COLORREF)clr;` */
+
+/* ms911808 "MCM_SETCURSEL": `MCM_SETCURSEL wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME)lpSysTime;` */
+
+/* ms911809 "MCM_SETDAYSTATE": `MCM_SETDAYSTATE wParam = (WPARAM)iMonths;lParam = (LPARAM)(LPMONTHDAYSTATE)lpDayStateArray;` */
+
+/* ms911810 "MCM_SETFIRSTDAYOFWEEK": `MCM_SETFIRSTDAYOFWEEK wParam= 0;lParam = (LPARAM)(INT) iDay;` */
+
+/* ms911811 "MCM_SETMAXSELCOUNT": `MCM_SETMAXSELCOUNT wParam = (WPARAM)(INT)iMax;lParam= 0;` */
+
+/* ms911812 "MCM_SETMONTHDELTA": `MCM_SETMONTHDELTA wParam = (WPARAM)(INT)iDelta;lParam= 0;` */
+
+/* ms911813 "MCM_SETRANGE": `MCM_SETRANGE wParam = (WPARAM)(SHORT) fWhichLimit;lParam = (LPARAM)(LPSYSTEMTIME)lprgSysTimeArray;` */
+
+/* ms911814 "MCM_SETSELRANGE": `MCM_SETSELRANGE wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME)lprgSysTimeArray;` */
+
+/* ms911815 "MCM_SETTODAY": `MCM_SETTODAY wParam= 0;lParam = (LPARAM)(LPSYSTEMTIME) lpSysTime;` */
+
+/* ms911816 "MCN_GETDAYSTATE": `MCN_GETDAYSTATE lpNMDayState = (LPNMDAYSTATE)lParam;` */
+
+/* ms911817 "MCN_SELCHANGE": `MCN_SELCHANGE lpNMSelChange = (LPNMSELCHANGE)lParam;` */
+
+/* ms911818 "MCN_SELECT": `MCN_SELECT lpNMSelChange = (LPNMSELCHANGE)lParam;` */
+
+/* ms911819 "MCN_SELECTNONE": `MCN_SELECTNONE` */
+
+/* ms931431 "MonthCal_GetColor": `COLORREF MonthCal_GetColor(HWND hwndMC, INT iColor );` */
+
+/* ms931432 "MonthCal_GetCurSel": `BOOL MonthCal_GetCurSel(HWND hwndMC, LPSYSTEMTIME lpSysTime );` */
+
+/* ms931433 "MonthCal_GetFirstDayOfWeek": `DWORD MonthCal_GetFirstDayOfWeek(HWND hwndMC );` */
+
+/* ms931434 "MonthCal_GetMaxSelCount": `DWORD MonthCal_GetMaxSelCount(HWND hwndMC );` */
+
+/* ms931435 "MonthCal_GetMaxTodayWidth": `DWORD MonthCal_GetMaxTodayWidth(HWND hwndMC );` */
+
+/* ms931436 "MonthCal_GetMinReqRect": `BOOL MonthCal_GetMinReqRect(HWND hwndMC, LPRECT lpRectInfo );` */
+
+/* ms931437 "MonthCal_GetMonthDelta": `INT MonthCal_GetMonthDelta(HWND hwndMC );` */
+
+/* ms931438 "MonthCal_GetMonthRange": `DWORD MonthCal_GetMonthRange(HWND hwndMC, DWORD dwFlag, LPSYSTEMTIME lprgSysTimeArray );` */
+
+/* ms931439 "MonthCal_GetRange": `DWORD MonthCal_GetRange(HWND hwndMC, LPSYSTEMTIME lprgSysTimeArray );` */
+
+/* ms931440 "MonthCal_GetSelRange": `BOOL MonthCal_GetSelRange(HWND hwndMC, LPSYSTEMTIME lprgSysTimeArray );` */
+
+/* ms931441 "MonthCal_GetToday": `BOOL MonthCal_GetToday(HWND hwndMC, LPSYSTEMTIME lpToday );` */
+
+/* ms931442 "MonthCal_HitTest": `DWORD MonthCal_HitTest(HWND hwndMC, PMCHITTESTINFO pMCHitTest );` */
+
+/* ms931443 "MonthCal_SetColor": `COLORREF MonthCal_SetColor(HWND hwndMC, INT iColor, COLORREF clr );` */
+
+/* ms931445 "MonthCal_SetCurSel": `BOOL MonthCal_SetCurSel(HWND hwndMC, LPSYSTEMTIME lpSysTime );` */
+
+/* ms931446 "MonthCal_SetDayState": `BOOL MonthCal_SetDayState(HWND hwndMC,INT iMonths, LPMONTHDAYSTATE lpDayStateArray );` */
+
+/* ms931447 "MonthCal_SetFirstDayOfWeek": `DWORD MonthCal_SetFirstDayOfWeek(HWND hwndMC, INT iDay );` */
+
+/* ms931448 "MonthCal_SetMaxSelCount": `BOOL MonthCal_SetMaxSelCount(HWND hwndMC, UINT iMax );` */
+
+/* ms931449 "MonthCal_SetMonthDelta": `INT MonthCal_SetMonthDelta(HWND hwndMC, INT iDelta );` */
+
+/* ms931450 "MonthCal_SetRange": `BOOL MonthCal_SetRange(HWND hwndMC, DWORD fWhichLimit, LPSYSTEMTIME lprgSysTimeArray );` */
+
+/* ms931451 "MonthCal_SetSelRange": `BOOL MonthCal_SetSelRange(HWND hwndMC, LPSYSTEMTIME lprgSysTimeArray );` */
+
+/* ms931452 "MonthCal_SetToday": `void MonthCal_SetToday(HWND hwndMC, LPSYSTEMTIME lpSysTime );` */
+
+/* ------------------------------------------------------------------ */
+/* Progress bar (PBM_) */
+/* ------------------------------------------------------------------ */
+
+/* ms911920 "PBM_GETPOS": `PBM_GETPOS wParam= 0;lParam= 0;` */
+
+/* ms911921 "PBM_GETRANGE": `PBM_GETRANGE wParam = (WPARAM)(BOOL)fWhichLimit;lParam = (LPARAM)(PPBRANGE) ppBRange;` */
+
+/* ms911922 "PBM_SETPOS": `PBM_SETPOSnNewPos= (WPARAM)wParam;` */
+
+/* ms911923 "PBM_SETRANGE": `PBM_SETRANGE(nMinRange,nMaxRange)= (MAKELPARAM)lParam;` */
+
+/* ms911924 "PBM_SETRANGE32": `PBM_SETRANGE32 wParam = (WPARAM)(int)iLowLim;lParam = (LPARAM)(int)iHighLim;` */
+
+/* ms911925 "PBM_SETSTEP": `PBM_SETSTEPnStepInc= (WPARAM)wParam;` */
+
+/* ------------------------------------------------------------------ */
+/* Rebar control (RB_/RBN_) */
+/* ------------------------------------------------------------------ */
+
+/* aa453625 "RBN_AUTOSIZE": `RBN_AUTOSIZE lpnmas = (LPNMRBAUTOSIZE)lParam;` */
+
+/* aa453626 "RBN_BEGINDRAG": `RBN_BEGINDRAG lpnmrb = (LPNMREBAR)lParam;` */
+
+/* aa453627 "RBN_ENDDRAG": `RBN_ENDDRAG lpnmrb = (LPNMREBAR)lParam;` */
+
+/* aa453628 "RBN_HEIGHTCHANGE": `RBN_HEIGHTCHANGE lpnmhdr = (LPNMHDR) lParam;` */
+
+/* aa453629 "RBN_LAYOUTCHANGED": `RBN_LAYOUTCHANGED lpnmhdr = (LPNMHDR)lParam;` */
+
+/* aa453608 "RB_DELETEBAND": `RB_DELETEBAND wParam = (WPARAM)(UINT)uBand;lParam= 0;` */
+
+/* aa453609 "RB_GETBANDBORDERS": `RB_GETBANDBORDERS wParam = (WPARAM)(UINT)uBand;lParam = (LPARAM)(LPRECT)lprc;` */
+
+/* aa453610 "RB_GETBANDCOUNT": `RB_GETBANDCOUNT wParam= 0;lParam= 0;` */
+
+/* aa453611 "RB_GETBANDINFO": `RB_GETBANDINFO wParam = (WPARAM)(UINT)uBand;lParam = (LPARAM)(LPREBARBANDINFO)lprbbi;` */
+
+/* aa453612 "RB_GETBARHEIGHT": `RB_GETBARHEIGHT wParam= 0;lParam= 0;` */
+
+/* aa453613 "RB_GETBARINFO": `RB_GETBARINFO wParam= 0;lParam = (LPARAM)(LPREBARINFO)lprbi;` */
+
+/* aa453614 "RB_GETBKCOLOR": `RB_GETBKCOLOR wParam= 0;lParam= 0;` */
+
+/* aa453615 "RB_GETRECT": `RB_GETRECT wParam = (WPARAM)(INT)iBand;lParam = (LPARAM)(LPRECT)lprc;` */
+
+/* aa453616 "RB_GETROWCOUNT": `RB_GETROWCOUNT wParam= 0;lParam= 0;` */
+
+/* aa453617 "RB_GETROWHEIGHT": `RB_GETROWHEIGHT wParam = (WPARAM)(UINT)uRow;lParam= 0;` */
+
+/* aa453618 "RB_GETTEXTCOLOR": `RB_GETTEXTCOLOR wParam= 0;lParam= 0;` */
+
+/* aa453621 "RB_IDTOINDEX": `RB_IDTOINDEXwParam = (WPARAM)(UINT)uBandID;lParam= 0;` */
+
+/* aa453622 "RB_INSERTBAND": `RB_INSERTBAND wParam = (WPARAM)(UINT)uIndex;lParam = (LPARAM)(LPREBARBANDINFO)lprbbi;` */
+
+/* aa453623 "RB_MAXIMIZEBAND": `RB_MAXIMIZEBAND wParam = (WPARAM)(UINT)uBand;lParam = (LPARAM)(BOOL)fIdeal;` */
+
+/* aa453624 "RB_MINIMIZEBAND": `RB_MINIMIZEBAND wParam = (WPARAM)(UINT)uBand;lParam= 0;` */
+
+/* aa453630 "RB_SETBANDINFO": `RB_SETBANDINFO wParam = (WPARAM)(UINT)uBand;lParam = (LPARAM)(LPREBARBANDINFO)lprbbi;` */
+
+/* aa453631 "RB_SETBARINFO": `RB_SETBARINFO wParam= 0;lParam = (LPARAM)(LPREBARINFO)lprbi;` */
+
+/* aa453632 "RB_SETBKCOLOR": `RB_SETBKCOLOR wParam= 0;lParam = (LPARAM)(COLORREF)clrBk;` */
+
+/* aa453633 "RB_SETPARENT": `RB_SETPARENT wParam = (WPARAM)(HWND)hwndParent;lParam= 0;` */
+
+/* aa453634 "RB_SETTEXTCOLOR": `RB_SETTEXTCOLOR wParam= 0;lParam = (LPARAM)(COLORREF)clrText;` */
+
+/* aa453635 "RB_SHOWBAND": `RB_SHOWBAND wParam = (WPARAM)(INT)iBand;lParam = (LPARAM)(BOOL)fShow;` */
+
+/* aa453636 "RB_SIZETORECT": `RB_SIZETORECT wParam= 0;lParam = (LPARAM)(LPRECT)prc;` */
+
+/* ------------------------------------------------------------------ */
+/* Status bar (SB_/SBN_) */
+/* ------------------------------------------------------------------ */
+
+/* ms932550 "SB_GETICON": `lResult = SendMessage( (HWND) hWndControl, (UINT) SB_GETICON, (WPARAM) wParam, // = (WPARAM) (INT) iPart; (LPARAM) lParam // = 0; not used, must be zero )` */
+
+/* ms939925 "SB_GETPARTS": `SB_GETPARTS wParam= (WPARAM)nParts;lParam = (LPARAM)(LPINT)aRightCoord;` */
+
+/* ms913125 "SB_GETRECT": `SB_GETRECT wParam = (WPARAM)iPart;lParam= (LPARAM)(LPRECT)lprc;` */
+
+/* ms913198 "SB_GETTEXT": `SB_GETTEXT wParam = (WPARAM)iPart;lParam= (LPARAM)(LPSTR)szText;` */
+
+/* ms913203 "SB_GETTEXTLENGTH": `SB_GETTEXTLENGTH wParam= (WPARAM)iPart;lParam= 0;` */
+
+/* ms913210 "SB_ISSIMPLE": `SB_ISSIMPLE wParam= 0;lParam= 0;` */
+
+/* ms932561 "SB_SETBKCOLOR": `lResult = SendMessage( // returns LRESULT in lResult (HWND) hWndControl, // handle to destination control (UINT) SB_SETBKCOLOR, // message ID (WPARAM) wParam, // = 0; not used, must be zero (LPARAM) lParam // = (LPARAM) (COLORREF) clrBk;)` */
+
+/* ms932570 "SB_SETICON": `lResult = SendMessage( (HWND) hWndControl, (UINT) SB_SETICON, (WPARAM) wParam, // = (WPARAM) (INT) iPart; (LPARAM) lParam // = (LPARAM) (HICON) hIcon; )` */
+
+/* ms913344 "SB_SETMINHEIGHT": `SB_SETMINHEIGHT wParam= (WPARAM)minHeight;lParam= 0;` */
+
+/* ms932515 "SB_SETPARTS": `SB_SETPARTS wParam= (WPARAM)nParts;lParam = (LPARAM)(LPINT)aWidths;` */
+
+/* ms932525 "SB_SETTEXT": `SB_SETTEXT wParam= (WPARAM)iPart|uType;lParam = (LPARAM)(LPSTR)szText;` */
+
+/* ------------------------------------------------------------------ */
+/* Toolbar (TB_/TBN_) */
+/* ------------------------------------------------------------------ */
+
+/* ms913804 "TBN_BEGINDRAG": `TBN_BEGINDRAG lpnmtb=(TBNOTIFY FAR *)lParam;` */
+
+/* ms913807 "TBN_DRAGOUT": `TBN_DRAGOUTlpnmtb = (LPNMTOOLBAR) lParam;` */
+
+/* ms913809 "TBN_DROPDOWN": `TBN_DROPDOWNlpnmtb=(LPNMTOOLBAR)lParam;` */
+
+/* ms913811 "TBN_ENDDRAG": `TBN_ENDDRAGlpnmtb=(TBNOTIFY FAR *)lParam;` */
+
+/* ms913813 "TBN_GETBUTTONINFO": `TBN_GETBUTTONINFOlpnmtb= (TBNOTIFY FAR *)lParam;` */
+
+/* ms940415 "TB_ADDBUTTONS": `TB_ADDBUTTONSwParam=(WPARAM)(UINT)uNumButtons;lParam=(LPARAM)(LPTBBUTTON)lpButtons;` */
+
+/* ms940416 "TB_ADDSTRING": `TB_ADDSTRINGwParam= (WPARAM)(HINSTANCE)hinst;lParam=(LPARAM)MAKELONG(idString,0);` */
+
+/* ms940417 "TB_AUTOSIZE": `TB_AUTOSIZE wParam= 0;lParam= 0;` */
+
+/* ms940419 "TB_BUTTONCOUNT": `TB_BUTTONCOUNT wParam= 0;lParam= 0;` */
+
+/* ms940421 "TB_BUTTONSTRUCTSIZE": `TB_BUTTONSTRUCTSIZEwParam=(WPARAM)cb;lParam= 0;` */
+
+/* ms940422 "TB_CHANGEBITMAP": `TB_CHANGEBITMAP wParam=(WPARAM)idButton;lParam=(LPARAM)MAKELPARAM(iBitmap,0);` */
+
+/* ms940423 "TB_CHECKBUTTON": `TB_CHECKBUTTON wParam=(WPARAM)idButton;lParam = (LPARAM)MAKELONG(fCheck,0);` */
+
+/* ms940424 "TB_COMMANDTOINDEX": `TB_COMMANDTOINDEX wParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms940425 "TB_DELETEBUTTON": `TB_DELETEBUTTON wParam=(WPARAM)iButton;lParam= 0;` */
+
+/* ms940426 "TB_ENABLEBUTTON": `TB_ENABLEBUTTON wParam=(WPARAM) idButton;lParam= (LPARAM)MAKELONG(fEnable,0);` */
+
+/* ms940427 "TB_GETBITMAP": `TB_GETBITMAP wParam= (WPARAM)idButton;lParam= 0;` */
+
+/* ms940428 "TB_GETBITMAPFLAGS": `TB_GETBITMAPFLAGS wParam= 0;lParam= 0;` */
+
+/* ms940431 "TB_GETBUTTONSIZE": `TB_GETBUTTONSIZE wParam= 0;lParam= 0;` */
+
+/* ms940432 "TB_GETBUTTONTEXT": `TB_GETBUTTONTEXTwParam= (WPARAM)idButton;lParam= (LPARAM)(LPSTR)lpszText;` */
+
+/* ms940433 "TB_GETDISABLEDIMAGELIST": `TB_GETDISABLEDIMAGELISTwParam= 0;lParam= 0;` */
+
+/* ms940434 "TB_GETIMAGELIST": `TB_GETIMAGELIST wParam= 0;lParam= 0;` */
+
+/* ms940435 "TB_GETITEMRECT": `TB_GETITEMRECTwParam = (WPARAM)iButton;lParam= (LPARAM)(LPRECT)lprc;` */
+
+/* ms940436 "TB_GETRECT": `TB_GETRECTwParam= (WPARAM)(INT) iID;lParam= (LPARAM)(LPRECT)lprc;` */
+
+/* ms940437 "TB_GETROWS": `TB_GETROWS wParam= 0;lParam= 0;` */
+
+/* ms940438 "TB_GETSTATE": `TB_GETSTATE wParam= (WPARAM)idButton;lParam= 0;` */
+
+/* ms913710 "TB_GETSTYLE": `TB_GETSTYLE wParam= 0;lParam= 0;` */
+
+/* ms913711 "TB_GETTEXTROWS": `TB_GETTEXTROWS wParam= 0;lParam= 0;` */
+
+/* ms913712 "TB_GETTOOLTIPS": `TB_GETTOOLTIPS` */
+
+/* ms913713 "TB_HIDEBUTTON": `TB_HIDEBUTTON wParam=(WPARAM)idButton;lParam= (LPARAM)MAKELONG(fShow,0);` */
+
+/* ms913714 "TB_HIGHLIGHTBUTTON": `TB_HIGHLIGHTBUTTONwParam = (WPARAM)idButton;lParam = (LPARAM) MAKELONG(fHighlight,0);` */
+
+/* ms913715 "TB_INDETERMINATE": `TB_INDETERMINATE wParam= (WPARAM)idButton;lParam= (LPARAM)MAKELONG(fIndeterminate,0);` */
+
+/* ms913716 "TB_INSERTBUTTON": `TB_INSERTBUTTON wParam = (WPARAM)iButton;lParam = (LPARAM)(LPTBBUTTON)lpButton;` */
+
+/* ms913717 "TB_ISBUTTONCHECKED": `TB_ISBUTTONCHECKED wParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms913718 "TB_ISBUTTONENABLED": `TB_ISBUTTONENABLED wParam= (WPARAM)idButton;lParam= 0;` */
+
+/* ms913719 "TB_ISBUTTONHIDDEN": `TB_ISBUTTONHIDDEN wParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms913720 "TB_ISBUTTONHIGHLIGHTED": `TB_ISBUTTONHIGHLIGHTEDwParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms913721 "TB_ISBUTTONINDETERMINATE": `TB_ISBUTTONINDETERMINATEwParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms913722 "TB_ISBUTTONPRESSED": `TB_ISBUTTONPRESSED wParam=(WPARAM)idButton;lParam= 0;` */
+
+/* ms913815 "TB_PRESSBUTTON": `TB_PRESSBUTTON wParam= (WPARAM)idButton;lParam= (LPARAM)MAKELONG(fPress,0);` */
+
+/* ms913851 "TB_REPLACEBITMAP": `TB_REPLACEBITMAPwParam= 0;lParam=(LPARAM) (LPTBREPLACEBITMAP)ptbrb;` */
+
+/* ms913819 "TB_SETBITMAPSIZE": `TB_SETBITMAPSIZE wParam= 0;lParam=(LPARAM)MAKELONG(dxBitmap,dyBitmap);` */
+
+/* ms913821 "TB_SETBUTTONINFO": `TB_SETBUTTONINFOwParam=(WPARAM)(INT)iID;lParam=(LPARAM)(LPTBBUTTONINFO)lptbbi;` */
+
+/* ms913823 "TB_SETBUTTONSIZE": `TB_SETBUTTONSIZE wParam= 0;lParam= (LPARAM)MAKELONG(dxButton,dyButton);` */
+
+/* ms913825 "TB_SETBUTTONWIDTH": `TB_SETBUTTONWIDTHwParam= 0;lParam=(LPARAM)(DWORD) MAKELONG(cxMin,cxMax);` */
+
+/* ms913829 "TB_SETDISABLEDIMAGELIST": `TB_SETDISABLEDIMAGELISTwParam= 0;lParam=(LPARAM)(HIMAGELIST)himlNewDisabled;` */
+
+/* ms913831 "TB_SETDRAWTEXTFLAGS": `TB_SETDRAWTEXTFLAGSwParam=(WPARAM)(DWORD)dwMask;lParam= (LPARAM)(DWORD)dwDTFlags;` */
+
+/* ms913833 "TB_SETIMAGELIST": `TB_SETIMAGELIST wParam= 0;lParam=(LPARAM)(HIMAGELIST)himlNew;` */
+
+/* ms913835 "TB_SETINDENT": `TB_SETINDENT wParam= (WPARAM)(INT) iIndent;lParam = 0;` */
+
+/* ms913837 "TB_SETMAXTEXTROWS": `TB_SETMAXTEXTROWSwParam=(WPARAM)(INT)iMaxRows;lParam= 0;` */
+
+/* ms913839 "TB_SETPARENT": `TB_SETPARENT wParam= (WPARAM)(HWND)hwndParent;lParam= 0;` */
+
+/* ms913841 "TB_SETROWS": `TB_SETROWSwParam=(WPARAM)MAKEWPARAM(cRows,fLarger);lParam = (LPARAM)(LPRECT)lprc;` */
+
+/* ms913843 "TB_SETSTATE": `TB_SETSTATE wParam= (WPARAM) idButton;lParam=(LPARAM)MAKELONG(fState,0);` */
+
+/* ms913845 "TB_SETSTYLE": `TB_SETSTYLE wParam= 0;lParam=(LPARAM)(DWORD)dwStyle;` */
+
+/* ms913847 "TB_SETTOOLTIPS": `TB_SETTOOLTIPSwParam = (WPARAM) (HWND) hwndToolTip;lParam = 0;` */
+
+/* ------------------------------------------------------------------ */
+/* Tooltip control (TTM_/TTN_) */
+/* ------------------------------------------------------------------ */
+
+/* aa453820 "TTM_ACTIVATE": `TTM_ACTIVATE wParam= (WPARAM) (BOOL)fActivate;lParam= 0;` */
+
+/* aa453821 "TTM_ADDTOOL": `TTM_ADDTOOLwParam = 0;lParam = (LPARAM) (LPTOOLINFO) lpti;` */
+
+/* aa453822 "TTM_DELTOOL": `TTM_DELTOOLwParam= 0;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453823 "TTM_ENUMTOOLS": `TTM_ENUMTOOLS wParam= (WPARAM) (UINT)iTool;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453824 "TTM_GETCURRENTTOOL": `TTM_GETCURRENTTOOLwParam= 0;lParam= (LPARAM)(LPTOOLINFO) lpti;` */
+
+/* aa453825 "TTM_GETDELAYTIME": `TTM_GETDELAYTIMEwParam= (DWORD)dwDuration;` */
+
+/* aa453826 "TTM_GETMARGIN": `TTM_GETMARGINwParam= 0;lParam= (LPARAM)(LPRECT)lprc;` */
+
+/* aa453827 "TTM_GETMAXTIPWIDTH": `TTM_GETMAXTIPWIDTH wParam= 0;lParam= 0;` */
+
+/* aa453828 "TTM_GETTEXT": `TTM_GETTEXT wParam= 0;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453829 "TTM_GETTIPBKCOLOR": `TTM_GETTIPBKCOLOR wParam= 0;lParam= 0;` */
+
+/* aa453831 "TTM_GETTOOLCOUNT": `TTM_GETTOOLCOUNT wParam= 0;lParam= 0;` */
+
+/* aa453832 "TTM_GETTOOLINFO": `TTM_GETTOOLINFO wParam= 0;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453833 "TTM_HITTEST": `TTM_HITTEST wParam= 0;lParam= (LPARAM) (LPHITTESTINFO)lphti;` */
+
+/* aa453834 "TTM_NEWTOOLRECT": `TTM_NEWTOOLRECT wParam= 0;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453835 "TTM_POP": `TTM_POP wParam= 0;lParam= 0;` */
+
+/* aa453836 "TTM_RELAYEVENT": `TTM_RELAYEVENT wParam= 0;lParam= (LPARAM) (LPMSG)lpmsg;` */
+
+/* aa453837 "TTM_SETDELAYTIME": `TTM_SETDELAYTIMEwParam= (WPARAM)(DWORD)dwDuration;lParam= (LPARAM)(INT) MAKELONG(iTime,0);` */
+
+/* aa453838 "TTM_SETMARGIN": `TTM_SETMARGINwParam= 0;lParam= (LPARAM)(LPRECT)lprc;` */
+
+/* aa453839 "TTM_SETMAXTIPWIDTH": `TTM_SETMAXTIPWIDTH wParam= 0;lParam= (LPARAM)(INT)iWidth;` */
+
+/* aa453840 "TTM_SETTIPBKCOLOR": `TTM_SETTIPBKCOLOR wParam= (WPARAM)(COLORREF) clr;lParam= 0;` */
+
+/* aa453841 "TTM_SETTIPTEXTCOLOR": `TTM_SETTIPTEXTCOLOR wParam= (WPARAM)(COLORREF)clr;lParam= 0;` */
+
+/* aa453842 "TTM_SETTOOLINFO": `TTM_SETTOOLINFO wParam= 0;lParam= (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453843 "TTM_TRACKACTIVATE": `TTM_TRACKACTIVATE wParam= (WPARAM)(BOOL)bActivate;lParam= (LPARAM)(LPTOOLINFO)lpti;` */
+
+/* aa453844 "TTM_TRACKPOSITION": `TTM_TRACKPOSITION wParam= 0;lParam= (LPARAM)(DWORD) MAKELONG(xPos, yPos);` */
+
+/* aa453845 "TTM_UPDATETIPTEXT": `TTM_UPDATETIPTEXT wParam = 0;lParam = (LPARAM) (LPTOOLINFO)lpti;` */
+
+/* aa453846 "TTM_WINDOWFROMPOINT": `TTM_WINDOWFROMPOINT wParam = 0;lParam = (POINT FAR *)lppt;` */
+
+/* ------------------------------------------------------------------ */
+/* Trackbar (TBM_) */
+/* ------------------------------------------------------------------ */
+
+/* ms913729 "TBM_CLEARTICS": `TBM_CLEARTICS wParam=(WPARAM)(BOOL)fRedraw;lParam = 0;` */
+
+/* ms913731 "TBM_GETBUDDY": `TBM_GETBUDDY wParam= (WPARAM)(BOOL)fLocation;lParam = 0;` */
+
+/* ms913733 "TBM_GETCHANNELRECT": `TBM_GETCHANNELRECTwParam = 0;lParam=(LPARAM)(LPRECT)lprc;` */
+
+/* ms913735 "TBM_GETLINESIZE": `TBM_GETLINESIZE wParam = 0;lParam = 0;` */
+
+/* ms913736 "TBM_GETNUMTICS": `TBM_GETNUMTICS wParam = 0;lParam = 0;` */
+
+/* ms913739 "TBM_GETPAGESIZE": `TBM_GETPAGESIZE wParam = 0;lParam = 0;` */
+
+/* ms913741 "TBM_GETPOS": `TBM_GETPOS wParam = 0;lParam = 0;` */
+
+/* ms913743 "TBM_GETPTICS": `TBM_GETPTICS wParam = 0;lParam = 0;` */
+
+/* ms913747 "TBM_GETRANGEMAX": `TBM_GETRANGEMAX wParam = 0;lParam = 0;` */
+
+/* ms913749 "TBM_GETRANGEMIN": `TBM_GETRANGEMIN wParam = 0;lParam = 0;` */
+
+/* ms913751 "TBM_GETSELEND": `TBM_GETSELEND wParam = 0;lParam = 0;` */
+
+/* ms913754 "TBM_GETSELSTART": `TBM_GETSELSTART wParam = 0;lParam = 0;` */
+
+/* ms913756 "TBM_GETTHUMBLENGTH": `TBM_GETTHUMBLENGTH wParam = 0;lParam = 0;` */
+
+/* ms913758 "TBM_GETTHUMBRECT": `TBM_GETTHUMBRECTwParam = 0;lParam=(LPARAM)(LPRECT)lprc;` */
+
+/* ms913761 "TBM_GETTIC": `TBM_GETTIC wParam=(WPARAM)(WORD)iTic;lParam = 0;` */
+
+/* ms913765 "TBM_GETTICPOS": `TBM_GETTICPOSwParam=(WPARAM)(WORD)iTic;lParam = 0;` */
+
+/* ms913769 "TBM_SETBUDDY": `TBM_SETBUDDY wParam= (WPARAM)(BOOL)fLocation;lParam= (LPARAM)(HWND)hwndBuddy;` */
+
+/* ms913773 "TBM_SETLINESIZE": `TBM_SETLINESIZE wParam = 0;lParam= (LONG)lLineSize;` */
+
+/* ms913779 "TBM_SETPAGESIZE": `TBM_SETPAGESIZE wParam = 0;lParam= (LONG)lPageSize;` */
+
+/* ms913783 "TBM_SETPOS": `TBM_SETPOS wParam=(WPARAM)(BOOL) fPosition;lParam=(LPARAM)(LONG)lPosition;` */
+
+/* ms913785 "TBM_SETRANGE": `TBM_SETRANGE wParam= (WPARAM)(BOOL) fRedraw;lParam= (LPARAM)MAKELONG(lMinimum,lMaximum);` */
+
+/* ms913787 "TBM_SETRANGEMAX": `TBM_SETRANGEMAX wParam= (WPARAM)fRedraw;lParam=(LPARAM)lMaximum;` */
+
+/* ms913789 "TBM_SETRANGEMIN": `TBM_SETRANGEMIN wParam = (WPARAM)fRedraw;lParam = (LPARAM)lMinimum;` */
+
+/* ms913791 "TBM_SETSEL": `TBM_SETSEL wParam=(WPARAM)(BOOL)fRedraw;lParam=(LPARAM)MAKELONG(lMinimum,lMaximum);` */
+
+/* ms913793 "TBM_SETSELEND": `TBM_SETSELENDwParam=(WPARAM)(BOOL)fRedraw;lParam= (LPARAM)(LONG)lEnd;` */
+
+/* ms913795 "TBM_SETSELSTART": `TBM_SETSELSTARTwParam= (WPARAM)(BOOL)fRedraw;lParam=(LPARAM)(LONG)lStart;` */
+
+/* ms913797 "TBM_SETTHUMBLENGTH": `TBM_SETTHUMBLENGTHwParam= (WPARAM)(UINT)iLength;lParam = 0;` */
+
+/* ------------------------------------------------------------------ */
+/* Tab control (TCM_/TCN_/TabCtrl_) */
+/* ------------------------------------------------------------------ */
+
+/* ms913864 "TCM_ADJUSTRECT": `TCM_ADJUSTRECTwParam=(WPARAM)(BOOL)fLarger;lParam=(LPARAM)(LPRECT)prc;` */
+
+/* ms913867 "TCM_DELETEALLITEMS": `TCM_DELETEALLITEMS wParam= 0;lParam= 0;` */
+
+/* ms913870 "TCM_DELETEITEM": `TCM_DELETEITEM wParam=(WPARAM)(int)iItem;lParam= 0;` */
+
+/* ms913872 "TCM_DESELECTALL": `TCM_DESELECTALL wParam=(WPARAM) (DWORD)fExcludeFocus;lParam= 0;` */
+
+/* ms913876 "TCM_GETCURFOCUS": `TCM_GETCURFOCUS wParam= 0;lParam= 0;` */
+
+/* ms913879 "TCM_GETCURSEL": `TCM_GETCURSEL wParam= 0;lParam= 0;` */
+
+/* ms913882 "TCM_GETEXTENDEDSTYLE": `TCM_GETEXTENDEDSTYLE wParam= 0;lParam= 0;` */
+
+/* ms913885 "TCM_GETIMAGELIST": `TCM_GETIMAGELIST wParam= 0;lParam= 0;` */
+
+/* ms913894 "TCM_GETITEM": `TCM_GETITEMwParam= (WPARAM)(int) iItem;lParam=(LPARAM)(TCITEM FAR *)pitem;` */
+
+/* ms913898 "TCM_GETITEMCOUNT": `TCM_GETITEMCOUNT wParam= 0;lParam= 0;` */
+
+/* ms933234 "TCM_GETITEMRECT": `TCM_GETITEMRECTwParam=(WPARAM)(int)iItem;lParam= (LPARAM)(RECT FAR *)prc;` */
+
+/* ms933237 "TCM_GETROWCOUNT": `TCM_GETROWCOUNT wParam= 0;lParam= 0;` */
+
+/* ms933240 "TCM_HIGHLIGHTITEM": `TCM_HIGHLIGHTITEMwParam= (WPARAM)idItem;lParam= (LPARAM) MAKELONG(fHighlight,0);` */
+
+/* ms933245 "TCM_HITTEST": `TCM_HITTESTwParam= 0;lParam= (LPARAM)(TC_HITTESTINFO FAR *)pinfo;` */
+
+/* ms933248 "TCM_INSERTITEM": `TCM_INSERTITEMwParam= (WPARAM)(int)iItem;lParam= (LPARAM)(const TCITEM FAR*)pitem;` */
+
+/* ms933255 "TCM_REMOVEIMAGE": `TCM_REMOVEIMAGE | wParam= (WPARAM)(int)iImage;lParam= 0;` */
+
+/* ms933258 "TCM_SETCURFOCUS": `TCM_SETCURFOCUSiItem= (int) (WPARAM)wParam;` */
+
+/* ms933261 "TCM_SETCURSEL": `TCM_SETCURSEL wParam= (WPARAM)(int)iItem;lParam= 0;` */
+
+/* ms933265 "TCM_SETEXTENDEDSTYLE": `TCM_SETEXTENDEDSTYLEwParam= (WPARAM)dwExMask;lParam=(LPARAM)dwExStyle;` */
+
+/* ms933267 "TCM_SETIMAGELIST": `TCM_SETIMAGELISTwParam= 0; lParam= (LPARAM)(HIMAGELIST)himl;` */
+
+/* ms933270 "TCM_SETITEM": `TCM_SETITEMwParam= (WPARAM)(int)iItem;lParam= (LPARAM)(TCITEM FAR *)pitem;` */
+
+/* ms933276 "TCM_SETITEMEXTRA": `TCM_SETITEMEXTRAwParam= (WPARAM)(int)cb;lParam= 0;` */
+
+/* ms933283 "TCM_SETITEMSIZE": `TCM_SETITEMSIZE wParam= 0; lParam=MAKELPARAM(cx,cy);` */
+
+/* ms933286 "TCM_SETMINTABWIDTH": `TCM_SETMINTABWIDTHwParam= 0;lParam= (LPARAM) (INT)cx;` */
+
+/* ms933294 "TCM_SETPADDING": `TCM_SETPADDING wParam = 0;lParam= MAKELPARAM(cx,cy);` */
+
+/* ms933299 "TCN_KEYDOWN": `TCN_KEYDOWNpnm= (TC_KEYDOWN FAR *)lParam;` */
+
+/* ms933405 "TCN_SELCHANGE": `TCN_SELCHANGE lpnmhdr = (LPNMHDR) lParam;` */
+
+/* ms933410 "TCN_SELCHANGING": `TCN_SELCHANGE lpnmhdr = (LPNMHDR) lParam;` */
+
+/* ms940387 "TabCtrl_AdjustRect": `void TabCtrl_AdjustRect(HWNDhwnd,BOOLfLarger,RECT FAR* prc );` */
+
+/* ms940388 "TabCtrl_DeleteAllItems": `BOOL TabCtrl_DeleteAllItems( HWND hwnd );` */
+
+/* ms940389 "TabCtrl_DeleteItem": `BOOL TabCtrl_DeleteItem( HWND hwnd, int iItem );` */
+
+/* ms940390 "TabCtrl_DeselectAll": `void TabCtrl_DeselectAll( HWND hwndTab, UINT fExcludeFocus);` */
+
+/* ms940391 "TabCtrl_GetCurFocus": `int TabCtrl_GetCurFocus( HWND hwnd );` */
+
+/* ms940392 "TabCtrl_GetCurSel": `int TabCtrl_GetCurSel( HWND hwnd );` */
+
+/* ms940393 "TabCtrl_GetExtendedStyle": `DWORD TabCtrl_GetExtendedStyle( HWND hwndTab);` */
+
+/* ms940394 "TabCtrl_GetImageList": `HIMAGELIST TabCtrl_GetImageList( HWND hwnd );` */
+
+/* ms940395 "TabCtrl_GetItem": `BOOL TabCtrl_GetItem( HWND hwnd, int iItem, TCITEM FAR* pitem );` */
+
+/* ms940396 "TabCtrl_GetItemCount": `int TabCtrl_GetItemCount( HWND hwnd );` */
+
+/* ms940397 "TabCtrl_GetItemRect": `BOOL TabCtrl_GetItemRect( HWND hwnd, int iItem, RECT FAR* prc );` */
+
+/* ms940398 "TabCtrl_GetRowCount": `int TabCtrl_GetRowCount( HWND hwnd );` */
+
+/* ms940399 "TabCtrl_HighlightItem": `BOOL TabCtrl_HighlightItem(HWND hwndTab, INT idItem, WORD fHighlight );` */
+
+/* ms940400 "TabCtrl_HitTest": `intTabCtrl_HitTest( HWNDhwnd, TC_HITTESTINFOFAR* pinfo );` */
+
+/* ms940401 "TabCtrl_InsertItem": `intTabCtrl_InsertItem( HWNDhwnd, intiItem, constTCITEMFAR* pitem );` */
+
+/* ms940402 "TabCtrl_RemoveImage": `voidTabCtrl_RemoveImage( HWNDhwnd, intiImage );` */
+
+/* ms940403 "TabCtrl_SetCurFocus" (printed verbatim; references held value-less constants):
+ *   VOID TabCtrl_SetCurFocus( HWNDhwnd,
+ *   intiItem);
+ */
+
+/* ms940404 "TabCtrl_SetCurSel": `intTabCtrl_SetCurSel(HWNDhwnd,intiItem );` */
+
+/* ms940405 "TabCtrl_SetExtendedStyle": `DWORD TabCtrl_SetExtendedStyle(WND hwndTab, DWORD dwExStyle );` */
+
+/* ms940406 "TabCtrl_SetImageList": `BOOLTabCtrl_SetImageList(HWNDhwnd,HIMAGELISThiml );` */
+
+/* ms940407 "TabCtrl_SetItem": `BOOLTabCtrl_SetItem(HWNDhwnd,intiItem,TCITEMFAR* pitem );` */
+
+/* ms940408 "TabCtrl_SetItemExtra": `BOOLTabCtrl_SetItemExtra(HWNDhwnd,intcb );` */
+
+/* ms940409 "TabCtrl_SetItemSize": `DWORDTabCtrl_SetItemSize(HWNDhwnd,intcx,intcy );` */
+
+/* ms940410 "TabCtrl_SetMinTabWidth": `int TabCtrl_SetMinTabWidth(HWND hwndTab, INT cx );` */
+
+/* ms940411 "TabCtrl_SetPadding": `voidTabCtrl_SetPadding(HWNDhwnd,intcx,intcy );` */
+
+/* ------------------------------------------------------------------ */
+/* Tree-View control (TVM_/TVN_/TreeView_) */
+/* ------------------------------------------------------------------ */
+
+/* ms914008 "TVM_CREATEDRAGIMAGE": `TVM_CREATEDRAGIMAGEwParam = 0;lParam= (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914019 "TVM_DELETEITEM": `TVM_DELETEITEMwParam = 0;lParam= (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914024 "TVM_EDITLABEL": `TVM_EDITLABELwParam = 0;lParam= (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914028 "TVM_ENDEDITLABELNOW": `TVM_ENDEDITLABELNOWwParam= (WPARAM)(BOOL)fCancel;lParam = 0;` */
+
+/* ms914029 "TVM_ENSUREVISIBLE": `TVM_ENSUREVISIBLEwParam = 0;lParam= (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914030 "TVM_EXPAND": `TVM_EXPANDwParam= (WPARAM)(UINT)flag;lParam = (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914031 "TVM_GETCOUNT": `TVM_GETCOUNT wParam = 0;lParam = 0;` */
+
+/* ms914032 "TVM_GETEDITCONTROL": `TVM_GETEDITCONTROL wParam = 0;lParam = 0;` */
+
+/* ms914033 "TVM_GETIMAGELIST": `TVM_GETIMAGELIST wParam= (WPARAM)iImage;lParam = 0;` */
+
+/* ms914034 "TVM_GETINDENT": `TVM_GETINDENT wParam = 0;lParam = 0;` */
+
+/* ms914035 "TVM_GETISEARCHSTRING": `TVM_GETISEARCHSTRINGwParam = 0;lParam=(LPARAM)(LPSTR)lpsz;` */
+
+/* ms914036 "TVM_GETITEM": `TVM_GETITEMwParam = 0;lParam= (LPARAM)(TV_ITEM FAR*)pitem;` */
+
+/* ms914037 "TVM_GETITEMRECT": `TVM_GETITEMRECTwParam= (WPARAM)(BOOL)fItemRect;lParam= (LPARAM)(RECT FAR*)prc;` */
+
+/* ms914038 "TVM_GETNEXTITEM": `TVM_GETNEXTITEMwParam=(WPARAM)(UINT)flag;lParam = (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914039 "TVM_GETVISIBLECOUNT": `TVM_GETVISIBLECOUNT wParam = 0;lParam = 0;` */
+
+/* ms914040 "TVM_HITTEST": `TVM_HITTEST wParam = 0;lParam=(LPARAM)(LPTV_HITTESTINFO)lpht;` */
+
+/* ms914041 "TVM_INSERTITEM": `TVM_INSERTITEMwParam = 0;lParam= (LPARAM)(LPTV_INSERTSTRUCT)lpis;` */
+
+/* ms914042 "TVM_SELECTITEM": `TVM_SELECTITEMwParam= (WPARAM)flag;lParam = (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914043 "TVM_SETIMAGELIST": `TVM_SETIMAGELISTwParam= (WPARAM)iImage;lParam = (LPARAM)(HIMAGELIST)himl;` */
+
+/* ms914044 "TVM_SETINDENT": `TVM_SETINDENT wParam=(WPARAM)indent;lParam = 0;` */
+
+/* ms914045 "TVM_SETITEM": `TVM_SETITEMwParam = 0;lParam = (LPARAM)(const TV_ITEM FAR*)pitem;` */
+
+/* ms914046 "TVM_SETITEMSPACING": `TVM_SETITEMSPACINGwParam = 0;lParam = (LPARAM)(int)iSpacing;` */
+
+/* ms914047 "TVM_SORTCHILDREN": `TVM_SORTCHILDRENwParam=(WPARAM)fRecurse;lParam = (LPARAM)(HTREEITEM)hitem;` */
+
+/* ms914048 "TVM_SORTCHILDRENCB": `TVM_SORTCHILDRENCBwParam = (WPARAM)fRecurse;lParam = (LPARAM)(LPTV_SORTCB)psort;` */
+
+/* ms914050 "TVN_BEGINDRAG": `TVN_BEGINDRAGpnmtv= (NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914051 "TVN_BEGINLABELEDIT": `TVN_BEGINLABELEDITptvdi= (TV_DISPINFO FAR *)lParam;` */
+
+/* ms914052 "TVN_DELETEITEM": `TVN_DELETEITEMpnmtv=(NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914053 "TVN_ENDLABELEDIT": `TVN_ENDLABELEDIT ptvdi=(TV_DISPINFO FAR *)lParam;` */
+
+/* ms914054 "TVN_GETDISPINFO": `TVN_GETDISPINFOlptvdi=(TV_DISPINFO FAR *)lParam;` */
+
+/* ms914055 "TVN_ITEMEXPANDED": `TVN_ITEMEXPANDEDpnmtv=(NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914056 "TVN_ITEMEXPANDING": `TVN_ITEMEXPANDINGpnmtv= (NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914057 "TVN_KEYDOWN": `TVN_KEYDOWNptvkd= (TV_KEYDOWN FAR *)lParam;` */
+
+/* ms914058 "TVN_SELCHANGED": `TVN_SELCHANGEDpnmtv=(NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914059 "TVN_SELCHANGING": `TVN_SELCHANGINGpnmtv= (NM_TREEVIEW FAR *)lParam;` */
+
+/* ms914060 "TVN_SETDISPINFO": `TVN_SETDISPINFOlptvdi= (TV_DISPINFO FAR *)lParam;` */
+
+/* aa453780 "TreeView_CreateDragImage": `HIMAGELISTTreeView_CreateDragImage(hwnd,hitem );` */
+
+/* aa453781 "TreeView_DeleteAllItems": `BOOLTreeView_DeleteAllItems( hwnd );` */
+
+/* aa453782 "TreeView_DeleteItem": `BOOLTreeView_DeleteItem(hwnd,hitem );` */
+
+/* aa453783 "TreeView_EditLabel": `HWNDTreeView_EditLabel(hwnd,hitem );` */
+
+/* aa453784 "TreeView_EndEditLabelNow": `BOOLTreeView_EndEditLabelNow(hwnd,fCancel );` */
+
+/* aa453785 "TreeView_EnsureVisible": `BOOLTreeView_EnsureVisible(hwnd,hitem );` */
+
+/* aa453786 "TreeView_Expand": `BOOLTreeView_Expand(hwnd,hitem,flag );` */
+
+/* aa453787 "TreeView_GetChild": `HTREEITEMTreeView_GetChild(hwnd,hitem );` */
+
+/* aa453788 "TreeView_GetCount": `UINTTreeView_GetCount(hwnd );` */
+
+/* aa453789 "TreeView_GetDropHilight": `HTREEITEMTreeView_GetDropHilight(hwnd);` */
+
+/* aa453790 "TreeView_GetEditControl": `HWNDTreeView_GetEditControl(hwnd );` */
+
+/* aa453791 "TreeView_GetFirstVisible": `HTREEITEMTreeView_GetFirstVisible(hwnd );` */
+
+/* aa453794 "TreeView_GetISearchString": `BOOLTreeView_GetISearchString(hwnd,lpsz);` */
+
+/* aa453792 "TreeView_GetImageList": `HIMAGELISTTreeView_GetImageList(hwnd,iImage );` */
+
+/* aa453793 "TreeView_GetIndent": `UINTTreeView_GetIndent( hwnd );` */
+
+/* aa453795 "TreeView_GetItem": `BOOLTreeView_GetItem(hwnd,pitem );` */
+
+/* aa453796 "TreeView_GetItemRect": `BOOLTreeView_GetItemRect(hwnd,hitem,prc,fItemRect );` */
+
+/* aa453797 "TreeView_GetNextItem": `HTREEITEMTreeView_GetNextItem(hwnd,hitem,flag );` */
+
+/* aa453798 "TreeView_GetNextSibling": `HTREEITEMTreeView_GetNextSibling(hwnd,hitem );` */
+
+/* aa453799 "TreeView_GetNextVisible": `HTREEITEMTreeView_GetNextVisible(hwnd,hitem );` */
+
+/* aa453800 "TreeView_GetParent": `HTREEITEMTreeView_GetParent(hwnd,hitem );` */
+
+/* aa453801 "TreeView_GetPrevSibling": `HTREEITEMTreeView_GetPrevSibling(hwnd,hitem );` */
+
+/* aa453802 "TreeView_GetPrevVisible": `HTREEITEMTreeView_GetPrevVisible(hwnd,hitem );` */
+
+/* aa453803 "TreeView_GetRoot": `HTREEITEMTreeView_GetRoot(hwnd );` */
+
+/* aa453804 "TreeView_GetSelection": `HTREEITEMTreeView_GetSelection(hwnd );` */
+
+/* aa453805 "TreeView_GetVisibleCount": `UINTTreeView_GetVisibleCount(hwnd );` */
+
+/* aa453806 "TreeView_HitTest": `HTREEITEMTreeView_HitTest(hwnd,lpht );` */
+
+/* aa453807 "TreeView_InsertItem": `HTREEITEMTreeView_InsertItem(hwnd,lpis );` */
+
+/* aa453808 "TreeView_Select": `BOOLTreeView_Select(hwnd,hitem,flag );` */
+
+/* aa453809 "TreeView_SelectDropTarget": `BOOLTreeView_SelectDropTarget(hwnd,hitem );` */
+
+/* aa453810 "TreeView_SelectItem": `BOOLTreeView_SelectItem(hwnd,hitem );` */
+
+/* aa453811 "TreeView_SelectSetFirstVisible": `BOOLTreeView_SelectSetFirstVisible(hwnd,hitem );` */
+
+/* aa453812 "TreeView_SetImageList": `HIMAGELISTTreeView_SetImageList(hwnd,himl,iImage );` */
+
+/* aa453813 "TreeView_SetIndent": `BOOLTreeView_SetIndent(hwnd,indent);` */
+
+/* aa453814 "TreeView_SetItem": `BOOLTreeView_SetItem(hwnd,pitem );` */
+
+/* aa453815 "TreeView_SortChildren": `BOOLTreeView_SortChildren(hwnd,hitem,fRecurse );` */
+
+/* aa453816 "TreeView_SortChildrenCB": `BOOLTreeView_SortChildrenCB(hwnd,psort,fRecurse );` */
+
+/* ------------------------------------------------------------------ */
+/* Up-Down control (UDM_) */
+/* ------------------------------------------------------------------ */
+
+/* ms914068 "UDM_GETACCEL": `UDM_GETACCEL wParam = (WPARAM)cAccels;lParam = (LPARAM)(LPUDACCEL)paAccels;` */
+
+/* ms914069 "UDM_GETBASE": `UDM_GETBASE wParam = 0;lParam = 0;` */
+
+/* ms914070 "UDM_GETBUDDY": `UDM_GETBUDDY wParam = 0;lParam = 0;` */
+
+/* ms914071 "UDM_GETPOS": `UDM_GETPOS wParam = 0;lParam = 0;` */
+
+/* ms914072 "UDM_GETRANGE": `UDM_GETRANGE wParam = 0;lParam = 0;` */
+
+/* ms914073 "UDM_GETRANGE32": `UDM_GETRANGE32 wParam = (WPARAM)(LPINT) pLow;lParam = (LPARAM)(LPINT)pHigh;` */
+
+/* ms914074 "UDM_SETACCEL": `UDM_SETACCEL wParam = (WPARAM)nAccels;lParam = (LPARAM)(LPUDACCEL)aAccels;` */
+
+/* ms914075 "UDM_SETBASE": `UDM_SETBASE wParam = (WPARAM)nBase;lParam = 0;` */
+
+/* ms914076 "UDM_SETBUDDY": `UDM_SETBUDDY wParam = (WPARAM)(HWND)hwndBuddy;lParam = 0;` */
+
+/* ms914077 "UDM_SETPOS": `UDM_SETPOS wParam = 0;lParam = (LPARAM)MAKELONG((short)nPos,0);` */
+
+/* ms914078 "UDM_SETRANGE": `UDM_SETRANGE wParam = 0;lParam = (LPARAM)MAKELONG((short)nUpper,(short)nLower );` */
+
+/* ms914079 "UDM_SETRANGE32": `UDM_SETRANGE32 wParam = (WPARAM)(int)iLow;lParam = (LPARAM)(int)iHigh;` */
+
+/* ------------------------------------------------------------------ */
+/* Shared notifications and misc (NM_/WM_/other) */
+/* ------------------------------------------------------------------ */
+
+/* aa453429 "LVINSERTGROUPSORTED" (printed verbatim; references held value-less constants):
+ *   typedef struct LVINSERTGROUPSORTED { PFNLVGROUPCOMPARE pfnGroupCompare; LPVOID *pvData; LVGROUP lvGroup;} LVINSERTGROUPSORTED, *PLVINSERTGROUPSORTED
+ */
+
+/* aa453577 "PSM_ADDPAGE": `PSM_ADDPAGE wParam = 0;lParam = (LPARAM)(HPROPSHEETPAGE)hpage;` */
+
+/* aa453578 "PSM_APPLY": `PSM_APPLY wParam = 0;lParam = 0;` */
+
+/* aa453579 "PSM_CANCELTOCLOSE": `PSM_CANCELTOCLOSE` */
+
+/* aa453580 "PSM_CHANGED": `PSM_CHANGED wParam = (WPARAM)(HWND)hwndPage;lParam= 0;` */
+
+/* aa453581 "PSM_GETCURRENTPAGEHWND": `PSM_GETCURRENTPAGEHWND wParam= 0;lParam= 0;` */
+
+/* aa453582 "PSM_GETTABCONTROL": `PSM_GETTABCONTROL wParam= 0;lParam= 0;` */
+
+/* aa453583 "PSM_ISDIALOGMESSAGE": `PSM_ISDIALOGMESSAGE wParam= 0;lParam = (LPARAM)pMsg;` */
+
+/* aa453584 "PSM_PRESSBUTTON": `PSM_PRESSBUTTON wParam= (WPARAM)(int)iButton; lParam= 0;` */
+
+/* aa453585 "PSM_QUERYSIBLINGS": `PSM_QUERYSIBLINGS wParam= (WPARAM)param1;lParam= (LPARAM)param2;` */
+
+/* aa453586 "PSM_REBOOTSYSTEM": `PSM_REBOOTSYSTEM wParam= 0;lParam= 0;` */
+
+/* aa453587 "PSM_REMOVEPAGE": `PSM_REMOVEPAGE wParam = (WPARAM)(int)index;lParam= (LPARAM)(HPROPSHEETPAGE) hpage;` */
+
+/* aa453588 "PSM_RESTARTWINDOWS": `PSM_RESTARTWINDOWS wParam= 0;lParam= 0;` */
+
+/* aa453589 "PSM_SETCURSEL": `PSM_SETCURSEL wParam = (WPARAM)(int)index;lParam= (LPARAM)(HPROPSHEETPAGE)hpage;` */
+
+/* aa453590 "PSM_SETCURSELID": `PSM_SETCURSELID wParam = 0;lParam = (LPARAM)(int)id;` */
+
+/* aa453591 "PSM_SETFINISHTEXT": `PSM_SETFINISHTEXT wParam= 0;lParam = (LPARAM) (LPSTR)lpszText;` */
+
+/* aa453592 "PSM_SETTITLE": `PSM_SETTITLE wParam= (WPARAM)(DWORD)dwStyle;lParam = (LPARAM)(LPCSTR)lpszText;` */
+
+/* aa453593 "PSM_SETWIZBUTTONS": `PSM_SETWIZBUTTONSwParam= 0;` */
+
+/* aa453594 "PSM_UNCHANGED": `PSM_UNCHANGED wParam = (WPARAM)(HWND)hwndPage;lParam= 0;` */
+
+/* aa453429 "LVINSERTGROUPSORTED" is HELD as a structure: the
+ * print `typedef struct LVINSERTGROUPSORTED { PFNLVGROUPCOMPARE
+ * pfnGroupCompare; LPVOID *pvData; LVGROUP lvGroup;}` names
+ * PFNLVGROUPCOMPARE, which has no typedef or signature on any
+ * page in the corpus (used by aa453405/aa453429/aa453519 only). */
+
+/* LVGROUP flag names printed on aa453426 (mask/state/uAlign):
+ *   LVGF_ALIGN LVGF_FOOTER LVGF_GROUPID LVGF_HEADER LVGF_NONE
+ *   LVGF_STATE
+ *   LVGS_NORMAL
+ *   LVGA_FOOTER_CENTER LVGA_FOOTER_LEFT LVGA_FOOTER_RIGHT
+ *   LVGA_HEADER_CENTER LVGA_HEADER_LEFT LVGA_HEADER_RIGHT
+ * LVGROUPMETRICS mask names printed on aa453427:
+ *   LVGMF_BORDERCOLOR LVGMF_BORDERSIZE LVGMF_NONE
+ *   LVGMF_TEXTCOLOR
+ * (names only; no values printed anywhere). */
+
+
 #ifdef __cplusplus
 }
 #endif

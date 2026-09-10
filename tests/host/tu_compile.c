@@ -29,6 +29,8 @@
 #include <Mshtmhst.h>
 #include <Uxtheme.h>
 #include <webvw.h>
+#include <Shellcb.h>
+#include <Advbacklight.h>
 #include <Ws2tcpip.h>
 #include <Ws2spi.h>
 #include <Tapi.h>
@@ -7377,6 +7379,31 @@ static int m93_webview_usage(void)
     return (int)dw + (int)dir;
 }
 
+static int m94_commctrl_usage(void)
+{
+    LVGROUP                    lvg;
+    LVGROUPMETRICS             lvgm;
+    LVSETINFOTIP               lvsi;
+    SHELLCALLBACKS             scb;
+    PFNSHELL_NOTIFYICON        pni;
+    PFNSHHADDTORECENTDOCS      pard;
+    DWORD                      dw;
+
+    lvg.cbSize = 0; lvg.uAlign = 0;
+    lvgm.cbSize = 0; lvgm.crFooter = 0;
+    lvsi.cbSize = 0; lvsi.iItem = 0;
+    pni = (PFNSHELL_NOTIFYICON)0;
+    pard = (PFNSHHADDTORECENTDOCS)0;
+    scb.dwSize = 0u;
+    scb.pfnShell_NotifyIcon = pni;
+    scb.pfnSHAddToRecentDocs = pard;
+    dw = 0;
+    dw += (DWORD)BacklightAdvApplet(NULL);
+    dw += (DWORD)(sizeof(SHELLCALLBACKS) != 0u);
+    return (int)dw + (int)lvg.cbSize + (int)lvgm.cbSize
+           + (int)lvsi.cbSize + (int)scb.dwSize;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7548,6 +7575,8 @@ int host_tu_entry(void)
     if (m92_wininet_usage() != 0)
         return 1;
     if (m93_webview_usage() != 0)
+        return 1;
+    if (m94_commctrl_usage() != 0)
         return 1;
     return 0;
 }

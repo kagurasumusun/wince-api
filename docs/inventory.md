@@ -6622,3 +6622,55 @@ unaffected; crosscheck passed unchanged):
 Gates with the new artifact + adjusted CRT: check 0, crosscheck 0
 (6 targets), e2e 0 (6 targets linked, machine/subsystem/imports
 asserted; dlltool -m armwince import libraries).
+
+## M94 -- Shell book, part 1: Commctrl.h completion (618 rows) + Shellcb.h + Advbacklight.h
+
+The M94a gap survey's Commctrl bulk, closed.  Value hold verified one
+more time before recording: NO page in the preserved corpus prints a
+numeric value for ANY of the 420 message constants (full-tree grep of
+pages/pages4/pages6/pagesw/pageswm for name+value table rows: zero
+hits), and the desktop Win32 reference does not print them either
+(checked lvm-getitemcount + nf-commctrl-listview_getitemcount on
+2026-09-10 -- neither the message value nor the macro body appears
+there), so no M52-style "derived:" path exists.  Every row is
+therefore RECORDED (name + printed packing/prototype), none #defined.
+
+- include/Commctrl.h +618 record rows (tools/gen-m94-commctrl.py,
+  marker-guarded append; 622 per-page records incl. the 3 oddity
+  notes): message constants with their printed wParam/lParam packing,
+  macro wrappers with their printed prototypes (ListView_/TreeView_/
+  TabCtrl_/MonthCal_/DateTime_/Header_), the 14 Header_* pages that
+  print full #define bodies (recorded verbatim -- they reference the
+  held constants symbolically), SendMessage-form syntax pages (26,
+  the lResult = SendMessage(...) prints), and bare notification names
+  (PSM_CANCELTOCLOSE/TB_GETTOOLTIPS: pages print no packing).
+  Print oddities recorded inline: aa453482 LVM_SETICONSPACING prints
+  "LVS_SETICONSPACING"; ms911819 MCN_SELECTNONE prints "MCN_SELECT;";
+  ms933410 TCN_SELCHANGING prints "TCN_SELCHANGE lpnmhdr = ...";
+  TBN_* pages split between TBNOTIFY FAR* and LPNMTOOLBAR spellings.
+- Structures compiled (all member types resolve): LVGROUP (+PLVGROUP),
+  LVGROUPMETRICS (+PLVGROUPMETRICS), LVSETINFOTIP (+PLVSETINFOTIP) --
+  full prints, TU-asserted; LVGF_/LVGS_/LVGA_/LVGMF_ flag names
+  recorded in the struct comments (no values).  LVINSERTGROUPSORTED
+  HELD: its print names PFNLVGROUPCOMPARE, which has no typedef or
+  signature on any corpus page (aa453405/29/519 use it only).
+  FILECHANGENOTIFY was already compiled in Shlobj.h (M50) -- not a
+  gap (the M94a per-header list had counted it under Commctrl.h).
+- include/Shellcb.h NEW: SHELLCALLBACKS struct + PFNSHELL_NOTIFYICON +
+  PFNSHHADDTORECENTDOCS typedefs (all three prints glued, repaired
+  with notes) + ShellRegisterCallbacks DECLARED (aa453687; no Link
+  Library row on either page -> no def entry).
+- include/Advbacklight.h NEW: BacklightAdvApplet DECLARED (aa452867,
+  CE .NET 4.0+; no Link Library row -> no def entry).
+- Pcommctrl.h alias comment updated (the 3 work-area macros are
+  recorded, not declared).
+- TU m94 (LVGROUP/LVGROUPMETRICS/LVSETINFOTIP field touches +
+  SHELLCALLBACKS + both callback typedefs + BacklightAdvApplet).
+  Gates GREEN x6.
+
+Shell book remaining after part 1: Shobjidl.h method records 27,
+Prsht.h 24 (PSM_*/PropSheet_*/PSN_*), aygshell.h 4 (INewMenuItemServer,
+IShellNotificationCallback), prose rows 201 (concept pages -- inventory
+accounting only), the Commdlg CDM_SETDEFEXT twin pair, and the
+TTM_GETTIPTEXTCOLOR mis-homed row (Windows.h home = archive print
+quirk; the TTM_ record lives in Commctrl.h per its real family).

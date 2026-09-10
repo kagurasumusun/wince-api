@@ -14,6 +14,7 @@ INCLUDES = -Iinclude
 CE_VERSIONS = 0x420 0x500 0x600
 
 HDRS = \
+include/Advbacklight.h \
 include/Autodial.h \
 include/Av_upnp.h \
 include/Bt_api.h \
@@ -130,6 +131,7 @@ include/Sapi.h \
 include/Sapiddk.h \
 include/Service.h \
 include/Shellapi.h \
+include/Shellcb.h \
 include/sideshow.h \
 include/Shelwapi.h \
 include/Shlguid.h \
