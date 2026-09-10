@@ -82,6 +82,9 @@ FORK_HOME = {
     'Winsock2.h': {'af_irda.h'},
     'Ws2tcpip.h': set(),
     'Mlang.h': {'mlang.h'},
+    'Sspi.h': {'sspi.h', 'security.h', 'ntsecpkg.h'},
+    'Schnlsp.h': {'schnlsp.h', 'schannel.h', 'sspi.h'},
+    'Rpcdce.h': {'rpcdce.h'},
 }
 
 # Full spellings the comment ledgers abbreviate.
@@ -97,6 +100,7 @@ MARKERS = {h: 'M96 value adoption' for h in (
     'Commctrl.h', 'Prsht.h', 'Wininet.h', 'Urlmon.h', 'Shobjidl.h',
     'aygshell.h', 'Sipapi.h', 'Winuser.h', 'Wincrypt.h', 'Winscard.h',
     'Tapi.h', 'Imm.h', 'Winsock2.h', 'Ws2tcpip.h', 'Mlang.h',
+    'Sspi.h', 'Schnlsp.h', 'Rpcdce.h',
 )}
 
 DEFINE_RE = re.compile(

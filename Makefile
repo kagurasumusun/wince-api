@@ -141,6 +141,7 @@ include/Shobjvidl.h \
 include/Shtypes.h \
 include/Sip.h \
 include/Sipapi.h \
+include/Sspi.h \
 include/Smbconfig.h \
 include/Snmp.h \
 include/Snmpapi.h \

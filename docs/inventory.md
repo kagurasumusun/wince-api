@@ -7046,3 +7046,35 @@ CE page spelling).
   NO CE method pages at all (IStorage, IStream, IRunningObjectTable,
   ITypeComp, IEnumCATEGORYINFO, IShellPropSheetExt) -- an order
   source alone cannot ground a callable layout.
+
+## M95 -- Security book implementation
+
+M95a harvested the book (498 leaves, rows 15830); the implementation
+follows family by family.  The R1-only source policy (clean-room.md
+par.4 revision) applies throughout: page text is primary; constant
+values and table orders the pages omit are adopted from R1 with
+provenance.
+
+- include/Sspi.h NEW (31 rows + the SSPI Handles carrier): 19 SSPI
+  functions (Secur32.lib; AcceptSecurityContext .. VerifySignature,
+  incl. the CE-only SealMessage/UnsealMessage whose table slots do
+  not exist -- the page dispatch table ends at DecryptMessage),
+  12 structures (SecBuffer, SecBufferDesc, SecPkgContext_Authority/
+  DceInfo/KeyInfo/Lifespan/Names/Sizes/StreamSizes,
+  SecPkgCredentials_Names, SecPkgInfo, SecurityFunctionTableW -- the
+  26-slot member order is the page's own print, R1-corroborated),
+  the SSPI Handles carriers (ms926453: SecHandle/CredHandle/
+  CtxtHandle), and the base spellings SEC_CHAR/SEC_WCHAR/
+  SECURITY_STATUS/TimeStamp/SEC_GET_KEY_FN (no CE type pages; own
+  design, R1 security.h/sspi.h corroborate the shapes).  Print
+  artifacts recorded: _SecPkgContex_DceInfo tag misprint, lowercase
+  pSecPkgContext_Names alias normalized, glued typedefstruct/
+  unsignedlong (ms926445), SealMessage's missing + trailing commas
+  (ms926485), the W-suffixed table members vs the unsuffixed
+  PSecurityFunctionTable of ms926095 (alias provided).
+  M96 value adoption: +88 (SECBUFFER_* 11, SECPKG_ATTR_*/FLAG_*/
+  CRED_* 29, ISC_REQ_/ISC_RET_ 16, ASC_REQ_/ASC_RET_ 13, SEC_E_/
+  SEC_I_ 18, SECBUFFER_VERSION, SECURITY_STRING-tagged 1); R1 gaps
+  stay held (SECPKG_ID_NONE, SECPKG_ATTR_DCE_INFO, several SEC_E_*
+  return names, parts of the ASC_*/ISC_RET_ flag sets -- 62 names).
+  Gates GREEN x6.
