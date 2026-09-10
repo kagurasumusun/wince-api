@@ -6834,3 +6834,8 @@ guard close, grouped by family, every value provenance-tagged R1.
   key documented on the IME pages -- Imm family home), WM_IME_
   COMPOSITION / WM_IME_STARTCOMPOSITION (IME message home is Imm).
   Total Imm M96: 139.  Gates GREEN x6.
+- include/aygshell.h TOP-UP: +1, GN_CONTEXTMENU (0x3E8 = 1000, R1
+  aygshell.h; the gesture-notification code the Commctrl.h:220 record
+  discusses -- GN_ home is aygshell.h, where NMRGINFO lives).
+  WM_LBUTTONDOWN is REHOMED to Winuser.h.  Total aygshell M96: 20.
+  Gates GREEN x6.

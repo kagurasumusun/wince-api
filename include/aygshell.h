@@ -576,6 +576,7 @@ AKARI_CE_IMPORT BOOL SHSipPreference(HWND hwnd, SIPSTATE st) AKARI_CE_NAME(SHSip
 #endif
 
 /* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -586,6 +587,9 @@ AKARI_CE_IMPORT BOOL SHSipPreference(HWND hwnd, SIPSTATE st) AKARI_CE_NAME(SHSip
  * (desktop-era values; policy note in clean-room.md).  R1's
  * license-exception files (winsock*, gl*) are unused.
  * ================================================================== */
+
+/* ---- GN_ family (1 names; R1) ---- */
+#define GN_CONTEXTMENU                               0x03E8
 
 /* ---- NMN_ family (1 names; R1) ---- */
 #define NMN_INVOKECOMMAND                            0x044F
