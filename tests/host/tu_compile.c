@@ -7286,6 +7286,15 @@ static int m88_shaped_usage(void)
            + (int)rgb.rgbBlue + (int)sizeof(amt);
 }
 
+static int m89_shaped_usage(void)
+{
+    MONITORINFOEX miex;
+
+    miex.cbSize = 0; miex.rcMonitor.left = 0; miex.dwFlags = 0;
+    miex.szDevice[0] = 0;
+    return (int)miex.cbSize + (int)miex.dwFlags + (int)miex.szDevice[0];
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7449,6 +7458,8 @@ int host_tu_entry(void)
     if (m87_shaped_usage() != 0)
         return 1;
     if (m88_shaped_usage() != 0)
+        return 1;
+    if (m89_shaped_usage() != 0)
         return 1;
     return 0;
 }

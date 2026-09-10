@@ -6338,3 +6338,28 @@ and an EMPTY Header row).  No Link Library rows -> no def changes.
   ContainsPalette, WaitDispatchingMessages, IsEqualObject, llMulDiv,
   Int64x32Div32) + struct field touches.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M89 -- Graphics book triage complete: MONITORINFOEX + prose closure
+
+Full triage of the remaining graphics-book harvest (871 pages):
+only ONE further compilable page exists -- ms932214 MONITORINFOEX.
+
+- include/Wingdi.h (EXT): +MONITORINFOEX (page Requirements row
+  prints Header: Windows.h; placed with the MONITORINFO/monitor
+  family that Wingdi.h owns; szDevice[CCHDEVICENAME], CCHDEVICENAME
+  = 32 from the DEVMODE pages).  TU m89.
+- Header-token spelling variants in the harvest, recorded as archive
+  typos of Dvdata.h (NO alias files, M76a one-file policy):
+  "Dvddata.h" (IDVDROM::Bind aa451943 / ::Unbind aa451957 -- the
+  sibling IDVDROM method pages and the interface page print
+  Dvdata.h) and "Ddvdata.h, Dvdata.idl" (one row).  The
+  surface-metrics token dvddata.h is therefore a typo residue.
+- Prose-only groups (no C surface; accounted): Windows Media Player
+  Control (Properties 84 + Events 21 + Methods 20 + app-dev 12 +
+  Media 11 + WMT 8 + Control Panel/Startup/DVDSample -- OCX
+  automation docs, `MediaPlayer.Prop` JScript syntax, no Header rows),
+  ASX Elements Reference (17, XML element prose), Supported
+  DirectShow Filters (23), AVI RIFF File Reference (chunk-layout
+  prose, no C prints), DirectDraw/D3DM/Video-Capture/Overlay/Video-
+  Port/Multiple-Screens concept pages, DirectShow code-walkthroughs.
+- Gates: check / crosscheck / e2e GREEN x6.

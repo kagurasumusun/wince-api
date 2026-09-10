@@ -1093,6 +1093,20 @@ typedef struct tagMONITORINFO {
     DWORD dwFlags;
 } MONITORINFO, *LPMONITORINFO;
 
+/* ms932214 "MONITORINFOEX" (Multiple Screens Structures, graphics-book
+ * M89 harvest; CE .NET 4.0+; page Requirements row prints Header:
+ * Windows.h): print `typedef struct tagMONITORINFOEX {DWORD cbSize;
+ * RECT rcMonitor;RECT rcWork;DWORD dwFlags;TCHAR szDevice
+ * [CCHDEVICENAME];} MONITORINFOEX, *LPMONITORINFOEX;` (glued tokens
+ * split; CCHDEVICENAME = 32 above; szDevice = device name string). */
+typedef struct tagMONITORINFOEX {
+    DWORD cbSize;
+    RECT  rcMonitor;
+    RECT  rcWork;
+    DWORD dwFlags;
+    TCHAR szDevice[CCHDEVICENAME];
+} MONITORINFOEX, *LPMONITORINFOEX;
+
 #define MONITORINFOF_PRIMARY 1
 
 /* MonitorFrom* dwFlags values (value tables on ms932198/ms932208/

@@ -131,16 +131,19 @@ Method is fixed in tools/surface-metrics.py (checked in, rerunnable).
 
 | Measure | Value |
 |---|---|
-| Documentation rows harvested | 14088 |
+| Documentation rows harvested | 14959 |
 | Function rows (sig parses `ret title(...)`) | 2666 |
-| ... declared via AKARI_CE_NAME | 1970 (74%) |
+| ... declared via AKARI_CE_NAME | 2009 (75%) |
 | Other symbol rows (types/constants/messages) | 4635 |
-| ... name present verbatim in include/ | 3068 (66%) |
-| Documented header tokens | 158 |
-| ... shipped in include/ | 149 (94%) |
-| Corpus pages preserved | 21346 |
+| ... name present verbatim in include/ | 3160 (68%) |
+| Documented header tokens | 159 |
+| ... shipped in include/ | 158 (99%) |
+| Corpus pages preserved | 22727 |
 
-Unshipped header tokens: NONE since M85 (158/158 shipped).
+Unshipped header tokens: 158/159 since M89 -- the single residue is
+dvddata.h, an archive typo for Dvdata.h (IDVDROM::Bind/Unbind pages
+print "Dvddata.h"; every sibling page prints Dvdata.h; recorded in
+docs/inventory.md M89, no alias file per the M76a one-file policy).
 The M83 list of 9 closed as: msime/msimeui/koreanimeui/imjpskin
 (M84, IME remainder -- 2 factory fns declared, 3 interfaces + 4 C++
 classes recorded, 4 structs compiled, 1 held), dinput/dmoimpl/bt_ddi/
