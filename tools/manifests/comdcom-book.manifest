@@ -1,0 +1,32 @@
+aa515067	Getting and Setting Properties
+ms862083	AppID Key
+ms862088	Array Manipulation Functions
+ms862094	Automation Supported APIs
+ms862102	Calling a Method With No Arguments
+ms862109	CLSID Key
+ms862113	COM Access Control
+ms862115	COM Authentication
+ms862116	COM and DCOM Migration
+ms862117	COM OEM Registry Settings
+ms862118	COM and DCOM OS Design Development
+ms862121	COM Supported APIs
+ms862127	Creating and Initializing COM Objects
+ms862132	DCOM Security Configuration Utility
+ms862133	DCOM Supported APIs
+ms862136	Determining Supported COM APIs
+ms862139	Developing Secure ActiveX Controls
+ms862170	Interface Key
+ms862492	Marshaling Support
+ms862537	Minimal COM Supported APIs
+ms862662	(Non-Compound) FileType Key
+ms862664	OLE Compound Documents
+ms862665	OLE Key
+ms862678	ProgID Key
+ms862680	Raising Exceptions During Invoke
+ms862712	String Manipulation Functions
+ms862714	COM Threads and Processes
+ms862716	Transport Protocols
+ms862725	VersionIndependentProgID Key
+ms882869	Indexed Properties
+ms892626	Passing Parameters
+ms893307	Returning Errors

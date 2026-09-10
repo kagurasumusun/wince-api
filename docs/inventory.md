@@ -6363,3 +6363,28 @@ only ONE further compilable page exists -- ms932214 MONITORINFOEX.
   prose, no C prints), DirectDraw/D3DM/Video-Capture/Overlay/Video-
   Port/Multiple-Screens concept pages, DirectShow code-walkthroughs.
 - Gates: check / crosscheck / e2e GREEN x6.
+
+## M90 -- Component Services (COM and DCOM) book: triage complete
+
+Book: CE 5.0 Features > Applications and Services Development >
+Component Services (COM and DCOM), 896 leaves.
+
+- 864/896 pages were already preserved (M44/M73-era Objbase.h /
+  Objidl.h / Oaidl surface harvests); the 32 missing leaves are now
+  fetched (tools/manifests/comdcom-book.manifest; build/pages
+  13521 -> 13553; rows.json 14959 -> 14991) and triaged: ALL are
+  concept/registry/prose pages (AppID/CLSID/Interface/OLE/ProgID/
+  VersionIndependentProgID/(Non-Compound) FileType registry keys,
+  Automation/COM/DCOM/Minimal-COM supported-APIs lists, marshaling/
+  threading/transport/security prose).  Two pages quote C only in
+  code examples: ms862113 (Permissions ACL sample struct) and
+  ms892626 (DISPPARAMS, already shipped) -- no new API surface.
+- The DCOM queue item from coverage.md is thereby CLOSED by
+  verification: 896/896 pages preserved, API surface already
+  implemented.
+- NOTE: a "COM and DCOM" subtree also exists under Windows Embedded
+  Compact 2013 (962 leaves, different id space/generation); its
+  mistaken manifest was removed.  Compact 2013 pages are a NEW doc
+  tree (beyond pages/pages4/pages6) and are out of scope until the
+  CE 4/5/6 generations are complete.
+- Gates unchanged (no header changes this unit).

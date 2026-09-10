@@ -117,10 +117,12 @@ Rndis.h / Ndistapi.h / Nuiouser.h / Wzcsapi.h rows remain for
 M78b/M78c.  FSD remainder (120) and VAIL/PC-Auth/TUI (254) are
 harvested, pending implementation.
 
-Remaining largest gaps: Graphics 731 (Compact-2013-tree titles +
-Unsupported-Items), File Systems DDI remainder (FSD/Partition
-Manager/Storage Manager function pages -- harvested, M79 queue),
-DCOM book triage (896 leaves), Core OS DDI books.
+Remaining largest gaps (M90): File Systems DDI remainder triage,
+Core OS DDI books, Internet Client 430, Apps-EndUser 338, Security
+266, Shell 989, Device Mgmt 229 (XML element prose).  CLOSED since
+M89/M90: Graphics 731 (fully harvested + triaged, M87-M89), DCOM
+896 (triage verified -- 864 pages were already preserved; the 32
+missing leaves fetched, all prose; API surface was M44/M73).
 
 ## Surface-completion measures (M83; script tools/surface-metrics.py)
 
