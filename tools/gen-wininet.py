@@ -34,6 +34,7 @@ FUNCS = [
  ("CreateUrlCacheEntry","aa452142","BOOL CreateUrlCacheEntry( LPCTSTR lpszUrlName,DWORD dwExpectedFileSize,LPCTSTR lpszFileExtension,LPSTR lpszFileName,DWORD dwReserved);",D),
  ("DeleteUrlCacheEntry","aa452150","BOOL DeleteUrlCacheEntry( LPCTSTR lpszUrlName);",D),
  ("FindCloseUrlCache","aa452195","BOOL FindCloseUrlCache( HANDLE hEnumHandle);",D),
+ ("FindFirstUrlCacheEntry","aa452197","HANDLE FindFirstUrlCacheEntry( LPCTSTR lpszUrlSearchPattern,LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo,LPDWORD lpdwFirstCacheEntryInfoBufferSize);",D),
  ("FindNextUrlCacheEntry","ms919204","BOOL FindNextUrlCacheEntry( HANDLE hEnumHandle,LPINTERNET_CACHE_ENTRY_INFO lpNextCacheEntryInfo,LPDWORD lpdwNextCacheEntryInfoBufferSize);",D),
  ("FindNextUrlCacheEntryEx","aa452206","BOOLAPI FindNextUrlCacheEntryEx( HANDLE hEnumHandle,LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo,LPDWORD lpdwFirstCacheEntryInfoBufferSize,LPVOID lpGroupAttributes,LPDWORD pcbGroupAttributes,LPVOID lpReserved);",D),
  ("GetUrlCacheEntryInfo","ms906320","BOOL GetUrlCacheEntryInfo( LPCTSTR lpszUrlName,LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo,LPDWORD lpdwCacheEntryInfoBufferSize);",D),
@@ -159,6 +160,7 @@ SIGS = {
  "CreateUrlCacheEntry":"BOOL CreateUrlCacheEntry(LPCTSTR lpszUrlName, DWORD dwExpectedFileSize, LPCTSTR lpszFileExtension, LPSTR lpszFileName, DWORD dwReserved)",
  "DeleteUrlCacheEntry":"BOOL DeleteUrlCacheEntry(LPCTSTR lpszUrlName)",
  "FindCloseUrlCache":"BOOL FindCloseUrlCache(HANDLE hEnumHandle)",
+ "FindFirstUrlCacheEntry":"HANDLE FindFirstUrlCacheEntry(LPCTSTR lpszUrlSearchPattern, LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo, LPDWORD lpdwFirstCacheEntryInfoBufferSize)",
  "FindNextUrlCacheEntry":"BOOL FindNextUrlCacheEntry(HANDLE hEnumHandle, LPINTERNET_CACHE_ENTRY_INFO lpNextCacheEntryInfo, LPDWORD lpdwNextCacheEntryInfoBufferSize)",
  "FindNextUrlCacheEntryEx":"BOOL WINAPI FindNextUrlCacheEntryEx(HANDLE hEnumHandle, LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo, LPDWORD lpdwFirstCacheEntryInfoBufferSize, LPVOID lpGroupAttributes, LPDWORD pcbGroupAttributes, LPVOID lpReserved)",
  "GetUrlCacheEntryInfo":"BOOL GetUrlCacheEntryInfo(LPCTSTR lpszUrlName, LPINTERNET_CACHE_ENTRY_INFO lpCacheEntryInfo, LPDWORD lpdwCacheEntryInfoBufferSize)",
@@ -195,6 +197,14 @@ L = []
 A = L.append
 A('''/*
  * Wininet.h -- Windows Internet Services (WinInet) API for Windows CE.
+ *
+ * Row accounting (M93): 83 Wininet.lib rows = 82 function pages +
+ * ms918386 INTERNET_STATUS_CALLBACK (held typedef record).  82 function
+ * rows: 35 declared, 47 recorded.  aa452197 FindFirstUrlCacheEntry is
+ * the one function page whose Requirements prints NO Header row (only
+ * OS + Link Library: Wininet.lib) -- the header home is implicit and
+ * the M92 header-row sweep missed it; all parameter types resolve
+ * (INTERNET_CACHE_ENTRY_INFO is compiled below) so it declares.
  *
  * Copyright (c) 2026 Akari API contributors
  * SPDX-License-Identifier: MIT

@@ -6480,3 +6480,73 @@ recorded as comments (no values printed anywhere).
 
 Remaining IC book rows: webvw.h 68, Mshtml.h/Mshtmhst.idl 11+4,
 Uxtheme.h 8, 161 prose -- triage next, then the book closes.
+
+## M93 -- Internet Client book close-out: Uxtheme/webvw/Mshtml/Mshtmhst + Wininet gap
+
+Environment note: the M93 session started from a fresh sandbox (corpus,
+LLVM, CRT, git credentials wiped by the snapshot exclusions).  Restored:
+corpus re-cloned + tools/ce-corpus.py import (15352 rows verified),
+wince-crt re-cloned, remotes re-pointed.  The newest LLVM artifact
+(10134447081, wince-llvm-01c51efc, built today) REGRESSES the CE flow:
+llvm-dlltool no longer accepts -m armce (plain -m arm only) and the ARM
+backend crashes on wince-crt runtime.c ("Cannot select: ARMISD::CALL",
+GOT load).  Fell back to the pinned artifact 10002884514
+(wince-llvm-29d8b88) -- the standing pin stands.
+
+Full 361-row accounting of tools/manifests/internetclient-book.manifest
+(M92+M93): 102 Wininet.h header rows + 68 webvw.h + 11 "Mshtml.h,
+Mshtmhst.idl." + 4 "Mshtmhst.h, Mshtmhst.idl." + 8 Uxtheme.h + 2
+Wininetui.h + 1 Urlmonui.h + 3 archive-typo "Interned.h .h." rows + 1
+"User-defined." (INTERNET_STATUS_CALLBACK, held) + 161 headerless rows
+(160 prose concept pages with no Link Library -- verified zero lib
+tokens among them; + aa452197 FindFirstUrlCacheEntry, see below).
+
+- include/Uxtheme.h NEW (8 rows, Ietheme.dll module token, CE 5.0+):
+  IsAppThemed DECLARED (BOOL(void) -- the one print with no HTHEME);
+  the other 7 RECORDED -- HTHEME appears by value/return in every one
+  but has NO typedef on any page in the corpus (full-tree grep), so
+  the M92 HINTERNET hold policy extends to it.  Print misprints
+  recorded: the GetThemeFont (ms906315) and HitTestThemeBackground
+  (ms906340) pages both print the callee name "GetThemeColor" (archive
+  copy-paste; parameter lists match the titles); GetThemeBackground-
+  Extent prints the out param pExtentRect const.
+- include/webvw.h NEW (68 rows + the 3 popup rows, wvuuid.lib, CE .NET
+  4.0+): IBrowser (18 methods), IBrowser2 (16), IBrowser3 (16),
+  _DPIEWebBrowserEvents2 (18) -- opaque typedefs + method records, the
+  Urlmon.h M58 pattern.  IHTMLCEPopupEvents (BeforeWindowOpen/Count/
+  Event) recorded here: its three pages print the archive typo Header
+  "Interned.h .h." (no twin in any tree corrects it; the See-Also
+  chain ties them to the IE6 popup-blocker/webview set).  wvuuid.lib
+  is the UUID library -- vtable/dispinterface members, no export
+  surface, no def.  aa452178 prints the callee "onStatusBar"
+  (lowercase), kept verbatim.
+- include/Mshtml.h NEW (11 rows, Mshtml.dll module token, CE .NET
+  4.1+): IOleControlNavigation2 (7 methods) + AdviseSink (4) as
+  opaque typedefs + records.  MIDL print artifacts kept verbatim
+  (virtual/STDMETHODCALLTYPE prefixes, __RPC_FAR, glued tokens); the
+  DeactivateRect page ms918597 misspells the callee "DectivateRect";
+  OnRectsChange prints empty parens.  HELD: NAV_STATUS_CANNAVIGATENOW
+  (named in OnNavigationStatusChange prose, no page/value).
+- include/Mshtmhst.h NEW (4 rows): NVFOCUS_DIRECTION enum DECLARED
+  (ms918828 full values 0..4, trailing comma normalized); GetFilename/
+  ShowInternalMessage/ShowPrompt RECORDED -- each page opens "This
+  method is called by MSHTML" and the GetFilename example prints
+  MyContainer::GetFilename, i.e. host-container methods, not exports;
+  none of the three pages prints a Link Library row.
+- include/Wininet.h: +FindFirstUrlCacheEntry DECLARED (aa452197) --
+  the page's Requirements prints NO Header row (only OS + Wininet.lib),
+  which is why the M92 header-row sweep missed it; caught by the M93
+  lib-token sweep; all parameter types resolve.  82 fn rows: 35
+  declared / 47 recorded; wininet-doc.def 34 -> 35.
+- tools/gen-m93.py checked in (page-text re-verification pass included:
+  every record id's page still carries the recorded tokens; it also
+  caught two "virtual" prefixes I had wrongly added to records that
+  print without them).
+- TU m93 (NVFOCUS_DIRECTION, IsAppThemed, FindFirstUrlCacheEntry,
+  IBrowser/IOleControlNavigation2 opaque typedef probes).  Gates
+  GREEN x6 (check/crosscheck/e2e with LLVM + CRT paths).
+
+The Internet Client book CLOSES here.  Remaining queue: Shell 989,
+Security 266, Apps-EndUser 338, Device Mgmt 229, LDAP 136, SOAP
+Toolkit 138, SAPI 431, XML 436, POOM 71, Exchange Client 47, .NET CF
+2, Core OS DDI books.

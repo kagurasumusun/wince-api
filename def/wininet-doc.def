@@ -18,6 +18,7 @@ EXPORTS
   CreateUrlCacheEntry
   DeleteUrlCacheEntry
   FindCloseUrlCache
+  FindFirstUrlCacheEntry
   FindNextUrlCacheEntry
   FindNextUrlCacheEntryEx
   GetUrlCacheEntryInfo

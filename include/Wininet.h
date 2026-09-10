@@ -1,6 +1,14 @@
 /*
  * Wininet.h -- Windows Internet Services (WinInet) API for Windows CE.
  *
+ * Row accounting (M93): 83 Wininet.lib rows = 82 function pages +
+ * ms918386 INTERNET_STATUS_CALLBACK (held typedef record).  82 function
+ * rows: 35 declared, 47 recorded.  aa452197 FindFirstUrlCacheEntry is
+ * the one function page whose Requirements prints NO Header row (only
+ * OS + Link Library: Wininet.lib) -- the header home is implicit and
+ * the M92 header-row sweep missed it; all parameter types resolve
+ * (INTERNET_CACHE_ENTRY_INFO is compiled below) so it declares.
+ *
  * Copyright (c) 2026 Akari API contributors
  * SPDX-License-Identifier: MIT
  *
@@ -542,6 +550,11 @@ AKARI_CE_IMPORT BOOL DeleteUrlCacheEntry(LPCTSTR lpszUrlName)
  *. */
 AKARI_CE_IMPORT BOOL FindCloseUrlCache(HANDLE hEnumHandle)
                         AKARI_CE_NAME(FindCloseUrlCache);
+
+/* aa452197 "FindFirstUrlCacheEntry": print `HANDLE FindFirstUrlCacheEntry( LPCTSTR lpszUrlSearchPattern,LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo,LPDWORD lpdwFirstCacheEntryInfoBufferSize);`
+ *. */
+AKARI_CE_IMPORT HANDLE FindFirstUrlCacheEntry(LPCTSTR lpszUrlSearchPattern, LPINTERNET_CACHE_ENTRY_INFO lpFirstCacheEntryInfo, LPDWORD lpdwFirstCacheEntryInfoBufferSize)
+                        AKARI_CE_NAME(FindFirstUrlCacheEntry);
 
 /* ms919204 "FindNextUrlCacheEntry": print `BOOL FindNextUrlCacheEntry( HANDLE hEnumHandle,LPINTERNET_CACHE_ENTRY_INFO lpNextCacheEntryInfo,LPDWORD lpdwNextCacheEntryInfoBufferSize);`
  *. */

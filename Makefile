@@ -79,6 +79,8 @@ include/Mq.h \
 include/Mqmgmt.h \
 include/Mqoai.h \
 include/Msgqueue.h \
+include/Mshtml.h \
+include/Mshtmhst.h \
 include/Msime.h \
 include/Msimeui.h \
 include/Mspyime.h \
@@ -155,6 +157,7 @@ include/Upnp.h \
 include/Upnpdevapi.h \
 include/Upnphost.h \
 include/Usp10.h \
+include/Uxtheme.h \
 include/Urlmon.h \
 include/Urlmonui.h \
 include/Voiplap.h \
@@ -162,6 +165,7 @@ include/Voipconfigurationdatastore.h \
 include/Voiperrorcodes.h \
 include/Voipmanager.h \
 include/Webproxy.h \
+include/webvw.h \
 include/Winbase.h \
 include/Winber.h \
 include/Wincrypt.h \

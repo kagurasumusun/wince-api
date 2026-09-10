@@ -25,6 +25,10 @@
 #include <Wininet.h>
 #include <Wininetui.h>
 #include <Urlmonui.h>
+#include <Mshtml.h>
+#include <Mshtmhst.h>
+#include <Uxtheme.h>
+#include <webvw.h>
 #include <Ws2tcpip.h>
 #include <Ws2spi.h>
 #include <Tapi.h>
@@ -7355,6 +7359,24 @@ static int m92_wininet_usage(void)
            + (int)ft.dwLowDateTime + (int)ics;
 }
 
+static int m93_webview_usage(void)
+{
+    NVFOCUS_DIRECTION           dir;
+    IBrowser                   *pb;
+    IOleControlNavigation2     *pn;
+    DWORD                       dw;
+
+    dir = FOCUS_UP;
+    pb = (IBrowser *)0;
+    pn = (IOleControlNavigation2 *)0;
+    dw = 0;
+    dw += (DWORD)IsAppThemed();
+    dw += (DWORD)(pb != (IBrowser *)0);
+    dw += (DWORD)(pn != (IOleControlNavigation2 *)0);
+    dw += (DWORD)(FindFirstUrlCacheEntry(NULL, NULL, &dw) != (HANDLE)0);
+    return (int)dw + (int)dir;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7524,6 +7546,8 @@ int host_tu_entry(void)
     if (m91_fsd_usage() != 0)
         return 1;
     if (m92_wininet_usage() != 0)
+        return 1;
+    if (m93_webview_usage() != 0)
         return 1;
     return 0;
 }
