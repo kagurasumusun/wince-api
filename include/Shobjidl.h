@@ -27,6 +27,10 @@
                           POINTL (OLE carriers, M44); the interface
                           method records below reference HWND / POINT /
                           LPMSG textually only */
+#include "Winuser.h"   /* LPMSG (IShellView::TranslateAccelerator --
+                          a real vtable parameter since M97) */
+#include "Prsht.h"     /* LPFNADDPROPSHEETPAGE (AddPropertySheetPages) */
+#include "Shtypes.h"   /* STRRET/LPSTRRET (GetDisplayNameOf) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -217,6 +221,155 @@ typedef struct ITaskbarList2    ITaskbarList2;
 /* ITaskbarList2: documented methods (1 page; Windows CE 5.0 and later).
  *   aa453238 MarkFullscreenWindow: HRESULT MarkFullscreenWindow(HWND hwnd, BOOL fFullscreen)
  */
+
+/* ------------------------------------------------------------------ */
+/* Auxiliary types the vtable signatures below reference.  They are    */
+/* dangling references in the M53 gap notes -- declared here (own      */
+/* design, ABI-safe) so the adopted vtables type-check:                */
+/*   POINTL           the OLE 2-D point (LONG x, LONG y) -- same       */
+/*                    shape as POINT (Wtypes); not page-documented.    */
+/*   SHCONTF          "the SHCONTF enumerated type" (EnumObjects page  */
+/*                    reference) -- a flags dword.                     */
+/*   IEnumIDList / IShellBrowser / FOLDERSETTINGS: recorded in the     */
+/*                    notes above as CE-page dangling references;      */
+/*                    opaque here (pointer-only use in the vtables).   */
+/* ------------------------------------------------------------------ */
+typedef struct { LONG x; LONG y; } POINTL, *LPPOINTL;
+typedef DWORD SHCONTF;
+/* ITEMIDLIST carrier: completed in Shlobj.h (aa453244); the vtables
+ * here use it through pointers only.  C11 permits the identical
+ * typedef redeclaration Shlobj.h performs. */
+typedef struct _ITEMIDLIST ITEMIDLIST, *LPITEMIDLIST;
+typedef const ITEMIDLIST *LPCITEMIDLIST;
+typedef struct IEnumIDList      IEnumIDList,      *LPENUMIDLIST;
+typedef struct IShellBrowser    IShellBrowser,    *LPSHELLBROWSER;
+typedef struct FOLDERSETTINGS   FOLDERSETTINGS,   *LPFOLDERSETTINGS,
+                                *LPCFOLDERSETTINGS;
+
+/* ================================================================== */
+/* ================================================================== */
+/* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
+ * ORDER adopted from R1 (CeGCC-lineage w32api, public
+ * domain; docs/clean-room.md par.4 revision 2026-09-10);
+ * method names/types are the CE pages' own printed
+ * signatures (the records above).  Methods the CE pages do
+ * not document but R1 carries are INCLUDED and tagged
+ * "(R1)" -- dropping a middle slot would shift the layout.
+ * Calling convention: plain function pointers (WINAPI is
+ * empty here: CE-wide cdecl; R1's __stdcall NOT adopted). */
+/* ================================================================== */
+
+/* ---- IDropTarget: 4 documented method pages; order R1 ---- */
+typedef struct IDropTargetVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IDropTarget*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IDropTarget*);  /* (R1) */
+    ULONG (WINAPI *Release)(IDropTarget*);  /* (R1) */
+    /* IDropTarget */
+    HRESULT (WINAPI *DragEnter)(IDropTarget*, IDataObject* pDataObject, DWORD grfKeyState, POINTL pt, DWORD* pdwEffect);  /* 929937 */
+    HRESULT (WINAPI *DragOver)(IDropTarget*, DWORD grfKeyState, POINTL pt, DWORD* pdwEffect);  /* 929939 */
+    HRESULT (WINAPI *DragLeave)(IDropTarget*);  /* 929938 */
+    HRESULT (WINAPI *Drop)(IDropTarget*, IDataObject* pDataObject, DWORD grfKeyState, POINTL pt, DWORD* pdwEffect);  /* 929940 */
+} IDropTargetVtbl;
+struct IDropTarget { const IDropTargetVtbl *lpVtbl; };
+#define IDropTarget_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IDropTarget_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IDropTarget_Release(T) ((T)->lpVtbl->Release(T))
+#define IDropTarget_DragEnter(T,a,b,c,d) ((T)->lpVtbl->DragEnter(T,a,b,c,d))
+#define IDropTarget_DragOver(T,a,b,c) ((T)->lpVtbl->DragOver(T,a,b,c))
+#define IDropTarget_DragLeave(T) ((T)->lpVtbl->DragLeave(T))
+#define IDropTarget_Drop(T,a,b,c,d) ((T)->lpVtbl->Drop(T,a,b,c,d))
+
+/* ---- IPersistFolder: 1 documented method pages; order R1 ---- */
+typedef struct IPersistFolderVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPersistFolder*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPersistFolder*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPersistFolder*);  /* (R1) */
+    /* IPersist */
+    HRESULT (WINAPI *GetClassID)(IPersistFolder*, CLSID*);  /* (R1) */
+    /* IPersistFolder */
+    HRESULT (WINAPI *Initialize)(IPersistFolder*, LPCITEMIDLIST pidl);  /* 909861 */
+} IPersistFolderVtbl;
+struct IPersistFolder { const IPersistFolderVtbl *lpVtbl; };
+#define IPersistFolder_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPersistFolder_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPersistFolder_Release(T) ((T)->lpVtbl->Release(T))
+#define IPersistFolder_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IPersistFolder_Initialize(T,a) ((T)->lpVtbl->Initialize(T,a))
+
+/* ---- IShellFolder: 9 documented method pages; order R1 ---- */
+typedef struct IShellFolderVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IShellFolder*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IShellFolder*);  /* (R1) */
+    ULONG (WINAPI *Release)(IShellFolder*);  /* (R1) */
+    /* IShellFolder */
+    HRESULT (WINAPI *ParseDisplayName)(IShellFolder*, HWND hwnd, LPBC pbc, LPOLESTR pwszDisplayName, ULONG* pchEaten, LPITEMIDLIST* ppidl, ULONG* pdwAttributes);  /* 909875 */
+    HRESULT (WINAPI *EnumObjects)(IShellFolder*, HWND hwndOwner, SHCONTF grfFlags, IEnumIDList** ppenumIDList);  /* 909871 */
+    HRESULT (WINAPI *BindToObject)(IShellFolder*, LPCITEMIDLIST pidl, LPBC pbc, REFIID riid, VOID** ppvOut);  /* 909868 */
+    HRESULT (WINAPI *BindToStorage)(IShellFolder*, LPCITEMIDLIST, LPBC, REFIID, PVOID*);  /* (R1) */
+    HRESULT (WINAPI *CompareIDs)(IShellFolder*, LPARAM lParam, LPCITEMIDLIST pidl1, LPCITEMIDLIST pidl2);  /* 909869 */
+    HRESULT (WINAPI *CreateViewObject)(IShellFolder*, HWND hwndOwner, REFIID riid, VOID** ppvOut);  /* 909870 */
+    HRESULT (WINAPI *GetAttributesOf)(IShellFolder*, UINT cidl, LPCITEMIDLIST* apidl, SFGAOF* rgfInOut);  /* 909872 */
+    HRESULT (WINAPI *GetUIObjectOf)(IShellFolder*, HWND hwndOwner, UINT cidl, LPCITEMIDLIST* apidl, REFIID riid, UINT* rgfReserved, VOID** ppv);  /* 909874 */
+    HRESULT (WINAPI *GetDisplayNameOf)(IShellFolder*, LPCITEMIDLIST pidl, DWORD uFlags, LPSTRRET lpName);  /* 909873 */
+    HRESULT (WINAPI *SetNameOf)(IShellFolder*, HWND hwndOwner, LPCITEMIDLIST pidl, LPCOLESTR lpszName, DWORD uFlags, LPITEMIDLIST* ppidlOut);  /* 909876 */
+} IShellFolderVtbl;
+struct IShellFolder { const IShellFolderVtbl *lpVtbl; };
+#define IShellFolder_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IShellFolder_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IShellFolder_Release(T) ((T)->lpVtbl->Release(T))
+#define IShellFolder_ParseDisplayName(T,a,b,c,d,e,f) ((T)->lpVtbl->ParseDisplayName(T,a,b,c,d,e,f))
+#define IShellFolder_EnumObjects(T,a,b,c) ((T)->lpVtbl->EnumObjects(T,a,b,c))
+#define IShellFolder_BindToObject(T,a,b,c,d) ((T)->lpVtbl->BindToObject(T,a,b,c,d))
+#define IShellFolder_BindToStorage(T,a,b,c,d) ((T)->lpVtbl->BindToStorage(T,a,b,c,d))
+#define IShellFolder_CompareIDs(T,a,b,c) ((T)->lpVtbl->CompareIDs(T,a,b,c))
+#define IShellFolder_CreateViewObject(T,a,b,c) ((T)->lpVtbl->CreateViewObject(T,a,b,c))
+#define IShellFolder_GetAttributesOf(T,a,b,c) ((T)->lpVtbl->GetAttributesOf(T,a,b,c))
+#define IShellFolder_GetUIObjectOf(T,a,b,c,d,e,f) ((T)->lpVtbl->GetUIObjectOf(T,a,b,c,d,e,f))
+#define IShellFolder_GetDisplayNameOf(T,a,b,c) ((T)->lpVtbl->GetDisplayNameOf(T,a,b,c))
+#define IShellFolder_SetNameOf(T,a,b,c,d,e) ((T)->lpVtbl->SetNameOf(T,a,b,c,d,e))
+
+/* ---- IShellView: 11 documented method pages; order R1 ---- */
+typedef struct IShellViewVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IShellView*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IShellView*);  /* (R1) */
+    ULONG (WINAPI *Release)(IShellView*);  /* (R1) */
+    /* IOleWindow */
+    HRESULT (WINAPI *GetWindow)(IShellView*, HWND*);  /* (R1) */
+    HRESULT (WINAPI *ContextSensitiveHelp)(IShellView*, BOOL);  /* (R1) */
+    /* IShellView */
+    HRESULT (WINAPI *TranslateAccelerator)(IShellView*, LPMSG lpmsg);  /* 909892 */
+    HRESULT (WINAPI *EnableModeless)(IShellView*, BOOL fEnable);  /* 909885 */
+    HRESULT (WINAPI *UIActivate)(IShellView*, UINT uState);  /* 909893 */
+    HRESULT (WINAPI *Refresh)(IShellView*);  /* 909889 */
+    HRESULT (WINAPI *CreateViewWindow)(IShellView*, IShellView* psvPrevious, LPCFOLDERSETTINGS pfs, IShellBrowser* psb, RECT* prcView, HWND* phWnd);  /* 909883 */
+    HRESULT (WINAPI *DestroyViewWindow)(IShellView*);  /* 909884 */
+    HRESULT (WINAPI *GetCurrentInfo)(IShellView*, LPFOLDERSETTINGS lpfs);  /* 909886 */
+    HRESULT (WINAPI *AddPropertySheetPages)(IShellView*, DWORD dwReserved, LPFNADDPROPSHEETPAGE lpfn, LPARAM lparam);  /* 909882 */
+    HRESULT (WINAPI *SaveViewState)(IShellView*);  /* 909890 */
+    HRESULT (WINAPI *SelectItem)(IShellView*, LPCITEMIDLIST pidlItem, UINT uFlags);  /* 909891 */
+    HRESULT (WINAPI *GetItemObject)(IShellView*, UINT uItem, REFIID riid, LPVOID* ppv);  /* 909887 */
+} IShellViewVtbl;
+struct IShellView { const IShellViewVtbl *lpVtbl; };
+#define IShellView_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IShellView_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IShellView_Release(T) ((T)->lpVtbl->Release(T))
+#define IShellView_GetWindow(T,a) ((T)->lpVtbl->GetWindow(T,a))
+#define IShellView_ContextSensitiveHelp(T,a) ((T)->lpVtbl->ContextSensitiveHelp(T,a))
+#define IShellView_TranslateAccelerator(T,a) ((T)->lpVtbl->TranslateAccelerator(T,a))
+#define IShellView_EnableModeless(T,a) ((T)->lpVtbl->EnableModeless(T,a))
+#define IShellView_UIActivate(T,a) ((T)->lpVtbl->UIActivate(T,a))
+#define IShellView_Refresh(T) ((T)->lpVtbl->Refresh(T))
+#define IShellView_CreateViewWindow(T,a,b,c,d,e) ((T)->lpVtbl->CreateViewWindow(T,a,b,c,d,e))
+#define IShellView_DestroyViewWindow(T) ((T)->lpVtbl->DestroyViewWindow(T))
+#define IShellView_GetCurrentInfo(T,a) ((T)->lpVtbl->GetCurrentInfo(T,a))
+#define IShellView_AddPropertySheetPages(T,a,b,c) ((T)->lpVtbl->AddPropertySheetPages(T,a,b,c))
+#define IShellView_SaveViewState(T) ((T)->lpVtbl->SaveViewState(T))
+#define IShellView_SelectItem(T,a,b) ((T)->lpVtbl->SelectItem(T,a,b))
+#define IShellView_GetItemObject(T,a,b,c) ((T)->lpVtbl->GetItemObject(T,a,b,c))
 
 #ifdef __cplusplus
 }

@@ -6902,3 +6902,35 @@ M96 adoption totals: 1381 defines across 10 headers (Commctrl 688,
 Winuser 210, Wininet 186, Imm 139, Wincrypt 102, aygshell 20,
 Shobjidl 18, Prsht 13, Sipapi 4, Winsock2 1).  Urlmon / Winscard /
 Tapi / Ws2tcpip: zero (no legal CE-lineage source carries them).
+
+## M97 -- COM interfaces made callable from C (vtable adoption)
+
+Item 2 of the 2026-09-10 source-policy direction: the record-only
+COM interfaces get real C vtable structs.  The VTABLE ORDER (and the
+base chains, and fill-in signatures for slots the CE pages do not
+document) is adopted from R1 (CeGCC-lineage w32api, public domain --
+docs/clean-room.md par.4); method names, parameter names and types
+are this project's own CE-page records.  Slots the CE pages do not
+document but R1 carries are INCLUDED and tagged /* (R1) */ -- e.g.
+IShellFolder::BindToStorage sits between BindToObject and CompareIDs
+in the real vtable; dropping it would shift every later slot.
+Calling convention: plain function pointers (WINAPI empty = CE
+cdecl); R1's STDMETHODCALLTYPE=__stdcall NOT adopted.  Each
+interface also gains the C call macros (IFoo_Method(T,...)).
+tools/adopt-vtables.py generates the section (map/write; resolves
+w32api-style #ifdef bodies by taking the default branch -- the
+_ENABLEMODELESS_CONFLICT guard yields EnableModeless, matching the
+CE page spelling).
+
+- include/Shobjidl.h (pilot): IDropTarget (7 slots), IPersistFolder
+  (5, incl. inherited IPersist::GetClassID), IShellFolder (13, incl.
+  R1-only BindToStorage), IShellView (16, incl. IOleWindow's
+  GetWindow/ContextSensitiveHelp).  ITaskbarList / ITaskbarList2
+  stay record-only: R1 carries neither interface, so no legal order
+  source exists.  Dangling-reference closures this required (own
+  design, pointer-only use): POINTL {LONG x, LONG y}, SHCONTF =
+  DWORD, opaque IEnumIDList / IShellBrowser / FOLDERSETTINGS, and a
+  forward-declared ITEMIDLIST carrier (completed in Shlobj.h, C11
+  identical-typedef redeclaration); new includes Winuser.h (LPMSG),
+  Prsht.h (LPFNADDPROPSHEETPAGE), Shtypes.h (LPSTRRET).  Gates
+  GREEN x6.
