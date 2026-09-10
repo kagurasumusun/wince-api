@@ -786,6 +786,114 @@ typedef struct IImageSink       IImageSink;
  *   aa452200 SetPalette: HRESULT SetPalette( const ColorPalette* palette);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: imaging (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451701 Error Codes for the Imaging API (Header: Imaging.h.) */
+/* ms939542 IBasicBitmapOps::AdjustBrightness (Header: Imaging.h.) */
+/* ms939545 IBasicBitmapOps::AdjustContrast (Header: Imaging.h.) */
+/* ms939546 IBasicBitmapOps::AdjustGamma (Header: Imaging.h.) */
+/* ms939547 IBasicBitmapOps::Clone (Header: Imaging.h.) */
+/* ms939548 IBasicBitmapOps::Flip (Header: Imaging.h.) */
+/* ms939549 IBasicBitmapOps::Resize (Header: Imaging.h.) */
+/* ms939550 IBasicBitmapOps::Rotate (Header: Imaging.h.) */
+/* ms909009 IBitmapImage::GetPalette (Header: Imaging.h.) */
+/* ms909061 IBitmapImage::GetPixelFormatID (Header: Imaging.h.) */
+/* ms909070 IBitmapImage::GetSize (Header: Imaging.h.) */
+/* ms909078 IBitmapImage::LockBits (Header: Imaging.h.) */
+/* ms909089 IBitmapImage::SetPalette (Header: Imaging.h.) */
+/* ms909098 IBitmapImage::UnlockBits (Header: Imaging.h.) */
+/* aa452147 IImage::Draw (Header: Imaging.h.) */
+/* aa452166 IImage::GetImageInfo (Header: Imaging.h.) */
+/* aa452168 IImage::GetPhysicalDimension (Header: Imaging.h.) */
+/* aa452169 IImage::GetThumbnail (Header: Imaging.h.) */
+/* aa452171 IImage::PushIntoSink (Header: Imaging.h.) */
+/* aa452173 IImage::SetImageFlags (Header: Imaging.h.) */
+/* ms910589 IImageDecoder::BeginDecode (Header: Imaging.h.) */
+/* ms910590 IImageDecoder::Decode (Header: Imaging.h.) */
+/* ms910591 IImageDecoder::EndDecode (Header: Imaging.h.) */
+/* ms910592 IImageDecoder::GetAllPropertyItems (Header: Imaging.h.) */
+/* aa452112 IImageDecoder::GetFrameCount (Header: Imaging.h.) */
+/* aa452115 IImageDecoder::GetFrameDimensionsCount (Header: Imaging.h.) */
+/* aa452116 IImageDecoder::GetFrameDimensionsList (Header: Imaging.h.) */
+/* aa452119 IImageDecoder::GetImageInfo (Header: Imaging.h.) */
+/* aa452120 IImageDecoder::GetPropertyCount (Header: Imaging.h.) */
+/* aa452122 IImageDecoder::GetPropertyIdList (Header: Imaging.h.) */
+/* aa452125 IImageDecoder::GetPropertyItem (Header: Imaging.h.) */
+/* aa452126 IImageDecoder::GetPropertyItemSize (Header: Imaging.h.) */
+/* aa452128 IImageDecoder::GetPropertySize (Header: Imaging.h.) */
+/* aa452130 IImageDecoder::GetThumbnail (Header: Imaging.h.) */
+/* aa452133 IImageDecoder::InitDecoder (Header: Imaging.h.) */
+/* aa452135 IImageDecoder::QueryDecoderParam (Header: Imaging.h.) */
+/* aa452137 IImageDecoder::RemovePropertyItem (Header: Imaging.h.) */
+/* aa452139 IImageDecoder::SelectActiveFrame (Header: Imaging.h.) */
+/* aa452141 IImageDecoder::SetDecoderParam (Header: Imaging.h.) */
+/* aa452143 IImageDecoder::SetPropertyItem (Header: Imaging.h.) */
+/* aa452145 IImageDecoder::TerminateDecoder (Header: Imaging.h.) */
+/* aa452151 IImageEncoder::GetEncoderParameterList (Header: Imaging.h.) */
+/* aa452153 IImageEncoder::GetEncoderParameterListSize (Header: Imaging.h.) */
+/* aa452155 IImageEncoder::GetEncodeSink (Header: Imaging.h.) */
+/* aa452158 IImageEncoder::InitEncoder (Header: Imaging.h.) */
+/* aa452160 IImageEncoder::SetEncoderParameters (Header: Imaging.h.) */
+/* aa452162 IImageEncoder::SetFrameDimension (Header: Imaging.h.) */
+/* aa452164 IImageEncoder::TerminateEncoder (Header: Imaging.h.) */
+/* aa452177 IImageSink::BeginSink (Header: Imaging.h.) */
+/* aa452180 IImageSink::EndSink (Header: Imaging.h.) */
+/* aa452182 IImageSink::GetPixelDataBuffer (Header: Imaging.h.) */
+/* aa452184 IImageSink::GetPropertyBuffer (Header: Imaging.h.) */
+/* aa452186 IImageSink::NeedRawProperty (Header: Imaging.h.) */
+/* aa452188 IImageSink::NeedTransform (Header: Imaging.h.) */
+/* aa452190 IImageSink::PushPixelData (Header: Imaging.h.) */
+/* aa452192 IImageSink::PushPropertyItems (Header: Imaging.h.) */
+/* aa452194 IImageSink::PushRawData (Header: Imaging.h.) */
+/* aa452196 IImageSink::PushRawInfo (Header: Imaging.h.) */
+/* aa452198 IImageSink::ReleasePixelDataBuffer (Header: Imaging.h.) */
+/* aa452200 IImageSink::SetPalette (Header: Imaging.h.) */
+/* aa452203 IImagingFactory::CreateBitmapFromBuffer (Header: Imaging.h.) */
+/* aa452205 IImagingFactory::CreateBitmapFromImage (Header: Imaging.h.) */
+/* aa452207 IImagingFactory::CreateImageDecoder (Header: Imaging.h.) */
+/* aa452209 IImagingFactory::CreateImageEncoderToFile (Header: Imaging.h.) */
+/* aa452211 IImagingFactory::CreateImageEncoderToStream (Header: Imaging.h.) */
+/* aa452213 IImagingFactory::CreateImageFromBuffer (Header: Imaging.h.) */
+/* aa452215 IImagingFactory::CreateImageFromFile (Header: Imaging.h.) */
+/* aa452217 IImagingFactory::CreateImageFromStream (Header: Imaging.h.) */
+/* aa452219 IImagingFactory::CreateNewBitmap (Header: Imaging.h.) */
+/* aa452231 IImagingFactory::GetInstalledDecoders (Header: Imaging.h.) */
+/* aa452233 IImagingFactory::GetInstalledEncoders (Header: Imaging.h.) */
+/* aa452235 IImagingFactory::InstallImageCodec (Header: Imaging.h.) */
+/* aa452237 IImagingFactory::UninstallImageCodec (Header: Imaging.h.) */
+/* aa452249 Imaging GUIDs (Header: Imaging.h) */
+/* ms932259 PixelFormat Values (Header: Imaging.h.) */
+/* ms932271 PropertyTag Values (Header: Imaging.h.) */
+/* ms932270 PropertyTagType Values (Header: Imaging.h) */
+
+/* ------------------------------------------------------------------
+ * Book surface: imaging (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms939536 IBasicBitmapOps */
+/* ms908972 IBitmapImage */
+/* ms910587 IImage */
+/* ms910588 IImageDecoder */
+/* aa452149 IImageEncoder */
+/* aa452175 IImageSink */
+/* aa452202 IImagingFactory */
+/* ms923412 Image File Format Specifications */
+/* ms923413 Imaging Application Development */
+/* aa452247 Imaging Classes */
+/* aa452248 Imaging Enumerations */
+/* aa452250 Imaging Interfaces */
+/* aa452251 Imaging Macros */
+/* ms923414 Imaging Migration */
+/* ms923415 Imaging OS Design Development */
+/* ms925314 Imaging Reference */
+/* ms923416 Imaging Registry Settings */
+/* ms932698 Imaging Samples */
+/* ms923417 Imaging Security */
+/* aa452252 Imaging Structures */
+/* aa452253 Imaging Types */
+/* ms940062 Implementing an Image Decoder Object */
+/* ms940063 Implementing an Image Encoder Object */
+
 #ifdef __cplusplus
 }
 #endif

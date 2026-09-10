@@ -85,6 +85,7 @@ FORK_HOME = {
     'Sspi.h': {'sspi.h', 'security.h', 'ntsecpkg.h'},
     'Schnlsp.h': {'schnlsp.h', 'schannel.h', 'sspi.h'},
     'Rpcdce.h': {'rpcdce.h'},
+    'Msacmdrv.h': {'msacm.h', 'mmsystem.h'},
 }
 
 # Full spellings the comment ledgers abbreviate.
@@ -94,13 +95,36 @@ EXPLICIT_TARGETS = {
         'HTTP_QUERY_FLAG_REQUEST_HEADERS', 'HTTP_QUERY_CUSTOM',
         'HTTP_QUERY_CONTENT_TRANSFER_ENCODING',
     ],
+    # M98 close-out: constant-like names documented by pages that are
+    # not cited in their home header's comments (the gap sweep list);
+    # R1 carries the values
+    'Imm.h': [
+        'IMC_CLOSESTATUSWINDOW', 'IMC_GETCANDIDATEPOS',
+        'IMC_GETCOMPOSITIONFONT', 'IMC_GETCOMPOSITIONWINDOW',
+        'IMC_GETCONVERSIONMODE', 'IMC_GETOPENSTATUS',
+        'IMC_GETSENTENCEMODE', 'IMC_GETSTATUSWINDOWPOS',
+        'IMC_OPENSTATUSWINDOW', 'IMC_SETCANDIDATEPOS',
+        'IMC_SETCOMPOSITIONFONT', 'IMC_SETCOMPOSITIONWINDOW',
+        'IMC_SETCONVERSIONMODE', 'IMC_SETOPENSTATUS',
+        'IMC_SETSENTENCEMODE', 'IMC_SETSTATUSWINDOWPOS',
+        'IMC_GETCANDIDATECOUNT', 'IMC_GETCANDIDATEPAGE',
+        'IMC_SETCANDIDATEPAGESTART', 'IMC_SETCANDIDATEPAGESIZE',
+        'IMC_GETSOFTKBDFONT', 'IMC_SETSOFTKBDFONT',
+        'IMC_GETSOFTKBDPOS', 'IMC_SETSOFTKBDPOS',
+    ],
+    'Mmsystem.h': [
+        'WIM_CLOSE', 'WIM_DATA', 'WIM_OPEN', 'WOM_CLOSE', 'WOM_DONE',
+        'WOM_OPEN', 'WIM_ERROR', 'WOM_ERROR',
+    ],
+    'Msacmdrv.h': ['DRV_CLOSE', 'DRV_OPEN'],
+    'Winuser.h': ['WM_FONTCHANGE'],
 }
 
 MARKERS = {h: 'M96 value adoption' for h in (
     'Commctrl.h', 'Prsht.h', 'Wininet.h', 'Urlmon.h', 'Shobjidl.h',
     'aygshell.h', 'Sipapi.h', 'Winuser.h', 'Wincrypt.h', 'Winscard.h',
     'Tapi.h', 'Imm.h', 'Winsock2.h', 'Ws2tcpip.h', 'Mlang.h',
-    'Sspi.h', 'Schnlsp.h', 'Rpcdce.h',
+    'Sspi.h', 'Schnlsp.h', 'Rpcdce.h', 'Msacmdrv.h',
 )}
 
 DEFINE_RE = re.compile(

@@ -52,4 +52,8 @@ AKARI_CE_IMPORT DWORD Icmp6ParseReplies(LPVOID ReplyBuffer,
  * ICMP_ECHO_REPLY (ms890360): the page prints no structure --
  * members are described in prose only (Address is IPAddr). */
 
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890363 IcmpSendEcho2: print `IcmpSendEcho2(HANDLEIcmpHandle,HANDLEEvent, #ifdef PIO_APC_ROUTINE_DEFINED PIO_APC_ROUTINEApcRoutine, #else FARPROCApcRoutine, #endif PVOIDApcContext,IPAddrDestinationAddress,LPVOIDRequestData,WORDRequestSize,PIP_OPTION_INFORMATIONRequestOptions,LPVOIDReplyBuffer,DWORDReplySize,DWORDTimeout);` -- recorded verbatim (no compiled prototype) */
 #endif /* AKARI_ICMPAPI_H */

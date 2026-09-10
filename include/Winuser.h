@@ -1653,6 +1653,7 @@ typedef struct tagNMHDR {
 /* ================================================================== */
 /* ================================================================== */
 /* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -1737,9 +1738,6 @@ typedef struct tagNMHDR {
 
 /* ---- GW_ family (1 names; R1) ---- */
 #define GW_OWNER                                     0x0004
-
-/* ---- GWL_ family (1 names; R1) ---- */
-#define GWL_ID                                       (-12)
 
 /* ---- KEYEVENTF_ family (1 names; R1) ---- */
 #define KEYEVENTF_SILENT                             0x0004
@@ -1897,7 +1895,8 @@ typedef struct tagNMHDR {
 /* ---- WHEEL_ family (1 names; R1) ---- */
 #define WHEEL_DELTA                                  0x0078
 
-/* ---- WM_ family (13 names; R1) ---- */
+/* ---- WM_ family (14 names; R1) ---- */
+#define WM_FONTCHANGE                                0x001D
 #define WM_MOUSEACTIVATE                             0x0021
 #define WM_WINDOWPOSCHANGING                         0x0046
 #define WM_HELP                                      0x0053

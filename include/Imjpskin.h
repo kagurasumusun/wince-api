@@ -79,6 +79,79 @@ typedef struct _MARGINS {
  *  CImeCUIToolBar::OnOffButton::AdjustRect, GetSize, PaintBackground,
  *    PaintBitmap. */
 
+/* ------------------------------------------------------------------
+ * Book surface: intl-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms904640 CImeCUICandWindow::CBottomInfoArea::CButton::AdjustRect (Header: Imjpskin.h.) */
+/* ms904641 CImeCUICandWindow::CBottomInfoArea::CButton::PaintBackground (Header: Imjpskin.h.) */
+/* ms904642 CImeCUICandWindow::CBottomInfoArea::CButton::PaintIcon (Header: Imjpskin.h.) */
+/* ms904643 CImeCUICandWindow::CBottomInfoArea::GetMargins (Header: Imjpskin.h.) */
+/* ms904644 CImeCUICandWindow::CBottomInfoArea::GetTextColor (Header: Imjpskin.h.) */
+/* ms904645 CImeCUICandWindow::CBottomInfoArea::IsAvailable (Header: Imjpskin.h.) */
+/* ms904646 CImeCUICandWindow::CBottomInfoArea::PaintBackground (Header: Imjpskin.h.) */
+/* ms904647 CImeCUICandWindow::CBottomInfoArea::UseCandMenuButton (Header: Imjpskin.h.) */
+/* ms904648 CImeCUICandWindow::CBottomInfoArea::UseCandNumText (Header: Imjpskin.h.) */
+/* ms904649 CImeCUICandWindow::CBottomInfoArea::UseSortButton (Header: Imjpskin.h.) */
+/* ms904650 CImeCUICandWindow::CCandListArea::GetMargins (Header: Imjpskin.h.) */
+/* ms904651 CImeCUICandWindow::CCandListArea::Item::CreateRenderingMetrics (Header: Imjpskin.h.) */
+/* ms904652 CImeCUICandWindow::CCandListArea::Item::FreeRenderingMetrics (Header: Imjpskin.h.) */
+/* ms904653 CImeCUICandWindow::CCandListArea::Item::GetSize (Header: Imjpskin.h.) */
+/* ms904654 CImeCUICandWindow::CCandListArea::Item::PaintBackground (Header: Imjpskin.h.) */
+/* ms904655 CImeCUICandWindow::CCandListArea::Item::PaintCandidateString (Header: Imjpskin.h.) */
+/* ms904656 CImeCUICandWindow::CCandListArea::Item::PaintInlineComment (Header: Imjpskin.h.) */
+/* ms904657 CImeCUICandWindow::CCandListArea::Item::SetSize (Header: Imjpskin.h.) */
+/* ms904658 CImeCUICandWindow::CCandListArea::PaintBackground (Header: Imjpskin.h.) */
+/* ms904659 CImeCUICandWindow::CCandListArea::ScrollBar::IsVisibleAlways (Header: Imjpskin.h.) */
+/* ms904660 CImeCUICandWindow::CNumButton::AdjustRect (Header: Imjpskin.h.) */
+/* ms904661 CImeCUICandWindow::CNumButton::PaintBackground (Header: Imjpskin.h.) */
+/* ms904662 CImeCUICandWindow::CNumButton::PaintIcon (Header: Imjpskin.h.) */
+/* ms904663 CImeCUICandWindow::CReadingsArea::CButton::AdjustRect (Header: Imjpskin.h.) */
+/* ms904664 CImeCUICandWindow::CReadingsArea::CButton::PaintBackground (Header: Imjpskin.h.) */
+/* ms904665 CImeCUICandWindow::CReadingsArea::CButton::PaintBitmap (Header: Imjpskin.h.) */
+/* ms904667 CImeCUICandWindow::CReadingsArea::CButton::PaintText (Header: Imjpskin.h.) */
+/* ms904668 CImeCUICandWindow::CReadingsArea::GetMargins (Header: Imjpskin.h.) */
+/* ms904669 CImeCUICandWindow::CReadingsArea::GetTextColor (Header: Imjpskin.h.) */
+/* ms904670 CImeCUICandWindow::CReadingsArea::IsAvailable (Header: Imjpskin.h.) */
+/* ms904671 CImeCUICandWindow::CReadingsArea::PaintBackground (Header: Imjpskin.h.) */
+/* ms904672 CImeCUICandWindow::GetHorizontalOffset (Header: Imjpskin.h.) */
+/* ms904673 CImeCUICandWindow::GetMargins (Header: Imjpskin.h.) */
+/* ms904674 CImeCUICandWindow::GetMaxHeight (Header: Imjpskin.h.) */
+/* ms904675 CImeCUICandWindow::GetMaxItems (Header: Imjpskin.h.) */
+/* ms904676 CImeCUICandWindow::GetWndStyle (Header: Imjpskin.h.) */
+/* ms904677 CImeCUICandWindow::GetWndStyleEx (Header: Imjpskin.h.) */
+/* ms904678 CImeCUICandWindow::IsHoverActionSupported (Header: Imjpskin.h.) */
+/* ms904679 CImeCUICandWindow::PaintBackground (Header: Imjpskin.h.) */
+/* ms904680 CImeCUICandWindow::UseNumButtons (Header: Imjpskin.h.) */
+/* ms904682 CImeCUIDefCompWindow::CloseButton::AdjustRect (Header: Imjpskin.h.) */
+/* ms904683 CImeCUIDefCompWindow::CloseButton::GetSize (Header: Imjpskin.h.) */
+/* ms904684 CImeCUIDefCompWindow::CloseButton::PaintBackground (Header: Imjpskin.h.) */
+/* ms904685 CImeCUIDefCompWindow::CloseButton::PaintBitmap (Header: Imjpskin.h.) */
+/* ms904686 CImeCUIDefCompWindow::CompArea::GetMargins (Header: Imjpskin.h.) */
+/* ms904687 CImeCUIDefCompWindow::GetMargins (Header: Imjpskin.h.) */
+/* ms904688 CImeCUIDefCompWindow::GetTextColor (Header: Imjpskin.h.) */
+/* ms904689 CImeCUIDefCompWindow::GetWndStyle (Header: Imjpskin.h.) */
+/* ms904690 CImeCUIDefCompWindow::GetWndStyleEx (Header: Imjpskin.h.) */
+/* ms904691 CImeCUIDefCompWindow::IsHoverActionSupported (Header: Imjpskin.h.) */
+/* ms904692 CImeCUIDefCompWindow::PaintBackground (Header: Imjpskin.h.) */
+/* ms904693 CImeCUIDefCompWindow::PaintGripper (Header: Imjpskin.h.) */
+/* ms904695 CImeCUIToolBar::Button::AdjustRect (Header: Imjpskin.h.) */
+/* ms904698 CImeCUIToolBar::Button::GetSize (Header: Imjpskin.h.) */
+/* ms904699 CImeCUIToolBar::Button::PaintBackground (Header: Imjpskin.h.) */
+/* ms904700 CImeCUIToolBar::Button::PaintBitmap (Header: Imjpskin.h.) */
+/* ms904701 CImeCUIToolBar::Button::PaintIcon (Header: Imjpskin.h.) */
+/* ms904696 CImeCUIToolBar::ButtonArea::GetMargins (Header: Imjpskin.h.) */
+/* ms904697 CImeCUIToolBar::ButtonArea::GetSeparator (Header: Imjpskin.h.) */
+/* ms904702 CImeCUIToolBar::GetMargins (Header: Imjpskin.h.) */
+/* ms904703 CImeCUIToolBar::GetWndStyle (Header: Imjpskin.h.) */
+/* ms904704 CImeCUIToolBar::GetWndStyleEx (Header: Imjpskin.h.) */
+/* ms904705 CImeCUIToolBar::IsHoverActionSupported (Header: Imjpskin.h.) */
+/* ms904706 CImeCUIToolBar::OnOffButton::AdjustRect (Header: Imjpskin.h.) */
+/* ms904707 CImeCUIToolBar::OnOffButton::GetSize (Header: Imjpskin.h.) */
+/* ms904708 CImeCUIToolBar::OnOffButton::PaintBackground (Header: Imjpskin.h.) */
+/* ms904709 CImeCUIToolBar::OnOffButton::PaintBitmap (Header: Imjpskin.h.) */
+/* ms904710 CImeCUIToolBar::PaintBackground (Header: Imjpskin.h.) */
+/* ms904711 CImeCUIToolBar::PaintGripper (Header: Imjpskin.h.) */
+
 #ifdef __cplusplus
 }
 #endif

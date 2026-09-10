@@ -297,6 +297,14 @@ AKARI_CE_IMPORT BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROC lpCodePageEnumProc,
                           DWORD dwFlags) AKARI_CE_NAME(EnumSystemCodePagesW);
 #define EnumSystemCodePages EnumSystemCodePagesW
 
+/* ------------------------------------------------------------------
+ * Book surface: intl-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms904721 EnumCalendarInfo: print `` -- recorded verbatim (no compiled prototype) */
+/* ms904724 EnumDateFormats: print `` -- recorded verbatim (no compiled prototype) */
+/* ms905070 EnumSystemLocales: print `` -- recorded verbatim (no compiled prototype) */
+/* ms905077 EnumTimeFormats: print `` -- recorded verbatim (no compiled prototype) */
+
 #ifdef __cplusplus
 }
 #endif

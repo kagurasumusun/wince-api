@@ -12,4 +12,17 @@
  * docs/inventory.md (header-name compatibility unit).
  */
 
-#include "Sapi.h"
+#include "Sapi.h"/* ------------------------------------------------------------------
+ * Book surface: sapi (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+typedef struct constCLSID constCLSID;   /* opaque carrier (layout unpublished) */
+typedef struct constWCHAR constWCHAR;   /* opaque carrier (layout unpublished) */
+/* ms893493 SpCreateNewToken (By Category ID): print `` */
+/* (record-only: parameter or return type unpublished) */
+/* ms893494 SpCreateNewToken (By Token ID): print `` */
+/* (record-only: parameter or return type unpublished) */
+/* ms893495 SpCreateNewTokenEx (By Category ID): print `` */
+/* (record-only: parameter or return type unpublished) */
+/* ms893496 SpCreateNewTokenEx (By Token ID): print `` */
+/* (record-only: parameter or return type unpublished) */
+

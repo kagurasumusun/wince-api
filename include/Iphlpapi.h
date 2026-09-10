@@ -170,4 +170,8 @@ AKARI_CE_IMPORT DWORD SetTcpEntry(PMIB_TCPROW pTcpRow) AKARI_CE_NAME(SetTcpEntry
  *   aa450422 GetRTTAndHopCount: `BOOLGetRTTAndHopCount(IPAddrDestIpAddress,
  *     PULONGHopCount, ULONGMaxHops, PULONG RTT);` */
 
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms887920 DeleteIPAddress: print `DWORD DeleteIPAddress(ULONGNTEContext);` -- recorded verbatim (no compiled prototype) */
 #endif /* AKARI_IPHLPAPI_H */

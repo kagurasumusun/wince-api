@@ -2656,6 +2656,29 @@ BOOL ResourceRequestEx(DWORD dwResId, DWORD dwId, DWORD dwLen, DWORD dwFlags);
 /* aa448270 Device Manager Security */
 /* ms892459 I/O Resource Manager */
 
+/* ------------------------------------------------------------------
+ * Book surface: file-io-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516938 File I/O Enumerations */
+/* aa516939 File I/O Functions */
+/* aa516941 File I/O Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: fsds-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa517137 CeFsIoControl: print `BOOL CeFsIoControl(LPCWSTR pszDir, DWORD dwIoControlCode, LPVOID lpInBuffer, DWORD nInBufferSize, LPVOID lpOutBuffer, DWORD nOutBufferSize, LPDWORD lpBytesReturned, LPOVERLAPPED lpOverlapped);` */
+AKARI_CE_IMPORT BOOL CeFsIoControl(LPCWSTR pszDir, DWORD dwIoControlCode, LPVOID lpInBuffer, DWORD nInBufferSize, LPVOID lpOutBuffer, DWORD nOutBufferSize, LPDWORD lpBytesReturned, LPOVERLAPPED lpOverlapped)
+    AKARI_CE_NAME(CeFsIoControl);
+/* aa517244 CeResyncFilesys: print `BOOL CeResyncFilesys(HANDLE hDevice);` */
+AKARI_CE_IMPORT BOOL CeResyncFilesys(HANDLE hDevice)
+    AKARI_CE_NAME(CeResyncFilesys);
+/* ms891383 LoadFSD: print `BOOL LoadFSD(HANDLEhDevice,LPCWSTRlpFSDName);` */
+AKARI_CE_IMPORT BOOL LoadFSD(HANDLE hDevice, LPCWSTR lpFSDName)
+    AKARI_CE_NAME(LoadFSD);
+/* ms891384 LoadFSDEx: print `BOOL LoadFSDEx(HANDLE hDevice, LPCWSTR lpFSDName, DWORD dwFlag);` */
+AKARI_CE_IMPORT BOOL LoadFSDEx(HANDLE hDevice, LPCWSTR lpFSDName, DWORD dwFlag)
+    AKARI_CE_NAME(LoadFSDEx);
+
 #ifdef __cplusplus
 }
 #endif

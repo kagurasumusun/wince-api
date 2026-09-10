@@ -215,6 +215,45 @@ AKARI_CE_IMPORT HRESULT CreateIFEDictionaryInstance(VOID **ppvObj)
 AKARI_CE_IMPORT HRESULT CreateIImeIPointInstance(REFCLSID clsid,
                     VOID **ppvObj) AKARI_CE_NAME(CreateIImeIPointInstance);
 
+/* ------------------------------------------------------------------
+ * Book surface: intl-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905451 IFEDictionary::Close (Header: Msime.h.) */
+/* ms905452 IFEDictionary::Create (Header: Msime.h.) */
+/* ms905453 IFEDictionary::ExistWord (Header: Msime.h.) */
+/* ms905454 IFEDictionary::GetHeader (Header: Msime.h.) */
+/* ms905455 IFEDictionary::GetPosTable (Header: Msime.h.) */
+/* ms905456 IFEDictionary::GetWords (Header: Msime.h.) */
+/* ms905457 IFEDictionary::NextWords (Header: Msime.h.) */
+/* ms905458 IFEDictionary::Open (Header: Msime.h.) */
+/* ms905459 IFEDictionary::RegisterWord (Header: Msime.h.) */
+/* ms905461 IImeIPoint2::ControlIME (Header: Msime.h.) */
+/* ms905462 IImeIPoint2::DeleteCompString (Header: Msime.h.) */
+/* ms905463 IImeIPoint2::GetAllCompositionInfo (Header: Msime.h.) */
+/* ms905464 IImeIPoint2::Initialize (Header: Msime.h.) */
+/* ms905465 IImeIPoint2::InsertImeItem (Header: Msime.h.) */
+/* ms905466 IImeIPoint2::InsertStringEx (Header: Msime.h.) */
+/* ms905467 IImeIPoint2::ReplaceCompString (Header: Msime.h.) */
+/* ms905468 IImeIPoint2::SelectIpCandidate (Header: Msime.h.) */
+/* ms905469 IImeIPoint2::UpdateContext (Header: Msime.h.) */
+/* ms905471 IImeIPointNotifySink::GenerateMessage (Header: Msime.h.) */
+/* ms905472 IImeIPointNotifySink::IsReadingHalfKana (Header: Msime.h.) */
+/* ms905473 IImeIPointNotifySink::SetCandidateSelection (Header: Msime.h.) */
+/* ms905474 IImeIPointNotifySink::SetCandidateStr (Header: Msime.h.) */
+/* ms905475 IImeIPointNotifySink::SetCompositionAttr (Header: Msime.h.) */
+/* ms905476 IImeIPointNotifySink::SetCompositionClause (Header: Msime.h.) */
+/* ms905477 IImeIPointNotifySink::SetCompositionReadAttr (Header: Msime.h.) */
+/* ms905478 IImeIPointNotifySink::SetCompositionReadClause (Header: Msime.h.) */
+/* ms905479 IImeIPointNotifySink::SetCompositionReadStr (Header: Msime.h.) */
+/* ms905480 IImeIPointNotifySink::SetCompositionStr (Header: Msime.h.) */
+/* ms905481 IImeIPointNotifySink::SetCursorPos (Header: Msime.h.) */
+/* ms905482 IImeIPointNotifySink::SetDeltaPos (Header: Msime.h.) */
+/* ms905483 IImeIPointNotifySink::SetResultClause (Header: Msime.h.) */
+/* ms905484 IImeIPointNotifySink::SetResultReadClause (Header: Msime.h.) */
+/* ms905485 IImeIPointNotifySink::SetResultReadStr (Header: Msime.h.) */
+/* ms905486 IImeIPointNotifySink::SetResultStr (Header: Msime.h.) */
+/* ms905487 IImeIPointNotifySink::SetTargetClause (Header: Msime.h.) */
+
 #ifdef __cplusplus
 }
 #endif

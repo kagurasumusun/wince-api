@@ -148,6 +148,51 @@ typedef struct ISdpRecord ISdpRecord;
  */
 typedef struct ISdpStream ISdpStream;
 
+/* ------------------------------------------------------------------
+ * Book surface: bt-appdev (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450534 ISdpNodeContainer::AppendNode (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450536 ISdpNodeContainer::CreateFromStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450539 ISdpNodeContainer::CreateStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450540 ISdpNodeContainer::GetNode (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450543 ISdpNodeContainer::GetNodeCount (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450545 ISdpNodeContainer::GetNodeStringData (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450547 ISdpNodeContainer::GetStreamSize (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450549 ISdpNodeContainer::GetType (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450553 ISdpNodeContainer::LockContainer (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450556 ISdpNodeContainer::SetNode (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450557 ISdpNodeContainer::SetType (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450560 ISdpNodeContainer::Walk (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450562 ISdpNodeContainer::WriteStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450579 ISdpRecord::CreateFromStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450582 ISdpRecord::GetAttribute (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450583 ISdpRecord::GetAttributeAsStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450586 ISdpRecord::GetAttributeList (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450588 ISdpRecord::GetServiceClass (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450591 ISdpRecord::SetAttribute (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450593 ISdpRecord::SetAttributeFromStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450595 ISdpRecord::Walk (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450597 ISdpRecord::WriteToStream (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450599 ISdpStream::ByteSwap* (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450603 ISdpStream::NormalizeUuid (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450605 ISdpStream::Retrieve* (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450607 ISdpStream::RetrieveElementInfo (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450609 ISdpStream::RetrieveRecords (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450611 ISdpStream::Validate (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450613 ISdpStream::VerifySequenceOf (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450615 ISdpStream::Walk (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450619 ISdpWalk::WalkNode (Header: Bthapi.h, Bthapi.idl.) */
+/* aa450622 ISdpWalk::WalkStream (Header: Bthapi.h, Bthapi.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: bt-appdev (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms886634 Bluetooth Application Development Enumerations */
+/* ms886635 Bluetooth Application Development Functions */
+/* ms886636 Bluetooth Application Development Interfaces */
+/* ms886637 Bluetooth Application Development IOCTLs */
+/* ms886647 Bluetooth Application Development Structures */
+
 #ifdef __cplusplus
 }
 #endif

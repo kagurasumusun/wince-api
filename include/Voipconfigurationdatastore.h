@@ -18,4 +18,7 @@
  *   UpdateSettingsFromXML(ms911691), WriteValue(ms911692)
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: vail (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* AKARI_VOIPCONFIGURATIONDATASTORE_H */

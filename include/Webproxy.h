@@ -52,4 +52,7 @@ AKARI_CE_IMPORT DWORD ProxySignalFilter(DWORD dwSignal)
  * takes PPROXY_HTTP_REQUEST, whose members point at the
  * unpublished SOCKADDR_STORAGE.  Recorded. */
 
+/* ------------------------------------------------------------------
+ * Book surface: servers (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* AKARI_WEBPROXY_H */

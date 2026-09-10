@@ -80,4 +80,60 @@ typedef enum _MINIDUMP_STREAM_TYPE {
     LastReservedStream = 0xffff
 } MINIDUMP_STREAM_TYPE;
 
+/* ------------------------------------------------------------------
+ * Book surface: errorrep-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms939635 _CEDUMP_BUCKET_PARAMETERS (Header: DwCeDump.h.) */
+/* ms939636 _CEDUMP_ELEMENT_LIST (Header: DwCeDump.h.) */
+/* ms939637 _CEDUMP_EXCEPTION (Header: DwCeDump.h.) */
+/* ms939638 _CEDUMP_EXCEPTION_STREAM (Header: DwCeDump.h.) */
+/* ms939639 _CEDUMP_FIELD_INFO (Header: DwCeDump.h, OsAxsFlexi.h.) */
+/* ms939640 _CEDUMP_MEMORY_LIST (Header: DwCeDump.h.) */
+/* ms939641 _CEDUMP_SYSTEM_INFO (Header: DwCeDump.h.) */
+/* ms939642 _CEDUMP_THREAD_CALL_STACK (Header: DwCeDump.h.) */
+/* ms939643 _CEDUMP_THREAD_CALL_STACK_FRAME (Header: DwCeDump.h.) */
+/* ms939644 _CEDUMP_THREAD_CALL_STACK_LIST (Header: DwCeDump.h.) */
+/* ms939645 _MINIDUMP_DIRECTORY (Header: DwCeDump.h.) */
+/* ms939646 _MINIDUMP_HEADER (Header: DwCeDump.h.) */
+/* ms939647 _MINIDUMP_LOCATION_DESCRIPTOR (Header: DwCeDump.h.) */
+/* ms939648 _MINIDUMP_MEMORY_DESCRIPTOR (Header: DwCeDump.h.) */
+/* ms939649 _MINIDUMP_STREAM_TYPE (Header: DwCeDump.h.) */
+/* ms939650 _MINIDUMP_STRING (Header: DwCeDump.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: errorrep-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa526060 Administrator Settings for Error Reporting */
+/* aa526062 Dump File Bucketing */
+/* ms939593 Dump File Format */
+/* ms939618 Dump File Structures */
+/* ms939661 Enabling Error Reporting in the OAL */
+/* ms939651 Error Report Control Panel */
+/* ms939585 Error Report Control Panel OS Design Development */
+/* ms939614 Error Report Control Panel Registry Settings */
+/* ms939620 Error Report Enumerations */
+/* ms939615 Error Report Functions */
+/* ms939652 Error Report Generator */
+/* ms939597 Error Report Generator OS Design Development */
+/* ms939616 Error Report Generator Reference */
+/* ms939617 Error Report Generator Registry Settings */
+/* ms939653 Error Report Transfer Driver */
+/* ms939601 Error Report Transfer Driver OS Design Development */
+/* ms939602 Error Report Transfer Driver Registry Settings */
+/* ms939619 Error Reporting Catalog Items */
+/* aa526067 Error Reporting Features */
+/* aa526068 Error Reporting Modes and Settings */
+/* ms939599 Error Reporting Overview */
+/* aa526063 Error Reporting Registry Settings */
+/* ms939621 Error Reporting Security */
+/* ms939609 Exception Mode */
+/* aa526064 Exception Mode Error Reporting */
+/* ms939660 How to Implement Error Reporting */
+/* ms939658 OAL Elements for Error Reporting */
+/* ms939654 Report Upload Client */
+/* ms939603 Report Upload Client Application Development */
+/* ms939606 Report Upload Client OS Design Development */
+/* ms939607 Report Upload Client Registry Settings */
+/* ms939659 Reserving Memory for Error Reporting Dumps */
+/* aa526066 Types of Crash Dump Files */
+/* aa526069 Windows Mobile Error Reporting Reference */
 #endif /* AKARI_DWCEDUMP_H */

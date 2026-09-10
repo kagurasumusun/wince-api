@@ -179,4 +179,62 @@ typedef int (*ServiceCallback)(struct _obex_transaction *pTrans);
  *     ServerCallback ObexExecute;} ObexTransaction;
  *   (MemAlloc / MemFree unpublished) -- recorded. */
 
+/* ------------------------------------------------------------------
+ * Book surface: servers (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms900495 IDeviceEnum::Clone (Header: Obex.h, Obex.idl.) */
+/* ms890398 IDeviceEnum::Next (Header: Obex.h, Obex.idl.) */
+/* ms890399 IDeviceEnum::Reset (Header: Obex.h, Obex.idl.) */
+/* ms890400 IDeviceEnum::Skip (Header: Obex.h, Obex.idl.) */
+/* ms890397 IDeviceEnum:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms890891 IHeaderCollection::AddAppParams (Header: Obex.h, Obex.idl.) */
+/* ms890893 IHeaderCollection::AddBody (Header: Obex.h, Obex.idl.) */
+/* ms890897 IHeaderCollection::AddByte (Header: Obex.h, Obex.idl.) */
+/* ms890900 IHeaderCollection::AddByteArray (Header: Obex.h, Obex.idl.) */
+/* ms890902 IHeaderCollection::AddConnectionId (Header: Obex.h, Obex.idl.) */
+/* ms890906 IHeaderCollection::AddCount (Header: Obex.h, Obex.idl.) */
+/* ms890910 IHeaderCollection::AddDescription (Header: Obex.h, Obex.idl.) */
+/* ms890914 IHeaderCollection::AddEndOfBody (Header: Obex.h, Obex.idl.) */
+/* ms890916 IHeaderCollection::AddHTTP (Header: Obex.h, Obex.idl.) */
+/* ms890920 IHeaderCollection::AddLength (Header: Obex.h, Obex.idl.) */
+/* ms890922 IHeaderCollection::AddLong (Header: Obex.h, Obex.idl.) */
+/* ms890925 IHeaderCollection::AddName (Header: Obex.h, Obex.idl.) */
+/* ms890927 IHeaderCollection::AddObjectClass (Header: Obex.h, Obex.idl.) */
+/* ms890931 IHeaderCollection::AddTarget (Header: Obex.h, Obex.idl.) */
+/* ms890933 IHeaderCollection::AddTime (Header: Obex.h, Obex.idl.) */
+/* ms890938 IHeaderCollection::AddTimeOld (Header: Obex.h, Obex.idl.) */
+/* ms890942 IHeaderCollection::AddType (Header: Obex.h, Obex.idl.) */
+/* ms890944 IHeaderCollection::AddUnicodeString (Header: Obex.h, Obex.idl.) */
+/* ms890947 IHeaderCollection::AddWho (Header: Obex.h, Obex.idl.) */
+/* ms890950 IHeaderCollection::EnumHeaders (Header: Obex.h, Obex.idl.) */
+/* ms890955 IHeaderCollection::Remove (Header: Obex.h, Obex.idl.) */
+/* ms890957 IHeaderCollection::RemoveAll (Header: Obex.h, Obex.idl.) */
+/* ms890953 IHeaderCollection:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms890961 IHeaderEnum::Clone (Header: Obex.h, Obex.idl.) */
+/* ms890966 IHeaderEnum::Next (Header: Obex.h, Obex.idl.) */
+/* ms890969 IHeaderEnum::Reset (Header: Obex.h, Obex.idl.) */
+/* ms890964 IHeaderEnum:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms890990 IObex::BindToDevice (Header: Obex.h, Obex.idl.) */
+/* ms891030 IObex::EnumDevices (Header: Obex.h, Obex.idl.) */
+/* ms891033 IObex::EnumTransports (Header: Obex.h, Obex.idl.) */
+/* ms891037 IObex::Initialize (Header: Obex.h, Obex.idl.) */
+/* ms891044 IObex::Shutdown (Header: Obex.h, Obex.idl.) */
+/* ms891054 IObex::StartDeviceEnum (Header: Obex.h, Obex.idl.) */
+/* ms891057 IObex::StopDeviceEnum (Header: Obex.h, Obex.idl.) */
+/* ms891039 IObex:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms890995 IObexDevice::Abort (Header: Obex.h, Obex.idl.) */
+/* ms890998 IObexDevice::Connect (Header: Obex.h, Obex.idl.) */
+/* ms891002 IObexDevice::Disconnect (Header: Obex.h, Obex.idl.) */
+/* ms891005 IObexDevice::EnumProperties (Header: Obex.h, Obex.idl.) */
+/* ms891008 IObexDevice::Get (Header: Obex.h, Obex.idl.) */
+/* ms891015 IObexDevice::Put (Header: Obex.h, Obex.idl.) */
+/* ms891017 IObexDevice::SetPassword (Header: Obex.h, Obex.idl.) */
+/* ms891020 IObexDevice::SetPath (Header: Obex.h, Obex.idl.) */
+/* ms891011 IObexDevice:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms891050 IObexSink::Notify (Header: Obex.h, Obex.idl.) */
+/* ms891046 IObexSink:IUnknown (Header: Obex.h, Obex.idl.) */
+/* ms900502 IPropertyBagEnum::Clone (Header: Obex.h) */
+/* ms900507 IPropertyBagEnum::Next (Header: Obex.h) */
+/* ms900511 IPropertyBagEnum::Reset (Header: Obex.h) */
+/* ms900514 IPropertyBagEnum::Skip (Header: Obex.h) */
 #endif /* AKARI_OBEX_H */

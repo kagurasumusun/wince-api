@@ -837,6 +837,95 @@ struct IMultiLanguage2 { const IMultiLanguage2Vtbl *lpVtbl; };
 #define IMultiLanguage2_GetNumberOfScripts(T,a) ((T)->lpVtbl->GetNumberOfScripts(T,a))
 #define IMultiLanguage2_EnumScripts(T,a,b,c) ((T)->lpVtbl->EnumScripts(T,a,b,c))
 
+/* ------------------------------------------------------------------
+ * Book surface: mlang (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452107 Code Page Enumeration (Header: Mlang.h, Mlang.idl.) */
+/* ms906427 IEnumCodePage::Next (Header: Mlang.h, Mlang.idl.) */
+/* ms906428 IEnumCodePage::Reset (Header: Mlang.h, Mlang.idl.) */
+/* ms906429 IEnumCodePage::Skip (Header: Mlang.h, Mlang.idl.) */
+/* ms906431 IEnumRfc1766::Next (Header: Mlang.h, Mlang.idl.) */
+/* ms906432 IEnumRfc1766::Reset (Header: Mlang.h, Mlang.idl.) */
+/* ms906433 IEnumRfc1766::Skip (Header: Mlang.h, Mlang.idl.) */
+/* aa452277 IEnumScript::Clone (Header: Mlang.h, Mlang.idl.) */
+/* aa452279 IEnumScript::Next (Header: Mlang.h, Mlang.idl.) */
+/* aa452281 IEnumScript::Reset (Header: Mlang.h, Mlang.idl.) */
+/* aa452283 IEnumScript::Skip (Header: Mlang.h, Mlang.idl.) */
+/* aa452356 IMLangCodePages::CodePagesToCodePage (Header: Mlang.h, Mlang.idl.) */
+/* aa452357 IMLangCodePages::CodePageToCodePages (Header: Mlang.h, Mlang.idl.) */
+/* aa452358 IMLangCodePages::GetCharCodePages (Header: Mlang.h, Mlang.idl.) */
+/* aa452359 IMLangCodePages::GetStrCodePages (Header: Mlang.h, Mlang.idl.) */
+/* aa452361 IMLangConvertCharset::DoConversion (Header: Mlang.h, Mlang.idl.) */
+/* aa452362 IMLangConvertCharset::DoConversionFromUnicode (Header: Mlang.h, Mlang.idl.) */
+/* aa452363 IMLangConvertCharset::DoConversionToUnicode (Header: Mlang.h, Mlang.idl.) */
+/* aa452364 IMLangConvertCharset::GetDestinationCodePage (Header: Mlang.h, Mlang.idl.) */
+/* aa452365 IMLangConvertCharset::GetProperty (Header: Mlang.h, Mlang.idl.) */
+/* aa452366 IMLangConvertCharset::GetSourceCodePage (Header: Mlang.h, Mlang.idl.) */
+/* aa452367 IMLangConvertCharset::Initialize (Header: Mlang.h, Mlang.idl.) */
+/* aa452370 IMLangFontLink2::CodePageToScriptID (Header: Mlang.h, Mlang.idl.) */
+/* aa452371 IMLangFontLink2::GetFontCodePages (Header: Mlang.h, Mlang.idl.) */
+/* aa452372 IMLangFontLink2::GetFontUnicodeRanges (Header: Mlang.h, Mlang.idl.) */
+/* aa452373 IMLangFontLink2::GetScriptFontInfo (Header: Mlang.h, Mlang.idl.) */
+/* aa452375 IMLangFontLink2::MapFont (Header: Mlang.h, Mlang.idl.) */
+/* aa452377 IMLangFontLink2::ReleaseFont (Header: Mlang.h, Mlang.idl.) */
+/* aa452379 IMLangFontLink2::ResetFontMapping (Header: Mlang.h, Mlang.idl.) */
+/* aa452382 IMLangFontLink::GetFontCodePages (Header: Mlang.h, Mlang.idl.) */
+/* aa452384 IMLangFontLink::MapFont (Header: Mlang.h, Mlang.idl.) */
+/* aa452386 IMLangFontLink::ReleaseFont (Header: Mlang.h, Mlang.idl.) */
+/* aa452387 IMLangFontLink::ResetFontMapping (Header: Mlang.h, Mlang.idl.) */
+/* aa452391 IMLangLineBreakConsole::BreakLineA (Header: Mlang.h, Mlang.idl.) */
+/* ms918284 IMLangLineBreakConsole::BreakLineW (Header: Mlang.h, Mlang.idl.) */
+/* ms918298 IMultiLanguage2::ConvertString (Header: Mlang.h, Mlang.idl.) */
+/* ms918299 IMultiLanguage2::ConvertStringFromUnicode (Header: Mlang.h, Mlang.idl.) */
+/* ms918300 IMultiLanguage2::ConvertStringFromUnicodeEx (Header: Mlang.h, Mlang.idl.) */
+/* ms918301 IMultiLanguage2::ConvertStringInIStream (Header: Mlang.h, Mlang.idl.) */
+/* ms918302 IMultiLanguage2::ConvertStringToUnicode (Header: Mlang.h, Mlang.idl.) */
+/* ms918303 IMultiLanguage2::ConvertStringToUnicodeEx (Header: Mlang.h, Mlang.idl.) */
+/* ms918304 IMultiLanguage2::CreateConvertCharset (Header: Mlang.h, Mlang.idl.) */
+/* ms918305 IMultiLanguage2::DetectCodepageInIStream (Header: Mlang.h, Mlang.idl.) */
+/* ms918306 IMultiLanguage2::DetectInputCodepage (Header: Mlang.h, Mlang.idl.) */
+/* ms918307 IMultiLanguage2::EnumCodePages (Header: Mlang.h, Mlang.idl.) */
+/* ms918308 IMultiLanguage2::EnumRfc1766 (Header: Mlang.h, Mlang.idl.) */
+/* ms918309 IMultiLanguage2::EnumScripts (Header: Mlang.h, Mlang.idl.) */
+/* ms918310 IMultiLanguage2::GetCharsetInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918311 IMultiLanguage2::GetCodePageDescription (Header: Mlang.h, Mlang.idl.) */
+/* ms918312 IMultiLanguage2::GetCodePageInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918313 IMultiLanguage2::GetFamilyCodePage (Header: Mlang.h, Mlang.idl.) */
+/* ms918314 IMultiLanguage2::GetLcidFromRfc1766 (Header: Mlang.h, Mlang.idl.) */
+/* ms918315 IMultiLanguage2::GetNumberOfCodePageInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918316 IMultiLanguage2::GetNumberOfScripts (Header: Mlang.h, Mlang.idl.) */
+/* ms918317 IMultiLanguage2::GetRfc1766FromLcid (Header: Mlang.h, Mlang.idl.) */
+/* ms918318 IMultiLanguage2::GetRfc1766Info (Header: Mlang.h, Mlang.idl.) */
+/* ms918319 IMultiLanguage2::IsConvertible (Header: Mlang.h, Mlang.idl.) */
+/* ms918320 IMultiLanguage2::SetMimeDBSource (Header: Mlang.h, Mlang.idl.) */
+/* ms918321 IMultiLanguage3::DetectOutboundCodePage (Header: Mlang.h, Mlang.idl.) */
+/* ms918322 IMultiLanguage3::DetectOutboundCodePageInIStream (Header: Mlang.h, Mlang.idl.) */
+/* ms918324 IMultiLanguage::ConvertString (Header: Mlang.h, Mlang.idl.) */
+/* ms918325 IMultiLanguage::ConvertStringFromUnicode (Header: Mlang.h, Mlang.idl.) */
+/* ms918326 IMultiLanguage::ConvertStringToUnicode (Header: Mlang.h, Mlang.idl.) */
+/* ms918327 IMultiLanguage::CreateConvertCharset (Header: Mlang.h, Mlang.idl.) */
+/* ms918328 IMultiLanguage::EnumCodePages (Header: Mlang.h, Mlang.idl.) */
+/* ms918329 IMultiLanguage::EnumRfc1766 (Header: Mlang.h, Mlang.idl.) */
+/* ms918330 IMultiLanguage::GetCharsetInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918331 IMultiLanguage::GetCodePageInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918332 IMultiLanguage::GetFamilyCodePage (Header: Mlang.h, Mlang.idl.) */
+/* ms918334 IMultiLanguage::GetLcidFromRfc1766 (Header: Mlang.h, Mlang.idl.) */
+/* ms918335 IMultiLanguage::GetNumberOfCodePageInfo (Header: Mlang.h, Mlang.idl.) */
+/* ms918336 IMultiLanguage::GetRfc1766FromLcid (Header: Mlang.h, Mlang.idl.) */
+/* ms918337 IMultiLanguage::GetRfc1766Info (Header: Mlang.h, Mlang.idl.) */
+/* ms918338 IMultiLanguage::IsConvertible (Header: Mlang.h, Mlang.idl.) */
+/* ms918818 Locale Enumeration (Header: Mlang.h, Mlang.idl.) */
+/* ms918855 Script Enumeration (Header: Mlang.h, Mlang.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: mlang (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905680 Internet Explorer MLang Enumerations */
+/* ms905681 Internet Explorer MLang Functions */
+/* ms905682 Internet Explorer MLang Interfaces */
+/* ms905683 Internet Explorer MLang Objects */
+/* ms905685 Internet Explorer MLang Structures */
+
 #ifdef __cplusplus
 }
 #endif

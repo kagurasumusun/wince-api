@@ -56,6 +56,28 @@ typedef struct IKoreanImeUI IKoreanImeUI;
  *  - RedrawStatusWnd:      `STDMETHOD RedrawStatusWnd(VOID);`
  *  - SetStatusData:        `STDMETHOD SetStatusData(DWORD dwState);` */
 
+/* ------------------------------------------------------------------
+ * Book surface: intl-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905489 IKoreanImeUI::GetCandWndPos (Header: KoreanImeUI.h.) */
+/* ms905490 IKoreanImeUI::GetCompositionFont (Header: KoreanImeUI.h.) */
+/* ms905491 IKoreanImeUI::GetCompWndPos (Header: KoreanImeUI.h.) */
+/* ms905492 IKoreanImeUI::GetStatusWndPos (Header: KoreanImeUI.h.) */
+/* ms905493 IKoreanImeUI::InitializeUIWindows (Header: KoreanImeUI.h.) */
+/* ms905494 IKoreanImeUI::RedrawCandWnd (Header: KoreanImeUI.h.) */
+/* ms905495 IKoreanImeUI::RedrawCompWnd (Header: KoreanImeUI.h.) */
+/* ms905496 IKoreanImeUI::RedrawStatusWnd (Header: KoreanImeUI.h.) */
+/* ms905497 IKoreanImeUI::SetCandData (Header: KoreanImeUI.h.) */
+/* ms905498 IKoreanImeUI::SetCandWndPos (Header: KoreanImeUI.h.) */
+/* ms905499 IKoreanImeUI::SetCompData (Header: KoreanImeUI.h.) */
+/* ms905500 IKoreanImeUI::SetCompWndPos (Header: KoreanImeUI.h.) */
+/* ms905501 IKoreanImeUI::SetStatusData (Header: KoreanImeUI.h.) */
+/* ms905502 IKoreanImeUI::SetStatusWndPos (Header: KoreanImeUI.h.) */
+/* ms905503 IKoreanImeUI::ShowHideCandWnd (Header: KoreanImeUI.h.) */
+/* ms905504 IKoreanImeUI::ShowHideCompWnd (Header: KoreanImeUI.h.) */
+/* ms905715 IKoreanImeUI::ShowHideStatusWnd (Header: KoreanImeUI.h.) */
+/* ms905791 IKoreanImeUI::UninitializeUIWindows (Header: KoreanImeUI.h.) */
+
 #ifdef __cplusplus
 }
 #endif

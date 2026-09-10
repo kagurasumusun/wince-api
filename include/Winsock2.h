@@ -980,4 +980,620 @@ AKARI_CE_IMPORT DWORD WSAWaitForMultipleEvents(DWORD cEvents,
 /* ---- SOL_ family (1 names; R1) ---- */
 #define SOL_IRLMP                                    0x00FF
 
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450370 fd_set (Header: Winsock2.h.) */
+/* ms890319 hostent (Header: Winsock2.h.) */
+/* ms890973 in_addr (Header: Winsock2.h.) */
+/* ms894561 linger (Header: Winsock2.h.) */
+/* ms896341 protoent (Header: Winsock2.h.) */
+/* aa450886 servent (Header: Winsock2.h.) */
+/* aa450942 sockaddr (Header: Winsock2.h.) */
+/* aa450946 sockaddr_in (Header: Winsock2.h.) */
+/* aa450970 timeval (Header: Winsock2.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898755 WSANSPIoctl: print `int WSAAPI WSANSPIoctl( HANDLE hLookup, DWORD dwControlCode, LPVOID lpvInBuffer, DWORD cbInBuffer, LPVOID lpvOutBuffer, DWORD cbOutBuffer, LPDWORD lpcbBytesReturned, LPWSACOMPLETION lpCompletion);` */
+/* (record-only: parameter or return type unpublished) */
+/* ms880914 Accessing Remote File Systems */
+/* ms880923 Adding an Entry to the IP Forward Table */
+/* ms899602 Adding an IPv6 Route */
+/* ms880924 Additional DHCP Settings */
+/* ms880926 Address Registry Settings */
+/* ms880927 Address Resolution Protocol */
+/* ms880925 Addresses for Hosts and Routers */
+/* ms886631 Allowing Inbound IPSec (IPv6) Traffic to Private Hosts */
+/* ms880930 Annotated Client Code with Checkv4 Output */
+/* ms880931 Annotated Server Code with Checkv4 Output */
+/* ms880932 Anycast IPv6 Addresses */
+/* ms880933 Application Registry Settings */
+/* ms880934 Applications and Services that Support IPv6 */
+/* ms880938 Assigning an IPv4 Address to a Device */
+/* ms880939 Assigning an IPv6 Address to a Device */
+/* ms880946 Authentication Protocol Initialization */
+/* ms880949 Auto Dial for ICS */
+/* ms880950 Auto Dial Registry Settings */
+/* ms880951 Auto Dial Registry Subkeys */
+/* ms880952 Automatic Client Configuration for IPv4 */
+/* ms880954 Backward Compatibility for Windows Sockets 1.1 Applications */
+/* ms880956 Basic Approach for getXbyY in the SPI */
+/* ms886633 Best Practices for the IP Firewall */
+/* ms880958 Binding to a Local Address */
+/* ms880959 Blocking Input/Output */
+/* ms880976 Byte Ordering Assumptions */
+/* ms880984 Certificate Authentication */
+/* ms880985 Challenge-Handshake Authentication Protocol (CHAP) */
+/* ms899604 Changing the Application Source Code to Support IPv6 */
+/* ms880987 Changing the Default Gateway */
+/* ms880988 Changing the Properties of an Existing Route */
+/* ms880989 Classless Interdomain Routing (CIDR) for IPv4 */
+/* ms880990 Classless Interdomain Routing (CIDR) for IPv6 */
+/* ms880991 Client-Side Configuration User Interface */
+/* ms880994 Closing Sockets */
+/* ms880998 Compatible Name Resolution for TCP/IP in the Windows Sockets 1.1 API */
+/* ms881001 Compatible Name Resolution for TCP/IP in the Windows Sockets 1.1 SPI */
+/* ms881003 Completion of the Authentication Session */
+/* ms881006 Configuration User Interface */
+/* ms899606 Configuring a Device with a Static Address for the IPv6 Test Lab */
+/* ms899607 Configuring CLIENT1 */
+/* ms899608 Configuring CLIENT2 */
+/* ms899611 Configuring IPv6 Interface Attributes */
+/* ms899612 Configuring ROUTER1 */
+/* ms899613 Configuring ROUTER2 */
+/* ms881338 Connecting to a Default Peer */
+/* ms881346 Connecting to a Network */
+/* ms881367 Connecting to the Test Internet (6bone) */
+/* ms881495 Connection Sharing Registry Settings */
+/* ms881505 Connection Shutdown */
+/* ms881617 Converting to IPv6 */
+/* ms881631 Core Protocol Stack for IPv4 */
+/* ms881635 Core Protocol Stack for IPv6 */
+/* ms899597 Core Protocols of IPv4 */
+/* ms881626 Core Protocols of IPv6 */
+/* ms881640 Creating a New Project for Converting to IPv4/IPv6 */
+/* ms899622 Creating a Socket Client Application */
+/* ms881657 Creating a Socket Server Application */
+/* ms899623 Creating a Static Routing Infrastructure in the IPv6 Test Lab */
+/* ms881658 Creating a UDP Datagram Socket Application */
+/* ms881652 Creating an Application to Convert to IPv4/IPv6 */
+/* ms881644 Creating an Internal Exposed Host */
+/* ms881651 Creating an IP Multicast Application */
+/* ms881663 Creating Event Objects */
+/* ms886651 Creating Rules Based on Time */
+/* ms886652 Creating Rules for an IPv6 Subnet */
+/* ms899731 Creating the Run-Time Images for the IPv6 Test Lab */
+/* ms881674 Data Transport Providers */
+/* ms881675 Dead Gateway Detection */
+/* ms899748 Deciding How to Display IP Addresses */
+/* ms881677 Default Address Selection for IPv6 */
+/* ms881678 Default IP Firewall Rules */
+/* ms881679 Delayed Acknowledgments */
+/* ms881680 Deleting an Entry to the IP Forward Table */
+/* ms881683 Destroying Event Objects */
+/* ms881684 Determining Available Network Resources */
+/* ms899755 Determining if a Network Connection is Present */
+/* ms881685 Determining Local and Remote Names */
+/* ms881687 Determining the Status of One or More Sockets */
+/* ms881700 DHCP Allocator */
+/* ms881701 DHCP Allocator Operation */
+/* ms881702 DhcpOptions */
+/* ms881703 DhcpSendOptions */
+/* ms881704 DHCPv6 Lite Registry Settings */
+/* ms881705 DHCPv6 Non-Configurable Registry Settings */
+/* ms881706 Diagnosing Connections */
+/* ms899598 Diagnosing Connectivity Problems using the Network Connection Status UI */
+/* ms886653 DNS Functions */
+/* ms881714 DNS Proxy */
+/* aa451151 DNS Proxy Registry Settings */
+/* ms886655 DNS Reference */
+/* ms886654 DNS Structures */
+/* ms898953 Domain Discovery */
+/* ms881715 Domain Discovery Application Development */
+/* ms898954 Domain Discovery Functions */
+/* ms881716 Domain Discovery Migration */
+/* ms881717 Domain Discovery OS Design Development */
+/* ms898955 Domain Discovery Reference */
+/* ms881718 Domain Discovery Samples */
+/* ms881719 Domain Discovery Security */
+/* aa450365 Domain Discovery Structures */
+/* ms881720 Dual Stack Architecture */
+/* ms881721 Duplicate IP Address Detection for IPv4 */
+/* ms881722 Duplicate IP Address Detection for IPv6 */
+/* ms881854 EAP Application Development */
+/* ms881723 EAP Authentication Protocols */
+/* ms886656 EAP Enumerations */
+/* ms886657 EAP Functions */
+/* ms881724 EAP Implementation Details */
+/* ms881725 EAP Initialization */
+/* ms881726 EAP Installation */
+/* ms898956 EAP Migration */
+/* ms881855 EAP OS Design Development */
+/* ms886658 EAP Reference */
+/* ms881728 EAP Registry Settings */
+/* ms898957 EAP Samples */
+/* ms881729 EAP Security */
+/* ms886659 EAP Structures */
+/* ms881832 Enabling Auto Dial for ICS */
+/* ms899760 Enabling IPv4 Routing */
+/* ms899766 Enabling IPv6 Forwarding */
+/* ms881834 Enabling IPv6 Routing */
+/* ms881836 Enabling NAT */
+/* ms881837 Enabling the DHCP Allocator */
+/* ms881838 Enabling the DNS Proxy */
+/* ms881839 Enhanced Functionality at Connect Time */
+/* ms881842 Error Reporting and Parameter Validation */
+/* ms881844 Establishing a Network Connection */
+/* ms881851 Event Object Signaling */
+/* ms881852 Event Objects in the Winsock SPI */
+/* ms881849 EVENTLOG */
+/* ms881853 Extended Byte-Order Conversion Routines */
+/* ms898958 Extensible Authentication Protocol */
+/* ms881863 FIREWALL */
+/* ms898960 Firewall */
+/* ms898961 Firewall Rule Examples */
+/* ms881866 Flow Control Using ICMP for IPv4 */
+/* ms881880 Function Interface Model */
+/* ms898964 Gateway Logging */
+/* ms881881 Gateway Logging Registry Settings */
+/* ms898965 General Firewall Rule Examples */
+/* ms881884 Generic Data Transport Functions */
+/* ms881886 gethostbyaddr Function in the SPI */
+/* ms881887 gethostbyname Function in the SPI */
+/* ms881889 gethostname Function in the SPI */
+/* ms881910 Host Name Resolution for Dual Stack (IPv4/IPv6) */
+/* ms881909 Host Name Resolution for IPv4 */
+/* ms881911 Host Name Resolution for IPv6 */
+/* ms881912 Host Name Resolution Using a DNS Server for IPv4 */
+/* ms881913 Host Name Resolution Using a NetBIOS Server for IPv4 */
+/* ms881914 Host Name Resolution Using Registry Entries */
+/* ms881908 HOSTNAME */
+/* aa450273 How to Convert an Application from IPv4 to IPv4/IPv6 */
+/* aa450274 How to Set Up and Use an IPv6 Test Lab */
+/* ms886676 ICMP Functions */
+/* ms886677 ICMP Reference */
+/* ms886678 ICMP Structures */
+/* ms898969 ICS Application Development */
+/* ms886679 ICS Functions */
+/* ms898966 ICS Migration */
+/* aa450033 ICS OS Design Development */
+/* ms886680 ICS Reference */
+/* aa450034 ICS Registry Settings */
+/* ms898967 ICS Samples */
+/* aa450035 ICS Security */
+/* ms881921 IKE Authentication */
+/* ms881923 Implementing a Secure Socket */
+/* aa450026 Installation Functions */
+/* aa450110 Installing an LSP */
+/* aa450032 Interactive User Interface */
+/* ms898968 Internet Connection Sharing */
+/* aa450037 Internet Control Message Protocol (ICMP) */
+/* aa450036 Internet Control Message Protocol for IPv6 (ICMPv6) */
+/* aa450038 Internet Group Management Protocol (IGMP) */
+/* aa450041 Internet Protocol (IP) for IPv4 */
+/* aa450042 Internet Protocol (IP) for IPv6 */
+/* aa450040 Internet Protocol Helper APIs */
+/* aa450043 Internet Protocol version 4 Address Classes */
+/* ms898970 Internet Protocol Version 6 */
+/* aa450046 Internet Router Discovery Protocol (IRDP) for IPv4 */
+/* aa450053 IP Firewall Application Development */
+/* ms886672 IP Firewall Data Types */
+/* ms886673 IP Firewall Enumerations */
+/* ms886674 IP Firewall Functions */
+/* ms886684 IP Firewall Logging Reference */
+/* aa450054 IP Firewall Logging Registry Settings */
+/* aa450055 IP Firewall Migration */
+/* aa450052 IP Firewall OS Design Development */
+/* ms886685 IP Firewall Reference */
+/* aa450056 IP Firewall Registry Settings */
+/* aa450057 IP Firewall Samples */
+/* aa450058 IP Firewall Security */
+/* ms886675 IP Firewall Structures */
+/* aa450059 IP Helper Code Samples */
+/* ms886686 IP Helper Enumerations */
+/* ms886687 IP Helper Functions */
+/* ms886688 IP Helper Reference */
+/* ms886689 IP Helper Structures */
+/* ms898971 IP Independent Source Code Examples */
+/* aa450060 IP Multicasting for IPv4 */
+/* aa450061 IP Multicasting for IPv6 */
+/* aa450062 IP NAT Registry Settings */
+/* aa450050 IP/ARP Extensions for IPv4 Multicasting */
+/* aa450051 IPConfig */
+/* aa450063 IPPROTO_IP */
+/* aa450064 IPPROTO_IPV6 */
+/* aa450065 IPPROTO_TCP */
+/* aa450066 IPPROTO_UDP */
+/* aa450067 IPSec Application Development */
+/* ms886690 IPSec Functions */
+/* aa450068 IPSec Migration */
+/* aa450069 IPSec OS Design Development */
+/* ms886691 IPSec Reference */
+/* aa450070 IPSec Registry Settings */
+/* aa450071 IPSec Samples */
+/* aa450072 IPSec Security */
+/* ms886692 IPSec Structures */
+/* ms898972 IPSec v4 */
+/* aa450073 IPv4-only Client Code */
+/* aa450074 IPv4-only Server Code */
+/* ms898973 IPv4-only Source Code Examples */
+/* aa450077 IPv6 */
+/* aa450078 IPv6 Address Autoconfiguration */
+/* aa450079 IPv6 Addresses */
+/* aa450081 IPv6 Addresses to Configure */
+/* aa450044 IPv6 Addressing */
+/* aa450432 IPv6 adu */
+/* aa450080 IPv6 and IPv4 Coexistence */
+/* aa450087 IPv6 Application Development */
+/* aa450084 IPv6 Characteristics */
+/* ms900518 IPv6 dp6dns */
+/* ms900530 IPv6 dp6domain */
+/* ms900531 IPv6 dp6enum */
+/* ms900540 IPv6 dp6pd */
+/* ms900542 IPv6 dp6rf */
+/* aa450433 IPv6 gp */
+/* aa450434 IPv6 gpu */
+/* aa450435 IPv6 gpu MaxTempDADAttempts */
+/* aa450436 IPv6 gpu MaxTempLifetime */
+/* aa450437 IPv6 gpu MaxTempRandomTime */
+/* aa450438 IPv6 gpu NeighborCacheLimit */
+/* aa450439 IPv6 gpu RouteCacheLimit */
+/* aa450440 IPv6 gpu TempRandomTime */
+/* aa450441 IPv6 gpu TempRegenerateTime */
+/* aa450442 IPv6 gpu UseTemporaryAddresses */
+/* aa450443 IPv6 if */
+/* aa450445 IPv6 ifc */
+/* aa450446 IPv6 ifd */
+/* aa450083 IPv6 Implementations */
+/* aa450085 IPv6 Interface Identifiers */
+/* ms898974 Ipv6 Migration */
+/* aa450447 IPv6 nc */
+/* aa450448 IPv6 ncf */
+/* ms898975 IPv6 OS Design Development */
+/* aa450086 IPv6 Overview */
+/* aa450045 IPv6 Packets */
+/* aa450449 IPv6 ppd */
+/* aa450450 IPv6 ppt */
+/* aa450451 IPv6 ppu */
+/* aa450452 IPv6 rc */
+/* aa450453 IPv6 rcf */
+/* aa450088 IPv6 References */
+/* aa450454 IPv6 renew */
+/* aa450089 IPv6 RFCs and Internet Drafts */
+/* aa450455 IPv6 rlu */
+/* aa450456 IPv6 rt */
+/* aa450457 IPv6 rtu */
+/* ms898976 Ipv6 Samples */
+/* aa450090 IPv6 Security */
+/* aa450458 IPv6 spt */
+/* aa450459 IPv6 spu */
+/* aa450091 IPv6 Test Lab Requirements */
+/* aa450092 IPv6 Traffic Between Nodes in Different Sites Across the Internet (6to4) */
+/* aa450093 IPv6 Traffic Between Nodes on Different Subnets of an IPv4 Internetwork */
+/* aa450094 IPv6 Traffic Between Nodes on Different Subnets of an IPv6 Internetwork */
+/* aa450075 IPv6-Enabled Client Code */
+/* aa450076 IPv6-Enabled Server Code */
+/* aa450460 IPv6tun */
+/* aa450103 Joining and Leaving a Multicast Group */
+/* aa450109 Layered Protocols and Provider Chains */
+/* aa450114 Link Layer Functionality */
+/* aa450115 Listing Addresses */
+/* aa450117 Locating a Printer on a Network */
+/* ms886695 Logging Blocked Inbound Packets */
+/* aa450118 Machine Name to IP Address Maps */
+/* aa450120 Maintaining Route Tables for IPv4 */
+/* aa450121 Maintaining Route Tables for IPv6 */
+/* aa450123 Managing Interfaces */
+/* ms882519 Managing IP Addresses */
+/* ms882649 Managing IPv4 Routes */
+/* ms882660 Managing IPv6 Routes */
+/* ms882630 Managing Network Adapters */
+/* ms882641 Managing Network Connections with WNet */
+/* ms882665 Managing Routing */
+/* ms882681 Manually Configuring an IPv4 Address */
+/* ms899789 Manually Configuring IPv6 Addresses */
+/* ms882704 Mapping an IP Multicast Address */
+/* ms882717 Maximum Transmission Unit (MTU) */
+/* aa450082 Methods for Configuring IPv6 Addresses */
+/* ms882787 Microsoft Challenge-Handshake Authentication Protocol 2.0 (MS CHAP V2) */
+/* ms882814 MODULESLIST */
+/* ms882863 Multicast Extensions to Windows Sockets */
+/* ms882950 Multicast IPv6 Addresses */
+/* ms882958 Multicast Listener Discovery (MLD) */
+/* ms882965 Multihoming for IPv4 */
+/* ms882973 Multihoming for IPv6 */
+/* ms882984 Multiple Public Interface Support */
+/* ms882991 Multiple Transport Protocols */
+/* ms883014 Multipoint Attributes in the WSAPROTOCOL_INFOW Structure */
+/* ms883026 Multipoint Socket Attributes */
+/* ms883035 Multipoint Taxonomy and Glossary */
+/* ms883043 Nagle Algorithm */
+/* ms883051 Name Registration for IPv4 */
+/* ms883059 Name Resolution and Winsock */
+/* ms883065 Name Resolution Data Structures */
+/* ms883073 Name Resolution Data Structures in the SPI */
+/* ms883081 Name Resolution Division of Responsibilities Between DLL and Service Providers */
+/* ms883100 Name Resolution for IPv4 Using the Cache */
+/* ms883089 Name Resolution for IPv6 Using the Cache */
+/* ms883096 Name Resolution Functions */
+/* ms883098 Name Resolution Model */
+/* ms883099 Name Resolution Service Provider Requirements */
+/* ms883101 Namespace Organization */
+/* ms883102 Namespace Provider Architecture */
+/* ms883104 Namespace Provider Initialization and Cleanup */
+/* ms883103 Namespace Provider Installation */
+/* ms883106 Naming Conventions */
+/* ms883107 NAT */
+/* ms883108 NAT and Applications */
+/* ms883109 NAT Editor */
+/* ms883110 NAT Editor Functions */
+/* ms883112 NAT Editor Initialization and Registration */
+/* ms883113 NAT Editor Operation */
+/* ms883114 NAT Firewall Packet Logging */
+/* ms883121 NAT Packet Filter */
+/* ms883122 NAT Traversal */
+/* ms883123 NAT Traversal in Internet Gateways */
+/* ms883124 NAT Traversal Operation */
+/* ms883120 NATIVEWIFI */
+/* ms898987 NDIS Packet Capturing */
+/* ms883126 NDIS Packet Capturing Application Development */
+/* ms883127 NDIS Packet Capturing Migration */
+/* ms883125 NDIS Packet Capturing OS Development */
+/* ms883128 NDIS Packet Capturing Security */
+/* ms883129 Neighbor Discovery (ND) */
+/* ms883130 NETLOG */
+/* ms886701 Netlog */
+/* ms883131 Netlogctl */
+/* ms895675 Netstat */
+/* ms883132 NETWORK */
+/* ms883134 Network Address Translation */
+/* ms898988 Network Bridging */
+/* ms898989 Network Bridging Application Development */
+/* ms883135 Network Bridging Architecture */
+/* ms898990 Network Bridging Migration */
+/* ms883136 Network Bridging Object Identifiers */
+/* ms883137 Network Bridging OS Design Development */
+/* ms883138 Network Bridging Queriable Object Identifiers */
+/* ms898991 Network Bridging Reference */
+/* ms883139 Network Bridging Registry Settings */
+/* ms883140 Network Bridging Sample Registry Configuration */
+/* ms898992 Network Bridging Samples */
+/* ms883141 Network Bridging Security */
+/* ms883142 Network Bridging Settable Object Identifiers */
+/* ms883143 Network Bridging Spanning Tree Algorithm */
+/* ms883144 Network Driver Interface Specification (NDIS) */
+/* ms883145 Network Driver Interface Specification (NDIS) for IPv6 */
+/* ms883146 Network Folder */
+/* ms898997 Network Utilities */
+/* ms898998 Network Utilities Application Development */
+/* ms883147 Network Utilities Migration */
+/* ms883148 Network Utilities OS Design Development */
+/* ms883149 Network Utilities Samples */
+/* ms899230 Network Utilities Security */
+/* ms883150 Nonblocking Input/Output */
+/* ms883151 Notification of Network Events */
+/* ms883312 Obtaining Identity Information */
+/* ms883321 Obtaining the Buffer Size */
+/* ms883385 Operational Characteristics of NDIS Object Identifiers */
+/* ms883386 Out-of-Band Data in the SPI */
+/* ms883387 Overlapped Completion Indication Mechanisms */
+/* ms883388 Overlapped Input/Output */
+/* ms883390 Packet Data Handling and Editing */
+/* ms883392 PARENTALCONTROLS */
+/* ms883399 PASSWORD */
+/* ms883400 Path Maximum Transmission Unit (PMTU) Discovery */
+/* ms883419 Ping */
+/* ms899797 Pinging a Host in the IPv6 Test Lab by Using a Link-Local Address */
+/* ms883420 Plug and Play */
+/* ms883430 Port States */
+/* ms883428 PORTFORWARD */
+/* ms883438 Printing on a Network */
+/* ms883449 Protected Extensible Authentication Protocol (PEAP) */
+/* ms883450 Protocol Basics: Listen, Connect, Accept */
+/* ms883452 Protocol-Independent Multicast and Multipoint in the SPI */
+/* ms883453 Protocol-Independent Name Resolution */
+/* ms883460 RAS */
+/* ms883461 RAS and Authentication Protocol Interaction During Authentication */
+/* aa450124 Reading Socket Options */
+/* aa450125 Receiving an IP Multicast Datagram */
+/* aa450126 Receiving an IP Multicast Datagram Sample */
+/* aa450129 Receiving Notification of Network Events */
+/* aa450131 Reconnecting and Disconnecting */
+/* ms899537 Reference Gateway User Interface */
+/* aa450133 Reference Gateway User Interface Migration */
+/* aa450134 Reference Gateway User Interface OS Design Development */
+/* aa450135 Reference Gateway User Interface Samples */
+/* aa450136 Reference Gateway User Interface Security */
+/* ms899538 Remote Configuration Framework */
+/* aa450149 Remote Configuration Framework Application Development */
+/* ms899539 Remote Configuration Framework Interfaces */
+/* aa450146 Remote Configuration Framework Migration */
+/* ms881882 Remote Configuration Framework Modules */
+/* ms899540 Remote Configuration Framework OS Design Development */
+/* ms899541 Remote Configuration Framework Reference */
+/* aa450145 Remote Configuration Framework Registry Settings */
+/* aa450147 Remote Configuration Framework Samples */
+/* aa450148 Remote Configuration Framework Security */
+/* aa450150 REMOTEUTILS */
+/* ms899806 Removing an IPv6 Route */
+/* aa450229 Restricting Outbound Traffic to Selected TCP Ports */
+/* aa450162 Retrieving a Connection Name */
+/* aa450163 Retrieving a User Name */
+/* aa450164 Retrieving Information About Network Configuration */
+/* aa450181 Retrieving Network Data */
+/* aa450182 Retrieving Network Errors */
+/* ms900298 Retrieving Network Information */
+/* aa450166 Retrieving Statistics for IP and ICMP */
+/* aa450165 Retrieving Statistics for TCP and UDP */
+/* aa450186 ROOTDIRS */
+/* aa450187 Route */
+/* aa450188 Routing for IPv4 */
+/* aa450189 Routing for IPv6 */
+/* ms899815 Running the Checkv4 Utility */
+/* ms899823 Running the SimpleClient and SimpleServer Applications */
+/* aa450194 Scatter/Gather I/O Support */
+/* ms885824 Secure Socket Control Codes */
+/* aa450204 Sending an IP Multicast Datagram */
+/* aa450205 Sending an IP Multicast Datagram Sample */
+/* aa450217 Service Installation in the Winsock SPI */
+/* aa450219 Service Provider Activation */
+/* aa450220 Service Query */
+/* aa450221 Service Registry Settings */
+/* ms884887 Setting a User Name and Password */
+/* ms884896 Setting ForwardMetric Values */
+/* ms884912 Shared Sockets in the SPI */
+/* ms884916 Silly Window Syndrome (SWS) */
+/* ms884918 Single Subnet with Link-Local Addresses */
+/* ms884919 SIO_MULTICAST_SCOPE IOCTL */
+/* ms884920 SIO_MULTIPOINT_LOOPBACK Ioctl */
+/* ms884921 Slow Start Algorithm and Congestion Avoidance */
+/* ms884922 SMBFILE */
+/* ms884923 SMBPRINT */
+/* ms884930 Socket Attribute Flags and Modes */
+/* ms884931 Socket Client */
+/* ms884933 Socket Connections on Connection-Oriented Protocols */
+/* ms884932 Socket Connections on Connectionless Protocols */
+/* ms884934 Socket Creation and Descriptor Management */
+/* ms884935 Socket Functions */
+/* ms884936 Socket I/O */
+/* ms899548 Socket Options */
+/* ms884937 Socket Options and IOCTLs */
+/* ms884938 Socket Options Not Supported */
+/* ms884939 Socket Server */
+/* ms900408 SOL_IRLMP */
+/* ms884940 SOL_SOCKET */
+/* ms884941 Spanning Tree Algorithm Functionality */
+/* ms884947 Static Port Mappings */
+/* ms899832 Stream Socket Application */
+/* ms899840 Submitting a Firewall for Certification */
+/* ms884950 Summary of Namespace Provider Functions */
+/* ms884951 Summary of Socket IOCTL Opcodes */
+/* ms884952 Summary of SPI Functions */
+/* ms884956 Support for Scatter/Gather Input/Output in the SPI */
+/* ms884964 TCP Connections to and from Multihomed Computers */
+/* ms884986 TCP Keep-Alive Messages */
+/* ms884987 TCP Receive Window Size Calculation and Window Scaling */
+/* ms884988 TCP Retransmission Behavior */
+/* ms884989 TCP Selective Acknowledgment */
+/* ms899549 TCP/IP */
+/* ms884967 TCP/IP and Dial-up Support */
+/* ms884974 TCP/IP and Dynamic DNS */
+/* ms884970 TCP/IP and IP Helper */
+/* ms884966 TCP/IP and the DHCP Client */
+/* ms884968 TCP/IP and the DNS Client */
+/* ms884983 TCP/IP and Windows Sockets */
+/* ms884984 TCP/IP and WinHTTP */
+/* ms884982 TCP/IP and WinInet */
+/* ms884985 TCP/IP and WINS */
+/* ms899552 TCP/IP Application Development */
+/* ms880936 TCP/IP Architectural Model */
+/* ms884965 TCP/IP Best Practices */
+/* ms899550 TCP/IP Migration */
+/* ms884971 TCP/IP OS Design Development */
+/* ms884972 TCP/IP Protocol Suite */
+/* ms899553 TCP/IP Reference */
+/* ms884973 TCP/IP Registry Settings */
+/* ms899554 TCP/IP Samples */
+/* ms884975 TCP/IP Security */
+/* ms884969 TCP/IP Support in Windows CE */
+/* ms884976 TCP/IPv4 and TCP/IPv6 Common Registry Settings */
+/* ms884977 TCP/IPv4 Configurable Registry Settings */
+/* ms900416 TCP/IPv4 Device Name Registry Settings */
+/* ms884978 TCP/IPv4 Non-Configurable Registry Settings */
+/* ms884979 TCP/IPv6 Architectural Model */
+/* ms884980 TCP/IPv6 Configurable Registry Settings */
+/* ms884981 TCP/IPv6 Registry Settings */
+/* ms899556 TCP/IPv6 Troubleshooting Tools */
+/* ms885274 Terminating a Network Connection */
+/* ms899850 Testing an IPv6 Connection by Using the Ping Command */
+/* ms899868 Testing IPv6 Connectivity by Using the Ping Command */
+/* ms899882 Testing your Application or Device in an IPv6 Environment */
+/* ms885292 Throughput Considerations */
+/* ms885298 TIMESERVICE */
+/* ms885306 Timestamps (RFC 1323) */
+/* aa450971 Tracert */
+/* ms885312 Transmission Control Protocol (TCP) */
+/* ms885323 Transport Installation */
+/* ms885336 Transport Level Security (TLS) */
+/* ms885344 Transport Mapping Between API and SPI Functions */
+/* ms885352 Transport Service Providers */
+/* ms899599 Troubleshooting IPv6 */
+/* ms899600 Troubleshooting: Setting Up and Using the IPv6 Test Lab */
+/* ms885359 Unicast IPv6 Addresses */
+/* ms885421 Upcalls Exposed by Ws2.dll */
+/* ms900593 USB Flash Config Tool */
+/* ms900441 USB Flash Config Tool Architecture */
+/* ms900595 USB Flash Config Tool Migration */
+/* ms900443 USB Flash Config Tool OS Design Development */
+/* ms900447 USB Flash Config Tool Registry Settings */
+/* ms900597 USB Flash Config Tool Samples */
+/* ms900450 USB Flash Config Tool Security */
+/* ms885768 Use of ICMP to Diagnose Problems for IPv4 */
+/* ms885769 Use of IGMP by Windows CE */
+/* ms885773 User Datagram Protocol (UDP) */
+/* ms885774 User Datagram Protocol (UDP) and Name Resolution for IPv4 */
+/* ms885775 USERS */
+/* ms885776 Using a Deferred Handshake */
+/* ms885778 Using Event Objects */
+/* ms885779 Using IPV6_PROTECTION_LEVEL */
+/* ms900101 Using Temporary Addresses in the IPv6 Test Lab */
+/* ms885783 Using the Address Resolution Protocol */
+/* ms885781 Using the Remote Configuration Framework */
+/* ms885789 Using WSAStartup to Initialize Winsock */
+/* ms885790 VERSION */
+/* ms900107 Viewing Interface Information */
+/* ms900114 Viewing the IPv6 Routing Table */
+/* ms900123 Viewing the Neighbor Cache */
+/* ms900128 Viewing the Route Cache */
+/* ms885794 WATSON */
+/* ms899584 Windows Networking API/Redirector */
+/* ms885813 Windows Networking API/Redirector Application Development */
+/* aa450259 Windows Networking API/Redirector Functions */
+/* ms885814 Windows Networking API/Redirector Migration */
+/* ms899585 Windows Networking API/Redirector OS Design Development */
+/* aa450260 Windows Networking API/Redirector Reference */
+/* aa450132 Windows Networking API/Redirector Registry Settings */
+/* ms885815 Windows Networking API/Redirector Samples */
+/* ms885816 Windows Networking API/Redirector Security */
+/* aa450261 Windows Networking API/Redirector Structures */
+/* ms899586 Windows Sockets */
+/* ms898578 Windows Sockets Reference */
+/* ms885818 Windows Sockets Support for IPv6 */
+/* ms885819 Windows-Specific Extension Functions */
+/* ms885820 Winsock 2.2 */
+/* ms885822 Winsock and WOSA */
+/* ms899587 Winsock Application Development */
+/* ms885821 Winsock Architecture */
+/* ms885823 Winsock Completion Indications */
+/* aa450262 Winsock Enumerations */
+/* aa450263 Winsock Error Codes */
+/* ms885825 Winsock Event Objects */
+/* aa450264 Winsock Functions */
+/* ms886607 Winsock Migration */
+/* ms886615 Winsock Name Resolution */
+/* ms885817 Winsock OS Design Development */
+/* ms886617 Winsock Overlapped I/O and Event Objects */
+/* aa450265 Winsock Reference */
+/* ms899596 Winsock Samples */
+/* ms886618 Winsock Secure Sockets */
+/* ms886619 Winsock Security */
+/* ms886620 Winsock Service Provider Interface (SPI) */
+/* ms886621 Winsock Service Providers */
+/* aa450266 Winsock SPI Functions */
+/* aa450267 Winsock SPI Reference */
+/* aa450269 Winsock Structures */
+/* ms886481 Winsock Support in Windows CE */
+/* ------------------------------------------------------------------
+ * Book surface: wsock-structures (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450370 fd_set (Header: Winsock2.h.) */
+/* ms890319 hostent (Header: Winsock2.h.) */
+/* ms890973 in_addr (Header: Winsock2.h.) */
+/* ms894561 linger (Header: Winsock2.h.) */
+/* ms896341 protoent (Header: Winsock2.h.) */
+/* aa450886 servent (Header: Winsock2.h.) */
+/* aa450942 sockaddr (Header: Winsock2.h.) */
+/* aa450946 sockaddr_in (Header: Winsock2.h.) */
+/* aa450970 timeval (Header: Winsock2.h.) */
 #endif  /* _WINSOCK2_H */

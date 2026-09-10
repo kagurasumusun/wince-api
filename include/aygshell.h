@@ -624,4 +624,18 @@ AKARI_CE_IMPORT BOOL SHSipPreference(HWND hwnd, SIPSTATE st) AKARI_CE_NAME(SHSip
 #define SPI_SETCURRENTIM                             0x00E2
 #define SPI_GETCURRENTIM                             0x00E3
 
+/* ------------------------------------------------------------------
+ * Book surface: aygshell (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909846 INewMenuItemServer::CreateNewItem (Header: Aygshell.h.) */
+/* ms909878 IShellNotificationCallback::OnCommandSelected (Header: aygshell.h) */
+/* ms909879 IShellNotificationCallback::OnDismiss (Header: aygshell.h) */
+/* ms909880 IShellNotificationCallback::OnLinkSelected (Header: aygshell.h) */
+/* ------------------------------------------------------------------
+ * Book surface: shell-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909846 INewMenuItemServer::CreateNewItem (Header: Aygshell.h.) */
+/* ms909878 IShellNotificationCallback::OnCommandSelected (Header: aygshell.h) */
+/* ms909879 IShellNotificationCallback::OnDismiss (Header: aygshell.h) */
+/* ms909880 IShellNotificationCallback::OnLinkSelected (Header: aygshell.h) */
 #endif /* AKARI_AYGSHELL_H */

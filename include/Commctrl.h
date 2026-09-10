@@ -3579,4 +3579,418 @@ typedef struct LVSETINFOTIP {
 #define VIEW_SORTDATE                                0x0006
 #define VIEW_SORTTYPE                                0x0007
 
+/* ------------------------------------------------------------------
+ * Book surface: cc-anim (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452858 Animation Controls Macros */
+/* aa452859 Animation Controls Messages */
+/* aa452860 Animation Controls Notifications */
+/* aa452861 Animation Controls Styles */
+/* ------------------------------------------------------------------
+ * Book surface: cc-capedit (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452920 CAPEDIT Control (Header: Commctrl.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: cc-capedit (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452921 CapEdit Controls Messages */
+/* ------------------------------------------------------------------
+ * Book surface: cc-cdraw (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907573 Custom Draw Messages */
+/* ms907580 Custom Draw Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-cmdbands-dep (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ee503418 REBARBANDINFO */
+/* ------------------------------------------------------------------
+ * Book surface: cc-cmdbands (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907179 Command Bands Functions */
+/* ms907189 Command Bands Macros */
+/* ms907205 Command Bands Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-cmdbars (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907210 Command Bars Functions */
+/* ms907216 Command Bars Macros */
+/* ------------------------------------------------------------------
+ * Book surface: cc-common (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907234 Common Control Functions */
+/* ms907242 Common Control Macros */
+/* ms907247 Common Control Messages */
+/* ms907254 Common Control Notifications */
+/* ms907537 Common Control Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-dateandtimepicker (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907588 Date and Time Picker Controls Macros */
+/* ms927538 Date and Time Picker Controls Messages */
+/* ms927544 Date and Time Picker Controls Notifications */
+/* ms927557 Date and Time Picker Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-header (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms927659 Header Controls Macros */
+/* ms927663 Header Controls Messages */
+/* ms927670 Header Controls Notifications */
+/* ms927682 Header Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-listview (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms927751 List-View Controls Macros */
+/* ms927755 List-View Controls Messages */
+/* ms927760 List-View Controls Notifications */
+/* ms927769 List-View Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-monthcalendar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms927836 Month Calendar Controls Macros */
+/* ms927842 Month Calendar Controls Messages */
+/* ms927846 Month Calendar Controls Notifications */
+/* ms927853 Month Calendar Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-progress (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms938700 Progress Bar Controls Messages */
+/* ms938703 Progress Bar Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-rebar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: cc-rebar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms938711 Rebar Controls Messages */
+/* aa452727 Rebar Controls Notifications */
+/* aa452729 Rebar Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-sbedit (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms939903 SBEDIT Control (Header: Commctrl.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: cc-status (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452763 Status Bars Functions */
+/* aa452764 Status Bars Messages */
+/* aa452765 Status Bars Notifications */
+/* ------------------------------------------------------------------
+ * Book surface: cc-tab (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452778 Tab Controls Macros */
+/* aa452779 Tab Controls Messages */
+/* aa452780 Tab Controls Notifications */
+/* aa452782 Tab Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-toolbar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: cc-toolbar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452784 Toolbar Controls Functions */
+/* aa452785 Toolbar Controls Messages */
+/* aa452786 Toolbar Controls Notifications */
+/* aa452788 Toolbar Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-tooltips (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452789 ToolTips Messages */
+/* aa453758 ToolTips Notifications */
+/* aa452791 ToolTips Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-trackbar (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452796 Trackbar Controls Messages */
+/* ------------------------------------------------------------------
+ * Book surface: cc-treeview (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452798 Tree View Controls Macros */
+/* aa452799 Tree View Controls Messages */
+/* aa452800 Tree View Controls Notifications */
+/* aa452802 Tree View Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-updown (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452803 Up-Down Controls Functions */
+/* aa452804 Up-Down Controls Messages */
+/* aa452806 Up-Down Controls Structures */
+/* ------------------------------------------------------------------
+ * Book surface: shell-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452920 CAPEDIT Control (Header: Commctrl.h.) */
+/* ms939903 SBEDIT Control (Header: Commctrl.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: shell-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms938413 About Animation Controls */
+/* ms906513 Adding a Global New Button Menu Item */
+/* ms906538 Adding a Temporary New Button Menu Item */
+/* ms906521 Adding an Advanced Backlight Dialog Box */
+/* ms906525 Adding an Advanced Print Dialog Box */
+/* ms906532 Adding an Image List to a Tab Control */
+/* ms906530 Adding and Editing Item Labels */
+/* ms906546 Adding Callback Items and Callback Masks */
+/* ms906548 Adding Columns */
+/* ms925985 Adding Header Control Items */
+/* ms925989 Adding Items and Subitems */
+/* aa453945 Adding Resources to a Control Panel Application */
+/* ms926077 Adding Text to the Status Bar */
+/* ms926078 Adding Tool Text */
+/* ms926084 Adding Tool Types */
+/* ms926086 Animation Controls */
+/* aa452858 Animation Controls Macros */
+/* aa452859 Animation Controls Messages */
+/* aa452860 Animation Controls Notifications */
+/* ms927251 Animation Controls Reference */
+/* aa452861 Animation Controls Styles */
+/* ms926093 Arranging, Sorting, and Finding List Views */
+/* ms926099 Atom Tables */
+/* aa452863 ATTRIB */
+/* ms926103 AYGShell API Extensions */
+/* ms927269 AYGShell Controls */
+/* ms927272 AYGShell Enumerations */
+/* ms927275 AYGShell Functions */
+/* ms907077 AYGShell Interfaces */
+/* ms907080 AYGShell Macros */
+/* ms907085 AYGShell Messages */
+/* ms907090 AYGShell Reference */
+/* ms907095 AYGShell Structures */
+/* aa453946 Building a Control Panel Application */
+/* aa452918 CALL */
+/* aa452921 CapEdit Controls Messages */
+/* aa452922 CapEdit Controls Reference */
+/* ms926120 Changing Fonts and Colors */
+/* aa453947 Changing the Skin Code for the Progress Bar */
+/* ms908110 CHDIR, CD */
+/* aa452828 Cloning the Commctrl Module */
+/* ms928588 CLS */
+/* ms907179 Command Bands Functions */
+/* ms907189 Command Bands Macros */
+/* ms907195 Command Bands Reference */
+/* ms907205 Command Bands Structures */
+/* ms907210 Command Bars Functions */
+/* ms907216 Command Bars Macros */
+/* ms907221 Command Bars Reference */
+/* aa453924 Command Processor */
+/* ms907227 Command Processor Commands */
+/* ms926133 Command Processor OS Design Development */
+/* ms926137 Command Processor Registry Settings */
+/* aa453925 Command Processor Shell */
+/* ms907234 Common Control Functions */
+/* ms907242 Common Control Macros */
+/* ms907247 Common Control Messages */
+/* ms907254 Common Control Notifications */
+/* ms907532 Common Control Reference */
+/* ms926140 Common Control Registry Settings */
+/* ms907537 Common Control Structures */
+/* ms926144 Common Controls */
+/* ms908145 Common Controls Reference */
+/* ms926146 Common Dialog Boxes (Shell) */
+/* ms907541 Common Dialog Boxes Functions */
+/* ms907548 Common Dialog Boxes Messages */
+/* ms907551 Common Dialog Boxes Reference */
+/* ms907558 Common Dialog Boxes Structures */
+/* ms908148 Console Registry Settings */
+/* ms926152 Control Panel */
+/* ms926154 Control Panel Applications */
+/* ms907564 Controls Messages */
+/* ms907569 Controls Reference */
+/* ms908150 COPY (Command Processor) */
+/* ms926168 Creating a Command Bands Control */
+/* ms926170 Creating a Command Bar */
+/* ms914264 Creating a Control Panel Application */
+/* ms926176 Creating a Date and Time Picker Control */
+/* ms926179 Creating a Header Control */
+/* ms914378 Creating a Hello World Application */
+/* ms926185 Creating a List View Control */
+/* ms926188 Creating a Month Calendar Control */
+/* ms926191 Creating a Multiple-Part Status Bar */
+/* ms926208 Creating a Progress Bar */
+/* ms926211 Creating a Property Sheet */
+/* ms926213 Creating a Rebar Control */
+/* ms926227 Creating a Status Bar */
+/* ms926233 Creating a Tab Control */
+/* ms926235 Creating a Toolbar */
+/* ms926239 Creating a ToolTip Control */
+/* ms906553 Creating a Trackbar */
+/* ms906558 Creating a Tree View */
+/* ms906562 Creating a Tree-View Image List */
+/* ms906564 Creating a Welcome Application */
+/* ms914382 Creating an Application that Demonstrates the Progress Bar */
+/* ms914387 Creating an Empty Display-Based OS */
+/* ms926202 Creating an Image List */
+/* ms926205 Creating an Up-Down Control */
+/* ms906575 Creating Controls */
+/* ms914399 Creating Excluded Projects to Host Shell Source Code in the IDE */
+/* ms906585 Creating Image Lists */
+/* ms906591 Creating Multiline ToolTips */
+/* ms906597 Creating Tracking ToolTips */
+/* ms906578 Creating, Finding, and Deleting Atoms */
+/* ms907573 Custom Draw Messages */
+/* ms907578 Custom Draw Reference */
+/* ms907580 Custom Draw Structures */
+/* ms906608 Customizing Folders with Desktop.ini */
+/* ms906612 Customizing Output with Callback Fields */
+/* ms908196 DATE */
+/* ms907588 Date and Time Picker Controls Macros */
+/* ms927538 Date and Time Picker Controls Messages */
+/* ms927544 Date and Time Picker Controls Notifications */
+/* ms927550 Date and Time Picker Controls Reference */
+/* ms927557 Date and Time Picker Controls Structures */
+/* aa452934 Desktop Registry Settings */
+/* aa452945 Dialing Characters Registry Settings */
+/* aa452946 Dialing Locations Registry Settings */
+/* aa452954 DIR */
+/* aa452628 Displaying and Handling Items in the New Button Menu */
+/* aa452635 Displaying Information */
+/* aa452994 ECHO (Command Processor) */
+/* aa452638 Editing Labels */
+/* aa452639 Enabling a Backlight */
+/* aa452642 Enabling Shell Callback Functions */
+/* aa452644 Enabling Slide Animation for the Taskbar */
+/* aa453057 ERASE, DEL */
+/* aa453059 EXIT */
+/* aa452650 Extending Shortcut Menus for a File Class */
+/* ms929202 General Shell Registry Settings */
+/* aa453191 GOTO (Command Processor) */
+/* aa452658 Handling Drag-and-Drop Messages */
+/* aa452659 Handling Messages for Tab Controls */
+/* aa452660 Handling Miscellaneous Messages */
+/* aa452662 Handling Paint Cycles, Drawing Stages, and Messages */
+/* aa452664 Handling Tree-View Messages */
+/* ms927659 Header Controls Macros */
+/* ms927663 Header Controls Messages */
+/* ms927670 Header Controls Notifications */
+/* ms927676 Header Controls Reference */
+/* ms927682 Header Controls Structures */
+/* ms929929 HELP */
+/* aa452665 Hiding System Sound Events */
+/* aa452830 How to Customize the Appearance of Common Controls */
+/* aa452831 How to Customize the Shell */
+/* aa452832 How to Implement a Control Panel Application */
+/* ms929941 IF (Command Processor) */
+/* aa452670 Including a Command Processor */
+/* aa452671 Including the Standard Shell */
+/* aa452672 Including the Taskman Shell */
+/* aa452675 Installing a Custom Shell */
+/* ms927751 List-View Controls Macros */
+/* ms927755 List-View Controls Messages */
+/* ms927760 List-View Controls Notifications */
+/* ms927764 List-View Controls Reference */
+/* ms927769 List-View Controls Structures */
+/* ms931429 MKDIR, MD */
+/* aa452681 Modifying Control Position and Acceleration */
+/* aa452683 Modifying Tree-View Item Appearance */
+/* ms927836 Month Calendar Controls Macros */
+/* ms927842 Month Calendar Controls Messages */
+/* ms927846 Month Calendar Controls Notifications */
+/* ms927850 Month Calendar Controls Reference */
+/* ms927853 Month Calendar Controls Structures */
+/* ms931456 MOVE */
+/* ms931463 net */
+/* ms911917 PATH */
+/* ms911918 PAUSE (Command Processor) */
+/* aa452692 Pocket PC-style Menu Bars */
+/* aa452693 Pocket PC-style New Button */
+/* ms938700 Progress Bar Controls Messages */
+/* ms938702 Progress Bar Controls Reference */
+/* ms938703 Progress Bar Controls Structures */
+/* aa453550 PROMPT */
+/* ms938704 Property Sheets Functions */
+/* ms938705 Property Sheets Macros */
+/* ms938706 Property Sheets Messages */
+/* ms938707 Property Sheets Notifications */
+/* ms938708 Property Sheets Reference */
+/* ms938709 Property Sheets Structures */
+/* aa453605 PWD */
+/* ms938711 Rebar Controls Messages */
+/* aa452727 Rebar Controls Notifications */
+/* aa452728 Rebar Controls Reference */
+/* aa452729 Rebar Controls Structures */
+/* aa452708 Relaying Mouse Messages to a ToolTip */
+/* ms939769 REM (Command Processor) */
+/* ms939790 RENAME, REN */
+/* aa452710 Responding to the Prepaint Notification */
+/* ms939859 RMDIR, RD */
+/* aa452714 Sample Custom Draw Function */
+/* aa452733 SbEdit Controls Reference */
+/* aa452716 Selecting Shell Components */
+/* ms939984 SET (Command Processor) */
+/* aa452720 Setting Regional Preferences */
+/* aa452721 Setting Tab Size and Position */
+/* aa452722 Setting the Position and Scroll Position of a List View Item */
+/* aa452723 Setting the Range and Current Position */
+/* aa452724 Setting the Size and Position of the Header Control */
+/* aa452725 Setting the Time */
+/* ms914408 Setting up Platform Builder to Build Modified Code in a Public Directory */
+/* ms914412 Setting Up the Source Files for a Custom Shell */
+/* aa453937 Shell Application Development */
+/* ms926615 Shell Components */
+/* aa452739 Shell Migration */
+/* aa453938 Shell OS Design Development */
+/* aa452738 Shell OS Functions */
+/* aa452740 Shell OS Reference */
+/* aa452744 Shell OS Structures */
+/* aa453939 Shell Overview */
+/* aa452741 Shell Reference */
+/* aa452742 Shell Registry Settings */
+/* aa452743 Shell Samples */
+/* ms926685 Shell Security */
+/* aa453712 SHIFT */
+/* ms933849 Simple Shell Modifications */
+/* ms926840 Specifying Toolbar Size, Position, and Appearance */
+/* aa452752 Standard Shell Enumerations */
+/* aa452753 Standard Shell Functions */
+/* aa452754 Standard Shell Interfaces */
+/* aa452755 Standard Shell Macros */
+/* aa452756 Standard Shell Messages */
+/* aa452757 Standard Shell Reference */
+/* aa452758 Standard Shell Structures */
+/* ms940348 START */
+/* aa452763 Status Bars Functions */
+/* aa452764 Status Bars Messages */
+/* aa452765 Status Bars Notifications */
+/* aa452766 Status Bars Reference */
+/* ms926882 Supporting Full-Screen Dialog Boxes */
+/* ms926909 Supporting the Input Panel */
+/* aa452778 Tab Controls Macros */
+/* aa452779 Tab Controls Messages */
+/* aa452780 Tab Controls Notifications */
+/* aa452781 Tab Controls Reference */
+/* aa452782 Tab Controls Structures */
+/* ms933416 TIME */
+/* aa453747 TITLE (Command Processor) */
+/* aa452784 Toolbar Controls Functions */
+/* aa452785 Toolbar Controls Messages */
+/* aa452786 Toolbar Controls Notifications */
+/* aa452787 Toolbar Controls Reference */
+/* aa452788 Toolbar Controls Structures */
+/* aa452789 ToolTips Messages */
+/* aa453758 ToolTips Notifications */
+/* aa452790 ToolTips Reference */
+/* aa452791 ToolTips Structures */
+/* aa452796 Trackbar Controls Messages */
+/* aa452797 Trackbar Controls Reference */
+/* aa452798 Tree View Controls Macros */
+/* aa452799 Tree View Controls Messages */
+/* aa452800 Tree View Controls Notifications */
+/* aa452801 Tree View Controls Reference */
+/* aa452802 Tree View Controls Structures */
+/* ms914066 TYPE */
+/* ms926983 Types of Atoms */
+/* aa452803 Up-Down Controls Functions */
+/* aa452804 Up-Down Controls Messages */
+/* aa452805 Up-Down Controls Reference */
+/* aa452806 Up-Down Controls Structures */
+/* ms927020 Using Advanced List View Functionality */
+/* ms906829 Using Animation Controls */
+/* ms906849 Using Atoms */
+/* ms906859 Using Images in Image Lists */
+/* ms906897 Using Overlays in Image Lists */
+/* ms927169 Using the Custom Draw Service */
+/* ms927173 Using ToolTips */
+/* ms914103 Windows CE Explorer Registry Settings */
+/* ms927193 Working with Active and Inactive Pages in a Property Sheet */
+/* ms927196 Working with Advanced Header Control Functionality */
+/* ms927205 Working with Common Controls */
 #endif /* AKARI_COMMCTRL_H */

@@ -222,6 +222,11 @@ typedef enum {
 /* docs/inventory.md M54.                                             */
 /* ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: rdp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513957 IMsTscAdvancedSettings::put_DisableRdpdr (Header: Discodlg.h, Mstsax.idl.) */
+
 #ifdef __cplusplus
 }
 #endif

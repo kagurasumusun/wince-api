@@ -1659,6 +1659,406 @@ typedef struct IRTCWatcherEvent2 IRTCWatcherEvent2;
  *   ms911496 StatusCode: HRESULT get_StatusCode( long* plStatusCode);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: rtc (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909308 IRTCBuddy2::EnumerateGroups (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909309 IRTCBuddy2::EnumeratePresenceDevices (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909312 IRTCBuddy2::PresenceDevices (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909313 IRTCBuddy2::PresenceProperty (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909314 IRTCBuddy2::Profile (Header: Rtccore.h, Rtccore.idl) */
+/* ms909315 IRTCBuddy2::Refresh (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909316 IRTCBuddy2::SubscriptionType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930128 IRTCBuddy::Notes (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930134 IRTCBuddy::Status (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909317 IRTCBuddyEvent2::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909319 IRTCBuddyEvent2::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909320 IRTCBuddyEvent2::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909321 IRTCBuddyEvent::Buddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909323 IRTCBuddyGroup::AddBuddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909324 IRTCBuddyGroup::Buddies (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909325 IRTCBuddyGroup::Data (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909326 IRTCBuddyGroup::EnumerateBuddies (Header: Rtccore.h, Rtccore.idl.) */
+/* ms929968 IRTCBuddyGroup::Name (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930098 IRTCBuddyGroup::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930105 IRTCBuddyGroup::RemoveBuddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909327 IRTCBuddyGroupEvent::Buddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909328 IRTCBuddyGroupEvent::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909329 IRTCBuddyGroupEvent::Group (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909548 IRTCBuddyGroupEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909665 IRTCClient2::AllowedPorts (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909769 IRTCClient2::AnswerMode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909780 IRTCClient2::ClientCurVer (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909789 IRTCClient2::ClientName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909800 IRTCClient2::CreateSessionWithDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909809 IRTCClient2::InitializeEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms909899 IRTCClient2::InvokeTuningWizardEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930346 IRTCClient2::PreferredSecurityLevel (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930435 IRTCClient2::SetSessionDescriptionManager (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930643 IRTCClient2::Version (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910041 IRTCClient::ActiveMedia (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910051 IRTCClient::AudioMuted (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910054 IRTCClient::CreateSession (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910058 IRTCClient::EventFilter (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910061 IRTCClient::Initialize (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910062 IRTCClient::InvokeTuningWizard (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910063 IRTCClient::IsT120AppletRunning (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910064 IRTCClient::IsTuned (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910066 IRTCClient::IVideoWindow (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910067 IRTCClient::ListenForIncomingSessions (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910068 IRTCClient::LocalUserName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910069 IRTCClient::LocalUserURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910071 IRTCClient::MaxBitrate (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910072 IRTCClient::MediaCapabilities (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910073 IRTCClient::NetworkAddresses (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910074 IRTCClient::NetworkQuality (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910075 IRTCClient::PlayRing (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910080 IRTCClient::PreferredAEC (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910081 IRTCClient::PreferredAudioDevice (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910082 IRTCClient::PreferredMediaTypes (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910083 IRTCClient::PreferredVideoDevice (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910084 IRTCClient::PreferredVolume (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910085 IRTCClient::PrepareForShutdown (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910129 IRTCClient::SendDTMF (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910130 IRTCClient::SetPreferredMediaTypes (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910131 IRTCClient::Shutdown (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910132 IRTCClient::StartT120Applet (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910133 IRTCClient::StopT120Applets (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910134 IRTCClient::TemporalSpatialTradeOff (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910135 IRTCClient::Volume (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910055 IRTCClientEvent::Client (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910056 IRTCClientEvent::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910076 IRTCClientPortManagement::GetPortRange (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910078 IRTCClientPortManagement::StartListenAddressAndPort (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910079 IRTCClientPortManagement::StopListenAddressAndPort (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910086 IRTCClientPresence2::AddBuddyEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910087 IRTCClientPresence2::AddGroup (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910088 IRTCClientPresence2::AddWatcherEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910089 IRTCClientPresence2::DisablePresence (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910090 IRTCClientPresence2::EnablePresenceEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910091 IRTCClientPresence2::EnumerateGroups (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910092 IRTCClientPresence2::GetLocalPresenceInfo (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910093 IRTCClientPresence2::GetPresenceData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910094 IRTCClientPresence2::Group (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910095 IRTCClientPresence2::Groups (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910097 IRTCClientPresence2::PresenceProperty (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910098 IRTCClientPresence2::RemoveGroup (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910099 IRTCClientPresence2::SetPresenceData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910100 IRTCClientPresence2::WatcherEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910101 IRTCClientPresence::AddBuddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910102 IRTCClientPresence::AddWatcher (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910103 IRTCClientPresence::Buddies (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910104 IRTCClientPresence::Buddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910105 IRTCClientPresence::EnablePresence (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910106 IRTCClientPresence::EnumerateBuddies (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910107 IRTCClientPresence::EnumerateWatchers (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910108 IRTCClientPresence::Export (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910109 IRTCClientPresence::Import (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910112 IRTCClientPresence::OfferWatcherMode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910113 IRTCClientPresence::PrivacyMode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910114 IRTCClientPresence::RemoveBuddy (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910115 IRTCClientPresence::RemoveWatcher (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910116 IRTCClientPresence::SetLocalPresenceInfo (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910117 IRTCClientPresence::Watcher (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910118 IRTCClientPresence::Watchers (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910119 IRTCClientProvisioning2::EnableProfileEx (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910121 IRTCClientProvisioning::CreateProfile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910122 IRTCClientProvisioning::DisableProfile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910123 IRTCClientProvisioning::EnableProfile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910124 IRTCClientProvisioning::EnumerateProfiles (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910125 IRTCClientProvisioning::GetProfile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910127 IRTCClientProvisioning::Profiles (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910128 IRTCClientProvisioning::SessionCapabilities (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930842 IRTCCollection::_NewEnum (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930755 IRTCCollection::Count (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930835 IRTCCollection::Item (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930851 IRTCEnumBuddies::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930867 IRTCEnumBuddies::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930877 IRTCEnumBuddies::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930885 IRTCEnumBuddies::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930893 IRTCEnumGroups::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910271 IRTCEnumGroups::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910302 IRTCEnumGroups::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910310 IRTCEnumGroups::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910323 IRTCEnumParticipants::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910340 IRTCEnumParticipants::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910350 IRTCEnumParticipants::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910356 IRTCEnumParticipants::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910365 IRTCEnumPresenceDevices::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910377 IRTCEnumPresenceDevices::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910387 IRTCEnumPresenceDevices::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910391 IRTCEnumPresenceDevices::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910397 IRTCEnumProfiles::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910408 IRTCEnumProfiles::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910413 IRTCEnumProfiles::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910417 IRTCEnumProfiles::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910426 IRTCEnumUserSearchResults::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910437 IRTCEnumUserSearchResults::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910443 IRTCEnumUserSearchResults::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910452 IRTCEnumUserSearchResults::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910453 IRTCEnumWatchers::Clone (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910455 IRTCEnumWatchers::Next (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910456 IRTCEnumWatchers::Reset (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910457 IRTCEnumWatchers::Skip (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910458 IRTCEventNotification::Event (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910461 IRTCInfoEvent::Info (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910462 IRTCInfoEvent::InfoHeader (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910463 IRTCInfoEvent::Participant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910464 IRTCInfoEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910465 IRTCIntensityEvent::Direction (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910467 IRTCIntensityEvent::Level (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910468 IRTCIntensityEvent::Max (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910469 IRTCIntensityEvent::Min (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910470 IRTCMediaEvent::EventReason (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910471 IRTCMediaEvent::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910473 IRTCMediaEvent::MediaType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910472 IRTCMediaEvent:IDispatch (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910474 IRTCMediaRequestEvent::Accept (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910475 IRTCMediaRequestEvent::CurrentMedia (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910477 IRTCMediaRequestEvent::ProposedMedia (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910478 IRTCMediaRequestEvent::Reject (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910479 IRTCMediaRequestEvent::RemotePreferredSecurityLevel (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910480 IRTCMediaRequestEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910481 IRTCMediaRequestEvent::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910482 IRTCMessagingEvent::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910484 IRTCMessagingEvent::Message (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910485 IRTCMessagingEvent::MessageHeader (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910486 IRTCMessagingEvent::Participant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910487 IRTCMessagingEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910488 IRTCMessagingEvent::UserStatus (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910490 IRTCParticipant::Name (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910491 IRTCParticipant::Removable (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910492 IRTCParticipant::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910493 IRTCParticipant::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910498 IRTCParticipant::UserURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910495 IRTCParticipantStateChangeEvent::Participant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910496 IRTCParticipantStateChangeEvent::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910497 IRTCParticipantStateChangeEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910499 IRTCPortManager::GetMapping (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910501 IRTCPortManager::ReleaseMapping (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910502 IRTCPortManager::UpdateRemoteAddress (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910503 IRTCPresenceContact::Data (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910505 IRTCPresenceContact::Name (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910506 IRTCPresenceContact::Persistent (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910507 IRTCPresenceContact::PresentityURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910508 IRTCPresenceDataEvent::GetPresenceData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910510 IRTCPresenceDataEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910511 IRTCPresenceDataEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910512 IRTCPresenceDevice::GetPresenceData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910514 IRTCPresenceDevice::Notes (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910515 IRTCPresenceDevice::PresenceProperty (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910516 IRTCPresenceDevice::Status (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910518 IRTCPresencePropertyEvent::PresenceProperty (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910647 IRTCPresencePropertyEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910714 IRTCPresencePropertyEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910716 IRTCPresencePropertyEvent::Value (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910723 IRTCPresenceStatusEvent::GetLocalPresenceInfo (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910732 IRTCPresenceStatusEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910739 IRTCPresenceStatusEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910743 IRTCProfile2::AllowedAuth (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910751 IRTCProfile2::Realm (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910755 IRTCProfile::ClientBanner (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910763 IRTCProfile::ClientCurVer (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910765 IRTCProfile::ClientData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910773 IRTCProfile::ClientMinVer (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910779 IRTCProfile::ClientName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910783 IRTCProfile::ClientUpdateURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910822 IRTCProfile::Key (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910829 IRTCProfile::Name (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910834 IRTCProfile::ProviderData (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910840 IRTCProfile::ProviderName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910842 IRTCProfile::ProviderURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910847 IRTCProfile::SessionCapabilities (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910854 IRTCProfile::SetCredentials (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910856 IRTCProfile::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910861 IRTCProfile::UserAccount (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910869 IRTCProfile::UserName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910874 IRTCProfile::UserURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910875 IRTCProfile::XML (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910785 IRTCProfileEvent2::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910798 IRTCProfileEvent::Cookie (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910808 IRTCProfileEvent::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910813 IRTCProfileEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910877 IRTCRegistrationStateChangeEvent::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910878 IRTCRegistrationStateChangeEvent::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910879 IRTCRegistrationStateChangeEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910880 IRTCRegistrationStateChangeEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910881 IRTCReInviteEvent::Accept (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910882 IRTCReInviteEvent::GetRemoteSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910884 IRTCReInviteEvent::Reject (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910885 IRTCReInviteEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910886 IRTCReInviteEvent::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910887 IRTCRoamingEvent::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910890 IRTCRoamingEvent::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910891 IRTCRoamingEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910892 IRTCRoamingEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910893 IRTCSession2::AnswerWithSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910895 IRTCSession2::IsSecurityEnabled (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910896 IRTCSession2::PreferredSecurityLevel (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910897 IRTCSession2::ReInviteWithSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910898 IRTCSession2::SendInfo (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910899 IRTCSession::AddParticipant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910900 IRTCSession::AddStream (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910901 IRTCSession::Answer (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910910 IRTCSession::CanAddParticipants (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910911 IRTCSession::Client (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910914 IRTCSession::EncryptionKey (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910915 IRTCSession::EnumerateParticipants (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910917 IRTCSession::NextRedirectedUser (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910926 IRTCSession::Participants (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910929 IRTCSession::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910930 IRTCSession::Redirect (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910931 IRTCSession::RedirectedUserName (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910932 IRTCSession::RedirectedUserURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930927 IRTCSession::RemoveParticipant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930933 IRTCSession::RemoveStream (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930939 IRTCSession::SendMessage (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930943 IRTCSession::SendMessageStatus (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930950 IRTCSession::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931149 IRTCSession::Terminate (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931166 IRTCSession::Type (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910902 IRTCSessionCallControl::Forward (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910903 IRTCSessionCallControl::Hold (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910904 IRTCSessionCallControl::IsReferred (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910906 IRTCSessionCallControl::Refer (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910907 IRTCSessionCallControl::ReferCookie (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910908 IRTCSessionCallControl::ReferredByURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910909 IRTCSessionCallControl::UnHold (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910912 IRTCSessionDescriptionManager::EvaluateSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910918 IRTCSessionOperationCompleteEvent2::GetRemoteSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910920 IRTCSessionOperationCompleteEvent2::Participant (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910921 IRTCSessionOperationCompleteEvent::Cookie (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910923 IRTCSessionOperationCompleteEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910924 IRTCSessionOperationCompleteEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910925 IRTCSessionOperationCompleteEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910928 IRTCSessionPortManagement::SetPortManager (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910933 IRTCSessionReferredEvent::Accept (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910935 IRTCSessionReferredEvent::ReferCookie (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910936 IRTCSessionReferredEvent::ReferredByURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910937 IRTCSessionReferredEvent::ReferToURI (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910938 IRTCSessionReferredEvent::Reject (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910939 IRTCSessionReferredEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms910940 IRTCSessionReferredEvent::SetReferredSessionState (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911220 IRTCSessionReferStatusEvent::ReferStatus (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911312 IRTCSessionReferStatusEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930910 IRTCSessionReferStatusEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930918 IRTCSessionReferStatusEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930958 IRTCSessionStateChangeEvent2::GetRemoteSessionDescription (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930976 IRTCSessionStateChangeEvent2::IsForked (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930984 IRTCSessionStateChangeEvent2::MediaTypes (Header: Rtccore.h, Rtccore.idl.) */
+/* ms930993 IRTCSessionStateChangeEvent2::RemotePreferredSecurityLevel (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931011 IRTCSessionStateChangeEvent::Session (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931017 IRTCSessionStateChangeEvent::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931031 IRTCSessionStateChangeEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms931043 IRTCSessionStateChangeEvent::StatusText (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911320 IRTCUserSearch::CreateQuery (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911326 IRTCUserSearch::ExecuteSearch (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911348 IRTCUserSearchQuery::SearchDomain (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911359 IRTCUserSearchQuery::SearchPreference (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911365 IRTCUserSearchQuery::SearchTerm (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911377 IRTCUserSearchQuery::SearchTerms (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911458 IRTCUserSearchResult::Value (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911392 IRTCUserSearchResultsEvent::Cookie (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911400 IRTCUserSearchResultsEvent::EnumerateResults (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911421 IRTCUserSearchResultsEvent::MoreAvailable (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911430 IRTCUserSearchResultsEvent::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911437 IRTCUserSearchResultsEvent::Query (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911445 IRTCUserSearchResultsEvent::Results (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911449 IRTCUserSearchResultsEvent::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911408 IRTCUserSearchResultsEvent:IDispatch (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911477 IRTCWatcher2::Profile (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911481 IRTCWatcher2::Scope (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911524 IRTCWatcher::State (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911489 IRTCWatcherEvent2::EventType (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911496 IRTCWatcherEvent2::StatusCode (Header: Rtccore.h, Rtccore.idl.) */
+/* ms911509 IRTCWatcherEvent::Watcher (Header: Rtccore.h, Rtccore.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: rtc (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa525598 Answer a Call */
+/* aa525793 Authentication */
+/* aa525600 Basic Authentication and RTC */
+/* aa525602 Client Application Behind a NAT */
+/* aa525603 Client Settings */
+/* aa525604 Codecs */
+/* aa525607 Comparing Windows CE and Desktop RTC Implementations */
+/* aa525611 Create a Session and Make a Call */
+/* aa525612 Create a Text Messaging Session */
+/* aa525610 Create and Enable a Profile */
+/* aa525623 Deregister and Disable a Profile */
+/* aa525626 Digest Authentication and RTC */
+/* aa525629 Enable Presence Functionality */
+/* aa525631 Firewalls and NATs */
+/* aa525678 Fundamental RTC Code Examples */
+/* aa525632 General RTC Client API Migration Guidelines */
+/* aa525633 Handle Events */
+/* aa525637 Initialize RTC */
+/* ms909310 IRTCBuddy2::Groups (Header: Rtccore.h. Rtccore.idl.) */
+/* aa525644 Kerberos Authentication and RTC */
+/* aa525652 NAT Address Mapping */
+/* aa525653 NTLM Authentication and RTC */
+/* aa525667 Phone-phone Sessions */
+/* aa525668 PINT */
+/* aa525669 Profile Requirements */
+/* aa525670 Provider Settings */
+/* aa525674 Provision Settings */
+/* aa525673 Provisioning and XML Profiles */
+/* aa525677 Real-time Communications Architecture */
+/* aa525675 Real-time Communications Concepts */
+/* aa525676 Real-time Communications Definitions */
+/* aa525679 Receive an Incoming PC-PC Session */
+/* aa525680 Register to Receive Events */
+/* aa525784 RTC 1.2 Code Examples */
+/* aa525786 RTC Buddy Group Object */
+/* aa525787 RTC Buddy Object */
+/* aa525788 RTC Client API 1.2 Functionality */
+/* aa525790 RTC Client API ACM Registry Settings */
+/* aa525792 RTC Client API ACM Sample Registry Configuration */
+/* ms931947 RTC Client API Application Development */
+/* aa525800 RTC Client API Code Examples */
+/* ms909292 RTC Client API Constants */
+/* ms909293 RTC Client API Enumerations */
+/* aa525803 RTC Client API External API Additions */
+/* aa525795 RTC Client API General Registry Settings */
+/* ms909294 RTC Client API Interfaces */
+/* ms931948 RTC Client API Migration */
+/* aa525796 RTC Client API Objects and Interfaces */
+/* ms931949 RTC Client API OS Design Development */
+/* aa525671 RTC Client API Provisioning */
+/* ms909295 RTC Client API Reference */
+/* aa525605 RTC Client API Registry Settings */
+/* ms931950 RTC Client API Samples */
+/* aa525606 RTC Client API Security */
+/* ms929620 RTC Client API Version Comparison */
+/* ms909296 RTC Client API XML Schema */
+/* aa525798 RTC Client Object */
+/* aa525802 RTC Events */
+/* aa525807 RTC Participant Object */
+/* aa525811 RTC Presence Device Object */
+/* aa525815 RTC Profile Object */
+/* ms929498 RTC Session Object */
+/* ms929512 RTC User Search Query Object */
+/* ms929720 RTC Watcher Object */
+/* ms929829 RTP/RTCP */
+/* ms909228 Session Information */
+/* ms909234 Session Settings */
+/* ms909238 Shut Down RTC */
+/* ms909242 SIP */
+/* ms909243 SIP and TEL URIs */
+/* ms909245 SIP Server Requirements */
+/* ms909246 SIP Server Settings */
+/* ms909244 SIP Servers */
+/* ms909251 Terminate a Call */
+/* ms909252 Transport Protocols and RTC */
+/* ms909253 Traversal of UPnP-Enabled NATs */
+/* ms909270 User Settings */
+/* ms909274 Using the RTC Client API */
+/* ms909275 Using XML Profiles */
+/* ms909289 Voice Performance */
+/* ms909290 Windows CE-SIP client, Windows CE-phone, or Messaging Sessions */
+/* ms909291 XML Profile Samples */
+
 #ifdef __cplusplus
 }
 #endif

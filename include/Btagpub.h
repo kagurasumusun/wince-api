@@ -166,6 +166,10 @@ AKARI_CE_IMPORT DWORD BthAGNetworkTransmitDTMF(LPSTR pszDTMF) AKARI_CE_NAME(BthA
 /* aa450322 "BthAGNetworkUnholdCall". */
 AKARI_CE_IMPORT DWORD BthAGNetworkUnholdCall(void) AKARI_CE_NAME(BthAGNetworkUnholdCall);
 
+/* ------------------------------------------------------------------
+ * Book surface: bt-os (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
 #ifdef __cplusplus
 }
 #endif

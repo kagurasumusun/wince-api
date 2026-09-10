@@ -261,4 +261,10 @@ AKARI_CE_IMPORT HRESULT APIENTRY MQSetQueueProperties(LPCWSTR lpwcsFormatName,
 /* MSMQQueueInfos object (ms895270):
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: servers (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450286 aPropID (Header: Mq.h.) */
+/* aa450287 aPropVar (Header: Mq.h.) */
+/* aa450288 aStatus (Header: Mq.h.) */
 #endif /* AKARI_MQ_H */

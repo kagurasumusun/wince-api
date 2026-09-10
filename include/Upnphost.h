@@ -34,4 +34,19 @@ typedef struct IUPnPReregistrar IUPnPReregistrar;
  *   IUPnPReregistrar (aa450723)
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: servers (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450651 IUPnPDeviceControl::GetServiceObject (Header: Upnphost.h.) */
+/* aa450653 IUPnPDeviceControl::Initialize (Header: Upnphost.h.) */
+/* aa450713 IUPnPEventSink::OnStateChanged (Header: Upnphost.h.) */
+/* aa450714 IUPnPEventSink::OnStateChangedSafe (Header: Upnphost.h.) */
+/* aa450715 IUPnPEventSource::Advise (Header: Upnphost.h.) */
+/* aa450717 IUPnPEventSource::Unadvise (Header: Upnphost.h.) */
+/* aa450718 IUPnPRegistrar::GetUniqueDeviceName (Header: Upnphost.h.) */
+/* aa450720 IUPnPRegistrar::RegisterDevice (Header: Upnphost.h.) */
+/* aa450721 IUPnPRegistrar::RegisterRunningDevice (Header: Upnphost.h.) */
+/* aa450722 IUPnPRegistrar::UnregisterDevice (Header: Upnphost.h.) */
+/* aa450724 IUPnPReregistrar::ReregisterDevice (Header: Upnphost.h.) */
+/* aa450725 IUPnPReregistrar::ReregisterRunningDevice (Header: Upnphost.h.) */
 #endif /* AKARI_UPNPHOST_H */

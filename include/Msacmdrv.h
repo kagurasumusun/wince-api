@@ -51,4 +51,24 @@ typedef struct  {
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- ACM_ family (2 names; R1) ---- */
+#define ACM_STREAMSIZEF_DESTINATION                  0x0001
+#define ACM_FORMATSUGGESTF_WFORMATTAG                0x10000
+
+/* ---- DRV_ family (2 names; R1) ---- */
+#define DRV_OPEN                                     0x0003
+#define DRV_CLOSE                                    0x0004
+
 #endif /* AKARI_MSACMDRV_H */

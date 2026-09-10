@@ -423,6 +423,55 @@ AKARI_CE_IMPORT VOID SnmpUtilVarBindListFree(SnmpVarBindList *pVbl) AKARI_CE_NAM
 /* ms894672 UDP Group */
 /* ms894675 Worker Callback Functions and Data */
 
+/* ------------------------------------------------------------------
+ * Book surface: snmp-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894372 About SnmpExtensionInit */
+/* ms894374 About SnmpExtensionQuery */
+/* ms894376 About SnmpExtensionTrap */
+/* ms894380 Address Translation Group */
+/* ms894384 Authentication Traps Registry Settings */
+/* ms894401 Communities Registry Settings */
+/* ms894489 Extension Agents Registry Settings */
+/* ms894486 Extension-Agent Implementor APIs */
+/* ms894498 Format */
+/* ms894501 Host Resources Device Group */
+/* ms894503 Host Resources Installed Software Group */
+/* ms894507 Host Resources Running Software Group */
+/* ms894510 Host Resources Storage Group */
+/* ms894515 Host Resources System Group */
+/* ms894519 ICMP Group */
+/* ms894526 Interfaces Group */
+/* ms894531 IP Group */
+/* ms894548 MIB Header Sample */
+/* ms894552 MIB-II Registry Settings */
+/* ms894560 PDU Buffer Registry Settings */
+/* ms894563 Permitted Managers Registry Settings */
+/* ms894569 Relevant RFCs */
+/* ms894580 Sample .mib File */
+/* ms894572 Sample Extension-Agent DLL */
+/* ms894583 Sample MIB Source File */
+/* ms894604 SNMP Extension API Functions */
+/* ms894607 SNMP Group */
+/* ms894609 SNMP Library Files and Programs */
+/* ms894619 SNMP Migration */
+/* ms894624 SNMP Operations */
+/* ms894595 SNMP OS Design Development */
+/* ms894629 SNMP Samples */
+/* ms894632 SNMP Security */
+/* ms894635 SNMP Terms */
+/* ms894650 SNMP Utility API Functions */
+/* ms894655 SNMP Versions */
+/* ms894613 SnmpMibEntry Array */
+/* ms894614 SnmpMibTable Array */
+/* ms894616 SnmpMibView Structure */
+/* ms894639 SnmpTfx API Functions */
+/* ms894647 SnmpTfx Macro Name Conventions */
+/* ms894659 System Group */
+/* ms894667 TCP Group */
+/* ms894672 UDP Group */
+/* ms894675 Worker Callback Functions and Data */
+
 #ifdef __cplusplus
 }
 #endif

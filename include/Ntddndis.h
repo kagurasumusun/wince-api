@@ -418,4 +418,7 @@ typedef struct _NDIS_PNP_CAPABILITIES NDIS_PNP_CAPABILITIES,
 /* ------------------------------------------------------------------
  * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: ndis (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* AKARI_NTDDNDIS_H */

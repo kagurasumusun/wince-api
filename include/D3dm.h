@@ -942,6 +942,335 @@ AKARI_CE_IMPORT IDirect3DMobile* WINAPI Direct3DMobileCreate(UINT SDKVersion)
  *      ppbData, DWORD Flags);
  *   ms929638 Unlock: HRESULT Unlock();
  */
+/* ------------------------------------------------------------------
+ * Book surface: d3dm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907765 D3DM Values (Header: D3dm.h.) */
+/* ms939132 D3DMADAPTER Values (Header: D3dm.h.) */
+/* aa451582 D3DMERR Values (Header: D3dm.h.) */
+/* ms909127 IDirect3DMobile::CheckDepthStencilMatch (Header: D3dm.h.) */
+/* ms909128 IDirect3DMobile::CheckDeviceFormat (Header: D3dm.h.) */
+/* ms923411 IDirect3DMobile::CheckDeviceFormatConversion (Header: D3dm.h.) */
+/* ms909129 IDirect3DMobile::CheckDeviceMultiSampleType (Header: D3dm.h.) */
+/* ms909130 IDirect3DMobile::CheckDeviceType (Header: D3dm.h.) */
+/* ms909131 IDirect3DMobile::CheckProfile (Header: D3dm.h.) */
+/* ms909132 IDirect3DMobile::CreateDevice (Header: D3dm.h.) */
+/* ms929139 IDirect3DMobile::EnumAdapterModes (Header: D3dm.h.) */
+/* ms929140 IDirect3DMobile::GetAdapterCount (Header: D3dm.h.) */
+/* ms929141 IDirect3DMobile::GetAdapterDisplayMode (Header: D3dm.h.) */
+/* ms929142 IDirect3DMobile::GetAdapterIdentifier (Header: D3dm.h.) */
+/* ms929143 IDirect3DMobile::GetAdapterModeCount (Header: D3dm.h.) */
+/* ms929144 IDirect3DMobile::GetDeviceCaps (Header: D3dm.h.) */
+/* ms929149 IDirect3DMobile::RegisterSoftwareDevice (Header: D3dm.h.) */
+/* ms909124 IDirect3DMobileBaseTexture::GetLevelCount (Header: D3dm.h.) */
+/* ms909125 IDirect3DMobileBaseTexture::GetLOD (Header: D3dm.h.) */
+/* ms909126 IDirect3DMobileBaseTexture::SetLOD (Header: D3dm.h.) */
+/* ms909134 IDirect3DMobileDevice::BeginScene (Header: D3dm.h.) */
+/* ms909135 IDirect3DMobileDevice::Clear (Header: D3dm.h.) */
+/* ms909136 IDirect3DMobileDevice::ColorFill (Header: D3dm.h.) */
+/* ms909137 IDirect3DMobileDevice::CopyRects (Header: D3dm.h.) */
+/* ms909138 IDirect3DMobileDevice::CreateAdditionalSwapChain (Header: D3dm.h.) */
+/* ms909139 IDirect3DMobileDevice::CreateDepthStencilSurface (Header: D3dm.h.) */
+/* ms909140 IDirect3DMobileDevice::CreateImageSurface (Header: D3dm.h.) */
+/* ms909141 IDirect3DMobileDevice::CreateIndexBuffer (Header: D3dm.h.) */
+/* ms909142 IDirect3DMobileDevice::CreateRenderTarget (Header: D3dm.h.) */
+/* ms909143 IDirect3DMobileDevice::CreateTexture (Header: D3dm.h.) */
+/* ms909144 IDirect3DMobileDevice::CreateVertexBuffer (Header: D3dm.h.) */
+/* ms909145 IDirect3DMobileDevice::DrawIndexedPrimitive (Header: D3dm.h.) */
+/* ms909146 IDirect3DMobileDevice::DrawPrimitive (Header: D3dm.h.) */
+/* ms929092 IDirect3DMobileDevice::EndScene (Header: D3dm.h.) */
+/* ms929093 IDirect3DMobileDevice::GetAvailableTextureMem (Header: D3dm.h.) */
+/* ms929094 IDirect3DMobileDevice::GetBackBuffer (Header: D3dm.h.) */
+/* ms929095 IDirect3DMobileDevice::GetClipStatus (Header: D3dm.h.) */
+/* ms929096 IDirect3DMobileDevice::GetCreationParameters (Header: D3dm.h.) */
+/* ms929097 IDirect3DMobileDevice::GetCurrentTexturePalette (Header: D3dm.h.) */
+/* ms929098 IDirect3DMobileDevice::GetDepthStencilSurface (Header: D3dm.h.) */
+/* ms929099 IDirect3DMobileDevice::GetDeviceCaps (Header: D3dm.h.) */
+/* ms929100 IDirect3DMobileDevice::GetDirect3D (Header: D3dm.h.) */
+/* ms929101 IDirect3DMobileDevice::GetDisplayMode (Header: D3dm.h.) */
+/* ms929102 IDirect3DMobileDevice::GetFrontBuffer (Header: D3dm.h.) */
+/* ms929103 IDirect3DMobileDevice::GetIndices (Header: D3dm.h.) */
+/* ms929104 IDirect3DMobileDevice::GetInfo (Header: D3dm.h.) */
+/* ms929105 IDirect3DMobileDevice::GetLight (Header: D3dm.h.) */
+/* ms929106 IDirect3DMobileDevice::GetLightEnable (Header: D3dm.h.) */
+/* ms929107 IDirect3DMobileDevice::GetMaterial (Header: D3dm.h.) */
+/* ms929108 IDirect3DMobileDevice::GetPaletteEntries (Header: D3dm.h.) */
+/* ms929109 IDirect3DMobileDevice::GetRenderState (Header: D3dm.h.) */
+/* ms929110 IDirect3DMobileDevice::GetRenderTarget (Header: D3dm.h.) */
+/* ms929112 IDirect3DMobileDevice::GetStreamSource (Header: D3dm.h.) */
+/* ms929113 IDirect3DMobileDevice::GetTexture (Header: D3dm.h.) */
+/* ms929114 IDirect3DMobileDevice::GetTextureStageState (Header: D3dm.h.) */
+/* ms929115 IDirect3DMobileDevice::GetTransform (Header: D3dm.h.) */
+/* ms929116 IDirect3DMobileDevice::GetViewport (Header: D3dm.h.) */
+/* ms929117 IDirect3DMobileDevice::LightEnable (Header: D3dm.h.) */
+/* ms929118 IDirect3DMobileDevice::Present (Header: D3dm.h.) */
+/* ms929119 IDirect3DMobileDevice::ProcessVertices (Header: D3dm.h.) */
+/* ms929120 IDirect3DMobileDevice::Reset (Header: D3dm.h.) */
+/* ms929121 IDirect3DMobileDevice::ResourceManagerDiscardBytes (Header: D3dm.h.) */
+/* ms929122 IDirect3DMobileDevice::SetClipStatus (Header: D3dm.h.) */
+/* ms929123 IDirect3DMobileDevice::SetCurrentTexturePalette (Header: D3dm.h.) */
+/* ms929124 IDirect3DMobileDevice::SetIndices (Header: D3dm.h.) */
+/* ms929125 IDirect3DMobileDevice::SetLight (Header: D3dm.h.) */
+/* ms929126 IDirect3DMobileDevice::SetMaterial (Header: D3dm.h.) */
+/* ms929127 IDirect3DMobileDevice::SetPaletteEntries (Header: D3dm.h.) */
+/* ms929128 IDirect3DMobileDevice::SetRenderState (Header: D3dm.h.) */
+/* ms929129 IDirect3DMobileDevice::SetRenderTarget (Header: D3dm.h.) */
+/* ms929130 IDirect3DMobileDevice::SetStreamSource (Header: D3dm.h.) */
+/* ms929131 IDirect3DMobileDevice::SetTexture (Header: D3dm.h.) */
+/* ms929132 IDirect3DMobileDevice::SetTextureStageState (Header: D3dm.h.) */
+/* ms929133 IDirect3DMobileDevice::SetTransform (Header: D3dm.h.) */
+/* ms929134 IDirect3DMobileDevice::SetViewport (Header: D3dm.h.) */
+/* ms929135 IDirect3DMobileDevice::StretchRect (Header: D3dm.h.) */
+/* ms929136 IDirect3DMobileDevice::TestCooperativeLevel (Header: D3dm.h.) */
+/* ms929137 IDirect3DMobileDevice::UpdateTexture (Header: D3dm.h.) */
+/* ms929138 IDirect3DMobileDevice::ValidateDevice (Header: D3dm.h.) */
+/* ms929146 IDirect3DMobileIndexBuffer::GetDesc (Header: D3dm.h.) */
+/* ms929147 IDirect3DMobileIndexBuffer::Lock (Header: D3dm.h.) */
+/* ms929148 IDirect3DMobileIndexBuffer::Unlock (Header: D3dm.h.) */
+/* ms929151 IDirect3DMobileResource::GetDevice (Header: D3dm.h.) */
+/* ms929152 IDirect3DMobileResource::GetPriority (Header: D3dm.h.) */
+/* ms929153 IDirect3DMobileResource::GetType (Header: D3dm.h.) */
+/* ms929154 IDirect3DMobileResource::PreLoad (Header: D3dm.h.) */
+/* ms929155 IDirect3DMobileResource::SetPriority (Header: D3dm.h.) */
+/* ms929511 IDirect3DMobileSurface::GetContainer (Header: D3dm.h.) */
+/* ms929619 IDirect3DMobileSurface::GetDC (Header: D3dm.h.) */
+/* ms929621 IDirect3DMobileSurface::GetDesc (Header: D3dm.h.) */
+/* ms929622 IDirect3DMobileSurface::GetDevice (Header: D3dm.h.) */
+/* ms929623 IDirect3DMobileSurface::LockRect (Header: D3dm.h.) */
+/* ms929624 IDirect3DMobileSurface::ReleaseDC (Header: D3dm.h.) */
+/* ms929625 IDirect3DMobileSurface::UnlockRect (Header: D3dm.h.) */
+/* ms929627 IDirect3DMobileSwapChain::GetBackBuffer (Header: D3dm.h.) */
+/* ms929628 IDirect3DMobileSwapChain::Present (Header: D3dm.h.) */
+/* ms929630 IDirect3DMobileTexture::AddDirtyRect (Header: D3dm.h.) */
+/* ms929631 IDirect3DMobileTexture::GetLevelDesc (Header: D3dm.h.) */
+/* ms929632 IDirect3DMobileTexture::GetSurfaceLevel (Header: D3dm.h.) */
+/* ms929633 IDirect3DMobileTexture::LockRect (Header: D3dm.h.) */
+/* ms929634 IDirect3DMobileTexture::UnlockRect (Header: D3dm.h.) */
+/* ms929636 IDirect3DMobileVertexBuffer::GetDesc (Header: D3dm.h.) */
+/* ms929637 IDirect3DMobileVertexBuffer::Lock (Header: D3dm.h.) */
+/* ms929638 IDirect3DMobileVertexBuffer::Unlock (Header: D3dm.h.) */
+/* ms912040 Interface Identifiers for Direct3D Mobile (Header: D3dm.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: d3dm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451158 About Render States */
+/* aa451161 Accessing the Contents of a Vertex Buffer */
+/* aa451170 Alpha Blending */
+/* aa451171 Alpha Blending State */
+/* aa451173 Alpha Test */
+/* aa451174 Alpha Testing State */
+/* aa451175 Alpha Texture Blending */
+/* aa451177 Ambient Lighting State */
+/* aa451178 Anisotropic Texture Filtering */
+/* aa451179 Antialiasing */
+/* aa451180 Application-Managed Resources and Allocation Strategies */
+/* aa451193 Automatic Texture Management */
+/* aa451199 Back-Face Culling */
+/* aa451203 Basic Lighting Formula */
+/* aa451204 Basic Texturing Concepts */
+/* aa451205 Beginning and Ending a Scene */
+/* aa451211 Blitting in Direct3D Mobile */
+/* aa451217 Border Color Texture Address Mode */
+/* aa451225 Camera Space Transformation */
+/* aa451228 Changing Depth Buffer Comparison Functions */
+/* aa451229 Changing Depth Buffer Write Access */
+/* aa451234 Clamp Texture Address Mode */
+/* aa451235 Clearing Depth Buffers */
+/* aa451236 Clearing Surfaces */
+/* aa451238 Clipping */
+/* aa451246 Color Values for Lights and Materials */
+/* aa451436 Common Details for Direct3D Mobile Resources */
+/* aa451248 Compressed Texture Formats */
+/* aa451249 Compressed Texture Resources */
+/* aa451261 Coordinate Transformation Matrices */
+/* aa451262 Copying To Surfaces */
+/* aa451273 Creating a Depth Buffer */
+/* aa451274 Creating a Direct3D Mobile Device */
+/* aa451287 Creating a Vertex Buffer */
+/* aa451275 Creating Direct3D Mobile Resources */
+/* aa451278 Creating Texture Maps in Direct3D Mobile */
+/* aa451289 Culling State */
+/* aa451299 Depth Buffering */
+/* aa451300 Depth Buffering State */
+/* aa451301 Depth Buffers */
+/* aa451304 Determining Hardware Support */
+/* aa451310 Device Limitations for Texture Addressing */
+/* aa451311 Device States */
+/* aa451312 Device Types */
+/* aa451313 Device Types and Index Processing Requirements */
+/* aa451314 Device Types and Vertex Processing Requirements */
+/* aa451307 Device-Supported Primitive Types */
+/* aa451315 Differences Between Direct3D Mobile and Other Versions of Direct3D */
+/* aa451340 Direct Light vs. Ambient Light */
+/* aa451322 Direct3D Mobile and COM */
+/* aa452479 Direct3D Mobile Application Development */
+/* aa451318 Direct3D Mobile Application Initialization */
+/* aa451319 Direct3D Mobile Application Operation */
+/* aa451320 Direct3D Mobile Application Shutdown */
+/* aa451321 Direct3D Mobile Architecture */
+/* aa451580 Direct3D Mobile Capability Bits */
+/* aa451323 Direct3D Mobile Cooperative Levels */
+/* aa452480 Direct3D Mobile Data Types */
+/* aa451308 Direct3D Mobile Device Capabilities */
+/* aa451324 Direct3D Mobile Devices */
+/* aa452481 Direct3D Mobile Enumerations */
+/* aa452482 Direct3D Mobile Functions */
+/* aa452483 Direct3D Mobile Interfaces */
+/* aa451325 Direct3D Mobile Light Model vs. Nature */
+/* aa452484 Direct3D Mobile Macros */
+/* aa452485 Direct3D Mobile Migration */
+/* ms913324 Direct3D Mobile OS Design Development */
+/* aa451327 Direct3D Mobile Programming */
+/* ms913343 Direct3D Mobile Reference */
+/* ms932521 Direct3D Mobile Registry Settings */
+/* aa451328 Direct3D Mobile Rendering Pipeline */
+/* aa451329 Direct3D Mobile Resources */
+/* ms932530 Direct3D Mobile Samples */
+/* ms932540 Direct3D Mobile Security */
+/* ms932554 Direct3D Mobile Structures */
+/* aa451326 Direct3DMobile Object */
+/* aa451341 Directly Mapping Texels to Pixels */
+/* aa451359 Dithering */
+/* aa451364 Driver Load Order */
+/* ms923219 Enabling and Disabling Lights */
+/* ms923211 Enabling Depth Buffering */
+/* ms923237 Error Conditions in Direct3D Mobile */
+/* ms923375 Flipping Surfaces */
+/* ms923377 Fog */
+/* ms923378 Fog State */
+/* ms923382 FVF Vertex Buffers */
+/* ms923383 GDI Interoperation */
+/* ms923404 Hardware Considerations for Texturing */
+/* ms923423 Index Buffer Descriptions */
+/* ms923424 Index Buffers */
+/* ms923425 Indexed Primitives */
+/* ms923429 Interpolation */
+/* ms923431 Introduction to Direct3D Mobile */
+/* ms923434 Introduction to Lighting and Materials */
+/* ms923438 Light Color */
+/* ms923904 Light Direction */
+/* ms924108 Light Mapping with Textures */
+/* ms924117 Light Objects */
+/* ms924119 Light Position, Range, and Attenuation */
+/* ms924120 Light Properties */
+/* ms924122 Light Type */
+/* ms923982 Lighting */
+/* ms923997 Lighting and Materials */
+/* ms923988 Lighting Equations */
+/* ms924006 Lighting State */
+/* ms924016 Lighting Support */
+/* ms924121 Lights */
+/* ms924124 Line Lists */
+/* ms924125 Line Strips */
+/* ms924123 Linear Texture Filtering */
+/* ms924127 Locking Direct3D Mobile Resources */
+/* ms924128 Locking Resources */
+/* ms924132 Lost Devices */
+/* ms924134 Managing Resources */
+/* ms924135 Manipulating Resources */
+/* ms924137 Material Properties */
+/* ms924138 Materials */
+/* ms924145 Memory Pools in Direct3D Mobile */
+/* ms924147 Mirror Texture Address Mode */
+/* ms924151 Mixing Formats Within a Single Texture */
+/* ms924159 Multipass Texture Blending */
+/* ms924165 Multiple Texture Blending */
+/* ms924167 Nearest-Point Sampling */
+/* ms924170 Opaque and One-Bit Alpha Textures */
+/* ms924173 Other Vertex Data */
+/* ms924174 Outline and Fill State */
+/* ms924199 Per Pixel Operations */
+/* ms924198 Per-Vertex Color State */
+/* ms924200 Perspective-Correct Texture Mapping */
+/* ms924210 Point Lists */
+/* ms924474 Pool and Usage for Index Buffers */
+/* ms924562 Pool and Usage for Vertex Buffers */
+/* ms924575 Presenting a Scene */
+/* ms924576 Primitive Clipping State */
+/* ms924577 Primitive Types */
+/* ms924582 Processing Vertex Data */
+/* ms924583 Processing Vertex Transformations */
+/* ms924584 Processing Vertices */
+/* ms924585 Projection Transformations */
+/* ms924590 Querying for Depth Buffer Support */
+/* ms924592 Rasterization */
+/* ms924593 Rasterization Rules */
+/* ms924597 Registration of a Software Device */
+/* ms924602 Render States */
+/* ms924599 Rendering */
+/* ms924600 Rendering from a Vertex Buffer */
+/* ms924601 Rendering Primitives */
+/* ms924603 Resource Properties */
+/* ms924604 Resource Relationships */
+/* ms924607 Retrieving a Depth Buffer */
+/* ms924609 Retrieving Light Properties */
+/* ms924610 Retrieving Material Properties */
+/* ms924614 Retrieving Vertex Buffer Descriptions */
+/* ms924618 Scene Presentation */
+/* ms924619 Screen Operations */
+/* ms924621 Selecting a Device */
+/* ms924628 Setting and Retrieving Texture Addressing Modes */
+/* ms924624 Setting Light Properties */
+/* ms924625 Setting Material Properties */
+/* ms924631 Setting Transformations */
+/* ms924634 Shading State */
+/* ms924644 Stencil Buffer State */
+/* ms924643 Stencil Buffers */
+/* ms924645 Stencil Operations */
+/* aa451408 Storage Efficiency and Texture Compression */
+/* ms924657 Surface Formats */
+/* ms924658 Surface Interfaces */
+/* ms924660 Surfaces */
+/* ms924668 Texture Addressing Modes */
+/* ms924669 Texture Addressing Modes and Texture Wrapping */
+/* aa451365 Texture Blending */
+/* aa451366 Texture Coordinate Formats */
+/* aa451367 Texture Coordinate Processing */
+/* aa451369 Texture Coordinate Transformation */
+/* aa451370 Texture Coordinate Transformations */
+/* aa451371 Texture Coordinate Wrapping */
+/* aa451368 Texture Coordinates */
+/* aa451372 Texture Dirty Regions */
+/* aa451373 Texture Filtering */
+/* aa451374 Texture Filtering with Mipmaps */
+/* aa451375 Texture Mapping */
+/* aa451376 Texture Read */
+/* aa451377 Texture Resources */
+/* aa451379 Texture Stage Inputs */
+/* aa451380 Texture Stage Operation */
+/* aa451381 Texture Stage States */
+/* aa451383 Texture Wrapping */
+/* aa451384 Texture Wrapping State */
+/* aa451378 Textures */
+/* aa451382 Textures with Alpha Channels */
+/* aa451396 Transformation */
+/* aa451397 Transformed and Lit Vertex Functionality */
+/* aa451398 Transformed and Lit Vertices */
+/* aa451402 Triangle Fans */
+/* aa451403 Triangle Lists */
+/* aa451404 Triangle Strips */
+/* aa451410 Untransformed and Lit Vertices */
+/* aa451411 Untransformed and Unlit Vertices */
+/* aa451421 Using Compressed Textures */
+/* aa451423 Using Devices */
+/* aa451424 Using Direct3D Mobile Resources */
+/* aa451429 Using Index Buffers */
+/* aa451430 Using Lights */
+/* aa451447 Using Vertex Buffers */
+/* aa451449 Using Z-Bias */
+/* aa451452 Vertex Buffer Descriptions */
+/* aa451453 Vertex Buffers */
+/* aa451454 Vertex Data Description */
+/* aa451455 Vertex Formats */
+/* aa451456 Vertex Normals */
+/* aa451464 View Transformation */
+/* aa451463 Viewport Transformation */
+/* ms925261 Width vs. Pitch */
+/* ms925282 World Transformation */
+/* ms925283 Wrap Texture Address Mode */
+/* ms925290 Writing Pixels */
+
 #ifdef __cplusplus
 }
 #endif

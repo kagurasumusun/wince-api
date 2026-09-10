@@ -392,6 +392,8 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 
 /* ================================================================== */
 /* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -403,12 +405,13 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
  * license-exception files (winsock*, gl*) are unused.
  * ================================================================== */
 
-/* ---- ATTR_ family (5 names; R1) ---- */
+/* ---- ATTR_ family (6 names; R1) ---- */
 #define ATTR_INPUT                                   0x0000
 #define ATTR_TARGET_CONVERTED                        0x0001
 #define ATTR_CONVERTED                               0x0002
 #define ATTR_TARGET_NOTCONVERTED                     0x0003
 #define ATTR_INPUT_ERROR                             0x0004
+#define ATTR_FIXEDCONVERTED                          0x0005
 
 /* ---- CFS_ family (3 names; R1) ---- */
 #define CFS_DEFAULT                                  0x0000
@@ -426,10 +429,19 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define GCL_REVERSECONVERSION                        0x0002
 #define GCL_REVERSE_LENGTH                           0x0003
 
-/* ---- GCS_ family (3 names; R1) ---- */
+/* ---- GCS_ family (12 names; R1) ---- */
+#define GCS_COMPREADSTR                              0x0001
+#define GCS_COMPREADATTR                             0x0002
+#define GCS_COMPREADCLAUSE                           0x0004
 #define GCS_COMPSTR                                  0x0008
+#define GCS_COMPATTR                                 0x0010
+#define GCS_COMPCLAUSE                               0x0020
 #define GCS_CURSORPOS                                0x0080
 #define GCS_DELTASTART                               0x0100
+#define GCS_RESULTREADSTR                            0x0200
+#define GCS_RESULTREADCLAUSE                         0x0400
+#define GCS_RESULTSTR                                0x0800
+#define GCS_RESULTCLAUSE                             0x1000
 
 /* ---- GGL_ family (4 names; R1) ---- */
 #define GGL_LEVEL                                    0x0001
@@ -484,26 +496,64 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define IGP_SETCOMPSTR                               0x0014
 #define IGP_SELECT                                   0x0018
 
-/* ---- IME_ family (25 names; R1) ---- */
+/* ---- IMC_ family (10 names; R1) ---- */
+#define IMC_GETCANDIDATEPOS                          0x0007
+#define IMC_SETCANDIDATEPOS                          0x0008
+#define IMC_GETCOMPOSITIONFONT                       0x0009
+#define IMC_SETCOMPOSITIONFONT                       0x000A
+#define IMC_GETCOMPOSITIONWINDOW                     0x000B
+#define IMC_SETCOMPOSITIONWINDOW                     0x000C
+#define IMC_GETSTATUSWINDOWPOS                       0x000F
+#define IMC_SETSTATUSWINDOWPOS                       0x0010
+#define IMC_CLOSESTATUSWINDOW                        0x0021
+#define IMC_OPENSTATUSWINDOW                         0x0022
+
+/* ---- IME_ family (51 names; R1) ---- */
 #define IME_CAND_UNKNOWN                             0x0000
+#define IME_SMODE_NONE                               0x0000
 #define IME_CAND_READ                                0x0001
+#define IME_CMODE_NATIVE                             0x0001
 #define IME_CONFIG_GENERAL                           0x0001
 #define IME_REGWORD_STYLE_EUDC                       0x0001
 #define IME_CAND_CODE                                0x0002
+#define IME_CMODE_KATAKANA                           0x0002
 #define IME_CONFIG_REGISTERWORD                      0x0002
+#define IME_SMODE_SINGLECONVERT                      0x0002
 #define IME_CAND_MEANING                             0x0003
 #define IME_CONFIG_SELECTDICTIONARY                  0x0003
+#define IME_ESC_QUERY_SUPPORT                        0x0003
 #define IME_CAND_RADICAL                             0x0004
+#define IME_ESC_RESERVED_FIRST                       0x0004
+#define IME_SMODE_AUTOMATIC                          0x0004
+#define IME_CMODE_FULLSHAPE                          0x0008
+#define IME_SMODE_PHRASEPREDICT                      0x0008
+#define IME_CHOTKEY_IME_NONIME_TOGGLE                0x0010
+#define IME_CMODE_ROMAN                              0x0010
 #define IME_CHOTKEY_SHAPE_TOGGLE                     0x0011
 #define IME_CHOTKEY_SYMBOL_TOGGLE                    0x0012
+#define IME_CMODE_CHARCODE                           0x0020
 #define IME_JHOTKEY_CLOSE_OPEN                       0x0030
+#define IME_CMODE_HANJACONVERT                       0x0040
 #define IME_KHOTKEY_SHAPE_TOGGLE                     0x0050
 #define IME_KHOTKEY_HANJACONVERT                     0x0051
 #define IME_KHOTKEY_ENGLISH                          0x0052
+#define IME_THOTKEY_IME_NONIME_TOGGLE                0x0070
 #define IME_THOTKEY_SHAPE_TOGGLE                     0x0071
 #define IME_THOTKEY_SYMBOL_TOGGLE                    0x0072
+#define IME_CMODE_SOFTKBD                            0x0080
+#define IME_CMODE_NOCONVERSION                       0x0100
 #define IME_HOTKEY_DSWITCH_FIRST                     0x0100
 #define IME_HOTKEY_DSWITCH_LAST                      0x011F
+#define IME_CMODE_EUDC                               0x0200
+#define IME_ESC_RESERVED_LAST                        0x07FF
+#define IME_ESC_PRIVATE_FIRST                        0x0800
+#define IME_ESC_PRIVATE_LAST                         0x0FFF
+#define IME_ESC_SEQUENCE_TO_INTERNAL                 0x1001
+#define IME_ESC_GET_EUDC_DICTIONARY                  0x1003
+#define IME_ESC_SET_EUDC_DICTIONARY                  0x1004
+#define IME_ESC_MAX_KEY                              0x1005
+#define IME_ESC_IME_NAME                             0x1006
+#define IME_ESC_HANJA_MODE                           0x1008
 #define IME_PROP_AT_CARET                            0x10000
 #define IME_PROP_SPECIAL_UI                          0x20000
 #define IME_PROP_CANDLIST_START_FROM_1               0x40000
@@ -537,7 +587,9 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define IMM_ERROR_GENERAL                            (-2)
 #define IMM_ERROR_NODATA                             (-1)
 
-/* ---- IMN_ family (11 names; R1) ---- */
+/* ---- IMN_ family (13 names; R1) ---- */
+#define IMN_CLOSESTATUSWINDOW                        0x0001
+#define IMN_OPENSTATUSWINDOW                         0x0002
 #define IMN_CHANGECANDIDATE                          0x0003
 #define IMN_CLOSECANDIDATE                           0x0004
 #define IMN_OPENCANDIDATE                            0x0005
@@ -550,7 +602,8 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define IMN_SETSTATUSWINDOWPOS                       0x000C
 #define IMN_GUIDELINE                                0x000D
 
-/* ---- IMR_ family (1 names; R1) ---- */
+/* ---- IMR_ family (2 names; R1) ---- */
+#define IMR_RECONVERTSTRING                          0x0004
 #define IMR_QUERYCHARPOSITION                        0x0006
 
 /* ---- MOD_ family (7 names; R1) ---- */
@@ -590,8 +643,18 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 /* ---- VK_ family (1 names; R1) ---- */
 #define VK_PROCESSKEY                                0x00E5
 
-/* ---- WM_ family (2 names; R1) ---- */
+/* ---- WM_ family (12 names; R1) ---- */
 #define WM_IME_STARTCOMPOSITION                      0x010D
+#define WM_IME_ENDCOMPOSITION                        0x010E
 #define WM_IME_COMPOSITION                           0x010F
+#define WM_IME_SETCONTEXT                            0x0281
+#define WM_IME_NOTIFY                                0x0282
+#define WM_IME_CONTROL                               0x0283
+#define WM_IME_COMPOSITIONFULL                       0x0284
+#define WM_IME_SELECT                                0x0285
+#define WM_IME_CHAR                                  0x0286
+#define WM_IME_REQUEST                               0x0288
+#define WM_IME_KEYDOWN                               0x0290
+#define WM_IME_KEYUP                                 0x0291
 
 #endif /* _IMM_H */

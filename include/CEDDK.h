@@ -389,6 +389,29 @@ AKARI_CE_IMPORT VOID HalFreeCommonBuffer(PDMA_ADAPTER_OBJECT DmaAdapter,
 /* ms919385 PCI_COMMON_CONFIG -- HELD (page print; member types unpublished):
  *   typedef struct _PCI_COMMON_CONFIG { ... } type0; */
 
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-addr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894807 CEDDK Dynamic-Link Library Address Mapping Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-bus (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894826 CEDDK Dynamic-Link Library Bus Access Enumerations */
+/* aa447661 CEDDK Dynamic-Link Library Bus Access Functions */
+/* ms894814 CEDDK Dynamic-Link Library Bus Access IOCTLs */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-dma (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447662 CEDDK Dynamic-Link Library DMA Functions */
+/* ms894823 CEDDK Dynamic-Link Library DMA Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-io (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894829 CEDDK Dynamic-Link Library I/O Functions */
+
 #ifdef __cplusplus
 }
 #endif

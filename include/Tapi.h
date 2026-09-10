@@ -1853,4 +1853,14 @@ AKARI_CE_IMPORT LONG phoneDevSpecific(HPHONE hPhone,
     LPVOID lpParams, DWORD dwSize)
     AKARI_CE_NAME(phoneDevSpecific);                        /* ms895918, CE 3.0+  */
 
+/* ------------------------------------------------------------------
+ * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms885284 The LINECALLINFO Data Structure */
+/* ------------------------------------------------------------------
+ * Book surface: tspi-all (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* _TAPI_H */

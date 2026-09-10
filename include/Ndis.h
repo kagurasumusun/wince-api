@@ -1669,4 +1669,45 @@ AKARI_CE_IMPORT VOID NdisZeroMemory(PVOID Destination, ULONG Length)
 /* ms894736 WAN Miniport Driver Indications */
 /* ms894751 Windows CE Communications Architecture */
 /* ms894759 Wireless Network Client Configuration */
+/* ------------------------------------------------------------------
+ * Book surface: ndis (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: ndis (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894762 802.11 Wireless LAN Object Identifiers */
+/* aa448300 Automatic Configuration Constants */
+/* ms894771 Automatic Configuration Functions */
+/* aa448301 Automatic Configuration Reference */
+/* aa448297 Automatic Configuration Structures */
+/* ms894877 Ethernet Object Identifiers */
+/* ms894880 General Object Identifiers */
+/* ms894947 IrDA Object Identifiers */
+/* ms894959 NDIS Data Types */
+/* ms894961 NDIS Library Functions */
+/* ms895357 NDIS Lower-Edge Functions */
+/* ms895360 NDIS Messages */
+/* ms895365 NDIS Structures */
+/* ms895373 NDIS Upper-Edge Functions */
+/* ms904106 NdisQuerySendFlags */
+/* ms904978 NdisSetSendFlags */
+/* ms895367 NDISTAPI Object Identifiers */
+/* ms895377 NDISWAN Object Identifiers */
+/* ms895383 Network Driver Data Types */
+/* ms895388 Network Driver Enumerations */
+/* ms895392 Network Driver Functions */
+/* ms895397 Network Driver IOCTLs */
+/* ms895401 Network Driver Macros */
+/* ms895405 Network Driver Messages */
+/* ms895411 Network Driver Object Identifiers */
+/* ms895419 Network Driver Structures */
+/* aa448124 OID_GEN_SUPPORTED_LIST */
+/* ms919147 OID_TCP_TASK_OFFLOAD */
+/* ms895435 Plug and Play and Power Management Object Identifiers */
+/* ms895446 Remote NDIS Data Types */
+/* ms895447 Remote NDIS Functions */
+/* ms895448 Remote NDIS Messages */
+/* ms895449 Remote NDIS Structures */
+/* ms895461 Task Offload Object Identifiers */
+/* ms895466 Token Ring Object Identifiers */
 #endif /* AKARI_NDIS_H */

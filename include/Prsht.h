@@ -279,4 +279,12 @@ BOOL     CALLBACK AddPropSheetPageProc(HPROPSHEETPAGE hpage,
 #define PSPCB_RELEASE                                0x0001
 #define PSPCB_CREATE                                 0x0002
 
+/* ------------------------------------------------------------------
+ * Book surface: cc-propertysheets (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms938704 Property Sheets Functions */
+/* ms938705 Property Sheets Macros */
+/* ms938706 Property Sheets Messages */
+/* ms938707 Property Sheets Notifications */
+/* ms938709 Property Sheets Structures */
 #endif /* AKARI_PRSHT_H */

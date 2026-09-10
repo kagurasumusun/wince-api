@@ -178,6 +178,60 @@ typedef struct IDVDUserOperation IDVDUserOperation;
 /* ms930832 TitlePlay: `HRESULT TitlePlay(BYTE byteTitleNumber);` */
 /* ms930840 VideoPresentationModeChange: `HRESULT VideoPresentationModeChange(USHORT uhVideoMode);` */
 
+/* ------------------------------------------------------------------
+ * Book surface: graphics-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451671 DVD-Video API Enumerated Types/EDDVDPlaybackState (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451673 DVD-Video API Enumerated Types/EDVDNavException (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451674 DVD-Video API Enumerated Types/EDVDSParamEvent (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451867 DVD-Video API Interfaces/IDVDNavigationManager (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452059 DVD-Video API Interfaces/IDVDUserOperation (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451630 DVD-Video API Structures/DVDUserGOPData (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451868 IDVDNavigationManager/IDVDNavigationManager::ButtonSelectDirect (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451869 IDVDNavigationManager/IDVDNavigationManager::GetGParameter (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451870 IDVDNavigationManager/IDVDNavigationManager::GetPlaybackState (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451871 IDVDNavigationManager/IDVDNavigationManager::GetScanCaps (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451872 IDVDNavigationManager/IDVDNavigationManager::GetSParameter (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451873 IDVDNavigationManager/IDVDNavigationManager::SetSParameter (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451875 IDVDNavigationManager/IDVDNavigationManager::SetVolume (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451876 IDVDNavigationManager/IDVDNavigationManger::UseRenderer (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451880 IDVDNavigatorSink/IDVDNavigatorSink::ConfirmTemporaryParentalLevel (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451882 IDVDNavigatorSink/IDVDNavigatorSink::InitializeSystemParameters (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451884 IDVDNavigatorSink/IDVDNavigatorSink::OnDiskReadError (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451886 IDVDNavigatorSink/IDVDNavigatorSink::OnGOPUserData (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451889 IDVDNavigatorSink/IDVDNavigatorSink::OnGPRMChange (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451891 IDVDNavigatorSink/IDVDNavigatorSink::OnNavigationException (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451893 IDVDNavigatorSink/IDVDNavigatorSink::OnNewCell (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451895 IDVDNavigatorSink/IDVDNavigatorSink::OnNewProgram (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451897 IDVDNavigatorSink/IDVDNavigatorSink::OnNewProgramChain (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451899 IDVDNavigatorSink/IDVDNavigatorSink::OnPlaybackStateChange (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451901 IDVDNavigatorSink/IDVDNavigatorSink::OnSPRMChange (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa451903 IDVDNavigatorSink/IDVDNavigatorSink::OnUOPChange (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452060 IDVDUserOperation/IDVDUserOperation::BackwardScan (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452061 IDVDUserOperation/IDVDUserOperation::ButtonActivate (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452062 IDVDUserOperation/IDVDUserOperation::ButtonSelect (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452063 IDVDUserOperation/IDVDUserOperation::ButtonSelectAndActivate (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452064 IDVDUserOperation/IDVDUserOperation::ChangeAngle (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452065 IDVDUserOperation/IDVDUserOperation::ChangeAudioStream (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452067 IDVDUserOperation/IDVDUserOperation::ChangeSubPictureStream (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452069 IDVDUserOperation/IDVDUserOperation::ForwardScan (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452071 IDVDUserOperation/IDVDUserOperation::GoUp (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452073 IDVDUserOperation/IDVDUserOperation::MenuCall (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452075 IDVDUserOperation/IDVDUserOperation::MenuLanguageSelect (Header: Dvdnav.h, Dvdnav.idl.) */
+/* aa452077 IDVDUserOperation/IDVDUserOperation::ParentalCountrySelect (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms910052 IDVDUserOperation/IDVDUserOperation::ParentalLevelSelect (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms910143 IDVDUserOperation/IDVDUserOperation::PartPlay (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms910154 IDVDUserOperation/IDVDUserOperation::Pause (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms910161 IDVDUserOperation/IDVDUserOperation::ProgramSearch (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms910167 IDVDUserOperation/IDVDUserOperation::PTTSearch (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930706 IDVDUserOperation/IDVDUserOperation::Resume (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930718 IDVDUserOperation/IDVDUserOperation::StillOff (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930814 IDVDUserOperation/IDVDUserOperation::Stop (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930822 IDVDUserOperation/IDVDUserOperation::TimePlay (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930827 IDVDUserOperation/IDVDUserOperation::TimeSearch (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930832 IDVDUserOperation/IDVDUserOperation::TitlePlay (Header: Dvdnav.h, Dvdnav.idl.) */
+/* ms930840 IDVDUserOperation/IDVDUserOperation::VideoPresentationModeChange (Header: Dvdnav.h, Dvdnav.idl.) */
+
 #ifdef __cplusplus
 }
 #endif

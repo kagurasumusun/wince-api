@@ -570,6 +570,90 @@ typedef struct ITimeZone              ITimeZone;
  *   HRESULT get_DaylightMonthOfYear ([out] long *plDaylightMonthOfYear);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: poom (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa515361 IAppointment Properties (Header: Pimstore.h.) */
+/* aa515347 IAppointment::Cancel (Header: Pimstore.h.) */
+/* aa515349 IAppointment::ClearRecurrencePattern (Header: Pimstore.h.) */
+/* aa515351 IAppointment::Copy (Header: Pimstore.h.) */
+/* aa515355 IAppointment::Delete (Header: Pimstore.h.) */
+/* aa515357 IAppointment::GetRecurrencePattern (Header: Pimstore.h.) */
+/* aa515363 IAppointment::Save (Header: Pimstore.h.) */
+/* aa515365 IAppointment::Send (Header: Pimstore.h.) */
+/* ms880177 IContact Properties (Header: Pimstore.h.) */
+/* ms880165 IContact::Copy (Header: Pimstore.h.) */
+/* ms880170 IContact::Delete (Header: Pimstore.h.) */
+/* ms880181 IContact::Save (Header: Pimstore.h.) */
+/* aa515719 IException Properties (Header: Pimstore.h.) */
+/* aa516109 IExceptions Properties (Header: Pimstore.h.) */
+/* aa515721 IExceptions::Item (Header: Pimstore.h.) */
+/* aa516163 IFolder Properties (Header: Pimstore.h.) */
+/* aa516161 IFolder::AddItemToInfraredFolder (Header: Pimstore.h.) */
+/* aa516164 IFolder::ReceiveFromInfrared (Header: Pimstore.h.) */
+/* aa516165 IFolder::SendToInfrared (Header: Pimstore.h.) */
+/* ms883882 IPOlRecipient::Resolve (Header: Pimstore.h.) */
+/* ms883975 IPOutlookApp Properties (Header: Pimstore.h.) */
+/* ms883892 IPOutlookApp::CreateItem (Header: Pimstore.h.) */
+/* ms883903 IPOutlookApp::GetDefaultFolder (Header: Pimstore.h.) */
+/* ms883912 IPOutlookApp::GetItemFromOid (Header: Pimstore.h.) */
+/* ms883922 IPOutlookApp::GetTimeZoneFromIndex (Header: Pimstore.h.) */
+/* ms883930 IPOutlookApp::GetTimeZoneInformationFromIndex (Header: Pimstore.h.) */
+/* ms883952 IPOutlookApp::Logoff (Header: Pimstore.h.) */
+/* ms883962 IPOutlookApp::Logon (Header: Pimstore.h.) */
+/* ms883983 IPOutlookApp::ReceiveFromInfrared (Header: Pimstore.h.) */
+/* ms884055 IPOutlookApp::SysFreeString (Header: Pimstore.h.) */
+/* ms884192 IPOutlookItemCollection Properties (Header: Pimstore.h.) */
+/* ms884078 IPOutlookItemCollection::Add (Header: Pimstore.h.) */
+/* ms884141 IPOutlookItemCollection::Find (Header: Pimstore.h.) */
+/* ms884152 IPOutlookItemCollection::FindNext (Header: Pimstore.h.) */
+/* ms884165 IPOutlookItemCollection::Item (Header: Pimstore.h.) */
+/* ms884201 IPOutlookItemCollection::Remove (Header: Pimstore.h.) */
+/* ms884210 IPOutlookItemCollection::Restrict (Header: Pimstore.h.) */
+/* ms884223 IPOutlookItemCollection::Sort (Header: Pimstore.h.) */
+/* ms884338 IRecipient Properties (Header: Pimstore.h.) */
+/* ms884569 IRecipients Properties (Header: Pimstore.h.) */
+/* ms884349 IRecipients::Add (Header: Pimstore.h.) */
+/* ms884359 IRecipients::Item (Header: Pimstore.h.) */
+/* ms884577 IRecipients::Remove (Header: Pimstore.h.) */
+/* ms884584 IRecurrencePattern Properties (Header: Pimstore.h.) */
+/* ms884582 IRecurrencePattern::GetOccurrence (Header: Pimstore.h.) */
+/* ms890839 ITask Properties (Header: Pimstore.h.) */
+/* ms890811 ITask::ClearRecurrencePattern (Header: Pimstore.h.) */
+/* ms890817 ITask::Copy (Header: Pimstore.h.) */
+/* ms890821 ITask::Delete (Header: Pimstore.h.) */
+/* ms890827 ITask::GetRecurrencePattern (Header: Pimstore.h.) */
+/* ms890846 ITask::Save (Header: Pimstore.h.) */
+/* ms890851 ITask::SkipRecurrence (Header: Pimstore.h.) */
+/* ms890879 ITimeZone Properties (Header: Pimstore.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: poom (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862095 Basic Object Model */
+/* ms862103 Cancel Method */
+/* ms862129 Creating a Recurring Appointment */
+/* ms862135 Design Goals */
+/* ms862137 Determining the Version */
+/* ms862141 Differences Between the Windows CE and Desktop Models */
+/* ms862169 Infrared Support */
+/* ms862659 No Events */
+/* ms862660 No Inspector or Explorer Object */
+/* ms862661 No NameSpace Object */
+/* ms862663 OID Instead of EntryID */
+/* ms862668 Outlook Compatibility */
+/* ms897376 Pocket Outlook Object Model Application Development */
+/* ms862673 Pocket Outlook Object Model Code Examples */
+/* aa513746 Pocket Outlook Object Model Constants */
+/* aa513747 Pocket Outlook Object Model Functions */
+/* aa513748 Pocket Outlook Object Model Interfaces */
+/* ms897377 Pocket Outlook Object Model OS Design Development */
+/* aa513749 Pocket Outlook Object Model Reference */
+/* aa513751 Pocket Outlook Object Model Security */
+/* aa513750 POOM Sample Code */
+/* ms862681 Recipients Define Meeting Requests */
+/* ms862683 Reminder Methods */
+
 #ifdef __cplusplus
 }
 #endif
