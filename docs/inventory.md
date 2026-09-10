@@ -6819,3 +6819,12 @@ guard close, grouped by family, every value provenance-tagged R1.
   aa453247 parameters prose describes KEYEVENTF_UNICODE but the flags
   table marks it Not supported -- the table wins), HTTP_QUERY_FLAG_
   COALESCE, INTERNET_FLAG_MAKE_PERSISTENT.  Gates GREEN x6.
+- include/Winuser.h TOP-UP: +101 (regex fix: the name pattern required
+  a 3-char first segment and silently missed every 2-char-prefix
+  family).  New families: BS_ 4, CB_ 3 (sentinels), CF_ 10 clipboard
+  formats, CS_ 3, CW_USEDEFAULT, GW_OWNER, KL_NAMELENGTH, MB_ 2,
+  MF_ 8, PM_ 3 (PeekMessage), SM_ 3, SS_ 10, SW_ 6, WA_ 3, WM_ 13
+  (incl. the CE-specific WM_HIBERNATE; WM_IME_* stay with the Imm
+  family in Imm.h), WS_ 30 (WS_EX_CAPTIONOKBTN is CE-specific).
+  NM_RCLICK is REHOMED to Commctrl.h (the NM_ family's ledger home).
+  Total Winuser M96: 210.  Gates GREEN x6.

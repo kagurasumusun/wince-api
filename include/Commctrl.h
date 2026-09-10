@@ -2726,4 +2726,742 @@ typedef struct LVSETINFOTIP {
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- ACM_ family (3 names; R1) ---- */
+#define ACM_PLAY                                     0x0465
+#define ACM_STOP                                     0x0466
+#define ACM_OPEN                                     0x0467
+
+/* ---- ACN_ family (2 names; R1) ---- */
+#define ACN_START                                    0x0001
+#define ACN_STOP                                     0x0002
+
+/* ---- ACS_ family (4 names; R1) ---- */
+#define ACS_CENTER                                   0x0001
+#define ACS_TRANSPARENT                              0x0002
+#define ACS_AUTOPLAY                                 0x0004
+#define ACS_TIMER                                    0x0008
+
+/* ---- CCS_ family (1 names; R1) ---- */
+#define CCS_VERT                                     0x0080
+
+/* ---- CDDS_ family (9 names; R1) ---- */
+#define CDDS_PREPAINT                                0x0001
+#define CDDS_POSTPAINT                               0x0002
+#define CDDS_PREERASE                                0x0003
+#define CDDS_POSTERASE                               0x0004
+#define CDDS_ITEM                                    0x10000
+#define CDDS_ITEMPREPAINT                            0x10001
+#define CDDS_ITEMPOSTPAINT                           0x10002
+#define CDDS_ITEMPREERASE                            0x10003
+#define CDDS_ITEMPOSTERASE                           0x10004
+
+/* ---- CDIS_ family (7 names; R1) ---- */
+#define CDIS_SELECTED                                0x0001
+#define CDIS_GRAYED                                  0x0002
+#define CDIS_DISABLED                                0x0004
+#define CDIS_CHECKED                                 0x0008
+#define CDIS_FOCUS                                   0x0010
+#define CDIS_DEFAULT                                 0x0020
+#define CDIS_HOT                                     0x0040
+
+/* ---- CDRF_ family (7 names; R1) ---- */
+#define CDRF_DODEFAULT                               0x0000
+#define CDRF_NEWFONT                                 0x0002
+#define CDRF_SKIPDEFAULT                             0x0004
+#define CDRF_NOTIFYPOSTPAINT                         0x0010
+#define CDRF_NOTIFYITEMDRAW                          0x0020
+#define CDRF_NOTIFYPOSTERASE                         0x0040
+#define CDRF_NOTIFYITEMERASE                         0x0080
+
+/* ---- CMDBAR_ family (2 names; R1) ---- */
+#define CMDBAR_HELP                                  0x000B
+#define CMDBAR_OK                                    0xF000
+
+/* ---- DTM_ family (10 names; R1) ---- */
+#define DTM_GETSYSTEMTIME                            0x1001
+#define DTM_SETSYSTEMTIME                            0x1002
+#define DTM_GETRANGE                                 0x1003
+#define DTM_SETRANGE                                 0x1004
+#define DTM_SETMCCOLOR                               0x1006
+#define DTM_GETMCCOLOR                               0x1007
+#define DTM_GETMONTHCAL                              0x1008
+#define DTM_SETMCFONT                                0x1009
+#define DTM_GETMCFONT                                0x100A
+#define DTM_SETFORMAT                                0x1050
+
+/* ---- DTN_ family (7 names; R1) ---- */
+#define DTN_DATETIMECHANGE                           (-759)
+#define DTN_DROPDOWN                                 (-754)
+#define DTN_CLOSEUP                                  (-753)
+#define DTN_USERSTRING                               (-745)
+#define DTN_WMKEYDOWN                                (-744)
+#define DTN_FORMAT                                   (-743)
+#define DTN_FORMATQUERY                              (-742)
+
+/* ---- DTS_ family (1 names; R1) ---- */
+#define DTS_SHOWNONE                                 0x0002
+
+/* ---- GDT_ family (2 names; R1) ---- */
+#define GDT_VALID                                    0x0000
+#define GDT_NONE                                     0x0001
+
+/* ---- GDTR_ family (2 names; R1) ---- */
+#define GDTR_MIN                                     0x0001
+#define GDTR_MAX                                     0x0002
+
+/* ---- GMR_ family (2 names; R1) ---- */
+#define GMR_VISIBLE                                  0x0000
+#define GMR_DAYSTATE                                 0x0001
+
+/* ---- HDF_ family (10 names; R1) ---- */
+#define HDF_LEFT                                     0x0000
+#define HDF_RIGHT                                    0x0001
+#define HDF_CENTER                                   0x0002
+#define HDF_JUSTIFYMASK                              0x0003
+#define HDF_RTLREADING                               0x0004
+#define HDF_IMAGE                                    0x0800
+#define HDF_BITMAP_ON_RIGHT                          0x1000
+#define HDF_BITMAP                                   0x2000
+#define HDF_STRING                                   0x4000
+#define HDF_OWNERDRAW                                0x8000
+
+/* ---- HDI_ family (9 names; R1) ---- */
+#define HDI_HEIGHT                                   0x0001
+#define HDI_WIDTH                                    0x0001
+#define HDI_TEXT                                     0x0002
+#define HDI_FORMAT                                   0x0004
+#define HDI_LPARAM                                   0x0008
+#define HDI_BITMAP                                   0x0010
+#define HDI_IMAGE                                    0x0020
+#define HDI_DI_SETITEM                               0x0040
+#define HDI_ORDER                                    0x0080
+
+/* ---- HDM_ family (15 names; R1) ---- */
+#define HDM_GETITEMCOUNT                             0x1200
+#define HDM_DELETEITEM                               0x1202
+#define HDM_LAYOUT                                   0x1205
+#define HDM_HITTEST                                  0x1206
+#define HDM_GETITEMRECT                              0x1207
+#define HDM_SETIMAGELIST                             0x1208
+#define HDM_GETIMAGELIST                             0x1209
+#define HDM_INSERTITEM                               0x120A
+#define HDM_GETITEM                                  0x120B
+#define HDM_SETITEM                                  0x120C
+#define HDM_ORDERTOINDEX                             0x120F
+#define HDM_CREATEDRAGIMAGE                          0x1210
+#define HDM_GETORDERARRAY                            0x1211
+#define HDM_SETORDERARRAY                            0x1212
+#define HDM_SETHOTDIVIDER                            0x1213
+
+/* ---- HDN_ family (11 names; R1) ---- */
+#define HDN_GETDISPINFO                              (-329)
+#define HDN_TRACK                                    (-328)
+#define HDN_ENDTRACK                                 (-327)
+#define HDN_BEGINTRACK                               (-326)
+#define HDN_DIVIDERDBLCLICK                          (-325)
+#define HDN_ITEMDBLCLICK                             (-323)
+#define HDN_ITEMCLICK                                (-322)
+#define HDN_ITEMCHANGED                              (-321)
+#define HDN_ITEMCHANGING                             (-320)
+#define HDN_ENDDRAG                                  (-311)
+#define HDN_BEGINDRAG                                (-310)
+
+/* ---- HDS_ family (2 names; R1) ---- */
+#define HDS_BUTTONS                                  0x0002
+#define HDS_DRAGDROP                                 0x0040
+
+/* ---- HHT_ family (6 names; R1) ---- */
+#define HHT_NOWHERE                                  0x0001
+#define HHT_ONHEADER                                 0x0002
+#define HHT_ONDIVIDER                                0x0004
+#define HHT_ONDIVOPEN                                0x0008
+#define HHT_TORIGHT                                  0x0400
+#define HHT_TOLEFT                                   0x0800
+
+/* ---- ICC_ family (12 names; R1) ---- */
+#define ICC_LISTVIEW_CLASSES                         0x0001
+#define ICC_TREEVIEW_CLASSES                         0x0002
+#define ICC_BAR_CLASSES                              0x0004
+#define ICC_TAB_CLASSES                              0x0008
+#define ICC_UPDOWN_CLASS                             0x0010
+#define ICC_PROGRESS_CLASS                           0x0020
+#define ICC_HOTKEY_CLASS                             0x0040
+#define ICC_ANIMATE_CLASS                            0x0080
+#define ICC_DATE_CLASSES                             0x0100
+#define ICC_USEREX_CLASSES                           0x0200
+#define ICC_COOL_CLASSES                             0x0400
+#define ICC_INTERNET_CLASSES                         0x0800
+
+/* ---- IDB_ family (6 names; R1) ---- */
+#define IDB_STD_SMALL_COLOR                          0x0000
+#define IDB_STD_LARGE_COLOR                          0x0001
+#define IDB_VIEW_SMALL_COLOR                         0x0004
+#define IDB_VIEW_LARGE_COLOR                         0x0005
+#define IDB_HIST_SMALL_COLOR                         0x0008
+#define IDB_HIST_LARGE_COLOR                         0x0009
+
+/* ---- ILCF_ family (2 names; R1) ---- */
+#define ILCF_MOVE                                    0x0000
+#define ILCF_SWAP                                    0x0001
+
+/* ---- LVGIT_ family (1 names; R1) ---- */
+#define LVGIT_UNFOLDED                               0x0001
+
+/* ---- LVIF_ family (1 names; R1) ---- */
+#define LVIF_TEXT                                    0x0001
+
+/* ---- LVIS_ family (4 names; R1) ---- */
+#define LVIS_FOCUSED                                 0x0001
+#define LVIS_SELECTED                                0x0002
+#define LVIS_CUT                                     0x0004
+#define LVIS_DROPHILITED                             0x0008
+
+/* ---- LVM_ family (84 names; R1) ---- */
+#define LVM_GETBKCOLOR                               0x1000
+#define LVM_SETBKCOLOR                               0x1001
+#define LVM_GETIMAGELIST                             0x1002
+#define LVM_SETIMAGELIST                             0x1003
+#define LVM_GETITEMCOUNT                             0x1004
+#define LVM_DELETEITEM                               0x1008
+#define LVM_DELETEALLITEMS                           0x1009
+#define LVM_GETCALLBACKMASK                          0x100A
+#define LVM_SETCALLBACKMASK                          0x100B
+#define LVM_GETNEXTITEM                              0x100C
+#define LVM_GETITEMRECT                              0x100E
+#define LVM_SETITEMPOSITION                          0x100F
+#define LVM_GETITEMPOSITION                          0x1010
+#define LVM_HITTEST                                  0x1012
+#define LVM_ENSUREVISIBLE                            0x1013
+#define LVM_SCROLL                                   0x1014
+#define LVM_REDRAWITEMS                              0x1015
+#define LVM_ARRANGE                                  0x1016
+#define LVM_GETEDITCONTROL                           0x1018
+#define LVM_DELETECOLUMN                             0x101C
+#define LVM_GETCOLUMNWIDTH                           0x101D
+#define LVM_SETCOLUMNWIDTH                           0x101E
+#define LVM_GETHEADER                                0x101F
+#define LVM_CREATEDRAGIMAGE                          0x1021
+#define LVM_GETVIEWRECT                              0x1022
+#define LVM_GETTEXTCOLOR                             0x1023
+#define LVM_SETTEXTCOLOR                             0x1024
+#define LVM_GETTEXTBKCOLOR                           0x1025
+#define LVM_SETTEXTBKCOLOR                           0x1026
+#define LVM_GETTOPINDEX                              0x1027
+#define LVM_GETCOUNTPERPAGE                          0x1028
+#define LVM_GETORIGIN                                0x1029
+#define LVM_UPDATE                                   0x102A
+#define LVM_SETITEMSTATE                             0x102B
+#define LVM_GETITEMSTATE                             0x102C
+#define LVM_SETITEMCOUNT                             0x102F
+#define LVM_SORTITEMS                                0x1030
+#define LVM_SETITEMPOSITION32                        0x1031
+#define LVM_GETSELECTEDCOUNT                         0x1032
+#define LVM_GETITEMSPACING                           0x1033
+#define LVM_SETICONSPACING                           0x1035
+#define LVM_SETEXTENDEDLISTVIEWSTYLE                 0x1036
+#define LVM_GETEXTENDEDLISTVIEWSTYLE                 0x1037
+#define LVM_GETSUBITEMRECT                           0x1038
+#define LVM_SUBITEMHITTEST                           0x1039
+#define LVM_SETCOLUMNORDERARRAY                      0x103A
+#define LVM_GETCOLUMNORDERARRAY                      0x103B
+#define LVM_APPROXIMATEVIEWRECT                      0x1040
+#define LVM_SETWORKAREAS                             0x1041
+#define LVM_GETSELECTIONMARK                         0x1042
+#define LVM_SETSELECTIONMARK                         0x1043
+#define LVM_GETWORKAREAS                             0x1046
+#define LVM_GETNUMBEROFWORKAREAS                     0x1049
+#define LVM_SETTOOLTIPS                              0x104A
+#define LVM_GETITEM                                  0x104B
+#define LVM_SETITEM                                  0x104C
+#define LVM_INSERTITEM                               0x104D
+#define LVM_GETTOOLTIPS                              0x104E
+#define LVM_FINDITEM                                 0x1053
+#define LVM_GETSTRINGWIDTH                           0x1057
+#define LVM_GETCOLUMN                                0x105F
+#define LVM_SETCOLUMN                                0x1060
+#define LVM_INSERTCOLUMN                             0x1061
+#define LVM_GETITEMTEXT                              0x1073
+#define LVM_SETITEMTEXT                              0x1074
+#define LVM_GETISEARCHSTRING                         0x1075
+#define LVM_EDITLABEL                                0x1076
+#define LVM_SETBKIMAGE                               0x108A
+#define LVM_GETBKIMAGE                               0x108B
+#define LVM_INSERTGROUP                              0x1091
+#define LVM_SETGROUPINFO                             0x1093
+#define LVM_GETGROUPINFO                             0x1095
+#define LVM_REMOVEGROUP                              0x1096
+#define LVM_MOVEGROUP                                0x1097
+#define LVM_SETGROUPMETRICS                          0x109B
+#define LVM_GETGROUPMETRICS                          0x109C
+#define LVM_ENABLEGROUPVIEW                          0x109D
+#define LVM_SORTGROUPS                               0x109E
+#define LVM_INSERTGROUPSORTED                        0x109F
+#define LVM_REMOVEALLGROUPS                          0x10A0
+#define LVM_HASGROUP                                 0x10A1
+#define LVM_SETINFOTIP                               0x10AD
+#define LVM_ISGROUPVIEWENABLED                       0x10AF
+#define LVM_MAPIDTOINDEX                             0x10B5
+
+/* ---- LVN_ family (18 names; R1) ---- */
+#define LVN_ODFINDITEM                               (-179)
+#define LVN_SETDISPINFO                              (-178)
+#define LVN_GETDISPINFO                              (-177)
+#define LVN_ENDLABELEDIT                             (-176)
+#define LVN_BEGINLABELEDIT                           (-175)
+#define LVN_GETINFOTIP                               (-158)
+#define LVN_MARQUEEBEGIN                             (-156)
+#define LVN_KEYDOWN                                  (-155)
+#define LVN_ODSTATECHANGED                           (-115)
+#define LVN_ITEMACTIVATE                             (-114)
+#define LVN_ODCACHEHINT                              (-113)
+#define LVN_BEGINDRAG                                (-109)
+#define LVN_COLUMNCLICK                              (-108)
+#define LVN_DELETEALLITEMS                           (-104)
+#define LVN_DELETEITEM                               (-103)
+#define LVN_INSERTITEM                               (-102)
+#define LVN_ITEMCHANGED                              (-101)
+#define LVN_ITEMCHANGING                             (-100)
+
+/* ---- MCHT_ family (15 names; R1) ---- */
+#define MCHT_NOWHERE                                 0x0000
+#define MCHT_TITLE                                   0x10000
+#define MCHT_TITLEMONTH                              0x10001
+#define MCHT_TITLEYEAR                               0x10002
+#define MCHT_CALENDAR                                0x20000
+#define MCHT_CALENDARDATE                            0x20001
+#define MCHT_CALENDARDAY                             0x20002
+#define MCHT_CALENDARWEEKNUM                         0x20003
+#define MCHT_TODAYLINK                               0x30000
+#define MCHT_NEXT                                    0x1000000
+#define MCHT_TITLEBTNNEXT                            0x1010003
+#define MCHT_CALENDARDATENEXT                        0x1020001
+#define MCHT_PREV                                    0x2000000
+#define MCHT_TITLEBTNPREV                            0x2010003
+#define MCHT_CALENDARDATEPREV                        0x2020001
+
+/* ---- MCM_ family (21 names; R1) ---- */
+#define MCM_GETCURSEL                                0x1001
+#define MCM_SETCURSEL                                0x1002
+#define MCM_GETMAXSELCOUNT                           0x1003
+#define MCM_SETMAXSELCOUNT                           0x1004
+#define MCM_GETSELRANGE                              0x1005
+#define MCM_SETSELRANGE                              0x1006
+#define MCM_GETMONTHRANGE                            0x1007
+#define MCM_SETDAYSTATE                              0x1008
+#define MCM_GETMINREQRECT                            0x1009
+#define MCM_SETCOLOR                                 0x100A
+#define MCM_GETCOLOR                                 0x100B
+#define MCM_SETTODAY                                 0x100C
+#define MCM_GETTODAY                                 0x100D
+#define MCM_HITTEST                                  0x100E
+#define MCM_SETFIRSTDAYOFWEEK                        0x100F
+#define MCM_GETFIRSTDAYOFWEEK                        0x1010
+#define MCM_GETRANGE                                 0x1011
+#define MCM_SETRANGE                                 0x1012
+#define MCM_GETMONTHDELTA                            0x1013
+#define MCM_SETMONTHDELTA                            0x1014
+#define MCM_GETMAXTODAYWIDTH                         0x1015
+
+/* ---- MCN_ family (3 names; R1) ---- */
+#define MCN_SELCHANGE                                (-749)
+#define MCN_GETDAYSTATE                              (-747)
+#define MCN_SELECT                                   (-746)
+
+/* ---- MCS_ family (3 names; R1) ---- */
+#define MCS_DAYSTATE                                 0x0001
+#define MCS_MULTISELECT                              0x0002
+#define MCS_WEEKNUMBERS                              0x0004
+
+/* ---- MCSC_ family (6 names; R1) ---- */
+#define MCSC_BACKGROUND                              0x0000
+#define MCSC_TEXT                                    0x0001
+#define MCSC_TITLEBK                                 0x0002
+#define MCSC_TITLETEXT                               0x0003
+#define MCSC_MONTHBK                                 0x0004
+#define MCSC_TRAILINGTEXT                            0x0005
+
+/* ---- PBM_ family (8 names; R1) ---- */
+#define PBM_SETRANGE                                 0x0401
+#define PBM_SETPOS                                   0x0402
+#define PBM_DELTAPOS                                 0x0403
+#define PBM_SETSTEP                                  0x0404
+#define PBM_STEPIT                                   0x0405
+#define PBM_SETRANGE32                               0x0406
+#define PBM_GETRANGE                                 0x0407
+#define PBM_GETPOS                                   0x0408
+
+/* ---- PSM_ family (18 names; R1) ---- */
+#define PSM_SETCURSEL                                0x0465
+#define PSM_REMOVEPAGE                               0x0466
+#define PSM_ADDPAGE                                  0x0467
+#define PSM_CHANGED                                  0x0468
+#define PSM_RESTARTWINDOWS                           0x0469
+#define PSM_REBOOTSYSTEM                             0x046A
+#define PSM_CANCELTOCLOSE                            0x046B
+#define PSM_QUERYSIBLINGS                            0x046C
+#define PSM_UNCHANGED                                0x046D
+#define PSM_APPLY                                    0x046E
+#define PSM_SETWIZBUTTONS                            0x0470
+#define PSM_PRESSBUTTON                              0x0471
+#define PSM_SETCURSELID                              0x0472
+#define PSM_GETTABCONTROL                            0x0474
+#define PSM_ISDIALOGMESSAGE                          0x0475
+#define PSM_GETCURRENTPAGEHWND                       0x0476
+#define PSM_SETTITLE                                 0x0478
+#define PSM_SETFINISHTEXT                            0x0479
+
+/* ---- RBBIM_ family (1 names; R1) ---- */
+#define RBBIM_CHILD                                  0x0010
+
+/* ---- RBBS_ family (8 names; R1) ---- */
+#define RBBS_BREAK                                   0x0001
+#define RBBS_FIXEDSIZE                               0x0002
+#define RBBS_CHILDEDGE                               0x0004
+#define RBBS_HIDDEN                                  0x0008
+#define RBBS_NOVERT                                  0x0010
+#define RBBS_FIXEDBMP                                0x0020
+#define RBBS_VARIABLEHEIGHT                          0x0040
+#define RBBS_GRIPPERALWAYS                           0x0080
+
+/* ---- RBIM_ family (1 names; R1) ---- */
+#define RBIM_IMAGELIST                               0x0001
+
+/* ---- RBN_ family (5 names; R1) ---- */
+#define RBN_ENDDRAG                                  (-836)
+#define RBN_BEGINDRAG                                (-835)
+#define RBN_AUTOSIZE                                 (-834)
+#define RBN_LAYOUTCHANGED                            (-833)
+#define RBN_HEIGHTCHANGE                             (-831)
+
+/* ---- SBT_ family (4 names; R1) ---- */
+#define SBT_NOBORDERS                                0x0100
+#define SBT_POPOUT                                   0x0200
+#define SBT_RTLREADING                               0x0400
+#define SBT_OWNERDRAW                                0x1000
+
+/* ---- STD_ family (15 names; R1) ---- */
+#define STD_CUT                                      0x0000
+#define STD_COPY                                     0x0001
+#define STD_PASTE                                    0x0002
+#define STD_UNDO                                     0x0003
+#define STD_REDOW                                    0x0004
+#define STD_DELETE                                   0x0005
+#define STD_FILENEW                                  0x0006
+#define STD_FILEOPEN                                 0x0007
+#define STD_FILESAVE                                 0x0008
+#define STD_PRINTPRE                                 0x0009
+#define STD_PROPERTIES                               0x000A
+#define STD_HELP                                     0x000B
+#define STD_FIND                                     0x000C
+#define STD_REPLACE                                  0x000D
+#define STD_PRINT                                    0x000E
+
+/* ---- TBBF_ family (1 names; R1) ---- */
+#define TBBF_LARGE                                   0x0001
+
+/* ---- TBCD_ family (3 names; R1) ---- */
+#define TBCD_TICS                                    0x0001
+#define TBCD_THUMB                                   0x0002
+#define TBCD_CHANNEL                                 0x0003
+
+/* ---- TBIF_ family (8 names; R1) ---- */
+#define TBIF_IMAGE                                   0x0001
+#define TBIF_TEXT                                    0x0002
+#define TBIF_STATE                                   0x0004
+#define TBIF_STYLE                                   0x0008
+#define TBIF_LPARAM                                  0x0010
+#define TBIF_COMMAND                                 0x0020
+#define TBIF_SIZE                                    0x0040
+#define TBIF_BYINDEX                                 0x80000000
+
+/* ---- TBM_ family (29 names; R1) ---- */
+#define TBM_GETRANGEMIN                              0x0401
+#define TBM_GETRANGEMAX                              0x0402
+#define TBM_GETTIC                                   0x0403
+#define TBM_SETTIC                                   0x0404
+#define TBM_SETPOS                                   0x0405
+#define TBM_SETRANGE                                 0x0406
+#define TBM_SETRANGEMIN                              0x0407
+#define TBM_SETRANGEMAX                              0x0408
+#define TBM_CLEARTICS                                0x0409
+#define TBM_SETSEL                                   0x040A
+#define TBM_SETSELSTART                              0x040B
+#define TBM_SETSELEND                                0x040C
+#define TBM_GETPTICS                                 0x040E
+#define TBM_GETTICPOS                                0x040F
+#define TBM_GETNUMTICS                               0x0410
+#define TBM_GETSELSTART                              0x0411
+#define TBM_GETSELEND                                0x0412
+#define TBM_CLEARSEL                                 0x0413
+#define TBM_SETTICFREQ                               0x0414
+#define TBM_SETPAGESIZE                              0x0415
+#define TBM_GETPAGESIZE                              0x0416
+#define TBM_SETLINESIZE                              0x0417
+#define TBM_GETLINESIZE                              0x0418
+#define TBM_GETTHUMBRECT                             0x0419
+#define TBM_GETCHANNELRECT                           0x041A
+#define TBM_SETTHUMBLENGTH                           0x041B
+#define TBM_GETTHUMBLENGTH                           0x041C
+#define TBM_SETBUDDY                                 0x0420
+#define TBM_GETBUDDY                                 0x0421
+
+/* ---- TBN_ family (7 names; R1) ---- */
+#define TBN_GETBUTTONINFO                            (-720)
+#define TBN_DRAGOUT                                  (-714)
+#define TBN_DROPDOWN                                 (-710)
+#define TBN_QUERYDELETE                              (-707)
+#define TBN_QUERYINSERT                              (-706)
+#define TBN_ENDDRAG                                  (-702)
+#define TBN_BEGINDRAG                                (-701)
+
+/* ---- TBS_ family (4 names; R1) ---- */
+#define TBS_HORZ                                     0x0000
+#define TBS_VERT                                     0x0002
+#define TBS_ENABLESELRANGE                           0x0020
+#define TBS_FIXEDLENGTH                              0x0040
+
+/* ---- TBSTYLE_ family (2 names; R1) ---- */
+#define TBSTYLE_DROPDOWN                             0x0008
+#define TBSTYLE_WRAPABLE                             0x0200
+
+/* ---- TCHT_ family (4 names; R1) ---- */
+#define TCHT_NOWHERE                                 0x0001
+#define TCHT_ONITEMICON                              0x0002
+#define TCHT_ONITEMLABEL                             0x0004
+#define TCHT_ONITEM                                  0x0006
+
+/* ---- TCIF_ family (5 names; R1) ---- */
+#define TCIF_TEXT                                    0x0001
+#define TCIF_IMAGE                                   0x0002
+#define TCIF_RTLREADING                              0x0004
+#define TCIF_PARAM                                   0x0008
+#define TCIF_STATE                                   0x0010
+
+/* ---- TCIS_ family (1 names; R1) ---- */
+#define TCIS_BUTTONPRESSED                           0x0001
+
+/* ---- TCM_ family (25 names; R1) ---- */
+#define TCM_GETIMAGELIST                             0x1302
+#define TCM_SETIMAGELIST                             0x1303
+#define TCM_GETITEMCOUNT                             0x1304
+#define TCM_DELETEITEM                               0x1308
+#define TCM_DELETEALLITEMS                           0x1309
+#define TCM_GETITEMRECT                              0x130A
+#define TCM_GETCURSEL                                0x130B
+#define TCM_SETCURSEL                                0x130C
+#define TCM_HITTEST                                  0x130D
+#define TCM_SETITEMEXTRA                             0x130E
+#define TCM_ADJUSTRECT                               0x1328
+#define TCM_SETITEMSIZE                              0x1329
+#define TCM_REMOVEIMAGE                              0x132A
+#define TCM_SETPADDING                               0x132B
+#define TCM_GETROWCOUNT                              0x132C
+#define TCM_GETCURFOCUS                              0x132F
+#define TCM_SETCURFOCUS                              0x1330
+#define TCM_SETMINTABWIDTH                           0x1331
+#define TCM_DESELECTALL                              0x1332
+#define TCM_HIGHLIGHTITEM                            0x1333
+#define TCM_SETEXTENDEDSTYLE                         0x1334
+#define TCM_GETEXTENDEDSTYLE                         0x1335
+#define TCM_GETITEM                                  0x133C
+#define TCM_SETITEM                                  0x133D
+#define TCM_INSERTITEM                               0x133E
+
+/* ---- TCN_ family (3 names; R1) ---- */
+#define TCN_SELCHANGING                              (-552)
+#define TCN_SELCHANGE                                (-551)
+#define TCN_KEYDOWN                                  (-550)
+
+/* ---- TCS_ family (2 names; R1) ---- */
+#define TCS_EX_FLATSEPARATORS                        0x0001
+#define TCS_BUTTONS                                  0x0100
+
+/* ---- TTF_ family (6 names; R1) ---- */
+#define TTF_IDISHWND                                 0x0001
+#define TTF_CENTERTIP                                0x0002
+#define TTF_RTLREADING                               0x0004
+#define TTF_SUBCLASS                                 0x0010
+#define TTF_ABSOLUTE                                 0x0080
+#define TTF_DI_SETITEM                               0x8000
+
+/* ---- TTM_ family (27 names; R1) ---- */
+#define TTM_ACTIVATE                                 0x0401
+#define TTM_SETDELAYTIME                             0x0403
+#define TTM_RELAYEVENT                               0x0407
+#define TTM_GETTOOLCOUNT                             0x040D
+#define TTM_WINDOWFROMPOINT                          0x0410
+#define TTM_TRACKACTIVATE                            0x0411
+#define TTM_TRACKPOSITION                            0x0412
+#define TTM_SETTIPBKCOLOR                            0x0413
+#define TTM_SETTIPTEXTCOLOR                          0x0414
+#define TTM_GETDELAYTIME                             0x0415
+#define TTM_GETTIPBKCOLOR                            0x0416
+#define TTM_GETTIPTEXTCOLOR                          0x0417
+#define TTM_SETMAXTIPWIDTH                           0x0418
+#define TTM_GETMAXTIPWIDTH                           0x0419
+#define TTM_SETMARGIN                                0x041A
+#define TTM_GETMARGIN                                0x041B
+#define TTM_POP                                      0x041C
+#define TTM_ADDTOOL                                  0x0432
+#define TTM_DELTOOL                                  0x0433
+#define TTM_NEWTOOLRECT                              0x0434
+#define TTM_GETTOOLINFO                              0x0435
+#define TTM_SETTOOLINFO                              0x0436
+#define TTM_HITTEST                                  0x0437
+#define TTM_GETTEXT                                  0x0438
+#define TTM_UPDATETIPTEXT                            0x0439
+#define TTM_ENUMTOOLS                                0x043A
+#define TTM_GETCURRENTTOOL                           0x043B
+
+/* ---- TTN_ family (4 names; R1) ---- */
+#define TTN_GETDISPINFO                              (-530)
+#define TTN_NEEDTEXT                                 (-530)
+#define TTN_POP                                      (-522)
+#define TTN_SHOW                                     (-521)
+
+/* ---- TTS_ family (1 names; R1) ---- */
+#define TTS_NOPREFIX                                 0x0002
+
+/* ---- TVC_ family (3 names; R1) ---- */
+#define TVC_UNKNOWN                                  0x0000
+#define TVC_BYMOUSE                                  0x0001
+#define TVC_BYKEYBOARD                               0x0002
+
+/* ---- TVE_ family (5 names; R1) ---- */
+#define TVE_COLLAPSE                                 0x0001
+#define TVE_EXPAND                                   0x0002
+#define TVE_TOGGLE                                   0x0003
+#define TVE_EXPANDPARTIAL                            0x4000
+#define TVE_COLLAPSERESET                            0x8000
+
+/* ---- TVGN_ family (11 names; R1) ---- */
+#define TVGN_ROOT                                    0x0000
+#define TVGN_NEXT                                    0x0001
+#define TVGN_PREVIOUS                                0x0002
+#define TVGN_PARENT                                  0x0003
+#define TVGN_CHILD                                   0x0004
+#define TVGN_FIRSTVISIBLE                            0x0005
+#define TVGN_NEXTVISIBLE                             0x0006
+#define TVGN_PREVIOUSVISIBLE                         0x0007
+#define TVGN_DROPHILITE                              0x0008
+#define TVGN_CARET                                   0x0009
+#define TVGN_LASTVISIBLE                             0x000A
+
+/* ---- TVHT_ family (12 names; R1) ---- */
+#define TVHT_NOWHERE                                 0x0001
+#define TVHT_ONITEMICON                              0x0002
+#define TVHT_ONITEMLABEL                             0x0004
+#define TVHT_ONITEMINDENT                            0x0008
+#define TVHT_ONITEMBUTTON                            0x0010
+#define TVHT_ONITEMRIGHT                             0x0020
+#define TVHT_ONITEMSTATEICON                         0x0040
+#define TVHT_ONITEM                                  0x0046
+#define TVHT_ABOVE                                   0x0100
+#define TVHT_BELOW                                   0x0200
+#define TVHT_TORIGHT                                 0x0400
+#define TVHT_TOLEFT                                  0x0800
+
+/* ---- TVIF_ family (7 names; R1) ---- */
+#define TVIF_TEXT                                    0x0001
+#define TVIF_IMAGE                                   0x0002
+#define TVIF_PARAM                                   0x0004
+#define TVIF_STATE                                   0x0008
+#define TVIF_HANDLE                                  0x0010
+#define TVIF_SELECTEDIMAGE                           0x0020
+#define TVIF_CHILDREN                                0x0040
+
+/* ---- TVIS_ family (8 names; R1) ---- */
+#define TVIS_SELECTED                                0x0002
+#define TVIS_CUT                                     0x0004
+#define TVIS_DROPHILITED                             0x0008
+#define TVIS_BOLD                                    0x0010
+#define TVIS_EXPANDED                                0x0020
+#define TVIS_EXPANDEDONCE                            0x0040
+#define TVIS_OVERLAYMASK                             0x0F00
+#define TVIS_STATEIMAGEMASK                          0xF000
+
+/* ---- TVM_ family (23 names; R1) ---- */
+#define TVM_DELETEITEM                               0x1101
+#define TVM_EXPAND                                   0x1102
+#define TVM_GETITEMRECT                              0x1104
+#define TVM_GETCOUNT                                 0x1105
+#define TVM_GETINDENT                                0x1106
+#define TVM_SETINDENT                                0x1107
+#define TVM_GETIMAGELIST                             0x1108
+#define TVM_SETIMAGELIST                             0x1109
+#define TVM_GETNEXTITEM                              0x110A
+#define TVM_SELECTITEM                               0x110B
+#define TVM_GETEDITCONTROL                           0x110F
+#define TVM_GETVISIBLECOUNT                          0x1110
+#define TVM_HITTEST                                  0x1111
+#define TVM_CREATEDRAGIMAGE                          0x1112
+#define TVM_SORTCHILDREN                             0x1113
+#define TVM_ENSUREVISIBLE                            0x1114
+#define TVM_SORTCHILDRENCB                           0x1115
+#define TVM_ENDEDITLABELNOW                          0x1116
+#define TVM_INSERTITEM                               0x1132
+#define TVM_GETITEM                                  0x113E
+#define TVM_SETITEM                                  0x113F
+#define TVM_GETISEARCHSTRING                         0x1140
+#define TVM_EDITLABEL                                0x1141
+
+/* ---- TVN_ family (11 names; R1) ---- */
+#define TVN_ENDLABELEDIT                             (-460)
+#define TVN_BEGINLABELEDIT                           (-459)
+#define TVN_DELETEITEM                               (-458)
+#define TVN_BEGINDRAG                                (-456)
+#define TVN_ITEMEXPANDED                             (-455)
+#define TVN_ITEMEXPANDING                            (-454)
+#define TVN_SETDISPINFO                              (-453)
+#define TVN_GETDISPINFO                              (-452)
+#define TVN_SELCHANGED                               (-451)
+#define TVN_SELCHANGING                              (-450)
+#define TVN_KEYDOWN                                  (-412)
+
+/* ---- TVS_ family (1 names; R1) ---- */
+#define TVS_HASBUTTONS                               0x0001
+
+/* ---- TVSIL_ family (2 names; R1) ---- */
+#define TVSIL_NORMAL                                 0x0000
+#define TVSIL_STATE                                  0x0002
+
+/* ---- UDM_ family (12 names; R1) ---- */
+#define UDM_SETRANGE                                 0x0465
+#define UDM_GETRANGE                                 0x0466
+#define UDM_SETPOS                                   0x0467
+#define UDM_GETPOS                                   0x0468
+#define UDM_SETBUDDY                                 0x0469
+#define UDM_GETBUDDY                                 0x046A
+#define UDM_SETACCEL                                 0x046B
+#define UDM_GETACCEL                                 0x046C
+#define UDM_SETBASE                                  0x046D
+#define UDM_GETBASE                                  0x046E
+#define UDM_SETRANGE32                               0x046F
+#define UDM_GETRANGE32                               0x0470
+
+/* ---- UDN_ family (1 names; R1) ---- */
+#define UDN_DELTAPOS                                 (-722)
+
+/* ---- VIEW_ family (8 names; R1) ---- */
+#define VIEW_LARGEICONS                              0x0000
+#define VIEW_SMALLICONS                              0x0001
+#define VIEW_LIST                                    0x0002
+#define VIEW_DETAILS                                 0x0003
+#define VIEW_SORTNAME                                0x0004
+#define VIEW_SORTSIZE                                0x0005
+#define VIEW_SORTDATE                                0x0006
+#define VIEW_SORTTYPE                                0x0007
+
 #endif /* AKARI_COMMCTRL_H */

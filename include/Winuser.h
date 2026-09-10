@@ -1651,6 +1651,8 @@ typedef struct tagNMHDR {
 #endif
 
 /* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -1662,15 +1664,46 @@ typedef struct tagNMHDR {
  * license-exception files (winsock*, gl*) are unused.
  * ================================================================== */
 
+/* ---- BS_ family (4 names; R1) ---- */
+#define BS_TEXT                                      0x0000
+#define BS_USERBUTTON                                0x0008
+#define BS_LEFTTEXT                                  0x0020
+#define BS_MULTILINE                                 0x2000
+
 /* ---- BST_ family (3 names; R1) ---- */
 #define BST_UNCHECKED                                0x0000
 #define BST_CHECKED                                  0x0001
 #define BST_INDETERMINATE                            0x0002
 
+/* ---- CB_ family (3 names; R1) ---- */
+#define CB_ERRSPACE                                  (-2)
+#define CB_ERR                                       (-1)
+#define CB_OKAY                                      0x0000
+
 /* ---- CBS_ family (3 names; R1) ---- */
 #define CBS_SIMPLE                                   0x0001
 #define CBS_OWNERDRAWFIXED                           0x0010
 #define CBS_OWNERDRAWVARIABLE                        0x0020
+
+/* ---- CF_ family (10 names; R1) ---- */
+#define CF_TEXT                                      0x0001
+#define CF_SYLK                                      0x0004
+#define CF_DIF                                       0x0005
+#define CF_TIFF                                      0x0006
+#define CF_DIB                                       0x0008
+#define CF_PALETTE                                   0x0009
+#define CF_PENDATA                                   0x000A
+#define CF_RIFF                                      0x000B
+#define CF_WAVE                                      0x000C
+#define CF_UNICODETEXT                               0x000D
+
+/* ---- CS_ family (3 names; R1) ---- */
+#define CS_OWNDC                                     0x0020
+#define CS_CLASSDC                                   0x0040
+#define CS_PARENTDC                                  0x0080
+
+/* ---- CW_ family (1 names; R1) ---- */
+#define CW_USEDEFAULT                                0x80000000
 
 /* ---- DCX_ family (10 names; R1) ---- */
 #define DCX_WINDOW                                   0x0001
@@ -1702,14 +1735,34 @@ typedef struct tagNMHDR {
 /* ---- GCW_ family (1 names; R1) ---- */
 #define GCW_ATOM                                     (-32)
 
+/* ---- GW_ family (1 names; R1) ---- */
+#define GW_OWNER                                     0x0004
+
 /* ---- GWL_ family (1 names; R1) ---- */
 #define GWL_ID                                       (-12)
 
 /* ---- KEYEVENTF_ family (1 names; R1) ---- */
 #define KEYEVENTF_SILENT                             0x0004
 
+/* ---- KL_ family (1 names; R1) ---- */
+#define KL_NAMELENGTH                                0x0009
+
 /* ---- LBS_ family (1 names; R1) ---- */
 #define LBS_NODATA                                   0x2000
+
+/* ---- MB_ family (2 names; R1) ---- */
+#define MB_SYSTEMMODAL                               0x1000
+#define MB_TASKMODAL                                 0x2000
+
+/* ---- MF_ family (8 names; R1) ---- */
+#define MF_BYCOMMAND                                 0x0000
+#define MF_STRING                                    0x0000
+#define MF_UNCHECKED                                 0x0000
+#define MF_CHECKED                                   0x0008
+#define MF_POPUP                                     0x0010
+#define MF_OWNERDRAW                                 0x0100
+#define MF_BYPOSITION                                0x0400
+#define MF_SEPARATOR                                 0x0800
 
 /* ---- MFS_ family (5 names; R1) ---- */
 #define MFS_ENABLED                                  0x0000
@@ -1751,11 +1804,21 @@ typedef struct tagNMHDR {
 #define ODT_COMBOBOX                                 0x0003
 #define ODT_BUTTON                                   0x0004
 
+/* ---- PM_ family (3 names; R1) ---- */
+#define PM_NOREMOVE                                  0x0000
+#define PM_REMOVE                                    0x0001
+#define PM_NOYIELD                                   0x0002
+
 /* ---- SBS_ family (4 names; R1) ---- */
 #define SBS_BOTTOMALIGN                              0x0004
 #define SBS_RIGHTALIGN                               0x0004
 #define SBS_SIZEBOXBOTTOMRIGHTALIGN                  0x0004
 #define SBS_SIZEGRIP                                 0x0010
+
+/* ---- SM_ family (3 names; R1) ---- */
+#define SM_CXBORDER                                  0x0005
+#define SM_CYBORDER                                  0x0006
+#define SM_SWAPBUTTON                                0x0017
 
 /* ---- SPI_ family (28 names; R1) ---- */
 #define SPI_GETMOUSE                                 0x0003
@@ -1791,6 +1854,26 @@ typedef struct tagNMHDR {
 #define SPIF_UPDATEINIFILE                           0x0001
 #define SPIF_SENDCHANGE                              0x0002
 
+/* ---- SS_ family (10 names; R1) ---- */
+#define SS_BLACKRECT                                 0x0004
+#define SS_GRAYRECT                                  0x0005
+#define SS_WHITERECT                                 0x0006
+#define SS_BLACKFRAME                                0x0007
+#define SS_GRAYFRAME                                 0x0008
+#define SS_WHITEFRAME                                0x0009
+#define SS_SIMPLE                                    0x000B
+#define SS_RIGHTJUST                                 0x0400
+#define SS_REALSIZEIMAGE                             0x0800
+#define SS_SUNKEN                                    0x1000
+
+/* ---- SW_ family (6 names; R1) ---- */
+#define SW_HIDE                                      0x0000
+#define SW_SHOWNORMAL                                0x0001
+#define SW_SHOWNOACTIVATE                            0x0004
+#define SW_SHOW                                      0x0005
+#define SW_SHOWNA                                    0x0008
+#define SW_RESTORE                                   0x0009
+
 /* ---- SWP_ family (13 names; R1) ---- */
 #define SWP_NOSIZE                                   0x0001
 #define SWP_NOMOVE                                   0x0002
@@ -1806,7 +1889,59 @@ typedef struct tagNMHDR {
 #define SWP_NOREPOSITION                             0x0200
 #define SWP_NOSENDCHANGING                           0x0400
 
+/* ---- WA_ family (3 names; R1) ---- */
+#define WA_INACTIVE                                  0x0000
+#define WA_ACTIVE                                    0x0001
+#define WA_CLICKACTIVE                               0x0002
+
 /* ---- WHEEL_ family (1 names; R1) ---- */
 #define WHEEL_DELTA                                  0x0078
+
+/* ---- WM_ family (13 names; R1) ---- */
+#define WM_MOUSEACTIVATE                             0x0021
+#define WM_WINDOWPOSCHANGING                         0x0046
+#define WM_HELP                                      0x0053
+#define WM_KEYLAST                                   0x0109
+#define WM_TIMER                                     0x0113
+#define WM_CTLCOLORSCROLLBAR                         0x0137
+#define WM_MOUSEFIRST                                0x0200
+#define WM_LBUTTONDOWN                               0x0201
+#define WM_RBUTTONDOWN                               0x0204
+#define WM_RBUTTONUP                                 0x0205
+#define WM_MOUSELAST                                 0x020D
+#define WM_PARENTNOTIFY                              0x0210
+#define WM_HIBERNATE                                 0x03FF
+
+/* ---- WS_ family (30 names; R1) ---- */
+#define WS_EX_LEFT                                   0x0000
+#define WS_EX_LTRREADING                             0x0000
+#define WS_EX_RIGHTSCROLLBAR                         0x0000
+#define WS_TILED                                     0x0000
+#define WS_EX_NOPARENTNOTIFY                         0x0004
+#define WS_EX_ACCEPTFILES                            0x0010
+#define WS_EX_TRANSPARENT                            0x0020
+#define WS_EX_MDICHILD                               0x0040
+#define WS_EX_TOOLWINDOW                             0x0080
+#define WS_EX_PALETTEWINDOW                          0x0188
+#define WS_EX_RIGHT                                  0x1000
+#define WS_EX_RTLREADING                             0x2000
+#define WS_EX_LEFTSCROLLBAR                          0x4000
+#define WS_EX_CONTROLPARENT                          0x10000
+#define WS_MAXIMIZEBOX                               0x10000
+#define WS_MINIMIZEBOX                               0x20000
+#define WS_NONAVDONEBUTTON                           0x20000
+#define WS_EX_APPWINDOW                              0x40000
+#define WS_THICKFRAME                                0x40000
+#define WS_EX_NOINHERITLAYOUT                        0x100000
+#define WS_EX_LAYOUTRTL                              0x400000
+#define WS_OVERLAPPEDWINDOW                          0xCF0000
+#define WS_TILEDWINDOW                               0xCF0000
+#define WS_MAXIMIZE                                  0x1000000
+#define WS_ICONIC                                    0x20000000
+#define WS_MINIMIZE                                  0x20000000
+#define WS_CHILDWINDOW                               0x40000000
+#define WS_EX_NODRAG                                 0x40000000
+#define WS_EX_CAPTIONOKBTN                           0x80000000
+#define WS_POPUPWINDOW                               0x80880000
 
 #endif /* AKARI_WINUSER_H */

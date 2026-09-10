@@ -47,6 +47,15 @@ NOT_PUBLISHED = {
     'Commctrl.h': {'ANIMATE_CLASS', 'STATUSCLASSNAME'},
 }
 
+# Names whose documented home is ANOTHER project header; never
+# adopted here even though this header's pages mention them in
+# passing (home decided by the family's own ledger/records).
+REHOME = {
+    'Winuser.h': {'NM_RCLICK'},        # NM_* family: Commctrl.h ledger
+    'aygshell.h': {'WM_LBUTTONDOWN'},  # core WM_*: Winuser.h
+    'Commctrl.h': {'GN_CONTEXTMENU'},  # GN_ gesture: aygshell.h
+}
+
 # Page-spelled name -> R1 spelling (value adopted under the page
 # spelling, the reference spelling noted in the emitted comment).
 ALIASES = {
@@ -93,7 +102,7 @@ DEFINE_RE = re.compile(
     r'^\s*#\s*define\s+([A-Za-z_][A-Za-z0-9_]*)\s+(.+)$')
 ENUM_RE = re.compile(r'enum\s*\w*\s*\{([^{}]*)\}', re.S)
 PAGEID_RE = re.compile(r'\b(?:ms|aa)(\d{6})\b')
-NAME_RE = re.compile(r'\b[A-Z][A-Z0-9]{2,}(?:_[A-Z0-9]+)+\b')
+NAME_RE = re.compile(r'\b[A-Z][A-Z0-9]{1,}(?:_[A-Z0-9]+)+\b')
 
 SUFFIX_RE = re.compile(r'(0[xX][0-9A-Fa-f]+|\d+)[uUlL]+')
 # Integer casts are value-preserving here (all adopted values fit).
@@ -231,8 +240,10 @@ def maps():
     return _maps
 
 
-def ours_defined():
-    """#define names across include/ (value presence filter)."""
+def ours_defined(exclude=frozenset()):
+    """#define names across include/ (value presence filter), minus
+    an exclusion set (used to ignore a header's own M96 section when
+    re-emitting it)."""
     names = set()
     idir = os.path.join(ROOT, 'include')
     for fn in os.listdir(idir):
@@ -244,19 +255,39 @@ def ours_defined():
         for m in re.finditer(r'^\s*#\s*define\s+([A-Za-z_][A-Za-z0-9_]*)',
                              text, re.M):
             names.add(m.group(1))
-    return names
+    return names - set(exclude)
 
 
-def code_identifiers():
+M96_MARK = 'M96 value adoption -- values adopted'
+
+
+def strip_m96(text):
+    """Remove this header's existing M96 adoption section.
+    -> (text_without_section, names_defined_in_section)"""
+    i = text.find(M96_MARK)
+    if i == -1:
+        return text, set()
+    start = text.rfind('/*', 0, i)          # banner opener line
+    ms = list(re.finditer(r'^[ \t]*#endif[^\n]*$', text, re.M))
+    end = ms[-1].start() if ms else len(text)
+    sec = text[start:end]
+    names = set(re.findall(r'^#define\s+(\w+)', sec, re.M))
+    return text[:start] + text[end:], names
+
+
+def code_identifiers(skip_m96_of=None):
     """Identifiers used in non-comment code anywhere in include/
     (enum members, typedefs, parameter names) -- a #define of such a
-    name would shadow or collide, so adoption skips them."""
+    name would shadow or collide, so adoption skips them.  The M96
+    section of skip_m96_of is ignored (it is being re-emitted)."""
     names = set()
     idir = os.path.join(ROOT, 'include')
     for fn in os.listdir(idir):
         if not fn.endswith('.h'):
             continue
         text = open(os.path.join(idir, fn), encoding='utf-8').read()
+        if fn == skip_m96_of:
+            text, _own = strip_m96(text)
         text = re.sub(r'/\*.*?\*/', ' ', text, flags=re.S)
         text = re.sub(r'//[^\n]*', '', text)
         names |= set(re.findall(r'[A-Za-z_]\w*', text))
@@ -265,7 +296,7 @@ def code_identifiers():
 
 NS_CACHE = os.path.join(ROOT, 'build', 'not-supported-names.txt')
 NS_SCAN_RE = re.compile(
-    r'\b([A-Z][A-Z0-9]{2,}(?:_[A-Z0-9]+)+)\s{0,3}Not supported\b')
+    r'\b([A-Z][A-Z0-9]{1,}(?:_[A-Z0-9]+)+)\s{0,3}Not supported\b')
 
 
 def not_supported():
@@ -315,6 +346,8 @@ def targets(header):
     text = open(os.path.join(ROOT, 'include', header),
                 encoding='utf-8').read()
     ctext = ' '.join(re.findall(r'/\*.*?\*/', text, flags=re.S))
+    text0, own_m96 = strip_m96(text)
+    defined = ours_defined(exclude=own_m96)
     comment_toks = set(NAME_RE.findall(ctext))
     comment_toks |= set(EXPLICIT_TARGETS.get(header, ()))
     page_toks = set()
@@ -323,9 +356,10 @@ def targets(header):
     page_toks -= comment_toks
     toks = comment_toks | page_toks
     toks -= NOT_PUBLISHED.get(header, set())
+    toks -= REHOME.get(header, set())
     toks -= not_supported() & toks
-    toks -= code_identifiers() & toks
-    toks = {t for t in toks if t not in ours_defined() and t not in EXCLUDE}
+    toks -= code_identifiers(skip_m96_of=header) & toks
+    toks = {t for t in toks if t not in defined and t not in EXCLUDE}
     return {t: ('comment' if t in comment_toks else 'page') for t in toks}
 
 
@@ -410,9 +444,8 @@ def main():
         return 0
     path = os.path.join(ROOT, 'include', header)
     text = open(path, encoding='utf-8').read()
-    if marker + ' -- values adopted' in text:
-        print(f'{header}: already has the {marker} section')
-        return 0
+    if M96_MARK in text:
+        text, _own = strip_m96(text)
     # insert before the LAST #endif line (the include guard close)
     ms = list(re.finditer(r'^[ \t]*#endif[^\n]*$', text, re.M))
     assert ms, 'include-guard #endif not found'
