@@ -7078,3 +7078,12 @@ provenance.
   stay held (SECPKG_ID_NONE, SECPKG_ATTR_DCE_INFO, several SEC_E_*
   return names, parts of the ASC_*/ISC_RET_ flag sets -- 62 names).
   Gates GREEN x6.
+- include/Schnlsp.h NEW (7 rows): SCHANNEL_CRED (14 members, the
+  page's glued print split, "DWORDreserved" spelling kept),
+  SecPkgContext_ConnectionInfo / _IssuerListInfoEx / _ProtoInfo,
+  SecPkgCred_CipherStrengths / _SupportedAlgs / _SupportedProtocols;
+  opaque struct _HMAPPER forward carrier.  No functions, no lib rows
+  (the package is reached through Sspi.h).  M96 value adoption: +13
+  (SCHANNEL_CRED_VERSION 4, SP_PROT_SSL2/SSL3/TLS1 CLIENT/SERVER 6,
+  SCH_CRED_* 6); CALG_EXCH_KEA named by ms926436 stays held (R1
+  wincrypt.h carries no such name).  Gates GREEN x6.
