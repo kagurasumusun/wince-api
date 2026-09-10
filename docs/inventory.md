@@ -6874,3 +6874,20 @@ guard close, grouped by family, every value provenance-tagged R1.
   provider parameter ids, PROV_ 16 provider types, USAGE_MATCH_ 2,
   X509_ASN_ENCODING).  CERT_SIMPLE_NAME_STR excluded
   (Not-supported row, ms937703).  Gates GREEN x6.
+- include/Shobjidl.h: 18 defines, 4 families: DROPEFFECT_ 3
+  (COPY/MOVE/LINK), MK_ 6 (OLE key-state modifiers, documented on
+  the shell drag-drop pages), SHGDN_ 4, SVUIA_ 5 -- the CE pages
+  spell the in-place value two ways (ms909893 prints
+  SVUIA_INPLACEACTIVATE, the ledger page the underscored
+  SVUIA_IN_PLACEACTIVATE), so BOTH spellings are defined at 3 with
+  the cross-reference noted.  Gates GREEN x6.
+- Zero-adoption closures: Winscard.h / Tapi.h / Urlmon.h /
+  Ws2tcpip.h adopt NOTHING under the R1-only policy -- the fork
+  carries no urlmon.h / winscard.h / tapi.h, and its winsock2.h /
+  ws2tcpip.h are the README's BSD-licensed exceptions (unused).
+  Their held families (INET_E_*, URLACTION_*, URLPOLICY_*,
+  SCARD_*, TAPI's DRV_REQUESTID etc.) remain value-less until a
+  legal CE-lineage source appears.  Winsock2.h adopts only
+  SOL_IRLMP (R1 af_irda.h, public domain, not an exception file;
+  documented on ms899548); all WSAE_* error values stay held (the
+  fork's winsock2.h is BSD-licensed and excluded).

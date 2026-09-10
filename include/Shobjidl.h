@@ -222,4 +222,42 @@ typedef struct ITaskbarList2    ITaskbarList2;
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- DROPEFFECT_ family (3 names; R1) ---- */
+#define DROPEFFECT_COPY                              0x0001
+#define DROPEFFECT_MOVE                              0x0002
+#define DROPEFFECT_LINK                              0x0004
+
+/* ---- MK_ family (6 names; R1) ---- */
+#define MK_LBUTTON                                   0x0001
+#define MK_RBUTTON                                   0x0002
+#define MK_SHIFT                                     0x0004
+#define MK_CONTROL                                   0x0008
+#define MK_MBUTTON                                   0x0010
+#define MK_ALT                                       0x0020
+
+/* ---- SHGDN_ family (4 names; R1) ---- */
+#define SHGDN_INFOLDER                               0x0001
+#define SHGDN_FOREDITING                             0x1000
+#define SHGDN_FORADDRESSBAR                          0x4000
+#define SHGDN_FORPARSING                             0x8000
+
+/* ---- SVUIA_ family (5 names; R1) ---- */
+#define SVUIA_DEACTIVATE                             0x0000
+#define SVUIA_ACTIVATE_NOFOCUS                       0x0001
+#define SVUIA_ACTIVATE_FOCUS                         0x0002
+#define SVUIA_INPLACEACTIVATE                        0x0003
+#define SVUIA_IN_PLACEACTIVATE                       0x0003  /* R1: SVUIA_INPLACEACTIVATE */
+
 #endif /* AKARI_SHOBJIDL_H */
