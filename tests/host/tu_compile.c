@@ -22,6 +22,9 @@
 #include <Natedit.h>
 #include <Commctrl.h>
 #include <Winsock2.h>
+#include <Wininet.h>
+#include <Wininetui.h>
+#include <Urlmonui.h>
 #include <Ws2tcpip.h>
 #include <Ws2spi.h>
 #include <Tapi.h>
@@ -7306,6 +7309,52 @@ static int m91_fsd_usage(void)
            + (FSDMGR_CloseFileLockState(&fls), 0);
 }
 
+static int m92_wininet_usage(void)
+{
+    HTTP_VERSION_INFO         hvi;
+    INTERNET_BUFFERS          ib;
+    INTERNET_CACHE_ENTRY_INFO icei;
+    INTERNET_CACHE_TIMESTAMPS icts;
+    INTERNET_CERTIFICATE_INFO cert;
+    INTERNET_CONNECTED_INFO   ici;
+    INTERNET_PER_CONN_OPTION  ipco;
+    INTERNET_PER_CONN_OPTION_LIST ipcol;
+    INTERNET_PROXY_INFO       ipi;
+    INTERNET_VERSION_INFO     ivi;
+    INTERNET_SCHEME           sch;
+    InternetCookieState       ics;
+    FILETIME                  ft;
+    DWORD                     dw;
+
+    hvi.dwMajorVersion = 0; ib.dwStructSize = 0; icei.dwStructSize = 0;
+    icts.ftExpires.dwLowDateTime = 0; cert.dwKeySize = 0;
+    ici.dwConnectedState = 0; ipco.dwOption = 0; ipcol.dwSize = 0;
+    ipi.dwAccessType = 0; ivi.dwMinorVersion = 0;
+    sch = INTERNET_SCHEME_HTTPS; ics = COOKIE_STATE_ACCEPT;
+    ft.dwLowDateTime = 0;
+    dw = 0;
+    dw = InternetAttemptConnect(0u);
+    dw += (DWORD)InternetCheckConnection(NULL, 0u, 0u);
+    dw += (DWORD)InternetGetCookie(NULL, NULL, NULL, &dw);
+    dw += (DWORD)InternetGetLastResponseInfo(&dw, NULL, NULL);
+    dw += (DWORD)InternetGoOnline(NULL, NULL, 0u);
+    dw += (DWORD)InternetTimeToSystemTime(NULL, NULL, 0u);
+    dw += (DWORD)InternetUnlockRequestFile(NULL);
+    dw += InternetConfirmZoneCrossing(NULL, NULL, NULL, FALSE);
+    dw += (DWORD)DeleteUrlCacheEntry(NULL);
+    dw += (DWORD)FindCloseUrlCache(NULL);
+    dw += (DWORD)UnlockUrlCacheEntryFile(NULL, 0u);
+    dw += IsMessageBoxHandled(NULL, 0u, 0u, 0u);
+    dw += IsDialogBoxHandled(NULL, 0u, 0u, NULL);
+    return (int)dw + (int)hvi.dwMajorVersion + (int)ib.dwStructSize
+           + (int)icei.dwStructSize + (int)icts.ftExpires.dwLowDateTime
+           + (int)cert.dwKeySize + (int)ici.dwConnectedState
+           + (int)ipco.dwOption + (int)ipcol.dwSize + (int)ipi.dwAccessType
+           + (int)ivi.dwMinorVersion + (int)sch
+           + HTTP_STATUS_VERSION_NOT_SUP + HTTP_QUERY_SET_COOKIE
+           + (int)ft.dwLowDateTime + (int)ics;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7473,6 +7522,8 @@ int host_tu_entry(void)
     if (m89_shaped_usage() != 0)
         return 1;
     if (m91_fsd_usage() != 0)
+        return 1;
+    if (m92_wininet_usage() != 0)
         return 1;
     return 0;
 }

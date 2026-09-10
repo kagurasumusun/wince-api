@@ -6422,3 +6422,61 @@ Row homes: Wininet.h 102 (NOT yet shipped -- M92 target), webvw.h
 68, Mshtml.h/Mshtmhst.idl 11+4, Uxtheme.h 8, Wininetui.h 2,
 Urlmonui.h 1, "Interned.h .h" 3 (archive typo spellings -- check
 against Internet.h), 161 prose rows.  85 rows carry parsed sigs.
+
+## M92 -- Internet Client: Wininet.h + Wininetui.h + Urlmonui.h
+
+include/Wininet.h NEW (tools/gen-wininet.py; 102 Wininet.h rows, all
+accounted): 81 function rows -- 34 DECLARED (every parameter type
+resolves in our headers; InternetConfirmZoneCrossing recovered from
+the glued print `DWORDInternetConfirmZoneCrossing(HWNDhWnd,
+LPTSTRszUrlPrev,LPTSTRszUrlNew,BOOLbPost);` -- the M91 rows-sig gap
+struck again, caught by the 102-row sweep) and 47 RECORDED as
+commented prototypes (HINTERNET / GROUPID / INTERNET_CACHE_GROUP_INFO
+/ INTERNET_CACHE_CONFIG_INFOA by value; HINTERNET et al. verified
+absent from every build/pages* corpus -- hold policy extended).
+InternetCreateUrl/InternetCrackUrl demoted D->R post-generation:
+LPURL_COMPONENTS needs URL_COMPONENTS, held (INTERNET_PORT member).
+11 structures compiled: HTTP_VERSION_INFO, INTERNET_BUFFERS,
+INTERNET_CACHE_ENTRY_INFO, INTERNET_CACHE_TIMESTAMPS,
+INTERNET_CERTIFICATE_INFO, INTERNET_CONNECTED_INFO,
+INTERNET_PER_CONN_OPTION(+LIST), INTERNET_PROXY_INFO,
+INTERNET_VERSION_INFO + INTERNET_SCHEME enum (print truncates after
+the MAILTO line; implicit 0.. values per printed order) and
+InternetCookieState enum (ms918353 full values).  HTTP_STATUS 38
+defines (ms906351 values).  HTTP_QUERY_* 62 defines (ms906348
+"HTTP Response Headers" prints the indices in parens -- 61 of the 66
+ms918842 names + HTTP_QUERY_TITLE which is on ms906348 only; the five
+modifiers CONTENT_TRANSFER_ENCODING/CUSTOM/FLAG_NUMBER/
+FLAG_REQUEST_HEADERS/FLAG_SYSTEMTIME stay value-less names).
+INTERNET_FLAG_ (31), INTERNET_OPTION_ (46), PRIVACY_ (11) name lists
+recorded as comments (no values printed anywhere).
+
+- Print repairs M92: BOOLAPI->BOOL WINAPI (FindNextUrlCacheEntryEx,
+  FtpPutFileEx, SetUrlCacheConfigInfoA); glued BOOL/name splits
+  (CrackUrl, GetConnectedStateEx, RetrieveUrlCacheEntryFile,
+  SetUrlCacheEntryInfo, UnlockUrlCacheEntryFile, ConfirmZoneCrossing);
+  RetrieveUrlCacheEntryStream dropped comma; UnlockUrlCacheEntryStream
+  LHANDLE->HANDLE; SAL OPTIONAL stripped (InternetQueryOption);
+  FindFirstUrlCacheEntryEx LPCWSTR-only; SetUrlCacheEntryInfo/
+  UnlockUrlCacheEntryFile print LPCSTR (A-native);
+  EnumPerSiteCookieDecisionW prints LPSTR (kept, archive oddity);
+  InternetEnumPerSite* print `unsigned long *` (kept verbatim).
+- include/Wininetui.h NEW: IsMessageBoxHandled callback DECLARED
+  (ms918809, Wininetui.lib).  include/Urlmonui.h NEW:
+  IsDialogBoxHandled (Urlmon) DECLARED (ms918806, Urlmonui.lib).
+  The sibling page ms918807 "IsDialogBoxHandled (WinInet)" also
+  names Wininetui.h -- same-name callback, one declaration covers
+  both rows.
+- "Interned.h .h" rows (aa451906 BeforeWindowOpen, aa452134 Count,
+  aa452193 Event): IHTMLCEPopupEvents COM methods (webvw/DHTML
+  territory; BeforeWindowOpen's own text names the interface) -- no
+  C surface, folded into the pending webvw.h 68-row triage.
+- tools/gen-doc-def.py: short_title now strips " Callback Function"
+  tails (M83 EnumUILanguagesProc precedent) -> wininetui-doc.def (2)
+  and urlmonui-doc.def (1) written; wininet-doc.def 34 exports.
+- TU m92 (11 struct field touches + InternetCookieState + HTTP_QUERY/
+  HTTP_STATUS defines + 13 declared-call probes + both UI callbacks).
+  Gates GREEN x6 (check/crosscheck/e2e with LLVM + CRT paths).
+
+Remaining IC book rows: webvw.h 68, Mshtml.h/Mshtmhst.idl 11+4,
+Uxtheme.h 8, 161 prose -- triage next, then the book closes.

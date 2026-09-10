@@ -156,6 +156,7 @@ include/Upnpdevapi.h \
 include/Upnphost.h \
 include/Usp10.h \
 include/Urlmon.h \
+include/Urlmonui.h \
 include/Voiplap.h \
 include/Voipconfigurationdatastore.h \
 include/Voiperrorcodes.h \
@@ -171,9 +172,11 @@ include/Windows.h \
 include/Windowsx.h \
 include/Wingdi.h \
 include/Winldap.h \
+include/Wininet.h \
 include/Winnetwk.h \
 include/Winnls.h \
 include/Winnt.h \
+include/Wininetui.h \
 include/Winreg.h \
 include/Winscard.h \
 include/Winsock2.h \

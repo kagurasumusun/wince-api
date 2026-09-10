@@ -263,6 +263,10 @@ def short_title(title):
     # book prints "CreatePalette (GDI)" for the page whose export is
     # CreatePalette) are annotations, not part of the export name.
     t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+    # "Callback Function" title tails (WinInet/Urlmon UI callbacks,
+    # M92; the EnumUILanguagesProc M83 precedent): the page documents
+    # the callback itself, whose name is the export.
+    t = re.sub(r"\s+Callback Function$", "", t).strip()
     return t
 
 
