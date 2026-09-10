@@ -963,4 +963,19 @@ AKARI_CE_IMPORT DWORD WSAWaitForMultipleEvents(DWORD cEvents,
                                                BOOL fAlertable)
     AKARI_CE_NAME(WSAWaitForMultipleEvents);
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- SOL_ family (1 names; R1) ---- */
+#define SOL_IRLMP                                    0x00FF
+
 #endif  /* _WINSOCK2_H */

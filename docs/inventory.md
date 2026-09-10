@@ -6891,3 +6891,14 @@ guard close, grouped by family, every value provenance-tagged R1.
   SOL_IRLMP (R1 af_irda.h, public domain, not an exception file;
   documented on ms899548); all WSAE_* error values stay held (the
   fork's winsock2.h is BSD-licensed and excluded).
+- include/Winsock2.h: 1 define (SOL_IRLMP 0x00FF, R1 af_irda.h --
+  public domain, not one of the README's BSD exception files); the
+  held-ledger sentence that still listed SOL_IRLMP as value-less was
+  patched to point at the adoption.  All other Winsock values stay
+  held (R1 winsock2.h / ws2tcpip.h are BSD-licensed exceptions).
+  Gates GREEN x6.
+
+M96 adoption totals: 1381 defines across 10 headers (Commctrl 688,
+Winuser 210, Wininet 186, Imm 139, Wincrypt 102, aygshell 20,
+Shobjidl 18, Prsht 13, Sipapi 4, Winsock2 1).  Urlmon / Winscard /
+Tapi / Ws2tcpip: zero (no legal CE-lineage source carries them).
