@@ -303,6 +303,13 @@ UINT     APIENTRY PrintHookProc(HWND hdlg, UINT uiMsg,
  * (ms911908), CDM_SETDEFEXT (ms908072) and CDN_TYPECHANGE
  * (ms908073; its LPOFNOTIFY lParam form is recorded above). */
 
+/* aa452636 "DrvAdvPageSetupDlg" (CE .NET 4.0+): `BOOL
+ * DrvAdvPageSetupDlg(LPPAGESETUPDLG lppsd,HWND hwndDlg);` -- RECORDED,
+ * not declared: the page's Remarks say "You should implement this
+ * function in the printer driver" (the Page Setup dialog invokes it
+ * when the user chooses Advanced); the page prints no Link Library
+ * row, so there is no doc-derived def entry either. */
+
 #ifdef __cplusplus
 }
 #endif

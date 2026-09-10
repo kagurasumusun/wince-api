@@ -188,6 +188,60 @@ BOOL     CALLBACK AddPropSheetPageProc(HPROPSHEETPAGE hpage,
  * flags and PSH_* header flags (aa453562/aa453560 tables).
  * ------------------------------------------------------------------ */
 
+/* ================================================================== */
+/* M94 (Shell book completion, part 2) -- PropSheet_* macro records    */
+/* and PSN_* notification records.  As with the Commctrl.h M94 set:   */
+/* no page prints numeric message values (PSM_* records live in       */
+/* commctrl.h, their Requirements home), and the macro prototypes    */
+/* below are printed without parameter types -- recorded verbatim     */
+/* (glued return/name pairs split for readability, noted inline).     */
+/* ================================================================== */
+
+/* aa453553 "PropSheet_AddPage": `BOOLPropSheet_AddPage( hPropSheetDlg,
+ * hpage );` */
+/* aa453554 "PropSheet_Apply": `BOOLPropSheet_Apply( hPropSheetDlg );` */
+/* aa453556 "PropSheet_CancelToClose": `VOID PropSheet_CancelToClose(
+ * hPropSheetDlg);` */
+/* aa453557 "PropSheet_Changed": `BOOLPropSheet_Changed( hPropSheetDlg,
+ * hwndPage);` */
+/* aa453558 "PropSheet_GetCurrentPageHwnd": `HWNDPropSheet_GetCurrentPageHwnd(
+ * hDlg );` */
+/* aa453559 "PropSheet_GetTabControl": `HWNDPropSheet_GetTabControl(
+ * hPropSheetDlg );` */
+/* aa453561 "PropSheet_IsDialogMessage": `BOOLPropSheet_IsDialogMessage(
+ * hDlg, pMsg );` */
+/* aa453564 "PropSheet_PressButton": `BOOLPropSheet_PressButton(
+ * hPropSheetDlg, iButton );` */
+/* aa453566 "PropSheet_QuerySiblings": `intPropSheet_QuerySiblings(
+ * hPropSheetDlg, param1, param2 );` */
+/* aa453567 "PropSheet_RebootSystem": `voidPropSheet_RebootSystem(
+ * hPropSheetDlg );` */
+/* aa453568 "PropSheet_RemovePage": `voidPropSheet_RemovePage(
+ * hPropSheetDlg, index, hpage );` */
+/* aa453569 "PropSheet_RestartWindows": `voidPropSheet_RestartWindows(
+ * hPropSheetDlg );` */
+/* aa453570 "PropSheet_SetCurSel": `BOOLPropSheet_SetCurSel(
+ * hPropSheetDlg, hpage, index );` */
+/* aa453571 "PropSheet_SetCurSelByID": `BOOLPropSheet_SetCurSelByID(
+ * hPropSheetDlg, id );` */
+/* aa453572 "PropSheet_SetFinishText": `VOID PropSheet_SetFinishText(
+ * hPropSheetDlg, lpszText);` */
+/* aa453573 "PropSheet_SetTitle": `voidPropSheet_SetTitle(
+ * hPropSheetDlg, dwStyle, lpszText );` */
+/* aa453574 "PropSheet_SetWizButtons": `VOID PropSheet_SetWizButtons(
+ * HWNDhPropSheetDlg,DWORDdwFlags );` */
+/* aa453575 "PropSheet_UnChanged": `voidPropSheet_UnChanged(
+ * hPropSheetDlg, hwndPage );` */
+
+/* PSN_* notifications (all print `lppsn= (LPPSHNOTIFY)lParam;`
+ * against the PSHNOTIFY structure above): */
+/* aa453595 "PSN_APPLY": `PSN_APPLY lppsn= (LPPSHNOTIFY)lParam;` */
+/* aa453596 "PSN_HELP": `PSN_HELP lppsn= (LPPSHNOTIFY)lParam;` */
+/* aa453597 "PSN_KILLACTIVE": `PSN_KILLACTIVE lppsn= (LPPSHNOTIFY)lParam;` */
+/* aa453598 "PSN_QUERYCANCEL": `PSN_QUERYCANCEL lppsn= (LPPSHNOTIFY)lParam;` */
+/* aa453599 "PSN_RESET": `PSN_RESET lppsn= (LPPSHNOTIFY)lParam;` */
+/* aa453600 "PSN_SETACTIVE": `PSN_SETACTIVE lppsn= (LPPSHNOTIFY)lParam;` */
+
 #ifdef __cplusplus
 }
 #endif

@@ -6674,3 +6674,44 @@ IShellNotificationCallback), prose rows 201 (concept pages -- inventory
 accounting only), the Commdlg CDM_SETDEFEXT twin pair, and the
 TTM_GETTIPTEXTCOLOR mis-homed row (Windows.h home = archive print
 quirk; the TTM_ record lives in Commctrl.h per its real family).
+
+## M94 part 2 -- Shell book API surface complete
+
+Method-name-aware re-sweep of the M94a gap list: the "Shobjidl.h 27"
+and "aygshell.h 4" rows were FALSE gaps -- the M53/M55-era Shobjidl.h
+method-record sections (IDropTarget 4, IPersistFolder 1, IShellFolder
+9, IShellView 12, ITaskbarList 5, ITaskbarList2 1) and the aygshell.h
+AYGShell interface sections (INewMenuItemServer::CreateNewItem,
+IShellNotificationCallback::OnCommandSelected/OnLinkSelected/OnDismiss)
+already record every one of them; the sweep had searched for the full
+"Interface::Method" title string while the records spell the bare
+method name after the interface banner.  LESSON (added to the error
+ledger): strip the interface prefix before the presence check.
+
+True gaps closed in part 2 (30 rows):
+- include/Prsht.h +24: the 18 PropSheet_* macro prototype records
+  (printed without parameter types -- `BOOLPropSheet_AddPage(
+  hPropSheetDlg, hpage );` etc., glued return/name pairs recorded
+  with splits noted) + the 6 PSN_* notification records (all print
+  `lppsn= (LPPSHNOTIFY)lParam;` against the existing PSHNOTIFY).
+  The PSM_* message twins stayed in Commctrl.h per their own
+  Requirements homes (M94 part 1).
+- include/Commctrl.h +5 records: ms913827 TB_SETCMDID (its
+  Requirements prints "Header: Commctrl.h" WITHOUT the trailing
+  period -- the spelling that made the part-1 HOMES set miss it),
+  aa453830 TTM_GETTIPTEXTCOLOR (Requirements prints "Header:
+  Windows.h", archive quirk; tooltip family), and the three
+  Pcommctrl.h-homed ListView_GetNumberOfWorkAreas / GetWorkAreas /
+  SetWorkAreas macros whose pages print full #define bodies
+  (recorded verbatim; they reference the held value-less LVM_*
+  constants; Pcommctrl.h alias comment already points here).
+- include/Commdlg.h +1: aa452636 DrvAdvPageSetupDlg RECORDED (the
+  page's Remarks: "You should implement this function in the printer
+  driver" -- the Page Setup dialog's Advanced hook; no Link Library
+  row, no def entry).
+
+Remaining shell-book rows: 201 -- verified ALL prose (zero parsed
+signatures, zero Header rows: concept/reference-index pages such as
+"Creating a Toolbar", "Animation Controls", registry-settings and
+command-processor pages).  The Shell book API SURFACE is COMPLETE
+(1251 leaves accounted).  Gates GREEN x6.

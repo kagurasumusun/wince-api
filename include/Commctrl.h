@@ -2692,6 +2692,36 @@ typedef struct LVSETINFOTIP {
  * (names only; no values printed anywhere). */
 
 
+/* ------------------------------------------------------------------ */
+/* M94 part 2 -- late-found rows.  ms913827 TB_SETCMDID's Requirements */
+/* prints "Header: Commctrl.h" without the trailing period the other  */
+/* rows carry (that spelling difference is why the M94 part-1 sweep   */
+/* missed it); aa453830 TTM_GETTIPTEXTCOLOR's Requirements prints     */
+/* "Header: Windows.h" (archive quirk -- the row belongs to the       */
+/* tooltip family).  The three ListView_*WorkAreas macros are the     */
+/* Pcommctrl.h-homed rows; their pages print full #define bodies,     */
+/* recorded verbatim (they reference the held value-less LVM_*        */
+/* constants).                                                         */
+/* ------------------------------------------------------------------ */
+
+/* ms913827 "TB_SETCMDID": `TB_SETCMDID wParam=(WPARAM)(UINT)index;lParam=(WPARAM)(UINT)cmdId;` */
+/* aa453830 "TTM_GETTIPTEXTCOLOR": `TTM_GETTIPTEXTCOLOR wParam= 0;lParam= 0;` */
+/* aa453343 "ListView_GetNumberOfWorkAreas" (printed body):
+ *   #define ListView_GetNumberOfWorkAreas(hwnd, pnWorkAreas) \
+ *       (BOOL)SNDMSG((hwnd), LVM_GETNUMBEROFWORKAREAS, 0, \
+ *       (LPARAM)(UINT *)(pnWorkAreas))
+ */
+/* aa453353 "ListView_GetWorkAreas" (printed body):
+ *   #define ListView_GetWorkAreas(hwnd, nWorkAreas, prc) \
+ *       (BOOL)SNDMSG((hwnd), LVM_GETWORKAREAS, (WPARAM)(int)nWorkAreas, \
+ *       (LPARAM)(RECT FAR*)(prc))
+ */
+/* aa453377 "ListView_SetWorkAreas" (printed body):
+ *   #define ListView_SetWorkAreas(hwnd, nWorkAreas, prc) \
+ *       (BOOL)SNDMSG((hwnd), LVM_SETWORKAREAS, (WPARAM)(int)nWorkAreas, \
+ *       (LPARAM)(RECT FAR*)(prc))
+ */
+
 #ifdef __cplusplus
 }
 #endif
