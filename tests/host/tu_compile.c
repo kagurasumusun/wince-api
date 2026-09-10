@@ -63,6 +63,9 @@
 #include <Externs.h>
 #include <Windot11.h>
 #include <Usp10.h>
+#include <Msime.h>
+#include <Msimeui.h>
+#include <Imjpskin.h>
 #include <Mspyime.h>
 #include <Recog.h>
 #include <DwCeDump.h>
@@ -7178,6 +7181,24 @@ static int m83_shaped_usage(void)
            + (int)abc.abcB + (int)u;
 }
 
+static int m84_shaped_usage(void)
+{
+    IMESHF        shf;
+    POSTBL        ptbl;
+    IPCANDIDATE   ipc;
+    MARGINS       marg;
+    IFEDictionary *pifed = NULL;
+    HRESULT       hr;
+
+    shf.cbShf = 0; ptbl.nPos = 0; ipc.dwSize = 0;
+    marg.cxLeftWidth = 0;
+    hr = CreateIFEDictionaryInstance((VOID **)&pifed);
+    hr = CreateIImeIPointInstance(NULL, (VOID **)&pifed);
+    ImeGetUIClassName(NULL);
+    return (int)shf.cbShf + (int)ptbl.nPos + (int)ipc.dwSize
+           + marg.cxLeftWidth + (int)hr + (pifed != NULL);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7333,6 +7354,8 @@ int host_tu_entry(void)
     if (m82_shaped_usage() != 0)
         return 1;
     if (m83_shaped_usage() != 0)
+        return 1;
+    if (m84_shaped_usage() != 0)
         return 1;
     return 0;
 }

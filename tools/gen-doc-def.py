@@ -294,6 +294,10 @@ def main():
         # the import-library form "Ndis.lib" (same NDIS library, M78a).
         if not tokens and re.search(r"ndis\.dll", lib):
             tokens = ["ndis.lib"]
+        # Japanese Pocket IME factory pages print the module form
+        # "Imejpp.dll" (M84) -- map onto the imejpp.lib token.
+        if not tokens and re.search(r"imejpp\.dll", lib):
+            tokens = ["imejpp.lib"]
         for token in tokens:
             bylib.setdefault(token, {})[sn] = r["id"]
 

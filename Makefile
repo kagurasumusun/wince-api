@@ -54,6 +54,7 @@ include/IAccess.h \
 include/Icmpapi.h \
 include/Imaging.h \
 include/Imm.h \
+include/Imjpskin.h \
 include/Ipexport.h \
 include/Iphlpapi.h \
 include/Iprtrmib.h \
@@ -61,6 +62,7 @@ include/Ipsec_api.h \
 include/Iptypes.h \
 include/Keybd.h \
 include/Kfuncs.h \
+include/Koreanimeui.h \
 include/Lockmgr.h \
 include/Lockmgrhelp.h \
 include/Lockmgrtypes.h \
@@ -70,6 +72,8 @@ include/Mq.h \
 include/Mqmgmt.h \
 include/Mqoai.h \
 include/Msgqueue.h \
+include/Msime.h \
+include/Msimeui.h \
 include/Mspyime.h \
 include/Msxml2.h \
 include/Natedit.h \

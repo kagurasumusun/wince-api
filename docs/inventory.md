@@ -6102,3 +6102,43 @@ intl-book.manifest (660); build/rows.json 14088 rows.
   surfaces; msime CreateIFEDictionaryInstance/CreateIImeIPointInstance
   are COM factory getters on Imejpp.dll -- candidates for a later
   record-only header).
+
+## M84 -- IME remainder: Msime/Msimeui/Koreanimeui/Imjpskin
+
+Closes 4 of the 9 unshipped documented header tokens (149 -> 153/158;
+remaining: bt_ddi, bthid, cesync, dinput, dmoimpl).  All from the
+already-harvested International book rows.
+
+- include/Msime.h (NEW): IMESHF (ms905982), POSTBL (ms906229),
+  IPCANDIDATE (tagIPCANDIDATE) compiled from full prints; IMEWRD HELD
+  (member `IMEUCT uct` -- IMEUCT has no CE page; verbatim print
+  recorded); IFEDictionary (9 methods), IImeIPoint2 (9),
+  IImeIPointNotifySink (17) as opaque forwards + method records
+  (M44/M69/M80 policy; pages list Vtable order but publish no C
+  layout).  2 factory fns DECLARED: CreateIFEDictionaryInstance
+  (ms904718), CreateIImeIPointInstance (ms904719) -- Imejpp.dll
+  module-form rows mapped onto imejpp.lib (gen-doc-def.py mapping
+  added, Ndis.dll precedent); def/imejpp-doc.def 2.  IPCTRL_* 30
+  control identifiers recorded name-only (pages print no values;
+  WM_SIDESHOW_* precedent); IPCTRLPARAM_DEFAULT referenced without a
+  page; RegisterWord reg values JDIC_REG_HEAD/IFED_REG_DEL and return
+  IFED_S_WORD_EXISTS recorded name-only.  Archive print repairs:
+  Initialize page misprints its prototype line as UpdateContext;
+  SetTargetClause page misprints its prototype line as
+  SetResultReadClause; ExistWord/RegisterWord drop the interface
+  name ("HRESULT::ExistWord").
+- include/Msimeui.h (NEW): ImeGetUIClassName declared (void,
+  LPTSTR) -- documented twice with identical prints (Simplified
+  Chinese ms905977, Traditional Chinese ms905978); Msimeuic.lib;
+  def/msimeuic-doc.def 1.
+- include/Koreanimeui.h (NEW): IKoreanImeUI opaque forward + 18
+  method records (GetCompositionFont page misprints the method name
+  "GetCompoitionFont"); Uuid.lib rows = GUID linkage, no def.
+- include/Imjpskin.h (NEW): MARGINS (ms906227) compiled; 3 C++
+  skin classes (CImeCUICandWindow 41, CImeCUIDefCompWindow 13,
+  CImeCUIToolBar 18 leaves) recorded as class/method lists -- C++
+  class library, no C surface (M80 record-only policy).
+- TU m84 (tests/host/tu_compile.c): IMESHF/POSTBL/IPCANDIDATE/
+  MARGINS field touches + both factory calls + ImeGetUIClassName.
+- Makefile HDRS 167 -> 171.
+- Gates: check / crosscheck / e2e GREEN x6.
