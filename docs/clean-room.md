@@ -53,26 +53,48 @@ GPL/LGPL/public-domain-with-unknown-history third-party packages.
 3. Own design decisions, always labeled *own design* in the
    inventory, never dressed up as documentation.
 
-## 4. What third-party trees are for (and only this)
+## 4. Third-party trees: permitted uses
 
-Third-party trees (CeGCC-lineage w32api/mingwrt etc.) may be
-inspected **only** for:
+**Policy revision (2026-09-10, user direction).**  Sources expanded
+from "official only" to *legal, trustworthy, and safe*.  Third-party
+material is now permitted as an **ABI-fact source** when, and only
+when, it is in the **public domain** or carries an equally
+unproblematic license.  The permitted reference set (checked in as
+read-only clones outside this repository, never committed):
 
-* **Existence / parity scoping** — which header file names exist,
-  which DLLs have import libraries, so the replacement's target scope
-  can be enumerated (see `docs/parity-target.md`).  File/dll *names*
-  are functional requirements of a drop-in replacement, not creative
-  content.
-* **Comparison / verification** — e.g., confirming that an export name
-  exists, or checking a build result.  Nothing from these inspections
-  is transcribed, translated, adapted, or mechanically converted into
-  this repository.
+* **R1 — CeGCC-lineage w32api** (kagurasumusun/w32api, the parity
+  target itself).  README: "THIS SOFTWARE IS NOT COPYRIGHTED ...
+  offered for use in the public domain".  Exceptions recorded there
+  (winsock.h/winsock2.h/ws2tcpip.h BSD Regents/DEC, gl.h Mesa,
+  glext.h/glu.h SGI) are used for nothing here.
+* **R2 — mingw-w64 headers** (mingw-w64 runtime package, public
+  domain per its DISCLAIMER notice).
 
-Forbidden: opening a w32api header and writing our header "from it";
-copying def files; porting macros; using web snippets or mirrors of
-third-party headers as implementation material.  GitHub-hosted copies
-of MS headers are not evidence for anything (they are non-official
-mirrors); official Microsoft pages are.
+Third-party trees may be used for:
+
+* **Existence / parity scoping** — as before (see
+  `docs/parity-target.md`).
+* **Comparison / verification** — as before.
+* **ABI facts** (NEW): numeric constant values, enumeration orders,
+  vtable member orders, and structure layouts — the uncopyrightable
+  functional interface facts required for interoperability — may be
+  *adopted* from R1/R2 with per-family provenance recorded in
+  `docs/inventory.md` and in the header where they land.  Where a
+  fact exists in both R1 and R2 the two must agree; a CE-only fact
+  carried only by R1 is adopted single-source and marked so.  All
+  *expression* (prose, macro bodies, struct member comments, code)
+  is written here, not taken from R1/R2; function macro wrappers are
+  built from the CE pages' own printed wParam/lParam packings
+  combined with adopted values.
+
+**Still forbidden, unchanged**: shared-source / leaked /
+unofficially-posted Microsoft material (e.g. Windows CE Shared
+Source), anything whose publication or redistribution is legally
+problematic, GPL/LGPL-covered expression (facts may be corroborated
+across sources, code may not), and non-official mirrors of MS
+headers as *documentation* evidence.  Official Microsoft pages
+remain the primary source; R1/R2 fill only the gaps the official CE
+pages leave (chiefly: constant values and full vtable orders).
 
 ## 5. Process rules
 
@@ -80,7 +102,10 @@ mirrors); official Microsoft pages are.
    `docs/inventory.md` naming its official page ID and Requirements.
 2. Items not covered by official text are marked *own design* and
    decided from toolchain-observable behavior, never from a
-   third-party implementation's behavior alone.
+   third-party implementation's behavior alone.  ABI facts adopted
+   from the R1/R2 reference set under §4 are marked *adopted* with
+   their source and cross-check status (the "derived values need a
+   recorded path" rule extends to adopted values).
 3. A file is added to `include/` only after its content is fully
    grounded; partial modules are not shipped half-grounded.
 4. No third-party license or copyright text appears anywhere in this
