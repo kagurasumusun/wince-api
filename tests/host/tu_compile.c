@@ -62,6 +62,13 @@
 #include <Wzcsapi.h>
 #include <Externs.h>
 #include <Windot11.h>
+#include <Storemgr.h>
+#include <Extfile.h>
+#include <Fsdmgr.h>
+#include <Partdrv.h>
+#include <Lockmgrtypes.h>
+#include <Lockmgrhelp.h>
+#include <Lockmgr.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -7031,6 +7038,47 @@ static int m78c_shaped_usage(void)
            + (pdw != NULL) + (pget != NULL);
 }
 
+static int m79_shaped_usage(void)
+{
+    FILELOCKSTATE           fls;
+    FSD_SCATTER_GATHER_RESULTS fsgr;
+    PFSGI                   pfsgi = NULL;
+    PVOLUME                 pvol = NULL;
+    PFILE                   pfile = NULL;
+    PSEARCH                 psearch = NULL;
+    PARTINFO               *ppi = NULL;
+    PSTOREMGR_STOREINFO     psi = NULL;
+    CE_VOLUME_INFO          *pcvi = NULL;
+    STORAGEDEVICEINFO       *psdi = NULL;
+    STORAGECONTEXT          *psc = NULL;
+    PD_PARTINFO            *ppdpi = NULL;
+    PD_STOREINFO           *ppdsi = NULL;
+    FILTERHOOK             *pfh = NULL;
+    FSD_VOLUME_INFO        *pfvi = NULL;
+    FILECHANGEINFO           fci;
+    SHELLFILECHANGEFUNC_t    sfcf = NULL;
+    PACQUIREFILELOCKSTATE    pafls = NULL;
+    DWORD                   d;
+
+    fls.dwPosLow = 0u; fls.fTerminal = 0; fls.pvLockContainer = NULL;
+    fsgr.cSectorsTransferred = 0u; fci.cbSize = 0u; fci.nFileSize = 0u;
+    d = FSDMGR_ReadDiskEx(pfsgi, &fsgr);
+    d += FSDMGR_WriteDiskEx(pfsgi, &fsgr);
+    d += FSD_UnhookVolume(pvol);
+    FSDMGR_OpenFileLockState(&fls);
+    FSDMGR_CloseFileLockState(&fls);
+    d += FindFirstStore(psi) != NULL;
+    d += FindNextPartition(NULL, ppi) != 0;
+    d += GetStoreInfo(NULL, psi) != 0;
+    d += OpenStore((LPCSTR)NULL) != NULL;
+    d += FormatStore(NULL) != 0;
+    return (int)d + (pfile || psearch || pcvi || psdi || psc || ppdpi
+                     || ppdsi || pfh || pfvi ? 1 : 0)
+           + (sfcf != NULL) + (pafls != NULL)
+           + (int)fls.dwPosLow + (int)fsgr.cSectorsTransferred
+           + (int)fci.cbSize + (int)fci.nFileSize;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7178,6 +7226,8 @@ int host_tu_entry(void)
     if (m78b_shaped_usage() != 0)
         return 1;
     if (m78c_shaped_usage() != 0)
+        return 1;
+    if (m79_shaped_usage() != 0)
         return 1;
     return 0;
 }

@@ -5946,3 +5946,55 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
   (354 Ndis.h + 126 Ntddndis.h + 69 Ntddndis/Ndistapi + 101
   Windot11.h + 23 Rndis.h + 20 Externs.h + 17 Nuiouser.h + 17
   Rndismini.h + 15 Wzcsapi.h + 35 book-index rows + 1 Wdm row).
+
+## M79 -- Storage Manager API + FSD DDI (Storemgr/Fsdmgr/Partdrv/Lockmgr)
+
+- FSD supplement fetched: tools/manifests/fsd-types.manifest (14 pages)
+  + fsd-types2.manifest (1): PARTINFO ms891424, STOREINFO (Storage
+  Manager) ms892106, PD_PARTINFO ms891440, PD_STOREINFO ms891443,
+  CE_VOLUME_INFO aa517292, STORAGEDEVICEINFO ms892022, STORAGECONTEXT
+  ms892014, FILELOCKSTATE aa517917, FILTERHOOK ms889612,
+  FSD_VOLUME_INFO aa517924, FSD_SCATTER_GATHER_INFO ms890842,
+  FSD_SCATTER_GATHER_RESULTS ms890852, PACQUIREFILELOCKSTATE aa517930,
+  SHELLFILECHANGEFUNC_t ms891992, FILECHANGEINFO ms889030 (cached).
+  rows.json 13462 -> 13477.
+- include/Storemgr.h (NEW): 19 declarations (Storeapi.lib) ->
+  def/storeapi-doc.def 19 exports: DeletePartition, Dismount*,
+  Find*Partition/Store, FormatPartition(Ex), FormatStore,
+  GetPartitionInfo, GetStoreInfo, MountPartition, OpenPartition,
+  OpenStore (LPCSTR print as printed), RenamePartition,
+  SetPartitionAttributes.  Held structures (unpublished *NAMESIZE
+  constants + SECTORNUM, prints recorded): PARTINFO, STOREINFO,
+  CE_VOLUME_INFO, STORAGEDEVICEINFO, STORAGECONTEXT.  Recorded fns:
+  CreatePartition/CreatePartitionEx (SECTORNUM by value),
+  CeGetVolumeInfo (CE_VOLUME_INFO_LEVEL unpublished).
+  NAME COLLISION: Storage Manager STOREINFO vs Cesync/COM STOREINFO
+  (ms896271, Objbase.h M73b) -- the COM struct keeps the
+  STOREINFO/PSTOREINFO typedef names; the SM struct is closed as
+  typedef struct _STOREMGR_STOREINFO *PSTOREMGR_STOREINFO and the
+  declarations use it (documented PSTOREINFO spelling preserved in
+  the quoted prints).
+- include/Extfile.h (M50 header, extended): +LPCFILECHANGEINFO
+  (print-grounded const twin), +SHELLFILECHANGEFUNC_t fn-ptr typedef
+  (`{`-for-`(` doc typo repaired, noted).
+- include/Fsdmgr.h (NEW): FILELOCKSTATE compiled (LPCRITICAL_SECTION
+  from Winbase.h); FSD_SCATTER_GATHER_RESULTS compiled (+PFSGR);
+  opaque FSD objects (PVOLUME/PFILE/PSEARCH, tags _FSD_VOLUME etc.);
+  held w/ prints: FSD_SCATTER_GATHER_INFO (+PFSGI), FILTERHOOK
+  (twenty P* filter callbacks unpublished), FSD_VOLUME_INFO
+  (MAX_FSD_DESCRIPTOR).  Declared (Fsdmgr.lib) ->
+  def/fsdmgr-doc.def 5 exports: FSDMGR_ReadDiskEx, FSDMGR_WriteDiskEx,
+  FSD_UnhookVolume + (via Lockmgrhelp.h) FSDMGR_OpenFileLockState,
+  FSDMGR_CloseFileLockState.  Recorded: the HDSK/HVOL-by-value
+  FSDMGR_* set, FSD_HookVolume, FSD_MountDisk/FSD_UnmountDisk (no
+  prints), FSDMGR_EmptyLockContainer (no print), and the FSD-supplied
+  MyFSD_* entry points (25 with prints, 25 names-only page set).
+- include/Partdrv.h (NEW, record surface): PD_PARTINFO/PD_STOREINFO
+  held (SECTORNUM); 17 PD_* driver-supplied prototypes recorded.
+- include/Lockmgr.h (record: FSDMGR_AcquireFileLock -- print names the
+  unpublished PRELEASEFILELOCKSTATE and drops parameter separators),
+  include/Lockmgrhelp.h (Open/Close declared, RemoveFileLock
+  name-record), include/Lockmgrtypes.h (PACQUIREFILELOCKSTATE typedef
+  compiled), all per their printed header homes.
+- TU m79 block; Makefile HDRS 153 -> 160.
+- Gates: check / crosscheck / e2e GREEN x6.

@@ -45,6 +45,7 @@ include/Dvp.h \
 include/ErrorRep.h \
 include/Excpt.h \
 include/Extfile.h \
+include/Fsdmgr.h \
 include/Fwapi.h \
 include/Httpext.h \
 include/Httpfilt.h \
@@ -59,6 +60,9 @@ include/Ipsec_api.h \
 include/Iptypes.h \
 include/Keybd.h \
 include/Kfuncs.h \
+include/Lockmgr.h \
+include/Lockmgrhelp.h \
+include/Lockmgrtypes.h \
 include/Mlang.h \
 include/Mmsystem.h \
 include/Mq.h \
@@ -78,6 +82,7 @@ include/Rndismini.h \
 include/Windot11.h \
 include/Wzcsapi.h \
 include/Notify.h \
+include/Partdrv.h \
 include/Oaidl.h \
 include/Obex.h \
 include/Obexserver.h \
@@ -122,6 +127,7 @@ include/Snmpapi.h \
 include/Snmpexts.h \
 include/Sphelper.h \
 include/Streams.h \
+include/Storemgr.h \
 include/Tapi.h \
 include/Tapicomn.h \
 include/Tlhelp.h \

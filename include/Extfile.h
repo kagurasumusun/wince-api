@@ -52,6 +52,18 @@ typedef struct _FILECHANGEINFO {
     ULONG    nFileSize;     /* size of the file/folder/item */
 } FILECHANGEINFO, *LPFILECHANGEINFO;
 
+/* M79a: the FSD supplement page SHELLFILECHANGEFUNC_t (ms891992) also
+ * prints "Header: Extfile.h".  Its parameter spelling LPCFILECHANGEINFO
+ * is grounded by the same print; the const-pointer typedef is closed
+ * on the compiled FILECHANGEINFO above. */
+typedef const FILECHANGEINFO *LPCFILECHANGEINFO;
+
+/* ms891992 "SHELLFILECHANGEFUNC_t": print `typedef BOOL
+ * (*SHELLFILECHANGEFUNC_t) { LPCFILECHANGEINFO lpfci};` -- the `{` is
+ * a doc typo for `(` (function-pointer declarator); repaired, noted.
+ * Used by MyFSD_RegisterFileSystemFunction (Fsdmgr.h, recorded). */
+typedef BOOL (*SHELLFILECHANGEFUNC_t)(LPCFILECHANGEINFO lpfci);
+
 #ifdef __cplusplus
 }
 #endif
