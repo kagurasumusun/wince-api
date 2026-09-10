@@ -90,6 +90,9 @@ EXPORTS
   CeStreamSeek
   CeStreamSetSize
   CeStreamWrite
+  CeSvcAdd
+  CeSvcQueryInfo
+  CeSvcRemove
   CeUnmountDBVol
   CeWriteRecordProps
   CeZeroPointer
@@ -189,6 +192,7 @@ EXPORTS
   DeleteObject
   DeleteTicket
   DeregisterService
+  DevicePowerNotify
   DisableThreadLibraryCalls
   DisassociateSession
   DispatchMessage
@@ -249,6 +253,7 @@ EXPORTS
   GetDCEx
   GetDIBColorTable
   GetDeviceCaps
+  GetDevicePower
   GetDiskFreeSpaceExW
   GetDllVersion
   GetExitCodeProcess
@@ -299,6 +304,7 @@ EXPORTS
   GetSysColorBrush
   GetSystemInfo
   GetSystemPaletteEntries
+  GetSystemPowerState
   GetSystemPowerStatusEx
   GetSystemPowerStatusEx2
   GetSystemTime
@@ -390,12 +396,17 @@ EXPORTS
   OpenProcess
   PatBlt
   PeekMessage
+  PlatformManageSystemPower
+  PlatformMapPowerStateHint
+  PlatformResumeSystem
+  PlatformValidatePMRegistry
   PlaySound
   Polygon
   Polyline
   PostMessage
   PostQuitMessage
   PostThreadMessage
+  PowerPolicyNotify
   PtInRegion
   PulseEvent
   QueryInfoSession
@@ -427,11 +438,14 @@ EXPORTS
   RegisterService
   RegisterWindowMessageW
   ReleaseDC
+  ReleasePowerRelationship
+  ReleasePowerRequirement
   ReleaseSemaphore
   RemoveDirectoryW
   RemoveFontResourceW
   RemovePropW
   ReportFault
+  RequestPowerNotifications
   ResetEvent
   RestoreDC
   ResumeThread
@@ -463,6 +477,7 @@ EXPORTS
   SetDIBColorTable
   SetDIBitsToDevice
   SetDaylightTime
+  SetDevicePower
   SetEndOfFile
   SetEvent
   SetFileAttributesW
@@ -473,10 +488,12 @@ EXPORTS
   SetLocalTime
   SetPaletteEntries
   SetPixel
+  SetPowerRequirement
   SetPropW
   SetROP2
   SetRectRgn
   SetStretchBltMode
+  SetSystemPowerState
   SetSystemTime
   SetTextAlign
   SetTextCharacterExtra
@@ -498,6 +515,7 @@ EXPORTS
   SipStatus
   SizeofResource
   Sleep
+  StopPowerNotifications
   StretchBlt
   StretchDIBits
   SuspendThread

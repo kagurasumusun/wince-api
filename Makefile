@@ -28,7 +28,8 @@ include/CEDDK.h \
 include/Cchannel.h \
 include/Celog.h \
 include/Comcat.h \
-include/Cesync.h \
+include/Ce_setup.h \
+include/Ceutil.h \
 include/Commctrl.h \
 include/Commdlg.h \
 include/Cpl.h \
@@ -51,6 +52,7 @@ include/Dmodshow.h \
 include/Dmoreg.h \
 include/Docobj.h \
 include/Dsgetdc.h \
+include/Devmgmt.h \
 include/Dshow.h \
 include/Dvp.h \
 include/ErrorRep.h \
@@ -63,6 +65,7 @@ include/Httpext.h \
 include/Httpfilt.h \
 include/IAccess.h \
 include/Icmpapi.h \
+include/IExchangeClient.h \
 include/Imaging.h \
 include/Imm.h \
 include/Lap.h \
@@ -89,6 +92,7 @@ include/Mshtml.h \
 include/Mshtmhst.h \
 include/Msime.h \
 include/Msimeui.h \
+include/Mssoap.h \
 include/Mspyime.h \
 include/Msxml2.h \
 include/Natedit.h \
@@ -97,10 +101,14 @@ include/Ndistapi.h \
 include/Ntddndis.h \
 include/Netui.h \
 include/Pkfuncs.h \
+include/pm.h \
+include/Pmimpl.h \
+include/Pmpolicy.h \
 include/Externs.h \
 include/Nuiouser.h \
 include/Rndis.h \
 include/Recog.h \
+include/Replfilt.h \
 include/Rndismini.h \
 include/Windot11.h \
 include/Wzcsapi.h \
@@ -125,6 +133,8 @@ include/Prsht.h \
 include/Psapi.h \
 include/Pwindbas.h \
 include/Pwinuser.h \
+include/Rapi.h \
+include/Rapitypes.h \
 include/Ras.h \
 include/Raseapif.h \
 include/Remoteui.h \
@@ -206,7 +216,6 @@ include/dvddrvr.h \
 include/dvdmedia.h \
 include/newmenu.h \
 include/p2p.h \
-include/pm.h \
 include/pnrpdef.h \
 include/pnrpns.h \
 include/shellsdk.h \
