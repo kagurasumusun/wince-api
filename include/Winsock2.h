@@ -41,7 +41,9 @@
  *      complete, so the values below are flagged design decisions;
  *      an on-device Ws2.dll cross-check is required before relying
  *      on the affected members.  Every other constant whose value
- *      is not officially published (SOL_SOCKET, SOL_IRLMP, the
+ *      is not officially published (SOL_SOCKET -- SOL_IRLMP now has
+ *      its R1 value (see the M96 adoption below; R1 af_irda.h is
+ *      public domain, not a README exception file) -- the
  *      remaining SO_ options, the FD_ event bits, MSG_ flags, the
  *      FIO and SIO ioctl codes, CF_ constants, SOMAXCONN,
  *      PVD_CONFIG) is deliberately NOT defined; the gap list is
