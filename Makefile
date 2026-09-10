@@ -32,6 +32,9 @@ include/Cesync.h \
 include/Commctrl.h \
 include/Commdlg.h \
 include/Cpl.h \
+include/Cred.h \
+include/Cred_prov.h \
+include/Credmgr.h \
 include/D3dm.h \
 include/D3dmcaps.h \
 include/D3dmtypes.h \
@@ -63,6 +66,7 @@ include/Icmpapi.h \
 include/Imaging.h \
 include/Imm.h \
 include/Lap.h \
+include/Lass.h \
 include/Imjpskin.h \
 include/Ipexport.h \
 include/Iphlpapi.h \

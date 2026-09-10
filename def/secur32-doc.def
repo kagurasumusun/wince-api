@@ -17,6 +17,9 @@ EXPORTS
   AcceptSecurityContext
   AcquireCredentialsHandle
   ApplyControlToken
+  CeCredFree
+  CeCredRead
+  CeCredWrite
   CompleteAuthToken
   DecryptMessage
   DeleteSecurityContext

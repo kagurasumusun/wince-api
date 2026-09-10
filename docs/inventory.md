@@ -7119,3 +7119,17 @@ provenance.
   VerifyUserStart/Stop/ToTop, DeinitLAP.  HELD: VU_HANDLE_MASTER_
   KEY, VU_UNTIL_SUCCESS (no legal source carries values).  Gates
   GREEN x6.
+- include/Cred.h NEW (6 rows): CRED (the page's WSTR pointer
+  spelling declared as a carrier; dwVersion/dwType names held) +
+  CredDelete/Free/Read/Update/Write (HRESULT, Coredll.lib).
+  HELD: CRED_VER_1, CRED_MAX_TARGET_LEN, CRED_TYPE_* (7 names; no
+  legal source carries values).  include/Cred_prov.h NEW (5 rows):
+  the type-provider entry points HandleBlob/MatchTarget/MatchUser/
+  Load/UnLoad -- provider-side exports (plain prototypes,
+  NOT_EXPORTS; titles print "Load/Unload Function", signatures
+  print Load/UnLoad).  include/Credmgr.h NEW (4 rows): deprecated
+  CREDENTIAL + CeCredFree/Read/Write (VOID returns -- the pages
+  print no return type and "Return Values: None"; Secur32.lib).
+  include/Lass.h NEW (1 row): LASSReloadConfig (Coredll.lib,
+  trusted applications).  coredll-doc.def 744 -> 750; secur32-doc
+  .def 19 -> 22.  Gates GREEN x6.

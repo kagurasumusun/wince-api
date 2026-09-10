@@ -218,7 +218,15 @@ NOT_EXPORTS = {"GetExceptionCode", "GetExceptionInformation",
                "VerifyUserStart",        # ms926488
                "VerifyUserStop",         # ms926489
                "VerifyUserToTop",        # ms926490
-               "DeinitLAP"}              # ms938427
+               "DeinitLAP",              # ms938427
+               # Credential type-provider entry points (M95 Cred_prov.h):
+               # the credential manager calls these ON the provider DLL
+               # ("enables type providers to ...") -- user-side exports.
+               "HandleBlob",             # ms906527
+               "MatchTarget",            # ms926147
+               "MatchUser",              # ms926153
+               "Load",                   # ms926136 (title "Load Function")
+               "UnLoad"}                 # ms926454 (title "Unload Function")
 
 
 def declared_exports():

@@ -132,6 +132,11 @@ EXPORTS
   CreateSolidBrush
   CreateThread
   CreateTicket
+  CredDelete
+  CredFree
+  CredRead
+  CredUpdate
+  CredWrite
   CryptAcquireContext
   CryptContextAddRef
   CryptCreateHash
@@ -356,6 +361,7 @@ EXPORTS
   IsDlgButtonChecked
   IsProcessorFeaturePresent
   KeybdGetDeviceInfo
+  LASSReloadConfig
   LineTo
   LoadKeyboardLayout
   LoadLibraryW
