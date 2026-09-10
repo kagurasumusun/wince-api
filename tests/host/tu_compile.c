@@ -53,6 +53,7 @@
 #include <Ipsec_api.h>
 #include <Raseapif.h>
 #include <Routprot.h>
+#include <Ndis.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6837,6 +6838,80 @@ static int m77c_shaped_usage(void)
            + bi.dwIfIndex + (ip.valSize != 0u);
 }
 
+static int m78a_shaped_usage(void)
+{
+    NDIS_HANDLE           nh;
+    NDIS_STATUS           ns;
+    NDIS_OID              no;
+    NDIS_PHYSICAL_ADDRESS npa;
+    NDIS_WORK_ITEM        nwi;
+    NDIS_PACKET_OOB_DATA  oob;
+    NDIS_PACKET_STACK     pstk;
+    TRANSPORT_HEADER_OFFSET tho;
+    NDIS_MAC_LINE_DOWN    mld;
+    NDIS_MAC_FRAGMENT     mfr;
+    NDIS_WAN_LINE_DOWN    wld;
+    NDIS_WAN_INFO         wi;
+    NDIS_WAN_COMPRESS_INFO wci;
+    NDIS_WAN_GET_LINK_INFO wgli;
+    NDIS_WAN_SET_COMP_INFO wsci;
+    NDIS_WAN_GET_STATS_INFO wgsi;
+    NDIS_TASK_TCP_IP_CHECKSUM ttc;
+    NDIS_TASK_TCP_LARGE_SEND tls;
+    NDIS_TCP_IP_CHECKSUM_PACKET_INFO tpi;
+    NDIS_CONFIGURATION_PARAMETER *pcp;
+    NDIS_REQUEST          *preq;
+    NDIS_PACKET           *ppkt;
+    NDIS_PROTOCOL_CHARACTERISTICS *ppc;
+    NDIS_MINIPORT_CHARACTERISTICS *pmc;
+    NDIS_SPIN_LOCK        *psl;
+    NDIS_RW_LOCK          *prwl;
+    LOCK_STATE            *pls;
+    NDIS_EVENT            *pev;
+    NDIS_TIMER            *ptm;
+    NDIS_MINIPORT_INTERRUPT *pmi;
+    NDIS_MINIPORT_TIMER   *pmt;
+    NDIS_INTERFACE_TYPE   ift = NdisInterfacePci;
+    NDIS_INTERRUPT_MODE   im  = NdisInterruptLatched;
+    NDIS_PARAMETER_TYPE   pt  = NdisParameterString;
+    PVOID                 pv;
+    UINT                  u;
+    BOOLEAN               b;
+
+    nh = NULL; no = 0u; npa.QuadPart = 0; nwi.Context = NULL;
+    nwi.Routine = NULL; nwi.WrapperReserved = 0u;
+    oob.TimeReceived = 0u; oob.Status = 0; pstk.IMReserved[0] = 0u;
+    tho.HeaderOffset = 0u; mld.NdisLinkContext = NULL;
+    mfr.Errors = 0u; wld.RemoteAddress[0] = 0u; wi.Endpoints = 0u;
+    wci.CompType = 0u; wgli.SendACCM = 0u; wsci.RecvCapabilities.CompType = 0u;
+    wgsi.BytesSent = 0u; ttc.V4Transmit.TcpChecksum = 0u;
+    tls.MaxOffLoadSize = 0u; tpi.Value = 0u;
+    pcp = NULL; preq = NULL; ppkt = NULL; ppc = NULL; pmc = NULL;
+    psl = NULL; prwl = NULL; pls = NULL; pev = NULL; ptm = NULL;
+    pmi = NULL; pmt = NULL; pv = NULL; u = 0u; b = 0;
+    ns = NdisGetVersion();
+    no = 0u; (void)no;
+    ns = NdisReadPcmciaAttributeMemory(nh, u, pv, u);
+    NdisCancelTimer(ptm, &b);
+    NdisInitializeEvent(pev);
+    NdisAcquireReadWriteLock(prwl, b, pls);
+    NdisMInitializeTimer(pmt, nh, NULL, pv);
+    ns = NdisMMapIoSpace(&pv, nh, npa, u);
+    ns = NdisEqualMemory(pv, pv, u);
+    u = NdisGetCacheFillSize();
+    NdisTerminateWrapper(nh, pv);
+    return (int)ift + (int)im + (int)pt + ns + (int)b
+           + (pcp || preq || ppkt || ppc || pmc || psl || prwl
+              || pls || pev || ptm || pmi || pmt ? 1 : 0)
+           + (int)oob.Status + (int)wci.CompType + (int)tho.HeaderOffset
+           + (mld.NdisLinkContext != NULL) + (int)mfr.Errors
+           + (int)wld.RemoteAddress[0] + (int)wi.Endpoints
+           + (int)wgli.SendACCM + (int)wsci.RecvCapabilities.CompType + (int)wgsi.BytesSent
+           + (int)ttc.V4Transmit.TcpChecksum + (int)tls.MaxOffLoadSize
+           + (int)tpi.Value + (int)pstk.IMReserved[0]
+           + (int)npa.QuadPart + (int)nwi.WrapperReserved;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -6978,6 +7053,8 @@ int host_tu_entry(void)
     if (m77b_shaped_usage() != 0)
         return 1;
     if (m77c_shaped_usage() != 0)
+        return 1;
+    if (m78a_shaped_usage() != 0)
         return 1;
     return 0;
 }

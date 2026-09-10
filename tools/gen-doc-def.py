@@ -290,6 +290,10 @@ def main():
             tokens = ["coredll.lib"]
         if not tokens and re.search(r"mlang\.dll", lib):
             tokens = ["mlang.lib"]
+        # NDIS driver pages print the module form "Ndis.dll" next to
+        # the import-library form "Ndis.lib" (same NDIS library, M78a).
+        if not tokens and re.search(r"ndis\.dll", lib):
+            tokens = ["ndis.lib"]
         for token in tokens:
             bylib.setdefault(token, {})[sn] = r["id"]
 

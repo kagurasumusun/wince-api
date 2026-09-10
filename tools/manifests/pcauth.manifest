@@ -1,0 +1,23 @@
+aa525659	PC Authentication OS Design Development
+ms912608	PC Authentication Application Development
+aa525655	PC Authentication Architecture
+ms909235	Setting Up PC Authentication
+ms909236	Setting up the PC Authentication LAP on a Windows CE Device
+ms909237	Setting up the PC Authentication PC Application
+aa525625	Determining PC Lock Status Using LASS
+aa525624	Determining PC Lock Status by Calling the LAP Directly
+aa525656	PC Authentication LAP Implementation
+aa525657	PC Authentication and IPsec
+aa525645	Learning More About PC Authentication
+aa525660	PC Authentication Registry Settings
+aa525662	PC Authentication Security
+aa525658	PC Authentication Migration
+aa525661	PC Authentication Samples
+ms931943	PC Authentication Reference
+ms931941	PC Authentication Constants
+ms912601	VOIPLAP_E_
+ms912602	VOIPLAP_S_
+ms931942	PC Authentication Functions
+ms909303	AttemptConnection
+ms909307	GetPCSyncName
+ms912594	SetPCSyncName

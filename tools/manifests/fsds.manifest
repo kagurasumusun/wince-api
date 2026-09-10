@@ -1,0 +1,580 @@
+ms885457	File Systems and Data Store Catalog Items
+ms892390	File Systems and Data Store OS Design Development
+ms885891	Object Store
+ms885883	Objects and Object Identifiers
+aa516918	Using Object Identifiers
+ms885906	Object Store Size
+ms885452	File Systems
+ms886144	Selecting the Internal File System for your Target Device
+ms885423	Filesys.exe Boot Process
+ms892397	Hive-based Registry Initialization
+ms892398	RAM-based Registry Initialization
+ms886072	Registry-Targeted Data
+ms885267	Boot Phases
+ms885443	File System Operations
+ms885325	Creating and Opening a File or Directory
+ms886029	Reading from a File
+aa516923	Writing to a File
+ms886160	Setting the File Pointer
+ms886040	Read/Write Example
+ms885351	Deleting a File or a Directory
+ms885849	Moving and Copying Files and Directories
+ms886105	Searching for a File or Directory
+ms886005	Reading and Writing File Attributes
+ms885501	Manipulating File Times
+ms886095	Retrieving File and Directory Information
+ms885512	Memory Mapping a File
+ms885120	Accessing Files on Other Storage Media
+ms885363	Determining Available Disk Space
+ms885978	Querying for Version Information
+ms885416	File-Naming Limitations
+aa516903	Synchronization and Device I/O
+ms885394	FAT File System
+aa516958	How to Configure a FAT File System
+aa516909	Transaction-Safe FAT File System
+aa516905	TFAT Implementation
+aa516961	Using TFAT
+aa516908	TFAT Write Operations
+aa516904	TFAT and Block Drivers
+aa516906	TFAT Programming Considerations
+ms892402	TFAT File Naming Limitations
+ms885244	Binary Rom Image File System (BinFS)
+aa516960	How to Implement BinFS
+ms885249	BinFS and the Bootpart Library
+ms885260	Boot Loader Support for BinFS
+ms885276	CD/UDFS File System
+ms885232	Installable File System
+ms885334	File System Driver Creation
+ms885494	File System Driver Loading
+aa516919	Using the FSD Manager
+ms885270	Cache Manager
+ms885487	Lazy-Writer Thread
+ms885839	Mounting an Installable File System as the Root Directory
+ms885434	File System Filters
+aa516959	How to Develop a File System Filter
+ms885427	File System Filter Implementation
+ms885439	File System Filter Samples
+ms885343	Databases
+ms885296	CEDB Database Support
+ms885320	Creating a Database
+ms885347	Deleting a Database Volume
+ms885361	Deleting Database Information
+ms885382	Enumerating Databases and Database Volumes
+ms892400	Database Volume Compaction Thread
+ms885588	Modifying the Sort Order
+ms885699	Mounted Database Example
+ms885833	Mounting and Unmounting a Database Volume
+ms885917	Opening a Database
+ms886013	Reading a Record
+ms886118	Searching for a Record
+aa516921	Writing and Creating a Record
+ms885226	Adding a Database Volume on an External Device
+ms885373	EDB Database Support
+ms885305	Comparing EDB with Other Databases
+ms885368	EDB Data Types and Size Limits
+ms885379	EDB Schema Support
+ms885311	Configurable EDB Volume Options
+ms885858	Multi-User Support in EDB
+aa516917	Using Notifications with EDB
+ms886046	Registry
+ms886080	Registry Types
+ms886152	Selecting the Registry for Your Target Device
+ms885989	RAM-Based Registry
+ms885957	Persisting Data with the RAM-Based Registry
+ms892394	Data Persistence with the RAM-based Registry Using the OAL
+ms892396	Initializing the RAM-based Registry
+ms885995	RAM-Based Registry Setup
+ms885472	Hive-Based Registry
+ms892395	Hive-based Registry Setup
+aa516920	Using the Hive-Based Registry
+ms885475	Hive-Based Registry Startup Sequence
+aa516910	Troubleshooting the Hive-Based Registry
+ms885947	Persisting Data with the Hive-Based Registry
+aa516911	Hive-Based Registry Data
+ms886055	Registry Fundamentals
+ms887923	Default Registry Settings
+ms885328	Creating and Opening a Registry Key
+aa516922	Writing and Creating a Registry Value
+ms885355	Deleting a Registry Key or Value
+ms885387	Enumerating Registry Keys
+ms885301	Closing a Registry Key
+ms886022	Reading a Registry Key or Value
+ms885466	Hints for Using the Registry
+ms885238	Advanced Registry Concepts
+aa516914	User Profiles
+aa516913	User Profile Hives
+aa516915	User Profile Setup
+aa516916	User Profile Storage
+aa516912	User Management
+ms885870	Multilingual User Interface (MUI) Registry
+ms885877	Nondeterministic Registry Flushing
+ms885460	Flush-On-Close Registry Flushing
+ms892401	Disabling Background Flushing to Improve Performance
+ms885480	Hive-Based Registry Stored in RAM
+ms886062	Registry Hive ROM Dependency
+ms885964	Protected Registry Keys and Values
+ms885505	Master Key Storage
+ms886086	Requesting Additional Secure Registry Keys
+ms885407	File and Database Replication
+ms885257	Bit-Based Replication
+ms885313	Count-Based Replication
+ms885413	File Compression
+ms886165	Storage Manager
+ms886175	Storage Manager Architecture
+ms886185	Storage Manager Loading Process
+ms885927	Partition Driver
+ms885939	Partition Manager
+ms892399	Partitioning a Storage Volume
+ms889212	File Systems and Data Store OS Reference
+aa516964	Bootpart OS Reference
+aa516962	Bootpart Library OS Functions
+aa516965	BP_GetPartitionInfo
+aa516966	BP_Init
+aa516967	BP_LowLevelFormat
+aa516968	BP_OpenPartition
+aa516969	BP_ReadData
+aa516970	BP_SetDataPointer
+aa516971	BP_WriteData
+aa516963	Bootpart Library OS Structures
+ms891423	PARTENTRY
+ms892383	Cache Manager Reference
+aa516978	Cache Manager Functions
+aa516975	CachedRead
+aa516976	CachedWrite
+aa516977	CacheIoControl
+aa517313	CreateCache
+ms887992	DeleteCache
+ms890202	FlushCache
+ms891359	InvalidateCache
+ms891818	ResizeCache
+ms892139	SyncCache
+aa517337	Database Replication OS Reference
+aa516929	Database Replication OS Functions
+aa516984	CeClearReplChangeBitsEx
+aa517163	CeGetReplChangeBitsEx
+aa517168	CeGetReplChangeMask
+aa517172	CeGetReplOtherBitsEx
+aa517239	CeRegisterReplNotification
+aa517262	CeSetReplChangeBitsEx
+aa517264	CeSetReplChangeMask
+aa517266	CeSetReplOtherBitsEx
+ms891473	ReplChangeSyncSettings
+ms891474	ReplCheckpoint
+ms891698	ReplCloseSync
+ms891775	ReplFindNextChange
+ms891783	ReplGetOidStatus
+ms891797	ReplGetSyncState
+ms891805	ReplOpenSync
+ms885337	Database Replication OS Macros
+ms890976	GetOIDSearchID
+aa516930	Database Replication OS Structures
+ms891472	REPLCHANGEINFO
+aa516935	FAT File System OS Reference
+aa516937	FAT Utility Library OS Functions
+ms887939	DefragVolume
+ms887947	DefragVolumeEx
+ms887957	DefragVolumeUI
+ms890458	FormatVolume
+ms890467	FormatVolumeEx
+ms890480	FormatVolumeUI
+ms891845	ScanVolume
+ms891858	ScanVolumeEx
+ms891864	ScanVolumeUI
+ms885399	FAT File System OS IOCTLs
+ms891368	IOCTL_DISK_FORMAT_VOLUME
+ms891377	IOCTL_DISK_SCAN_VOLUME
+aa516936	FAT File System OS Structures
+ms887931	DEFRAG_OPTIONS
+ms887962	DEFRAG_PARAMS
+ms887970	DEFRAG_RESULTS
+ms890413	FORMAT_OPTIONS
+ms890489	FORMAT_PARAMS
+ms890505	FORMAT_RESULTS
+ms890514	FRAGNODE
+ms891827	SCAN_OPTIONS
+ms891875	SCAN_PARAMS
+ms891883	SCAN_RESULTS
+aa516950	Partition Manager OS Reference
+aa516949	Partition Manager OS Functions
+ms891425	PD_ClosePartition
+ms891426	PD_CloseStore
+ms891427	PD_CreatePartition
+ms891428	PD_DeletePartition
+ms891429	PD_DeviceIoControl
+ms891430	PD_FindPartitionClose
+ms891431	PD_FindPartitionNext
+ms891432	PD_FindPartitionStart
+ms891433	PD_FormatPartition
+ms891434	PD_FormatStore
+ms891435	PD_GetPartitionInfo
+ms891436	PD_GetStoreInfo
+ms891437	PD_IsStoreFormatted
+ms891438	PD_OpenPartition
+ms891439	PD_OpenStore
+ms891441	PD_RenamePartition
+ms891442	PD_SetPartitionAttrs
+aa516951	Partition Manager OS Structures
+ms891440	PD_PARTINFO
+ms891443	PD_STOREINFO
+ms891459	Registry OS Reference
+ms891458	Registry OS Functions
+ms891446	ReadGenericData
+ms891447	ReadRegData
+ms891449	RegCopyFile
+ms891457	RegistryOperation
+ms891463	RegReplaceKey
+ms891464	RegRestoreFile
+ms891466	RegSaveKey
+ms892381	WriteGenericData
+ms892382	WriteRegData
+aa516954	Registry OS Structures
+ms891340	HiveRAMInfo
+ms891349	HiveRAMRegion
+ms891467	RegSecureKey
+ms891468	RegSecureKeyList
+ms892388	File Systems and Data Store Application Development
+ms892391	File Systems and Data Store Registry Settings
+aa517912	File Systems Registry Settings Overview
+aa517910	File System Settings
+aa517821	Autoload Settings
+aa517915	Storage Device Settings
+aa517913	Mount Settings
+aa517933	Settings for Specific File Systems
+ms885253	BinFS Registry Settings
+ms885283	CD/UDFS File System Registry Settings
+ms885403	FAT File System Registry Settings
+aa516907	TFAT Registry Settings
+aa517914	Release Directory File System Registry Settings
+ms892393	Storage Manager Registry Settings
+ms885899	Object Store Registry Settings
+ms885432	File System Filter Registry Settings
+ms892389	File Systems and Data Store Migration
+ms886136	File Systems and Data Store Security
+ms892385	File Systems and Data Store Reference
+aa517305	Copy External Reference
+aa517302	Copy External IOCTLs
+ms890532	FSCTL_COPY_EXTERNAL_COMPLETE
+ms890545	FSCTL_COPY_EXTERNAL_START
+ms891378	IOCTL_DISK_COPY_EXTERNAL_COMPLETE
+ms891382	IOCTL_DISK_COPY_EXTERNAL_START
+aa517307	Copy External Structures
+ms889011	DISK_COPY_EXTERNAL
+ms889492	FILE_COPY_EXTERNAL
+ms891894	SECTOR_LIST_ENTRY
+aa516928	Database Reference
+ms892384	CEDB Reference
+aa516925	CEDB Functions
+aa516982	CeChangeDatabaseLCID (CEDB)
+aa516985	CeCreateDatabase (CEDB)
+aa516986	CeCreateDatabaseEx (CEDB)
+aa516987	CeCreateDatabaseEx2 (CEDB)
+aa516994	CeDeleteDatabase (CEDB)
+aa516996	CeDeleteDatabaseEx (CEDB)
+aa516997	CeDeleteRecord (CEDB)
+aa517003	CeEnumDBVolumes (CEDB)
+aa517106	CeFindFirstDatabase (CEDB)
+aa517109	CeFindFirstDatabaseEx (CEDB)
+aa517118	CeFindNextDatabase (CEDB)
+aa517120	CeFindNextDatabaseEx (CEDB)
+aa517128	CeFlushDBVol (CEDB)
+aa517132	CeFreeNotification (CEDB)
+aa517152	CeGetDBInformationByHandle (CEDB)
+aa517177	CeMountDBVol (CEDB)
+aa517194	CeOidGetInfo (CEDB)
+aa517197	CeOidGetInfoEx (CEDB)
+aa517198	CeOidGetInfoEx2 (CEDB)
+aa517213	CeOpenDatabase (CEDB)
+aa517216	CeOpenDatabaseEx (CEDB)
+aa517218	CeOpenDatabaseEx2 (CEDB)
+aa517229	CeReadRecordProps (CEDB)
+aa517235	CeReadRecordPropsEx (CEDB)
+aa517246	CeSeekDatabase (CEDB)
+aa517251	CeSeekDatabaseEx (CEDB)
+aa517254	CeSetDatabaseInfo (CEDB)
+aa517258	CeSetDatabaseInfoEx (CEDB)
+aa517259	CeSetDatabaseInfoEx2 (CEDB)
+aa517280	CeUnmountDBVol (CEDB)
+aa517285	CeWriteRecordProps (CEDB)
+aa516931	CEDB Structures
+aa516972	BY_HANDLE_DB_INFORMATION (CEDB)
+aa516981	CEBLOB (CEDB)
+aa516991	CEDBASEINFO (CEDB)
+aa516992	CEDBASEINFOEX (CEDB)
+aa517186	CENOTIFICATION (CEDB)
+aa517189	CENOTIFYREQUEST (CEDB)
+aa517207	CEOIDINFO (CEDB)
+aa517208	CEOIDINFOEX (CEDB)
+aa517227	CEPROPVAL (CEDB)
+aa517237	CERECORDINFO (CEDB)
+aa517283	CEVALUNION (CEDB)
+ms891997	SORTORDERSPEC (CEDB)
+ms892001	SORTORDERSPECEX (CEDB)
+aa516933	EDB Reference
+aa516932	EDB Functions
+aa516979	CeAddDatabaseProps (EDB)
+aa516980	CeBeginTransaction (EDB)
+aa516983	CeChangeDatabaseLCID (EDB)
+aa516988	CeCreateDatabaseEx2 (EDB)
+aa516989	CeCreateDatabaseWithProps (EDB)
+aa516990	CeCreateSession (EDB)
+aa516995	CeDeleteDatabase (EDB)
+aa516998	CeDeleteRecord (EDB)
+aa517002	CeEndTransaction (EDB)
+aa517004	CeEnumDBVolumes (EDB)
+aa517114	CeFindFirstDatabaseEx (EDB)
+aa517122	CeFindNextDatabaseEx (EDB)
+aa517130	CeFlushDBVol (EDB)
+aa517135	CeFreeNotification (EDB)
+aa517146	CeGetDatabaseProps (EDB)
+aa517147	CeGetDatabaseSession (EDB)
+aa517155	CeGetDBInformationByHandle (EDB)
+aa517180	CeMountDBVol (EDB)
+aa517182	CeMountDBVolEx (EDB)
+aa517204	CeOidGetInfoEx2 (EDB)
+aa517220	CeOpenDatabaseInSession (EDB)
+aa517223	CeOpenStream (EDB)
+aa517232	CeReadRecordProps (EDB)
+aa517236	CeReadRecordPropsEx (EDB)
+aa517242	CeRemoveDatabaseProps (EDB)
+aa517250	CeSeekDatabase (EDB)
+aa517253	CeSeekDatabaseEx (EDB)
+aa517256	CeSetDatabaseInfo (EDB)
+aa517268	CeSetSessionOption (EDB)
+aa517270	CeStreamRead (EDB)
+aa517272	CeStreamSaveChanges (EDB)
+aa517274	CeStreamSeek (EDB)
+aa517275	CeStreamSetSize (EDB)
+aa517278	CeStreamWrite (EDB)
+aa517282	CeUnmountDBVol (EDB)
+aa517288	CeWriteRecordProps (EDB)
+aa516934	EDB Structures
+aa516974	BY_HANDLE_DB_INFORMATION (EDB)
+aa516993	CEDBASEINFOEX (EDB)
+aa517210	CEOIDINFOEX (EDB)
+aa517225	CEPROPSPEC (EDB)
+aa516924	CEVOLUMEOPTIONS (EDB)
+ms892010	SORTORDERSPECEX (EDB)
+aa516926	Database Macros
+aa517295	CHECK_INVALIDGUID
+aa517298	CHECK_SYSTEMGUID
+aa517332	CREATE_INVALIDGUID
+aa517336	CREATE_SYSTEMGUID
+ms892256	TypeFromPropID
+aa516927	Database Messages
+aa517338	DB_CEOID_CHANGED
+aa517339	DB_CEOID_CREATED
+aa517340	DB_CEOID_DATABASE_DELETED
+aa517341	DB_CEOID_DIRECTORY_DELETED
+ms887719	DB_CEOID_FILE_DELETED
+ms887825	DB_CEOID_RECORD_DELETED
+ms892379	WM_DBNOTIFICATION
+aa516940	File I/O Reference
+aa516939	File I/O Functions
+aa517140	CeGenRandom
+aa517144	CeGetCanonicalPathName
+aa517158	CeGetFileNotificationInfo
+aa517300	CloseHandle
+aa517309	CopyFile
+aa517311	CopyFileEx
+aa517316	CreateDirectory
+aa517318	CreateFile
+ms887981	DeleteAndRenameFile
+ms889001	DeleteFile
+ms889619	FindClose
+ms889625	FindCloseChangeNotification
+ms889670	FindFirstChangeNotification
+ms889678	FindFirstFile
+ms889683	FindFirstFileEx
+ms889784	FindNextChangeNotification
+ms889873	FindNextFile
+ms890238	FlushFileBuffers
+ms890887	GetDiskFreeSpaceEx
+ms890895	GetFileAttributes
+ms890909	GetFileAttributesEx
+ms890926	GetFileInformationByHandle
+ms890939	GetFileSize
+ms890951	GetFileVersionInfo
+ms890963	GetFileVersionInfoSize
+ms891023	GetStoreInformation
+ms891186	GetTempFileName
+ms891189	GetTempPath
+ms891385	LockFileEx
+ms891388	MoveFile
+ms891445	ReadFile
+ms891470	RemoveDirectory
+ms891916	SetEndOfFile
+ms891925	SetFileAttributes
+ms891933	SetFilePointer
+ms892364	UnlockFileEx
+ms892380	WriteFile
+aa516941	File I/O Structures
+aa516973	BY_HANDLE_FILE_INFORMATION
+aa517001	CEDIRINFO
+aa517101	CEFILEINFO
+ms889597	FILE_NOTIFY_INFORMATION
+ms889030	FILECHANGEINFO
+ms891422	OVERLAPPED
+ms892377	WIN32_FILE_ATTRIBUTE_DATA
+ms892378	WIN32_FIND_DATA
+aa516938	File I/O Enumerations
+ms889654	FINDEX_INFO_LEVELS
+ms889664	FINDEX_SEARCH_OPS
+ms890917	GET_FILEEX_INFO_LEVELS
+aa516943	File Mapping Reference
+aa516942	File Mapping Functions
+aa517321	CreateFileForMapping
+aa517331	CreateFileMapping
+ms890303	FlushViewOfFile
+ms891386	MapViewOfFile
+ms892373	UnmapViewOfFile
+aa516945	File System Password Reference
+aa516944	File System Password Functions
+aa517297	CheckPassword
+ms890993	GetPasswordActive
+ms891004	GetPasswordStatus
+ms891953	SetPassword
+ms891968	SetPasswordActive
+ms891976	SetPasswordStatus
+aa516947	FSD Reference
+ms890679	FSD Data Types
+aa517930	PACQUIREFILELOCKSTATE
+aa517931	PEMPTYLOCKCONTAINER
+ms891992	SHELLFILECHANGEFUNC_t
+aa516946	FSD Functions
+aa517137	CeFsIoControl
+aa517244	CeResyncFilesys
+ms890702	FSD_HookVolume
+ms890837	FSD_MountDisk
+ms890860	FSD_UnhookVolume
+ms890869	FSD_UnmountDisk
+aa517919	FSDMGR_AcquireFileLock
+aa517920	FSDMGR_CloseFileLockState
+ms890708	FSDMGR_CreateFileHandle
+ms890716	FSDMGR_CreateSearchHandle
+ms890721	FSDMGR_DeregisterVolume
+ms890822	FSDMGR_DeviceHandleToHDSK
+ms890829	FSDMGR_DiskIoControl
+aa517921	FSDMGR_EmptyLockContainer
+ms890738	FSDMGR_GetDiskInfo
+ms890745	FSDMGR_GetRegistryFlag
+ms890753	FSDMGR_GetRegistryString
+ms890762	FSDMGR_GetRegistryValue
+ms890773	FSDMGR_GetVolumeName
+aa517922	FSDMGR_OpenFileLockState
+ms890782	FSDMGR_ReadDisk
+ms890792	FSDMGR_ReadDiskEx
+ms890800	FSDMGR_RegisterVolume
+aa517923	FSDMGR_RemoveFileLock
+ms890807	FSDMGR_WriteDisk
+ms890814	FSDMGR_WriteDiskEx
+ms891383	LoadFSD
+ms891384	LoadFSDEx
+ms891389	MyFSD_CloseFile
+ms891390	MyFSD_CloseVolume
+ms891391	MyFSD_CreateDirectoryW
+ms891392	MyFSD_CreateFileW
+ms891393	MyFSD_DeleteAndRenameFileW
+ms891394	MyFSD_DeleteFileW
+ms891395	MyFSD_DeviceIoControl
+ms891396	MyFSD_FindClose
+ms891397	MyFSD_FindFirstFileW
+ms891398	MyFSD_FindNextFileW
+ms891399	MyFSD_FlushFileBuffers
+ms891419	MyFSD_FsIoControl
+ms891400	MyFSD_GetDiskFreeSpaceW
+ms891401	MyFSD_GetFileAttributesW
+ms891402	MyFSD_GetFileInformationByHandle
+ms891403	MyFSD_GetFileSize
+ms891404	MyFSD_GetFileTime
+aa517925	MyFSD_GetVolumeInfo
+aa517926	MyFSD_LockFileEx
+ms891405	MyFSD_MountDisk
+ms891406	MyFSD_MoveFileW
+ms891407	MyFSD_Notify
+ms891408	MyFSD_ReadFile
+ms891409	MyFSD_ReadFileWithSeek
+aa517927	MyFSD_ReadFileScatter
+ms891410	MyFSD_RegisterFileSystemFunction
+ms891411	MyFSD_RemoveDirectoryW
+ms891412	MyFSD_SetEndOfFile
+ms891413	MyFSD_SetFileAttributesW
+ms891414	MyFSD_SetFilePointer
+ms891415	MyFSD_SetFileTime
+aa517928	MyFSD_UnLockFileEx
+ms891416	MyFSD_UnmountDisk
+ms891417	MyFSD_WriteFile
+aa517929	MyFSD_WriteFileGather
+ms891418	MyFSD_WriteFileWithSeek
+ms889123	FSD IOCTLs
+ms890558	FSCTL_GET_COMPRESSION
+ms890569	FSCTL_GET_REGISTRY_INFO
+ms890585	FSCTL_QUERY_ALLOCATED_RANGES
+ms890601	FSCTL_SET_COMPRESSION
+ms890611	FSCTL_SET_SPARSE
+ms890637	FSCTL_SET_ZERO_DATA
+ms890651	FSCTL_USER
+ms890878	FSSCTL_FLUSH_BUFFERS
+aa516948	FSD Structures
+aa517289	CE_REGISTRY_INFO
+ms889307	FILE_ALLOCATED_RANGE_BUFFER
+aa517917	FILELOCKSTATE
+ms889606	FILE_ZERO_DATA_INFORMATION
+ms889612	FILTERHOOK
+ms890667	FSD_BUFFER_INFO
+ms890695	FSD_DISK_INFO
+ms890842	FSD_SCATTER_GATHER_INFO
+ms890852	FSD_SCATTER_GATHER_RESULTS
+aa517924	FSD_VOLUME_INFO
+aa516953	Registry Reference
+aa516952	Registry Functions
+ms891448	RegCloseKey
+ms891450	RegCreateKeyEx
+ms891451	RegDeleteKey
+ms891452	RegDeleteValue
+ms891453	RegEnumKeyEx
+ms891454	RegEnumValue
+ms891455	RegFlushKey
+ms891460	RegOpenKeyEx
+ms891461	RegQueryInfoKey
+ms891462	RegQueryValueEx
+ms891469	RegSetValueEx
+ms891456	Registry Notification Functions
+aa517103	CeFindCloseRegChange
+aa517116	CeFindFirstRegChange
+aa517123	CeFindNextRegChange
+aa516956	Storage Manager Reference
+aa516955	Storage Manager Functions
+aa517175	CeGetVolumeInfo
+aa517334	CreatePartition
+aa517335	CreatePartitionEx
+ms889008	DeletePartition
+ms889019	DismountPartition
+ms889024	DismountStore
+ms889632	FindClosePartition
+ms889642	FindCloseStore
+ms889689	FindFirstPartition
+ms889696	FindFirstStore
+ms889968	FindNextPartition
+ms890093	FindNextStore
+ms890426	FormatPartition
+ms890434	FormatPartitionEx
+ms890450	FormatStore
+ms890985	GetPartitionInfo
+ms891013	GetStoreInfo
+ms891387	MountPartition
+ms891420	OpenPartition
+ms891421	OpenStore
+ms891471	RenamePartition
+ms891941	SetPartitionAttributes
+aa516957	Storage Manager Structures
+aa517292	CE_VOLUME_INFO
+ms891424	PARTINFO
+ms892014	STORAGECONTEXT
+ms892022	STORAGEDEVICEINFO
+ms892106	STOREINFO (Storage Manager)
+aa517934	User Management Reference
+aa517916	User Management Functions
+aa517595	GetUserNameEx
+ms891226	GetUserDirectory
+ms891903	SetCurrentUser
+ms891984	SetUserData

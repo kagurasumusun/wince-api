@@ -1,0 +1,183 @@
+ms931959	VAIL OS Design Development
+ms931956	VAIL Application Development
+ms909276	VAIL as a Part of an IP Phone
+ms909283	VAIL Architecture
+ms909280	VAIL Objects and Interfaces
+ms909285	VoIP Manager
+aa525614	Current Call
+ms909277	VAIL Call Conferencing
+ms909288	VoIP Media Manager
+aa525648	Media Manager Responsibilities
+aa525636	How the VAIL Creates the Media Manager
+aa525640	IP Phone Provisioning
+aa525681	Retrieving Provisioning Information
+ms909273	Using Provisioning Information in VAIL
+aa525608	Configuration Data Store Example XML
+aa525621	Database Store and Call Logging
+aa525613	Creating an Application That Uses VAIL
+aa525630	Example VAIL Application Structure
+aa525638	VoIP Manager Setup
+ms909286	VoIP Manager Initialization
+ms909287	VoIP Manager SIP Server Registration
+ms909239	VoIP Manager Shutdown
+ms909282	VAIL Registry Settings
+ms909281	VAIL Plugin Registry Settings
+ms909278	VAIL Configuration Data Store Registry Settings
+ms909279	VAIL Configuration Registry Settings
+ms931957	VAIL How-to Topics
+ms909284	VAIL Security
+ms931958	VAIL Migration
+aa525649	Migrating to New Initialization and Provisioning APIs
+ms931960	VAIL Samples
+ms909301	VAIL Reference
+ms909298	VAIL Constants
+ms909304	CONFIG_DATA_
+ms909305	DCRP_VALID_
+ms912596	VMS_
+ms912600	VOIP_E_
+ms912605	VOIP_S_
+ms909299	VAIL Enumerations
+ms912597	VoIPCallEvent
+ms912598	VoIPCallStatus
+ms912599	VoIPCallType
+ms912604	VoIPProgressTone
+ms912606	VoIPSystemEvent
+ms909300	VAIL Interfaces
+ms911650	IVoIPCallerInfoDB
+ms911532	IVoIPCallerInfoDB::CreateRecord
+ms911539	IVoIPCallerInfoDB::Enumerator
+ms931238	IVoIPCallerInfoDB::FindCallerInfoBySpeedDialEntry
+ms931345	IVoIPCallerInfoDB::FindCallerInfoByURI
+ms911634	IVoIPCallerInfoDB::FriendlyNameEnumerator
+ms911647	IVoIPCallerInfoDB::Init
+ms911651	IVoIPCallerInfoDB::SpeedDialEnumerator
+ms911546	IVoIPCallerInfoDBEnum
+ms911553	IVoIPCallerInfoDBEnum::Next
+ms911567	IVoIPCallerInfoDBEnum::Reset
+ms931185	IVoIPCallerInfoDBEnum::Skip
+ms911658	IVoIPCallerInfoRecord
+ms911652	IVoIPCallerInfoRecord::Blocked
+ms911654	IVoIPCallerInfoRecord::Commit
+ms911655	IVoIPCallerInfoRecord::DeleteFromDB
+ms911656	IVoIPCallerInfoRecord::ForwardingURI
+ms911657	IVoIPCallerInfoRecord::FriendlyName
+ms911659	IVoIPCallerInfoRecord::RingTone
+ms911660	IVoIPCallerInfoRecord::SpeedDialEntry
+ms911661	IVoIPCallerInfoRecord::URI
+ms911662	IVoIPCallerInfoRecord::VoIPName
+ms911672	IVoIPCallLogDB
+ms911663	IVoIPCallLogDB::Capacity
+ms911664	IVoIPCallLogDB::CreateRecord
+ms911670	IVoIPCallLogDB::IncomingEnumerator
+ms911671	IVoIPCallLogDB::Init
+ms911673	IVoIPCallLogDB::MissedEnumerator
+ms911674	IVoIPCallLogDB::OutgoingEnumerator
+ms911665	IVoIPCallLogDBEnum
+ms911667	IVoIPCallLogDBEnum::Next
+ms911668	IVoIPCallLogDBEnum::Reset
+ms911669	IVoIPCallLogDBEnum::Skip
+ms911681	IVoIPCallRecord
+ms911675	IVoIPCallRecord::CallType
+ms911676	IVoIPCallRecord::Commit
+ms911677	IVoIPCallRecord::DeleteFromDB
+ms911678	IVoIPCallRecord::Duration
+ms911679	IVoIPCallRecord::EndTime
+ms911680	IVoIPCallRecord::FriendlyName
+ms911682	IVoIPCallRecord::StartTime
+ms911683	IVoIPCallRecord::URI
+ms911684	IVoIPCallRecord::VoIPName
+ms911686	IVoIPConfigurationDataStore
+ms911685	IVoIPConfigurationDataStore::Initialize
+ms911687	IVoIPConfigurationDataStore::ReadValue
+ms911688	IVoIPConfigurationDataStore::Uninitialize
+ms911689	IVoIPConfigurationDataStore::UpdateSettingsFromFile
+ms911690	IVoIPConfigurationDataStore::UpdateSettingsFromServer
+ms911691	IVoIPConfigurationDataStore::UpdateSettingsFromXML
+ms911692	IVoIPConfigurationDataStore::WriteValue
+ms931675	IVoIPCurrentCall
+ms931626	IVoIPCurrentCall::Answer
+ms931630	IVoIPCurrentCall::Duration
+ms931657	IVoIPCurrentCall::FriendlyName
+ms931662	IVoIPCurrentCall::Hangup
+ms931667	IVoIPCurrentCall::Hold
+ms931672	IVoIPCurrentCall::Ignore
+ms931679	IVoIPCurrentCall::NetworkStatus
+ms931684	IVoIPCurrentCall::Redirect
+ms911835	IVoIPCurrentCall::RTCParticipant
+ms911839	IVoIPCurrentCall::RTCSession
+ms911843	IVoIPCurrentCall::StartTime
+ms911847	IVoIPCurrentCall::Status
+ms911852	IVoIPCurrentCall::Type
+ms911857	IVoIPCurrentCall::Unhold
+ms911943	IVoIPCurrentCall::URI
+ms911949	IVoIPCurrentCall::VoIPName
+ms931621	IVoIPCurrentCall2
+ms931501	IVoIPCurrentCall2::AddParticipantToConference
+ms931602	IVoIPCurrentCall2::ConferenceHost
+ms931606	IVoIPCurrentCall2::ConferenceParticipants
+ms931612	IVoIPCurrentCall2::IsConferenceHost
+ms931615	IVoIPCurrentCall2::IsConferenceParticipant
+ms931638	IVoIPCurrentCallEnumerator
+ms931643	IVoIPCurrentCallEnumerator::Next
+ms931646	IVoIPCurrentCallEnumerator::Reset
+ms931654	IVoIPCurrentCallEnumerator::Skip
+ms911957	IVoIPDirectoryClient
+ms911968	IVoIPDirectoryClient::RegistrationParameters
+ms911977	IVoIPDirectoryClient::SipPassword
+ms911983	IVoIPDirectoryClient::SipServerParameters
+ms912032	IVoIPMediaMgr
+ms911989	IVoIPMediaMgr::AnswerSession
+aa525641	IVoIPMediaMgr::ConferenceSessions
+ms911998	IVoIPMediaMgr::CreatePCToPCSession
+ms912006	IVoIPMediaMgr::EvaluateSessionDescription
+ms912013	IVoIPMediaMgr::HoldSession
+ms912020	IVoIPMediaMgr::Initialize
+ms912027	IVoIPMediaMgr::InitializeRTCClient
+ms912036	IVoIPMediaMgr::MicrophoneMute
+ms912043	IVoIPMediaMgr::MicrophoneVolume
+ms912055	IVoIPMediaMgr::OnReinviteEvent
+aa525642	IVoIPMediaMgr::OnSessionOperationCompleteEvent
+ms912064	IVoIPMediaMgr::OnSessionStateChangeEvent
+ms912071	IVoIPMediaMgr::PlayProgressTone
+ms912081	IVoIPMediaMgr::PlaySound
+ms912089	IVoIPMediaMgr::SendDTMF
+ms912098	IVoIPMediaMgr::SpeakerMute
+ms912109	IVoIPMediaMgr::SpeakerVolume
+ms912118	IVoIPMediaMgr::StopProgressTone
+ms912124	IVoIPMediaMgr::StopSound
+ms912130	IVoIPMediaMgr::UnholdSession
+ms912137	IVoIPMediaMgr::Uninitialize
+ms912233	IVoIPMgr
+ms912178	IVoIPMgr::ActiveCurrentCall
+ms912184	IVoIPMgr::AutoForwardURI
+ms912189	IVoIPMgr::Call
+ms912195	IVoIPMgr::CallerInfoDB
+ms912201	IVoIPMgr::CallLogDB
+ms912207	IVoIPMgr::CurrentCallEnumerator
+ms912217	IVoIPMgr::Initialize
+ms912240	IVoIPMgr::MicrophoneMute
+ms912244	IVoIPMgr::MicrophoneVolume
+ms912253	IVoIPMgr::MissedCallTimeout
+ms912258	IVoIPMgr::MyServer
+ms912263	IVoIPMgr::MyURI
+ms912269	IVoIPMgr::Parameters
+ms912274	IVoIPMgr::PlayProgressTone
+ms912279	IVoIPMgr::Reregister
+ms912285	IVoIPMgr::RingTone
+ms912291	IVoIPMgr::RTCClient
+ms912299	IVoIPMgr::SendDTMF
+ms912302	IVoIPMgr::SpeakerMute
+ms912307	IVoIPMgr::SpeakerVolume
+ms912311	IVoIPMgr::State
+ms912319	IVoIPMgr::StopProgressTone
+ms912325	IVoIPMgr::Uninitialize
+ms912165	IVoIPMgr2
+ms912146	IVoIPMgr2::InitializeEx
+ms912171	IVoIPMgr2::RegisterWithSIPServer
+ms912331	IVoIPUI
+ms912339	IVoIPUI::OnCallEvent
+ms912343	IVoIPUI::OnSystemEvent
+ms909302	VAIL Structures
+ms909306	DirectoryClientRegParams
+ms912595	SIPServerRegistrationParameters
+ms912603	VoIPMgrParameters

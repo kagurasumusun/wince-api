@@ -1,0 +1,120 @@
+aa516903	Synchronization and Device I/O
+aa516923	Writing to a File
+aa517137	CeFsIoControl
+aa517175	CeGetVolumeInfo
+aa517244	CeResyncFilesys
+aa517334	CreatePartition
+aa517335	CreatePartitionEx
+aa517919	FSDMGR_AcquireFileLock
+aa517920	FSDMGR_CloseFileLockState
+aa517921	FSDMGR_EmptyLockContainer
+aa517922	FSDMGR_OpenFileLockState
+aa517923	FSDMGR_RemoveFileLock
+aa517925	MyFSD_GetVolumeInfo
+aa517926	MyFSD_LockFileEx
+aa517927	MyFSD_ReadFileScatter
+aa517928	MyFSD_UnLockFileEx
+aa517929	MyFSD_WriteFileGather
+ms885120	Accessing Files on Other Storage Media
+ms885325	Creating and Opening a File or Directory
+ms885351	Deleting a File or a Directory
+ms885363	Determining Available Disk Space
+ms885416	File-Naming Limitations
+ms885501	Manipulating File Times
+ms885512	Memory Mapping a File
+ms885849	Moving and Copying Files and Directories
+ms885978	Querying for Version Information
+ms886005	Reading and Writing File Attributes
+ms886029	Reading from a File
+ms886040	Read/Write Example
+ms886095	Retrieving File and Directory Information
+ms886105	Searching for a File or Directory
+ms886160	Setting the File Pointer
+ms889008	DeletePartition
+ms889019	DismountPartition
+ms889024	DismountStore
+ms889632	FindClosePartition
+ms889642	FindCloseStore
+ms889689	FindFirstPartition
+ms889696	FindFirstStore
+ms889968	FindNextPartition
+ms890093	FindNextStore
+ms890426	FormatPartition
+ms890434	FormatPartitionEx
+ms890450	FormatStore
+ms890702	FSD_HookVolume
+ms890708	FSDMGR_CreateFileHandle
+ms890716	FSDMGR_CreateSearchHandle
+ms890721	FSDMGR_DeregisterVolume
+ms890738	FSDMGR_GetDiskInfo
+ms890745	FSDMGR_GetRegistryFlag
+ms890753	FSDMGR_GetRegistryString
+ms890762	FSDMGR_GetRegistryValue
+ms890773	FSDMGR_GetVolumeName
+ms890782	FSDMGR_ReadDisk
+ms890792	FSDMGR_ReadDiskEx
+ms890800	FSDMGR_RegisterVolume
+ms890807	FSDMGR_WriteDisk
+ms890814	FSDMGR_WriteDiskEx
+ms890822	FSDMGR_DeviceHandleToHDSK
+ms890829	FSDMGR_DiskIoControl
+ms890837	FSD_MountDisk
+ms890860	FSD_UnhookVolume
+ms890869	FSD_UnmountDisk
+ms890985	GetPartitionInfo
+ms891013	GetStoreInfo
+ms891383	LoadFSD
+ms891384	LoadFSDEx
+ms891387	MountPartition
+ms891389	MyFSD_CloseFile
+ms891390	MyFSD_CloseVolume
+ms891391	MyFSD_CreateDirectoryW
+ms891392	MyFSD_CreateFileW
+ms891393	MyFSD_DeleteAndRenameFileW
+ms891394	MyFSD_DeleteFileW
+ms891395	MyFSD_DeviceIoControl
+ms891396	MyFSD_FindClose
+ms891397	MyFSD_FindFirstFileW
+ms891398	MyFSD_FindNextFileW
+ms891399	MyFSD_FlushFileBuffers
+ms891400	MyFSD_GetDiskFreeSpaceW
+ms891401	MyFSD_GetFileAttributesW
+ms891402	MyFSD_GetFileInformationByHandle
+ms891403	MyFSD_GetFileSize
+ms891404	MyFSD_GetFileTime
+ms891405	MyFSD_MountDisk
+ms891406	MyFSD_MoveFileW
+ms891407	MyFSD_Notify
+ms891408	MyFSD_ReadFile
+ms891409	MyFSD_ReadFileWithSeek
+ms891410	MyFSD_RegisterFileSystemFunction
+ms891411	MyFSD_RemoveDirectoryW
+ms891412	MyFSD_SetEndOfFile
+ms891413	MyFSD_SetFileAttributesW
+ms891414	MyFSD_SetFilePointer
+ms891415	MyFSD_SetFileTime
+ms891416	MyFSD_UnmountDisk
+ms891417	MyFSD_WriteFile
+ms891418	MyFSD_WriteFileWithSeek
+ms891419	MyFSD_FsIoControl
+ms891420	OpenPartition
+ms891421	OpenStore
+ms891425	PD_ClosePartition
+ms891426	PD_CloseStore
+ms891427	PD_CreatePartition
+ms891428	PD_DeletePartition
+ms891429	PD_DeviceIoControl
+ms891430	PD_FindPartitionClose
+ms891431	PD_FindPartitionNext
+ms891432	PD_FindPartitionStart
+ms891433	PD_FormatPartition
+ms891434	PD_FormatStore
+ms891435	PD_GetPartitionInfo
+ms891436	PD_GetStoreInfo
+ms891437	PD_IsStoreFormatted
+ms891438	PD_OpenPartition
+ms891439	PD_OpenStore
+ms891441	PD_RenamePartition
+ms891442	PD_SetPartitionAttrs
+ms891471	RenamePartition
+ms891941	SetPartitionAttributes

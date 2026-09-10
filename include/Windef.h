@@ -136,6 +136,13 @@ typedef const WCHAR    *LPCWSTR;
 typedef WCHAR          *PWSTR;   /* WCHAR pointer (CE doc spellings) */
 typedef const WCHAR    *PCWSTR;  /* const WCHAR pointer (Upnpdevapi.h
                                    * print spellings, M75b; LPCWSTR twin) */
+typedef BOOLEAN       *PBOOLEAN; /* BOOLEAN pointer (Ndis.h print spellings,
+                                   * NdisCancelTimer aa447993, M78a) */
+typedef const CHAR    *PCSTR;    /* const CHAR pointer (Ndis.h print
+                                   * spellings, NdisInitAnsiString ms904984,
+                                   * M78a; LPCSTR twin) */
+typedef CHAR           CCHAR;    /* 8-bit char (Ndis.h print spelling,
+                                   * NdisSystemProcessorCount aa447963, M78a) */
 typedef DWORD *LPDWORD;
 typedef DWORD *PDWORD;  /* DWORD pointer (VirtualProtect aa450980) */
 typedef LONG  *PLONG;   /* signed-32-bit pointer (SetFilePointer ms891933) */

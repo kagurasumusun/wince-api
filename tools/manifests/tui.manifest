@@ -1,0 +1,48 @@
+ms909247	TUI OS Design Development
+ms931952	TUI Application Development
+ms909255	TUI Architecture and Functionality
+ms909256	TUI IP Phone Functionality
+ms909254	TUI Architecture
+ms909248	TUI Hardware Requirements and PC Keyboard Hotkeys
+ms909264	Examining the TUI Implementation
+ms909269	Understanding TUI Source Code
+aa525635	How TUI Uses ATL
+ms909260	TUI Object and Window Hierarchies
+ms909259	TUI Object Model
+aa525616	CVoIPApp
+ms909262	TUISettings
+aa525618	CVoIPDesktopManager
+ms909266	TUI UI Object Model
+aa525617	CVoIPDesktop
+aa525619	CVoIPMainDialog
+aa525654	Other TUI Windows
+aa525620	CVoIPStateMgr
+aa525643	IVoIPState and CVoIPState
+aa525628	Display Items
+ms909263	TUI Source Code Directories
+ms909265	TUI Startup and Initialization
+ms909267	TUI User Interface Organization
+aa525634	Handling TUI User Input
+aa525672	Provisioning the TUI Application
+aa525622	Debugging using TUI Debug Zones
+aa525599	Asynchronous Operations and Message Boxes in the TUI
+ms909257	TUI Keyboard Hotkeys
+ms909272	Using the Phone IME from the TUI
+aa525646	Limiting Access to Sensitive Information in the TUI
+ms909268	TUI User Interface Tips and Tricks
+aa525615	Customizing the TUI Application
+aa525597	Adding a New TUI Screen
+aa525601	Changing the TUI Time Zone
+aa525609	Connecting to a Presence Server Using a Certificate
+aa525627	Displaying a Mouse Cursor in the TUI
+aa525639	Installing a Custom TUI Input Method Editor
+aa525647	Mapping Hardware to TUI Functionality
+aa525650	Modifying TUI Dial Plans
+aa525651	Modifying TUI Strings, Icons, and Other UI Elements
+ms909271	Using and Modifying TUI User Help
+ms909249	TUI Registry Settings
+ms931953	TUI How-to Topics
+ms909250	TUI Security
+ms909258	TUI Migration
+ms931961	TUI Samples
+ms909261	TUI Reference

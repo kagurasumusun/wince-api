@@ -67,6 +67,7 @@ include/Mqoai.h \
 include/Msgqueue.h \
 include/Msxml2.h \
 include/Natedit.h \
+include/Ndis.h \
 include/Netui.h \
 include/Notify.h \
 include/Oaidl.h \

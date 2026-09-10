@@ -5788,3 +5788,73 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
 - NetGen C-API surface complete except the NDIS driver reference
   (NDIS Library Functions 248 + Structures 83 + Data Types 17 etc. --
   the NDIS DDI is its own future queue).
+
+## M78a -- NDIS library (Ndis.h): base types + 229 declarations
+
+- Source: Network Driver Reference book, 779 leaves fetched
+  (tools/manifests/ndis.manifest; corpus 51bef5ec -> 2e1ee452).
+  This unit lands the 354 Header: Ndis.h rows; Ntddndis.h /
+  Windot11.h / Rndis.h / Ndistapi.h / Nuiouser.h / Wzcsapi.h rows
+  stay for M78b/M78c.
+- include/Ndis.h (NEW): base types printed on their own pages --
+  NDIS_HANDLE (PVOID), NDIS_STATUS (int), NDIS_OID (ULONG),
+  NDIS_ERROR_CODE (#define ULONG), NDIS_PHYSICAL_ADDRESS (page
+  remark closes PHYSICAL_ADDRESS on Winnt.h LARGE_INTEGER),
+  NDIS_BUFFER (MDL opaque -- no CE page prints MDL), NDIS_STRING
+  (UNICODE_STRING opaque, same situation), NDIS_ANSI_STRING
+  (opaque), NDIS_PROC, NDIS_WORK_ITEM (print's `);` tail is the
+  documented `];` typo family -- reproduced verbatim with note),
+  NDIS_PARAMETER_TYPE, NDIS_INTERFACE_TYPE (value expressions are
+  CEDDK.h INTERFACE_TYPE enumerators, ms901367),
+  NDIS_INTERRUPT_MODE (KINTERRUPT_MODE unpublished; enum closed on
+  the two page-table names).
+- Compiled structures: NDIS_PACKET_OOB_DATA, NDIS_PACKET_STACK,
+  TRANSPORT_HEADER_OFFSET, NDIS_MAC_LINE_DOWN, NDIS_MAC_FRAGMENT,
+  NDIS_WAN_LINE_DOWN, NDIS_WAN_INFO, NDIS_WAN_COMPRESS_INFO,
+  NDIS_WAN_GET/SET_LINK_INFO, NDIS_WAN_GET/SET_COMP_INFO,
+  NDIS_WAN_GET_STATS_INFO, NDIS_TASK_TCP_IP_CHECKSUM,
+  NDIS_TASK_TCP_LARGE_SEND, NDIS_TCP_IP_CHECKSUM_PACKET_INFO
+  (bitfields).
+- Held structures (print recorded verbatim, opaque forward):
+  NDIS_REQUEST (NDIS_REQUEST_TYPE), NDIS_PACKET
+  (NDIS_PACKET_PRIVATE), NDIS_PACKET_EXTENSION
+  (MaxPerPacketInfo), NDIS_CONFIGURATION_PARAMETER (BINARY_DATA),
+  NDIS_WAN_PACKET (LIST_ENTRY), NDIS_PROTOCOL_CHARACTERISTICS
+  (18 *_HANDLER callback typedefs), NDIS_MINIPORT_CHARACTERISTICS
+  (W_*_HANDLER family), NDIS_TASK_OFFLOAD (NDIS_TASK union),
+  NDIS_ENCAPSULATION_FORMAT + NDIS_TASK_OFFLOAD_HEADER
+  (NDIS_ENCAPSULATION), MEDIA_SPECIFIC_INFORMATION
+  (NDIS_CLASS_ID; typedef name as printed, tag without '_'),
+  NDIS_MAC_LINE_UP + NDIS_WAN_LINE_UP (NDIS_WAN_QUALITY),
+  NETWORK_ADDRESS/_LIST (page prints the _LIST body twice).
+- 229 AKARI_CE_IMPORT declarations (Ndis.lib / Ndis.dll /
+  Ndislib.lib pages; 17 of the 295 signatures recorded because a
+  parameter/return type is unpublished: MM_PAGE_PRIORITY x2,
+  LIST_ENTRY x4, NDIS_DMA_SIZE, PNPAGED_LOOKASIDE_LIST family x4,
+  W_MINIPORT_CALLBACK, ADAPTER_SHUTDOWN_HANDLER,
+  PDRIVER_UNLOAD, PNDIS_PHYSICAL_ADDRESS_UNIT, PNDIS_MEDIUM +
+  PSTRING (NdisOpenAdapter), and NdisIMQueueMiniportCallback whose
+  print also glitches the return as "NDIS STATUS_").
+  Repairs noted at site: NdisCreateLookaheadBufferFromSharedMemory
+  (page print corrupted mid-name), NdisIMRevertBack (VOID_ + tail
+  comma), NdisGetPoolFromPacket (NDIS_Handle), NdisWriteErrorLogEntry
+  (varargs tail printed "ULONG...").
+  PPNDIS_PACKET double-pointer prints emitted as PNDIS_PACKET *
+  (NdisMIndicateReceivePacket, NdisSendPackets).
+  Compat macros: OPTIONAL/IN/OUT empty, CONST const (print-driven).
+- Record sections: 49 macro/callback prints (NDIS_GET/SET_PACKET_*
+  family, NDIS_BUFFER_*/ETH_*/TR_* helpers, NDIS_*_FROM_PACKET,
+  NDIS_PHYSICAL_ADDRESS_CONST, NDIS_INIT_FUNCTION; DriverEntry,
+  Protocol* driver-supplied set, NDIS XXX_Init) -- none are
+  imports.
+- include/Windef.h: +PBOOLEAN, +PCSTR, +CCHAR (Ndis.h print
+  spellings, M75b PCWSTR precedent).
+- tools/gen-doc-def.py: "Link Library: Ndis.dll." module-form rows
+  mapped onto the ndis.lib token (coredll.dll/mlang.dll
+  precedent).  def/ndis-doc.def: 152 exports (15 held-type pages
+  skipped, listed in the generator log); no ndislib def (its 15
+  rows are the driver-supplied Protocol* set + XXX_Init).
+- TU m78a block; Makefile HDRS 144 -> 145.
+- Gates: check / crosscheck / e2e GREEN x6.
+- rows.json 12309 -> 13462 (NDIS 779 + fsds 120 + VAIL 183 +
+  pcauth 23 + tui 48 appended via ce-rows-local).
