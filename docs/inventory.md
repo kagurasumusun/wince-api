@@ -6997,3 +6997,15 @@ CE page spelling).
   (ms918821), RFC1766INFO (ms918852), SCRIPTINFO (ms918857, tag
   misprint "tagSCRIPINFO" kept); SCRIPTFONTINFO stays opaque (no
   page).  Gates GREEN x6.
+- include/Dshow.h TOP-UP +3: IAMTVTuner (27 slots; R1 quirk entries
+  Logout/StoreAutoTune -- THIS spelled as the interface pointer --
+  parsed as 0-own-parameter slots), IMediaControl (16, incl. the
+  IDispatch base; StopWhenReady is one of the quirk slots),
+  IReferenceClock (7; the CE page spells slot 6 AdvisePeriodic, R1
+  AdvisePeriodicTime -- SLOT_ALIASES maps it; the emitted pointer
+  keeps the CE page name).  Parser: 12-group STDMETHOD_RE with the
+  two quirk branches; IRootStorage-style misprint heads accepted
+  (emitted name = page title).  Aux carriers (R1 strmif facts):
+  OAFilterState, HEVENT, HSEMAPHORE, LPDISPATCH, AMTunerModeType (5
+  values), TunerInputType (2 members).  Total Dshow M97: 15.
+  Gates GREEN x6.

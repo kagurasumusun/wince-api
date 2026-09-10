@@ -35,7 +35,11 @@ STDMETHOD_RE = re.compile(
     r'STDMETHOD_\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*\(\s*THIS\s*\)'
     r'|STDMETHOD\(\s*(\w+)\s*\)\s*\(\s*THIS\s*\)'
     r'|STDMETHOD_\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*\(\s*THIS_\s*([^)]*)\)'
-    r'|STDMETHOD\(\s*(\w+)\s*\)\s*\(\s*THIS_\s*([^)]*)\)')
+    r'|STDMETHOD\(\s*(\w+)\s*\)\s*\(\s*THIS_\s*([^)]*)\)'
+    # w32api quirk: THIS spelled as the interface pointer itself --
+    # a 0-own-parameter slot (strmif.h StoreAutoTune / StopWhenReady)
+    r'|STDMETHOD_\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*\(\s*(?:struct\s+)?I\w+\s*\*\s*\)'
+    r'|STDMETHOD\(\s*(\w+)\s*\)\s*\(\s*(?:struct\s+)?I\w+\s*\*\s*\)')
 DECL_INTF_RE = re.compile(
     r'DECLARE_INTERFACE(_)?\(\s*(\w+)\s*(?:,\s*(\w+)\s*)?\)')
 
@@ -106,10 +110,14 @@ def parse_r1():
                     types = [t.strip() for t in sm.group(6).split(',')
                              if t.strip()]
                     methods.append((sm.group(5), sm.group(4), types))
-                else:                # STDMETHOD(name)(THIS_ ...)
+                elif sm.group(7):    # STDMETHOD(name)(THIS_ ...)
                     types = [t.strip() for t in sm.group(8).split(',')
                              if t.strip()]
                     methods.append((sm.group(7), 'HRESULT', types))
+                elif sm.group(9):    # quirk: STDMETHOD_(ret,name)(IIfc*)
+                    methods.append((sm.group(10), sm.group(9), []))
+                else:                # quirk: STDMETHOD(name)(IIfc*)
+                    methods.append((sm.group(11), 'HRESULT', []))
             if methods:
                 out[name] = {'base': base, 'file': fn, 'methods': methods}
     return out
@@ -224,8 +232,10 @@ def parse_records(header):
             head = sig[:lp]
             hm = re.match(r'^([A-Za-z_]\w*)[\s]?([A-Za-z_]\w*)?$', head.strip())
             if hm and hm.group(2):
-                if hm.group(2) != name:
-                    continue          # not a plain signature line
+                # a differing head token is a recorded page misprint
+                # (IRootStorage prints "SwitchTofFile"): the emitted
+                # pointer uses the page-TITLE name; the verbatim record
+                # above keeps the misprint
                 ret = hm.group(1)
             else:
                 # glued return+name (HRESULTNext, HRESULTRenderFile)
@@ -241,6 +251,14 @@ def parse_records(header):
             out[cur]['methods'].append((page, name, ret, plist))
     return out
 
+
+# Vtable slot names: CE page spelling -> R1 spelling (the emitted
+# pointer keeps the CE page name; the R1 spelling is noted in the
+# map output).  The slot ORDER is what R1 contributes; the CE page
+# name is the documented CE ABI name.
+SLOT_ALIASES = {
+    'Dshow.h': {'AdvisePeriodic': 'AdvisePeriodicTime'},
+}
 
 # ------------------------------------------------------------- compose
 
@@ -286,9 +304,13 @@ def compose(header):
             problems.append(f'{iface}: base chain {chain} has no IUnknown')
             continue
         own = {m[1]: m for m in recs[iface]['methods']}
+        slot_alias = SLOT_ALIASES.get(header, {})
+        r1_to_page = {v: k for k, v in slot_alias.items()}
         rows = []
         used = set()
         for (seg, mname, ret, types) in flat:
+            ownname = mname if mname in own else r1_to_page.get(mname, mname)
+            mname = ownname
             if mname in own:
                 page, name, pret, plist = own[mname]
                 if len(plist) != len(types):

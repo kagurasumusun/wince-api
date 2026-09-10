@@ -1636,6 +1636,28 @@ AKARI_CE_IMPORT DWORD WINAPI DbgWaitForSingleObject(HANDLE h)
  * the same width as HWND).  Own design, ABI-safe. */
 typedef LONG OAHWND;
 
+/* ================================================================== */
+/* Parameter-carrier spellings the M97 vtables reference.  The enum
+ * ORDERS/VALUES and the OAFilterState/HEVENT/HSEMAPHORE spellings are
+ * R1 (strmif.h) ABI facts (public domain; docs/clean-room.md par.4);
+ * the CE pages print the names in the signatures without defining
+ * them. */
+typedef long OAFilterState;
+typedef unsigned int HEVENT;
+typedef HANDLE HSEMAPHORE;
+typedef IDispatch *LPDISPATCH;
+typedef enum tagAMTunerModeType {
+    AMTUNER_MODE_DEFAULT = 0x0000,
+    AMTUNER_MODE_TV      = 0x0001,
+    AMTUNER_MODE_FM_RADIO= 0x0002,
+    AMTUNER_MODE_AM_RADIO= 0x0004,
+    AMTUNER_MODE_DSS     = 0x0008
+} AMTunerModeType;
+typedef enum {
+    TunerInputCable,                /* R1 order: 0 */
+    TunerInputAntenna               /* 1 */
+} TunerInputType;
+
 /* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
  * ORDER adopted from R1 (CeGCC-lineage w32api, public
  * domain; docs/clean-room.md par.4 revision 2026-09-10);
@@ -1667,6 +1689,67 @@ struct IAMStreamConfig { const IAMStreamConfigVtbl *lpVtbl; };
 #define IAMStreamConfig_GetFormat(T,a) ((T)->lpVtbl->GetFormat(T,a))
 #define IAMStreamConfig_GetNumberOfCapabilities(T,a,b) ((T)->lpVtbl->GetNumberOfCapabilities(T,a,b))
 #define IAMStreamConfig_GetStreamCaps(T,a,b,c) ((T)->lpVtbl->GetStreamCaps(T,a,b,c))
+
+/* ---- IAMTVTuner: 11 documented method pages; order R1 ---- */
+typedef struct IAMTVTunerVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IAMTVTuner*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IAMTVTuner*);  /* (R1) */
+    ULONG (WINAPI *Release)(IAMTVTuner*);  /* (R1) */
+    /* IAMTVTuner */
+    HRESULT (WINAPI *put_Channel)(IAMTVTuner*, long, long, long);  /* (R1) */
+    HRESULT (WINAPI *get_Channel)(IAMTVTuner*, long*, long*, long*);  /* (R1) */
+    HRESULT (WINAPI *ChannelMinMax)(IAMTVTuner*, long*, long*);  /* (R1) */
+    HRESULT (WINAPI *put_CountryCode)(IAMTVTuner*, long);  /* (R1) */
+    HRESULT (WINAPI *get_CountryCode)(IAMTVTuner*, long*);  /* (R1) */
+    HRESULT (WINAPI *put_TuningSpace)(IAMTVTuner*, long);  /* (R1) */
+    HRESULT (WINAPI *get_TuningSpace)(IAMTVTuner*, long*);  /* (R1) */
+    HRESULT (WINAPI *Logon)(IAMTVTuner*, HANDLE);  /* (R1) */
+    HRESULT (WINAPI *Logout)(IAMTVTuner*);  /* (R1) */
+    HRESULT (WINAPI *SignalPresen)(IAMTVTuner*, long*);  /* (R1) */
+    HRESULT (WINAPI *put_Mode)(IAMTVTuner*, AMTunerModeType);  /* (R1) */
+    HRESULT (WINAPI *get_Mode)(IAMTVTuner*, AMTunerModeType*);  /* (R1) */
+    HRESULT (WINAPI *GetAvailableModes)(IAMTVTuner*, long*);  /* (R1) */
+    HRESULT (WINAPI *get_AvailableTVFormats)(IAMTVTuner*, long* lAnalogVideoStandard);  /* 452518 */
+    HRESULT (WINAPI *get_TVFormat)(IAMTVTuner*, long* plAnalogVideoStandard);  /* 452522 */
+    HRESULT (WINAPI *AutoTune)(IAMTVTuner*, long lChannel, long* plFoundSignal);  /* 452516 */
+    HRESULT (WINAPI *StoreAutoTune)(IAMTVTuner*);  /* 452527 */
+    HRESULT (WINAPI *get_NumInputConnections)(IAMTVTuner*, long* plNumInputConnections);  /* 452521 */
+    HRESULT (WINAPI *put_InputType)(IAMTVTuner*, long lIndex, TunerInputType InputType);  /* 452526 */
+    HRESULT (WINAPI *get_InputType)(IAMTVTuner*, long lIndex, TunerInputType* pInputType);  /* 452520 */
+    HRESULT (WINAPI *put_ConnectInput)(IAMTVTuner*, long lIndex);  /* 452525 */
+    HRESULT (WINAPI *get_ConnectInput)(IAMTVTuner*, long* plIndex);  /* 452519 */
+    HRESULT (WINAPI *get_VideoFrequency)(IAMTVTuner*, long* lFreq);  /* 452523 */
+    HRESULT (WINAPI *get_AudioFrequency)(IAMTVTuner*, long* lFreq);  /* 452517 */
+} IAMTVTunerVtbl;
+struct IAMTVTuner { const IAMTVTunerVtbl *lpVtbl; };
+#define IAMTVTuner_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IAMTVTuner_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IAMTVTuner_Release(T) ((T)->lpVtbl->Release(T))
+#define IAMTVTuner_put_Channel(T,a,b,c) ((T)->lpVtbl->put_Channel(T,a,b,c))
+#define IAMTVTuner_get_Channel(T,a,b,c) ((T)->lpVtbl->get_Channel(T,a,b,c))
+#define IAMTVTuner_ChannelMinMax(T,a,b) ((T)->lpVtbl->ChannelMinMax(T,a,b))
+#define IAMTVTuner_put_CountryCode(T,a) ((T)->lpVtbl->put_CountryCode(T,a))
+#define IAMTVTuner_get_CountryCode(T,a) ((T)->lpVtbl->get_CountryCode(T,a))
+#define IAMTVTuner_put_TuningSpace(T,a) ((T)->lpVtbl->put_TuningSpace(T,a))
+#define IAMTVTuner_get_TuningSpace(T,a) ((T)->lpVtbl->get_TuningSpace(T,a))
+#define IAMTVTuner_Logon(T,a) ((T)->lpVtbl->Logon(T,a))
+#define IAMTVTuner_Logout(T) ((T)->lpVtbl->Logout(T))
+#define IAMTVTuner_SignalPresen(T,a) ((T)->lpVtbl->SignalPresen(T,a))
+#define IAMTVTuner_put_Mode(T,a) ((T)->lpVtbl->put_Mode(T,a))
+#define IAMTVTuner_get_Mode(T,a) ((T)->lpVtbl->get_Mode(T,a))
+#define IAMTVTuner_GetAvailableModes(T,a) ((T)->lpVtbl->GetAvailableModes(T,a))
+#define IAMTVTuner_get_AvailableTVFormats(T,a) ((T)->lpVtbl->get_AvailableTVFormats(T,a))
+#define IAMTVTuner_get_TVFormat(T,a) ((T)->lpVtbl->get_TVFormat(T,a))
+#define IAMTVTuner_AutoTune(T,a,b) ((T)->lpVtbl->AutoTune(T,a,b))
+#define IAMTVTuner_StoreAutoTune(T) ((T)->lpVtbl->StoreAutoTune(T))
+#define IAMTVTuner_get_NumInputConnections(T,a) ((T)->lpVtbl->get_NumInputConnections(T,a))
+#define IAMTVTuner_put_InputType(T,a,b) ((T)->lpVtbl->put_InputType(T,a,b))
+#define IAMTVTuner_get_InputType(T,a,b) ((T)->lpVtbl->get_InputType(T,a,b))
+#define IAMTVTuner_put_ConnectInput(T,a) ((T)->lpVtbl->put_ConnectInput(T,a))
+#define IAMTVTuner_get_ConnectInput(T,a) ((T)->lpVtbl->get_ConnectInput(T,a))
+#define IAMTVTuner_get_VideoFrequency(T,a) ((T)->lpVtbl->get_VideoFrequency(T,a))
+#define IAMTVTuner_get_AudioFrequency(T,a) ((T)->lpVtbl->get_AudioFrequency(T,a))
 
 /* ---- IBaseFilter: 5 documented method pages; order R1 ---- */
 typedef struct IBaseFilterVtbl {
@@ -1835,11 +1918,14 @@ typedef struct IGraphBuilderVtbl {
     HRESULT (WINAPI *ConnectDirect)(IGraphBuilder*, IPin*, IPin*, const AM_MEDIA_TYPE*);  /* (R1) */
     HRESULT (WINAPI *Reconnect)(IGraphBuilder*, IPin*);  /* (R1) */
     HRESULT (WINAPI *Disconnect)(IGraphBuilder*, IPin*);  /* (R1) */
+    HRESULT (WINAPI *SetDefaultSyncSource)(IGraphBuilder*);  /* (R1) */
     HRESULT (WINAPI *Connect)(IGraphBuilder*, IPin* ppinOut, IPin* ppinIn);  /* 910580 */
     HRESULT (WINAPI *Render)(IGraphBuilder*, IPin* ppinOut);  /* 910582 */
     HRESULT (WINAPI *RenderFile)(IGraphBuilder*, LPCWSTR lpwstrFile, LPCWSTR lpwstrPlayList);  /* 910583 */
     HRESULT (WINAPI *AddSourceFilter)(IGraphBuilder*, LPCWSTR lpwstrFileName, LPCWSTR lpwstrFilterName, IBaseFilter** ppFilter);  /* 910579 */
     HRESULT (WINAPI *SetLogFile)(IGraphBuilder*, HANDLE hFile);  /* 910584 */
+    HRESULT (WINAPI *Abort)(IGraphBuilder*);  /* (R1) */
+    HRESULT (WINAPI *ShouldOperationContinue)(IGraphBuilder*);  /* (R1) */
 } IGraphBuilderVtbl;
 struct IGraphBuilder { const IGraphBuilderVtbl *lpVtbl; };
 #define IGraphBuilder_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
@@ -1852,11 +1938,53 @@ struct IGraphBuilder { const IGraphBuilderVtbl *lpVtbl; };
 #define IGraphBuilder_ConnectDirect(T,a,b,c) ((T)->lpVtbl->ConnectDirect(T,a,b,c))
 #define IGraphBuilder_Reconnect(T,a) ((T)->lpVtbl->Reconnect(T,a))
 #define IGraphBuilder_Disconnect(T,a) ((T)->lpVtbl->Disconnect(T,a))
+#define IGraphBuilder_SetDefaultSyncSource(T) ((T)->lpVtbl->SetDefaultSyncSource(T))
 #define IGraphBuilder_Connect(T,a,b) ((T)->lpVtbl->Connect(T,a,b))
 #define IGraphBuilder_Render(T,a) ((T)->lpVtbl->Render(T,a))
 #define IGraphBuilder_RenderFile(T,a,b) ((T)->lpVtbl->RenderFile(T,a,b))
 #define IGraphBuilder_AddSourceFilter(T,a,b,c) ((T)->lpVtbl->AddSourceFilter(T,a,b,c))
 #define IGraphBuilder_SetLogFile(T,a) ((T)->lpVtbl->SetLogFile(T,a))
+#define IGraphBuilder_Abort(T) ((T)->lpVtbl->Abort(T))
+#define IGraphBuilder_ShouldOperationContinue(T) ((T)->lpVtbl->ShouldOperationContinue(T))
+
+/* ---- IMediaControl: 7 documented method pages; order R1 ---- */
+typedef struct IMediaControlVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMediaControl*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMediaControl*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMediaControl*);  /* (R1) */
+    /* IMediaControl */
+    HRESULT (WINAPI *GetTypeInfoCount)(IMediaControl*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *GetTypeInfo)(IMediaControl*, UINT, LCID, LPTYPEINFO*);  /* (R1) */
+    HRESULT (WINAPI *GetIDsOfNames)(IMediaControl*, REFIID, LPOLESTR*, UINT, LCID, DISPID*);  /* (R1) */
+    HRESULT (WINAPI *Invoke)(IMediaControl*, DISPID, REFIID, LCID, WORD, DISPPARAMS*, VARIANT*, EXCEPINFO*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *Run)(IMediaControl*);  /* 452264 */
+    HRESULT (WINAPI *Pause)(IMediaControl*);  /* 452262 */
+    HRESULT (WINAPI *Stop)(IMediaControl*);  /* 452265 */
+    HRESULT (WINAPI *GetState)(IMediaControl*, LONG msTimeout, OAFilterState* pfs);  /* 452260 */
+    HRESULT (WINAPI *RenderFile)(IMediaControl*, BSTR strFilename);  /* 452263 */
+    HRESULT (WINAPI *AddSourceFilter)(IMediaControl*, BSTR strFilename, IDispatch** ppUnk);  /* 452259 */
+    HRESULT (WINAPI *get_FilterCollection)(IMediaControl*, LPDISPATCH*);  /* (R1) */
+    HRESULT (WINAPI *get_RegFilterCollection)(IMediaControl*, LPDISPATCH*);  /* (R1) */
+    HRESULT (WINAPI *StopWhenReady)(IMediaControl*);  /* 452266 */
+} IMediaControlVtbl;
+struct IMediaControl { const IMediaControlVtbl *lpVtbl; };
+#define IMediaControl_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMediaControl_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMediaControl_Release(T) ((T)->lpVtbl->Release(T))
+#define IMediaControl_GetTypeInfoCount(T,a) ((T)->lpVtbl->GetTypeInfoCount(T,a))
+#define IMediaControl_GetTypeInfo(T,a,b,c) ((T)->lpVtbl->GetTypeInfo(T,a,b,c))
+#define IMediaControl_GetIDsOfNames(T,a,b,c,d,e) ((T)->lpVtbl->GetIDsOfNames(T,a,b,c,d,e))
+#define IMediaControl_Invoke(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->Invoke(T,a,b,c,d,e,f,g,h))
+#define IMediaControl_Run(T) ((T)->lpVtbl->Run(T))
+#define IMediaControl_Pause(T) ((T)->lpVtbl->Pause(T))
+#define IMediaControl_Stop(T) ((T)->lpVtbl->Stop(T))
+#define IMediaControl_GetState(T,a,b) ((T)->lpVtbl->GetState(T,a,b))
+#define IMediaControl_RenderFile(T,a) ((T)->lpVtbl->RenderFile(T,a))
+#define IMediaControl_AddSourceFilter(T,a,b) ((T)->lpVtbl->AddSourceFilter(T,a,b))
+#define IMediaControl_get_FilterCollection(T,a) ((T)->lpVtbl->get_FilterCollection(T,a))
+#define IMediaControl_get_RegFilterCollection(T,a) ((T)->lpVtbl->get_RegFilterCollection(T,a))
+#define IMediaControl_StopWhenReady(T) ((T)->lpVtbl->StopWhenReady(T))
 
 /* ---- IMediaFilter: 6 documented method pages; order R1 ---- */
 typedef struct IMediaFilterVtbl {
@@ -1995,6 +2123,27 @@ struct IQualProp { const IQualPropVtbl *lpVtbl; };
 #define IQualProp_get_FramesDrawn(T,a) ((T)->lpVtbl->get_FramesDrawn(T,a))
 #define IQualProp_get_FramesDroppedInRenderer(T,a) ((T)->lpVtbl->get_FramesDroppedInRenderer(T,a))
 #define IQualProp_get_Jitter(T,a) ((T)->lpVtbl->get_Jitter(T,a))
+
+/* ---- IReferenceClock: 4 documented method pages; order R1 ---- */
+typedef struct IReferenceClockVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IReferenceClock*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IReferenceClock*);  /* (R1) */
+    ULONG (WINAPI *Release)(IReferenceClock*);  /* (R1) */
+    /* IReferenceClock */
+    HRESULT (WINAPI *GetTime)(IReferenceClock*, REFERENCE_TIME* pTime);  /* 931805 */
+    HRESULT (WINAPI *AdviseTime)(IReferenceClock*, REFERENCE_TIME rtBaseTime, REFERENCE_TIME rtStreamTime, HEVENT hEvent, DWORD* pdwAdviseCookie);  /* 931804 */
+    HRESULT (WINAPI *AdvisePeriodic)(IReferenceClock*, REFERENCE_TIME rtStartTime, REFERENCE_TIME rtPeriodTime, HSEMAPHORE hSemaphore, DWORD* pdwAdviseCookie);  /* 931803 */
+    HRESULT (WINAPI *Unadvise)(IReferenceClock*, DWORD dwAdviseCookie);  /* 931807 */
+} IReferenceClockVtbl;
+struct IReferenceClock { const IReferenceClockVtbl *lpVtbl; };
+#define IReferenceClock_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IReferenceClock_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IReferenceClock_Release(T) ((T)->lpVtbl->Release(T))
+#define IReferenceClock_GetTime(T,a) ((T)->lpVtbl->GetTime(T,a))
+#define IReferenceClock_AdviseTime(T,a,b,c,d) ((T)->lpVtbl->AdviseTime(T,a,b,c,d))
+#define IReferenceClock_AdvisePeriodic(T,a,b,c,d) ((T)->lpVtbl->AdvisePeriodic(T,a,b,c,d))
+#define IReferenceClock_Unadvise(T,a) ((T)->lpVtbl->Unadvise(T,a))
 
 /* ---- IVideoWindow: 39 documented method pages; order R1 ---- */
 typedef struct IVideoWindowVtbl {
