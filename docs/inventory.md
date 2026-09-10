@@ -6828,3 +6828,9 @@ guard close, grouped by family, every value provenance-tagged R1.
   family in Imm.h), WS_ 30 (WS_EX_CAPTIONOKBTN is CE-specific).
   NM_RCLICK is REHOMED to Commctrl.h (the NM_ family's ledger home).
   Total Winuser M96: 210.  Gates GREEN x6.
+- include/Imm.h TOP-UP: +34 (2-char families): GL_ID_* guide-line
+  error codes (20), NI_* candidate/composition notifications (8),
+  UI_CAP_2700/ROT90/ROTANY, VK_PROCESSKEY (0xE5, the IME virtual
+  key documented on the IME pages -- Imm family home), WM_IME_
+  COMPOSITION / WM_IME_STARTCOMPOSITION (IME message home is Imm).
+  Total Imm M96: 139.  Gates GREEN x6.

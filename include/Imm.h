@@ -391,6 +391,7 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
     CE-specific software input panel state helper */
 
 /* ================================================================== */
+/* ================================================================== */
 /* M96 value adoption -- values adopted from the CeGCC-lineage w32api
  * reference (R1, public domain; docs/clean-room.md par.4
  * revision 2026-09-10).  Every name below is documented by
@@ -435,6 +436,28 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define GGL_INDEX                                    0x0002
 #define GGL_STRING                                   0x0003
 #define GGL_PRIVATE                                  0x0004
+
+/* ---- GL_ family (20 names; R1) ---- */
+#define GL_ID_UNKNOWN                                0x0000
+#define GL_LEVEL_NOGUIDELINE                         0x0000
+#define GL_ID_NOMODULE                               0x0001
+#define GL_LEVEL_FATAL                               0x0001
+#define GL_LEVEL_ERROR                               0x0002
+#define GL_LEVEL_WARNING                             0x0003
+#define GL_LEVEL_INFORMATION                         0x0004
+#define GL_ID_NODICTIONARY                           0x0010
+#define GL_ID_CANNOTSAVE                             0x0011
+#define GL_ID_NOCONVERT                              0x0020
+#define GL_ID_TYPINGERROR                            0x0021
+#define GL_ID_TOOMANYSTROKE                          0x0022
+#define GL_ID_READINGCONFLICT                        0x0023
+#define GL_ID_INPUTREADING                           0x0024
+#define GL_ID_INPUTRADICAL                           0x0025
+#define GL_ID_INPUTCODE                              0x0026
+#define GL_ID_CHOOSECANDIDATE                        0x0028
+#define GL_ID_REVERSECONVERSION                      0x0029
+#define GL_ID_PRIVATE_FIRST                          0x8000
+#define GL_ID_PRIVATE_LAST                           0xFFFF
 
 /* ---- IACE_ family (3 names; R1) ---- */
 #define IACE_CHILDREN                                0x0001
@@ -539,6 +562,16 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define MOD_RIGHT                                    0x4000
 #define MOD_LEFT                                     0x8000
 
+/* ---- NI_ family (8 names; R1) ---- */
+#define NI_OPENCANDIDATE                             0x0010
+#define NI_CLOSECANDIDATE                            0x0011
+#define NI_SELECTCANDIDATESTR                        0x0012
+#define NI_CHANGECANDIDATELIST                       0x0013
+#define NI_COMPOSITIONSTR                            0x0015
+#define NI_SETCANDIDATE_PAGESTART                    0x0016
+#define NI_SETCANDIDATE_PAGESIZE                     0x0017
+#define NI_IMEMENUSELECTED                           0x0018
+
 /* ---- SCS_ family (5 names; R1) ---- */
 #define SCS_CAP_COMPSTR                              0x0001
 #define SCS_CAP_MAKEREAD                             0x0002
@@ -548,5 +581,17 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 
 /* ---- SELECT_ family (1 names; R1) ---- */
 #define SELECT_CAP_SENTENCE                          0x0002
+
+/* ---- UI_ family (3 names; R1) ---- */
+#define UI_CAP_2700                                  0x0001
+#define UI_CAP_ROT90                                 0x0002
+#define UI_CAP_ROTANY                                0x0004
+
+/* ---- VK_ family (1 names; R1) ---- */
+#define VK_PROCESSKEY                                0x00E5
+
+/* ---- WM_ family (2 names; R1) ---- */
+#define WM_IME_STARTCOMPOSITION                      0x010D
+#define WM_IME_COMPOSITION                           0x010F
 
 #endif /* _IMM_H */
