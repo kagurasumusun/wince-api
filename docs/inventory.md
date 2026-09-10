@@ -6388,3 +6388,37 @@ Component Services (COM and DCOM), 896 leaves.
   tree (beyond pages/pages4/pages6) and are out of scope until the
   CE 4/5/6 generations are complete.
 - Gates unchanged (no header changes this unit).
+
+## M91 -- FSD DDI completion check + Internet Client harvest
+
+FSD survey over the full fsdmgr/storemgr/partdrv/lockmgr row set
+(86 rows): M79/M79b had already shipped far more than the summary
+notes recorded (Storemgr.h 19 store-api declarations; Fsdmgr.h
+types + ReadDiskEx/WriteDiskEx/FSD_UnhookVolume declarations +
+MyFSD_* record block; Partdrv.h PD_* records; Lockmgr trio).  The
+by-value HDSK/HVOL/FDI hold policy stands (no CE page prints those
+types; verified again by title search -- zero pages).
+
+- include/Fsdmgr.h (EXT): +FSDMGR_EmptyLockContainer DECLARED
+  (aa517921; print misprints the callee "MyFSD_EmptyLockContainer"
+  -- archive typo note; PFILELOCKSTATE is the compiled opaque
+  pointer so unlike the HDSK/HVOL set it declares).  FSD_MountDisk/
+  FSD_UnmountDisk records upgraded with page-text-recovered prints
+  (`BOOLFSD_MountDisk( HDSKhdsk);` / `BOOLFSD_UnmountDisk(
+  HDSKhdsk);` -- the M79 "no signature" note was a rows-sig
+  extraction gap; HDSK still unpublished, records stay records).
+- include/Lockmgrhelp.h (EXT): FSDMGR_RemoveFileLock record upgraded
+  with the recovered prototype line (print names it
+  MyFSD_UnlockFileEx, drops separators, names the unpublished
+  PRELEASEFILELOCKSTATE -- stays recorded).
+- def/fsdmgr-doc.def 5 -> 6 (EmptyLockContainer).
+- TU m91 (FILELOCKSTATE field + EmptyLockContainer/Open/Close
+  calls).  Gates GREEN x6.
+
+Internet Client book harvest: tools/manifests/internetclient-book.
+manifest (361 missing leaves of 607; 246 already preserved);
+fetched into build/pages (13553 -> 13914); rows.json 14991 -> 15352.
+Row homes: Wininet.h 102 (NOT yet shipped -- M92 target), webvw.h
+68, Mshtml.h/Mshtmhst.idl 11+4, Uxtheme.h 8, Wininetui.h 2,
+Urlmonui.h 1, "Interned.h .h" 3 (archive typo spellings -- check
+against Internet.h), 161 prose rows.  85 rows carry parsed sigs.

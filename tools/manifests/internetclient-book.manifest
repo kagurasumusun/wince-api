@@ -1,0 +1,361 @@
+aa451874	About Character Sets
+aa451877	About DHTML
+aa451879	About HINTERNET Handles
+aa451881	About the ActiveX Navigation Control
+aa451883	About the IMultilanguage Interfaces
+aa451885	About the Webview Browser Object
+aa451887	Accessing Elements with Script Languages
+aa451890	Accessing the HTTP Protocol
+aa451892	Accessing URLs Directly
+aa451896	Adding Internet Browsing Functionality to Your Application
+aa451898	Adding JScript Code to an HTML Page
+aa451900	Adding VBScript Code to an HTML Page
+aa451902	Additional Resources for JScript Developers
+aa451904	Additional Resources for VBScript Developers
+aa451906	BeforeWindowOpen
+aa451908	Internet Explorer Browser Control Host Registry Settings
+aa451910	Browser Registry Settings
+aa451914	Changing Fonts with the WebBrowser Control
+aa451918	Code Page Detection
+aa451920	Specifying Privacy Settings
+aa451922	Conversion Between Character Sets
+aa451924	Cookie Headers
+aa451926	Cookies
+aa451928	Creating a Cache Entry
+aa451930	The IESimple Browser
+aa451932	Creating and Cracking URLs
+aa451935	Creating and Retrieving Cookies
+aa451938	Creating a Browser Class
+aa451940	Creating a Browser Window
+aa451942	Creating the Browser Control
+aa451944	Creating the Navigation Control
+aa451946	Creating a Web Browser Object
+aa451948	Customizing the Browser User Interface
+aa451950	Customizing the Focus Rectangle
+aa451952	Deleting a Cache Entry
+aa451954	Deleting Files from an FTP Server
+aa451956	DHTML Events
+aa451958	Disabling Multiple Windows
+aa451960	Displaying the Current Security Zone
+aa451963	Enumerating Code Pages and Locales
+aa451965	Enumerating Directories
+aa451967	Enumerating the Cache
+aa451969	Font Linking
+aa451971	FTP Function Handles
+aa451975	GetFilename
+aa451977	Handling HTTP Authentication
+aa451979	Handling Structures with Variable Size Data
+aa451981	Handling Uniform Resource Locators
+aa451983	Hit Logging
+aa451985	Hosting MSHTML from an Application
+aa451988	HTTP and FTP Common Functions
+aa451989	HTTP Authentication
+aa451991	Identifying Pocket Internet Explorer to a Web Server
+aa451993	IESample Registry Settings
+aa451996	International Language Functionalities
+aa451997	Internet Client Services Catalog Items
+aa452001	Internet Explorer 6 Architecture
+aa452002	Internet Explorer 6 for Windows CE Characteristics
+aa452003	Internet Explorer 6 Migration
+aa452004	Internet Explorer 6 OS Overview
+aa452005	Internet Explorer 6 Default Registry Settings
+aa452007	Internet Explorer 6 Security
+aa452009	Support for Internet Explorer 6 in Windows CE
+aa452010	Internet Explorer Browser Control Host Migration
+aa452011	Internet Explorer Browser Control Host OS Design Development
+aa452012	Internet Explorer Browser Control Host Samples
+aa452013	Internet Explorer MSHTML/DHTML API Migration
+aa452015	Internet Explorer MSHTML/DHTML API Samples
+aa452016	Internet Explorer Multiple-Language API OS Design Development
+aa452017	Internet Explorer Multiple-Language API Migration
+aa452018	Internet Explorer Multiple-Language API Samples
+aa452019	Internet Explorer RPC Support
+aa452021	Internet Explorer TV-Style Navigation Migration
+aa452022	Internet Explorer TV-Style Navigation OS Design Development
+aa452023	Internet Explorer TV-Style Navigation Samples
+aa452024	Internet Protocols
+aa452028	JScript Support in Windows CE
+aa452029	JScript Migration
+aa452030	JScript OS Design Development
+aa452031	JScript Samples
+aa452032	Locale-based Text and Line Breaking
+aa452068	Transition Events
+aa452072	Adding Transitions
+aa452091	WinInet Error Messages
+aa452096	API Flags
+aa452097	apply (Internet Explorer)
+aa452106	CloseThemeData
+aa452121	CommitUrlCacheEntry
+aa452134	Count
+aa452142	CreateUrlCacheEntry
+aa452148	Creating a URL Moniker
+aa452150	DeleteUrlCacheEntry
+aa452156	_DPIEWebBrowserEvents2::BeforeNavigate2
+aa452157	_DPIEWebBrowserEvents2::CommandStateChange
+aa452159	_DPIEWebBrowserEvents2::DocumentComplete
+aa452161	_DPIEWebBrowserEvents2::DownloadBegin
+aa452163	_DPIEWebBrowserEvents2::DownloadComplete
+aa452165	_DPIEWebBrowserEvents2::NavigateComplete2
+aa452167	_DPIEWebBrowserEvents2::NewWindow2
+aa452170	_DPIEWebBrowserEvents2::OnFullScreen
+aa452172	_DPIEWebBrowserEvents2::OnMenuBar
+aa452174	_DPIEWebBrowserEvents2::OnProgressChange
+aa452176	_DPIEWebBrowserEvents2::OnQuit
+aa452178	_DPIEWebBrowserEvents2::OnStatusBar
+aa452179	_DPIEWebBrowserEvents2::OnTheaterMode
+aa452181	_DPIEWebBrowserEvents2::OnToolBar
+aa452183	_DPIEWebBrowserEvents2::OnVisible
+aa452185	_DPIEWebBrowserEvents2::PropertyChange
+aa452187	_DPIEWebBrowserEvents2::StatusTextChange
+aa452189	_DPIEWebBrowserEvents2::TitleChange
+aa452191	DrawThemeBackground
+aa452193	Event
+aa452195	FindCloseUrlCache
+aa452197	FindFirstUrlCacheEntry
+aa452206	FindNextUrlCacheEntryEx
+aa452208	FtpCommand
+aa452210	FtpCreateDirectory
+aa452212	FtpDeleteFile
+aa452214	FtpFindFirstFile
+aa452216	FtpGetCurrentDirectory
+aa452218	FtpGetFile
+aa452230	FtpGetFileEx
+aa452232	FtpGetFileSize
+aa452234	FtpOpenFile
+aa452236	FtpPutFile
+aa452238	FtpPutFileEx
+aa452240	FtpRemoveDirectory
+aa452433	CreateUrlCacheGroup
+aa452434	DeleteUrlCacheGroup
+aa452486	FindFirstUrlCacheGroup
+aa452487	FindNextUrlCacheGroup
+aa452488	GetUrlCacheGroupAttribute
+aa452489	ReadUrlCacheEntryStream
+aa452490	RetrieveUrlCacheEntryStream
+aa452491	SetUrlCacheEntryGroup
+aa452492	SetUrlCacheGroupAttribute
+aa452493	UnlockUrlCacheEntryStream
+ms904973	Manipulating Directories on an FTP Server
+ms905065	Mapping Code Pages to Script IDs
+ms905072	Internet Explorer Multiple-Language API Registry Settings
+ms905080	MSHTML/DHTML API Overview
+ms905088	MSHTML Editing
+ms905101	Internet Explorer MSHTML/DHTML API Registry Settings
+ms905109	Navigating Directories
+ms905118	Navigating to a Specified URL
+ms905210	Obtaining MIME Information
+ms905213	P3P Policy Evaluation Engine
+ms905225	Placing Files on an FTP Server
+ms905234	Pocket Internet Explorer Architecture
+ms905240	Pocket Internet Explorer Characteristics
+ms905244	Pocket Internet Explorer Migration
+ms905255	Pocket Internet Explorer Samples
+ms905260	Pocket Internet Explorer Security
+ms905265	Printing Pages with the WebBrowser Control
+ms905270	Privacy Functions
+ms905275	Privacy Notification User Interface
+ms905281	Privacy Templates
+ms905286	Theme Property Values
+ms905293	Proxy Authentication
+ms905299	Registering the Browser Window
+ms905302	Customizing the Browser Font Table
+ms905307	Renaming Files and Directories on an FTP Server
+ms905316	Replacement of the Urlmon User Interface
+ms905320	Replacement of the WinInet User Interface
+ms905329	Retrieving Cache Entry Data
+ms905334	Retrieving Cache Entry Files
+ms905338	Retrieving Files from an FTP Server
+ms905345	Server Authentication
+ms905348	Setting Up Event Sinks
+ms905355	SetUrlCacheConfigInfo
+ms905429	ShowInternalMessage
+ms905508	ShowPrompt
+ms905622	Starting an FTP Session
+ms905630	Summary of Browser Characteristics
+ms905631	Internet Explorer TV-Style Navigation Registry Settings
+ms905632	The IESample Browser
+ms905633	Theme Hit Test Values
+ms905635	URL Moniker Services Registry Settings
+ms905636	URL Moniker Services Security
+ms905637	URL Moniker Services Migration
+ms905638	URL Moniker Services Overview
+ms905639	URL Moniker Services Samples
+ms905640	URL Security Zones
+ms905641	URLs, Namespaces, and Monikers
+ms905642	Using Asynchronous Pluggable Protocols
+ms905643	Using Asynchronous WinInet Functions
+ms905644	Using Client Capabilities
+ms905645	Using Flags to Control Caching
+ms905646	Using HTML Components
+ms905647	Using Persistent Caching Functions
+ms905649	Using the Travel Log Interfaces
+ms905650	Using the URL Moniker Functions
+ms905651	Using the WinInet Functions for FTP Sessions
+ms905652	Using WebBrowser Controls
+ms905653	Using the WinInet Debug Engine
+ms905654	VBScript Support in Windows CE
+ms905655	VBScript Migration
+ms905656	VBScript OS Design Development
+ms905657	VBScript Samples
+ms905658	WinInet Overview
+ms905659	WinInet Migration
+ms905660	WinInet Registry Settings
+ms905662	WinInet Samples
+ms905663	WinInet Security
+ms905664	Working with WebBrowser Events
+ms905667	XML Data Islands Application Development
+ms905668	XML Data Islands Migration
+ms905669	XML Data Islands Samples
+ms905675	Applying Filters
+ms905676	Filter and Transition Properties
+ms905690	Theme Parts and States
+ms906192	FtpRenameFile
+ms906282	FtpSetCurrentDirectory
+ms906298	GetThemeBackgroundExtent
+ms906304	GetThemeColor
+ms906315	GetThemeFont
+ms906320	GetUrlCacheEntryInfo
+ms906328	GetUrlCacheEntryInfoEx
+ms906340	HitTestThemeBackground
+ms906344	HttpAddRequestHeaders
+ms906345	HttpEndRequest
+ms906346	HttpOpenRequest
+ms906347	HttpQueryInfo
+ms906348	HTTP Response Headers
+ms906349	HttpSendRequest
+ms906350	HttpSendRequestEx
+ms906351	HTTP Status Codes
+ms906352	HTTP_VERSION_INFO
+ms906375	IBrowser2::get_ClearTypeEnabled
+ms906376	IBrowser2::get_FitToWindow
+ms906377	IBrowser2::get_LayoutHeight
+ms906378	IBrowser2::get_LayoutWidth
+ms906379	IBrowser2::get_LocationBaseURL
+ms906380	IBrowser2::get_PlaySounds
+ms906381	IBrowser2::get_ScriptingEnabled
+ms906382	IBrowser2::get_ShowImages
+ms906383	IBrowser2::get_ZoomLevel
+ms906384	IBrowser2::put_ClearTypeEnabled
+ms906385	IBrowser2::put_FitToWindow
+ms906386	IBrowser2::put_LocationBaseURL
+ms906387	IBrowser2::put_PlaySounds
+ms906388	IBrowser2::put_ScriptingEnabled
+ms906389	IBrowser2::put_ShowImages
+ms906390	IBrowser2::put_ZoomLevel
+ms906392	IBrowser3::addStyle
+ms906393	IBrowser3::get_ActiveXEnabled
+ms906394	IBrowser3::get_CanCopy
+ms906395	IBrowser3::get_ContextMenuEnabled
+ms906396	IBrowser3::get_document
+ms906397	IBrowser3::get_FocusRectEnabled
+ms906398	IBrowser3::get_IntegralPaging
+ms906399	IBrowser3::get_script
+ms906400	IBrowser3::get_SelectionEnabled
+ms906401	IBrowser3::get_SuperFitToWindow
+ms906402	IBrowser3::put_ActiveXEnabled
+ms906403	IBrowser3::put_ContextMenuEnabled
+ms906404	IBrowser3::put_FocusRectEnabled
+ms906405	IBrowser3::put_IntegralPaging
+ms906406	IBrowser3::put_SelectionEnabled
+ms906407	IBrowser3::put_SuperFitToWindow
+ms906408	IBrowser::FrameNavigate
+ms906409	IBrowser::get_Busy
+ms906410	IBrowser::get_CBrowserPointer
+ms906411	IBrowser::get_IsFrame
+ms906412	IBrowser::get_LocationURL
+ms906413	IBrowser::get_MarginHeight
+ms906414	IBrowser::get_MarginWidth
+ms906415	IBrowser::get_ScrollStyle
+ms906416	IBrowser::get_SelectedCodepage
+ms906417	IBrowser::get_title
+ms906418	IBrowser::navigate
+ms906419	IBrowser::put_IsFrame
+ms906420	IBrowser::put_MarginHeight
+ms906421	IBrowser::put_MarginWidth
+ms906422	IBrowser::put_ScrollStyle
+ms906423	IBrowser::put_SelectedCodepage
+ms906424	IBrowser::Refresh
+ms906425	IBrowser::Stop
+ms918339	INTERNET_ASYNC_RESULT
+ms918340	InternetAttemptConnect
+ms918341	INTERNET_AUTH_NOTIFY_DATA
+ms918342	INTERNET_BUFFERS
+ms918343	INTERNET_CACHE_ENTRY_INFO
+ms918344	INTERNET_CACHE_TIMESTAMPS
+ms918345	INTERNET_CERTIFICATE_INFO
+ms918346	InternetCheckConnection
+ms918348	InternetCloseHandle
+ms918349	InternetCombineUrl
+ms918350	InternetConfirmZoneCrossing
+ms918351	InternetConnect
+ms918352	INTERNET_CONNECTED_INFO
+ms918353	InternetCookieState
+ms918354	InternetCrackUrl
+ms918355	InternetCreateUrl
+ms918356	InternetEnumPerSiteCookieDecisionA
+ms918357	InternetEnumPerSiteCookieDecisionW
+ms918358	InternetErrorDlg
+ms918359	InternetFindNextFile
+ms918360	InternetGetConnectedState
+ms918361	InternetGetConnectedStateEx
+ms918362	InternetGetCookie
+ms918363	InternetGetLastResponseInfo
+ms918364	InternetGetPerSiteCookieDecisionA
+ms918365	InternetGetPerSiteCookieDecisionW
+ms918366	InternetGoOnline
+ms918367	InternetLockRequestFile
+ms918368	InternetOpen
+ms918369	InternetOpenUrl
+ms918370	INTERNET_PER_CONN_OPTION
+ms918371	INTERNET_PER_CONN_OPTION_LIST
+ms918372	INTERNET_PROXY_INFO
+ms918373	InternetQueryDataAvailable
+ms918374	InternetQueryOption
+ms918375	InternetReadFile
+ms918376	InternetReadFileEx
+ms918377	INTERNET_SCHEME
+ms918378	InternetSetCookie
+ms918379	InternetSetCookieEx
+ms918380	InternetSetFilePointer
+ms918381	InternetSetOption
+ms918382	InternetSetOptionEx
+ms918383	InternetSetPerSiteCookieDecisionA
+ms918384	InternetSetPerSiteCookieDecisionW
+ms918385	InternetSetStatusCallback
+ms918386	INTERNET_STATUS_CALLBACK
+ms918387	InternetTimeFromSystemTime
+ms918388	InternetTimeToSystemTime
+ms918389	InternetUnlockRequestFile
+ms918390	INTERNET_VERSION_INFO
+ms918391	InternetWriteFile
+ms918392	IOleControlNavigation2::ActivateRect
+ms918399	IOleControlNavigation2AdviseSink::NavigateOutControl
+ms918561	IOleControlNavigation2AdviseSink::OnFocusRectChange
+ms918569	IOleControlNavigation2AdviseSink::OnNavigationStatusChange
+ms918586	IOleControlNavigation2AdviseSink::OnRectsChange
+ms918597	IOleControlNavigation2::DeactivateRect
+ms918608	IOleControlNavigation2::GetControlNavigationCapabilities
+ms918620	IOleControlNavigation2::GetCurrentRectIndex
+ms918717	IOleControlNavigation2::GetNavigationRectCount
+ms918731	IOleControlNavigation2::GetNavigationRects
+ms918755	IOleControlNavigation2::NavigateInControl
+ms918803	IsAppThemed
+ms918806	IsDialogBoxHandled Callback Function (Urlmon)
+ms918807	IsDialogBoxHandled Callback Function (WinInet)
+ms918809	IsMessageBoxHandled Callback Function
+ms918828	NVFOCUS_DIRECTION
+ms918830	OpenThemeDataEx
+ms918831	Option Flags
+ms918834	play (Internet Explorer)
+ms918835	Privacy Flags
+ms918842	Query Info Flags
+ms918849	RetrieveUrlCacheEntryFile
+ms918858	SetUrlCacheEntryInfo
+ms918859	stop (Internet Explorer)
+ms918862	UnlockUrlCacheEntryFile
+ms918864	URL_COMPONENTS
+ms918879	XML Data Islands OS Design Development
+ms918893	Internet Explorer 6 Application Development
+ms919019	Internet Explorer Browser Control Host Reference
+ms919201	FindFirstUrlCacheEntryEx
+ms919204	FindNextUrlCacheEntry

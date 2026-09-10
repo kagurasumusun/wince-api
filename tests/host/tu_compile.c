@@ -7295,6 +7295,17 @@ static int m89_shaped_usage(void)
     return (int)miex.cbSize + (int)miex.dwFlags + (int)miex.szDevice[0];
 }
 
+static int m91_fsd_usage(void)
+{
+    FILELOCKSTATE fls;
+
+    fls.cQueue = 0;
+    return (int)fls.cQueue
+           + (FSDMGR_EmptyLockContainer(&fls) ? 1 : 0)
+           + (FSDMGR_OpenFileLockState(&fls), 0)
+           + (FSDMGR_CloseFileLockState(&fls), 0);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7460,6 +7471,8 @@ int host_tu_entry(void)
     if (m88_shaped_usage() != 0)
         return 1;
     if (m89_shaped_usage() != 0)
+        return 1;
+    if (m91_fsd_usage() != 0)
         return 1;
     return 0;
 }

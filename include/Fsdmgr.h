@@ -122,8 +122,20 @@ AKARI_CE_IMPORT BOOL FSD_UnhookVolume(PVOLUME pvol)
 /* "FSD_HookVolume": `PVOLUME FSD_HookVolume(HDSK hdsk,PFILTERHOOK
  * pFilterHook);` -- HDSK unpublished (PFILTERHOOK is the held
  * FILTERHOOK pointer). */
-/* "FSD_MountDisk" / "FSD_UnmountDisk" (Fsdmgr.lib rows): pages print
- * no signature -- names recorded. */
+/* "FSD_MountDisk" / "FSD_UnmountDisk" (Fsdmgr.lib rows): prints
+ * `BOOLFSD_MountDisk( HDSKhdsk);` / `BOOLFSD_UnmountDisk( HDSKhdsk);`
+ * -- HDSK is not printed by any CE page (recorded; page-text
+ * recovery M91, the M79 note "no signature" was a rows-sig
+ * extraction gap). */
+
+/* aa517921 "FSDMGR_EmptyLockContainer" (Fsdmgr.lib row): print
+ * `BOOL MyFSD_EmptyLockContainer( PFILELOCKSTATE pFileLockState );`
+ * (the prototype line misprints the callee as MyFSD_ -- the page
+ * describes the FSDMGR helper; archive typo).  PFILELOCKSTATE is
+ * the Fsdmgr.h opaque FILELOCKSTATE pointer, so unlike the
+ * HDSK/HVOL-by-value set this one is declared. */
+AKARI_CE_IMPORT BOOL FSDMGR_EmptyLockContainer(PFILELOCKSTATE pFileLockState)
+                    AKARI_CE_NAME(FSDMGR_EmptyLockContainer);
 
 /* --- Recorded FSD-supplied entry points (MyFSD_*). -------------- */
 /* MyFSD_* are implemented by the file system driver and called by

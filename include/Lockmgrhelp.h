@@ -23,7 +23,14 @@ AKARI_CE_IMPORT void FSDMGR_OpenFileLockState(PFILELOCKSTATE pFileLockState)
 AKARI_CE_IMPORT void FSDMGR_CloseFileLockState(PFILELOCKSTATE pFileLockState)
                     AKARI_CE_NAME(FSDMGR_CloseFileLockState);
 
-/* "FSDMGR_RemoveFileLock" (aa517923, Fsdmgr.lib row): the page
- * prints no signature -- name recorded. */
+/* "FSDMGR_RemoveFileLock" (aa517923, Fsdmgr.lib row): page-text
+ * recovery (M91) of the prototype line: `BOOL MyFSD_UnlockFileEx(
+ * PACQUIREFILELOCKSTATE pAcquireFileLockState PRELEASEFILELOCKSTATE
+ * pReleaseFileLockState DWORD dwHandle, DWORDdwReserved,
+ * DWORDnNumberOfBytesToUnlockLow, DWORDnNumberOfBytesToUnlockHigh,
+ * LPOVERLAPPEDlpOverlapped );` -- the print misprints the callee as
+ * MyFSD_UnlockFileEx, drops the separators between the first three
+ * parameters, and names PRELEASEFILELOCKSTATE (unpublished), so the
+ * function stays recorded. */
 
 #endif /* AKARI_LOCKMGRHELP_H */

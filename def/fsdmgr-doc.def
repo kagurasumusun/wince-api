@@ -15,6 +15,7 @@
 LIBRARY fsdmgr.dll
 EXPORTS
   FSDMGR_CloseFileLockState
+  FSDMGR_EmptyLockContainer
   FSDMGR_OpenFileLockState
   FSDMGR_ReadDiskEx
   FSDMGR_WriteDiskEx
