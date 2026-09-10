@@ -6847,3 +6847,7 @@ guard close, grouped by family, every value provenance-tagged R1.
   GN_CONTEXTMENU rehomed to aygshell.h.  Total Commctrl M96: 688
   (incl. the PSM_* 18 message twins whose Requirements home is
   Commctrl.h per M94 part 1).  Gates GREEN x6.
+- include/Prsht.h: 13 defines, 4 families: ID_PSRESTARTWINDOWS 2 /
+  ID_PSREBOOTSYSTEM 3, PSCB_ 3 (GETVERSION/PRECREATE/INITIALIZED),
+  PSN_ 6 notifications, PSPCB_ 2 (CREATE/RELEASE).  PSM_* stayed in
+  Commctrl.h (their Requirements home).  Gates GREEN x6.

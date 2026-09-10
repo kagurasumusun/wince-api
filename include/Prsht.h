@@ -246,4 +246,37 @@ BOOL     CALLBACK AddPropSheetPageProc(HPROPSHEETPAGE hpage,
 }
 #endif
 
+/* ================================================================== */
+/* M96 value adoption -- values adopted from the CeGCC-lineage w32api
+ * reference (R1, public domain; docs/clean-room.md par.4
+ * revision 2026-09-10).  Every name below is documented by
+ * the official CE pages WITHOUT a value (see the record
+ * comments and the held ledger in this header); the value
+ * is a CE-era ABI fact carried by the CE lineage itself.
+ * Desktop mingw-w64 was considered and EXCLUDED as a source
+ * (desktop-era values; policy note in clean-room.md).  R1's
+ * license-exception files (winsock*, gl*) are unused.
+ * ================================================================== */
+
+/* ---- ID_ family (2 names; R1) ---- */
+#define ID_PSRESTARTWINDOWS                          0x0002
+#define ID_PSREBOOTSYSTEM                            0x0003
+
+/* ---- PSCB_ family (3 names; R1) ---- */
+#define PSCB_INITIALIZED                             0x0001
+#define PSCB_PRECREATE                               0x0002
+#define PSCB_GETVERSION                              0x0003
+
+/* ---- PSN_ family (6 names; R1) ---- */
+#define PSN_QUERYCANCEL                              (-209)
+#define PSN_HELP                                     (-205)
+#define PSN_RESET                                    (-203)
+#define PSN_APPLY                                    (-202)
+#define PSN_KILLACTIVE                               (-201)
+#define PSN_SETACTIVE                                (-200)
+
+/* ---- PSPCB_ family (2 names; R1) ---- */
+#define PSPCB_RELEASE                                0x0001
+#define PSPCB_CREATE                                 0x0002
+
 #endif /* AKARI_PRSHT_H */
