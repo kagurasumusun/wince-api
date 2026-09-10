@@ -62,6 +62,9 @@
 #include <Wzcsapi.h>
 #include <Externs.h>
 #include <Windot11.h>
+#include <DwCeDump.h>
+#include <Pkfuncs.h>
+#include <sideshow.h>
 #include <Voiplap.h>
 #include <Voiperrorcodes.h>
 #include <Storemgr.h>
@@ -7100,6 +7103,30 @@ static int m80_shaped_usage(void)
     return (int)d + (hr != 0) + (int)l + ci + wbuf[0];
 }
 
+static int m82_shaped_usage(void)
+{
+    MINIDUMP_STREAM_TYPE mst = ceStreamSystemInfo;
+    MINIDUMP_HEADER     *pmh = NULL;
+    MINIDUMP_DIRECTORY  *pmd = NULL;
+    CEDUMP_EXCEPTION    *pce = NULL;
+    MINIDUMP_STRING     *pms = NULL;
+    GUID                 g1  = {0};
+    UINT                 u;
+    DWORD                d;
+    BOOL                 b;
+
+    mst = ceStreamException;
+    pmh = NULL; pmd = NULL; pce = NULL; pms = NULL; u = 0u; d = 0u;
+    b = CaptureDumpFileOnDevice(0u, 0u, NULL);
+    b = SideShowMgr_Start(NULL, 1u, &g1);
+    b = SideShowMgr_Stop();
+    b = SideShowMgr_IsServiceRunning();
+    d = SideShowMgr_GetCurrentCacheSize();
+    b = SideShowMgr_SetMaximumCacheSize(d);
+    u = SideShowMgr_GetGadgetCount();
+    return (int)mst + (int)u + b + (pmh || pmd || pce || pms ? 1 : 0);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7251,6 +7278,8 @@ int host_tu_entry(void)
     if (m79_shaped_usage() != 0)
         return 1;
     if (m80_shaped_usage() != 0)
+        return 1;
+    if (m82_shaped_usage() != 0)
         return 1;
     return 0;
 }

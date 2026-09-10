@@ -18,6 +18,7 @@ EXPORTS
   AlphaBlend
   BeginPaint
   BitBlt
+  CaptureDumpFileOnDevice
   CeAddDatabaseProps
   CeBeginTransaction
   CeChangeDatabaseLCID

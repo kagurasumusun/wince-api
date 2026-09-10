@@ -1,0 +1,40 @@
+; sideshowapi-doc.def -- sideshowapi.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements table names this link
+; library (the SideShow pages print the colon-less form
+; "Requirements Header sideshow.h Library sideshowapi.lib";
+; tools/ce-manifest.py + tools/ce-fetch.py harvest;
+; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Library row (sideshowapi.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY sideshowapi.dll
+EXPORTS
+  SideShowMgr_FindFirstItem
+  SideShowMgr_FindNextItem
+  SideShowMgr_GetAvailableUserNames
+  SideShowMgr_GetCurrentCacheSize
+  SideShowMgr_GetGadgetCount
+  SideShowMgr_GetGadgetInfo
+  SideShowMgr_GetGadgetInfoSizes
+  SideShowMgr_GetGadgetOrder
+  SideShowMgr_GetGuidsFromGadgetId
+  SideShowMgr_GetItemData
+  SideShowMgr_GetItemDataSize
+  SideShowMgr_GetItemDataSizeTimeout
+  SideShowMgr_GetNotificationInfo
+  SideShowMgr_GetNotificationInfoSizes
+  SideShowMgr_GetSizeOfAvailableUserNames
+  SideShowMgr_IsServiceRunning
+  SideShowMgr_SendApplicationEvent
+  SideShowMgr_SetMaximumCacheSize
+  SideShowMgr_Start
+  SideShowMgr_Stop
+  SideShowMgr_UserChangeRequest
+  SideShowMgr_UserChangeRequestCch

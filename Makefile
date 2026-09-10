@@ -43,6 +43,7 @@ include/Dsgetdc.h \
 include/Dshow.h \
 include/Dvp.h \
 include/ErrorRep.h \
+include/DwCeDump.h \
 include/Excpt.h \
 include/Extfile.h \
 include/Fsdmgr.h \
@@ -75,6 +76,7 @@ include/Ndis.h \
 include/Ndistapi.h \
 include/Ntddndis.h \
 include/Netui.h \
+include/Pkfuncs.h \
 include/Externs.h \
 include/Nuiouser.h \
 include/Rndis.h \
@@ -113,6 +115,7 @@ include/Sapi.h \
 include/Sapiddk.h \
 include/Service.h \
 include/Shellapi.h \
+include/sideshow.h \
 include/Shelwapi.h \
 include/Shlguid.h \
 include/Shlobj.h \

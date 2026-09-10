@@ -6024,3 +6024,40 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
 - Gates: check / crosscheck / e2e GREEN x6.
 - VoIP Phone Services book now fully triaged (VAIL 183 + PC Auth 23
   + TUI 48 + RTC 503 cached = M80/M81 boundary).
+
+## M82 -- Error Reporting dump structures + Pkfuncs + SideShow
+
+- Books fetched: tools/manifests/errorrep-book.manifest (51 leaves,
+  Windows CE Error Reporting) + sideshow-book.manifest (51 leaves,
+  SideShow; cc*-id pages of the Windows Embedded CE 6.0 /
+  NavReady 2009-era doc set).  rows.json 13578 (ce-rows-local).
+  SideShow Requirements tables print the colon-less form
+  ("Requirements Header sideshow.h Library sideshowapi.lib") so the
+  row parser records empty header/lib -- home noted per header.
+- include/DwCeDump.h (NEW): _MINIDUMP_STREAM_TYPE compiled (print
+  carries C++ // comments -- reproduced as C block comments, noted;
+  values 0x8000-0x800A ceStream* + UnusedStream=0 +
+  LastReservedStream=0xffff).  15 dump structures held with verbatim
+  prints (_CEDUMP_BUCKET_PARAMETERS/ELEMENT_LIST/EXCEPTION/
+  EXCEPTION_STREAM/FIELD_INFO/MEMORY_LIST/SYSTEM_INFO/
+  THREAD_CALL_STACK(_FRAME/_LIST), _MINIDUMP_DIRECTORY/HEADER/
+  LOCATION_DESCRIPTOR/MEMORY_DESCRIPTOR/STRING): every print embeds
+  RVA / ULONG32 members, which no CE page prints as typedefs (the
+  Dump File Format page ms939593 describes an RVA as "an offset from
+  the beginning of a file" only).  Opaque forward + P typedefs.
+  Lib rows: "none." (host dump tools); _MINIDUMP_MEMORY_DESCRIPTOR
+  prints DwDmpTxt.lib (host-side, no def).
+- include/Pkfuncs.h (NEW): CaptureDumpFileOnDevice declared
+  (ms939622; Coredll.lib -> coredll-doc.def 739 -> 740).  (Kfuncs.h
+  remains the documented alias of Winbase.h; Pkfuncs.h is a distinct
+  documented home.)
+- include/sideshow.h (NEW, lowercase as documented): 22
+  SideShowMgr_* declarations (sideshowapi.lib ->
+  def/sideshowapi-doc.def 22 exports, written directly because the
+  colon-less Library rows are invisible to gen-doc-def.py -- the def
+  header comment documents this); 3 recorded (FindItemClose,
+  ForceConnect, ForceDisconnect -- prints lack return types); 17
+  WM_SIDESHOW_* message names recorded (wParam/lParam semantics
+  printed, no values).
+- TU m82 block; Makefile HDRS 164 -> 167.
+- Gates: check (72 defs) / crosscheck / e2e GREEN x6.
