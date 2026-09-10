@@ -342,6 +342,7 @@ def emit_section(header, marker):
     L.append(' * Desktop mingw-w64 was considered and EXCLUDED as a source')
     L.append(' * (desktop-era values; policy note in clean-room.md).  R1\'s')
     L.append(' * license-exception files (winsock*, gl*) are unused.')
+    L.append(' * ================================================================== */')
     L.append('/* ================================================================== */')
     for fam in sorted(fams):
         rows = sorted(fams[fam], key=lambda r: (r[1], r[0]))

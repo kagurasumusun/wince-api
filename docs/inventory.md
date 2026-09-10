@@ -6794,3 +6794,7 @@ guard close, grouped by family, every value provenance-tagged R1.
   pages (CANDIDATEFORM etc. -- not constants) and CE-page names R1
   does not carry; they stay held.  Gates: check / crosscheck / e2e
   GREEN x6 (i386 / arm thumb2 / arm 4.2 / 5.0 / 6.0).
+- include/Sipapi.h: 4 defines (SIPF_OFF 0 / SIPF_ON 1 / SIPF_DOCKED 2 /
+  SIPF_LOCKED 4, R1).  Unresolved 3 (SIP_DOWN / SIP_STATUS_* are
+  aygshell-enum-adjacent names our aygshell.h already carries as enum
+  members -- code-identifier guard).  Gates GREEN x6.
