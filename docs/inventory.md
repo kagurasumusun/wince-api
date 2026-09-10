@@ -6715,3 +6715,51 @@ signatures, zero Header rows: concept/reference-index pages such as
 "Creating a Toolbar", "Animation Controls", registry-settings and
 command-processor pages).  The Shell book API SURFACE is COMPLETE
 (1251 leaves accounted).  Gates GREEN x6.
+
+## M95a -- Security book harvest + gap survey (book opened)
+
+The Shell book closed at M94; the Security book opens.  tools/
+ce-manifest.py over the official toc.json ("Security" under Windows CE
+Features) -> tools/manifests/security-book.manifest: 498 leaves, all
+(v=msdn.10).  232 were already preserved; the 266 missing fetched
+(build/pages 14126 -> 14392; rows.json 15564 -> 15830 via
+tools/ce-rows-local.py; all 498 leaves have rows).
+
+Gap survey (method-name-aware, the M94 part-2 lesson): 256 rows --
+187 prose + 69 with Header rows:
+  Sspi.h 16 (SecBuffer, SecBufferDesc, SecPkgContext_* structures,
+    SecPkgInfo, SecurityFunctionTable, DecryptMessage, EncryptMessage,
+    SealMessage, UnsealMessage),
+  "Security.h, Sspi.h" 14 (SSPI core: AcceptSecurityContext,
+    AcquireCredentialsHandle, InitializeSecurityContext [no parsed
+    sig], ApplyControlToken, CompleteAuthToken,
+    DeleteSecurityContext, EnumerateSecurityPackages,
+    FreeContextBuffer, FreeCredentialsHandle, InitSecurityInterface,
+    MakeSignature, QueryContextAttributes,
+    QueryCredentialsAttributes, QuerySecurityPackageInfo),
+  Lap.h 10 (LAP: VerifyUser, VerifyUserStart/Stop/ToTop, InitLAP
+    "function" + InitLap "structure" -- two spellings, pages to be
+    diffed, the ImeGetUIClassName precedent; DeinitLAP,
+    CreateEnrollmentConfigDialog, LAPCreateEnrollmentConfigDialog;
+    VerifyUser has TWO pages -- ms926456 LASS-side sig vs ms926487
+    "VerifyUser (LAP)" no-sig provider-side),
+  Ntlmssp.h 10 (NTLMAddGroup/RemoveGroup/EnumGroups/GetGroupList/
+    EnumUser/DeleteUser/SetUserInfo/AddUserToGroup/
+    RemoveUserFromGroup/GetUserList),
+  Schnlsp.h 6 (SCHANNEL_CRED, SecPkgContext_ConnectionInfo/_ProtoInfo,
+    SecPkgCred_CipherStrengths/_SupportedAlgs/_SupportedProtocols),
+  Cred.h 5 (CredDelete/Free/Read/Update/Write), Cred_prov.h 3
+  (HandleBlob, MatchTarget, MatchUser), Credmgr.h 3 (CeCredFree/
+  Read/Write), Lass.h 1 (LASSReloadConfig),
+  Wininet.h 1 (InternetCanonicalizeUrl -- a WinInet function living
+  in the SECURITY book's manifest, not the Internet Client book's;
+  its Security-book page prints Link Library Secur32.lib, which
+  needs a page-text check against the Wininet family).
+
+Link Library tokens for the new surface: SSPI core + Credmgr ->
+Secur32.lib (new def file secur32-doc.def), Ntlmssp -> Ntlmssp.lib,
+Lap/Lass/Cred/Cred_prov -> Coredll.lib (existing coredll-doc.def),
+Schnlsp structures + Sspi.h structure rows print no lib.  M95 will
+create Sspi.h (+ the Security.h dual-home decision), Lap.h,
+Ntlmssp.h, Schnlsp.h, Cred.h, Cred_prov.h, Credmgr.h, Lass.h and
+add InternetCanonicalizeUrl to Wininet.h.

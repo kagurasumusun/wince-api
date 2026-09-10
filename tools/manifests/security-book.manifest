@@ -1,0 +1,498 @@
+ms925956	Security Catalog Items
+ms925958	Security Overview
+ms925585	Authentication Services
+ms925709	Authentication Services OS Design Development
+ms925593	Authentication Services Application Development
+ms925959	Security Support Provider Interface Architecture
+ms925957	Security Packages
+ms925924	Kerberos Security Support Provider
+ms925942	Negotiate Security Support Provider
+ms925943	NTLM Security Support Provider
+ms925955	Schannel Security Support Provider
+ms925944	Obtaining Schannel Credentials
+ms925934	Manually Validating Schannel Credentials
+ms936952	SSPI Functions and Structures
+ms925948	Using SSPI
+ms925922	Initializing the SSPI
+ms925571	Authenticating a Connection
+ms925885	Context Semantics
+ms925876	Context Requirements
+ms925936	Memory Use and Buffers
+ms925914	Ensuring Communication Integrity
+ms925913	Ending an SSPI Session
+ms936953	SSPI Sample Application
+ms925716	Authentication Services Registry Settings
+ms925727	Authentication Services Security
+ms925600	Authentication Services Migration
+ms925722	Authentication Services Samples
+ms936967	Authentication Services Reference
+ms936966	Authentication Services Functions
+ms937012	AcceptSecurityContext
+ms937013	AcquireCredentialsHandle
+ms937015	ApplyControlToken
+ms937725	CompleteAuthToken
+ms938416	DecryptMessage
+ms906494	DeleteSecurityContext
+ms906502	EncryptMessage
+ms906509	EnumerateSecurityPackages
+ms906515	FreeContextBuffer
+ms906519	FreeCredentialsHandle
+ms926002	InitializeSecurityContext
+ms926095	InitSecurityInterface
+ms926106	InternetCanonicalizeUrl
+ms926142	MakeSignature
+ms926159	NTLMAddGroup
+ms926164	NTLMAddUserToGroup
+ms926171	NTLMDeleteUser
+ms926178	NTLMEnumGroups
+ms926183	NTLMEnumUser
+ms926187	NTLMGetGroupList
+ms926195	NTLMGetUserList
+ms926201	NTLMRemoveGroup
+ms926207	NTLMRemoveUserFromGroup
+ms926215	NTLMSetUserInfo
+ms938456	QueryContextAttributes
+ms938459	QueryCredentialsAttributes
+ms938462	QuerySecurityPackageInfo
+ms926485	SealMessage
+ms926486	UnsealMessage
+ms926455	VerifySignature
+ms936968	Authentication Services Structures
+ms926432	SCHANNEL_CRED
+ms926452	SEC_WINNT_AUTH_IDENTITY
+ms926433	SecBuffer
+ms926434	SecBufferDesc
+ms926435	SecPkgContext_Authority
+ms926436	SecPkgContext_ConnectionInfo
+ms926437	SecPkgContext_DceInfo
+ms926438	SecPkgContext_IssuerListInfoEx
+ms926439	SecPkgContext_KeyInfo
+ms926440	SecPkgContext_Lifespan
+ms926441	SecPkgContext_Names
+ms926442	SecPkgContext_ProtoInfo
+ms926443	SecPkgContext_Sizes
+ms926445	SecPkgContext_StreamSizes
+ms926446	SecPkgCred_CipherStrengths
+ms926448	SecPkgCred_SupportedAlgs
+ms926449	SecPkgCred_SupportedProtocols
+ms926447	SecPkgCredentials_Names
+ms926450	SecPkgInfo
+ms926451	SecurityFunctionTable
+ms926453	SSPI Handles
+ms925891	Credential Manager
+ms925894	Credential Manager OS Design Development
+ms925895	Credential Manager Overview
+ms925890	Creating a Credential Type Provider
+ms926461	Credential Manager Application Development
+ms925900	Credential Types
+ms925898	Credential Type Categories
+ms925899	Credential Type Providers
+ms925896	Credential Manager Registry Settings
+ms925897	Credential Manager Security
+ms925893	Credential Manager Migration
+ms936980	Credential Manager Reference
+ms936979	Credential Manager Functions
+ms936978	Credential Manager Error Codes
+ms937729	CeCredFree
+ms937730	CeCredRead
+ms937731	CeCredWrite
+ms936977	CredDelete
+ms936983	CredFree
+ms936984	CredRead
+ms936985	CredUpdate
+ms936986	CredWrite
+ms936982	Credential Manager Type Provider Functions
+ms906527	HandleBlob
+ms926136	Load Function (Credential Manager)
+ms926147	MatchTarget
+ms926153	MatchUser
+ms926454	Unload Function (Credential Manager)
+ms936981	Credential Manager Structures
+ms936976	CRED
+ms937728	CREDENTIAL
+ms926466	Cryptography Services
+ms926458	Certificates
+ms926460	Certificates OS Design Development
+ms925772	Certificates Overview
+ms937010	How to Enroll for a Certificate Using the Default Settings
+ms936961	Using the Enrollment Client Sample
+ms925580	Authenticating the Client
+ms925887	Creating a PKCS #10 Request
+ms925947	Posting the Request
+ms925952	Retrieving the Certificate
+ms926472	Creating an Enrollment Environment
+ms926471	Adding Enroll.exe to the OS Design
+ms926473	Obtaining a Certificate
+ms926476	Verifying the Existence of a Certificate
+ms937011	How to Enroll for a Certificate Using the Modified Settings
+ms925784	Configuring Enroll.exe
+ms926475	Using an Enrollment .cfg File
+ms926474	Obtaining a Certificate Using a .cfg File
+ms925941	Modifying the ASP Page
+ms925945	Enrollment Options
+ms936943	Smart Card Enrollment
+ms926459	Certificates Application Development
+ms936955	Supported CryptoAPI 2.0 APIs
+ms936958	Unsupported CryptoAPI 2.0 APIs
+ms936964	X.509 Digital Certification
+ms925766	Certificates and CryptoAPI
+ms925909	Encoding and Decoding a Certificate Context
+ms925757	Certificate Extended Properties
+ms925933	Managing Certificates with Certificate Stores
+ms925932	Managing a Certificate Store's State
+ms936962	Working with Certificates in Certificate Stores
+ms925764	Certificate Links
+ms925931	Logical and Physical Stores
+ms936956	System Store Locations
+ms925921	Hierarchy of Trust
+ms925752	Certificate Chains
+ms936974	Certificates Security
+ms936972	Certificates Registry Settings
+ms936970	Certificates Migration
+ms936973	Certificates Samples
+ms936971	Certificates Reference
+ms936969	Certificates Functions
+ms937018	CertAddCertificateContextToStore
+ms937019	CertAddCertificateLinkToStore
+ms937020	CertAddEncodedCertificateToStore
+ms937021	CertAddEnhancedKeyUsageIdentifier
+ms937022	CertAddSerializedElementToStore
+ms937023	CertAlgIdToOID
+ms937035	CertCloseStore
+ms937036	CertCompareCertificate
+ms937037	CertCompareCertificateName
+ms937038	CertCompareIntegerBlob
+ms937039	CertComparePublicKeyInfo
+ms937042	CertControlStore
+ms937043	CertCreateCertificateContext
+ms937044	CertDeleteCertificateFromStore
+ms937235	CertDuplicateCertificateChain
+ms937328	CertDuplicateCertificateContext
+ms937422	CertDuplicateStore
+ms937534	CertEnumCertificateContextProperties
+ms937636	CertEnumCertificatesInStore
+aa452564	CertEnumPhysicalStore
+ms937645	CertEnumSystemStore
+ms937650	CertEnumSystemStoreLocation
+ms937652	CertFindAttribute
+ms937653	CertFindCertificateInStore
+ms937655	CertFindExtension
+ms937657	CertFindRDNAttr
+ms937658	CertFreeCertificateChain
+ms937659	CertFreeCertificateContext
+ms937660	CertGetCertificateChain
+ms937661	CertGetCertificateContextProperty
+ms937662	CertGetEnhancedKeyUsage
+ms937663	CertGetIntendedKeyUsage
+ms937664	CertGetIssuerCertificateFromStore
+ms937665	CertGetNameString
+ms937667	CertGetPublicKeyLength
+ms937668	CertGetStoreProperty
+ms937670	CertGetSubjectCertificateFromStore
+aa452565	CertGetValidUsages
+ms937674	CertIsRDNAttrsInCertificateName
+ms937681	CertNameToStr
+ms937682	CertOIDToAlgId
+ms937683	CertOpenStore
+ms937684	CertOpenSystemStore
+ms937693	CertRDNValueToStr
+ms937694	CertRemoveEnhancedKeyUsageIdentifier
+ms937696	CertSaveStore
+ms937697	CertSerializeCertificateStoreElement
+ms937698	CertSetCertificateContextProperty
+ms937699	CertSetEnhancedKeyUsage
+ms937700	CertSetStoreProperty
+ms937703	CertStrToName
+ms937709	CertVerifySubjectCertificateContext
+ms937710	CertVerifyTimeValidity
+ms937711	CertVerifyValidityNesting
+ms937732	CryptAcquireCertificatePrivateKey
+ms937739	CryptCreateKeyIdentifierFromCSP
+ms937740	CryptDecodeObjectEx
+ms937747	CryptEncodeObjectEx
+ms937995	CryptEnumKeyIdentifierProperties
+ms938004	CryptEnumOIDInfo
+ms938031	CryptExportPublicKeyInfoEx
+ms938040	CryptFindCertificateKeyProvInfo
+ms938050	CryptFindOIDInfo
+ms938057	CryptFreeOIDFunctionAddress
+ms938079	CryptGetDefaultOIDFunctionAddress
+ms938099	CryptGetKeyIdentifierProperty
+ms938109	CryptGetOIDFunctionAddress
+ms938130	CryptHashCertificate
+ms938149	CryptHashPublicKeyInfo
+ms938167	CryptHashToBeSigned
+ms938185	CryptImportPublicKeyInfoEx
+ms938191	CryptInitOIDFunctionSet
+ms938197	CryptInstallDefaultContext
+ms938204	CryptInstallOIDFunctionAddress
+ms938330	CryptSetKeyIdentifierProperty
+ms938360	CryptSignAndEncodeCertificate
+ms938364	CryptSignCertificate
+aa452567	CryptVerifyCertificateSignature
+ms938372	CryptUninstallDefaultContext
+ms926224	PFXExportCertStoreEx
+ms926229	PFXImportCertStore
+ms926234	PFXIsPFXBlob
+ms926241	PFXVerifyPassword
+ms926462	Cryptography
+ms925901	Cryptography OS Design Development
+ms926463	Cryptography Application Development
+ms925912	Encryption and Decryption
+ms925937	Microsoft Cryptographic System
+ms925940	Microsoft RSA Base Provider
+ms925939	Microsoft Enhanced Cryptographic Provider
+ms925938	Microsoft DSS and Diffie-Hellman Cryptographic Provider
+ms925906	Diffie-Hellman Keys
+ms925927	Key Length Comparison
+ms936960	Using Basic Cryptography Services
+ms925926	Key Databases
+ms925925	Key BLOBs
+ms925918	Generating Cryptographic Keys
+ms925787	Connecting to a CSP
+ms925915	Exchanging Public Keys
+ms925917	Exporting Cryptographic Keys
+ms936954	Storing Session Keys
+ms936959	Using a Backup Authority
+ms925916	Exchanging Session Keys
+ms925910	Encrypting and Decrypting Data
+ms925954	Sample Code: Encrypting a File
+ms925953	Sample Code: Decrypting a File
+ms925911	Encrypting and Decrypting Simultaneously
+ms925889	Creating Digital Signatures
+ms925962	Signing and Verifying Messages
+ms925920	Hashing and Digital Signature Algorithms
+ms925949	Protected Store
+ms925441	About Cryptographic Service Provider
+ms925946	Overview of the CryptoAPI Registry
+ms936963	Writing a CSP
+ms925908	Embedding the Digital Signature as a Resource
+ms925950	Registering the CSP
+ms925960	Setting the Machine Default CSP
+ms925961	Setting the User Default CSP
+ms936957	Testing the CSP
+ms925919	Getting a CSP Signed
+ms925903	Cryptography Security
+ms925902	Cryptography Registry Settings
+ms926464	Cryptography Migration
+ms926465	Cryptography Samples
+ms936989	Cryptography Reference
+ms936987	Cryptography Data Types
+ms937014	ALG_ID
+ms906535	HCRYPTHASH
+ms906545	HCRYPTKEY
+ms925987	HCRYPTPROV
+ms936988	Cryptography Functions
+ms937726	CPAcquireContext
+ms937733	CryptAcquireContext
+ms937737	CryptContextAddRef
+ms937738	CryptCreateHash
+ms937741	CryptDecrypt
+ms937742	CryptDeriveKey
+ms937743	CryptDestroyHash
+ms937744	CryptDestroyKey
+ms937745	CryptDuplicateHash
+ms937746	CryptDuplicateKey
+ms937989	CryptEncrypt
+ms938012	CryptEnumProviders
+ms938017	CryptEnumProviderTypes
+ms938025	CryptExportKey
+aa452566	CryptFindLocalizedName
+ms938062	CryptGenKey
+ms938069	CryptGenRandom
+ms938088	CryptGetDefaultProvider
+ms938096	CryptGetHashParam
+ms938103	CryptGetKeyParam
+ms938119	CryptGetProvParam
+ms938123	CryptGetUserKey
+ms938141	CryptHashData
+ms938156	CryptHashSessionKey
+ms938178	CryptImportKey
+ms938232	CryptMsgCalculateEncodedLength
+ms938239	CryptMsgClose
+ms938247	CryptMsgControl
+ms938251	CryptMsgDuplicate
+ms938257	CryptMsgGetParam
+ms938264	CryptMsgOpenToDecode
+ms938271	CryptMsgOpenToEncode
+ms938279	CryptMsgUpdate
+ms938309	CryptProtectData
+ms938317	CryptReleaseContext
+ms938326	CryptSetHashParam
+ms938335	CryptSetKeyParam
+ms938347	CryptSetProvider
+ms938353	CryptSetProviderEx
+ms938358	CryptSetProvParam
+ms938369	CryptSignHash
+ms938379	CryptUnprotectData
+ms938383	CryptVerifySignature
+ms936990	Cryptography Structures
+ms937016	BLOB (Cryptography)
+ms937017	CERT_ACCESS_DESCRIPTION
+ms937024	CERT_ALT_NAME_ENTRY
+ms937025	CERT_ALT_NAME_INFO
+ms937026	CERT_AUTHORITY_INFO_ACCESS
+ms937028	CERT_AUTHORITY_KEY_ID_INFO
+ms937027	CERT_AUTHORITY_KEY_ID2_INFO
+ms937030	CERT_BASIC_CONSTRAINTS_INFO
+ms937029	CERT_BASIC_CONSTRAINTS2_INFO
+ms937031	CERT_CHAIN_CONTEXT
+ms937032	CERT_CHAIN_ELEMENT
+ms937033	CERT_CHAIN_ENGINE_CONFIG
+ms937034	CERT_CHAIN_PARA
+ms937040	CERT_CONTEXT
+ms937651	CERT_EXTENSION
+ms937671	CERT_ID
+ms937672	CERT_INFO
+ms937675	CERT_ISSUER_SERIAL_NUMBER
+ms937676	CERT_KEY_ATTRIBUTES_INFO
+ms937677	CERT_KEY_CONTEXT
+ms937679	CERT_KEY_USAGE_RESTRICTION_INFO
+ms937678	CERT_KEYGEN_REQUEST_INFO
+ms937680	CERT_NAME_INFO
+ms937685	CERT_POLICIES_INFO
+ms937686	CERT_POLICY_ID
+ms937687	CERT_POLICY_INFO
+ms937688	CERT_POLICY_QUALIFIER_INFO
+ms937689	CERT_PRIVATE_KEY_VALIDITY
+ms937690	CERT_PUBLIC_KEY_INFO
+ms937691	CERT_RDN
+ms937692	CERT_RDN_ATTR
+ms937695	CERT_REQUEST_INFO
+ms937701	CERT_SIGNED_CONTENT_INFO
+ms937702	CERT_SIMPLE_CHAIN
+ms937704	CERT_SYSTEM_STORE_INFO
+ms937705	CERT_SYSTEM_STORE_RELOCATE_PARA
+ms937706	CERT_TRUST_LIST_INFO
+ms937707	CERT_TRUST_STATUS
+ms937708	CERT_USAGE_MATCH
+ms937712	CMSG_CMS_RECIPIENT_INFO
+ms937713	CMSG_CMS_SIGNER_INFO
+ms937714	CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA
+ms937715	CMSG_CTRL_DECRYPT_PARA
+ms937716	CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA
+ms937717	CMSG_CTRL_KEY_AGREE_DECRYPT_PARA
+ms937718	CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA
+ms938395	CMSG_ENVELOPED_ENCODE_INFO
+ms937719	CMSG_HASHED_ENCODE_INFO
+ms938404	CMSG_KEY_TRANS_RECIPIENT_INFO
+ms937720	CMSG_MAIL_LIST_RECIPIENT_INFO
+ms937721	CMSG_SIGNED_ENCODE_INFO
+ms937722	CMSG_SIGNER_ENCODE_INFO
+ms937723	CMSG_SIGNER_INFO
+ms937724	CMSG_STREAM_INFO
+ms937734	CRYPT_ALGORITHM_IDENTIFIER
+ms937735	CRYPT_ATTRIBUTE
+ms938388	CRYPT_ATTRIBUTES
+ms937736	CRYPT_BIT_BLOB
+ms937748	CRYPT_ENCODE_PARA
+ms938212	CRYPT_KEY_PROV_INFO
+ms938221	CRYPT_KEY_PROV_PARAM
+ms938293	CRYPT_OID_FUNC_ENTRY
+ms938300	CRYPT_OID_INFO
+ms938286	CRYPTOAPI_BLOB
+ms938410	CTL_USAGE
+ms925995	HMAC_INFO
+ms906557	PROV_ENUMALGS
+ms938451	PROV_ENUMALGS_EX
+ms938453	PUBLICKEYSTRUC
+ms938465	RSAPUBKEY
+ms926457	VTableProvStruc
+ms925963	Smart Card
+ms926470	Smart Card OS Design Development
+ms926469	Smart Card Application Development
+ms936949	Smart Card Subsystem
+ms925965	Smart Card Concepts
+ms936945	Smart Card Readers
+ms936944	Smart Card Interfaces
+ms925923	Introducing Smart Cards to the System
+ms936835	Smart Card Database
+ms925562	Accessing a Smart Card
+ms936947	Smart Card Resource Manager
+ms936933	Smart Card Database Query Functions
+ms936930	Smart Card Database Management Functions
+ms925951	Resource Manager Context Functions
+ms936951	Smart Card Tracking Functions
+ms925964	Smart Card and Reader Access Functions
+ms925907	Direct Card Access Functions
+ms925966	Smart Card CSP
+ms925904	CSP Functions
+ms925738	Card Specific Properties
+ms937008	Smart Card Security
+ms936946	Smart Card Registry Settings
+ms937007	Smart Card Samples
+ms937005	Smart Card Migration
+ms937006	Smart Card Reference
+ms937004	Smart Card Functions
+ms938481	SCardBeginTransaction
+ms938495	SCardCancel
+ms938504	SCardConnect
+ms938510	SCardControl
+ms938564	SCardFreeMemory
+ms938517	SCardDisconnect
+ms938526	SCardEndTransaction
+ms938536	SCardEstablishContext
+ms938545	SCardForgetCardType
+ms938553	SCardForgetReader
+ms938574	SCardGetAttrib
+ms926375	SCardGetCardTypeProviderName
+ms926397	SCardGetProviderId
+ms926406	SCardGetStatusChange
+ms926415	SCardIntroduceCardType
+ms926416	SCardIntroduceReader
+ms926418	SCardIsValidContext
+ms926419	SCardListCards
+ms926420	SCardListInterfaces
+ms926422	SCardListReaders
+ms926423	SCardLocateCards
+ms926424	SCardLocateCardsByATR
+ms926426	SCardReconnect
+ms926427	SCardReleaseContext
+ms926428	SCardSetAttrib
+ms926429	SCardSetCardTypeProviderName
+ms926430	SCardStatus
+ms926431	SCardTransmit
+ms937009	Smart Card Structures
+ms938473	SCARD_ATRMASK
+ms926417	SCARD_IO_REQUEST
+ms926425	SCARD_READERSTATE
+ms936965	Smart Card Error Values
+ms926467	Local Authentication Subsystem (LASS)
+ms925929	LASS OS Design Development
+ms925930	LASS Overview
+ms926480	Local Authentication Plugin (LAP)
+ms926477	Authentication Event (AE)
+ms925779	Comparing LASS and Password Authentication
+ms925935	Master Key Protection in LASS
+ms925928	LASS Exponential Backoff
+ms936975	Creating a LAP
+ms926479	LAP Implementation Issues
+ms926478	Implementing Master Key Protection in a LAP
+ms936994	LASS Application Development
+ms926482	Enrolling Users
+ms926484	Verifying Users
+ms926483	Handling Registry Changes
+ms926481	Configuring LASS
+ms936992	Installing a LAP
+ms937002	Setting an Active LAP
+ms936991	Installing an AE
+ms937003	Setting an AE Policy
+ms925905	Customizing StartUI or Control Panel to Use LASS
+ms937001	LASS Security
+ms936997	LASS Registry Settings
+ms936998	LASS Samples
+ms936996	LASS Reference
+ms936995	LASS Functions
+ms937727	CreateEnrollmentConfigDialog
+ms926124	LASSReloadConfig
+ms926456	VerifyUser
+ms936993	LAP-Exported Functions
+ms938427	DeinitLAP
+ms926083	InitLAP (function)
+ms926118	LAPCreateEnrollmentConfigDialog
+ms926487	VerifyUser (LAP)
+ms926488	VerifyUserStart
+ms926489	VerifyUserStop
+ms926490	VerifyUserToTop
+ms926131	LASS Structures
+ms926088	InitLap (structure)
