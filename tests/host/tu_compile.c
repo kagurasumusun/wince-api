@@ -54,6 +54,8 @@
 #include <Raseapif.h>
 #include <Routprot.h>
 #include <Ndis.h>
+#include <Ntddndis.h>
+#include <Ndistapi.h>
 #include <aygshell.h>
 #include <shellsdk.h>
 #include <newmenu.h>
@@ -6912,6 +6914,52 @@ static int m78a_shaped_usage(void)
            + (int)npa.QuadPart + (int)nwi.WrapperReserved;
 }
 
+static int m78b_shaped_usage(void)
+{
+    NDIS_802_11_SSID              ssid;
+    NDIS_802_11_MAC_ADDRESS       mac;
+    NDIS_802_11_RATES             rates;
+    NDIS_802_11_CONFIGURATION     cfg;
+    NDIS_802_11_CONFIGURATION_FH  fh;
+    NDIS_802_11_WEP               wep;
+    NDIS_802_11_STATISTICS        st;
+    NDIS_WLAN_BSSID               wb;
+    NDIS_802_11_BSSID_LIST       *pbl;
+    NDIS_PM_PACKET_PATTERN        pp;
+    VAR_STRING                    vs;
+    NDIS_TAPI_CONFIG_DIALOG       cd;
+    NDIS_TAPI_NEGOTIATE_EXT_VERSION nev;
+    NDIS_TAPI_PROVIDER_INITIALIZE pi;
+    NDIS_TAPI_PROVIDER_SHUTDOWN   psh;
+    NDIS_TAPI_SET_DEV_CONFIG      sdc;
+    NDIS_TAPI_GET_DEV_CAPS       *gdc;
+    NDIS_TAPI_EVENT              *tev;
+    NDIS_MEDIUM                   med = NdisMedium802_3;
+    NDIS_802_11_WEP_STATUS        ws  = Ndis802_11WEPEnabled;
+    NDIS_802_11_AUTHENTICATION_MODE am = Ndis802_11AuthModeOpen;
+    NDIS_802_11_NETWORK_TYPE      nt  = Ndis802_11FH;
+    NDIS_WAN_MEDIUM_SUBTYPE       wms = NdisWanMediumSerial;
+    NDIS_802_5_RING_STATE         rs  = NdisRingStateOpened;
+    ULONG                         ul;
+
+    ssid.SsidLength = 0u; mac[0] = 0u; rates[0] = 0u;
+    fh.DwellTime = 0u; cfg.BeaconPeriod = 0u; cfg.FHConfig = fh;
+    wep.KeyLength = 0u; st.FailedCount.QuadPart = 0;
+    wb.Length = 0u; wb.Configuration = cfg; wb.Ssid = ssid;
+    pp.MaskSize = 0u; vs.ulTotalSize = 0u;
+    cd.ulDeviceID = 0u; nev.ulExtVersion = 0u; pi.ulProviderID = 0u;
+    psh.ulRequestID = 0u; sdc.ulDeviceID = 0u;
+    pbl = NULL; gdc = NULL; tev = NULL; ul = 0u;
+    (void)pbl; (void)gdc; (void)tev; (void)ul;
+    return (int)med + (int)ws + (int)am + (int)nt + (int)wms
+           + (int)rs + (int)fh.DwellTime + (int)cfg.BeaconPeriod
+           + (int)wep.KeyLength + (int)st.FailedCount.QuadPart
+           + (int)wb.Length + (int)pp.MaskSize + (int)vs.ulTotalSize
+           + (int)cd.ulDeviceID + (int)nev.ulExtVersion
+           + (int)pi.ulProviderID + (int)psh.ulRequestID
+           + (int)sdc.ulDeviceID + (int)mac[0] + (int)rates[0];
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7055,6 +7103,8 @@ int host_tu_entry(void)
     if (m77c_shaped_usage() != 0)
         return 1;
     if (m78a_shaped_usage() != 0)
+        return 1;
+    if (m78b_shaped_usage() != 0)
         return 1;
     return 0;
 }

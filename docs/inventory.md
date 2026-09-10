@@ -5858,3 +5858,38 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
 - Gates: check / crosscheck / e2e GREEN x6.
 - rows.json 12309 -> 13462 (NDIS 779 + fsds 120 + VAIL 183 +
   pcauth 23 + tui 48 appended via ce-rows-local).
+
+## M78b -- Ntddndis.h + Ndistapi.h: 802.11 types, NDIS_MEDIUM, TAPI structs
+
+- include/Ntddndis.h (NEW): 802.11 scalar types (ANTENNA,
+  FRAGMENTATION_THRESHOLD, KEY_INDEX, RSSI, RTS_THRESHOLD,
+  TX_POWER_LEVEL, MAC_ADDRESS[6], RATES[8]), enums
+  (AUTHENTICATION_MODE, NETWORK_INFRASTRUCTURE, NETWORK_TYPE,
+  POWER_MODE, PRIVACY_FILTER, RELOAD_DEFAULTS, WEP_STATUS with the
+  second ENCRYPTION_STATUS typedef names as printed,
+  NDIS_802_5_RING_STATE, NDIS_MEDIUM -- the grounded medium list
+  --, NDIS_WAN_MEDIUM_SUBTYPE), structs (SSID, CONFIGURATION_FH,
+  CONFIGURATION, NETWORK_TYPE_LIST, STATISTICS, WEP,
+  NDIS_WLAN_BSSID [page home Ndis.h; co-located here because all
+  member types and the embedding BSSID_LIST are Ntddndis.h rows;
+  print spells `Uchar` -- Ulong/Uchar normalization note],
+  NDIS_802_11_BSSID_LIST, NDIS_PM_PACKET_PATTERN, VAR_STRING),
+  and the five ULONG-only NDIS_TAPI_* request structs
+  (CONFIG_DIALOG, NEGOTIATE_EXT_VERSION, PROVIDER_INITIALIZE,
+  PROVIDER_SHUTDOWN, SET_DEV_CONFIG).
+- Repair (noted at site): NDIS_802_11_WEP_STATUS print anchors
+  `Ndis802_11Encryption1KeyAbsent = Ndis802_11WEPNotSupported`,
+  which is not compilable C in the printed order and breaks the
+  WEP-alias pattern; repaired to `= Ndis802_11WEPKeyAbsent`.
+- Held: 28 NDIS_TAPI_* structs (HDRV_/HTAPI_ handles, LINE_*
+  structures unpublished), NDIS_PM_WAKE_UP_CAPABILITIES
+  (NDIS_DEVICE_POWER_STATE unpublished), NDIS_PNP_CAPABILITIES.
+- Recorded names only: 131 OID_* pages (802_3/802_11 49, TAPI 34,
+  GEN 23, IRDA 11, PNP 9, WAN 5 -- no page prints values) and
+  IOCTL_NDIS_GET_LOG_DATA.
+- include/Ndistapi.h (NEW): NDIS_TAPI_EVENT print recorded
+  (HTAPI_LINE/HTAPI_CALL unpublished), opaque forward.
+- NdisOpenAdapter stays recorded in Ndis.h (its print names the
+  unpublished PSTRING; NDIS_MEDIUM alone would not unhold it).
+- TU m78b block; Makefile HDRS 145 -> 147.
+- Gates: check / crosscheck / e2e GREEN x6.
