@@ -12,10 +12,16 @@
 ; Ordinals are not published; entries are name-only.
 LIBRARY coredll.dll
 EXPORTS
+  ActivateDevice
+  ActivateDeviceEx
   ActivateKeyboardLayout
   ActivateService
   AddFontResourceW
   AlphaBlend
+  BatteryDrvrGetLevels
+  BatteryDrvrSupportsChangeNotification
+  BatteryGetLifeTimeInfo
+  BatteryNotifyOfTimeChange
   BeginPaint
   BitBlt
   CaptureDumpFileOnDevice
@@ -183,6 +189,7 @@ EXPORTS
   CryptUnprotectData
   CryptVerifySignature
   DataHandler
+  DeactivateDevice
   DebugActiveProcess
   DebugBreak
   DeleteDC
@@ -192,6 +199,7 @@ EXPORTS
   DeleteObject
   DeleteTicket
   DeregisterService
+  DeviceIoControl
   DevicePowerNotify
   DisableThreadLibraryCalls
   DisassociateSession
@@ -211,6 +219,7 @@ EXPORTS
   EnumFontFamiliesW
   EnumFontFamiliesExW
   EnumFontsW
+  EnumPnpIds
   EnumPropsExW
   EnumServices
   EqualRgn
@@ -391,6 +400,7 @@ EXPORTS
   MultiByteToWideChar
   OffsetRgn
   OffsetViewportOrgEx
+  OpenDeviceKey
   OpenEventW
   OpenMsgQueue
   OpenProcess
@@ -434,6 +444,7 @@ EXPORTS
   RegQueryInfoKeyW
   RegQueryValueExW
   RegSetValueExW
+  RegisterDevice
   RegisterEditor
   RegisterService
   RegisterWindowMessageW
@@ -447,6 +458,9 @@ EXPORTS
   ReportFault
   RequestPowerNotifications
   ResetEvent
+  ResourceCreateList
+  ResourceRelease
+  ResourceRequest
   RestoreDC
   ResumeThread
   RoundRect
@@ -608,6 +622,7 @@ EXPORTS
   TlsFree
   TlsGetValue
   TlsSetValue
+  TouchCalibrate
   TranslateCharsetInfo
   TranslateMessage
   TransparentBlt

@@ -1524,4 +1524,149 @@ AKARI_CE_IMPORT VOID NdisZeroMemory(PVOID Destination, ULONG Length)
 /* "ProtocolUnbindAdapter" (ms919717): `VOID ProtocolUnbindAdapter(PNDIS_STATUSStatus,NDIS_HANDLEProtocolBindingContext,NDIS_HANDLEUnbindContext)` */
 /* "XXX_Init (NDIS)" (ms923698): `DWORDXXX_Init( DWORDdwContext)` */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890411 802.1x Object Identifiers */
+/* ms890420 802.1x Security */
+/* ms890429 802.1x User Administration Issues */
+/* ms890447 Accessing OOB Information */
+/* ms895483 Adding a DllMain Entry Point to the NDIS Miniport Driver Core Functions */
+/* ms895484 Adding an NDIS Miniport Driver to a Run-Time Image */
+/* ms895482 Adding Debug Zones to the NDIS Miniport Driver Initialization Functions */
+/* ms895485 Adding the Windows-based Desktop NDIS Miniport Driver to the Run-Time Image Build */
+/* ms923761 Asynchronous Network I/O */
+/* ms890616 AsyncMac Registry Settings */
+/* ms890690 Authenticating 802.1x */
+/* aa448300 Automatic Configuration Constants */
+/* ms890698 Automatic Configuration Subsystem */
+/* ms890770 Benefits of Media Sense */
+/* ms890997 Built-in Network Adapters */
+/* ms891031 Bus Master-DMA Network Adapters */
+/* aa448268 CETK NDIS Test Pass Criteria */
+/* ms891051 Choosing a Receive Function */
+/* ms891059 Choosing a Send Function */
+/* aa447428 Communication Class Interface */
+/* ms895486 Conditionally Defining Power Management in the NDIS Miniport Driver Object Identifier Functions */
+/* aa447429 Configuration Descriptor */
+/* aa447432 Considerations For Improving NDIS Driver Performance */
+/* aa447434 Control Channel Characteristics */
+/* aa447437 Data Class Interface */
+/* aa447438 Data In Endpoint Descriptor */
+/* aa447439 Data Out Endpoint Descriptor */
+/* aa447459 Design Considerations for a Network Performance Test */
+/* aa447461 Device Descriptor */
+/* ms890534 Evaluation of Network Performance Test Results */
+/* ms895487 Filtering Local Variables in the NDIS Miniport Driver PhyDetect and SetupPhy Functions */
+/* ms892158 General NDIS Objects */
+/* aa448253 Implementing a Network Performance Test */
+/* ms892218 Implementing a ProtocolReceive Handler */
+/* ms892219 Implementing a ProtocolReceivePacket Handler */
+/* ms892232 Initialization of NDIS Protocol Drivers */
+/* ms892233 Initializing the NDIS Wrapper */
+/* ms892236 Installable ISR Registry Settings */
+/* ms892241 Interface Descriptor for Communication Class Interface */
+/* ms892242 Interface Descriptor for Data Class Interface */
+/* ms892464 IRDA Miniport Drivers */
+/* ms892469 IrDA Network Adapters */
+/* ms892473 Kernel Memory Allocated for Use by the Networking Stack */
+/* ms892482 Kingston PCI NE2000 */
+/* ms892487 Linksys ISA NE2000 */
+/* ms892490 Media Sense Implementation */
+/* ms892495 Miniport Driver Registry Settings */
+/* ms892497 Miniport Operations */
+/* ms892502 Multi-Packet Messages */
+/* ms892505 NDIS Adapter Binding Management APIs */
+/* ms892507 NDIS Assumptions for Media Sense Support */
+/* aa447933 NDIS Debug */
+/* ms892510 NDIS Driver Portability */
+/* ms892512 NDIS Driver Upper-Edge Functions */
+/* ms892513 NDIS Ethernet Objects */
+/* ms892514 NDIS Events */
+/* ms892516 NDIS IrDA Objects */
+/* ms892517 NDIS Library Functions Used by WAN Miniport Drivers */
+/* ms923730 NDIS Miniport Driver Implementation */
+/* ms892518 NDIS Miniport Driver Samples */
+/* ms892519 NDIS Network Wakeup Objects */
+/* ms892521 NDIS Objects for WAN Miniports */
+/* ms892522 NDIS Packet Structure */
+/* ms892523 NDIS Plug and Play Support */
+/* ms892524 NDIS Power Management Objects */
+/* ms892525 NDIS Protocol Driver Lower-Edge Functions */
+/* ms892526 NDIS Protocol Driver Registration */
+/* ms892515 NDIS Support in Windows CE */
+/* ms892529 NDIS TAPI Objects */
+/* ms892530 NDIS Task Offload Objects */
+/* ms892531 NDIS Timers */
+/* ms892532 NDIS Token Ring Objects */
+/* ms892538 NDIS Wake-on-LAN Support */
+/* ms904106 NdisQuerySendFlags */
+/* ms904978 NdisSetSendFlags */
+/* ms892533 NDISUIO Binding and Unbinding */
+/* ms892534 NDISUIO Driver Registration */
+/* ms892536 NDISUIO Operations */
+/* ms892540 Network Adapter Card Requirements */
+/* ms892506 Network Driver Samples */
+/* ms892543 Network Keys */
+/* ms892544 NIC Instance Specific Registry Settings */
+/* ms892547 Notification Endpoint Descriptor */
+/* aa448124 OID_GEN_SUPPORTED_LIST */
+/* ms919147 OID_TCP_TASK_OFFLOAD */
+/* ms892553 Open System and Shared Key Authentication */
+/* ms892552 Opening an Adapter Underlying a Protocol Driver */
+/* ms892562 Passing Media-Specific Information */
+/* aa447533 PC Card Network Adapters */
+/* aa447544 PCI Bus Enumerator Template */
+/* aa447545 PCMCIA-based Miniport Functional Interrupts */
+/* aa447546 Performance Improvements for an NDIS Miniport Driver */
+/* aa447562 Power Manager Requests and NDIS */
+/* aa447553 Power-Manageable NDIS Miniports */
+/* aa447577 Protocol Driver Query and Set */
+/* aa447578 Protocol Driver Reset Operations */
+/* aa447581 Protocol Driver Unbinding Operations */
+/* aa447583 Querying WAN Miniport Driver Information */
+/* aa447586 Registering a CheckForHang Handler */
+/* aa447587 Registering as a WAN Miniport Driver */
+/* aa447593 Remote NDIS Objects */
+/* aa447594 Remote NDIS Packet Message */
+/* ms895504 Removing DMA Support from the NDIS Miniport Driver Initialization Functions */
+/* ms895505 Removing DMA Support From the NDIS Miniport Driver Send and Receive Functions */
+/* ms895506 Removing Unused Local Variables from the NDIS Miniport Driver Core Functions */
+/* ms895507 Removing WMI Support From the NDIS Miniport Driver Object Identifier Functions */
+/* aa447600 Reusing Packets */
+/* aa447602 RNDIS Control Messages */
+/* aa447604 RNDIS Device Architecture */
+/* aa447605 RNDIS Device Control */
+/* aa447607 RNDIS Ethernet Objects */
+/* aa447608 RNDIS Ethernet Statistics Objects */
+/* aa447609 RNDIS General Objects */
+/* aa447610 RNDIS General Statistics Objects */
+/* aa447612 RNDIS Network Wakeup Objects */
+/* aa447614 RNDIS Power Management Objects */
+/* aa447615 RNDIS Registry Settings */
+/* aa447616 RNDIS Status Values */
+/* aa447618 RNDIS Version */
+/* aa448282 Running Performance Tests for NDIS Miniport Drivers */
+/* aa448281 Running the One-Card NDIS Test */
+/* aa448283 Running the Two-Card in Two Machines NDIS Test for Media Sense */
+/* aa448284 Running the Two-Card NDIS Test */
+/* aa448285 Running the Winsock Stress Test */
+/* ms894012 Sending on a WAN Miniport Driver */
+/* ms894021 Shared IST for NDIS */
+/* ms894024 Simultaneous Access for Multiple Applications */
+/* ms894034 Spin Locks */
+/* ms894046 Subordinate DMA Network Adapters */
+/* ms894066 Token Ring Miniport Drivers */
+/* ms894076 USB Configuration Descriptor */
+/* ms894077 USB Device Descriptor */
+/* ms894718 USB Short Packets */
+/* ms894176 USB-Level Termination */
+/* ms894362 USB-RNDIS Flow Control */
+/* ms894365 USB-RNDIS Power Management */
+/* ms894736 WAN Miniport Driver Indications */
+/* ms894751 Windows CE Communications Architecture */
+/* ms894759 Wireless Network Client Configuration */
 #endif /* AKARI_NDIS_H */

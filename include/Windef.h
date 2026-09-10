@@ -143,6 +143,7 @@ typedef const WCHAR    *LPCWSTR;
 typedef WCHAR          *PWSTR;   /* WCHAR pointer (CE doc spellings) */
 typedef const WCHAR    *PCWSTR;  /* const WCHAR pointer (Upnpdevapi.h
                                    * print spellings, M75b; LPCWSTR twin) */
+typedef BOOL         *PBOOL;    /* BOOL pointer (Security/Power book prints) */
 typedef BOOLEAN       *PBOOLEAN; /* BOOLEAN pointer (Ndis.h print spellings,
                                    * NdisCancelTimer aa447993, M78a) */
 typedef const CHAR    *PCSTR;    /* const CHAR pointer (Ndis.h print
@@ -315,5 +316,11 @@ typedef struct _RECTL {
 #ifdef __cplusplus
 }
 #endif
+
+typedef struct _POINTL { LONG x; LONG y; } POINTL, *LPPOINTL;
+typedef struct _SIZEL {
+    LONG cx;
+    LONG cy;
+} SIZEL;
 
 #endif /* AKARI_WINDEF_H */

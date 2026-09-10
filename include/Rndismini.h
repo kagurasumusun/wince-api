@@ -96,4 +96,7 @@ AKARI_CE_IMPORT void MddIndicateRndisPacket(PDATA_WRAPPER pDataWrapper)
 AKARI_CE_IMPORT BOOL PDDInit(RNDIS_PDD_CHARACTERISTICS *pRndisPddCharacteristics,
                     PBYTE pBaseAddress) AKARI_CE_NAME(PDDInit);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* AKARI_RNDISMINI_H */

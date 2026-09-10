@@ -415,4 +415,7 @@ typedef struct _NDIS_PNP_CAPABILITIES NDIS_PNP_CAPABILITIES,
 /* "IOCTL_NDIS_GET_LOG_DATA" (Ntddndis.h row): prose page -- the
  * IOCTL value is not printed by any CE page; name recorded. */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
 #endif /* AKARI_NTDDNDIS_H */

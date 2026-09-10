@@ -377,6 +377,18 @@ AKARI_CE_IMPORT VOID HalFreeCommonBuffer(PDMA_ADAPTER_OBJECT DmaAdapter,
                                          BOOLEAN CacheEnabled
                                          ) AKARI_CE_NAME(HalFreeCommonBuffer);
 
+/* ------------------------------------------------------------------
+ * Book surface: driver-libs-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891025 Bus Enumeration Applications */
+/* ms894814 CEDDK Dynamic-Link Library Bus Access IOCTLs */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-pci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms919385 PCI_COMMON_CONFIG -- HELD (page print; member types unpublished):
+ *   typedef struct _PCI_COMMON_CONFIG { ... } type0; */
+
 #ifdef __cplusplus
 }
 #endif

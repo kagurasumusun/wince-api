@@ -28,4 +28,9 @@ AKARI_CE_IMPORT BOOL CaptureDumpFileOnDevice(DWORD dwProcessId,
                     DWORD dwThreadId, LPCWSTR pwzExtraFilesPath)
                     AKARI_CE_NAME(CaptureDumpFileOnDevice);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-pci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898290 DEVICE_LOCATION -- HELD (page print; member types unpublished):
+ *   typedef struct _DEVICE_LOCATION { ... } DEVICE_LOCATION, *PDEVICE_LOCATION; */
 #endif /* AKARI_PKFUNCS_H */

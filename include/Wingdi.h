@@ -1130,6 +1130,77 @@ AKARI_CE_IMPORT HMONITOR MonitorFromPoint(POINT pt, DWORD dwFlags) AKARI_CE_NAME
 AKARI_CE_IMPORT HMONITOR MonitorFromRect(LPCRECT lprc, DWORD dwFlags) AKARI_CE_NAME(MonitorFromRect);
 AKARI_CE_IMPORT HMONITOR MonitorFromWindow(HWND hwnd, DWORD dwFlags) AKARI_CE_NAME(MonitorFromWindow);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898295 DEVMODEW (page print, compiled) */
+typedef struct _devicemodew {
+    WCHAR dmDeviceName[CCHDEVICENAME];
+    WORD dmSpecVersion;
+    WORD dmDriverVersion;
+    WORD dmSize;
+    WORD dmDriverExtra;
+    DWORD dmFields;
+    short dmOrientation;
+    short dmPaperSize;
+    short dmPaperLength;
+    short dmPaperWidth;
+    short dmScale;
+    short dmCopies;
+    short dmDefaultSource;
+    short dmPrintQuality;
+    short dmColor;
+    short dmDuplex;
+    short dmYResolution;
+    short dmTTOption;
+    short dmCollate;
+    WCHAR dmFormName[CCHFORMNAME];
+    WORD dmLogPixels;
+    DWORD dmBitsPerPel;
+    DWORD dmPelsWidth;
+    DWORD dmPelsHeight;
+    DWORD dmDisplayFlags;
+    DWORD dmDisplayFrequency;
+    DWORD dmDisplayOrientation;
+} DEVMODEW, * PDEVMODEW, * NPDEVMODEW, * LPDEVMODEW;
+/* aa447821 GDIINFO (page print, compiled) */
+typedef struct tagGDIINFO {
+    ULONG ulVersion;
+    ULONG ulTechnology;
+    ULONG ulHorzSize;
+    ULONG ulVertSize;
+    ULONG ulHorzRes;
+    ULONG ulVertRes;
+    ULONG cBitsPixel;
+    ULONG cPlanes;
+    ULONG ulNumBrushes;
+    ULONG flRaster;
+    ULONG ulLogPixelsX;
+    ULONG ulLogPixelsY;
+    ULONG flTextCaps;
+    ULONG ulDACRed;
+    ULONG ulDACGreen;
+    ULONG ulDACBlue;
+    ULONG ulAspectX;
+    ULONG ulAspectY;
+    ULONG ulAspectXY;
+    LONG xStyleStep;
+    LONG yStyleStep;
+    LONG denStyleStep;
+    POINTL ptlPhysOffset;
+    SIZEL szlPhysSize;
+    ULONG ulNumPalReg;
+    ULONG ulDevicePelsDPI;
+    ULONG ulPrimaryOrder;
+    ULONG ulHTPatternSize;
+    ULONG ulHTOutputFormat;
+    ULONG flHTFlags;
+    ULONG ulVRefresh;
+    ULONG ulBltAlignment;
+    ULONG ulPanningHorzRes;
+    ULONG ulPanningVertRes;
+} GDIINFO;
+
 #ifdef __cplusplus
 }
 #endif

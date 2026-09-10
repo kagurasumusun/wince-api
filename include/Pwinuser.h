@@ -95,6 +95,31 @@ AKARI_CE_IMPORT KEY_STATE_FLAGS GetAsyncShiftFlags(UINT VKey) AKARI_CE_NAME(GetA
  * passed to the driver's PFN_KEYBD_DRIVER_GET_INFO. */
 AKARI_CE_IMPORT BOOL KeybdGetDeviceInfo(INT iIndex, LPVOID lpOutput) AKARI_CE_NAME(KeybdGetDeviceInfo);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905318 NLedGetDeviceInfo: print `BOOL WINAPI NLedGetDeviceInfo(UINT nInfoId,void* pOutput);` */
+/* (record-only: parameter or return type unpublished) */
+/* ms905321 NLedSetDevice: print `BOOL WINAPI NLedSetDevice(UINT nDeviceId,void* pInput);` */
+/* (record-only: parameter or return type unpublished) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896132 BatteryGetLifeTimeInfo: print `void BatteryGetLifeTimeInfo(LPSYSTEMTIMEpstLastChange,DWORD* pcmsCpuUsage,DWORD* pcmsPreviousCpuUsage );` */
+AKARI_CE_IMPORT void BatteryGetLifeTimeInfo(LPSYSTEMTIME pstLastChange, DWORD* pcmsCpuUsage, DWORD* pcmsPreviousCpuUsage)
+    AKARI_CE_NAME(BatteryGetLifeTimeInfo);
+/* ms896134 BatteryNotifyOfTimeChange: print `void WINAPI BatteryNotifyOfTimeChange( BOOL fForward, FILETIME *pftDelta);` */
+AKARI_CE_IMPORT void WINAPI BatteryNotifyOfTimeChange(BOOL fForward, FILETIME pftDelta)
+    AKARI_CE_NAME(BatteryNotifyOfTimeChange);
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa448196 TouchCalibrate: print `BOOL WINAPI TouchCalibrate(void);` */
+AKARI_CE_IMPORT BOOL WINAPI TouchCalibrate(void)
+    AKARI_CE_NAME(TouchCalibrate);
+
 #ifdef __cplusplus
 }
 #endif

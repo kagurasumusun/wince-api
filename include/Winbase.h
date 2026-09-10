@@ -2591,6 +2591,71 @@ typedef struct _DevmgrDeviceInformation_tag {
     WCHAR  szBusName[MAX_PATH];
 } DEVMGR_DEVICE_INFORMATION, *PDEVMGR_DEVICE_INFORMATION;
 
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898292 DeviceSearchType (page print, compiled) */
+typedef enum  {
+    DeviceSearchByLegacyName,
+    DeviceSearchByDeviceName,
+    DeviceSearchByBusName,
+    DeviceSearchByGuid,
+    DeviceSearchByParent
+} DeviceSearchType;
+/* ms896106 ActivateDevice: print `HANDLE ActivateDevice(LPCWSTR lpszDevKey, DWORD dwClientInfo);` */
+AKARI_CE_IMPORT HANDLE ActivateDevice(LPCWSTR lpszDevKey, DWORD dwClientInfo)
+    AKARI_CE_NAME(ActivateDevice);
+/* ms896107 ActivateDeviceEx: print `HANDLE ActivateDeviceEx(LPCWSTR lpszDevKey, LPCVOID lpRegEnts, DWORD cRegEnts, LPVOID lpvParam);` */
+AKARI_CE_IMPORT HANDLE ActivateDeviceEx(LPCWSTR lpszDevKey, LPCVOID lpRegEnts, DWORD cRegEnts, LPVOID lpvParam)
+    AKARI_CE_NAME(ActivateDeviceEx);
+/* ms896109 AdvertiseInterface: print `BOOL AdvertiseInterface(const GUID* devclass,LPCWSTR name,BOOL fAdd);` */
+/* (record-only: parameter or return type unpublished) */
+/* ms898278 DeactivateDevice: print `BOOL DeactivateDevice(HANDLE hDevice);` */
+AKARI_CE_IMPORT BOOL DeactivateDevice(HANDLE hDevice)
+    AKARI_CE_NAME(DeactivateDevice);
+/* ms898281 DeregisterDevice: print `BOOL DeregisterDevice(Handle hDevice);` */
+/* (record-only: parameter or return type unpublished) */
+/* ms898288 DeviceIoControl: print `BOOL DeviceIoControl(HANDLEhDevice,DWORDdwIoControlCode,LPVOIDlpInBuffer,DWORDnInBufferSize,LPVOID lpOutBuffer,DWORDnOutBufferSize,LPDWORDlpBytesReturned,LPOVERLAPPEDlpOverlapped);` */
+AKARI_CE_IMPORT BOOL DeviceIoControl(HANDLE hDevice, DWORD dwIoControlCode, LPVOID lpInBuffer, DWORD nInBufferSize, LPVOID lpOutBuffer, DWORD nOutBufferSize, LPDWORD lpBytesReturned, LPOVERLAPPED lpOverlapped)
+    AKARI_CE_NAME(DeviceIoControl);
+/* aa447790 EnumDeviceInterfaces: print `BOOL EnumDeviceInterfaces ( HANDLE h, DWORD dwIndex, GUID *pClass, LPWSTR pszNameBuf, LPDWORD lpdwNameBufSize);` */
+BOOL EnumDeviceInterfaces(HANDLE h, DWORD dwIndex, GUID pClass, LPWSTR pszNameBuf, LPDWORD lpdwNameBufSize);
+/* aa447798 FindFirstDevice: print `HANDLE FindFirstDevice( DeviceSearchType searchType, LPCVOID pvSearchParam, PDEVMGR_DEVICE_INFORMATION pdi);` */
+/* (record-only: parameter or return type unpublished) */
+/* aa447800 FindNextDevice: print `BOOL FindNextDevice( HANDLE h, PDEVMGR_DEVICE_INFORMATION pdi);` */
+BOOL FindNextDevice(HANDLE h, PDEVMGR_DEVICE_INFORMATION pdi);
+/* aa447829 GetDeviceInformationByDeviceHandle: print `BOOL GetDeviceInformationByDeviceHandle( HANDLE hDevice, PDEVMGR_DEVICE_INFORMATION pdi);` */
+BOOL GetDeviceInformationByDeviceHandle(HANDLE hDevice, PDEVMGR_DEVICE_INFORMATION pdi);
+/* aa447830 GetDeviceInformationByFileHandle: print `BOOL GetDeviceInformationByFileHandle( HANDLE hFile, PDEVMGR_DEVICE_INFORMATION pdi);` */
+BOOL GetDeviceInformationByFileHandle(HANDLE hFile, PDEVMGR_DEVICE_INFORMATION pdi);
+/* ms919794 RegisterDevice: print `HANDLE RegisterDevice( LPCWSTR lpszType,DWORD dwIndex,LPCWSTR lpszLib,DWORD dwInfo);` */
+AKARI_CE_IMPORT HANDLE RegisterDevice(LPCWSTR lpszType, DWORD dwIndex, LPCWSTR lpszLib, DWORD dwInfo)
+    AKARI_CE_NAME(RegisterDevice);
+/* ms919852 ResourceCreateList: print `BOOL ResourceCreateList(DWORD dwResId, DWORD dwMinimum, DWORD dwCount);` */
+AKARI_CE_IMPORT BOOL ResourceCreateList(DWORD dwResId, DWORD dwMinimum, DWORD dwCount)
+    AKARI_CE_NAME(ResourceCreateList);
+/* ms919854 ResourceDestroyList: print `BOOL ResourceDestroyList ( DWORD dwResId);` */
+BOOL ResourceDestroyList(DWORD dwResId);
+/* ms919857 ResourceMarkAsShareable: print `BOOL ResourceMarkAsShareable( DWORD dwResId, DWORD dwId, DWORD dwLen, BOOL fShareable);` */
+BOOL ResourceMarkAsShareable(DWORD dwResId, DWORD dwId, DWORD dwLen, BOOL fShareable);
+/* ms919859 ResourceRelease: print `BOOL ResourceRelease(DWORD dwResId, DWORD dwBase, DWORD dwLen);` */
+AKARI_CE_IMPORT BOOL ResourceRelease(DWORD dwResId, DWORD dwBase, DWORD dwLen)
+    AKARI_CE_NAME(ResourceRelease);
+/* ms919861 ResourceRequest: print `BOOL ResourceRequest(DWORD dwResId, DWORD dwBase, DWORD dwLen);` */
+AKARI_CE_IMPORT BOOL ResourceRequest(DWORD dwResId, DWORD dwBase, DWORD dwLen)
+    AKARI_CE_NAME(ResourceRequest);
+/* ms919863 ResourceRequestEx: print `BOOL ResourceRequestEx ( DWORD dwResId, DWORD dwId, DWORD dwLen, DWORD dwFlags);` */
+BOOL ResourceRequestEx(DWORD dwResId, DWORD dwId, DWORD dwLen, DWORD dwFlags);
+
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447463 Device File Names */
+/* aa448269 Device Manager Architecture */
+/* aa447470 Device Manager Registry Keys */
+/* aa448270 Device Manager Security */
+/* ms892459 I/O Resource Manager */
+
 #ifdef __cplusplus
 }
 #endif

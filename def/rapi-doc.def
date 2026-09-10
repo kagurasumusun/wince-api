@@ -1,0 +1,83 @@
+; rapi-doc.def -- rapi.lib export surface for Windows CE.
+;
+; Copyright (c) 2026 Akari API contributors
+; SPDX-License-Identifier: MIT
+;
+; Derived exclusively from the official Microsoft CE
+; documentation pages: each name below appears on the
+; listed page whose Requirements row names this link
+; library (tools/ce-manifest.py + tools/ce-fetch.py
+; harvest; docs/inventory.md records every page).  No
+; shared-source/device-dump/VS/PB-derived name is used.
+; Ordinals are not published; entries are name-only.
+; LIBRARY tag = documented Link Library row (rapi.lib); the on-device module name is
+; not published by the CE documentation.
+LIBRARY rapi.dll
+EXPORTS
+  CeCheckPassword
+  CeCloseHandle
+  CeCopyFile
+  CeCreateDatabase
+  CeCreateDatabaseEx
+  CeCreateDirectory
+  CeDeleteDatabase
+  CeDeleteDatabaseEx
+  CeDeleteFile
+  CeDeleteRecord
+  CeEnumDBVolumes
+  CeFindClose
+  CeFindFirstDatabase
+  CeFindFirstDatabaseEx
+  CeFindNextDatabase
+  CeFindNextDatabaseEx
+  CeFindNextFile
+  CeGetClassName
+  CeGetDesktopDeviceCaps
+  CeGetFileAttributes
+  CeGetFileSize
+  CeGetFileTime
+  CeGetLastError
+  CeGetSpecialFolderPath
+  CeGetStoreInformation
+  CeGetSystemMetrics
+  CeGetSystemPowerStatusEx
+  CeGetTempPath
+  CeGetWindow
+  CeGetWindowLong
+  CeGetWindowText
+  CeGlobalMemoryStatus
+  CeMountDBVol
+  CeMoveFile
+  CeOidGetInfo
+  CeOidGetInfoEx
+  CeOpenDatabase
+  CeOpenDatabaseEx
+  CeQueryInstructionSet
+  CeRapiGetError
+  CeRapiInit
+  CeRapiInitEx
+  CeRapiInvoke
+  CeRapiUninit
+  CeReadFile
+  CeReadRecordProps
+  CeReadRecordPropsEx
+  CeRegCloseKey
+  CeRegDeleteKey
+  CeRegDeleteValue
+  CeRegEnumKeyEx
+  CeRegEnumValue
+  CeRegOpenKeyEx
+  CeRegQueryInfoKey
+  CeRegQueryValueEx
+  CeRemoveDirectory
+  CeSHCreateShortcut
+  CeSHGetShortcutTarget
+  CeSeekDatabase
+  CeSetDatabaseInfo
+  CeSetDatabaseInfoEx
+  CeSetEndOfFile
+  CeSetFileAttributes
+  CeSetFilePointer
+  CeUnmountDBVol
+  CeWriteFile
+  CeWriteRecordProps

@@ -187,10 +187,7 @@ typedef void           *HMETAFILEPICT;                  /* metafile picture hand
 
 /* SIZEL: the CE spelling of the {LONG cx, LONG cy} size (SIZE) used
  * by the Ocidl.h pages (DVEXTENTINFO). */
-typedef struct _SIZEL {
-    LONG cx;
-    LONG cy;
-} SIZEL;
+/* SIZEL/POINTL moved to Windef.h (the GDI/DDI books share them) */
 
 /* ------------------------------------------------------------------ */
 /* Enumeration types (Oaidl.h / Objidl.h / Wtypes.h / Ocidl.h)        */
@@ -3161,7 +3158,7 @@ typedef struct CATEGORYINFO CATEGORYINFO;   /* opaque; RegisterCategories
  * shapes as their GDI twins; the M44 "OLE carriers" note).  RECTL /
  * POINTL / POINTF / SIZEL are pointer-only here apart from their
  * trivial layouts. */
-typedef struct _POINTL { LONG x; LONG y; } POINTL, *LPPOINTL;
+/* POINTL moved to Windef.h (the GDI/DDI books share it) */
 typedef struct _POINTF { FLOAT x; FLOAT y; } POINTF, *LPPOINTF;
 /* SIZEL / RECTL are already declared (Windef); only the OLE pointer
  * spellings are added. */

@@ -657,6 +657,13 @@ AKARI_CE_IMPORT HRESULT WINAPI DirectDrawEnumerateEx(
  *              LPDIRECTDRAWSURFACE4 lpDDSReference);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896147 buildDDHALInfo: print `EXTERN_C BOOL buildDDHALInfo(LPDDHALINFOlpddhi,DWORDmodeIndex);` -- recorded verbatim (no compiled prototype) */
+/* ms899358 HALInit: print `EXTERN_C BOOL WINAPI HALInit(LPDDHALINFO lpddhi,BOOL reset,DWORD modeIndex);` */
+/* (record-only: parameter or return type unpublished) */
+
 #ifdef __cplusplus
 }
 #endif

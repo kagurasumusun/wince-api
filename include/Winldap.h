@@ -543,6 +543,39 @@ AKARI_CE_IMPORT ULONG    ldap_sasl_bind_s(LDAP *ExternalHandle, const PTCHAR Dis
  * the asynchronous prototype cannot be confirmed from the CE 5.0
  * page and is not declared. */
 
+/* ------------------------------------------------------------------
+ * Book surface: ldap-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms863826 berval (Header: Winldap.h.) */
+/* ms892300 ldap_sasl_bind (Header: Winldap.h.) */
+/* ms893453 Session Options (Header: Winldap.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: ldap-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862089 Authenticating an LDAP Client */
+/* ms862090 Authentication Operations */
+/* ms862108 Closing a Connection */
+/* ms862140 Differences Between the LDAP Implementation in Windows CE and Windows Server 2003 */
+/* ms862144 Establishing an LDAP Session */
+/* ms862172 Interrogation Operations */
+/* ms862244 LDAP Distinguished Names */
+/* ms862372 LDAP Migration */
+/* ms862177 LDAP OS Design Development */
+/* ms862403 LDAP Registry Settings */
+/* ms862417 LDAP Samples */
+/* ms862429 LDAP Schema Model */
+/* ms862439 LDAP Security */
+/* ms862452 LDAP Security Model */
+/* ms862477 Managing Memory */
+/* ms862548 Modifying a Directory Entry */
+/* ms862670 Paging Search Results */
+/* ms862693 Searching a Directory */
+/* ms862704 Sorting Search Results */
+/* ms862713 Synchronous vs. Asynchronous Calls */
+/* ms862719 Update Operations */
+/* ms862720 Using Controls */
+
 #ifdef __cplusplus
 }
 #endif

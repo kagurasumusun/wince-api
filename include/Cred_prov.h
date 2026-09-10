@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-typedef BOOL *PBOOL;   /* the pages' pointer spelling (not in Windef) */
+/* PBOOL now declared in Windef.h */
 
 /* ms906527 "HandleBlob". */
 DWORD HandleBlob(DWORD dwType, PWCHAR szTarget, PWCHAR szUser,

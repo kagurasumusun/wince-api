@@ -152,11 +152,15 @@ def split_glued(piece):
     with a lowercase/underscore-headed remainder wins."""
     piece = piece.strip()
     best = None
+    if ' ' in piece or '*' in piece:
+        return None            # spaced/starred pieces are not glued
     for i in range(len(piece) - 1, 0, -1):
         pre, name = piece[:i], piece[i:]
         p = pre.rstrip('*')
         if (p in KNOWN or p in PRIMS) and name and \
-                (name[0].islower() or name[0] == '_'):
+                (name[0].islower() or name[0] == '_') and \
+                re.search(r'[a-z]', name) and not \
+                re.match(r'^_?[A-Z0-9_]+$', name):
             best = (pre, name)
             break
     return best
@@ -165,6 +169,9 @@ def split_glued(piece):
 def parse_piece(piece):
     piece = re.sub(r'\[.*?\]', '', piece).strip()
     piece = piece.replace('OPTIONAL', '').strip()
+    # SAL-style annotation tokens the DDI pages print inline
+    piece = re.sub(r'\b(IN|OUT|IN_OUT|__in|__out|__inout|__in_opt|__out_opt)\b',
+                   ' ', piece).strip()
     if not piece:
         return None
     if re.match(r'^(void|VOID)$', piece):
@@ -349,7 +356,7 @@ def compile_type(decl):
 def canonical_hdr(doc_hdr):
     """documented Header spelling -> our file name"""
     h = doc_hdr.strip().rstrip('.').strip()
-    h = h.split(',')[0].split(' and ')[0].strip()
+    h = h.split(',')[0].split(' and ')[0].split(' or ')[0].strip()
     if not h:
         return None
     if re.search(r'\.(cpp|c|idl|def)$', h):

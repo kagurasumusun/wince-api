@@ -71,6 +71,10 @@ extern "C" {
  * SendCharEvents uKeyFlags / puShift parameters carry this type. */
 typedef UINT32 KEY_STATE_FLAGS;
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
 #ifdef __cplusplus
 }
 #endif
