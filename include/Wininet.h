@@ -451,6 +451,16 @@ AKARI_CE_IMPORT DWORD InternetConfirmZoneCrossing(HWND hWnd, LPTSTR szUrlPrev, L
 AKARI_CE_IMPORT BOOL WINAPI InternetCombineUrl(LPCTSTR lpszBaseUrl, LPCTSTR lpszRelativeUrl, LPTSTR lpszBuffer, LPDWORD lpdwBufferLength, DWORD dwFlags)
                         AKARI_CE_NAME(InternetCombineUrl);
 
+/* ms926106 "InternetCanonicalizeUrl" (Security book row, Windows CE
+ * 2.0 and later; the page's Requirements print "Header: Wininet.h.
+ * Link Library: Secur32.lib." -- the archive's own cross-book quirk;
+ * the def placement follows the printed Link Library row, so the
+ * import is carried by def/secur32-doc.def): print `BOOL WINAPI InternetCanonicalizeUrl(LPCTSTRlpszUrl,LPWSTRlpszBuffer,LPDWORDlpdwBufferLength,DWORDdwFlags );`
+ *.  dwFlags: the ICU_* modifiers (values in the M96 section). */
+AKARI_CE_IMPORT BOOL WINAPI InternetCanonicalizeUrl(LPCTSTR lpszUrl,
+    LPWSTR lpszBuffer, LPDWORD lpdwBufferLength, DWORD dwFlags)
+                        AKARI_CE_NAME(InternetCanonicalizeUrl);
+
 /* ms918356 "InternetEnumPerSiteCookieDecisionA": print `BOOL InternetEnumPerSiteCookieDecisionA( LPSTR pszSiteName, unsigned long *pcSiteNameSize, unsigned long *pdwDecision, unsigned long dwIndex);`
  *. */
 AKARI_CE_IMPORT BOOL InternetEnumPerSiteCookieDecisionA(LPSTR pszSiteName, unsigned long *pcSiteNameSize, unsigned long *pdwDecision, unsigned long dwIndex)

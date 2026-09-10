@@ -7133,3 +7133,20 @@ provenance.
   include/Lass.h NEW (1 row): LASSReloadConfig (Coredll.lib,
   trusted applications).  coredll-doc.def 744 -> 750; secur32-doc
   .def 19 -> 22.  Gates GREEN x6.
+- include/Wininet.h +1: InternetCanonicalizeUrl (ms926106, the
+  Security book's single Wininet.h-homed row; Requirements print
+  "Link Library: Secur32.lib" -- the archive's cross-book quirk;
+  def placement follows the printed row, so the import lands in
+  secur32-doc.def 22 -> 23).  Final sweep (method-name-aware): the
+  308 API rows are fully accounted (Load/Unload Function titles are
+  the Cred_prov.h print-vs-title fix-ups; CRYPTOAPI_BLOB ms938286
+  is the ms937016 alias page -- corroboration note added to
+  Wincrypt.h, no new name).  190 prose rows verified by the M95a
+  survey.  SECURITY BOOK API SURFACE COMPLETE (498 leaves
+  accounted).  Gates GREEN x6.
+
+M95 totals: 8 new headers (Sspi, Schnlsp, Rpcdce, Ntlmssp, Lap,
+Cred, Cred_prov, Credmgr, Lass = 9 counting Lass.h separately),
+Wininet.h +1; 101 constant values adopted from R1 (88 Sspi + 13
+Schnlsp); def files: secur32-doc.def 23, ntlmssp-doc.def 10,
+shellcb-doc.def 1, coredll-doc.def 744 -> 750.

@@ -82,7 +82,10 @@ typedef ULONG_PTR HCRYPTMSG;
 
 /* ms937016 BLOB (Cryptography): tag _CRYPTOAPI_BLOB with the 13
  * documented alias typedef names (no self-named CRYPTOAPI_BLOB
- * typedef is printed on the page). */
+ * typedef is printed on the page).  The Security book's separate
+ * CRYPTOAPI_BLOB page (ms938286, Header: Wincrypt.h) prints the
+ * identical declaration and alias list -- corroboration recorded,
+ * no new name. */
 typedef struct _CRYPTOAPI_BLOB {
     DWORD   cbData;
     BYTE   *pbData;

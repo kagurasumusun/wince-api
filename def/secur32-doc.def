@@ -29,6 +29,7 @@ EXPORTS
   FreeCredentialsHandle
   InitSecurityInterface
   InitializeSecurityContext
+  InternetCanonicalizeUrl
   MakeSignature
   QueryContextAttributes
   QueryCredentialsAttributes
