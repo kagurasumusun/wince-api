@@ -7032,3 +7032,17 @@ CE page spelling).
   signature wins (it is the CE ABI; e.g. IMultiLanguage2::
   GetCodePageInfo 3 params vs the desktop-shaped R1 2).  Gates
   GREEN x6.
+- M97 COMPLETE: 88 interfaces callable from C across 4 headers
+  (Objbase 59, Dshow 15, Mlang 10, Shobjidl 4), each with a full
+  vtable struct (R1 order), the CE pages' own signatures, (R1)-tagged
+  fill-in slots, and C call macros.  Still record-only, by policy:
+  interfaces R1 does not carry (Sapi 49, Rtccore 62, Imaging 7,
+  D3dm 9, Pimstore 13, Msxml2 10, webvw/Discodlg/Bthapi/Mshtml CE
+  host-navigation 2, ITaskbarList(2), ICreateTypeInfo(2)/
+  ICreateTypeLib(2)/IEnumFORMATETC/IEnumMoniker/IEnumSTATDATA/
+  IEnumSTATSTG/IEnumString/IErrorlog/IMultiQI/IViewObjectEx/
+  IAccessControl/IContinueCallback/IEnumOLEVERB/IOleLink,
+  IMultiLanguage3, 44 further DShow interfaces), and interfaces with
+  NO CE method pages at all (IStorage, IStream, IRunningObjectTable,
+  ITypeComp, IEnumCATEGORYINFO, IShellPropSheetExt) -- an order
+  source alone cannot ground a callable layout.
