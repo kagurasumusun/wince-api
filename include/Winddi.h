@@ -196,6 +196,104 @@ AKARI_CE_IMPORT ULONG XLATEOBJ_cGetPalette(XLATEOBJ* pxlo, ULONG iPal, ULONG cPa
 /* ms894032 Source Code for ProfApp */
 /* aa448295 VGA Support */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890437 Accelerated Line Segment Function */
+/* ms890528 Advanced Display Driver Power Management */
+/* ms890543 Antialiased Font Support */
+/* ms890627 ATI Sample Display Driver Optimization */
+/* ms890765 Benefits and Limitations of GPE Display Drivers */
+/* ms890816 Bit Block Transfer Acceleration */
+/* ms896142 BitBlT Emulation Library Functions */
+/* ms923765 Building DispPerf.exe */
+/* ms891084 ClearType */
+/* ms891144 ColorConverter */
+/* aa447433 Contrast Control */
+/* aa448245 Creating a Display Driver Based on the GPE Classes */
+/* aa448246 Creating a Target Application for Profiling the FLAT Display Driver */
+/* aa447456 DDI Functions */
+/* aa447494 Display Buffer Formats */
+/* aa448251 Display Device Performance Profile Analysis */
+/* aa447499 Display Driver Migration */
+/* aa447501 Display Driver Performance Profiling */
+/* aa447503 Display Driver Recommendations */
+/* aa447504 Display Driver Registry Settings */
+/* aa447508 Display Driver Security */
+/* aa447507 Display Drivers and the Run-Time Image */
+/* aa448252 Enabling Monte Carlo Profiling of a Configuration */
+/* ms892154 FLAT Sample Display Driver */
+/* ms892157 GDI Support Services */
+/* ms892160 GPE */
+/* ms892162 GPESurf */
+/* ms892163 GPEVGA */
+/* aa448254 Implementing the GenBltCpuInitialize Function */
+/* aa448255 Implementing the Optimization Function */
+/* aa448256 Implementing the Translation Function */
+/* ms892485 Line Drawing */
+/* ms892486 Line Drawing Acceleration */
+/* ms892503 Multiple Screen Driver Support */
+/* ms892546 Node2D */
+/* aa448261 Obtaining a Performance Profile for a Display Driver */
+/* ms892556 Optimized GPE Emulation Function Analysis */
+/* ms892557 Optimizing a GPE Emulation Function */
+/* aa447567 Primary Display Drivers */
+/* aa447622 Sample Blit Acceleration */
+/* aa447624 Sample DrvEscape Function */
+/* ms893969 Screen Rotation */
+/* ms893979 Secondary Display Drivers */
+/* ms894032 Source Code for ProfApp */
+/* aa448295 VGA Support */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890437 Accelerated Line Segment Function */
+/* ms890528 Advanced Display Driver Power Management */
+/* ms890543 Antialiased Font Support */
+/* ms890627 ATI Sample Display Driver Optimization */
+/* ms890765 Benefits and Limitations of GPE Display Drivers */
+/* ms890816 Bit Block Transfer Acceleration */
+/* ms896142 BitBlT Emulation Library Functions */
+/* ms923765 Building DispPerf.exe */
+/* ms891084 ClearType */
+/* ms891144 ColorConverter */
+/* aa447433 Contrast Control */
+/* aa448245 Creating a Display Driver Based on the GPE Classes */
+/* aa448246 Creating a Target Application for Profiling the FLAT Display Driver */
+/* aa447456 DDI Functions */
+/* aa447494 Display Buffer Formats */
+/* aa448251 Display Device Performance Profile Analysis */
+/* aa447499 Display Driver Migration */
+/* aa447501 Display Driver Performance Profiling */
+/* aa447503 Display Driver Recommendations */
+/* aa447504 Display Driver Registry Settings */
+/* aa447508 Display Driver Security */
+/* aa447507 Display Drivers and the Run-Time Image */
+/* aa448252 Enabling Monte Carlo Profiling of a Configuration */
+/* ms892154 FLAT Sample Display Driver */
+/* ms892157 GDI Support Services */
+/* ms892160 GPE */
+/* ms892162 GPESurf */
+/* ms892163 GPEVGA */
+/* aa448254 Implementing the GenBltCpuInitialize Function */
+/* aa448255 Implementing the Optimization Function */
+/* aa448256 Implementing the Translation Function */
+/* ms892485 Line Drawing */
+/* ms892486 Line Drawing Acceleration */
+/* ms892503 Multiple Screen Driver Support */
+/* ms892546 Node2D */
+/* aa448261 Obtaining a Performance Profile for a Display Driver */
+/* ms892556 Optimized GPE Emulation Function Analysis */
+/* ms892557 Optimizing a GPE Emulation Function */
+/* aa447567 Primary Display Drivers */
+/* aa447622 Sample Blit Acceleration */
+/* aa447624 Sample DrvEscape Function */
+/* ms893969 Screen Rotation */
+/* ms893979 Secondary Display Drivers */
+/* ms894032 Source Code for ProfApp */
+/* aa448295 VGA Support */
+
 #ifdef __cplusplus
 }
 #endif

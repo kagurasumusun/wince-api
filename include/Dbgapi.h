@@ -57,6 +57,17 @@ BOOL RegisterDbgZones(HMODULE hMod, LPDBGPARAM lpdbgparam);
  * wIndex 0..MAX_OEM_LEDINDEX (the OS reserves its own index range). */
 AKARI_CE_IMPORT void WriteDebugLED(WORD wIndex, DWORD dwPattern) AKARI_CE_NAME(WriteDebugLED);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-debugging-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451039 ASSERTMSG: print `ASSERTMSG(TEXT("Invalid number of items"), dwCurrentNumberOfItems < dwMaxNumberOfItems);` -- recorded verbatim (no compiled prototype) */
+/* aa451062 DEBUGCHK: print `DEBUGCHK (Expression)` */
+/* (record-only: parameter or return type unpublished) */
+/* aa451064 DEBUGLED: print `DEBUGLED (Condition, (Parameters) )` -- recorded verbatim (no compiled prototype) */
+/* aa451070 DEBUGZONE: print `DEBUGZONE (ulZoneMask)` -- recorded verbatim (no compiled prototype) */
+/* aa451085 RETAILLED: print `RETAILLED (Condition, (Parameters) )` -- recorded verbatim (no compiled prototype) */
+/* aa451067 DEBUGREGISTER, RETAILREGISTERZONES (Header: Dbgapi.h) */
+
 #ifdef __cplusplus
 }
 #endif

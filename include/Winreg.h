@@ -198,6 +198,12 @@ AKARI_CE_IMPORT BOOL CeFindNextRegChange(HANDLE hChangeHandle) AKARI_CE_NAME(CeF
  * handle must not be used afterwards. */
 AKARI_CE_IMPORT BOOL CeFindCloseRegChange(HANDLE hChangeHandle) AKARI_CE_NAME(CeFindCloseRegChange);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-registry-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516952 Registry Functions */
+/* ms891456 Registry Notification Functions */
+
 #ifdef __cplusplus
 }
 #endif

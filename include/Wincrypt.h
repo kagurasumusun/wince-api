@@ -1712,4 +1712,197 @@ AKARI_CE_IMPORT BOOL WINAPI PFXVerifyPassword(CRYPT_DATA_BLOB *pPFX, LPCWSTR szP
 /* ms936962 Working with Certificates in Certificate Stores */
 /* ms936963 Writing a CSP */
 /* ms936964 X.509 Digital Certification */
+/* ------------------------------------------------------------------
+ * Book surface: security-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms925441 About Cryptographic Service Provider */
+/* ms925562 Accessing a Smart Card */
+/* ms926471 Adding Enroll.exe to the OS Design */
+/* ms925571 Authenticating a Connection */
+/* ms925580 Authenticating the Client */
+/* ms926477 Authentication Event (AE) */
+/* ms925585 Authentication Services */
+/* ms925593 Authentication Services Application Development */
+/* ms936966 Authentication Services Functions */
+/* ms925600 Authentication Services Migration */
+/* ms925709 Authentication Services OS Design Development */
+/* ms936967 Authentication Services Reference */
+/* ms925716 Authentication Services Registry Settings */
+/* ms925722 Authentication Services Samples */
+/* ms925727 Authentication Services Security */
+/* ms936968 Authentication Services Structures */
+/* ms925738 Card Specific Properties */
+/* ms925752 Certificate Chains */
+/* ms925757 Certificate Extended Properties */
+/* ms925764 Certificate Links */
+/* ms926458 Certificates */
+/* ms925766 Certificates and CryptoAPI */
+/* ms926459 Certificates Application Development */
+/* ms936969 Certificates Functions */
+/* ms936970 Certificates Migration */
+/* ms926460 Certificates OS Design Development */
+/* ms925772 Certificates Overview */
+/* ms936971 Certificates Reference */
+/* ms936972 Certificates Registry Settings */
+/* ms936973 Certificates Samples */
+/* ms936974 Certificates Security */
+/* ms925779 Comparing LASS and Password Authentication */
+/* ms925784 Configuring Enroll.exe */
+/* ms926481 Configuring LASS */
+/* ms925787 Connecting to a CSP */
+/* ms925876 Context Requirements */
+/* ms925885 Context Semantics */
+/* ms925890 Creating a Credential Type Provider */
+/* ms936975 Creating a LAP */
+/* ms925887 Creating a PKCS #10 Request */
+/* ms926472 Creating an Enrollment Environment */
+/* ms925889 Creating Digital Signatures */
+/* ms925891 Credential Manager */
+/* ms926461 Credential Manager Application Development */
+/* ms936978 Credential Manager Error Codes */
+/* ms936979 Credential Manager Functions */
+/* ms925893 Credential Manager Migration */
+/* ms925894 Credential Manager OS Design Development */
+/* ms925895 Credential Manager Overview */
+/* ms936980 Credential Manager Reference */
+/* ms925896 Credential Manager Registry Settings */
+/* ms925897 Credential Manager Security */
+/* ms936981 Credential Manager Structures */
+/* ms936982 Credential Manager Type Provider Functions */
+/* ms925898 Credential Type Categories */
+/* ms925899 Credential Type Providers */
+/* ms925900 Credential Types */
+/* ms926462 Cryptography */
+/* ms926463 Cryptography Application Development */
+/* ms936987 Cryptography Data Types */
+/* ms936988 Cryptography Functions */
+/* ms926464 Cryptography Migration */
+/* ms925901 Cryptography OS Design Development */
+/* ms936989 Cryptography Reference */
+/* ms925902 Cryptography Registry Settings */
+/* ms926465 Cryptography Samples */
+/* ms925903 Cryptography Security */
+/* ms926466 Cryptography Services */
+/* ms936990 Cryptography Structures */
+/* ms925904 CSP Functions */
+/* ms925905 Customizing StartUI or Control Panel to Use LASS */
+/* ms925906 Diffie-Hellman Keys */
+/* ms925907 Direct Card Access Functions */
+/* ms925908 Embedding the Digital Signature as a Resource */
+/* ms925909 Encoding and Decoding a Certificate Context */
+/* ms925910 Encrypting and Decrypting Data */
+/* ms925911 Encrypting and Decrypting Simultaneously */
+/* ms925912 Encryption and Decryption */
+/* ms925913 Ending an SSPI Session */
+/* ms926482 Enrolling Users */
+/* ms925945 Enrollment Options */
+/* ms925914 Ensuring Communication Integrity */
+/* ms925915 Exchanging Public Keys */
+/* ms925916 Exchanging Session Keys */
+/* ms925917 Exporting Cryptographic Keys */
+/* ms925918 Generating Cryptographic Keys */
+/* ms925919 Getting a CSP Signed */
+/* ms926483 Handling Registry Changes */
+/* ms925920 Hashing and Digital Signature Algorithms */
+/* ms925921 Hierarchy of Trust */
+/* ms937010 How to Enroll for a Certificate Using the Default Settings */
+/* ms937011 How to Enroll for a Certificate Using the Modified Settings */
+/* ms926478 Implementing Master Key Protection in a LAP */
+/* ms925922 Initializing the SSPI */
+/* ms936992 Installing a LAP */
+/* ms936991 Installing an AE */
+/* ms925923 Introducing Smart Cards to the System */
+/* ms925924 Kerberos Security Support Provider */
+/* ms925925 Key BLOBs */
+/* ms925926 Key Databases */
+/* ms925927 Key Length Comparison */
+/* ms926479 LAP Implementation Issues */
+/* ms936993 LAP-Exported Functions */
+/* ms936994 LASS Application Development */
+/* ms925928 LASS Exponential Backoff */
+/* ms936995 LASS Functions */
+/* ms925929 LASS OS Design Development */
+/* ms925930 LASS Overview */
+/* ms936996 LASS Reference */
+/* ms936997 LASS Registry Settings */
+/* ms936998 LASS Samples */
+/* ms937001 LASS Security */
+/* ms926131 LASS Structures */
+/* ms926480 Local Authentication Plugin (LAP) */
+/* ms926467 Local Authentication Subsystem (LASS) */
+/* ms925931 Logical and Physical Stores */
+/* ms925932 Managing a Certificate Store's State */
+/* ms925933 Managing Certificates with Certificate Stores */
+/* ms925934 Manually Validating Schannel Credentials */
+/* ms925935 Master Key Protection in LASS */
+/* ms925936 Memory Use and Buffers */
+/* ms925937 Microsoft Cryptographic System */
+/* ms925938 Microsoft DSS and Diffie-Hellman Cryptographic Provider */
+/* ms925939 Microsoft Enhanced Cryptographic Provider */
+/* ms925940 Microsoft RSA Base Provider */
+/* ms925941 Modifying the ASP Page */
+/* ms925942 Negotiate Security Support Provider */
+/* ms925943 NTLM Security Support Provider */
+/* ms926473 Obtaining a Certificate */
+/* ms926474 Obtaining a Certificate Using a .cfg File */
+/* ms925944 Obtaining Schannel Credentials */
+/* ms925946 Overview of the CryptoAPI Registry */
+/* ms925947 Posting the Request */
+/* ms925949 Protected Store */
+/* ms925950 Registering the CSP */
+/* ms925951 Resource Manager Context Functions */
+/* ms925952 Retrieving the Certificate */
+/* ms925953 Sample Code: Decrypting a File */
+/* ms925954 Sample Code: Encrypting a File */
+/* ms925955 Schannel Security Support Provider */
+/* ms925956 Security Catalog Items */
+/* ms925958 Security Overview */
+/* ms925957 Security Packages */
+/* ms925959 Security Support Provider Interface Architecture */
+/* ms937002 Setting an Active LAP */
+/* ms937003 Setting an AE Policy */
+/* ms925960 Setting the Machine Default CSP */
+/* ms925961 Setting the User Default CSP */
+/* ms925962 Signing and Verifying Messages */
+/* ms925963 Smart Card */
+/* ms925964 Smart Card and Reader Access Functions */
+/* ms926469 Smart Card Application Development */
+/* ms925965 Smart Card Concepts */
+/* ms925966 Smart Card CSP */
+/* ms936835 Smart Card Database */
+/* ms936930 Smart Card Database Management Functions */
+/* ms936933 Smart Card Database Query Functions */
+/* ms936943 Smart Card Enrollment */
+/* ms936965 Smart Card Error Values */
+/* ms937004 Smart Card Functions */
+/* ms936944 Smart Card Interfaces */
+/* ms937005 Smart Card Migration */
+/* ms926470 Smart Card OS Design Development */
+/* ms936945 Smart Card Readers */
+/* ms937006 Smart Card Reference */
+/* ms936946 Smart Card Registry Settings */
+/* ms936947 Smart Card Resource Manager */
+/* ms937007 Smart Card Samples */
+/* ms937008 Smart Card Security */
+/* ms937009 Smart Card Structures */
+/* ms936949 Smart Card Subsystem */
+/* ms936951 Smart Card Tracking Functions */
+/* ms936952 SSPI Functions and Structures */
+/* ms926453 SSPI Handles */
+/* ms936953 SSPI Sample Application */
+/* ms936954 Storing Session Keys */
+/* ms936955 Supported CryptoAPI 2.0 APIs */
+/* ms936956 System Store Locations */
+/* ms936957 Testing the CSP */
+/* ms936958 Unsupported CryptoAPI 2.0 APIs */
+/* ms936959 Using a Backup Authority */
+/* ms926475 Using an Enrollment .cfg File */
+/* ms936960 Using Basic Cryptography Services */
+/* ms925948 Using SSPI */
+/* ms936961 Using the Enrollment Client Sample */
+/* ms926476 Verifying the Existence of a Certificate */
+/* ms926484 Verifying Users */
+/* ms936962 Working with Certificates in Certificate Stores */
+/* ms936963 Writing a CSP */
+/* ms936964 X.509 Digital Certification */
 #endif /* _WINCRYPT_H */

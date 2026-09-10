@@ -299,6 +299,91 @@ typedef struct _D3DMTEXTURE_DESC {
 /* ms894061 Texture Maps */
 /* ms894734 Vertex and Index Buffers */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-d3dmdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896720 D3DM_DRIVER Values (Header: D3dmddk.h.) */
+/* ms896731 D3DM_GETINFO Values (Header: D3dmddk.h.) */
+/* aa447706 D3DMRTYPEFLAG Values (Header: D3dmddk.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-d3dmdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890522 Additional Information from the Direct3D Mobile Driver */
+/* ms890710 Back Buffers and Image Surfaces */
+/* ms891126 Clipping in Direct3D Mobile Drivers */
+/* ms891181 Command Buffer Structure */
+/* aa447458 Depth and Stencil Buffers */
+/* aa447478 Direct3D Mobile Driver Registry Settings */
+/* aa447479 Direct3D Mobile Reference Driver */
+/* aa447517 Driver Initialization in Direct3D Mobile */
+/* ms892156 Front Buffers */
+/* ms892244 Internal Direct3D Mobile Driver Errors */
+/* ms892488 Local Hooking */
+/* ms892504 Multisampling in the Driver */
+/* ms892551 Number Format Conversions */
+/* aa447592 Remote Hooking */
+/* aa447595 Rendering Contexts in Direct3D Mobile */
+/* aa447598 Resource Management by Direct3D Mobile Drivers */
+/* ms894049 Surface Locks in Direct3D Mobile */
+/* ms894061 Texture Maps */
+/* ms894734 Vertex and Index Buffers */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-d3dmdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447695 D3DM_CreateContext: documented name-only (no value published; held) */
+/* aa447716 D3DM_CREATECONTEXT_PTR: documented name-only (no value published; held) */
+/* aa447696 D3DM_CreateSurface: documented name-only (no value published; held) */
+/* aa447720 D3DM_CREATESURFACE_PTR: documented name-only (no value published; held) */
+/* aa447697 D3DM_DestroyContext: documented name-only (no value published; held) */
+/* aa447722 D3DM_DESTROYCONTEXT_PTR: documented name-only (no value published; held) */
+/* aa447698 D3DM_DestroySurface: documented name-only (no value published; held) */
+/* aa447724 D3DM_DESTROYSURFACE_PTR: documented name-only (no value published; held) */
+/* aa447725 D3DM_DLL_ENTRY: documented name-only (no value published; held) */
+/* aa447700 D3DM_DrawPrimitive: documented name-only (no value published; held) */
+/* aa447729 D3DM_DRAWPRIMITIVE_PTR: documented name-only (no value published; held) */
+/* aa447701 D3DM_GetAdapterInfo: documented name-only (no value published; held) */
+/* ms896730 D3DM_GETADAPTERINFO_PTR: documented name-only (no value published; held) */
+/* aa447702 D3DM_GetInfo: documented name-only (no value published; held) */
+/* ms896733 D3DM_GETINFO_PTR: documented name-only (no value published; held) */
+/* aa447703 D3DM_Initialize: documented name-only (no value published; held) */
+/* aa447704 D3DM_LockSurface: documented name-only (no value published; held) */
+/* ms896738 D3DM_LOCKSURFACE_PTR: documented name-only (no value published; held) */
+/* aa447705 D3DM_ResourceManager: documented name-only (no value published; held) */
+/* ms896747 D3DM_RESOURCEMANAGER_PTR: documented name-only (no value published; held) */
+/* aa447709 D3DM_UnlockSurface: documented name-only (no value published; held) */
+/* ms896758 D3DM_UNLOCKSURFACE_PTR: documented name-only (no value published; held) */
+/* aa447710 D3DM_ValidateDevice: documented name-only (no value published; held) */
+/* ms896760 D3DM_VALIDATEDEVICE_PTR: documented name-only (no value published; held) */
+/* aa447708 D3DMTSS_TEXTURE: documented name-only (no value published; held) */
+/* ms896720 D3DM_DRIVER Values (Header: D3dmddk.h.) */
+/* ms896731 D3DM_GETINFO Values (Header: D3dmddk.h.) */
+/* aa447706 D3DMRTYPEFLAG Values (Header: D3dmddk.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-d3dmdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890522 Additional Information from the Direct3D Mobile Driver */
+/* ms890710 Back Buffers and Image Surfaces */
+/* ms891126 Clipping in Direct3D Mobile Drivers */
+/* ms891181 Command Buffer Structure */
+/* aa447458 Depth and Stencil Buffers */
+/* aa447478 Direct3D Mobile Driver Registry Settings */
+/* aa447479 Direct3D Mobile Reference Driver */
+/* aa447517 Driver Initialization in Direct3D Mobile */
+/* ms892156 Front Buffers */
+/* ms892244 Internal Direct3D Mobile Driver Errors */
+/* ms892488 Local Hooking */
+/* ms892504 Multisampling in the Driver */
+/* ms892551 Number Format Conversions */
+/* aa447592 Remote Hooking */
+/* aa447595 Rendering Contexts in Direct3D Mobile */
+/* aa447598 Resource Management by Direct3D Mobile Drivers */
+/* ms894049 Surface Locks in Direct3D Mobile */
+/* ms894061 Texture Maps */
+/* ms894734 Vertex and Index Buffers */
+
 #ifdef __cplusplus
 }
 #endif

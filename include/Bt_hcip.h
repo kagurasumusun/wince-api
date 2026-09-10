@@ -71,6 +71,42 @@ AKARI_CE_IMPORT int HCI_WritePacket(HCI_TYPE eType, BD_BUFFER* pOutBuffer)
 /* ms894035 Supported HCI Transport Drivers */
 /* aa447440 Transferring Data */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-bthci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890928 Bluetooth HCI Transport Driver Registry Settings */
+/* ms890956 Bluetooth Stack Architecture */
+/* ms890965 Bluetooth Stack Implementation Considerations */
+/* ms890977 Bluetooth Stack Implementation in Windows CE */
+/* aa447431 Closing Connections */
+/* aa447457 Debug/Auxiliary */
+/* ms892245 Internal Representation for Bluetooth Address */
+/* ms892428 IO Control and Other Common Stack Functions */
+/* ms892493 Memory Utilization */
+/* aa447430 Opening Connections */
+/* ms894022 Shared Thread Pool */
+/* ms894023 Sharing Responsibilities */
+/* ms894035 Supported HCI Transport Drivers */
+/* aa447440 Transferring Data */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-bthci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890928 Bluetooth HCI Transport Driver Registry Settings */
+/* ms890956 Bluetooth Stack Architecture */
+/* ms890965 Bluetooth Stack Implementation Considerations */
+/* ms890977 Bluetooth Stack Implementation in Windows CE */
+/* aa447431 Closing Connections */
+/* aa447457 Debug/Auxiliary */
+/* ms892245 Internal Representation for Bluetooth Address */
+/* ms892428 IO Control and Other Common Stack Functions */
+/* ms892493 Memory Utilization */
+/* aa447430 Opening Connections */
+/* ms894022 Shared Thread Pool */
+/* ms894023 Sharing Responsibilities */
+/* ms894035 Supported HCI Transport Drivers */
+/* aa447440 Transferring Data */
+
 #ifdef __cplusplus
 }
 #endif

@@ -54,6 +54,31 @@ VOID FMD_PowerUp(void);
 /* ms895489 How to Configure a Run-Time Image to Support a Flash Media Device */
 /* ms895494 How to Develop a Flash Media Driver */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-flash (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-flash (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895489 How to Configure a Run-Time Image to Support a Flash Media Device */
+/* ms895494 How to Develop a Flash Media Driver */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-flash (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901387 IOCTL_DISK_DELETE_SECTORS: documented name-only (no value published; held) */
+/* ms902121 IOCTL_FMD_GET_INTERFACE: documented name-only (no value published; held) */
+/* ms902122 IOCTL_FMD_LOCK_BLOCKS: documented name-only (no value published; held) */
+/* ms902123 IOCTL_FMD_SET_XIPMODE: documented name-only (no value published; held) */
+/* ms902124 IOCTL_FMD_UNLOCK_BLOCKS: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-flash (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895489 How to Configure a Run-Time Image to Support a Flash Media Device */
+/* ms895494 How to Develop a Flash Media Driver */
+
 #ifdef __cplusplus
 }
 #endif

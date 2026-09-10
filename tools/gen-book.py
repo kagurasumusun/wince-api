@@ -157,7 +157,7 @@ def split_glued(piece):
     for i in range(len(piece) - 1, 0, -1):
         pre, name = piece[:i], piece[i:]
         p = pre.rstrip('*')
-        if (p in KNOWN or p in PRIMS) and name and \
+        if len(p) >= 2 and (p in KNOWN or p in PRIMS) and name and \
                 (name[0].islower() or name[0] == '_') and \
                 re.search(r'[a-z]', name) and not \
                 re.match(r'^_?[A-Z0-9_]+$', name):
@@ -349,8 +349,16 @@ def compile_type(decl):
             if not member_type_known(mem):
                 return None
             lines.append('    ' + mem + ';')
+    # drop page-print duplicate pointer aliases that reuse the
+    # structure name itself ('} X, *X;' is a print artifact)
+    seen = []
+    for a in aliases:
+        n = a.lstrip('*').strip()
+        if n in [x.lstrip('*').strip() for x in seen]:
+            continue
+        seen.append(a)
     return 'typedef ' + kind + ' ' + (tag or '') + ' {\n' + \
-        '\n'.join(lines) + '\n} ' + ', '.join(aliases) + ';'
+        '\n'.join(lines) + '\n} ' + ', '.join(seen) + ';'
 
 
 def canonical_hdr(doc_hdr):
@@ -557,9 +565,16 @@ def emit_group(target, rs, bookname, raw, merge=False):
     for r in opaques:
         name = re.sub(r'\s*\(Windows CE[^)]*\)\s*$', '', r['title']).strip()
         name = re.sub(r'\s*\([^)]*\)\s*$', '', name).strip()
-        if not carried(name) and name in need_carriers:
+        if carried(name):
+            continue
+        if name in need_carriers:
             emit.append(f'typedef struct {name} {name};   /* referenced; no page prints a layout */')
             DECLARED.add(name)
+        else:
+            # documented name-only (constant/typedef page, no value,
+            # no layout, not carried by R1): held-ledger record
+            emit.append(f'/* {r["id"].split("(")[0]} {name}: documented name-only'
+                        f' (no value published; held) */')
     for r, p in parsed_funcs:
         pid = r['id'].split('(')[0]
         sig = ' '.join((r.get('sig') or '').split())

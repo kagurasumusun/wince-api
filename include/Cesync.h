@@ -71,4 +71,90 @@ typedef struct tagDevInfo {
 /* aa514406 IReplStore::RemoveDuplicates (Header: Cesync.h.) */
 /* aa514407 IReplStore::ReportStatus (Header: Cesync.h.) */
 /* aa514409 IReplStore::UpdateItem (Header: Cesync.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513895 IEnumReplItem::Clone (Header: Cesync.h.) */
+/* aa513896 IEnumReplItem::GetFolderHandle (Header: Cesync.h.) */
+/* aa513900 IEnumReplItem::Next (Header: Cesync.h.) */
+/* aa513901 IEnumReplItem::Reset (Header: Cesync.h.) */
+/* aa513903 IEnumReplItem::Skip (Header: Cesync.h.) */
+/* aa514343 IReplNotify::GetWindow (Header: Cesync.h.) */
+/* aa514347 IReplNotify::OnItemCompleted (Header: Cesync.h.) */
+/* aa514350 IReplNotify::OnItemNotify (Header: Cesync.h.) */
+/* aa514352 IReplNotify::QueryDevice (Header: Cesync.h.) */
+/* aa514354 IReplNotify::SetStatusText (Header: Cesync.h.) */
+/* aa514356 IReplObjHandler::DeleteObj (Header: Cesync.h.) */
+/* aa514357 IReplObjHandler::GetPacket (Header: Cesync.h.) */
+/* aa514361 IReplObjHandler::Reset (Header: Cesync.h.) */
+/* aa514363 IReplObjHandler::SetPacket (Header: Cesync.h.) */
+/* aa514365 IReplObjHandler::Setup (Header: Cesync.h.) */
+/* aa514367 IReplStore::ActivateDialog (Header: Cesync.h.) */
+/* aa514370 IReplStore::BytesToObject (Header: Cesync.h.) */
+/* aa514372 IReplStore::CompareItem (Header: Cesync.h.) */
+/* aa514374 IReplStore::CompareStoreIDs (Header: Cesync.h.) */
+/* aa514376 IReplStore::CopyObject (Header: Cesync.h.) */
+/* aa514378 IReplStore::FindFirstItem (Header: Cesync.h.) */
+/* aa514380 IReplStore::FindItemClose (Header: Cesync.h.) */
+/* aa514381 IReplStore::FindNextItem (Header: Cesync.h.) */
+/* aa514384 IReplStore::FreeObject (Header: Cesync.h.) */
+/* aa514386 IReplStore::GetConflictInfo (Header: Cesync.h.) */
+/* aa514388 IReplStore::GetFolderInfo (Header: Cesync.h.) */
+/* aa514389 IReplStore::GetObjTypeUIData (Header: Cesync.h.) */
+/* aa514391 IReplStore::GetStoreInfo (Header: Cesync.h.) */
+/* aa514393 IReplStore::Initialize (Header: Cesync.h.) */
+/* aa514395 IReplStore::IsFolderChanged (Header: Cesync.h.) */
+/* aa514396 IReplStore::IsItemChanged (Header: Cesync.h.) */
+/* aa514398 IReplStore::IsItemReplicated (Header: Cesync.h.) */
+/* aa514400 IReplStore::IsValidObject (Header: Cesync.h.) */
+/* aa514403 IReplStore::ObjectToBytes (Header: Cesync.h.) */
+/* aa514406 IReplStore::RemoveDuplicates (Header: Cesync.h.) */
+/* aa514407 IReplStore::ReportStatus (Header: Cesync.h.) */
+/* aa514409 IReplStore::UpdateItem (Header: Cesync.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513866 GetObjTypeInfo: documented name-only (no value published; held) */
+/* aa513869 HREPLFLD: documented name-only (no value published; held) */
+/* aa513871 HREPLITEM: documented name-only (no value published; held) */
+/* aa513872 HREPLOBJ: documented name-only (no value published; held) */
+/* aa514309 InitObjType: documented name-only (no value published; held) */
+/* ms861001 ReplDialogs: documented name-only (no value published; held) */
+/* aa513895 IEnumReplItem::Clone (Header: Cesync.h.) */
+/* aa513896 IEnumReplItem::GetFolderHandle (Header: Cesync.h.) */
+/* aa513900 IEnumReplItem::Next (Header: Cesync.h.) */
+/* aa513901 IEnumReplItem::Reset (Header: Cesync.h.) */
+/* aa513903 IEnumReplItem::Skip (Header: Cesync.h.) */
+/* aa514343 IReplNotify::GetWindow (Header: Cesync.h.) */
+/* aa514347 IReplNotify::OnItemCompleted (Header: Cesync.h.) */
+/* aa514350 IReplNotify::OnItemNotify (Header: Cesync.h.) */
+/* aa514352 IReplNotify::QueryDevice (Header: Cesync.h.) */
+/* aa514354 IReplNotify::SetStatusText (Header: Cesync.h.) */
+/* aa514356 IReplObjHandler::DeleteObj (Header: Cesync.h.) */
+/* aa514357 IReplObjHandler::GetPacket (Header: Cesync.h.) */
+/* aa514361 IReplObjHandler::Reset (Header: Cesync.h.) */
+/* aa514363 IReplObjHandler::SetPacket (Header: Cesync.h.) */
+/* aa514365 IReplObjHandler::Setup (Header: Cesync.h.) */
+/* aa514367 IReplStore::ActivateDialog (Header: Cesync.h.) */
+/* aa514370 IReplStore::BytesToObject (Header: Cesync.h.) */
+/* aa514372 IReplStore::CompareItem (Header: Cesync.h.) */
+/* aa514374 IReplStore::CompareStoreIDs (Header: Cesync.h.) */
+/* aa514376 IReplStore::CopyObject (Header: Cesync.h.) */
+/* aa514378 IReplStore::FindFirstItem (Header: Cesync.h.) */
+/* aa514380 IReplStore::FindItemClose (Header: Cesync.h.) */
+/* aa514381 IReplStore::FindNextItem (Header: Cesync.h.) */
+/* aa514384 IReplStore::FreeObject (Header: Cesync.h.) */
+/* aa514386 IReplStore::GetConflictInfo (Header: Cesync.h.) */
+/* aa514388 IReplStore::GetFolderInfo (Header: Cesync.h.) */
+/* aa514389 IReplStore::GetObjTypeUIData (Header: Cesync.h.) */
+/* aa514391 IReplStore::GetStoreInfo (Header: Cesync.h.) */
+/* aa514393 IReplStore::Initialize (Header: Cesync.h.) */
+/* aa514395 IReplStore::IsFolderChanged (Header: Cesync.h.) */
+/* aa514396 IReplStore::IsItemChanged (Header: Cesync.h.) */
+/* aa514398 IReplStore::IsItemReplicated (Header: Cesync.h.) */
+/* aa514400 IReplStore::IsValidObject (Header: Cesync.h.) */
+/* aa514403 IReplStore::ObjectToBytes (Header: Cesync.h.) */
+/* aa514406 IReplStore::RemoveDuplicates (Header: Cesync.h.) */
+/* aa514407 IReplStore::ReportStatus (Header: Cesync.h.) */
+/* aa514409 IReplStore::UpdateItem (Header: Cesync.h.) */
 

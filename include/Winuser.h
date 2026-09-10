@@ -1943,4 +1943,8 @@ typedef struct tagNMHDR {
 #define WS_EX_CAPTIONOKBTN                           0x80000000
 #define WS_POPUPWINDOW                               0x80880000
 
+/* ------------------------------------------------------------------
+ * Book surface: cc-controls (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907564 Controls Messages */
 #endif /* AKARI_WINUSER_H */

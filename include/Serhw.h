@@ -133,6 +133,37 @@ AKARI_CE_IMPORT ULONG COM_Write(HANDLE COM_Write, PUCHAR pSourceBytes, ULONG Num
 /* ms894017 Serial Port Driver Registry Settings */
 /* ms894019 Serial Port Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890705 Automatic Detection of Docking for Serial Ports */
+/* ms892179 High Speed Serial Port Driver */
+/* ms895498 Migrating a Serial Port Driver */
+/* aa447559 Power Management in Serial Port Drivers */
+/* ms894015 Serial Port Driver Architecture */
+/* ms894017 Serial Port Driver Registry Settings */
+/* ms894019 Serial Port Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms900149 HWOtherintrHandler: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890705 Automatic Detection of Docking for Serial Ports */
+/* ms892179 High Speed Serial Port Driver */
+/* ms895498 Migrating a Serial Port Driver */
+/* aa447559 Power Management in Serial Port Drivers */
+/* ms894015 Serial Port Driver Architecture */
+/* ms894017 Serial Port Driver Registry Settings */
+/* ms894019 Serial Port Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

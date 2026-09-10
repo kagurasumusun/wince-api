@@ -319,6 +319,170 @@ typedef enum VoIPProgressTone {
 /* ms909239 VoIP Manager Shutdown */
 /* ms909287 VoIP Manager SIP Server Registration */
 /* ms909288 VoIP Media Manager */
+/* ------------------------------------------------------------------
+ * Book surface: vail (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909305 DCRP_VALID_: documented name-only (no value published; held) */
+/* ms912596 VMS_: documented name-only (no value published; held) */
+/* ms931501 IVoIPCurrentCall2::AddParticipantToConference (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931602 IVoIPCurrentCall2::ConferenceHost (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931606 IVoIPCurrentCall2::ConferenceParticipants (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931612 IVoIPCurrentCall2::IsConferenceHost (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931615 IVoIPCurrentCall2::IsConferenceParticipant (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931626 IVoIPCurrentCall::Answer (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931630 IVoIPCurrentCall::Duration (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931657 IVoIPCurrentCall::FriendlyName (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931662 IVoIPCurrentCall::Hangup (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931667 IVoIPCurrentCall::Hold (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931672 IVoIPCurrentCall::Ignore (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931679 IVoIPCurrentCall::NetworkStatus (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931684 IVoIPCurrentCall::Redirect (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911835 IVoIPCurrentCall::RTCParticipant (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911839 IVoIPCurrentCall::RTCSession (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911843 IVoIPCurrentCall::StartTime (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911847 IVoIPCurrentCall::Status (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911852 IVoIPCurrentCall::Type (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911857 IVoIPCurrentCall::Unhold (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911943 IVoIPCurrentCall::URI (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms911949 IVoIPCurrentCall::VoIPName (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931643 IVoIPCurrentCallEnumerator::Next (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931646 IVoIPCurrentCallEnumerator::Reset (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms931654 IVoIPCurrentCallEnumerator::Skip (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912146 IVoIPMgr2::InitializeEx (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912171 IVoIPMgr2::RegisterWithSIPServer (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912178 IVoIPMgr::ActiveCurrentCall (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912184 IVoIPMgr::AutoForwardURI (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912189 IVoIPMgr::Call (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912195 IVoIPMgr::CallerInfoDB (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912201 IVoIPMgr::CallLogDB (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912207 IVoIPMgr::CurrentCallEnumerator (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912217 IVoIPMgr::Initialize (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912240 IVoIPMgr::MicrophoneMute (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912244 IVoIPMgr::MicrophoneVolume (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912253 IVoIPMgr::MissedCallTimeout (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912258 IVoIPMgr::MyServer (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912263 IVoIPMgr::MyURI (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912269 IVoIPMgr::Parameters (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912274 IVoIPMgr::PlayProgressTone (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912279 IVoIPMgr::Reregister (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912285 IVoIPMgr::RingTone (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912291 IVoIPMgr::RTCClient (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912299 IVoIPMgr::SendDTMF (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912302 IVoIPMgr::SpeakerMute (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912307 IVoIPMgr::SpeakerVolume (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912311 IVoIPMgr::State (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912319 IVoIPMgr::StopProgressTone (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912325 IVoIPMgr::Uninitialize (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912339 IVoIPUI::OnCallEvent (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ms912343 IVoIPUI::OnSystemEvent (Header: Voipmanager.h, Voipmanager.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: vail (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa525608 Configuration Data Store Example XML */
+/* aa525613 Creating an Application That Uses VAIL */
+/* aa525614 Current Call */
+/* aa525621 Database Store and Call Logging */
+/* aa525630 Example VAIL Application Structure */
+/* aa525636 How the VAIL Creates the Media Manager */
+/* aa525640 IP Phone Provisioning */
+/* ms911532 IVoIPCallerInfoDB::CreateRecord (Header: Voipstore.idl.) */
+/* ms911539 IVoIPCallerInfoDB::Enumerator (Header: Voipstore.idl.) */
+/* ms931238 IVoIPCallerInfoDB::FindCallerInfoBySpeedDialEntry (Header: Voipstore.idl.) */
+/* ms931345 IVoIPCallerInfoDB::FindCallerInfoByURI (Header: Voipstore.idl.) */
+/* ms911634 IVoIPCallerInfoDB::FriendlyNameEnumerator (Header: Voipstore.idl.) */
+/* ms911647 IVoIPCallerInfoDB::Init (Header: Voipstore.idl.) */
+/* ms911651 IVoIPCallerInfoDB::SpeedDialEnumerator (Header: Voipstore.idl.) */
+/* ms911553 IVoIPCallerInfoDBEnum::Next (Header: Voipstore.idl.) */
+/* ms911567 IVoIPCallerInfoDBEnum::Reset (Header: Voipstore.idl.) */
+/* ms931185 IVoIPCallerInfoDBEnum::Skip (Header: Voipstore.idl.) */
+/* ms911652 IVoIPCallerInfoRecord::Blocked (Header: Voipstore.idl.) */
+/* ms911654 IVoIPCallerInfoRecord::Commit (Header: Voipstore.idl.) */
+/* ms911655 IVoIPCallerInfoRecord::DeleteFromDB (Header: Voipstore.idl.) */
+/* ms911656 IVoIPCallerInfoRecord::ForwardingURI (Header: Voipstore.idl.) */
+/* ms911657 IVoIPCallerInfoRecord::FriendlyName (Header: Voipstore.idl.) */
+/* ms911659 IVoIPCallerInfoRecord::RingTone (Header: Voipstore.idl.) */
+/* ms911660 IVoIPCallerInfoRecord::SpeedDialEntry (Header: Voipstore.idl.) */
+/* ms911661 IVoIPCallerInfoRecord::URI (Header: Voipstore.idl.) */
+/* ms911662 IVoIPCallerInfoRecord::VoIPName (Header: Voipstore.idl.) */
+/* ms911663 IVoIPCallLogDB::Capacity (Header: Voipstore.idl.) */
+/* ms911664 IVoIPCallLogDB::CreateRecord (Header: Voipstore.idl.) */
+/* ms911670 IVoIPCallLogDB::IncomingEnumerator (Header: Voipstore.idl.) */
+/* ms911671 IVoIPCallLogDB::Init (Header: Voipstore.idl.) */
+/* ms911673 IVoIPCallLogDB::MissedEnumerator (Header: Voipstore.idl.) */
+/* ms911674 IVoIPCallLogDB::OutgoingEnumerator (Header: Voipstore.idl.) */
+/* ms911667 IVoIPCallLogDBEnum::Next (Header: Voipstore.idl.) */
+/* ms911668 IVoIPCallLogDBEnum::Reset (Header: Voipstore.idl.) */
+/* ms911669 IVoIPCallLogDBEnum::Skip (Header: Voipstore.idl.) */
+/* ms911675 IVoIPCallRecord::CallType (Header: Voipstore.idl.) */
+/* ms911676 IVoIPCallRecord::Commit (Header: Voipstore.idl.) */
+/* ms911677 IVoIPCallRecord::DeleteFromDB (Header: Voipstore.idl.) */
+/* ms911678 IVoIPCallRecord::Duration (Header: Voipstore.idl.) */
+/* ms911679 IVoIPCallRecord::EndTime (Header: Voipstore.idl.) */
+/* ms911680 IVoIPCallRecord::FriendlyName (Header: Voipstore.idl.) */
+/* ms911682 IVoIPCallRecord::StartTime (Header: Voipstore.idl.) */
+/* ms911683 IVoIPCallRecord::URI (Header: Voipstore.idl.) */
+/* ms911684 IVoIPCallRecord::VoIPName (Header: Voipstore.idl.) */
+/* ms911685 IVoIPConfigurationDataStore::Initialize (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911687 IVoIPConfigurationDataStore::ReadValue (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911688 IVoIPConfigurationDataStore::Uninitialize (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911689 IVoIPConfigurationDataStore::UpdateSettingsFromFile (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911690 IVoIPConfigurationDataStore::UpdateSettingsFromServer (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911691 IVoIPConfigurationDataStore::UpdateSettingsFromXML (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911692 IVoIPConfigurationDataStore::WriteValue (Header: Voipconfigurationdatastore.idl, Voipconfigurationdatastore.h.) */
+/* ms911968 IVoIPDirectoryClient::RegistrationParameters (Header: Voipprov.idl.) */
+/* ms911977 IVoIPDirectoryClient::SipPassword (Header: Voipprov.idl.) */
+/* ms911983 IVoIPDirectoryClient::SipServerParameters (Header: Voipprov.idl.) */
+/* ms911989 IVoIPMediaMgr::AnswerSession (Header: Voipmediamanager.idl.) */
+/* aa525641 IVoIPMediaMgr::ConferenceSessions (Header: Voipmediamanager.idl.) */
+/* ms911998 IVoIPMediaMgr::CreatePCToPCSession (Header: Voipmediamanager.idl.) */
+/* ms912006 IVoIPMediaMgr::EvaluateSessionDescription (Header: Voipmediamanager.idl.) */
+/* ms912013 IVoIPMediaMgr::HoldSession (Header: Voipmediamanager.idl.) */
+/* ms912020 IVoIPMediaMgr::Initialize (Header: Voipmediamanager.idl.) */
+/* ms912027 IVoIPMediaMgr::InitializeRTCClient (Header: Voipmediamanager.idl.) */
+/* ms912036 IVoIPMediaMgr::MicrophoneMute (Header: Voipmediamanager.idl.) */
+/* ms912043 IVoIPMediaMgr::MicrophoneVolume (Header: Voipmediamanager.idl.) */
+/* ms912055 IVoIPMediaMgr::OnReinviteEvent (Header: Voipmediamanager.idl.) */
+/* aa525642 IVoIPMediaMgr::OnSessionOperationCompleteEvent (Header: Voipmediamanager.idl.) */
+/* ms912064 IVoIPMediaMgr::OnSessionStateChangeEvent (Header: Voipmediamanager.idl.) */
+/* ms912071 IVoIPMediaMgr::PlayProgressTone (Header: Voipmediamanager.idl.) */
+/* ms912081 IVoIPMediaMgr::PlaySound (Header: Voipmediamanager.idl.) */
+/* ms912089 IVoIPMediaMgr::SendDTMF (Header: Voipmediamanager.idl.) */
+/* ms912098 IVoIPMediaMgr::SpeakerMute (Header: Voipmediamanager.idl.) */
+/* ms912109 IVoIPMediaMgr::SpeakerVolume (Header: Voipmediamanager.idl.) */
+/* ms912118 IVoIPMediaMgr::StopProgressTone (Header: Voipmediamanager.idl.) */
+/* ms912124 IVoIPMediaMgr::StopSound (Header: Voipmediamanager.idl.) */
+/* ms912130 IVoIPMediaMgr::UnholdSession (Header: Voipmediamanager.idl.) */
+/* ms912137 IVoIPMediaMgr::Uninitialize (Header: Voipmediamanager.idl.) */
+/* ms912165 IVoIPMgr2 */
+/* aa525648 Media Manager Responsibilities */
+/* aa525649 Migrating to New Initialization and Provisioning APIs */
+/* aa525681 Retrieving Provisioning Information */
+/* ms909273 Using Provisioning Information in VAIL */
+/* ms931956 VAIL Application Development */
+/* ms909283 VAIL Architecture */
+/* ms909276 VAIL as a Part of an IP Phone */
+/* ms909277 VAIL Call Conferencing */
+/* ms909278 VAIL Configuration Data Store Registry Settings */
+/* ms909279 VAIL Configuration Registry Settings */
+/* ms909298 VAIL Constants */
+/* ms909299 VAIL Enumerations */
+/* ms931957 VAIL How-to Topics */
+/* ms909300 VAIL Interfaces */
+/* ms931958 VAIL Migration */
+/* ms909280 VAIL Objects and Interfaces */
+/* ms931959 VAIL OS Design Development */
+/* ms909281 VAIL Plugin Registry Settings */
+/* ms909301 VAIL Reference */
+/* ms909282 VAIL Registry Settings */
+/* ms931960 VAIL Samples */
+/* ms909284 VAIL Security */
+/* ms909302 VAIL Structures */
+/* ms909285 VoIP Manager */
+/* ms909286 VoIP Manager Initialization */
+/* aa525638 VoIP Manager Setup */
+/* ms909239 VoIP Manager Shutdown */
+/* ms909287 VoIP Manager SIP Server Registration */
+/* ms909288 VoIP Media Manager */
 #endif /* AKARI_VOIPMANAGER_H */
 
 

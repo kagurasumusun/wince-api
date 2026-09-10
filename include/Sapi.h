@@ -2087,6 +2087,249 @@ typedef struct tagSPTEXTSELECTIONINFO {
 /* ms862709 Speech Synthesis API and DDI */
 /* ms897394 TalkBack */
 
+/* ------------------------------------------------------------------
+ * Book surface: sapi (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895608 SP_MAX_PRON_LENGTH: documented name-only (no value published; held) */
+/* ms895652 SP_MAX_WORD_LENGTH: documented name-only (no value published; held) */
+/* aa515641 IEnumSpObjectTokens::Clone (Header: sapi.h, sapi.idl.) */
+/* aa515643 IEnumSpObjectTokens::GetCount (Header: sapi.h, sapi.idl.) */
+/* aa515645 IEnumSpObjectTokens::Item (Header: sapi.h, sapi.idl.) */
+/* aa515648 IEnumSpObjectTokens::Next (Header: sapi.h, sapi.idl.) */
+/* aa515651 IEnumSpObjectTokens::Reset (Header: sapi.h, sapi.idl.) */
+/* aa515653 IEnumSpObjectTokens::Skip (Header: sapi.h, sapi.idl.) */
+/* ms886219 ISpAudio::EventHandle (Header: Sapi.h, Sapi.idl.) */
+/* ms886228 ISpAudio::GetBufferInfo (Header: Sapi.h, Sapi.idl.) */
+/* ms886240 ISpAudio::GetBufferNotifySize (Header: Sapi.h, Sapi.idl.) */
+/* ms886253 ISpAudio::GetDefaultFormat (Header: Sapi.h, Sapi.idl.) */
+/* ms886263 ISpAudio::GetStatus (Header: Sapi.h, Sapi.idl.) */
+/* ms886272 ISpAudio::SetBufferInfo (Header: Sapi.h, Sapi.idl.) */
+/* ms886286 ISpAudio::SetBufferNotifySize (Header: Sapi.h, Sapi.idl.) */
+/* ms886294 ISpAudio::SetFormat (Header: Sapi.h, Sapi.idl.) */
+/* ms886301 ISpAudio::SetState (Header: Sapi.h, Sapi.idl.) */
+/* ms886487 ISpContainerLexicon::AddLexicon (Header: Sapi.h, Sapi.idl.) */
+/* ms886494 ISpDataKey::CreateKey (Header: sapi.h, sapi.idl.) */
+/* ms886502 ISpDataKey::DeleteKey (Header: sapi.h, sapi.idl.) */
+/* ms886614 ISpDataKey::DeleteValue (Header: sapi.h, sapi.idl.) */
+/* ms886824 ISpDataKey::EnumKeys (Header: sapi.h, sapi.idl.) */
+/* ms886831 ISpDataKey::EnumValues (Header: sapi.h, sapi.idl.) */
+/* ms886832 ISpDataKey::GetData (Header: sapi.h, sapi.idl.) */
+/* ms886833 ISpDataKey::GetDWORD (Header: sapi.h, sapi.idl.) */
+/* ms886834 ISpDataKey::GetStringValue (Header: sapi.h, sapi.idl.) */
+/* ms886835 ISpDataKey::OpenKey (Header: sapi.h, sapi.idl.) */
+/* ms886836 ISpDataKey::SetData (Header: sapi.h, sapi.idl.) */
+/* ms886837 ISpDataKey::SetDWORD (Header: sapi.h, sapi.idl.) */
+/* ms886838 ISpDataKey::SetStringValue (Header: sapi.h, sapi.idl.) */
+/* ms886842 ISpEventSink::AddEvents (Header: Sapi.h, Sapi.idl.) */
+/* ms886843 ISpEventSink::GetEventInterest (Header: Sapi.h, Sapi.idl.) */
+/* ms886845 ISpEventSource::GetEvents (Header: Sapi.h, Sapi.idl.) */
+/* ms886846 ISpEventSource::GetInfo (Header: Sapi.h, Sapi.idl.) */
+/* ms886847 ISpEventSource::SetInterest (Header: Sapi.h, Sapi.idl.) */
+/* ms886852 ISpGrammarBuilder::AddResource (Header: Sapi.h, Sapi.idl.) */
+/* ms886853 ISpGrammarBuilder::AddRuleTransition (Header: Sapi.h, Sapi.idl.) */
+/* ms886854 ISpGrammarBuilder::AddWordTransition (Header: Sapi.h, Sapi.idl.) */
+/* ms886855 ISpGrammarBuilder::ClearRule (Header: Sapi.h, Sapi.idl.) */
+/* ms886856 ISpGrammarBuilder::Commit (Header: Sapi.h, Sapi.idl.) */
+/* ms886857 ISpGrammarBuilder::CreateNewState (Header: Sapi.h, Sapi.idl.) */
+/* ms886858 ISpGrammarBuilder::GetRule (Header: Sapi.h, Sapi.idl.) */
+/* ms886859 ISpGrammarBuilder::ResetGrammar (Header: Sapi.h, Sapi.idl.) */
+/* ms886866 ISpLexicon::AddPronunciation (Header: Sapi.h, Sapi.idl.) */
+/* ms886867 ISpLexicon::GetGeneration (Header: Sapi.h, Sapi.idl.) */
+/* ms886868 ISpLexicon::GetGenerationChange (Header: Sapi.h, Sapi.idl.) */
+/* ms886869 ISpLexicon::GetPronunciations (Header: Sapi.h, Sapi.idl.) */
+/* ms886870 ISpLexicon::GetWords (Header: Sapi.h, Sapi.idl.) */
+/* ms886871 ISpLexicon::RemovePronunciation (Header: Sapi.h, Sapi.idl.) */
+/* ms886873 ISpMMSysAudio::GetDeviceId (Header: Sapi.h, Sapi.idl.) */
+/* ms886874 ISpMMSysAudio::GetLineId (Header: Sapi.h, Sapi.idl.) */
+/* ms886875 ISpMMSysAudio::GetMMHandle (Header: Sapi.h, Sapi.idl.) */
+/* ms886876 ISpMMSysAudio::Read (Header: Sapi.h, Sapi.idl.) */
+/* ms886877 ISpMMSysAudio::SetDeviceId (Header: Sapi.h, Sapi.idl.) */
+/* ms886878 ISpMMSysAudio::SetLineId (Header: Sapi.h, Sapi.idl.) */
+/* ms886879 ISpMMSysAudio::Write (Header: Sapi.h, Sapi.idl.) */
+/* ms886881 ISpNotifyCallback::NotifyCallback (Header: Sapi.h, Sapi.idl.) */
+/* ms886883 ISpNotifySink::Notify (Header: Sapi.h, Sapi.idl.) */
+/* ms886885 ISpNotifySource::GetNotifyEventHandle (Header: Sapi.h, Sapi.idl.) */
+/* ms886886 ISpNotifySource::SetNotifyCallbackFunction (Header: Sapi.h, Sapi.idl.) */
+/* ms886887 ISpNotifySource::SetNotifyCallbackInterface (Header: Sapi.h, Sapi.idl.) */
+/* ms886889 ISpNotifySource::SetNotifySink (Header: Sapi.h, Sapi.idl.) */
+/* ms886890 ISpNotifySource::SetNotifyWin32Event (Header: Sapi.h, Sapi.idl.) */
+/* ms886891 ISpNotifySource::SetNotifyWindowMessage (Header: Sapi.h, Sapi.idl.) */
+/* ms886892 ISpNotifySource::WaitForNotifyEvent (Header: Sapi.h, Sapi.idl.) */
+/* ms886894 ISpNotifyTranslator::GetEventHandle (Header: Sapi.h, Sapi.idl.) */
+/* ms886895 ISpNotifyTranslator::InitCallback (Header: Sapi.h, Sapi.idl.) */
+/* ms886896 ISpNotifyTranslator::InitSpNotifyCallback (Header: Sapi.h, Sapi.idl.) */
+/* ms886897 ISpNotifyTranslator::InitWin32Event (Header: Sapi.h, Sapi.idl.) */
+/* ms886898 ISpNotifyTranslator::InitWindowMessage (Header: Sapi.h, Sapi.idl.) */
+/* ms886899 ISpNotifyTranslator::Wait (Header: Sapi.h, Sapi.idl.) */
+/* ms886908 ISpObjectToken::CreateInstance (Header: sapi.h, sapi.idl.) */
+/* ms886909 ISpObjectToken::DisplayUI (Header: sapi.h, sapi.idl.) */
+/* ms886916 ISpObjectToken::GetCategory (Header: sapi.h, sapi.idl.) */
+/* ms886917 ISpObjectToken::GetId (Header: sapi.h, sapi.idl.) */
+/* ms886918 ISpObjectToken::GetStorageFileName (Header: sapi.h, sapi.idl.) */
+/* ms886921 ISpObjectToken::IsUISupported (Header: sapi.h, sapi.idl.) */
+/* ms886922 ISpObjectToken::MatchesAttributes (Header: sapi.h, sapi.idl.) */
+/* ms886923 ISpObjectToken::Remove (Header: sapi.h, sapi.idl.) */
+/* ms886924 ISpObjectToken::RemoveStorageFileName (Header: sapi.h, sapi.idl.) */
+/* ms886925 ISpObjectToken::SetId (Header: sapi.h, sapi.idl.) */
+/* ms886902 ISpObjectTokenCategory::EnumTokens (Header: sapi.h, sapi.idl.) */
+/* ms886903 ISpObjectTokenCategory::GetDataKey (Header: sapi.h, sapi.idl.) */
+/* ms886904 ISpObjectTokenCategory::GetDefaultTokenId (Header: sapi.h, sapi.idl.) */
+/* ms886905 ISpObjectTokenCategory::GetId (Header: sapi.h, sapi.idl.) */
+/* ms886906 ISpObjectTokenCategory::SetDefaultTokenId (Header: sapi.h, sapi.idl.) */
+/* ms886907 ISpObjectTokenCategory::SetId (Header: sapi.h, sapi.idl.) */
+/* ms886920 ISpObjectTokenInit::InitFromDataKey (Header: sapi.h, sapi.idl.) */
+/* ms886927 ISpObjectWithToken::GetObjectToken (Header: sapi.h, sapi.idl.) */
+/* ms886928 ISpObjectWithToken::SetObjectToken (Header: sapi.h, sapi.idl.) */
+/* aa517023 ISpPhoneConverter::IdToPhone (Header: Sapi.h, Sapi.idl.) */
+/* aa517156 ISpPhoneConverter::PhoneToId (Header: Sapi.h, Sapi.idl.) */
+/* aa517183 ISpPhrase::Discard (Header: Sapi.h, Sapi.idl.) */
+/* aa517184 ISpPhrase::GetPhrase (Header: Sapi.h, Sapi.idl.) */
+/* aa517185 ISpPhrase::GetSerializedPhrase (Header: Sapi.h, Sapi.idl.) */
+/* aa517187 ISpPhrase::GetText (Header: Sapi.h, Sapi.idl.) */
+/* aa517165 ISpPhraseAlt::Commit (Header: Sapi.h, Sapi.idl.) */
+/* aa517166 ISpPhraseAlt::GetAltInfo (Header: Sapi.h, Sapi.idl.) */
+/* aa517171 ISpPhraseBuilder::AddElements (Header: Sapi.h, Sapi.idl.) */
+/* aa517173 ISpPhraseBuilder::AddProperties (Header: Sapi.h, Sapi.idl.) */
+/* aa517176 ISpPhraseBuilder::AddReplacements (Header: Sapi.h, Sapi.idl.) */
+/* aa517178 ISpPhraseBuilder::AddRules (Header: Sapi.h, Sapi.idl.) */
+/* aa517179 ISpPhraseBuilder::InitFromPhrase (Header: Sapi.h, Sapi.idl.) */
+/* aa517181 ISpPhraseBuilder::InitFromSerializedPhrase (Header: Sapi.h, Sapi.idl.) */
+/* aa517190 ISpRecoContext::Bookmark (Header: Sapi.h, Sapi.idl.) */
+/* aa517191 ISpRecoContext::CreateGrammar (Header: Sapi.h, Sapi.idl.) */
+/* aa517192 ISpRecoContext::DeserializeResult (Header: Sapi.h, Sapi.idl.) */
+/* aa517193 ISpRecoContext::GetAudioOptions (Header: Sapi.h, Sapi.idl.) */
+/* aa517195 ISpRecoContext::GetContextState (Header: Sapi.h, Sapi.idl.) */
+/* aa517196 ISpRecoContext::GetMaxAlternates (Header: Sapi.h, Sapi.idl.) */
+/* aa517199 ISpRecoContext::GetRecognizer (Header: Sapi.h, Sapi.idl.) */
+/* aa517200 ISpRecoContext::GetStatus (Header: Sapi.h, Sapi.idl.) */
+/* aa517201 ISpRecoContext::GetVoice (Header: Sapi.h, Sapi.idl.) */
+/* aa517202 ISpRecoContext::GetVoicePurgeEvent (Header: Sapi.h, Sapi.idl.) */
+/* aa517203 ISpRecoContext::Pause (Header: Sapi.h, Sapi.idl.) */
+/* aa517205 ISpRecoContext::Resume (Header: Sapi.h, Sapi.idl.) */
+/* aa517206 ISpRecoContext::SetAdaptationData (Header: Sapi.h, Sapi.idl.) */
+/* aa517209 ISpRecoContext::SetAudioOptions (Header: Sapi.h, Sapi.idl.) */
+/* aa517211 ISpRecoContext::SetContextState (Header: Sapi.h, Sapi.idl.) */
+/* aa517212 ISpRecoContext::SetMaxAlternates (Header: Sapi.h, Sapi.idl.) */
+/* aa517214 ISpRecoContext::SetVoice (Header: Sapi.h, Sapi.idl.) */
+/* aa517215 ISpRecoContext::SetVoicePurgeEvent (Header: Sapi.h, Sapi.idl.) */
+/* aa517219 ISpRecognizer::CreateRecoContext (Header: Sapi.h, Sapi.idl.) */
+/* aa517221 ISpRecognizer::DisplayUI (Header: Sapi.h, Sapi.idl.) */
+/* aa517224 ISpRecognizer::EmulateRecognition (Header: Sapi.h, Sapi.idl.) */
+/* aa517226 ISpRecognizer::GetFormat (Header: Sapi.h, Sapi.idl.) */
+/* aa517228 ISpRecognizer::GetInputObjectToken (Header: Sapi.h, Sapi.idl.) */
+/* aa517230 ISpRecognizer::GetInputStream (Header: Sapi.h, Sapi.idl.) */
+/* aa517231 ISpRecognizer::GetRecognizer (Header: Sapi.h, Sapi.idl.) */
+/* aa517233 ISpRecognizer::GetRecoProfile (Header: Sapi.h, Sapi.idl.) */
+/* aa517234 ISpRecognizer::GetRecoState (Header: Sapi.h, Sapi.idl.) */
+/* aa517238 ISpRecognizer::GetStatus (Header: Sapi.h, Sapi.idl.) */
+/* aa517240 ISpRecognizer::IsSharedInstance (Header: Sapi.h, Sapi.idl.) */
+/* aa517241 ISpRecognizer::IsUISupported (Header: Sapi.h, Sapi.idl.) */
+/* aa517243 ISpRecognizer::SetInput (Header: Sapi.h, Sapi.idl.) */
+/* aa517245 ISpRecognizer::SetRecognizer (Header: Sapi.h, Sapi.idl.) */
+/* aa517247 ISpRecognizer::SetRecoProfile (Header: Sapi.h, Sapi.idl.) */
+/* aa517248 ISpRecognizer::SetRecoState (Header: Sapi.h, Sapi.idl.) */
+/* aa517252 ISpRecoGrammar::GetGrammarId (Header: Sapi.h, Sapi.idl.) */
+/* aa517255 ISpRecoGrammar::GetGrammarState (Header: Sapi.h, Sapi.idl.) */
+/* aa517257 ISpRecoGrammar::GetRecoContext (Header: Sapi.h, Sapi.idl.) */
+/* aa517260 ISpRecoGrammar::IsPronounceable (Header: Sapi.h, Sapi.idl.) */
+/* aa517261 ISpRecoGrammar::LoadCmdFromFile (Header: Sapi.h, Sapi.idl.) */
+/* aa517263 ISpRecoGrammar::LoadCmdFromMemory (Header: Sapi.h, Sapi.idl.) */
+/* aa517265 ISpRecoGrammar::LoadCmdFromProprietaryGrammar (Header: Sapi.h, Sapi.idl.) */
+/* aa517267 ISpRecoGrammar::LoadCmdFromResource (Header: Sapi.h, Sapi.idl.) */
+/* aa517269 ISpRecoGrammar::LoadDictation (Header: Sapi.h, Sapi.idl.) */
+/* aa517271 ISpRecoGrammar::SaveCmd (Header: Sapi.h, Sapi.idl.) */
+/* aa517273 ISpRecoGrammar::SetDictationState (Header: Sapi.h, Sapi.idl.) */
+/* aa517276 ISpRecoGrammar::SetGrammarState (Header: Sapi.h, Sapi.idl.) */
+/* aa517277 ISpRecoGrammar::SetRuleIdState (Header: Sapi.h, Sapi.idl.) */
+/* aa517279 ISpRecoGrammar::SetRuleState (Header: Sapi.h, Sapi.idl.) */
+/* aa517281 ISpRecoGrammar::SetTextSelection (Header: Sapi.h, Sapi.idl.) */
+/* aa517284 ISpRecoGrammar::SetWordSequenceData (Header: Sapi.h, Sapi.idl.) */
+/* aa517286 ISpRecoGrammar::UnloadDictation (Header: Sapi.h, Sapi.idl.) */
+/* aa517290 ISpRecoResult::GetAlternates (Header: Sapi.h, Sapi.idl.) */
+/* aa517291 ISpRecoResult::GetAudio (Header: Sapi.h, Sapi.idl.) */
+/* aa517293 ISpRecoResult::GetRecoContext (Header: Sapi.h, Sapi.idl.) */
+/* aa517294 ISpRecoResult::GetResultTimes (Header: Sapi.h, Sapi.idl.) */
+/* aa517296 ISpRecoResult::ScaleAudio (Header: Sapi.h, Sapi.idl.) */
+/* aa517299 ISpRecoResult::Serialize (Header: Sapi.h, Sapi.idl.) */
+/* aa517301 ISpRecoResult::SpeakAudio (Header: Sapi.h, Sapi.idl.) */
+/* aa517304 ISpRegDataKey::SetKey (Header: sapi.h, sapi.idl.) */
+/* aa517308 ISpResourceManager::GetObject (Header: sapi.h, sapi.idl.) */
+/* aa517310 ISpResourceManager::SetObject (Header: sapi.h, sapi.idl.) */
+/* ms889643 ISpStream::BindToFile (Header: Sapi.h, Sapi.idl.) */
+/* ms889649 ISpStream::Close (Header: Sapi.h, Sapi.idl.) */
+/* ms890204 ISpStream::GetBaseStream (Header: Sapi.h, Sapi.idl.) */
+/* ms890231 ISpStream::SetBaseStream (Header: Sapi.h, Sapi.idl.) */
+/* ms890094 ISpStreamFormat::GetFormat (Header: Sapi.h, Sapi.idl.) */
+/* ms889680 ISpStreamFormatConverter::GetBaseStream (Header: Sapi.h, Sapi.idl.) */
+/* ms889690 ISpStreamFormatConverter::ResetSeekPosition (Header: Sapi.h, Sapi.idl.) */
+/* ms889698 ISpStreamFormatConverter::ScaleBaseToConvertedOffset (Header: Sapi.h, Sapi.idl.) */
+/* ms889785 ISpStreamFormatConverter::ScaleConvertedToBaseOffset (Header: Sapi.h, Sapi.idl.) */
+/* ms889876 ISpStreamFormatConverter::SetBaseStream (Header: Sapi.h, Sapi.idl.) */
+/* ms889967 ISpStreamFormatConverter::SetFormat (Header: Sapi.h, Sapi.idl.) */
+/* ms890271 ISpTranscript::AppendTranscript (Header: Sapi.h, Sapi.idl.) */
+/* ms890272 ISpTranscript::GetTranscript (Header: Sapi.h, Sapi.idl.) */
+/* ms890284 ISpVoice::DisplayUI (Header: Sapi.h, Sapi.idl.) */
+/* ms890285 ISpVoice::GetAlertBoundary (Header: Sapi.h, Sapi.idl.) */
+/* ms890286 ISpVoice::GetOutputObjectToken (Header: Sapi.h, Sapi.idl.) */
+/* ms890288 ISpVoice::GetOutputStream (Header: Sapi.h, Sapi.idl.) */
+/* ms890289 ISpVoice::GetPriority (Header: Sapi.h, Sapi.idl.) */
+/* ms890290 ISpVoice::GetRate (Header: Sapi.h, Sapi.idl.) */
+/* ms890291 ISpVoice::GetStatus (Header: Sapi.h, Sapi.idl.) */
+/* ms890292 ISpVoice::GetSyncSpeakTimeout (Header: Sapi.h, Sapi.idl.) */
+/* ms890352 ISpVoice::GetVoice (Header: Sapi.h, Sapi.idl.) */
+/* ms890414 ISpVoice::GetVolume (Header: Sapi.h, Sapi.idl.) */
+/* ms890423 ISpVoice::IsUISupported (Header: Sapi.h, Sapi.idl.) */
+/* ms890442 ISpVoice::Pause (Header: Sapi.h, Sapi.idl.) */
+/* ms890452 ISpVoice::Resume (Header: Sapi.h, Sapi.idl.) */
+/* ms890460 ISpVoice::SetAlertBoundary (Header: Sapi.h, Sapi.idl.) */
+/* ms890466 ISpVoice::SetOutput (Header: Sapi.h, Sapi.idl.) */
+/* ms890472 ISpVoice::SetPriority (Header: Sapi.h, Sapi.idl.) */
+/* ms890479 ISpVoice::SetRate (Header: Sapi.h, Sapi.idl.) */
+/* ms890487 ISpVoice::SetSyncSpeakTimeout (Header: Sapi.h, Sapi.idl.) */
+/* ms890497 ISpVoice::SetVoice (Header: Sapi.h, Sapi.idl.) */
+/* ms890504 ISpVoice::SetVolume (Header: Sapi.h, Sapi.idl.) */
+/* ms890513 ISpVoice::Skip (Header: Sapi.h, Sapi.idl.) */
+/* ms890519 ISpVoice::Speak (Header: Sapi.h, Sapi.idl.) */
+/* ms890525 ISpVoice::SpeakCompleteEvent (Header: Sapi.h, Sapi.idl.) */
+/* ms890536 ISpVoice::SpeakStream (Header: Sapi.h, Sapi.idl.) */
+/* ms890540 ISpVoice::WaitUntilDone (Header: Sapi.h, Sapi.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: sapi (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862081 American English Phoneme Representation */
+/* ms862104 Chinese Phonemes */
+/* ms862143 Engine Characteristics */
+/* ms862171 International Phoneme Representation */
+/* ms886851 ISpGrammarBuilder */
+/* ms862174 Japanese Phonemes */
+/* ms862156 Microsoft Speech SDK Overview */
+/* ms897380 SAPI Application Development */
+/* ms893442 SAPI Class IDs */
+/* aa513752 SAPI Enumerations */
+/* aa513758 SAPI Functions */
+/* aa513761 SAPI Global Variables */
+/* aa513764 SAPI Interfaces */
+/* aa513776 SAPI Macros */
+/* ms862687 SAPI Migration */
+/* ms862707 SAPI OS Design Development */
+/* ms862685 SAPI Overview */
+/* aa513780 SAPI Reference */
+/* ms862688 SAPI Registry Settings */
+/* ms862686 SAPI Samples */
+/* aa513783 SAPI Structures */
+/* aa513788 SAPI Token Category IDs */
+/* ms893503 SPDUI_AddRemoveWord */
+/* ms893504 SPDUI_AudioProperties */
+/* ms894109 SPDUI_AudioVolume */
+/* ms894171 SPDUI_EngineProperties */
+/* ms894312 SPDUI_MicTraining */
+/* ms894322 SPDUI_RecoProfileProperties */
+/* ms894324 SPDUI_UserTraining */
+/* ms862708 Speech Recognition API and DDI */
+/* ms862709 Speech Synthesis API and DDI */
+/* ms897394 TalkBack */
+
 #ifdef __cplusplus
 }
 #endif

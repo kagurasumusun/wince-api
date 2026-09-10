@@ -66,4 +66,25 @@ AKARI_CE_IMPORT HRESULT SetPCSyncName(const WCHAR *c_wszPCName)
 /* ms909235 Setting Up PC Authentication */
 /* ms909236 Setting up the PC Authentication LAP on a Windows CE Device */
 /* ms909237 Setting up the PC Authentication PC Application */
+/* ------------------------------------------------------------------
+ * Book surface: pcauth (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa525624 Determining PC Lock Status by Calling the LAP Directly */
+/* aa525625 Determining PC Lock Status Using LASS */
+/* aa525645 Learning More About PC Authentication */
+/* aa525657 PC Authentication and IPsec */
+/* ms912608 PC Authentication Application Development */
+/* aa525655 PC Authentication Architecture */
+/* ms931941 PC Authentication Constants */
+/* ms931942 PC Authentication Functions */
+/* aa525656 PC Authentication LAP Implementation */
+/* aa525658 PC Authentication Migration */
+/* aa525659 PC Authentication OS Design Development */
+/* ms931943 PC Authentication Reference */
+/* aa525660 PC Authentication Registry Settings */
+/* aa525661 PC Authentication Samples */
+/* aa525662 PC Authentication Security */
+/* ms909235 Setting Up PC Authentication */
+/* ms909236 Setting up the PC Authentication LAP on a Windows CE Device */
+/* ms909237 Setting up the PC Authentication PC Application */
 #endif /* AKARI_VOIPLAP_H */

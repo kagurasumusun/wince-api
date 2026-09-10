@@ -194,6 +194,308 @@ HRESULT CeSetDevMgmtTask(DMTASKINFO* pdi);
 /* ms896068 UserName Element (Poll Request) */
 /* ms896069 Version Element (Poll Request) */
 
+/* ------------------------------------------------------------------
+ * Book surface: dmclient (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: dmclient (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894682 abort */
+/* ms894382 API Access */
+/* ms894712 ApplicablePackages Element (Poll Response) */
+/* ms894994 AuthorizationToken Element (Poll Request) */
+/* ms894996 Behavior Element (Instruction Response) */
+/* ms894386 Checkpoint Restart */
+/* ms895006 ClientLocation Element (Location Request) */
+/* ms895008 ClientSettings Element (Poll Response) */
+/* ms895011 CodePage Element (Poll Request) */
+/* ms895012 CommandLine Element (Instruction Response) */
+/* ms895015 Connection Element (Poll Request) */
+/* ms895018 copy (Device Management Client) */
+/* ms895020 createdir */
+/* ms894407 Custom HTTP Headers for Various POSTs */
+/* ms895022 delete */
+/* ms894425 Device Management Client Architecture */
+/* ms894426 Device Management Client Database */
+/* ms894427 Device Management Client Migration */
+/* ms894460 Device Management Client OS Design Development */
+/* ms894465 Device Management Client Registry Settings */
+/* ms894685 Device Management Client Samples */
+/* ms894468 Device Management Client Security */
+/* ms894472 Device Management Service Design */
+/* ms894480 Device Management Software Requirements */
+/* ms895025 DeviceName Element (Poll Request) */
+/* ms895027 DevicePoll Element (Poll Request) */
+/* ms895029 Directory Element (Software Inventory Report) */
+/* ms895031 DirectoryService Element (Location Request) */
+/* ms895033 DirectoryService Element (Location Response) */
+/* ms895043 Domain Element (Poll Request) */
+/* ms894482 Download Event Status Reports */
+/* ms895048 echo (Device Management Client) */
+/* ms895050 else */
+/* ms895052 elseif */
+/* ms895054 Enabled Element (Poll Response) */
+/* ms895056 endif */
+/* ms895060 ExcludeCompressed Element (Poll Response) */
+/* ms895062 ExcludeEncrypted Element (Poll Response) */
+/* ms894492 Failure Recovery */
+/* ms895064 FailureRetryCount Element (Poll Response) */
+/* ms895066 FailureRetryInterval Element (Poll Response) */
+/* ms894496 File Collection Report */
+/* ms895074 File Element (Software Inventory Report) */
+/* ms895068 FileCollectionSettings Element (Poll Response) */
+/* ms895071 filecreated */
+/* ms895077 fileexists */
+/* ms895079 FileFilterItem Element (Poll Response) */
+/* ms895082 filelastmodified */
+/* ms895085 FileReport Element (Software Inventory Report) */
+/* ms895088 filesize */
+/* ms895092 Filter Element (Poll Response) */
+/* ms895095 Flags Element (Instruction Response) */
+/* ms895098 goto (Device Management Client) */
+/* ms895099 HTTP Element (Location Response) */
+/* ms894518 HTTP Status Codes for Device Management */
+/* ms895101 ID Element (Instruction Response) */
+/* ms895102 ID Element (Poll Request) */
+/* ms895107 Identification Element (Poll Request) */
+/* ms895112 if (Device Management Client) */
+/* ms894521 Instruction Request to the Server */
+/* ms894524 Instruction Response from the Server */
+/* ms895124 Instructions Element (Instruction Response) */
+/* ms895128 InstructionsRequest Element (Instruction Request) */
+/* ms895131 Interval Element (Instruction Response) */
+/* ms895133 Interval Element (Poll Response) */
+/* ms895136 Inventory Element (Machine Inventory Report) */
+/* ms895139 InventoryItem Element (Machine Inventory Report) */
+/* ms895141 IPAddress Element (Location Request) */
+/* ms895145 IPAddress Element (Poll Request) */
+/* ms895148 IPAddresses Element (Location Request) */
+/* ms895152 IPSubnet Element (Poll Request) */
+/* ms895157 IPSubnets Element (Location Response) */
+/* ms895161 loadreg */
+/* ms895167 LocalDestination Element (Instruction Response) */
+/* ms895172 Location Element (Location Response) */
+/* ms895177 Locations Element (Location Response) */
+/* ms895180 LongDescription Element (Instruction Response) */
+/* ms895184 MAC Element (Poll Request) */
+/* ms894542 Machine or Hardware Inventory Report */
+/* ms895191 MachineInventorySettings Element (Poll Response) */
+/* ms895195 ManagementSystem Element (Poll Request) */
+/* ms895198 Name Element (Instruction Response) */
+/* ms895202 Name Element (Location Request) */
+/* ms895206 Name Element (Location Response) */
+/* ms895210 Name Element (Poll Request) */
+/* ms895214 NetworkAdapter Element (Poll Request) */
+/* ms895218 onerror */
+/* ms895223 Package Element (Instruction Request) */
+/* ms895227 Package Element (Instruction Response) */
+/* ms895229 Package Element (Poll Response) */
+/* ms894554 Package Location Request to Server */
+/* ms894558 Package Location Response to Target Device */
+/* ms895233 PackageID Element (Location Request) */
+/* ms895237 PackageID Element (Location Response) */
+/* ms895242 PackageLocation Element (Location Response) */
+/* ms895250 PackageLocationRequest Element (Location Request) */
+/* ms895259 PackageSize Element (Instruction Response) */
+/* ms895263 Parameter Element (Download Event Status) */
+/* ms895267 Path Element (Poll Response) */
+/* ms895271 Platform Element (Poll Request) */
+/* ms894565 Poll Request to the Server */
+/* ms895274 PollInterval Element (Poll Response) */
+/* ms895957 PollResponse Element (Poll Response) */
+/* ms895982 PollServer Element (Poll Response) */
+/* ms895990 Processor Element (Poll Request) */
+/* ms895992 Property Element (Machine Inventory Report) */
+/* ms894567 Provisioning (Device Management Client) */
+/* ms895993 quit */
+/* ms895994 reboot */
+/* ms895995 Recurrence Element (Instruction Response) */
+/* ms895996 Recursive Element (Poll Response) */
+/* ms895997 reg */
+/* ms896001 rem (Device Management Client) */
+/* ms896002 rename */
+/* ms896003 report */
+/* ms896004 reportfsentries */
+/* ms896005 Required Element (Instruction Response) */
+/* ms896006 run (Device Management Client) */
+/* ms896008 runasync */
+/* ms896009 savereg */
+/* ms896011 scheduletask */
+/* ms894588 Script Support */
+/* ms894591 Server Response to the Device Poll */
+/* ms896012 set (Device Management Client) */
+/* ms896013 setattrs */
+/* ms896014 Settings Element (Poll Response) */
+/* ms896015 ShortDescription Element (Instruction Response) */
+/* ms896016 SMB Element (Location Response) */
+/* ms896017 SMBPath Element (Location Response) */
+/* ms894653 Software Inventory Report */
+/* ms896058 SoftwareInventorySettings Element (Poll Response) */
+/* ms896059 SourceFiles Element (Instruction Response) */
+/* ms896060 StartTime Element (Instruction Response) */
+/* ms896061 Status Element (Download Event Status) */
+/* ms896062 StatusMessage Element (Download Event Status) */
+/* ms896063 Subnet Element (Location Response) */
+/* ms896065 SystemDefaultLCID Element (Poll Request) */
+/* ms894662 Systems Management Server Device Management Feature Pack */
+/* ms896066 Timestamp Element (Poll Request) */
+/* ms896067 URL Element (Location Response) */
+/* ms896068 UserName Element (Poll Request) */
+/* ms896069 Version Element (Poll Request) */
+
+/* ------------------------------------------------------------------
+ * Book surface: dmclient (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895034 DMSDLINFO: documented name-only (no value published; held) */
+/* ms895037 DMSINVPKGID: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: dmclient (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894682 abort */
+/* ms894382 API Access */
+/* ms894712 ApplicablePackages Element (Poll Response) */
+/* ms894994 AuthorizationToken Element (Poll Request) */
+/* ms894996 Behavior Element (Instruction Response) */
+/* ms894386 Checkpoint Restart */
+/* ms895006 ClientLocation Element (Location Request) */
+/* ms895008 ClientSettings Element (Poll Response) */
+/* ms895011 CodePage Element (Poll Request) */
+/* ms895012 CommandLine Element (Instruction Response) */
+/* ms895015 Connection Element (Poll Request) */
+/* ms895018 copy (Device Management Client) */
+/* ms895020 createdir */
+/* ms894407 Custom HTTP Headers for Various POSTs */
+/* ms895022 delete */
+/* ms894425 Device Management Client Architecture */
+/* ms894426 Device Management Client Database */
+/* ms894427 Device Management Client Migration */
+/* ms894460 Device Management Client OS Design Development */
+/* ms894465 Device Management Client Registry Settings */
+/* ms894685 Device Management Client Samples */
+/* ms894468 Device Management Client Security */
+/* ms894472 Device Management Service Design */
+/* ms894480 Device Management Software Requirements */
+/* ms895025 DeviceName Element (Poll Request) */
+/* ms895027 DevicePoll Element (Poll Request) */
+/* ms895029 Directory Element (Software Inventory Report) */
+/* ms895031 DirectoryService Element (Location Request) */
+/* ms895033 DirectoryService Element (Location Response) */
+/* ms895043 Domain Element (Poll Request) */
+/* ms894482 Download Event Status Reports */
+/* ms895048 echo (Device Management Client) */
+/* ms895050 else */
+/* ms895052 elseif */
+/* ms895054 Enabled Element (Poll Response) */
+/* ms895056 endif */
+/* ms895060 ExcludeCompressed Element (Poll Response) */
+/* ms895062 ExcludeEncrypted Element (Poll Response) */
+/* ms894492 Failure Recovery */
+/* ms895064 FailureRetryCount Element (Poll Response) */
+/* ms895066 FailureRetryInterval Element (Poll Response) */
+/* ms894496 File Collection Report */
+/* ms895074 File Element (Software Inventory Report) */
+/* ms895068 FileCollectionSettings Element (Poll Response) */
+/* ms895071 filecreated */
+/* ms895077 fileexists */
+/* ms895079 FileFilterItem Element (Poll Response) */
+/* ms895082 filelastmodified */
+/* ms895085 FileReport Element (Software Inventory Report) */
+/* ms895088 filesize */
+/* ms895092 Filter Element (Poll Response) */
+/* ms895095 Flags Element (Instruction Response) */
+/* ms895098 goto (Device Management Client) */
+/* ms895099 HTTP Element (Location Response) */
+/* ms894518 HTTP Status Codes for Device Management */
+/* ms895101 ID Element (Instruction Response) */
+/* ms895102 ID Element (Poll Request) */
+/* ms895107 Identification Element (Poll Request) */
+/* ms895112 if (Device Management Client) */
+/* ms894521 Instruction Request to the Server */
+/* ms894524 Instruction Response from the Server */
+/* ms895124 Instructions Element (Instruction Response) */
+/* ms895128 InstructionsRequest Element (Instruction Request) */
+/* ms895131 Interval Element (Instruction Response) */
+/* ms895133 Interval Element (Poll Response) */
+/* ms895136 Inventory Element (Machine Inventory Report) */
+/* ms895139 InventoryItem Element (Machine Inventory Report) */
+/* ms895141 IPAddress Element (Location Request) */
+/* ms895145 IPAddress Element (Poll Request) */
+/* ms895148 IPAddresses Element (Location Request) */
+/* ms895152 IPSubnet Element (Poll Request) */
+/* ms895157 IPSubnets Element (Location Response) */
+/* ms895161 loadreg */
+/* ms895167 LocalDestination Element (Instruction Response) */
+/* ms895172 Location Element (Location Response) */
+/* ms895177 Locations Element (Location Response) */
+/* ms895180 LongDescription Element (Instruction Response) */
+/* ms895184 MAC Element (Poll Request) */
+/* ms894542 Machine or Hardware Inventory Report */
+/* ms895191 MachineInventorySettings Element (Poll Response) */
+/* ms895195 ManagementSystem Element (Poll Request) */
+/* ms895198 Name Element (Instruction Response) */
+/* ms895202 Name Element (Location Request) */
+/* ms895206 Name Element (Location Response) */
+/* ms895210 Name Element (Poll Request) */
+/* ms895214 NetworkAdapter Element (Poll Request) */
+/* ms895218 onerror */
+/* ms895223 Package Element (Instruction Request) */
+/* ms895227 Package Element (Instruction Response) */
+/* ms895229 Package Element (Poll Response) */
+/* ms894554 Package Location Request to Server */
+/* ms894558 Package Location Response to Target Device */
+/* ms895233 PackageID Element (Location Request) */
+/* ms895237 PackageID Element (Location Response) */
+/* ms895242 PackageLocation Element (Location Response) */
+/* ms895250 PackageLocationRequest Element (Location Request) */
+/* ms895259 PackageSize Element (Instruction Response) */
+/* ms895263 Parameter Element (Download Event Status) */
+/* ms895267 Path Element (Poll Response) */
+/* ms895271 Platform Element (Poll Request) */
+/* ms894565 Poll Request to the Server */
+/* ms895274 PollInterval Element (Poll Response) */
+/* ms895957 PollResponse Element (Poll Response) */
+/* ms895982 PollServer Element (Poll Response) */
+/* ms895990 Processor Element (Poll Request) */
+/* ms895992 Property Element (Machine Inventory Report) */
+/* ms894567 Provisioning (Device Management Client) */
+/* ms895993 quit */
+/* ms895994 reboot */
+/* ms895995 Recurrence Element (Instruction Response) */
+/* ms895996 Recursive Element (Poll Response) */
+/* ms895997 reg */
+/* ms896001 rem (Device Management Client) */
+/* ms896002 rename */
+/* ms896003 report */
+/* ms896004 reportfsentries */
+/* ms896005 Required Element (Instruction Response) */
+/* ms896006 run (Device Management Client) */
+/* ms896008 runasync */
+/* ms896009 savereg */
+/* ms896011 scheduletask */
+/* ms894588 Script Support */
+/* ms894591 Server Response to the Device Poll */
+/* ms896012 set (Device Management Client) */
+/* ms896013 setattrs */
+/* ms896014 Settings Element (Poll Response) */
+/* ms896015 ShortDescription Element (Instruction Response) */
+/* ms896016 SMB Element (Location Response) */
+/* ms896017 SMBPath Element (Location Response) */
+/* ms894653 Software Inventory Report */
+/* ms896058 SoftwareInventorySettings Element (Poll Response) */
+/* ms896059 SourceFiles Element (Instruction Response) */
+/* ms896060 StartTime Element (Instruction Response) */
+/* ms896061 Status Element (Download Event Status) */
+/* ms896062 StatusMessage Element (Download Event Status) */
+/* ms896063 Subnet Element (Location Response) */
+/* ms896065 SystemDefaultLCID Element (Poll Request) */
+/* ms894662 Systems Management Server Device Management Feature Pack */
+/* ms896066 Timestamp Element (Poll Request) */
+/* ms896067 URL Element (Location Response) */
+/* ms896068 UserName Element (Poll Request) */
+/* ms896069 Version Element (Poll Request) */
+
 #ifdef __cplusplus
 }
 #endif

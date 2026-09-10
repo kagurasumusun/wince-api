@@ -175,6 +175,12 @@ AKARI_CE_IMPORT BOOL Toolhelp32ReadProcessMemory(DWORD th32ProcessID,
                                  LPVOID lpBuffer, DWORD cbRead,
                                  LPDWORD lpNumberOfBytesRead) AKARI_CE_NAME(Toolhelp32ReadProcessMemory);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-toolhelp-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450774 ToolHelp Functions */
+/* aa450776 ToolHelp Structures */
+
 #ifdef __cplusplus
 }
 #endif

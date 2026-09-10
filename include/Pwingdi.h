@@ -31,6 +31,15 @@ extern "C" {
  * Book surface: drivers-display (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447689 ContrastCmdInputParm: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

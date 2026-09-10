@@ -305,6 +305,32 @@ AKARI_CE_IMPORT BOOL EnumSystemCodePagesW(CODEPAGE_ENUMPROC lpCodePageEnumProc,
 /* ms905070 EnumSystemLocales: print `` -- recorded verbatim (no compiled prototype) */
 /* ms905077 EnumTimeFormats: print `` -- recorded verbatim (no compiled prototype) */
 
+/* ------------------------------------------------------------------
+ * Book surface: core-nls-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms904722 EnumCalendarInfoProc: documented name-only (no value published; held) */
+/* ms904740 EnumDateFormatsProc: documented name-only (no value published; held) */
+/* ms904848 EnumLocalesProc: documented name-only (no value published; held) */
+/* ms905083 EnumTimeFormatsProc: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-nls-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms903783 Code Pages */
+/* ms903928 Language Identifiers and Locales */
+/* ms906223 LCTYPE Constants */
+/* ms904415 National Language Support (NLS) Functions */
+/* ms906224 National Language support (NLS) Locale Identifiers */
+/* ms904406 National Language Support (NLS) Macros */
+/* ms904614 National Language Support (NLS) Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-unicode-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450778 Unicode Functions */
+/* aa450779 Unicode Macros */
+/* aa450781 Unicode Structures */
+
 #ifdef __cplusplus
 }
 #endif

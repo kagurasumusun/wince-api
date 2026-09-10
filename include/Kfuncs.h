@@ -12,4 +12,16 @@
  * docs/inventory.md (header-name compatibility unit).
  */
 
-#include "Winbase.h"
+#include "Winbase.h"/* ------------------------------------------------------------------
+ * Book surface: core-process-and-thread-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450792 CeGetCallerTrust: print `DWORD CeGetCallerTrust (void);` */
+AKARI_CE_IMPORT DWORD CeGetCallerTrust(void)
+    AKARI_CE_NAME(CeGetCallerTrust);
+/* ms885614 GetCurrentProcessId: print `` */
+AKARI_CE_IMPORT DWORD GetCurrentProcessId(void)
+    AKARI_CE_NAME(GetCurrentProcessId);
+/* ms885616 GetCurrentThreadId: print `` */
+AKARI_CE_IMPORT DWORD GetCurrentThreadId(void)
+    AKARI_CE_NAME(GetCurrentThreadId);
+

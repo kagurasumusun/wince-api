@@ -291,6 +291,64 @@ AKARI_CE_IMPORT HRESULT DMORegister(LPCWSTR szName, REFCLSID clsidDMO,
  *   ms931415 Process: HRESULT Process(ULONGulSize,BYTE* pDataREFERENCE_TIME refTimeStart,DWORDdwFlags);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: dmo (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451595 DMO Error Codes (Header: Dmo.h.) */
+/* aa451598 DMO GUIDs (Header: Dmo.h.) */
+/* aa451809 IDMOQualityControl::GetStatus (Header: Dmo.h.) */
+/* aa451810 IDMOQualityControl::SetNow (Header: Dmo.h.) */
+/* aa451811 IDMOQualityControl::SetStatus (Header: Dmo.h.) */
+/* aa451813 IDMOVideoOutputOptimizations::GetCurrentOperationMode (Header: Dmo.h.) */
+/* aa451814 IDMOVideoOutputOptimizations::GetCurrentSampleRequirements (Header: Dmo.h.) */
+/* aa451815 IDMOVideoOutputOptimizations::QueryOperationModePreferences (Header: Dmo.h.) */
+/* aa451816 IDMOVideoOutputOptimizations::SetOperationMode (Header: Dmo.h.) */
+/* ms910385 IEnumDMO::Clone (Header: Dmo.h.) */
+/* ms910392 IEnumDMO::Next (Header: Dmo.h.) */
+/* ms910398 IEnumDMO::Reset (Header: Dmo.h.) */
+/* ms910405 IEnumDMO::Skip (Header: Dmo.h.) */
+/* aa452255 IMediaBuffer::GetBufferAndLength (Header: Dmo.h.) */
+/* aa452256 IMediaBuffer::GetMaxLength (Header: Dmo.h.) */
+/* aa452257 IMediaBuffer::SetLength (Header: Dmo.h.) */
+/* ms931391 IMediaObject::AllocateStreamingResources (Header: Dmo.h.) */
+/* ms931392 IMediaObject::Discontinuity (Header: Dmo.h.) */
+/* ms931393 IMediaObject::Flush (Header: Dmo.h.) */
+/* ms931394 IMediaObject::FreeStreamingResources (Header: Dmo.h.) */
+/* ms931395 IMediaObject::GetInputCurrentType (Header: Dmo.h.) */
+/* ms931396 IMediaObject::GetInputMaxLatency (Header: Dmo.h.) */
+/* ms931397 IMediaObject::GetInputSizeInfo (Header: Dmo.h.) */
+/* ms931398 IMediaObject::GetInputStatus (Header: Dmo.h.) */
+/* ms931399 IMediaObject::GetInputStreamInfo (Header: Dmo.h.) */
+/* ms931400 IMediaObject::GetInputType (Header: Dmo.h.) */
+/* ms931401 IMediaObject::GetOutputCurrentType (Header: Dmo.h.) */
+/* ms931402 IMediaObject::GetOutputSizeInfo (Header: Dmo.h.) */
+/* ms931403 IMediaObject::GetOutputStreamInfo (Header: Dmo.h.) */
+/* ms931404 IMediaObject::GetOutputType (Header: Dmo.h.) */
+/* ms931405 IMediaObject::GetStreamCount (Header: Dmo.h.) */
+/* ms931416 IMediaObject::Lock (Header: Dmo.h.) */
+/* ms931419 IMediaObject::ProcessOutput (Header: Dmo.h.) */
+/* ms931420 IMediaObject::SetInputMaxLatency (Header: Dmo.h.) */
+/* ms931421 IMediaObject::SetInputType (Header: Dmo.h.) */
+/* ms931422 IMediaObject::SetOutputType (Header: Dmo.h.) */
+/* ms931413 IMediaObjectInPlace::Clone (Header: Dmo.h.) */
+/* ms931414 IMediaObjectInPlace::GetLatency (Header: Dmo.h.) */
+/* ms931415 IMediaObjectInPlace::Process (Header: Dmo.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: dmo (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451592 DMO Base Class Reference */
+/* aa451689 DMO Enumerated Types */
+/* aa451722 DMO Functions */
+/* ms923428 DMO Interfaces */
+/* aa452388 DMO Structures */
+/* ms931417 IMediaObject Methods */
+/* ms931418 IMediaObject::ProcessInput */
+/* ms931407 IMediaObjectImpl Class Template */
+/* ms923420 Implementing the DMO Methods */
+/* ms924190 Overview of IMediaObjectImpl */
+/* aa451438 Using the DMO Base Class */
+
 #ifdef __cplusplus
 }
 #endif

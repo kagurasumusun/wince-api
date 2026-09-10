@@ -38,6 +38,16 @@ AKARI_CE_IMPORT DWORD EnumPnpIds(LPTSTR lpszPnpList, LPDWORD lpBuflen)
 AKARI_CE_IMPORT HKEY OpenDeviceKey(LPCTSTR ActiveKey)
     AKARI_CE_NAME(OpenDeviceKey);
 
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898304 DMAdvertiseInterface: documented name-only (no value published; held) */
+/* ms919663 POST_INIT_BUF: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

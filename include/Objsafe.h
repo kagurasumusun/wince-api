@@ -6,4 +6,9 @@
  * ------------------------------------------------------------------ */
 /* ms882879 IObjectSafety::GetInterfaceSafetyOptions (Header: Objsafe.h, Objsafe.idl.) */
 /* ms882881 IObjectSafety::SetInterfaceSafetyOptions (Header: Objsafe.h, Objsafe.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: dcom-com (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms882879 IObjectSafety::GetInterfaceSafetyOptions (Header: Objsafe.h, Objsafe.idl.) */
+/* ms882881 IObjectSafety::SetInterfaceSafetyOptions (Header: Objsafe.h, Objsafe.idl.) */
 

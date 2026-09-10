@@ -27,6 +27,18 @@ extern "C" {
 /* ms902146 KEYBD_PDD -- HELD (page print; member types unpublished):
  *   typedef struct tagKEYBD_PDD { ... } KEYBD_PDD, *PKEYBD_PDD; */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms919401 PFN_KEYBD_EVENT: documented name-only (no value published; held) */
+/* ms919402 PFN_KEYBD_PDD_ENTRY: documented name-only (no value published; held) */
+/* ms919403 PFN_KEYBD_PDD_POWER_HANDLER: documented name-only (no value published; held) */
+/* ms919404 PFN_KEYBD_PDD_TOGGLE_LIGHTS: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

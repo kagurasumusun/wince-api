@@ -27,6 +27,12 @@ extern "C" {
 /* aa451943 IDVDROM/IDVDROM::Bind (Header: Dvddata.h.) */
 /* aa451957 IDVDROM/IDVDROM::Unbind (Header: Dvddata.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: graphics-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451943 IDVDROM/IDVDROM::Bind (Header: Dvddata.h.) */
+/* aa451957 IDVDROM/IDVDROM::Unbind (Header: Dvddata.h.) */
+
 #ifdef __cplusplus
 }
 #endif

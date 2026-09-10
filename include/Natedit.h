@@ -191,6 +191,20 @@ typedef VOID (*PNAT_LOG_DROPPED_PACKET)(
 /* ms886748: initialization monitor. */
 typedef VOID (*PNAT_LOG_INIT)(void);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-nat-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms886745 LogConnectionCreation: documented name-only (no value published; held) */
+/* ms886746 LogConnectionDeletion: documented name-only (no value published; held) */
+/* ms886747 LogDroppedPacket: documented name-only (no value published; held) */
+/* ms886748 LogInit: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-nat-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450757 Network Address Translation Functions */
+/* aa450759 Network Address Translation Structures */
+
 #ifdef __cplusplus
 }
 #endif

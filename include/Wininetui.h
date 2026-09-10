@@ -29,6 +29,12 @@ AKARI_CE_IMPORT DWORD IsMessageBoxHandled(HWND hWnd, UINT uText,
                     UINT uCaption, UINT uType)
                     AKARI_CE_NAME(IsMessageBoxHandled);
 
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms918807 IsDialogBoxHandled Callback Function (WinInet) (Header: Wininetui.h.) */
+/* ms918809 IsMessageBoxHandled Callback Function (Header: Wininetui.h.) */
+
 #ifdef __cplusplus
 }
 #endif

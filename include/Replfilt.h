@@ -61,6 +61,52 @@ typedef struct tagCFF_CONVERTOPTIONS {
 /* aa514335 IPegasusFileFilterSite::ReportLoss (Header: Replfilt.h.) */
 /* aa514336 IPegasusFileFilterSite::ReportProgress (Header: Replfilt.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513873 ICeFileFilter::FilterOptions (Header: Replfilt.h.) */
+/* aa513875 ICeFileFilter::FormatMessage (Header: Replfilt.h.) */
+/* aa513877 ICeFileFilter::NextConvertFile (Header: Replfilt.h.) */
+/* aa513881 ICeFileFilterOptions::SetFilterOptions (Header: Replfilt.h.) */
+/* aa513882 ICeFileFilterSite::CloseDestinationFile (Header: Replfilt.h.) */
+/* aa513883 ICeFileFilterSite::CloseSourceFile (Header: Replfilt.h.) */
+/* aa513886 ICeFileFilterSite::OpenDestinationFile (Header: Replfilt.h.) */
+/* aa513890 ICeFileFilterSite::OpenSourceFile (Header: Replfilt.h.) */
+/* aa513891 ICeFileFilterSite::ReportLoss (Header: Replfilt.h.) */
+/* aa513893 ICeFileFilterSite::ReportProgress (Header: Replfilt.h.) */
+/* aa514316 IPegasusFileFilter::FilterOptions (Header: Replfilt.h.) */
+/* aa514319 IPegasusFileFilter::FormatMessage (Header: Replfilt.h.) */
+/* aa514323 IPegasusFileFilter::NextConvertFile (Header: Replfilt.h.) */
+/* aa514325 IPegasusFileFilterSite::CloseDestinationFile (Header: Replfilt.h.) */
+/* aa514327 IPegasusFileFilterSite::CloseSourceFile (Header: Replfilt.h.) */
+/* aa514331 IPegasusFileFilterSite::OpenDestinationFile (Header: Replfilt.h.) */
+/* aa514332 IPegasusFileFilterSite::OpenSourceFile (Header: Replfilt.h.) */
+/* aa514335 IPegasusFileFilterSite::ReportLoss (Header: Replfilt.h.) */
+/* aa514336 IPegasusFileFilterSite::ReportProgress (Header: Replfilt.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513873 ICeFileFilter::FilterOptions (Header: Replfilt.h.) */
+/* aa513875 ICeFileFilter::FormatMessage (Header: Replfilt.h.) */
+/* aa513877 ICeFileFilter::NextConvertFile (Header: Replfilt.h.) */
+/* aa513881 ICeFileFilterOptions::SetFilterOptions (Header: Replfilt.h.) */
+/* aa513882 ICeFileFilterSite::CloseDestinationFile (Header: Replfilt.h.) */
+/* aa513883 ICeFileFilterSite::CloseSourceFile (Header: Replfilt.h.) */
+/* aa513886 ICeFileFilterSite::OpenDestinationFile (Header: Replfilt.h.) */
+/* aa513890 ICeFileFilterSite::OpenSourceFile (Header: Replfilt.h.) */
+/* aa513891 ICeFileFilterSite::ReportLoss (Header: Replfilt.h.) */
+/* aa513893 ICeFileFilterSite::ReportProgress (Header: Replfilt.h.) */
+/* aa514316 IPegasusFileFilter::FilterOptions (Header: Replfilt.h.) */
+/* aa514319 IPegasusFileFilter::FormatMessage (Header: Replfilt.h.) */
+/* aa514323 IPegasusFileFilter::NextConvertFile (Header: Replfilt.h.) */
+/* aa514325 IPegasusFileFilterSite::CloseDestinationFile (Header: Replfilt.h.) */
+/* aa514327 IPegasusFileFilterSite::CloseSourceFile (Header: Replfilt.h.) */
+/* aa514331 IPegasusFileFilterSite::OpenDestinationFile (Header: Replfilt.h.) */
+/* aa514332 IPegasusFileFilterSite::OpenSourceFile (Header: Replfilt.h.) */
+/* aa514335 IPegasusFileFilterSite::ReportLoss (Header: Replfilt.h.) */
+/* aa514336 IPegasusFileFilterSite::ReportProgress (Header: Replfilt.h.) */
+
 #ifdef __cplusplus
 }
 #endif

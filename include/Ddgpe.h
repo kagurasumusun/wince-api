@@ -81,6 +81,126 @@ extern "C" {
 /* aa448181 SurfaceHeap::NodeSize (Header: Ddgpe.h.) */
 /* aa448182 SurfaceHeap::Size (Header: Ddgpe.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896766 DDGPE::AllocSurface (Header: Ddgpe.h.) */
+/* ms896768 DDGPE::AllocVideoSurface (Header: Ddgpe.h.) */
+/* ms896770 DDGPE::BltExpanded (Header: Ddgpe.h.) */
+/* ms896772 DDGPE::BltPrepare (Header: Ddgpe.h.) */
+/* ms896775 DDGPE::DetectMode (Header: Ddgpe.h.) */
+/* ms896776 DDGPE::DetectPixelFormat (Header: Ddgpe.h.) */
+/* ms896779 DDGPE::GetDriverData (Header: Ddgpe.h.) */
+/* ms896780 DDGPE::GetDriverGUID (Header: Ddgpe.h.) */
+/* ms896781 DDGPE::GetModeInfoEx (Header: Ddgpe.h.) */
+/* ms896782 DDGPE::GetPhysicalModeId (Header: Ddgpe.h.) */
+/* ms896783 DDGPE::InDisplay (Header: Ddgpe.h.) */
+/* ms896784 DDGPE::PerformBlt (Header: Ddgpe.h.) */
+/* ms896785 DDGPE::SetDriverData (Header: Ddgpe.h.) */
+/* ms896786 DDGPE::SetDriverGUID (Header: Ddgpe.h.) */
+/* ms896787 DDGPE::SetMode (Header: Ddgpe.h.) */
+/* ms896788 DDGPE::SetVisibleSurface (Header: Ddgpe.h.) */
+/* ms896815 DDGPE::WrapSurface (Header: Ddgpe.h.) */
+/* ms896798 DDGPESurf Constructors (Header: Ddgpe.h.) */
+/* ms896790 DDGPESurf::AlignedWidth (Header: Ddgpe.h.) */
+/* ms896791 DDGPESurf::Bpp (Header: Ddgpe.h.) */
+/* ms896794 DDGPESurf::ColorKey (Header: Ddgpe.h.) */
+/* ms896795 DDGPESurf::ColorKeyHigh (Header: Ddgpe.h.) */
+/* ms896796 DDGPESurf::ColorKeyLow (Header: Ddgpe.h.) */
+/* ms896797 DDGPESurf::ColorKeyMask (Header: Ddgpe.h.) */
+/* ms896799 DDGPESurf::DeleteSurface (Header: Ddgpe.h.) */
+/* ms896800 DDGPESurf::GetDDGPESurf (Header: Ddgpe.h.) */
+/* ms896801 DDGPESurf::GetDirectDrawSurface (Header: Ddgpe.h.) */
+/* ms896802 DDGPESurf::GetDriverData (Header: Ddgpe.h.) */
+/* ms896803 DDGPESurf::GetDriverGUID (Header: Ddgpe.h.) */
+/* ms896804 DDGPESurf::HasAlpha (Header: Ddgpe.h.) */
+/* ms896805 DDGPESurf::Init (Header: Ddgpe.h.) */
+/* ms896806 DDGPESurf::PixelFormat (Header: Ddgpe.h.) */
+/* ms896807 DDGPESurf::SetColorKey (Header: Ddgpe.h.) */
+/* ms896808 DDGPESurf::SetColorKeyHigh (Header: Ddgpe.h.) */
+/* ms896809 DDGPESurf::SetColorKeyLow (Header: Ddgpe.h.) */
+/* ms896810 DDGPESurf::SetColorKeyMask (Header: Ddgpe.h.) */
+/* ms896811 DDGPESurf::SetDDGPESurf (Header: Ddgpe.h.) */
+/* ms896812 DDGPESurf::SetDirectDrawSurface (Header: Ddgpe.h.) */
+/* ms896813 DDGPESurf::SetDriverData (Header: Ddgpe.h.) */
+/* ms896814 DDGPESurf::SetDriverGUID (Header: Ddgpe.h.) */
+/* ms899331 g_nVideoMemorySize (Header: Ddgpe.h.) */
+/* ms899332 g_pDDrawPrimarySurface (Header: Ddgpe.h.) */
+/* ms899350 g_pGPE (Header: Ddgpe.h.) */
+/* ms899351 g_pVideoMemory (Header: Ddgpe.h.) */
+/* ms902186 m_dwPhysicalModeID (Header: Ddgpe.h.) */
+/* aa447866 m_pModeEx (Header: Ddgpe.h.) */
+/* aa448179 SurfaceHeap Constructor (Header: Ddgpe.h.) */
+/* aa448174 SurfaceHeap::Address (Header: Ddgpe.h.) */
+/* aa448175 SurfaceHeap::Alloc (Header: Ddgpe.h.) */
+/* aa448176 SurfaceHeap::Available (Header: Ddgpe.h.) */
+/* aa448180 SurfaceHeap::Free (Header: Ddgpe.h.) */
+/* aa448181 SurfaceHeap::NodeSize (Header: Ddgpe.h.) */
+/* aa448182 SurfaceHeap::Size (Header: Ddgpe.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896767 DDGPEAllocSurfaceData: documented name-only (no value published; held) */
+/* ms896771 DDGPEBltParams: documented name-only (no value published; held) */
+/* aa447764 EDDGPEPixelFormat: documented name-only (no value published; held) */
+/* aa447765 EDDGPEPixelFormatToEGPEFormat: documented name-only (no value published; held) */
+/* aa447782 EGPEFormatToEDDGPEPixelFormat: documented name-only (no value published; held) */
+/* ms899343 GPEModeEx: documented name-only (no value published; held) */
+/* ms896766 DDGPE::AllocSurface (Header: Ddgpe.h.) */
+/* ms896768 DDGPE::AllocVideoSurface (Header: Ddgpe.h.) */
+/* ms896770 DDGPE::BltExpanded (Header: Ddgpe.h.) */
+/* ms896772 DDGPE::BltPrepare (Header: Ddgpe.h.) */
+/* ms896775 DDGPE::DetectMode (Header: Ddgpe.h.) */
+/* ms896776 DDGPE::DetectPixelFormat (Header: Ddgpe.h.) */
+/* ms896779 DDGPE::GetDriverData (Header: Ddgpe.h.) */
+/* ms896780 DDGPE::GetDriverGUID (Header: Ddgpe.h.) */
+/* ms896781 DDGPE::GetModeInfoEx (Header: Ddgpe.h.) */
+/* ms896782 DDGPE::GetPhysicalModeId (Header: Ddgpe.h.) */
+/* ms896783 DDGPE::InDisplay (Header: Ddgpe.h.) */
+/* ms896784 DDGPE::PerformBlt (Header: Ddgpe.h.) */
+/* ms896785 DDGPE::SetDriverData (Header: Ddgpe.h.) */
+/* ms896786 DDGPE::SetDriverGUID (Header: Ddgpe.h.) */
+/* ms896787 DDGPE::SetMode (Header: Ddgpe.h.) */
+/* ms896788 DDGPE::SetVisibleSurface (Header: Ddgpe.h.) */
+/* ms896815 DDGPE::WrapSurface (Header: Ddgpe.h.) */
+/* ms896798 DDGPESurf Constructors (Header: Ddgpe.h.) */
+/* ms896790 DDGPESurf::AlignedWidth (Header: Ddgpe.h.) */
+/* ms896791 DDGPESurf::Bpp (Header: Ddgpe.h.) */
+/* ms896794 DDGPESurf::ColorKey (Header: Ddgpe.h.) */
+/* ms896795 DDGPESurf::ColorKeyHigh (Header: Ddgpe.h.) */
+/* ms896796 DDGPESurf::ColorKeyLow (Header: Ddgpe.h.) */
+/* ms896797 DDGPESurf::ColorKeyMask (Header: Ddgpe.h.) */
+/* ms896799 DDGPESurf::DeleteSurface (Header: Ddgpe.h.) */
+/* ms896800 DDGPESurf::GetDDGPESurf (Header: Ddgpe.h.) */
+/* ms896801 DDGPESurf::GetDirectDrawSurface (Header: Ddgpe.h.) */
+/* ms896802 DDGPESurf::GetDriverData (Header: Ddgpe.h.) */
+/* ms896803 DDGPESurf::GetDriverGUID (Header: Ddgpe.h.) */
+/* ms896804 DDGPESurf::HasAlpha (Header: Ddgpe.h.) */
+/* ms896805 DDGPESurf::Init (Header: Ddgpe.h.) */
+/* ms896806 DDGPESurf::PixelFormat (Header: Ddgpe.h.) */
+/* ms896807 DDGPESurf::SetColorKey (Header: Ddgpe.h.) */
+/* ms896808 DDGPESurf::SetColorKeyHigh (Header: Ddgpe.h.) */
+/* ms896809 DDGPESurf::SetColorKeyLow (Header: Ddgpe.h.) */
+/* ms896810 DDGPESurf::SetColorKeyMask (Header: Ddgpe.h.) */
+/* ms896811 DDGPESurf::SetDDGPESurf (Header: Ddgpe.h.) */
+/* ms896812 DDGPESurf::SetDirectDrawSurface (Header: Ddgpe.h.) */
+/* ms896813 DDGPESurf::SetDriverData (Header: Ddgpe.h.) */
+/* ms896814 DDGPESurf::SetDriverGUID (Header: Ddgpe.h.) */
+/* ms899331 g_nVideoMemorySize (Header: Ddgpe.h.) */
+/* ms899332 g_pDDrawPrimarySurface (Header: Ddgpe.h.) */
+/* ms899350 g_pGPE (Header: Ddgpe.h.) */
+/* ms899351 g_pVideoMemory (Header: Ddgpe.h.) */
+/* ms902186 m_dwPhysicalModeID (Header: Ddgpe.h.) */
+/* aa447866 m_pModeEx (Header: Ddgpe.h.) */
+/* aa448179 SurfaceHeap Constructor (Header: Ddgpe.h.) */
+/* aa448174 SurfaceHeap::Address (Header: Ddgpe.h.) */
+/* aa448175 SurfaceHeap::Alloc (Header: Ddgpe.h.) */
+/* aa448176 SurfaceHeap::Available (Header: Ddgpe.h.) */
+/* aa448180 SurfaceHeap::Free (Header: Ddgpe.h.) */
+/* aa448181 SurfaceHeap::NodeSize (Header: Ddgpe.h.) */
+/* aa448182 SurfaceHeap::Size (Header: Ddgpe.h.) */
+
 #ifdef __cplusplus
 }
 #endif

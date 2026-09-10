@@ -412,6 +412,41 @@ AKARI_CE_IMPORT VOID HalFreeCommonBuffer(PDMA_ADAPTER_OBJECT DmaAdapter,
  * ------------------------------------------------------------------ */
 /* ms894829 CEDDK Dynamic-Link Library I/O Functions */
 
+/* ------------------------------------------------------------------
+ * Book surface: driver-libs-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891025 Bus Enumeration Applications */
+/* ms894814 CEDDK Dynamic-Link Library Bus Access IOCTLs */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-addr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894807 CEDDK Dynamic-Link Library Address Mapping Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-bus (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894826 CEDDK Dynamic-Link Library Bus Access Enumerations */
+/* aa447661 CEDDK Dynamic-Link Library Bus Access Functions */
+/* ms894814 CEDDK Dynamic-Link Library Bus Access IOCTLs */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-dma (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447662 CEDDK Dynamic-Link Library DMA Functions */
+/* ms894823 CEDDK Dynamic-Link Library DMA Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: ceddk-io (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894829 CEDDK Dynamic-Link Library I/O Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: driver-libs-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891025 Bus Enumeration Applications */
+/* ms894814 CEDDK Dynamic-Link Library Bus Access IOCTLs */
+
 #ifdef __cplusplus
 }
 #endif

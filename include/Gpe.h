@@ -56,6 +56,39 @@ typedef struct DRVENABLEDATA DRVENABLEDATA;   /* opaque carrier (layout unpublis
 /* ms899348 GPESurf::GPESurf (Header: Gpe.h.) */
 /* ms899349 GPESurf::Init (Header: Gpe.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms899334 GPE::AllocSurface (Header: Gpe.h.) */
+/* ms899335 GPE::BltComplete (Header: Gpe.h.) */
+/* ms899337 GPE::BltPrepare (Header: Gpe.h.) */
+/* ms899339 GPE::GetModeInfo (Header: Gpe.h.) */
+/* ms899340 GPE::Line (Header: Gpe.h.) */
+/* ms899344 GPE::MovePointer (Header: Gpe.h.) */
+/* ms899345 GPE::NumModes (Header: Gpe.h.) */
+/* ms899346 GPE::SetMode (Header: Gpe.h.) */
+/* ms899347 GPE::SetPointerShape (Header: Gpe.h.) */
+/* ms899348 GPESurf::GPESurf (Header: Gpe.h.) */
+/* ms899349 GPESurf::Init (Header: Gpe.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms899336 GPEBltParms: documented name-only (no value published; held) */
+/* ms899341 GPELineParms: documented name-only (no value published; held) */
+/* ms899342 GPEMode: documented name-only (no value published; held) */
+/* ms899334 GPE::AllocSurface (Header: Gpe.h.) */
+/* ms899335 GPE::BltComplete (Header: Gpe.h.) */
+/* ms899337 GPE::BltPrepare (Header: Gpe.h.) */
+/* ms899339 GPE::GetModeInfo (Header: Gpe.h.) */
+/* ms899340 GPE::Line (Header: Gpe.h.) */
+/* ms899344 GPE::MovePointer (Header: Gpe.h.) */
+/* ms899345 GPE::NumModes (Header: Gpe.h.) */
+/* ms899346 GPE::SetMode (Header: Gpe.h.) */
+/* ms899347 GPE::SetPointerShape (Header: Gpe.h.) */
+/* ms899348 GPESurf::GPESurf (Header: Gpe.h.) */
+/* ms899349 GPESurf::Init (Header: Gpe.h.) */
+
 #ifdef __cplusplus
 }
 #endif

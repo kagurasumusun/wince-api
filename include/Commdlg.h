@@ -317,6 +317,13 @@ UINT     APIENTRY PrintHookProc(HWND hdlg, UINT uiMsg,
 /* ms907548 Common Dialog Boxes Messages */
 /* ms907558 Common Dialog Boxes Structures */
 
+/* ------------------------------------------------------------------
+ * Book surface: cc-commdlg (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms907541 Common Dialog Boxes Functions */
+/* ms907548 Common Dialog Boxes Messages */
+/* ms907558 Common Dialog Boxes Structures */
+
 #ifdef __cplusplus
 }
 #endif

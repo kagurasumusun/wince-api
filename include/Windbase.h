@@ -736,6 +736,59 @@ AKARI_CE_IMPORT BOOL CeStreamWrite(HANDLE hStream, LPBYTE lprgbBuffer,
 /* aa516903 Synchronization and Device I/O */
 /* aa516923 Writing to a File */
 
+/* ------------------------------------------------------------------
+ * Book surface: cedb (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516925 CEDB Functions */
+/* aa516931 CEDB Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: dbref (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516925 CEDB Functions */
+/* ms892384 CEDB Reference */
+/* aa516931 CEDB Structures */
+/* aa516926 Database Macros */
+/* aa516927 Database Messages */
+/* aa516932 EDB Functions */
+/* aa516933 EDB Reference */
+/* aa516934 EDB Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: fsds (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms885120 Accessing Files on Other Storage Media */
+/* aa516925 CEDB Functions */
+/* ms892384 CEDB Reference */
+/* aa516931 CEDB Structures */
+/* ms885325 Creating and Opening a File or Directory */
+/* aa516926 Database Macros */
+/* aa516927 Database Messages */
+/* ms885351 Deleting a File or a Directory */
+/* ms885363 Determining Available Disk Space */
+/* aa516932 EDB Functions */
+/* aa516933 EDB Reference */
+/* aa516934 EDB Structures */
+/* aa516938 File I/O Enumerations */
+/* aa516939 File I/O Functions */
+/* aa516941 File I/O Structures */
+/* aa516942 File Mapping Functions */
+/* ms885416 File-Naming Limitations */
+/* ms885501 Manipulating File Times */
+/* ms885512 Memory Mapping a File */
+/* ms885849 Moving and Copying Files and Directories */
+/* ms885978 Querying for Version Information */
+/* ms886040 Read/Write Example */
+/* ms886005 Reading and Writing File Attributes */
+/* ms886029 Reading from a File */
+/* aa516952 Registry Functions */
+/* ms891456 Registry Notification Functions */
+/* ms886095 Retrieving File and Directory Information */
+/* ms886105 Searching for a File or Directory */
+/* ms886160 Setting the File Pointer */
+/* aa516903 Synchronization and Device I/O */
+/* aa516923 Writing to a File */
+
 #ifdef __cplusplus
 }
 #endif

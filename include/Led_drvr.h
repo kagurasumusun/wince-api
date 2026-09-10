@@ -44,6 +44,20 @@ AKARI_CE_IMPORT BOOL NLedDriverSetDevice(INT nInfoId, PVOID pInput)
 /* ms892549 Notification LED Driver Development Concepts */
 /* ms892550 Notification LED Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895501 Moving a Notification LED Driver from GWES to Device Manager */
+/* ms892549 Notification LED Driver Development Concepts */
+/* ms892550 Notification LED Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895501 Moving a Notification LED Driver from GWES to Device Manager */
+/* ms892549 Notification LED Driver Development Concepts */
+/* ms892550 Notification LED Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

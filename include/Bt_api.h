@@ -298,6 +298,16 @@ AKARI_CE_IMPORT int BthWriteScanEnableMask(unsigned char mask) AKARI_CE_NAME(Bth
 /* ms880966 Bluetooth OS Structures */
 /* ms886707 PAN Profile Object Identifiers */
 
+/* ------------------------------------------------------------------
+ * Book surface: bt-os (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms886640 Bluetooth OS Functions */
+/* ms880965 Bluetooth OS IOCTLs */
+/* ms886639 Bluetooth OS Messages */
+/* ms886638 Bluetooth OS Object Identifiers */
+/* ms880966 Bluetooth OS Structures */
+/* ms886707 PAN Profile Object Identifiers */
+
 #ifdef __cplusplus
 }
 #endif

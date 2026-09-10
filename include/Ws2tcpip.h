@@ -51,4 +51,16 @@ AKARI_CE_IMPORT int getnameinfo(const struct sockaddr *sa,
 /* aa450282 addrinfo (Header: Ws2tcpip.h.) */
 /* ms890972 in6_addr (Header: Ws2tcpip.h.) */
 /* aa450948 sockaddr_in6 (Header: Ws2tcpip.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450282 addrinfo (Header: Ws2tcpip.h.) */
+/* ms890972 in6_addr (Header: Ws2tcpip.h.) */
+/* aa450948 sockaddr_in6 (Header: Ws2tcpip.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: wsock-structures (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450282 addrinfo (Header: Ws2tcpip.h.) */
+/* ms890972 in6_addr (Header: Ws2tcpip.h.) */
+/* aa450948 sockaddr_in6 (Header: Ws2tcpip.h.) */
 #endif  /* _WS2TCPIP_H */

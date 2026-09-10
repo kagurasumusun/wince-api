@@ -35,6 +35,37 @@ typedef struct _SERIAL_QUEUE_SIZES {
     DWORD cbOutQueue;
 } SERIAL_QUEUE_SIZES, *PSERIAL_QUEUE_SIZES;
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-serial (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901420 IOCTL_SERIAL_CLR_DTR: documented name-only (no value published; held) */
+/* ms901421 IOCTL_SERIAL_CLR_RTS: documented name-only (no value published; held) */
+/* ms901422 IOCTL_SERIAL_DISABLE_IR: documented name-only (no value published; held) */
+/* ms901423 IOCTL_SERIAL_ENABLE_IR: documented name-only (no value published; held) */
+/* ms901424 IOCTL_SERIAL_GET_COMMSTATUS: documented name-only (no value published; held) */
+/* ms901425 IOCTL_SERIAL_GET_DCB: documented name-only (no value published; held) */
+/* ms901426 IOCTL_SERIAL_GET_MODEMSTATUS: documented name-only (no value published; held) */
+/* ms901427 IOCTL_SERIAL_GET_PROPERTIES: documented name-only (no value published; held) */
+/* ms901428 IOCTL_SERIAL_GET_TIMEOUTS: documented name-only (no value published; held) */
+/* ms901429 IOCTL_SERIAL_GET_WAIT_MASK: documented name-only (no value published; held) */
+/* ms901430 IOCTL_SERIAL_IMMEDIATE_CHAR: documented name-only (no value published; held) */
+/* ms901431 IOCTL_SERIAL_PURGE: documented name-only (no value published; held) */
+/* ms901432 IOCTL_SERIAL_SET_BREAK_OFF: documented name-only (no value published; held) */
+/* ms901433 IOCTL_SERIAL_SET_BREAK_ON: documented name-only (no value published; held) */
+/* ms901434 IOCTL_SERIAL_SET_DCB: documented name-only (no value published; held) */
+/* ms901435 IOCTL_SERIAL_SET_DTR: documented name-only (no value published; held) */
+/* ms901436 IOCTL_SERIAL_SET_QUEUE_SIZE: documented name-only (no value published; held) */
+/* ms901437 IOCTL_SERIAL_SET_RTS: documented name-only (no value published; held) */
+/* ms901438 IOCTL_SERIAL_SET_TIMEOUTS: documented name-only (no value published; held) */
+/* ms901439 IOCTL_SERIAL_SET_WAIT_MASK: documented name-only (no value published; held) */
+/* ms901440 IOCTL_SERIAL_SET_XOFF: documented name-only (no value published; held) */
+/* ms901441 IOCTL_SERIAL_SET_XON: documented name-only (no value published; held) */
+/* ms901442 IOCTL_SERIAL_WAIT_ON_MASK: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

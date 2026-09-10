@@ -177,6 +177,78 @@ IHTMLCEPopupEvents:
  *   aa452193  HRESULT Event( int index, DWORD *pdispidEvt);
  *
  */
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452156 _DPIEWebBrowserEvents2::BeforeNavigate2 (Header: webvw.h) */
+/* aa452157 _DPIEWebBrowserEvents2::CommandStateChange (Header: webvw.h) */
+/* aa452159 _DPIEWebBrowserEvents2::DocumentComplete (Header: webvw.h) */
+/* aa452161 _DPIEWebBrowserEvents2::DownloadBegin (Header: webvw.h) */
+/* aa452163 _DPIEWebBrowserEvents2::DownloadComplete (Header: webvw.h) */
+/* aa452165 _DPIEWebBrowserEvents2::NavigateComplete2 (Header: webvw.h) */
+/* aa452167 _DPIEWebBrowserEvents2::NewWindow2 (Header: webvw.h) */
+/* aa452170 _DPIEWebBrowserEvents2::OnFullScreen (Header: webvw.h) */
+/* aa452172 _DPIEWebBrowserEvents2::OnMenuBar (Header: webvw.h) */
+/* aa452174 _DPIEWebBrowserEvents2::OnProgressChange (Header: webvw.h) */
+/* aa452176 _DPIEWebBrowserEvents2::OnQuit (Header: webvw.h) */
+/* aa452178 _DPIEWebBrowserEvents2::OnStatusBar (Header: webvw.h) */
+/* aa452179 _DPIEWebBrowserEvents2::OnTheaterMode (Header: webvw.h) */
+/* aa452181 _DPIEWebBrowserEvents2::OnToolBar (Header: webvw.h) */
+/* aa452183 _DPIEWebBrowserEvents2::OnVisible (Header: webvw.h) */
+/* aa452185 _DPIEWebBrowserEvents2::PropertyChange (Header: webvw.h) */
+/* aa452187 _DPIEWebBrowserEvents2::StatusTextChange (Header: webvw.h) */
+/* aa452189 _DPIEWebBrowserEvents2::TitleChange (Header: webvw.h) */
+/* ms906375 IBrowser2::get_ClearTypeEnabled (Header: webvw.h) */
+/* ms906376 IBrowser2::get_FitToWindow (Header: webvw.h) */
+/* ms906377 IBrowser2::get_LayoutHeight (Header: webvw.h) */
+/* ms906378 IBrowser2::get_LayoutWidth (Header: webvw.h) */
+/* ms906379 IBrowser2::get_LocationBaseURL (Header: webvw.h) */
+/* ms906380 IBrowser2::get_PlaySounds (Header: webvw.h) */
+/* ms906381 IBrowser2::get_ScriptingEnabled (Header: webvw.h) */
+/* ms906382 IBrowser2::get_ShowImages (Header: webvw.h) */
+/* ms906383 IBrowser2::get_ZoomLevel (Header: webvw.h) */
+/* ms906384 IBrowser2::put_ClearTypeEnabled (Header: webvw.h) */
+/* ms906385 IBrowser2::put_FitToWindow (Header: webvw.h) */
+/* ms906386 IBrowser2::put_LocationBaseURL (Header: webvw.h) */
+/* ms906387 IBrowser2::put_PlaySounds (Header: webvw.h) */
+/* ms906388 IBrowser2::put_ScriptingEnabled (Header: webvw.h) */
+/* ms906389 IBrowser2::put_ShowImages (Header: webvw.h) */
+/* ms906390 IBrowser2::put_ZoomLevel (Header: webvw.h) */
+/* ms906392 IBrowser3::addStyle (Header: webvw.h) */
+/* ms906393 IBrowser3::get_ActiveXEnabled (Header: webvw.h) */
+/* ms906394 IBrowser3::get_CanCopy (Header: webvw.h) */
+/* ms906395 IBrowser3::get_ContextMenuEnabled (Header: webvw.h) */
+/* ms906396 IBrowser3::get_document (Header: webvw.h) */
+/* ms906397 IBrowser3::get_FocusRectEnabled (Header: webvw.h) */
+/* ms906398 IBrowser3::get_IntegralPaging (Header: webvw.h) */
+/* ms906399 IBrowser3::get_script (Header: webvw.h) */
+/* ms906400 IBrowser3::get_SelectionEnabled (Header: webvw.h) */
+/* ms906401 IBrowser3::get_SuperFitToWindow (Header: webvw.h) */
+/* ms906402 IBrowser3::put_ActiveXEnabled (Header: webvw.h) */
+/* ms906403 IBrowser3::put_ContextMenuEnabled (Header: webvw.h) */
+/* ms906404 IBrowser3::put_FocusRectEnabled (Header: webvw.h) */
+/* ms906405 IBrowser3::put_IntegralPaging (Header: webvw.h) */
+/* ms906406 IBrowser3::put_SelectionEnabled (Header: webvw.h) */
+/* ms906407 IBrowser3::put_SuperFitToWindow (Header: webvw.h) */
+/* ms906408 IBrowser::FrameNavigate (Header: webvw.h) */
+/* ms906409 IBrowser::get_Busy (Header: webvw.h) */
+/* ms906410 IBrowser::get_CBrowserPointer (Header: webvw.h) */
+/* ms906411 IBrowser::get_IsFrame (Header: webvw.h) */
+/* ms906412 IBrowser::get_LocationURL (Header: webvw.h) */
+/* ms906413 IBrowser::get_MarginHeight (Header: webvw.h) */
+/* ms906414 IBrowser::get_MarginWidth (Header: webvw.h) */
+/* ms906415 IBrowser::get_ScrollStyle (Header: webvw.h) */
+/* ms906416 IBrowser::get_SelectedCodepage (Header: webvw.h) */
+/* ms906417 IBrowser::get_title (Header: webvw.h) */
+/* ms906418 IBrowser::navigate (Header: webvw.h) */
+/* ms906419 IBrowser::put_IsFrame (Header: webvw.h) */
+/* ms906420 IBrowser::put_MarginHeight (Header: webvw.h) */
+/* ms906421 IBrowser::put_MarginWidth (Header: webvw.h) */
+/* ms906422 IBrowser::put_ScrollStyle (Header: webvw.h) */
+/* ms906423 IBrowser::put_SelectedCodepage (Header: webvw.h) */
+/* ms906424 IBrowser::Refresh (Header: webvw.h) */
+/* ms906425 IBrowser::Stop (Header: webvw.h) */
+
 #ifdef __cplusplus
 }
 #endif

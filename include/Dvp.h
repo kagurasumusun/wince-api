@@ -199,6 +199,28 @@ typedef HRESULT (WINAPI *LPDDENUMVIDEOCALLBACK)(
  *              DWORD dwTimeout);
  */
 
+/* ------------------------------------------------------------------
+ * Book surface: ddraw (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909118 IDDVideoPortContainer::CreateVideoPort (Header: Dvp.h.) */
+/* ms909119 IDDVideoPortContainer::EnumVideoPorts (Header: Dvp.h.) */
+/* ms909120 IDDVideoPortContainer::GetVideoPortConnectInfo (Header: Dvp.h.) */
+/* ms909121 IDDVideoPortContainer::QueryVideoPortStatus (Header: Dvp.h.) */
+/* aa451781 IDirectDrawVideoPort::Flip (Header: Dvp.h.) */
+/* aa451782 IDirectDrawVideoPort::GetBandwidthInfo (Header: Dvp.h.) */
+/* aa451783 IDirectDrawVideoPort::GetColorControls (Header: Dvp.h.) */
+/* aa451784 IDirectDrawVideoPort::GetFieldPolarity (Header: Dvp.h.) */
+/* aa451785 IDirectDrawVideoPort::GetInputFormats (Header: Dvp.h.) */
+/* aa451786 IDirectDrawVideoPort::GetOutputFormats (Header: Dvp.h.) */
+/* aa451787 IDirectDrawVideoPort::GetVideoLine (Header: Dvp.h.) */
+/* aa451788 IDirectDrawVideoPort::GetVideoSignalStatus (Header: Dvp.h.) */
+/* aa451789 IDirectDrawVideoPort::SetColorControls (Header: Dvp.h.) */
+/* aa451790 IDirectDrawVideoPort::SetTargetSurface (Header: Dvp.h.) */
+/* aa451791 IDirectDrawVideoPort::StartVideo (Header: Dvp.h.) */
+/* aa451792 IDirectDrawVideoPort::StopVideo (Header: Dvp.h.) */
+/* aa451793 IDirectDrawVideoPort::UpdateVideo (Header: Dvp.h.) */
+/* aa451794 IDirectDrawVideoPort::WaitForSync (Header: Dvp.h.) */
+
 #ifdef __cplusplus
 }
 #endif

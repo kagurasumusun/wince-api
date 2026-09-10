@@ -34,6 +34,15 @@ typedef struct  {
  * Book surface: drivers-display (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-display (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa448311 IOCTL_HAL_DDI: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

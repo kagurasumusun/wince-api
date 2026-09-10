@@ -148,6 +148,78 @@ AKARI_CE_IMPORT DWORD SetSystemPowerState(LPCWSTR psState, DWORD StateFlags, DWO
 AKARI_CE_IMPORT BOOL StopPowerNotifications(HANDLE h)
     AKARI_CE_NAME(StopPowerNotifications);
 
+/* ------------------------------------------------------------------
+ * Book surface: powerman (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890485 Activity Timer Behavior */
+/* ms890491 Activity Timer Events */
+/* ms890495 Activity Timer Resets */
+/* ms890509 Activity Timer Time-outs and the Power Control Panel Utility */
+/* ms890589 Application Suspend Time-outs */
+/* aa448265 Best Practices for Faster Suspend Times */
+/* ms891075 Class-Qualified Device Names */
+/* aa447476 Device and System Power State Names */
+/* aa447460 Device Control IOCTLs */
+/* aa447464 Device Initialization Responsibilities */
+/* aa447472 Device Power Capabilities */
+/* aa447471 Device Power States */
+/* aa447475 Device State D3 and System Wakeup */
+/* aa447523 Driver-to-Power Manager APIs */
+/* ms892149 Example System Power States */
+/* ms892164 GWES Suspend Time-outs */
+/* ms895488 How to Add Power Management to a Device Driver */
+/* ms892451 IOCTL_POWER_SET Request Processing */
+/* ms892548 Notification Interface */
+/* ms892558 Other Power Management APIs */
+/* aa447557 Power Management Implementation in Drivers */
+/* ms894041 Power Management Implementation in Stream Interface Drivers */
+/* aa447560 Power Manager and ACPI/APM */
+/* aa447563 Power Manager Suspend Time-outs */
+/* aa447565 Power Requirements on Devices */
+/* aa447552 Power-Manageable Device Drivers */
+/* ms894011 Self-Management Example */
+/* ms894050 Suspend and Resume Handling */
+/* ms894051 Suspend and Resume Power Callbacks */
+/* ms894057 System Power State Setting */
+/* ms894059 System Power State to Device Power State Mapping */
+/* ms894060 System Power State Transitions */
+
+/* ------------------------------------------------------------------
+ * Book surface: powerman (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890485 Activity Timer Behavior */
+/* ms890491 Activity Timer Events */
+/* ms890495 Activity Timer Resets */
+/* ms890509 Activity Timer Time-outs and the Power Control Panel Utility */
+/* ms890589 Application Suspend Time-outs */
+/* aa448265 Best Practices for Faster Suspend Times */
+/* ms891075 Class-Qualified Device Names */
+/* aa447476 Device and System Power State Names */
+/* aa447460 Device Control IOCTLs */
+/* aa447464 Device Initialization Responsibilities */
+/* aa447472 Device Power Capabilities */
+/* aa447471 Device Power States */
+/* aa447475 Device State D3 and System Wakeup */
+/* aa447523 Driver-to-Power Manager APIs */
+/* ms892149 Example System Power States */
+/* ms892164 GWES Suspend Time-outs */
+/* ms895488 How to Add Power Management to a Device Driver */
+/* ms892451 IOCTL_POWER_SET Request Processing */
+/* ms892548 Notification Interface */
+/* ms892558 Other Power Management APIs */
+/* aa447557 Power Management Implementation in Drivers */
+/* ms894041 Power Management Implementation in Stream Interface Drivers */
+/* aa447560 Power Manager and ACPI/APM */
+/* aa447563 Power Manager Suspend Time-outs */
+/* aa447565 Power Requirements on Devices */
+/* aa447552 Power-Manageable Device Drivers */
+/* ms894011 Self-Management Example */
+/* ms894050 Suspend and Resume Handling */
+/* ms894051 Suspend and Resume Power Callbacks */
+/* ms894057 System Power State Setting */
+/* ms894059 System Power State to Device Power State Mapping */
+/* ms894060 System Power State Transitions */
+
 #ifdef __cplusplus
 }
 #endif

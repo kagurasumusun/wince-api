@@ -11,4 +11,12 @@
  * Book surface: stdshell (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 /* ms909876 IShellFolder::SetNameOf (Header: Shobjvidl.h, Shobjidl.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: shell-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909876 IShellFolder::SetNameOf (Header: Shobjvidl.h, Shobjidl.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: stdshell (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909876 IShellFolder::SetNameOf (Header: Shobjvidl.h, Shobjidl.idl.) */
 

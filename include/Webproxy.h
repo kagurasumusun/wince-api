@@ -55,4 +55,8 @@ AKARI_CE_IMPORT DWORD ProxySignalFilter(DWORD dwSignal)
 /* ------------------------------------------------------------------
  * Book surface: servers (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: servers (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891164 IOCTL_SERVICE_PRX_SIGNAL_FILTER: documented name-only (no value published; held) */
 #endif /* AKARI_WEBPROXY_H */

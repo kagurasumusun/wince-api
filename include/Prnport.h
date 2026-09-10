@@ -44,6 +44,24 @@ BOOL WINAPI PrinterSend(HANDLE hPrint, LPCVOID lpBuffer, DWORD dwBytes);
 /* aa447570 Printer Driver Registry Settings */
 /* aa447572 Printer Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-printer (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447573 Print Spooling */
+/* aa447568 Printer Driver Architecture */
+/* aa447569 Printer Driver Migration */
+/* aa447570 Printer Driver Registry Settings */
+/* aa447572 Printer Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-printer (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447573 Print Spooling */
+/* aa447568 Printer Driver Architecture */
+/* aa447569 Printer Driver Migration */
+/* aa447570 Printer Driver Registry Settings */
+/* aa447572 Printer Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

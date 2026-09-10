@@ -38,6 +38,28 @@ VOID PDD_AudioPowerHandler(BOOL power_down);
 BOOL PDD_IoControl(PDWORD pdwOpenData, DWORD dwCode, PBYTE pBufIn, DWORD dwLenIn, PBYTE pBufOut, DWORD dwLenOut, PDWORD pdwActualOut);
 /* ms919399 PDD_WaveProc: print `` -- recorded verbatim (no compiled prototype) */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms923328 WPDM_CLOSE: documented name-only (no value published; held) */
+/* ms923329 WPDM_CONTINUE: documented name-only (no value published; held) */
+/* ms923340 WPDM_ENDOFDATA: documented name-only (no value published; held) */
+/* ms923341 WPDM_GETDEVCAPS: documented name-only (no value published; held) */
+/* ms923668 WPDM_GETMIXERVAL: documented name-only (no value published; held) */
+/* ms923342 WPDM_GETVOLUME: documented name-only (no value published; held) */
+/* ms923344 WPDM_OPEN: documented name-only (no value published; held) */
+/* ms923345 WPDM_PAUSE: documented name-only (no value published; held) */
+/* ms923346 WPDM_RESTART: documented name-only (no value published; held) */
+/* ms923670 WPDM_SETMIXERVAL: documented name-only (no value published; held) */
+/* ms923347 WPDM_SETVOLUME: documented name-only (no value published; held) */
+/* ms923348 WPDM_STANDBY: documented name-only (no value published; held) */
+/* ms923568 WPDM_START: documented name-only (no value published; held) */
+/* ms923660 WPDM_STOP: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

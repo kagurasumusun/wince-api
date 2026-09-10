@@ -64,6 +64,34 @@ AKARI_CE_IMPORT BOOL ErrorAnalysis(INT32 cCalibrationPoints, INT32* pScreenXBuff
 /* ms894067 Touch Screen Driver Registry Settings */
 /* ms894069 Touch Screen Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447794 enumTouchPanelSampleFlags (Header: Tchddi.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894068 Touch Screen Driver Development Concepts */
+/* ms894067 Touch Screen Driver Registry Settings */
+/* ms894069 Touch Screen Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa448205 TOUCH_PANEL_SAMPLE_FLAGS: documented name-only (no value published; held) */
+/* aa448208 TPDC_CALIBRATION_POINT: documented name-only (no value published; held) */
+/* aa448209 TPDC_CALIBRATION_POINT_COUNT: documented name-only (no value published; held) */
+/* aa448210 TPDC_SAMPLE_RATE: documented name-only (no value published; held) */
+/* aa447794 enumTouchPanelSampleFlags (Header: Tchddi.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-touch (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894068 Touch Screen Driver Development Concepts */
+/* ms894067 Touch Screen Driver Registry Settings */
+/* ms894069 Touch Screen Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

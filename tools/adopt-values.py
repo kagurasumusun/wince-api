@@ -115,6 +115,9 @@ EXPLICIT_TARGETS = {
     'Mmsystem.h': [
         'WIM_CLOSE', 'WIM_DATA', 'WIM_OPEN', 'WOM_CLOSE', 'WOM_DONE',
         'WOM_OPEN', 'WIM_ERROR', 'WOM_ERROR',
+        'MM_WIM_CLOSE', 'MM_WIM_DATA', 'MM_WOM_CLOSE', 'MM_WOM_DONE',
+        'MM_MIXM_CONTROL_CHANGE', 'MM_MIXM_LINE_CHANGE',
+        'MM_WIM_OPEN', 'MM_WOM_OPEN',
     ],
     'Msacmdrv.h': ['DRV_CLOSE', 'DRV_OPEN'],
     'Winuser.h': ['WM_FONTCHANGE'],

@@ -70,6 +70,110 @@ extern "C" {
 /* ms862559 Modifying Returned Contact Information */
 /* ms862684 Retrieving Information from an Exchange Server */
 
+/* ------------------------------------------------------------------
+ * Book surface: exchange (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516110 IExchangeClient::CancelPendingRequests (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516134 IExchangeClient::GetServer (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516135 IExchangeClient::Initialize (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516141 IExchangeClient::RequestContacts (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516142 IExchangeClient::RequestFreeBusyData (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516143 IExchangeClient::RequestGALSearch (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516149 IExchangeClient::SetCredentials (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516150 IExchangeClient::SetServer (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516151 IExchangeClient::Uninitialize (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516112 IExchangeClientContactInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516113 IExchangeClientContactInformation::GetEmailAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516114 IExchangeClientContactInformation::GetHomeAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516115 IExchangeClientContactInformation::GetHomePhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516116 IExchangeClientContactInformation::GetMobilePhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516117 IExchangeClientContactInformation::GetWorkAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516118 IExchangeClientContactInformation::GetWorkPhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516120 IExchangeClientDataItemArray::GetItemAt (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516121 IExchangeClientDataItemArray::GetItemCount (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516123 IExchangeClientFreeBusyInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516124 IExchangeClientFreeBusyInformation::GetEmailAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516125 IExchangeClientFreeBusyInformation::GetFreeBusyData (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516127 IExchangeClientGALSearchInformation::GetAlias (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516128 IExchangeClientGALSearchInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516129 IExchangeClientGALSearchInformation::GetOffice (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516130 IExchangeClientGALSearchInformation::GetPhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516132 IExchangeClientGALSearchInformation::GetSMTPAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516140 IExchangeClientRequest::Cancel (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516144 IExchangeClientRequest::GetDataItemArray (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516145 IExchangeClientRequest::GetHttpStatus (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516146 IExchangeClientRequest::GetStatus (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516147 IExchangeClientRequest::GetType (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516138 IExchangeClientRequestCallback::OnRequestProgress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516139 IExchangeClientRequestCallback::OnShutdown (Header: IExchangeClient.h, IExchangeClient.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: exchange (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862146 Exchange Client API Organization */
+/* ms862148 Exchange Client Migration */
+/* ms862149 Exchange Client OS Design Development */
+/* aa513729 Exchange Client Registry Settings */
+/* ms897393 Exchange Client Samples */
+/* ms862150 Exchange Client Security */
+/* ms862559 Modifying Returned Contact Information */
+/* ms862684 Retrieving Information from an Exchange Server */
+
+/* ------------------------------------------------------------------
+ * Book surface: exchange (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms863932 ContactsSearchCriteria: documented name-only (no value published; held) */
+/* aa514944 ExchangeClientRequestStatus: documented name-only (no value published; held) */
+/* aa514947 ExchangeClientRequestType: documented name-only (no value published; held) */
+/* aa515003 FreeBusyCriteria: documented name-only (no value published; held) */
+/* aa515013 GALSearchCriteria: documented name-only (no value published; held) */
+/* aa513745 OWAEC_E_: documented name-only (no value published; held) */
+/* aa516110 IExchangeClient::CancelPendingRequests (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516134 IExchangeClient::GetServer (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516135 IExchangeClient::Initialize (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516141 IExchangeClient::RequestContacts (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516142 IExchangeClient::RequestFreeBusyData (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516143 IExchangeClient::RequestGALSearch (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516149 IExchangeClient::SetCredentials (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516150 IExchangeClient::SetServer (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516151 IExchangeClient::Uninitialize (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516112 IExchangeClientContactInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516113 IExchangeClientContactInformation::GetEmailAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516114 IExchangeClientContactInformation::GetHomeAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516115 IExchangeClientContactInformation::GetHomePhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516116 IExchangeClientContactInformation::GetMobilePhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516117 IExchangeClientContactInformation::GetWorkAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516118 IExchangeClientContactInformation::GetWorkPhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516120 IExchangeClientDataItemArray::GetItemAt (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516121 IExchangeClientDataItemArray::GetItemCount (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516123 IExchangeClientFreeBusyInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516124 IExchangeClientFreeBusyInformation::GetEmailAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516125 IExchangeClientFreeBusyInformation::GetFreeBusyData (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516127 IExchangeClientGALSearchInformation::GetAlias (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516128 IExchangeClientGALSearchInformation::GetDisplayName (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516129 IExchangeClientGALSearchInformation::GetOffice (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516130 IExchangeClientGALSearchInformation::GetPhoneNumber (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516132 IExchangeClientGALSearchInformation::GetSMTPAddress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516140 IExchangeClientRequest::Cancel (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516144 IExchangeClientRequest::GetDataItemArray (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516145 IExchangeClientRequest::GetHttpStatus (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516146 IExchangeClientRequest::GetStatus (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516147 IExchangeClientRequest::GetType (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516138 IExchangeClientRequestCallback::OnRequestProgress (Header: IExchangeClient.h, IExchangeClient.idl.) */
+/* aa516139 IExchangeClientRequestCallback::OnShutdown (Header: IExchangeClient.h, IExchangeClient.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: exchange (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862146 Exchange Client API Organization */
+/* ms862148 Exchange Client Migration */
+/* ms862149 Exchange Client OS Design Development */
+/* aa513729 Exchange Client Registry Settings */
+/* ms897393 Exchange Client Samples */
+/* ms862150 Exchange Client Security */
+/* ms862559 Modifying Returned Contact Information */
+/* ms862684 Retrieving Information from an Exchange Server */
+
 #ifdef __cplusplus
 }
 #endif

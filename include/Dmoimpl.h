@@ -47,6 +47,22 @@ extern "C" {
  *    (ms931410)
  *  - `bool OutputTypeSet(DWORDulOutputStreamIndex);` (ms931411) */
 
+/* ------------------------------------------------------------------
+ * Book surface: dmo (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451573 _DERIVED_::InternalAcceptingInput (Header: Dmoimpl.h.) */
+/* aa451574 _DERIVED_::InternalCheckInputType (Header: Dmoimpl.h.) */
+/* aa451575 _DERIVED_::InternalCheckOutputType (Header: Dmoimpl.h.) */
+/* aa451576 _DERIVED_::Lock (Header: Dmoimpl.h.) */
+/* aa451577 _DERIVED_::Unlock (Header: Dmoimpl.h.) */
+/* aa451296 Declaring the Derived Class (Header: Dmoimpl.h.) */
+/* ms931406 IMediaObjectImpl::CheckTypesSet (Header: Dmoimpl.h.) */
+/* ms931408 IMediaObjectImpl::InputType (Header: Dmoimpl.h.) */
+/* ms931409 IMediaObjectImpl::InputTypeSet (Header: Dmoimpl.h.) */
+/* ms931410 IMediaObjectImpl::OutputType (Header: Dmoimpl.h.) */
+/* ms931411 IMediaObjectImpl::OutputTypeSet (Header: Dmoimpl.h.) */
+/* ms924129 LockIt Internal Class (Header: Dmoimpl.h.) */
+
 #ifdef __cplusplus
 }
 #endif

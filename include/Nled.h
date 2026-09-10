@@ -25,6 +25,17 @@ extern "C" {
  * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-nled (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905297 NLED_COUNT_INFO: documented name-only (no value published; held) */
+/* ms905326 NLED_SETTINGS_INFO: documented name-only (no value published; held) */
+/* ms905332 NLED_SUPPORTS_INFO: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

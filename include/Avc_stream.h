@@ -161,6 +161,105 @@ typedef struct  {
 /* aa447548 Plug Finding */
 /* ms894014 Serial Bus and Subunit Plug Association */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890559 Application Session Buffers */
+/* ms890566 Application Session Data Transfer */
+/* ms890572 Application Session Starting */
+/* ms890581 Application Session Stopping */
+/* ms892180 IEEE 1394 AV/C VCR Subunit Driver Development Concepts */
+/* ms892181 IEEE 1394 AV/C VCR Subunit Driver Samples */
+/* ms892184 IEEE 1394 Bus Driver Samples */
+/* ms892185 IEEE 1394 Data Transfers */
+/* ms892187 IEEE 1394 Driver Thread Priorities */
+/* ms892188 IEEE 1394 Sample Communication */
+/* ms892189 IEEE 1394 SBP-2 Driver Development Concepts */
+/* ms892191 IEEE 1394 SBP-2 Driver Registry Settings */
+/* ms892190 IEEE 1394 SBP-2 Driver Samples */
+/* ms892192 IEEE 1394 Streaming Filter Driver Architecture */
+/* ms892193 IEEE 1394 Streaming Filter Driver Differences in Media Types */
+/* ms892194 IEEE 1394 Streaming Filter Driver IOCTL Processing Requirements */
+/* ms892195 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Complex Form */
+/* ms892196 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Incorrect Form */
+/* ms892197 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Simple Form */
+/* ms892199 IEEE 1394 Streaming Filter Driver Registry Settings */
+/* ms892201 IEEE 1394 Streaming Filter Driver Samples */
+/* ms892204 IEEE 1394 Unit Filter Driver Architecture */
+/* ms892205 IEEE 1394 Unit Filter Driver Destination Selection */
+/* ms892206 IEEE 1394 Unit Filter Driver Plug Allocation */
+/* ms892207 IEEE 1394 Unit Filter Driver Plug Management */
+/* ms892208 IEEE 1394 Unit Filter Driver Registration */
+/* ms892209 IEEE 1394 Unit Filter Driver Registry Settings */
+/* ms892211 IEEE 1394 Unit Filter Driver Samples */
+/* ms892212 IEEE 1394 Unit Filter Driver Streaming */
+/* ms892213 IEEE 1394 Virtual VCR Application */
+/* ms892214 IEEE 1394 Virtual VCR Driver Architecture */
+/* ms892215 IEEE 1394 Virtual VCR Driver Registry Settings */
+/* ms892217 IEEE 1394 Virtual VCR Driver Samples */
+/* aa447548 Plug Finding */
+/* ms894014 Serial Bus and Subunit Plug Association */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901860 IOCTL_STREAM_ATTACH_BUFFER: documented name-only (no value published; held) */
+/* ms901875 IOCTL_STREAM_CREATE_LOCAL_PLUG: documented name-only (no value published; held) */
+/* ms901884 IOCTL_STREAM_DELETE_LOCAL_PLUG: documented name-only (no value published; held) */
+/* ms901896 IOCTL_STREAM_DEREFERENCE_REMOTE_PLUG: documented name-only (no value published; held) */
+/* ms901909 IOCTL_STREAM_DETACH_BUFFER: documented name-only (no value published; held) */
+/* ms901940 IOCTL_STREAM_GET_MEDIA_SIZE: documented name-only (no value published; held) */
+/* ms902087 IOCTL_STREAM_GET_REMOTE_PLUG_HANDLE: documented name-only (no value published; held) */
+/* ms902094 IOCTL_STREAM_LOCATE_REMOTE_PLUG: documented name-only (no value published; held) */
+/* ms902096 IOCTL_STREAM_QUERY_BUFFER_STATE: documented name-only (no value published; held) */
+/* ms902097 IOCTL_STREAM_SET_MEDIA_SIZE: documented name-only (no value published; held) */
+/* ms902098 IOCTL_STREAM_START_RECV_SESSION: documented name-only (no value published; held) */
+/* ms902099 IOCTL_STREAM_START_XMIT_SESSION: documented name-only (no value published; held) */
+/* ms902101 IOCTL_STREAM_STOP_SESSION: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890559 Application Session Buffers */
+/* ms890566 Application Session Data Transfer */
+/* ms890572 Application Session Starting */
+/* ms890581 Application Session Stopping */
+/* ms892180 IEEE 1394 AV/C VCR Subunit Driver Development Concepts */
+/* ms892181 IEEE 1394 AV/C VCR Subunit Driver Samples */
+/* ms892184 IEEE 1394 Bus Driver Samples */
+/* ms892185 IEEE 1394 Data Transfers */
+/* ms892187 IEEE 1394 Driver Thread Priorities */
+/* ms892188 IEEE 1394 Sample Communication */
+/* ms892189 IEEE 1394 SBP-2 Driver Development Concepts */
+/* ms892191 IEEE 1394 SBP-2 Driver Registry Settings */
+/* ms892190 IEEE 1394 SBP-2 Driver Samples */
+/* ms892192 IEEE 1394 Streaming Filter Driver Architecture */
+/* ms892193 IEEE 1394 Streaming Filter Driver Differences in Media Types */
+/* ms892194 IEEE 1394 Streaming Filter Driver IOCTL Processing Requirements */
+/* ms892195 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Complex Form */
+/* ms892196 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Incorrect Form */
+/* ms892197 IEEE 1394 Streaming Filter Driver IRP Processing Requirements Simple Form */
+/* ms892199 IEEE 1394 Streaming Filter Driver Registry Settings */
+/* ms892201 IEEE 1394 Streaming Filter Driver Samples */
+/* ms892204 IEEE 1394 Unit Filter Driver Architecture */
+/* ms892205 IEEE 1394 Unit Filter Driver Destination Selection */
+/* ms892206 IEEE 1394 Unit Filter Driver Plug Allocation */
+/* ms892207 IEEE 1394 Unit Filter Driver Plug Management */
+/* ms892208 IEEE 1394 Unit Filter Driver Registration */
+/* ms892209 IEEE 1394 Unit Filter Driver Registry Settings */
+/* ms892211 IEEE 1394 Unit Filter Driver Samples */
+/* ms892212 IEEE 1394 Unit Filter Driver Streaming */
+/* ms892213 IEEE 1394 Virtual VCR Application */
+/* ms892214 IEEE 1394 Virtual VCR Driver Architecture */
+/* ms892215 IEEE 1394 Virtual VCR Driver Registry Settings */
+/* ms892217 IEEE 1394 Virtual VCR Driver Samples */
+/* aa447548 Plug Finding */
+/* ms894014 Serial Bus and Subunit Plug Association */
+
 #ifdef __cplusplus
 }
 #endif

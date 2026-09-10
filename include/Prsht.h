@@ -287,4 +287,12 @@ BOOL     CALLBACK AddPropSheetPageProc(HPROPSHEETPAGE hpage,
 /* ms938706 Property Sheets Messages */
 /* ms938707 Property Sheets Notifications */
 /* ms938709 Property Sheets Structures */
+/* ------------------------------------------------------------------
+ * Book surface: cc-propertysheets (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms938704 Property Sheets Functions */
+/* ms938705 Property Sheets Macros */
+/* ms938706 Property Sheets Messages */
+/* ms938707 Property Sheets Notifications */
+/* ms938709 Property Sheets Structures */
 #endif /* AKARI_PRSHT_H */

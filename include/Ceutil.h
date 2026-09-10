@@ -62,6 +62,17 @@ AKARI_CE_IMPORT HRESULT CeSvcRemove(LPTSTR pszSvcName, LPTSTR pszSvcClass, DWORD
 /* (record-only: parameter or return type unpublished) */
 /* ms860950 CeSvcOpen Constant Enumeration (Header: Ceutil.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms860950 CeSvcOpen Constant Enumeration (Header: Ceutil.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa514415 ObjectNotify: documented name-only (no value published; held) */
+/* ms860950 CeSvcOpen Constant Enumeration (Header: Ceutil.h.) */
+
 #ifdef __cplusplus
 }
 #endif

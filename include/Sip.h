@@ -223,6 +223,41 @@ typedef struct IInputMethod2 IInputMethod2;
 /* ms909766 IInputMethod::Showing (Header: Sip.h.) */
 /* ms909775 IInputMethod::UserOptionsDlg (Header: Sip.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: sip (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms929944 IIMCallback2::SendAlternatives2 (Header: Sip.h.) */
+/* ms929945 IIMCallback2::SendCharEvents (Header: Sip.h.) */
+/* ms929946 IIMCallback2::SendString (Header: Sip.h.) */
+/* ms929947 IIMCallback2::SendVirtualKey (Header: Sip.h.) */
+/* ms929948 IIMCallback2::SetImInfo (Header: Sip.h.) */
+/* ms929949 IIMCallback::SendCharEvents (Header: Sip.h.) */
+/* ms929950 IIMCallback::SendString (Header: Sip.h.) */
+/* ms929951 IIMCallback::SendVirtualKey (Header: Sip.h.) */
+/* ms929952 IIMCallback::SetImInfo (Header: Sip.h.) */
+/* ms929955 IInputMethod2::Deselect (Header: Sip.h.) */
+/* ms929956 IInputMethod2::GetImData (Header: Sip.h.) */
+/* ms929957 IInputMethod2::GetInfo (Header: Sip.h.) */
+/* ms929958 IInputMethod2::Hiding (Header: Sip.h.) */
+/* ms929959 IInputMethod2::ReceiveSipInfo (Header: Sip.h.) */
+/* ms929960 IInputMethod2::RegisterCallback (Header: Sip.h.) */
+/* ms929961 IInputMethod2::RegisterCallback2 (Header: Sip.h.) */
+/* ms929962 IInputMethod2::Select (Header: Sip.h.) */
+/* ms929963 IInputMethod2::SetImData (Header: Sip.h.) */
+/* ms929964 IInputMethod2::SetIMMActiveContext (Header: Sip.h.) */
+/* ms929965 IInputMethod2::Showing (Header: Sip.h.) */
+/* ms930035 IInputMethod2::UserOptionsDlg (Header: Sip.h.) */
+/* ms930093 IInputMethod::Deselect (Header: Sip.h.) */
+/* ms930101 IInputMethod::GetImData (Header: Sip.h.) */
+/* ms930107 IInputMethod::GetInfo (Header: Sip.h.) */
+/* ms930118 IInputMethod::Hiding (Header: Sip.h.) */
+/* ms930126 IInputMethod::ReceiveSipInfo (Header: Sip.h.) */
+/* ms930132 IInputMethod::RegisterCallback (Header: Sip.h.) */
+/* ms909669 IInputMethod::Select (Header: Sip.h.) */
+/* ms909763 IInputMethod::SetImData (Header: Sip.h.) */
+/* ms909766 IInputMethod::Showing (Header: Sip.h.) */
+/* ms909775 IInputMethod::UserOptionsDlg (Header: Sip.h.) */
+
 #ifdef __cplusplus
 }
 #endif

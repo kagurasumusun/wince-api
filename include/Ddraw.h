@@ -664,6 +664,94 @@ AKARI_CE_IMPORT HRESULT WINAPI DirectDrawEnumerateEx(
 /* ms899358 HALInit: print `EXTERN_C BOOL WINAPI HALInit(LPDDHALINFO lpddhi,BOOL reset,DWORD modeIndex);` */
 /* (record-only: parameter or return type unpublished) */
 
+/* ------------------------------------------------------------------
+ * Book surface: ddraw (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms929640 IDirectDraw4::Compact (Header: Ddraw.h.) */
+/* ms929641 IDirectDraw4::CreateClipper (Header: Ddraw.h.) */
+/* ms929642 IDirectDraw4::CreatePalette (Header: Ddraw.h.) */
+/* ms929643 IDirectDraw4::CreateSurface (Header: Ddraw.h.) */
+/* ms929644 IDirectDraw4::DuplicateSurface (Header: Ddraw.h.) */
+/* ms929645 IDirectDraw4::EnumDisplayModes (Header: Ddraw.h.) */
+/* ms929646 IDirectDraw4::EnumSurfaces (Header: Ddraw.h.) */
+/* ms929647 IDirectDraw4::FlipToGDISurface (Header: Ddraw.h.) */
+/* ms929648 IDirectDraw4::GetAvailableVidMem (Header: Ddraw.h.) */
+/* ms929649 IDirectDraw4::GetCaps (Header: Ddraw.h.) */
+/* ms929650 IDirectDraw4::GetDisplayMode (Header: Ddraw.h.) */
+/* ms929651 IDirectDraw4::GetFourCCCodes (Header: Ddraw.h.) */
+/* ms929652 IDirectDraw4::GetGDISurface (Header: Ddraw.h.) */
+/* ms929653 IDirectDraw4::GetMonitorFrequency (Header: Ddraw.h.) */
+/* ms929654 IDirectDraw4::GetScanLine (Header: Ddraw.h.) */
+/* ms929655 IDirectDraw4::GetSurfaceFromDC (Header: Ddraw.h.) */
+/* ms929656 IDirectDraw4::GetVerticalBlankStatus (Header: Ddraw.h.) */
+/* ms929657 IDirectDraw4::RestoreAllSurfaces (Header: Ddraw.h.) */
+/* ms929658 IDirectDraw4::RestoreDisplayMode (Header: Ddraw.h.) */
+/* ms929659 IDirectDraw4::SetCooperativeLevel (Header: Ddraw.h.) */
+/* ms929660 IDirectDraw4::SetDisplayMode (Header: Ddraw.h.) */
+/* ms929661 IDirectDraw4::TestCooperativeLevel (Header: Ddraw.h.) */
+/* ms929662 IDirectDraw4::WaitForVerticalBlank (Header: Ddraw.h.) */
+/* ms929664 IDirectDrawClipper::GetClipList (Header: Ddraw.h.) */
+/* ms929665 IDirectDrawClipper::GetHWnd (Header: Ddraw.h.) */
+/* ms929667 IDirectDrawClipper::IsClipListChanged (Header: Ddraw.h.) */
+/* ms929668 IDirectDrawClipper::SetClipList (Header: Ddraw.h.) */
+/* ms929669 IDirectDrawClipper::SetHWnd (Header: Ddraw.h.) */
+/* ms929671 IDirectDrawColorControl::GetColorControls (Header: Ddraw.h.) */
+/* ms929672 IDirectDrawColorControl::SetColorControls (Header: Ddraw.h.) */
+/* ms929674 IDirectDrawPalette::GetCaps (Header: Ddraw.h.) */
+/* ms929675 IDirectDrawPalette::GetEntries (Header: Ddraw.h.) */
+/* ms929676 IDirectDrawPalette::SetEntries (Header: Ddraw.h.) */
+/* ms929678 IDirectDrawSurface5::AddAttachedSurface (Header: Ddraw.h.) */
+/* ms929679 IDirectDrawSurface5::AddOverlayDirtyRect (Header: Ddraw.h.) */
+/* ms929680 IDirectDrawSurface5::AlphaBlt (Header: Ddraw.h.) */
+/* ms929681 IDirectDrawSurface5::Blt (Header: Ddraw.h.) */
+/* ms929682 IDirectDrawSurface5::BltFast (Header: Ddraw.h.) */
+/* ms929683 IDirectDrawSurface5::ChangeUniquenessValue (Header: Ddraw.h.) */
+/* ms929684 IDirectDrawSurface5::DeleteAttachedSurface (Header: Ddraw.h.) */
+/* ms929685 IDirectDrawSurface5::EnumAttachedSurfaces (Header: Ddraw.h.) */
+/* ms929686 IDirectDrawSurface5::EnumOverlayZOrders (Header: Ddraw.h.) */
+/* ms929687 IDirectDrawSurface5::Flip (Header: Ddraw.h.) */
+/* ms929688 IDirectDrawSurface5::FreePrivateData (Header: Ddraw.h.) */
+/* ms929689 IDirectDrawSurface5::GetAttachedSurface (Header: Ddraw.h.) */
+/* ms929690 IDirectDrawSurface5::GetBltStatus (Header: Ddraw.h.) */
+/* ms929691 IDirectDrawSurface5::GetCaps (Header: Ddraw.h.) */
+/* ms929692 IDirectDrawSurface5::GetClipper (Header: Ddraw.h.) */
+/* ms929693 IDirectDrawSurface5::GetColorKey (Header: Ddraw.h.) */
+/* ms929694 IDirectDrawSurface5::GetDC (Header: Ddraw.h.) */
+/* ms929695 IDirectDrawSurface5::GetDDInterface (Header: Ddraw.h.) */
+/* ms929696 IDirectDrawSurface5::GetFlipStatus (Header: Ddraw.h.) */
+/* ms929697 IDirectDrawSurface5::GetOverlayPosition (Header: Ddraw.h.) */
+/* ms929698 IDirectDrawSurface5::GetPalette (Header: Ddraw.h.) */
+/* ms929699 IDirectDrawSurface5::GetPixelFormat (Header: Ddraw.h.) */
+/* ms929700 IDirectDrawSurface5::GetPrivateData (Header: Ddraw.h.) */
+/* ms929701 IDirectDrawSurface5::GetSurfaceDesc (Header: Ddraw.h.) */
+/* ms929702 IDirectDrawSurface5::GetUniquenessValue (Header: Ddraw.h.) */
+/* ms929703 IDirectDrawSurface5::Initialize (Header: Ddraw.h.) */
+/* ms929704 IDirectDrawSurface5::IsLost (Header: Ddraw.h.) */
+/* ms929705 IDirectDrawSurface5::Lock (Header: Ddraw.h.) */
+/* ms929706 IDirectDrawSurface5::PageLock (Header: Ddraw.h.) */
+/* ms929707 IDirectDrawSurface5::PageUnlock (Header: Ddraw.h.) */
+/* ms929708 IDirectDrawSurface5::ReleaseDC (Header: Ddraw.h.) */
+/* ms929709 IDirectDrawSurface5::Restore (Header: Ddraw.h.) */
+/* ms929710 IDirectDrawSurface5::SetClipper (Header: Ddraw.h.) */
+/* ms929711 IDirectDrawSurface5::SetColorKey (Header: Ddraw.h.) */
+/* ms929712 IDirectDrawSurface5::SetOverlayPosition (Header: Ddraw.h.) */
+/* ms929713 IDirectDrawSurface5::SetPalette (Header: Ddraw.h.) */
+/* ms929714 IDirectDrawSurface5::SetPrivateData (Header: Ddraw.h.) */
+/* ms929715 IDirectDrawSurface5::SetSurfaceDesc (Header: Ddraw.h.) */
+/* ms929716 IDirectDrawSurface5::Unlock (Header: Ddraw.h.) */
+/* ms929717 IDirectDrawSurface5::UpdateOverlay (Header: Ddraw.h.) */
+/* aa451768 IDirectDrawSurface5::UpdateOverlayZOrder (Header: Ddraw.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: ddraw (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms925292 DirectDraw Callback Functions (SDK) */
+/* ms925293 DirectDraw Functions */
+/* ms925294 DirectDraw Interfaces */
+/* aa451337 DirectDraw Return Values */
+/* ms925296 DirectDraw Structures (SDK) */
+/* ms929718 IDirectDrawSurface5::UpdateOverlayDisplay */
+
 #ifdef __cplusplus
 }
 #endif

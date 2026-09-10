@@ -28,6 +28,11 @@ AKARI_CE_IMPORT DWORD IsDialogBoxHandled(HWND hWnd, DWORD dwAction,
                     DWORD dwPermissions, LPCTSTR lpszText)
                     AKARI_CE_NAME(IsDialogBoxHandled);
 
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms918806 IsDialogBoxHandled Callback Function (Urlmon) (Header: Urlmonui.h.) */
+
 #ifdef __cplusplus
 }
 #endif

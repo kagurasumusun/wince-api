@@ -899,4 +899,176 @@ AKARI_CE_IMPORT BOOL UnlockUrlCacheEntryStream(HANDLE hUrlCacheStream, DWORD dwR
 #define WININET_API_FLAG_SYNC                        0x0004
 #define WININET_API_FLAG_USE_CONTEXT                 0x0008
 
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452096 API Flags (Header: Wininet.h.) */
+/* ms906348 HTTP Response Headers (Header: Wininet.h.) */
+/* ms906351 HTTP Status Codes (Header: Wininet.h.) */
+/* ms918831 Option Flags (Header: Wininet.h.) */
+/* ms918835 Privacy Flags (Header: Wininet.h.) */
+/* ms918842 Query Info Flags (Header: Wininet.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451874 About Character Sets */
+/* aa451877 About DHTML */
+/* aa451879 About HINTERNET Handles */
+/* aa451881 About the ActiveX Navigation Control */
+/* aa451883 About the IMultilanguage Interfaces */
+/* aa451885 About the Webview Browser Object */
+/* aa451887 Accessing Elements with Script Languages */
+/* aa451890 Accessing the HTTP Protocol */
+/* aa451892 Accessing URLs Directly */
+/* aa451896 Adding Internet Browsing Functionality to Your Application */
+/* aa451898 Adding JScript Code to an HTML Page */
+/* aa452072 Adding Transitions */
+/* aa451900 Adding VBScript Code to an HTML Page */
+/* aa451902 Additional Resources for JScript Developers */
+/* aa451904 Additional Resources for VBScript Developers */
+/* aa452097 apply (Internet Explorer) */
+/* ms905675 Applying Filters */
+/* aa451910 Browser Registry Settings */
+/* aa451914 Changing Fonts with the WebBrowser Control */
+/* aa451918 Code Page Detection */
+/* aa451922 Conversion Between Character Sets */
+/* aa451924 Cookie Headers */
+/* aa451926 Cookies */
+/* aa451938 Creating a Browser Class */
+/* aa451940 Creating a Browser Window */
+/* aa451928 Creating a Cache Entry */
+/* aa452148 Creating a URL Moniker */
+/* aa451946 Creating a Web Browser Object */
+/* aa451932 Creating and Cracking URLs */
+/* aa451935 Creating and Retrieving Cookies */
+/* aa451942 Creating the Browser Control */
+/* aa451944 Creating the Navigation Control */
+/* ms905302 Customizing the Browser Font Table */
+/* aa451948 Customizing the Browser User Interface */
+/* aa451950 Customizing the Focus Rectangle */
+/* aa451952 Deleting a Cache Entry */
+/* aa451954 Deleting Files from an FTP Server */
+/* aa451956 DHTML Events */
+/* aa451958 Disabling Multiple Windows */
+/* aa451960 Displaying the Current Security Zone */
+/* aa451963 Enumerating Code Pages and Locales */
+/* aa451965 Enumerating Directories */
+/* aa451967 Enumerating the Cache */
+/* ms905676 Filter and Transition Properties */
+/* aa451969 Font Linking */
+/* aa451971 FTP Function Handles */
+/* aa451977 Handling HTTP Authentication */
+/* aa451979 Handling Structures with Variable Size Data */
+/* aa451981 Handling Uniform Resource Locators */
+/* aa451983 Hit Logging */
+/* aa451985 Hosting MSHTML from an Application */
+/* aa451988 HTTP and FTP Common Functions */
+/* aa451989 HTTP Authentication */
+/* aa451991 Identifying Pocket Internet Explorer to a Web Server */
+/* aa451993 IESample Registry Settings */
+/* aa451996 International Language Functionalities */
+/* aa451997 Internet Client Services Catalog Items */
+/* ms918893 Internet Explorer 6 Application Development */
+/* aa452001 Internet Explorer 6 Architecture */
+/* aa452005 Internet Explorer 6 Default Registry Settings */
+/* aa452002 Internet Explorer 6 for Windows CE Characteristics */
+/* aa452003 Internet Explorer 6 Migration */
+/* aa452004 Internet Explorer 6 OS Overview */
+/* aa452007 Internet Explorer 6 Security */
+/* aa452010 Internet Explorer Browser Control Host Migration */
+/* aa452011 Internet Explorer Browser Control Host OS Design Development */
+/* ms919019 Internet Explorer Browser Control Host Reference */
+/* aa451908 Internet Explorer Browser Control Host Registry Settings */
+/* aa452012 Internet Explorer Browser Control Host Samples */
+/* aa452013 Internet Explorer MSHTML/DHTML API Migration */
+/* ms905101 Internet Explorer MSHTML/DHTML API Registry Settings */
+/* aa452015 Internet Explorer MSHTML/DHTML API Samples */
+/* aa452017 Internet Explorer Multiple-Language API Migration */
+/* aa452016 Internet Explorer Multiple-Language API OS Design Development */
+/* ms905072 Internet Explorer Multiple-Language API Registry Settings */
+/* aa452018 Internet Explorer Multiple-Language API Samples */
+/* aa452019 Internet Explorer RPC Support */
+/* aa452021 Internet Explorer TV-Style Navigation Migration */
+/* aa452022 Internet Explorer TV-Style Navigation OS Design Development */
+/* ms905631 Internet Explorer TV-Style Navigation Registry Settings */
+/* aa452023 Internet Explorer TV-Style Navigation Samples */
+/* aa452024 Internet Protocols */
+/* aa452029 JScript Migration */
+/* aa452030 JScript OS Design Development */
+/* aa452031 JScript Samples */
+/* aa452028 JScript Support in Windows CE */
+/* aa452032 Locale-based Text and Line Breaking */
+/* ms904973 Manipulating Directories on an FTP Server */
+/* ms905065 Mapping Code Pages to Script IDs */
+/* ms905088 MSHTML Editing */
+/* ms905080 MSHTML/DHTML API Overview */
+/* ms905109 Navigating Directories */
+/* ms905118 Navigating to a Specified URL */
+/* ms905210 Obtaining MIME Information */
+/* ms905213 P3P Policy Evaluation Engine */
+/* ms905225 Placing Files on an FTP Server */
+/* ms918834 play (Internet Explorer) */
+/* ms905234 Pocket Internet Explorer Architecture */
+/* ms905240 Pocket Internet Explorer Characteristics */
+/* ms905244 Pocket Internet Explorer Migration */
+/* ms905255 Pocket Internet Explorer Samples */
+/* ms905260 Pocket Internet Explorer Security */
+/* ms905265 Printing Pages with the WebBrowser Control */
+/* ms905270 Privacy Functions */
+/* ms905275 Privacy Notification User Interface */
+/* ms905281 Privacy Templates */
+/* ms905293 Proxy Authentication */
+/* ms905299 Registering the Browser Window */
+/* ms905307 Renaming Files and Directories on an FTP Server */
+/* ms905316 Replacement of the Urlmon User Interface */
+/* ms905320 Replacement of the WinInet User Interface */
+/* ms905329 Retrieving Cache Entry Data */
+/* ms905334 Retrieving Cache Entry Files */
+/* ms905338 Retrieving Files from an FTP Server */
+/* ms905345 Server Authentication */
+/* ms905348 Setting Up Event Sinks */
+/* aa451920 Specifying Privacy Settings */
+/* ms905622 Starting an FTP Session */
+/* ms918859 stop (Internet Explorer) */
+/* ms905630 Summary of Browser Characteristics */
+/* aa452009 Support for Internet Explorer 6 in Windows CE */
+/* ms905632 The IESample Browser */
+/* aa451930 The IESimple Browser */
+/* ms905633 Theme Hit Test Values */
+/* ms905690 Theme Parts and States */
+/* ms905286 Theme Property Values */
+/* aa452068 Transition Events */
+/* ms905637 URL Moniker Services Migration */
+/* ms905638 URL Moniker Services Overview */
+/* ms905635 URL Moniker Services Registry Settings */
+/* ms905639 URL Moniker Services Samples */
+/* ms905636 URL Moniker Services Security */
+/* ms905640 URL Security Zones */
+/* ms905641 URLs, Namespaces, and Monikers */
+/* ms905642 Using Asynchronous Pluggable Protocols */
+/* ms905643 Using Asynchronous WinInet Functions */
+/* ms905644 Using Client Capabilities */
+/* ms905645 Using Flags to Control Caching */
+/* ms905646 Using HTML Components */
+/* ms905647 Using Persistent Caching Functions */
+/* ms905649 Using the Travel Log Interfaces */
+/* ms905650 Using the URL Moniker Functions */
+/* ms905653 Using the WinInet Debug Engine */
+/* ms905651 Using the WinInet Functions for FTP Sessions */
+/* ms905652 Using WebBrowser Controls */
+/* ms905655 VBScript Migration */
+/* ms905656 VBScript OS Design Development */
+/* ms905657 VBScript Samples */
+/* ms905654 VBScript Support in Windows CE */
+/* aa452091 WinInet Error Messages */
+/* ms905659 WinInet Migration */
+/* ms905658 WinInet Overview */
+/* ms905660 WinInet Registry Settings */
+/* ms905662 WinInet Samples */
+/* ms905663 WinInet Security */
+/* ms905664 Working with WebBrowser Events */
+/* ms905667 XML Data Islands Application Development */
+/* ms905668 XML Data Islands Migration */
+/* ms918879 XML Data Islands OS Design Development */
+/* ms905669 XML Data Islands Samples */
 #endif /* AKARI_WININET_H */

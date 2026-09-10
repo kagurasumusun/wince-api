@@ -74,6 +74,20 @@ typedef struct  {
 /* ms923275 VVCR_QueryState_Response -- HELD (page print; member types unpublished):
  *   typedef struct  { ... } VVCR_QueryState_Response; */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms902113 IOCTL_VVCR_COMPLETE: documented name-only (no value published; held) */
+/* ms902114 IOCTL_VVCR_EVENT: documented name-only (no value published; held) */
+/* ms902116 IOCTL_VVCR_QUERY_STATE: documented name-only (no value published; held) */
+/* ms902117 IOCTL_VVCR_SET_MECHANISM_POSITION: documented name-only (no value published; held) */
+/* ms902118 IOCTL_VVCR_SET_MECHANISM_STATE: documented name-only (no value published; held) */
+/* ms902119 IOCTL_VVCR_SET_MECHANISM_TRACK_NUMBER: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

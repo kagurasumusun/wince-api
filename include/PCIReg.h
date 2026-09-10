@@ -65,6 +65,32 @@ typedef struct BUSDATA_PARMS {
 /* ms894039 Step 4: Enumerating a PCI Ethernet Controller Driver */
 /* ms894040 Step 5: Loading Drivers on the PCI Bus */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-pci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms923768 Enabling the PCI Bus Driver */
+/* aa447537 PCI Bus Configuration and Enumeration */
+/* aa447541 PCI Bus Driver Registry Settings */
+/* aa447542 PCI Bus Driver Samples */
+/* ms894036 Step 1: Loading the PCI Bus Driver */
+/* ms894037 Step 2: Enumerating Devices on the PCI Bus */
+/* ms894038 Step 3: Enumerating a PCI Serial Driver */
+/* ms894039 Step 4: Enumerating a PCI Ethernet Controller Driver */
+/* ms894040 Step 5: Loading Drivers on the PCI Bus */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-pci (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms923768 Enabling the PCI Bus Driver */
+/* aa447537 PCI Bus Configuration and Enumeration */
+/* aa447541 PCI Bus Driver Registry Settings */
+/* aa447542 PCI Bus Driver Samples */
+/* ms894036 Step 1: Loading the PCI Bus Driver */
+/* ms894037 Step 2: Enumerating Devices on the PCI Bus */
+/* ms894038 Step 3: Enumerating a PCI Serial Driver */
+/* ms894039 Step 4: Enumerating a PCI Ethernet Controller Driver */
+/* ms894040 Step 5: Loading Drivers on the PCI Bus */
+
 #ifdef __cplusplus
 }
 #endif

@@ -186,4 +186,24 @@ AKARI_CE_IMPORT BOOL FSDMGR_EmptyLockContainer(PFILELOCKSTATE pFileLockState)
 /* ms886160 Setting the File Pointer */
 /* aa516903 Synchronization and Device I/O */
 /* aa516923 Writing to a File */
+/* ------------------------------------------------------------------
+ * Book surface: fsds-remainder (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms885120 Accessing Files on Other Storage Media */
+/* ms885325 Creating and Opening a File or Directory */
+/* ms885351 Deleting a File or a Directory */
+/* ms885363 Determining Available Disk Space */
+/* ms885416 File-Naming Limitations */
+/* ms885501 Manipulating File Times */
+/* ms885512 Memory Mapping a File */
+/* ms885849 Moving and Copying Files and Directories */
+/* ms885978 Querying for Version Information */
+/* ms886040 Read/Write Example */
+/* ms886005 Reading and Writing File Attributes */
+/* ms886029 Reading from a File */
+/* ms886095 Retrieving File and Directory Information */
+/* ms886105 Searching for a File or Directory */
+/* ms886160 Setting the File Pointer */
+/* aa516903 Synchronization and Device I/O */
+/* aa516923 Writing to a File */
 #endif /* AKARI_FSDMGR_H */

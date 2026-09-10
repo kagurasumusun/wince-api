@@ -56,6 +56,60 @@ extern "C" {
 /* aa447620 Sample ATADISK Driver */
 /* aa447625 Sample Secure Digital Card Driver */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms892148 ATAPI Slave Devices */
+/* ms890840 Block Driver Access */
+/* ms890849 Block Driver Architecture */
+/* ms890855 Block Driver Detection */
+/* ms890864 Block Driver Installation */
+/* ms890868 Block Driver Interface */
+/* ms890874 Block Driver Loading */
+/* ms890877 Block Driver Manager */
+/* ms890882 Block Driver Power Cycle */
+/* ms890889 Block Driver Registry Settings */
+/* ms892152 File System Loading and Unloading */
+/* aa447620 Sample ATADISK Driver */
+/* aa447625 Sample Secure Digital Card Driver */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901375 IOCTL_CDROM_DISC_INFO: documented name-only (no value published; held) */
+/* ms901376 IOCTL_CDROM_EJECT_MEDIA: documented name-only (no value published; held) */
+/* ms901377 IOCTL_CDROM_GET_SENSE_DATA: documented name-only (no value published; held) */
+/* ms901378 IOCTL_CDROM_ISSUE_INQUIRY: documented name-only (no value published; held) */
+/* ms901379 IOCTL_CDROM_PAUSE_AUDIO: documented name-only (no value published; held) */
+/* ms901380 IOCTL_CDROM_PLAY_AUDIO_MSF: documented name-only (no value published; held) */
+/* ms901381 IOCTL_CDROM_READ_SG: documented name-only (no value published; held) */
+/* ms901382 IOCTL_CDROM_READ_TOC: documented name-only (no value published; held) */
+/* ms901383 IOCTL_CDROM_RESUME_AUDIO: documented name-only (no value published; held) */
+/* ms901384 IOCTL_CDROM_SEEK_AUDIO_MSF: documented name-only (no value published; held) */
+/* ms901385 IOCTL_CDROM_STOP_AUDIO: documented name-only (no value published; held) */
+/* ms901386 IOCTL_CDROM_TEST_UNIT_READY: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms892148 ATAPI Slave Devices */
+/* ms890840 Block Driver Access */
+/* ms890849 Block Driver Architecture */
+/* ms890855 Block Driver Detection */
+/* ms890864 Block Driver Installation */
+/* ms890868 Block Driver Interface */
+/* ms890874 Block Driver Loading */
+/* ms890877 Block Driver Manager */
+/* ms890882 Block Driver Power Cycle */
+/* ms890889 Block Driver Registry Settings */
+/* ms892152 File System Loading and Unloading */
+/* aa447620 Sample ATADISK Driver */
+/* aa447625 Sample Secure Digital Card Driver */
+
 #ifdef __cplusplus
 }
 #endif

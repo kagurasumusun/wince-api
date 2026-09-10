@@ -1137,4 +1137,18 @@
  *   aa451718  FOURCCMap::SetFOURCC : void SetFOURCC(const GUID* pguid);
  */
 
+
+/* ------------------------------------------------------------------ */
+/* Book surface: drivers-stream (tools/gen-book.py; page ids per record) */
+/* ------------------------------------------------------------------ */
+/* The stream-interface driver template pages (ms923695 XXX_Close,
+ * ms923696 XXX_Deinit, ms923699 XXX_IOControl, ms923700 XXX_Open,
+ * ms923701 XXX_PowerDown, ms923702 XXX_PowerUp, ms923703 XXX_Read,
+ * ms923704 XXX_Seek, ms923705 XXX_Write) document the nine
+ * entry points every stream driver implements under the XXX_
+ * placeholder prefix ("Developer implemented"); the real names are
+ * driver-defined (the Init/Deinit pair is registered via the
+ * Prefix registry value).  Recorded as the template set -- no
+ * XXX_-prefixed declaration is emitted. */
+
 #endif /* AKARI_STREAMS_H */

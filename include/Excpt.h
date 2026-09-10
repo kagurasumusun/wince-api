@@ -56,6 +56,12 @@ DWORD GetExceptionCode(void);
  * a try-except; returns a pointer to an EXCEPTION_POINTERS. */
 LPEXCEPTION_POINTERS GetExceptionInformation(void);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-exception-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450741 Exception Functions */
+/* aa450743 Exception Structures */
+
 #ifdef __cplusplus
 }
 #endif

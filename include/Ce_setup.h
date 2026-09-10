@@ -29,6 +29,16 @@ extern "C" {
 /* ms864467 Uninstall_Exit: print `codeUNINSTALL_EXIT Uninstall_Exit(HWNDhwndParent);` */
 /* (record-only: parameter or return type unpublished) */
 
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa514314 Install_Init: documented name-only (no value published; held) */
+/* ms864576 Uninstall_Init: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

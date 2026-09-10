@@ -21,4 +21,8 @@
 /* ------------------------------------------------------------------
  * Book surface: vail (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: vail (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms909304 CONFIG_DATA_: documented name-only (no value published; held) */
 #endif /* AKARI_VOIPCONFIGURATIONDATASTORE_H */

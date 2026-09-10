@@ -128,6 +128,40 @@ typedef struct _HIDP_UNKNOWN_TOKEN {
 /* ms923752 Troubleshooting: Dropped HID Reports */
 /* ms923757 Troubleshooting: HID Report Identifier Errors */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms892167 HID Button Capability Arrays */
+/* ms892168 HID Collection Capabilities */
+/* ms892169 HID Data Indexes */
+/* ms892170 HID Driver Migration */
+/* ms894890 HID Driver Registry Settings */
+/* ms892172 HID Driver Samples */
+/* ms892174 HID Link Collections */
+/* ms892175 HID Preparsed Data */
+/* ms892176 HID Report Initialization */
+/* ms892177 HID Report Interpretation */
+/* ms892178 HID Value Capability Arrays */
+/* ms923752 Troubleshooting: Dropped HID Reports */
+/* ms923757 Troubleshooting: HID Report Identifier Errors */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms892167 HID Button Capability Arrays */
+/* ms892168 HID Collection Capabilities */
+/* ms892169 HID Data Indexes */
+/* ms892170 HID Driver Migration */
+/* ms894890 HID Driver Registry Settings */
+/* ms892172 HID Driver Samples */
+/* ms892174 HID Link Collections */
+/* ms892175 HID Preparsed Data */
+/* ms892176 HID Report Initialization */
+/* ms892177 HID Report Interpretation */
+/* ms892178 HID Value Capability Arrays */
+/* ms923752 Troubleshooting: Dropped HID Reports */
+/* ms923757 Troubleshooting: HID Report Identifier Errors */
+
 #ifdef __cplusplus
 }
 #endif

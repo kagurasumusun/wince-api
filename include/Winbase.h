@@ -2679,6 +2679,121 @@ AKARI_CE_IMPORT BOOL LoadFSD(HANDLE hDevice, LPCWSTR lpFSDName)
 AKARI_CE_IMPORT BOOL LoadFSDEx(HANDLE hDevice, LPCWSTR lpFSDName, DWORD dwFlag)
     AKARI_CE_NAME(LoadFSDEx);
 
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447463 Device File Names */
+/* aa448269 Device Manager Architecture */
+/* aa447470 Device Manager Registry Keys */
+/* aa448270 Device Manager Security */
+/* ms892459 I/O Resource Manager */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-debugging-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450702 Debugging Functions */
+/* ms887725 Debugging Macros */
+/* aa450706 Debugging Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-dll-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450708 DLL Functions */
+/* aa450738 DLL Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-error-values-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451023 CERTSRV Error Codes */
+/* aa451026 CRYPT Error Codes */
+/* aa450739 Error Functions */
+/* ms885600 Formatting Specifications */
+/* ms886761 Net Errors - Alphabetical Order */
+/* ms886762 Net Errors - Numerical Order */
+/* aa451033 NTE error codes */
+/* ms886792 RAS Error Values */
+/* aa450917 System Errors - Alphabetical Order */
+/* aa450919 System Errors - Numerical Order */
+/* aa451035 TRUST Error Codes */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-fiber-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450744 Fiber Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-memory-management-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450797 CeHeapCreate: print `HANDLE CeHeapCreate(DWORDflOptions,DWORDdwInitialSize,DWORDdwMaximumSize,PFN_AllocHeapMempfnAlloc,PFN_FreeHeapMempfnFee );` -- recorded verbatim (no compiled prototype) */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-memory-management-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450751 Memory Management Functions */
+/* aa450753 Memory Management Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-process-and-thread-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450760 Process and Thread Functions */
+/* aa450762 Process and Thread Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-serial-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450763 Serial Communications Functions */
+/* aa450765 Serial Communications Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-strings-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450766 Strings Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-synchronization-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450749 Synchronization Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-system-management-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450768 System Management Functions */
+/* aa450770 System Management Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-time-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450771 Time Functions */
+/* aa450773 Time Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: devmgr (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa447463 Device File Names */
+/* aa448269 Device Manager Architecture */
+/* aa447470 Device Manager Registry Keys */
+/* aa448270 Device Manager Security */
+/* ms892459 I/O Resource Manager */
+
+/* ------------------------------------------------------------------
+ * Book surface: file-io-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516938 File I/O Enumerations */
+/* aa516939 File I/O Functions */
+/* aa516941 File I/O Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: file-mapping-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa516942 File Mapping Functions */
+
+/* ------------------------------------------------------------------
+ * Book surface: core-debugging-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450702 Debugging Functions */
+/* ms887725 Debugging Macros */
+/* aa450706 Debugging Structures */
+
 #ifdef __cplusplus
 }
 #endif

@@ -123,6 +123,12 @@ AKARI_CE_IMPORT BOOL ReadMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbBufferS
 AKARI_CE_IMPORT BOOL WriteMsgQueue(HANDLE hMsgQ, LPVOID lpBuffer, DWORD cbDataSize,
                    DWORD dwTimeout, DWORD dwFlags) AKARI_CE_NAME(WriteMsgQueue);
 
+/* ------------------------------------------------------------------
+ * Book surface: core-msgqueue-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450754 Message Queue Point-to-Point Functions */
+/* aa450756 Message Queue Point-to-Point Structures */
+
 #ifdef __cplusplus
 }
 #endif

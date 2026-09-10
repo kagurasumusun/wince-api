@@ -1863,4 +1863,33 @@ AKARI_CE_IMPORT LONG phoneDevSpecific(HPHONE hPhone,
 /* ------------------------------------------------------------------
  * Book surface: tspi-all (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894406 LINE_NEWCALL: documented name-only (no value published; held) */
+/* ms894385 LINELOCATIONOPTION: documented name-only (no value published; held) */
+/* ------------------------------------------------------------------
+ * Book surface: tapi-structures-constants (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms885284 The LINECALLINFO Data Structure */
+/* ------------------------------------------------------------------
+ * Book surface: tspi-all (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms893374 LINE_ADDRESSSTATE: documented name-only (no value published; held) */
+/* ms893651 LINE_CALLINFO: documented name-only (no value published; held) */
+/* ms894004 LINE_CALLSTATE: documented name-only (no value published; held) */
+/* ms894120 LINE_CLOSE: documented name-only (no value published; held) */
+/* ms894127 LINE_CREATE: documented name-only (no value published; held) */
+/* ms894133 LINE_DEVSPECIFIC: documented name-only (no value published; held) */
+/* ms894157 LINE_GENERATE: documented name-only (no value published; held) */
+/* ms894381 LINE_LINEDEVSTATE: documented name-only (no value published; held) */
+/* ms894393 LINE_MONITORDIGITS: documented name-only (no value published; held) */
+/* ms894399 LINE_MONITORMEDIA: documented name-only (no value published; held) */
+/* ms894457 LINE_REMOVE: documented name-only (no value published; held) */
+/* ms895909 PHONE_BUTTON: documented name-only (no value published; held) */
+/* ms895914 PHONE_CLOSE: documented name-only (no value published; held) */
+/* ms895917 PHONE_CREATE: documented name-only (no value published; held) */
+/* ms895920 PHONE_DEVSPECIFIC: documented name-only (no value published; held) */
+/* ms895947 PHONE_REMOVE: documented name-only (no value published; held) */
+/* ms896240 PHONE_STATE: documented name-only (no value published; held) */
 #endif /* _TAPI_H */

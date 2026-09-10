@@ -85,6 +85,37 @@ NTSTATUS SmartcardDeleteLink(LPCWSTR pszFriendlyName);
 /* ms894029 Smart Card Driver Registry Settings */
 /* ms894031 Smart Card Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894027 Smart Card Driver Architecture */
+/* ms894028 Smart Card Driver Debugging */
+/* ms894029 Smart Card Driver Registry Settings */
+/* ms894031 Smart Card Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms919721 RDF_CARD_EJECT: documented name-only (no value published; held) */
+/* ms919724 RDF_CARD_POWER: documented name-only (no value published; held) */
+/* ms919728 RDF_CARD_TRACKING: documented name-only (no value published; held) */
+/* ms919732 RDF_IOCTL_VENDOR: documented name-only (no value published; held) */
+/* ms919736 RDF_READER_SWALLOW: documented name-only (no value published; held) */
+/* ms919740 RDF_SET_PROTOCOL: documented name-only (no value published; held) */
+/* ms919743 RDF_TRANSMIT: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms894027 Smart Card Driver Architecture */
+/* ms894028 Smart Card Driver Debugging */
+/* ms894029 Smart Card Driver Registry Settings */
+/* ms894031 Smart Card Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

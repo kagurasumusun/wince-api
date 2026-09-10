@@ -25,6 +25,25 @@ extern "C" {
  * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-scm (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901443 IOCTL_SMARTCARD_CANCEL_BLOCKING: documented name-only (no value published; held) */
+/* ms901445 IOCTL_SMARTCARD_EJECT: documented name-only (no value published; held) */
+/* ms901446 IOCTL_SMARTCARD_GET_ATTRIBUTE: documented name-only (no value published; held) */
+/* ms901447 IOCTL_SMARTCARD_GET_STATE: documented name-only (no value published; held) */
+/* ms901448 IOCTL_SMARTCARD_IS_ABSENT: documented name-only (no value published; held) */
+/* ms901449 IOCTL_SMARTCARD_IS_PRESENT: documented name-only (no value published; held) */
+/* ms901650 IOCTL_SMARTCARD_POWER: documented name-only (no value published; held) */
+/* ms901722 IOCTL_SMARTCARD_SET_ATTRIBUTE: documented name-only (no value published; held) */
+/* ms901833 IOCTL_SMARTCARD_SET_PROTOCOL: documented name-only (no value published; held) */
+/* ms901842 IOCTL_SMARTCARD_SWALLOW: documented name-only (no value published; held) */
+/* ms901848 IOCTL_SMARTCARD_TRANSMIT: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

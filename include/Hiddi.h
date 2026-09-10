@@ -46,6 +46,22 @@ typedef enum _HID_STRING_TYPE {
 AKARI_CE_IMPORT BOOL HIDDeviceNotifications(DWORD dwMsg, WPARAM wParam, PVOID pvNotifyParameter)
     AKARI_CE_NAME(HIDDeviceNotifications);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms899886 HID_FUNCS: documented name-only (no value published; held) */
+/* ms899394 HIDDeviceAttach: documented name-only (no value published; held) */
+/* ms902163 LPGET_INTERRUPT_REPORT: documented name-only (no value published; held) */
+/* ms902165 LPGET_QUEUE_SIZE: documented name-only (no value published; held) */
+/* ms902164 LPGET_REPORT: documented name-only (no value published; held) */
+/* ms902167 LPGET_STRING: documented name-only (no value published; held) */
+/* ms902174 LPSET_QUEUE_SIZE: documented name-only (no value published; held) */
+/* ms902173 LPSET_REPORT: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

@@ -71,4 +71,27 @@ typedef struct  {
 #define DRV_OPEN                                     0x0003
 #define DRV_CLOSE                                    0x0004
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895512 ACMDM_DRIVER_ABOUT: documented name-only (no value published; held) */
+/* ms895966 ACMDM_DRIVER_DETAILS: documented name-only (no value published; held) */
+/* ms895983 ACMDM_DRIVER_NOTIFY: documented name-only (no value published; held) */
+/* ms896075 ACMDM_FILTER_DETAILS: documented name-only (no value published; held) */
+/* ms896077 ACMDM_FILTERTAG_DETAILS: documented name-only (no value published; held) */
+/* ms896078 ACMDM_FORMAT_DETAILS: documented name-only (no value published; held) */
+/* ms896079 ACMDM_FORMAT_SUGGEST: documented name-only (no value published; held) */
+/* ms896080 ACMDM_FORMATTAG_DETAILS: documented name-only (no value published; held) */
+/* ms896081 ACMDM_HARDWARE_WAVE_CAPS_INPUT: documented name-only (no value published; held) */
+/* ms896082 ACMDM_HARDWARE_WAVE_CAPS_OUTPUT: documented name-only (no value published; held) */
+/* ms896083 ACMDM_STREAM_CLOSE: documented name-only (no value published; held) */
+/* ms896084 ACMDM_STREAM_CONVERT: documented name-only (no value published; held) */
+/* ms896085 ACMDM_STREAM_OPEN: documented name-only (no value published; held) */
+/* ms896086 ACMDM_STREAM_PREPARE: documented name-only (no value published; held) */
+/* ms896087 ACMDM_STREAM_RESET: documented name-only (no value published; held) */
+/* ms896088 ACMDM_STREAM_SIZE: documented name-only (no value published; held) */
+/* ms896089 ACMDM_STREAM_UNPREPARE: documented name-only (no value published; held) */
 #endif /* AKARI_MSACMDRV_H */

@@ -363,6 +363,87 @@ VOID VCAPITYPE VirtualChannelOpenEvent(DWORD openHandle, UINT event,
 /* ms861737 Redirection Properties of IMsRdpClientAdvancedSettings */
 /* ms861766 Remote Desktop ActiveX Control Interface */
 
+/* ------------------------------------------------------------------
+ * Book surface: rdp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms861195 Bitmap and Caching Properties of IMsRdpClientAdvancedSettings */
+/* ms861243 Connection, Timeout, Interval and Event Properties of IMsRdpClientAdvancedSettings */
+/* aa513922 IMsRdpClient Properties (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513913 IMsRdpClient::get_ExtendedDisconnectReason (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513915 IMsRdpClient::GetVirtualChannelOptions (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513927 IMsRdpClient::RequestClose (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513936 IMsRdpClient::SetVirtualChannelOptions (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513909 IMsRdpClientAdvancedSettings Properties */
+/* aa513910 IMsRdpClientAdvancedSettings Property Descriptions */
+/* aa513918 IMsRdpClientNonScriptable::NotifyRedirectDeviceChange (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513920 IMsRdpClientNonScriptable::SendKeys (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513933 IMsRdpClientSecuredSettings Properties (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513942 IMsTscAdvancedSettings::get_allowBackgroundInput (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513944 IMsTscAdvancedSettings::get_BitmapPersistence (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513946 IMsTscAdvancedSettings::get_Compress (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513948 IMsTscAdvancedSettings::get_ContainerHandledFullScreen (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513952 IMsTscAdvancedSettings::get_DisableRdpdr (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513953 IMsTscAdvancedSettings::put_allowBackgroundInput (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513954 IMsTscAdvancedSettings::put_BitmapPersistence (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513955 IMsTscAdvancedSettings::put_Compress (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513956 IMsTscAdvancedSettings::put_ContainerHandledFullScreen (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513958 IMsTscAdvancedSettings::put_IconFile (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513959 IMsTscAdvancedSettings::put_IconIndex (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513960 IMsTscAdvancedSettings::put_KeyBoardLayoutStr (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513961 IMsTscAdvancedSettings::put_PluginDlls (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513963 IMsTscAx::Connect (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513964 IMsTscAx::CreateVirtualChannels (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513965 IMsTscAx::Disconnect (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513976 IMsTscAx::get_AdvancedSettings (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513977 IMsTscAx::get_CipherStrength (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514247 IMsTscAx::get_Connected (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514248 IMsTscAx::get_ConnectingText (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514249 IMsTscAx::get_DesktopHeight (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514250 IMsTscAx::get_DesktopWidth (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514252 IMsTscAx::get_DisconnectedText (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514253 IMsTscAx::get_Domain (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514254 IMsTscAx::get_HorizontalScrollBarVisible (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514256 IMsTscAx::get_SecuredSettings2 (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514258 IMsTscAx::get_Server (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514260 IMsTscAx::get_UserName (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514262 IMsTscAx::get_Version (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514265 IMsTscAx::get_VerticalScrollBarVisible (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514268 IMsTscAx::put_ConnectingText (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514270 IMsTscAx::put_DisconnectedText (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514271 IMsTscAx::put_Domain (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514273 IMsTscAx::put_Server (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514276 IMsTscAx::put_UserName (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514278 IMsTscAx::SendOnVirtualChannel (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513967 IMsTscAxEvents::OnConfirmClose (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513968 IMsTscAxEvents::OnConnected (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513969 IMsTscAxEvents::OnConnecting (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513970 IMsTscAxEvents::OnDisconnected (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513971 IMsTscAxEvents::OnFatalError (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513972 IMsTscAxEvents::OnIdleTimeoutNotification (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513973 IMsTscAxEvents::OnLoginComplete (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513974 IMsTscAxEvents::OnRequestContainerMinimize (Header: Discodlg.h. Mstsax.idl.) */
+/* aa513975 IMsTscAxEvents::OnWarning (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514281 IMsTscNonScriptable::get_BinaryPassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514283 IMsTscNonScriptable::get_BinarySalt (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514285 IMsTscNonScriptable::get_PortablePassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514287 IMsTscNonScriptable::get_PortableSalt (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514289 IMsTscNonScriptable::put_BinaryPassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514290 IMsTscNonScriptable::put_BinarySalt (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514292 IMsTscNonScriptable::put_ClearTextPassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514295 IMsTscNonScriptable::put_PortablePassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514297 IMsTscNonScriptable::put_PortableSalt (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514299 IMsTscNonScriptable::ResetPassword (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514302 IMsTscSecuredSettings::get_StartProgram (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514303 IMsTscSecuredSettings::get_WorkDir (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514305 IMsTscSecuredSettings::put_StartProgram (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514307 IMsTscSecuredSettings::put_WorkDir (Header: Discodlg.h. Mstsax.idl.) */
+/* aa514412 Keyboard and Mouse Properties of IMsRdpClientAdvancedSettings */
+/* aa514423 Other IMsRdpClientAdvancedSettings Properties */
+/* aa513318 RDP Functions */
+/* aa513320 RDP Structures */
+/* ms861737 Redirection Properties of IMsRdpClientAdvancedSettings */
+/* ms861766 Remote Desktop ActiveX Control Interface */
+
 #ifdef __cplusplus
 }
 #endif

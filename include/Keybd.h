@@ -75,6 +75,16 @@ typedef UINT32 KEY_STATE_FLAGS;
  * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms902134 KBDI_AUTOREPEAT_INFO: documented name-only (no value published; held) */
+/* ms902135 KBDI_VKEY_TO_UNICODE_INFO: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

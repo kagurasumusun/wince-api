@@ -25,6 +25,15 @@ extern "C" {
  * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-hid (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms899816 HIDP_PREPARSED_DATA: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

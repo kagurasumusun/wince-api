@@ -54,6 +54,56 @@ extern "C" {
 /* ms894347 USB Function Mass Storage Client Driver Transport */
 /* aa448290 USB Function Serial Client Driver Samples */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbfn (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa448275 Optimizing a USB Function Driver Stack */
+/* aa448278 Porting a USB Function Controller Driver */
+/* aa448298 USB Function Client Driver Functions */
+/* ms895481 USB Function Client Driver Registry Settings */
+/* ms894091 USB Function Controller Driver Bus Interface */
+/* ms894094 USB Function Controller Driver MDD */
+/* ms894095 USB Function Controller Driver MDD and DDI Interface */
+/* ms894096 USB Function Controller Driver PDD */
+/* ms894097 USB Function Controller Driver PDD and DDSI Interface */
+/* ms894093 USB Function Controller Driver Samples */
+/* ms894098 USB Function Controller Driver Transfers */
+/* ms923251 USB Function Controller MDD Functions */
+/* ms895475 USB Function Controller MDD IOCTLs */
+/* ms923252 USB Function Controller PDD Functions */
+/* ms894319 USB Function Mass Storage Client Driver Configuration and Implementation */
+/* ms894325 USB Function Mass Storage Client Driver Execution Sequence */
+/* ms894323 USB Function Mass Storage Client Driver Samples */
+/* ms894330 USB Function Mass Storage Client Driver SCSI-2 Command Support */
+/* ms894345 USB Function Mass Storage Client Driver SCSI-2 Direct-Access Device Emulator */
+/* ms894347 USB Function Mass Storage Client Driver Transport */
+/* aa448290 USB Function Serial Client Driver Samples */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbfn (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa448275 Optimizing a USB Function Driver Stack */
+/* aa448278 Porting a USB Function Controller Driver */
+/* aa448298 USB Function Client Driver Functions */
+/* ms895481 USB Function Client Driver Registry Settings */
+/* ms894091 USB Function Controller Driver Bus Interface */
+/* ms894094 USB Function Controller Driver MDD */
+/* ms894095 USB Function Controller Driver MDD and DDI Interface */
+/* ms894096 USB Function Controller Driver PDD */
+/* ms894097 USB Function Controller Driver PDD and DDSI Interface */
+/* ms894093 USB Function Controller Driver Samples */
+/* ms894098 USB Function Controller Driver Transfers */
+/* ms923251 USB Function Controller MDD Functions */
+/* ms895475 USB Function Controller MDD IOCTLs */
+/* ms923252 USB Function Controller PDD Functions */
+/* ms894319 USB Function Mass Storage Client Driver Configuration and Implementation */
+/* ms894325 USB Function Mass Storage Client Driver Execution Sequence */
+/* ms894323 USB Function Mass Storage Client Driver Samples */
+/* ms894330 USB Function Mass Storage Client Driver SCSI-2 Command Support */
+/* ms894345 USB Function Mass Storage Client Driver SCSI-2 Direct-Access Device Emulator */
+/* ms894347 USB Function Mass Storage Client Driver Transport */
+/* aa448290 USB Function Serial Client Driver Samples */
+
 #ifdef __cplusplus
 }
 #endif

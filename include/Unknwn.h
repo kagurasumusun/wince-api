@@ -8,4 +8,10 @@
 /* ms891547 IUnknown::AddRef (Header: Unknwn.h, Unknwn.idl.) */
 /* ms891550 IUnknown::QueryInterface (Header: Unknwn.h, Unknwn.idl.) */
 /* ms891556 IUnknown::Release (Header: Unknwn.h, Unknwn.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: dcom-com (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891547 IUnknown::AddRef (Header: Unknwn.h, Unknwn.idl.) */
+/* ms891550 IUnknown::QueryInterface (Header: Unknwn.h, Unknwn.idl.) */
+/* ms891556 IUnknown::Release (Header: Unknwn.h, Unknwn.idl.) */
 

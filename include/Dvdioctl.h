@@ -33,6 +33,15 @@ typedef struct _DVD_REGIONCE {
     UCHAR ResetCount;
 } DVD_REGIONCE, *PDVD_REGIONCE;
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms902120 IOCTL_DVD_GET_REGION: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

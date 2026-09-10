@@ -79,6 +79,21 @@ IOleControlNavigation2AdviseSink:
  *   ms918586  HRESULT STDMETHODCALLTYPE OnRectsChange();
  *
  */
+/* ------------------------------------------------------------------
+ * Book surface: internetclient-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms918392 IOleControlNavigation2::ActivateRect (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918597 IOleControlNavigation2::DeactivateRect (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918608 IOleControlNavigation2::GetControlNavigationCapabilities (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918620 IOleControlNavigation2::GetCurrentRectIndex (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918717 IOleControlNavigation2::GetNavigationRectCount (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918731 IOleControlNavigation2::GetNavigationRects (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918755 IOleControlNavigation2::NavigateInControl (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918399 IOleControlNavigation2AdviseSink::NavigateOutControl (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918561 IOleControlNavigation2AdviseSink::OnFocusRectChange (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918569 IOleControlNavigation2AdviseSink::OnNavigationStatusChange (Header: Mshtml.h, Mshtmhst.idl.) */
+/* ms918586 IOleControlNavigation2AdviseSink::OnRectsChange (Header: Mshtml.h, Mshtmhst.idl.) */
+
 #ifdef __cplusplus
 }
 #endif

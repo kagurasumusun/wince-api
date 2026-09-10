@@ -258,6 +258,132 @@ AKARI_CE_IMPORT BOOL CeWriteFile(HANDLE hFile, LPCVOID lpBuffer, DWORD nNumberOf
 /* aa513061 Using RAPI Calls in a File Filter */
 /* aa513303 Windows CE-based Device Notification */
 
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa514340 IRAPIStream::GetRapiStat (Header: Rapi.h.) */
+/* aa514342 IRAPIStream::SetRapiStat (Header: Rapi.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513308 Accessing Folders */
+/* ms861126 Accessing Objects */
+/* aa513311 ActiveSync Migration */
+/* ms879784 ActiveSync Overview */
+/* ms861144 ActiveSync Programming FAQ */
+/* ms861160 ActiveSync Samples */
+/* ms861176 ActiveSync Security */
+/* aa514589 Adding Custom Menus to Windows CE Explorer */
+/* ms861215 COM-Based Notification */
+/* ms861226 Comparing Store Identifiers */
+/* ms861235 Configuring the ActiveSync COM Components */
+/* ms861269 Defining ActiveSync Objects */
+/* ms861287 Desktop Computer Registry Settings */
+/* ms861294 Desktop Registry Structure */
+/* ms861304 Detecting Changes to Desktop Objects */
+/* ms861313 Detecting Device Object Changes */
+/* ms861416 Device Registry Settings */
+/* ms861429 Enabling or Disabling a Service Provider in a New Partnership */
+/* ms861466 Enumerating Device Objects */
+/* ms861472 Enumerating Objects */
+/* ms861476 Enumerating Objects with the FindObjects Function */
+/* ms861484 Establishing an ActiveSync Desktop-Device Partnership */
+/* ms861491 Examples of CEUTIL Functions */
+/* ms861541 Generating a Class Identifier for the Filter */
+/* ms861549 Handling and Displaying Service-Provider Errors */
+/* ms861565 Handling Errors that Halt Synchronization */
+/* ms861575 Handling Initialization Errors */
+/* ms861590 Handling Synchronization Errors */
+/* ms861598 Implementing a Dummy File Filter */
+/* ms861622 Implementing the Device Functions */
+/* aa514725 Important End-user Notification for ActiveSync */
+/* ms861652 Initializing the Device Store */
+/* ms861657 Initializing the Store */
+/* ms861670 Managing the Summary and Details Panes */
+/* ms861690 Prompting Users for Information During Synchronization */
+/* ms861695 Prompting Users for Settings During Setup */
+/* ms861741 Registering a File Extension Type */
+/* ms861749 Registering a File Filter */
+/* ms861753 Registering File Types and File Filters */
+/* ms861756 Registering the Service Provider */
+/* ms861759 Registry-Based Notification */
+/* ms861772 Resolving Conflicts */
+/* ms861781 Sending and Receiving Data with the SyncData Function */
+/* ms861790 Setting Synchronization Options */
+/* ms861786 Settings Dialog Box Specifications */
+/* ms861795 Steps in Developing ActiveSync Providers */
+/* ms861821 Understanding Partnerships */
+/* ms861825 Understanding Service Providers */
+/* ms861830 Understanding the ActiveSync Manager's Role */
+/* ms861834 User-Interface Elements */
+/* aa513061 Using RAPI Calls in a File Filter */
+/* aa513303 Windows CE-based Device Notification */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513341 CEDB_FIND_DATA: documented name-only (no value published; held) */
+/* ms879801 RAPIEXT: documented name-only (no value published; held) */
+/* aa514340 IRAPIStream::GetRapiStat (Header: Rapi.h.) */
+/* aa514342 IRAPIStream::SetRapiStat (Header: Rapi.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: activesync (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513308 Accessing Folders */
+/* ms861126 Accessing Objects */
+/* aa513311 ActiveSync Migration */
+/* ms879784 ActiveSync Overview */
+/* ms861144 ActiveSync Programming FAQ */
+/* ms861160 ActiveSync Samples */
+/* ms861176 ActiveSync Security */
+/* aa514589 Adding Custom Menus to Windows CE Explorer */
+/* ms861215 COM-Based Notification */
+/* ms861226 Comparing Store Identifiers */
+/* ms861235 Configuring the ActiveSync COM Components */
+/* ms861269 Defining ActiveSync Objects */
+/* ms861287 Desktop Computer Registry Settings */
+/* ms861294 Desktop Registry Structure */
+/* ms861304 Detecting Changes to Desktop Objects */
+/* ms861313 Detecting Device Object Changes */
+/* ms861416 Device Registry Settings */
+/* ms861429 Enabling or Disabling a Service Provider in a New Partnership */
+/* ms861466 Enumerating Device Objects */
+/* ms861472 Enumerating Objects */
+/* ms861476 Enumerating Objects with the FindObjects Function */
+/* ms861484 Establishing an ActiveSync Desktop-Device Partnership */
+/* ms861491 Examples of CEUTIL Functions */
+/* ms861541 Generating a Class Identifier for the Filter */
+/* ms861549 Handling and Displaying Service-Provider Errors */
+/* ms861565 Handling Errors that Halt Synchronization */
+/* ms861575 Handling Initialization Errors */
+/* ms861590 Handling Synchronization Errors */
+/* ms861598 Implementing a Dummy File Filter */
+/* ms861622 Implementing the Device Functions */
+/* aa514725 Important End-user Notification for ActiveSync */
+/* ms861652 Initializing the Device Store */
+/* ms861657 Initializing the Store */
+/* ms861670 Managing the Summary and Details Panes */
+/* ms861690 Prompting Users for Information During Synchronization */
+/* ms861695 Prompting Users for Settings During Setup */
+/* ms861741 Registering a File Extension Type */
+/* ms861749 Registering a File Filter */
+/* ms861753 Registering File Types and File Filters */
+/* ms861756 Registering the Service Provider */
+/* ms861759 Registry-Based Notification */
+/* ms861772 Resolving Conflicts */
+/* ms861781 Sending and Receiving Data with the SyncData Function */
+/* ms861790 Setting Synchronization Options */
+/* ms861786 Settings Dialog Box Specifications */
+/* ms861795 Steps in Developing ActiveSync Providers */
+/* ms861821 Understanding Partnerships */
+/* ms861825 Understanding Service Providers */
+/* ms861830 Understanding the ActiveSync Manager's Role */
+/* ms861834 User-Interface Elements */
+/* aa513061 Using RAPI Calls in a File Filter */
+/* aa513303 Windows CE-based Device Notification */
+
 #ifdef __cplusplus
 }
 #endif

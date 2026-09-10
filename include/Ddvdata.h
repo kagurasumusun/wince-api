@@ -26,6 +26,11 @@ extern "C" {
  * ------------------------------------------------------------------ */
 /* aa451617 DVD-Video API Structures/DVD_AUDIO_MU_ATTR (Header: Ddvdata.h, Dvdata.idl.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: graphics-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451617 DVD-Video API Structures/DVD_AUDIO_MU_ATTR (Header: Ddvdata.h, Dvdata.idl.) */
+
 #ifdef __cplusplus
 }
 #endif

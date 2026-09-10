@@ -54,6 +54,24 @@ typedef enum {
 /* aa452561 STRMBUF_CAPTURE_MODE */
 /* aa452562 STRMBUF_PLAYBACK_TUNE_POLICY */
 
+/* ------------------------------------------------------------------
+ * Book surface: dshow-enum (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms925344 AM_SAMPLE_PROPERTY_FLAGS */
+/* ms925346 AM_STREAM_INFO_FLAGS */
+/* ms925348 AMVP_MODE */
+/* ms925439 AnalogVideoStandard */
+/* aa451714 FILTER_STATE */
+/* ms932034 Merit */
+/* ms932233 MPEG2Level */
+/* ms932234 MPEG2Profile */
+/* ms932255 PIN_DIRECTION */
+/* ms932273 QualityMessageType */
+/* aa452499 STREAMBUFFER_EC */
+/* aa452378 StreamControlState */
+/* aa452561 STRMBUF_CAPTURE_MODE */
+/* aa452562 STRMBUF_PLAYBACK_TUNE_POLICY */
+
 #ifdef __cplusplus
 }
 #endif

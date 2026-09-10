@@ -165,6 +165,294 @@ extern "C" {
 /* ms862721 Using the ISoapTypeMapperFactory Object */
 /* ms862727 WSDL Details Specific to SOAP Toolkit */
 
+/* ------------------------------------------------------------------
+ * Book surface: soap (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513911 addElement Method (Header: Mssoap.h.) */
+/* aa513914 address Property (Header: Mssoap.h.) */
+/* aa513917 addSchema Method (Header: Mssoap.h.) */
+/* aa513919 addType Method (Header: Mssoap.h.) */
+/* ms863706 BeginMessage Method (Header: Mssoap.h.) */
+/* ms863712 BeginMessageWSDL Method (Header: Mssoap.h.) */
+/* ms863862 bindStyle Property (Header: Mssoap.h.) */
+/* ms863865 Body Property (Header: Mssoap.h.) */
+/* ms863863 BodyEntries Property (Header: Mssoap.h.) */
+/* ms863864 BodyEntry Property (Header: Mssoap.h.) */
+/* ms863872 callIndex Property (Header: Mssoap.h.) */
+/* ms863879 ClientProperty Property (Header: Mssoap.h.) */
+/* ms863926 comValue Property (Header: Mssoap.h.) */
+/* ms863929 Connect Method (ISoapConnector) (Header: Mssoap.h.) */
+/* ms863930 ConnectorProperty Property (Header: Mssoap.h.) */
+/* ms863931 ConnectWSDL Method (Header: Mssoap.h.) */
+/* ms864399 CreatePortConnector Method (Header: Mssoap.h.) */
+/* ms864417 detail Property (ISoapClient) (Header: Mssoap.h.) */
+/* ms864418 detail Property (ISOAPError) (Header: Mssoap.h.) */
+/* ms864432 documentation Property (WSDLService object) (Header: Mssoap.h.) */
+/* ms864436 DOM Property (Header: Mssoap.h.) */
+/* ms864457 elementName Property (SoapMapper) (Header: Mssoap.h.) */
+/* ms864458 elementType Property (Header: Mssoap.h.) */
+/* ms864460 encoding Property (SoapMapper) (Header: Mssoap.h.) */
+/* ms864461 EncodingStream Property (Header: Mssoap.h.) */
+/* ms864462 EndMessage Method (Header: Mssoap.h.) */
+/* aa514561 Envelope Property (Header: Mssoap.h.) */
+/* aa514948 ExecuteOperation Method (Header: Mssoap.h.) */
+/* aa514972 Fault Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514954 faultactor Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514957 faultactor Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514960 FaultActor Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514965 faultcode Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514967 faultcode Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514969 FaultCode Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514962 faultcodeNS Property (Header: Mssoap.h.) */
+/* aa514970 FaultDetail Property (Header: Mssoap.h.) */
+/* aa514974 faultstring Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514976 faultstring Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514978 FaultString Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514983 Find Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* aa515030 getElementMapper Method (Header: Mssoap.h.) */
+/* aa515027 getElementMapperbyName Method (Header: Mssoap.h.) */
+/* aa515042 getMapper Method (Header: Mssoap.h.) */
+/* aa515048 GetOperationParts Method (Header: Mssoap.h.) */
+/* aa515049 getPrefixForNamespace Method (Header: Mssoap.h.) */
+/* aa515061 GetSoapOperations Method (Header: Mssoap.h.) */
+/* aa515063 GetSoapPorts Method (Header: Mssoap.h.) */
+/* aa515065 GetSoapServices Method (Header: Mssoap.h.) */
+/* aa515071 getTypeMapper Method (Header: Mssoap.h.) */
+/* aa515069 getTypeMapperbyName Method (Header: Mssoap.h.) */
+/* aa515085 Header Property (Header: Mssoap.h.) */
+/* aa515078 HeaderEntries Property (Header: Mssoap.h.) */
+/* aa515080 HeaderEntry Property (Header: Mssoap.h.) */
+/* aa515083 HeaderHandler Property (ISoapClient) (Header: Mssoap.h.) */
+/* ms882870 Init Method (ISoapSerializer) (Header: Mssoap.h.) */
+/* ms882871 Init Method (ISoapServer) (Header: Mssoap.h.) */
+/* ms882872 Init Method (ISoapTypeMapper) (Header: Mssoap.h.) */
+/* ms882874 InputStream Property (Header: Mssoap.h.) */
+/* ms886109 isInput Property (Header: Mssoap.h.) */
+/* ms892331 load Method (ISoapReader) (Header: Mssoap.h.) */
+/* ms892332 load Method (WSDLOperation) (Header: Mssoap.h.) */
+/* ms892334 load Method (WSDLReader) (Header: Mssoap.h.) */
+/* ms892338 loadXML Method (ISoapReader) (Header: Mssoap.h.) */
+/* ms892345 messageName Property (Header: Mssoap.h.) */
+/* ms892352 mssoapinit Method (Header: Mssoap.h.) */
+/* ms892355 MustUnderstandHeaderEntries Property (Header: Mssoap.h.) */
+/* ms892359 name Property (WSDLOperation) (Header: Mssoap.h.) */
+/* ms892360 name Property (WSDLPort) (Header: Mssoap.h.) */
+/* ms892369 name Property (WSDLService) (Header: Mssoap.h.) */
+/* ms892448 Next Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms892588 objectMethod Property (Header: Mssoap.h.) */
+/* ms892589 ObjectProgID Property (Header: Mssoap.h.) */
+/* ms892617 OutputStream Property (Header: Mssoap.h.) */
+/* ms892624 ParseRequest Method (Header: Mssoap.h.) */
+/* ms892625 partName Property (Header: Mssoap.h.) */
+/* ms892630 preferredEncoding Property (Header: Mssoap.h.) */
+/* ms892644 read Method (Header: Mssoap.h.) */
+/* ms892643 readHeader Method (Header: Mssoap.h.) */
+/* ms892661 reset Method (Header: Mssoap.h.) */
+/* ms893073 reset Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms893257 reset Method (ISoapConnector) (Header: Mssoap.h.) */
+/* ms893318 RPCParameter Property (Header: Mssoap.h.) */
+/* ms893323 RPCResult Property (Header: Mssoap.h.) */
+/* ms893328 RPCStruct Property (Header: Mssoap.h.) */
+/* ms893445 save Method (SoapMapper) (Header: Mssoap.h.) */
+/* ms893446 save Method (WSDLOperation) (Header: Mssoap.h.) */
+/* ms893463 setProperty Method (WSDLReader) (Header: Mssoap.h.) */
+/* ms893470 Skip Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms893471 soapAction Property (ISoapReader) (Header: Mssoap.h.) */
+/* ms893472 soapAction Property (WSDLOperation) (Header: Mssoap.h.) */
+/* ms893473 SoapAttribute Method (Header: Mssoap.h.) */
+/* ms893474 SoapDefaultNamespace Method (Header: Mssoap.h.) */
+/* ms893475 SoapInvoke Method (Header: Mssoap.h.) */
+/* ms893477 SoapNamespace Method (Header: Mssoap.h.) */
+/* ms895978 startBody and endBody Methods (Header: Mssoap.h.) */
+/* ms895979 startElement and endElement Methods (Header: Mssoap.h.) */
+/* ms895980 startEnvelope and endEnvelope Methods (Header: Mssoap.h.) */
+/* ms895981 startFault, endFault, startFaultDetail, and endFaultDetail Methods (Header: Mssoap.h.) */
+/* ms896027 startHeader, endHeader, startHeaderElement, and endHeaderElement Methods (Header: Mssoap.h.) */
+/* ms896419 style Property (Header: Mssoap.h.) */
+/* ms896490 transport Property (Header: Mssoap.h.) */
+/* ms897141 varType Method (Header: Mssoap.h.) */
+/* ms897188 willWriteHeaders Method (Header: Mssoap.h.) */
+/* ms897193 write Method (Header: Mssoap.h.) */
+/* ms897189 writeBuffer Method (Header: Mssoap.h.) */
+/* ms897192 writeHeaders Method (Header: Mssoap.h.) */
+/* ms897194 writeString Method (Header: Mssoap.h.) */
+/* ms897195 writeXML Method (Header: Mssoap.h.) */
+/* ms897204 xmlNamespace Property (Header: Mssoap.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: soap (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862087 A Quick Introduction to WSML */
+/* ms862071 About the WSDL/WSML Generator */
+/* ms862082 Analyzing WSDL and WSML Files */
+/* ms862098 Binding Element */
+/* ms862106 Client and Server Error Handling */
+/* ms862107 Client-Side Data Flow */
+/* ms862110 Code Listing for the Calc.wsdl File */
+/* ms862112 Code Listing for the Calc.wsml File */
+/* ms862162 Handling Document-Oriented SOAP Requests */
+/* ms862164 Handling SOAP Headers */
+/* ms862516 Message Element */
+/* ms862674 PortType Element */
+/* ms862694 Sending Complex Types Using a Custom Type Mapper */
+/* ms862697 Service Element */
+/* ms862159 SOAP Guidelines and Limitations */
+/* ms862698 SOAP Migration */
+/* ms862703 SOAP OS Design Development */
+/* ms862699 SOAP Registry Settings */
+/* ms862700 SOAP Samples */
+/* ms862701 SOAP Security */
+/* ms862153 SOAP Support in Windows CE */
+/* ms862706 Specifying an ISAPI Listener */
+/* ms862717 Types Element */
+/* ms862718 Understanding the SOAP Fault &lt;detail&gt; Contents */
+/* ms862721 Using the ISoapTypeMapperFactory Object */
+/* ms862727 WSDL Details Specific to SOAP Toolkit */
+
+/* ------------------------------------------------------------------
+ * Book surface: soap (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa513911 addElement Method (Header: Mssoap.h.) */
+/* aa513914 address Property (Header: Mssoap.h.) */
+/* aa513917 addSchema Method (Header: Mssoap.h.) */
+/* aa513919 addType Method (Header: Mssoap.h.) */
+/* ms863706 BeginMessage Method (Header: Mssoap.h.) */
+/* ms863712 BeginMessageWSDL Method (Header: Mssoap.h.) */
+/* ms863862 bindStyle Property (Header: Mssoap.h.) */
+/* ms863865 Body Property (Header: Mssoap.h.) */
+/* ms863863 BodyEntries Property (Header: Mssoap.h.) */
+/* ms863864 BodyEntry Property (Header: Mssoap.h.) */
+/* ms863872 callIndex Property (Header: Mssoap.h.) */
+/* ms863879 ClientProperty Property (Header: Mssoap.h.) */
+/* ms863926 comValue Property (Header: Mssoap.h.) */
+/* ms863929 Connect Method (ISoapConnector) (Header: Mssoap.h.) */
+/* ms863930 ConnectorProperty Property (Header: Mssoap.h.) */
+/* ms863931 ConnectWSDL Method (Header: Mssoap.h.) */
+/* ms864399 CreatePortConnector Method (Header: Mssoap.h.) */
+/* ms864417 detail Property (ISoapClient) (Header: Mssoap.h.) */
+/* ms864418 detail Property (ISOAPError) (Header: Mssoap.h.) */
+/* ms864432 documentation Property (WSDLService object) (Header: Mssoap.h.) */
+/* ms864436 DOM Property (Header: Mssoap.h.) */
+/* ms864457 elementName Property (SoapMapper) (Header: Mssoap.h.) */
+/* ms864458 elementType Property (Header: Mssoap.h.) */
+/* ms864460 encoding Property (SoapMapper) (Header: Mssoap.h.) */
+/* ms864461 EncodingStream Property (Header: Mssoap.h.) */
+/* ms864462 EndMessage Method (Header: Mssoap.h.) */
+/* aa514561 Envelope Property (Header: Mssoap.h.) */
+/* aa514948 ExecuteOperation Method (Header: Mssoap.h.) */
+/* aa514972 Fault Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514954 faultactor Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514957 faultactor Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514960 FaultActor Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514965 faultcode Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514967 faultcode Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514969 FaultCode Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514962 faultcodeNS Property (Header: Mssoap.h.) */
+/* aa514970 FaultDetail Property (Header: Mssoap.h.) */
+/* aa514974 faultstring Property (ISoapClient) (Header: Mssoap.h.) */
+/* aa514976 faultstring Property (ISOAPError) (Header: Mssoap.h.) */
+/* aa514978 FaultString Property (ISoapReader) (Header: Mssoap.h.) */
+/* aa514983 Find Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* aa515030 getElementMapper Method (Header: Mssoap.h.) */
+/* aa515027 getElementMapperbyName Method (Header: Mssoap.h.) */
+/* aa515042 getMapper Method (Header: Mssoap.h.) */
+/* aa515048 GetOperationParts Method (Header: Mssoap.h.) */
+/* aa515049 getPrefixForNamespace Method (Header: Mssoap.h.) */
+/* aa515061 GetSoapOperations Method (Header: Mssoap.h.) */
+/* aa515063 GetSoapPorts Method (Header: Mssoap.h.) */
+/* aa515065 GetSoapServices Method (Header: Mssoap.h.) */
+/* aa515071 getTypeMapper Method (Header: Mssoap.h.) */
+/* aa515069 getTypeMapperbyName Method (Header: Mssoap.h.) */
+/* aa515085 Header Property (Header: Mssoap.h.) */
+/* aa515078 HeaderEntries Property (Header: Mssoap.h.) */
+/* aa515080 HeaderEntry Property (Header: Mssoap.h.) */
+/* aa515083 HeaderHandler Property (ISoapClient) (Header: Mssoap.h.) */
+/* ms882870 Init Method (ISoapSerializer) (Header: Mssoap.h.) */
+/* ms882871 Init Method (ISoapServer) (Header: Mssoap.h.) */
+/* ms882872 Init Method (ISoapTypeMapper) (Header: Mssoap.h.) */
+/* ms882874 InputStream Property (Header: Mssoap.h.) */
+/* ms886109 isInput Property (Header: Mssoap.h.) */
+/* ms892331 load Method (ISoapReader) (Header: Mssoap.h.) */
+/* ms892332 load Method (WSDLOperation) (Header: Mssoap.h.) */
+/* ms892334 load Method (WSDLReader) (Header: Mssoap.h.) */
+/* ms892338 loadXML Method (ISoapReader) (Header: Mssoap.h.) */
+/* ms892345 messageName Property (Header: Mssoap.h.) */
+/* ms892352 mssoapinit Method (Header: Mssoap.h.) */
+/* ms892355 MustUnderstandHeaderEntries Property (Header: Mssoap.h.) */
+/* ms892359 name Property (WSDLOperation) (Header: Mssoap.h.) */
+/* ms892360 name Property (WSDLPort) (Header: Mssoap.h.) */
+/* ms892369 name Property (WSDLService) (Header: Mssoap.h.) */
+/* ms892448 Next Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms892588 objectMethod Property (Header: Mssoap.h.) */
+/* ms892589 ObjectProgID Property (Header: Mssoap.h.) */
+/* ms892617 OutputStream Property (Header: Mssoap.h.) */
+/* ms892624 ParseRequest Method (Header: Mssoap.h.) */
+/* ms892625 partName Property (Header: Mssoap.h.) */
+/* ms892630 preferredEncoding Property (Header: Mssoap.h.) */
+/* ms892644 read Method (Header: Mssoap.h.) */
+/* ms892643 readHeader Method (Header: Mssoap.h.) */
+/* ms892661 reset Method (Header: Mssoap.h.) */
+/* ms893073 reset Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms893257 reset Method (ISoapConnector) (Header: Mssoap.h.) */
+/* ms893318 RPCParameter Property (Header: Mssoap.h.) */
+/* ms893323 RPCResult Property (Header: Mssoap.h.) */
+/* ms893328 RPCStruct Property (Header: Mssoap.h.) */
+/* ms893445 save Method (SoapMapper) (Header: Mssoap.h.) */
+/* ms893446 save Method (WSDLOperation) (Header: Mssoap.h.) */
+/* ms893463 setProperty Method (WSDLReader) (Header: Mssoap.h.) */
+/* ms893470 Skip Method (EnumWSDLService) (Header: Mssoap.h.) */
+/* ms893471 soapAction Property (ISoapReader) (Header: Mssoap.h.) */
+/* ms893472 soapAction Property (WSDLOperation) (Header: Mssoap.h.) */
+/* ms893473 SoapAttribute Method (Header: Mssoap.h.) */
+/* ms893474 SoapDefaultNamespace Method (Header: Mssoap.h.) */
+/* ms893475 SoapInvoke Method (Header: Mssoap.h.) */
+/* ms893477 SoapNamespace Method (Header: Mssoap.h.) */
+/* ms895978 startBody and endBody Methods (Header: Mssoap.h.) */
+/* ms895979 startElement and endElement Methods (Header: Mssoap.h.) */
+/* ms895980 startEnvelope and endEnvelope Methods (Header: Mssoap.h.) */
+/* ms895981 startFault, endFault, startFaultDetail, and endFaultDetail Methods (Header: Mssoap.h.) */
+/* ms896027 startHeader, endHeader, startHeaderElement, and endHeaderElement Methods (Header: Mssoap.h.) */
+/* ms896419 style Property (Header: Mssoap.h.) */
+/* ms896490 transport Property (Header: Mssoap.h.) */
+/* ms897141 varType Method (Header: Mssoap.h.) */
+/* ms897188 willWriteHeaders Method (Header: Mssoap.h.) */
+/* ms897193 write Method (Header: Mssoap.h.) */
+/* ms897189 writeBuffer Method (Header: Mssoap.h.) */
+/* ms897192 writeHeaders Method (Header: Mssoap.h.) */
+/* ms897194 writeString Method (Header: Mssoap.h.) */
+/* ms897195 writeXML Method (Header: Mssoap.h.) */
+/* ms897204 xmlNamespace Property (Header: Mssoap.h.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: soap (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms862087 A Quick Introduction to WSML */
+/* ms862071 About the WSDL/WSML Generator */
+/* ms862082 Analyzing WSDL and WSML Files */
+/* ms862098 Binding Element */
+/* ms862106 Client and Server Error Handling */
+/* ms862107 Client-Side Data Flow */
+/* ms862110 Code Listing for the Calc.wsdl File */
+/* ms862112 Code Listing for the Calc.wsml File */
+/* ms862162 Handling Document-Oriented SOAP Requests */
+/* ms862164 Handling SOAP Headers */
+/* ms862516 Message Element */
+/* ms862674 PortType Element */
+/* ms862694 Sending Complex Types Using a Custom Type Mapper */
+/* ms862697 Service Element */
+/* ms862159 SOAP Guidelines and Limitations */
+/* ms862698 SOAP Migration */
+/* ms862703 SOAP OS Design Development */
+/* ms862699 SOAP Registry Settings */
+/* ms862700 SOAP Samples */
+/* ms862701 SOAP Security */
+/* ms862153 SOAP Support in Windows CE */
+/* ms862706 Specifying an ISAPI Listener */
+/* ms862717 Types Element */
+/* ms862718 Understanding the SOAP Fault &lt;detail&gt; Contents */
+/* ms862721 Using the ISoapTypeMapperFactory Object */
+/* ms862727 WSDL Details Specific to SOAP Toolkit */
+
 #ifdef __cplusplus
 }
 #endif

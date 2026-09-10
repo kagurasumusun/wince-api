@@ -27,6 +27,29 @@ extern "C" {
 /* ms923264 VCR_RequestResponse -- HELD (page print; member types unpublished):
  *   typedef struct  { ... } u; */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896116 AVC_VCR_CMD_ANALOG_AUDIO_OUTPUT_MODE: documented name-only (no value published; held) */
+/* ms896117 AVC_VCR_CMD_INPUT_SIGNAL_MODE: documented name-only (no value published; held) */
+/* ms896118 AVC_VCR_CMD_LOAD_MEDIUM: documented name-only (no value published; held) */
+/* ms896119 AVC_VCR_CMD_MEDIUM_INFO: documented name-only (no value published; held) */
+/* ms896120 AVC_VCR_CMD_OUTPUT_SIGNAL_MODE: documented name-only (no value published; held) */
+/* ms896121 AVC_VCR_CMD_PLAY: documented name-only (no value published; held) */
+/* ms896122 AVC_VCR_CMD_RECORD: documented name-only (no value published; held) */
+/* ms896123 AVC_VCR_CMD_RECORDING_DATE: documented name-only (no value published; held) */
+/* ms896124 AVC_VCR_CMD_RECORDING_SPEED: documented name-only (no value published; held) */
+/* ms896125 AVC_VCR_CMD_RECORDING_TIME: documented name-only (no value published; held) */
+/* ms896126 AVC_VCR_CMD_RELATIVE_TIME_COUNTER: documented name-only (no value published; held) */
+/* ms896127 AVC_VCR_CMD_TIME_CODE: documented name-only (no value published; held) */
+/* ms896128 AVC_VCR_CMD_TRANSPORT_STATE: documented name-only (no value published; held) */
+/* ms896129 AVC_VCR_CMD_WIND: documented name-only (no value published; held) */
+/* ms902112 IOCTL_VCR_AVCCMD: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

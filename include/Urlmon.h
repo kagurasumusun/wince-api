@@ -1072,6 +1072,139 @@ AKARI_CE_IMPORT BOOL WINAPI WriteHitLogging(
 /* aa452079 URL Moniker Services Interfaces */
 /* aa452081 URL Moniker Services Structures */
 
+/* ------------------------------------------------------------------
+ * Book surface: urlmon-app (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452294 IInternetBindInfo::GetBindInfo (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452295 IInternetBindInfo::GetBindString (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452301 IInternetPriority::GetPriority (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452302 IInternetPriority::SetPriority (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452309 IInternetProtocol::LockRequest (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452310 IInternetProtocol::Read (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452316 IInternetProtocol::Seek (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452326 IInternetProtocol::UnlockRequest (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452305 IInternetProtocolInfo::CombineUrl (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452306 IInternetProtocolInfo::CompareUrl (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452307 IInternetProtocolInfo::ParseUrl (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452308 IInternetProtocolInfo::QueryInfo (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452312 IInternetProtocolRoot::Abort (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452313 IInternetProtocolRoot::Continue (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452314 IInternetProtocolRoot::Start (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452315 IInternetProtocolRoot::Terminate (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452318 IInternetProtocolSink::ReportData (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452319 IInternetProtocolSink::ReportProgress (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452320 IInternetProtocolSink::ReportResult (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452325 IInternetProtocolSink::Switch (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452322 IInternetProtocolSinkStackable::CommitSwitch (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452323 IInternetProtocolSinkStackable::RollbackSwitch (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452324 IInternetProtocolSinkStackable::SwitchSink (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452341 IInternetSession::RegisterMimeFilter (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452342 IInternetSession::RegisterNameSpace (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452343 IInternetSession::UnregisterMimeFilter (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452344 IInternetSession::UnregisterNameSpace (Header: Urlmon.h, Urlmon.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon-app (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905670 Asynchronous Pluggable Protocols Enumerations */
+/* ms905671 Asynchronous Pluggable Protocols Functions */
+/* ms905672 Asynchronous Pluggable Protocols Interfaces */
+/* ms905674 Asynchronous Pluggable Protocols Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon-hitlog (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905677 Hit Logging Functions */
+/* ms905679 Hit Logging Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon-zones (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452297 IInternetHostSecurityManager::GetSecurityId (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452298 IInternetHostSecurityManager::ProcessUrlAction (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452299 IInternetHostSecurityManager::QueryCustomPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452328 IInternetSecurityManager::GetSecurityId (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452329 IInternetSecurityManager::GetSecuritySite (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452330 IInternetSecurityManager::GetZoneMappings (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452331 IInternetSecurityManager::MapUrlToZone (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452332 IInternetSecurityManager::ProcessUrlAction (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452334 IInternetSecurityManager::QueryCustomPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452335 IInternetSecurityManager::SetSecuritySite (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452336 IInternetSecurityManager::SetZoneMapping (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452338 IInternetSecurityMgrSite::EnableModeless (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452339 IInternetSecurityMgrSite::GetWindow (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452346 IInternetZoneManager::CreateZoneEnumerator (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452347 IInternetZoneManager::DestroyZoneEnumerator (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452348 IInternetZoneManager::GetZoneActionPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452349 IInternetZoneManager::GetZoneAt (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452350 IInternetZoneManager::GetZoneAttributes (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452351 IInternetZoneManager::GetZoneCustomPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452352 IInternetZoneManager::SetZoneActionPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452353 IInternetZoneManager::SetZoneAttributes (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452354 IInternetZoneManager::SetZoneCustomPolicy (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452025 Internet Security Manager (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452026 Internet Zone Manager (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918863 URL Action Flags (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918874 URL Policy Flags (Header: Urlmon.h, Urlmon.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon-zones (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa452027 Internet Zone Settings */
+/* aa452033 Local Intranet Zone Settings */
+/* ms905325 Restricted Sites Zone Settings */
+/* ms905634 Trusted Sites Zone Settings */
+/* aa452082 URL Security Zones Constants */
+/* aa452083 URL Security Zones Enumerations */
+/* aa452084 URL Security Zones Functions */
+/* aa452085 URL Security Zones Interfaces */
+/* aa452086 URL Security Zones Objects */
+/* ms919149 URL Security Zones Settings */
+/* aa452088 URL Security Zones Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms906355 IAuthenticate::Authenticate (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906357 IBindHost::CreateMoniker (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906358 IBindHost::MonikerBindToObject (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906359 IBindHost::MonikerBindToStorage (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906361 IBinding::Abort (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906362 IBinding::GetBindResult (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906363 IBinding::GetPriority (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906364 IBinding::Resume (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906366 IBindStatusCallback::GetBindInfo (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906367 IBindStatusCallback::GetPriority (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906368 IBindStatusCallback::OnDataAvailable (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906369 IBindStatusCallback::OnObjectAvailable (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906370 IBindStatusCallback::OnProgress (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906371 IBindStatusCallback::OnStartBinding (Header: Urlmon.h, Urlmon.idl.) */
+/* ms906372 IBindStatusCallback::OnStopBinding (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452286 IHttpNegotiate::BeginningTransaction (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452288 IHttpNegotiate::OnResponse (Header: Urlmon.h, Urlmon.idl.) */
+/* aa452291 IHttpSecurity::OnSecurityProblem (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918294 IMonikerProp::PutProperty (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918775 IPersistMoniker::GetClassID (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918789 IPersistMoniker::GetCurMoniker (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918798 IPersistMoniker::IsDirty (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918800 IPersistMoniker::Load (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918801 IPersistMoniker::Save (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918802 IPersistMoniker::SaveCompleted (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918812 IWindowForBindingUI::GetWindow (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918814 IWinInetHttpInfo::QueryInfo (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918816 IWinInetInfo::QueryOption (Header: Urlmon.h, Urlmon.idl.) */
+/* ms918870 URL Moniker Error Codes Constants (Header: Urlmon.h, Urlmon.idl.) */
+
+/* ------------------------------------------------------------------
+ * Book surface: urlmon (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms918766 IPersistMoniker */
+/* aa452074 URL Moniker Services Enumerations */
+/* aa452076 URL Moniker Services Errors */
+/* aa452078 URL Moniker Services Functions */
+/* aa452079 URL Moniker Services Interfaces */
+/* aa452081 URL Moniker Services Structures */
+
 #ifdef __cplusplus
 }
 #endif

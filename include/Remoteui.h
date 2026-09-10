@@ -62,4 +62,27 @@ typedef struct IVariableContainer IVariableContainer;
 /* ms893292 IVariableContainer::FindNextVar (Header: Remoteui.h, Remoteui.idl.) */
 /* ms893301 IVariableContainer::GetArray (Header: Remoteui.h, Remoteui.idl.) */
 /* ms893305 IVariableContainer::GetValue (Header: Remoteui.h, Remoteui.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450471 IRemoteUI_Array::AddValue (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450472 IRemoteUI_Array::FindFirstVar (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450473 IRemoteUI_Array::FindNextVar (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450474 IRemoteUI_Array::GetName (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450475 IRemoteUI_Array::GetValue (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450463 IRemoteUIModule::Get (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450464 IRemoteUIModule::Init (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450465 IRemoteUIModule::ModuleName (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450466 IRemoteUIModule::NeedHTTPDRestart (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450467 IRemoteUIModule::NeedNetworkRestart (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450468 IRemoteUIModule::Put (Header: Remoteui.h, Remoteui.idl.) */
+/* aa450469 IRemoteUIModule::Reset (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893266 IVariableContainer::AddArray (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893272 IVariableContainer::AddValue (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893275 IVariableContainer::FindFirstArray (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893281 IVariableContainer::FindFirstVar (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893287 IVariableContainer::FindNextArray (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893292 IVariableContainer::FindNextVar (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893301 IVariableContainer::GetArray (Header: Remoteui.h, Remoteui.idl.) */
+/* ms893305 IVariableContainer::GetValue (Header: Remoteui.h, Remoteui.idl.) */
 #endif /* AKARI_REMOTEUI_H */

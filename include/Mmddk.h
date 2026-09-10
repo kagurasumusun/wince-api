@@ -134,6 +134,94 @@ typedef struct  {
 /* ms894070 Types of ACM Drivers */
 /* ms894748 WAV_IOControl Messages and Parameter Structures */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890477 ACM Format Tags and Filter Tags */
+/* ms890640 Audio Device Instances */
+/* ms890647 Audio Driver Migration */
+/* ms890665 Audio Driver Registry Settings */
+/* ms890671 Audio MDD and PDD */
+/* ms890682 Audio Mixer */
+/* ms891137 Codec Configuration */
+/* ms892151 Extra Bytes */
+/* ms892247 Interrupt Handling in Audio Drivers */
+/* aa447547 Playing and Recording */
+/* aa447550 Porting a Desktop ACM Driver to Windows CE */
+/* aa447558 Power Management in Audio Drivers */
+/* aa447585 Recognized Formats */
+/* aa447597 Required Entry-point Function */
+/* aa447619 Sample ACM Drivers */
+/* aa447626 Samples per Block */
+/* ms894065 Tips for Writing ACM Drivers */
+/* ms894070 Types of ACM Drivers */
+/* ms894748 WAV_IOControl Messages and Parameter Structures */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms923298 WIDM_ADDBUFFER: documented name-only (no value published; held) */
+/* ms923299 WIDM_CLOSE: documented name-only (no value published; held) */
+/* ms923300 WIDM_GETDEVCAPS: documented name-only (no value published; held) */
+/* ms923301 WIDM_GETNUMDEVS: documented name-only (no value published; held) */
+/* ms923302 WIDM_GETPOS: documented name-only (no value published; held) */
+/* aa448330 WIDM_GETPROP: documented name-only (no value published; held) */
+/* ms923303 WIDM_OPEN: documented name-only (no value published; held) */
+/* ms923304 WIDM_PREPARE: documented name-only (no value published; held) */
+/* ms923305 WIDM_RESET: documented name-only (no value published; held) */
+/* aa448331 WIDM_SETPROP: documented name-only (no value published; held) */
+/* ms923306 WIDM_START: documented name-only (no value published; held) */
+/* ms923307 WIDM_STOP: documented name-only (no value published; held) */
+/* ms923308 WIDM_UNPREPARE: documented name-only (no value published; held) */
+/* ms923309 WODM_BREAKLOOP: documented name-only (no value published; held) */
+/* ms923310 WODM_CLOSE: documented name-only (no value published; held) */
+/* ms923311 WODM_GETDEVCAPS: documented name-only (no value published; held) */
+/* ms923312 WODM_GETEXTDEVCAPS: documented name-only (no value published; held) */
+/* ms923313 WODM_GETNUMDEVS: documented name-only (no value published; held) */
+/* ms923314 WODM_GETPITCH: documented name-only (no value published; held) */
+/* ms923315 WODM_GETPLAYBACKRATE: documented name-only (no value published; held) */
+/* ms923316 WODM_GETPOS: documented name-only (no value published; held) */
+/* aa448332 WODM_GETPROP: documented name-only (no value published; held) */
+/* ms923317 WODM_GETVOLUME: documented name-only (no value published; held) */
+/* ms923318 WODM_OPEN: documented name-only (no value published; held) */
+/* ms923319 WODM_PAUSE: documented name-only (no value published; held) */
+/* ms923320 WODM_PREPARE: documented name-only (no value published; held) */
+/* ms923321 WODM_RESET: documented name-only (no value published; held) */
+/* ms923322 WODM_RESTART: documented name-only (no value published; held) */
+/* ms923323 WODM_SETPITCH: documented name-only (no value published; held) */
+/* ms923324 WODM_SETPLAYBACKRATE: documented name-only (no value published; held) */
+/* aa448334 WODM_SETPROP: documented name-only (no value published; held) */
+/* ms923325 WODM_SETVOLUME: documented name-only (no value published; held) */
+/* ms923326 WODM_UNPREPARE: documented name-only (no value published; held) */
+/* ms923327 WODM_WRITE: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-audio (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890477 ACM Format Tags and Filter Tags */
+/* ms890640 Audio Device Instances */
+/* ms890647 Audio Driver Migration */
+/* ms890665 Audio Driver Registry Settings */
+/* ms890671 Audio MDD and PDD */
+/* ms890682 Audio Mixer */
+/* ms891137 Codec Configuration */
+/* ms892151 Extra Bytes */
+/* ms892247 Interrupt Handling in Audio Drivers */
+/* aa447547 Playing and Recording */
+/* aa447550 Porting a Desktop ACM Driver to Windows CE */
+/* aa447558 Power Management in Audio Drivers */
+/* aa447585 Recognized Formats */
+/* aa447597 Required Entry-point Function */
+/* aa447619 Sample ACM Drivers */
+/* aa447626 Samples per Block */
+/* ms894065 Tips for Writing ACM Drivers */
+/* ms894070 Types of ACM Drivers */
+/* ms894748 WAV_IOControl Messages and Parameter Structures */
+
 #ifdef __cplusplus
 }
 #endif

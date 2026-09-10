@@ -102,4 +102,14 @@ AKARI_CE_IMPORT BOOL PDDInit(RNDIS_PDD_CHARACTERISTICS *pRndisPddCharacteristics
 /* ------------------------------------------------------------------
  * Book surface: ndis (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------
+ * Book surface: drivers-network-rem (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901364 IndicateRndisPacketCompleteHandler: documented name-only (no value published; held) */
+/* ms902185 MddSendRndisPacketComplete: documented name-only (no value published; held) */
+/* ms919397 PDDDeinit: documented name-only (no value published; held) */
+/* ms902127 PFN_PDD_ISR: documented name-only (no value published; held) */
 #endif /* AKARI_RNDISMINI_H */

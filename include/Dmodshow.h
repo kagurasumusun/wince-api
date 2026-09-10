@@ -7,4 +7,9 @@
  * ------------------------------------------------------------------ */
 /* aa451818 IDMOWrapperFilter Interface (Header: Dmodshow.h.) */
 /* aa451817 IDMOWrapperFilter::Init (Header: Dmodshow.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: dshow-iface (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451818 IDMOWrapperFilter Interface (Header: Dmodshow.h.) */
+/* aa451817 IDMOWrapperFilter::Init (Header: Dmodshow.h.) */
 

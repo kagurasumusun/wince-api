@@ -116,6 +116,52 @@ typedef enum _SDCARD_DEVICE_TYPE {
 /* ms894026 Slot Event Callback */
 /* ms894055 Synchronous Bus Requests */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-sd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-sd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890608 Asynchronous Bus Requests */
+/* ms891038 Card Information Structures */
+/* ms891100 Client Driver Entry Points */
+/* ms891109 Client Driver Registration */
+/* ms891161 Combo Cards */
+/* ms892501 Multi-Function Cards */
+/* aa447564 Power On and Off Notifications for Secure Digital Card Drivers */
+/* ms893994 Secure Digital Card Bus Driver */
+/* ms894008 Secure Digital Card Driver Registry Settings */
+/* ms920486 Secure Digital Card Driver Status Codes */
+/* ms894010 Secure Digital Card Multimedia Card Compatibility */
+/* ms894025 Single Function Cards */
+/* ms894026 Slot Event Callback */
+/* ms894055 Synchronous Bus Requests */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-sd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms920438 SD_IO_FUNCTION_ENABLE_INFO: documented name-only (no value published; held) */
+/* ms920440 SD_IO_TRANSFER_TYPE: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-sd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890608 Asynchronous Bus Requests */
+/* ms891038 Card Information Structures */
+/* ms891100 Client Driver Entry Points */
+/* ms891109 Client Driver Registration */
+/* ms891161 Combo Cards */
+/* ms892501 Multi-Function Cards */
+/* aa447564 Power On and Off Notifications for Secure Digital Card Drivers */
+/* ms893994 Secure Digital Card Bus Driver */
+/* ms894008 Secure Digital Card Driver Registry Settings */
+/* ms920486 Secure Digital Card Driver Status Codes */
+/* ms894010 Secure Digital Card Multimedia Card Compatibility */
+/* ms894025 Single Function Cards */
+/* ms894026 Slot Event Callback */
+/* ms894055 Synchronous Bus Requests */
+
 #ifdef __cplusplus
 }
 #endif

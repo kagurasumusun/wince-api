@@ -54,6 +54,23 @@ typedef struct _STORAGE_IDENTIFICATION {
 /* ms920817 SG_REQ -- HELD (page print; member types unpublished):
  *   typedef struct _SG_REQ { ... } SG_REQ, *PSG_REQ; */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-block (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901388 IOCTL_DISK_DEVICE_INFO: documented name-only (no value published; held) */
+/* ms901389 IOCTL_DISK_FORMAT_MEDIA: documented name-only (no value published; held) */
+/* ms901392 IOCTL_DISK_GET_STORAGEID: documented name-only (no value published; held) */
+/* ms901390 IOCTL_DISK_GETINFO: documented name-only (no value published; held) */
+/* ms901391 IOCTL_DISK_GETNAME: documented name-only (no value published; held) */
+/* ms901393 IOCTL_DISK_READ: documented name-only (no value published; held) */
+/* aa448310 IOCTL_DISK_SECURE_WIPE: documented name-only (no value published; held) */
+/* ms901394 IOCTL_DISK_SETINFO: documented name-only (no value published; held) */
+/* ms901395 IOCTL_DISK_WRITE: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

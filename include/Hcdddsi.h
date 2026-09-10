@@ -61,6 +61,15 @@ DWORD HcdPdd_Seek(DWORD dwOpenContext);
 /* ms899382 HcdPdd_Write: print `` */
 DWORD HcdPdd_Write(DWORD dwOpenContext);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms899365 HcdMdd_DestroyHcdObject: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

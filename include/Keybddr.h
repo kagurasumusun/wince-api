@@ -64,6 +64,107 @@ extern "C" {
 /* ms894073 United States 101 Keyboard */
 /* aa448264 Updating the Keyboard Driver IST */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890515 Adding Keyboard Layouts */
+/* ms923760 Adding Keyboard LED Support to the HID Keyboard Driver */
+/* ms890989 Brazilian (ABNT) Keyboard */
+/* ms923766 Building the Keyboard Driver DLLs */
+/* ms923767 Configuring the Keyboard Driver Registry */
+/* ms923769 Copying the Windows CE .NET 4.1 or Earlier Keyboard Driver to Windows CE .NET 4.2 or Later */
+/* aa448247 Creating the Keyboard Device Layout */
+/* aa448248 Creating the Keyboard DLL Sources File */
+/* aa448249 Creating the Keyboard Input Language */
+/* aa448250 Developing the Keyboard PDD Entry Point */
+/* aa447467 Device Layout Data */
+/* aa447524 Dutch Keyboard */
+/* ms892155 French Keyboard */
+/* ms892159 German Keyboard */
+/* ms892173 HID Keyboard Driver Dependencies on the GWES Keyboard Driver */
+/* aa448257 Implementing the KeybdPdd_GetEventEx2 Function */
+/* aa448258 Implementing the Keyboard PDD List */
+/* ms892234 Input Language Data */
+/* ms892470 Italian Keyboard */
+/* ms892472 Japanese Keyboard */
+/* ms892476 Keyboard Driver Registry Settings */
+/* ms892478 Keyboard Driver Samples */
+/* ms892479 Keyboard Identification */
+/* ms892481 Keyboard PDDs */
+/* ms892483 Korean Keyboard */
+/* aa448259 Migrating the Keyboard DLL Without Conforming to the Layout Manager Interface */
+/* aa448260 Migrating the Keyboard PDD Without Conforming to the Layout Manager Interface */
+/* aa447551 Portuguese Keyboard */
+/* aa447582 PS/2 Keyboard Driver Scan Code Support */
+/* aa447591 Remote Desktop Protocol Support */
+/* ms894033 Spanish Keyboard */
+/* ms894053 Swedish Keyboard */
+/* ms894072 United Kingdom Keyboard */
+/* ms894073 United States 101 Keyboard */
+/* aa448264 Updating the Keyboard Driver IST */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms902139 PFN_KEYBD_DRIVER_INIT_STATES: documented name-only (no value published; held) */
+/* ms902137 PFN_KEYBD_DRIVER_INITIALIZE: documented name-only (no value published; held) */
+/* ms902138 PFN_KEYBD_DRIVER_INITIALIZE_EX: documented name-only (no value published; held) */
+/* ms902140 PFN_KEYBD_DRIVER_MAP_VIRTUAL_KEY: documented name-only (no value published; held) */
+/* ms902141 PFN_KEYBD_DRIVER_POWER_HANDLER: documented name-only (no value published; held) */
+/* ms902142 PFN_KEYBD_DRIVER_SET_MODE: documented name-only (no value published; held) */
+/* ms902143 PFN_KEYBD_DRIVER_VKEY_TO_UNICODE: documented name-only (no value published; held) */
+/* ms902144 PFN_KEYBD_EVENT_CALLBACK: documented name-only (no value published; held) */
+/* ms902145 PFN_KEYBD_EVENT_CALLBACK_EX: documented name-only (no value published; held) */
+/* ms902151 PFN_LAYOUT_MGR_ACTIVATE_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
+/* ms902153 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
+/* ms902154 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_LIST: documented name-only (no value published; held) */
+/* ms902155 PFN_LAYOUT_MGR_GET_KEYBOARD_LAYOUT_NAME: documented name-only (no value published; held) */
+/* ms902156 PFN_LAYOUT_MGR_GET_KEYBOARD_TYPE: documented name-only (no value published; held) */
+/* ms902157 PFN_LAYOUT_MGR_LOAD_KEYBOARD_LAYOUT: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-kbd (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890515 Adding Keyboard Layouts */
+/* ms923760 Adding Keyboard LED Support to the HID Keyboard Driver */
+/* ms890989 Brazilian (ABNT) Keyboard */
+/* ms923766 Building the Keyboard Driver DLLs */
+/* ms923767 Configuring the Keyboard Driver Registry */
+/* ms923769 Copying the Windows CE .NET 4.1 or Earlier Keyboard Driver to Windows CE .NET 4.2 or Later */
+/* aa448247 Creating the Keyboard Device Layout */
+/* aa448248 Creating the Keyboard DLL Sources File */
+/* aa448249 Creating the Keyboard Input Language */
+/* aa448250 Developing the Keyboard PDD Entry Point */
+/* aa447467 Device Layout Data */
+/* aa447524 Dutch Keyboard */
+/* ms892155 French Keyboard */
+/* ms892159 German Keyboard */
+/* ms892173 HID Keyboard Driver Dependencies on the GWES Keyboard Driver */
+/* aa448257 Implementing the KeybdPdd_GetEventEx2 Function */
+/* aa448258 Implementing the Keyboard PDD List */
+/* ms892234 Input Language Data */
+/* ms892470 Italian Keyboard */
+/* ms892472 Japanese Keyboard */
+/* ms892476 Keyboard Driver Registry Settings */
+/* ms892478 Keyboard Driver Samples */
+/* ms892479 Keyboard Identification */
+/* ms892481 Keyboard PDDs */
+/* ms892483 Korean Keyboard */
+/* aa448259 Migrating the Keyboard DLL Without Conforming to the Layout Manager Interface */
+/* aa448260 Migrating the Keyboard PDD Without Conforming to the Layout Manager Interface */
+/* aa447551 Portuguese Keyboard */
+/* aa447582 PS/2 Keyboard Driver Scan Code Support */
+/* aa447591 Remote Desktop Protocol Support */
+/* ms894033 Spanish Keyboard */
+/* ms894053 Swedish Keyboard */
+/* ms894072 United Kingdom Keyboard */
+/* ms894073 United States 101 Keyboard */
+/* aa448264 Updating the Keyboard Driver IST */
+
 #ifdef __cplusplus
 }
 #endif

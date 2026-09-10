@@ -657,4 +657,296 @@ AKARI_CE_IMPORT BOOL ImmSIPanelState(UINT dwCmd, LPVOID pValue)
 #define WM_IME_KEYDOWN                               0x0290
 #define WM_IME_KEYUP                                 0x0291
 
+/* ------------------------------------------------------------------
+ * Book surface: imm-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905959 IMC_GETCONVERSIONMODE: documented name-only (no value published; held) */
+/* ms905960 IMC_GETOPENSTATUS: documented name-only (no value published; held) */
+/* ms905961 IMC_GETSENTENCEMODE: documented name-only (no value published; held) */
+/* ms905968 IMC_SETCONVERSIONMODE: documented name-only (no value published; held) */
+/* ms905969 IMC_SETOPENSTATUS: documented name-only (no value published; held) */
+/* ms905970 IMC_SETSENTENCEMODE: documented name-only (no value published; held) */
+/* ms906055 IMR_CANDIDATEFORM: documented name-only (no value published; held) */
+/* ms906056 IMR_COMPOSITIONFONT: documented name-only (no value published; held) */
+/* ms906147 IMR_COMPOSITIONFORM: documented name-only (no value published; held) */
+/* ms906166 IMR_CONFIRMRECONVERTSTRING: documented name-only (no value published; held) */
+/* ms906175 IMR_DOCUMENTFEED: documented name-only (no value published; held) */
+/* ------------------------------------------------------------------
+ * Book surface: imm-reference (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms905973 IME Composition String Values */
+/* ms905974 IME Conversion Mode Values */
+/* ms905976 IME Escapes */
+/* ms905979 IME Hot Key Identifiers */
+/* ms905981 IME Sentence Mode Values */
+/* ------------------------------------------------------------------
+ * Book surface: intl-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms903647 Accessing the Conversion Service */
+/* ms903706 Adhering to International Conventions */
+/* ms903715 AGFA AC3 Font Compression OS Design Development */
+/* ms903734 Application Implementation */
+/* ms903739 Applications with Multiple DLLs */
+/* ms906457 Arabic */
+/* ms906458 Arabic OS Design Development */
+/* ms906488 Building a Multilingual Run-time Image */
+/* ms903746 Caching with Uniscribe */
+/* ms903756 Changing the Edit Control Level */
+/* ms904348 Chinese (Simplified) */
+/* ms903762 Chinese (Simplified) OS Design Development */
+/* ms904630 Chinese (Simplified) Registry Settings */
+/* ms906459 Chinese (Simplified) Samples */
+/* ms904362 Chinese (Traditional) */
+/* ms906460 Chinese (Traditional) OS Design Development */
+/* ms904395 Chinese (Traditional) Registry Settings */
+/* ms903773 Chinese (Traditional) Samples */
+/* ms903783 Code Pages */
+/* ms903791 Coding for Internationalization */
+/* ms903805 Complex Scripts Overview */
+/* ms903814 Complex Scripts Support in Windows CE */
+/* ms903822 Converting a Composition String */
+/* ms917973 Creating a Complex Scripts-enabled Run-Time Image */
+/* ms906490 Creating a Dictionary File */
+/* ms903833 Creating a Dictionary Source File */
+/* ms906489 Creating a Multilingual OS Design */
+/* ms903850 Creating a Notification Sink */
+/* ms903842 Creating an International User Interface */
+/* ms903854 Creating the Candidate List */
+/* ms917974 Customizing the Accelerator Button Area */
+/* ms917975 Customizing the Bottom Information Area */
+/* ms917976 Customizing the Candidate List Area */
+/* ms917977 Customizing the Candidate Window */
+/* ms917978 Customizing the Default Composition Window */
+/* ms903855 Customizing the IME Toolbar */
+/* ms917979 Customizing the IME Toolbar Buttons */
+/* ms917980 Customizing the Readings Area */
+/* ms903856 Default Registry Values for Menu */
+/* ms903857 Default Registry Values for Widgets */
+/* ms903858 Defining a Character Set */
+/* ms903859 Defining Calendar Formats */
+/* ms903860 Determining the Composition String */
+/* ms903861 Dialog Boxes, Buttons, and Fonts */
+/* ms917982 Displaying Text with Uniscribe */
+/* ms903863 East Asian Font Versions */
+/* ms903862 East Asian Fonts */
+/* ms903864 Editing the Composition String */
+/* ms903865 End User-Defined Phrase (EUDP) */
+/* ms903866 EUDP Management */
+/* ms903867 GB18030 Data Converter */
+/* ms903868 GB18030 Text Converter Registry Settings */
+/* ms903869 Handling IME Window Messages */
+/* ms903870 Handwriting Recognizer Engine (HWX) */
+/* ms906464 Handwriting Recognizer Engine (HWX) Application Development */
+/* ms904397 Handwriting Recognizer Engine (HWX) Functions */
+/* ms903871 Handwriting Recognizer Engine (HWX) Migration */
+/* ms903872 Handwriting Recognizer Engine (HWX) OS Design Development */
+/* ms906465 Handwriting Recognizer Engine (HWX) Reference */
+/* ms904398 Handwriting Recognizer Engine (HWX) Registry Settings */
+/* ms903873 Handwriting Recognizer Engine (HWX) Samples */
+/* ms903874 Handwriting Recognizer Engine (HWX) Security */
+/* ms904399 Handwriting Recognizer Engine (HWX) Structures */
+/* ms906466 Hebrew */
+/* ms903875 Hebrew OS Design Development */
+/* ms904635 How to Create a Multilingual Run-time Image Using MUI */
+/* ms903876 IKoreanImeUI Interface */
+/* ms905973 IME Composition String Values */
+/* ms905974 IME Conversion Mode Values */
+/* ms905976 IME Escapes */
+/* ms905979 IME Hot Key Identifiers */
+/* ms905981 IME Sentence Mode Values */
+/* ms917983 Implementing Japanese IME 3.1 */
+/* ms906467 Indic */
+/* ms906468 Indic OS Design Development */
+/* ms903877 Input Method Editor Constants */
+/* ms906469 Input Method Manager (IMM) */
+/* ms903878 Input Method Manager (IMM) Application Development */
+/* ms904405 Input Method Manager (IMM) Function Identifiers */
+/* ms904400 Input Method Manager (IMM) Functions */
+/* ms904401 Input Method Manager (IMM) Messages */
+/* ms906470 Input Method Manager (IMM) Migration */
+/* ms906471 Input Method Manager (IMM) OS Design Development */
+/* ms904402 Input Method Manager (IMM) Reference */
+/* ms906472 Input Method Manager (IMM) Samples */
+/* ms903879 Input Method Manager (IMM) Security */
+/* ms904403 Input Method Manager (IMM) Structures */
+/* ms906473 International Application Development */
+/* ms904404 International Catalog Items */
+/* ms903880 International Changes in Windows CE .NET 4.0 and Windows CE .NET 4.2 */
+/* ms906474 International Migration */
+/* ms903884 International OS Design Development */
+/* ms903885 International Samples */
+/* ms903882 Internationalizing Software */
+/* ms903886 Japanese */
+/* ms903887 Japanese All Character IM Registry Settings */
+/* ms903889 Japanese Character Auto Complete (CAC) IM Registry Settings */
+/* ms903890 Japanese Dictionary Compiler */
+/* ms903891 Japanese Edit Control */
+/* ms903892 Japanese Handwriting Sample IM Registry Settings */
+/* ms903893 Japanese IM and IME Registry Settings */
+/* ms903900 Japanese IM Handwriting Panels */
+/* ms903901 Japanese IM Hot Key Registry Settings */
+/* ms903902 Japanese IM On-Screen Keyboards */
+/* ms903903 Japanese IM Search Panels */
+/* ms903894 Japanese IME 3.1 */
+/* ms903895 Japanese IME 3.1 Architecture */
+/* ms904407 Japanese IME 3.1 Classes */
+/* ms903896 Japanese IME 3.1 Customizable User Interface */
+/* ms903897 Japanese IME 3.1 Dictionary Compiler */
+/* ms903898 Japanese IME 3.1 Part-of-Speech Codes */
+/* ms904408 Japanese IME 3.1 Reference */
+/* ms903899 Japanese IME 3.1 Registry Settings */
+/* ms904409 Japanese IME 3.1 Structures */
+/* ms903904 Japanese Input Method Architecture */
+/* ms903905 Japanese Input Methods */
+/* ms903906 Japanese MS Kana IM Registry Settings */
+/* ms903907 Japanese MS Roma IM Registry Settings */
+/* ms903908 Japanese OS Design Development */
+/* ms903909 Japanese Pocket IME */
+/* ms903910 Japanese Pocket IME Architecture */
+/* ms904410 Japanese Pocket IME Functions */
+/* ms903911 Japanese Pocket IME Interfaces */
+/* ms906220 Japanese Pocket IME Reference */
+/* ms904411 Japanese Pocket IME Structures */
+/* ms903912 Japanese Pocket IME UI Code */
+/* ms906475 Japanese Registry Settings */
+/* ms903913 Japanese Samples */
+/* ms903914 Japanese Search by Radical IM Registry Settings */
+/* ms903915 Japanese Search by Stroke IM Registry Settings */
+/* ms903916 Korean */
+/* ms903917 Korean Handwriting Sample IM Registry Settings */
+/* ms903918 Korean IME */
+/* ms903921 Korean IME Architecture in Windows CE */
+/* ms904412 Korean IME UI Configuration Registry Settings */
+/* ms903922 Korean IME UI Source Code Files */
+/* ms903919 Korean IME97 Hot Key Registry Settings */
+/* ms903920 Korean IME97 Registry Settings */
+/* ms903923 Korean Input Method Implementation */
+/* ms903924 Korean Input Methods */
+/* ms903925 Korean OS Design Development */
+/* ms906476 Korean Registry Settings */
+/* ms903926 Korean Samples */
+/* ms903927 Korean Soft Keyboard IM Registry Settings */
+/* ms903928 Language Identifiers and Locales */
+/* ms917984 Laying Out Text with Uniscribe */
+/* ms906223 LCTYPE Constants */
+/* ms904413 Locale Specific Migration */
+/* ms906477 Locale Specific OS Design Development */
+/* ms906478 Locale Specific Support */
+/* ms903929 Managing Linked System Fonts */
+/* ms903931 Menus and Fonts */
+/* ms903933 MUI Font Linking */
+/* ms903934 MUI Implementation */
+/* ms903935 MUI Locale Considerations */
+/* ms903947 MUI Resource DLLs */
+/* ms904030 Multilingual User Interface (MUI) */
+/* ms904140 Multilingual User Interface (MUI) Application Development */
+/* ms906479 Multilingual User Interface (MUI) Functions */
+/* ms904148 Multilingual User Interface (MUI) Migration */
+/* ms906480 Multilingual User Interface (MUI) OS Design Development */
+/* ms903724 Multilingual User Interface (MUI) Reference */
+/* ms904414 Multilingual User Interface (MUI) Registry Settings */
+/* ms904152 Multilingual User Interface (MUI) Samples */
+/* ms904158 Multilingual User Interface (MUI) Security */
+/* ms904167 Multiple Dictionary Support for Japanese */
+/* ms904172 Multiple IME Support */
+/* ms904378 Multiple Input Language Support */
+/* ms906482 National Language Support (NLS) */
+/* ms906481 National Language Support (NLS) Application Development */
+/* ms904415 National Language Support (NLS) Functions */
+/* ms906224 National Language support (NLS) Locale Identifiers */
+/* ms904406 National Language Support (NLS) Macros */
+/* ms903830 National Language Support (NLS) Migration */
+/* ms903883 National Language Support (NLS) OS Design Development */
+/* ms904522 National Language Support (NLS) Reference */
+/* ms904396 National Language Support (NLS) Samples */
+/* ms904179 National Language Support (NLS) Security */
+/* ms904614 National Language Support (NLS) Structures */
+/* ms904189 NLS Registry Settings */
+/* ms904196 Overview of the IME User Interface */
+/* ms904318 Overview of the Input Method System */
+/* ms904328 Part-of-Speech Codes */
+/* ms904327 Partial Recognition Process */
+/* ms904329 Performing Handwriting Recognition */
+/* ms904330 Preparing for Cultural Differences */
+/* ms904331 Processing User Input */
+/* ms904332 Processing User Input from the Keyboard */
+/* ms904334 Processing User Input with Alternatives */
+/* ms904335 Programming and Designing a Global Application */
+/* ms904336 Programming with Unicode and NLS */
+/* ms904337 Recognition Process */
+/* ms904338 Recognizing a Hand-Drawn Character */
+/* ms904339 Registry Settings for Conversion Candidates */
+/* ms904340 Registry Settings for Multiple Dictionaries */
+/* ms904341 Registry Settings for User Dictionary */
+/* ms904342 Related Processing for Complex Scripts */
+/* ms904343 Retrieving Time and Date Strings */
+/* ms904344 Selecting an MUI Locale */
+/* ms904345 Setting the Input Method Programmatically */
+/* ms904346 Setting Up the HWXGUIDE Structure */
+/* ms904347 Shaping Engines */
+/* ms904349 Simplified Chinese Input Method */
+/* ms904350 Simplified Chinese MSPY 3.0 IME */
+/* ms904351 Simplified Chinese MSPY 3.0 IME Configuration */
+/* ms904622 Simplified Chinese MSPY 3.0 IME Configuration Registry Settings */
+/* ms906483 Simplified Chinese MSPY 3.0 IME Functions */
+/* ms904626 Simplified Chinese MSPY 3.0 IME Hot Key Registry Settings */
+/* ms904352 Simplified Chinese MSPY 3.0 IME OS Design Development */
+/* ms906281 Simplified Chinese MSPY 3.0 IME Reference */
+/* ms904354 Simplified Chinese Pocket IME */
+/* ms904355 Simplified Chinese Pocket IME Architecture in Windows CE */
+/* ms904627 Simplified Chinese Pocket IME Functions */
+/* ms904353 Simplified Chinese Pocket IME Hot Key Registry Settings */
+/* ms904628 Simplified Chinese Pocket IME Reference */
+/* ms904629 Simplified Chinese Pocket IME UI Configuration Registry Settings */
+/* ms904356 Simplified Chinese Pocket IME UI Module Registry Settings */
+/* ms904357 Simplified Chinese Pocket IME UI Source Code Files */
+/* ms904358 Specifying Locales with NLS */
+/* ms904359 Spelling Checker (USA) Migration Issues */
+/* ms904360 Supporting International Characters and Formatting */
+/* ms917985 Testing the Multilingual Run-time Image */
+/* ms917981 Text Display with Uniscribe */
+/* ms906484 Thai */
+/* ms904361 Thai OS Design Development */
+/* ms904363 Traditional Chinese Handwriting Sample IM Registry Settings */
+/* ms904364 Traditional Chinese Input Method Implementation */
+/* ms904365 Traditional Chinese Input Methods */
+/* ms904367 Traditional Chinese Pocket IME */
+/* ms904368 Traditional Chinese Pocket IME Architecture */
+/* ms904631 Traditional Chinese Pocket IME Functions */
+/* ms904366 Traditional Chinese Pocket IME Hot Key Registry Settings */
+/* ms904632 Traditional Chinese Pocket IME Reference */
+/* ms904634 Traditional Chinese Pocket IME UI Configuration Registry Settings */
+/* ms904369 Traditional Chinese Pocket IME UI Module Registry Settings */
+/* ms904370 Traditional Chinese Pocket IME UI Source Code Files */
+/* ms904371 Transcriber Handwriting Recognition Application OS Design Development */
+/* ms904372 Understanding the Unicode Standard */
+/* ms906461 Unicode Script Processor for Complex Scripts */
+/* ms906462 Uniscribe Application Development */
+/* ms906485 Uniscribe Enumerations */
+/* ms906486 Uniscribe Functions */
+/* ms904373 Uniscribe Migration */
+/* ms903796 Uniscribe OS Design Development */
+/* ms906463 Uniscribe Reference */
+/* ms904374 Uniscribe Registry Settings */
+/* ms904375 Uniscribe Samples */
+/* ms904376 Uniscribe Security */
+/* ms906487 Uniscribe Structures */
+/* ms904377 User Dictionary for Japanese */
+/* ms904379 Using Japanese Input Methods */
+/* ms904380 Using the IImeIPoint2 Interface */
+/* ms904381 Using the IME Composition Window */
+/* ms904382 Using the Japanese Pocket IME UI */
+/* ms904383 Using the Korean Input Method */
+/* ms904384 Using the MUI with Applications */
+/* ms904385 Using the Traditional Chinese Input Method */
+/* ms904386 Using Uniscribe to Process Complex Scripts */
+/* ms903932 Window Layout and Mirroring */
+/* ms904387 Working with Fonts in the MUI */
+/* ms904388 Working with IME Composition Strings */
+/* ms904389 Working with Input Contexts */
+/* ms904390 Working with Surrogate Pairs */
+/* ms904391 Working with the IME Candidate Window */
+/* ms904392 Working with the IME Status Window */
+/* ms904393 Working with the Input Method Editor */
+/* ms904394 Working With Unicode Surrogates */
 #endif /* _IMM_H */

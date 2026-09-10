@@ -60,6 +60,12 @@ DWORD UnLoad(DWORD dwType, DWORD dwFlags);
 /* ms926136 Load Function (Credential Manager) (Header: Cred_prov.h.) */
 /* ms926454 Unload Function (Credential Manager) (Header: Cred_prov.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: security-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms926136 Load Function (Credential Manager) (Header: Cred_prov.h.) */
+/* ms926454 Unload Function (Credential Manager) (Header: Cred_prov.h.) */
+
 #ifdef __cplusplus
 }
 #endif

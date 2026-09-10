@@ -80,6 +80,27 @@ AKARI_CE_IMPORT NTSTATUS UNIT_CloseUnitDeviceObject(PFILE_OBJECT UnitFileObject,
 AKARI_CE_IMPORT NTSTATUS UNIT_OpenUnitDeviceObject(PDEVICE_OBJECT SubunitParentDeviceObject, PFILE_OBJECT* UnitFileObject, PDEVICE_OBJECT* UnitDeviceObject)
     AKARI_CE_NAME(UNIT_OpenUnitDeviceObject);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-1394 (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms902102 IOCTL_UNIT_ALLOCATE_LOCAL_PLUG: documented name-only (no value published; held) */
+/* ms902103 IOCTL_UNIT_CONNECTION_REQUEST_PROCESSED: documented name-only (no value published; held) */
+/* ms902104 IOCTL_UNIT_DEREFERENCE_CONNECTION_PLUG: documented name-only (no value published; held) */
+/* ms902105 IOCTL_UNIT_DEREGISTER_SUBUNIT: documented name-only (no value published; held) */
+/* ms902106 IOCTL_UNIT_DISCONNECTION_REQUEST_PROCESSED: documented name-only (no value published; held) */
+/* ms902107 IOCTL_UNIT_FREE_LOCAL_PLUG: documented name-only (no value published; held) */
+/* ms902108 IOCTL_UNIT_PROCESS_REGISTRY_PLUGS: documented name-only (no value published; held) */
+/* ms902109 IOCTL_UNIT_QUERY_LOCAL_PLUGS: documented name-only (no value published; held) */
+/* ms902110 IOCTL_UNIT_REGISTER_SUBUNIT: documented name-only (no value published; held) */
+/* aa448227 UNIT_AllocateLocalPlugCB: documented name-only (no value published; held) */
+/* aa448232 UNIT_ConnectToRemotePlugCB: documented name-only (no value published; held) */
+/* aa448234 UNIT_DisconnectFromRemotePlugCB: documented name-only (no value published; held) */
+/* aa448235 UNIT_FreeLocalPlugCB: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

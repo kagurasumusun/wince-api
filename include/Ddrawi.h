@@ -222,6 +222,73 @@ extern "C" {
 /* aa448178 SurfaceHeap Class Definition */
 /* ms894730 Use of SurfaceHeap */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896774 DDGPE Class Definition */
+/* aa447442 DDGPE Derivation */
+/* ms896793 DDGPESurf Class Definition */
+/* aa447445 DDGPESurf Derivation */
+/* aa447447 DDHAL Callback Return Values */
+/* aa447448 DDHAL Callbacks and Capabilities */
+/* aa447450 DDHAL Customization */
+/* aa447484 Developing a Display Driver that is Prepared for DirectDraw Support */
+/* aa447477 Differences from Desktop Implementations */
+/* ms890597 DirectDraw Display Driver Architecture */
+/* aa447489 DirectDraw Driver Samples */
+/* aa447797 Exported DDHAL Functions */
+/* aa447498 Extending a Display Driver with the DDGPE Classes */
+/* aa447451 Implementing DDHAL Functionality */
+/* aa447452 Implementing DDHAL Functionality without GPE */
+/* ms892231 Implementing Overlay Flipping in a DirectDraw Driver */
+/* aa447454 Porting DDHAL from the Desktop */
+/* aa447502 Preparing a Display Driver */
+/* aa448178 SurfaceHeap Class Definition */
+/* ms894730 Use of SurfaceHeap */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms898262 DDRAWI_DDRAWSURFACE_LCL: documented name-only (no value published; held) */
+/* ms896155 LPDDHAL_CANCREATESURFACE: documented name-only (no value published; held) */
+/* aa447691 LPDDHAL_CREATEPALETTE: documented name-only (no value published; held) */
+/* aa447692 LPDDHAL_CREATESURFACE: documented name-only (no value published; held) */
+/* ms898282 LPDDHAL_DESTROYDRIVER: documented name-only (no value published; held) */
+/* aa447807 LPDDHAL_FLIPTOGDISURFACE: documented name-only (no value published; held) */
+/* ms899311 LPDDHAL_GETSCANLINE: documented name-only (no value published; held) */
+/* ms920564 LPDDHAL_SETCOLORKEY: documented name-only (no value published; held) */
+/* ms920606 LPDDHAL_SETEXCLUSIVEMODE: documented name-only (no value published; held) */
+/* ms920661 LPDDHAL_SETMODE: documented name-only (no value published; held) */
+/* ms923279 LPDDHAL_WAITFORVERTICALBLANK: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-ddrawdisp (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms896774 DDGPE Class Definition */
+/* aa447442 DDGPE Derivation */
+/* ms896793 DDGPESurf Class Definition */
+/* aa447445 DDGPESurf Derivation */
+/* aa447447 DDHAL Callback Return Values */
+/* aa447448 DDHAL Callbacks and Capabilities */
+/* aa447450 DDHAL Customization */
+/* aa447484 Developing a Display Driver that is Prepared for DirectDraw Support */
+/* aa447477 Differences from Desktop Implementations */
+/* ms890597 DirectDraw Display Driver Architecture */
+/* aa447489 DirectDraw Driver Samples */
+/* aa447797 Exported DDHAL Functions */
+/* aa447498 Extending a Display Driver with the DDGPE Classes */
+/* aa447451 Implementing DDHAL Functionality */
+/* aa447452 Implementing DDHAL Functionality without GPE */
+/* ms892231 Implementing Overlay Flipping in a DirectDraw Driver */
+/* aa447454 Porting DDHAL from the Desktop */
+/* aa447502 Preparing a Display Driver */
+/* aa448178 SurfaceHeap Class Definition */
+/* ms894730 Use of SurfaceHeap */
+
 #ifdef __cplusplus
 }
 #endif

@@ -248,4 +248,56 @@ AKARI_CE_IMPORT BOOL GetCharABCWidthsI(HDC hdc, UINT giFirst, UINT cgi,
  * Book surface: graphics-book (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 /* ms932214 Multiple Screens Structures/MONITORINFOEX (Header: Windows.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: fonts-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901095 Changing the Font Size for the Help System */
+/* ms901154 Configuring the ClearType Sample Application */
+/* ms900852 Creating End User Defined Characters */
+/* ms900854 Drawing and Formatting Text */
+/* ms900901 Drawing Text */
+/* ms901096 Enabling Antialiased Fonts */
+/* ms901013 Enabling Asian Line Breaking */
+/* ms901097 Enabling ClearType */
+/* ms901067 Enabling EUDC */
+/* ms901076 Enabling Font Linking */
+/* ms901098 Enabling Linked Fonts */
+/* aa520322 End User Defined Character Codepoint Ranges */
+/* ms901077 Enumerating Fonts */
+/* ms901078 Font Linking Registry Settings */
+/* ms901079 Font Registry Settings */
+/* ms901080 Font Registry Settings for Japan */
+/* ms901081 Font Registry Settings for Korea */
+/* ms901082 Font Registry Settings for Simplified Chinese */
+/* ms901083 Font Registry Settings for Traditional Chinese */
+/* ms901149 Fonts Application Development */
+/* ms901084 Fonts Catalog Items */
+/* ms901099 Fonts Functions */
+/* ms901150 Fonts How-to Topics */
+/* ms901100 Fonts Messages */
+/* ms901151 Fonts Migration */
+/* ms901152 Fonts OS Design Development */
+/* ms901085 Fonts Overview */
+/* ms901101 Fonts Reference */
+/* ms901153 Fonts Samples */
+/* ms901086 Fonts Security */
+/* ms901102 Fonts Structures */
+/* ms901088 Formatting Text */
+/* ms901089 General Font Registry Settings */
+/* ms901107 How to Implement ClearType */
+/* ms901090 Installing and Using Fonts */
+/* ms901103 Replacing Fonts */
+/* ms901104 Replacing OS Design Fonts */
+/* ms901105 Replacing Windows CE Default Fonts */
+/* ms901155 Setting the Registry Key to Adjust Gamma Settings */
+/* ms901156 Setting the Registry Key to Support ClearType */
+/* ms901106 Specifying the Directory for Font Loading */
+/* ms901091 System Font Registry Settings */
+/* ms901092 Using Fonts */
+/* ms901093 Working with ClearType Fonts */
+/* ms901094 Working with TrueType and Raster Fonts */
+/* ------------------------------------------------------------------
+ * Book surface: graphics-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms932214 Multiple Screens Structures/MONITORINFOEX (Header: Windows.h.) */
 #endif /* AKARI_WINDOWS_H */

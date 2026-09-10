@@ -46,6 +46,38 @@ AKARI_CE_IMPORT BOOL BatteryDrvrSupportsChangeNotification(void)
 /* ms890749 Battery Driver Samples */
 /* ms895500 Moving a Battery Driver from GWES to Device Manager */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890742 Battery Driver Development Concepts */
+/* ms890724 Battery Driver Global Variables */
+/* ms890735 Battery Driver Registry Settings */
+/* ms890749 Battery Driver Samples */
+/* ms895500 Moving a Battery Driver from GWES to Device Manager */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms901368 IOCTL_BATTERY_GETLEVELS: documented name-only (no value published; held) */
+/* ms901369 IOCTL_BATTERY_GETLIFETIMEINFO: documented name-only (no value published; held) */
+/* ms901370 IOCTL_BATTERY_GETSYSTEMPOWERSTATUSEX: documented name-only (no value published; held) */
+/* ms901371 IOCTL_BATTERY_GETSYSTEMPOWERSTATUSEX2: documented name-only (no value published; held) */
+/* ms901372 IOCTL_BATTERY_NOTIFYOFTIMECHANGE: documented name-only (no value published; held) */
+/* ms901373 IOCTL_BATTERY_SUPPORTSCHANGENOTIFICATION: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms890742 Battery Driver Development Concepts */
+/* ms890724 Battery Driver Global Variables */
+/* ms890735 Battery Driver Registry Settings */
+/* ms890749 Battery Driver Samples */
+/* ms895500 Moving a Battery Driver from GWES to Device Manager */
+
 #ifdef __cplusplus
 }
 #endif

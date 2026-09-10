@@ -417,5 +417,13 @@ int WSCDeinstallProvider(LPGUID lpProviderId, LPINT lpErrno);
  * Book surface: wsock-spi-functions (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 /* ms885421 Upcalls Exposed by Ws2.dll */
+/* ------------------------------------------------------------------
+ * Book surface: netgen (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa450268 Winsock SPI Structures (Header: Ws2spi.h.) */
+/* ------------------------------------------------------------------
+ * Book surface: wsock-spi-functions (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms885421 Upcalls Exposed by Ws2.dll */
 #endif  /* _WS2SPI_H */
 

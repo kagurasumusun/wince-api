@@ -480,4 +480,70 @@ struct IShellView { const IShellViewVtbl *lpVtbl; };
 /* aa453241 ITaskbarList::DeleteTab (Header: Shobjidl.h, Shobjidl.idl.) */
 /* aa453242 ITaskbarList::HrInit (Header: Shobjidl.h, Shobjidl.idl.) */
 /* aa453243 ITaskbarList::SetActiveAlt (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: shell-book (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms929937 IDropTarget::DragEnter (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929938 IDropTarget::DragLeave (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929939 IDropTarget::DragOver (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929940 IDropTarget::Drop (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909861 IPersistFolder::Initialize (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909868 IShellFolder::BindToObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909869 IShellFolder::CompareIDs (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909870 IShellFolder::CreateViewObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909871 IShellFolder::EnumObjects (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909872 IShellFolder::GetAttributesOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909873 IShellFolder::GetDisplayNameOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909874 IShellFolder::GetUIObjectOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909875 IShellFolder::ParseDisplayName (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909882 IShellView::AddPropertySheetPages (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909883 IShellView::CreateViewWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909884 IShellView::DestroyViewWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909885 IShellView::EnableModeless (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909886 IShellView::GetCurrentInfo (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909887 IShellView::GetItemObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909889 IShellView::Refresh (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909890 IShellView::SaveViewState (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909891 IShellView::SelectItem (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909892 IShellView::TranslateAccelerator (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909893 IShellView::UIActivate (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453238 ITaskbarList2::MarkFullscreenWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453239 ITaskbarList::ActivateTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453240 ITaskbarList::AddTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453241 ITaskbarList::DeleteTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453242 ITaskbarList::HrInit (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453243 ITaskbarList::SetActiveAlt (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ------------------------------------------------------------------
+ * Book surface: stdshell (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms929937 IDropTarget::DragEnter (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929938 IDropTarget::DragLeave (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929939 IDropTarget::DragOver (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms929940 IDropTarget::Drop (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909861 IPersistFolder::Initialize (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909868 IShellFolder::BindToObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909869 IShellFolder::CompareIDs (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909870 IShellFolder::CreateViewObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909871 IShellFolder::EnumObjects (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909872 IShellFolder::GetAttributesOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909873 IShellFolder::GetDisplayNameOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909874 IShellFolder::GetUIObjectOf (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909875 IShellFolder::ParseDisplayName (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909882 IShellView::AddPropertySheetPages (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909883 IShellView::CreateViewWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909884 IShellView::DestroyViewWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909885 IShellView::EnableModeless (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909886 IShellView::GetCurrentInfo (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909887 IShellView::GetItemObject (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909889 IShellView::Refresh (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909890 IShellView::SaveViewState (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909891 IShellView::SelectItem (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909892 IShellView::TranslateAccelerator (Header: Shobjidl.h, Shobjidl.idl.) */
+/* ms909893 IShellView::UIActivate (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453238 ITaskbarList2::MarkFullscreenWindow (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453239 ITaskbarList::ActivateTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453240 ITaskbarList::AddTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453241 ITaskbarList::DeleteTab (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453242 ITaskbarList::HrInit (Header: Shobjidl.h, Shobjidl.idl.) */
+/* aa453243 ITaskbarList::SetActiveAlt (Header: Shobjidl.h, Shobjidl.idl.) */
 #endif /* AKARI_SHOBJIDL_H */

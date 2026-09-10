@@ -588,4 +588,8 @@ AKARI_CE_IMPORT LONG TSPI_providerShutdown(
  * Book surface: tspi-all (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 /* aa451084 TSPI_lineSetCurrentLocation */
+/* ------------------------------------------------------------------
+ * Book surface: tspi-all (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* aa451084 TSPI_lineSetCurrentLocation */
 #endif  /* _TAPICOMN_H */

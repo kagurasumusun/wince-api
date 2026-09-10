@@ -39,6 +39,15 @@ void WINAPI BatteryPDDResume(void);
 /* ms896141 BatteryPDDSupportsChangeNotification: print `BOOL BatteryPDDSupportsChangeNotification(void);` */
 BOOL BatteryPDDSupportsChangeNotification(void);
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-battery (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms919400 PFN_BATTERY_PDD_IOCONTROL: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif

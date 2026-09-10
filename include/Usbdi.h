@@ -70,6 +70,111 @@ BOOL USBUnInstallDriver(void);
 /* ms894721 USB System Software */
 /* ms894725 USB Transfer Types */
 
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891069 CIsochronousPipe Class and CIsochTransfer Class Relationship */
+/* aa447435 CQueuePipe Class and CTransfer Class Relationship */
+/* ms892166 Implementing USB Host Controller Drivers */
+/* ms892239 Installing the USB Host Mass Storage Client Driver on the Target Device */
+/* ms892240 Installing the USB Host Printer Client Driver on the Target Device */
+/* ms894079 Installing, Attaching, and Detaching USB Drivers */
+/* ms894080 Loading USB Device Drivers */
+/* ms894047 Supported USB Features */
+/* ms894081 Testing USB Device Drivers */
+/* aa448289 Testing USB Host Client Drivers for Compliance with the USB Specification */
+/* aa448279 Troubleshooting: Connection Stability Between the USB Host Client Driver and the USB Host Controller Driver */
+/* ms894075 USB 2.0 Common Code Implemented by the EHCI Driver */
+/* ms894082 USB Devices */
+/* ms894083 USB Driver Interface Functions */
+/* ms894099 USB Host Client Driver Registry Settings */
+/* ms894085 USB Host Controller Driver Registry Settings */
+/* aa447627 USB Host Controller Driver Samples */
+/* ms892165 USB Host Controller-specific Code */
+/* ms893945 USB Host RNDIS Client Driver */
+/* ms894721 USB System Software */
+/* ms894725 USB Transfer Types */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms895508 LPABORT_PIPE_TRANSFERS: documented name-only (no value published; held) */
+/* ms902160 LPABORT_TRANSFER: documented name-only (no value published; held) */
+/* aa447664 LPCLEAR_FEATURE: documented name-only (no value published; held) */
+/* aa447671 LPCLOSE_PIPE: documented name-only (no value published; held) */
+/* ms902161 LPCLOSE_TRANSFER: documented name-only (no value published; held) */
+/* ms902162 LPDEVICE_NOTIFY_ROUTINE: documented name-only (no value published; held) */
+/* ms898298 LPDISABLE_DEVICE: documented name-only (no value published; held) */
+/* aa447799 LPFIND_INTERFACE: documented name-only (no value published; held) */
+/* aa447826 LPGET_DESCRIPTOR: documented name-only (no value published; held) */
+/* aa447828 LPGET_DEVICE_INFO: documented name-only (no value published; held) */
+/* aa447835 LPGET_FRAME_LENGTH: documented name-only (no value published; held) */
+/* aa447836 LPGET_FRAME_NUMBER: documented name-only (no value published; held) */
+/* ms899299 LPGET_INTERFACE: documented name-only (no value published; held) */
+/* ms899307 LPGET_ISOCH_RESULTS: documented name-only (no value published; held) */
+/* ms902166 LPGET_STATUS: documented name-only (no value published; held) */
+/* ms902168 LPGET_TRANSFER_STATUS: documented name-only (no value published; held) */
+/* ms899322 LPGET_USBD_VERSION: documented name-only (no value published; held) */
+/* ms902125 LPIS_DEFAULT_PIPE_HALTED: documented name-only (no value published; held) */
+/* ms902126 LPIS_PIPE_HALTED: documented name-only (no value published; held) */
+/* ms902133 LPIS_TRANSFER_COMPLETE: documented name-only (no value published; held) */
+/* ms902169 LPISSUE_BULK_TRANSFER: documented name-only (no value published; held) */
+/* ms902129 LPISSUE_CONTROL_TRANSFER: documented name-only (no value published; held) */
+/* ms902170 LPISSUE_INTERRUPT_TRANSFER: documented name-only (no value published; held) */
+/* ms902131 LPISSUE_ISOCH_TRANSFER: documented name-only (no value published; held) */
+/* ms902171 LPISSUE_VENDOR_TRANSFER: documented name-only (no value published; held) */
+/* ms902158 LPLOAD_GENERIC_INTERFACE_DRIVER: documented name-only (no value published; held) */
+/* ms919304 LPOPEN_CLIENT_REGISTRY_KEY: documented name-only (no value published; held) */
+/* ms919318 LPOPEN_PIPE: documented name-only (no value published; held) */
+/* ms919790 LPREGISTER_CLIENT_DRIVER_ID: documented name-only (no value published; held) */
+/* ms919792 LPREGISTER_CLIENT_SETTINGS: documented name-only (no value published; held) */
+/* ms919796 LPREGISTER_NOTIFICATION_ROUTINE: documented name-only (no value published; held) */
+/* ms919800 LPRELEASE_FRAME_LENGTH_CONTROL: documented name-only (no value published; held) */
+/* ms919846 LPRESET_DEFAULT_PIPE: documented name-only (no value published; held) */
+/* ms902172 LPRESET_PIPE: documented name-only (no value published; held) */
+/* ms919865 LPRESUME_DEVICE: documented name-only (no value published; held) */
+/* ms920570 LPSET_DESCRIPTOR: documented name-only (no value published; held) */
+/* ms920620 LPSET_FEATURE: documented name-only (no value published; held) */
+/* ms920634 LPSET_FRAME_LENGTH: documented name-only (no value published; held) */
+/* ms920654 LPSET_INTERFACE: documented name-only (no value published; held) */
+/* aa448184 LPSUSPEND_DEVICE: documented name-only (no value published; held) */
+/* aa448185 LPSYNC_FRAME: documented name-only (no value published; held) */
+/* aa448187 LPTAKE_FRAME_LENGTH_CONTROL: documented name-only (no value published; held) */
+/* aa448214 LPTRANSLATE_STRING_DESCR: documented name-only (no value published; held) */
+/* ms902176 LPUN_REGISTER_CLIENT_DRIVER_ID: documented name-only (no value published; held) */
+/* aa448244 LPUN_REGISTER_CLIENT_SETTINGS: documented name-only (no value published; held) */
+/* ms923105 LPUN_REGISTER_NOTIFICATION_ROUTINE: documented name-only (no value published; held) */
+/* ms923262 USB_FUNCS: documented name-only (no value published; held) */
+
+/* ------------------------------------------------------------------
+ * Book surface: drivers-usbhost (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891069 CIsochronousPipe Class and CIsochTransfer Class Relationship */
+/* aa447435 CQueuePipe Class and CTransfer Class Relationship */
+/* ms892166 Implementing USB Host Controller Drivers */
+/* ms892239 Installing the USB Host Mass Storage Client Driver on the Target Device */
+/* ms892240 Installing the USB Host Printer Client Driver on the Target Device */
+/* ms894079 Installing, Attaching, and Detaching USB Drivers */
+/* ms894080 Loading USB Device Drivers */
+/* ms894047 Supported USB Features */
+/* ms894081 Testing USB Device Drivers */
+/* aa448289 Testing USB Host Client Drivers for Compliance with the USB Specification */
+/* aa448279 Troubleshooting: Connection Stability Between the USB Host Client Driver and the USB Host Controller Driver */
+/* ms894075 USB 2.0 Common Code Implemented by the EHCI Driver */
+/* ms894082 USB Devices */
+/* ms894083 USB Driver Interface Functions */
+/* ms894099 USB Host Client Driver Registry Settings */
+/* ms894085 USB Host Controller Driver Registry Settings */
+/* aa447627 USB Host Controller Driver Samples */
+/* ms892165 USB Host Controller-specific Code */
+/* ms893945 USB Host RNDIS Client Driver */
+/* ms894721 USB System Software */
+/* ms894725 USB Transfer Types */
+
 #ifdef __cplusplus
 }
 #endif

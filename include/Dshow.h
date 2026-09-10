@@ -2262,8 +2262,36 @@ struct IVideoWindow { const IVideoWindowVtbl *lpVtbl; };
 /* ms908713 IAMMediaContent::get_Title (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
 /* ms908716 IAMMediaContent::get_WatermarkURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
 
+/* ------------------------------------------------------------------
+ * Book surface: dshow-iface (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms908721 IAMMediaContent Interface (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451759 IAMMediaContent::get_AuthorName (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451760 IAMMediaContent::get_BaseURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451761 IAMMediaContent::get_Copyright (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451762 IAMMediaContent::get_Description (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451763 IAMMediaContent::get_LogoIconURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451764 IAMMediaContent::get_LogoURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451765 IAMMediaContent::get_MoreInfoBannerImage (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451766 IAMMediaContent::get_MoreInfoBannerURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* aa451767 IAMMediaContent::get_MoreInfoText (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* ms908698 IAMMediaContent::get_MoreInfoURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* ms908703 IAMMediaContent::get_Rating (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* ms908713 IAMMediaContent::get_Title (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+/* ms908716 IAMMediaContent::get_WatermarkURL (Header: Dshow.h, Initguid.h, Qnetwork.h.) */
+
 #ifdef __cplusplus
 }
 #endif
+
+
+/* ------------------------------------------------------------------ */
+/* Book surface: dshow-classes remainder (tools/gen-book.py)            */
+/* ------------------------------------------------------------------ */
+/* ms937581 AddAfterI, ms937583 AddBeforeI, ms937585 AddHeadI,
+ * ms937587 AddTailI: CGenericList POSITION-list helper methods (the
+ * strmif C++ template class; the pages print no header -- the class
+ * itself is a C++ template, not a C-callable interface).  Recorded
+ * here; no C declaration. */
 
 #endif /* AKARI_DSHOW_H */

@@ -170,6 +170,18 @@ AKARI_CE_IMPORT DWORD BthAGNetworkUnholdCall(void) AKARI_CE_NAME(BthAGNetworkUnh
  * Book surface: bt-os (tools/gen-book.py; page ids per record)
  * ------------------------------------------------------------------ */
 
+/* ------------------------------------------------------------------
+ * Book surface: bt-os (tools/gen-book.py; page ids per record)
+ * ------------------------------------------------------------------ */
+/* ms891134 IOCTL_AG_CLOSE_AUDIO: documented name-only (no value published; held) */
+/* ms891136 IOCTL_AG_CLOSE_CONTROL: documented name-only (no value published; held) */
+/* ms891138 IOCTL_AG_GET_MIC_VOL: documented name-only (no value published; held) */
+/* ms891142 IOCTL_AG_GET_SPEAKER_VOL: documented name-only (no value published; held) */
+/* ms891145 IOCTL_AG_OPEN_AUDIO: documented name-only (no value published; held) */
+/* ms891147 IOCTL_AG_OPEN_CONTROL: documented name-only (no value published; held) */
+/* ms891150 IOCTL_AG_SET_MIC_VOL: documented name-only (no value published; held) */
+/* ms891153 IOCTL_AG_SET_SPEAKER_VOL: documented name-only (no value published; held) */
+
 #ifdef __cplusplus
 }
 #endif
