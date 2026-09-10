@@ -55,20 +55,28 @@ GPL/LGPL/public-domain-with-unknown-history third-party packages.
 
 ## 4. Third-party trees: permitted uses
 
-**Policy revision (2026-09-10, user direction).**  Sources expanded
-from "official only" to *legal, trustworthy, and safe*.  Third-party
-material is now permitted as an **ABI-fact source** when, and only
-when, it is in the **public domain** or carries an equally
-unproblematic license.  The permitted reference set (checked in as
-read-only clones outside this repository, never committed):
+**Policy revision (2026-09-10, user direction; R2 removed same day
+by further user direction).**  Sources expanded from "official only"
+to *legal, trustworthy, and safe*.  Third-party material is permitted
+as an **ABI-fact source** when, and only when, it is in the **public
+domain** or carries an equally unproblematic license.  The permitted
+reference set (checked in as read-only clones outside this
+repository, never committed):
 
 * **R1 — CeGCC-lineage w32api** (kagurasumusun/w32api, the parity
   target itself).  README: "THIS SOFTWARE IS NOT COPYRIGHTED ...
   offered for use in the public domain".  Exceptions recorded there
   (winsock.h/winsock2.h/ws2tcpip.h BSD Regents/DEC, gl.h Mesa,
-  glext.h/glu.h SGI) are used for nothing here.
-* **R2 — mingw-w64 headers** (mingw-w64 runtime package, public
-  domain per its DISCLAIMER notice).
+  glext.h/glu.h SGI) are used for nothing here -- no value, enum
+  order, vtable order or layout fact is taken from those files.
+* ~~R2 — mingw-w64 headers~~ **REMOVED** (2026-09-10, user
+  direction): mingw-w64 is a *desktop* Win32 ABI source, not a CE
+  lineage; spot-checks showed it carrying modern desktop values
+  where the CE lineage differs (INTERNET_OPTION_CONTEXT_VALUE 45 vs
+  CE 10, INTERNET_LAST_OPTION 0x60 vs CE 0x32, MCN_GETDAYSTATE
+  MCN_FIRST+3 vs CE -747).  Adopting from it would corrupt CE
+  4/5/6 fidelity.  Nothing was ever adopted from it (checked before
+  the first write); it must not be re-added as a source.
 
 Third-party trees may be used for:
 
@@ -78,10 +86,11 @@ Third-party trees may be used for:
 * **ABI facts** (NEW): numeric constant values, enumeration orders,
   vtable member orders, and structure layouts — the uncopyrightable
   functional interface facts required for interoperability — may be
-  *adopted* from R1/R2 with per-family provenance recorded in
-  `docs/inventory.md` and in the header where they land.  Where a
-  fact exists in both R1 and R2 the two must agree; a CE-only fact
-  carried only by R1 is adopted single-source and marked so.  All
+  *adopted* from R1 with per-family provenance recorded in
+  `docs/inventory.md` and in the header where they land.  R1 is the
+  CE lineage, so its values ARE the CE-era ABI facts this project
+  needs; where the official CE page prints a value, the page wins
+  and no adoption happens (pages remain primary).  All
   *expression* (prose, macro bodies, struct member comments, code)
   is written here, not taken from R1/R2; function macro wrappers are
   built from the CE pages' own printed wParam/lParam packings
@@ -93,7 +102,7 @@ Source), anything whose publication or redistribution is legally
 problematic, GPL/LGPL-covered expression (facts may be corroborated
 across sources, code may not), and non-official mirrors of MS
 headers as *documentation* evidence.  Official Microsoft pages
-remain the primary source; R1/R2 fill only the gaps the official CE
+remain the primary source; R1 fills only the gaps the official CE
 pages leave (chiefly: constant values and full vtable orders).
 
 ## 5. Process rules
@@ -103,9 +112,9 @@ pages leave (chiefly: constant values and full vtable orders).
 2. Items not covered by official text are marked *own design* and
    decided from toolchain-observable behavior, never from a
    third-party implementation's behavior alone.  ABI facts adopted
-   from the R1/R2 reference set under §4 are marked *adopted* with
-   their source and cross-check status (the "derived values need a
-   recorded path" rule extends to adopted values).
+   from the R1 reference under §4 are marked *adopted* with their
+   source noted (the "derived values need a recorded path" rule
+   extends to adopted values).
 3. A file is added to `include/` only after its content is fully
    grounded; partial modules are not shipped half-grounded.
 4. No third-party license or copyright text appears anywhere in this
