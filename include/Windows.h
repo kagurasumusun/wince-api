@@ -149,4 +149,51 @@ AKARI_CE_IMPORT BOOL SHGetAutoRunPath(LPTSTR pAutoRunPath) AKARI_CE_NAME(SHGetAu
 }
 #endif
 
+
+/* ------------------------------------------------------------------ */
+/* MUI (Multilingual User Interface) and EUDC/font items whose pages   */
+/* list Header: Windows.h (International / Fonts books, M83).          */
+/* ------------------------------------------------------------------ */
+
+/* ms905116 "EnumUILanguagesProc" (Coreloc.lib row on the sibling
+ * pages): print `BOOL CALLBACK EnumUILanguagesProc(LPTSTR
+ * lpUILanguageString);` -- the application-defined callback.  The
+ * UILANGUAGE_ENUMPROC pointer typedef named by the EnumUILanguages
+ * print (ms905092) is closed on this callback prototype (recorded
+ * path). */
+typedef BOOL (CALLBACK *UILANGUAGE_ENUMPROC)(LPTSTR lpUILanguageString);
+
+/* ms905092 "EnumUILanguages": print `BOOL EnumUILanguages(
+ * UILANGUAGE_ENUMPROC lpUILanguageEnumProc,DWORDdwFlags);` (glued
+ * tokens split; Coreloc.lib). */
+AKARI_CE_IMPORT BOOL EnumUILanguages(UILANGUAGE_ENUMPROC lpUILanguageEnumProc,
+                    DWORD dwFlags) AKARI_CE_NAME(EnumUILanguages);
+
+/* ms905303 "GetSystemDefaultUILanguage": print
+ * `LANGID GetSystemDefaultUILanguage();` (Coreloc.lib). */
+AKARI_CE_IMPORT LANGID GetSystemDefaultUILanguage(void)
+                    AKARI_CE_NAME(GetSystemDefaultUILanguage);
+
+/* ms905328 "GetUserDefaultUILanguage": print
+ * `LANGID GetUserDefaultUILanguage();` (Coreloc.lib). */
+AKARI_CE_IMPORT LANGID GetUserDefaultUILanguage(void)
+                    AKARI_CE_NAME(GetUserDefaultUILanguage);
+
+/* ms906280 "SetUserDefaultUILanguage": print
+ * `BOOL SetUserDefaultUILanguage(LANGID langid);` (Coreloc.lib). */
+AKARI_CE_IMPORT BOOL SetUserDefaultUILanguage(LANGID langid)
+                    AKARI_CE_NAME(SetUserDefaultUILanguage);
+
+/* ms901122 "EnableEUDC" (Fonts book): print `BOOL EnableEUDC(BOOL
+ * fEnableEUDC);` (Coredll.lib). */
+AKARI_CE_IMPORT BOOL EnableEUDC(BOOL fEnableEUDC)
+                    AKARI_CE_NAME(EnableEUDC);
+
+/* aa520324 "GetCharABCWidthsI" (Fonts book): print
+ * `BOOL GetCharABCWidthsI( HDC hdc, UINT giFirst, UINT cgi, LPWORD
+ * pgi, LPABC lpabc);` (Coredll.lib). */
+AKARI_CE_IMPORT BOOL GetCharABCWidthsI(HDC hdc, UINT giFirst, UINT cgi,
+                    LPWORD pgi, LPABC lpabc)
+                    AKARI_CE_NAME(GetCharABCWidthsI);
+
 #endif /* AKARI_WINDOWS_H */

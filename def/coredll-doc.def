@@ -194,6 +194,7 @@ EXPORTS
   EditorDeregister
   EditorInitialize
   Ellipse
+  EnableEUDC
   EnumDisplayDevices
   EnumDisplayMonitors
   EnumDisplaySettings
@@ -229,6 +230,7 @@ EXPORTS
   GetBkColor
   GetBkMode
   GetCharABCWidthsW
+  GetCharABCWidthsI
   GetCharWidth32W
   GetClipBox
   GetClipRgn

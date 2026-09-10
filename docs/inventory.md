@@ -6061,3 +6061,44 @@ M77 prep, rows.json 12309; 148 NetGen pages were already cached from earlier boo
   printed, no values).
 - TU m82 block; Makefile HDRS 164 -> 167.
 - Gates: check (72 defs) / crosscheck / e2e GREEN x6.
+
+## M83 -- Fonts + International books: Uniscribe, MUI, MSPY, HWX
+
+Books fetched via tools/manifests/fonts-book.manifest (77) +
+intl-book.manifest (660); build/rows.json 14088 rows.
+
+- include/Usp10.h (NEW): 31 Script* decls -> Uspce.lib; 14 data types
+  compiled (GOFFSET, SCRIPT_STATE, SCRIPT_ANALYSIS, SCRIPT_CONTROL,
+  SCRIPT_DIGITSUBSTITUTE, SCRIPT_FONTPROPERTIES, SCRIPT_ITEM,
+  SCRIPT_JUSTIFY enum 0-15, SCRIPT_LOGATTR, SCRIPT_PROPERTIES,
+  SCRIPT_CACHE/SCRIPT_STRING_ANALYSIS as void*, SCRIPT_TABDEF,
+  SCRIPT_VISATTR).  Print repairs: ScriptApplyLogicalWidth
+  "HESULT"->HRESULT + stray trailing comma; same trailing comma on
+  ScriptGetGlyphABCWidths/ScriptGetLogicalWidths.  ScriptString_pSize
+  etc. return `const SIZE*` (recorded, not declared).  def/uspce-doc.def
+  31.
+- include/Windows.h (EXT): MUI + EUDC items whose pages print
+  Header: Windows.h -- EnumUILanguages/GetSystemDefaultUILanguage/
+  GetUserDefaultUILanguage/SetUserDefaultUILanguage (Coreloc.lib;
+  UILANGUAGE_ENUMPROC pointer typedef closed on the
+  EnumUILanguagesProc print ms905116), EnableEUDC (Coredll),
+  GetCharABCWidthsI (Coredll, aa520324).  def/coreloc-doc.def 37
+  (+4), def/coredll-doc.def 742 (+2).
+- include/Mspyime.h (NEW): GetPinyinType/SetPinyinType/
+  ClearEudpContent -> Chsime03.lib; def/chsime03-doc.def 3.
+- include/Recog.h (NEW): HWXGUIDE/HWXRESULTS compiled from full
+  prints; HwxConfig declared; 12 further Hwx* recorded (HRC and ALC
+  unpublished -- standing held list extended); HwxSetAbort page
+  prints no signature.  HwxConfig's Library row prints all four
+  recognition libs (Hwxjpn/Hwxcht/Hwxkor/Hwxusa), so def/hwxjpn-
+  doc.def + hwxcht/hwxkor/hwxusa triplets each carry 1 export
+  (hwxusa-doc.def etc.).
+- TU m83 (tests/host/tu_compile.c): Uniscribe struct-field touches +
+  ScriptFreeCache/HwxConfig/MSPY/MUI/EUDC calls.
+- Books fully triaged: Fonts 77, International 660.  Remaining
+  prose-only: imm.h rows shipped M46; winnls.h rows shipped M47-era;
+  msime.h 74 + msimeui.h 2 + imjpskin.h 73 + koreanimeui.h 19 +
+  winuser/pwinuser 1 each = deferred (record-only IME-internal UI
+  surfaces; msime CreateIFEDictionaryInstance/CreateIImeIPointInstance
+  are COM factory getters on Imejpp.dll -- candidates for a later
+  record-only header).

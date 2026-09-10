@@ -70,6 +70,7 @@ include/Mq.h \
 include/Mqmgmt.h \
 include/Mqoai.h \
 include/Msgqueue.h \
+include/Mspyime.h \
 include/Msxml2.h \
 include/Natedit.h \
 include/Ndis.h \
@@ -80,6 +81,7 @@ include/Pkfuncs.h \
 include/Externs.h \
 include/Nuiouser.h \
 include/Rndis.h \
+include/Recog.h \
 include/Rndismini.h \
 include/Windot11.h \
 include/Wzcsapi.h \
@@ -141,6 +143,7 @@ include/Unknwn.h \
 include/Upnp.h \
 include/Upnpdevapi.h \
 include/Upnphost.h \
+include/Usp10.h \
 include/Urlmon.h \
 include/Voiplap.h \
 include/Voipconfigurationdatastore.h \

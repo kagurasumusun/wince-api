@@ -62,6 +62,9 @@
 #include <Wzcsapi.h>
 #include <Externs.h>
 #include <Windot11.h>
+#include <Usp10.h>
+#include <Mspyime.h>
+#include <Recog.h>
 #include <DwCeDump.h>
 #include <Pkfuncs.h>
 #include <sideshow.h>
@@ -7127,6 +7130,54 @@ static int m82_shaped_usage(void)
     return (int)mst + (int)u + b + (pmh || pmd || pce || pms ? 1 : 0);
 }
 
+static int m83_shaped_usage(void)
+{
+    GOFFSET                 goff;
+    SCRIPT_ANALYSIS         sa;
+    SCRIPT_CONTROL          sc;
+    SCRIPT_STATE            ss;
+    SCRIPT_DIGITSUBSTITUTE  sds;
+    SCRIPT_FONTPROPERTIES  sfp;
+    SCRIPT_ITEM             si;
+    SCRIPT_LOGATTR          sla;
+    SCRIPT_PROPERTIES      *psp = NULL;
+    SCRIPT_TABDEF           std_;
+    SCRIPT_VISATTR          sva;
+    SCRIPT_JUSTIFY          sj = SCRIPT_JUSTIFY_ARABIC_KASHIDA;
+    SCRIPT_CACHE            scache = NULL;
+    SCRIPT_STRING_ANALYSIS  ssa = NULL;
+    HWXGUIDE                hg;
+    HWXRESULTS              hr_;
+    LANGID                  lg;
+    ABC                     abc;
+    UINT                    u;
+    DWORD                   dwd;
+    BOOL                    b;
+
+    goff.du = 0; sa.eScript = 0; sc.uDefaultLanguage = 0;
+    ss.uBidiLevel = 0; sds.DigitSubstitute = 0; sfp.cBytes = 0;
+    si.iCharPos = 0; sla.fCharStop = 0; std_.cTabStops = 0;
+    sva.fClusterStart = 0; hg.cHorzBox = 0; hr_.indxBox = 0;
+    u = 0u; dwd = 0u; b = 0; abc.abcB = 0;
+    b = ScriptFreeCache(&scache);
+    b = HwxConfig();
+    b = GetPinyinType(&dwd);
+    b = SetPinyinType(dwd);
+    b = EnableEUDC(b);
+    b = GetCharABCWidthsI(NULL, 0u, 0u, NULL, &abc);
+    lg = GetSystemDefaultUILanguage();
+    lg = GetUserDefaultUILanguage();
+    b = SetUserDefaultUILanguage(lg);
+    b = EnumUILanguages(NULL, 0u);
+    return (int)sj + (int)goff.du + (int)sa.eScript + (int)ss.uBidiLevel
+           + (int)sfp.cBytes + (int)si.iCharPos + (int)sla.fCharStop
+           + (int)std_.cTabStops + (int)sva.fClusterStart
+           + (int)hg.cHorzBox + (int)hr_.indxBox + (int)lg + b
+           + (psp != NULL) + (scache != NULL) + (ssa != NULL)
+           + (int)sc.uDefaultLanguage + (int)sds.DigitSubstitute
+           + (int)abc.abcB + (int)u;
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7280,6 +7331,8 @@ int host_tu_entry(void)
     if (m80_shaped_usage() != 0)
         return 1;
     if (m82_shaped_usage() != 0)
+        return 1;
+    if (m83_shaped_usage() != 0)
         return 1;
     return 0;
 }

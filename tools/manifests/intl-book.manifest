@@ -1,0 +1,660 @@
+ms904404	International Catalog Items
+ms903884	International OS Design Development
+ms903814	Complex Scripts Support in Windows CE
+ms917973	Creating a Complex Scripts-enabled Run-Time Image
+ms903862	East Asian Fonts
+ms903863	East Asian Font Versions
+ms904378	Multiple Input Language Support
+ms904172	Multiple IME Support
+ms906473	International Application Development
+ms904335	Programming and Designing a Global Application
+ms903882	Internationalizing Software
+ms903842	Creating an International User Interface
+ms903706	Adhering to International Conventions
+ms904330	Preparing for Cultural Differences
+ms904360	Supporting International Characters and Formatting
+ms903791	Coding for Internationalization
+ms903805	Complex Scripts Overview
+ms903932	Window Layout and Mirroring
+ms906474	International Migration
+ms904359	Spelling Checker (USA) Migration Issues
+ms903880	International Changes in Windows CE .NET 4.0 and Windows CE .NET 4.2
+ms903885	International Samples
+ms906469	Input Method Manager (IMM)
+ms906471	Input Method Manager (IMM) OS Design Development
+ms903878	Input Method Manager (IMM) Application Development
+ms904393	Working with the Input Method Editor
+ms904318	Overview of the Input Method System
+ms904196	Overview of the IME User Interface
+ms904392	Working with the IME Status Window
+ms904381	Using the IME Composition Window
+ms904388	Working with IME Composition Strings
+ms904391	Working with the IME Candidate Window
+ms903869	Handling IME Window Messages
+ms904389	Working with Input Contexts
+ms903879	Input Method Manager (IMM) Security
+ms906470	Input Method Manager (IMM) Migration
+ms906472	Input Method Manager (IMM) Samples
+ms904402	Input Method Manager (IMM) Reference
+ms903877	Input Method Editor Constants
+ms905974	IME Conversion Mode Values
+ms905973	IME Composition String Values
+ms905979	IME Hot Key Identifiers
+ms905981	IME Sentence Mode Values
+ms905976	IME Escapes
+ms904400	Input Method Manager (IMM) Functions
+ms904955	EnumRegisterWordProc
+ms905984	ImmAssociateContext
+ms905985	ImmAssociateContextEx
+ms905986	ImmConfigureIME
+ms905987	ImmCreateContext
+ms905988	ImmCreateIMCC
+ms905989	ImmDestroyContext
+ms905990	ImmDestroyIMCC
+ms905991	ImmDisableIME
+ms905992	ImmEnumRegisterWord
+ms905993	ImmEscape
+ms905994	ImmGenerateMessage
+ms905995	ImmGetCandidateList
+ms905996	ImmGetCandidateListCount
+ms905997	ImmGetCandidateWindow
+ms905998	ImmGetCompositionFont
+ms906001	ImmGetCompositionString
+ms906002	ImmGetCompositionWindow
+ms906003	ImmGetContext
+ms906004	ImmGetConversionList
+ms906005	ImmGetConversionStatus
+ms906006	ImmGetConversionStatusForeground
+ms906007	ImmGetDefaultIMEWnd
+ms906008	ImmGetDescription
+ms906009	ImmGetGuideLine
+ms906010	ImmGetHotKey
+ms906011	ImmGetIMCCLockCount
+ms906012	ImmGetIMCCSize
+ms906013	ImmGetIMCLockCount
+ms906014	ImmGetIMEFileName
+ms906015	ImmGetImeMenuItems
+ms906016	ImmGetOpenStatus
+ms906017	ImmGetProperty
+ms906018	ImmGetRegisterWordStyle
+ms906019	ImmGetStatusWindowPos
+ms906020	ImmGetVirtualKey
+ms906021	ImmIsIME
+ms906022	ImmIsUIMessage
+ms906023	ImmLockIMC
+ms906024	ImmLockIMCC
+ms906025	ImmNotifyIME
+ms906026	ImmRegisterWord
+ms906027	ImmReleaseContext
+ms906028	ImmReSizeIMCC
+ms906029	ImmSetCandidateWindow
+ms906030	ImmSetCompositionFont
+ms906031	ImmSetCompositionString
+ms906032	ImmSetCompositionWindow
+ms906033	ImmSetConversionStatus
+ms906034	ImmSetHotKey
+ms906035	ImmSetOpenStatus
+ms906036	ImmSetStatusWindowPos
+ms906037	ImmSimulateHotKey
+ms906038	ImmSIPanelState
+ms906039	ImmUnlockIMC
+ms906040	ImmUnlockIMCC
+ms906041	ImmUnregisterWord
+ms904401	Input Method Manager (IMM) Messages
+ms905842	IMC_CLOSESTATUSWINDOW
+ms905949	IMC_GETCANDIDATEPOS
+ms905955	IMC_GETCOMPOSITIONFONT
+ms905958	IMC_GETCOMPOSITIONWINDOW
+ms905959	IMC_GETCONVERSIONMODE
+ms905960	IMC_GETOPENSTATUS
+ms905961	IMC_GETSENTENCEMODE
+ms905962	IMC_GETSTATUSWINDOWPOS
+ms905963	IMC_OPENSTATUSWINDOW
+ms905964	IMC_SETCANDIDATEPOS
+ms905966	IMC_SETCOMPOSITIONFONT
+ms905967	IMC_SETCOMPOSITIONWINDOW
+ms905968	IMC_SETCONVERSIONMODE
+ms905969	IMC_SETOPENSTATUS
+ms905970	IMC_SETSENTENCEMODE
+ms905971	IMC_SETSTATUSWINDOWPOS
+ms906042	IMN_CHANGECANDIDATE
+ms906043	IMN_CLOSECANDIDATE
+ms906044	IMN_CLOSESTATUSWINDOW
+ms906045	IMN_GUIDELINE
+ms906046	IMN_OPENCANDIDATE
+ms906047	IMN_OPENSTATUSWINDOW
+ms906048	IMN_SETCANDIDATEPOS
+ms906049	IMN_SETCOMPOSITIONFONT
+ms906050	IMN_SETCOMPOSITIONWINDOW
+ms906051	IMN_SETCONVERSIONMODE
+ms906052	IMN_SETOPENSTATUS
+ms906053	IMN_SETSENTENCEMODE
+ms906054	IMN_SETSTATUSWINDOWPOS
+ms906055	IMR_CANDIDATEFORM
+ms906056	IMR_COMPOSITIONFONT
+ms906147	IMR_COMPOSITIONFORM
+ms906166	IMR_CONFIRMRECONVERTSTRING
+ms906175	IMR_DOCUMENTFEED
+ms906183	IMR_QUERYCHARPOSITION
+ms906184	IMR_RECONVERTSTRING
+ms906445	WM_IME_CHAR
+ms906446	WM_IME_COMPOSITION
+ms906447	WM_IME_COMPOSITIONFULL
+ms906448	WM_IME_CONTROL
+ms906449	WM_IME_ENDCOMPOSITION
+ms906450	WM_IME_KEYDOWN
+ms906451	WM_IME_KEYUP
+ms906452	WM_IME_NOTIFY
+ms906453	WM_IME_REQUEST
+ms906454	WM_IME_SELECT
+ms906455	WM_IME_SETCONTEXT
+ms906456	WM_IME_STARTCOMPOSITION
+ms904403	Input Method Manager (IMM) Structures
+ms904636	CANDIDATEFORM
+ms904637	CANDIDATEINFO
+ms904638	CANDIDATELIST
+ms904714	COMPOSITIONFORM
+ms904715	COMPOSITIONSTR
+ms905340	GUIDELINE
+ms905972	IMECHARPOSITION
+ms905980	IMEMENUITEMINFO
+ms906185	INPUTCONTEXT
+ms906231	RECONVERTSTRING
+ms906232	REGISTERWORD
+ms906434	STYLEBUF
+ms904405	Input Method Manager (IMM) Function Identifiers
+ms906187	IPCTRL_CARETBACKSPACE
+ms906188	IPCTRL_CARETBOTTOM
+ms906189	IPCTRL_CARETDELETE
+ms906190	IPCTRL_CARETLEFT
+ms906191	IPCTRL_CARETRIGHT
+ms906193	IPCTRL_CARETSET
+ms906194	IPCTRL_CARETTOP
+ms906195	IPCTRL_CLEARALL
+ms906196	IPCTRL_CONVERTALL
+ms906197	IPCTRL_DETERMINALL
+ms906198	IPCTRL_GETCONVERSIONMODE
+ms906199	IPCTRL_GETERROR
+ms906200	IPCTRL_INSERTFULLSPACE
+ms906201	IPCTRL_INSERTHALFSPACE
+ms906202	IPCTRL_INSERTSPACE
+ms906203	IPCTRL_JPN_BUNLENDEC
+ms906204	IPCTRL_JPN_BUNLENINC
+ms906205	IPCTRL_JPN_CRSRLEFT
+ms906206	IPCTRL_JPN_CRSRRIGHT
+ms906207	IPCTRL_JPN_UNDOBUNSETSU
+ms906208	IPCTRL_JPN_UNDOCLR
+ms906209	IPCTRL_MAKECANDIDATE
+ms906210	IPCTRL_OFFIME
+ms906211	IPCTRL_ONIME
+ms906212	IPCTRL_PHRASEDELETE
+ms906213	IPCTRL_PRECONVERSION
+ms906214	IPCTRL_RELOADCFG
+ms906215	IPCTRL_SELECTCANDIDATE
+ms906216	IPCTRL_SETCONVERSIONMODE
+ms906217	IPCTRL_SETSHIFTSTATE
+ms906482	National Language Support (NLS)
+ms903883	National Language Support (NLS) OS Design Development
+ms906481	National Language Support (NLS) Application Development
+ms904336	Programming with Unicode and NLS
+ms904372	Understanding the Unicode Standard
+ms903858	Defining a Character Set
+ms904394	Working With Unicode Surrogates
+ms904390	Working with Surrogate Pairs
+ms904358	Specifying Locales with NLS
+ms904343	Retrieving Time and Date Strings
+ms903859	Defining Calendar Formats
+ms904189	NLS Registry Settings
+ms904179	National Language Support (NLS) Security
+ms903830	National Language Support (NLS) Migration
+ms904396	National Language Support (NLS) Samples
+ms904522	National Language Support (NLS) Reference
+ms904415	National Language Support (NLS) Functions
+ms904713	CompareString
+ms904716	ConvertDefaultLocale
+ms904721	EnumCalendarInfo
+ms904722	EnumCalendarInfoProc
+ms904723	EnumCodePagesProc
+ms904724	EnumDateFormats
+ms904740	EnumDateFormatsProc
+ms904848	EnumLocalesProc
+ms905062	EnumSystemCodePages
+ms905070	EnumSystemLocales
+ms905077	EnumTimeFormats
+ms905083	EnumTimeFormatsProc
+ms905209	FoldString
+ms905215	GetACP
+ms905221	GetCPInfo
+ms905229	GetCurrencyFormat
+ms905235	GetDateFormat
+ms905243	GetLocaleInfo
+ms905250	GetNumberFormat
+ms905256	GetOEMCP
+ms905272	GetStringTypeW
+ms905283	GetStringTypeEx
+ms905289	GetSystemDefaultLangID
+ms905298	GetSystemDefaultLCID
+ms905310	GetTimeFormat
+ms905315	GetUserDefaultLangID
+ms905323	GetUserDefaultLCID
+ms906218	IsValidCodePage
+ms906219	IsValidLocale
+ms906221	LCMapString
+ms906277	SetLocaleInfo
+ms906279	SetUserDefaultLCID
+ms906224	National Language support (NLS) Locale Identifiers
+ms906223	LCTYPE Constants
+ms903928	Language Identifiers and Locales
+ms903783	Code Pages
+ms904406	National Language Support (NLS) Macros
+ms906225	MAKELANGID
+ms906226	MAKELCID
+ms906230	PRIMARYLANGID
+ms906441	SUBLANGID
+ms904614	National Language Support (NLS) Structures
+ms904717	CPINFO
+ms904720	CURRENCYFMT
+ms906228	NUMBERFMT
+ms906478	Locale Specific Support
+ms906477	Locale Specific OS Design Development
+ms904413	Locale Specific Migration
+ms903715	AGFA AC3 Font Compression OS Design Development
+ms904371	Transcriber Handwriting Recognition Application OS Design Development
+ms906457	Arabic
+ms906458	Arabic OS Design Development
+ms904348	Chinese (Simplified)
+ms903762	Chinese (Simplified) OS Design Development
+ms904350	Simplified Chinese MSPY 3.0 IME
+ms904352	Simplified Chinese MSPY 3.0 IME OS Design Development
+ms904351	Simplified Chinese MSPY 3.0 IME Configuration
+ms903865	End User-Defined Phrase (EUDP)
+ms903866	EUDP Management
+ms904345	Setting the Input Method Programmatically
+ms906281	Simplified Chinese MSPY 3.0 IME Reference
+ms906483	Simplified Chinese MSPY 3.0 IME Functions
+ms904712	ClearEudpContent
+ms905263	GetPinyinType
+ms906278	SetPinyinType
+ms904354	Simplified Chinese Pocket IME
+ms904355	Simplified Chinese Pocket IME Architecture in Windows CE
+ms904357	Simplified Chinese Pocket IME UI Source Code Files
+ms904349	Simplified Chinese Input Method
+ms904628	Simplified Chinese Pocket IME Reference
+ms904627	Simplified Chinese Pocket IME Functions
+ms905977	ImeGetUIClassName (Simplified Chinese)
+ms903867	GB18030 Data Converter
+ms903868	GB18030 Text Converter Registry Settings
+ms904630	Chinese (Simplified) Registry Settings
+ms904622	Simplified Chinese MSPY 3.0 IME Configuration Registry Settings
+ms904626	Simplified Chinese MSPY 3.0 IME Hot Key Registry Settings
+ms904356	Simplified Chinese Pocket IME UI Module Registry Settings
+ms904629	Simplified Chinese Pocket IME UI Configuration Registry Settings
+ms904353	Simplified Chinese Pocket IME Hot Key Registry Settings
+ms906459	Chinese (Simplified) Samples
+ms904362	Chinese (Traditional)
+ms906460	Chinese (Traditional) OS Design Development
+ms904365	Traditional Chinese Input Methods
+ms904364	Traditional Chinese Input Method Implementation
+ms904385	Using the Traditional Chinese Input Method
+ms904367	Traditional Chinese Pocket IME
+ms904368	Traditional Chinese Pocket IME Architecture
+ms904370	Traditional Chinese Pocket IME UI Source Code Files
+ms904632	Traditional Chinese Pocket IME Reference
+ms904631	Traditional Chinese Pocket IME Functions
+ms905978	ImeGetUIClassName (Traditional Chinese)
+ms904395	Chinese (Traditional) Registry Settings
+ms904369	Traditional Chinese Pocket IME UI Module Registry Settings
+ms904634	Traditional Chinese Pocket IME UI Configuration Registry Settings
+ms904366	Traditional Chinese Pocket IME Hot Key Registry Settings
+ms904363	Traditional Chinese Handwriting Sample IM Registry Settings
+ms903773	Chinese (Traditional) Samples
+ms906466	Hebrew
+ms903875	Hebrew OS Design Development
+ms906467	Indic
+ms906468	Indic OS Design Development
+ms903886	Japanese
+ms903908	Japanese OS Design Development
+ms903905	Japanese Input Methods
+ms903904	Japanese Input Method Architecture
+ms904379	Using Japanese Input Methods
+ms903902	Japanese IM On-Screen Keyboards
+ms903903	Japanese IM Search Panels
+ms903900	Japanese IM Handwriting Panels
+ms903894	Japanese IME 3.1
+ms903895	Japanese IME 3.1 Architecture
+ms917983	Implementing Japanese IME 3.1
+ms903896	Japanese IME 3.1 Customizable User Interface
+ms903855	Customizing the IME Toolbar
+ms917979	Customizing the IME Toolbar Buttons
+ms917977	Customizing the Candidate Window
+ms917974	Customizing the Accelerator Button Area
+ms917975	Customizing the Bottom Information Area
+ms917976	Customizing the Candidate List Area
+ms917980	Customizing the Readings Area
+ms917978	Customizing the Default Composition Window
+ms903897	Japanese IME 3.1 Dictionary Compiler
+ms906490	Creating a Dictionary File
+ms903898	Japanese IME 3.1 Part-of-Speech Codes
+ms903899	Japanese IME 3.1 Registry Settings
+ms904408	Japanese IME 3.1 Reference
+ms904407	Japanese IME 3.1 Classes
+ms904681	CImeCUIDefCompWindow
+ms904682	CImeCUIDefCompWindow::CloseButton::AdjustRect
+ms904683	CImeCUIDefCompWindow::CloseButton::GetSize
+ms904684	CImeCUIDefCompWindow::CloseButton::PaintBackground
+ms904685	CImeCUIDefCompWindow::CloseButton::PaintBitmap
+ms904686	CImeCUIDefCompWindow::CompArea::GetMargins
+ms904687	CImeCUIDefCompWindow::GetMargins
+ms904688	CImeCUIDefCompWindow::GetTextColor
+ms904689	CImeCUIDefCompWindow::GetWndStyle
+ms904690	CImeCUIDefCompWindow::GetWndStyleEx
+ms904691	CImeCUIDefCompWindow::IsHoverActionSupported
+ms904692	CImeCUIDefCompWindow::PaintBackground
+ms904693	CImeCUIDefCompWindow::PaintGripper
+ms904694	CImeCUIToolBar
+ms904695	CImeCUIToolBar::Button::AdjustRect
+ms904698	CImeCUIToolBar::Button::GetSize
+ms904699	CImeCUIToolBar::Button::PaintBackground
+ms904700	CImeCUIToolBar::Button::PaintBitmap
+ms904701	CImeCUIToolBar::Button::PaintIcon
+ms904696	CImeCUIToolBar::ButtonArea::GetMargins
+ms904697	CImeCUIToolBar::ButtonArea::GetSeparator
+ms904702	CImeCUIToolBar::GetMargins
+ms904703	CImeCUIToolBar::GetWndStyle
+ms904704	CImeCUIToolBar::GetWndStyleEx
+ms904705	CImeCUIToolBar::IsHoverActionSupported
+ms904706	CImeCUIToolBar::OnOffButton::AdjustRect
+ms904707	CImeCUIToolBar::OnOffButton::GetSize
+ms904708	CImeCUIToolBar::OnOffButton::PaintBackground
+ms904709	CImeCUIToolBar::OnOffButton::PaintBitmap
+ms904710	CImeCUIToolBar::PaintBackground
+ms904711	CImeCUIToolBar::PaintGripper
+ms904639	CImeCUICandWindow
+ms904640	CImeCUICandWindow::CBottomInfoArea::CButton::AdjustRect
+ms904641	CImeCUICandWindow::CBottomInfoArea::CButton::PaintBackground
+ms904642	CImeCUICandWindow::CBottomInfoArea::CButton::PaintIcon
+ms904643	CImeCUICandWindow::CBottomInfoArea::GetMargins
+ms904644	CImeCUICandWindow::CBottomInfoArea::GetTextColor
+ms904645	CImeCUICandWindow::CBottomInfoArea::IsAvailable
+ms904646	CImeCUICandWindow::CBottomInfoArea::PaintBackground
+ms904647	CImeCUICandWindow::CBottomInfoArea::UseCandMenuButton
+ms904648	CImeCUICandWindow::CBottomInfoArea::UseCandNumText
+ms904649	CImeCUICandWindow::CBottomInfoArea::UseSortButton
+ms904650	CImeCUICandWindow::CCandListArea::GetMargins
+ms904651	CImeCUICandWindow::CCandListArea::Item::CreateRenderingMetrics
+ms904652	CImeCUICandWindow::CCandListArea::Item::FreeRenderingMetrics
+ms904653	CImeCUICandWindow::CCandListArea::Item::GetSize
+ms904654	CImeCUICandWindow::CCandListArea::Item::PaintBackground
+ms904655	CImeCUICandWindow::CCandListArea::Item::PaintCandidateString
+ms904656	CImeCUICandWindow::CCandListArea::Item::PaintInlineComment
+ms904657	CImeCUICandWindow::CCandListArea::Item::SetSize
+ms904658	CImeCUICandWindow::CCandListArea::PaintBackground
+ms904659	CImeCUICandWindow::CCandListArea::ScrollBar::IsVisibleAlways
+ms904660	CImeCUICandWindow::CNumButton::AdjustRect
+ms904661	CImeCUICandWindow::CNumButton::PaintBackground
+ms904662	CImeCUICandWindow::CNumButton::PaintIcon
+ms904663	CImeCUICandWindow::CReadingsArea::CButton::AdjustRect
+ms904664	CImeCUICandWindow::CReadingsArea::CButton::PaintBackground
+ms904665	CImeCUICandWindow::CReadingsArea::CButton::PaintBitmap
+ms904667	CImeCUICandWindow::CReadingsArea::CButton::PaintText
+ms904668	CImeCUICandWindow::CReadingsArea::GetMargins
+ms904669	CImeCUICandWindow::CReadingsArea::GetTextColor
+ms904670	CImeCUICandWindow::CReadingsArea::IsAvailable
+ms904671	CImeCUICandWindow::CReadingsArea::PaintBackground
+ms904672	CImeCUICandWindow::GetHorizontalOffset
+ms904673	CImeCUICandWindow::GetMargins
+ms904674	CImeCUICandWindow::GetMaxHeight
+ms904675	CImeCUICandWindow::GetMaxItems
+ms904676	CImeCUICandWindow::GetWndStyle
+ms904677	CImeCUICandWindow::GetWndStyleEx
+ms904678	CImeCUICandWindow::IsHoverActionSupported
+ms904679	CImeCUICandWindow::PaintBackground
+ms904680	CImeCUICandWindow::UseNumButtons
+ms904409	Japanese IME 3.1 Structures
+ms906227	MARGINS
+ms903909	Japanese Pocket IME
+ms903910	Japanese Pocket IME Architecture
+ms903912	Japanese Pocket IME UI Code
+ms904382	Using the Japanese Pocket IME UI
+ms904167	Multiple Dictionary Support for Japanese
+ms904340	Registry Settings for Multiple Dictionaries
+ms904377	User Dictionary for Japanese
+ms904341	Registry Settings for User Dictionary
+ms904339	Registry Settings for Conversion Candidates
+ms903890	Japanese Dictionary Compiler
+ms903833	Creating a Dictionary Source File
+ms904328	Part-of-Speech Codes
+ms904380	Using the IImeIPoint2 Interface
+ms903647	Accessing the Conversion Service
+ms903850	Creating a Notification Sink
+ms904332	Processing User Input from the Keyboard
+ms903864	Editing the Composition String
+ms904334	Processing User Input with Alternatives
+ms903822	Converting a Composition String
+ms903854	Creating the Candidate List
+ms903860	Determining the Composition String
+ms906220	Japanese Pocket IME Reference
+ms904410	Japanese Pocket IME Functions
+ms904718	CreateIFEDictionaryInstance
+ms904719	CreateIImeIPointInstance
+ms903911	Japanese Pocket IME Interfaces
+ms905450	IFEDictionary
+ms905451	IFEDictionary::Close
+ms905452	IFEDictionary::Create
+ms905453	IFEDictionary::ExistWord
+ms905454	IFEDictionary::GetHeader
+ms905455	IFEDictionary::GetPosTable
+ms905456	IFEDictionary::GetWords
+ms905457	IFEDictionary::NextWords
+ms905458	IFEDictionary::Open
+ms905459	IFEDictionary::RegisterWord
+ms905460	IImeIPoint2
+ms905461	IImeIPoint2::ControlIME
+ms905462	IImeIPoint2::DeleteCompString
+ms905463	IImeIPoint2::GetAllCompositionInfo
+ms905464	IImeIPoint2::Initialize
+ms905465	IImeIPoint2::InsertImeItem
+ms905466	IImeIPoint2::InsertStringEx
+ms905467	IImeIPoint2::ReplaceCompString
+ms905468	IImeIPoint2::SelectIpCandidate
+ms905469	IImeIPoint2::UpdateContext
+ms905470	IImeIPointNotifySink
+ms905471	IImeIPointNotifySink::GenerateMessage
+ms905472	IImeIPointNotifySink::IsReadingHalfKana
+ms905473	IImeIPointNotifySink::SetCandidateSelection
+ms905474	IImeIPointNotifySink::SetCandidateStr
+ms905475	IImeIPointNotifySink::SetCompositionAttr
+ms905476	IImeIPointNotifySink::SetCompositionClause
+ms905477	IImeIPointNotifySink::SetCompositionReadAttr
+ms905478	IImeIPointNotifySink::SetCompositionReadClause
+ms905479	IImeIPointNotifySink::SetCompositionReadStr
+ms905480	IImeIPointNotifySink::SetCompositionStr
+ms905481	IImeIPointNotifySink::SetCursorPos
+ms905482	IImeIPointNotifySink::SetDeltaPos
+ms905483	IImeIPointNotifySink::SetResultClause
+ms905484	IImeIPointNotifySink::SetResultReadClause
+ms905485	IImeIPointNotifySink::SetResultReadStr
+ms905486	IImeIPointNotifySink::SetResultStr
+ms905487	IImeIPointNotifySink::SetTargetClause
+ms904411	Japanese Pocket IME Structures
+ms905982	IMESHF
+ms905983	IMEWRD
+ms906186	IPCANDIDATE
+ms906229	POSTBL
+ms903891	Japanese Edit Control
+ms903756	Changing the Edit Control Level
+ms906475	Japanese Registry Settings
+ms903887	Japanese All Character IM Registry Settings
+ms903889	Japanese Character Auto Complete (CAC) IM Registry Settings
+ms903892	Japanese Handwriting Sample IM Registry Settings
+ms903893	Japanese IM and IME Registry Settings
+ms903901	Japanese IM Hot Key Registry Settings
+ms903906	Japanese MS Kana IM Registry Settings
+ms903907	Japanese MS Roma IM Registry Settings
+ms903914	Japanese Search by Radical IM Registry Settings
+ms903915	Japanese Search by Stroke IM Registry Settings
+ms903913	Japanese Samples
+ms903916	Korean
+ms903925	Korean OS Design Development
+ms903924	Korean Input Methods
+ms903923	Korean Input Method Implementation
+ms904383	Using the Korean Input Method
+ms903918	Korean IME
+ms903921	Korean IME Architecture in Windows CE
+ms903922	Korean IME UI Source Code Files
+ms904412	Korean IME UI Configuration Registry Settings
+ms903876	IKoreanImeUI Interface
+ms905488	IKoreanImeUI
+ms905489	IKoreanImeUI::GetCandWndPos
+ms905490	IKoreanImeUI::GetCompositionFont
+ms905491	IKoreanImeUI::GetCompWndPos
+ms905492	IKoreanImeUI::GetStatusWndPos
+ms905493	IKoreanImeUI::InitializeUIWindows
+ms905494	IKoreanImeUI::RedrawCandWnd
+ms905495	IKoreanImeUI::RedrawCompWnd
+ms905496	IKoreanImeUI::RedrawStatusWnd
+ms905497	IKoreanImeUI::SetCandData
+ms905498	IKoreanImeUI::SetCandWndPos
+ms905499	IKoreanImeUI::SetCompData
+ms905500	IKoreanImeUI::SetCompWndPos
+ms905501	IKoreanImeUI::SetStatusData
+ms905502	IKoreanImeUI::SetStatusWndPos
+ms905503	IKoreanImeUI::ShowHideCandWnd
+ms905504	IKoreanImeUI::ShowHideCompWnd
+ms905715	IKoreanImeUI::ShowHideStatusWnd
+ms905791	IKoreanImeUI::UninitializeUIWindows
+ms906476	Korean Registry Settings
+ms903917	Korean Handwriting Sample IM Registry Settings
+ms903919	Korean IME97 Hot Key Registry Settings
+ms903920	Korean IME97 Registry Settings
+ms903927	Korean Soft Keyboard IM Registry Settings
+ms903926	Korean Samples
+ms906484	Thai
+ms904361	Thai OS Design Development
+ms903870	Handwriting Recognizer Engine (HWX)
+ms903872	Handwriting Recognizer Engine (HWX) OS Design Development
+ms906464	Handwriting Recognizer Engine (HWX) Application Development
+ms904338	Recognizing a Hand-Drawn Character
+ms904346	Setting Up the HWXGUIDE Structure
+ms904331	Processing User Input
+ms904337	Recognition Process
+ms904327	Partial Recognition Process
+ms904329	Performing Handwriting Recognition
+ms906465	Handwriting Recognizer Engine (HWX) Reference
+ms904397	Handwriting Recognizer Engine (HWX) Functions
+ms905349	HwxALCPriority
+ms905356	HwxALCValid
+ms905428	HwxConfig
+ms905434	HwxCreate
+ms905436	HwxDestroy
+ms905438	HwxEndInput
+ms905439	HwxGetResults
+ms905441	HwxInput
+ms905442	HwxProcess
+ms905445	HwxResultsAvailable
+ms905446	HwxSetAbort
+ms905447	HwxSetContext
+ms905448	HwxSetGuide
+ms905449	HwxSetPartial
+ms904399	Handwriting Recognizer Engine (HWX) Structures
+ms905440	HWXGUIDE
+ms905443	HWXRESULTS
+ms904398	Handwriting Recognizer Engine (HWX) Registry Settings
+ms903874	Handwriting Recognizer Engine (HWX) Security
+ms903871	Handwriting Recognizer Engine (HWX) Migration
+ms903873	Handwriting Recognizer Engine (HWX) Samples
+ms906461	Unicode Script Processor for Complex Scripts
+ms903796	Uniscribe OS Design Development
+ms906462	Uniscribe Application Development
+ms904386	Using Uniscribe to Process Complex Scripts
+ms903746	Caching with Uniscribe
+ms904347	Shaping Engines
+ms904342	Related Processing for Complex Scripts
+ms917981	Text Display with Uniscribe
+ms917984	Laying Out Text with Uniscribe
+ms917982	Displaying Text with Uniscribe
+ms904374	Uniscribe Registry Settings
+ms904376	Uniscribe Security
+ms904373	Uniscribe Migration
+ms904375	Uniscribe Samples
+ms906463	Uniscribe Reference
+ms906485	Uniscribe Enumerations
+ms906270	SCRIPT_JUSTIFY
+ms906486	Uniscribe Functions
+ms906233	ScriptApplyDigitSubstitution
+ms906234	ScriptApplyLogicalWidth
+ms906235	ScriptBreak
+ms906236	ScriptCacheGetHeight
+ms906237	ScriptCPtoX
+ms906238	ScriptFreeCache
+ms906239	ScriptGetCMap
+ms906240	ScriptGetFontProperties
+ms906241	ScriptGetGlyphABCWidth
+ms906242	ScriptGetLogicalWidths
+ms906243	ScriptGetProperties
+ms906244	ScriptIsComplex
+ms906245	ScriptItemize
+ms906246	ScriptJustify
+ms906247	ScriptLayout
+ms906248	ScriptPlace
+ms906249	ScriptRecordDigitSubstitution
+ms906250	ScriptShape
+ms906259	ScriptString_pcOutChars
+ms906260	ScriptString_pLogAttr
+ms906261	ScriptString_pSize
+ms906251	ScriptStringAnalyse
+ms906252	ScriptStringCPtoX
+ms906253	ScriptStringFree
+ms906254	ScriptStringGetLogicalWidths
+ms906255	ScriptStringGetOrder
+ms906256	ScriptStringOut
+ms906257	ScriptStringValidate
+ms906258	ScriptStringXtoCP
+ms906262	ScriptTextOut
+ms906263	ScriptXtoCP
+ms906487	Uniscribe Structures
+ms905336	GOFFSET
+ms906264	SCRIPT_ANALYSIS
+ms906265	SCRIPT_CACHE
+ms906266	SCRIPT_CONTROL
+ms906267	SCRIPT_DIGITSUBSTITUTE
+ms906268	SCRIPT_FONTPROPERTIES
+ms906269	SCRIPT_ITEM
+ms906271	SCRIPT_LOGATTR
+ms906272	SCRIPT_PROPERTIES
+ms906273	SCRIPT_STATE
+ms906274	SCRIPT_STRING_ANALYSIS
+ms906275	SCRIPT_TABDEF
+ms906276	SCRIPT_VISATTR
+ms904030	Multilingual User Interface (MUI)
+ms906480	Multilingual User Interface (MUI) OS Design Development
+ms903934	MUI Implementation
+ms903935	MUI Locale Considerations
+ms903933	MUI Font Linking
+ms904635	How to Create a Multilingual Run-time Image Using MUI
+ms906489	Creating a Multilingual OS Design
+ms906488	Building a Multilingual Run-time Image
+ms917985	Testing the Multilingual Run-time Image
+ms904140	Multilingual User Interface (MUI) Application Development
+ms904387	Working with Fonts in the MUI
+ms903929	Managing Linked System Fonts
+ms903931	Menus and Fonts
+ms903856	Default Registry Values for Menu
+ms903857	Default Registry Values for Widgets
+ms903861	Dialog Boxes, Buttons, and Fonts
+ms904384	Using the MUI with Applications
+ms904344	Selecting an MUI Locale
+ms903947	MUI Resource DLLs
+ms903734	Application Implementation
+ms903739	Applications with Multiple DLLs
+ms904414	Multilingual User Interface (MUI) Registry Settings
+ms904158	Multilingual User Interface (MUI) Security
+ms904148	Multilingual User Interface (MUI) Migration
+ms904152	Multilingual User Interface (MUI) Samples
+ms903724	Multilingual User Interface (MUI) Reference
+ms906479	Multilingual User Interface (MUI) Functions
+ms905092	EnumUILanguages
+ms905116	EnumUILanguagesProc
+ms905303	GetSystemDefaultUILanguage
+ms905328	GetUserDefaultUILanguage
+ms906280	SetUserDefaultUILanguage

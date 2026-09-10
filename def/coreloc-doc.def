@@ -22,6 +22,7 @@ EXPORTS
   CompareStringW
   ConvertDefaultLocale
   EnumSystemCodePagesW
+  EnumUILanguages
   FoldStringW
   GetACP
   GetCPInfo
@@ -33,9 +34,11 @@ EXPORTS
   GetStringTypeExW
   GetSystemDefaultLCID
   GetSystemDefaultLangID
+  GetSystemDefaultUILanguage
   GetTimeFormatW
   GetUserDefaultLCID
   GetUserDefaultLangID
+  GetUserDefaultUILanguage
   IsCharAlphaW
   IsCharAlphaNumericW
   IsCharLowerW
@@ -45,5 +48,6 @@ EXPORTS
   LCMapStringW
   SetLocaleInfoW
   SetUserDefaultLCID
+  SetUserDefaultUILanguage
   wsprintfW
   wvsprintfW
