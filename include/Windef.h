@@ -92,6 +92,13 @@ typedef unsigned int    UINT;
  * type of the Win32 basetypes (desktop reference: unsigned int).  Same
  * width as UINT/ULONG on every CE target. */
 typedef uint32_t        UINT32;
+/* UINT8/UINT16: printed as member/base types by the DVD-Video API
+ * pages (Dvdata.h/Dvdnav.h structures, M87: UINT8 cmd[8], UINT16
+ * attr, ...) and the RAS/PPP pages; fixed-width base types in the
+ * UINT32 (ms902150) family -- the CE docs use them without ever
+ * printing their definition (derived widths 8/16 bits, recorded). */
+typedef uint8_t         UINT8;
+typedef uint16_t        UINT16;
 typedef int             BOOL;
 typedef unsigned char   BYTE;   /* single byte (IsDBCSLeadByte pages) */
 typedef BYTE           *LPBYTE; /* byte pointer (registry value data)  */

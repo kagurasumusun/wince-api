@@ -36,6 +36,8 @@ include/D3dmcaps.h \
 include/D3dmtypes.h \
 include/Dbgapi.h \
 include/Dccole.h \
+include/Dvdata.h \
+include/Dvdnav.h \
 include/Ddraw.h \
 include/Discodlg.h \
 include/Dinput.h \

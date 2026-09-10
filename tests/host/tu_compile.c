@@ -64,6 +64,8 @@
 #include <Windot11.h>
 #include <Usp10.h>
 #include <Cesync.h>
+#include <Dvdata.h>
+#include <Dvdnav.h>
 #include <Msime.h>
 #include <Msimeui.h>
 #include <Imjpskin.h>
@@ -7210,6 +7212,45 @@ static int m85_alias_usage(void)
     return (int)csi.cbStruct;
 }
 
+static int m87_shaped_usage(void)
+{
+    DVD_AUDIO_MU_ATTR   ama;
+    DVD_CELL_PIECE      ccp;
+    DVD_CELL_PLAYBACK   cbp;
+    DVD_ISRC            isrc;
+    DVD_NAV_CMD         ncmd;
+    DVD_POS_CODE        pcode;
+    DVD_PROVIDER_ID      pid;
+    DVD_SUBPICTURE_STREAM_ATTR ssa;
+    DVD_TEXT_ITEM       ti;
+    DVD_TITLE_SET_INFO  tsi;
+    DVDUserGOPData      gop;
+    DVD_RECT            dr;
+    EDDVDPlaybackState  pbs;
+    EDVDDomainType      dom;
+    ENavCmdArea         nca;
+    EPGCPlaybackMode    pbm;
+    IDVDUserOperation  *puo = NULL;
+    UNICODE_PATH        upath;
+    WCHAR               w;
+
+    ama.atr1[0] = 0; ccp.vob_id = 0; cbp.cellCategory = 0;
+    isrc.valid = 0; ncmd.cmd[0] = 0; pcode.posCode[0] = 0;
+    pid.providerID[0] = 0; ssa.modetype = 0; ti.itemCode = 0;
+    tsi.nParts = 0; gop.userData[0] = 0; dr.xStart = 0;
+    pbs = DVD_PAUSED; dom = DVD_TT_DOM; nca = DVD_CELL_CMD;
+    pbm = DVD_PLAYMODE_SHUFFLE;
+    upath[0] = 0; w = 0;
+    return (int)ama.atr1[0] + (int)ccp.vob_id + (int)cbp.cellCategory
+           + (int)isrc.valid + (int)ncmd.cmd[0] + (int)pcode.posCode[0]
+           + (int)pid.providerID[0] + (int)ssa.modetype + (int)ti.itemCode
+           + (int)tsi.nParts + (int)gop.userData[0] + (int)dr.xStart
+           + (int)pbs + (int)dom + (int)nca + (int)pbm
+           + (puo != NULL) + (int)upath[0] + (int)w
+           + SPRM_REGION + DVD_SCANCAP_BACKWARD_SINGLE
+           + (int)sizeof(UNICODE_PATH);
+}
+
 int host_tu_entry(void)
 {
     (void) api_symbols;
@@ -7369,6 +7410,8 @@ int host_tu_entry(void)
     if (m84_shaped_usage() != 0)
         return 1;
     if (m85_alias_usage() != 0)
+        return 1;
+    if (m87_shaped_usage() != 0)
         return 1;
     return 0;
 }

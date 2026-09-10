@@ -6234,3 +6234,54 @@ Dvdata.h (157 rows + variants), Dvdnav.h (50), Dvddata.h (2) --
 DVD-Video API interfaces/structures; one Windows.h row.
 
 Gates: check / crosscheck / e2e GREEN x6.
+
+## M87 -- DVD-Video API (Dvdata.h + Dvdnav.h)
+
+From the M86 graphics-book harvest: the DVD-Video API book rows
+(Requirements rows print "Header: Dvdata.h, Dvdata.idl" /
+"Dvdnav.h, Dvdnav.idl" and "Link Library: Ddvdids.lib" -- GUID
+linkage, no def; Uuid.lib precedent).  The aa45xxxx/ms93xxx pages
+print prototypes in the page body only (rows.json sig fields empty
+-- extraction done from page text via /tmp/gen-dvd.py, method
+grouping by page-id order).
+
+- include/Dvdata.h (NEW): UNICODE_PATH (WCHAR[128]; the page-local
+  `#define MAX_PATH 128` NOT emitted -- Windef.h owns MAX_PATH=260,
+  conflict recorded); 13 structures compiled verbatim
+  (DVD_AUDIO_MU_ATTR w/ nested anonymous struct, DVD_AUDIO_STREAM_ATTR,
+  DVD_CELL_PIECE, DVD_CELL_PLAYBACK, DVD_ISRC, DVD_NAV_CMD,
+  DVD_POS_CODE, DVD_PROVIDER_ID, DVD_SUBPICTURE_STREAM_ATTR,
+  DVD_TEXT_ITEM, DVD_TEXT_LANGUAGE_UNIT, DVD_TITLE_SET_INFO, DVD_RECT;
+  tags as printed incl. the archive `_structDVD_*` spellings); 4 enums
+  (EDVDDomainType, ENavCmdArea, EPGCLinkType, EPGCPlaybackMode); 19
+  interface forwards + 123 method records (incl. IEnumDVD_XXXX generic
+  Next/Skip/Reset/Clone + IEnumDVD_CELL_PIECE/TEXT_ITEM/
+  TEXT_LANGUAGE_UNIT which share them).
+- include/Dvdnav.h (NEW): 45 DVD macros from ms925307 with printed
+  values (DVD_*_SPACE_BIT, DVD_NAVSTATREQ_*, DVD_PROGRAM_*, DVD_MENU_*,
+  DVD_SELECT_*, DVD_SCANCAP_*, SPRM_* 0-20); DVDUserGOPData; 3 enums
+  (EDDVDPlaybackState, EDVDNavException, EDVDSParamEvent); 2 interface
+  forwards + 45 method records (IDVDUserOperation 24 incl. TimePlay,
+  IDVDNavigationManager 8 incl. UseRenderer whose TOC path misspells
+  the interface "IDVDNavigationManger").
+- Header-attribution mismatch recorded: the IDVDNavigatorSink
+  interface page prints Dvdata.h while its 12 method pages print
+  Dvdnav.h -- interface homed by its interface page (Dvdata.h) with
+  per-method cross-header notes.
+- 16 method pages print callee names that differ from their titles
+  (archive typos; each annotated at its record): GetSearmless...
+  (GetSeamlessAngleChangeAddress), GetPGC (GetPGCCount), GetTimeMap
+  (GetTitleSet), GetTotalVOBUnit(s), GetVOBTablePtr, GetButton...
+  (x2), OpenVOB (CloseVOB!), ButonSelect..., ChangeAngel, ForwardScan
+  (GoUp), ManuLanguageSelect, TimePlay (PTTSearch), Unlock (UnLock),
+  GetParentManagementInfo.
+- include/Windef.h: +UINT8/UINT16 (fixed-width base types, DVD pages'
+  member spellings; UINT32/ms902150 family policy, derived widths
+  recorded).
+- TU m87 (tests/host/tu_compile.c): 12 struct field touches + enum
+  uses + macro uses + UNICODE_PATH array.
+- Makefile HDRS 178 -> 180.
+- Gates: check / crosscheck / e2e GREEN x6.
+- Metrics note: the graphics rows carry empty sig fields, so the
+  fn-rows measure in tools/surface-metrics.py does not see them;
+  DVD method records are counted by the symbol measure only.
