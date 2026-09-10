@@ -140,6 +140,19 @@ def flatten(r1, name):
 # ------------------------------------------------------------- our records
 
 BANNER_RE = re.compile(r'/\*\s*(\w+):\s*documented methods\b')
+
+# Type words the pages glue directly onto parameter names (longWidth,
+# HRESULTNext, unsigned longfoo ...).  Longest first.
+GLUE_TYPES = [
+    'unsigned short', 'unsigned int', 'unsigned long', 'unsigned char',
+    'REFERENCE_TIME', 'LONGLONG', 'ULONGLONG', 'OAHWND',
+    'HRESULT', 'SCODE', 'long', 'int', 'short', 'char', 'float',
+    'double', 'void',
+]
+
+# Return types the pages glue onto the method name in the signature.
+RET_TYPES = ('HRESULT', 'ULONG', 'DWORD', 'LONG', 'BOOL', 'UINT',
+             'LONGLONG', 'ULONGLONG', 'OAHWND', 'void', 'VOID')
 RECORD_RE = re.compile(
     r'\s*\*\s+(?:ms|aa)(\d{6})\s+(\w+):\s+(.+)$')
 
@@ -164,12 +177,23 @@ def split_params(params):
                 plist.append((mm.group(1).strip() + ('*' if is_array else ''),
                               mm.group(2)))
                 continue
-            mm = re.match(r'^([A-Z][A-Z0-9_]*[A-Z_])([a-z]\w*)$', p)
-            if mm:
-                plist.append((mm.group(1) + ('*' if is_array else ''),
-                              mm.group(2)))
-                continue
-            plist.append((p + ('*' if is_array else ''), ''))
+            # glued misprints with a KNOWN type word (longWidth,
+            # HRESULTNext, DWORDgrfFlags, REFERENCE_TIMErtNow)
+            for gt in GLUE_TYPES:
+                if p.startswith(gt):
+                    rest = p[len(gt):]
+                    if rest and re.match(r'^[A-Za-z_]\w*$', rest):
+                        p = gt
+                        plist.append((gt + ('*' if is_array else ''), rest))
+                        break
+            else:
+                mm = re.match(r'^([A-Z][A-Z0-9_]*[A-Z_])([a-z]\w*)$', p)
+                if mm:
+                    plist.append((mm.group(1) + ('*' if is_array else ''),
+                                  mm.group(2)))
+                    continue
+                plist.append((p + ('*' if is_array else ''), ''))
+            continue
     return plist
 
 
@@ -199,9 +223,19 @@ def parse_records(header):
                 continue
             head = sig[:lp]
             hm = re.match(r'^([A-Za-z_]\w*)[\s]?([A-Za-z_]\w*)?$', head.strip())
-            if not hm or (hm.group(2) and hm.group(2) != name):
-                continue          # not a plain signature line
-            ret = hm.group(1)
+            if hm and hm.group(2):
+                if hm.group(2) != name:
+                    continue          # not a plain signature line
+                ret = hm.group(1)
+            else:
+                # glued return+name (HRESULTNext, HRESULTRenderFile)
+                ret = None
+                for rt in RET_TYPES:
+                    if head.strip() == rt + name:
+                        ret = rt
+                        break
+                if ret is None:
+                    continue          # not a plain signature line
             plist = split_params(sig[lp + 1:rp])
             out[cur]['pages'] += 1
             out[cur]['methods'].append((page, name, ret, plist))
@@ -220,7 +254,8 @@ TYPE_MAP = {'IENUMIDLIST': 'IEnumIDList',
 EXACT_TYPE_MAP = {'IENumSTATDATA': 'IEnumSTATDATA',
                   'byte': 'BYTE',
                   '__IView_pfncont': 'LPFNCONTINUE',
-                  'IEnumOleVerb': 'IEnumOLEVERB'}
+                  'IEnumOleVerb': 'IEnumOLEVERB',
+                  'IbaseFilter': 'IBaseFilter'}
 
 
 def r1_type(t):

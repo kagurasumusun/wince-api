@@ -6976,3 +6976,15 @@ CE page spelling).
   includes +Wingdi.h (LOGPALETTE) +Winuser.h (LPMSG/LPCRECT);
   Shobjidl.h's pilot-era untagged POINTL moved to Objbase.h.
   Total Objbase M97: 58 interfaces.  Gates GREEN x6.
+- include/Dshow.h: 12 interfaces made callable -- IAMStreamConfig,
+  IBaseFilter (15 slots incl. the IMediaFilter chain), IDirectDrawVideo
+  (19), IEnumMediaTypes, IEnumPins, IFilterGraph, IGraphBuilder (15),
+  IMediaFilter, IMediaSample (19), IPin (18), IQualProp, IVideoWindow
+  (46, incl. the IDispatch base slots).  44 DShow interfaces stay
+  record-only (R1 carries no DirectShow headers); three were SKIPPED
+  on CE-vs-R1 method-set mismatches (IAMTVTuner::StoreAutoTune,
+  IMediaControl::StopWhenReady, IReferenceClock::AdvisePeriodic
+  documented by CE but absent from R1 -- no order source).  Parser
+  additions: glued return+name heads (HRESULTNext), OAHWND/known-type
+  glue splitting; aux typedef OAHWND (32-bit long, IDL spelling);
+  include +Ddraw.h (DDCAPS, LPDIRECTDRAW).  Gates GREEN x6.

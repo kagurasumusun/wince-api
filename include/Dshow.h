@@ -56,6 +56,8 @@
 #include "Wingdi.h"    /* COLORREF, RGBQUAD, BITMAPINFOHEADER, DIBSECTION,
                           HBITMAP */
 #include "Objbase.h"   /* IUnknown (opaque forward) */
+#include "Ddraw.h"     /* DDCAPS, LPDIRECTDRAW (IDirectDrawVideo vtable
+                          parameters -- real since M97) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -1625,6 +1627,474 @@ AKARI_CE_IMPORT DWORD WINAPI DbgWaitForSingleObject(HANDLE h)
 /* aa451652 "EC_PLEASE_REOPEN": This event code indicates that the graph should be re-rendered -- no value printed; no Requirements row; name recorded only. */
 /* aa451658 "EC_STATUS": This event code allows arbitrary status messages to be passed to the application -- no value printed; no Requirements row; name recorded only. */
 /* aa451665 "EC_VIDEOFRAMEREADY": This event code is sent to notify the application that the first video frame is about to be drawn -- no value printed; no Requirements row; name recorded only. */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* ================================================================== */
+/* OAHWND: the automation-compatible window-handle alias the IVideoWindow
+ * pages print (the DShow IDL spells it as a 32-bit long; on CE that is
+ * the same width as HWND).  Own design, ABI-safe. */
+typedef LONG OAHWND;
+
+/* M97 vtable adoption -- COM interfaces made callable from C.  Vtable
+ * ORDER adopted from R1 (CeGCC-lineage w32api, public
+ * domain; docs/clean-room.md par.4 revision 2026-09-10);
+ * method names/types are the CE pages' own printed
+ * signatures (the records above).  Methods the CE pages do
+ * not document but R1 carries are INCLUDED and tagged
+ * "(R1)" -- dropping a middle slot would shift the layout.
+ * Calling convention: plain function pointers (WINAPI is
+ * empty here: CE-wide cdecl; R1's __stdcall NOT adopted). */
+/* ================================================================== */
+
+/* ---- IAMStreamConfig: 4 documented method pages; order R1 ---- */
+typedef struct IAMStreamConfigVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IAMStreamConfig*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IAMStreamConfig*);  /* (R1) */
+    ULONG (WINAPI *Release)(IAMStreamConfig*);  /* (R1) */
+    /* IAMStreamConfig */
+    HRESULT (WINAPI *SetFormat)(IAMStreamConfig*, AM_MEDIA_TYPE* pmt);  /* 908823 */
+    HRESULT (WINAPI *GetFormat)(IAMStreamConfig*, AM_MEDIA_TYPE** pmt);  /* 908804 */
+    HRESULT (WINAPI *GetNumberOfCapabilities)(IAMStreamConfig*, int* piCount, int* piSize);  /* 908807 */
+    HRESULT (WINAPI *GetStreamCaps)(IAMStreamConfig*, int iIndex, AM_MEDIA_TYPE** pmt, BYTE* pSCC);  /* 908811 */
+} IAMStreamConfigVtbl;
+struct IAMStreamConfig { const IAMStreamConfigVtbl *lpVtbl; };
+#define IAMStreamConfig_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IAMStreamConfig_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IAMStreamConfig_Release(T) ((T)->lpVtbl->Release(T))
+#define IAMStreamConfig_SetFormat(T,a) ((T)->lpVtbl->SetFormat(T,a))
+#define IAMStreamConfig_GetFormat(T,a) ((T)->lpVtbl->GetFormat(T,a))
+#define IAMStreamConfig_GetNumberOfCapabilities(T,a,b) ((T)->lpVtbl->GetNumberOfCapabilities(T,a,b))
+#define IAMStreamConfig_GetStreamCaps(T,a,b,c) ((T)->lpVtbl->GetStreamCaps(T,a,b,c))
+
+/* ---- IBaseFilter: 5 documented method pages; order R1 ---- */
+typedef struct IBaseFilterVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IBaseFilter*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IBaseFilter*);  /* (R1) */
+    ULONG (WINAPI *Release)(IBaseFilter*);  /* (R1) */
+    /* IBaseFilter */
+    HRESULT (WINAPI *GetClassID)(IBaseFilter*, CLSID*pClassID);  /* (R1) */
+    HRESULT (WINAPI *Stop)(IBaseFilter*);  /* (R1) */
+    HRESULT (WINAPI *Pause)(IBaseFilter*);  /* (R1) */
+    HRESULT (WINAPI *Run)(IBaseFilter*, REFERENCE_TIME tStart);  /* (R1) */
+    HRESULT (WINAPI *GetState)(IBaseFilter*, unsigned long, void*);  /* (R1) */
+    HRESULT (WINAPI *SetSyncSource)(IBaseFilter*, struct IReferenceClock*);  /* (R1) */
+    HRESULT (WINAPI *GetSyncSource)(IBaseFilter*, struct IReferenceClock**);  /* (R1) */
+    HRESULT (WINAPI *EnumPins)(IBaseFilter*, IEnumPins** ppEnum);  /* 939490 */
+    HRESULT (WINAPI *FindPin)(IBaseFilter*, LPCWSTR Id, IPin** ppPin);  /* 939495 */
+    HRESULT (WINAPI *QueryFilterInfo)(IBaseFilter*, FILTER_INFO* pInfo);  /* 939507 */
+    HRESULT (WINAPI *JoinFilterGraph)(IBaseFilter*, IFilterGraph* pGraph, LPCWSTR pName);  /* 939504 */
+    HRESULT (WINAPI *QueryVendorInfo)(IBaseFilter*, LPWSTR* pVendorInfo);  /* 939511 */
+} IBaseFilterVtbl;
+struct IBaseFilter { const IBaseFilterVtbl *lpVtbl; };
+#define IBaseFilter_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IBaseFilter_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IBaseFilter_Release(T) ((T)->lpVtbl->Release(T))
+#define IBaseFilter_GetClassID(T,a) ((T)->lpVtbl->GetClassID(T,a))
+#define IBaseFilter_Stop(T) ((T)->lpVtbl->Stop(T))
+#define IBaseFilter_Pause(T) ((T)->lpVtbl->Pause(T))
+#define IBaseFilter_Run(T,a) ((T)->lpVtbl->Run(T,a))
+#define IBaseFilter_GetState(T,a,b) ((T)->lpVtbl->GetState(T,a,b))
+#define IBaseFilter_SetSyncSource(T,a) ((T)->lpVtbl->SetSyncSource(T,a))
+#define IBaseFilter_GetSyncSource(T,a) ((T)->lpVtbl->GetSyncSource(T,a))
+#define IBaseFilter_EnumPins(T,a) ((T)->lpVtbl->EnumPins(T,a))
+#define IBaseFilter_FindPin(T,a,b) ((T)->lpVtbl->FindPin(T,a,b))
+#define IBaseFilter_QueryFilterInfo(T,a) ((T)->lpVtbl->QueryFilterInfo(T,a))
+#define IBaseFilter_JoinFilterGraph(T,a,b) ((T)->lpVtbl->JoinFilterGraph(T,a,b))
+#define IBaseFilter_QueryVendorInfo(T,a) ((T)->lpVtbl->QueryVendorInfo(T,a))
+
+/* ---- IDirectDrawVideo: 16 documented method pages; order R1 ---- */
+typedef struct IDirectDrawVideoVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IDirectDrawVideo*, REFIID, LPVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IDirectDrawVideo*);  /* (R1) */
+    ULONG (WINAPI *Release)(IDirectDrawVideo*);  /* (R1) */
+    /* IDirectDrawVideo */
+    HRESULT (WINAPI *CanUseOverlayStretch)(IDirectDrawVideo*, long* UseOverlayStretch);  /* 451769 */
+    HRESULT (WINAPI *CanUseScanLine)(IDirectDrawVideo*, long* UseScanLine);  /* 451770 */
+    HRESULT (WINAPI *GetCaps)(IDirectDrawVideo*, DDCAPS* pCaps);  /* 451771 */
+    HRESULT (WINAPI *GetDirectDraw)(IDirectDrawVideo*, LPDIRECTDRAW* ppDirectDraw);  /* 451772 */
+    HRESULT (WINAPI *GetEmulatedCaps)(IDirectDrawVideo*, DDCAPS* pCaps);  /* 451773 */
+    HRESULT (WINAPI *GetFourCCCodes)(IDirectDrawVideo*, DWORD* pCount, DWORD* pCodes);  /* 451774 */
+    HRESULT (WINAPI *GetSurfaceDesc)(IDirectDrawVideo*, DDSURFACEDESC* pSurfaceDesc);  /* 451775 */
+    HRESULT (WINAPI *GetSurfaceType)(IDirectDrawVideo*, DWORD* pSurfaceType);  /* 451776 */
+    HRESULT (WINAPI *GetSwitches)(IDirectDrawVideo*, DWORD* pSwitches);  /* 451778 */
+    HRESULT (WINAPI *SetDefault)(IDirectDrawVideo*);  /* 451795 */
+    HRESULT (WINAPI *SetDirectDraw)(IDirectDrawVideo*, LPDIRECTDRAW pDirectDraw);  /* 451796 */
+    HRESULT (WINAPI *SetSwitches)(IDirectDrawVideo*, DWORD pSwitches);  /* 451797 */
+    HRESULT (WINAPI *UseOverlayStretch)(IDirectDrawVideo*, long UseOverlayStretch);  /* 451798 */
+    HRESULT (WINAPI *UseScanLine)(IDirectDrawVideo*, long UseScanLine);  /* 451799 */
+    HRESULT (WINAPI *UseWhenFullScreen)(IDirectDrawVideo*, long UseWhenFullScreen);  /* 451800 */
+    HRESULT (WINAPI *WillUseFullScreen)(IDirectDrawVideo*, long* UseWhenFullScreen);  /* 451801 */
+} IDirectDrawVideoVtbl;
+struct IDirectDrawVideo { const IDirectDrawVideoVtbl *lpVtbl; };
+#define IDirectDrawVideo_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IDirectDrawVideo_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IDirectDrawVideo_Release(T) ((T)->lpVtbl->Release(T))
+#define IDirectDrawVideo_CanUseOverlayStretch(T,a) ((T)->lpVtbl->CanUseOverlayStretch(T,a))
+#define IDirectDrawVideo_CanUseScanLine(T,a) ((T)->lpVtbl->CanUseScanLine(T,a))
+#define IDirectDrawVideo_GetCaps(T,a) ((T)->lpVtbl->GetCaps(T,a))
+#define IDirectDrawVideo_GetDirectDraw(T,a) ((T)->lpVtbl->GetDirectDraw(T,a))
+#define IDirectDrawVideo_GetEmulatedCaps(T,a) ((T)->lpVtbl->GetEmulatedCaps(T,a))
+#define IDirectDrawVideo_GetFourCCCodes(T,a,b) ((T)->lpVtbl->GetFourCCCodes(T,a,b))
+#define IDirectDrawVideo_GetSurfaceDesc(T,a) ((T)->lpVtbl->GetSurfaceDesc(T,a))
+#define IDirectDrawVideo_GetSurfaceType(T,a) ((T)->lpVtbl->GetSurfaceType(T,a))
+#define IDirectDrawVideo_GetSwitches(T,a) ((T)->lpVtbl->GetSwitches(T,a))
+#define IDirectDrawVideo_SetDefault(T) ((T)->lpVtbl->SetDefault(T))
+#define IDirectDrawVideo_SetDirectDraw(T,a) ((T)->lpVtbl->SetDirectDraw(T,a))
+#define IDirectDrawVideo_SetSwitches(T,a) ((T)->lpVtbl->SetSwitches(T,a))
+#define IDirectDrawVideo_UseOverlayStretch(T,a) ((T)->lpVtbl->UseOverlayStretch(T,a))
+#define IDirectDrawVideo_UseScanLine(T,a) ((T)->lpVtbl->UseScanLine(T,a))
+#define IDirectDrawVideo_UseWhenFullScreen(T,a) ((T)->lpVtbl->UseWhenFullScreen(T,a))
+#define IDirectDrawVideo_WillUseFullScreen(T,a) ((T)->lpVtbl->WillUseFullScreen(T,a))
+
+/* ---- IEnumMediaTypes: 4 documented method pages; order R1 ---- */
+typedef struct IEnumMediaTypesVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumMediaTypes*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumMediaTypes*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumMediaTypes*);  /* (R1) */
+    /* IEnumMediaTypes */
+    HRESULT (WINAPI *Clone)(IEnumMediaTypes*, IEnumMediaTypes** ppEnum);  /* 910540 */
+    HRESULT (WINAPI *Next)(IEnumMediaTypes*, ULONG cMediaTypes, AM_MEDIA_TYPE** ppMediaTypes, ULONG* pcFetched);  /* 910542 */
+    HRESULT (WINAPI *Reset)(IEnumMediaTypes*);  /* 910543 */
+    HRESULT (WINAPI *Skip)(IEnumMediaTypes*, ULONG cMediaTypes);  /* 910544 */
+} IEnumMediaTypesVtbl;
+struct IEnumMediaTypes { const IEnumMediaTypesVtbl *lpVtbl; };
+#define IEnumMediaTypes_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumMediaTypes_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumMediaTypes_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumMediaTypes_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+#define IEnumMediaTypes_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumMediaTypes_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumMediaTypes_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+
+/* ---- IEnumPins: 4 documented method pages; order R1 ---- */
+typedef struct IEnumPinsVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IEnumPins*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IEnumPins*);  /* (R1) */
+    ULONG (WINAPI *Release)(IEnumPins*);  /* (R1) */
+    /* IEnumPins */
+    HRESULT (WINAPI *Clone)(IEnumPins*, IEnumPins** ppEnum);  /* 910545 */
+    HRESULT (WINAPI *Next)(IEnumPins*, ULONG cPins, IPin** ppPins, ULONG* pcFetched);  /* 910547 */
+    HRESULT (WINAPI *Reset)(IEnumPins*);  /* 910548 */
+    HRESULT (WINAPI *Skip)(IEnumPins*, ULONG cPins);  /* 910549 */
+} IEnumPinsVtbl;
+struct IEnumPins { const IEnumPinsVtbl *lpVtbl; };
+#define IEnumPins_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IEnumPins_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IEnumPins_Release(T) ((T)->lpVtbl->Release(T))
+#define IEnumPins_Clone(T,a) ((T)->lpVtbl->Clone(T,a))
+#define IEnumPins_Next(T,a,b,c) ((T)->lpVtbl->Next(T,a,b,c))
+#define IEnumPins_Reset(T) ((T)->lpVtbl->Reset(T))
+#define IEnumPins_Skip(T,a) ((T)->lpVtbl->Skip(T,a))
+
+/* ---- IFilterGraph: 8 documented method pages; order R1 ---- */
+typedef struct IFilterGraphVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IFilterGraph*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IFilterGraph*);  /* (R1) */
+    ULONG (WINAPI *Release)(IFilterGraph*);  /* (R1) */
+    /* IFilterGraph */
+    HRESULT (WINAPI *AddFilter)(IFilterGraph*, IBaseFilter* pFilter, LPCWSTR pName);  /* 910561 */
+    HRESULT (WINAPI *RemoveFilter)(IFilterGraph*, IBaseFilter* pFilter);  /* 910568 */
+    HRESULT (WINAPI *EnumFilters)(IFilterGraph*, IEnumFilters** ppEnum);  /* 910564 */
+    HRESULT (WINAPI *FindFilterByName)(IFilterGraph*, LPCWSTR pName, IBaseFilter** ppFilter);  /* 910565 */
+    HRESULT (WINAPI *ConnectDirect)(IFilterGraph*, IPin* ppinOut, IPin* ppinIn, const AM_MEDIA_TYPE* pmt);  /* 910562 */
+    HRESULT (WINAPI *Reconnect)(IFilterGraph*, IPin* ppin);  /* 910567 */
+    HRESULT (WINAPI *Disconnect)(IFilterGraph*, IPin* ppin);  /* 910563 */
+    HRESULT (WINAPI *SetDefaultSyncSource)(IFilterGraph*);  /* 910569 */
+} IFilterGraphVtbl;
+struct IFilterGraph { const IFilterGraphVtbl *lpVtbl; };
+#define IFilterGraph_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IFilterGraph_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IFilterGraph_Release(T) ((T)->lpVtbl->Release(T))
+#define IFilterGraph_AddFilter(T,a,b) ((T)->lpVtbl->AddFilter(T,a,b))
+#define IFilterGraph_RemoveFilter(T,a) ((T)->lpVtbl->RemoveFilter(T,a))
+#define IFilterGraph_EnumFilters(T,a) ((T)->lpVtbl->EnumFilters(T,a))
+#define IFilterGraph_FindFilterByName(T,a,b) ((T)->lpVtbl->FindFilterByName(T,a,b))
+#define IFilterGraph_ConnectDirect(T,a,b,c) ((T)->lpVtbl->ConnectDirect(T,a,b,c))
+#define IFilterGraph_Reconnect(T,a) ((T)->lpVtbl->Reconnect(T,a))
+#define IFilterGraph_Disconnect(T,a) ((T)->lpVtbl->Disconnect(T,a))
+#define IFilterGraph_SetDefaultSyncSource(T) ((T)->lpVtbl->SetDefaultSyncSource(T))
+
+/* ---- IGraphBuilder: 5 documented method pages; order R1 ---- */
+typedef struct IGraphBuilderVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IGraphBuilder*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IGraphBuilder*);  /* (R1) */
+    ULONG (WINAPI *Release)(IGraphBuilder*);  /* (R1) */
+    /* IGraphBuilder */
+    HRESULT (WINAPI *AddFilter)(IGraphBuilder*, IBaseFilter*, LPCWSTR);  /* (R1) */
+    HRESULT (WINAPI *RemoveFilter)(IGraphBuilder*, IBaseFilter*);  /* (R1) */
+    HRESULT (WINAPI *EnumFilters)(IGraphBuilder*, struct IEnumFilters**);  /* (R1) */
+    HRESULT (WINAPI *FindFilterByName)(IGraphBuilder*, LPCWSTR, IBaseFilter**);  /* (R1) */
+    HRESULT (WINAPI *ConnectDirect)(IGraphBuilder*, IPin*, IPin*, const AM_MEDIA_TYPE*);  /* (R1) */
+    HRESULT (WINAPI *Reconnect)(IGraphBuilder*, IPin*);  /* (R1) */
+    HRESULT (WINAPI *Disconnect)(IGraphBuilder*, IPin*);  /* (R1) */
+    HRESULT (WINAPI *Connect)(IGraphBuilder*, IPin* ppinOut, IPin* ppinIn);  /* 910580 */
+    HRESULT (WINAPI *Render)(IGraphBuilder*, IPin* ppinOut);  /* 910582 */
+    HRESULT (WINAPI *RenderFile)(IGraphBuilder*, LPCWSTR lpwstrFile, LPCWSTR lpwstrPlayList);  /* 910583 */
+    HRESULT (WINAPI *AddSourceFilter)(IGraphBuilder*, LPCWSTR lpwstrFileName, LPCWSTR lpwstrFilterName, IBaseFilter** ppFilter);  /* 910579 */
+    HRESULT (WINAPI *SetLogFile)(IGraphBuilder*, HANDLE hFile);  /* 910584 */
+} IGraphBuilderVtbl;
+struct IGraphBuilder { const IGraphBuilderVtbl *lpVtbl; };
+#define IGraphBuilder_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IGraphBuilder_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IGraphBuilder_Release(T) ((T)->lpVtbl->Release(T))
+#define IGraphBuilder_AddFilter(T,a,b) ((T)->lpVtbl->AddFilter(T,a,b))
+#define IGraphBuilder_RemoveFilter(T,a) ((T)->lpVtbl->RemoveFilter(T,a))
+#define IGraphBuilder_EnumFilters(T,a) ((T)->lpVtbl->EnumFilters(T,a))
+#define IGraphBuilder_FindFilterByName(T,a,b) ((T)->lpVtbl->FindFilterByName(T,a,b))
+#define IGraphBuilder_ConnectDirect(T,a,b,c) ((T)->lpVtbl->ConnectDirect(T,a,b,c))
+#define IGraphBuilder_Reconnect(T,a) ((T)->lpVtbl->Reconnect(T,a))
+#define IGraphBuilder_Disconnect(T,a) ((T)->lpVtbl->Disconnect(T,a))
+#define IGraphBuilder_Connect(T,a,b) ((T)->lpVtbl->Connect(T,a,b))
+#define IGraphBuilder_Render(T,a) ((T)->lpVtbl->Render(T,a))
+#define IGraphBuilder_RenderFile(T,a,b) ((T)->lpVtbl->RenderFile(T,a,b))
+#define IGraphBuilder_AddSourceFilter(T,a,b,c) ((T)->lpVtbl->AddSourceFilter(T,a,b,c))
+#define IGraphBuilder_SetLogFile(T,a) ((T)->lpVtbl->SetLogFile(T,a))
+
+/* ---- IMediaFilter: 6 documented method pages; order R1 ---- */
+typedef struct IMediaFilterVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMediaFilter*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMediaFilter*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMediaFilter*);  /* (R1) */
+    /* IMediaFilter */
+    HRESULT (WINAPI *Stop)(IMediaFilter*);  /* 931389 */
+    HRESULT (WINAPI *Pause)(IMediaFilter*);  /* 931255 */
+    HRESULT (WINAPI *Run)(IMediaFilter*, REFERENCE_TIME tStart);  /* 931338 */
+    HRESULT (WINAPI *GetState)(IMediaFilter*, DWORD dwMilliSecsTimeout, FILTER_STATE* State);  /* 452284 */
+    HRESULT (WINAPI *SetSyncSource)(IMediaFilter*, IReferenceClock* pClock);  /* 931385 */
+    HRESULT (WINAPI *GetSyncSource)(IMediaFilter*, IReferenceClock** pClock);  /* 452287 */
+} IMediaFilterVtbl;
+struct IMediaFilter { const IMediaFilterVtbl *lpVtbl; };
+#define IMediaFilter_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMediaFilter_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMediaFilter_Release(T) ((T)->lpVtbl->Release(T))
+#define IMediaFilter_Stop(T) ((T)->lpVtbl->Stop(T))
+#define IMediaFilter_Pause(T) ((T)->lpVtbl->Pause(T))
+#define IMediaFilter_Run(T,a) ((T)->lpVtbl->Run(T,a))
+#define IMediaFilter_GetState(T,a,b) ((T)->lpVtbl->GetState(T,a,b))
+#define IMediaFilter_SetSyncSource(T,a) ((T)->lpVtbl->SetSyncSource(T,a))
+#define IMediaFilter_GetSyncSource(T,a) ((T)->lpVtbl->GetSyncSource(T,a))
+
+/* ---- IMediaSample: 16 documented method pages; order R1 ---- */
+typedef struct IMediaSampleVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IMediaSample*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IMediaSample*);  /* (R1) */
+    ULONG (WINAPI *Release)(IMediaSample*);  /* (R1) */
+    /* IMediaSample */
+    HRESULT (WINAPI *GetPointer)(IMediaSample*, BYTE** ppBuffer);  /* 911587 */
+    HRESULT (WINAPI *GetSize)(IMediaSample*);  /* 911588 */
+    HRESULT (WINAPI *GetTime)(IMediaSample*, REFERENCE_TIME* pTimeStart, REFERENCE_TIME* pTimeEnd);  /* 911589 */
+    HRESULT (WINAPI *SetTime)(IMediaSample*, REFERENCE_TIME* pTimeStart, REFERENCE_TIME* pTimeEnd);  /* 911600 */
+    HRESULT (WINAPI *IsSyncPoint)(IMediaSample*);  /* 911593 */
+    HRESULT (WINAPI *SetSyncPoint)(IMediaSample*, BOOL bIsSyncPoint);  /* 911599 */
+    HRESULT (WINAPI *IsPreroll)(IMediaSample*);  /* 911592 */
+    HRESULT (WINAPI *SetPreroll)(IMediaSample*, BOOL bIsPreroll);  /* 911598 */
+    HRESULT (WINAPI *GetActualDataLength)(IMediaSample*);  /* 911584 */
+    HRESULT (WINAPI *SetActualDataLength)(IMediaSample*, long lLen);  /* 911594 */
+    HRESULT (WINAPI *GetMediaType)(IMediaSample*, AM_MEDIA_TYPE** ppMediaType);  /* 911586 */
+    HRESULT (WINAPI *SetMediaType)(IMediaSample*, AM_MEDIA_TYPE* pMediaType);  /* 911597 */
+    HRESULT (WINAPI *IsDiscontinuity)(IMediaSample*);  /* 911591 */
+    HRESULT (WINAPI *SetDiscontinuity)(IMediaSample*, BOOL bIsDiscontinuity);  /* 911595 */
+    HRESULT (WINAPI *GetMediaTime)(IMediaSample*, LONGLONG* pTimeStart, LONGLONG* pTimeEnd);  /* 911585 */
+    HRESULT (WINAPI *SetMediaTime)(IMediaSample*, LONGLONG* pTimeStart, LONGLONG* pTimeEnd);  /* 911596 */
+} IMediaSampleVtbl;
+struct IMediaSample { const IMediaSampleVtbl *lpVtbl; };
+#define IMediaSample_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IMediaSample_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IMediaSample_Release(T) ((T)->lpVtbl->Release(T))
+#define IMediaSample_GetPointer(T,a) ((T)->lpVtbl->GetPointer(T,a))
+#define IMediaSample_GetSize(T) ((T)->lpVtbl->GetSize(T))
+#define IMediaSample_GetTime(T,a,b) ((T)->lpVtbl->GetTime(T,a,b))
+#define IMediaSample_SetTime(T,a,b) ((T)->lpVtbl->SetTime(T,a,b))
+#define IMediaSample_IsSyncPoint(T) ((T)->lpVtbl->IsSyncPoint(T))
+#define IMediaSample_SetSyncPoint(T,a) ((T)->lpVtbl->SetSyncPoint(T,a))
+#define IMediaSample_IsPreroll(T) ((T)->lpVtbl->IsPreroll(T))
+#define IMediaSample_SetPreroll(T,a) ((T)->lpVtbl->SetPreroll(T,a))
+#define IMediaSample_GetActualDataLength(T) ((T)->lpVtbl->GetActualDataLength(T))
+#define IMediaSample_SetActualDataLength(T,a) ((T)->lpVtbl->SetActualDataLength(T,a))
+#define IMediaSample_GetMediaType(T,a) ((T)->lpVtbl->GetMediaType(T,a))
+#define IMediaSample_SetMediaType(T,a) ((T)->lpVtbl->SetMediaType(T,a))
+#define IMediaSample_IsDiscontinuity(T) ((T)->lpVtbl->IsDiscontinuity(T))
+#define IMediaSample_SetDiscontinuity(T,a) ((T)->lpVtbl->SetDiscontinuity(T,a))
+#define IMediaSample_GetMediaTime(T,a,b) ((T)->lpVtbl->GetMediaTime(T,a,b))
+#define IMediaSample_SetMediaTime(T,a,b) ((T)->lpVtbl->SetMediaTime(T,a,b))
+
+/* ---- IPin: 15 documented method pages; order R1 ---- */
+typedef struct IPinVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IPin*, REFIID, PVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IPin*);  /* (R1) */
+    ULONG (WINAPI *Release)(IPin*);  /* (R1) */
+    /* IPin */
+    HRESULT (WINAPI *Connect)(IPin*, IPin* pReceivePin, const AM_MEDIA_TYPE* pmt);  /* 912252 */
+    HRESULT (WINAPI *ReceiveConnection)(IPin*, IPin* pConnector, AM_MEDIA_TYPE* pmt);  /* 931694 */
+    HRESULT (WINAPI *Disconnect)(IPin*);  /* 912278 */
+    HRESULT (WINAPI *ConnectedTo)(IPin*, IPin** ppPin);  /* 912262 */
+    HRESULT (WINAPI *ConnectionMediaType)(IPin*, AM_MEDIA_TYPE* pmt);  /* 912270 */
+    HRESULT (WINAPI *QueryPinInfo)(IPin*, PIN_INFO* pInfo);  /* 912352 */
+    HRESULT (WINAPI *QueryDirection)(IPin*, PIN_DIRECTION* pPinDir);  /* 912328 */
+    HRESULT (WINAPI *QueryId)(IPin*, LPWSTR* Id);  /* 912337 */
+    HRESULT (WINAPI *QueryAccept)(IPin*, const AM_MEDIA_TYPE* pmt);  /* 912318 */
+    HRESULT (WINAPI *EnumMediaTypes)(IPin*, IEnumMediaTypes** ppEnum);  /* 912300 */
+    HRESULT (WINAPI *QueryInternalConnections)(IPin*, IPin** apPin, ULONG* nPin);  /* 912346 */
+    HRESULT (WINAPI *EndOfStream)(IPin*);  /* 912294 */
+    HRESULT (WINAPI *BeginFlush)(IPin*);  /* 912246 */
+    HRESULT (WINAPI *EndFlush)(IPin*);  /* 912286 */
+    HRESULT (WINAPI *NewSegment)(IPin*, REFERENCE_TIME tStart, REFERENCE_TIME tStop, double dRate);  /* 912310 */
+} IPinVtbl;
+struct IPin { const IPinVtbl *lpVtbl; };
+#define IPin_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IPin_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IPin_Release(T) ((T)->lpVtbl->Release(T))
+#define IPin_Connect(T,a,b) ((T)->lpVtbl->Connect(T,a,b))
+#define IPin_ReceiveConnection(T,a,b) ((T)->lpVtbl->ReceiveConnection(T,a,b))
+#define IPin_Disconnect(T) ((T)->lpVtbl->Disconnect(T))
+#define IPin_ConnectedTo(T,a) ((T)->lpVtbl->ConnectedTo(T,a))
+#define IPin_ConnectionMediaType(T,a) ((T)->lpVtbl->ConnectionMediaType(T,a))
+#define IPin_QueryPinInfo(T,a) ((T)->lpVtbl->QueryPinInfo(T,a))
+#define IPin_QueryDirection(T,a) ((T)->lpVtbl->QueryDirection(T,a))
+#define IPin_QueryId(T,a) ((T)->lpVtbl->QueryId(T,a))
+#define IPin_QueryAccept(T,a) ((T)->lpVtbl->QueryAccept(T,a))
+#define IPin_EnumMediaTypes(T,a) ((T)->lpVtbl->EnumMediaTypes(T,a))
+#define IPin_QueryInternalConnections(T,a,b) ((T)->lpVtbl->QueryInternalConnections(T,a,b))
+#define IPin_EndOfStream(T) ((T)->lpVtbl->EndOfStream(T))
+#define IPin_BeginFlush(T) ((T)->lpVtbl->BeginFlush(T))
+#define IPin_EndFlush(T) ((T)->lpVtbl->EndFlush(T))
+#define IPin_NewSegment(T,a,b,c) ((T)->lpVtbl->NewSegment(T,a,b,c))
+
+/* ---- IQualProp: 6 documented method pages; order R1 ---- */
+typedef struct IQualPropVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IQualProp*, REFIID, LPVOID*);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IQualProp*);  /* (R1) */
+    ULONG (WINAPI *Release)(IQualProp*);  /* (R1) */
+    /* IQualProp */
+    HRESULT (WINAPI *get_AvgFrameRate)(IQualProp*, int* piAvgFrameRate);  /* 931726 */
+    HRESULT (WINAPI *get_AvgSyncOffset)(IQualProp*, int* piAvg);  /* 931785 */
+    HRESULT (WINAPI *get_DevSyncOffset)(IQualProp*, int* piDev);  /* 931794 */
+    HRESULT (WINAPI *get_FramesDrawn)(IQualProp*, int* pcFramesDrawn);  /* 931798 */
+    HRESULT (WINAPI *get_FramesDroppedInRenderer)(IQualProp*, int* pcFrames);  /* 931799 */
+    HRESULT (WINAPI *get_Jitter)(IQualProp*, int* piJitter);  /* 931801 */
+} IQualPropVtbl;
+struct IQualProp { const IQualPropVtbl *lpVtbl; };
+#define IQualProp_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IQualProp_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IQualProp_Release(T) ((T)->lpVtbl->Release(T))
+#define IQualProp_get_AvgFrameRate(T,a) ((T)->lpVtbl->get_AvgFrameRate(T,a))
+#define IQualProp_get_AvgSyncOffset(T,a) ((T)->lpVtbl->get_AvgSyncOffset(T,a))
+#define IQualProp_get_DevSyncOffset(T,a) ((T)->lpVtbl->get_DevSyncOffset(T,a))
+#define IQualProp_get_FramesDrawn(T,a) ((T)->lpVtbl->get_FramesDrawn(T,a))
+#define IQualProp_get_FramesDroppedInRenderer(T,a) ((T)->lpVtbl->get_FramesDroppedInRenderer(T,a))
+#define IQualProp_get_Jitter(T,a) ((T)->lpVtbl->get_Jitter(T,a))
+
+/* ---- IVideoWindow: 39 documented method pages; order R1 ---- */
+typedef struct IVideoWindowVtbl {
+    /* IUnknown */
+    HRESULT (WINAPI *QueryInterface)(IVideoWindow*, REFIID, void**);  /* (R1) */
+    ULONG (WINAPI *AddRef)(IVideoWindow*);  /* (R1) */
+    ULONG (WINAPI *Release)(IVideoWindow*);  /* (R1) */
+    /* IVideoWindow */
+    HRESULT (WINAPI *GetTypeInfoCount)(IVideoWindow*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *GetTypeInfo)(IVideoWindow*, UINT, LCID, ITypeInfo**);  /* (R1) */
+    HRESULT (WINAPI *GetIDsOfNames)(IVideoWindow*, REFIID, LPOLESTR*, UINT, LCID, DISPID*);  /* (R1) */
+    HRESULT (WINAPI *Invoke)(IVideoWindow*, DISPID, REFIID, LCID, WORD, void*, VARIANT*, EXCEPINFO*, UINT*);  /* (R1) */
+    HRESULT (WINAPI *put_Caption)(IVideoWindow*, BSTR strCaption);  /* 931977 */
+    HRESULT (WINAPI *get_Caption)(IVideoWindow*, BSTR* strCaption);  /* 931823 */
+    HRESULT (WINAPI *put_WindowStyle)(IVideoWindow*, long WindowStyle);  /* 931988 */
+    HRESULT (WINAPI *get_WindowStyle)(IVideoWindow*, long* pWindowStyle);  /* 912561 */
+    HRESULT (WINAPI *put_WindowStyleEx)(IVideoWindow*, long pWindowStyleEx);  /* 931989 */
+    HRESULT (WINAPI *get_WindowStyleEx)(IVideoWindow*, long* pWindowStyleEx);  /* 931962 */
+    HRESULT (WINAPI *put_AutoShow)(IVideoWindow*, long AutoShow);  /* 931974 */
+    HRESULT (WINAPI *get_AutoShow)(IVideoWindow*, long* AutoShow);  /* 931820 */
+    HRESULT (WINAPI *put_WindowState)(IVideoWindow*, long WindowState);  /* 931987 */
+    HRESULT (WINAPI *get_WindowState)(IVideoWindow*, long* WindowState);  /* 912445 */
+    HRESULT (WINAPI *put_BackgroundPalette)(IVideoWindow*, long BackgroundPalette);  /* 931975 */
+    HRESULT (WINAPI *get_BackgroundPalette)(IVideoWindow*, long* pBackgroundPalette);  /* 931821 */
+    HRESULT (WINAPI *put_Visible)(IVideoWindow*, long Visible);  /* 931985 */
+    HRESULT (WINAPI *get_Visible)(IVideoWindow*, long* pVisible);  /* 931833 */
+    HRESULT (WINAPI *put_Left)(IVideoWindow*, long Left);  /* 931981 */
+    HRESULT (WINAPI *get_Left)(IVideoWindow*, long* pLeft);  /* 931826 */
+    HRESULT (WINAPI *put_Width)(IVideoWindow*, long Width);  /* 931986 */
+    HRESULT (WINAPI *get_Width)(IVideoWindow*, long* pWidth);  /* 931834 */
+    HRESULT (WINAPI *put_Top)(IVideoWindow*, long Top);  /* 931984 */
+    HRESULT (WINAPI *get_Top)(IVideoWindow*, long* pTop);  /* 931832 */
+    HRESULT (WINAPI *put_Height)(IVideoWindow*, long Height);  /* 931979 */
+    HRESULT (WINAPI *get_Height)(IVideoWindow*, long* pHeight);  /* 931825 */
+    HRESULT (WINAPI *put_Owner)(IVideoWindow*, OAHWND Owner);  /* 931983 */
+    HRESULT (WINAPI *get_Owner)(IVideoWindow*, OAHWND* pOwner);  /* 931830 */
+    HRESULT (WINAPI *put_MessageDrain)(IVideoWindow*, OAHWND Drain);  /* 931982 */
+    HRESULT (WINAPI *get_MessageDrain)(IVideoWindow*, OAHWND* Drain);  /* 931828 */
+    HRESULT (WINAPI *get_BorderColor)(IVideoWindow*, long* pColor);  /* 931822 */
+    HRESULT (WINAPI *put_BorderColor)(IVideoWindow*, long Color);  /* 931976 */
+    HRESULT (WINAPI *get_FullScreenMode)(IVideoWindow*, long* FullScreenMode);  /* 931824 */
+    HRESULT (WINAPI *put_FullScreenMode)(IVideoWindow*, long FullScreenMode);  /* 931978 */
+    HRESULT (WINAPI *SetWindowForeground)(IVideoWindow*, long Focus);  /* 931990 */
+    HRESULT (WINAPI *NotifyOwnerMessage)(IVideoWindow*, long hwnd, long uMsg, long wParam, long lParam);  /* 931972 */
+    HRESULT (WINAPI *SetWindowPosition)(IVideoWindow*, long Left, long Top, long Width, long Height);  /* 931991 */
+    HRESULT (WINAPI *GetWindowPosition)(IVideoWindow*, long* pLeft, long* pTop, long* pWidth, long* pHeight);  /* 912426 */
+    HRESULT (WINAPI *GetMinIdealImageSize)(IVideoWindow*, long* pWidth, long* pHeight);  /* 931829 */
+    HRESULT (WINAPI *GetMaxIdealImageSize)(IVideoWindow*, long* pWidth, long* pHeight);  /* 931827 */
+    HRESULT (WINAPI *GetRestorePosition)(IVideoWindow*, long* pLeft, long* pTop, long* pWidth, long* pHeight);  /* 931831 */
+    HRESULT (WINAPI *HideCursor)(IVideoWindow*, long HideCursor);  /* 931968 */
+    HRESULT (WINAPI *IsCursorHidden)(IVideoWindow*, long* CursorHidden);  /* 931970 */
+} IVideoWindowVtbl;
+struct IVideoWindow { const IVideoWindowVtbl *lpVtbl; };
+#define IVideoWindow_QueryInterface(T,a,b) ((T)->lpVtbl->QueryInterface(T,a,b))
+#define IVideoWindow_AddRef(T) ((T)->lpVtbl->AddRef(T))
+#define IVideoWindow_Release(T) ((T)->lpVtbl->Release(T))
+#define IVideoWindow_GetTypeInfoCount(T,a) ((T)->lpVtbl->GetTypeInfoCount(T,a))
+#define IVideoWindow_GetTypeInfo(T,a,b,c) ((T)->lpVtbl->GetTypeInfo(T,a,b,c))
+#define IVideoWindow_GetIDsOfNames(T,a,b,c,d,e) ((T)->lpVtbl->GetIDsOfNames(T,a,b,c,d,e))
+#define IVideoWindow_Invoke(T,a,b,c,d,e,f,g,h) ((T)->lpVtbl->Invoke(T,a,b,c,d,e,f,g,h))
+#define IVideoWindow_put_Caption(T,a) ((T)->lpVtbl->put_Caption(T,a))
+#define IVideoWindow_get_Caption(T,a) ((T)->lpVtbl->get_Caption(T,a))
+#define IVideoWindow_put_WindowStyle(T,a) ((T)->lpVtbl->put_WindowStyle(T,a))
+#define IVideoWindow_get_WindowStyle(T,a) ((T)->lpVtbl->get_WindowStyle(T,a))
+#define IVideoWindow_put_WindowStyleEx(T,a) ((T)->lpVtbl->put_WindowStyleEx(T,a))
+#define IVideoWindow_get_WindowStyleEx(T,a) ((T)->lpVtbl->get_WindowStyleEx(T,a))
+#define IVideoWindow_put_AutoShow(T,a) ((T)->lpVtbl->put_AutoShow(T,a))
+#define IVideoWindow_get_AutoShow(T,a) ((T)->lpVtbl->get_AutoShow(T,a))
+#define IVideoWindow_put_WindowState(T,a) ((T)->lpVtbl->put_WindowState(T,a))
+#define IVideoWindow_get_WindowState(T,a) ((T)->lpVtbl->get_WindowState(T,a))
+#define IVideoWindow_put_BackgroundPalette(T,a) ((T)->lpVtbl->put_BackgroundPalette(T,a))
+#define IVideoWindow_get_BackgroundPalette(T,a) ((T)->lpVtbl->get_BackgroundPalette(T,a))
+#define IVideoWindow_put_Visible(T,a) ((T)->lpVtbl->put_Visible(T,a))
+#define IVideoWindow_get_Visible(T,a) ((T)->lpVtbl->get_Visible(T,a))
+#define IVideoWindow_put_Left(T,a) ((T)->lpVtbl->put_Left(T,a))
+#define IVideoWindow_get_Left(T,a) ((T)->lpVtbl->get_Left(T,a))
+#define IVideoWindow_put_Width(T,a) ((T)->lpVtbl->put_Width(T,a))
+#define IVideoWindow_get_Width(T,a) ((T)->lpVtbl->get_Width(T,a))
+#define IVideoWindow_put_Top(T,a) ((T)->lpVtbl->put_Top(T,a))
+#define IVideoWindow_get_Top(T,a) ((T)->lpVtbl->get_Top(T,a))
+#define IVideoWindow_put_Height(T,a) ((T)->lpVtbl->put_Height(T,a))
+#define IVideoWindow_get_Height(T,a) ((T)->lpVtbl->get_Height(T,a))
+#define IVideoWindow_put_Owner(T,a) ((T)->lpVtbl->put_Owner(T,a))
+#define IVideoWindow_get_Owner(T,a) ((T)->lpVtbl->get_Owner(T,a))
+#define IVideoWindow_put_MessageDrain(T,a) ((T)->lpVtbl->put_MessageDrain(T,a))
+#define IVideoWindow_get_MessageDrain(T,a) ((T)->lpVtbl->get_MessageDrain(T,a))
+#define IVideoWindow_get_BorderColor(T,a) ((T)->lpVtbl->get_BorderColor(T,a))
+#define IVideoWindow_put_BorderColor(T,a) ((T)->lpVtbl->put_BorderColor(T,a))
+#define IVideoWindow_get_FullScreenMode(T,a) ((T)->lpVtbl->get_FullScreenMode(T,a))
+#define IVideoWindow_put_FullScreenMode(T,a) ((T)->lpVtbl->put_FullScreenMode(T,a))
+#define IVideoWindow_SetWindowForeground(T,a) ((T)->lpVtbl->SetWindowForeground(T,a))
+#define IVideoWindow_NotifyOwnerMessage(T,a,b,c,d) ((T)->lpVtbl->NotifyOwnerMessage(T,a,b,c,d))
+#define IVideoWindow_SetWindowPosition(T,a,b,c,d) ((T)->lpVtbl->SetWindowPosition(T,a,b,c,d))
+#define IVideoWindow_GetWindowPosition(T,a,b,c,d) ((T)->lpVtbl->GetWindowPosition(T,a,b,c,d))
+#define IVideoWindow_GetMinIdealImageSize(T,a,b) ((T)->lpVtbl->GetMinIdealImageSize(T,a,b))
+#define IVideoWindow_GetMaxIdealImageSize(T,a,b) ((T)->lpVtbl->GetMaxIdealImageSize(T,a,b))
+#define IVideoWindow_GetRestorePosition(T,a,b,c,d) ((T)->lpVtbl->GetRestorePosition(T,a,b,c,d))
+#define IVideoWindow_HideCursor(T,a) ((T)->lpVtbl->HideCursor(T,a))
+#define IVideoWindow_IsCursorHidden(T,a) ((T)->lpVtbl->IsCursorHidden(T,a))
+
 #ifdef __cplusplus
 }
 #endif
