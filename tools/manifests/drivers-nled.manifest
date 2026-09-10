@@ -1,0 +1,12 @@
+ms892549(v=msdn.10)	Notification LED Driver Development Concepts
+ms895501(v=msdn.10)	Moving a Notification LED Driver from GWES to Device Manager
+ms892550(v=msdn.10)	Notification LED Driver Samples
+ms905300(v=msdn.10)	NLedDriverGetDeviceInfo
+ms905305(v=msdn.10)	NLedDriverInitialize
+ms905309(v=msdn.10)	NLedDriverPowerDown
+ms905313(v=msdn.10)	NLedDriverSetDevice
+ms905318(v=msdn.10)	NLedGetDeviceInfo
+ms905321(v=msdn.10)	NLedSetDevice
+ms905297(v=msdn.10)	NLED_COUNT_INFO
+ms905326(v=msdn.10)	NLED_SETTINGS_INFO
+ms905332(v=msdn.10)	NLED_SUPPORTS_INFO

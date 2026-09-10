@@ -1,0 +1,14 @@
+ms894042(v=msdn.10)	Stream Interface Driver Architecture
+ms892442(v=msdn.10)	I/O Control Codes
+ms923695(v=msdn.10)	XXX_Close (Device Manager)
+ms923696(v=msdn.10)	XXX_Deinit (Device Manager)
+ms923697(v=msdn.10)	XXX_Init (Device Manager)
+ms923699(v=msdn.10)	XXX_IOControl (Device Manager)
+ms923700(v=msdn.10)	XXX_Open (Device Manager)
+ms923701(v=msdn.10)	XXX_PowerDown (Device Manager)
+ms923702(v=msdn.10)	XXX_PowerUp (Device Manager)
+ms923706(v=msdn.10)	XXX_PreClose (Device Manager)
+ms923707(v=msdn.10)	XXX_PreDeinit (Device Manager)
+ms923703(v=msdn.10)	XXX_Read (Device Manager)
+ms923704(v=msdn.10)	XXX_Seek (Device Manager)
+ms923705(v=msdn.10)	XXX_Write (Device Manager)

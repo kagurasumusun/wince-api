@@ -1,0 +1,13 @@
+aa447568(v=msdn.10)	Printer Driver Architecture
+aa447573(v=msdn.10)	Print Spooling
+aa447570(v=msdn.10)	Printer Driver Registry Settings
+aa447569(v=msdn.10)	Printer Driver Migration
+aa447572(v=msdn.10)	Printer Driver Samples
+aa447744(v=msdn.10)	DrvEndDoc
+aa447758(v=msdn.10)	DrvStartDoc
+aa447759(v=msdn.10)	DrvStartPage
+ms899310(v=msdn.10)	GetPrinterInfo
+ms919683(v=msdn.10)	PrinterClose
+ms919686(v=msdn.10)	PrinterOpen
+ms919688(v=msdn.10)	PrinterSend
+ms919830(v=msdn.10)	ReportPrinterStatus
