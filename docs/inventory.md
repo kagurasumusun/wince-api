@@ -7290,3 +7290,47 @@ e2e recipe now pins the wince-crt ARM builds to -march=armv5tej
 ARMv4T and crashes in ISel; the fresh wince-crt clone carries no
 default march).  Gates: make check (hostcheck 0x420/0x500/0x600 +
 defcheck), crosscheck x6, e2e x6 -- ALL GREEN.
+
+## M100 -- header-name unification: empty alias bridges removed
+
+User-directed (2026-09-11): unify to the correct (documented) header
+names directly, and drop the empty bridging headers.
+
+Audit before acting: every REAL header's filename already matches
+its documented dominant Header-row spelling (the M72 evidence
+method; spot-verified against each header's banner -- aygshell.h 46
+rows vs Aygshell.h 6, bt_ddi.h/dvdmedia.h/newmenu.h/p2p.h ("the
+only documented spelling is lowercase")/shellsdk.h/sideshow.h/
+webvw.h/strmif.h banners all print lowercase; CEDDK.h and the
+Dvdata.h/Dvddata.h/Ddvdata.h trio are distinct documented homes).
+No real header was renamed.
+
+Removed: the 15 empty name-bridge headers (forwarder-only, zero
+unique page-id records -- every record they carried is also in the
+content header): Comcat.h, IAccess.h, Mqoai.h, Netui.h,
+Obexserver.h, Ole2.h, Olectl.h, Pchannel.h, Pcommctrl.h,
+Pwindbas.h, Rtcerr.h, Shlguid.h, Shobjvidl.h, Tlhelp.h,
+Unimodem.h.  Consumers include the content headers directly
+(Objbase.h, Mq.h, Tapi.h, Obex.h, Cchannel.h, Commctrl.h,
+Windbase.h, Rtccore.h, Shlobj.h, Shobjidl.h, Tlhelp32.h).
+
+Kept: the documented-token headers that carry records (not empty):
+Av_upnp.h (148 UPnP AV rows, record-only, M76), strmif.h
+(dshow-iface book surface records; compiled surface in Dshow.h),
+D3dmtypes.h / D3dmcaps.h (book surfaces + the D3dm.h alias note),
+Oaidl.h / Objidl.h / Ocidl.h / Oleauto.h / Oleidl.h / Oleauto.h /
+Unknwn.h / Wtypes.h / Dccole.h / Docobj.h / Objsafe.h / Mqmgmt.h /
+Sapiddk.h / Streams.h / Playlist.h / Dmodshow.h (book-surface
+records for their documented tokens, content carried by
+Objbase.h/Mq.h/Sapi.h/Dshow.h).
+
+Mechanics: Makefile HDRS -15 (253 compile-gated headers; the block
+was regenerated from the include/ listing, which also removed a
+pre-existing duplicate winerror.h entry and re-applied the M98
+record-only exclusion set -- Cardserv/Cardsv2/Ddvdata/Dvddata/
+Developer-defined/"Not applicable"/Socksv2/Tuple stay ungated),
+tu_compile.c alias includes removed.  e2e recipe updated for the
+2026-09-10 toolchain (llvm-dlltool -m armwince -> -m arm-pc-wince;
+invented machine names are gone, b2851a3d).  Gates: make check +
+crosscheck + e2e all GREEN on the clang 22.1.8 artifact 10176580836
+(wince-llvm-5b8f2fb2).

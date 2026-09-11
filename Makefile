@@ -39,7 +39,6 @@ include/Ce_setup.h \
 include/Celog.h \
 include/Cesync.h \
 include/Ceutil.h \
-include/Comcat.h \
 include/Commctrl.h \
 include/Commdlg.h \
 include/Cpl.h \
@@ -91,7 +90,6 @@ include/Hidpddi.h \
 include/Hidpi.h \
 include/Httpext.h \
 include/Httpfilt.h \
-include/IAccess.h \
 include/IExchangeClient.h \
 include/Icmpapi.h \
 include/Imaging.h \
@@ -118,7 +116,6 @@ include/Mmddk.h \
 include/Mmsystem.h \
 include/Mq.h \
 include/Mqmgmt.h \
-include/Mqoai.h \
 include/Msacmdrv.h \
 include/Msgqueue.h \
 include/Mshtmhst.h \
@@ -131,7 +128,6 @@ include/Msxml2.h \
 include/Natedit.h \
 include/Ndis.h \
 include/Ndistapi.h \
-include/Netui.h \
 include/Nled.h \
 include/Notify.h \
 include/Ntddndis.h \
@@ -139,21 +135,16 @@ include/Ntlmssp.h \
 include/Nuiouser.h \
 include/Oaidl.h \
 include/Obex.h \
-include/Obexserver.h \
 include/Objbase.h \
 include/Objidl.h \
 include/Objsafe.h \
 include/Ocidl.h \
-include/Ole2.h \
 include/Oleauto.h \
-include/Olectl.h \
 include/Oleidl.h \
 include/PCIReg.h \
 include/PCIbus.h \
 include/PCIrsrc.h \
 include/Partdrv.h \
-include/Pchannel.h \
-include/Pcommctrl.h \
 include/Pegdser.h \
 include/Pimstore.h \
 include/Pkfuncs.h \
@@ -164,7 +155,6 @@ include/Prnport.h \
 include/Proxy.h \
 include/Prsht.h \
 include/Psapi.h \
-include/Pwindbas.h \
 include/Pwingdi.h \
 include/Pwinuser.h \
 include/Rapi.h \
@@ -179,7 +169,6 @@ include/Rndismini.h \
 include/Routprot.h \
 include/Rpcdce.h \
 include/Rtccore.h \
-include/Rtcerr.h \
 include/Rules.h \
 include/Sapi.h \
 include/Sapiddk.h \
@@ -192,10 +181,8 @@ include/Service.h \
 include/Shellapi.h \
 include/Shellcb.h \
 include/Shelwapi.h \
-include/Shlguid.h \
 include/Shlobj.h \
 include/Shobjidl.h \
-include/Shobjvidl.h \
 include/Shtypes.h \
 include/Sip.h \
 include/Sipapi.h \
@@ -213,10 +200,8 @@ include/Tapi.h \
 include/Tapicomn.h \
 include/Tchddi.h \
 include/Tchddsi.h \
-include/Tlhelp.h \
 include/Tlhelp32.h \
 include/Tvout.h \
-include/Unimodem.h \
 include/Unknwn.h \
 include/Upnp.h \
 include/Upnpdevapi.h \
@@ -282,7 +267,6 @@ include/sideshow.h \
 include/strmif.h \
 include/webvw.h \
 include/winerror.h \
-include/winerror.h
 
 .PHONY: check hostcheck defcheck defdoc e2e clean
 
@@ -377,14 +361,17 @@ clean:
 #   make e2e WINCECLANG=/path/to/clang CRTDIR=/path/to/wince-crt
 #
 # Toolchain adaptation (2026-09-10 LLVM-WinCE artifact, wince-llvm-
-# 01c51ef / 10134447081): llvm-dlltool spells the CE ARM machine
-# "armwince" now ("arm" means ARMNT; the CE machine is named after the
-# OS that requires it, commit 556b2ba5), and the clang driver answers a
-# bare *-pc-wince ARM triple with the generic default CPU arm7tdmi
-# (ARMv4T) -- the core is asked for by option (71f4db8c/0583ffe45).
-# The ARM e2e objects are therefore pinned to -march=armv5tej to match
-# the wince-crt build (its WCE_ARCHFLAGS) and keep the pipeline on the
-# link-verified ARMv5TE codegen.
+# 01c51ef / 10134447081; superseded 2026-09-11 by 5b8f2fb / artifact
+# 10176580836 "[WinCE][ToolDrivers] Name a CE machine by its target,
+# not an invented machine", b2851a3d): llvm-dlltool no longer knows the
+# invented machine name "armwince" -- a CE machine is named by its
+# target triple ("-m arm-pc-wince"; the machine-name table is i386/
+# arm/arm64/... where "arm" means ARMNT).  The clang driver still
+# answers a bare *-pc-wince ARM triple with the generic default CPU
+# arm7tdmi (ARMv4T) -- the core is asked for by option (71f4db8c/
+# 0583ffe45).  The ARM e2e objects are therefore pinned to
+# -march=armv5tej to match the wince-crt build (its WCE_ARCHFLAGS)
+# and keep the pipeline on the link-verified ARMv5TE codegen.
 CRTDIR    ?= $(abspath $(CURDIR)/../wince-crt)
 
 # M39 note: the M39 ws2 import assertions below resolve through ws2.dll (Ws2.lib
@@ -401,7 +388,7 @@ e2e:
 	bin=$$(dirname "$(WINCECLANG)"); \
 	tmp=$$(mktemp -d); trap 'rm -rf "$$tmp"' EXIT; \
 	for t in $(CE_TRIPLES); do \
-	  case $$t in arm*) dtf="-m armwince"; march="-march=armv5tej"; mchk="IMAGE_FILE_MACHINE_ARM";; \
+	  case $$t in arm*) dtf="-m arm-pc-wince"; march="-march=armv5tej"; mchk="IMAGE_FILE_MACHINE_ARM";; \
 	             *)    dtf="-m i386 --no-leading-underscore"; march=""; mchk="IMAGE_FILE_MACHINE_I386";; \
 	  esac; \
 	  d=build/e2e/$$t; mkdir -p $$d; \

@@ -140,7 +140,6 @@
 #include <Rtccore.h>
 #include <Windbase.h>
 #include <Windbase.h>
-#include <Pwindbas.h>
 #include <Dshow.h>
 #include <dvdmedia.h>
 #include <Dmo.h>
@@ -148,7 +147,6 @@
 #include <strmif.h>
 #include <Playlist.h>
 #include <Dmodshow.h>
-#include <Shobjvidl.h>
 #include <Oleauto.h>
 #include <Oaidl.h>
 #include <stddef.h>
